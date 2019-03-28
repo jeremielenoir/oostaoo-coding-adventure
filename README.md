@@ -1,1 +1,1 @@
-# oostaoo-codign-adventure
+# oostaoo-coding-adventure
