@@ -1,0 +1,80 @@
+#background{
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.65);
+    position: fixed;
+}
+
+.burger{
+    background: red;
+}
+
+.menu-burger-item{
+    color: black;
+}
+
+.material-icons{
+    cursor: pointer;
+    color: black;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar{
+    height: 80px;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    
+}
+
+.mat-button{
+    background: white;
+    border-radius: 0px;
+    color: black;
+    margin: 15px 40px 0 25px;
+    height: 40px;
+    width: auto;
+    text-transform: uppercase;
+    transition: .5s;
+}
+
+.mat-button:hover{
+    background: goldenrod;
+
+}
+
+img{
+    width: 160px;
+    height: 37px;
+    margin: 15px 0 0 20px;
+}
+
+.menu{
+    font-size: 16px;
+    
+    display: block;
+    cursor: pointer;
+    height: 80px;
+    width: 8%;
+    line-height: 95px;
+}
+
+.menu:hover{
+    color: goldenrod;
+}
+
+a{
+    display: block;
+    height: 80px;
+    width: 8%;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 95px;
+}
+
+a:hover{
+    color: goldenrod;
+}

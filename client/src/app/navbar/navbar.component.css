@@ -1,0 +1,56 @@
+#navbar{
+  position: fixed;
+  background: transparent;
+  /* height: 80vh; */
+  width: 100%;
+  z-index: 1000;
+}
+.menu-spacer {
+    flex: 1 1 auto;
+  }
+
+  .mat-toolbar{
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    
+}
+
+img{
+    width: 160px;
+    height: 37px;
+    margin: 10px 0 0 20px;
+}
+
+a{
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  display: inline-block;
+  margin: 20px 0px 0;
+  height: 80px;
+  padding: 20px;
+}
+
+a:hover{
+  color:goldenrod;
+
+}
+
+.mat-button{
+ background: white;
+ color: black;
+ height: 50px;
+ line-height: 10px;
+ border-radius: 0px;
+}
+
+.mat-button:hover{
+  color: black;
+  background: goldenrod;
+}
+
+.arrow{
+  font-size: 14px;
+  color: white;
+}
+
