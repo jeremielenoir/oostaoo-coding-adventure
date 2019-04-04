@@ -12,6 +12,20 @@
   display: flex;
   flex-wrap: wrap;
   padding-top: 80px;
+  align-content: center;
+  justify-content: space-around
+}
+
+.left {
+  width: 30%
+}
+
+.right {
+  width: 40%
+}
+
+#text #anim-text {
+  color: #f2bb13
 }
 
 #text h1 {
@@ -34,6 +48,12 @@
 
 .custom-email input {
   background-color: white;
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 300px;
+  /* à modifier format mobile */
 }
 
 .mat-focused .placeholder {
@@ -56,9 +76,8 @@ mat-error {
   font-size: 14px;
   font-weight: 600;
   padding: 0px 20px;
-  line-height: 52px;
   height: 50px;
-  margin-top: 20px
+  margin-top: 5px
 }
 
 .custom-buttom:hover {
@@ -74,11 +93,11 @@ mat-error {
   display: none;
 }
 
-.mat-form-field {
+/* .mat-form-field {
   margin-bottom: 10px;
-}
+} */
 
-::ng-deep .mat-form-field-wrapper {
+/* ::ng-deep .mat-form-field-wrapper {
   display: flex !important;
   flex-direction: column !important;
 }
@@ -89,7 +108,7 @@ mat-error {
 
 ::ng-deep .mat-form-field-subscript-wrapper {
   position: static !important;
-}
+} */
 
 #anim {
   padding-top: 100px;
@@ -99,9 +118,30 @@ mat-error {
   right: 300px;
 }
 
-#secondSection {
-  background-image: url(../../assets/Coding-game-img/Page-accueil/fond-section.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 40vh;
+/* CSS format mobile */
+
+@media screen and (min-width: 200px) and (max-width: 640px) {
+  #text {
+    padding-top: 50px;
+    padding-left: 30px;
+    padding-right: 30px
+  }
+  #text h1 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 32px;
+  }
+  #text h3 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+  }
+  .right {
+    visibility: hidden
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .bloc {
+    display: block;
+    clear: both;
+  }
 }

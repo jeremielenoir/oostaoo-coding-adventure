@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CounterAnimComponent } from './counter-anim.component';
+import { SecondSectionComponent } from './second-section.component';
 
-describe('CounterAnimComponent', () => {
-  let component: CounterAnimComponent;
-  let fixture: ComponentFixture<CounterAnimComponent>;
+describe('SecondSectionComponent', () => {
+  let component: SecondSectionComponent;
+  let fixture: ComponentFixture<SecondSectionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CounterAnimComponent ]
+      declarations: [ SecondSectionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CounterAnimComponent);
+    fixture = TestBed.createComponent(SecondSectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
