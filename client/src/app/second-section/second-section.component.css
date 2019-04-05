@@ -1,8 +1,8 @@
 #secondSection {
   background-image: url(../../assets/Coding-game-img/Page-accueil/fond-section.jpg);
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
-  height: 50vh;
+  /* height: 50vh; */
 }
 
 #titre-second-section {
@@ -47,11 +47,8 @@
   font-weight: 600;
   padding: 0px 40px;
   height: 50px;
-  margin-top: 5px
-}
-
-.custom-buttom:hover {
-  background-color: #252e38;
+  margin-top: 5px;
+  text-transform: uppercase
 }
 
 .Second-text-image {
@@ -79,4 +76,77 @@
 
 .all-items {
   width: 50%
+}
+
+.radial-out {
+  overflow: hidden;
+  backface-visibility: hidden;
+  position: relative;
+  transition: color 400ms;
+  transform: translateZ(0);
+}
+
+.radial-out:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0px;
+  left: 50px;
+  right: 50px;
+  bottom: 0px;
+  background-color: #252e38;
+  border-radius: 50%;
+  transform: scale(0);
+  transition-property: transform;
+  transition: 400ms ease-out;
+}
+
+.radial-out:hover:before {
+  transform: scale(2);
+}
+
+/* format mobile */
+
+@media screen and (min-width: 200px) and (max-width: 640px) {
+  #secondSection {
+    background-image: none !important;
+    padding: 30px;
+  }
+  #titre-second-section {
+    padding-top: 0px;
+  }
+  #titre-second-section h1 {
+    font-size: 32px;
+  }
+  #titre-second-section p {
+    font-size: 32px;
+    color: #f2bb13;
+    font-weight: 700;
+    line-height: 42px;
+  }
+  .Second-text-image img {
+    display: none
+  }
+  .Second-text-image {
+    flex-direction: column;
+  }
+  .Second-right {
+    width: 100%;
+  }
+  .Second-left {
+    width: 100%;
+    padding-right: 0px;
+  }
+  .all-items {
+    width: 100%;
+  }
+  .all-items h1 {
+    margin-top: 40px;
+    font-size: 32px;
+    line-height: 32px;
+  }
+  .separator {
+    margin-top: 3vh;
+    width: 20%
+  }
 }
