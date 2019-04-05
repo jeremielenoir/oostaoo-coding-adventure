@@ -10,7 +10,11 @@ import { MaterialModule } from "./material";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { TestanimComponent } from "./testanim/testanim.component";
 import { IndexPageComponent } from "./index-page/index-page.component";
-import { SecondSectionComponent } from './second-section/second-section.component';
+import { SecondSectionComponent } from "./second-section/second-section.component";
+import { CounterAnimComponent } from "./counter-anim/counter-anim.component";
+import { FooterComponent } from "./footer/footer.component";
+import { CountUpModule } from "countup.js-angular2";
+import { MainComponent } from "./main/main.component";
 
 @NgModule({
   declarations: [
@@ -18,7 +22,10 @@ import { SecondSectionComponent } from './second-section/second-section.componen
     NavbarComponent,
     TestanimComponent,
     IndexPageComponent,
-    SecondSectionComponent
+    SecondSectionComponent,
+    CounterAnimComponent,
+    MainComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +34,8 @@ import { SecondSectionComponent } from './second-section/second-section.componen
     MaterialModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CountUpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
