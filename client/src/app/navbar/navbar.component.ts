@@ -53,5 +53,12 @@ export class NavbarComponent implements OnInit {
       let element = document.getElementById("navbar");
       element.classList.remove("style-nav-scroll");
     }
+    if (window.pageYOffset < 100) {
+      let element = document.getElementById("navbar");
+      element.classList.add("style-nav-scroll2");
+    } else {
+      let element = document.getElementById("navbar");
+      element.classList.remove("style-nav-scroll2");
+    }
   }
 }
