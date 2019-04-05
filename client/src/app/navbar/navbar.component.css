@@ -5,7 +5,13 @@
 }
 
 .style-nav-scroll {
-  background-color: #252e38
+  background-color: #252e38;
+  transition: 3s;
+}
+
+.style-nav-scroll2 {
+  transition: 3s;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 .fixe-nav {
