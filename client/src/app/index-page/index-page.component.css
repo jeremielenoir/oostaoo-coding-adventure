@@ -157,7 +157,7 @@ mat-error {
   padding-top: 100px;
   position: absolute;
   width: 500px;
-  bottom: 100px;
+  bottom: 30px;
   right: 300px;
 }
 
@@ -209,10 +209,3 @@ mat-error {
     visibility: hidden
   }
 }
-
-/* @media screen and (max-width: 640px) {
-  .bloc {
-    display: block;
-    clear: both;
-  }
-} */
