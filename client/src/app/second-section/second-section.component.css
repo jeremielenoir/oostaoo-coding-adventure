@@ -13,7 +13,7 @@
   padding-top: 10vh;
 }
 
-#titre-second-section .all-items h1 {
+#titre-second-section h1 {
   color: #252e38;
   font-family: "Open Sans", Open Sans;
   font-size: 42px;
@@ -23,7 +23,7 @@
   margin: 0px 0px 010px 0px;
 }
 
-#titre-second-section .all-items p {
+#titre-second-section p {
   color: #f2bb13;
   font-family: "Open Sans", Open Sans;
   font-size: 42px;
