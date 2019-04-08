@@ -78,6 +78,11 @@
   width: 50%
 }
 
+.all-items h1 {
+  font-size: 32px;
+  font-weight: 700
+}
+
 .radial-out {
   overflow: hidden;
   backface-visibility: hidden;
@@ -144,6 +149,7 @@
     margin-top: 40px;
     font-size: 32px;
     line-height: 32px;
+    font-weight: 700
   }
   .separator {
     margin-top: 3vh;
