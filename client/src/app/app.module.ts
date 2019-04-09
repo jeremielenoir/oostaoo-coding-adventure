@@ -15,7 +15,12 @@ import { FooterComponent } from "./footer/footer.component";
 import { CountUpModule } from "countup.js-angular2";
 import { MainComponent } from "./main/main.component";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { SliderComponent } from './slider/slider.component';
+=======
+import { SlideMarquesComponent } from "./slide-marques/slide-marques.component";
+import { DragScrollModule } from "ngx-drag-scroll";
+>>>>>>> 6fce76618d5faa7b7e6cb4dca0918ecd278e0596
 =======
 import { SlideMarquesComponent } from "./slide-marques/slide-marques.component";
 import { DragScrollModule } from "ngx-drag-scroll";
@@ -31,7 +36,11 @@ import { DragScrollModule } from "ngx-drag-scroll";
     MainComponent,
     FooterComponent,
 <<<<<<< HEAD
+<<<<<<< HEAD
     SliderComponent
+=======
+    SlideMarquesComponent
+>>>>>>> 6fce76618d5faa7b7e6cb4dca0918ecd278e0596
 =======
     SlideMarquesComponent
 >>>>>>> 6fce76618d5faa7b7e6cb4dca0918ecd278e0596
