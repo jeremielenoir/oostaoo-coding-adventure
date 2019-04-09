@@ -363,7 +363,7 @@ element.style {
 
 .carousel-control-next,.carousel-control-prev
 {
-    z-index: 3;
+   
     color: #f2bb13;
     font-size: 56px;
     width: 0%;
@@ -394,7 +394,7 @@ element.style {
     .picto-inline
     {
         width: auto;
-        border:1px solid red;
+        
     }
 
     .hide-carosel
@@ -445,7 +445,17 @@ element.style {
         margin-bottom: 16px
     }
 
+    .contenu-slider
+    {
+        height: 540px!important;
+        width: 50%!important;
+    }
 
+    .carousel-text
+    {
+        margin-bottom: 35px;
+        height: 230px!important;
+    }
 
 }
 
@@ -517,9 +527,55 @@ element.style {
    .checkout-twitter{
        height: 100%!important;
        padding-bottom: 30px;
-       display: inline-block
+       display: inline-block;
+       
+       max-width: 100%;
+   }
+
+
+   .swiper-slide{
+
+    padding: 20px 40px 44px 20px;   
+    
+   }
+
+   .help-contenu
+   {
+     
+   }
+
+   .contenu-slider
+   {
+       height: auto!important;
+       position: relative;
+       z-index: 2
+   }
+
+   .carousel-inner
+   {
+       height: auto;
    }
 
   
+
+    .caro-nex-main
+    {
+        right: 56px;
+    }
+
+   
+   .contenu-slider
+   {
+      width: 80%!important;
+   }
+
+   .carousel-text
+   {
+      height: auto!important;
+   }
+
+
+
+
 
 }

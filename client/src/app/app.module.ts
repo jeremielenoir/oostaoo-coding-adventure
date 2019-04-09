@@ -15,6 +15,7 @@ import { CounterAnimComponent } from "./counter-anim/counter-anim.component";
 import { FooterComponent } from "./footer/footer.component";
 import { CountUpModule } from "countup.js-angular2";
 import { MainComponent } from "./main/main.component";
+import { SliderComponent } from './slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MainComponent } from "./main/main.component";
     SecondSectionComponent,
     CounterAnimComponent,
     MainComponent,
-    FooterComponent
+    FooterComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,
