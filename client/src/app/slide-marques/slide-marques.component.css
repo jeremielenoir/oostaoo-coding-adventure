@@ -1,0 +1,28 @@
+.demo-one {
+  height: 130px;
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-top: 2%
+}
+
+.demo-one img {
+  height: 50px;
+  width: 200px;
+  padding-right: 100px;
+}
+
+.demo-border {
+  background-image: linear-gradient(330deg, #276b9c 0%, #113656 100%);
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 200px) and (max-width: 640px) {
+  .demo-one {
+    padding-top: 11%;
+    padding-left: inherit;
+    padding-right: inherit;
+  }
+  .demo-one img {
+    padding-right: 80px;
+  }
+}

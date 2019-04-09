@@ -16,9 +16,9 @@ import {
   animations: [
     trigger("move", [
       state("in", style({ top: 50 })),
-      state("out", style({ top: 100 })),
-      transition("in => out", animate("3s linear")),
-      transition("out => in", animate("3s linear"))
+      state("out", style({ top: 90 })),
+      transition("in => out", animate("1s linear")),
+      transition("out => in", animate("1s linear"))
     ])
   ]
 })

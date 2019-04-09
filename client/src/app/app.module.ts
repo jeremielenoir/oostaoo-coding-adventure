@@ -8,26 +8,33 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { MaterialModule } from "./material";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { TestanimComponent } from "./testanim/testanim.component";
 import { IndexPageComponent } from "./index-page/index-page.component";
 import { SecondSectionComponent } from "./second-section/second-section.component";
 import { CounterAnimComponent } from "./counter-anim/counter-anim.component";
 import { FooterComponent } from "./footer/footer.component";
 import { CountUpModule } from "countup.js-angular2";
 import { MainComponent } from "./main/main.component";
+<<<<<<< HEAD
 import { SliderComponent } from './slider/slider.component';
+=======
+import { SlideMarquesComponent } from "./slide-marques/slide-marques.component";
+import { DragScrollModule } from "ngx-drag-scroll";
+>>>>>>> 6fce76618d5faa7b7e6cb4dca0918ecd278e0596
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    TestanimComponent,
     IndexPageComponent,
     SecondSectionComponent,
     CounterAnimComponent,
     MainComponent,
     FooterComponent,
+<<<<<<< HEAD
     SliderComponent
+=======
+    SlideMarquesComponent
+>>>>>>> 6fce76618d5faa7b7e6cb4dca0918ecd278e0596
   ],
   imports: [
     BrowserModule,
@@ -37,7 +44,8 @@ import { SliderComponent } from './slider/slider.component';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    CountUpModule
+    CountUpModule,
+    DragScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]
