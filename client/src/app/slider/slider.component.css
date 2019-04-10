@@ -1,10 +1,7 @@
 @import '../main/main.component.css';
-
-
 /*-- les element carousel opentrust--*/
 
-#element_open_trust
-{
+#element_open_trust {
     background-image: url(https://www.codingame.com/work/wp-content/uploads/2018/11/patchwork-right-blue.png);
     background-position: center right;
     background-repeat: no-repeat;
@@ -13,8 +10,7 @@
     position: relative;
 }
 
-.background-ov
-{
+.background-ov {
     background-image: url(https://www.codingame.com/work/wp-content/uploads/2018/11/explose-left.png);
     background-position: center left;
     background-repeat: no-repeat;
@@ -26,55 +22,41 @@
     position: absolute;
 }
 
-.row-ov
-{
+.row-ov {
     display: flex;
     align-items: center;
     justify-content: center
 }
 
-.contenu-slider
-{
+.contenu-slider {
     width: 58%;
     height: auto;
     background: #fff;
-    box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.20);
+    box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.20);
     padding: 10px;
     height: 430px;
-    
 }
 
-.carousel-inner
-{
+.carousel-inner {
     width: 100%!important;
-    padding-left:50px;
-    padding-right:50px;
+    padding-left: 50px;
+    padding-right: 50px;
     padding-top: 30px;
     padding-bottom: 30px;
-    
 }
 
-.carousel-img
-{
-    display:flex;
+.carousel-img {
+    display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 42px;
 }
 
-.carousel-img img
-{
-
-}
-
-
-.help-contenu
-{
+.help-contenu {
     text-align: center;
 }
 
-.help-contenu .carousel-text
-{
+.help-contenu .carousel-text {
     color: #252e38;
     font-family: "Open Sans", Open Sans;
     font-size: 16px;
@@ -84,8 +66,7 @@
     height: 150px;
 }
 
-.name-carousel
-{
+.name-carousel {
     display: block;
     color: #f2bb13;
     font-family: "Open Sans", Open Sans;
@@ -94,12 +75,10 @@
     font-style: normal;
 }
 
-.carousel-control-prev{
+.carousel-control-prev {
     left: 28px;
-
 }
 
-.carousel-control-prev,.carousel-control-next
-{
+.carousel-control-prev, .carousel-control-next {
     font-size: 50px;
 }
