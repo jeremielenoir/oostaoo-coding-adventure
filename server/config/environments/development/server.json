@@ -1,0 +1,16 @@
+{
+  "host": "ec2-35-180-87-221.eu-west-3.compute.amazonaws.com",
+  "port": 1337,
+  "proxy": {
+    "enabled": false
+  },
+  "autoReload": {
+    "enabled": true
+  },
+  "cron": {
+    "enabled": false
+  },
+  "admin": {
+    "autoOpen": false
+  }
+}
