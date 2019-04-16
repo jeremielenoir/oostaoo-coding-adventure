@@ -1,3 +1,4 @@
+@import "../second-section/second-section.component.css";
 section {
     display: inline-block;
     width: 100%;
@@ -318,6 +319,37 @@ element.style {}
     right: 30px;
 }
 
+/* RADIAL OUT INVERSER */
+
+.radial-inverser {
+    overflow: hidden;
+    backface-visibility: hidden;
+    position: relative;
+    transition: color 400ms;
+    transform: translateZ(0);
+}
+
+.radial-inverser:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+    left: 50px;
+    right: 50px;
+    bottom: 0px;
+    background-color: #f2bb13;
+    border-radius: 50%;
+    transform: scale(0);
+    transition-property: transform;
+    transition: 400ms ease-out;
+}
+
+.radial-inverser:hover:before {
+    transform: scale(2);
+}
+
+/* RADIAL OUT INVERSER */
+
 /*-- @media screen max 1024 --*/
 
 @media (max-width: 1024px) {
@@ -400,6 +432,9 @@ element.style {}
     .modern-heading {
         flex-direction: column-reverse
     }
+    .modern-heading-title {
+        font-size: 32px;
+    }
     .picto-inline {
         height: auto;
     }
@@ -445,5 +480,15 @@ element.style {}
     }
     .carousel-img img {
         width: 100%
+    }
+    /* SECTION CONTACT */
+    .size-button {
+        width: 100%;
+        text-align: center
+    }
+    .center-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }

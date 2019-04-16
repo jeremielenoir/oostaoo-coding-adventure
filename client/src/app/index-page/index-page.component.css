@@ -209,3 +209,17 @@ mat-error {
     visibility: hidden
   }
 }
+
+@media (min-width: 767px)and (max-width: 1024px) {
+  .left {
+    width: 80%;
+    padding-left: 38px;
+    padding-right: 38px;
+  }
+  .right {
+    display: none
+  }
+  #home {
+    height: 60vh;
+  }
+}

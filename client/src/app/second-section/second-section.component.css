@@ -156,3 +156,18 @@
     width: 20%
   }
 }
+
+@media (min-width: 767px)and (max-width: 1024px) {
+  /* CHANGE SIZE IMG */
+  .Second-text-image {
+    padding-left: 38px;
+    padding-right: 38px;
+    padding-bottom: 38px;
+  }
+  .Second-text-image img {
+    width: 100%;
+  }
+  .all-items {
+    width: 100%;
+  }
+}

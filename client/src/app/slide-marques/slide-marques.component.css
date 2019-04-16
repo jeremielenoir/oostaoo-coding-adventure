@@ -26,3 +26,9 @@
     padding-right: 80px;
   }
 }
+
+@media (min-width: 767px)and (max-width: 1024px) {
+  .demo-one {
+    padding-top: 5%
+  }
+}
