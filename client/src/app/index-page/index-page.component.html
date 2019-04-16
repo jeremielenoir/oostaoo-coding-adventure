@@ -1,0 +1,52 @@
+<section id="home">
+  <div class="left">
+    <div id="text">
+      <h1>
+        Préparez-vous à
+        <div class="slidingVertical">
+          <span>sourcer</span><span>évaluer</span><span>fidéliser</span> <br />
+        </div>
+        vos développeurs comme personne
+      </h1>
+
+      <h3>
+        La plate-forme tout-en-un, puissante et facile à utiliser pour recruter
+        des développeurs.
+      </h3>
+    </div>
+    <div class="form">
+      <form>
+        <mat-form-field>
+          <mat-error
+            *ngIf="
+              emailFormControl.hasError('email') &&
+              !emailFormControl.hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            This field is required.
+          </mat-error>
+          <input
+            type="email"
+            class="input-custom"
+            matInput
+            [formControl]="emailFormControl"
+          />
+        </mat-form-field>
+      </form>
+
+      <button mat-raised-button class="custom-buttom">ESSAIE GRATUIT</button>
+    </div>
+  </div>
+  <div class="right">
+    <img
+      [@move]="state"
+      (@move.done)="onEnd($event)"
+      id="anim"
+      src="../../assets/Coding-game-img/Page-accueil/icon-cg-work.png"
+      alt=""
+    />
+  </div>
+</section>
