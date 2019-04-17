@@ -2,6 +2,7 @@
   "name": "server",
   "private": true,
   "version": "0.1.0",
+  "repository": "https://github.com/jeremielenoir/oostaoo-coding-adventure",
   "description": "A Strapi application.",
   "main": "./server.js",
   "scripts": {
@@ -27,13 +28,13 @@
     "mysql": "2.16.0"
   },
   "author": {
-    "name": "A Strapi developer",
+    "name": "Mendoza Miguel, Famady Kebe, Maxime Chagnon",
     "email": "",
     "url": ""
   },
   "maintainers": [
     {
-      "name": "A Strapi developer",
+      "name": "Mendoza Miguel, Famady Kebe, Maxime Chagnon",
       "email": "",
       "url": ""
     }
