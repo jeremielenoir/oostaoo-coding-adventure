@@ -1,22 +1,40 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from '@angular/router';
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NavbarComponent } from "./navbar/navbar.component";
+import { NavbarComponent } from "./components/home/navbar/navbar.component";
 import { MaterialModule } from "./material";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { IndexPageComponent } from "./index-page/index-page.component";
-import { SecondSectionComponent } from "./second-section/second-section.component";
-import { CounterAnimComponent } from "./counter-anim/counter-anim.component";
-import { FooterComponent } from "./footer/footer.component";
+import { IndexPageComponent } from "./components/home/index-page/index-page.component";
+import { SecondSectionComponent } from "./components/home/second-section/second-section.component";
+import { CounterAnimComponent } from "./components/home/counter-anim/counter-anim.component";
+import { FooterComponent } from "./components/home/footer/footer.component";
 import { CountUpModule } from "countup.js-angular2";
-import { MainComponent } from "./main/main.component";
-import { SliderComponent } from "./slider/slider.component";
+import { MainComponent } from "./components/home/main/main.component";
+import { SliderComponent } from "./components/home/slider/slider.component";
 import { DragScrollModule } from "ngx-drag-scroll";
-import { SlideMarquesComponent } from "./slide-marques/slide-marques.component";
+import { SlideMarquesComponent } from "./components/home/slide-marques/slide-marques.component";
+import { RouteComponentComponent } from './components/panelAdmin/route-component/route-component.component';
+import { AccueilComponent } from './components/home/accueil/accueil.component';
+
+
+
+const appRoutes: Routes = [
+  {
+    path: 'campaings',
+    component: RouteComponentComponent
+  },
+  {
+    path: '',
+    component: AccueilComponent
+  }
+]
 
 @NgModule({
   declarations: [
@@ -28,9 +46,12 @@ import { SlideMarquesComponent } from "./slide-marques/slide-marques.component";
     MainComponent,
     FooterComponent,
     SliderComponent,
-    SlideMarquesComponent
+    SlideMarquesComponent,
+    RouteComponentComponent,
+    AccueilComponent
   ],
   imports: [
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -44,4 +65,4 @@ import { SlideMarquesComponent } from "./slide-marques/slide-marques.component";
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
