@@ -42,6 +42,7 @@ ul li ul {
   margin-left: 54px;
   margin-top: -43px;
   line-height: normal;
+  z-index: 99;
 }
 
 ul li ul li {
