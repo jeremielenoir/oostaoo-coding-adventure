@@ -1,0 +1,81 @@
+<div class="contenu-view-content-left">
+  <div class="header-form-contenu">
+    <div class="header-form">
+      <div class="sous-header-form">
+        <div class="form-group-header">
+          <form>
+            <span class="icon-form-group-header-contenu"
+              ><i class="fas fa-search"></i
+            ></span>
+            <input
+              type="text"
+              name="search"
+              [(ngModel)]="searchText"
+              class="champ-header-contenu"
+              placeholder="Filtrer par titre ou candidat"
+              id="search-header"
+              (input)="Hundelesearch($event)"
+            />
+          </form>
+        </div>
+
+        <div class="form-group-header form-group-header-2">
+          <span class="form-header-checkbox">
+            <input type="checkbox" name="" id="archive" />
+          </span>
+
+          <label for="archive">Inclure les campagnes archivées</label>
+        </div>
+      </div>
+
+      <app-integration-bouton> </app-integration-bouton>
+    </div>
+  </div>
+
+  <div class="contenu-techno">
+    <div class="sidibar-header contenu-techno-header">
+      <span class="icon-contenu contenu-techno-header-icon">
+        <i class="far fa-list-alt"></i>
+      </span>
+
+      <h2 class="sidibar-header-title contenu-techno-header-title">
+        Campagnes
+      </h2>
+    </div>
+
+    <div class="content-scroll">
+      <div
+        *ngFor="let Data of Datacampagnes | filter: searchText"
+        class="contenu-techno-content"
+      >
+        <div class="contenu-branche">
+          <a href="">
+            <p class="branche-content-text">
+              {{ Data.name }}
+            </p>
+
+            <div class="branche-content-noti">
+              <span class="branche-content-noti-item">
+                <strong>1</strong>
+                <span>Invité</span>
+              </span>
+              <span class="branche-content-noti-item">
+                <strong>1</strong>
+                <span>Terminé</span>
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <div class="branche-content-list-end">
+          <span class="branche-content-list-end-contenu-icon ">
+            <i class="far fa-user"></i>
+          </span>
+          <span class="branche-content-list-end-contenu-icon dashed">
+            <i class="fas fa-ellipsis-h"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

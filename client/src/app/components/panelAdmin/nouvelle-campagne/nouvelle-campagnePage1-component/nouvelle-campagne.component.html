@@ -1,0 +1,104 @@
+<div class="new-campaign row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="title">
+          <i id="icon" class="fas fa-plus-circle fa-2x"></i>
+          <h2>Nouvelle campagne</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+        <div id="select">
+          <div>
+            <label for="role" [ngStyle]="errorRole ? { color: 'red' } : null"
+              >Sélectionnez un rôle</label
+            >
+            <mat-form-field [formGroup]="formCampagne">
+              <mat-select name="role" formControlName="role">
+                <mat-option *ngFor="let role of RoleList" [value]="role">{{
+                  role
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div id="select">
+          <span>Ou</span>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div id="select">
+          <div>
+            <label
+              for="techno"
+              [ngStyle]="errorTechno ? { color: 'red' } : null"
+              >Sélectionnez les technologies à tester</label
+            >
+            <mat-form-field [formGroup]="formCampagne">
+              <mat-select multiple name="techno" formControlName="techno">
+                <mat-option
+                  *ngFor="let techno of TechnoList"
+                  [value]="techno"
+                  >{{ techno }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="role" [ngStyle]="errorExperience ? { color: 'red' } : null"
+          >Sélectionnez l'expérience requise</label
+        >
+        <div class="example-radio-button" [formGroup]="formCampagne">
+          <mat-radio-group formControlName="experience">
+            <mat-radio-button value="Junior">
+              Junior
+              <i
+                class="fas fa-info-circle info"
+                title="Questions et challenges de code pour des développeurs de 0 à 2 ans d'expérience."
+              >
+              </i>
+            </mat-radio-button>
+            <mat-radio-button value="Senior"
+              >Sénior
+              <i
+                class="fas fa-info-circle info"
+                title="Questions et challenges de code pour des développeurs de 3 à 5 ans d'expérience."
+              >
+              </i>
+            </mat-radio-button>
+            <mat-radio-button value="Expert" disabled>
+              Expert
+              <i
+                class="fas fa-info-circle info"
+                title="Questions et challenges de code pour des développeurs qui ont une expertise sur une ou plusieurs technologies."
+              >
+              </i>
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+    <div class="row formQuestion finalQuestion">
+      <div class="col-md-12">
+        <div class="button">
+          <button
+            type="button"
+            id="button"
+            mat-flat-button
+            (click)="onIncrementPage(formCampagne.value)"
+          >
+            Étapes suivante : Paramètres
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

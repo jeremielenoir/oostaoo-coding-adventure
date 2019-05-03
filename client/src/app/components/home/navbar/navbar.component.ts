@@ -26,7 +26,7 @@ import { DOCUMENT } from "@angular/common";
   ]
 })
 export class NavbarComponent implements OnInit {
-  constructor(@Inject(DOCUMENT) document) {}
+  constructor(@Inject(DOCUMENT) document) { }
 
   public shouldShow = true;
   @ViewChild("myLabel") lab;
@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   @HostListener("window:scroll", ["$event"])
   onWindowScroll(e) {

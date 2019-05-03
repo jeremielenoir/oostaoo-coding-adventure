@@ -20,23 +20,64 @@ import { MainComponent } from "./components/home/main/main.component";
 import { SliderComponent } from "./components/home/slider/slider.component";
 import { DragScrollModule } from "ngx-drag-scroll";
 import { SlideMarquesComponent } from "./components/home/slide-marques/slide-marques.component";
-import { RouteComponentComponent } from './components/panelAdmin/route-component/route-component.component';
+import { RouteComponentComponent, PopupMonOffre } from './components/panelAdmin/route-component/route-component.component';
 import { AccueilComponent } from './components/home/accueil/accueil.component';
+import { MatBottomSheetModule, MAT_BOTTOM_SHEET_DEFAULT_OPTIONS } from '@angular/material';
+import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
+import { EditQuestionComponent, nouvelleQuestion } from './components/panelAdmin/edit-question/edit-question.component';
+import { ProfilUserComponent } from './components/panelAdmin/profil-user/profil-user.component';
 
+import { IntegrationBoutonComponent } from './components/panelAdmin/integration-bouton/integration-bouton.component';
+import { NouvelleCampagneComponent } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagne.component';
+import { NouvelleCampagnePage1Component } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component';
+import { NouvelleCampagnePage2Component } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage2-component/nouvelle-campagne2.component';
+import { NouvelleCampagnePage3Component, PopupCampaign } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component';
+
+import { RouteComponentComponent2 } from './components/panelAdmin/route-component2/route-component.component';
+import { CompagneComponent } from './components/panelAdmin/compagne/compagne.component';
+import { SidibarRightComponent } from './components/panelAdmin/sidibar-right/sidibar-right.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
+import { HttpClientModule } from '@angular/common/http';
 
 
 const appRoutes: Routes = [
+  // {
+  //   path: 'editquestion',
+  //   component: EditQuestionComponent
+  // },
   {
-    path: 'campaings',
-    component: RouteComponentComponent
+    path: 'profil-user',
+    component: ProfilUserComponent
   },
   {
     path: '',
     component: AccueilComponent
+  },
+  // {
+  //   path: 'dashboard',
+  //   component: RouteComponentComponent
+  // },
+  {
+    path: 'dashboard/campaigns',
+    component: IntegrationBoutonComponent,
+  },
+  {
+    path: 'dashboard/campaigns/new',
+    component: NouvelleCampagneComponent,
+  },
+  // {
+  //   path: 'test2',
+  //   component: NouvelleCampagnePage3Component
+  // },
+  {
+    path: 'dashboard',
+    component: RouteComponentComponent2
   }
 ]
 
 @NgModule({
+  entryComponents: [RouteComponentComponent, PopupMonOffre, nouvelleQuestion, EditQuestionComponent, PopupCampaign, NouvelleCampagnePage3Component],
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -48,7 +89,21 @@ const appRoutes: Routes = [
     SliderComponent,
     SlideMarquesComponent,
     RouteComponentComponent,
-    AccueilComponent
+    PopupMonOffre,
+    AccueilComponent,
+    NavMobileAbsoluteDirective,
+    EditQuestionComponent,
+    nouvelleQuestion,
+    ProfilUserComponent,
+    IntegrationBoutonComponent,
+    NouvelleCampagneComponent,
+    NouvelleCampagnePage1Component,
+    NouvelleCampagnePage2Component,
+    PopupCampaign,
+    NouvelleCampagnePage3Component,
+    RouteComponentComponent2,
+    CompagneComponent,
+    SidibarRightComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -60,9 +115,14 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     CountUpModule,
-    DragScrollModule
+    DragScrollModule,
+    MatBottomSheetModule,
+    HttpClientModule,
+    Ng2SearchPipeModule
   ],
-  providers: [],
+  providers: [{ provide: MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}
