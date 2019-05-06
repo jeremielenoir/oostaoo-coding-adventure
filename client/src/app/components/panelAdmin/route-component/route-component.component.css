@@ -285,7 +285,6 @@ button:hover {
 
 #menu-nav-mobile {
   display: flex;
-  border: 1px solid green;
   flex-direction: column;
   width: 100%;
   padding-top: 10px;
@@ -341,10 +340,12 @@ button:hover {
   #container {
     display: flex;
     flex-wrap: wrap;
+    height: inherit;
   }
   .fixNavMobile {
     position: absolute;
-    margin-top: 13vh;
+    margin-top: 10vh;
+    z-index: 99;
   }
   .unfixNavMobile {
     position: inherit;
