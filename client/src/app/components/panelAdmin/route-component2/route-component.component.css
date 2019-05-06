@@ -49,8 +49,16 @@
     .rowter {
         flex-wrap: wrap;
     }
-    .view-content {}
-    .contenu-view-content {}
+    app-route-component {
+        width: 100%;
+    }
+    .view-content {
+        width: 100%;
+    }
+    .contenu-view-content {
+        display: flex;
+        flex-direction: column;
+    }
     .contenu-view-content-left {}
 }
 

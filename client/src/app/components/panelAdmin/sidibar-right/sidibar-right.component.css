@@ -1,65 +1,55 @@
-.sidibar
-{
+.sidibar {
     border: 1px solid #e4e4e4;
     overflow: hidden;
     background-color: white;
     margin-left: 20px;
     height: 100%;
     flex: 11;
-    
 }
 
-.sidibar > .sidibar-header
-{
+.sidibar>.sidibar-header {
     border-bottom: 1px solid #e7e7e7;
     padding: 0 20px;
     display: flex;
     align-items: center;
     height: 48px;
-    justify-content:space-between
-   
+    justify-content: space-between
 }
 
-.sidibar > .sidibar-header > .sidibar-header-title
-{
+.sidibar>.sidibar-header>.sidibar-header-title {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 0px!important;
 }
 
-.sidibar > .sidibar-header > .sidibar-header-title > .icon-contenu
-{
+.sidibar>.sidibar-header>.sidibar-header-title>.icon-contenu {
     margin-right: 15px;
     display: inline-block;
     color: #f2bb13;
     font-size: 24px;
-    border:2.5px solid #f2bb13; 
+    border: 2.5px solid #f2bb13;
     border-radius: 4px;
 }
-.sidibar > .sidibar-content
-{
+
+.sidibar>.sidibar-content {
     overflow-y: auto;
     flex: 1 1 0px;
     height: 620px;
 }
 
-.icon-right-sidibar
-{
+.icon-right-sidibar {
     cursor: pointer
 }
 
-.icon
-{
+.icon {
     transition: .5s
 }
 
-.icon:hover
-{
-    fill:red;
+.icon:hover {
+    fill: red;
 }
 
-.sidibar > .sidibar-content > .list-sidibar
-{
+.sidibar>.sidibar-content>.list-sidibar {
     color: #7e8082;
     display: flex;
     overflow: hidden;
@@ -67,27 +57,23 @@
     flex-direction: row;
 }
 
-.sidibar > .sidibar-content > .list-sidibar:first-child{
-    border-top:none
+.sidibar>.sidibar-content>.list-sidibar:first-child {
+    border-top: none
 }
 
-.sidibar > .sidibar-content > .list-sidibar > .list-sidibar-left
-{
-
+.sidibar>.sidibar-content>.list-sidibar>.list-sidibar-left {
     padding: 14px 20px;
     min-width: 100px;
     font-size: 15px;
     max-height: 400px;
     align-items: center;
-
 }
 
-.sidibar > .sidibar-content > .list-sidibar > .list-sidibar-left > .list-sidibar-left-content{
-
+.sidibar>.sidibar-content>.list-sidibar>.list-sidibar-left>.list-sidibar-left-content {
     word-wrap: break-word;
-
 }
-.sidibar > .sidibar-content > .list-sidibar > .list-sidibar-left > .list-sidibar-left-content > a {
+
+.sidibar>.sidibar-content>.list-sidibar>.list-sidibar-left>.list-sidibar-left-content>a {
     color: #f2bb13;
     border: none;
     transition: color 0.2s;
@@ -95,32 +81,28 @@
     text-decoration: none;
 }
 
-.sidibar > .sidibar-content > .list-sidibar > .list-sidibar-left > .list-sidibar-left-content > a:hover {
+.sidibar>.sidibar-content>.list-sidibar>.list-sidibar-left>.list-sidibar-left-content>a:hover {
     color: #ffd200;
 }
 
-
-.sidibar > .sidibar-content > .list-sidibar > .list-sidibar-right
-{
-
-    min-width:100px!important;
+.sidibar>.sidibar-content>.list-sidibar>.list-sidibar-right {
+    min-width: 100px!important;
     display: flex;
     font-size: 12px;
-    border-left:1px solid #e7e7e7;
+    border-left: 1px solid #e7e7e7;
     font-weight: 400;
     align-items: center;
     flex-direction: column;
     justify-content: center;
 }
 
-.sidibar > .sidibar-content > .list-sidibar > .list-sidibar-right > p
-{
+.sidibar>.sidibar-content>.list-sidibar>.list-sidibar-right>p {
     margin-bottom: 0px!important
 }
 
 /*--shadow cog --*/
-#shadow-cog{
 
+#shadow-cog {
     position: fixed;
     top: 0px;
     left: 0px;
@@ -135,14 +117,12 @@
     display: none
 }
 
-#shadow-cog.shadow-cog-active
-{   
+#shadow-cog.shadow-cog-active {
     display: block;
     display: flex;
 }
 
-#remove
-{
+#remove {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -151,8 +131,7 @@
     z-index: -1;
 }
 
-#shadow-cog > .modall,#shadow-cog.shadow-cog-active > .modall
-{
+#shadow-cog>.modall, #shadow-cog.shadow-cog-active>.modall {
     border: none;
     background: rgb(255, 255, 255);
     outline: none;
@@ -162,13 +141,9 @@
     min-width: 550px;
     width: 550px;
     height: auto;
-    
 }
 
-
-
-#shadow-cog > .modall > .modall-header
-{
+#shadow-cog>.modall>.modall-header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -176,10 +151,7 @@
     height: 50px;
 }
 
-
-
-#shadow-cog > .modall > .modall-header > .modall-title
-{
+#shadow-cog>.modall>.modall-header>.modall-title {
     color: white;
     margin: 0;
     padding: 0;
@@ -187,17 +159,15 @@
     font-weight: 600;
 }
 
-#shadow-cog > .modall > .modall-header > .modall-title > .icon-modal-header
-{
+#shadow-cog>.modall>.modall-header>.modall-title>.icon-modal-header {
     margin-right: 10px;
 }
 
-#shadow-cog > .modall > .modall-content form
-{
+#shadow-cog>.modall>.modall-content form {
     padding: 30px;
 }
 
-#shadow-cog > .modall > .modall-content form > .checked-block {
+#shadow-cog>.modall>.modall-content form>.checked-block {
     position: relative;
     font-size: 16px;
     display: block;
@@ -207,43 +177,39 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    color:#7e8082
+    color: #7e8082
 }
 
-.checkbox
-{
+.checkbox {
     width: 0px;
     height: 0px;
     opacity: 0;
 }
 
-
-.check-label
-{
-    display:inline-block;
+.check-label {
+    display: inline-block;
     margin-left: 25px;
 }
 
-.checked-block input:checked ~ .checkbox-span {
-    border-color:#f2bb13;
-  }
+.checked-block input:checked~.checkbox-span {
+    border-color: #f2bb13;
+}
 
-.checkbox-span      
-{
+.checkbox-span {
     position: absolute;
     top: 0;
     left: 0;
     height: 17px;
     width: 17px;
-    border:2px solid #7e8082;
-    display:inline-block;
+    border: 2px solid #7e8082;
+    display: inline-block;
     border-radius: 2px;
     margin-top: 4px;
-
 }
- 
-  /* Style the checkmark/indicator */
-  .checkbox-span::after {
+
+/* Style the checkmark/indicator */
+
+.checkbox-span::after {
     content: "";
     position: absolute;
     display: none;
@@ -256,15 +222,15 @@
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-  }
-   
-  /* Show the checkmark when checked */
-  .checked-block  input:checked ~ .checkbox-span:after {
+}
+
+/* Show the checkmark when checked */
+
+.checked-block input:checked~.checkbox-span:after {
     display: block;
-  }
-  
-.btn-modal
-{
+}
+
+.btn-modal {
     width: 100%;
     margin-top: 30px;
     color: white;
@@ -279,7 +245,14 @@
     background-color: #f2bb13;
 }
 
-.btn-modal:hover
-{
+.btn-modal:hover {
     background-color: #ffd200;
+}
+
+@media (min-width: 300px) and (max-width: 1024px) {
+    .sidibar {
+        margin-left: inherit;
+        /* width: 380px; */
+        margin-top: 2vh;
+    }
 }

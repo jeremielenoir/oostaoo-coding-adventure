@@ -3,3 +3,9 @@
     color: white;
     margin-top: 15px;
 }
+
+@media (min-width: 300px) and (max-width: 1024px) {
+    .no-margin-bottom {
+        margin-bottom: inherit;
+    }
+}
