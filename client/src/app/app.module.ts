@@ -20,7 +20,7 @@ import { MainComponent } from "./components/home/main/main.component";
 import { SliderComponent } from "./components/home/slider/slider.component";
 import { DragScrollModule } from "ngx-drag-scroll";
 import { SlideMarquesComponent } from "./components/home/slide-marques/slide-marques.component";
-import { RouteComponentComponent, PopupMonOffre } from './components/panelAdmin/route-component/route-component.component';
+import { RouteComponentComponent, PopupMonOffre } from './components/panelAdmin/navbar/route-component.component';
 import { AccueilComponent } from './components/home/accueil/accueil.component';
 import { MatBottomSheetModule, MAT_BOTTOM_SHEET_DEFAULT_OPTIONS } from '@angular/material';
 import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
