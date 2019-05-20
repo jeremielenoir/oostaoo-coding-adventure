@@ -1,0 +1,37 @@
+<div>
+  <header class="header-question">
+    <i id="icon" class="fas fa-plus-circle"></i>
+    <h4>Nouvelle question</h4>
+  </header>
+
+  <div class="content-modal-question">
+    <h4>Langage de programmation</h4>
+    <mat-form-field>
+      <mat-select>
+        <mat-option *ngFor="let techno of TechnoList" [value]="techno">{{
+          techno
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <h4>Type de question</h4>
+    <mat-form-field>
+      <mat-select>
+        <mat-option *ngFor="let question of Questions" [value]="question">{{
+          question
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <h4>Langues</h4>
+    <mat-form-field>
+      <mat-select multiple>
+        <mat-option *ngFor="let langue of Langues" [value]="langue">
+          {{ langue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="btn-question">
+      Créer
+    </button>
+  </div>
+</div>

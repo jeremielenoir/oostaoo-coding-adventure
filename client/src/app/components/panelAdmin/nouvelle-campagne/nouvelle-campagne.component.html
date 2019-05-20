@@ -1,0 +1,34 @@
+<div class="container-fluid backgroundColor">
+  <div class="cadreQuestion">
+    <form
+      [formGroup]="ParentFormCampagne"
+      (ngSubmit)="nouvelleCampagne(ParentFormCampagne.value)"
+    >
+      <div [ngSwitch]="nNumeorPage">
+        <div *ngSwitchCase="1">
+          <app-NouvelleCampagnePage1Component
+            (incrementPage)="nextPage()"
+            [formCampagne]="ParentFormCampagne"
+          >
+          </app-NouvelleCampagnePage1Component>
+        </div>
+        <div *ngSwitchCase="2">
+          <app-NouvelleCampagnePage2Component
+            (incrementPage)="nextPage()"
+            (decrementPage)="previousPage()"
+            [formCampagne]="ParentFormCampagne"
+          >
+          </app-NouvelleCampagnePage2Component>
+        </div>
+        <div *ngSwitchCase="3">
+          <app-NouvelleCampagnePage3Component
+            (incrementPage)="nextPage()"
+            (decrementPage)="previousPage()"
+            [formCampagne]="ParentFormCampagne"
+          >
+          </app-NouvelleCampagnePage3Component>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

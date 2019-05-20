@@ -1,0 +1,17 @@
+::ng-deep .cdk-overlay-pane {
+    position: absolute !important;
+    left: 2.5% !important;
+    top: 20% !important;  
+    pointer-events: auto;
+    box-sizing: border-box;
+    z-index: 1000;
+    display: flex;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+::ng-deep .mat-bottom-sheet-container{
+    background: #20242a !important;
+    color: white;
+    padding: 0px 0px 0px 10px !important;
+}

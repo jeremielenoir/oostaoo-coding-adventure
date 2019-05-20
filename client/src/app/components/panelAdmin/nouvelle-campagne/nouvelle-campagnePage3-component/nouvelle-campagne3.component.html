@@ -1,0 +1,126 @@
+
+<div id="top-bar">
+  <div id="segment1">
+    <p id="diagram">diagram</p>
+    <div id="segment1-content">
+      <p>point</p>
+      <p>temps</p>
+    </div>
+    <p id="arrow"><i class="fas fa-chevron-right"></i></p>
+  </div>
+
+  <div id="segment2">
+    <div id="segment2-content">
+      <p id="techno">aws</p>
+      <p>point</p>
+    </div>
+  </div>
+
+  <div id="segment3">
+    <div id="segment3-left">
+      <p>
+        Score moyen <br />
+        attendu
+      </p>
+      <p id="score">33% <i class="fas fa-info-circle info"></i></p>
+      <p>diagramme</p>
+    </div>
+    <div id="segment3-right">
+      <button
+        class="custom-buttom"
+        mat-flat-button
+        id="back"
+        (click)="onDecrementPage(formCampagne.value)"
+      >
+        RETOUR
+      </button>
+      <button
+        class="custom-buttom"
+        mat-flat-button
+        id="save"
+        routerLink="../../"
+      >
+        ENREGISTRER
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="content">
+  <div class="example-container">
+    <div class="bar" id="">
+      <i class="far fa-question-circle bar-icon"></i>
+      <p class="bar-text">Notre collection de questions</p>
+      <div id="div-search">
+        <input type="text" id="search-input" placeholder="Recherche" />
+        <i class="fas fa-search search-icon"></i>
+      </div>
+      <button mat-flat-button id="bar-btn-search" class="custom-buttom">
+        Recherche avancée
+      </button>
+      <button mat-flat-button class="custom-buttom">
+        Trier par <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="todo"
+      [cdkDropListConnectedTo]="[doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="example-box" *ngFor="let item of todo" cdkDrag>
+        <p class="question-techno">AWS</p>
+        {{ item }}
+        <i class="fas fa-puzzle-piece drop-icon"></i> |
+        <p>20 pts</p>
+        | <i class="fas fa-list-ul drop-icon"></i> |
+        <p>00:30</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <div class="bar" id="">
+      <div id="bar2-left">
+        <i class="far fa-list-alt bar-icon"></i>
+        <p class="bar-text">Votre Campagne</p>
+      </div>
+      <div id="bar2-right">
+        <button mat-flat-button class="custom-buttom" color="primary">
+          <i class="fas fa-play"></i> Prévisualiser
+        </button>
+        <button mat-flat-button class="custom-buttom" color="primary">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="done"
+      [cdkDropListConnectedTo]="[todoList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <p id="drop-text">Glissez/déposez une question ici</p>
+      <div
+        class="example-box"
+        *ngFor="let item of done"
+        (click)="openBottomSheet()"
+        cdkDrag
+      >
+        <p class="question-techno">AWS</p>
+        {{ item }}
+
+        <i class="fas fa-puzzle-piece drop-icon"></i> |
+        <p>20 pts</p>
+        | <i class="fas fa-list-ul drop-icon"></i> |
+        <p>00:30</p>
+      </div>
+    </div>
+  </div>
+</div>
