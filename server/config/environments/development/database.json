@@ -1,0 +1,17 @@
+{
+  "defaultConnection": "default",
+  "connections": {
+    "default": {
+      "connector": "strapi-hook-bookshelf",
+      "settings": {
+        "client": "mysql",
+        "host": "oostaoo.cjatpf99ejol.eu-west-3.rds.amazonaws.com",
+        "port": 3306,
+        "database": "strapi",
+        "username": "oostaoo123",
+        "password": "Codingadventure123"
+      },
+      "options": {}
+    }
+  }
+}
