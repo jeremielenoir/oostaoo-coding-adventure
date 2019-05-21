@@ -2,6 +2,7 @@
   "name": "server",
   "private": true,
   "version": "0.1.0",
+  "repository": "https://github.com/jeremielenoir/oostaoo-coding-adventure",
   "description": "A Strapi application.",
   "main": "./server.js",
   "scripts": {
@@ -19,21 +20,21 @@
     "eslint-plugin-react": "^7.7.0"
   },
   "dependencies": {
+    "knex": "latest",
     "lodash": "^4.17.5",
+    "mysql": "2.16.0",
     "strapi": "3.0.0-alpha.25.2",
     "strapi-hook-bookshelf": "3.0.0-alpha.25.2",
-    "strapi-hook-knex": "3.0.0-alpha.25.2",
-    "knex": "latest",
-    "mysql": "2.16.0"
+    "strapi-hook-knex": "3.0.0-alpha.25.2"
   },
   "author": {
-    "name": "A Strapi developer",
+    "name": "Mendoza Miguel, Famady Kebe, Maxime Chagnon",
     "email": "",
     "url": ""
   },
   "maintainers": [
     {
-      "name": "A Strapi developer",
+      "name": "Mendoza Miguel, Famady Kebe, Maxime Chagnon",
       "email": "",
       "url": ""
     }

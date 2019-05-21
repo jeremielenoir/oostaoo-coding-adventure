@@ -1,0 +1,104 @@
+<div class="new-campaign row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12 formQuestion">
+          <label  for="nomDeCampagne" 
+                  [ngStyle]="errorNomCampgane ? {color:'red'} : null">
+            Nom de la campagne
+          </label>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col-md-12 formQuestion">
+          <mat-form-field [formGroup]="formCampagne" class="fullWidth">
+            <input  matInput
+                    value="{{formCampagne.value.techno.join(', ')}} - {{formCampagne.value.experience}}"
+                    name="nomDeCampagne">
+          </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-12 formQuestion">
+    <div class="row" >
+      <div class="col-md-12">
+        <label  for="nomDeCampagne" 
+                [ngStyle]="errorNomCampgane ? {color:'red'} : null">
+          En quelle langue les questions doivent-elles être posées à vos candidats ?
+        </label>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col-md-12">
+          <mat-checkbox class="example-margin" [(ngModel)]="checked">Anglais</mat-checkbox>
+          <mat-checkbox class="example-margin" checked="true">Français</mat-checkbox>
+      </div>     
+    </div>
+  </div>
+
+
+  <div class="col-md-12 formQuestion">
+      <div class="row" >
+        <div class="col-md-12">
+          <label for="utilisationCopieColler" [ngStyle]="errorExperience ? {color:'red'} : null">
+              En quelle langue les questions doivent-elles être posées à vos candidats ?
+            </label>
+          <div class="example-radio-button" [formGroup]="formCampagne">
+            <mat-radio-group formControlName="utilisationCopieColler">
+              <mat-radio-button value="true">
+                Oui
+              </mat-radio-button>
+              <mat-radio-button value="false">
+                Non
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>  
+      </div>
+    </div>
+
+  <div class="col-md-12 formQuestion">
+    <div class="row" >
+      <div class="col-md-12">
+        <label for="envoiRapportSimplifie" [ngStyle]="errorExperience ? {color:'red'} : null">
+            Souhaitez-vous envoyer le rapport simplifié au candidat à l'issue de son test ?
+        </label>
+        <div class="example-radio-button" [formGroup]="formCampagne">
+          <mat-radio-group formControlName="envoiRapportSimplifie">
+            <mat-radio-button value="true">
+              Oui
+            </mat-radio-button>
+            <mat-radio-button value="false">
+              Non
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>  
+    </div>
+  </div>
+
+  <div class="col-md-12 formQuestion finalQuestion">
+    <div class="row" >
+      <div class="col-md-6">
+        <button type="button" 
+                  id="button" mat-flat-button 
+                  (click)="onDecrementPage(formCampagne.value)"
+                  >
+          Étapes précédente : Profil recherché
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button type="button" 
+                  id="button" mat-flat-button 
+                  (click)="onIncrementPage(formCampagne.value)"
+                  >
+                  Étapes suivante : Paramètres
+        </button>
+      </div>
+    </div>
+  </div>
+</div>  
+
+
+  
