@@ -1,0 +1,28 @@
+{
+  "connection": "default",
+  "collectionName": "Test",
+  "info": {
+    "name": "usercodingame",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "password": {
+      "default": "",
+      "type": "password"
+    },
+    "username": {
+      "default": "",
+      "type": "string"
+    },
+    "email": {
+      "default": "",
+      "unique": true,
+      "type": "email"
+    }
+  }
+}
