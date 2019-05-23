@@ -1,6 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from '@angular/router';
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
+
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
@@ -42,6 +44,7 @@ import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utili
 import { ProtectionDeDonneesComponent } from './components/panelAdmin/protection-de-donnees/protection-de-donnees.component';
 import { FacturationComponent } from './components/panelAdmin/facturation/facturation.component';
 import { UtilisateursComponent } from './components/panelAdmin/compte-utilisateurs/utilisateurs.component';
+import { ProfilEntrepriseComponent } from './components/panelAdmin/profil-entreprise/profil-entreprise.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -74,6 +77,10 @@ const appRoutes: Routes = [
   {
     path: 'dashboard/profil-utilisateur',
     component: ProfilUtilisateurComponent,
+  },
+  {
+    path: 'dashboard/profil-entreprise',
+    component: ProfilEntrepriseComponent,
   },
   {
     path: 'dashboard/facturation',
@@ -128,7 +135,8 @@ const appRoutes: Routes = [
     ProfilUtilisateurComponent,
     FacturationComponent,
     ProtectionDeDonneesComponent,
-    UtilisateursComponent
+    UtilisateursComponent,
+    ProfilEntrepriseComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -143,7 +151,8 @@ const appRoutes: Routes = [
     DragScrollModule,
     MatBottomSheetModule,
     HttpClientModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    RoundProgressModule
   ],
   providers: [{ provide: MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }],
   bootstrap: [AppComponent]

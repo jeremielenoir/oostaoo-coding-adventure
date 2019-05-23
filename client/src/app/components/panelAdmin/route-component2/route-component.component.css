@@ -22,6 +22,7 @@
     flex-direction: column;
     overflow: hidden;
     background-color: #f9f9f9;
+    margin-left: 18%;
 }
 
 .header-notification {
@@ -44,6 +45,7 @@
     position: relative;
     flex-direction: row;
     padding: 20px;
+    
 }
 
 @media (min-width: 300px) and (max-width: 1024px) {
@@ -53,6 +55,12 @@
     app-route-component {
         width: 100%;
     }
+
+    .view-content {
+
+        margin-left: 0%;
+    }
+
     .view-content {
         width: 100%;
     }
@@ -63,6 +71,8 @@
     .contenu-view-content-left {}
 }
 
-@media (max-width: 990px) {}
+@media (max-width: 1024px) {
+
+}
 
 @media (max-width: 767px) {}

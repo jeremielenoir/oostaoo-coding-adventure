@@ -1,3 +1,9 @@
+
+
+#content{
+    margin-left: 18%;
+}
+
 .component-utilisateurs
 {
     background-color: #f9f9f9;
@@ -569,6 +575,12 @@
 
       /* .mat-cell */
   }
+
+@media screen and (min-width: 300px) and (max-width: 1024px){
+    #content{
+        margin-left: 0%;
+    }
+}
 
 
   @media screen and (max-width: 760px) {

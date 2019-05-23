@@ -9,6 +9,7 @@
     left: 15%;
     position: absolute;
     width: 70%;
+    margin-left: 9%;
 }
 
 .backgroundColor {
@@ -145,6 +146,13 @@
 
 ::ng-deep .mat-form-field-underline {
     display: none;
+}
+
+@media (min-width: 300px) and (max-width: 1024px) {
+    .cadreQuestion {
+        margin-left: 0%;
+    }
+    
 }
 
 @media screen and (min-width:768px) and (max-width:959px) {

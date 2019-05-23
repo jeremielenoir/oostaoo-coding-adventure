@@ -5,6 +5,7 @@
     background: #f9f9f9;
     width: 100%;
     padding: 10px;
+    margin-left: 18%;
 }
 
 .icon{
@@ -112,6 +113,16 @@
     border: 1px solid #e4e4e4;
 }
 
+
+@media screen and (min-width: 300px) and (max-width: 1024px){
+    #global{
+        display: block;
+    }
+    #content{
+
+        margin-left: 0%;
+    }
+}
 
 
 
