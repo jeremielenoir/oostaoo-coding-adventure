@@ -16,7 +16,7 @@
       "type": "string"
     },
     "level": {
-      "default": "",
+      "default": "junior",
       "type": "enumeration",
       "enum": [
         "junior",
@@ -25,7 +25,7 @@
       ]
     },
     "langs": {
-      "default": "",
+      "default": "FR",
       "type": "enumeration",
       "enum": [
         "FR",
@@ -43,7 +43,7 @@
       "type": "boolean"
     },
     "stopwatch": {
-      "default": "",
+      "default": "per_question",
       "type": "enumeration",
       "enum": [
         "per_question",

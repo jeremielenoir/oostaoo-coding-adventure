@@ -16,7 +16,7 @@
       "type": "string"
     },
     "level": {
-      "default": "",
+      "default": "facile",
       "type": "enumeration",
       "enum": [
         "facile",
@@ -29,7 +29,7 @@
       "type": "integer"
     },
     "type": {
-      "default": "",
+      "default": "one",
       "type": "enumeration",
       "enum": [
         "one",
@@ -38,7 +38,7 @@
       ]
     },
     "theme": {
-      "default": "",
+      "default": "langage",
       "type": "enumeration",
       "enum": [
         "langage",
