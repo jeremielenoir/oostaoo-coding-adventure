@@ -1,0 +1,27 @@
+{
+  "connection": "default",
+  "collectionName": "answers",
+  "info": {
+    "name": "answer",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "answer_value": {
+      "default": "",
+      "type": "text"
+    },
+    "question": {
+      "model": "question",
+      "via": "answers"
+    },
+    "candidat": {
+      "model": "candidat",
+      "via": "answers"
+    }
+  }
+}

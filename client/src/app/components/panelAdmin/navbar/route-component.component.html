@@ -1,0 +1,263 @@
+<div id="container">
+  <div id="totalLeft">
+    <div
+      id="left"
+      [ngClass]="{
+        fixNavMobile: isShow2 === false,
+        unfixNavMobile: isShow2 === true
+      }"
+      *ngIf="isShow === false || isShow2 === false"
+    >
+      <div id="left-top">
+        <div id="logo">
+          <a href="#"
+            ><img
+              src="../../../../assets/logo-codingame-for-work.png"
+              alt="img-site"
+          /></a>
+        </div>
+        <div id="profil">
+          <a href="#"
+            ><img src="../../../../assets/Oostaoo Logo.png" alt="img-profil"
+          /></a>
+          <a id="color-notif" href="">
+            <div id="photoNotif">
+              <div class="notif">
+                <i class="fa fa-bell-o fa-2x color-site" aria-hidden="true"></i>
+                <a href="#">0</a>
+              </div>
+            </div>
+          </a>
+          <div id="user-name">
+            <p>MyUserName</p>
+          </div>
+        </div>
+      </div>
+      <button
+        mat-stroked-button
+        class="custom-button"
+        (click)="isShowNavTesting = !isShowNavTesting"
+      >
+        <i class="fa fa-bar-chart fa-2x color-site" aria-hidden="true"></i>
+        TESTING
+      </button>
+      <div id="campaign" *ngIf="isShowNavTesting">
+        <ul>
+          <li>
+            <a routerLink="/dashboard">Mes campagnes</a>
+          </li>
+          <li>
+            <a href="#">Editeur de questions</a>
+          </li>
+          <li>
+            <a href="#">Interview</a>
+          </li>
+          <li>
+            <a href="#">Intégration</a>
+          </li>
+        </ul>
+        <button
+          mat-button
+          class="custom-button-testing color-white"
+          (click)="openBottomSheet()"
+        >
+          MODIFIER MON OFFRE
+        </button>
+      </div>
+      <button mat-stroked-button class=" custom-button">
+        <i class="fa fa-crosshairs fa-2x color-site" aria-hidden="true"></i>
+        SOURCING
+      </button>
+      <button mat-stroked-button class=" custom-button">
+        <i class="fa fa-users fa-2x color-site" aria-hidden="true"></i> TEAM
+        BUILDING
+      </button>
+      <button
+        mat-stroked-button
+        class=" custom-button"
+        (click)="isShowNavCompte = !isShowNavCompte"
+      >
+        <i class="fa fa-user-circle-o fa-2x color-site" aria-hidden="true"></i>
+        COMPTE
+      </button>
+      <div id="compte" *ngIf="isShowNavCompte">
+        <ul>
+          <li>
+            <a  routerLink="/dashboard/profil-utilisateur">Profil utilisateur</a>
+          </li>
+          <li>
+            <a href="/dashboard/profil-entreprise">Profil entreprise</a>
+          </li>
+          <li>
+            <a routerLink="/dashboard/facturation">Facturation</a>
+          </li>
+          <li>
+            <a routerLink="/dashboard/protection-des-donnees">Protection des données</a>
+          </li>
+          <li>
+              <a routerLink="/dashboard/utilisateurs">Utilisateurs</a>
+          </li>
+          <li>
+            <a href="#">Déconnexion</a>
+          </li>
+        </ul>
+      </div>
+      <div id="contact">
+        <div id="centerContact">
+          <button mat-button class="custom-button-testing color-white">
+            CONTACTEZ-NOUS
+          </button>
+          <a class="color-site" href="#">Nouveautés</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="left2" *ngIf="isShow === true">
+      <a href="#">
+        <div id="logo2" class="padding-left2">
+          <img src="../../../../assets/Oostaoo Logo.png" alt="img-profil" />
+        </div>
+      </a>
+      <a href="#"
+        ><div id="notif2" class="padding-left2">
+          <i class="fa fa-bell-o fa-2x color-site" aria-hidden="true"></i>
+        </div>
+      </a>
+      <div id="testing2" class="padding-left2">
+        <ul>
+          <li>
+            <a href=""
+              ><i
+                class="fa fa-bar-chart fa-2x color-site"
+                aria-hidden="true"
+              ></i
+            ></a>
+            <ul>
+              <h4>TESTING</h4>
+              <li class="padding10pxcompagne">
+                <a routerLink="/dashboard">Mes campagnes</a>
+              </li>
+              <li class="padding10pxcompagne">
+                <a href="#">Editeur de questions</a>
+              </li>
+              <li class="padding10pxcompagne">
+                <a href="#">Interview</a>
+              </li>
+              <li class="padding10pxcompagne">
+                <a href="#">Intégration</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div id="sourcing2" class="padding-left2">
+        <ul>
+          <li>
+            <a href=""
+              ><i
+                class="fa fa-crosshairs fa-2x color-site"
+                aria-hidden="true"
+              ></i
+            ></a>
+            <ul class="fixmarginleft">
+              <h4>SOURCING</h4>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div id="team2" class="padding-left2">
+        <ul>
+          <li>
+            <a href=""
+              ><i class="fa fa-users fa-2x color-site" aria-hidden="true"></i
+            ></a>
+            <ul>
+              <h4>TEAM BUILDING</h4>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div id="compte2" class="padding-left2">
+        <ul>
+          <li>
+            <a href=""
+              ><i
+                class="fa fa-user-circle-o fa-2x color-site"
+                aria-hidden="true"
+              ></i
+            ></a>
+            <ul>
+              <h4>COMPTE</h4>
+              <li class="padding10pxcompagne">
+                <a  routerLink="/dashboard/profil-utilisateur">Profil utilisateur</a>
+              </li>
+              <li class="padding10pxcompagne">
+                <a href="/dashboard/profil-entreprise">Profil entreprise</a>
+              </li>
+              <li class="padding10pxcompagne">
+                <a routerLink="/dashboard/facturation">Facturation</a>
+              </li>
+              <li class="padding10pxcompagne">
+                <a routerLink="/dashboard/protection-des-donnees">Protection des données</a>
+              </li>
+              <li class="padding10pxcompagne">
+                  <a routerLink="/dashboard/utilisateurs">Utilisateurs</a>
+              </li>
+              <li class="padding10pxcompagne">
+                <a href="#">Déconnexion</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div id="contact2" class="padding-left2">
+        <ul>
+          <li>
+            <a href=""
+              ><i class="fa fa-envelope fa-2x color-site" aria-hidden="true"></i
+            ></a>
+            <ul>
+              <h4>CONTACTEZ-NOUS</h4>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div id="news" class="padding-left2">
+        <a href="#"
+          ><i class="fa fa-newspaper-o fa-2x color-site" aria-hidden="true"></i
+        ></a>
+      </div>
+    </div>
+    <!-- button for show or hidden nav in desktop -->
+    <button
+      id="nonemobile"
+      mat-button
+      (click)="isShow = !isShow"
+      (click)="isShow2 = true"
+      class="custom-button-nav"
+    >
+      <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+    </button>
+  </div>
+  <!-- button for show or hidden nav in desktop -->
+  <div id="menu-nav-mobile">
+    <div id="nav-mobile">
+      <div
+        id="icon-mobile"
+        (click)="isShow2 = !isShow2"
+        (click)="isShow = true"
+      >
+        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+      </div>
+      <div id="logo-mobile">
+        <img
+          src="../../../../assets/Coding-game-img/logo-mobile.svg"
+          alt="logo-mobile"
+        />
+      </div>
+      <div id="notif-mobile">
+        <i class="fa fa-bell-o fa-2x" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,687 @@
+<div id="global">
+  <app-route-component></app-route-component>
+
+  <div id="content">
+
+<div id="shadow-cog">
+
+    <div id="remove"  (click)="param_cog_non_active()"></div>
+
+    <div class="modall">
+
+      <form enctype="multipart/form-data">
+
+        <div class="modall-header"></div>
+
+        <div class="modall-content">
+
+         <div class="block-upload" id="block-upload">
+
+
+            <i class="modal-content-icon fas fa-camera"></i>
+
+            <span class="modal-content-text">
+  
+                Déposez votre image ici
+  
+            </span>
+  
+            <div class="btn-modal-content" id="btn-modal-content">
+  
+              <span class="modal-text-btn-upload">ou télécharger une photo</span>
+  
+              <input type="file" class="file" id="file" (change)="readURL($event,this)"/>
+  
+            </div>
+
+
+
+         </div>
+
+         <div class="cadrage-img">
+
+          <figure class="img-figure">
+              <img src="" class="upload_img"/>
+          </figure>
+
+          <div class="text-error-upload">
+
+              <i class="fas fa-ban ban-error"></i>
+
+            <span class="error">Fichier non supporté</span>
+
+            <div class="btn-modal-content" id="btn-modal-content">
+  
+                <span class="modal-text-btn-upload">ou télécharger une photo</span>
+    
+                <input type="file" class="file" id="file" (change)="readURL($event,this)"/>
+    
+              </div>
+
+          </div>
+
+          </div>
+
+        
+        </div>
+
+  
+        <div class="modall-footer">
+
+            <button mat-button class="modal-btn-footer" disabled="disabled" id="btn-valide">valider</button>  
+            <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()">annuler</button>
+
+
+        </div>
+
+      </form>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div id="shadow-cog-add-images">
+
+    <div id="remove_add_image"   (click)="param_cog_non_active_add_img()"></div>
+
+    <div class="modall">
+
+      <form enctype="multipart/form-data">
+
+        <div class="modall-header"></div>
+
+        <div class="modall-content">
+
+         <div class="block-upload" id="block-upload-deux">
+
+
+            <i class="modal-content-icon fas fa-camera"></i>
+
+            <span class="modal-content-text">
+  
+                Déposez votre image ici
+  
+            </span>
+  
+            <div class="btn-modal-content" id="btn-modal-content">
+  
+              <span class="modal-text-btn-upload">ou télécharger une photo</span>
+  
+              <input type="file" class="file" id="file" (change)="readURL_deux($event,this)"/>
+  
+            </div>
+
+
+
+         </div>
+
+         <div class="cadrage-img">
+
+          <figure class="img-figure">
+              <img src="" class="upload_img"/>
+          </figure>
+
+          <div class="text-error-upload">
+
+              <i class="fas fa-ban ban-error"></i>
+
+            <span class="error">Fichier non supporté</span>
+
+            <div class="btn-modal-content" id="btn-modal-content">
+  
+                <span class="modal-text-btn-upload">ou télécharger une photo</span>
+    
+                <input type="file" class="file" id="file" (change)="readURL($event,this)"/>
+    
+              </div>
+
+          </div>
+
+          </div>
+
+        
+        </div>
+
+  
+        <div class="modall-footer">
+
+            <button mat-button class="modal-btn-footer" disabled="disabled" id="btn-valide-deuxx">valider</button>  
+            <button mat-button class="modal-btn-footer" (click)="param_cog_non_active_add_img()">annuler</button>
+
+
+        </div>
+
+      </form>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="big-content">
+
+  <div class="all-group-content">
+
+   <div class="view-content-center">
+
+      <div class="edit-panel">
+
+          <header class="edit-panel-header">
+
+            <h2 class="title-edit-panel" (click)="show_header_param()">Éditez les détails de votre entreprise dans la langue de votre choix</h2>
+
+            <div class="sous-edit-panel-left">
+
+                  <span class="chart-title">Complétion</span>
+
+                  <div class="charte-progress">
+
+                      <round-progress
+                      [current]="33"
+                      [max]="100"
+                      [color]="'45ccce'"
+                      [background]="'#eee'"
+                      [radius]="125"
+                      [stroke]="20"
+                      [semicircle]="false"
+                      [rounded]="true"
+                      [clockwise]="true"
+                      [responsive]="true"
+                      [duration]="800"
+                      [animation]="'easeInOutQuart'"
+                      [animationDelay]="1000"
+                      >
+                    </round-progress>
+
+                    <div class="detail_progresse_mini">
+
+                        <span class="number_progress_mini">33%</span>
+        
+                    </div>
+                    
+                  </div>
+
+            </div>
+          </header>
+
+          <div class="param-header">
+
+              <form>
+
+                  <div class="regroupe-form">
+
+                      <label class="first-label-param-header">Choisissez votre langue</label>
+      
+                      <div class="block-form-flex">
+      
+      
+                        <select  class="champ-form-gestion">
+      
+                          <option *ngFor="let industrie of industrie" value="{{industrie}}">{{ industrie }}</option>
+      
+                        </select>
+      
+                      </div>
+      
+                  </div>
+
+                  <div class="regroupe-form">
+
+                      <label>Lien vidéo</label>
+      
+                      <div class="block-form-flex incrage">
+      
+                        <input type="text" class="champ-form-gestion champ-incrage" value=""/>
+      
+                        <span class="span-incrage">url:</span>
+                        
+                      </div>
+      
+                  </div>
+      
+                  <div class="regroupe-form">
+      
+                      <label>Lien du site</label>
+      
+                      <div class="block-form-flex">
+      
+                          <input type="text" class="champ-form-gestion champ-incrage" value=""/>
+      
+                          <span class="span-incrage">url:</span>
+                        
+                      </div>
+      
+                  </div>
+
+                  <div class="regroupe-form">
+
+                      <label>Teaser de l'entreprise</label>
+      
+                      <div class="block-form-flex">
+      
+                        <textarea class="champ-form-gestion textarea-gestion" style="height:150px;resize:none;"></textarea>
+      
+                        <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
+                        
+                      </div>
+      
+                  </div>
+
+                  <div class="regroupe-form">
+
+                      <label></label>
+      
+                      <div class="block-form-flex btn-block-flex">
+      
+                          <button mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
+          
+                      </div>
+      
+                  </div>
+
+
+              </form>
+
+
+            </div>
+
+      </div>
+
+      <div class="edit-panel">
+
+        <div class="edit-panel-header">
+
+            <h2 class="title-edit-panel">
+                Éditez les détails de votre entreprise en Anglais
+                <figure class="img-country"><img src="../../../../assets/country.png" role="img" alt="country"/></figure>
+            </h2>
+      
+      
+              <div class="sous-edit-panel-left">
+      
+                    <span class="chart-title">Complétion</span>
+      
+                    <div class="charte-progress">
+
+                      
+                      <round-progress
+                        [current]="62"
+                        [max]="100"
+                        [color]="'45ccce'"
+                        [background]="'#eee'"
+                        [radius]="125"
+                        [stroke]="20"
+                        [semicircle]="false"
+                        [rounded]="true"
+                        [clockwise]="true"
+                        [responsive]="true"
+                        [duration]="800"
+                        [animation]="'easeInOutQuart'"
+                        [animationDelay]="1000"
+                      >
+                      </round-progress>
+
+                      <div class="detail_progresse_mini">
+
+                          <span class="number_progress_mini">62%</span>
+          
+                      </div>
+    
+                      
+                    </div>
+      
+              </div>
+
+        
+
+         </div>
+
+        <form>
+
+            <div class="regroupe-form">
+
+                <label>Logo de l'entreprise</label>
+
+              <div class="all-gestion-info">
+
+
+                    <figure class="img-upload"><img src="../../../../assets/oosatoo-logo.png" alt="" role=""></figure>
+
+    
+                    <div class="gestion-info-img">
+    
+                        <div class="gestion-info-img-header">
+      
+                            <button mat-button class="btn-gestion" (click)="modal_upload()">ENVOYER</button>
+                            <button mat-button class="btn-gestion">SUPPRIMER</button>
+      
+                        </div>
+      
+                        <p class="gestion-info-img-contenu">4 Mo max.</p>
+                        <p class="gestion-info-img-contenu">Taille recommandée : 500 x 500px</p>
+                        <p class="gestion-info-img-contenu">Types de fichier recommandés : JPEG, PNG, GIF</p>
+
+      
+                    </div>
+
+
+              </div>
+                
+
+            </div>
+
+
+            <div class="regroupe-form">
+
+                <label>Nom de l'entreprise</label>
+
+                <div class="block-form-flex">
+
+                  <input type="text" class="champ-form-gestion" value=""/>
+
+                  <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
+                  
+                </div>
+
+            </div>
+
+            <div class="regroupe-form">
+
+                <label>Adresse email de l'entreprise</label>
+
+                <div class="block-form-flex">
+
+                  <input type="text" class="champ-form-gestion" value=""/>
+
+                  <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
+                  
+                </div>
+
+            </div>
+
+            <div class="regroupe-form">
+
+                <label>Numéro de téléphone</label>
+
+                <div class="block-form-flex">
+
+                  <input type="text" class="champ-form-gestion" value=""/>
+
+                  <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
+                  
+                </div>
+
+            </div>
+
+            <div class="regroupe-form">
+
+                <label>Industrie</label>
+
+                <div class="block-form-flex">
+
+
+                  <select  class="champ-form-gestion">
+
+                    <option *ngFor="let industrie of industrie" value="{{industrie}}">{{ industrie }}</option>
+
+                  </select>
+
+                </div>
+
+            </div>
+
+            <div class="regroupe-form">
+
+                <label>Nombre d'employés</label>
+
+                <div class="block-form-flex">
+
+                    <select  class="champ-form-gestion">
+
+                        <option *ngFor="let nbr_employe of nbr_employe" value="{{nbr_employe}}">{{ nbr_employe }}</option>
+    
+                    </select>
+                  
+                </div>
+
+            </div>
+
+            <div class="regroupe-form">
+
+                <label>Nombre de développeurs</label>
+
+                <div class="block-form-flex">
+
+                    <select  class="champ-form-gestion">
+
+                        <option *ngFor="let nbr_employe of nbr_employe" value="{{nbr_employe}}">{{ nbr_employe }}</option>
+    
+                    </select>
+                  
+                </div>
+
+            </div>
+
+            <div class="regroupe-form">
+
+                <label>Technologies</label>
+
+                <div class="block-form-flex select-form-flex">
+
+                    <mat-form-field class="select-tech">
+                        <mat-label>Toppings</mat-label>
+                        <mat-select [formControl]="toppings" multiple>
+                          <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                  
+                </div>
+
+            </div>
+
+            <div class="regroupe-form">
+
+                <label>Lien vidéo</label>
+
+                <div class="block-form-flex incrage">
+
+                  <input type="text" class="champ-form-gestion champ-incrage" value=""/>
+
+                  <span class="span-incrage">url:</span>
+                  
+                </div>
+
+            </div>
+
+            <div class="regroupe-form">
+
+                <label>Lien du site</label>
+
+                <div class="block-form-flex">
+
+                    <input type="text" class="champ-form-gestion champ-incrage" value=""/>
+
+                    <span class="span-incrage">url:</span>
+                  
+                </div>
+
+            </div>
+
+            <div class="regroupe-form">
+
+                <label>Teaser de l'entreprise</label>
+
+                <div class="block-form-flex">
+
+                  <textarea class="champ-form-gestion textarea-gestion" style="height:150px;resize:none;"></textarea>
+
+                  <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
+                  
+                </div>
+
+            </div>
+
+
+            <div class="regroupe-form">
+
+                <label>Ajouter des images (10 max)</label>
+
+              <div class="all-gestion-info">
+
+                 <div class="upload" (click)="param_cog_non_active_add_image()">
+
+                    <i class="fas fa-camera icon-upload"></i>
+
+                    <span class="text-upload">ADD PIC</span>
+
+                 </div>
+
+              </div>
+                
+
+            </div>
+
+            <div class="regroupe-form">
+
+                <label></label>
+
+                <div class="block-form-flex">
+
+                    <input type="text" class="champ-form-gestion champ-incrage-network" value=""/>
+
+                    <span class="span-incrage span-incrage-network">
+                      <i class="fab fa-linkedin-in icon-network"></i>
+                      Linkidin
+                    </span>
+    
+                </div>
+
+            </div>
+
+            <div class="regroupe-form">
+
+                <label></label>
+
+                <div class="block-form-flex">
+
+                    <input type="text" class="champ-form-gestion champ-incrage-network" value=""/>
+
+                    <span class="span-incrage span-incrage-network">
+                      <i class="fab fa-facebook-f icon-network"></i>
+                      Linkidin
+                    </span>
+    
+                </div>
+
+            </div>
+
+            <div class="regroupe-form">
+
+                <label></label>
+
+                <div class="block-form-flex">
+
+                    <input type="text" class="champ-form-gestion champ-incrage-network" value=""/>
+
+                    <span class="span-incrage span-incrage-network">
+                      <i class="fab fa-twitter icon-network"></i>
+                      Linkidin
+                    </span>
+    
+                </div>
+
+            </div>
+
+
+            <div class="regroupe-form">
+
+                <label></label>
+
+                <div class="block-form-flex btn-block-flex">
+
+                    <button mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
+    
+                </div>
+
+            </div>
+
+            
+
+          </form>
+
+      </div>
+
+   </div>
+
+   <div class="content-left">
+
+      <div class="completion_fiche">
+
+
+        <div class="completion_fiche_progress">
+
+            <h2 class="text_number_progress_responsive">Complétion de votre fiche</h2>
+
+         <div class="progres">
+           
+
+            <round-progress
+                        [current]="56"
+                        [max]="100"
+                        [color]="'#fff'"
+                        [background]="'#5CD2BC'"
+                        [radius]="200"
+                        [stroke]="20"
+                        [semicircle]="false"
+                        [rounded]="true"
+                        [clockwise]="true"
+                        [responsive]="true"
+                        [duration]="800"
+                        [animation]="'easeInOutQuart'"
+                        [animationDelay]="1000"
+                        >
+            </round-progress>
+
+          </div> 
+
+
+            <div class="detail_progresse">
+
+                <span class="number_progress">56</span>
+
+                <span class="text_number_progress">Complétion de votre fiche</span>
+
+            </div>
+
+        </div>
+
+
+
+      </div>
+
+   </div>
+    
+
+  </div>
+
+
+</div>
+
+</div>
+
+</div>

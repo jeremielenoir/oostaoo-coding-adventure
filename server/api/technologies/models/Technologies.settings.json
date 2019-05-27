@@ -1,0 +1,35 @@
+{
+  "connection": "default",
+  "collectionName": "technologies",
+  "info": {
+    "name": "technologies",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "name": {
+      "default": "",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "type": "text"
+    },
+    "questions": {
+      "collection": "question",
+      "via": "technologies"
+    },
+    "profile": {
+      "model": "profile",
+      "via": "technologies"
+    },
+    "campaigns": {
+      "collection": "campaign",
+      "via": "technologies"
+    }
+  }
+}

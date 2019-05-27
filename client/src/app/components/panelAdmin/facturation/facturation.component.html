@@ -1,0 +1,74 @@
+<div id="global">
+
+    <app-route-component></app-route-component>
+
+
+<div id="content">
+
+    <div id="section1">
+      <h2 class="title"><i class="far fa-clock icon"></i> Historique des factures</h2>
+
+      
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="montant" class="display-phone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="display-phone"> Montant </th>
+            <td mat-cell *matCellDef="let element" class="display-phone"> {{element.montant}} € </td>
+          </ng-container>
+        
+          <!-- Weight Column -->
+          <ng-container matColumnDef="statut" class="display">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="display"> Statut </th>
+            <td mat-cell *matCellDef="let element" class="display"> {{element.statut}} </td>
+          </ng-container>
+        
+          <!-- Symbol Column -->
+          <ng-container  matColumnDef="facture" class="display">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="display" > Numéro de facture </th>
+            <td mat-cell *matCellDef="let element" class="display"> {{element.facture}}</td>
+          </ng-container>
+
+          <ng-container  matColumnDef="download">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header > Voir</th>
+            <td mat-cell *matCellDef="let element"><a href=""><i class="far fa-eye icon"></i></a></td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+
+    <div id="section2">
+      <div id="section2-title">
+      <h2> <i class="far fa-credit-card icon "></i> Détails de l'abonnement</h2>
+      <a href="">Se désabonner</a>
+      </div>
+
+      <div id="section2-top">
+          <i class="far fa-calendar icon icoheight centrage"></i>
+          <p>Prochaine <br> facturation</p>
+          <p class="centrage">19/05/2019</p>
+          <p class="separation display-phone"> | </p>
+          <i class="fas fa-coins icon icoheight centrage"></i>
+          <p class="centrage">Montant</p>
+          <p class="centrage">418,80 €</p>
+      </div>
+
+      <h2> <i class="far fa-credit-card icon"></i> Carte de crédit</h2>
+      <div id="section2-bottom">
+          
+          <p class="centrage-bottom">Numéro de carte : MasterCard ***-9376</p>
+          <p>Expire le : <br> 01/2021</p>
+          <button  mat-flat-button class="bouton-modifier" >Modifier</button>
+      </div>
+    </div>
+</div>
+
+</div>

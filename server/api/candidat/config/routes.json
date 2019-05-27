@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/candidats",
+      "handler": "Candidat.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/candidats/count",
+      "handler": "Candidat.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/candidats/:id",
+      "handler": "Candidat.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/candidats",
+      "handler": "Candidat.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/candidats/:id",
+      "handler": "Candidat.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/candidats/:id",
+      "handler": "Candidat.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
