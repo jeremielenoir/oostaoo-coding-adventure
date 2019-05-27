@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/usercodingames",
-      "handler": "Usercodingame.find",
+      "path": "/technologies",
+      "handler": "Technologies.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/usercodingames/count",
-      "handler": "Usercodingame.count",
+      "path": "/technologies/count",
+      "handler": "Technologies.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/usercodingames/:id",
-      "handler": "Usercodingame.findOne",
+      "path": "/technologies/:id",
+      "handler": "Technologies.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/usercodingames",
-      "handler": "Usercodingame.create",
+      "path": "/technologies",
+      "handler": "Technologies.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/usercodingames/:id",
-      "handler": "Usercodingame.update",
+      "path": "/technologies/:id",
+      "handler": "Technologies.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/usercodingames/:id",
-      "handler": "Usercodingame.destroy",
+      "path": "/technologies/:id",
+      "handler": "Technologies.destroy",
       "config": {
         "policies": []
       }

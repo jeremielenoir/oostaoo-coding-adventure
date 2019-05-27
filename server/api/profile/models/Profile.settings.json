@@ -1,8 +1,8 @@
 {
   "connection": "default",
-  "collectionName": "Test",
+  "collectionName": "profiles",
   "info": {
-    "name": "usercodingame",
+    "name": "profile",
     "description": ""
   },
   "options": {
@@ -11,18 +11,17 @@
     "comment": ""
   },
   "attributes": {
-    "password": {
-      "default": "",
-      "type": "password"
-    },
-    "username": {
+    "name": {
       "default": "",
       "type": "string"
     },
-    "email": {
-      "default": "",
-      "unique": true,
-      "type": "email"
+    "technologies": {
+      "collection": "technologies",
+      "via": "profile"
+    },
+    "campaigns": {
+      "collection": "campaign",
+      "via": "profile"
     }
   }
 }

@@ -1,8 +1,8 @@
-/* global Programminglanguage */
+/* global Technologies */
 'use strict';
 
 /**
- * Programminglanguage.js service
+ * Technologies.js service
  *
  * @description: A set of functions similar to controller's actions to avoid code duplication.
  */
@@ -16,20 +16,20 @@ const utils = require('strapi-hook-bookshelf/lib/utils/');
 module.exports = {
 
   /**
-   * Promise to fetch all programminglanguages.
+   * Promise to fetch all technologies.
    *
    * @return {Promise}
    */
 
   fetchAll: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('programminglanguage', params);
+    const filters = strapi.utils.models.convertParams('technologies', params);
     // Select field to populate.
-    const populate = Programminglanguage.associations
+    const populate = Technologies.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    return Programminglanguage.query(function(qb) {
+    return Technologies.query(function(qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value) && where.symbol !== 'IN' && where.symbol !== 'NOT IN') {
           for (const value in where.value) {
@@ -52,33 +52,33 @@ module.exports = {
   },
 
   /**
-   * Promise to fetch a/an programminglanguage.
+   * Promise to fetch a/an technologies.
    *
    * @return {Promise}
    */
 
   fetch: (params) => {
     // Select field to populate.
-    const populate = Programminglanguage.associations
+    const populate = Technologies.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    return Programminglanguage.forge(_.pick(params, 'id')).fetch({
+    return Technologies.forge(_.pick(params, 'id')).fetch({
       withRelated: populate
     });
   },
 
   /**
-   * Promise to count a/an programminglanguage.
+   * Promise to count a/an technologies.
    *
    * @return {Promise}
    */
 
   count: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('programminglanguage', params);
+    const filters = strapi.utils.models.convertParams('technologies', params);
 
-    return Programminglanguage.query(function(qb) {
+    return Technologies.query(function(qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value)) {
           for (const value in where.value) {
@@ -92,50 +92,50 @@ module.exports = {
   },
 
   /**
-   * Promise to add a/an programminglanguage.
+   * Promise to add a/an technologies.
    *
    * @return {Promise}
    */
 
   add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Programminglanguage.associations.map(ast => ast.alias));
-    const data = _.omit(values, Programminglanguage.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Technologies.associations.map(ast => ast.alias));
+    const data = _.omit(values, Technologies.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Programminglanguage.forge(data).save();
+    const entry = await Technologies.forge(data).save();
 
     // Create relational data and return the entry.
-    return Programminglanguage.updateRelations({ id: entry.id , values: relations });
+    return Technologies.updateRelations({ id: entry.id , values: relations });
   },
 
   /**
-   * Promise to edit a/an programminglanguage.
+   * Promise to edit a/an technologies.
    *
    * @return {Promise}
    */
 
   edit: async (params, values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Programminglanguage.associations.map(ast => ast.alias));
-    const data = _.omit(values, Programminglanguage.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Technologies.associations.map(ast => ast.alias));
+    const data = _.omit(values, Technologies.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Programminglanguage.forge(params).save(data);
+    const entry = await Technologies.forge(params).save(data);
 
     // Create relational data and return the entry.
-    return Programminglanguage.updateRelations(Object.assign(params, { values: relations }));
+    return Technologies.updateRelations(Object.assign(params, { values: relations }));
   },
 
   /**
-   * Promise to remove a/an programminglanguage.
+   * Promise to remove a/an technologies.
    *
    * @return {Promise}
    */
 
   remove: async (params) => {
     params.values = {};
-    Programminglanguage.associations.map(association => {
+    Technologies.associations.map(association => {
       switch (association.nature) {
         case 'oneWay':
         case 'oneToOne':
@@ -152,45 +152,45 @@ module.exports = {
       }
     });
 
-    await Programminglanguage.updateRelations(params);
+    await Technologies.updateRelations(params);
 
-    return Programminglanguage.forge(params).destroy();
+    return Technologies.forge(params).destroy();
   },
 
   /**
-   * Promise to search a/an programminglanguage.
+   * Promise to search a/an technologies.
    *
    * @return {Promise}
    */
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('programminglanguage', params);
+    const filters = strapi.utils.models.convertParams('technologies', params);
     // Select field to populate.
-    const populate = Programminglanguage.associations
+    const populate = Technologies.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    const associations = Programminglanguage.associations.map(x => x.alias);
-    const searchText = Object.keys(Programminglanguage._attributes)
-      .filter(attribute => attribute !== Programminglanguage.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['string', 'text'].includes(Programminglanguage._attributes[attribute].type));
+    const associations = Technologies.associations.map(x => x.alias);
+    const searchText = Object.keys(Technologies._attributes)
+      .filter(attribute => attribute !== Technologies.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['string', 'text'].includes(Technologies._attributes[attribute].type));
 
-    const searchNoText = Object.keys(Programminglanguage._attributes)
-      .filter(attribute => attribute !== Programminglanguage.primaryKey && !associations.includes(attribute))
-      .filter(attribute => !['string', 'text', 'boolean', 'integer', 'decimal', 'float'].includes(Programminglanguage._attributes[attribute].type));
+    const searchNoText = Object.keys(Technologies._attributes)
+      .filter(attribute => attribute !== Technologies.primaryKey && !associations.includes(attribute))
+      .filter(attribute => !['string', 'text', 'boolean', 'integer', 'decimal', 'float'].includes(Technologies._attributes[attribute].type));
 
-    const searchInt = Object.keys(Programminglanguage._attributes)
-      .filter(attribute => attribute !== Programminglanguage.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['integer', 'decimal', 'float'].includes(Programminglanguage._attributes[attribute].type));
+    const searchInt = Object.keys(Technologies._attributes)
+      .filter(attribute => attribute !== Technologies.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['integer', 'decimal', 'float'].includes(Technologies._attributes[attribute].type));
 
-    const searchBool = Object.keys(Programminglanguage._attributes)
-      .filter(attribute => attribute !== Programminglanguage.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['boolean'].includes(Programminglanguage._attributes[attribute].type));
+    const searchBool = Object.keys(Technologies._attributes)
+      .filter(attribute => attribute !== Technologies.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['boolean'].includes(Technologies._attributes[attribute].type));
 
     const query = (params._q || '').replace(/[^a-zA-Z0-9.-\s]+/g, '');
 
-    return Programminglanguage.query(qb => {
+    return Technologies.query(qb => {
       // Search in columns which are not text value.
       searchNoText.forEach(attribute => {
         qb.orWhereRaw(`LOWER(${attribute}) LIKE '%${_.toLower(query)}%'`);
@@ -209,7 +209,7 @@ module.exports = {
       }
 
       // Search in columns with text using index.
-      switch (Programminglanguage.client) {
+      switch (Technologies.client) {
         case 'mysql':
           qb.orWhereRaw(`MATCH(${searchText.join(',')}) AGAINST(? IN BOOLEAN MODE)`, `*${query}*`);
           break;

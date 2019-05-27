@@ -1,8 +1,8 @@
 {
   "connection": "default",
-  "collectionName": "programminglanguages",
+  "collectionName": "answers",
   "info": {
-    "name": "programminglanguage",
+    "name": "answer",
     "description": ""
   },
   "options": {
@@ -11,9 +11,17 @@
     "comment": ""
   },
   "attributes": {
-    "name": {
+    "answer_value": {
       "default": "",
       "type": "text"
+    },
+    "question": {
+      "model": "question",
+      "via": "answers"
+    },
+    "candidat": {
+      "model": "candidat",
+      "via": "answers"
     }
   }
 }

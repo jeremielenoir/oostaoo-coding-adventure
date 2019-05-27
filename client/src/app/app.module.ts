@@ -27,7 +27,7 @@ import { AccueilComponent } from './components/home/accueil/accueil.component';
 import { MatBottomSheetModule, MAT_BOTTOM_SHEET_DEFAULT_OPTIONS } from '@angular/material';
 import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
 import { EditQuestionComponent, nouvelleQuestion } from './components/panelAdmin/edit-question/edit-question.component';
-import { ProfilUserComponent } from './components/panelAdmin/profil-user/profil-user.component';
+//import { ProfilUserComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
 
 import { IntegrationBoutonComponent } from './components/panelAdmin/integration-bouton/integration-bouton.component';
 import { NouvelleCampagneComponent } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagne.component';
@@ -54,10 +54,10 @@ const appRoutes: Routes = [
   //   path: 'editquestion',
   //   component: EditQuestionComponent
   // },
-  {
+  /*{
     path: 'profil-user',
     component: ProfilUserComponent
-  },
+  },*/
   {
     path: '',
     component: AccueilComponent
@@ -122,7 +122,7 @@ const appRoutes: Routes = [
     NavMobileAbsoluteDirective,
     EditQuestionComponent,
     nouvelleQuestion,
-    ProfilUserComponent,
+    //ProfilUserComponent,
     IntegrationBoutonComponent,
     NouvelleCampagneComponent,
     NouvelleCampagnePage1Component,

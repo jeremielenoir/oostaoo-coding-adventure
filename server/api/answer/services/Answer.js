@@ -1,8 +1,8 @@
-/* global Usercodingame */
+/* global Answer */
 'use strict';
 
 /**
- * Usercodingame.js service
+ * Answer.js service
  *
  * @description: A set of functions similar to controller's actions to avoid code duplication.
  */
@@ -16,20 +16,20 @@ const utils = require('strapi-hook-bookshelf/lib/utils/');
 module.exports = {
 
   /**
-   * Promise to fetch all usercodingames.
+   * Promise to fetch all answers.
    *
    * @return {Promise}
    */
 
   fetchAll: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('usercodingame', params);
+    const filters = strapi.utils.models.convertParams('answer', params);
     // Select field to populate.
-    const populate = Usercodingame.associations
+    const populate = Answer.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    return Usercodingame.query(function(qb) {
+    return Answer.query(function(qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value) && where.symbol !== 'IN' && where.symbol !== 'NOT IN') {
           for (const value in where.value) {
@@ -52,33 +52,33 @@ module.exports = {
   },
 
   /**
-   * Promise to fetch a/an usercodingame.
+   * Promise to fetch a/an answer.
    *
    * @return {Promise}
    */
 
   fetch: (params) => {
     // Select field to populate.
-    const populate = Usercodingame.associations
+    const populate = Answer.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    return Usercodingame.forge(_.pick(params, 'id')).fetch({
+    return Answer.forge(_.pick(params, 'id')).fetch({
       withRelated: populate
     });
   },
 
   /**
-   * Promise to count a/an usercodingame.
+   * Promise to count a/an answer.
    *
    * @return {Promise}
    */
 
   count: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('usercodingame', params);
+    const filters = strapi.utils.models.convertParams('answer', params);
 
-    return Usercodingame.query(function(qb) {
+    return Answer.query(function(qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value)) {
           for (const value in where.value) {
@@ -92,50 +92,50 @@ module.exports = {
   },
 
   /**
-   * Promise to add a/an usercodingame.
+   * Promise to add a/an answer.
    *
    * @return {Promise}
    */
 
   add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Usercodingame.associations.map(ast => ast.alias));
-    const data = _.omit(values, Usercodingame.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Answer.associations.map(ast => ast.alias));
+    const data = _.omit(values, Answer.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Usercodingame.forge(data).save();
+    const entry = await Answer.forge(data).save();
 
     // Create relational data and return the entry.
-    return Usercodingame.updateRelations({ id: entry.id , values: relations });
+    return Answer.updateRelations({ id: entry.id , values: relations });
   },
 
   /**
-   * Promise to edit a/an usercodingame.
+   * Promise to edit a/an answer.
    *
    * @return {Promise}
    */
 
   edit: async (params, values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Usercodingame.associations.map(ast => ast.alias));
-    const data = _.omit(values, Usercodingame.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Answer.associations.map(ast => ast.alias));
+    const data = _.omit(values, Answer.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Usercodingame.forge(params).save(data);
+    const entry = await Answer.forge(params).save(data);
 
     // Create relational data and return the entry.
-    return Usercodingame.updateRelations(Object.assign(params, { values: relations }));
+    return Answer.updateRelations(Object.assign(params, { values: relations }));
   },
 
   /**
-   * Promise to remove a/an usercodingame.
+   * Promise to remove a/an answer.
    *
    * @return {Promise}
    */
 
   remove: async (params) => {
     params.values = {};
-    Usercodingame.associations.map(association => {
+    Answer.associations.map(association => {
       switch (association.nature) {
         case 'oneWay':
         case 'oneToOne':
@@ -152,45 +152,45 @@ module.exports = {
       }
     });
 
-    await Usercodingame.updateRelations(params);
+    await Answer.updateRelations(params);
 
-    return Usercodingame.forge(params).destroy();
+    return Answer.forge(params).destroy();
   },
 
   /**
-   * Promise to search a/an usercodingame.
+   * Promise to search a/an answer.
    *
    * @return {Promise}
    */
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('usercodingame', params);
+    const filters = strapi.utils.models.convertParams('answer', params);
     // Select field to populate.
-    const populate = Usercodingame.associations
+    const populate = Answer.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    const associations = Usercodingame.associations.map(x => x.alias);
-    const searchText = Object.keys(Usercodingame._attributes)
-      .filter(attribute => attribute !== Usercodingame.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['string', 'text'].includes(Usercodingame._attributes[attribute].type));
+    const associations = Answer.associations.map(x => x.alias);
+    const searchText = Object.keys(Answer._attributes)
+      .filter(attribute => attribute !== Answer.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['string', 'text'].includes(Answer._attributes[attribute].type));
 
-    const searchNoText = Object.keys(Usercodingame._attributes)
-      .filter(attribute => attribute !== Usercodingame.primaryKey && !associations.includes(attribute))
-      .filter(attribute => !['string', 'text', 'boolean', 'integer', 'decimal', 'float'].includes(Usercodingame._attributes[attribute].type));
+    const searchNoText = Object.keys(Answer._attributes)
+      .filter(attribute => attribute !== Answer.primaryKey && !associations.includes(attribute))
+      .filter(attribute => !['string', 'text', 'boolean', 'integer', 'decimal', 'float'].includes(Answer._attributes[attribute].type));
 
-    const searchInt = Object.keys(Usercodingame._attributes)
-      .filter(attribute => attribute !== Usercodingame.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['integer', 'decimal', 'float'].includes(Usercodingame._attributes[attribute].type));
+    const searchInt = Object.keys(Answer._attributes)
+      .filter(attribute => attribute !== Answer.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['integer', 'decimal', 'float'].includes(Answer._attributes[attribute].type));
 
-    const searchBool = Object.keys(Usercodingame._attributes)
-      .filter(attribute => attribute !== Usercodingame.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['boolean'].includes(Usercodingame._attributes[attribute].type));
+    const searchBool = Object.keys(Answer._attributes)
+      .filter(attribute => attribute !== Answer.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['boolean'].includes(Answer._attributes[attribute].type));
 
     const query = (params._q || '').replace(/[^a-zA-Z0-9.-\s]+/g, '');
 
-    return Usercodingame.query(qb => {
+    return Answer.query(qb => {
       // Search in columns which are not text value.
       searchNoText.forEach(attribute => {
         qb.orWhereRaw(`LOWER(${attribute}) LIKE '%${_.toLower(query)}%'`);
@@ -209,7 +209,7 @@ module.exports = {
       }
 
       // Search in columns with text using index.
-      switch (Usercodingame.client) {
+      switch (Answer.client) {
         case 'mysql':
           qb.orWhereRaw(`MATCH(${searchText.join(',')}) AGAINST(? IN BOOLEAN MODE)`, `*${query}*`);
           break;

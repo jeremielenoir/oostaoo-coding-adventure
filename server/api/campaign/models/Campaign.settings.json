@@ -1,0 +1,83 @@
+{
+  "connection": "default",
+  "collectionName": "campaigns",
+  "info": {
+    "name": "campaign",
+    "description": "campaign content"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "Name": {
+      "default": "",
+      "type": "string"
+    },
+    "level": {
+      "default": "",
+      "type": "enumeration",
+      "enum": [
+        "junior",
+        "senior",
+        "expert"
+      ]
+    },
+    "langs": {
+      "default": "",
+      "type": "enumeration",
+      "enum": [
+        "FR",
+        "EN",
+        "ES",
+        "JP"
+      ]
+    },
+    "copy_paste": {
+      "default": false,
+      "type": "boolean"
+    },
+    "sent_report": {
+      "default": false,
+      "type": "boolean"
+    },
+    "stopwatch": {
+      "default": "",
+      "type": "enumeration",
+      "enum": [
+        "per_question",
+        " global"
+      ]
+    },
+    "expiration_date": {
+      "default": "",
+      "type": "date"
+    },
+    "email_title": {
+      "default": "",
+      "type": "string"
+    },
+    "email_content": {
+      "default": "",
+      "type": "text"
+    },
+    "profile": {
+      "model": "profile",
+      "via": "campaigns"
+    },
+    "technologies": {
+      "collection": "technologies",
+      "via": "campaigns",
+      "dominant": true
+    },
+    "candidats": {
+      "collection": "candidat",
+      "via": "campaign"
+    },
+    "questions": {
+      "collection": "question",
+      "via": "campaigns"
+    }
+  }
+}

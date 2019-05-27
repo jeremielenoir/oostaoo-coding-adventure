@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/programminglanguages",
-      "handler": "Programminglanguage.find",
+      "path": "/profiles",
+      "handler": "Profile.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/programminglanguages/count",
-      "handler": "Programminglanguage.count",
+      "path": "/profiles/count",
+      "handler": "Profile.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/programminglanguages/:id",
-      "handler": "Programminglanguage.findOne",
+      "path": "/profiles/:id",
+      "handler": "Profile.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/programminglanguages",
-      "handler": "Programminglanguage.create",
+      "path": "/profiles",
+      "handler": "Profile.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/programminglanguages/:id",
-      "handler": "Programminglanguage.update",
+      "path": "/profiles/:id",
+      "handler": "Profile.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/programminglanguages/:id",
-      "handler": "Programminglanguage.destroy",
+      "path": "/profiles/:id",
+      "handler": "Profile.destroy",
       "config": {
         "policies": []
       }

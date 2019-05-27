@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Lifecycle callbacks for the `Usercodingame` model.
+ * Lifecycle callbacks for the `Profile` model.
  */
 
 module.exports = {

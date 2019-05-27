@@ -1,0 +1,39 @@
+{
+  "connection": "default",
+  "collectionName": "candidats",
+  "info": {
+    "name": "candidat",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "Nom": {
+      "default": "",
+      "type": "string"
+    },
+    "email": {
+      "default": "",
+      "type": "email"
+    },
+    "campaign": {
+      "model": "campaign",
+      "via": "candidats"
+    },
+    "answers": {
+      "collection": "answer",
+      "via": "candidat"
+    },
+    "invitation_date": {
+      "default": "",
+      "type": "date"
+    },
+    "updated_at": {
+      "default": "",
+      "type": "date"
+    }
+  }
+}
