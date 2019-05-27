@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/candidats",
+      "path": "/api/candidats",
       "handler": "Candidat.find",
       "config": {
         "policies": []
@@ -10,7 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/candidats/count",
+      "path": "/api/candidats/count",
       "handler": "Candidat.count",
       "config": {
         "policies": []
@@ -18,7 +18,7 @@
     },
     {
       "method": "GET",
-      "path": "/candidats/:id",
+      "path": "/api/candidats/:id",
       "handler": "Candidat.findOne",
       "config": {
         "policies": []
@@ -26,7 +26,7 @@
     },
     {
       "method": "POST",
-      "path": "/candidats",
+      "path": "/api/candidats",
       "handler": "Candidat.create",
       "config": {
         "policies": []
@@ -34,7 +34,7 @@
     },
     {
       "method": "PUT",
-      "path": "/candidats/:id",
+      "path": "/api/candidats/:id",
       "handler": "Candidat.update",
       "config": {
         "policies": []
@@ -42,7 +42,7 @@
     },
     {
       "method": "DELETE",
-      "path": "/candidats/:id",
+      "path": "/api/candidats/:id",
       "handler": "Candidat.destroy",
       "config": {
         "policies": []

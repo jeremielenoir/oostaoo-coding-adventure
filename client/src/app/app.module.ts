@@ -7,6 +7,8 @@ import {RoundProgressModule} from 'angular-svg-round-progressbar';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
+import { HttpClientModule } from '@angular/common/http';
+import { ApiClientService} from './api-client/api-client.service';
 import { AppComponent } from "./app.component";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -46,7 +48,7 @@ import { FacturationComponent } from './components/panelAdmin/facturation/factur
 import { UtilisateursComponent } from './components/panelAdmin/compte-utilisateurs/utilisateurs.component';
 import { ProfilEntrepriseComponent } from './components/panelAdmin/profil-entreprise/profil-entreprise.component';
 
-import { HttpClientModule } from '@angular/common/http';
+
 
 
 const appRoutes: Routes = [
@@ -154,7 +156,10 @@ const appRoutes: Routes = [
     Ng2SearchPipeModule,
     RoundProgressModule
   ],
-  providers: [{ provide: MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }],
+  providers: [
+    { provide: MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
+    ApiClientService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

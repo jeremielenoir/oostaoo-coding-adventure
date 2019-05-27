@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/questions",
+      "path": "/api/questions",
       "handler": "Question.find",
       "config": {
         "policies": []
@@ -10,7 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/questions/count",
+      "path": "/api/questions/count",
       "handler": "Question.count",
       "config": {
         "policies": []
@@ -18,7 +18,7 @@
     },
     {
       "method": "GET",
-      "path": "/questions/:id",
+      "path": "/api/questions/:id",
       "handler": "Question.findOne",
       "config": {
         "policies": []
@@ -26,7 +26,7 @@
     },
     {
       "method": "POST",
-      "path": "/questions",
+      "path": "/api/questions",
       "handler": "Question.create",
       "config": {
         "policies": []
@@ -34,7 +34,7 @@
     },
     {
       "method": "PUT",
-      "path": "/questions/:id",
+      "path": "/api/questions/:id",
       "handler": "Question.update",
       "config": {
         "policies": []
@@ -42,7 +42,7 @@
     },
     {
       "method": "DELETE",
-      "path": "/questions/:id",
+      "path": "/api/questions/:id",
       "handler": "Question.destroy",
       "config": {
         "policies": []

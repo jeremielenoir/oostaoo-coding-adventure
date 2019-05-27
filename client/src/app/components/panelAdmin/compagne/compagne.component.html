@@ -44,18 +44,18 @@
 
     <div class="content-scroll">
       <div
-        *ngFor="let Data of Datacampagnes | filter: searchText"
+        *ngFor="let campaign of campaigns | filter: searchText"
         class="contenu-techno-content"
       >
         <div class="contenu-branche">
           <a href="">
             <p class="branche-content-text">
-              {{ Data.name }}
+              {{ campaign.Name }}
             </p>
 
             <div class="branche-content-noti">
               <span class="branche-content-noti-item">
-                <strong>1</strong>
+                <strong>{{campaign.candidats.length}}</strong>
                 <span>Invité</span>
               </span>
               <span class="branche-content-noti-item">

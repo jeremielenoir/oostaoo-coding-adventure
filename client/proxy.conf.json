@@ -1,0 +1,16 @@
+{
+    "/api": {
+        "target": "http://localhost:1337",
+        "secure": false,
+        "pathRewrite":{
+            "^/":""
+        }
+    },
+    "/uploads": {
+        "target": "http://localhost:1337",
+        "secure": false,
+        "pathRewrite":{
+            "^/":""
+        }
+    }
+}
