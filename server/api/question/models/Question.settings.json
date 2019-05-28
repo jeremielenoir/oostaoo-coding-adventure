@@ -3,7 +3,7 @@
   "collectionName": "questions",
   "info": {
     "name": "question",
-    "description": ""
+    "description": "question content"
   },
   "options": {
     "increments": true,
@@ -13,7 +13,62 @@
   "attributes": {
     "name": {
       "default": "",
+      "type": "string"
+    },
+    "level": {
+      "default": "facile",
+      "type": "enumeration",
+      "enum": [
+        "facile",
+        "moyen",
+        "expert"
+      ]
+    },
+    "points": {
+      "default": "",
+      "type": "integer"
+    },
+    "type": {
+      "default": "one",
+      "type": "enumeration",
+      "enum": [
+        "one",
+        "multiple",
+        "free"
+      ]
+    },
+    "theme": {
+      "default": "langage",
+      "type": "enumeration",
+      "enum": [
+        "langage",
+        "resolution"
+      ]
+    },
+    "time": {
+      "default": "",
+      "type": "integer"
+    },
+    "content": {
+      "default": "",
       "type": "text"
+    },
+    "technologies": {
+      "model": "technologies",
+      "via": "questions"
+    },
+    "answer_value": {
+      "default": "",
+      "type": "text"
+    },
+    "answers": {
+      "collection": "answer",
+      "via": "question"
+    },
+    "campaigns": {
+      "collection": "campaign",
+      "via": "questions",
+      "dominant": true
     }
   }
 }

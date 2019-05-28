@@ -1,0 +1,27 @@
+{
+  "connection": "default",
+  "collectionName": "profiles",
+  "info": {
+    "name": "profile",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "name": {
+      "default": "",
+      "type": "string"
+    },
+    "technologies": {
+      "collection": "technologies",
+      "via": "profile"
+    },
+    "campaigns": {
+      "collection": "campaign",
+      "via": "profile"
+    }
+  }
+}
