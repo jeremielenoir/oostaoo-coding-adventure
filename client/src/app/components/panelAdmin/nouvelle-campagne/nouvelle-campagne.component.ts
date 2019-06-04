@@ -22,16 +22,16 @@ export class NouvelleCampagneComponent implements OnInit {
       role: this.oAuthFormVerification.getRoleValidator(),
       techno: this.oAuthFormVerification.getTechnoValidator(),
       experience: ['Senior', this.oAuthFormVerification.getExperienceValidator()],
-      langueSouhaite: [''],
       utilisationCopieColler: 'false',
       envoiRapportSimplifie: 'false',
-      nomDeCampagne: '',
-
+      nomDeCampagne: "",
+      anglais: "",
+      français: "",
     });
   }
 
   ngOnInit() {
-    console.log(this.ParentFormCampagne.value);
+    // console.log(this.ParentFormCampagne.value);
     /*
     this._http.get(`${environment.urlBackEnd}Test22s`)
       .subscribe(
@@ -42,6 +42,7 @@ export class NouvelleCampagneComponent implements OnInit {
 
   public nextPage(): void {
     this.nNumeorPage++;
+    console.log(this.ParentFormCampagne.value);
   }
 
   public previousPage(): void {
@@ -52,7 +53,4 @@ export class NouvelleCampagneComponent implements OnInit {
   public nouvelleCampagne(p_oDataFormValue: any): void {
     console.log(p_oDataFormValue);
   }
-
-
-
 }
