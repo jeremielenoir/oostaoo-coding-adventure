@@ -16,9 +16,13 @@
               >Sélectionnez un rôle</label
             >
             <mat-form-field [formGroup]="formCampagne">
-              <mat-select name="role" formControlName="role">
-                <mat-option *ngFor="let role of RoleList" [value]="role">{{
-                  role
+              <mat-select
+                name="role"
+                formControlName="role"
+                (selectionChange)="selected($event)"
+              >
+                <mat-option *ngFor="let role of profiles" [value]="role.name">{{
+                  role.name
                 }}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -39,11 +43,16 @@
               >Sélectionnez les technologies à tester</label
             >
             <mat-form-field [formGroup]="formCampagne">
-              <mat-select multiple name="techno" formControlName="techno">
+              <mat-select
+                multiple
+                name="techno"
+                formControlName="techno"
+                [(ngModel)]="selectedValue"
+              >
                 <mat-option
-                  *ngFor="let techno of TechnoList"
-                  [value]="techno"
-                  >{{ techno }}</mat-option
+                  *ngFor="let techno of technos"
+                  [value]="techno.name"
+                  >{{ techno.name }}</mat-option
                 >
               </mat-select>
             </mat-form-field>
@@ -74,7 +83,7 @@
               >
               </i>
             </mat-radio-button>
-            <mat-radio-button value="Expert" disabled>
+            <mat-radio-button value="Expert">
               Expert
               <i
                 class="fas fa-info-circle info"
