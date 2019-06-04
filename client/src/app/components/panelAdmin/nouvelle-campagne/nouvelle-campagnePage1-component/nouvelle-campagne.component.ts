@@ -1,6 +1,9 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AuthFormVerification } from 'src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator'
+import { AuthFormVerification } from 'src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator';
+import { ApiClientService, API_URI_TECHNO, API_URI_PROFILES } from '../../../../api-client/api-client.service';
+import { MatSelectChange } from '@angular/material';
+
 
 @Component({
   selector: 'app-NouvelleCampagnePage1Component',
@@ -8,6 +11,8 @@ import { AuthFormVerification } from 'src/app/components/panelAdmin/nouvelle-cam
   styleUrls: ['./nouvelle-campagne.component.css', '../nouvelle-campagne.component.css']
 })
 export class NouvelleCampagnePage1Component implements OnInit {
+
+  // public selectedValue: any[];
 
   @Output() incrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
@@ -33,12 +38,44 @@ export class NouvelleCampagnePage1Component implements OnInit {
     'SysAdmin Windows', 'Personnalisé'];
 
 
+  public technos: any[];
+  public profiles: any[];
+  public technosSelect: Array<string> = [];
+  selectedValue: any[];
 
-  constructor() {
+
+  constructor(public apiClientService: ApiClientService) {
     this.oAuthFormVerification = new AuthFormVerification();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.apiClientService.get(API_URI_TECHNO).subscribe((datas) => {
+      this.technos = datas;
+    });
+    this.apiClientService.get(API_URI_PROFILES).subscribe((datas) => {
+      this.profiles = datas;
+    })
+    console.log(this.formCampagne.value)
+  }
+
+  selected(event: MatSelectChange) {
+    // console.log(event.value);
+    for (var i = 0; i < this.profiles.length; i++) {
+      // console.log(this.profiles[i])
+      let roleData = this.profiles[i].name;
+      if (event.value == roleData) {
+        let self = this;
+        let technoData = [];
+        // console.log(this.technosSelect[0].name)
+        this.profiles[i].technologies.forEach(function (item) {
+          technoData.push(item.name);
+        });
+        self.technosSelect = technoData;
+        console.log(self.technosSelect)
+        this.selectedValue = this.technosSelect;
+      }
+    }
+  }
 
   // validation du formulaire et passage à l'étap suivante.
   public onIncrementPage(p_oDatafromValue: any): void {
@@ -72,5 +109,4 @@ export class NouvelleCampagnePage1Component implements OnInit {
       this.errorTechno = '';
     }
   }
-
 }
