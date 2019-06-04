@@ -10,13 +10,14 @@ const prefix = '/api/';
 
 export const API_URI_CAMPAIGNS: string = prefix + 'campaigns';
 export const API_URI_CAMPAIGN: string = prefix + 'campaign/:id';
-
+export const API_URI_TECHNO: string = prefix + 'technologies';
+export const API_URI_PROFILES: string = prefix + 'profiles';
 
 
 @Injectable()
 export class ApiClientService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private handleError(error: any, caught: Observable<any>): Observable<any> {
     let errorMessage = '';
@@ -78,3 +79,5 @@ export class ApiClientService {
   }
 
 }
+
+
