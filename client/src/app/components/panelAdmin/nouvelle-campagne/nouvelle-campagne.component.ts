@@ -25,8 +25,7 @@ export class NouvelleCampagneComponent implements OnInit {
       utilisationCopieColler: 'false',
       envoiRapportSimplifie: 'false',
       nomDeCampagne: "",
-      anglais: "",
-      français: "",
+      langs: []
     });
   }
 
@@ -42,7 +41,7 @@ export class NouvelleCampagneComponent implements OnInit {
 
   public nextPage(): void {
     this.nNumeorPage++;
-    console.log(this.ParentFormCampagne.value);
+    // console.log(this.ParentFormCampagne.value);
   }
 
   public previousPage(): void {
