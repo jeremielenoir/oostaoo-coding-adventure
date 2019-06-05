@@ -42,19 +42,13 @@
       <div class="col-md-12">
         <form [formGroup]="formCampagne">
           <mat-checkbox
-            name="en"
-            formControlName="anglais"
+            *ngFor="let lang of langsData"
+            formControlName="langs"
             class="example-margin"
-            checked="false"
-            >Anglais</mat-checkbox
-          >
-          <mat-checkbox
-            class="example-margin"
-            checked="true"
-            name="fr"
-            formControlName="français"
-            >Français</mat-checkbox
-          >
+            [value]="lang"
+            (change)="Change($event, lang)"
+            >{{ lang }}
+          </mat-checkbox>
         </form>
       </div>
     </div>
@@ -128,6 +122,7 @@
           (click)="onIncrementPage(formCampagne.value)"
           (click)="postData()"
         >
+          <!-- (click)="postData()" -->
           Étapes suivante : Paramètres
         </button>
       </div>
