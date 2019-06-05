@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ApiClientService, API_URI_CAMPAIGNS } from '../../../../api-client/api-client.service';
-import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-NouvelleCampagnePage2Component',
@@ -15,53 +14,58 @@ export class NouvelleCampagnePage2Component implements OnInit {
   @Input() formCampagne: FormGroup;
   public errorNomCampgane: boolean = false;
 
-
-  TechnoList: string[] = ['AWS', 'Android', 'Angular 2+', 'AngularJS (1.x)', 'Apache Spark', 'C', 'C#', 'C++',
-    'Data Science', 'Docker', 'Git', 'Hadoop Ecosystem', 'Java', 'Javascript, HTML, CSS',
-    'Mobile iOS/Swift', 'Node.js', 'PHP', 'Python 3', 'React', 'SQL', 'Scala', 'Spring Framework',
-    'Symfony', 'Windows Administration'];
-
-  RoleList: string[] = ['Développeur Angular Front-End', 'Administrateur base de données (SQL)',
-    'Data Engineer (Hadoop, Spark)', 'Data Scientist (Python)', 'Développeur .NET C#',
-    'Développeur .NET C# Back-End', 'Développeur AngularJS Front-End', 'Développeur C',
-    'Développeur C# Full Stack', 'Développeur C++', 'Développeur Hadoop', 'Développeur Java',
-    'Développeur Java Back-End', 'Développeur Java Full Stack', 'Développeur Java Spring Back-End',
-    'Développeur Mobile Android', 'Développeur Mobile iOS (Swift)', 'Développeur Node.js',
-    'Développeur PHP', 'Développeur PHP Fullstack', 'Développeur PHP Symfony', 'Développeur Python',
-    'Développeur React Front-End', 'Développeur Scala', 'Développeur Spark',
-    'Développeur Web (JavaScript, HTML, CSS)', 'Expert Git', 'Ingénieur DevOps AWS/Docker',
-    'SysAdmin Windows', 'Personnalisé'];
-
-
-
+  langsData: string[] = ["FR", "EN", "ES", "JP"];
+  lastAction: string;
   constructor(public apiClientService: ApiClientService) {
   }
 
   ngOnInit() {
     this.formCampagne.patchValue({
-      nomDeCampagne: this.formCampagne.value.role + " - " + this.formCampagne.value.experience,
-      // langueSouhaite: 
+      nomDeCampagne: this.formCampagne.value.role + " - " + this.formCampagne.value.experience
     })
-    // console.log(this.formCampagne.value.en + "en", this.formCampagne.value.fr + "fr")
+  }
+  arrLang: any = [];
+
+  Change(event, item) {
+    // console.log(item + " _ " + event.checked);
+    if (event.checked) {
+      this.arrLang.push(item)
+    } else {
+      let index = this.arrLang.indexOf(item);
+      if (index > -1) {
+        this.arrLang.splice(index, 1);
+      }
+    }
+    // console.log(this.formCampagne.value.langs)
+    // console.log(this.arrLang);
   }
 
-
   postData() {
-    const formData = new FormData();
-    formData.append("Name", "test");
-    formData.append("level", 'password');
-    formData.append("langs", 'password');
-    formData.append("copy_paste", 'password');
-    formData.append("sent_report", 'password');
-    formData.append("profile", 'password');
-    formData.append("technologies", 'password');
-
-    this.apiClientService.post(API_URI_CAMPAIGNS, formData).subscribe(
+    // console.log(this.arrLang)
+    this.formCampagne.patchValue({
+      utilisationCopieColler: this.formCampagne.value.utilisationCopieColler,
+      envoiRapportSimplifie: this.formCampagne.value.envoiRapportSimplifie,
+      langs: this.arrLang
+    })
+    this.apiClientService.post(API_URI_CAMPAIGNS, {
+      "Name": this.formCampagne.value.nomDeCampagne,
+      "level": this.formCampagne.value.experience,
+      "langs": this.formCampagne.value.langs,
+      "copy_paste": this.formCampagne.value.utilisationCopieColler,
+      "sent_report": this.formCampagne.value.envoiRapportSimplifie,
+      "profile": this.formCampagne.value.role,
+      "technologies": this.formCampagne.value.techno
+    }).subscribe(
       (res) => {
         console.log(res);
       },
       err => console.log(err)
     );
+    console.log("technologies " + this.formCampagne.value.techno)
+    // console.log("cp " + this.formCampagne.value.utilisationCopieColler)
+    // console.log("sent_rapport " + this.formCampagne.value.envoiRapportSimplifie)
+    // console.log("langues " + this.formCampagne.value.langs)
+    // console.log(this.formCampagne.value)
   }
 
   public onDecrementPage(): void {
