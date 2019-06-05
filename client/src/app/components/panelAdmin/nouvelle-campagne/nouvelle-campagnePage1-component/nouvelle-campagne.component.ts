@@ -12,6 +12,7 @@ import { MatSelectChange } from '@angular/material';
 })
 export class NouvelleCampagnePage1Component implements OnInit {
 
+
   // public selectedValue: any[];
 
   @Output() incrementPage = new EventEmitter<any>();
@@ -55,7 +56,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
     this.apiClientService.get(API_URI_PROFILES).subscribe((datas) => {
       this.profiles = datas;
     })
-    console.log(this.formCampagne.value)
+    // console.log(this.formCampagne.value)
   }
 
   selected(event: MatSelectChange) {
@@ -63,15 +64,14 @@ export class NouvelleCampagnePage1Component implements OnInit {
     for (var i = 0; i < this.profiles.length; i++) {
       // console.log(this.profiles[i])
       let roleData = this.profiles[i].name;
+      // console.log(roleData)
       if (event.value == roleData) {
-        let self = this;
         let technoData = [];
-        // console.log(this.technosSelect[0].name)
         this.profiles[i].technologies.forEach(function (item) {
           technoData.push(item.name);
         });
-        self.technosSelect = technoData;
-        console.log(self.technosSelect)
+        this.technosSelect = technoData;
+        // console.log(this.technosSelect)
         this.selectedValue = this.technosSelect;
       }
     }
