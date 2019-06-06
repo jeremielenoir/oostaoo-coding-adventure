@@ -21,7 +21,7 @@ export class NouvelleCampagneComponent implements OnInit {
     this.ParentFormCampagne = this._formBuilder.group({
       role: this.oAuthFormVerification.getRoleValidator(),
       techno: this.oAuthFormVerification.getTechnoValidator(),
-      experience: ['Senior', this.oAuthFormVerification.getExperienceValidator()],
+      experience: ['junior', this.oAuthFormVerification.getExperienceValidator()],
       utilisationCopieColler: 'false',
       envoiRapportSimplifie: 'false',
       nomDeCampagne: "",
