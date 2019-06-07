@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ApiClientService, API_URI_CAMPAIGNS } from '../../../../api-client/api-client.service';
-import { MatRadioChange, MatRadioButton } from '@angular/material';
 
 @Component({
   selector: 'app-NouvelleCampagnePage2Component',
@@ -38,8 +37,8 @@ export class NouvelleCampagnePage2Component implements OnInit {
       "langs": this.formCampagne.value.langue,
       "copy_paste": this.formCampagne.value.utilisationCopieColler,
       "sent_report": this.formCampagne.value.envoiRapportSimplifie,
-      "profile": this.formCampagne.value.role,
-      "technologies": this.formCampagne.value.techno
+      "profile": this.formCampagne.value.roleSelectedId,
+      "technologies": this.formCampagne.value.technoSelectedId
     }).subscribe(
       (res) => {
         console.log(res);
