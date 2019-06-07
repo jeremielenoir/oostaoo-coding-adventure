@@ -3,6 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
+import { ApiClientService, API_URI_TECHNO, API_URI_QUESTIONS } from '../../../../api-client/api-client.service';
+
 
 @Component({
   selector: 'app-NouvelleCampagnePage3Component',
@@ -14,12 +16,10 @@ export class NouvelleCampagnePage3Component implements OnInit {
   @Output() decrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
 
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
+  public questions: any[];
+
+  Questions = [];
+  allQuestions = [];
 
   done = [
     'Get up',
@@ -39,7 +39,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
         event.currentIndex);
     }
   }
-  constructor(private bottomSheet: MatBottomSheet) { }
+  constructor(private bottomSheet: MatBottomSheet, public apiClientService: ApiClientService) { }
 
   openBottomSheet(): void {
     this.bottomSheet.open(PopupCampaign);
@@ -47,6 +47,24 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
 
   ngOnInit() {
+    this.apiClientService.get(API_URI_QUESTIONS).subscribe((datas) => {
+      this.questions = datas;
+      // if(this.formCampagne.value.technoSelectedId)
+      for (var i = 0; i < this.questions.length; i++) {
+        // console.log(this.questions[i])
+        // console.log("techno id : " + this.questions[i].technologies.id + "\n techno name : " + this.questions[i].technologies.name)
+        this.allQuestions = this.questions;
+        if (this.formCampagne.value.technoSelectedId.includes(this.questions[i].technologies.id)) {
+          // console.log(this.questions[i].technologies.name)
+
+          // console.log(this.questions[i])
+          this.Questions.push(this.questions[i]);
+        }
+      }
+      console.log(this.allQuestions)
+    });
+    // console.log(this.Questions)
+    // console.log(this.formCampagne.value.technoSelectedId)
   }
 
   public onDecrementPage(): void {
