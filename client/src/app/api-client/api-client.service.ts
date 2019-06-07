@@ -12,6 +12,7 @@ export const API_URI_CAMPAIGNS: string = prefix + 'campaigns';
 export const API_URI_CAMPAIGN: string = prefix + 'campaign/:id';
 export const API_URI_TECHNO: string = prefix + 'technologies';
 export const API_URI_PROFILES: string = prefix + 'profiles';
+export const API_URI_QUESTIONS: string = prefix + 'questions';
 
 
 @Injectable()
