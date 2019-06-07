@@ -42,6 +42,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
   public technos: any[];
   public profiles: any[];
   public technosSelect: Array<string> = [];
+  public technosSelectID: Array<number> = [];
   selectedValue: any[];
 
 
@@ -66,13 +67,24 @@ export class NouvelleCampagnePage1Component implements OnInit {
       let roleData = this.profiles[i].name;
       // console.log(roleData)
       if (event.value == roleData) {
+        // console.log(this.profiles[i].id)
+        this.formCampagne.patchValue({
+          roleSelectedId: { "id": this.profiles[i].id }
+        })
         let technoData = [];
+        let technoDataID = [];
         this.profiles[i].technologies.forEach(function (item) {
           technoData.push(item.name);
+          technoDataID.push(item.id)
         });
         this.technosSelect = technoData;
+        this.formCampagne.patchValue({
+          technoSelectedId: technoDataID
+        })
         // console.log(this.technosSelect)
         this.selectedValue = this.technosSelect;
+        // console.log(technoDataID)
+        // console.log(this.formCampagne.value)
       }
     }
   }
