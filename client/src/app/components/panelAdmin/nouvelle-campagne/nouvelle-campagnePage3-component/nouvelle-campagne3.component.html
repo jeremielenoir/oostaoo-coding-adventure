@@ -71,7 +71,7 @@
       (cdkDropListDropped)="drop($event)"
     >
       <div class="example-box" *ngFor="let item of allQuestions" cdkDrag>
-        <p class="question-techno">AWS</p>
+        <p class="question-techno">{{ item.technologies.name }}</p>
         {{ item.name }}
         <i class="fas fa-puzzle-piece drop-icon"></i> |
         <p>{{ item.points }} points</p>
@@ -112,7 +112,7 @@
         (click)="openBottomSheet()"
         cdkDrag
       >
-        <p class="question-techno">AWS</p>
+        <p class="question-techno">{{ item.technologies.name }}</p>
         {{ item.name }}
 
         <i class="fas fa-puzzle-piece drop-icon"></i> |

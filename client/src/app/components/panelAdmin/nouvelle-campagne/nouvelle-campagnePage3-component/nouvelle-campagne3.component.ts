@@ -4,6 +4,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 import { ApiClientService, API_URI_TECHNO, API_URI_QUESTIONS } from '../../../../api-client/api-client.service';
+import { element } from '@angular/core/src/render3';
 
 
 @Component({
@@ -20,14 +21,6 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
   Questions = [];
   allQuestions = [];
-
-  done = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -61,7 +54,23 @@ export class NouvelleCampagnePage3Component implements OnInit {
           this.Questions.push(this.questions[i]);
         }
       }
-      console.log(this.allQuestions)
+      // console.log(this.allQuestions)
+      // console.log(this.Questions)
+
+
+      // for (let index = 0; index < this.Questions.length; index++) {
+      //   const element = this.Questions[index];
+      //   if (this.allQuestions.includes(this.Questions[index])) {
+      //     console.log("lol")
+      //   } else { console.log("false") }
+      // }
+      const finalArray = [];
+      this.allQuestions.forEach((element1) => this.Questions.forEach((element2) => {
+        if (element1 !== element2) {
+          finalArray.push(element1)
+        }
+      }))
+      console.log(finalArray)
     });
     // console.log(this.Questions)
     // console.log(this.formCampagne.value.technoSelectedId)
