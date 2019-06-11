@@ -6,6 +6,7 @@ import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 import { ApiClientService, API_URI_QUESTIONS } from '../../../../api-client/api-client.service';
 
 
+
 @Component({
   selector: 'app-NouvelleCampagnePage3Component',
   templateUrl: './nouvelle-campagne3.component.html',
@@ -19,7 +20,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
   public questions: any[];
 
   Questions = [];
-  QuestionsSelected = [];
+  allQuestions = [];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -29,6 +30,8 @@ export class NouvelleCampagnePage3Component implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+        // console.log("All Questions =",this.allQuestions)
+        // console.log("Selected = ",this.Questions)
     }
   }
   constructor(private bottomSheet: MatBottomSheet, public apiClientService: ApiClientService) { }
@@ -43,15 +46,12 @@ export class NouvelleCampagnePage3Component implements OnInit {
       this.questions = datas;
       for (var i = 0; i < this.questions.length; i++) {
         if (this.formCampagne.value.technoSelectedId.includes(this.questions[i].technologies.id)) {
-          // console.log(this.questions[i].technologies.name)
-          // console.log(this.questions[i])
-          this.Questions.push(this.questions[i]);
+          this.allQuestions.push(this.questions[i]);
         }
       }
     });
-    console.log("questions ", this.Questions);
-  }
 
+  }
 
   public onDecrementPage(): void {
     this.decrementPage.emit();  // Déclenche l'output
