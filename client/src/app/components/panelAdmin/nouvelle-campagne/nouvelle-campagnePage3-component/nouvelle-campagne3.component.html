@@ -65,12 +65,12 @@
     <div
       cdkDropList
       #todoList="cdkDropList"
-      [cdkDropListData]="allQuestions"
+      [cdkDropListData]="Questions"
       [cdkDropListConnectedTo]="[doneList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)"
     >
-      <div class="example-box" *ngFor="let item of allQuestions" cdkDrag>
+      <div class="example-box" *ngFor="let item of Questions" cdkDrag>
         <p class="question-techno">{{ item.technologies.name }}</p>
         {{ item.name }}
         <i class="fas fa-puzzle-piece drop-icon"></i> |
@@ -100,26 +100,13 @@
     <div
       cdkDropList
       #doneList="cdkDropList"
-      [cdkDropListData]="Questions"
+      [cdkDropListData]="QuestionsSelected"
       [cdkDropListConnectedTo]="[todoList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)"
     >
       <p id="drop-text">Glissez/déposez une question ici</p>
-      <div
-        class="example-box"
-        *ngFor="let item of Questions"
-        (click)="openBottomSheet()"
-        cdkDrag
-      >
-        <p class="question-techno">{{ item.technologies.name }}</p>
-        {{ item.name }}
-
-        <i class="fas fa-puzzle-piece drop-icon"></i> |
-        <p>{{ item.points }} points</p>
-        | <i class="fas fa-list-ul drop-icon"></i> |
-        <p>{{ item.time }}</p>
-      </div>
+      <div class="example-box" (click)="openBottomSheet()" cdkDrag></div>
     </div>
   </div>
 </div>

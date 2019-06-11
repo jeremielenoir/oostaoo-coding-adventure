@@ -3,8 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
-import { ApiClientService, API_URI_TECHNO, API_URI_QUESTIONS } from '../../../../api-client/api-client.service';
-import { element } from '@angular/core/src/render3';
+import { ApiClientService, API_URI_QUESTIONS } from '../../../../api-client/api-client.service';
 
 
 @Component({
@@ -20,7 +19,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
   public questions: any[];
 
   Questions = [];
-  allQuestions = [];
+  QuestionsSelected = [];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -42,39 +41,17 @@ export class NouvelleCampagnePage3Component implements OnInit {
   ngOnInit() {
     this.apiClientService.get(API_URI_QUESTIONS).subscribe((datas) => {
       this.questions = datas;
-      // if(this.formCampagne.value.technoSelectedId)
       for (var i = 0; i < this.questions.length; i++) {
-        // console.log(this.questions[i])
-        // console.log("techno id : " + this.questions[i].technologies.id + "\n techno name : " + this.questions[i].technologies.name)
-        this.allQuestions = this.questions;
         if (this.formCampagne.value.technoSelectedId.includes(this.questions[i].technologies.id)) {
           // console.log(this.questions[i].technologies.name)
-
           // console.log(this.questions[i])
           this.Questions.push(this.questions[i]);
         }
       }
-      // console.log(this.allQuestions)
-      // console.log(this.Questions)
-
-
-      // for (let index = 0; index < this.Questions.length; index++) {
-      //   const element = this.Questions[index];
-      //   if (this.allQuestions.includes(this.Questions[index])) {
-      //     console.log("lol")
-      //   } else { console.log("false") }
-      // }
-      const finalArray = [];
-      this.allQuestions.forEach((element1) => this.Questions.forEach((element2) => {
-        if (element1 !== element2) {
-          finalArray.push(element1)
-        }
-      }))
-      console.log(finalArray)
     });
-    // console.log(this.Questions)
-    // console.log(this.formCampagne.value.technoSelectedId)
+    console.log("questions ", this.Questions);
   }
+
 
   public onDecrementPage(): void {
     this.decrementPage.emit();  // Déclenche l'output
