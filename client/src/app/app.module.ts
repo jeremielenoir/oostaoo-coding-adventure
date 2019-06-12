@@ -1,14 +1,14 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from '@angular/router';
-import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { HttpClientModule } from '@angular/common/http';
-import { ApiClientService} from './api-client/api-client.service';
+import { ApiClientService } from './api-client/api-client.service';
 import { AppComponent } from "./app.component";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -28,7 +28,7 @@ import { RouteComponentComponent, PopupMonOffre } from './components/panelAdmin/
 import { AccueilComponent } from './components/home/accueil/accueil.component';
 import { MatBottomSheetModule, MAT_BOTTOM_SHEET_DEFAULT_OPTIONS } from '@angular/material';
 import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
-import { EditQuestionComponent, nouvelleQuestion } from './components/panelAdmin/edit-question/edit-question.component';
+import { Candidats, InviteCandidat } from './components/panelAdmin/candidats/candidats.component';
 //import { ProfilUserComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
 
 import { IntegrationBoutonComponent } from './components/panelAdmin/integration-bouton/integration-bouton.component';
@@ -52,10 +52,10 @@ import { ProfilEntrepriseComponent } from './components/panelAdmin/profil-entrep
 
 
 const appRoutes: Routes = [
-  // {
-  //   path: 'editquestion',
-  //   component: EditQuestionComponent
-  // },
+  {
+    path: 'editquestion',
+    component: Candidats
+  },
   /*{
     path: 'profil-user',
     component: ProfilUserComponent
@@ -107,7 +107,7 @@ const appRoutes: Routes = [
 ]
 
 @NgModule({
-  entryComponents: [RouteComponentComponent, PopupMonOffre, nouvelleQuestion, EditQuestionComponent, PopupCampaign, NouvelleCampagnePage3Component],
+  entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, Candidats, PopupCampaign, NouvelleCampagnePage3Component],
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -122,8 +122,8 @@ const appRoutes: Routes = [
     PopupMonOffre,
     AccueilComponent,
     NavMobileAbsoluteDirective,
-    EditQuestionComponent,
-    nouvelleQuestion,
+    Candidats,
+    InviteCandidat,
     //ProfilUserComponent,
     IntegrationBoutonComponent,
     NouvelleCampagneComponent,
