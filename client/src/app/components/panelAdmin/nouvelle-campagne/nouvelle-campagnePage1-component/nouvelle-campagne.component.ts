@@ -41,9 +41,11 @@ export class NouvelleCampagnePage1Component implements OnInit {
 
   public technos: any[];
   public profiles: any[];
-  public technosSelect: Array<string> = [];
-  public technosSelectID: Array<number> = [];
-  selectedValue: any[];
+  public technosSelect: Array<string>;
+  public technosSelectID: Array<number>;
+  public selectedValue: any[];
+
+  public test:number;
 
 
   constructor(public apiClientService: ApiClientService) {
@@ -51,16 +53,19 @@ export class NouvelleCampagnePage1Component implements OnInit {
   }
 
   ngOnInit() {
+    
     this.apiClientService.get(API_URI_TECHNO).subscribe((datas) => {
       this.technos = datas;
     });
     this.apiClientService.get(API_URI_PROFILES).subscribe((datas) => {
       this.profiles = datas;
-    })
-    // console.log(this.formCampagne.value)
-  }
 
-  selected(event: MatSelectChange) {
+    })
+
+
+  }
+  
+  public selected(event: MatSelectChange) {
     // console.log(event.value);
     for (var i = 0; i < this.profiles.length; i++) {
       // console.log(this.profiles[i])
