@@ -38,6 +38,7 @@
         mat-flat-button
         id="save"
         routerLink="../../"
+        (click)="SendQuestionSelected()"
       >
         ENREGISTRER
       </button>
@@ -108,16 +109,14 @@
       (cdkDropListDropped)="drop($event)"
     >
       <p id="drop-text">Glissez/déposez une question ici</p>
-        <div class="example-box" *ngFor="let item of Questions" cdkDrag>
-          <p class="question-techno">{{ item.technologies.name }}</p>
-          {{ item.name }}
-          <i class="fas fa-puzzle-piece drop-icon"></i> |
-          <p>{{ item.points }} points</p>
-          | <i class="fas fa-list-ul drop-icon"></i> |
-          <p>{{ item.time }}</p>
-        </div>
-    
-      
+      <div class="example-box" *ngFor="let item of Questions" cdkDrag>
+        <p class="question-techno">{{ item.technologies.name }}</p>
+        {{ item.name }}
+        <i class="fas fa-puzzle-piece drop-icon"></i> |
+        <p>{{ item.points }} points</p>
+        | <i class="fas fa-list-ul drop-icon"></i> |
+        <p>{{ item.time }}</p>
+      </div>
     </div>
   </div>
 </div>
