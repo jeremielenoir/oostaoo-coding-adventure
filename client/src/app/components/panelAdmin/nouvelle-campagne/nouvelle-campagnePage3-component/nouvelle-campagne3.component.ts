@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
-import { ApiClientService, API_URI_QUESTIONS } from '../../../../api-client/api-client.service';
+import { ApiClientService, API_URI_QUESTIONS, API_URI_CAMPAIGNS, API_URI_CAMPAIGN } from '../../../../api-client/api-client.service';
 
 
 
@@ -21,6 +21,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
   Questions = [];
   allQuestions = [];
+  QuestionsCampaign = [];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -30,8 +31,8 @@ export class NouvelleCampagnePage3Component implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-        // console.log("All Questions =",this.allQuestions)
-        // console.log("Selected = ",this.Questions)
+      // console.log("All Questions =", this.allQuestions)
+      console.log("Selected = ", this.Questions)
     }
   }
   constructor(private bottomSheet: MatBottomSheet, public apiClientService: ApiClientService) { }
@@ -42,6 +43,9 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
 
   ngOnInit() {
+    // setTimeout(() => {
+    //   console.log(this.formCampagne.value.CampaignID.id)
+    // }, 1000)
     this.apiClientService.get(API_URI_QUESTIONS).subscribe((datas) => {
       this.questions = datas;
       for (var i = 0; i < this.questions.length; i++) {
@@ -50,7 +54,29 @@ export class NouvelleCampagnePage3Component implements OnInit {
         }
       }
     });
+    setTimeout(() => {
+      this.apiClientService.get(API_URI_CAMPAIGNS + "/" + this.formCampagne.value.CampaignID.id).subscribe((datas) => {
+        console.log("resultat from get", datas);
+      })
+    }, 1000)
+  }
 
+  SendQuestionSelected() {
+    for (var i = 0; i < this.Questions.length; i++) {
+      // console.log(this.Questions[i])
+      this.formCampagne.patchValue({
+        questionSelectedId: this.Questions[i].id
+      })
+    }
+    this.apiClientService.put(API_URI_CAMPAIGNS + "/" + this.formCampagne.value.CampaignID.id, {
+      "questions": { "id": this.formCampagne.value.questionSelectedId }
+    }).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      err => console.log(err)
+    );
+    console.log(this.formCampagne.value.questionSelectedId)
   }
 
   public onDecrementPage(): void {
