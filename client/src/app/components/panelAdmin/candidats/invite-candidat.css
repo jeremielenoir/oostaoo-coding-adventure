@@ -1,20 +1,29 @@
+.modal-candidat {
+  padding: 50px;
+}
+
 .header-question {
   color: white;
-  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f2bb13;
+  /* background-color: #f2bb13; */
 }
 
-.header-question h4 {
+.header-question h2 {
   margin-bottom: 0px!important;
-  font-size: 18px;
   font-weight: 600;
+  color: black;
+}
+
+.header-question p {
+  color: #7e8082
 }
 
 .content-modal-question {
   padding: 24px;
+  display: flex;
+  align-items: center
 }
 
 ::ng-deep .mat-dialog-container {
@@ -23,12 +32,6 @@
 
 ::ng-deep .mat-form-field {
   width: 100%;
-}
-
-#icon {
-  padding-right: 6px;
-  font-size: 22px;
-  /* display: inline-block; */
 }
 
 .btn-question {
@@ -42,4 +45,12 @@
   height: 50px;
   background-color: #f2bb13;
   width: 100%
+}
+
+.rond-custom {
+  padding: 10px;
+  border-radius: 50px;
+  border: 1px solid #f2bb13;
+  height: 30px;
+  line-height: 10px;
 }
