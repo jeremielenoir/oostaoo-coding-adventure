@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiClientService, API_URI_CAMPAIGNS} from '../../../api-client/api-client.service';
+import { ApiClientService, API_URI_CAMPAIGNS } from '../../../api-client/api-client.service';
 
 @Component({
   selector: 'app-compagne',
@@ -24,12 +24,8 @@ export class CompagneComponent implements OnInit {
         console.log('CAMPAIGNS', this.campaigns);
       });
   }
-
-
-
-
-
-
-
+  recupID(idCampaign) {
+    console.log(idCampaign)
+  }
 
 }
