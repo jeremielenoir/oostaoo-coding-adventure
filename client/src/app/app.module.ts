@@ -53,24 +53,17 @@ import { ProfilEntrepriseComponent } from './components/panelAdmin/profil-entrep
 
 const appRoutes: Routes = [
   {
-    path: 'editquestion',
-    component: Candidats
+    path: 'dashboard/campaigns/:id',
+    component: Candidats,
   },
   /*{
     path: 'profil-user',
     component: ProfilUserComponent
   },*/
+  { path: "", redirectTo: "/home", pathMatch: "full" },
   {
-    path: '',
+    path: 'home',
     component: AccueilComponent
-  },
-  // {
-  //   path: 'dashboard',
-  //   component: RouteComponentComponent
-  // },
-  {
-    path: 'dashboard/campaigns',
-    component: IntegrationBoutonComponent,
   },
   {
     path: 'dashboard/campaigns/new',
@@ -96,10 +89,6 @@ const appRoutes: Routes = [
     path: 'dashboard/utilisateurs',
     component: UtilisateursComponent,
   },
-  // {
-  //   path: 'test2',
-  //   component: NouvelleCampagnePage3Component
-  // },
   {
     path: 'dashboard',
     component: RouteComponentComponent2
