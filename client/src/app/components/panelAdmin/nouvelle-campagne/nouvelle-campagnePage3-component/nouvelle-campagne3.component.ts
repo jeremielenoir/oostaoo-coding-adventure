@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
-import { ApiClientService, API_URI_QUESTIONS } from '../../../../api-client/api-client.service';
+import { ApiClientService, API_URI_QUESTIONS, API_URI_CAMPAIGNS } from '../../../../api-client/api-client.service';
 
 
 
@@ -21,6 +21,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
   Questions = [];
   allQuestions = [];
+  QuestionsCampaign = [];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -30,15 +31,11 @@ export class NouvelleCampagnePage3Component implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-        // console.log("All Questions =",this.allQuestions)
-        // console.log("Selected = ",this.Questions)
+      // console.log("all question: ", this.allQuestions);
+      // console.log("this Question: ", this.Questions)
     }
   }
   constructor(private bottomSheet: MatBottomSheet, public apiClientService: ApiClientService) { }
-
-  openBottomSheet(): void {
-    this.bottomSheet.open(PopupCampaign);
-  }
 
 
   ngOnInit() {
@@ -50,7 +47,27 @@ export class NouvelleCampagnePage3Component implements OnInit {
         }
       }
     });
+    setTimeout(() => {
+      this.apiClientService.get(API_URI_CAMPAIGNS + "/" + this.formCampagne.value.CampaignID.id).subscribe((datas) => {
+        console.log("resultat from get", datas);
+      })
+    }, 1000)
+  }
 
+  SendQuestionSelected() {
+    for (let index = 0; index < this.Questions.length; index++) {
+      const element = this.Questions[index];
+      this.QuestionsCampaign.push(element['id'])
+    }
+    // console.log("this array for update questions", this.QuestionsCampaign)
+    this.apiClientService.put(API_URI_CAMPAIGNS + "/" + this.formCampagne.value.CampaignID.id, {
+      "questions": this.QuestionsCampaign
+    }).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      err => console.log(err)
+    );
   }
 
   public onDecrementPage(): void {

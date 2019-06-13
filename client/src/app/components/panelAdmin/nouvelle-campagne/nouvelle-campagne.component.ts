@@ -27,7 +27,9 @@ export class NouvelleCampagneComponent implements OnInit {
       utilisationCopieColler: 'false',
       envoiRapportSimplifie: 'false',
       nomDeCampagne: "",
-      langue: []
+      langue: [],
+      questionSelectedId: { "id": "" },
+      CampaignID: { "id": "" }
     });
   }
 

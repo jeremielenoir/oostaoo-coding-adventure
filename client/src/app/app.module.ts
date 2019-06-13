@@ -1,14 +1,14 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from '@angular/router';
-import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { HttpClientModule } from '@angular/common/http';
-import { ApiClientService} from './api-client/api-client.service';
+import { ApiClientService } from './api-client/api-client.service';
 import { AppComponent } from "./app.component";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -28,6 +28,10 @@ import { RouteComponentComponent, PopupMonOffre } from './components/panelAdmin/
 import { AccueilComponent } from './components/home/accueil/accueil.component';
 import { MatBottomSheetModule, MAT_BOTTOM_SHEET_DEFAULT_OPTIONS } from '@angular/material';
 import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
+<<<<<<< HEAD
+=======
+import { Candidats, InviteCandidat } from './components/panelAdmin/candidats/candidats.component';
+>>>>>>> 3e87827d6e7900c21d52310c6b03d706acd4cb6d
 //import { ProfilUserComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
 
 import { nouvelleQuestion} from './components/panelAdmin/edit-campagne/candidats/candidats.component'
@@ -56,14 +60,23 @@ import { SettingsComponent } from './components/panelAdmin/edit-campagne/setting
 
 
 const appRoutes: Routes = [
+<<<<<<< HEAD
+=======
+  {
+    path: 'dashboard/campaigns/:id',
+    component: Candidats,
+  },
+>>>>>>> 3e87827d6e7900c21d52310c6b03d706acd4cb6d
   /*{
     path: 'profil-user',
     component: ProfilUserComponent
   },*/
+  { path: "", redirectTo: "/home", pathMatch: "full" },
   {
-    path: '',
+    path: 'home',
     component: AccueilComponent
   },
+<<<<<<< HEAD
   // {
   //   path: 'dashboard',
   //   component: RouteComponentComponent
@@ -92,6 +105,8 @@ const appRoutes: Routes = [
   //   component: SettingsComponent,
   // },
   
+=======
+>>>>>>> 3e87827d6e7900c21d52310c6b03d706acd4cb6d
   {
     path: 'dashboard/campaigns/new',
     component: NouvelleCampagneComponent,
@@ -116,10 +131,6 @@ const appRoutes: Routes = [
     path: 'dashboard/utilisateurs',
     component: UtilisateursComponent,
   },
-  // {
-  //   path: 'test2',
-  //   component: NouvelleCampagnePage3Component
-  // },
   {
     path: 'dashboard',
     component: RouteComponentComponent2
@@ -127,7 +138,11 @@ const appRoutes: Routes = [
 ]
 
 @NgModule({
+<<<<<<< HEAD
   entryComponents: [RouteComponentComponent, PopupMonOffre, nouvelleQuestion, PopupCampaign, NouvelleCampagnePage3Component],
+=======
+  entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, Candidats, PopupCampaign, NouvelleCampagnePage3Component],
+>>>>>>> 3e87827d6e7900c21d52310c6b03d706acd4cb6d
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -141,8 +156,14 @@ const appRoutes: Routes = [
     RouteComponentComponent,
     PopupMonOffre,
     AccueilComponent,
+<<<<<<< HEAD
 
     nouvelleQuestion,
+=======
+    NavMobileAbsoluteDirective,
+    Candidats,
+    InviteCandidat,
+>>>>>>> 3e87827d6e7900c21d52310c6b03d706acd4cb6d
     //ProfilUserComponent,
     IntegrationBoutonComponent,
     NouvelleCampagneComponent,

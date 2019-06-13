@@ -38,6 +38,7 @@
         mat-flat-button
         id="save"
         routerLink="../../"
+        (click)="SendQuestionSelected()"
       >
         ENREGISTRER
       </button>
@@ -51,7 +52,8 @@
       <i class="far fa-question-circle bar-icon"></i>
       <p class="bar-text">Notre collection de questions</p>
       <div id="div-search">
-        <input type="text" id="search-input" placeholder="Recherche" />
+        <input type="text" id="search-input" placeholder="Recherche"  name="search"
+        [(ngModel)]="searchText"/>
         <i class="fas fa-search search-icon"></i>
       </div>
       <button mat-flat-button id="bar-btn-search" class="custom-buttom">
@@ -70,8 +72,9 @@
       class="example-list"
       (cdkDropListDropped)="drop($event)"
     >
-      <div class="example-box" *ngFor="let item of allQuestions" cdkDrag>
-        <p class="question-techno">{{ item.technologies.name }}</p>
+      <div class="example-box" *ngFor="let item of allQuestions | filter: searchText" cdkDrag>
+        <p class="question-techno">{{item.technologies.name}}</p>
+
         {{ item.name }}
         <i class="fas fa-puzzle-piece drop-icon"></i> |
         <p>{{ item.points }} points</p>
@@ -106,16 +109,14 @@
       (cdkDropListDropped)="drop($event)"
     >
       <p id="drop-text">Glissez/déposez une question ici</p>
-        <div class="example-box" *ngFor="let item of Questions" cdkDrag>
-          <p class="question-techno">{{ item.technologies.name }}</p>
-          {{ item.name }}
-          <i class="fas fa-puzzle-piece drop-icon"></i> |
-          <p>{{ item.points }} points</p>
-          | <i class="fas fa-list-ul drop-icon"></i> |
-          <p>{{ item.time }}</p>
-        </div>
-    
-      
+      <div class="example-box" *ngFor="let item of Questions" cdkDrag>
+        <p class="question-techno">{{ item.technologies.name }}</p>
+        {{ item.name }}
+        <i class="fas fa-puzzle-piece drop-icon"></i> |
+        <p>{{ item.points }} points</p>
+        | <i class="fas fa-list-ul drop-icon"></i> |
+        <p>{{ item.time }}</p>
+      </div>
     </div>
   </div>
 </div>
