@@ -47,15 +47,15 @@
         *ngFor="let campaign of campaigns | filter: searchText"
         class="contenu-techno-content"
       >
-        <div class="contenu-branche">
-          <a href="">
+        <div class="contenu-branche" (click)="recupID(campaign.id)">
+          <a [routerLink]="['/dashboard/campaigns/', campaign.id]">
             <p class="branche-content-text">
               {{ campaign.Name }}
             </p>
 
             <div class="branche-content-noti">
               <span class="branche-content-noti-item">
-                <strong>{{campaign.candidats.length}}</strong>
+                <strong>{{ campaign.candidats.length }}</strong>
                 <span>Invité</span>
               </span>
               <span class="branche-content-noti-item">
