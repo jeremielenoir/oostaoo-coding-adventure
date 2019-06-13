@@ -1,23 +1,22 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 @Component({
-  selector: 'app-edit-question',
-  templateUrl: './edit-question.component.html',
-  styleUrls: ['./edit-question.component.css']
+  selector: 'app-candidats',
+  templateUrl: './candidats.component.html',
+  styleUrls: ['./candidats.component.css']
 })
+export class CandidatsComponent implements OnInit {
 
 
-export class EditQuestionComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   openDialog() {
     this.dialog.open(nouvelleQuestion);
   }
-
   ngOnInit() {
   }
-
+  
 }
 
 @Component({

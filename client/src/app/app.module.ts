@@ -28,9 +28,9 @@ import { RouteComponentComponent, PopupMonOffre } from './components/panelAdmin/
 import { AccueilComponent } from './components/home/accueil/accueil.component';
 import { MatBottomSheetModule, MAT_BOTTOM_SHEET_DEFAULT_OPTIONS } from '@angular/material';
 import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
-import { EditQuestionComponent, nouvelleQuestion } from './components/panelAdmin/edit-question/edit-question.component';
 //import { ProfilUserComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
 
+import { nouvelleQuestion} from './components/panelAdmin/edit-campagne/candidats/candidats.component'
 import { IntegrationBoutonComponent } from './components/panelAdmin/integration-bouton/integration-bouton.component';
 import { NouvelleCampagneComponent } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagne.component';
 import { NouvelleCampagnePage1Component } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component';
@@ -47,15 +47,15 @@ import { ProtectionDeDonneesComponent } from './components/panelAdmin/protection
 import { FacturationComponent } from './components/panelAdmin/facturation/facturation.component';
 import { UtilisateursComponent } from './components/panelAdmin/compte-utilisateurs/utilisateurs.component';
 import { ProfilEntrepriseComponent } from './components/panelAdmin/profil-entreprise/profil-entreprise.component';
+import { EditCampagneComponent } from './components/panelAdmin/edit-campagne/edit-campagne.component';
+import { CandidatsComponent } from './components/panelAdmin/edit-campagne/candidats/candidats.component';
+import { QuestionsComponent } from './components/panelAdmin/edit-campagne/questions/questions.component';
+import { SettingsComponent } from './components/panelAdmin/edit-campagne/settings/settings.component';
 
 
 
 
 const appRoutes: Routes = [
-  // {
-  //   path: 'editquestion',
-  //   component: EditQuestionComponent
-  // },
   /*{
     path: 'profil-user',
     component: ProfilUserComponent
@@ -69,9 +69,29 @@ const appRoutes: Routes = [
   //   component: RouteComponentComponent
   // },
   {
-    path: 'dashboard/campaigns',
-    component: IntegrationBoutonComponent,
+    path: 'dashboard/campaigns/:id',
+    component: EditCampagneComponent,
+    children: [
+      { path: '', redirectTo: 'candidats', pathMatch: 'full' },
+      { path: 'candidats', component: CandidatsComponent },
+      { path: 'questions', component: QuestionsComponent },
+      { path: 'settings', component: SettingsComponent },
+    ]
   },
+
+  // {
+  //   path: 'dashboard/campaigns/:id/candidats',
+  //   component: CandidatsComponent,
+  // },
+  // {
+  //   path: 'dashboard/campaigns/:id/questions',
+  //   component: QuestionsComponent,
+  // },
+  // {
+  //   path: 'dashboard/campaigns/:id/settings',
+  //   component: SettingsComponent,
+  // },
+  
   {
     path: 'dashboard/campaigns/new',
     component: NouvelleCampagneComponent,
@@ -107,7 +127,7 @@ const appRoutes: Routes = [
 ]
 
 @NgModule({
-  entryComponents: [RouteComponentComponent, PopupMonOffre, nouvelleQuestion, EditQuestionComponent, PopupCampaign, NouvelleCampagnePage3Component],
+  entryComponents: [RouteComponentComponent, PopupMonOffre, nouvelleQuestion, PopupCampaign, NouvelleCampagnePage3Component],
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -121,8 +141,7 @@ const appRoutes: Routes = [
     RouteComponentComponent,
     PopupMonOffre,
     AccueilComponent,
-    NavMobileAbsoluteDirective,
-    EditQuestionComponent,
+
     nouvelleQuestion,
     //ProfilUserComponent,
     IntegrationBoutonComponent,
@@ -138,7 +157,11 @@ const appRoutes: Routes = [
     FacturationComponent,
     ProtectionDeDonneesComponent,
     UtilisateursComponent,
-    ProfilEntrepriseComponent
+    ProfilEntrepriseComponent,
+    EditCampagneComponent,
+    CandidatsComponent,
+    QuestionsComponent,
+    SettingsComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
