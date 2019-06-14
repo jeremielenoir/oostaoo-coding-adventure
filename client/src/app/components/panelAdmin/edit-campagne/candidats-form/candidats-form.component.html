@@ -1,0 +1,66 @@
+<div class="container p-3">
+  <div class="row">
+    <div class="col-12">
+      <form [formGroup]="form" (submit)="submit()">
+        <div class="card">
+          <div class="card-header">Contact Information</div>
+          <div class="card-body" formArrayName="contacts">
+            <div class="row">
+              <div
+                class="col-6"
+                *ngFor="let contact of contactFormGroup.controls; let i = index"
+              >
+                <div [formGroupName]="i" class="row">
+                  <div class="form-group col-6">
+                    <label>Contact Label</label>
+                    <input
+                      class="form-control"
+                      formControlName="name"
+                      type="text"
+                    />
+                  </div>
+
+                  <div class="form-group col-12">
+                    <label>Email/Phone No.</label>
+                    <input
+                      class="form-control"
+                      formControlName="value"
+                      type="text"
+                    />
+                  </div>
+                  <div class="form-group col-12 text-right">
+                    <button
+                      class="btn btn-danger"
+                      type="button"
+                      (click)="removeContact(i)"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="col-12">
+              <button
+                class="btn btn-primary m-1"
+                type="button"
+                (click)="addContact()"
+              >
+                Add Contact
+              </button>
+              <button
+                class="btn btn-success m-1"
+                [disabled]="!form.valid"
+                type="submit"
+              >
+                Save User Profile
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

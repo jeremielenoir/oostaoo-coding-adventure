@@ -8,9 +8,9 @@ describe('CandidatsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CandidatsComponent ]
+      declarations: [CandidatsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,5 +21,7 @@ describe('CandidatsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    component.openDialog();
+    expect(component.isOpen).toEqual(true);
   });
 });
