@@ -202,7 +202,7 @@ label {
     display: block
 } */
 
-.branche-content-noti-item strong {}
+
 
 .contenu-techno-content .contenu-branche a:hover .branche-content-noti-item span {
     color: #f2bb13
@@ -258,9 +258,6 @@ label {
     }
     .no-margin-bottom {
         margin-bottom: inherit;
-    }
-    .contenu-techno {
-        /* width: 380px; */
     }
 }
 

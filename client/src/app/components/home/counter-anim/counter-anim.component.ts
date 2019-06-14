@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class CounterAnimComponent implements OnInit {
-  
+
   constructor() { }
 
   ngOnInit() {

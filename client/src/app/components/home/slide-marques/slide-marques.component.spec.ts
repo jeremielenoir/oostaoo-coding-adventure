@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SlideMarquesComponent } from "./slide-marques.component";
+import { SlideMarquesComponent } from './slide-marques.component';
 
-describe("SlideMarquesComponent", () => {
+describe('SlideMarquesComponent', () => {
   let component: SlideMarquesComponent;
   let fixture: ComponentFixture<SlideMarquesComponent>;
 
@@ -18,7 +18,7 @@ describe("SlideMarquesComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

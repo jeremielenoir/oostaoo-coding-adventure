@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { MAT_DIALOG_DATA } from '@angular/material'
+import { MAT_DIALOG_DATA } from '@angular/material';
 import { ApiClientService, API_URI_CAMPAIGNS, API_URI_CANDIDATS } from '../../../api-client/api-client.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { ApiClientService, API_URI_CAMPAIGNS, API_URI_CANDIDATS } from '../../..
 export class Candidats implements OnInit {
 
   globalID: any;
-
+  
   // constructor() { }
 
   constructor(public dialog: MatDialog, r: ActivatedRoute) {

@@ -30,28 +30,28 @@ export class InviteCandidat {
 
   ngOnInit() {
     // will log the entire data object
-    console.log("params id", this.data) //show id pass in params router
+    console.log('params id', this.data); // show id pass in params router
     this.apiClientService
-      .get(API_URI_CAMPAIGNS + "/" + this.data)
+      .get(API_URI_CAMPAIGNS + '/' + this.data)
       .subscribe((datas) => {
         this.campaigns = [datas];
-        console.log("id campaign", this.campaigns);
+        console.log('id campaign', this.campaigns);
       });
   }
   postCandidat() {
     this.apiClientService.post(API_URI_CANDIDATS, {
-      "Nom": this.name_candidat.value,
-      "email": this.emailFormControl.value,
+      Nom: this.name_candidat.value,
+      email: this.emailFormControl.value,
     }).subscribe(
       (res) => {
-        this.candidatID = res.id
-        console.log("id candidats", this.candidatID);
+        this.candidatID = res.id;
+        console.log('id candidats', this.candidatID);
       },
       err => console.log(err)
     );
   }
   onNoClick(): void {
     this.dialogRef.close();
-    console.log(this.name_candidat.value)
+    console.log(this.name_candidat.value);
   }
 }

@@ -9,7 +9,7 @@ import { ApiClientService, API_URI_CAMPAIGNS } from '../../../../api-client/api-
 })
 export class NouvelleCampagnePage2Component implements OnInit {
 
-  selectedLangue = "FR"
+  selectedLangue = 'FR'
 
   @Output() incrementPage = new EventEmitter<any>();
   @Output() decrementPage = new EventEmitter<any>();
@@ -20,7 +20,7 @@ export class NouvelleCampagnePage2Component implements OnInit {
 
   ngOnInit() {
     this.formCampagne.patchValue({
-      nomDeCampagne: this.formCampagne.value.role + " - " + this.formCampagne.value.experience
+      nomDeCampagne: this.formCampagne.value.role + ' - ' + this.formCampagne.value.experience
     })
   }
 
@@ -31,31 +31,31 @@ export class NouvelleCampagnePage2Component implements OnInit {
       langue: this.selectedLangue
     })
     // Confirm true for post
-    if (this.formCampagne.value.utilisationCopieColler === "true") {
-      var truecp = true
+    if (this.formCampagne.value.utilisationCopieColler === 'true') {
+      var truecp = true;
     } else {
-      var truecp = false
+      var truecp = false;
     }
-    if (this.formCampagne.value.envoiRapportSimplifie === "true") {
-      var envoiRapportSimplifie = true
+    if (this.formCampagne.value.envoiRapportSimplifie === 'true') {
+      var envoiRapportSimplifie = true;
     } else {
-      var envoiRapportSimplifie = false
+      var envoiRapportSimplifie = false;
     }
 
     this.apiClientService.post(API_URI_CAMPAIGNS, {
-      "Name": this.formCampagne.value.nomDeCampagne,
-      "level": this.formCampagne.value.experience,
-      "langs": this.formCampagne.value.langue,
-      "copy_paste": truecp,
-      "sent_report": envoiRapportSimplifie,
-      "profile": this.formCampagne.value.roleSelectedId,
-      "technologies": this.formCampagne.value.technoSelectedId
+      Name: this.formCampagne.value.nomDeCampagne,
+      level: this.formCampagne.value.experience,
+      langs: this.formCampagne.value.langue,
+      copy_paste: truecp,
+      sent_report: envoiRapportSimplifie,
+      profile: this.formCampagne.value.roleSelectedId,
+      technologies: this.formCampagne.value.technoSelectedId
     }).subscribe(
       (res) => {
-        console.log("resultat from post", res);
+        console.log('resultat from post', res);
         this.formCampagne.patchValue({
-          CampaignID: { "id": res.id }
-        })
+          CampaignID: { 'id': res.id }
+        });
       },
       err => console.log(err)
     );
