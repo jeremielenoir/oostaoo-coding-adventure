@@ -37,7 +37,7 @@
         class="custom-buttom"
         mat-flat-button
         id="save"
-        routerLink="../../"
+        [routerLink]="['/dashboard/campaigns']"
         (click)="SendQuestionSelected()"
       >
         ENREGISTRER
@@ -52,8 +52,13 @@
       <i class="far fa-question-circle bar-icon"></i>
       <p class="bar-text">Notre collection de questions</p>
       <div id="div-search">
-        <input type="text" id="search-input" placeholder="Recherche"  name="search"
-        [(ngModel)]="searchText"/>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Recherche"
+          name="search"
+          [(ngModel)]="searchText"
+        />
         <i class="fas fa-search search-icon"></i>
       </div>
       <button mat-flat-button id="bar-btn-search" class="custom-buttom">
@@ -72,8 +77,12 @@
       class="example-list"
       (cdkDropListDropped)="drop($event)"
     >
-      <div class="example-box" *ngFor="let item of allQuestions | filter: searchText" cdkDrag>
-        <p class="question-techno">{{item.technologies.name}}</p>
+      <div
+        class="example-box"
+        *ngFor="let item of allQuestions | filter: searchText"
+        cdkDrag
+      >
+        <p class="question-techno">{{ item.technologies.name }}</p>
 
         {{ item.name }}
         <i class="fas fa-puzzle-piece drop-icon"></i> |

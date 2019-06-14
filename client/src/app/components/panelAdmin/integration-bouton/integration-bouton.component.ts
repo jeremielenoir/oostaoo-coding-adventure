@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntegrationBoutonComponent implements OnInit {
 
+  public showImage: boolean;
   constructor() { }
 
   ngOnInit() {

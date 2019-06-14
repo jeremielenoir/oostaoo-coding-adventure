@@ -1,5 +1,5 @@
 import { Component, OnInit, QueryList, ViewChild, ViewEncapsulation } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 
 
@@ -31,13 +31,13 @@ export class ProfilEntrepriseComponent implements OnInit {
   shadowCogAddImages = null;
 
   industrie: string[] = ['Communications', 'Game publisher', 'Industry', 'Internet',
-                         'IT Services', 'Recruiting Agency', 'Security', 'Software', 'Startup' , 'Other'];
+    'IT Services', 'Recruiting Agency', 'Security', 'Software', 'Startup', 'Other'];
   nbrEmploye: string[] = ['1-9', '10-49', '50-199', '+200'];
 
   toppings = new FormControl();
   toppingList: string[] = ['Ada', 'Android', 'Bash', 'Big Data',
-                           'C', 'C++', 'C#', 'Clojure', 'Cloud', 'Cobol', 'DBA', 'Dart', 'Delphi',
-                           '.NET', 'F#'];
+    'C', 'C++', 'C#', 'Clojure', 'Cloud', 'Cobol', 'DBA', 'Dart', 'Delphi',
+    '.NET', 'F#'];
 
 
   constructor() { }
@@ -69,50 +69,52 @@ export class ProfilEntrepriseComponent implements OnInit {
 
   }
 
-   verifExtension(chemin) {
-      const longueur = chemin.length;
-      const indiceDebut = longueur - 4;
-      const indiceFin = longueur;
-      const extension = chemin.substr(indiceDebut, indiceFin);
+  verifExtension(chemin) {
+    const longueur = chemin.length;
+    const indiceDebut = longueur - 4;
+    const indiceFin = longueur;
+    const extension = chemin.substr(indiceDebut, indiceFin);
 
-      return extension;
+    return extension;
 
   }
 
 
-readURL(event) {
+  readURL(event) {
 
-  this.uploadImg[0].src = URL.createObjectURL(event.target.files[0]);
+    this.uploadImg[0].src = URL.createObjectURL(event.target.files[0]);
 
-  this.blockUpload.style.display = 'none';
+    this.blockUpload.style.display = 'none';
 
-  this.btnValide.disabled = false;
-  const extensionsAutorise  = ['.png', '.gif', '.jpg', '.jpeg', '.PNG', '.GIF', '.JPG', '.JPEG'];
+    this.btnValide.disabled = false;
+    const extensionsAutorise = ['.png', '.gif', '.jpg', '.jpeg', '.PNG', '.GIF', '.JPG', '.JPEG'];
 
-  const extension = this.verifExtension(event.target.value);
+    const extension = this.verifExtension(event.target.value);
 
-  if ( extension === extensionsAutorise[0]
-    || extension === extensionsAutorise[1] ||
-    extension === extensionsAutorise[2] ||
-    extension === extensionsAutorise[3] || extension === extensionsAutorise[4] || extension === extensionsAutorise[5] ||
-    extension === extensionsAutorise[6] || extension === extensionsAutorise[7]
-     ) {
+    if (extension === extensionsAutorise[0]
+      || extension === extensionsAutorise[1] ||
+      extension === extensionsAutorise[2] ||
+      extension === extensionsAutorise[3] || extension === extensionsAutorise[4] || extension === extensionsAutorise[5] ||
+      extension === extensionsAutorise[6] || extension === extensionsAutorise[7]
+    ) {
 
       this.cadrageImg[0].style.display = 'block';
       this.imgFigure[0].style.display = 'block';
       this.textErrorUpload[0].style.display = 'none';
 
-  } else {
+    } else {
 
-    this.cadrageImg[0].style.display = 'block';
-    this.textErrorUpload[0].style.display = 'block';
-    this.imgFigure[0].style.display = 'none';
+      this.cadrageImg[0].style.display = 'block';
+      this.textErrorUpload[0].style.display = 'block';
+      this.imgFigure[0].style.display = 'none';
 
-    this.btnValide.disabled = true;
+      this.btnValide.disabled = true;
+
+      this.btnValide.disabled = true;
+
+    }
 
   }
-
-}
 
 
 
@@ -134,63 +136,59 @@ readURL(event) {
 
 
 
-public show_header_param() {
+  public show_header_param() {
 
-  this.paramHeader.classList.toggle('active-param-header');
+    this.paramHeader.classList.toggle('active-param-header');
 
-}
+  }
 
-// function modal add images
+  // function modal add images
 
-public param_cog_non_active_add_image() {
+  public param_cog_non_active_add_image() {
 
-  this.shadowCogAddImages.classList.add('shadow-cog-active');
+    this.shadowCogAddImages.classList.add('shadow-cog-active');
 
-}
+  }
 
-public param_cog_non_active_add_img() {
+  public param_cog_non_active_add_img() {
 
 
     this.shadowCogAddImages.classList.remove('shadow-cog-active');
 
-}
+  }
 
-readURL_deux(event) {
+  readURL_deux(event) {
 
-  this.uploadImg[1].src = URL.createObjectURL(event.target.files[0]);
+    this.uploadImg[1].src = URL.createObjectURL(event.target.files[0]);
 
-  this.blockUploadDeux.style.display = 'none';
+    this.blockUploadDeux.style.display = 'none';
 
-  this.btnValide.disabled = false;
-  const extensionsAutorise  = ['.png', '.gif', '.jpg', '.jpeg', '.PNG', '.GIF', '.JPG', '.JPEG'];
+    this.btnValide.disabled = false;
+    const extensionsAutorise = ['.png', '.gif', '.jpg', '.jpeg', '.PNG', '.GIF', '.JPG', '.JPEG'];
 
-  const extension = this.verifExtension(event.target.value);
+    const extension = this.verifExtension(event.target.value);
 
-  if ( extension === extensionsAutorise[0]
-    || extension === extensionsAutorise[1] ||
-    extension === extensionsAutorise[2] ||
-    extension === extensionsAutorise[3] || extension === extensionsAutorise[4] || extension === extensionsAutorise[5] ||
-    extension === extensionsAutorise[6] || extension === extensionsAutorise[7]
-     ) {
+    if (extension === extensionsAutorise[0]
+      || extension === extensionsAutorise[1] ||
+      extension === extensionsAutorise[2] ||
+      extension === extensionsAutorise[3] || extension === extensionsAutorise[4] || extension === extensionsAutorise[5] ||
+      extension === extensionsAutorise[6] || extension === extensionsAutorise[7]
+    ) {
 
       this.cadrageImg[1].style.display = 'block';
       this.imgFigure[1].style.display = 'block';
       this.textErrorUpload[1].style.display = 'none';
 
-  } else {
+    } else {
 
-    this.cadrageImg[1].style.display = 'block';
-    this.textErrorUpload[1].style.display = 'block';
-    this.imgFigure[1].style.display = 'none';
+      this.cadrageImg[1].style.display = 'block';
+      this.textErrorUpload[1].style.display = 'block';
+      this.imgFigure[1].style.display = 'none';
+
+      this.btnValideDeux.disabled = true;
+    }
 
     this.btnValideDeux.disabled = true;
   }
 
 }
-
-
-
-
-}
-
-

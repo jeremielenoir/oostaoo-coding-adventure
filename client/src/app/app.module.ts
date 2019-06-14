@@ -1,43 +1,50 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
-
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-
-import { AppRoutingModule } from "./app-routing.module";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiClientService } from './api-client/api-client.service';
-import { AppComponent } from "./app.component";
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { CountUpModule } from 'countup.js-angular2';
+import { DragScrollModule } from 'ngx-drag-scroll';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NavbarComponent } from "./components/home/navbar/navbar.component";
-import { MaterialModule } from "./material";
-import { FlexLayoutModule } from "@angular/flex-layout";
-import { IndexPageComponent } from "./components/home/index-page/index-page.component";
-import { SecondSectionComponent } from "./components/home/second-section/second-section.component";
-import { CounterAnimComponent } from "./components/home/counter-anim/counter-anim.component";
-import { FooterComponent } from "./components/home/footer/footer.component";
-import { CountUpModule } from "countup.js-angular2";
-import { MainComponent } from "./components/home/main/main.component";
-import { SliderComponent } from "./components/home/slider/slider.component";
-import { DragScrollModule } from "ngx-drag-scroll";
-import { SlideMarquesComponent } from "./components/home/slide-marques/slide-marques.component";
+// import components
+import { NavbarComponent } from './components/home/navbar/navbar.component';
+import { IndexPageComponent } from './components/home/index-page/index-page.component';
+import { SecondSectionComponent } from './components/home/second-section/second-section.component';
+import { CounterAnimComponent } from './components/home/counter-anim/counter-anim.component';
+import { FooterComponent } from './components/home/footer/footer.component';
+
+import { MainComponent } from './components/home/main/main.component';
+import { SliderComponent } from './components/home/slider/slider.component';
+
+import { SlideMarquesComponent } from './components/home/slide-marques/slide-marques.component';
 import { RouteComponentComponent, PopupMonOffre } from './components/panelAdmin/navbar/route-component.component';
 import { AccueilComponent } from './components/home/accueil/accueil.component';
-import { MatBottomSheetModule, MAT_BOTTOM_SHEET_DEFAULT_OPTIONS } from '@angular/material';
+
 import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
 import { IntegrationBoutonComponent } from './components/panelAdmin/integration-bouton/integration-bouton.component';
 import { NouvelleCampagneComponent } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagne.component';
-import { NouvelleCampagnePage1Component } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component';
-import { NouvelleCampagnePage2Component } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage2-component/nouvelle-campagne2.component';
-import { NouvelleCampagnePage3Component, PopupCampaign } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component';
+import {
+  NouvelleCampagnePage1Component
+} from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component';
+import {
+  NouvelleCampagnePage2Component
+} from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage2-component/nouvelle-campagne2.component';
+import {
+  NouvelleCampagnePage3Component, PopupCampaign
+} from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component';
 
 import { RouteComponentComponent2 } from './components/panelAdmin/route-component2/route-component.component';
 import { CompagneComponent } from './components/panelAdmin/compagne/compagne.component';
 import { SidibarRightComponent } from './components/panelAdmin/sidibar-right/sidibar-right.component';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
 import { ProtectionDeDonneesComponent } from './components/panelAdmin/protection-de-donnees/protection-de-donnees.component';
@@ -50,61 +57,11 @@ import { InviteCandidat } from './components/panelAdmin/edit-campagne/candidats/
 
 import { QuestionsComponent } from './components/panelAdmin/edit-campagne/questions/questions.component';
 import { SettingsComponent } from './components/panelAdmin/edit-campagne/settings/settings.component';
-
-
-
-
-const appRoutes: Routes = [
-  // {
-  //   path: 'dashboard/campaigns/:id',
-  //   component: Candidats,
-  // },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  {
-    path: 'home',
-    component: AccueilComponent
-  },
-  {
-    path: 'dashboard/campaigns/:id',
-    component: EditCampagneComponent,
-    children: [
-      { path: 'candidats', component: CandidatsComponent },
-      { path: 'questions', component: QuestionsComponent },
-      { path: 'settings', component: SettingsComponent },
-    ]
-  },
-  {
-    path: 'dashboard/new',
-    component: NouvelleCampagneComponent,
-  },
-  {
-    path: 'dashboard/profil-utilisateur',
-    component: ProfilUtilisateurComponent,
-  },
-  {
-    path: 'dashboard/profil-entreprise',
-    component: ProfilEntrepriseComponent,
-  },
-  {
-    path: 'dashboard/facturation',
-    component: FacturationComponent,
-  },
-  {
-    path: 'dashboard/protection-des-donnees',
-    component: ProtectionDeDonneesComponent,
-  },
-  {
-    path: 'dashboard/utilisateurs',
-    component: UtilisateursComponent,
-  },
-  {
-    path: 'dashboard',
-    component: RouteComponentComponent2
-  }
-]
+import { CandidatsFormComponent } from './components/panelAdmin/edit-campagne/candidats-form/candidats-form.component';
 
 @NgModule({
-  entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign, NouvelleCampagnePage3Component],
+  entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
+    NouvelleCampagnePage3Component],
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -137,10 +94,10 @@ const appRoutes: Routes = [
     CandidatsComponent,
     InviteCandidat,
     QuestionsComponent,
-    SettingsComponent
+    SettingsComponent,
+    CandidatsFormComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -150,17 +107,14 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     CountUpModule,
     DragScrollModule,
-    MatBottomSheetModule,
     HttpClientModule,
     Ng2SearchPipeModule,
     RoundProgressModule
   ],
   providers: [
-    { provide: MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
     ApiClientService
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
 }
