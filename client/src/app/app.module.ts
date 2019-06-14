@@ -28,13 +28,7 @@ import { RouteComponentComponent, PopupMonOffre } from './components/panelAdmin/
 import { AccueilComponent } from './components/home/accueil/accueil.component';
 import { MatBottomSheetModule, MAT_BOTTOM_SHEET_DEFAULT_OPTIONS } from '@angular/material';
 import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
-<<<<<<< HEAD
-=======
 import { Candidats, InviteCandidat } from './components/panelAdmin/candidats/candidats.component';
->>>>>>> 3e87827d6e7900c21d52310c6b03d706acd4cb6d
-//import { ProfilUserComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
-
-import { nouvelleQuestion} from './components/panelAdmin/edit-campagne/candidats/candidats.component'
 import { IntegrationBoutonComponent } from './components/panelAdmin/integration-bouton/integration-bouton.component';
 import { NouvelleCampagneComponent } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagne.component';
 import { NouvelleCampagnePage1Component } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component';
@@ -60,27 +54,15 @@ import { SettingsComponent } from './components/panelAdmin/edit-campagne/setting
 
 
 const appRoutes: Routes = [
-<<<<<<< HEAD
-=======
   {
     path: 'dashboard/campaigns/:id',
     component: Candidats,
   },
->>>>>>> 3e87827d6e7900c21d52310c6b03d706acd4cb6d
-  /*{
-    path: 'profil-user',
-    component: ProfilUserComponent
-  },*/
   { path: "", redirectTo: "/home", pathMatch: "full" },
   {
     path: 'home',
     component: AccueilComponent
   },
-<<<<<<< HEAD
-  // {
-  //   path: 'dashboard',
-  //   component: RouteComponentComponent
-  // },
   {
     path: 'dashboard/campaigns/:id',
     component: EditCampagneComponent,
@@ -92,21 +74,6 @@ const appRoutes: Routes = [
     ]
   },
 
-  // {
-  //   path: 'dashboard/campaigns/:id/candidats',
-  //   component: CandidatsComponent,
-  // },
-  // {
-  //   path: 'dashboard/campaigns/:id/questions',
-  //   component: QuestionsComponent,
-  // },
-  // {
-  //   path: 'dashboard/campaigns/:id/settings',
-  //   component: SettingsComponent,
-  // },
-  
-=======
->>>>>>> 3e87827d6e7900c21d52310c6b03d706acd4cb6d
   {
     path: 'dashboard/campaigns/new',
     component: NouvelleCampagneComponent,
@@ -138,11 +105,7 @@ const appRoutes: Routes = [
 ]
 
 @NgModule({
-<<<<<<< HEAD
-  entryComponents: [RouteComponentComponent, PopupMonOffre, nouvelleQuestion, PopupCampaign, NouvelleCampagnePage3Component],
-=======
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, Candidats, PopupCampaign, NouvelleCampagnePage3Component],
->>>>>>> 3e87827d6e7900c21d52310c6b03d706acd4cb6d
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -156,15 +119,9 @@ const appRoutes: Routes = [
     RouteComponentComponent,
     PopupMonOffre,
     AccueilComponent,
-<<<<<<< HEAD
-
-    nouvelleQuestion,
-=======
     NavMobileAbsoluteDirective,
     Candidats,
     InviteCandidat,
->>>>>>> 3e87827d6e7900c21d52310c6b03d706acd4cb6d
-    //ProfilUserComponent,
     IntegrationBoutonComponent,
     NouvelleCampagneComponent,
     NouvelleCampagnePage1Component,

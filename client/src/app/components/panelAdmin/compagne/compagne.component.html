@@ -47,13 +47,8 @@
         *ngFor="let campaign of campaigns | filter: searchText"
         class="contenu-techno-content"
       >
-<<<<<<< HEAD
-        <div class="contenu-branche">
-          <a href="/dashboard/campaigns/{{campaign.id}}/">
-=======
         <div class="contenu-branche" (click)="recupID(campaign.id)">
           <a [routerLink]="['/dashboard/campaigns/', campaign.id]">
->>>>>>> 3e87827d6e7900c21d52310c6b03d706acd4cb6d
             <p class="branche-content-text">
               {{ campaign.Name }}
             </p>
