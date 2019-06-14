@@ -48,20 +48,20 @@ export class NouvelleCampagnePage3Component implements OnInit {
       }
     });
     setTimeout(() => {
-      this.apiClientService.get(API_URI_CAMPAIGNS + "/" + this.formCampagne.value.CampaignID.id).subscribe((datas) => {
-        console.log("resultat from get", datas);
-      })
-    }, 1000)
+      this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.formCampagne.value.CampaignID.id).subscribe((datas) => {
+        console.log('resultat from get', datas);
+      });
+    }, 1000);
   }
 
   SendQuestionSelected() {
     for (let index = 0; index < this.Questions.length; index++) {
       const element = this.Questions[index];
-      this.QuestionsCampaign.push(element['id'])
+      this.QuestionsCampaign.push(element['id']);
     }
     // console.log("this array for update questions", this.QuestionsCampaign)
-    this.apiClientService.put(API_URI_CAMPAIGNS + "/" + this.formCampagne.value.CampaignID.id, {
-      "questions": this.QuestionsCampaign
+    this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.formCampagne.value.CampaignID.id, {
+      questions: this.QuestionsCampaign
     }).subscribe(
       (res) => {
         console.log(res);

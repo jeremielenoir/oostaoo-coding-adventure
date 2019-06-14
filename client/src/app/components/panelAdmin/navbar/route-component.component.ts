@@ -19,14 +19,14 @@ export class RouteComponentComponent implements OnInit {
   ngOnInit() {
   }
 
-  public active_menu(){
+  public active_menu() {
 
-    let totalLeft = document.getElementById('totalLeft');
-    let btn_arrow = document.getElementById('btn-arrow');
+    const totalLeft = document.getElementById('totalLeft');
+    const btnArrow = document.getElementById('btn-arrow');
 
-    totalLeft.classList.toggle('new-totalLeft')
+    totalLeft.classList.toggle('new-totalLeft');
 
-    btn_arrow.classList.toggle('fa-arrow-right')
+    btnArrow.classList.toggle('fa-arrow-right');
  
   }
 

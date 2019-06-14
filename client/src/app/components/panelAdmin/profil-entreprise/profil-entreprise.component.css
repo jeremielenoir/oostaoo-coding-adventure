@@ -176,10 +176,6 @@
     background-color: rgba(43,174,145,.7);
 }
 
-.modal-text-btn-upload
-{
-
-}
 
 .file
 {
@@ -548,10 +544,6 @@
     font-size: 8px;
 }
 
-.textarea-gestion
-{
-
-}
 
 
 ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix
@@ -634,10 +626,6 @@
     margin-bottom: 0px!important;
 }
 
-.incrage
-{
-    
-}
 
 .champ-incrage
 {
@@ -751,11 +739,6 @@
 }
 
 /*-- partie compltion des fiche compléte--*/
-
-
-.all-group-content .content-left
-{
-}
 
 .completion_fiche
 {
@@ -919,11 +902,6 @@
     .number_progress::after
     {
         font-size: 12px!important;
-    }
-
-
-    .completion_fiche_progress{
-
     }
 
     .text_number_progress_responsive

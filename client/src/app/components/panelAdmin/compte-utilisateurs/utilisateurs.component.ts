@@ -46,7 +46,7 @@ export class UtilisateursComponent implements OnInit {
   text_label = null;
   title_champ_default = null;
 
-  //update form
+  // update form
 
   update_nom = null;
   update_prenom = null;
@@ -64,7 +64,7 @@ export class UtilisateursComponent implements OnInit {
     this.text_label = document.querySelectorAll('.libele');
     this.title_champ_default = document.querySelectorAll('.title-champ-default');
 
-    //update infféctation
+    // update infféctation
 
     this.update_nom = document.getElementById('update_nom');
     this.update_prenom = document.getElementById('update_prenom');
@@ -77,14 +77,14 @@ export class UtilisateursComponent implements OnInit {
 
   public param_cog() {
 
-    let element = document.getElementById('shadow-cog');
+    const element = document.getElementById('shadow-cog');
     element.classList.add('shadow-cog-active')
 
   }
 
   public param_cog_non_active() {
 
-    let element = document.getElementById('shadow-cog');
+    const element = document.getElementById('shadow-cog');
 
     element.classList.remove('shadow-cog-active')
 
@@ -92,7 +92,7 @@ export class UtilisateursComponent implements OnInit {
 
   public param_cog_deux() {
 
-    let element = document.getElementById('shadow-cog-2');
+    const element = document.getElementById('shadow-cog-2');
     element.classList.add('shadow-cog-active')
 
     console.log('salut cog 2')
@@ -101,7 +101,7 @@ export class UtilisateursComponent implements OnInit {
 
   public param_cog_non_active_deux() {
 
-    let element = document.getElementById('shadow-cog-2');
+    const element = document.getElementById('shadow-cog-2');
 
     element.classList.remove('shadow-cog-active')
 
@@ -110,14 +110,14 @@ export class UtilisateursComponent implements OnInit {
   public Hundelesubmit() {
 
 
-    if (this.nom.value == "") {
+    if (this.nom.value === '') {
       this.nom.classList.add('errorChamp');
       this.text_label[1].classList.add('new-label')
       this.title_champ_default[1].classList.add('title-champ-default-visible')
 
     }
 
-    if (this.prenom.value == "") {
+    if (this.prenom.value === '') {
 
       this.prenom.classList.add('errorChamp');
       this.text_label[0].classList.add('new-label');
@@ -125,7 +125,7 @@ export class UtilisateursComponent implements OnInit {
 
     }
 
-    if (this.email.value == "") {
+    if (this.email.value === '') {
 
       this.email.classList.add('errorChamp');
       this.text_label[2].classList.add('new-label');
@@ -175,7 +175,7 @@ export class UtilisateursComponent implements OnInit {
 
   public is_valid_email(event) {
 
-    let verify_mail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const verify_mail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     // return re.test(email);
 
     if (this.email.value.length < 1) {
@@ -184,7 +184,7 @@ export class UtilisateursComponent implements OnInit {
       this.text_label[2].classList.add('new-label');
       this.title_champ_default[2].classList.add('title-champ-default-visible');
 
-      this.title_champ_default[2].innerHTML = "Obligatoire";
+      this.title_champ_default[2].innerHTML = 'Obligatoire';
 
 
     } else {
@@ -196,7 +196,7 @@ export class UtilisateursComponent implements OnInit {
         this.title_champ_default[2].classList.remove('title-champ-default-visible');
 
       } else {
-        this.title_champ_default[2].innerHTML = "Email invalide";
+        this.title_champ_default[2].innerHTML = 'Email invalide';
 
         this.email.classList.add('errorChamp');
         this.text_label[2].classList.add('new-label');
@@ -210,14 +210,14 @@ export class UtilisateursComponent implements OnInit {
   public Hundelesubmit_modif() {
 
 
-    if (this.update_nom.value == "") {
+    if (this.update_nom.value === '') {
       this.update_nom.classList.add('errorChamp');
       this.text_label_update[1].classList.add('new-label')
       this.title_champ_default_update[1].classList.add('title-champ-default-visible')
 
     }
 
-    if (this.update_prenom.value == "") {
+    if (this.update_prenom.value === '') {
 
       this.update_prenom.classList.add('errorChamp');
       this.text_label_update[0].classList.add('new-label');
@@ -225,7 +225,7 @@ export class UtilisateursComponent implements OnInit {
 
     }
 
-    if (this.update_email.value == "") {
+    if (this.update_email.value === '') {
 
       this.update_email.classList.add('errorChamp');
       this.text_label_update[2].classList.add('new-label');
@@ -241,14 +241,14 @@ export class UtilisateursComponent implements OnInit {
     if (this.update_prenom.value.length < 1) {
 
       this.update_prenom.classList.add('errorChamp');
-      this.text_label_update[0].classList.add('new-label')
-      this.title_champ_default_update[0].classList.add('title-champ-default-visible')
+      this.text_label_update[0].classList.add('new-label');
+      this.title_champ_default_update[0].classList.add('title-champ-default-visible');
 
     } else {
 
       this.update_prenom.classList.remove('errorChamp');
-      this.text_label_update[0].classList.remove('new-label')
-      this.title_champ_default_update[0].classList.remove('title-champ-default-visible')
+      this.text_label_update[0].classList.remove('new-label');
+      this.title_champ_default_update[0].classList.remove('title-champ-default-visible');
     }
 
 
@@ -260,14 +260,14 @@ export class UtilisateursComponent implements OnInit {
     if (this.update_nom.value.length < 1) {
 
       this.update_nom.classList.add('errorChamp');
-      this.text_label_update[1].classList.add('new-label')
-      this.title_champ_default_update[1].classList.add('title-champ-default-visible')
+      this.text_label_update[1].classList.add('new-label');
+      this.title_champ_default_update[1].classList.add('title-champ-default-visible');
 
     } else {
 
       this.update_nom.classList.remove('errorChamp');
-      this.text_label_update[1].classList.remove('new-label')
-      this.title_champ_default_update[1].classList.remove('title-champ-default-visible')
+      this.text_label_update[1].classList.remove('new-label');
+      this.title_champ_default_update[1].classList.remove('title-champ-default-visible');
     }
 
 
@@ -279,22 +279,23 @@ export class UtilisateursComponent implements OnInit {
     if (this.update_email.value.length < 1) {
 
       this.update_email.classList.add('errorChamp');
-      this.text_label_update[2].classList.add('new-label')
-      this.title_champ_default_update[2].classList.add('title-champ-default-visible')
+      this.text_label_update[2].classList.add('new-label');
+      this.title_champ_default_update[2].classList.add('title-champ-default-visible');
 
     } else {
 
       this.update_email.classList.remove('errorChamp');
-      this.text_label_update[2].classList.remove('new-label')
-      this.title_champ_default_update[2].classList.remove('title-champ-default-visible')
+      this.text_label_update[2].classList.remove('new-label');
+      this.title_champ_default_update[2].classList.remove('title-champ-default-visible');
     }
 
   }
 
-  //function filter table utilisateurs 
+  // function filter table utilisateurs 
 
 
   displayedColumns: string[] = ['name', 'mail', 'gestion', 'symbol'];
+
   dataSource = ELEMENT_DATA;
 
   // doFilter = (value: string) => {

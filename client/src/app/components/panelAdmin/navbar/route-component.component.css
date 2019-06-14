@@ -309,15 +309,9 @@ button:hover {
   justify-content: space-around;
 }
 
-#icon-mobile {}
-
-#logo-mobile {}
-
 #logo-mobile img {
   width: 200px;
 }
-
-#notif-mobile {}
 
 #url-mobile {
   padding-left: 10px;

@@ -69,18 +69,18 @@ export class NouvelleCampagnePage1Component implements OnInit {
     // console.log(event.value);
     for (var i = 0; i < this.profiles.length; i++) {
       // console.log(this.profiles[i])
-      let roleData = this.profiles[i].name;
+      const roleData = this.profiles[i].name;
       // console.log(roleData)
       if (event.value == roleData) {
         // console.log(this.profiles[i].id)
         this.formCampagne.patchValue({
-          roleSelectedId: { "id": this.profiles[i].id }
-        })
-        let technoData = [];
-        let technoDataID = [];
-        this.profiles[i].technologies.forEach(function (item) {
+          roleSelectedId: { 'id': this.profiles[i].id }
+        });
+        const technoData = [];
+        const technoDataID = [];
+        this.profiles[i].technologies.forEach((item) => {
           technoData.push(item.name);
-          technoDataID.push(item.id)
+          technoDataID.push(item.id);
         });
         this.technosSelect = technoData;
         this.formCampagne.patchValue({

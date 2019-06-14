@@ -20,16 +20,16 @@ export class NouvelleCampagneComponent implements OnInit {
     this.oAuthFormVerification = new AuthFormVerification();
     this.ParentFormCampagne = this._formBuilder.group({
       role: this.oAuthFormVerification.getRoleValidator(),
-      roleSelectedId: { "id": "" },
+      roleSelectedId: { 'id': '' },
       techno: this.oAuthFormVerification.getTechnoValidator(),
       technoSelectedId: [],
       experience: ['junior', this.oAuthFormVerification.getExperienceValidator()],
       utilisationCopieColler: 'false',
       envoiRapportSimplifie: 'false',
-      nomDeCampagne: "",
+      nomDeCampagne: '',
       langue: [],
-      questionSelectedId: { "id": "" },
-      CampaignID: { "id": "" }
+      questionSelectedId: { 'id': '' },
+      CampaignID: { 'id': '' }
     });
   }
 
