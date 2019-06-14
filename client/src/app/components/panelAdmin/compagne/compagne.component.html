@@ -48,7 +48,7 @@
         class="contenu-techno-content"
       >
         <div class="contenu-branche" (click)="recupID(campaign.id)">
-          <a [routerLink]="['/dashboard/campaigns/', campaign.id]">
+          <a [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats']">
             <p class="branche-content-text">
               {{ campaign.Name }}
             </p>

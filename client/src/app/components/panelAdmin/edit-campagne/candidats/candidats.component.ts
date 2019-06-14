@@ -1,39 +1,40 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { Validators, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { MAT_DIALOG_DATA } from '@angular/material'
+import { ApiClientService, API_URI_CAMPAIGNS, API_URI_CANDIDATS } from '../../../../api-client/api-client.service';
+import { InviteCandidat } from './invite-candidat.component';
 
 @Component({
   selector: 'app-candidats',
   templateUrl: './candidats.component.html',
   styleUrls: ['./candidats.component.css']
 })
+
+
 export class CandidatsComponent implements OnInit {
 
+  globalId: string;
 
-  constructor(public dialog: MatDialog) { }
+  // constructor() { }
+
+  constructor(public dialog: MatDialog, private route: ActivatedRoute) {
+
+    this.route.parent.params.subscribe((params) => {
+      this.globalId = params.id;
+      console.log("data", this.globalId);
+    });
+  }
 
   openDialog() {
-    this.dialog.open(nouvelleQuestion);
+    this.dialog.open(InviteCandidat, {
+      data: this.globalId
+    });
+
   }
+
   ngOnInit() {
+
   }
-  
-}
-
-@Component({
-  selector: 'nouvelle-question',
-  templateUrl: 'nouvelle-question.html',
-  styleUrls: ['./nouvelle-question.css']
-})
-
-export class nouvelleQuestion {
-  constructor() { }
-
-  TechnoList: string[] = ['AWS', 'Android', 'Angular 2+', 'AngularJS (1.x)', 'Apache Spark', 'C', 'C#', 'C++',
-    'Data Science', 'Docker', 'Git', 'Hadoop Ecosystem', 'Java', 'Javascript, HTML, CSS',
-    'Mobile iOS/Swift', 'Node.js', 'PHP', 'Python 3', 'React', 'SQL', 'Scala', 'Spring Framework',
-    'Symfony', 'Windows Administration'];
-
-  Questions: string[] = ['Question à choix multiples', 'Réponse libre', 'Projet'];
-
-  Langues: string[] = ['Anglais', 'Français']
 }

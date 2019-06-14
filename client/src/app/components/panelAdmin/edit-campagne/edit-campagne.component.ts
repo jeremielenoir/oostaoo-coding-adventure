@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-campagne',
@@ -8,12 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditCampagneComponent implements OnInit {
 
-constructor( ) {
-   
-}
+  public globalId: string;
 
-ngOnInit() {
-}
+  constructor(private route: ActivatedRoute) {
+    this.route.params.subscribe((params) => {
+      this.globalId = params['id'];
+      console.log("globalID: ", this.globalId, params);
+    });
+  }
 
-
+  ngOnInit() {
+  }
 }

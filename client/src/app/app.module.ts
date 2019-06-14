@@ -28,7 +28,6 @@ import { RouteComponentComponent, PopupMonOffre } from './components/panelAdmin/
 import { AccueilComponent } from './components/home/accueil/accueil.component';
 import { MatBottomSheetModule, MAT_BOTTOM_SHEET_DEFAULT_OPTIONS } from '@angular/material';
 import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
-import { Candidats, InviteCandidat } from './components/panelAdmin/candidats/candidats.component';
 import { IntegrationBoutonComponent } from './components/panelAdmin/integration-bouton/integration-bouton.component';
 import { NouvelleCampagneComponent } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagne.component';
 import { NouvelleCampagnePage1Component } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component';
@@ -47,6 +46,8 @@ import { UtilisateursComponent } from './components/panelAdmin/compte-utilisateu
 import { ProfilEntrepriseComponent } from './components/panelAdmin/profil-entreprise/profil-entreprise.component';
 import { EditCampagneComponent } from './components/panelAdmin/edit-campagne/edit-campagne.component';
 import { CandidatsComponent } from './components/panelAdmin/edit-campagne/candidats/candidats.component';
+import { InviteCandidat } from './components/panelAdmin/edit-campagne/candidats/invite-candidat.component';
+
 import { QuestionsComponent } from './components/panelAdmin/edit-campagne/questions/questions.component';
 import { SettingsComponent } from './components/panelAdmin/edit-campagne/settings/settings.component';
 
@@ -54,11 +55,11 @@ import { SettingsComponent } from './components/panelAdmin/edit-campagne/setting
 
 
 const appRoutes: Routes = [
-  {
-    path: 'dashboard/campaigns/:id',
-    component: Candidats,
-  },
-  { path: "", redirectTo: "/home", pathMatch: "full" },
+  // {
+  //   path: 'dashboard/campaigns/:id',
+  //   component: Candidats,
+  // },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'home',
     component: AccueilComponent
@@ -67,15 +68,13 @@ const appRoutes: Routes = [
     path: 'dashboard/campaigns/:id',
     component: EditCampagneComponent,
     children: [
-      { path: '', redirectTo: 'candidats', pathMatch: 'full' },
       { path: 'candidats', component: CandidatsComponent },
       { path: 'questions', component: QuestionsComponent },
       { path: 'settings', component: SettingsComponent },
     ]
   },
-
   {
-    path: 'dashboard/campaigns/new',
+    path: 'dashboard/new',
     component: NouvelleCampagneComponent,
   },
   {
@@ -105,7 +104,7 @@ const appRoutes: Routes = [
 ]
 
 @NgModule({
-  entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, Candidats, PopupCampaign, NouvelleCampagnePage3Component],
+  entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign, NouvelleCampagnePage3Component],
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -120,8 +119,6 @@ const appRoutes: Routes = [
     PopupMonOffre,
     AccueilComponent,
     NavMobileAbsoluteDirective,
-    Candidats,
-    InviteCandidat,
     IntegrationBoutonComponent,
     NouvelleCampagneComponent,
     NouvelleCampagnePage1Component,
@@ -138,6 +135,7 @@ const appRoutes: Routes = [
     ProfilEntrepriseComponent,
     EditCampagneComponent,
     CandidatsComponent,
+    InviteCandidat,
     QuestionsComponent,
     SettingsComponent
   ],

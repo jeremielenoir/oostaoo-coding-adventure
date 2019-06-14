@@ -9,10 +9,10 @@ import { ApiClientService, API_URI_CAMPAIGNS } from '../../../api-client/api-cli
 export class CompagneComponent implements OnInit {
 
   public campaigns: any[];
-  public search_header: string;
+  public searchHeader: string;
 
   constructor(public apiClientService: ApiClientService) {
-    this.search_header = null;
+    this.searchHeader = null;
 
   }
 
@@ -24,8 +24,8 @@ export class CompagneComponent implements OnInit {
         console.log('CAMPAIGNS', this.campaigns);
       });
   }
-  recupID(idCampaign) {
-    console.log(idCampaign)
+  recupID(idCampaign: string) {
+    console.log(idCampaign);
   }
 
 }
