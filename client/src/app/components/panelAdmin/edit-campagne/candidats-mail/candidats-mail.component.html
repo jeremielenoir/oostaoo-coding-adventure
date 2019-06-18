@@ -12,7 +12,7 @@
   <p>Évaluation technique</p> <br>
 
   <p><b>Message :</b></p>
-  <p>Bonjour zeze,</p> <br>
+  <p *ngFor="let candidat of candidats">Bonjour {{ candidat.Nom }},</p> <br>
 
   <p>Votre candidature a retenu notre attention.</p> <br>
   
@@ -28,3 +28,4 @@
 
 <button (click)="onClose()">ENVOYER EMAIL</button>
 <button (click)="retourCandidat()">RETOUR AUX CANDIDATS</button>
+<button (click)="showCandidats()" (click)="updateCampaign()">showCandidats</button>
