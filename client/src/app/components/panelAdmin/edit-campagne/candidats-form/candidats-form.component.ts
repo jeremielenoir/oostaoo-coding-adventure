@@ -70,15 +70,15 @@ export class CandidatsFormComponent implements OnInit {
       email: email,
     }).subscribe(
       (res) => {
-        this.arrayCandidat.push({ id: res.id });
-        console.log('id candidats', this.arrayCandidat);
+        this.arrayCandidat.push(res.id );
+         console.log('id candidats', this.arrayCandidat);
       },
       err => console.log(err)
     );
   }
   // method triggered when form is submitted
   submit() {
-    console.log(this.form.value.contacts);
+    // console.log(this.form.value.contacts);
     for (let i = 0; i < this.form.value.contacts.length; i++) {
       const item = this.form.value.contacts[i];
       const nom = item.name;
@@ -88,7 +88,7 @@ export class CandidatsFormComponent implements OnInit {
   }
 
   openDialog() {
-    console.log(this.arrayCandidat);
+    // console.log(this.arrayCandidat);
     this.dialog.open(CandidatsMailComponent, {
       data: {
         globalId: this.globalId,
