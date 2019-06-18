@@ -11,19 +11,17 @@
 }
 
 .header-question h2 {
-  margin-bottom: 0px!important;
+  margin-bottom: 0px !important;
   font-weight: 600;
   color: black;
 }
 
 .header-question p {
-  color: #7e8082
+  color: #7e8082;
 }
 
 .content-modal-question {
   padding: 24px;
-  display: flex;
-  align-items: center
 }
 
 ::ng-deep .mat-dialog-container {
@@ -44,7 +42,6 @@
   font-weight: 700;
   height: 50px;
   background-color: #f2bb13;
-  width: 100%
 }
 
 .rond-custom {

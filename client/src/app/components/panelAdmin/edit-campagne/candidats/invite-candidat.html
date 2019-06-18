@@ -8,54 +8,6 @@
   </header>
   <hr />
   <div class="content-modal-question">
-    <form>
-      <table cellspacing="0">
-        <tr>
-          <td>
-            <mat-form-field>
-              <input
-                matInput
-                placeholder="Name"
-                [formControl]="name_candidat"
-              />
-              <mat-error *ngIf="name_candidat.hasError('required')">
-                Name is <strong>required</strong>
-              </mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <mat-form-field>
-              <input
-                matInput
-                placeholder="Email"
-                [formControl]="emailFormControl"
-              />
-              <mat-error
-                *ngIf="
-                  emailFormControl.hasError('email') &&
-                  !emailFormControl.hasError('required')
-                "
-              >
-                Please enter a valid email address
-              </mat-error>
-              <mat-error *ngIf="emailFormControl.hasError('required')">
-                Email is <strong>required</strong>
-              </mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
-      </table>
-    </form>
-
-    <button
-      mat-raised-button
-      color="primary"
-      class="btn-question"
-      (click)="postCandidat()"
-    >
-      Créer
-    </button>
+    <app-candidats-form  *ngFor="let campaign of campaigns" [globalId]="campaign.id"></app-candidats-form>
   </div>
 </div>

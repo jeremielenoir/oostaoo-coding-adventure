@@ -12,7 +12,7 @@
               >
                 <div [formGroupName]="i" class="row">
                   <div class="form-group col-6">
-                    <label>Contact Label</label>
+                    <label>Nom</label>
                     <input
                       class="form-control"
                       formControlName="name"
@@ -21,11 +21,12 @@
                   </div>
 
                   <div class="form-group col-12">
-                    <label>Email/Phone No.</label>
+                    <label>Email*</label>
                     <input
                       class="form-control"
                       formControlName="value"
                       type="text"
+                      required
                     />
                   </div>
                   <div class="form-group col-12 text-right">
@@ -48,14 +49,18 @@
                 type="button"
                 (click)="addContact()"
               >
-                Add Contact
+                ajouter candidat
               </button>
               <button
-                class="btn btn-success m-1"
+                mat-raised-button
+                color="primary"
+                class="btn-question"
+                mat-button
                 [disabled]="!form.valid"
                 type="submit"
+                (click)="openDialog()"
               >
-                Save User Profile
+                Prochaine étape : configuration d’email
               </button>
             </div>
           </div>
