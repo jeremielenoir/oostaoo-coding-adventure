@@ -19,16 +19,16 @@ export class CandidatsMailComponent implements OnInit {
     public dialogRef: MatDialogRef<CandidatsMailComponent>) { }
 
   ngOnInit() {
-    console.log('data', this.data.globalId);
-    console.log('data', this.data.candidatId);
-    this.apiClientService
-      .get(API_URI_CAMPAIGNS + '/' + this.data.globalId)
-      .subscribe(datas => {
-        this.campaigns = [datas];
-      });
-    setTimeout(() => {
-      console.log(this.campaigns)
-    }, 2000);
+    // console.log('data', this.data.globalId);
+    // console.log('data', this.data.candidatId);
+    // this.apiClientService
+    //   .get(API_URI_CAMPAIGNS + '/' + this.data.globalId)
+    //   .subscribe(datas => {
+    //     this.campaigns = [datas];
+    //   });
+    // setTimeout(() => {
+    //   console.log(this.campaigns)
+    // }, 2000);
   }
   onClose(): void {
     this.dialog.closeAll();
