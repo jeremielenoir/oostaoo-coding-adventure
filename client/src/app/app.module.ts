@@ -58,10 +58,11 @@ import { InviteCandidat } from './components/panelAdmin/edit-campagne/candidats/
 import { QuestionsComponent } from './components/panelAdmin/edit-campagne/questions/questions.component';
 import { SettingsComponent } from './components/panelAdmin/edit-campagne/settings/settings.component';
 import { CandidatsFormComponent } from './components/panelAdmin/edit-campagne/candidats-form/candidats-form.component';
+import { CandidatsMailComponent } from './components/panelAdmin/edit-campagne/candidats-mail/candidats-mail.component';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
-    NouvelleCampagnePage3Component],
+    NouvelleCampagnePage3Component, CandidatsMailComponent],
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -95,7 +96,8 @@ import { CandidatsFormComponent } from './components/panelAdmin/edit-campagne/ca
     InviteCandidat,
     QuestionsComponent,
     SettingsComponent,
-    CandidatsFormComponent
+    CandidatsFormComponent,
+    CandidatsMailComponent
   ],
   imports: [
     BrowserModule,
