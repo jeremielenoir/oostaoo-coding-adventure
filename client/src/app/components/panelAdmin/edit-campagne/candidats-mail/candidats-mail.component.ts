@@ -28,17 +28,19 @@ export class CandidatsMailComponent implements OnInit {
         .get(API_URI_CAMPAIGNS + '/' + this.data.globalId)
           .subscribe(datas => {
           this.campaigns = [datas];
-          console.log(this.campaigns);
+          // console.log(this.campaigns);
       });
-
+      const myCandidat = [];
       for (let index = 0; index < this.data.candidatId.length; index++) {
       console.log('id :' + this.data.candidatId[index]);
+      console.log('hello');
       this.apiClientService
             .get(API_URI_CANDIDATS + '/' + this.data.candidatId[index])
               .subscribe(datas => {
-            this.candidats = [datas];
+                myCandidat.push(datas);
           });
     }
+      this.candidats = myCandidat;
   }
   updateCampaign() {
     this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.data.globalId, {
@@ -58,7 +60,7 @@ export class CandidatsMailComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  showCandidats(){
+  showCandidats() {
     console.log(this.candidats);
   }
 }
