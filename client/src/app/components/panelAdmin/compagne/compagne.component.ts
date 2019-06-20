@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiClientService, API_URI_CAMPAIGNS } from '../../../api-client/api-client.service';
+import { InviteCandidat } from '../edit-campagne/candidats/invite-candidat.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-compagne',
@@ -11,9 +13,9 @@ export class CompagneComponent implements OnInit {
   public campaigns: any[];
   public searchHeader: string;
 
-  constructor(public apiClientService: ApiClientService) {
+  constructor(public apiClientService: ApiClientService,
+              public dialog: MatDialog) {
     this.searchHeader = null;
-
   }
 
   ngOnInit() {
@@ -26,6 +28,13 @@ export class CompagneComponent implements OnInit {
   }
   recupID(idCampaign: string) {
     console.log(idCampaign);
+  }
+
+  openDialog(idCampaign) {
+    this.dialog.open(InviteCandidat, {
+      data: idCampaign,
+      height: '80vh'
+    });
   }
 
 }
