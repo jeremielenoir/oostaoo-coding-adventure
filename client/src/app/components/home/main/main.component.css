@@ -112,8 +112,6 @@ p {
     height: auto;
 }
 
-.elementor-element {}
-
 .title-heading-block {
     text-align: center;
     margin: 80px 0px 80px 0px;
@@ -139,8 +137,6 @@ p {
     max-width: 100%
 }
 
-.post .content-description {}
-
 .post .content-description .entry-title a {
     margin-bottom: .5em;
     color: #252e38;
@@ -151,8 +147,6 @@ p {
     letter-spacing: 0px;
     display: block
 }
-
-.mini-storie {}
 
 .mini-storie a {
     font-family: "Open Sans", Open Sans;
@@ -297,8 +291,6 @@ p {
 .testimonial-footer>p>a {
     color: #1691aa;
 }
-
-element.style {}
 
 .carousel-control-next, .carousel-control-prev {
     color: #f2bb13;
@@ -460,7 +452,7 @@ element.style {}
     .swiper-slide {
         padding: 20px 40px 44px 20px;
     }
-    .help-contenu {}
+    
     .contenu-slider {
         height: auto!important;
         position: relative;

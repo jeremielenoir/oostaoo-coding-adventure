@@ -1,0 +1,13 @@
+<div class="modal-candidat">
+  <header class="header-question">
+    <span class="rond-custom"><p>1</p></span>
+    <div class="info-campaign-candidats">
+      <h2>Entrez le nom et l'email des candidats</h2>
+      <p *ngFor="let campaign of campaigns">{{ campaign.Name }}</p>
+    </div>
+  </header>
+  <hr />
+  <div class="content-modal-question">
+    <app-candidats-form  *ngFor="let campaign of campaigns" [globalId]="campaign.id"></app-candidats-form>
+  </div>
+</div>

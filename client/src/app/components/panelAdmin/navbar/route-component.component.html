@@ -10,7 +10,7 @@
     >
       <div id="left-top">
         <div id="logo">
-          <a href="#"
+          <a href="/dashboard"
             ><img
               src="../../../../assets/logo-codingame-for-work.png"
               alt="img-site"
@@ -44,7 +44,7 @@
       <div id="campaign" *ngIf="isShowNavTesting">
         <ul>
           <li>
-            <a routerLink="/dashboard">Mes campagnes</a>
+            <a routerLink="/dashboard/campaigns">Mes campagnes</a>
           </li>
           <li>
             <a href="#">Editeur de questions</a>
@@ -234,9 +234,9 @@
       mat-button
       (click)="isShow = !isShow"
       (click)="isShow2 = true"
-      class="custom-button-nav"
+      class="custom-button-nav"(click)="active_menu()"
     >
-      <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+      <i class="fa fa-arrow-left fa-2x" aria-hidden="true" id="btn-arrow"></i>
     </button>
   </div>
   <!-- button for show or hidden nav in desktop -->
@@ -250,10 +250,12 @@
         <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
       </div>
       <div id="logo-mobile">
+        <a href="/dashboard">
         <img
           src="../../../../assets/Coding-game-img/logo-mobile.svg"
           alt="logo-mobile"
         />
+      </a>
       </div>
       <div id="notif-mobile">
         <i class="fa fa-bell-o fa-2x" aria-hidden="true"></i>

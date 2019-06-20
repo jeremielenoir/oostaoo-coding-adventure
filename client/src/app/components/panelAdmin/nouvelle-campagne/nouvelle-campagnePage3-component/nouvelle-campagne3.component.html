@@ -1,4 +1,3 @@
-
 <div id="top-bar">
   <div id="segment1">
     <p id="diagram">diagram</p>
@@ -38,7 +37,8 @@
         class="custom-buttom"
         mat-flat-button
         id="save"
-        routerLink="../../"
+        [routerLink]="['/dashboard/campaigns']"
+        (click)="SendQuestionSelected()"
       >
         ENREGISTRER
       </button>
@@ -52,7 +52,13 @@
       <i class="far fa-question-circle bar-icon"></i>
       <p class="bar-text">Notre collection de questions</p>
       <div id="div-search">
-        <input type="text" id="search-input" placeholder="Recherche" />
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Recherche"
+          name="search"
+          [(ngModel)]="searchText"
+        />
         <i class="fas fa-search search-icon"></i>
       </div>
       <button mat-flat-button id="bar-btn-search" class="custom-buttom">
@@ -66,18 +72,23 @@
     <div
       cdkDropList
       #todoList="cdkDropList"
-      [cdkDropListData]="todo"
+      [cdkDropListData]="allQuestions"
       [cdkDropListConnectedTo]="[doneList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)"
     >
-      <div class="example-box" *ngFor="let item of todo" cdkDrag>
-        <p class="question-techno">AWS</p>
-        {{ item }}
+      <div
+        class="example-box"
+        *ngFor="let item of allQuestions | filter: searchText"
+        cdkDrag
+      >
+        <p class="question-techno">{{ item.technologies.name }}</p>
+
+        {{ item.name }}
         <i class="fas fa-puzzle-piece drop-icon"></i> |
-        <p>20 pts</p>
+        <p>{{ item.points }} points</p>
         | <i class="fas fa-list-ul drop-icon"></i> |
-        <p>00:30</p>
+        <p>{{ item.time }}</p>
       </div>
     </div>
   </div>
@@ -101,25 +112,19 @@
     <div
       cdkDropList
       #doneList="cdkDropList"
-      [cdkDropListData]="done"
+      [cdkDropListData]="Questions"
       [cdkDropListConnectedTo]="[todoList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)"
     >
       <p id="drop-text">Glissez/déposez une question ici</p>
-      <div
-        class="example-box"
-        *ngFor="let item of done"
-        (click)="openBottomSheet()"
-        cdkDrag
-      >
-        <p class="question-techno">AWS</p>
-        {{ item }}
-
+      <div class="example-box" *ngFor="let item of Questions" cdkDrag>
+        <p class="question-techno">{{ item.technologies.name }}</p>
+        {{ item.name }}
         <i class="fas fa-puzzle-piece drop-icon"></i> |
-        <p>20 pts</p>
+        <p>{{ item.points }} points</p>
         | <i class="fas fa-list-ul drop-icon"></i> |
-        <p>00:30</p>
+        <p>{{ item.time }}</p>
       </div>
     </div>
   </div>

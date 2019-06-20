@@ -1,0 +1,28 @@
+{
+  "connection": "default",
+  "collectionName": "notifications",
+  "info": {
+    "name": "notification",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "Message": {
+      "default": "",
+      "type": "text"
+    },
+    "created_at": {
+      "default": "",
+      "type": "date"
+    },
+    "user": {
+      "model": "user",
+      "via": "notifications",
+      "plugin": "users-permissions"
+    }
+  }
+}

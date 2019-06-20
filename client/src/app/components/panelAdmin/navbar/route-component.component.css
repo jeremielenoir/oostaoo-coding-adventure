@@ -256,6 +256,7 @@ button:hover {
   background-color: #20252a;
   border-top: 1px solid black;
   border-radius: 0px;
+  outline: none
 }
 
 .custom-button-nav:hover {
@@ -285,6 +286,13 @@ button:hover {
   position: fixed;
   width: 18%;
   z-index: 10;
+  transition: width .3s,min-width .3s;
+}
+
+#totalLeft.new-totalLeft
+{
+  width: 80px;
+  transition: width .3s,min-width .3s;
 }
 
 /* NAV MENU MOBILE */
@@ -301,15 +309,9 @@ button:hover {
   justify-content: space-around;
 }
 
-#icon-mobile {}
-
-#logo-mobile {}
-
 #logo-mobile img {
   width: 200px;
 }
-
-#notif-mobile {}
 
 #url-mobile {
   padding-left: 10px;
@@ -321,7 +323,7 @@ button:hover {
 
 /* NAV MENU MOBILE */
 
-@media (min-width: 300px) and (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
   #menu-nav-mobile {
     display: block;
   }
@@ -350,7 +352,6 @@ button:hover {
   }
   .fixNavMobile {
     position: absolute;
-    margin-top: 15vh;
     z-index: 99;
   }
   .unfixNavMobile {
@@ -361,11 +362,16 @@ button:hover {
   }
 }
 
-/* @media (min-width: 769px) and (max-width: 1024px) {
-  #left {
-    padding-top: 300px;
+
+
+@media screen and (max-width:768px){
+
+  .fixNavMobile
+  {
+    display: block
   }
-} */
+
+}
 
 app-compagne {
   display: flex;

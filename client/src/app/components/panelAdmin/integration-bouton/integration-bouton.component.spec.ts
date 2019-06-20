@@ -8,9 +8,9 @@ describe('IntegrationBoutonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IntegrationBoutonComponent ]
+      declarations: [IntegrationBoutonComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

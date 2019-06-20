@@ -31,7 +31,7 @@ export class AuthFormVerification {
             this.sMessageError = 'Merci de selectionner une expérience.';
             return false;
         }
-    }   
+    }
     public static validateTechno(p_sTabTechno: string[]): boolean {
         if (p_sTabTechno && p_sTabTechno.length > 0) {
             return true;
@@ -40,7 +40,7 @@ export class AuthFormVerification {
             return false;
         }
     }
-    
+
     public getRoleValidator(p_sStartValue: string = ''): FormControl {
         this.roleValidator = new FormControl(p_sStartValue, [Validators.required]);
         return this.roleValidator;

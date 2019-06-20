@@ -16,9 +16,13 @@
               >Sélectionnez un rôle</label
             >
             <mat-form-field [formGroup]="formCampagne">
-              <mat-select name="role" formControlName="role">
-                <mat-option *ngFor="let role of RoleList" [value]="role">{{
-                  role
+              <mat-select
+                name="role"
+                formControlName="role"
+                (selectionChange)="selected($event)"
+              >
+                <mat-option *ngFor="let role of profiles" [value]="role.name">{{
+                  role.name
                 }}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -39,11 +43,16 @@
               >Sélectionnez les technologies à tester</label
             >
             <mat-form-field [formGroup]="formCampagne">
-              <mat-select multiple name="techno" formControlName="techno">
+              <mat-select
+                multiple
+                name="techno"
+                formControlName="techno"
+                [(ngModel)]="selectedValue"
+              >
                 <mat-option
-                  *ngFor="let techno of TechnoList"
-                  [value]="techno"
-                  >{{ techno }}</mat-option
+                  *ngFor="let techno of technos"
+                  [value]="techno.name"
+                  >{{ techno.name }}</mat-option
                 >
               </mat-select>
             </mat-form-field>
@@ -53,12 +62,14 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <label for="role" [ngStyle]="errorExperience ? { color: 'red' } : null"
+        <label
+          for="experience"
+          [ngStyle]="errorExperience ? { color: 'red' } : null"
           >Sélectionnez l'expérience requise</label
         >
         <div class="example-radio-button" [formGroup]="formCampagne">
           <mat-radio-group formControlName="experience">
-            <mat-radio-button value="Junior">
+            <mat-radio-button value="junior">
               Junior
               <i
                 class="fas fa-info-circle info"
@@ -66,7 +77,7 @@
               >
               </i>
             </mat-radio-button>
-            <mat-radio-button value="Senior"
+            <mat-radio-button value="senior"
               >Sénior
               <i
                 class="fas fa-info-circle info"
@@ -74,7 +85,7 @@
               >
               </i>
             </mat-radio-button>
-            <mat-radio-button value="Expert" disabled>
+            <mat-radio-button value="expert">
               Expert
               <i
                 class="fas fa-info-circle info"

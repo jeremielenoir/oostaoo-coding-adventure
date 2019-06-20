@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiClientService, API_URI_CAMPAIGNS } from '../../../api-client/api-client.service';
+import { InviteCandidat } from '../edit-campagne/candidats/invite-candidat.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-compagne',
@@ -7,84 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompagneComponent implements OnInit {
 
-  constructor() { 
+  public campaigns: any[];
+  public searchHeader: string;
 
+  constructor(public apiClientService: ApiClientService,
+              public dialog: MatDialog) {
+    this.searchHeader = null;
   }
 
-  search_header = null;
-
-  Datacampagnes = [
-    {
-      name: "PHP, SQL, Symfony - Senior",
-    },
-    {
-      name: "Git, JavaScript, HTML, CSS, Node.js - Junior"
-    },
-    {
-      name: "Développeur PHP - Senior"
-    },
-    {
-      name: "Android, Git, Mobile iOS/Swift - Senior"
-    },
-    {
-      name: "Développeur PHP - Senior"
-    },
-    {
-      name: "Android, Git, Mobile iOS/Swift - Senior"
-    },
-    {
-      name: "Node.js, React - Senior"
-    },
-    {
-      name: "Développeur PHP - Senior"
-    },
-    {
-      name: "Android, Git, Mobile iOS/Swift - Senior"
-    },
-    {
-      name: "Git, JavaScript, HTML, CSS, Node.js - Junior"
-    },
-    {
-      name: "PHP, SQL, Symfony - Senior",
-    },
-    {
-      name: "Git, JavaScript, HTML, CSS, Node.js - Junior"
-    },
-    {
-      name: "Développeur PHP - Senior"
-    },
-    {
-      name: "Android, Git, Mobile iOS/Swift - Senior"
-    },
-    {
-      name: "Développeur PHP - Senior"
-    },
-    {
-      name: "Android, Git, Mobile iOS/Swift - Senior"
-    },
-    {
-      name: "Node.js, React - Senior"
-    },
-    {
-      name: "Développeur PHP - Senior"
-    },
-    {
-      name: "Android, Git, Mobile iOS/Swift - Senior"
-    },
-    {
-      name: "Git, JavaScript, HTML, CSS, Node.js - Junior"
-    }
-
-  ]
-
-
- 
   ngOnInit() {
-
-    
-
+    this.apiClientService
+      .get(API_URI_CAMPAIGNS)
+      .subscribe((datas) => {
+        this.campaigns = datas;
+        console.log('CAMPAIGNS', this.campaigns);
+      });
+  }
+  recupID(idCampaign: string) {
+    console.log(idCampaign);
   }
 
-
+  openDialog(idCampaign) {
+    this.dialog.open(InviteCandidat, {
+      data: idCampaign,
+      height: '80vh'
+    });
+  }
 
 }

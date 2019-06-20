@@ -3,6 +3,9 @@ import { FormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
+import { ApiClientService, API_URI_QUESTIONS, API_URI_CAMPAIGNS } from '../../../../api-client/api-client.service';
+
+
 
 @Component({
   selector: 'app-NouvelleCampagnePage3Component',
@@ -14,20 +17,11 @@ export class NouvelleCampagnePage3Component implements OnInit {
   @Output() decrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
 
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
+  public questions: any[];
 
-  done = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
+  Questions = [];
+  allQuestions = [];
+  QuestionsCampaign = [];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -37,16 +31,43 @@ export class NouvelleCampagnePage3Component implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+      // console.log("all question: ", this.allQuestions);
+      // console.log("this Question: ", this.Questions)
     }
   }
-  constructor(private bottomSheet: MatBottomSheet) { }
-
-  openBottomSheet(): void {
-    this.bottomSheet.open(PopupCampaign);
-  }
+  constructor(private bottomSheet: MatBottomSheet, public apiClientService: ApiClientService) { }
 
 
   ngOnInit() {
+    this.apiClientService.get(API_URI_QUESTIONS).subscribe((datas) => {
+      this.questions = datas;
+      for (var i = 0; i < this.questions.length; i++) {
+        if (this.formCampagne.value.technoSelectedId.includes(this.questions[i].technologies.id)) {
+          this.allQuestions.push(this.questions[i]);
+        }
+      }
+    });
+    setTimeout(() => {
+      this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.formCampagne.value.CampaignID.id).subscribe((datas) => {
+        console.log('resultat from get', datas);
+      });
+    }, 1000);
+  }
+
+  SendQuestionSelected() {
+    for (let index = 0; index < this.Questions.length; index++) {
+      const element = this.Questions[index];
+      this.QuestionsCampaign.push(element['id']);
+    }
+    // console.log("this array for update questions", this.QuestionsCampaign)
+    this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.formCampagne.value.CampaignID.id, {
+      questions: this.QuestionsCampaign
+    }).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      err => console.log(err)
+    );
   }
 
   public onDecrementPage(): void {

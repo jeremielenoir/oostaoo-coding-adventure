@@ -20,18 +20,21 @@ export class NouvelleCampagneComponent implements OnInit {
     this.oAuthFormVerification = new AuthFormVerification();
     this.ParentFormCampagne = this._formBuilder.group({
       role: this.oAuthFormVerification.getRoleValidator(),
+      roleSelectedId: { 'id': '' },
       techno: this.oAuthFormVerification.getTechnoValidator(),
-      experience: ['Senior', this.oAuthFormVerification.getExperienceValidator()],
-      langueSouhaite: [''],
+      technoSelectedId: [],
+      experience: ['junior', this.oAuthFormVerification.getExperienceValidator()],
       utilisationCopieColler: 'false',
       envoiRapportSimplifie: 'false',
       nomDeCampagne: '',
-
+      langue: [],
+      questionSelectedId: { 'id': '' },
+      CampaignID: { 'id': '' }
     });
   }
 
   ngOnInit() {
-    console.log(this.ParentFormCampagne.value);
+    // console.log(this.ParentFormCampagne.value);
     /*
     this._http.get(`${environment.urlBackEnd}Test22s`)
       .subscribe(
@@ -42,6 +45,7 @@ export class NouvelleCampagneComponent implements OnInit {
 
   public nextPage(): void {
     this.nNumeorPage++;
+    // console.log(this.ParentFormCampagne.value);
   }
 
   public previousPage(): void {
@@ -52,7 +56,4 @@ export class NouvelleCampagneComponent implements OnInit {
   public nouvelleCampagne(p_oDataFormValue: any): void {
     console.log(p_oDataFormValue);
   }
-
-
-
 }
