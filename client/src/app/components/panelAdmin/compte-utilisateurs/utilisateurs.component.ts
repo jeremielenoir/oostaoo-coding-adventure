@@ -40,263 +40,237 @@ export class UtilisateursComponent implements OnInit {
 
   // public dataSource = new MatTableDataSource<Owner>();
 
-  nom = null;
-  prenom = null;
-  email = null;
-  text_label = null;
-  title_champ_default = null;
 
-  // update form
+  public PrenomValue = 'Jérémie';
+  public NomValue = 'lenoir';
+  public MailValue = 'lenoir.jeremie@oostaoo.com';
 
-  update_nom = null;
-  update_prenom = null;
-  update_email = null;
-  text_label_update = null;
-  title_champ_default_update = null;
+  public nomIsactive: boolean = false;
+  public prenomIsactive: boolean = false;
+  public emailIsactive:boolean;
+  public Text_mail: string;
+  public shadow_cog1:boolean = false;
+  public shadow_cog2:boolean = false;
+
+
+  public nomIsactiveUpdate: boolean = false;
+  public prenomIsactiveUpdate: boolean = false;
+  public emailIsactiveUpdate:boolean = false;
+
+
+  public text_label_update;
+  public title_champ_default_update;
+  public update_email;
 
   constructor() { }
 
   ngOnInit() {
-
-    this.nom = document.getElementById('nom');
-    this.prenom = document.getElementById('prenom');
-    this.email = document.getElementById('email');
-    this.text_label = document.querySelectorAll('.libele');
-    this.title_champ_default = document.querySelectorAll('.title-champ-default');
-
-    // update infféctation
-
-    this.update_nom = document.getElementById('update_nom');
-    this.update_prenom = document.getElementById('update_prenom');
-    this.update_email = document.getElementById('update_email');
-    this.text_label_update = document.querySelectorAll('.update_libele');
-    this.title_champ_default_update = document.querySelectorAll('.title-champ-default-update');
 
   }
 
 
   public param_cog() {
 
-    const element = document.getElementById('shadow-cog');
-    element.classList.add('shadow-cog-active')
+    this.shadow_cog1 = !this.shadow_cog1;
 
   }
 
   public param_cog_non_active() {
 
-    const element = document.getElementById('shadow-cog');
+   this.shadow_cog1 = false;
 
-    element.classList.remove('shadow-cog-active')
+   this.nomIsactive = false;
+   this.prenomIsactive = false;
+   this.emailIsactive = false;
 
   }
 
   public param_cog_deux() {
 
-    const element = document.getElementById('shadow-cog-2');
-    element.classList.add('shadow-cog-active')
-
-    console.log('salut cog 2')
-
+    this.shadow_cog2 = true;
   }
 
   public param_cog_non_active_deux() {
 
-    const element = document.getElementById('shadow-cog-2');
+   this.shadow_cog2 = false;
 
-    element.classList.remove('shadow-cog-active')
+   this.NomValue = 'Lenoir';
+   this.PrenomValue = 'Jéremie';
+   this.MailValue = 'lenoir.jeremie@oostaoo.com';
 
-  }
-
-  public Hundelesubmit() {
-
-
-    if (this.nom.value === '') {
-      this.nom.classList.add('errorChamp');
-      this.text_label[1].classList.add('new-label')
-      this.title_champ_default[1].classList.add('title-champ-default-visible')
-
-    }
-
-    if (this.prenom.value === '') {
-
-      this.prenom.classList.add('errorChamp');
-      this.text_label[0].classList.add('new-label');
-      this.title_champ_default[0].classList.add('title-champ-default-visible')
-
-    }
-
-    if (this.email.value === '') {
-
-      this.email.classList.add('errorChamp');
-      this.text_label[2].classList.add('new-label');
-      this.title_champ_default[2].classList.add('title-champ-default-visible')
-
-    }
+   this.nomIsactiveUpdate = false;
+   this.emailIsactiveUpdate = false;
+   this.prenomIsactiveUpdate = false;
 
   }
+
+  // public Hundelesubmit(){
+
+
+  //   if(this.nom.value == "")
+  //   {
+  //     this.nom.classList.add('errorChamp');
+  //     this.text_label[1].classList.add('new-label')
+  //     this.title_champ_default[1].classList.add('title-champ-default-visible')
+
+  //   }
+
+  //   if(this.prenom.value == ""){
+
+  //     this.prenom.classList.add('errorChamp');
+  //     this.text_label[0].classList.add('new-label');
+  //     this.title_champ_default[0].classList.add('title-champ-default-visible')
+
+  //   }
+  //   if(this.email.value == ""){
+
+  //     this.email.classList.add('errorChamp');
+  //     this.text_label[2].classList.add('new-label');
+  //     this.title_champ_default[2].classList.add('title-champ-default-visible')
+
+  //   }
+
+  // }
 
   public is_valid_prenom(event) {
 
-    if (this.prenom.value.length < 1) {
+    let champValue = event.target.value;
 
-      this.prenom.classList.add('errorChamp');
-      this.text_label[0].classList.add('new-label')
-      this.title_champ_default[0].classList.add('title-champ-default-visible')
+    if(champValue.length < 1)
+    {
+
+      this.prenomIsactive = true;
 
     } else {
 
-      this.prenom.classList.remove('errorChamp');
-      this.text_label[0].classList.remove('new-label')
-      this.title_champ_default[0].classList.remove('title-champ-default-visible')
+      this.prenomIsactive = false;
+
     }
-
-
-
   }
 
   public is_valid_nom(event) {
 
-    if (this.nom.value.length < 1) {
+    let champValue = event.target.value;
 
-      this.nom.classList.add('errorChamp');
-      this.text_label[1].classList.add('new-label');
-      this.title_champ_default[1].classList.add('title-champ-default-visible')
+    if(champValue.length < 1)
+    {
 
-
-    } else {
-
-      this.nom.classList.remove('errorChamp');
-      this.text_label[1].classList.remove('new-label');
-      this.title_champ_default[1].classList.remove('title-champ-default-visible')
-
-    }
-
-  }
-
-  public is_valid_email(event) {
-
-    const verify_mail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // return re.test(email);
-
-    if (this.email.value.length < 1) {
-
-      this.email.classList.add('errorChamp');
-      this.text_label[2].classList.add('new-label');
-      this.title_champ_default[2].classList.add('title-champ-default-visible');
-
-      this.title_champ_default[2].innerHTML = 'Obligatoire';
-
+      this.nomIsactive = true;
 
     } else {
 
-      if (verify_mail.test(this.email.value)) {
+      this.nomIsactive = false;
 
-        this.email.classList.remove('errorChamp');
-        this.text_label[2].classList.remove('new-label');
-        this.title_champ_default[2].classList.remove('title-champ-default-visible');
-
-      } else {
-        this.title_champ_default[2].innerHTML = 'Email invalide';
-
-        this.email.classList.add('errorChamp');
-        this.text_label[2].classList.add('new-label');
-        this.title_champ_default[2].classList.add('title-champ-default-visible');
-      }
-
-    }
-
+    } 
+  
   }
 
-  public Hundelesubmit_modif() {
+  public is_valid_emaill(event){
 
+    let verify_mail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if (this.update_nom.value === '') {
-      this.update_nom.classList.add('errorChamp');
-      this.text_label_update[1].classList.add('new-label')
-      this.title_champ_default_update[1].classList.add('title-champ-default-visible')
+    let champValue = event.target.value;
 
-    }
+    if(champValue.length < 1)
+    {
+      this.emailIsactive = true;
+      this.Text_mail = "Obligatoire";
+    } else
+    {
 
-    if (this.update_prenom.value === '') {
+        if(verify_mail.test(champValue))
+        {
 
-      this.update_prenom.classList.add('errorChamp');
-      this.text_label_update[0].classList.add('new-label');
-      this.title_champ_default_update[0].classList.add('title-champ-default-visible')
+          this.Text_mail = "Obligatoire"; 
+          this.emailIsactive = false;
 
-    }
-
-    if (this.update_email.value === '') {
-
-      this.update_email.classList.add('errorChamp');
-      this.text_label_update[2].classList.add('new-label');
-      this.title_champ_default_update[2].classList.add('title-champ-default-visible')
+        } else
+        {
+          this.emailIsactive = true;
+          this.Text_mail = "Email invalide";
+        }
 
     }
 
   }
 
 
+  // update form
   public is_valid_prenom_update(event) {
 
-    if (this.update_prenom.value.length < 1) {
+    let champValue = event.target.value;
 
-      this.update_prenom.classList.add('errorChamp');
-      this.text_label_update[0].classList.add('new-label');
-      this.title_champ_default_update[0].classList.add('title-champ-default-visible');
+    this.PrenomValue = '';
+
+    console.log(champValue)
+
+    if(champValue.length < 1)
+    {
+
+      this.prenomIsactiveUpdate = true;
 
     } else {
 
-      this.update_prenom.classList.remove('errorChamp');
-      this.text_label_update[0].classList.remove('new-label');
-      this.title_champ_default_update[0].classList.remove('title-champ-default-visible');
+      this.prenomIsactiveUpdate = false;
+
     }
-
-
-
   }
 
   public is_valid_nom_update(event) {
 
-    if (this.update_nom.value.length < 1) {
+    let champValue = event.target.value;
 
-      this.update_nom.classList.add('errorChamp');
-      this.text_label_update[1].classList.add('new-label');
-      this.title_champ_default_update[1].classList.add('title-champ-default-visible');
+    this.NomValue = '';
+
+    if(champValue.length < 1)
+    {
+
+      this.nomIsactiveUpdate = true;
 
     } else {
 
-      this.update_nom.classList.remove('errorChamp');
-      this.text_label_update[1].classList.remove('new-label');
-      this.title_champ_default_update[1].classList.remove('title-champ-default-visible');
+      this.nomIsactiveUpdate = false;
+
     }
-
-
-
   }
 
   public is_valid_email_update(event) {
 
-    if (this.update_email.value.length < 1) {
+    let verify_mail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-      this.update_email.classList.add('errorChamp');
-      this.text_label_update[2].classList.add('new-label');
-      this.title_champ_default_update[2].classList.add('title-champ-default-visible');
+    let champValue = event.target.value;
 
-    } else {
+    this.MailValue = event.target.value;
 
-      this.update_email.classList.remove('errorChamp');
-      this.text_label_update[2].classList.remove('new-label');
-      this.title_champ_default_update[2].classList.remove('title-champ-default-visible');
+
+    if(champValue.length < 1)
+    {
+      this.emailIsactiveUpdate = true;
+      this.Text_mail = 'Obligatoire';
+    } else
+    {
+
+        if(verify_mail.test(champValue))
+        {
+
+          this.Text_mail = 'Obligatoire';
+          this.emailIsactiveUpdate = false;
+
+        } else
+        {
+          this.emailIsactiveUpdate = true;
+          this.Text_mail = 'Email invalide';
+        }
+
     }
 
   }
 
-  // function filter table utilisateurs 
 
 
-  displayedColumns: string[] = ['name', 'mail', 'gestion', 'symbol'];
 
-  dataSource = ELEMENT_DATA;
+  public displayedColumns: string[] = ['name' , 'mail' , 'gestion' , 'symbol'];
+  public dataSource = ELEMENT_DATA;
 
   // doFilter = (value: string) => {
 
