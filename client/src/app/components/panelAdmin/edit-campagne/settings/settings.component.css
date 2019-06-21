@@ -1,59 +1,51 @@
 #background {
-    background-color: #f9f9f9;
-    padding: 5px;
+    padding-top: 10px;
     padding-left: 18%;
-    
-  }
-
-#form{
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
-    padding: 20px;
-    background: white;
-    border: 1px solid #e7e7e7;
-}
-
-
-::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
-    opacity: 0.5 !important;     /*click effect color change*/
-    background-color: #f2bb31 !important;
-}
-::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
-    background-color: #f2bb31!important;   /*inner circle color change*/
-}
-::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-   border-color:#f2bb31!important; /*outer ring color change*/
-}
-
-::ng-deep .mat-radio-button .mat-radio-ripple{
-        height: 0px!important;
-        width: 0px!important;
-}
-
-::ng-deep .mat-checkbox .mat-checkbox-ripple{
-    height: 0px!important;
-    width: 0px!important;
-}
-
-::ng-deep .mat-form-field-infix{
-    width: 270px !important;
-}
-
-::ng-deep .mat-form-field-flex {
-    display: inline-flex;
-    align-items: baseline;
-    box-sizing: border-box;
+    height: 100%;
     width: 100%;
-    border: 1px solid #f9f9f9;
-    height: 60px;
-    padding: 0px 10px 10px;
-    margin-top: 15px;
+    background: #f9f9f9; 
+    display: flex;
+    justify-content: center;
 }
-::ng-deep .mat-form-field-underline {
-    display: none;
-  }
 
-::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background{
-    background: #f2bb31;
+#content{
+    width: 80%;
+    background: #f9f9f9;
+   
+}
+
+#nav{
+    display: flex;
+    width: 100%;
+    border-top: 1px solid #e7e7e7;
+    border-left: 1px solid #e7e7e7;
+    border-right: 1px solid #e7e7e7;
+    
+}
+
+.link-nav{
+    width: 50%;
+    height: 50px;
+    background: #2b3035;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    line-height: 50px;
+}
+
+#formbox{
+    width: 100%;
+    padding: 5% 8%;
+    background: white;
+    border-bottom: 1px solid #e7e7e7;
+    border-left: 1px solid #e7e7e7;
+    border-right: 1px solid #e7e7e7;
+}
+
+.active-link{
+    background: white;
+    color: black;
+    /* -webkit-box-shadow: 5px 7px 26px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 7px 26px -9px rgba(0,0,0,0.75);
+    box-shadow: 5px 7px 26px -9px rgba(0,0,0,0.75); */
 }

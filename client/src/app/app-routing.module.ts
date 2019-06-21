@@ -13,6 +13,8 @@ import { EditCampagneComponent } from './components/panelAdmin/edit-campagne/edi
 import { CandidatsComponent } from './components/panelAdmin/edit-campagne/candidats/candidats.component';
 import { QuestionsComponent } from './components/panelAdmin/edit-campagne/questions/questions.component';
 import { SettingsComponent } from './components/panelAdmin/edit-campagne/settings/settings.component';
+import { GeneralComponent } from './components/panelAdmin/edit-campagne/settings/general/general.component';
+import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne/settings/personnalisation/personnalisation.component';
 
 
 import { CandidatsFormComponent } from './components/panelAdmin/edit-campagne/candidats-form/candidats-form.component';
@@ -43,12 +45,16 @@ const routes: Routes = [
   {
     path: 'dashboard/campaigns/:id',
     component: EditCampagneComponent,
-    children: [
-      { path: 'candidats', component: CandidatsComponent },
-      { path: 'questions', component: QuestionsComponent },
-      { path: 'settings', component: SettingsComponent },
-    ]
+      children: [
+        { path: 'candidats', component: CandidatsComponent },
+        { path: 'questions', component: QuestionsComponent },
+        { path: 'settings', component: SettingsComponent, children: [
+          { path: 'general', component: GeneralComponent },
+          { path: 'personnalisation', component: PersonnalisationComponent },
+        ]},
+      ]
   },
+
   {
     path: 'dashboard/profil-utilisateur',
     component: ProfilUtilisateurComponent,

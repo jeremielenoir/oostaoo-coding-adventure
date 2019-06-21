@@ -59,6 +59,8 @@ import { QuestionsComponent } from './components/panelAdmin/edit-campagne/questi
 import { SettingsComponent } from './components/panelAdmin/edit-campagne/settings/settings.component';
 import { CandidatsFormComponent } from './components/panelAdmin/edit-campagne/candidats-form/candidats-form.component';
 import { CandidatsMailComponent } from './components/panelAdmin/edit-campagne/candidats-mail/candidats-mail.component';
+import { GeneralComponent } from './components/panelAdmin/edit-campagne/settings/general/general.component';
+import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne/settings/personnalisation/personnalisation.component';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -97,7 +99,9 @@ import { CandidatsMailComponent } from './components/panelAdmin/edit-campagne/ca
     QuestionsComponent,
     SettingsComponent,
     CandidatsFormComponent,
-    CandidatsMailComponent
+    CandidatsMailComponent,
+    GeneralComponent,
+    PersonnalisationComponent
   ],
   imports: [
     BrowserModule,
