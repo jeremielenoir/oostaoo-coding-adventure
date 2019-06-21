@@ -64,7 +64,7 @@ export class CandidatsComponent implements OnInit {
           console.log('my data', res);
           this.campaigns = res;
           resolve(this.campaigns);
-        }).catch(error => console.log(error));
+        }, msg => reject(msg))
       return promise;
     });
     // console.log('all candidats: ', this.getCampaign);
