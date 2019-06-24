@@ -10,6 +10,33 @@
   color: #333;
 }
 
+@media screen and (max-width: 1024px) {
+  #container {
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+  }
+
+  .invitation,
+  .tutorial-test {
+    margin: 20px 0 20px 0;
+    width: 90% !important;
+    height: auto !important;
+  }
+
+  .tutorial,
+  .test {
+    height: auto !important;
+    margin-bottom: 20px;
+  }
+
+  .test-invit .image {
+    width: 130px !important;
+    height: 85px !important;
+    margin-right: 10px !important;
+  }
+}
+
 .invitation,
 .tutorial-test {
   width: 45%;
