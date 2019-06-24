@@ -1,5 +1,4 @@
 <div [ngSwitch]="ViewCandidats">
-
   <div *ngSwitchCase="'CandidatFalse'" id="editQuestion">
     <p class="style-link">
       LINK page
@@ -26,110 +25,85 @@
 
   <div *ngSwitchCase="'CandidatTrue'" id="editQuestion">
     <div class="barre-nav">
-        <mat-form-field class="candidat-custom-select">
-          <mat-label>0 sélectionné</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let choice of choices" [value]="choice.value">
-              {{choice.viewValue}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        
-        <div class="sous-header-form fixSearch">
-            <div class="form-group-header">
-              <form>
-                <span class="icon-form-group-header-contenu"
-                  ><i class="fas fa-search"></i
-                ></span>
-                <input
-                  type="text"
-                  name="search"
-                  class="champ-header-contenu"
-                  placeholder="Filtrer par nom, email"
-                  id="search-header"
-                />
-              </form>
-            </div>
-          </div>
+      <mat-form-field class="candidat-custom-select">
+        <mat-label>0 sélectionné</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let choice of choices" [value]="choice.value">
+            {{ choice.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-          <mat-form-field class="candidat-finish-custom-select">
-              <mat-label>all candidats</mat-label>
-              <mat-select>
-                <mat-option *ngFor="let choice of choicesTimeTest" [value]="choice.value">
-                  {{choice.viewValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+      <mat-form-field class="candidat-finish-custom-select">
+        <mat-label>all candidats</mat-label>
+        <mat-select>
+          <mat-option
+            *ngFor="let choice of choicesTimeTest"
+            [value]="choice.value"
+          >
+            {{ choice.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-            <button
-          mat-raised-button
-          color="primary"
-          class="btn-question fix-button"
-          mat-button
-          (click)="openDialog()"
-        >
-          Invitez des candidats
-        </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="btn-question fix-button"
+        mat-button
+        (click)="openDialog()"
+      >
+        Invitez des candidats
+      </button>
     </div>
 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tableALL">
+    <!--Table-->
 
-          <!-- Checkbox Column -->
-          <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef>
-              <mat-checkbox (change)="$event ? masterToggle() : null"
-                            [checked]="selection.hasValue() && isAllSelected()"
-                            [indeterminate]="selection.hasValue() && !isAllSelected()"
-                            [aria-label]="checkboxLabel()">
-              </mat-checkbox>
-            </th>
-            <td mat-cell *matCellDef="let row">
-              <mat-checkbox (click)="$event.stopPropagation()"
-                            (change)="$event ? selection.toggle(row) : null"
-                            [checked]="selection.isSelected(row)"
-                            [aria-label]="checkboxLabel(row)">
-              </mat-checkbox>
-            </td>
-          </ng-container>
-        
-          <!-- Position Column -->
-          <ng-container matColumnDef="position">
-              <th mat-header-cell *matHeaderCellDef> Candidats </th>
-              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-            </ng-container>
+    <mat-form-field>
+      <input
+        matInput
+        (keyup)="applyFilter($event.target.value)"
+        placeholder="Filter"
+      />
+    </mat-form-field>
 
-          <ng-container matColumnDef="candidats">
-            <th mat-header-cell *matHeaderCellDef> Candidats </th>
-            <td mat-cell *matCellDef="let element"> {{element.candidats}} </td>
-          </ng-container>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+        </ng-container>
 
-          <ng-container matColumnDef="email">
-              <th mat-header-cell *matHeaderCellDef> Email </th>
-              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-            </ng-container>
-        
-          <!-- Name Column -->
-          <ng-container matColumnDef="derniere_activite">
-            <th mat-header-cell *matHeaderCellDef> Dernière activité </th>
-            <td mat-cell *matCellDef="let element"> {{element.derniere_activite}} </td>
-          </ng-container>
-        
-          <!-- Weight Column -->
-          <ng-container matColumnDef="score">
-            <th mat-header-cell *matHeaderCellDef> Score </th>
-            <td mat-cell *matCellDef="let element"> {{element.score}} </td>
-          </ng-container>
-        
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="technos">
-            <th mat-header-cell *matHeaderCellDef> TECHNOS </th>
-            <td mat-cell *matCellDef="let element"> {{element.technos}} </td>
-          </ng-container>
-        
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-              (click)="selection.toggle(row)">
-          </tr>
-        </table>
+        <!-- Progress Column -->
+        <ng-container matColumnDef="progress">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Progress</th>
+          <td mat-cell *matCellDef="let row">{{ row.progress }}%</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+          <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="color">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Color</th>
+          <td mat-cell *matCellDef="let row" [style.color]="row.color">
+            {{ row.color }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+
+    <!--Table-->
+
+    <button (click)="getCandidats()">get candidats</button>
   </div>
+
+  <div *ngSwitchDefault id="editQuestion">...</div>
 </div>
