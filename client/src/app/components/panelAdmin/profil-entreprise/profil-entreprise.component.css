@@ -85,11 +85,20 @@
     flex-direction: column;
 }
 
+.block-upload.block-upload-hidden
+{
+    display: none
+}
+
 
 .cadrage-img
 {
   
     display: none;
+}
+
+.cadrage-img-active{
+    display: block;
 }
 
 .img-figure
@@ -103,6 +112,10 @@
     display: none
 }
 
+.img-figure.img-figure-active{
+    display: block
+}
+
 .text-error-upload
 {
     color:red;
@@ -110,6 +123,13 @@
     text-align: center;
 
 }
+
+.text-error-upload-show
+{
+    display: block;
+}
+
+
 
 .error
 {

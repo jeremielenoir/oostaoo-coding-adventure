@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidibarRightComponent implements OnInit {
 
+  public Isactive = false;
+
   constructor() { }
 
   ngOnInit() {
@@ -14,16 +16,13 @@ export class SidibarRightComponent implements OnInit {
 
   public param_cog(){
 
-    let element = document.getElementById('shadow-cog');
-    element.classList.add('shadow-cog-active')
+    this.Isactive = true;
 
   }
 
   public param_cog_non_active(){
-
-    let element = document.getElementById('shadow-cog');
-
-    element.classList.remove('shadow-cog-active')
+ 
+    this.Isactive = false;
 
   }
 

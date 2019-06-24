@@ -3,7 +3,7 @@
 
   <div id="content">
 
-<div id="shadow-cog">
+<div id="shadow-cog" [ngClass]= "{'shadow-cog-active': shadowcog == true}">
 
     <div id="remove"  (click)="param_cog_non_active()"></div>
 
@@ -15,7 +15,7 @@
 
         <div class="modall-content">
 
-         <div class="block-upload" id="block-upload">
+         <div class="block-upload" [ngClass]="{'block-upload-hidden': blockUpload == true}">
 
 
             <i class="modal-content-icon fas fa-camera"></i>
@@ -38,13 +38,13 @@
 
          </div>
 
-         <div class="cadrage-img">
+         <div class="cadrage-img" [ngClass]="{'cadrage-img-active' : cadrageImgBoolean == true}">
 
-          <figure class="img-figure">
-              <img src="" class="upload_img"/>
+          <figure class="img-figure"  [ngClass]="{'img-figure-active' : cadrageImgBooleanState == false}">
+              <img src="" class="upload_img" #uploadimgfirst/>
           </figure>
 
-          <div class="text-error-upload">
+          <div class="text-error-upload" [ngClass]="{'text-error-upload-show' : cadrageImgBooleanState == true}">
 
               <i class="fas fa-ban ban-error"></i>
 
@@ -81,15 +81,7 @@
 
 </div>
 
-
-
-
-
-
-
-
-
-<div id="shadow-cog-add-images">
+<div id="shadow-cog-add-images" [ngClass]= "{'shadow-cog-active': shadowcogImage === true}">
 
     <div id="remove_add_image"   (click)="param_cog_non_active_add_img()"></div>
 
@@ -168,11 +160,6 @@
 </div>
 
 
-
-
-
-
-
 <div class="big-content">
 
   <div class="all-group-content">
@@ -219,11 +206,11 @@
             </div>
           </header>
 
-          <div class="param-header">
+          <div class="param-header" #paramHeader>
 
               <form>
 
-                  <div class="regroupe-form">
+                  <div class="regroupe-form" #regroupeform>
 
                       <label class="first-label-param-header">Choisissez votre langue</label>
       

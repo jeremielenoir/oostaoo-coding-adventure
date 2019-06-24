@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { TooltipPosition } from '@angular/material';
@@ -38,46 +38,46 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class UtilisateursComponent implements OnInit {
 
-  // public dataSource = new MatTableDataSource<Owner>();
-
-
   public PrenomValue = 'Jérémie';
   public NomValue = 'lenoir';
   public MailValue = 'lenoir.jeremie@oostaoo.com';
 
-  public nomIsactive: boolean = false;
-  public prenomIsactive: boolean = false;
-  public emailIsactive:boolean;
-  public Text_mail: string;
-  public shadow_cog1:boolean = false;
-  public shadow_cog2:boolean = false;
+  public nomIsactive = false;
+  public prenomIsactive = false;
+  public emailIsactive;
+  public Textmail: string;
+  public shadowcog1 = false;
+  public shadowcog2 = false;
 
 
-  public nomIsactiveUpdate: boolean = false;
-  public prenomIsactiveUpdate: boolean = false;
-  public emailIsactiveUpdate:boolean = false;
+  public nomIsactiveUpdate = false;
+  public prenomIsactiveUpdate = false;
+  public emailIsactiveUpdate = false;
 
-
-  public text_label_update;
-  public title_champ_default_update;
-  public update_email;
 
   constructor() { }
+
+  @ViewChild('form') formulaire;
 
   ngOnInit() {
 
   }
 
+  ngAfterViewInit() {
+
+    
+
+  }
 
   public param_cog() {
 
-    this.shadow_cog1 = !this.shadow_cog1;
+    this.shadowcog1 = !this.shadowcog1;
 
   }
 
   public param_cog_non_active() {
 
-   this.shadow_cog1 = false;
+   this.shadowcog1 = false;
 
    this.nomIsactive = false;
    this.prenomIsactive = false;
@@ -87,12 +87,12 @@ export class UtilisateursComponent implements OnInit {
 
   public param_cog_deux() {
 
-    this.shadow_cog2 = true;
+    this.shadowcog2 = true;
   }
 
   public param_cog_non_active_deux() {
 
-   this.shadow_cog2 = false;
+   this.shadowcog2 = false;
 
    this.NomValue = 'Lenoir';
    this.PrenomValue = 'Jéremie';
@@ -104,33 +104,25 @@ export class UtilisateursComponent implements OnInit {
 
   }
 
-  // public Hundelesubmit(){
 
+  public Hundelesubmit(event){
+    let prenom = this.formulaire.nativeElement.prenom.value;
+    let nom = this.formulaire.nativeElement.nom.value;
+    let email = this.formulaire.nativeElement.email.value;
 
-  //   if(this.nom.value == "")
-  //   {
-  //     this.nom.classList.add('errorChamp');
-  //     this.text_label[1].classList.add('new-label')
-  //     this.title_champ_default[1].classList.add('title-champ-default-visible')
+    if(prenom === ''){
+      this.prenomIsactive;
+    }
 
-  //   }
+    if(nom === ''){
+      this.nomIsactive = true;
+    }
 
-  //   if(this.prenom.value == ""){
+    if(email === ''){
+      this.emailIsactive = true;
+    }
 
-  //     this.prenom.classList.add('errorChamp');
-  //     this.text_label[0].classList.add('new-label');
-  //     this.title_champ_default[0].classList.add('title-champ-default-visible')
-
-  //   }
-  //   if(this.email.value == ""){
-
-  //     this.email.classList.add('errorChamp');
-  //     this.text_label[2].classList.add('new-label');
-  //     this.title_champ_default[2].classList.add('title-champ-default-visible')
-
-  //   }
-
-  // }
+  }
 
   public is_valid_prenom(event) {
 
@@ -161,8 +153,7 @@ export class UtilisateursComponent implements OnInit {
 
       this.nomIsactive = false;
 
-    } 
-  
+    }
   }
 
   public is_valid_emaill(event){
@@ -174,20 +165,20 @@ export class UtilisateursComponent implements OnInit {
     if(champValue.length < 1)
     {
       this.emailIsactive = true;
-      this.Text_mail = "Obligatoire";
+      this.Textmail = 'Obligatoire';
     } else
     {
 
         if(verify_mail.test(champValue))
         {
 
-          this.Text_mail = "Obligatoire"; 
+          this.Textmail = 'Obligatoire';
           this.emailIsactive = false;
 
         } else
         {
           this.emailIsactive = true;
-          this.Text_mail = "Email invalide";
+          this.Textmail = 'Email invalide';
         }
 
     }
@@ -246,20 +237,20 @@ export class UtilisateursComponent implements OnInit {
     if(champValue.length < 1)
     {
       this.emailIsactiveUpdate = true;
-      this.Text_mail = 'Obligatoire';
+      this.Textmail = 'Obligatoire';
     } else
     {
 
         if(verify_mail.test(champValue))
         {
 
-          this.Text_mail = 'Obligatoire';
+          this.Textmail = 'Obligatoire';
           this.emailIsactiveUpdate = false;
 
         } else
         {
           this.emailIsactiveUpdate = true;
-          this.Text_mail = 'Email invalide';
+          this.Textmail = 'Email invalide';
         }
 
     }
@@ -283,10 +274,7 @@ export class UtilisateursComponent implements OnInit {
 
 
 
-  emailFormControl = new FormControl('', [
-    Validators.required,
-
-  ]);
+  emailFormControl = new FormControl('' , [Validators.required]);
 
   matcher = new MyErrorStateMatcher();
 
