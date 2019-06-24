@@ -25,7 +25,7 @@ const routes: Routes = [
     component: CandidatsFormComponent
   },
   {
-    path: 'test',
+    path: 'evaluate',
     component: ClientTestComponent
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
