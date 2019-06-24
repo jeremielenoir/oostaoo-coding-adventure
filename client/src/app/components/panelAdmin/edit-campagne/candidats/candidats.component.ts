@@ -88,7 +88,7 @@ export class CandidatsComponent implements OnInit {
     }
   }
 
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
+  displayedColumns: string[] = this.technologies.map(column => column.name);
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -99,12 +99,12 @@ export class CandidatsComponent implements OnInit {
 
 }
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-}
+// export interface UserData {
+//   id: string;
+//   name: string;
+//   progress: string;
+//   color: string;
+// }
 
 /** Constants used to fill up our data base. */
 const COLORS: string[] = [
