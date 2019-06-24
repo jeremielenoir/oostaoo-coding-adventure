@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { API_URI_CAMPAIGNS, ApiClientService } from 'src/app/api-client/api-client.service';
 
 @Component({
@@ -12,7 +13,13 @@ export class GeneralComponent implements OnInit {
   @Input() formCampagne: FormGroup;
 
 
-  constructor(public apiClientService: ApiClientService) { }
+  constructor(private route: ActivatedRoute, public apiClientService: ApiClientService) {
+    this.route.parent.params.subscribe(params => {
+      this.globalId = params.id;
+      console.log('data', this.globalId);
+    });
+  }
+  public globalId: string;
 
   ngOnInit() {
   }
