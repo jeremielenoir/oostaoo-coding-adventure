@@ -1,17 +1,22 @@
 #container {
   width: 100%;
-  height: 100vh;
   background-color: #f9f9f9;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   font-family: Open Sans, Lato, sans-serif;
   font-weight: 300;
   color: #333;
 }
 
+.test-container {
+  max-width: 1200px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+}
+
 @media screen and (max-width: 1024px) {
-  #container {
+  .test-container {
     flex-direction: column;
     justify-content: space-around;
     height: 100%;
