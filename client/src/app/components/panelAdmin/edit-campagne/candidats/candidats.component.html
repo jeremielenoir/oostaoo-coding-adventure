@@ -59,25 +59,16 @@
 
     <!--Table-->
 
-    <mat-form-field>
-      <input
-        matInput
-        (keyup)="applyFilter($event.target.value)"
-        placeholder="Filter"
-      />
-    </mat-form-field>
+    <div class="example-container mat-elevation-z8">
+      <table mat-table [dataSource]="infosCandidats">
+        <!-- Item Column -->
 
-    <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort>
-        <!-- ID Column -->
         <ng-container
-          *ngFor="let column of columns"
-          matColumnDef="{{ column.name }}"
+          *ngFor="let column of displayedColumns"
+          [matColumnDef]="column"
         >
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            {{ column.name }}
-          </th>
-          <td mat-cell *matCellDef="let row">{{ column.name }}</td>
+          <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+          <td mat-cell *matCellDef="let dataInfos">{{ dataInfos[column] }}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

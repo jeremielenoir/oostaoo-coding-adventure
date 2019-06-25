@@ -1,14 +1,11 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { InviteCandidat } from './invite-candidat.component';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
 } from '../../../../api-client/api-client.service';
-
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-candidats',
@@ -22,18 +19,14 @@ export class CandidatsComponent implements OnInit {
     this.route.parent.params.subscribe(params => {
       this.globalId = params.id;
       // console.log('data', this.globalId);
-
-      // Create 100 users
-      const users = Array.from({ length: 5 }, (_, k) => createNewUser(k + 1));
-
-      // Assign the data to the data source for the table to render
-      this.dataSource = new MatTableDataSource(users);
     });
   }
   public globalId: string;
   public campaigns;
   public candidats;
   public technologies;
+  public displayedColumns;
+  public infosCandidats;
   ViewCandidats;
   choices = [
     { value: 'exporter', viewValue: 'Exporter' },
@@ -55,7 +48,25 @@ export class CandidatsComponent implements OnInit {
 
   ngOnInit() {
     this.getCampaign();
-    this.dataSource.sort = this.sort;
+    setTimeout(() => {
+      // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
+      const defaultColumns = ['Candidats', 'Dernière activité', 'Score'];
+      const getInfoCandidat = [];
+      for (const candidat of this.candidats) {
+        getInfoCandidat.push({
+          Candidats: candidat.Nom,
+          email: candidat.email
+        });
+      }
+      console.log('test: ', getInfoCandidat);
+      this.infosCandidats = getInfoCandidat;
+      // INFOS FOR ADD COLUMN
+      const getTechnos = [];
+      for (const technos of this.technologies) {
+        getTechnos.push(technos.name);
+      }
+      this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
+    }, 1000);
   }
   getCampaign() {
     const promise = new Promise((resolve, reject) => {
@@ -87,44 +98,4 @@ export class CandidatsComponent implements OnInit {
       console.log(element);
     }
   }
-
-  displayedColumns: string[] = this.technologies.map(column => column.name);
-  dataSource: MatTableDataSource<UserData>;
-
-  @ViewChild(MatSort) sort: MatSort;
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-}
-
-// export interface UserData {
-//   id: string;
-//   name: string;
-//   progress: string;
-//   color: string;
-// }
-
-/** Constants used to fill up our data base. */
-const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
-];
-const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
 }
