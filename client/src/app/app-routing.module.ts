@@ -56,6 +56,7 @@ const routes: Routes = [
         path: 'settings',
         component: SettingsComponent,
         children: [
+          { path: '', pathMatch: 'full', redirectTo: 'general'},
           { path: 'general', component: GeneralComponent },
           { path: 'personnalisation', component: PersonnalisationComponent }
         ]

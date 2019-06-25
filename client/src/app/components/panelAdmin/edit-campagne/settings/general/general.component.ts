@@ -10,17 +10,31 @@ import { API_URI_CAMPAIGNS, ApiClientService } from 'src/app/api-client/api-clie
 })
 export class GeneralComponent implements OnInit {
 
-  @Input() formCampagne: FormGroup;
-
-
-  constructor(private route: ActivatedRoute, public apiClientService: ApiClientService) {
-    this.route.parent.params.subscribe(params => {
+  constructor( private route: ActivatedRoute, public apiClientService: ApiClientService) {
+    this.route.parent.parent.params.subscribe(params => {
       this.globalId = params.id;
-      console.log('data', this.globalId);
     });
   }
-  public globalId: string;
+  public globalId: any;
+
+  public campaigns;
+
 
   ngOnInit() {
+    this.getCampaign();
+    setTimeout(() => {
+      console.log('campaign selected in /general = ', this.campaigns);
+     }, 1000);
   }
+
+
+  getCampaign() {
+    this.apiClientService
+    .get(API_URI_CAMPAIGNS + '/' + this.globalId)
+    .subscribe(datas => {
+      this.campaigns = datas;
+    });
+
+  }
+
 }

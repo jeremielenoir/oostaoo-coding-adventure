@@ -4,7 +4,7 @@
   </label>
 </div>
 <mat-form-field class="input-length input-style">
-  <input matInput name="nomDeCampagne" />
+  <input matInput value="{{campaigns.Name}}" name="nomDeCampagne" />
 </mat-form-field>
 
 
@@ -15,7 +15,7 @@
   </label>
 </div>
 <div class="example-radio-button">
-  <mat-radio-group>
+  <mat-radio-group  >
     <mat-radio-button value="FR">
       FR
     </mat-radio-button>
@@ -53,7 +53,7 @@
   </label>
 </div>
 <mat-form-field class="input-length input-style" >
-  <input type="number" value="30" matInput name="nomDeCampagne"/>
+  <input type="" value="{{campaigns.expiration_date}}" matInput name="nomDeCampagne"/>
 </mat-form-field>
             
 
@@ -115,4 +115,5 @@
               Enregistrer
             </button>
 </div>
+
      
