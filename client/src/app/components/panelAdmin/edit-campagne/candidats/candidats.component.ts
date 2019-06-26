@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatDialog, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatSort } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { InviteCandidat } from './invite-candidat.component';
 import {
@@ -11,16 +11,8 @@ import {
   selector: 'app-candidats',
   templateUrl: './candidats.component.html',
   styleUrls: ['./candidats.component.css'],
-  // encapsulation: ViewEncapsulation.None
 })
 export class CandidatsComponent implements OnInit {
-
-  constructor(public dialog: MatDialog, private route: ActivatedRoute, public apiClientService: ApiClientService) {
-    this.route.parent.params.subscribe(params => {
-      this.globalId = params.id;
-      // console.log('data', this.globalId);
-    });
-  }
   public globalId: string;
   public campaigns;
   public candidats;
@@ -28,6 +20,17 @@ export class CandidatsComponent implements OnInit {
   public displayedColumns;
   public infosCandidats;
   ViewCandidats;
+
+  @ViewChild(MatSort) sort: MatSort;
+
+
+  constructor(public dialog: MatDialog, private route: ActivatedRoute, public apiClientService: ApiClientService) {
+    this.route.parent.params.subscribe(params => {
+      this.globalId = params.id;
+      // console.log('data', this.globalId);
+    });
+  }
+
   choices = [
     { value: 'exporter', viewValue: 'Exporter' },
     { value: 'anonymiser', viewValue: 'Anonymiser' },
@@ -50,16 +53,19 @@ export class CandidatsComponent implements OnInit {
     this.getCampaign();
     setTimeout(() => {
       // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
-      const defaultColumns = ['Candidats', 'Dernière activité', 'Score'];
+      const defaultColumns = ['Checked', 'Candidats', 'Email', 'Dernière activité', 'Score'];
       const getInfoCandidat = [];
       for (const candidat of this.candidats) {
         getInfoCandidat.push({
           Candidats: candidat.Nom,
-          email: candidat.email
+          Email: candidat.email,
+          checked: false
         });
       }
       console.log('test: ', getInfoCandidat);
-      this.infosCandidats = getInfoCandidat;
+      this.infosCandidats = new MatTableDataSource(getInfoCandidat);
+      this.infosCandidats.sort = this.sort;
+
       // INFOS FOR ADD COLUMN
       const getTechnos = [];
       for (const technos of this.technologies) {
@@ -67,7 +73,9 @@ export class CandidatsComponent implements OnInit {
       }
       this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
     }, 1000);
+
   }
+
   getCampaign() {
     const promise = new Promise((resolve, reject) => {
       const apiURL = API_URI_CAMPAIGNS + '/' + this.globalId;
@@ -97,5 +105,9 @@ export class CandidatsComponent implements OnInit {
       const element = this.candidats[index];
       console.log(element);
     }
+  }
+
+  applyFilter(filterValue: string) {
+    this.infosCandidats.filter = filterValue.trim().toLowerCase();
   }
 }
