@@ -57,11 +57,19 @@
 .invitation .test-invit {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 129px;
 }
 
 .test-invit h3 {
   width: 250px;
+  margin-left: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 0px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px dashed #e3e3e3;
+  border-bottom: 1px dashed #e3e3e3;
 }
 
 .test-invit .image {
@@ -69,6 +77,10 @@
   height: 200px;
   background-image: url('../../../../assets/fileservlet.png');
   background-size: cover;
+}
+
+.text {
+  padding: 30px 0 105px 0;
 }
 
 .tutorial-test {
