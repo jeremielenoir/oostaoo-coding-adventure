@@ -1,4 +1,5 @@
-p{
+@import '../../nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component.css';
+
+.container-edit-question{
     padding-left: 18%;
-    font-size: 23px;
 }
