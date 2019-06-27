@@ -1,10 +1,12 @@
+
+<form action="" *ngFor="let campaign of campaigns">
 <div class="formQuestion">
   <label for="nomDeCampagne">
     Nom de la campagne
   </label>
 </div>
-<mat-form-field class="input-length input-style">
-  <input matInput value="{{campaigns.Name}}" name="nomDeCampagne" />
+<mat-form-field class="input-length input-style" >
+  <input matInput value="{{campaign.Name}}" name="nomDeCampagne" />
 </mat-form-field>
 
 
@@ -16,16 +18,16 @@
 </div>
 <div class="example-radio-button">
   <mat-radio-group  >
-    <mat-radio-button value="FR">
+    <mat-radio-button [checked]="FR" value="FR">
       FR
     </mat-radio-button>
-    <mat-radio-button value="EN">
+    <mat-radio-button [checked]="EN" value="EN">
       EN
     </mat-radio-button>
-    <mat-radio-button value="ES">
+    <mat-radio-button [checked]="ES" value="ES">
       ES
     </mat-radio-button>
-    <mat-radio-button value="JP">
+    <mat-radio-button [checked]="JP" value="JP">
       JP
     </mat-radio-button>
     </mat-radio-group>
@@ -37,10 +39,10 @@
 </label>
 <div class="example-radio-button" >
   <mat-radio-group>
-    <mat-radio-button value="true">
+    <mat-radio-button [checked]="copytrue" value="true">
       Oui
     </mat-radio-button>
-    <mat-radio-button value="false">
+    <mat-radio-button [checked]="copyfalse" value="false">
       Non
     </mat-radio-button>
   </mat-radio-group>
@@ -52,8 +54,9 @@
     Nombre de jours au bout desquels une invitation expire
   </label>
 </div>
+
 <mat-form-field class="input-length input-style" >
-  <input type="" value="{{campaigns.expiration_date}}" matInput name="nomDeCampagne"/>
+  <input id="date" type="date" matInput name="nomDeCampagne" value="{{campaign.expiration_date}}">
 </mat-form-field>
             
 
@@ -65,10 +68,10 @@
 </div>
 <div class="example-radio-button">
   <mat-radio-group>
-    <mat-radio-button value="true">
+    <mat-radio-button [checked]="rapporttrue" value="true">
       Oui
     </mat-radio-button>
-    <mat-radio-button value="false">
+    <mat-radio-button [checked]="rapportfalse" value="false">
       Non
     </mat-radio-button>
   </mat-radio-group>
@@ -115,5 +118,6 @@
               Enregistrer
             </button>
 </div>
+</form>
 
      

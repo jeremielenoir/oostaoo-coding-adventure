@@ -14,7 +14,7 @@ export class SettingsComponent implements OnInit {
   constructor( private route: ActivatedRoute, public apiClientService: ApiClientService) {
     this.route.parent.params.subscribe(params => {
       this.globalId = params.id;
-       console.log('data /settings = ', this.globalId);
+      console.log('data /settings = ', this.globalId);
     });
   }
 

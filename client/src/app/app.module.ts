@@ -45,7 +45,7 @@ import {
 import { RouteComponentComponent2 } from './components/panelAdmin/route-component2/route-component.component';
 import { CompagneComponent } from './components/panelAdmin/compagne/compagne.component';
 import { SidibarRightComponent } from './components/panelAdmin/sidibar-right/sidibar-right.component';
-
+import { DatePipe } from '@angular/common'
 import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
 import { ProtectionDeDonneesComponent } from './components/panelAdmin/protection-de-donnees/protection-de-donnees.component';
 import { FacturationComponent } from './components/panelAdmin/facturation/facturation.component';
@@ -120,7 +120,8 @@ import { ClientTestComponent } from './components/panelAdmin/client-test/client-
     RoundProgressModule
   ],
   providers: [
-    ApiClientService
+    ApiClientService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
