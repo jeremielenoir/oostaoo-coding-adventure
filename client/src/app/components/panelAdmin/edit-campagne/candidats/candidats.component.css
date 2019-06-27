@@ -111,6 +111,14 @@ table {
   margin-top: 20px;
 }
 
+/* Change color row table on hover */
+.mat-row:hover {
+  background-color: #20252a;
+}
+.mat-cell:hover{
+  color: white;
+}
+
 ::ng-deep .mat-form-field-underline {
   display: none;
 }
