@@ -66,9 +66,9 @@
         </div>
 
   
-        <div class="modall-footer">
+        <div class="modall-footer" #btnValideParent>
 
-            <button mat-button class="modal-btn-footer" disabled="disabled" id="btn-valide">valider</button>  
+            <button mat-button class="modal-btn-footer" disabled="disabled" id="btn-valide" >valider</button>  
             <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()">annuler</button>
 
 
@@ -85,7 +85,11 @@
 
     <div id="remove_add_image"   (click)="param_cog_non_active_add_img()"></div>
 
+   
+
     <div class="modall">
+
+        <h3 style="color:red;">shadow-cog ---2</h3>
 
       <form enctype="multipart/form-data">
 
@@ -93,7 +97,7 @@
 
         <div class="modall-content">
 
-         <div class="block-upload" id="block-upload-deux">
+         <div class="block-upload" id="block-upload-deux" [ngClass]="{'block-upload-hidden': blockUploadLast == true}">
 
 
             <i class="modal-content-icon fas fa-camera"></i>
@@ -116,13 +120,13 @@
 
          </div>
 
-         <div class="cadrage-img">
+         <div class="cadrage-img" [ngClass]="{'cadrage-img-active' : cadrageImgBooleanLast === true}">
 
-          <figure class="img-figure">
-              <img src="" class="upload_img"/>
+          <figure class="img-figure" [ngClass]="{'img-figure-active' : cadrageImgBooleanStateLast === false}">
+              <img src="" class="upload_img" #uploadimgLast/>
           </figure>
 
-          <div class="text-error-upload">
+          <div class="text-error-upload" [ngClass]="{'text-error-upload-show' : cadrageImgBooleanStateLast === true}">
 
               <i class="fas fa-ban ban-error"></i>
 
@@ -132,7 +136,7 @@
   
                 <span class="modal-text-btn-upload">ou télécharger une photo</span>
     
-                <input type="file" class="file" id="file" (change)="readURL($event,this)"/>
+                <input type="file" class="file" id="file" (change)="readURL_deux($event)"/>
     
               </div>
 
@@ -144,7 +148,7 @@
         </div>
 
   
-        <div class="modall-footer">
+        <div class="modall-footer" #btnValideParentAddImage>
 
             <button mat-button class="modal-btn-footer" disabled="disabled" id="btn-valide-deuxx">valider</button>  
             <button mat-button class="modal-btn-footer" (click)="param_cog_non_active_add_img()">annuler</button>

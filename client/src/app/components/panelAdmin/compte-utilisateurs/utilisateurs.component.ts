@@ -2,8 +2,6 @@ import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { TooltipPosition } from '@angular/material';
-// import { DataSource } from '@angular/cdk/table';
-
 
 
 export interface PeriodicElement {
@@ -13,8 +11,6 @@ export interface PeriodicElement {
   symbol: string;
 
 }
-
-
 
 const ELEMENT_DATA: PeriodicElement[] = [
   { name: 'Jérémie Lenoir', mail: 'Hydrogen', gestion: 'Privileges', symbol: '' },
@@ -65,7 +61,6 @@ export class UtilisateursComponent implements OnInit {
 
   ngAfterViewInit() {
 
-    
 
   }
 
@@ -110,7 +105,7 @@ export class UtilisateursComponent implements OnInit {
     let nom = this.formulaire.nativeElement.nom.value;
     let email = this.formulaire.nativeElement.email.value;
 
-    if(prenom === ''){
+    if(prenom === '') {
       this.prenomIsactive;
     }
 
@@ -126,7 +121,7 @@ export class UtilisateursComponent implements OnInit {
 
   public is_valid_prenom(event) {
 
-    let champValue = event.target.value;
+    const champValue = event.target.value;
 
     if(champValue.length < 1)
     {
@@ -189,7 +184,7 @@ export class UtilisateursComponent implements OnInit {
   // update form
   public is_valid_prenom_update(event) {
 
-    let champValue = event.target.value;
+    const champValue = event.target.value;
 
     this.PrenomValue = '';
 
@@ -209,7 +204,7 @@ export class UtilisateursComponent implements OnInit {
 
   public is_valid_nom_update(event) {
 
-    let champValue = event.target.value;
+    const champValue = event.target.value;
 
     this.NomValue = '';
 
@@ -227,9 +222,9 @@ export class UtilisateursComponent implements OnInit {
 
   public is_valid_email_update(event) {
 
-    let verify_mail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const verify_mail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    let champValue = event.target.value;
+    const champValue = event.target.value;
 
     this.MailValue = event.target.value;
 
@@ -257,17 +252,10 @@ export class UtilisateursComponent implements OnInit {
 
   }
 
-
-
-
   public displayedColumns: string[] = ['name' , 'mail' , 'gestion' , 'symbol'];
   public dataSource = ELEMENT_DATA;
 
-  // doFilter = (value: string) => {
 
-  //   this.dataSource.filter = value.trim().toLocaleLowerCase();
-
-  // }
 
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[3]);
