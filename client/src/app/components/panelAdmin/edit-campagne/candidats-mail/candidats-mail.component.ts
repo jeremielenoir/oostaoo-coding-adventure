@@ -21,26 +21,21 @@ export class CandidatsMailComponent implements OnInit {
               public dialogRef: MatDialogRef<CandidatsMailComponent>) { }
 
   ngOnInit() {
-      // console.log('data campaign id', this.data.globalId);
-      // console.log('all data: ' + this.data);
-      // console.log('data candidat id: ', this.data.candidatId);
-      this.apiClientService
-        .get(API_URI_CAMPAIGNS + '/' + this.data.globalId)
-          .subscribe(datas => {
-          this.campaigns = [datas];
-          // console.log(this.campaigns);
+    this.apiClientService
+      .get(API_URI_CAMPAIGNS + '/' + this.data.globalId)
+      .subscribe(datas => {
+        this.campaigns = [datas];
       });
-      const myCandidat = [];
-      for (let index = 0; index < this.data.candidatId.length; index++) {
+    const myCandidat = [];
+    for (let index = 0; index < this.data.candidatId.length; index++) {
       console.log('id :' + this.data.candidatId[index]);
-      console.log('hello');
       this.apiClientService
-            .get(API_URI_CANDIDATS + '/' + this.data.candidatId[index])
-              .subscribe(datas => {
-                myCandidat.push(datas);
-          });
+        .get(API_URI_CANDIDATS + '/' + this.data.candidatId[index])
+        .subscribe(datas => {
+          myCandidat.push(datas);
+        });
     }
-      this.candidats = myCandidat;
+    this.candidats = myCandidat;
   }
   updateCampaign() {
     this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.data.globalId, {
@@ -51,6 +46,7 @@ export class CandidatsMailComponent implements OnInit {
       },
       err => console.log(err)
     );
+    window.location.reload();
   }
 
   onClose(): void {

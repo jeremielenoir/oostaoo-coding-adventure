@@ -9,23 +9,39 @@
   <hr />
   <div class="content-modal-question"></div>
   <p><b>Sujet :</b></p>
-  <p>Évaluation technique</p> <br>
+  <p>Évaluation technique</p>
+  <br />
 
   <p><b>Message :</b></p>
-  <p *ngFor="let candidat of candidats">Bonjour {{ candidat.Nom }},</p> <br>
+  <p *ngFor="let candidat of candidats">Bonjour {{ candidat.Nom }},</p>
+  <br />
 
-  <p>Votre candidature a retenu notre attention.</p> <br>
-  
-  <p>Dans le cadre de notre processus de recrutement, nous avons le plaisir de vous inviter à passer une évaluation technique.
-    Vous pourrez choisir le moment le plus approprié pour vous pour passer ce test.</p> <br>
-  
-  <p>Quand vous serez prêt(e), cliquez sur le lien ci-dessous pour accéder à la page d’accueil de votre session : "LINK INVITATION"</p>
-  
-  <p>Bonne chance !</p> <br>
+  <p>Votre candidature a retenu notre attention.</p>
+  <br />
+
+  <p>
+    Dans le cadre de notre processus de recrutement, nous avons le plaisir de
+    vous inviter à passer une évaluation technique. Vous pourrez choisir le
+    moment le plus approprié pour vous pour passer ce test.
+  </p>
+  <br />
+
+  <p>
+    Quand vous serez prêt(e), cliquez sur le lien ci-dessous pour accéder à la
+    page d’accueil de votre session : "LINK INVITATION"
+  </p>
+
+  <p>Bonne chance !</p>
+  <br />
 
   <p>Cordialement,</p>
 </div>
 
-<button (click)="onClose()">ENVOYER EMAIL</button>
+<button
+  (click)="onClose()"
+  (click)="updateCampaign()"
+>
+  ENVOYER EMAIL
+</button>
 <button (click)="retourCandidat()">RETOUR AUX CANDIDATS</button>
-<button (click)="showCandidats()" (click)="updateCampaign()">showCandidats</button>
+<button (click)="showCandidats()">showCandidats</button>
