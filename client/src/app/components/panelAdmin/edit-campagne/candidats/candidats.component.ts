@@ -53,16 +53,16 @@ export class CandidatsComponent implements OnInit {
     this.getCampaign();
     setTimeout(() => {
       // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
-      const defaultColumns = ['Checked', 'Candidats', 'Email', 'Dernière activité', 'Score'];
+      const defaultColumns = ['Checked', 'Candidats', 'Dernière activité', 'Score'];
       const getInfoCandidat = [];
       for (const candidat of this.candidats) {
         getInfoCandidat.push({
           Candidats: candidat.Nom,
           Email: candidat.email,
-          checked: false
+          Checked: false
         });
       }
-      console.log('test: ', getInfoCandidat);
+      console.log('candidats campaign: ', getInfoCandidat);
       this.infosCandidats = new MatTableDataSource(getInfoCandidat);
       this.infosCandidats.sort = this.sort;
 

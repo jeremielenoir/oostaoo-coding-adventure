@@ -52,7 +52,6 @@
   font-size: 14px;
   transition: background-color 200ms;
   font-weight: 700;
-  height: 50px;
   background-color: #f2bb13;
 }
 
@@ -81,11 +80,6 @@ table {
   height: 50px;
 }
 
-.fixSearch {
-  /* width: 60%; */
-  height: 50px;
-}
-
 .candidat-finish-custom-select mat-label {
   color: white;
 }
@@ -97,10 +91,24 @@ table {
 .barre-nav {
   display: flex;
   padding: 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .fix-button {
   margin-top: inherit;
+}
+
+.custom-input-filtre {
+  width: 50%;
+  border: 1px solid #e4e4e4;
+  background: white;
+  height: 50px;
+}
+
+.table-container {
+  width: 100%;
+  margin-top: 20px;
 }
 
 ::ng-deep .mat-form-field-underline {
@@ -109,6 +117,10 @@ table {
 
 ::ng-deep .mat-form-field-flex {
   margin-top: 0px;
+}
+
+filter-table {
+  display: flex;
 }
 
 @media screen and (max-width: 1020px) {
