@@ -35,7 +35,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
       // console.log("this Question: ", this.Questions)
     }
   }
-  constructor(private bottomSheet: MatBottomSheet, public apiClientService: ApiClientService) { }
+  constructor(public apiClientService: ApiClientService) { }
 
 
   ngOnInit() {
