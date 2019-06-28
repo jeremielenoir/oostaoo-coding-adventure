@@ -29,6 +29,14 @@
         <button
           class="custom-buttom"
           mat-flat-button
+          id="back"
+          (click)="onDecrementPage(formCampagne.value)"
+        >
+          RETOUR
+        </button>
+        <button
+          class="custom-buttom"
+          mat-flat-button
           id="save"
           [routerLink]="['/dashboard/campaigns']"
           (click)="SendQuestionSelected()"
