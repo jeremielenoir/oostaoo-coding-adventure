@@ -15,8 +15,10 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 export class QuestionsComponent implements OnInit {
   public globalId;
   public campaing;
-  public questions;
+  public yourCampaign;
   public allQuestions;
+  public allQuestionsCampaign;
+  public questionsByCampaign;
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -26,6 +28,8 @@ export class QuestionsComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+      console.log('all question: ', this.allQuestions);
+      console.log('this Question: ', this.questionsByCampaign);
     }
   }
 
@@ -37,47 +41,58 @@ export class QuestionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    const questionTechnoAllData = [];
-    const questionTechnoCampaign = [];
-    this.apiClientService
-      .get(API_URI_CAMPAIGNS + '/' + this.globalId)
-      .subscribe(datas => {
-        this.campaing = datas;
-        this.questions = datas.questions;
-        console.log('campaign', this.campaing);
-        // console.log('question of campaign: ', this.questions);
-        // for (const  question of this.campaing[0]) {
-        //   console.log(question);
-        // }
-        for (const idTechno of this.campaing.technologies) {
-          // console.log('idTechno from campaign: ', idTechno.id);
-          // console.log('Techno from campaign: ', idTechno); 
-          questionTechnoCampaign.push(idTechno);
+    this.loadCampaign();
+    this.loadAllQuestion();
+    setTimeout(() => {
+      const questionByTechnoCampaing = [];
+      // console.log('questionsByCampaign: ', this.questionsByCampaign);
+      // console.log('idtechno: ', this.yourCampaign[0].technologies);
+      // console.log('allquestion: ', this.allQuestions);
+      for (const iterator of this.allQuestions) {
+        // console.log('ite: ', iterator);
+        // console.log('iterator', iterator);
+        this.yourCampaign[0].technologies.forEach(element => {
+          // console.log('element: ', element);
+          if (iterator.technologies.id === element.id) {
+            // console.log('element.id: ', element.id);
+            // console.log('iterator.technologies.id: ', iterator.technologies.id);
+            // console.log('iterator.name: ', iterator.name);
+            // console.log('this.yourCampaign[0].questions: ', this.yourCampaign[0].questions);
+            questionByTechnoCampaing.push(iterator);
+          }
+        });
+        // console.log(this.yourCampaign[0].questions);
+        // console.log('iteName: ', iterator.name);
+      }
+      console.log(questionByTechnoCampaing)
+      this.yourCampaign[0].questions.forEach(element => {
+        console.log(element);
+        const index = questionByTechnoCampaing.indexOf(element);
+        if (index > -1) {
+          questionByTechnoCampaing.splice(index, 1);
         }
       });
-    this.apiClientService.get(API_URI_QUESTIONS).subscribe(datas => {
-      this.allQuestions = datas;
-      for (const data of datas) {
-        questionTechnoAllData.push(data);
-      }
-    });
-    setTimeout(()=>{
-      console.log('question Techno all Data: ', questionTechnoAllData);
-    }, 1000)
-    // setTimeout(() => {
-    //   // console.log('question Techno Campaing: ', questionTechnoCampaign);
-    //   console.log('question Techno all Data: ', questionTechnoAllData);
-    //   for (const technoCampaing of questionTechnoCampaign) {
-    //     console.log('techno id: ', technoCampaing.id);
-    //   }
-    //   // if (questionTechnoCampaign[0].id === 3) {
-    //   //   console.log('check idquestion in campaigns: ', true);
-    //   //   console.log('question :', questionTechnoCampaign);
-    //   // }
-    //   // for (const questionTechno of questionTechnoCampaign) {
-    //   //   console.log('quesstiontechno : ', questionTechno);
-    //   // console.log(questionTechnoAllData.includes(questionTechno));
-    //   // }
-    // }, 1000);
+      this.allQuestionsCampaign = questionByTechnoCampaing;
+    }, 1000);
+  }
+
+  loadCampaign(): Promise<any> {
+    return this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.globalId)
+      .toPromise()
+      .then(response => {
+        // console.log('response: ', response);
+        this.questionsByCampaign = response.questions;
+        this.yourCampaign = [response];
+      })
+      .catch(err => err);
+  }
+
+  loadAllQuestion(): Promise<any> {
+    return this.apiClientService.get(API_URI_QUESTIONS)
+      .toPromise()
+      .then(response => {
+        return this.allQuestions = response;
+      })
+      .catch(err => err);
   }
 }

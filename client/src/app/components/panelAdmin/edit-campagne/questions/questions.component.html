@@ -73,14 +73,14 @@
       <div
         cdkDropList
         #todoList="cdkDropList"
-        [cdkDropListData]="allQuestions"
+        [cdkDropListData]="allQuestionsCampaign"
         [cdkDropListConnectedTo]="[doneList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)"
       >
         <div
           class="example-box"
-          *ngFor="let item of allQuestions | filter: searchText"
+          *ngFor="let item of allQuestionsCampaign | filter: searchText"
           cdkDrag
         >
           <p class="question-techno">{{ item.technologies.name }}</p>
@@ -113,19 +113,31 @@
       <div
         cdkDropList
         #doneList="cdkDropList"
-        [cdkDropListData]="questions"
+        [cdkDropListData]="questionsByCampaign"
         [cdkDropListConnectedTo]="[todoList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)"
       >
         <p id="drop-text">Glissez/déposez une question ici</p>
-        <div class="example-box" *ngFor="let item of questions" cdkDrag>
-          <p class="question-techno">{{ item.technologies.name }}</p>
-          {{ item.name }}
-          <i class="fas fa-puzzle-piece drop-icon"></i> |
-          <p>{{ item.points }} points</p>
-          | <i class="fas fa-list-ul drop-icon"></i> |
-          <p>{{ item.time }}</p>
+        <!-- <div *ngFor="let item of questions">
+          <div *ngFor="let item2 of item.questions">
+            <p>{{ item2.name }}</p>
+            <p *ngFor="let item2 of item.technologies">{{ item2.name }}</p>
+            |
+            <p *ngFor="let item2 of item.questions">{{ item2.points }}</p>
+            |
+            <p *ngFor="let item2 of item.questions">{{ item2.time }}</p>
+          </div>
+        </div> -->
+
+        <div *ngFor="let itemQuestions of questionsByCampaign">
+          <div class="example-box" cdkDrag>
+            <p>{{ itemQuestions.name }}</p>
+            <i class="fas fa-puzzle-piece drop-icon"></i> |
+            <p>{{ itemQuestions.points }}</p>
+            | <i class="fas fa-list-ul drop-icon"></i> |
+            <p>{{ itemQuestions.time }}</p>
+          </div>
         </div>
       </div>
     </div>
