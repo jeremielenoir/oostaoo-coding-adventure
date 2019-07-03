@@ -19,6 +19,7 @@ export class QuestionsComponent implements OnInit {
   public allQuestions;
   public allQuestionsCampaign;
   public questionsByCampaign;
+  public updateQuestionsCampaign = [];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -28,8 +29,8 @@ export class QuestionsComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-      console.log('all question: ', this.allQuestions);
-      console.log('this Question: ', this.questionsByCampaign);
+      console.log('allQuestionsCampaign: ', this.allQuestionsCampaign);
+      console.log('this questionsByCampaign: ', this.questionsByCampaign);
     }
   }
 
@@ -53,6 +54,7 @@ export class QuestionsComponent implements OnInit {
       for (const iterator of this.allQuestions) {
         this.yourCampaign[0].technologies.forEach(element => {
           if (iterator.technologies.id === element.id && !nameQuestionByTechno.includes(iterator.name)) {
+            // console.log(iterator);
             questionByTechnoCampaing.push(iterator);
           }
         });
@@ -69,6 +71,7 @@ export class QuestionsComponent implements OnInit {
       .then(response => {
         // console.log('response: ', response);
         this.questionsByCampaign = response.questions;
+        console.log('questionsByCampaign : ', this.questionsByCampaign);
         this.yourCampaign = [response];
       })
       .catch(err => err);
@@ -81,5 +84,21 @@ export class QuestionsComponent implements OnInit {
         return this.allQuestions = response;
       })
       .catch(err => err);
+  }
+
+  SendQuestionSelected() {
+    for(const element of this.questionsByCampaign) {
+      console.log('element: ', element);
+      this.updateQuestionsCampaign.push(element['id']);
+    }
+    console.log("this array for update questions: ",this.updateQuestionsCampaign)
+    this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.globalId, {
+      questions: this.updateQuestionsCampaign
+    }).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      err => console.log(err)
+    );
   }
 }
