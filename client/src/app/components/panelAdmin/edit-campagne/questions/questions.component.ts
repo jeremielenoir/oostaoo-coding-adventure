@@ -44,34 +44,21 @@ export class QuestionsComponent implements OnInit {
     this.loadCampaign();
     this.loadAllQuestion();
     setTimeout(() => {
+      const nameQuestionByTechno = [];
+      this.yourCampaign[0].questions.forEach(element => {
+        // console.log(element);
+        nameQuestionByTechno.push(element.name);
+      });
       const questionByTechnoCampaing = [];
-      // console.log('questionsByCampaign: ', this.questionsByCampaign);
-      // console.log('idtechno: ', this.yourCampaign[0].technologies);
-      // console.log('allquestion: ', this.allQuestions);
       for (const iterator of this.allQuestions) {
-        // console.log('ite: ', iterator);
-        // console.log('iterator', iterator);
         this.yourCampaign[0].technologies.forEach(element => {
-          // console.log('element: ', element);
-          if (iterator.technologies.id === element.id) {
-            // console.log('element.id: ', element.id);
-            // console.log('iterator.technologies.id: ', iterator.technologies.id);
-            // console.log('iterator.name: ', iterator.name);
-            // console.log('this.yourCampaign[0].questions: ', this.yourCampaign[0].questions);
+          if (iterator.technologies.id === element.id && !nameQuestionByTechno.includes(iterator.name)) {
             questionByTechnoCampaing.push(iterator);
           }
         });
         // console.log(this.yourCampaign[0].questions);
         // console.log('iteName: ', iterator.name);
       }
-      console.log(questionByTechnoCampaing)
-      this.yourCampaign[0].questions.forEach(element => {
-        console.log(element);
-        const index = questionByTechnoCampaing.indexOf(element);
-        if (index > -1) {
-          questionByTechnoCampaing.splice(index, 1);
-        }
-      });
       this.allQuestionsCampaign = questionByTechnoCampaing;
     }, 1000);
   }
