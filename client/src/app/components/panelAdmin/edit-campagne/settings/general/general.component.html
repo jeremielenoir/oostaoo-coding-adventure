@@ -6,7 +6,7 @@
   </label>
 </div>
 <mat-form-field class="input-length input-style" >
-  <input matInput value="{{campaign.Name}}" name="nomDeCampagne" />
+  <input matInput [formControl]="name"/>
 </mat-form-field>
 
 
@@ -17,38 +17,38 @@
   </label>
 </div>
 <div class="example-radio-button">
-  <mat-radio-group  >
-    <mat-radio-button [checked]="FR" value="FR">
+  <mat-radio-group  [formControl]="lang"  >
+    <mat-radio-button [checked]="lang.value === 'FR' " >
       FR
     </mat-radio-button>
-    <mat-radio-button [checked]="EN" value="EN">
+    <mat-radio-button [checked]="lang.value === 'EN' " >
       EN
     </mat-radio-button>
-    <mat-radio-button [checked]="ES" value="ES">
+    <mat-radio-button [checked]="lang.value === 'ES'" >
       ES
     </mat-radio-button>
-    <mat-radio-button [checked]="JP" value="JP">
+    <mat-radio-button [checked]="lang.value === 'JP'" >
       JP
     </mat-radio-button>
     </mat-radio-group>
 </div>
 
-   
+
 <label for="utilisationCopieColler">
   Voulez-vous empêcher l'utilisation du copier/coller pendant le test ?
 </label>
 <div class="example-radio-button" >
-  <mat-radio-group>
-    <mat-radio-button [checked]="copytrue" value="true">
+  <mat-radio-group [formControl]='copypaste'>
+    <mat-radio-button [checked]="copypaste.value === true">
       Oui
     </mat-radio-button>
-    <mat-radio-button [checked]="copyfalse" value="false">
+    <mat-radio-button [checked]="copypaste.value === false">
       Non
     </mat-radio-button>
   </mat-radio-group>
 </div>
     
-
+  
 <div class="formQuestion">
   <label for="nomDeCampagne">
     Nombre de jours au bout desquels une invitation expire
@@ -56,7 +56,7 @@
 </div>
 
 <mat-form-field class="input-length input-style" >
-  <input id="date" type="date" matInput name="nomDeCampagne" value="{{campaign.expiration_date}}">
+  <input id="date" type="number" matInput name="DayBeforeExp" [(ngModel)]="datevalue" >
 </mat-form-field>
             
 
@@ -67,16 +67,16 @@
   </label>
 </div>
 <div class="example-radio-button">
-  <mat-radio-group>
-    <mat-radio-button [checked]="rapporttrue" value="true">
+  <mat-radio-group [formControl]="rapport">
+    <mat-radio-button [checked]="rapport.value === true">
       Oui
     </mat-radio-button>
-    <mat-radio-button [checked]="rapportfalse" value="false">
+    <mat-radio-button [checked]="rapport.value === false">
       Non
     </mat-radio-button>
   </mat-radio-group>
 </div>
-     
+    
 
 <label for="nomDeCampagne" >
   Comment souhaitez-vous que le candidat soit chronométré ?
@@ -108,16 +108,17 @@
   </div>
 </div>
 
-<div id="button-container">   
-            <button type="button" class="button grey" mat-flat-button>
-              Prévisualiser
-            </button>
-          
-          
-            <button type="button" class="button yellow" mat-flat-button >
-              Enregistrer
-            </button>
-</div>
+
+  <div id="button-container">   
+              <button type="button" class="button grey" mat-flat-button>
+                Prévisualiser
+              </button>
+            
+            
+              <button (click)="modifierPersonne()" type="button" class="button yellow" mat-flat-button >
+                Enregistrer
+              </button> 
+  </div>
 </form>
 
      

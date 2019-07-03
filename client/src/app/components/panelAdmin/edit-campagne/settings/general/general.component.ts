@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
@@ -18,7 +18,6 @@ export class GeneralComponent implements OnInit {
     });
   }
   public globalId: any;
-
   public campaigns;
 
   EN = false;
@@ -31,11 +30,23 @@ export class GeneralComponent implements OnInit {
   rapportfalse = true;
   dateExp;
   NewDateExp;
+  datevalue = 30;
+
+  name = new FormControl('', Validators.required);
+  lang = new FormControl('', Validators.required);
+  copypaste = new FormControl('', Validators.required);
+  date = new FormControl('', Validators.required);
+  rapport = new FormControl('', Validators.required);
+  chrono = new FormControl('', Validators.required);
 
   ngOnInit() {
     this.getCampaign();
     setTimeout(() => {
-
+      this.name = new FormControl(this.campaigns[0].Name);
+      this.lang = new FormControl(this.campaigns[0].langs, );
+      this.copypaste = new FormControl(this.campaigns[0].copy_paste);
+      this.rapport = new FormControl(this.campaigns[0].sent_report);
+      console.log('form =', this.name, this.lang.value, this.copypaste.value, this.rapport.value );
       console.log('campaign selected in /general = ', this.campaigns);
       console.log('campaign langue = ', this.campaigns[0].langs);
       if ( this.campaigns[0].langs === 'EN') {
@@ -50,7 +61,6 @@ export class GeneralComponent implements OnInit {
       if ( this.campaigns[0].langs === 'ES') {
         this.ES = true;
       }
-
 
       if ( this.campaigns[0].copy_paste === true) {
         this.copytrue = true;
@@ -69,13 +79,21 @@ export class GeneralComponent implements OnInit {
       }
       this.dateExp = this.campaigns[0].expiration_date.slice(0, 10);
       this.NewDateExp = new Date(this.dateExp);
-      this.NewDateExp.setDate(this.NewDateExp.getDate() + 30);
-      console.log('new date exp: ', this.NewDateExp);
-      console.log('date exp: ', this.campaigns[0].expiration_date.slice(0, 10));
+      // this.NewDateExp.setDate(this.NewDateExp.getDate() + this.datevalue);
+      // console.log('new date exp: ', this.NewDateExp);
+      // console.log('date exp: ', this.campaigns[0].expiration_date.slice(0, 10));
+      console.log('datevalue =', this.datevalue);
      }, 1000);
   }
 
+  modifierPersonne() {
 
+    console.log('datevalue =', this.datevalue);
+    this.NewDateExp.setDate(this.NewDateExp.getDate() + this.datevalue);
+    console.log('date exp: ', this.campaigns[0].expiration_date.slice(0, 10));
+    console.log('new date exp: ', this.NewDateExp);
+    console.log('form =', this.name.value, this.lang, this.copypaste.value, this.rapport.value );
+  }
 
   getCampaign() {
     this.apiClientService
@@ -84,4 +102,6 @@ export class GeneralComponent implements OnInit {
       this.campaigns = [datas];
     });
   }
+
+  
 }
