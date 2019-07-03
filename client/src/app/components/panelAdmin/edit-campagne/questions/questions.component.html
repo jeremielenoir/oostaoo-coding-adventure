@@ -119,25 +119,16 @@
         (cdkDropListDropped)="drop($event)"
       >
         <p id="drop-text">Glissez/déposez une question ici</p>
-        <!-- <div *ngFor="let item of questions">
-          <div *ngFor="let item2 of item.questions">
-            <p>{{ item2.name }}</p>
-            <p *ngFor="let item2 of item.technologies">{{ item2.name }}</p>
-            |
-            <p *ngFor="let item2 of item.questions">{{ item2.points }}</p>
-            |
-            <p *ngFor="let item2 of item.questions">{{ item2.time }}</p>
-          </div>
-        </div> -->
-
-        <div *ngFor="let itemQuestions of questionsByCampaign">
-          <div class="example-box" cdkDrag>
-            <p>{{ itemQuestions.name }}</p>
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
-            <p>{{ itemQuestions.points }}</p>
-            | <i class="fas fa-list-ul drop-icon"></i> |
-            <p>{{ itemQuestions.time }}</p>
-          </div>
+        <div
+          class="example-box"
+          *ngFor="let itemQuestions of questionsByCampaign"
+          cdkDrag
+        >
+          <p>{{ itemQuestions.name }}</p>
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+          <p>{{ itemQuestions.points }}</p>
+          | <i class="fas fa-list-ul drop-icon"></i> |
+          <p>{{ itemQuestions.time }}</p>
         </div>
       </div>
     </div>
