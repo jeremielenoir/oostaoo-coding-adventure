@@ -73,6 +73,7 @@ export class QuestionsComponent implements OnInit {
         this.questionsByCampaign = response.questions;
         console.log('questionsByCampaign : ', this.questionsByCampaign);
         this.yourCampaign = [response];
+        console.log('this.yourCampaign: ', this.yourCampaign)
       })
       .catch(err => err);
   }
