@@ -83,12 +83,7 @@
           *ngFor="let item of allQuestionsCampaign | filter: searchText"
           cdkDrag
         >
-          <p
-            class="question-techno"
-            *ngIf="item.technologies == item.technologies.id"
-          >
-            {{ item.technologies.name }} -lol
-          </p>
+          <p class="question-techno">{{ item.technologies.name }}</p>
 
           {{ item.name }}
           <i class="fas fa-puzzle-piece drop-icon"></i> |
@@ -124,36 +119,22 @@
         (cdkDropListDropped)="drop($event)"
       >
         <p id="drop-text">Glissez/déposez une question ici</p>
-        <ng-container *ngFor="let item of yourCampaign">
-          <div
-            class="example-box"
-            *ngFor="let itemQuestions of questionsByCampaign"
-            cdkDrag
-          >
-            <div *ngFor="let item of item.technologies">
-              <p
-                *ngIf="
-                  item.id === itemQuestions.technologies ||
-                  itemQuestions.technologies.id === item.id
-                "
-                class="question-techno"
-              >
-                {{ item.name }}
-              </p>
-              <p
-                *ngIf="!item.id === itemQuestions.technologies"
-                class="question-techno"
-              >
-                lol
-              </p>
-            </div>
-            <p>{{ itemQuestions.name }}</p>
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
-            <p>{{ itemQuestions.points }} points</p>
-            | <i class="fas fa-list-ul drop-icon"></i> |
-            <p>{{ itemQuestions.time }}</p>
+        <div
+          class="example-box"
+          *ngFor="let itemQuestions of questionsByCampaign"
+          cdkDrag
+        >
+          <div>
+            <p class="question-techno">
+              {{ itemQuestions.technologies.name }}
+            </p>
           </div>
-        </ng-container>
+          <p>{{ itemQuestions.name }}</p>
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+          <p>{{ itemQuestions.points }} points</p>
+          | <i class="fas fa-list-ul drop-icon"></i> |
+          <p>{{ itemQuestions.time }}</p>
+        </div>
       </div>
     </div>
   </div>

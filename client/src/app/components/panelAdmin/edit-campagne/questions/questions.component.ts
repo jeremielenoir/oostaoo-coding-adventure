@@ -51,28 +51,36 @@ export class QuestionsComponent implements OnInit {
         nameQuestionByTechno.push(element.name);
       });
       const questionByTechnoCampaing = [];
+      const nameQuestionCampaignByTechno = [];
       for (const iterator of this.allQuestions) {
+        // console.log('iterator from all questions: ', iterator);
         campaigns[0].technologies.forEach(element => {
           if (iterator.technologies.id === element.id && !nameQuestionByTechno.includes(iterator.name)) {
             // console.log(iterator);
             questionByTechnoCampaing.push(iterator);
           }
+          if (iterator.technologies.id === element.id && nameQuestionByTechno.includes(iterator.name)) {
+            // console.log(iterator);
+            nameQuestionCampaignByTechno.push(iterator);
+          }
         });
+        console.log('nameQuestionCampaignByTechno: ', nameQuestionCampaignByTechno);
         // console.log(this.yourCampaign[0].questions);
         // console.log('iteName: ', iterator.name);
       }
+      this.questionsByCampaign = nameQuestionCampaignByTechno;
+      console.log('this.questionsByCampaign: ', this.questionsByCampaign);
       this.allQuestionsCampaign = questionByTechnoCampaing;
-    }); 
+    });
   }
 
   loadCampaign(): Promise<any> {
     return this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.globalId)
       .toPromise()
       .then(response => {
-        // console.log('response: ', response);
-        this.questionsByCampaign = response.questions;
         // console.log('questionsByCampaign : ', this.questionsByCampaign);
         this.yourCampaign = [response];
+        // console.log('this.yourCampaign: ', this.yourCampaign);
         return this.yourCampaign;
       })
       .catch(err => err);
@@ -82,17 +90,18 @@ export class QuestionsComponent implements OnInit {
     return this.apiClientService.get(API_URI_QUESTIONS)
       .toPromise()
       .then(response => {
+        // console.log('all questions: ', response);
         return this.allQuestions = response;
       })
       .catch(err => err);
   }
 
   SendQuestionSelected() {
-    for(const element of this.questionsByCampaign) {
+    for (const element of this.questionsByCampaign) {
       console.log('element: ', element);
-      this.updateQuestionsCampaign.push(element['id']);
+      this.updateQuestionsCampaign.push(element.id);
     }
-    console.log("this array for update questions: ",this.updateQuestionsCampaign)
+    console.log('this array for update questions: ', this.updateQuestionsCampaign);
     this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.globalId, {
       questions: this.updateQuestionsCampaign
     }).subscribe(
