@@ -83,7 +83,12 @@
           *ngFor="let item of allQuestionsCampaign | filter: searchText"
           cdkDrag
         >
-          <p class="question-techno">{{ item.technologies.name }}</p>
+          <p
+            class="question-techno"
+            *ngIf="item.technologies == item.technologies.id"
+          >
+            {{ item.technologies.name }} -lol
+          </p>
 
           {{ item.name }}
           <i class="fas fa-puzzle-piece drop-icon"></i> |
@@ -127,13 +132,19 @@
           >
             <div *ngFor="let item of item.technologies">
               <p
-                class="question-techno"
                 *ngIf="
                   item.id === itemQuestions.technologies ||
                   itemQuestions.technologies.id === item.id
                 "
+                class="question-techno"
               >
                 {{ item.name }}
+              </p>
+              <p
+                *ngIf="!item.id === itemQuestions.technologies"
+                class="question-techno"
+              >
+                lol
               </p>
             </div>
             <p>{{ itemQuestions.name }}</p>
