@@ -260,13 +260,12 @@
 
 .question-techno {
     display: block;
-    width: 40px;
     height: 20px;
     background: #f28730;
     font-size: 12px;
     color: white;
     text-align: center;
-    line-height: 20px;
+    padding: 2px;
 }
 
 ::ng-deep .example-box {
@@ -287,7 +286,6 @@
     box-shadow: 0px 0px 5px grey;
     transform: translate(2px, -3px);
 }
-
 
 ::ng-deep .exemple-list, .cdk-drop-list {
     background-color: #f9f9f9!important;
