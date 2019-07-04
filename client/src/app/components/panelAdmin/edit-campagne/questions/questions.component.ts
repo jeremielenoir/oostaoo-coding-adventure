@@ -42,17 +42,17 @@ export class QuestionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadCampaign();
     this.loadAllQuestion();
-    setTimeout(() => {
+    this.loadCampaign().then(campaigns => {
+      // console.log('this.yourCampaign: ', campaigns)
       const nameQuestionByTechno = [];
-      this.yourCampaign[0].questions.forEach(element => {
+      campaigns[0].questions.forEach(element => {
         // console.log(element);
         nameQuestionByTechno.push(element.name);
       });
       const questionByTechnoCampaing = [];
       for (const iterator of this.allQuestions) {
-        this.yourCampaign[0].technologies.forEach(element => {
+        campaigns[0].technologies.forEach(element => {
           if (iterator.technologies.id === element.id && !nameQuestionByTechno.includes(iterator.name)) {
             // console.log(iterator);
             questionByTechnoCampaing.push(iterator);
@@ -62,7 +62,7 @@ export class QuestionsComponent implements OnInit {
         // console.log('iteName: ', iterator.name);
       }
       this.allQuestionsCampaign = questionByTechnoCampaing;
-    }, 1000);
+    }); 
   }
 
   loadCampaign(): Promise<any> {
@@ -71,9 +71,9 @@ export class QuestionsComponent implements OnInit {
       .then(response => {
         // console.log('response: ', response);
         this.questionsByCampaign = response.questions;
-        console.log('questionsByCampaign : ', this.questionsByCampaign);
+        // console.log('questionsByCampaign : ', this.questionsByCampaign);
         this.yourCampaign = [response];
-        console.log('this.yourCampaign: ', this.yourCampaign)
+        return this.yourCampaign;
       })
       .catch(err => err);
   }
