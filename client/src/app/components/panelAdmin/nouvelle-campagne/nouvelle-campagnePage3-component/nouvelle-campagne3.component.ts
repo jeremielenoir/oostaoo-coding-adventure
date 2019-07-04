@@ -48,7 +48,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
       }
     });
     setTimeout(() => {
-      console.log('this.allQuestions: ', this.allQuestions);
+      console.log('this.allQuestions: ', this.allQuestions)
       this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.formCampagne.value.CampaignID.id).subscribe((datas) => {
         console.log('resultat from get', datas);
       });
