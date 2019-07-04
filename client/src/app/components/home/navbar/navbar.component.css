@@ -1,3 +1,14 @@
+.remove-index {
+  z-index: 0;
+  height: 0vh;
+}
+
+.add-index {
+  z-index: 1000;
+  height: 100vh;
+}
+
+
 #navbar {
   position: fixed;
   width: 100%;
@@ -5,14 +16,15 @@
 }
 
 .style-nav-scroll {
-  background-color: #252e38;
-  transition: 3s;
+  background: -webkit-linear-gradient(top, #333333, #00000080)!important;
+  background: -moz-linear-gradient(top, #333333, #00000080);
+  background: linear-gradient(to bottom, #333333, #00000080);
+    transition: 3s;
+  
 }
 
-.style-nav-scroll2 {
-  transition: 3s;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
-}
+
+
 
 .fixe-nav {
   visibility: hidden;
@@ -30,6 +42,7 @@
 img {
   width: 160px;
   margin: 10px 0 0 20px;
+
 }
 
 a {
@@ -54,8 +67,35 @@ a:hover {
   border-radius: 0px;
 }
 
+.style-nav-scroll,.add-index{
+
+  background-color:transparent;
+  transition: none;
+
+}
+
+ .mat-toolbar
+{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  padding-bottom: 12px;
+  align-items: center;
+  padding: 20px;
+}
+
+.mat-toolbar-row
+{
+  /* width: 50px; */
+  padding: 0px;
+  /* margin-top: 20px; */
+}
+
 .mat-icon-button {
-  height: 100px;
+  height: 50px;
+  /* margin-top: 20px; */
+  width: auto;
+  
 }
 
 .size-nav {
@@ -72,3 +112,15 @@ a:hover {
   font-size: 14px;
   color: white;
 }
+
+@media screen and (max-width: 960px) {
+ 
+.mat-toolbar-row
+{
+  width: 50px;
+  padding: 0px;
+  margin-top: 20px;
+}
+
+}
+

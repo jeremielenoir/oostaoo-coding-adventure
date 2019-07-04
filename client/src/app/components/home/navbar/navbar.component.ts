@@ -11,54 +11,51 @@ import { DOCUMENT } from '@angular/common';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
-  styles: [
-    `
-      .remove-index {
-        z-index: 0;
-        height: 0vh;
-      }
-
-      .add-index {
-        z-index: 1000;
-        height: 100vh;
-      }
-    `
-  ]
 })
 export class NavbarComponent implements OnInit {
   constructor(@Inject(DOCUMENT) document) { }
 
   public shouldShow = true;
-  @ViewChild('myLabel') lab;
+  @ViewChild('header') header;
 
-  showOrHideManually() {
+  public showOrHideManually() {
     this.shouldShow = !this.shouldShow;
     if (this.shouldShow) {
-      this.lab.nativeElement.classList.add('remove-index');
-      this.lab.nativeElement.classList.remove('add-index');
+      this.header.nativeElement.classList.add('remove-index');
+      this.header.nativeElement.classList.remove('add-index');
     } else {
-      this.lab.nativeElement.classList.add('add-index');
-      this.lab.nativeElement.classList.remove('remove-index');
+      this.header.nativeElement.classList.add('add-index');
+      this.header.nativeElement.classList.remove('remove-index');
     }
   }
 
-  ngOnInit() { }
-
   @HostListener('window:scroll', ['$event'])
-  onWindowScroll(e) {
+  public onWindowScroll() {
     if (window.pageYOffset > 100) {
       const element = document.getElementById('navbar');
       element.classList.add('style-nav-scroll');
+
+      console.log(element)
     } else {
       const element = document.getElementById('navbar');
       element.classList.remove('style-nav-scroll');
     }
-    if (window.pageYOffset < 100) {
-      const element = document.getElementById('navbar');
-      element.classList.add('style-nav-scroll2');
-    } else {
-      const element = document.getElementById('navbar');
-      element.classList.remove('style-nav-scroll2');
-    }
+    // if (window.pageYOffset < 100) {
+    //   const element = document.getElementById('navbar');
+    //   element.classList.add('style-nav-scroll2');
+    // } else {
+    //   const element = document.getElementById('navbar');
+    //   element.classList.remove('style-nav-scroll2');
+    // }
   }
+
+
+  ngOnInit() {
+
+    this.onWindowScroll()
+   }
+
+
+
+
 }

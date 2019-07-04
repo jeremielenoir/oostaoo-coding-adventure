@@ -1,7 +1,10 @@
 <!-- <button (click)="showOrHideManually()">Show/Hide manually</button>
 <label #myLabel> SOME TEXT BLABLA </label> -->
-<div #myLabel id="navbar" (scroll)="onWindowScroll($event)">
+<div #header id="navbar" (scroll)="onWindowScroll($event)">
   <mat-toolbar color="primary">
+
+      <img src="../../assets/logo.png" alt="Logo" />
+
     <mat-toolbar-row class="super">
       <button
         mat-icon-button
@@ -12,7 +15,6 @@
       >
         <mat-icon class="size-nav">menu</mat-icon>
       </button>
-      <img src="../../assets/logo.png" alt="Logo" />
 
       <span class="menu-spacer"></span>
       <div fxShow="true" fxHide.lt-md>

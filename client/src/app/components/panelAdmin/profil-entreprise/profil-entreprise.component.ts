@@ -20,9 +20,9 @@ export class ProfilEntrepriseComponent implements OnInit {
   public interval: any;
   public shadowcog = false;
   public shadowcogImage = false;
-  public cadrageImgBoolean = false;
+  public cadrageImgBoolean: boolean;
   public blockUpload = false;
-  public cadrageImgBooleanState = false;
+  public cadrageImgBooleanState;
   public blockUploadLast = false;
   public cadrageImgBooleanLast = false;
   public cadrageImgBooleanStateLast = false;
@@ -96,6 +96,8 @@ export class ProfilEntrepriseComponent implements OnInit {
 
   readURL(event) {
 
+   if (event.target.files && event.target.files[0]) {
+
     this.blockUpload = true;
     this.cadrageImgBoolean = true;
 
@@ -122,6 +124,9 @@ export class ProfilEntrepriseComponent implements OnInit {
       this.btnValideParent.nativeElement.children[0].disabled = true;
 
     }
+
+
+   }
 
   }
 
