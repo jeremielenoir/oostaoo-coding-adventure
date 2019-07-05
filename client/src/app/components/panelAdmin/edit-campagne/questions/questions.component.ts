@@ -42,12 +42,13 @@ export class QuestionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadAllQuestion();
-    this.loadCampaign().then(campaigns => {
-      // console.log('this.yourCampaign: ', campaigns)
+    Promise.all([this.loadCampaign(), this.loadAllQuestion()]).then(values => {
+      const campaigns = values[0];
+      console.log('this.loadCampaign', values[0]);
+      console.log('this.loadCampaign', values[1]);
       const nameQuestionByTechno = [];
       campaigns[0].questions.forEach(element => {
-        // console.log(element);
+        console.log(element);
         nameQuestionByTechno.push(element.name);
       });
       const questionByTechnoCampaing = [];
@@ -64,7 +65,7 @@ export class QuestionsComponent implements OnInit {
             nameQuestionCampaignByTechno.push(iterator);
           }
         });
-        console.log('nameQuestionCampaignByTechno: ', nameQuestionCampaignByTechno);
+        // console.log('nameQuestionCampaignByTechno: ', nameQuestionCampaignByTechno);
         // console.log(this.yourCampaign[0].questions);
         // console.log('iteName: ', iterator.name);
       }
