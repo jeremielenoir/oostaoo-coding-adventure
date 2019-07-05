@@ -24,11 +24,11 @@
     <mat-radio-button [checked]="lang.value === 'EN' " >
       EN
     </mat-radio-button>
-    <mat-radio-button [checked]="lang.value === 'ES'" >
+    <mat-radio-button [checked]="lang.value === 'ES' " >
       ES
     </mat-radio-button>
-    <mat-radio-button [checked]="lang.value === 'JP'" >
-      JP
+    <mat-radio-button [checked]="lang.value === 'JP' " >
+      JP 
     </mat-radio-button>
     </mat-radio-group>
 </div>
@@ -39,10 +39,10 @@
 </label>
 <div class="example-radio-button" >
   <mat-radio-group [formControl]='copypaste'>
-    <mat-radio-button [checked]="copypaste.value === true">
+    <mat-radio-button >
       Oui
     </mat-radio-button>
-    <mat-radio-button [checked]="copypaste.value === false">
+    <mat-radio-button >
       Non
     </mat-radio-button>
   </mat-radio-group>
