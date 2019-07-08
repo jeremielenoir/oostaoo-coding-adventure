@@ -4,6 +4,7 @@
     <div class="info-campaign-candidats">
       <h2>Configuration de l'email</h2>
       <p *ngFor="let campaign of campaigns">{{ campaign.Name }}</p>
+      <p>Vous avez sélectionné <strong>{{nbCandidat}}</strong> destinataires</p>
     </div>
   </header>
   <hr />
@@ -13,7 +14,7 @@
   <br />
 
   <p><b>Message :</b></p>
-  <p *ngFor="let candidat of candidats">Bonjour {{ candidat.Nom }},</p>
+  <p *ngFor="let candidat of candidats">Bonjour {{ candidat.name }},</p>
   <br />
 
   <p>Votre candidature a retenu notre attention.</p>
@@ -39,7 +40,7 @@
 
 <button
   (click)="onClose()"
-  (click)="updateCampaign()"
+  (click)="updateCampaignPostCandidats()"
 >
   ENVOYER EMAIL
 </button>

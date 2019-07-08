@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { API_URI_CANDIDATS, ApiClientService } from 'src/app/api-client/api-client.service';
 import { MatDialog } from '@angular/material';
 import { CandidatsMailComponent } from '../candidats-mail/candidats-mail.component';
 
@@ -17,25 +16,21 @@ export class CandidatsFormComponent implements OnInit {
   }
 
   constructor(private fb: FormBuilder,
-    public apiClientService: ApiClientService,
-    public dialog: MatDialog) {
+              public dialog: MatDialog) {
   }
   public form: FormGroup;
   public contactList: FormArray;
   @Input() globalId: string;
   public campaigns: any;
   candidatId: any;
-  arrayCandidat: Array<{ id: number }> = [];
 
   ngOnInit() {
     this.form = this.fb.group({
       contacts: this.fb.array([this.createContact()])
     });
-
     // set contactlist to this field
     this.contactList = this.form.get('contacts') as FormArray;
   }
-
   // contact formgroup
   createContact(): FormGroup {
     return this.fb.group({
@@ -44,62 +39,33 @@ export class CandidatsFormComponent implements OnInit {
       value: [null, Validators.compose([Validators.required, Validators.email])]
     });
   }
-
   // add a contact form group
   addContact() {
     this.contactList.push(this.createContact());
   }
-
   // remove contact from group
   removeContact(index) {
     // this.contactList = this.form.get('contacts') as FormArray;
     this.contactList.removeAt(index);
   }
-
-
   // get the formgroup under contacts form array
   getContactsFormGroup(index): FormGroup {
     // this.contactList = this.form.get('contacts') as FormArray;
     const formGroup = this.contactList.controls[index] as FormGroup;
     return formGroup;
   }
-
-  postCandidat(nom, email) {
-    this.apiClientService.post(API_URI_CANDIDATS, {
-      Nom: nom,
-      email: email,
-    }).subscribe(
-      (res) => {
-        this.arrayCandidat.push(res.id );
-        //  console.log('from post id candidats', this.arrayCandidat);
-      },
-      err => console.log(err)
-    );
-  }
   // method triggered when form is submitted
   submit() {
-    setTimeout(() => {
-      // console.log('from post id candidats', this.arrayCandidat[0]);
-    }, 2000);
-    // console.log(this.form.value.contacts);
-    for (let i = 0; i < this.form.value.contacts.length; i++) {
-      const item = this.form.value.contacts[i];
-      const nom = item.name;
-      const email = item.value;
-      this.postCandidat(nom, email);
-    }
+    console.log('this.form.value.contacts: ', this.form.value.contacts);
   }
 
   openDialog() {
-    console.log(this.arrayCandidat);
-    setTimeout(() => {
       this.dialog.open(CandidatsMailComponent, {
         data: {
           globalId: this.globalId,
-          candidatId: this.arrayCandidat,
+          contact: this.form.value.contacts,
         },
         height: '80vh'
       });
-    }, 1000);
   }
 }

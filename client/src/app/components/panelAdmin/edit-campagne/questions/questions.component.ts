@@ -42,38 +42,47 @@ export class QuestionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadCampaign();
-    this.loadAllQuestion();
-    setTimeout(() => {
+    Promise.all([this.loadCampaign(), this.loadAllQuestion()]).then(values => {
+      const campaigns = values[0];
+      console.log('this.loadCampaign', values[0]);
+      console.log('this.loadCampaign', values[1]);
       const nameQuestionByTechno = [];
-      this.yourCampaign[0].questions.forEach(element => {
-        // console.log(element);
+      campaigns[0].questions.forEach(element => {
+        console.log(element);
         nameQuestionByTechno.push(element.name);
       });
       const questionByTechnoCampaing = [];
+      const nameQuestionCampaignByTechno = [];
       for (const iterator of this.allQuestions) {
-        this.yourCampaign[0].technologies.forEach(element => {
+        // console.log('iterator from all questions: ', iterator);
+        campaigns[0].technologies.forEach(element => {
           if (iterator.technologies.id === element.id && !nameQuestionByTechno.includes(iterator.name)) {
             // console.log(iterator);
             questionByTechnoCampaing.push(iterator);
           }
+          if (iterator.technologies.id === element.id && nameQuestionByTechno.includes(iterator.name)) {
+            // console.log(iterator);
+            nameQuestionCampaignByTechno.push(iterator);
+          }
         });
+        // console.log('nameQuestionCampaignByTechno: ', nameQuestionCampaignByTechno);
         // console.log(this.yourCampaign[0].questions);
         // console.log('iteName: ', iterator.name);
       }
+      this.questionsByCampaign = nameQuestionCampaignByTechno;
+      console.log('this.questionsByCampaign: ', this.questionsByCampaign);
       this.allQuestionsCampaign = questionByTechnoCampaing;
-    }, 1000);
+    });
   }
 
   loadCampaign(): Promise<any> {
     return this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.globalId)
       .toPromise()
       .then(response => {
-        // console.log('response: ', response);
-        this.questionsByCampaign = response.questions;
-        console.log('questionsByCampaign : ', this.questionsByCampaign);
+        // console.log('questionsByCampaign : ', this.questionsByCampaign);
         this.yourCampaign = [response];
-        console.log('this.yourCampaign: ', this.yourCampaign)
+        // console.log('this.yourCampaign: ', this.yourCampaign);
+        return this.yourCampaign;
       })
       .catch(err => err);
   }
@@ -82,17 +91,18 @@ export class QuestionsComponent implements OnInit {
     return this.apiClientService.get(API_URI_QUESTIONS)
       .toPromise()
       .then(response => {
+        // console.log('all questions: ', response);
         return this.allQuestions = response;
       })
       .catch(err => err);
   }
 
   SendQuestionSelected() {
-    for(const element of this.questionsByCampaign) {
+    for (const element of this.questionsByCampaign) {
       console.log('element: ', element);
-      this.updateQuestionsCampaign.push(element['id']);
+      this.updateQuestionsCampaign.push(element.id);
     }
-    console.log("this array for update questions: ",this.updateQuestionsCampaign)
+    console.log('this array for update questions: ', this.updateQuestionsCampaign);
     this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.globalId, {
       questions: this.updateQuestionsCampaign
     }).subscribe(

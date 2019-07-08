@@ -14,11 +14,19 @@ import {
 export class CandidatsMailComponent implements OnInit {
   public campaigns: any;
   public candidats: any;
+  public nbCandidat: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data,
               public apiClientService: ApiClientService,
               private dialog: MatDialog,
-              public dialogRef: MatDialogRef<CandidatsMailComponent>) { }
+              public dialogRef: MatDialogRef<CandidatsMailComponent>) {
+                this.candidats = this.data.contact;
+                let count = 0;
+                for (const iterator of this.data.contact) {
+                  count++;
+                }
+                this.nbCandidat = count;
+}
 
   ngOnInit() {
     this.apiClientService
@@ -26,27 +34,43 @@ export class CandidatsMailComponent implements OnInit {
       .subscribe(datas => {
         this.campaigns = [datas];
       });
-    const myCandidat = [];
-    for (let index = 0; index < this.data.candidatId.length; index++) {
-      console.log('id :' + this.data.candidatId[index]);
-      this.apiClientService
-        .get(API_URI_CANDIDATS + '/' + this.data.candidatId[index])
-        .subscribe(datas => {
-          myCandidat.push(datas);
-        });
-    }
-    this.candidats = myCandidat;
   }
-  updateCampaign() {
-    this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.data.globalId, {
-      candidats: this.candidats
-    }).subscribe(
+  postCandidat(nom, emailContact): Promise<any> {
+    return this.apiClientService.post(API_URI_CANDIDATS, {
+      Nom: nom,
+      email: emailContact,
+    }).toPromise()
+      .then(
+      (res) => {
+        console.log('res', res.id);
+        const idCandidat = [];
+        idCandidat.push(res.id);
+        return idCandidat;
+      },
+      err => console.log(err)
+    ).then(idCandidat => {
+      this.updateCampaign(idCandidat);
+    });
+  }
+
+  updateCampaignPostCandidats() {
+    for (const iterator of this.candidats) {
+      console.log('iterator: ', iterator);
+      this.postCandidat(iterator.name, iterator.value);
+    }
+  }
+
+  updateCampaign(idCandidat): Promise<any> {
+    return this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.data.globalId, {
+      candidats: idCandidat
+    }).toPromise()
+    .then(
       (res) => {
         console.log(res);
+        window.location.reload();
       },
       err => console.log(err)
     );
-    window.location.reload();
   }
 
   onClose(): void {
