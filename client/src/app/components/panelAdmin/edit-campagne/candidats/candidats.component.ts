@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatTableDataSource, MatSort } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { InviteCandidat } from './invite-candidat.component';
@@ -51,29 +51,6 @@ export class CandidatsComponent implements OnInit {
 
   ngOnInit() {
     this.getCampaign();
-    setTimeout(() => {
-      // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
-      const defaultColumns = ['Checked', 'Candidats', 'Dernière activité', 'Score'];
-      const getInfoCandidat = [];
-      for (const candidat of this.candidats) {
-        getInfoCandidat.push({
-          Candidats: candidat.Nom,
-          Email: candidat.email,
-          Checked: false
-        });
-      }
-      console.log('candidats campaign: ', getInfoCandidat);
-      this.infosCandidats = new MatTableDataSource(getInfoCandidat);
-      this.infosCandidats.sort = this.sort;
-
-      // INFOS FOR ADD COLUMN
-      const getTechnos = [];
-      for (const technos of this.technologies) {
-        getTechnos.push(technos.name);
-      }
-      this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
-    }, 1000);
-
   }
 
   getCampaign() {
@@ -84,11 +61,11 @@ export class CandidatsComponent implements OnInit {
         .toPromise()
         .then(res => { // Success
           this.campaigns = res;
-          console.log('this.campaign: ', this.campaigns);
+          // console.log('this.campaign: ', this.campaigns);
           this.candidats = res.candidats;
-          console.log('this.candidats: ', this.candidats);
+          // console.log('this.candidats: ', this.candidats);
           this.technologies = res.technologies;
-          console.log('this.technologies: ', this.technologies);
+          // console.log('this.technologies: ', this.technologies);
           if (this.campaigns.candidats.length > 0) {
             this.ViewCandidats = 'CandidatTrue';
           } else {
@@ -97,14 +74,30 @@ export class CandidatsComponent implements OnInit {
           resolve(this.campaigns);
         }, msg => reject(msg));
       return promise;
+    }).then((data) => {
+      console.log('data: ', data);
+      // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
+      const defaultColumns = ['Checked', 'Candidats', 'Dernière activité', 'Score'];
+      const getInfoCandidat = [];
+      for (const candidat of this.candidats) {
+        getInfoCandidat.push({
+          Candidats: candidat.Nom,
+          Email: candidat.email,
+          Checked: false
+        });
+      }
+      // INFOS FOR ADD COLUMN
+      const getTechnos = [];
+      for (const technos of this.technologies) {
+        getTechnos.push(technos.name);
+      }
+      this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
+      console.log('candidats campaign: ', getInfoCandidat);
+      setTimeout(() => {
+        this.infosCandidats = new MatTableDataSource(getInfoCandidat);
+        this.infosCandidats.sort = this.sort;
+      }, 1000);
     });
-  }
-
-  getCandidats() {
-    for (let index = 0; index < this.candidats.length; index++) {
-      const element = this.candidats[index];
-      console.log(element);
-    }
   }
 
   applyFilter(filterValue: string) {
