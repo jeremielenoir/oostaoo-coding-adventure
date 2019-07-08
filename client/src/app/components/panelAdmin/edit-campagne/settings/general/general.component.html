@@ -35,10 +35,10 @@
   </label>
   <div class="example-radio-button">
     <mat-radio-group [formControl]="copypasteControl">
-      <mat-radio-button value="true" [checked]="copypasteControl.value === true">
+      <mat-radio-button value=true [checked]="copypasteControl.value === true">
         Oui
       </mat-radio-button>
-      <mat-radio-button value="false" [checked]="copypasteControl.value === false">
+      <mat-radio-button value=false [checked]="copypasteControl.value === false">
         Non
       </mat-radio-button>
     </mat-radio-group>
@@ -68,10 +68,10 @@
   </div>
   <div class="example-radio-button">
     <mat-radio-group [formControl]="rapportControl">
-      <mat-radio-button value="true" [checked]="rapportControl.value === true">
+      <mat-radio-button value=true [checked]="rapportControl.value === true">
         Oui
       </mat-radio-button>
-      <mat-radio-button value="false" [checked]="rapportControl.value === false">
+      <mat-radio-button value=false [checked]="rapportControl.value === false">
         Non
       </mat-radio-button>
     </mat-radio-group>
@@ -115,7 +115,7 @@
     </button>
 
     <button
-      (click)="modifierPersonne()"
+      (click)="updateCampaign()"
       type="button"
       class="button yellow"
       mat-flat-button
