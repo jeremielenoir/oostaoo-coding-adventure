@@ -16,9 +16,9 @@ export class CandidatsMailComponent implements OnInit {
   public candidats: any;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data,
-              public apiClientService: ApiClientService,
-              private dialog: MatDialog,
-              public dialogRef: MatDialogRef<CandidatsMailComponent>) { }
+    public apiClientService: ApiClientService,
+    private dialog: MatDialog,
+    public dialogRef: MatDialogRef<CandidatsMailComponent>) { }
 
   ngOnInit() {
     this.apiClientService
@@ -54,6 +54,17 @@ export class CandidatsMailComponent implements OnInit {
   }
   retourCandidat() {
     this.dialogRef.close();
+    for (let index = 0; index < this.data.candidatId.length; index++) {
+      console.log('id :' + this.data.candidatId[index]);
+      this.apiClientService
+        .delete(API_URI_CANDIDATS + '/' + this.data.candidatId[index])
+        .subscribe(() => {
+          console.log('success');
+        });
+      if (index > -1) {
+        this.data.candidatId.splice(index, 1);
+      }
+    }
   }
 
   showCandidats() {
