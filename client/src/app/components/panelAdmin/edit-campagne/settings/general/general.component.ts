@@ -23,6 +23,17 @@ export class GeneralComponent implements OnInit {
   dateExp: string | number | Date;
   NewDateExp: Date;
   datevalue = 30;
+  EN : boolean;
+  FR : boolean;
+  JP : boolean;
+  ES : boolean;
+  copytrue : boolean;
+  copyfalse : boolean;
+  rapporttrue : boolean;
+  rapportfalse : boolean;
+  copypasteControl;
+  rapportControl;
+
 
   name = new FormControl('', Validators.required);
   lang = new FormControl('', Validators.required);
@@ -35,9 +46,9 @@ export class GeneralComponent implements OnInit {
     this.getCampaign().then(camp => {
       this.name = new FormControl(camp[0].Name);
       this.lang = new FormControl(camp[0].langs);
-      this.copypaste = new FormControl(camp[0].copy_paste);
-      this.rapport = new FormControl(camp[0].sent_report);
-      console.log('form =', this.name, this.lang.value, this.copypaste.value, this.rapport.value);
+      this.copypasteControl = new FormControl(camp[0].copy_paste);
+      this.rapportControl = new FormControl(camp[0].sent_report);
+      console.log('form =', this.name, this.lang.value, this.copypasteControl.value, this.rapport.value);
       console.log('campaign selected in /general = ', camp);
       console.log('campaign langue = ', camp[0].langs);
       if (camp[0].langs === 'EN') {
