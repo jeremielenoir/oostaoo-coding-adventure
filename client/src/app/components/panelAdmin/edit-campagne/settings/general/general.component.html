@@ -34,11 +34,11 @@
     Voulez-vous empêcher l'utilisation du copier/coller pendant le test ?
   </label>
   <div class="example-radio-button">
-    <mat-radio-group>
-      <mat-radio-button value="true" [checked]="copytrue == true">
+    <mat-radio-group [formControl]="copypasteControl">
+      <mat-radio-button value="true" [checked]="copypasteControl.value === true">
         Oui
       </mat-radio-button>
-      <mat-radio-button value="false" [checked]="copyfalse == true">
+      <mat-radio-button value="false" [checked]="copypasteControl.value === false">
         Non
       </mat-radio-button>
     </mat-radio-group>
@@ -56,7 +56,7 @@
       type="number"
       matInput
       name="DayBeforeExp"
-      [(ngModel)]="datevalue"
+      [formControl]='date'
     />
   </mat-form-field>
 
@@ -67,11 +67,11 @@
     </label>
   </div>
   <div class="example-radio-button">
-    <mat-radio-group [formControl]="rapport">
-      <mat-radio-button value="true" [checked]="rapporttrue === true">
+    <mat-radio-group [formControl]="rapportControl">
+      <mat-radio-button value="true" [checked]="rapportControl.value === true">
         Oui
       </mat-radio-button>
-      <mat-radio-button value="false" [checked]="rapportfalse === true">
+      <mat-radio-button value="false" [checked]="rapportControl.value === false">
         Non
       </mat-radio-button>
     </mat-radio-group>

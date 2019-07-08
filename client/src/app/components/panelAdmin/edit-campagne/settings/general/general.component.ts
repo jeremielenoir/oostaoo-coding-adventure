@@ -22,24 +22,12 @@ export class GeneralComponent implements OnInit {
 
   dateExp: string | number | Date;
   NewDateExp: Date;
-  datevalue = 30;
-  EN : boolean;
-  FR : boolean;
-  JP : boolean;
-  ES : boolean;
-  copytrue : boolean;
-  copyfalse : boolean;
-  rapporttrue : boolean;
-  rapportfalse : boolean;
-  copypasteControl;
-  rapportControl;
-
-
+  //  date = 30;
   name = new FormControl('', Validators.required);
   lang = new FormControl('', Validators.required);
-  copypaste = new FormControl('', Validators.required);
-  date = new FormControl('', Validators.required);
-  rapport = new FormControl('', Validators.required);
+  copypasteControl = new FormControl('', Validators.required);
+  date = new FormControl(30, Validators.required);
+  rapportControl = new FormControl('', Validators.required);
   chrono = new FormControl('', Validators.required);
 
   ngOnInit() {
@@ -48,61 +36,43 @@ export class GeneralComponent implements OnInit {
       this.lang = new FormControl(camp[0].langs);
       this.copypasteControl = new FormControl(camp[0].copy_paste);
       this.rapportControl = new FormControl(camp[0].sent_report);
-      console.log('form =', this.lang.value);
+      console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
       // console.log('campaign selected in /general = ', camp);
       // console.log('campaign langue = ', camp[0].langs);
-      if (this.lang.value === 'EN') {
-        this.EN = true;
-      }
-      if (this.lang.value === 'FR') {
-        this.FR = true;
-      }
-      if (this.lang.value === 'JP') {
-        this.JP = true;
-      }
-      if (this.lang.value === 'ES') {
-        this.ES = true;
-      }
-
-      if (this.copypasteControl.value === true) {
-        this.copytrue = true;
-        this.copyfalse = false;
-      } else {
-        this.copytrue = false;
-        this.copyfalse = true;
-      }
-
-      if (this.rapportControl.value === true) {
-        this.rapporttrue = true;
-        this.rapportfalse = false;
-      } else {
-        this.rapporttrue = false;
-        this.rapportfalse = true;
-      }
       this.dateExp = camp[0].expiration_date.slice(0, 10);
       this.NewDateExp = new Date(this.dateExp);
-      // this.NewDateExp.setDate(this.NewDateExp.getDate() + this.datevalue);
+      // this.NewDateExp.setDate(this.NewDateExp.getDate() + this. date);
       // console.log('new date exp: ', this.NewDateExp);
-      console.log('datevalue =', this.datevalue);
+      console.log(' date =', this. date.value);
     });
   }
 
-  modifierPersonne() {
-    //  console.log('datevalue =', this.datevalue);	    
-    this.NewDateExp.setDate(this.NewDateExp.getDate() + this.datevalue);
-    // console.log('date exp: ', this.campaigns[0].expiration_date.slice(0, 10));
-    // console.log('new date exp: ', this.NewDateExp);
-    // console.log('form =', this.name.value, this.lang, this.copypaste.value, this.rapport.value );
-	   }
+  formatDate(date: string | number | Date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) { month = '0' + month; }
+    if (day.length < 2) { day = '0' + day; }
+    return [year, month, day].join('-');
+}
 
-  getCampaign(): Promise<any> {
-    return this.apiClientService
-      .get(API_URI_CAMPAIGNS + '/' + this.globalId)
-      .toPromise()
-      .then(datas => {
-        // console.log('all questions: ', response);
-        return this.campaigns = [datas];
-      })
-      .catch(err => err);
+  modifierPersonne() {
+    this.NewDateExp.setDate(this.NewDateExp.getDate() + this. date.value);
+    console.log('date exp: ', this.campaigns[0].expiration_date.slice(0, 10));
+    console.log('new date', this.formatDate(this.NewDateExp));
+    console.log('form =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value );
+  }
+
+  async getCampaign(): Promise<any> {
+    try {
+      const datas = await this.apiClientService
+        .get(API_URI_CAMPAIGNS + '/' + this.globalId)
+        .toPromise();
+      // console.log('all questions: ', response);
+      return this.campaigns = [datas];
+    } catch (err) {
+      return err;
+    }
   }
 }
