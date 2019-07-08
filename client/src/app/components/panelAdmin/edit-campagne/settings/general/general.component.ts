@@ -48,23 +48,23 @@ export class GeneralComponent implements OnInit {
       this.lang = new FormControl(camp[0].langs);
       this.copypasteControl = new FormControl(camp[0].copy_paste);
       this.rapportControl = new FormControl(camp[0].sent_report);
-      console.log('form =', this.name, this.lang.value, this.copypasteControl.value, this.rapport.value);
-      console.log('campaign selected in /general = ', camp);
-      console.log('campaign langue = ', camp[0].langs);
-      if (camp[0].langs === 'EN') {
+      console.log('form =', this.lang.value);
+      // console.log('campaign selected in /general = ', camp);
+      // console.log('campaign langue = ', camp[0].langs);
+      if (this.lang.value === 'EN') {
         this.EN = true;
       }
-      if (camp[0].langs === 'FR') {
+      if (this.lang.value === 'FR') {
         this.FR = true;
       }
-      if (camp[0].langs === 'JP') {
+      if (this.lang.value === 'JP') {
         this.JP = true;
       }
-      if (camp[0].langs === 'ES') {
+      if (this.lang.value === 'ES') {
         this.ES = true;
       }
 
-      if (camp[0].copy_paste === true) {
+      if (this.copypasteControl.value === true) {
         this.copytrue = true;
         this.copyfalse = false;
       } else {
@@ -72,7 +72,7 @@ export class GeneralComponent implements OnInit {
         this.copyfalse = true;
       }
 
-      if (camp[0].sent_report === true) {
+      if (this.rapportControl.value === true) {
         this.rapporttrue = true;
         this.rapportfalse = false;
       } else {
@@ -88,11 +88,11 @@ export class GeneralComponent implements OnInit {
   }
 
   modifierPersonne() {
-     console.log('datevalue =', this.datevalue);	    
+    //  console.log('datevalue =', this.datevalue);	    
     this.NewDateExp.setDate(this.NewDateExp.getDate() + this.datevalue);
-    console.log('date exp: ', this.campaigns[0].expiration_date.slice(0, 10));
-    console.log('new date exp: ', this.NewDateExp);
-    console.log('form =', this.name.value, this.lang, this.copypaste.value, this.rapport.value );
+    // console.log('date exp: ', this.campaigns[0].expiration_date.slice(0, 10));
+    // console.log('new date exp: ', this.NewDateExp);
+    // console.log('form =', this.name.value, this.lang, this.copypaste.value, this.rapport.value );
 	   }
 
   getCampaign(): Promise<any> {
