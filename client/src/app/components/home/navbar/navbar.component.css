@@ -19,7 +19,7 @@
   background: -webkit-linear-gradient(top, #333333, #00000080)!important;
   background: -moz-linear-gradient(top, #333333, #00000080);
   background: linear-gradient(to bottom, #333333, #00000080);
-    transition: 3s;
+  transition: 3s;
   
 }
 

@@ -1,5 +1,5 @@
 import {
-  Component,
+Component,
   OnInit,
   ViewChild,
   HostListener,
@@ -16,29 +16,26 @@ export class NavbarComponent implements OnInit {
   constructor(@Inject(DOCUMENT) document) { }
 
   public shouldShow = true;
+  public Removeshould = true;
+  public IsheaderTrue = false;
+  public AddIndex = false;
   @ViewChild('header') header;
 
   public showOrHideManually() {
     this.shouldShow = !this.shouldShow;
-    if (this.shouldShow) {
-      this.header.nativeElement.classList.add('remove-index');
-      this.header.nativeElement.classList.remove('add-index');
-    } else {
-      this.header.nativeElement.classList.add('add-index');
-      this.header.nativeElement.classList.remove('remove-index');
-    }
+
   }
 
   @HostListener('window:scroll', ['$event'])
   public onWindowScroll() {
     if (window.pageYOffset > 100) {
-      const element = document.getElementById('navbar');
-      element.classList.add('style-nav-scroll');
 
-      console.log(element)
+      this.IsheaderTrue = true;
+
+
     } else {
-      const element = document.getElementById('navbar');
-      element.classList.remove('style-nav-scroll');
+      this.IsheaderTrue = false;
+
     }
     // if (window.pageYOffset < 100) {
     //   const element = document.getElementById('navbar');
@@ -52,7 +49,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
 
-    this.onWindowScroll()
+    this.onWindowScroll();
+
    }
 
 
