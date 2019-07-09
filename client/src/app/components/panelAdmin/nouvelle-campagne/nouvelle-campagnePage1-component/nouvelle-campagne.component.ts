@@ -14,7 +14,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
 
   @Output() incrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
-  @Input('technoByParent') technoParent;
+  @Input() technoByParent;
   public oAuthFormVerification: AuthFormVerification;
   public errorExperience: string;
   public errorRole: string;
@@ -49,8 +49,8 @@ export class NouvelleCampagnePage1Component implements OnInit {
   }
 
   ngOnInit() {
-    console.log('technoParent: ', this.technoParent);
-    this.technosSelect = this.technoParent;
+    console.log('technoParent: ', this.technoByParent);
+    this.technosSelect = this.technoByParent;
     this.apiClientService.get(API_URI_TECHNO).subscribe((datas) => {
       this.technos = datas;
     });
