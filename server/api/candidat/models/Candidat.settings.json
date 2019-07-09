@@ -30,10 +30,6 @@
     "invitation_date": {
       "default": "",
       "type": "date"
-    },
-    "updated_at": {
-      "default": "",
-      "type": "date"
     }
   }
 }
