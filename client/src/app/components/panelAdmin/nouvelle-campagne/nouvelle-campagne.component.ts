@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { AuthFormVerification } from 'src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator'
-import { HttpClient } from '@angular/common/http';
+import { AuthFormVerification } from 'src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator';
 
 @Component({
   selector: 'app-nouvelle-campagne',
@@ -13,14 +12,14 @@ export class NouvelleCampagneComponent implements OnInit {
   nNumeorPage: number;
   ParentFormCampagne: FormGroup;
   public oAuthFormVerification: AuthFormVerification;
+  technoFromChild: Array<string>;
 
-  constructor(private _formBuilder: FormBuilder,
-    private _http: HttpClient) {
+  constructor(private _formBuilder: FormBuilder) {
     this.nNumeorPage = 1;
     this.oAuthFormVerification = new AuthFormVerification();
     this.ParentFormCampagne = this._formBuilder.group({
       role: this.oAuthFormVerification.getRoleValidator(),
-      roleSelectedId: { 'id': '' },
+      roleSelectedId: { id: '' },
       techno: this.oAuthFormVerification.getTechnoValidator(),
       technoSelectedId: [],
       experience: ['junior', this.oAuthFormVerification.getExperienceValidator()],
@@ -28,8 +27,7 @@ export class NouvelleCampagneComponent implements OnInit {
       envoiRapportSimplifie: 'false',
       nomDeCampagne: '',
       langue: [],
-      questionSelectedId: { 'id': '' },
-      CampaignID: { 'id': '' }
+      CampaignID: { id: '' }
     });
   }
 
@@ -42,6 +40,15 @@ export class NouvelleCampagneComponent implements OnInit {
       );
       */
   }
+
+  getTechno(techno: Array<string>) {
+    this.technoFromChild = techno;
+}
+
+showtechno() {
+  console.log('this.technoFromChild: ', this.technoFromChild);
+}
+
 
   public nextPage(): void {
     this.nNumeorPage++;

@@ -7,11 +7,13 @@
     >
       <div [ngSwitch]="nNumeorPage">
         <div *ngSwitchCase="1">
-          <app-NouvelleCampagnePage1Component
+          <app-profile-rechercher
             (incrementPage)="nextPage()"
             [formCampagne]="ParentFormCampagne"
+            (valueChange)="getTechno($event)"
+            [technoByParent]="technoFromChild"
           >
-          </app-NouvelleCampagnePage1Component>
+          </app-profile-rechercher>
         </div>
         <div *ngSwitchCase="2">
           <app-NouvelleCampagnePage2Component
