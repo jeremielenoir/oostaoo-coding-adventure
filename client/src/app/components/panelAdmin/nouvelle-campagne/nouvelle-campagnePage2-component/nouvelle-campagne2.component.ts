@@ -9,19 +9,19 @@ import { ApiClientService, API_URI_CAMPAIGNS } from '../../../../api-client/api-
 })
 export class NouvelleCampagnePage2Component implements OnInit {
 
-  selectedLangue = 'FR'
+  selectedLangue = 'FR';
 
   @Output() incrementPage = new EventEmitter<any>();
   @Output() decrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
-  public errorNomCampgane: boolean = false;
+  public errorNomCampgane = false;
 
   constructor(public apiClientService: ApiClientService) { }
 
   ngOnInit() {
     this.formCampagne.patchValue({
       nomDeCampagne: this.formCampagne.value.role + ' - ' + this.formCampagne.value.experience
-    })
+    });
   }
 
   postData() {
