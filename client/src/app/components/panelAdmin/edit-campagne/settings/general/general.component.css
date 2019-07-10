@@ -52,12 +52,6 @@
     font-weight: bold;
 }
 
-.button {
-    display: flex;
-    height: 50px;
-    margin: 20px 0 90px;
-}
-
 .example-radio-button {
     margin: 0 10px 0 0;
 }
@@ -102,6 +96,8 @@
 }
 
 .button {
+    height: 50px;
+    margin: 20px 0 90px;
     width: 48%;
     display: flex;
     justify-content: center;
