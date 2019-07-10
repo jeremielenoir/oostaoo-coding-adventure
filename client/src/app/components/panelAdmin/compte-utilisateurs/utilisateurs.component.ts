@@ -34,6 +34,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class UtilisateursComponent implements OnInit {
 
+
+
+  constructor() { }
+
   public PrenomValue = 'Jérémie';
   public NomValue = 'lenoir';
   public MailValue = 'lenoir.jeremie@oostaoo.com';
@@ -50,17 +54,22 @@ export class UtilisateursComponent implements OnInit {
   public prenomIsactiveUpdate = false;
   public emailIsactiveUpdate = false;
 
+  public displayedColumns: string[] = ['name' , 'mail' , 'gestion' , 'symbol'];
+  public dataSource = ELEMENT_DATA;
 
-  constructor() { }
+
+
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[3]);
+
+
+
+  emailFormControl = new FormControl('' , [Validators.required]);
+  
 
   @ViewChild('form') formulaire;
 
   ngOnInit() {
-
-  }
-
-  ngAfterViewInit() {
-
 
   }
 
@@ -101,19 +110,19 @@ export class UtilisateursComponent implements OnInit {
 
 
   public Hundelesubmit(event){
-    let prenom = this.formulaire.nativeElement.prenom.value;
-    let nom = this.formulaire.nativeElement.nom.value;
-    let email = this.formulaire.nativeElement.email.value;
+    const prenom = this.formulaire.nativeElement.prenom.value;
+    const nom = this.formulaire.nativeElement.nom.value;
+    const email = this.formulaire.nativeElement.email.value;
 
-    if(prenom === '') {
-      this.prenomIsactive;
+    if (prenom === '') {
+      return this.prenomIsactive;
     }
 
-    if(nom === ''){
+    if (nom === '') {
       this.nomIsactive = true;
     }
 
-    if(email === ''){
+    if (email === '') {
       this.emailIsactive = true;
     }
 
@@ -123,9 +132,7 @@ export class UtilisateursComponent implements OnInit {
 
     const champValue = event.target.value;
 
-    if(champValue.length < 1)
-    {
-
+    if (champValue.length < 1) {
       this.prenomIsactive = true;
 
     } else {
@@ -137,10 +144,9 @@ export class UtilisateursComponent implements OnInit {
 
   public is_valid_nom(event) {
 
-    let champValue = event.target.value;
+    const champValue = event.target.value;
 
-    if(champValue.length < 1)
-    {
+    if (champValue.length < 1) {
 
       this.nomIsactive = true;
 
@@ -153,25 +159,21 @@ export class UtilisateursComponent implements OnInit {
 
   public is_valid_emaill(event){
 
-    let verify_mail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const verifyMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    let champValue = event.target.value;
+    const champValue = event.target.value;
 
-    if(champValue.length < 1)
-    {
+    if (champValue.length < 1) {
       this.emailIsactive = true;
       this.Textmail = 'Obligatoire';
-    } else
-    {
+    } else {
 
-        if(verify_mail.test(champValue))
-        {
+        if (verifyMail.test(champValue)) {
 
           this.Textmail = 'Obligatoire';
           this.emailIsactive = false;
 
-        } else
-        {
+        } else {
           this.emailIsactive = true;
           this.Textmail = 'Email invalide';
         }
@@ -190,8 +192,7 @@ export class UtilisateursComponent implements OnInit {
 
     console.log(champValue)
 
-    if(champValue.length < 1)
-    {
+    if (champValue.length < 1) {
 
       this.prenomIsactiveUpdate = true;
 
@@ -208,8 +209,7 @@ export class UtilisateursComponent implements OnInit {
 
     this.NomValue = '';
 
-    if(champValue.length < 1)
-    {
+    if (champValue.length < 1) {
 
       this.nomIsactiveUpdate = true;
 
@@ -222,28 +222,24 @@ export class UtilisateursComponent implements OnInit {
 
   public is_valid_email_update(event) {
 
-    const verify_mail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const verifyMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const champValue = event.target.value;
 
     this.MailValue = event.target.value;
 
 
-    if(champValue.length < 1)
-    {
+    if (champValue.length < 1) {
       this.emailIsactiveUpdate = true;
       this.Textmail = 'Obligatoire';
-    } else
-    {
+    } else {
 
-        if(verify_mail.test(champValue))
-        {
+        if (verifyMail.test(champValue)) {
 
           this.Textmail = 'Obligatoire';
           this.emailIsactiveUpdate = false;
 
-        } else
-        {
+        } else {
           this.emailIsactiveUpdate = true;
           this.Textmail = 'Email invalide';
         }
@@ -251,24 +247,11 @@ export class UtilisateursComponent implements OnInit {
     }
 
   }
-
-  public displayedColumns: string[] = ['name' , 'mail' , 'gestion' , 'symbol'];
-  public dataSource = ELEMENT_DATA;
-
-
-
-  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
-  position = new FormControl(this.positionOptions[3]);
-
-
-
-  emailFormControl = new FormControl('' , [Validators.required]);
-
-  matcher = new MyErrorStateMatcher();
-
 }
 
+
 export class MyErrorStateMatcher implements ErrorStateMatcher {
+  matcher = new MyErrorStateMatcher();
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
