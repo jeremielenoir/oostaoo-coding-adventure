@@ -1,4 +1,4 @@
-import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit,AfterViewInit, ViewChild} from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { TooltipPosition } from '@angular/material';
@@ -58,6 +58,7 @@ export class UtilisateursComponent implements OnInit {
   public dataSource = ELEMENT_DATA;
 
 
+<<<<<<< Updated upstream
 
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[3]);
@@ -70,8 +71,14 @@ export class UtilisateursComponent implements OnInit {
   @ViewChild('form') formulaire;
 
   ngOnInit() {
+=======
+ ngOnInit(){
 
-  }
+ }
+
+  @ViewChild('form') formulaire;
+>>>>>>> Stashed changes
+
 
   public param_cog() {
 
@@ -80,6 +87,11 @@ export class UtilisateursComponent implements OnInit {
   }
 
   public param_cog_non_active() {
+
+    this.formulaire.nativeElement.prenom.value = '';
+    this.formulaire.nativeElement.nom.value = '';
+    this.formulaire.nativeElement.email.value = '';
+
 
    this.shadowcog1 = false;
 
@@ -114,8 +126,14 @@ export class UtilisateursComponent implements OnInit {
     const nom = this.formulaire.nativeElement.nom.value;
     const email = this.formulaire.nativeElement.email.value;
 
+<<<<<<< Updated upstream
     if (prenom === '') {
       return this.prenomIsactive;
+=======
+    if(prenom === '') {
+
+      this.prenomIsactive = true;
+>>>>>>> Stashed changes
     }
 
     if (nom === '') {

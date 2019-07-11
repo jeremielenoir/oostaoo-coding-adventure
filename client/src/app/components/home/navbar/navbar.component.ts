@@ -37,13 +37,7 @@ export class NavbarComponent implements OnInit {
       this.IsheaderTrue = false;
 
     }
-    // if (window.pageYOffset < 100) {
-    //   const element = document.getElementById('navbar');
-    //   element.classList.add('style-nav-scroll2');
-    // } else {
-    //   const element = document.getElementById('navbar');
-    //   element.classList.remove('style-nav-scroll2');
-    // }
+
   }
 
 
@@ -52,8 +46,5 @@ export class NavbarComponent implements OnInit {
     this.onWindowScroll();
 
    }
-
-
-
 
 }
