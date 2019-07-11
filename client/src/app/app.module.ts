@@ -62,6 +62,7 @@ import { CandidatsMailComponent } from './components/panelAdmin/edit-campagne/ca
 import { GeneralComponent } from './components/panelAdmin/edit-campagne/settings/general/general.component';
 import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne/settings/personnalisation/personnalisation.component';
 import { ClientTestComponent } from './components/panelAdmin/client-test/client-test.component';
+import { TestComponent } from './components/panelAdmin/client-test/test/test.component';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -103,7 +104,8 @@ import { ClientTestComponent } from './components/panelAdmin/client-test/client-
     CandidatsMailComponent,
     GeneralComponent,
     PersonnalisationComponent,
-    ClientTestComponent
+    ClientTestComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
