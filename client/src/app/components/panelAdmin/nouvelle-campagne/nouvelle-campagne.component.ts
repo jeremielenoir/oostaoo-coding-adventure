@@ -13,6 +13,7 @@ export class NouvelleCampagneComponent implements OnInit {
   ParentFormCampagne: FormGroup;
   public oAuthFormVerification: AuthFormVerification;
   technoFromChild: Array<string>;
+  selectProfilFromChild: string;
 
   constructor(private _formBuilder: FormBuilder) {
     this.nNumeorPage = 1;
@@ -43,11 +44,15 @@ export class NouvelleCampagneComponent implements OnInit {
 
   getTechno(techno: Array<string>) {
     this.technoFromChild = techno;
-}
+  }
 
-showtechno() {
-  console.log('this.technoFromChild: ', this.technoFromChild);
-}
+  getProfil(profil: string) {
+    this.selectProfilFromChild = profil;
+  }
+
+  showtechno() {
+    console.log('this.technoFromChild: ', this.technoFromChild);
+  }
 
 
   public nextPage(): void {

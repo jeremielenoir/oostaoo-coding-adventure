@@ -11,7 +11,9 @@
             (incrementPage)="nextPage()"
             [formCampagne]="ParentFormCampagne"
             (valueChange)="getTechno($event)"
+            (valueChangeProfil)="getProfil($event)"
             [technoByParent]="technoFromChild"
+            [profilByParent]="selectProfilFromChild"
           >
           </app-profile-rechercher>
         </div>
