@@ -19,6 +19,7 @@
               <mat-select
                 name="role"
                 formControlName="role"
+                [(ngModel)]="roleSelect"
                 (selectionChange)="selected($event)"
               >
                 <mat-option *ngFor="let role of profiles" [value]="role.name">{{
@@ -48,6 +49,7 @@
                 name="techno"
                 formControlName="techno"
                 [(ngModel)]="technosSelect"
+                (selectionChange)="getTechnoChecked()"
               >
                 <mat-option
                   *ngFor="let techno of technos"
