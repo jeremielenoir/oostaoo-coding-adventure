@@ -29,17 +29,19 @@ export class NouvelleCampagnePage2Component implements OnInit {
       utilisationCopieColler: this.formCampagne.value.utilisationCopieColler,
       envoiRapportSimplifie: this.formCampagne.value.envoiRapportSimplifie,
       langue: this.selectedLangue
-    })
+    });
     // Confirm true for post
+    let truecp;
     if (this.formCampagne.value.utilisationCopieColler === 'true') {
-      var truecp = true;
+      truecp = true;
     } else {
-      var truecp = false;
+      truecp = false;
     }
+    let envoiRapportSimplifie;
     if (this.formCampagne.value.envoiRapportSimplifie === 'true') {
-      var envoiRapportSimplifie = true;
+       envoiRapportSimplifie = true;
     } else {
-      var envoiRapportSimplifie = false;
+       envoiRapportSimplifie = false;
     }
 
     this.apiClientService.post(API_URI_CAMPAIGNS, {
