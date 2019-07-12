@@ -15,12 +15,19 @@ export class NouvelleCampagnePage1Component implements OnInit {
   @Output() incrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
   @Input() technoByParent;
+  @Input() profilByParent;
   public oAuthFormVerification: AuthFormVerification;
   public errorExperience: string;
   public errorRole: string;
   public errorTechno: string;
 
+  public technos: any[];
+  public profiles: any[];
+  public technosSelect: Array<string>;
+  public roleSelect: string;
+
   @Output() valueChange = new EventEmitter();
+  @Output() valueChangeProfil = new EventEmitter();
 
   TechnoList: string[] = ['AWS', 'Android', 'Angular 2+', 'AngularJS (1.x)', 'Apache Spark', 'C', 'C#', 'C++',
     'Data Science', 'Docker', 'Git', 'Hadoop Ecosystem', 'Java', 'Javascript, HTML, CSS',
@@ -38,12 +45,6 @@ export class NouvelleCampagnePage1Component implements OnInit {
     'Développeur Web (JavaScript, HTML, CSS)', 'Expert Git', 'Ingénieur DevOps AWS/Docker',
     'SysAdmin Windows', 'Personnalisé'];
 
-
-  public technos: any[];
-  public profiles: any[];
-  public technosSelect: Array<string>;
-
-
   constructor(public apiClientService: ApiClientService) {
     this.oAuthFormVerification = new AuthFormVerification();
   }
@@ -51,6 +52,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
   ngOnInit() {
     console.log('technoParent: ', this.technoByParent);
     this.technosSelect = this.technoByParent;
+    this.roleSelect = this.profilByParent;
     this.apiClientService.get(API_URI_TECHNO).subscribe((datas) => {
       this.technos = datas;
     });
@@ -59,19 +61,18 @@ export class NouvelleCampagnePage1Component implements OnInit {
     });
   }
   selected(event: MatSelectChange) {
-    // console.log(event.value);
     for (const iterator of this.profiles) {
-      // console.log(this.profiles[i])
+      // console.log('iterator profiles: ', iterator);
       const roleData = iterator.name;
-      // console.log(roleData)
+      console.log(roleData);
       if (event.value === roleData) {
-        // console.log(this.profiles[i].id)
         this.formCampagne.patchValue({
           roleSelectedId: { id: iterator.id }
         });
         const technoData = [];
         const technoDataID = [];
         iterator.technologies.forEach((item) => {
+          // console.log('item forEach : ', item);
           technoData.push(item.name);
           technoDataID.push(item.id);
         });
@@ -79,16 +80,58 @@ export class NouvelleCampagnePage1Component implements OnInit {
         this.formCampagne.patchValue({
           technoSelectedId: technoDataID
         });
-        // console.log(technoDataID)
-        // console.log(this.formCampagne.value)
       }
     }
+    console.log('this.formCampagne.value: ', this.formCampagne.value);
   }
+  getTechnoChecked() {
+    this.roleSelect = 'Personnalisé';
+    console.log(this.formCampagne.value.techno);
+    let nbSimilarTechno = 0;
+    let myprofile;
+    for (const profile of this.profiles) {
+      console.log('profile : ', profile);
+      myprofile = {
+        profileName: profile,
+        nb: profile.technologies.length,
+        techno: profile.technologies
+      };
+      // console.log(myprofile);
+      // this.profileHasTechnologies(profile, this.formCampagne.value.techno);
+    }
+    const technoDataID = [];
+    for (const techno of this.technos) {
+      this.formCampagne.value.techno.forEach(element => {
+        if (element === techno.name) {
+          technoDataID.push(techno.id);
+        }
+      });
+    }
+    this.formCampagne.patchValue({
+      technoSelectedId: technoDataID
+    });
+  }
+
+  // profileHasTechnologies(profile: any, listTechno: Array<string>): boolean {
+  //   const nbCounterTechno = 0;
+  //   const Technoprofil = [];
+  //   for (const techno of profile.technologies) {
+  //     // console.log('techno: ', techno);
+  //     for (const technoFromList of listTechno) {
+  //       // console.log('technoFromList: ', technoFromList);
+  //       if (techno.name === technoFromList && profile.technologies.length === listTechno.length && listTechno.indexOf(techno.name) !== -1) {
+  //         // console.log(profile);
+  //       }
+  //     }
+  //   }
+  //   return true;
+  // }
 
   valueChanged() { // You can give any function name
     console.log('this.technosSelect: ', this.technosSelect);
     this.valueChange.emit(this.technosSelect);
-}
+    this.valueChangeProfil.emit(this.roleSelect);
+  }
 
   // validation du formulaire et passage à l'étap suivante.
   public onIncrementPage(pDatafromValue: any): void {
