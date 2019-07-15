@@ -50,9 +50,8 @@ export class NouvelleCampagnePage1Component implements OnInit {
   }
 
   ngOnInit() {
-    console.log('technoParent: ', this.technoByParent);
-    this.technosSelect = this.technoByParent;
-    this.roleSelect = this.profilByParent;
+    // this.technosSelect = this.technoByParent;
+    // this.roleSelect = this.profilByParent;
     this.apiClientService.get(API_URI_TECHNO).subscribe((datas) => {
       this.technos = datas;
     });
@@ -64,7 +63,6 @@ export class NouvelleCampagnePage1Component implements OnInit {
     for (const iterator of this.profiles) {
       // console.log('iterator profiles: ', iterator);
       const roleData = iterator.name;
-      console.log(roleData);
       if (event.value === roleData) {
         this.formCampagne.patchValue({
           roleSelectedId: { id: iterator.id }
@@ -73,59 +71,70 @@ export class NouvelleCampagnePage1Component implements OnInit {
         const technoDataID = [];
         iterator.technologies.forEach((item) => {
           // console.log('item forEach : ', item);
-          technoData.push(item.name);
+          technoData.push(item);
           technoDataID.push(item.id);
         });
         this.technosSelect = technoData;
+        console.log('this.technosSelect: ', this.technosSelect);
         this.formCampagne.patchValue({
+          techno: technoData,
           technoSelectedId: technoDataID
         });
       }
     }
     console.log('this.formCampagne.value: ', this.formCampagne.value);
   }
+
+
   getTechnoChecked() {
-    this.roleSelect = 'Personnalisé';
-    console.log(this.formCampagne.value.techno);
-    let nbSimilarTechno = 0;
-    let myprofile;
+    console.log('this.formCampagne.value.techno: ', this.formCampagne.value.techno);
     for (const profile of this.profiles) {
-      console.log('profile : ', profile);
-      myprofile = {
-        profileName: profile,
-        nb: profile.technologies.length,
-        techno: profile.technologies
-      };
-      // console.log(myprofile);
-      // this.profileHasTechnologies(profile, this.formCampagne.value.techno);
+      if (this.profileHasTechnologies(profile, this.formCampagne.value.techno)) {
+        console.log('profile : ', profile);
+        this.roleSelect = profile.name;
+        break;
+      } else {
+        this.roleSelect = 'Personnalisé';
+      }
     }
     const technoDataID = [];
-    for (const techno of this.technos) {
-      this.formCampagne.value.techno.forEach(element => {
-        if (element === techno.name) {
-          technoDataID.push(techno.id);
-        }
-      });
-    }
+
+    this.formCampagne.value.techno.forEach(element => {
+      technoDataID.push(element.id);
+    });
+
     this.formCampagne.patchValue({
       technoSelectedId: technoDataID
     });
+    console.log('this.formCampagne.value: ', this.formCampagne.value);
   }
 
-  // profileHasTechnologies(profile: any, listTechno: Array<string>): boolean {
-  //   const nbCounterTechno = 0;
-  //   const Technoprofil = [];
-  //   for (const techno of profile.technologies) {
-  //     // console.log('techno: ', techno);
-  //     for (const technoFromList of listTechno) {
-  //       // console.log('technoFromList: ', technoFromList);
-  //       if (techno.name === technoFromList && profile.technologies.length === listTechno.length && listTechno.indexOf(techno.name) !== -1) {
-  //         // console.log(profile);
-  //       }
-  //     }
-  //   }
-  //   return true;
-  // }
+  compareObjects(o1: any, o2: any): boolean {
+    // console.log('o1: ', o1, 'o2: ', o2);
+    if (!o1 || !o2) {
+      return false;
+    }
+    return o1.id === o2.id;
+  }
+
+
+  profileHasTechnologies(profile: any, listTechno: Array<string>): boolean {
+
+    if (profile.technologies.length !== listTechno.length) {
+      return false;
+    }
+
+    let nbCounterTechno = 0;
+    for (const techno of profile.technologies) {
+      // console.log('techno: ', techno);
+      for (const technoFromList of listTechno) {
+        if (techno.name === technoFromList['name']) {
+          nbCounterTechno++;
+        }
+      }
+    }
+    return profile.technologies.length === nbCounterTechno;
+  }
 
   valueChanged() { // You can give any function name
     console.log('this.technosSelect: ', this.technosSelect);
