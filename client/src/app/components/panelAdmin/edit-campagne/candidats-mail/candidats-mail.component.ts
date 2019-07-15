@@ -26,6 +26,7 @@ export class CandidatsMailComponent implements OnInit {
                   count++;
                 }
                 this.nbCandidat = count;
+                console.log('DATA', this.data);
 }
 
   ngOnInit() {
@@ -64,20 +65,16 @@ export class CandidatsMailComponent implements OnInit {
     return this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.data.globalId, {
       candidats: idCandidat
     }).toPromise()
-    .then(
-      (res) => {
-        console.log(res);
-        window.location.reload();
+    .then((res) => {
+        console.log('CANDIDATS', res);
+        this.dialog.closeAll();
       },
       err => console.log(err)
     );
   }
 
-  onClose(): void {
-    this.dialog.closeAll();
-  }
   retourCandidat() {
-    this.dialogRef.close();
+    this.dialogRef.close('tetet');
   }
 
   showCandidats() {

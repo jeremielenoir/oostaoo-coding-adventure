@@ -29,6 +29,11 @@ export class CandidatsComponent implements OnInit {
       this.globalId = params.id;
       // console.log('data', this.globalId);
     });
+
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getCampaign();
+
+    })
   }
 
   choices = [
@@ -43,20 +48,30 @@ export class CandidatsComponent implements OnInit {
   ];
 
   openDialog() {
-    this.dialog.open(InviteCandidat, {
+    const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
       data: this.globalId,
       height: '80vh'
     });
+
+    inviteCandidatDialog.afterClosed().subscribe((data) => {
+      this.getCampaign().then(datas => {
+        console.log('AFTER CLOSE ALL DATAS', datas);
+      });
+    });
+
   }
 
   ngOnInit() {
-    this.getCampaign();
+    this.getCampaign().then(datas => {
+      console.log('INIT DATAS', datas);
+    });
   }
 
-  getCampaign() {
-    const promise = new Promise((resolve, reject) => {
+  getCampaign(): Promise<any> {
+
       const apiURL = API_URI_CAMPAIGNS + '/' + this.globalId;
-      this.apiClientService
+
+      return this.apiClientService
         .get(apiURL)
         .toPromise()
         .then(res => { // Success
@@ -71,33 +86,37 @@ export class CandidatsComponent implements OnInit {
           } else {
             this.ViewCandidats = 'CandidatFalse';
           }
-          resolve(this.campaigns);
-        }, msg => reject(msg));
-      return promise;
-    }).then((data) => {
-      console.log('data: ', data);
-      // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
-      const defaultColumns = ['Checked', 'Candidats', 'Dernière activité', 'Score'];
-      const getInfoCandidat = [];
-      for (const candidat of this.candidats) {
-        getInfoCandidat.push({
-          Candidats: candidat.Nom,
-          Email: candidat.email,
-          Checked: false
+          return this.campaigns;
+        })
+        .then((data) => {
+          // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
+          const defaultColumns = ['Checked', 'Candidats', 'Dernière activité', 'Score'];
+          const getInfoCandidat = [];
+          for (const candidat of this.candidats) {
+            getInfoCandidat.push({
+              Candidats: candidat.Nom,
+              Email: candidat.email,
+              Checked: false
+            });
+          }
+          // INFOS FOR ADD COLUMN
+          const getTechnos = [];
+          for (const technos of this.technologies) {
+            getTechnos.push(technos.name);
+          }
+          this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
+
+          return getInfoCandidat;
+
+        }).then( (getInfoCandidat) => {
+            console.log('INFOS CANDIDATS', getInfoCandidat);
+            this.infosCandidats = new MatTableDataSource(getInfoCandidat);
+            this.infosCandidats.sort = this.sort;
+            return this.campaigns;
+        })
+        .catch(error => {
+          console.log('ERROR', error);
         });
-      }
-      // INFOS FOR ADD COLUMN
-      const getTechnos = [];
-      for (const technos of this.technologies) {
-        getTechnos.push(technos.name);
-      }
-      this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
-      console.log('candidats campaign: ', getInfoCandidat);
-      setTimeout(() => {
-        this.infosCandidats = new MatTableDataSource(getInfoCandidat);
-        this.infosCandidats.sort = this.sort;
-      }, 1000);
-    });
   }
 
   applyFilter(filterValue: string) {

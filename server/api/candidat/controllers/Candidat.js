@@ -1,5 +1,17 @@
 'use strict';
 
+const nodemailer = require('nodemailer');
+
+// Create reusable transporter object using SMTP transport.
+const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'lenoir.jeremie@oostaoo.com',
+    pass: 'marijuana'
+  }
+});
+
+
 /**
  * Candidat.js controller
  *
@@ -49,7 +61,25 @@ module.exports = {
    */
 
   create: async (ctx) => {
-    return strapi.services.candidat.add(ctx.request.body);
+    try{
+      let candidat = await strapi.services.candidat.add(ctx.request.body);
+
+      const options = {
+        to: 'lenoir.jeremie@gmail.com',
+        from: 'lenoir.jeremie@gmail.com',
+        replyTo: 'no-reply@strapi.io',
+        subject: 'Use strapi email provider successfully',
+        text: 'Hello world!',
+        html: 'Hello world!'
+      };
+
+      await transporter.sendMail(options);
+
+      return candidat;
+    }catch(e){
+      return null;
+    }
+
   },
 
   /**
