@@ -50,8 +50,8 @@ export class NouvelleCampagnePage1Component implements OnInit {
   }
 
   ngOnInit() {
-    // this.technosSelect = this.technoByParent;
-    // this.roleSelect = this.profilByParent;
+    this.technosSelect = this.technoByParent;
+    this.roleSelect = this.profilByParent;
     this.apiClientService.get(API_URI_TECHNO).subscribe((datas) => {
       this.technos = datas;
     });
