@@ -1,1 +1,5 @@
 @import '../candidats/invite-candidat.css';
+.textarea-champ{
+    min-width:860px;
+    height:410px;
+}

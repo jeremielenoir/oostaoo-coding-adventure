@@ -9,39 +9,30 @@
   </header>
   <hr />
   <div class="content-modal-question"></div>
-  <p><b>Sujet :</b></p>
-  <p>Évaluation technique</p>
-  <br />
 
-  <p><b>Message :</b></p>
-  <p *ngFor="let candidat of candidats">Bonjour {{ candidat.name }},</p>
-  <br />
 
-  <p>Votre candidature a retenu notre attention.</p>
-  <br />
+    <div class="col-12 form-group">
 
-  <p>
-    Dans le cadre de notre processus de recrutement, nous avons le plaisir de
-    vous inviter à passer une évaluation technique. Vous pourrez choisir le
-    moment le plus approprié pour vous pour passer ce test.
-  </p>
-  <br />
+      <label>Sujet :</label>
 
-  <p>
-    Quand vous serez prêt(e), cliquez sur le lien ci-dessous pour accéder à la
-    page d’accueil de votre session : "LINK INVITATION"
-  </p>
+      <input type="" name="" class="form-control" [(ngModel)]="sujet"/>
+    
+    </div>
+    <br />
 
-  <p>Bonne chance !</p>
-  <br />
+     <div class="col-12 form-group">
 
-  <p>Cordialement,</p>
-</div>
+      <label>Message :</label>
 
-<button
-  (click)="updateCampaignPostCandidats()"
->
-  ENVOYER EMAIL
-</button>
-<button (click)="retourCandidat()">RETOUR AUX CANDIDATS</button>
-<button (click)="showCandidats()">showCandidats</button>
+      <textarea class="form-control textarea-champ" [(ngModel)]="contenu"></textarea>
+    
+    </div>
+
+  
+  <button
+    (click)="updateCampaignPostCandidats()"
+  >
+    ENVOYER EMAIL
+  </button>
+  <button (click)="retourCandidat()">RETOUR AUX CANDIDATS</button>
+  <button (click)="showCandidats()">showCandidats</button>

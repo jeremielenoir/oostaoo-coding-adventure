@@ -16,6 +16,10 @@ export class CandidatsMailComponent implements OnInit {
   public candidats: any;
   public nbCandidat: number;
 
+  public sujet = 'Évaluation technique';
+  public name:string[] = [];
+  public contenu: string;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data,
     public apiClientService: ApiClientService,
     private dialog: MatDialog,
@@ -35,6 +39,35 @@ export class CandidatsMailComponent implements OnInit {
       .subscribe(datas => {
         this.campaigns = [datas];
       });
+
+        for(let candidat of this.candidats){
+
+          this.name.push(candidat.name)
+
+      }        
+
+       this.contenu = `
+
+       Bonjour ${this.name},
+
+
+      Votre candidature a retenu notre attention.
+    
+        Dans le cadre de notre processus de recrutement, nous avons le plaisir de
+        vous inviter à passer une évaluation technique. Vous pourrez choisir le
+        moment le plus approprié pour vous pour passer ce test.
+  
+        Quand vous serez prêt(e), cliquez sur le lien ci-dessous pour accéder à la
+        page d’accueil de votre session : "LINK INVITATION"
+    
+
+      Bonne chance !
+
+
+        Cordialement
+    
+    `;
+
   }
   postCandidat(nom, emailContact): Promise<any> {
     return this.apiClientService.post(API_URI_CANDIDATS, {
@@ -64,7 +97,9 @@ export class CandidatsMailComponent implements OnInit {
 
   updateCampaign(idCandidat): Promise<any> {
     return this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.data.globalId, {
-      candidats: idCandidat
+      candidats: idCandidat,
+      email_title: this.sujet,
+      email_content: this.contenu
     }).toPromise()
       .then((res) => {
         console.log('CANDIDATS', res);
