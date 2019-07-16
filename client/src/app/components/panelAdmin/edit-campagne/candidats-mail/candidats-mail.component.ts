@@ -17,17 +17,17 @@ export class CandidatsMailComponent implements OnInit {
   public nbCandidat: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data,
-              public apiClientService: ApiClientService,
-              private dialog: MatDialog,
-              public dialogRef: MatDialogRef<CandidatsMailComponent>) {
-                this.candidats = this.data.contact;
-                let count = 0;
-                for (const iterator of this.data.contact) {
-                  count++;
-                }
-                this.nbCandidat = count;
-                console.log('DATA', this.data);
-}
+    public apiClientService: ApiClientService,
+    private dialog: MatDialog,
+    public dialogRef: MatDialogRef<CandidatsMailComponent>) {
+    this.candidats = this.data.contact;
+    let count = 0;
+    for (const iterator of this.data.contact) {
+      count++;
+    }
+    this.nbCandidat = count;
+    console.log('DATA', this.data);
+  }
 
   ngOnInit() {
     this.apiClientService
@@ -40,18 +40,19 @@ export class CandidatsMailComponent implements OnInit {
     return this.apiClientService.post(API_URI_CANDIDATS, {
       Nom: nom,
       email: emailContact,
+      token: this.data.globalId
     }).toPromise()
       .then(
-      (res) => {
-        console.log('res', res.id);
-        const idCandidat = [];
-        idCandidat.push(res.id);
-        return idCandidat;
-      },
-      err => console.log(err)
-    ).then(idCandidat => {
-      this.updateCampaign(idCandidat);
-    });
+        (res) => {
+          console.log('res', res.id);
+          const idCandidat = [];
+          idCandidat.push(res.id);
+          return idCandidat;
+        },
+        err => console.log(err)
+      ).then(idCandidat => {
+        this.updateCampaign(idCandidat);
+      });
   }
 
   updateCampaignPostCandidats() {
@@ -65,16 +66,16 @@ export class CandidatsMailComponent implements OnInit {
     return this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.data.globalId, {
       candidats: idCandidat
     }).toPromise()
-    .then((res) => {
+      .then((res) => {
         console.log('CANDIDATS', res);
         this.dialog.closeAll();
       },
-      err => console.log(err)
-    );
+        err => console.log(err)
+      );
   }
 
   retourCandidat() {
-    this.dialogRef.close('tetet');
+    this.dialogRef.close();
   }
 
   showCandidats() {
