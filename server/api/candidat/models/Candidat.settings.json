@@ -30,6 +30,10 @@
     "invitation_date": {
       "default": "",
       "type": "date"
+    },
+    "token": {
+      "default": "",
+      "type": "string"
     }
   }
 }
