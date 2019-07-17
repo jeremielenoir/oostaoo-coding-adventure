@@ -17,20 +17,20 @@ export class CandidatsMailComponent implements OnInit {
   public nbCandidat: number;
 
   public sujet = 'Évaluation technique';
-  public name:string[] = [];
+  public name: string[] = [];
   public contenu: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data,
-    public apiClientService: ApiClientService,
-    private dialog: MatDialog,
-    public dialogRef: MatDialogRef<CandidatsMailComponent>) {
+              public apiClientService: ApiClientService,
+              private dialog: MatDialog,
+              public dialogRef: MatDialogRef<CandidatsMailComponent>) {
     this.candidats = this.data.contact;
     let count = 0;
     for (const iterator of this.data.contact) {
       count++;
     }
     this.nbCandidat = count;
-    console.log('DATA', this.data);
+    // console.log('DATA', this.data);
   }
 
   ngOnInit() {
@@ -40,32 +40,32 @@ export class CandidatsMailComponent implements OnInit {
         this.campaigns = [datas];
       });
 
-        for(let candidat of this.candidats){
+    for (const candidat of this.candidats) {
 
-          this.name.push(candidat.name)
+      this.name.push(candidat.name);
 
-      }        
+    }
 
-       this.contenu = `
+    this.contenu = `
 
        Bonjour ${this.name},
 
 
       Votre candidature a retenu notre attention.
-    
+
         Dans le cadre de notre processus de recrutement, nous avons le plaisir de
         vous inviter à passer une évaluation technique. Vous pourrez choisir le
         moment le plus approprié pour vous pour passer ce test.
-  
+
         Quand vous serez prêt(e), cliquez sur le lien ci-dessous pour accéder à la
-        page d’accueil de votre session : "LINK INVITATION"
-    
+        page d’accueil de votre session : "https://localhost:4200/evaluate/.."
+
 
       Bonne chance !
 
 
         Cordialement
-    
+
     `;
 
   }
@@ -73,7 +73,9 @@ export class CandidatsMailComponent implements OnInit {
     return this.apiClientService.post(API_URI_CANDIDATS, {
       Nom: nom,
       email: emailContact,
-      token: this.data.globalId
+      token: this.data.globalId,
+      email_title: this.sujet,
+      email_content: this.contenu
     }).toPromise()
       .then(
         (res) => {
