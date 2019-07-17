@@ -64,6 +64,8 @@ import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne
 import { ClientTestComponent } from './components/panelAdmin/client-test/client-test.component';
 import { TestComponent } from './components/panelAdmin/client-test/test/test.component';
 
+import { NgxEditorModule } from 'ngx-editor';
+
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
     NouvelleCampagnePage3Component, CandidatsMailComponent],
@@ -119,7 +121,8 @@ import { TestComponent } from './components/panelAdmin/client-test/test/test.com
     DragScrollModule,
     HttpClientModule,
     Ng2SearchPipeModule,
-    RoundProgressModule
+    RoundProgressModule,
+    NgxEditorModule
   ],
   providers: [
     ApiClientService,
