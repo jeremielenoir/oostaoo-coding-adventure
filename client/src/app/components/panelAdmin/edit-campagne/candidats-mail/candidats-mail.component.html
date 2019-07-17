@@ -15,7 +15,8 @@
 
       <label>Sujet :</label>
 
-      <input type="" name="" class="form-control" [(ngModel)]="sujet"/>
+      <input type="" name="" class="form-control" [(ngModel)]="sujet" *ngIf="show"/>
+      <p>{{sujet}}</p>
     
     </div>
     <br />
@@ -24,8 +25,9 @@
 
       <label>Message :</label>
 
-      <textarea class="form-control textarea-champ" [(ngModel)]="contenu"></textarea>
-    
+      <app-ngx-editor *ngIf="show" [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="htmlContent"></app-ngx-editor>
+      <!-- <textarea class="form-control textarea-champ" ></textarea> -->
+      <p>{{htmlContent}}</p>
     </div>
 
   
@@ -35,4 +37,4 @@
     ENVOYER EMAIL
   </button>
   <button (click)="retourCandidat()">RETOUR AUX CANDIDATS</button>
-  <button (click)="showCandidats()">showCandidats</button>
+  <button (click)="show=!show">Modifier</button>

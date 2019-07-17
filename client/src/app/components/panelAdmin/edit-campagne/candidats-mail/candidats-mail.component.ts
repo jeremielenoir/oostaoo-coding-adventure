@@ -18,7 +18,8 @@ export class CandidatsMailComponent implements OnInit {
 
   public sujet = 'Évaluation technique';
   public name: string[] = [];
-  public contenu: string;
+  public htmlContent: any;
+  public show = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data,
               public apiClientService: ApiClientService,
@@ -46,36 +47,19 @@ export class CandidatsMailComponent implements OnInit {
 
     }
 
-    this.contenu = `
-
-       Bonjour ${this.name},
-
-
-      Votre candidature a retenu notre attention.
-
-        Dans le cadre de notre processus de recrutement, nous avons le plaisir de
-        vous inviter à passer une évaluation technique. Vous pourrez choisir le
-        moment le plus approprié pour vous pour passer ce test.
-
-        Quand vous serez prêt(e), cliquez sur le lien ci-dessous pour accéder à la
-        page d’accueil de votre session : "https://localhost:4200/evaluate/.."
-
-
-      Bonne chance !
-
-
-        Cordialement
-
+    this.htmlContent = `
+       <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.name},</span><br></div><div><span style="background-color: transparent; font-size: 1rem;"><br></span></div><div>Votre candidature a retenu notre attention.</div><div>Dans le cadre de notre processus de recrutement, nous avons le plaisir de vous inviter à passer une évaluation technique.</div><div>Vous pourrez choisir le moment le plus approprié pour vous pour passer ce test.</div><div>Quand vous serez prêt(e), cliquez sur le lien ci-dessous pour accéder à la page d’accueil de votre session :&nbsp;<a href="http://localhost:4200/evaluate/.." target="_blank" style="font-size: 1rem;">http://localhost:4200/evaluate/..</a></div><div><br></div><div><br></div><div>Bonne chance !</div><div>Cordialement </div>
     `;
 
   }
+
   postCandidat(nom, emailContact): Promise<any> {
     return this.apiClientService.post(API_URI_CANDIDATS, {
       Nom: nom,
       email: emailContact,
       token: this.data.globalId,
       email_title: this.sujet,
-      email_content: this.contenu
+      email_content: this.htmlContent
     }).toPromise()
       .then(
         (res) => {
@@ -101,7 +85,7 @@ export class CandidatsMailComponent implements OnInit {
     return this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.data.globalId, {
       candidats: idCandidat,
       email_title: this.sujet,
-      email_content: this.contenu
+      email_content: this.htmlContent
     }).toPromise()
       .then((res) => {
         console.log('CANDIDATS', res);
