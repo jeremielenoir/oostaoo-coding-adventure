@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Campaign.js controller
@@ -7,14 +7,13 @@
  */
 
 module.exports = {
-
   /**
    * Retrieve campaign records.
    *
    * @return {Object|Array}
    */
 
-  find: async (ctx) => {
+  find: async ctx => {
     if (ctx.query._q) {
       return strapi.services.campaign.search(ctx.query);
     } else {
@@ -28,7 +27,7 @@ module.exports = {
    * @return {Object}
    */
 
-  findOne: async (ctx) => {
+  findOne: async ctx => {
     return strapi.services.campaign.fetch(ctx.params);
   },
 
@@ -38,7 +37,7 @@ module.exports = {
    * @return {Number}
    */
 
-  count: async (ctx) => {
+  count: async ctx => {
     return strapi.services.campaign.count(ctx.query);
   },
 
@@ -48,7 +47,7 @@ module.exports = {
    * @return {Object}
    */
 
-  create: async (ctx) => {
+  create: async ctx => {
     return strapi.services.campaign.add(ctx.request.body);
   },
 
@@ -59,7 +58,7 @@ module.exports = {
    */
 
   update: async (ctx, next) => {
-    return strapi.services.campaign.edit(ctx.params, ctx.request.body) ;
+    return strapi.services.campaign.edit(ctx.params, ctx.request.body);
   },
 
   /**
