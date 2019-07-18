@@ -63,9 +63,8 @@ module.exports = {
   create: async (ctx) => {
     // console.log(strapi.services.campaign);
     //faire un get campaigns avec ctx.request.body.token? qui est l'id de la campaign?
-    var idCampaignNom = ctx.request.body.token + ctx.request.body.Nom;
+    var idCampaignNom = ctx.request.body.idCampaign + ctx.request.body.Nom;
     // console.log('ctx.request.body.token: ', ctx.request.body.token);
-    
     // console.log("idCampaignNom: ", idCampaignNom);
     var cryptoData = crypto
       .createHash('md5')
@@ -73,12 +72,14 @@ module.exports = {
       .digest('hex');
     // console.log("cryptoData: ", cryptoData);
     // console.log('ctx.request.body: ', ctx.request.body);
-    let email_message = ctx.request.body.email_content;
+    let getEmail_message = ctx.request.body.email_content;
     let email_title = ctx.request.body.email_title;
+    let postEmail_message = getEmail_message.replace(/http:\/\/localhost:4200\/evaluate\/.../gm,'http://localhost:4200/evaluate/?id='+cryptoData);
+    console.log('postEmail_message: ', postEmail_message);
     ctx.request.body = {
       Nom : ctx.request.body.Nom,
       email : ctx.request.body.email,
-      token : ctx.request.body.token
+      token : ctx.request.body.idCampaign
     };
     const depositObj = {
       ...ctx.request.body,
@@ -94,7 +95,7 @@ module.exports = {
         from: 'lenoir.jeremie@gmail.com',
         replyTo: 'no-reply@strapi.io',
         subject: email_title,
-        html: email_message
+        html: postEmail_message
       };
       await transporter.sendMail(options);
       return candidat;
