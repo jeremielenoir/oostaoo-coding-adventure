@@ -48,7 +48,16 @@ export class CandidatsMailComponent implements OnInit {
     }
 
     this.htmlContent = `
-       <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.name},</span><br></div><div><span style="background-color: transparent; font-size: 1rem;"><br></span></div><div>Votre candidature a retenu notre attention.</div><div>Dans le cadre de notre processus de recrutement, nous avons le plaisir de vous inviter à passer une évaluation technique.</div><div>Vous pourrez choisir le moment le plus approprié pour vous pour passer ce test.</div><div>Quand vous serez prêt(e), cliquez sur le lien ci-dessous pour accéder à la page d’accueil de votre session :&nbsp;<a href="http://localhost:4200/evaluate/..." target="_blank" style="font-size: 1rem;">http://localhost:4200/evaluate/...</a></div><div><br></div><div><br></div><div>Bonne chance !</div><div>Cordialement </div>
+       <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.name},</span><br>
+       </div><div><span style="background-color: transparent; font-size: 1rem;"><br></span></div>
+       <div>Votre candidature a retenu notre attention.</div><div>Dans le cadre de notre processus
+       de recrutement,nous avons le plaisir de vous inviter à passer une évaluation technique.</div>
+       <div>Vous pourrez choisir le moment le plus approprié pour vous pour passer ce test.</div>
+       <div>Quand vous serez prêt(e), cliquez sur le lien ci-dessous pour accéder à la page d’accueil de votre session :&nbsp;
+       <a href="http://localhost:4200/evaluate/..." target="_blank" style="font-size: 1rem;">
+       http://localhost:4200/evaluate/...</a></div>
+       <div><br></div><div><br></div>
+       <div>Bonne chance !</div><div>Cordialement </div>
     `;
 
   }
@@ -59,7 +68,7 @@ export class CandidatsMailComponent implements OnInit {
       email: emailContact,
       idCampaign: this.data.globalId,
       email_title: this.sujet,
-      email_content: this.htmlContent,
+      email_content: this.htmlContent
     }).toPromise()
       .then(
         (res) => {
