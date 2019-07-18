@@ -1,121 +1,95 @@
-<div id="shadow-cog">
+<div id="shadow-cog" [class.shadow-cog-active]="Activetime">
+  <div id="remove"></div>
 
-    <div id="remove"></div>
+  <div class="modall">
+    <div class="modall-header">
+      <h3 class="modall-title">
+        Timeout
+      </h3>
+    </div>
 
-        <div class="modall">
-        
-            <div class="modall-header">
+    <div class="modall-content">
+      <p>
+        Le temps imparti pour la question est écoulé. Votre réponse actuelle a
+        été soumise. Cliquez sur OK quand vous êtes prêt(e) à passer à la
+        question suivante.
+      </p>
+    </div>
 
-                    <h3 class="modall-title">
-
-                        Timeout
-
-                    </h3>
-
-            </div>
-
-
-            <div class="modall-content">
-
-                <p>
-                
-                    Le temps imparti pour la question est écoulé. Votre réponse actuelle a été soumise.
-
-                    Cliquez sur OK quand vous êtes prêt(e) à passer à la question suivante.
-
-                </p>
-
-            </div>
-
-            <div class="modall-footer">
-
-                <button class="btn">OK</button>
-            
-            </div>
-        </div>
+    <div class="modall-footer">
+      <button class="btn" (click)="QuestNext()">OK</button>
+    </div>
+  </div>
 </div>
 
 <div class="block-testing">
-
   <div class="testing-left">
-
     <div class="cube-testing">
-
       <header class="header-cube-testing">
+        <div class="f030">
+          <i class="far fa-question-circle icon-testing"></i>
 
-          
+          <span class="title-testing"
+            >Question {{ index + 1 }} / {{ questions.length }} -
+            {{ question.technologies.name }}</span
+          >
+        </div>
 
-              <div class="f030">
+        <div class="testing-timer">
+          <span class="testing-timer-icon"><i class="far fa-clock"></i></span>
 
-                  <i class="far fa-question-circle icon-testing"></i>
-    
-                  <span class="title-testing">Question 5 / 39 - Git</span>
-
-              </div>
-
-              <div class="testing-timer">
-
-                  <span class="testing-timer-icon"><i class="far fa-clock"></i></span>
-
-                  <span class="testing-timer-text">
-                      Temps écoulé :
-                      <strong>01:30/01:30</strong>
-                  </span>
-
-              </div>
-   
-
+          <span class="testing-timer-text">
+            Temps écoulé :
+            <strong>{{ timedefault }}/:{{ question.time }}</strong>
+          </span>
+        </div>
       </header>
 
       <div class="scroll-auto-testing">
-
-          <div class="content-testing">
-
-                  On vous demande de corriger le bug <span style="font-family:monospace;">n°33</span>. Vous créez donc une nouvelle branche <code>bugfix33</code> et commitez les changements requis sur cette branche.<br>
-                  <br>
-                  Soit l'enchaînement de commandes suivant :<br>
-                  <br>
-
-                  <img alt="" src="../../../../../assets/merge.png" style="width: 469px; height: 283px;" class=""><br>
-                  <br>
-                <strong>Écrivez la prochaine commande</strong> Git qui merge ces changements sur la branche <code>master</code> (on suppose que la branche <code>master</code> est à jour).
-
-          </div>
+        <div class="content-testing">
+          <span style="display:block;padding:15px;">{{
+            question.content
+          }}</span>
+        </div>
       </div>
-      
     </div>
-
   </div>
 
-
   <div class="testing-right">
-
     <div class="cube-testing">
+      <header class="header-cube-testing">
+        <div class="f030">
+          <i class="fas fa-code icon-testing"></i>
 
-        <header class="header-cube-testing">
+          <span class="title-testing"
+            >Question {{ index + 1 }} / {{ questions.length }} -
+            {{ question.technologies.name }}</span
+          >
+        </div>
 
-            <div class="f030">
+        <div class="testing-timer">
+          <span class="testing-timer-icon"><i class="far fa-clock"></i></span>
 
-                <i class="fas fa-code icon-testing"></i>
-  
-                <span class="title-testing">Question 5 / 39 - Git</span>
+          <span class="testing-timer-text">
+            Temps écoulé :
+            <strong>00:30/00:{{ question.time }}</strong>
+          </span>
+        </div>
+      </header>
 
-            </div>
-        </header>
+      <!--textarea-->
 
-        <!--textarea-->
+      <div class="scroll-auto-testing">
+        <div class="content-testing content-testing-seconde">
+          <textarea
+            class="textarea"
+            placeholder="Tapez votre réponse"
+          ></textarea>
+        </div>
 
-        <div class="scroll-auto-testing">
+        <!--radio-->
 
-            <div class="content-testing content-testing-seconde">
-
-                <textarea class="textarea" placeholder="Tapez votre réponse"></textarea>
-
-            </div>
-            
-            <!--radio-->
-
-            <!-- <div class="content-testing content-testing-seconde">
+        <!-- <div class="content-testing content-testing-seconde">
 
                 <form>
 
@@ -150,9 +124,9 @@
 
             </div>  -->
 
-            <!--checkbox-->
+        <!--checkbox-->
 
-            <!-- <div class="content-testing content-testing-seconde">
+        <!-- <div class="content-testing content-testing-seconde">
 
                 <form>
 
@@ -186,15 +160,9 @@
                 </form>
 
             </div> -->
-
-
-        </div>
-
-
+      </div>
     </div>
 
-    <button class="button">Question suivante</button>
-
-  </div>  
-
+    <button class="button" (click)="QuestNext()">Question suivante</button>
+  </div>
 </div>

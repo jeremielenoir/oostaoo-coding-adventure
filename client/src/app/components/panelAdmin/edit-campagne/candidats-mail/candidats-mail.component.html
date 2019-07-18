@@ -1,6 +1,8 @@
 <div class="modal-candidat">
   <header class="header-question">
-    <span class="rond-custom"><p>2</p></span>
+    <span class="rond-custom">
+      <p>2</p>
+    </span>
     <div class="info-campaign-candidats">
       <h2>Configuration de l'email</h2>
       <p *ngFor="let campaign of campaigns">{{ campaign.Name }}</p>
@@ -11,28 +13,27 @@
   <div class="content-modal-question"></div>
 
 
-    <div class="col-12 form-group">
+  <div class="col-12 form-group">
 
-      <label>Sujet :</label>
+    <label>Sujet :</label>
 
-      <input type="" name="" class="form-control" [(ngModel)]="sujet" *ngIf="show"/>
-      <p *ngIf="!show">{{sujet}}</p>
-    
-    </div>
-    <br />
+    <input type="" name="" class="form-control" [(ngModel)]="sujet" *ngIf="show" />
+    <p *ngIf="!show">{{sujet}}</p>
 
-     <div class="col-12 form-group">
+  </div>
+  <br />
 
-      <label>Message :</label>
+  <div class="col-12 form-group">
 
-      <app-ngx-editor *ngIf="show" [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="htmlContent"></app-ngx-editor>
-      <div *ngIf="!show" [innerHTML]="htmlContent"></div>
-    </div>
+    <label>Message :</label>
 
-  
-  <button
-    (click)="updateCampaignPostCandidats()"
-  >
+    <app-ngx-editor *ngIf="show" [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="htmlContent">
+    </app-ngx-editor>
+    <div *ngIf="!show" [innerHTML]="htmlContent"></div>
+  </div>
+
+
+  <button (click)="updateCampaignPostCandidats()">
     ENVOYER EMAIL
   </button>
   <button (click)="retourCandidat()">RETOUR AUX CANDIDATS</button>

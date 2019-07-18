@@ -16,15 +16,18 @@ export class CandidatsMailComponent implements OnInit {
   public candidats: any;
   public nbCandidat: number;
 
-  public sujet = 'Évaluation technique';
+  public sujet: string;
   public name: string[] = [];
-  public htmlContent: any;
+  public contenu: string;
   public show = false;
+  public htmlContent: any;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data,
-              public apiClientService: ApiClientService,
-              private dialog: MatDialog,
-              public dialogRef: MatDialogRef<CandidatsMailComponent>) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data,
+    public apiClientService: ApiClientService,
+    private dialog: MatDialog,
+    public dialogRef: MatDialogRef<CandidatsMailComponent>
+  ) {
     this.candidats = this.data.contact;
     let count = 0;
     for (const iterator of this.data.contact) {
@@ -35,6 +38,7 @@ export class CandidatsMailComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.apiClientService
       .get(API_URI_CAMPAIGNS + '/' + this.data.globalId)
       .subscribe(datas => {
@@ -46,6 +50,7 @@ export class CandidatsMailComponent implements OnInit {
       this.name.push(candidat.name);
 
     }
+    this.sujet = 'Évaluation technique';
 
     this.htmlContent = `
        <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.name},</span><br>
@@ -60,6 +65,18 @@ export class CandidatsMailComponent implements OnInit {
        <div>Bonne chance !</div><div>Cordialement </div>
     `;
 
+    for (const candidat of this.candidats) {
+      this.name.push(candidat.name);
+    }
+
+    // this.sujet = this.campaigns[0].email_title;
+
+    // this.contenu = `
+
+    // Bonjour ${this.name}
+
+    //     ${this.campaigns[0].email_content}
+    //   `;
   }
 
   postCandidat(nom, emailContact): Promise<any> {
@@ -71,14 +88,15 @@ export class CandidatsMailComponent implements OnInit {
       email_content: this.htmlContent
     }).toPromise()
       .then(
-        (res) => {
+        res => {
           console.log('res', res.id);
           const idCandidat = [];
           idCandidat.push(res.id);
           return idCandidat;
         },
         err => console.log(err)
-      ).then(idCandidat => {
+      )
+      .then(idCandidat => {
         this.updateCampaign(idCandidat);
       });
   }
