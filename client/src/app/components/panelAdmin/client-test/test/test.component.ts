@@ -16,7 +16,8 @@ export class TestComponent implements OnInit {
   public timeClearInterval: any;
   public Activetime: boolean;
 
-  constructor(private apiClientService: ApiClientService) {}
+
+  constructor(private apiClientService: ApiClientService) { }
 
   ngOnInit() {
     console.log(this.index);
@@ -25,6 +26,9 @@ export class TestComponent implements OnInit {
       this.question = datas[0];
       this.Countertime();
     });
+
+
+
   }
 
   // ngAfterContentInit() {
@@ -35,6 +39,7 @@ export class TestComponent implements OnInit {
     this.timeClearInterval = setInterval(() => {
       if (this.timedefault < this.questions[this.index].time) {
         this.timedefault++;
+        // console.log(this.fmtMSS(this.timedefault));
       } else {
         this.Activetime = !this.Activetime;
         clearInterval(this.timeClearInterval);
@@ -42,7 +47,7 @@ export class TestComponent implements OnInit {
     }, 1000);
   }
 
-  QuestNext() {
+  public QuestNext() {
     this.Activetime = false;
 
     if (this.index < this.questions.length - 1) {
@@ -56,4 +61,11 @@ export class TestComponent implements OnInit {
 
     //  console.log(this.this.questions[this.index].time)
   }
+
+  public fmtMSS(s) {
+    return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s
+  }
+
 }
+
+
