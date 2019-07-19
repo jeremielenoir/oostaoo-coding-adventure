@@ -73,9 +73,16 @@ module.exports = {
     // console.log("cryptoData: ", cryptoData);
     // console.log('ctx.request.body: ', ctx.request.body);
     let getEmail_message = ctx.request.body.email_content;
+    console.log('getEmail_message: ', getEmail_message);
     let email_title = ctx.request.body.email_title;
-    let postEmail_message = getEmail_message.replace(/http:\/\/localhost:4200\/evaluate\/.../gm,'http://localhost:4200/evaluate/?id='+cryptoData);
-    console.log('postEmail_message: ', postEmail_message);
+    let getEmail_message_crypto = getEmail_message.replace(/http:\/\/localhost:4200\/evaluate\/.../gm,'http://localhost:4200/evaluate/?id='+cryptoData);
+    // console.log('postEmail_message: ', postEmail_message);
+    let getNom = ctx.request.body.Nom;
+    console.log('nom: ', getNom);
+    let nameCandidats = ctx.request.body.name_candidats.join();
+    console.log('nameCandidats: ', nameCandidats);
+    let postEmail_message = getEmail_message_crypto.replace(nameCandidats, getNom);
+    
     ctx.request.body = {
       Nom : ctx.request.body.Nom,
       email : ctx.request.body.email,
