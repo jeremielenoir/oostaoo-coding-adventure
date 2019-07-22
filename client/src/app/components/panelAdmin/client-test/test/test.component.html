@@ -29,8 +29,10 @@
         <div class="f030">
           <i class="far fa-question-circle icon-testing"></i>
 
-          <span  class="title-testing">Question {{ index + 1 }} / {{ questions.length }} -
-            {{ question.technologies.name }}</span>
+          <span class="title-testing"
+            >Question {{ index + 1 }} / {{ questions.length }} -
+            {{ question.technologies.name }}</span
+          >
         </div>
 
         <div class="testing-timer">
@@ -38,7 +40,17 @@
 
           <span class="testing-timer-text">
             Temps écoulé :
-            <strong [class.active-time-danger]="timedefault >= timeDanger">{{  timedefault === 600 ? fmtMSS(timedefault) : '0'+fmtMSS(timedefault)}}/{{ question.time === 600 ? fmtMSS(question.time) : '0'+fmtMSS(question.time)}}</strong>
+            <strong [class.active-time-danger]="timedefault >= timeDanger"
+              >{{
+                timedefault === 600
+                  ? fmtMSS(timedefault)
+                  : "0" + fmtMSS(timedefault)
+              }}/{{
+                question.time === 600
+                  ? fmtMSS(question.time)
+                  : "0" + fmtMSS(question.time)
+              }}</strong
+            >
           </span>
         </div>
       </header>
@@ -52,15 +64,16 @@
       </div>
     </div>
   </div>
-
   <div class="testing-right">
     <div class="cube-testing">
       <header class="header-cube-testing">
         <div class="f030">
           <i class="fas fa-code icon-testing"></i>
 
-          <span class="title-testing">Question {{ index + 1 }} / {{ questions.length }} -
-            {{ question.technologies.name }}</span>
+          <span class="title-testing"
+            >Question {{ index + 1 }} / {{ questions.length }} -
+            {{ question.technologies.name }}</span
+          >
         </div>
 
         <div class="testing-timer">
@@ -77,87 +90,92 @@
 
       <div *ngIf="question.type === 'free'" class="scroll-auto-testing">
         <div class="content-testing content-testing-seconde">
-          <textarea class="textarea" placeholder="Tapez votre réponse"></textarea>
+          <textarea
+            class="textarea"
+            placeholder="Tapez votre réponse"
+          ></textarea>
         </div>
+      </div>
 
-        <!--radio-->
+      <!--radio-->
 
-         <div *ngIf="question.type === one" class="content-testing content-testing-seconde">
-
-
-                <form>
-
-                  <label class="label-response">
-
-                      <span class="contenu">document.md</span>
-
-                      <input type="radio" class="radio-response" name="res" value="test3"/>
-                      <span class="check-radio"></span>  
-                        
-                  </label>
-
-                  <label class="label-response">
-
-                      <span class="contenu">document.md</span>
-
-                      <input type="radio" class="radio-response" name="res" value="test1"/>
-                      <span class="check-radio"></span>  
-                        
-                  </label>
-
-                  <label class="label-response">
-
-                      <span class="contenu">document.md</span>
-
-                      <input type="radio" class="radio-response" name="res" value="naruto"/>
-                      <span class="check-radio"></span>  
-                        
-                  </label>
-
-                </form>
-
-            </div>
-
-        <!--checkbox -->
-
-       <div *ngIf="question.type === multiple" class="content-testing content-testing-seconde">
-
-                <form>
-
-                    <label class="label-response">
-
-                        <span class="contenu">document.md</span>
-  
-                        <input type="checkbox" class="radio-response" name="check" value="test3"/>
-                        <span class="check-checkbox"></span>  
-                          
-                    </label>
-
-                    <label class="label-response">
-
-                        <span class="contenu">document.md</span>
-  
-                        <input type="checkbox" class="radio-response" name="check" value="test3"/>
-                        <span class="check-checkbox"></span>  
-                          
-                    </label>
-
-                    <label class="label-response">
-
-                        <span class="contenu">document.md</span>
-  
-                        <input type="checkbox" class="radio-response" name="check" value="test3"/>
-                        <span class="check-checkbox"></span>  
-                          
-                    </label>
-
-                </form>
-
-            </div>
-
+      <div
+        *ngIf="question.type === one"
+        class="content-testing content-testing-seconde"
+      >
+        <form>
+          <label class="label-response">
+            <span class="contenu">document.md</span>
+            <input
+              type="radio"
+              class="radio-response"
+              name="res"
+              value="test3"
+            />
+            <span class="check-radio"></span>
+          </label>
+          <label class="label-response">
+            <span class="contenu">document.md</span>
+            <input
+              type="radio"
+              class="radio-response"
+              name="res"
+              value="test1"
+            />
+            <span class="check-radio"></span>
+          </label>
+          <label class="label-response">
+            <span class="contenu">document.md</span>
+            <input
+              type="radio"
+              class="radio-response"
+              name="res"
+              value="naruto"
+            />
+            <span class="check-radio"></span>
+          </label>
+        </form>
+      </div>
+      <!--checkbox -->
+      <div
+        *ngIf="question.type === multiple"
+        class="content-testing content-testing-seconde"
+      >
+        <form>
+          <label class="label-response">
+            <span class="contenu">document.md</span>
+            <input
+              type="checkbox"
+              class="radio-response"
+              name="check"
+              value="test3"
+            />
+            <span class="check-checkbox"></span>
+          </label>
+          <label class="label-response">
+            <span class="contenu">document.md</span>
+            <input
+              type="checkbox"
+              class="radio-response"
+              name="check"
+              value="test3"
+            />
+            <span class="check-checkbox"></span>
+          </label>
+          <label class="label-response">
+            <span class="contenu">document.md</span>
+            <input
+              type="checkbox"
+              class="radio-response"
+              name="check"
+              value="test3"
+            />
+            <span class="check-checkbox"></span>
+          </label>
+        </form>
       </div>
     </div>
-
-    <button class="button" (click)="QuestNext()">Question suivante</button>
   </div>
+
+  <button class="button" (click)="QuestNext()">Question suivante</button>
 </div>
