@@ -13,53 +13,62 @@ export class TestComponent implements OnInit {
   public index = 0;
   public question: any;
   public timedefault = 0;
-  public timeClearInterval: any;
+  public stopTimeInterval: any;
   public Activetime: boolean;
+  public timeDanger: number
 
 
   constructor(private apiClientService: ApiClientService) { }
 
   ngOnInit() {
-    console.log(this.index);
     this.apiClientService.get(API_URI_QUESTIONS).subscribe(datas => {
       this.questions = datas;
       this.question = datas[0];
+      this.timeDanger = datas[0].time - 5;
       this.Countertime();
     });
-
-
-
   }
 
-  // ngAfterContentInit() {
-
-  // }
 
   Countertime() {
-    this.timeClearInterval = setInterval(() => {
+    this.stopTimeInterval = setInterval(() => {
       if (this.timedefault < this.questions[this.index].time) {
         this.timedefault++;
-        // console.log(this.fmtMSS(this.timedefault));
       } else {
         this.Activetime = !this.Activetime;
-        clearInterval(this.timeClearInterval);
+        clearInterval(this.stopTimeInterval);
       }
     }, 1000);
   }
 
   public QuestNext() {
+
     this.Activetime = false;
 
     if (this.index < this.questions.length - 1) {
       this.index++;
-
       this.timedefault = 0;
-      clearInterval(this.timeClearInterval);
+      clearInterval(this.stopTimeInterval);
       this.Countertime();
+
+    } else {
+
+      if (this.index === this.questions.length - 1) {
+
+        clearInterval(this.stopTimeInterval);
+
+        console.log('question terminé');
+
+      }
+
     }
+
     this.question = this.questions[this.index];
 
-    //  console.log(this.this.questions[this.index].time)
+    this.timeDanger = this.questions[this.index].time - 5;
+
+
+    console.log('temp', this.timeDanger)
   }
 
   public fmtMSS(s) {

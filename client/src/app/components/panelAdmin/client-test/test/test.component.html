@@ -38,7 +38,7 @@
 
           <span class="testing-timer-text">
             Temps écoulé :
-            <strong>{{  timedefault === 600 ? fmtMSS(timedefault) : '0'+fmtMSS(timedefault)}}/{{ question.time === 600 ? fmtMSS(question.time) : '0'+fmtMSS(question.time)}}</strong>
+            <span [class.active-time-dander]="timedefault >= timeDanger">{{  timedefault === 600 ? fmtMSS(timedefault) : '0'+fmtMSS(timedefault)}}/{{ question.time === 600 ? fmtMSS(question.time) : '0'+fmtMSS(question.time)}}</span>
           </span>
         </div>
       </header>
