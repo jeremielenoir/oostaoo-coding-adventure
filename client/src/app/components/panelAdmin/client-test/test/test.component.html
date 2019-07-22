@@ -75,14 +75,15 @@
 
       <!--textarea-->
 
-      <div class="scroll-auto-testing">
+      <div *ngIf="question.type === 'free'" class="scroll-auto-testing">
         <div class="content-testing content-testing-seconde">
           <textarea class="textarea" placeholder="Tapez votre réponse"></textarea>
         </div>
 
         <!--radio-->
 
-        <!-- <div class="content-testing content-testing-seconde">
+         <div *ngIf="question.type === one" class="content-testing content-testing-seconde">
+
 
                 <form>
 
@@ -115,11 +116,11 @@
 
                 </form>
 
-            </div>  -->
+            </div>
 
-        <!--checkbox-->
+        <!--checkbox -->
 
-        <!-- <div class="content-testing content-testing-seconde">
+       <div *ngIf="question.type === multiple" class="content-testing content-testing-seconde">
 
                 <form>
 
@@ -152,7 +153,8 @@
 
                 </form>
 
-            </div> -->
+            </div>
+
       </div>
     </div>
 

@@ -15,7 +15,11 @@ export class TestComponent implements OnInit {
   public timedefault = 0;
   public stopTimeInterval: any;
   public Activetime: boolean;
-  public timeDanger: number
+  public timeDanger: number;
+  public type:string;
+  public free = 'free';
+  public multiple = 'multiple';
+  public one = 'one'
 
 
   constructor(private apiClientService: ApiClientService) { }
@@ -25,6 +29,8 @@ export class TestComponent implements OnInit {
       this.questions = datas;
       this.question = datas[0];
       this.timeDanger = datas[0].time - 5;
+      this.type =  datas[0];
+      console.log('type: ', this.type)
       this.Countertime();
     });
   }
@@ -67,9 +73,9 @@ export class TestComponent implements OnInit {
     this.question = this.questions[this.index];
 
     this.timeDanger = this.questions[this.index].time - 5;
-
-
-    console.log('temp', this.timeDanger)
+   
+    console.log('type ',this.question.type)
+  
   }
 
   public fmtMSS(s) {
