@@ -22,14 +22,14 @@
   </div>
 </div>
 
-<div class="block-testing">
+<div class="block-testing" *ngIf="questions != undefined">
   <div class="testing-left">
     <div class="cube-testing">
       <header class="header-cube-testing">
         <div class="f030">
           <i class="far fa-question-circle icon-testing"></i>
 
-          <span class="title-testing">Question {{ index + 1 }} / {{ questions.length }} -
+          <span  class="title-testing">Question {{ index + 1 }} / {{ questions.length }} -
             {{ question.technologies.name }}</span>
         </div>
 
