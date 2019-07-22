@@ -64,10 +64,6 @@ export class CandidatsMailComponent implements OnInit {
        <div>Bonne chance !</div><div>Cordialement </div>
     `;
 
-    for (const candidat of this.candidats) {
-      this.name.push(candidat.name);
-    }
-
     // this.sujet = this.campaigns[0].email_title;
 
     // this.contenu = `
@@ -84,7 +80,8 @@ export class CandidatsMailComponent implements OnInit {
       email: emailContact,
       idCampaign: this.data.globalId,
       email_title: this.sujet,
-      email_content: this.htmlContent
+      email_content: this.htmlContent,
+      name_candidats: this.name
     }).toPromise()
       .then(
         res => {
