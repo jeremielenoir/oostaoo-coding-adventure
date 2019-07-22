@@ -34,7 +34,6 @@ export class CandidatsMailComponent implements OnInit {
       count++;
     }
     this.nbCandidat = count;
-    // console.log('DATA', this.data);
   }
 
   ngOnInit() {
