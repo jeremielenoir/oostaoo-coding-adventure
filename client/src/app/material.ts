@@ -2,7 +2,7 @@ import {
     MatButtonModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatRadioModule, MatCheckboxModule,
     MatIconModule, MatToolbarModule, MatMenuModule, MatListModule, MatSidenavModule, MatDialogModule,
     MatBottomSheetModule, MatTableModule, MatSortModule, MatTooltipModule, MAT_BOTTOM_SHEET_DEFAULT_OPTIONS,
-    MatDialogRef
+    MatDialogRef, MatCardModule, MatProgressSpinnerModule
 } from '@angular/material';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -12,10 +12,12 @@ import { NgModule } from '@angular/core';
 @NgModule({
     imports: [MatButtonModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatRadioModule,
         MatCheckboxModule, MatIconModule, MatToolbarModule, MatMenuModule, MatListModule, MatSidenavModule,
-        MatDialogModule, DragDropModule, MatBottomSheetModule, MatTableModule, MatSortModule, MatTooltipModule],
+        MatDialogModule, DragDropModule, MatBottomSheetModule, MatTableModule, MatSortModule, MatTooltipModule,
+        MatCardModule, MatProgressSpinnerModule],
     exports: [MatButtonModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatRadioModule, MatCheckboxModule,
         MatIconModule, MatToolbarModule, MatMenuModule, MatListModule, MatSidenavModule, DragDropModule,
-        MatBottomSheetModule, MatTableModule, MatSortModule, MatTooltipModule],
+        MatBottomSheetModule, MatTableModule, MatSortModule, MatTooltipModule,
+        MatCardModule, MatProgressSpinnerModule],
     providers: [
         { provide: MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
         { provide: MatDialogRef, useValue: {} },

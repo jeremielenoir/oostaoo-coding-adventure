@@ -112,6 +112,14 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
+
+        <mat-card
+          *ngIf="isLoading"
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <mat-progress-spinner color="primary" mode="indeterminate">
+          </mat-progress-spinner>
+        </mat-card>
       </div>
       <!--Table-->
     </div>
