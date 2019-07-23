@@ -16,7 +16,7 @@ import { SettingsComponent } from './components/panelAdmin/edit-campagne/setting
 import { GeneralComponent } from './components/panelAdmin/edit-campagne/settings/general/general.component';
 import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne/settings/personnalisation/personnalisation.component';
 import { ClientTestComponent } from './components/panelAdmin/client-test/client-test.component';
-import {TestComponent} from './components/panelAdmin/client-test/test/test.component'
+import { TestComponent } from './components/panelAdmin/client-test/test/test.component'
 
 import { CandidatsFormComponent } from './components/panelAdmin/edit-campagne/candidats-form/candidats-form.component';
 
@@ -61,7 +61,7 @@ const routes: Routes = [
         path: 'settings',
         component: SettingsComponent,
         children: [
-          { path: '', pathMatch: 'full', redirectTo: 'general'},
+          { path: '', pathMatch: 'full', redirectTo: 'general' },
           { path: 'general', component: GeneralComponent },
           { path: 'personnalisation', component: PersonnalisationComponent }
         ]
