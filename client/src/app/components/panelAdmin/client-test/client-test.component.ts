@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
-  ApiClientService,
-  API_URI_CANDIDATS
-} from '../../../api-client/api-client.service';
+import { API_URI_CAMPAIGNS, ApiClientService, API_URI_CANDIDATS } from '../../../api-client/api-client.service';
 
 @Component({
   selector: 'app-client-test',
@@ -13,6 +10,8 @@ import {
 export class ClientTestComponent implements OnInit {
   idParam: string;
   public loading = false;
+  public idCampaign;
+  public questionCampaign = [];
 
   constructor(private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router) {
     this.route.queryParams.subscribe(params => {
@@ -30,6 +29,9 @@ export class ClientTestComponent implements OnInit {
     this.apiClientService.get(API_URI_CANDIDATS).toPromise().then(res => {
       for (const candidat of res) {
         if (candidat.token === this.idParam) {
+          console.log(candidat);
+          this.idCampaign = candidat.campaign.id;
+          console.log('this.idCampaign : ', this.idCampaign);
           this.router.navigate(['/evaluate'], {
             queryParams: {
               id: this.idParam
@@ -41,6 +43,13 @@ export class ClientTestComponent implements OnInit {
           this.router.navigate(['/home']);
         }
       }
+      return this.idCampaign;
+    }).then(idCampaign => {
+      this.apiClientService.get(API_URI_CAMPAIGNS + '/' + idCampaign).toPromise().then(res => {
+        console.log(res);
+        this.questionCampaign = [... this.questionCampaign, ...res.questions];
+        console.log('this.questionCampaign: ', this.questionCampaign);
+      });
     });
   }
 }
