@@ -121,4 +121,5 @@ export class CandidatsComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.infosCandidats.filter = filterValue.trim().toLowerCase();
   }
+
 }

@@ -1,4 +1,11 @@
 <div [ngSwitch]="ViewCandidats">
+  <mat-card
+    *ngIf="isLoading2"
+    style="display: flex; justify-content: center; align-items: center"
+  >
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </mat-card>
   <div *ngSwitchCase="'CandidatFalse'" id="editQuestion">
     <p class="style-link">
       LINK page
