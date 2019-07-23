@@ -65,6 +65,7 @@ import { ClientTestComponent } from './components/panelAdmin/client-test/client-
 import { TestComponent } from './components/panelAdmin/client-test/test/test.component';
 
 import { NgxEditorModule } from 'ngx-editor';
+import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -107,7 +108,8 @@ import { NgxEditorModule } from 'ngx-editor';
     GeneralComponent,
     PersonnalisationComponent,
     ClientTestComponent,
-    TestComponent
+    TestComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
