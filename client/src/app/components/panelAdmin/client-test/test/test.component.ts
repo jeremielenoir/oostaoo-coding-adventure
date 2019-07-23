@@ -17,6 +17,9 @@ export class TestComponent implements OnInit {
   public Activetime: boolean;
   public timeDanger: number;
   public type: string;
+  public Alltime: number[] = [];
+  public CalculTimeTotal: number = 0;
+
 
   constructor(private apiClientService: ApiClientService) { }
 
@@ -29,9 +32,9 @@ export class TestComponent implements OnInit {
       console.log('type: ', this.type);
       this.Countertime();
     });
+
   }
 
-  // }
 
   Countertime() {
     this.stopTimeInterval = setInterval(() => {
@@ -46,10 +49,13 @@ export class TestComponent implements OnInit {
 
   public QuestNext() {
 
+    this.Alltime.push(this.timedefault);
+
     this.Activetime = false;
 
     if (this.index < this.questions.length - 1) {
       this.index++;
+
       this.timedefault = 0;
       clearInterval(this.stopTimeInterval);
       this.Countertime();
@@ -60,7 +66,14 @@ export class TestComponent implements OnInit {
 
         clearInterval(this.stopTimeInterval);
 
-        console.log('question terminé');
+
+        for (const nbrtime of this.Alltime) {
+
+          console.log('chaque temp passe sur chaque question', nbrtime)
+
+          this.CalculTimeTotal += nbrtime;
+
+        }
 
       }
 

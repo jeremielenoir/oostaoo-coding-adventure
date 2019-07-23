@@ -45,7 +45,7 @@ import {
 import { RouteComponentComponent2 } from './components/panelAdmin/route-component2/route-component.component';
 import { CompagneComponent } from './components/panelAdmin/compagne/compagne.component';
 import { SidibarRightComponent } from './components/panelAdmin/sidibar-right/sidibar-right.component';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
 import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
 import { ProtectionDeDonneesComponent } from './components/panelAdmin/protection-de-donnees/protection-de-donnees.component';
 import { FacturationComponent } from './components/panelAdmin/facturation/facturation.component';
@@ -65,6 +65,7 @@ import { ClientTestComponent } from './components/panelAdmin/client-test/client-
 import { TestComponent } from './components/panelAdmin/client-test/test/test.component';
 
 import { NgxEditorModule } from 'ngx-editor';
+import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -107,7 +108,8 @@ import { NgxEditorModule } from 'ngx-editor';
     GeneralComponent,
     PersonnalisationComponent,
     ClientTestComponent,
-    TestComponent
+    TestComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
