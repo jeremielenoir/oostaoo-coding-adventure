@@ -17,10 +17,6 @@ export class TestComponent implements OnInit {
   public Activetime: boolean;
   public timeDanger: number;
   public type: string;
-  public free = 'free';
-  public multiple = 'multiple';
-  public one = 'one';
-
 
   constructor(private apiClientService: ApiClientService) { }
 
