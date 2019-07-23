@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
   ApiClientService,
-  API_URI_CAMPAIGNS,
   API_URI_CANDIDATS
 } from '../../../api-client/api-client.service';
 
@@ -13,6 +12,7 @@ import {
 })
 export class ClientTestComponent implements OnInit {
   idParam: string;
+  public loading = false;
 
   constructor(private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router) {
     this.route.queryParams.subscribe(params => {
@@ -26,10 +26,16 @@ export class ClientTestComponent implements OnInit {
   }
 
   getCandidats() {
+    this.loading = true;
     this.apiClientService.get(API_URI_CANDIDATS).toPromise().then(res => {
       for (const candidat of res) {
         if (candidat.token === this.idParam) {
-          this.router.navigate(['/evaluate?id=' + this.idParam]);
+          this.router.navigate(['/evaluate'], {
+            queryParams: {
+              id: this.idParam
+            }
+          });
+          this.loading = false;
         }
         if (candidat.token !== this.idParam) {
           this.router.navigate(['/home']);
