@@ -1,7 +1,8 @@
 import {
     MatButtonModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatRadioModule, MatCheckboxModule,
     MatIconModule, MatToolbarModule, MatMenuModule, MatListModule, MatSidenavModule, MatDialogModule,
-    MatBottomSheetModule, MatTableModule, MatSortModule, MatTooltipModule, MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, MatDialogRef
+    MatBottomSheetModule, MatTableModule, MatSortModule, MatTooltipModule, MAT_BOTTOM_SHEET_DEFAULT_OPTIONS,
+    MatDialogRef
 } from '@angular/material';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
