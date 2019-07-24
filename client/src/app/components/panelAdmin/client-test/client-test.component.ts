@@ -14,6 +14,8 @@ export class ClientTestComponent implements OnInit {
   public StatueTestingQuestion = 'eval';
 
   @ViewChild('btnchecked') btnchecked: ElementRef;
+  idCampaign: any;
+  questionCampaign: any[];
 
   constructor(private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router) {
     this.route.queryParams.subscribe(params => {
@@ -57,7 +59,6 @@ export class ClientTestComponent implements OnInit {
 
   }
   getCandidats() {
-    this.loading = true;
     this.apiClientService.get(API_URI_CANDIDATS).toPromise().then(res => {
       for (const candidat of res) {
         if (candidat.token === this.idParam) {
@@ -69,7 +70,6 @@ export class ClientTestComponent implements OnInit {
               id: this.idParam
             }
           });
-          this.loading = false;
         }
         if (candidat.token !== this.idParam) {
           this.router.navigate(['/home']);
