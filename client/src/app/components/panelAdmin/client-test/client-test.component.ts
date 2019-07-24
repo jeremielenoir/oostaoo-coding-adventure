@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { API_URI_CAMPAIGNS, ApiClientService, API_URI_CANDIDATS } from '../../../api-client/api-client.service';
 
@@ -8,10 +8,12 @@ import { API_URI_CAMPAIGNS, ApiClientService, API_URI_CANDIDATS } from '../../..
   styleUrls: ['./client-test.component.css']
 })
 export class ClientTestComponent implements OnInit {
-  idParam: string;
-  public loading = false;
-  public idCampaign;
-  public questionCampaign = [];
+  public idParam: string;
+  public checkedBoolean: boolean;
+  public ActiveTest: boolean;
+  public StatueTestingQuestion = 'eval';
+
+  @ViewChild('btnchecked') btnchecked: ElementRef;
 
   constructor(private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router) {
     this.route.queryParams.subscribe(params => {
@@ -24,6 +26,36 @@ export class ClientTestComponent implements OnInit {
     this.getCandidats();
   }
 
+  public hundelechecked(event) {
+
+    if (event.target.checked === true) {
+
+      // this.btnchecked.nativeElement.disabled == true
+
+      this.btnchecked.nativeElement.disabled = false;
+
+    } else {
+      this.btnchecked.nativeElement.disabled = true;
+    }
+
+  }
+
+  hundleActiveTest() {
+
+    this.ActiveTest = true;
+
+    console.log('state', this.ActiveTest);
+  }
+
+  NohundleActiveTest() {
+    this.ActiveTest = false;
+  }
+
+  HundleStatueTestingQuestion() {
+
+    this.StatueTestingQuestion = 'testing';
+
+  }
   getCandidats() {
     this.loading = true;
     this.apiClientService.get(API_URI_CANDIDATS).toPromise().then(res => {

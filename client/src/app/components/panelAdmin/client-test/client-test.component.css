@@ -114,7 +114,7 @@
   background-size: cover;
 }
 
-button {
+.btn-compo {
   width: 200px;
   height: 50px;
   border: 1px solid #f2bb13;
@@ -125,6 +125,78 @@ button {
   text-transform: uppercase;
   background: transparent;
   color: #f2bb13;
+}
+
+.modall-content{
+  width: 1000px;
+  max-width: 90vw;
+  padding: 0px 40px;
+}
+
+.modall-footer{
+  display: flex;
+  padding: 0 20px 20px 20px;
+}
+
+
+.claire-text{
+  color: #20252a;
+  padding: 0 40px;
+  font-size: 17px;
+  text-align: left;
+  margin-top: 30px;
+  font-weight: 300;
+  display: block
+}
+
+.text-gras{
+  font-weight: bold
+}
+
+.text-link{
+  color: #f2bb13;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.checkbox-condition{
+  display: inline-block;
+  position: relative;
+  top: -15px;
+  left: -10px;
+}
+
+.text-condition{
+  font-size: 17px;
+  display: inline-block;
+  width: 95%;
+}
+
+.btn{
+
+  flex: 1;
+  color: white;
+  height: 50px;
+  margin: 20px;
+  font-size: 18px;
+  transition: background 0.2s;
+  font-weight: 600!important;
+  background-color: #7e8082;
+  border-radius: 0px;
+}
+
+.btn,.btn:active,.btn:focus{
+  outline: none!important
+}
+.btn:not(:disabled):hover {
+  background-color: #aaaaaa;
+}
+
+.btn:not(:disabled):last-child {
+  background-color: #ffd200;
+}
+.btn:not(:disabled):last-child:hover{
+  background-color: red;
 }
 
 .yellow {

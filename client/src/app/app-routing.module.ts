@@ -24,10 +24,7 @@ const routes: Routes = [
     path: 'evaluate',
     component: ClientTestComponent
   },
-  {
-    path: 'evaluate/testing',
-    component: TestComponent
-  },
+
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'home',
@@ -88,7 +85,10 @@ const routes: Routes = [
     path: 'nod-found',
     component: NotFoundComponent
   },
-  { path: '**', redirectTo: 'nod-found' }
+  {
+    path: '**',
+    redirectTo: 'nod-found'
+  }
 ];
 
 @NgModule({
