@@ -92,11 +92,14 @@ export class CandidatsComponent implements OnInit {
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
         const defaultColumns = ['Checked', 'Candidats', 'Dernière activité', 'Score'];
         const getInfoCandidat = [];
+        let dateInvite;
         for (const candidat of this.candidats) {
+          dateInvite = new Date(candidat.invitation_date);
           getInfoCandidat.push({
             Candidats: candidat.Nom,
             Email: candidat.email,
-            Checked: false
+            Checked: false,
+            'Dernière activité': dateInvite.toLocaleString()
           });
         }
         // INFOS FOR ADD COLUMN
