@@ -15,7 +15,7 @@ export class ClientTestComponent implements OnInit {
 
   @ViewChild('btnchecked') btnchecked: ElementRef;
   idCampaign: any;
-  questionCampaign: any[];
+  questionCampaign = [];
 
   constructor(private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router) {
     this.route.queryParams.subscribe(params => {
@@ -61,7 +61,7 @@ export class ClientTestComponent implements OnInit {
   getCandidats() {
     this.apiClientService.get(API_URI_CANDIDATS).toPromise().then(res => {
       for (const candidat of res) {
-        if (candidat.token === this.idParam) {
+        if (this.idParam === candidat.token) {
           console.log(candidat);
           this.idCampaign = candidat.campaign.id;
           console.log('this.idCampaign : ', this.idCampaign);
@@ -71,6 +71,7 @@ export class ClientTestComponent implements OnInit {
             }
           });
         }
+        // console.log('candidat.token: ', candidat.token);
         if (candidat.token !== this.idParam) {
           this.router.navigate(['/home']);
         }
@@ -79,7 +80,7 @@ export class ClientTestComponent implements OnInit {
     }).then(idCampaign => {
       this.apiClientService.get(API_URI_CAMPAIGNS + '/' + idCampaign).toPromise().then(res => {
         console.log(res);
-        this.questionCampaign = [... this.questionCampaign, ...res.questions];
+        this.questionCampaign = [...this.questionCampaign, ...res.questions];
         console.log('this.questionCampaign: ', this.questionCampaign);
       });
     });

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import {
   ApiClientService,
   API_URI_QUESTIONS
@@ -18,21 +18,19 @@ export class TestComponent implements OnInit {
   public timeDanger: number;
   public type: string;
   public Alltime: number[] = [];
-  public CalculTimeTotal: number = 0;
+  public CalculTimeTotal = 0;
+  @Input() questionCampaign: any;
 
 
   constructor(private apiClientService: ApiClientService) { }
 
   ngOnInit() {
-    this.apiClientService.get(API_URI_QUESTIONS).subscribe(datas => {
-      this.questions = datas;
-      this.question = datas[0];
-      this.timeDanger = datas[0].time - 5;
-      this.type = datas[0];
-      console.log('type: ', this.type);
-      this.Countertime();
-    });
-
+    console.log('questionCampaign from TEST: ', this.questionCampaign);
+    this.questions = this.questionCampaign;
+    this.question = this.questionCampaign[0];
+    this.timeDanger = this.questionCampaign[0].time - 5;
+    this.type = this.questionCampaign[0];
+    this.Countertime();
   }
 
 
@@ -69,11 +67,12 @@ export class TestComponent implements OnInit {
 
         for (const nbrtime of this.Alltime) {
 
-          console.log('chaque temp passe sur chaque question', nbrtime)
+          console.log('chaque temp passe sur chaque question', nbrtime);
 
           this.CalculTimeTotal += nbrtime;
 
         }
+        console.log('this.CalculTimeTotal: ', this.CalculTimeTotal);
 
       }
 
