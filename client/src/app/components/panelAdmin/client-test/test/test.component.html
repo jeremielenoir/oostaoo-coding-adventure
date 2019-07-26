@@ -30,7 +30,7 @@
           <i class="far fa-question-circle icon-testing"></i>
 
           <span class="title-testing">Question {{ index + 1 }} / {{ questions.length }} -
-            {{ question.technologies.name }}</span>
+            {{ language }} </span>
         </div>
 
         <div class="testing-timer">
@@ -47,6 +47,8 @@
                   ? fmtMSS(question.time)
                   : "0" + fmtMSS(question.time)
               }}</strong>
+
+             
           </span>
         </div>
       </header>
