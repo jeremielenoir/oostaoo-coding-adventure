@@ -1,0 +1,35 @@
+{
+  "connection": "default",
+  "collectionName": "utilsateurentreprises",
+  "info": {
+    "name": "utilsateurentreprise",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "nom": {
+      "default": "",
+      "type": "string"
+    },
+    "email": {
+      "default": "",
+      "type": "email"
+    },
+    "privileges": {
+      "default": "",
+      "type": "string"
+    },
+    "password": {
+      "default": "",
+      "type": "password"
+    },
+    "utilisateursadmin": {
+      "model": "utilisateursadmin",
+      "via": "utilsateurentreprises"
+    }
+  }
+}
