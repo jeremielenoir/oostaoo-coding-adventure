@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/utilisateursadmins",
+      "path": "/api/utilisateursadmins",
       "handler": "Utilisateursadmin.find",
       "config": {
         "policies": []
@@ -10,7 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/utilisateursadmins/count",
+      "path": "/api/utilisateursadmins/count",
       "handler": "Utilisateursadmin.count",
       "config": {
         "policies": []
@@ -18,7 +18,7 @@
     },
     {
       "method": "GET",
-      "path": "/utilisateursadmins/:id",
+      "path": "/api/utilisateursadmins/:id",
       "handler": "Utilisateursadmin.findOne",
       "config": {
         "policies": []
@@ -26,7 +26,7 @@
     },
     {
       "method": "POST",
-      "path": "/utilisateursadmins",
+      "path": "/api/utilisateursadmins",
       "handler": "Utilisateursadmin.create",
       "config": {
         "policies": []
@@ -34,7 +34,7 @@
     },
     {
       "method": "PUT",
-      "path": "/utilisateursadmins/:id",
+      "path": "/api/utilisateursadmins/:id",
       "handler": "Utilisateursadmin.update",
       "config": {
         "policies": []
@@ -42,7 +42,7 @@
     },
     {
       "method": "DELETE",
-      "path": "/utilisateursadmins/:id",
+      "path": "/api/utilisateursadmins/:id",
       "handler": "Utilisateursadmin.destroy",
       "config": {
         "policies": []

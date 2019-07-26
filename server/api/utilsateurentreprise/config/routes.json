@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/utilsateurentreprises",
+      "path": "/api/utilsateurentreprises",
       "handler": "Utilsateurentreprise.find",
       "config": {
         "policies": []
@@ -10,7 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/utilsateurentreprises/count",
+      "path": "/api/utilsateurentreprises/count",
       "handler": "Utilsateurentreprise.count",
       "config": {
         "policies": []
@@ -18,7 +18,7 @@
     },
     {
       "method": "GET",
-      "path": "/utilsateurentreprises/:id",
+      "path": "/api/utilsateurentreprises/:id",
       "handler": "Utilsateurentreprise.findOne",
       "config": {
         "policies": []
@@ -26,7 +26,7 @@
     },
     {
       "method": "POST",
-      "path": "/utilsateurentreprises",
+      "path": "/api/utilsateurentreprises",
       "handler": "Utilsateurentreprise.create",
       "config": {
         "policies": []
@@ -34,7 +34,7 @@
     },
     {
       "method": "PUT",
-      "path": "/utilsateurentreprises/:id",
+      "path": "/api/utilsateurentreprises/:id",
       "handler": "Utilsateurentreprise.update",
       "config": {
         "policies": []
@@ -42,7 +42,7 @@
     },
     {
       "method": "DELETE",
-      "path": "/utilsateurentreprises/:id",
+      "path": "/api/utilsateurentreprises/:id",
       "handler": "Utilsateurentreprise.destroy",
       "config": {
         "policies": []
