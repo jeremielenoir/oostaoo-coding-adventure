@@ -20,11 +20,13 @@ export class TestComponent implements OnInit {
   public Alltime: number[] = [];
   public CalculTimeTotal = 0;
   @Input() questionCampaign: any;
+  @Input() technoCampaign: any;
 
 
   constructor(private apiClientService: ApiClientService) { }
 
   ngOnInit() {
+    console.log('technoCampaign from TEST: ', this.technoCampaign);
     console.log('questionCampaign from TEST: ', this.questionCampaign);
     this.questions = this.questionCampaign;
     this.question = this.questionCampaign[0];

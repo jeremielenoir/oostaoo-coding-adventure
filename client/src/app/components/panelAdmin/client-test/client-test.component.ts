@@ -16,6 +16,7 @@ export class ClientTestComponent implements OnInit {
   @ViewChild('btnchecked') btnchecked: ElementRef;
   idCampaign: any;
   questionCampaign = [];
+  technoCampaign = [];
 
   constructor(private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router) {
     this.route.queryParams.subscribe(params => {
@@ -80,8 +81,10 @@ export class ClientTestComponent implements OnInit {
     }).then(idCampaign => {
       this.apiClientService.get(API_URI_CAMPAIGNS + '/' + idCampaign).toPromise().then(res => {
         console.log('res campaing: ', res);
-        this.questionCampaign = [...this.questionCampaign, ...res.questions];
+        this.questionCampaign = [...res.questions];
+        this.technoCampaign = [...res.technologies];
         console.log('this.questionCampaign: ', this.questionCampaign);
+        console.log('this.technoCampaign: ', this.technoCampaign);
       });
     });
   }
