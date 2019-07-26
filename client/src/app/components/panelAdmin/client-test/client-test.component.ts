@@ -46,7 +46,7 @@ export class ClientTestComponent implements OnInit {
 
     this.ActiveTest = true;
 
-    console.log('state', this.ActiveTest);
+    // console.log('state', this.ActiveTest);
   }
 
   NohundleActiveTest() {
@@ -61,6 +61,8 @@ export class ClientTestComponent implements OnInit {
   getCandidats() {
     this.apiClientService.get(API_URI_CANDIDATS).toPromise().then(res => {
       for (const candidat of res) {
+        const hasValue = Object.values(candidat).includes(this.idParam);
+        console.log(hasValue, 'hasValue');
         if (this.idParam === candidat.token) {
           console.log(candidat);
           this.idCampaign = candidat.campaign.id;
@@ -70,16 +72,14 @@ export class ClientTestComponent implements OnInit {
               id: this.idParam
             }
           });
-        }
-        // console.log('candidat.token: ', candidat.token);
-        if (candidat.token !== this.idParam) {
+        } else {
           this.router.navigate(['/home']);
         }
       }
       return this.idCampaign;
     }).then(idCampaign => {
       this.apiClientService.get(API_URI_CAMPAIGNS + '/' + idCampaign).toPromise().then(res => {
-        console.log(res);
+        console.log('res campaing: ', res);
         this.questionCampaign = [...this.questionCampaign, ...res.questions];
         console.log('this.questionCampaign: ', this.questionCampaign);
       });
