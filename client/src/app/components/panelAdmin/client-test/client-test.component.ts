@@ -30,23 +30,16 @@ export class ClientTestComponent implements OnInit {
   }
 
   public hundelechecked(event) {
-
     if (event.target.checked === true) {
-
       // this.btnchecked.nativeElement.disabled == true
-
       this.btnchecked.nativeElement.disabled = false;
-
     } else {
       this.btnchecked.nativeElement.disabled = true;
     }
-
   }
 
   hundleActiveTest() {
-
     this.ActiveTest = true;
-
     // console.log('state', this.ActiveTest);
   }
 
@@ -55,37 +48,30 @@ export class ClientTestComponent implements OnInit {
   }
 
   HundleStatueTestingQuestion() {
-
     this.StatueTestingQuestion = 'testing';
-
   }
+
   getCandidats() {
     this.apiClientService.get(API_URI_CANDIDATS).toPromise().then(res => {
       for (const candidat of res) {
-        const hasValue = Object.values(candidat).includes(this.idParam);
-        console.log(hasValue, 'hasValue');
         if (this.idParam === candidat.token) {
-          console.log(candidat);
           this.idCampaign = candidat.campaign.id;
-          console.log('this.idCampaign : ', this.idCampaign);
-          this.router.navigate(['/evaluate'], {
+          // console.log('this.idCampaign : ', this.idCampaign);
+          this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.idCampaign).toPromise().then(res1 => {
+            // console.log('res campaing: ', res);
+            this.questionCampaign = [...res1.questions];
+            this.technoCampaign = [...res1.technologies];
+            // console.log('this.questionCampaign: ', this.questionCampaign);
+            // console.log('this.technoCampaign: ', this.technoCampaign);
+          });
+          return this.router.navigate(['/evaluate'], {
             queryParams: {
               id: this.idParam
             }
           });
-        } else {
-          // this.router.navigate(['/home']);
         }
       }
-      return this.idCampaign;
-    }).then(idCampaign => {
-      this.apiClientService.get(API_URI_CAMPAIGNS + '/' + idCampaign).toPromise().then(res => {
-        console.log('res campaing: ', res);
-        this.questionCampaign = [...res.questions];
-        this.technoCampaign = [...res.technologies];
-        console.log('this.questionCampaign: ', this.questionCampaign);
-        console.log('this.technoCampaign: ', this.technoCampaign);
-      });
+      return this.router.navigate(['/home']);
     });
   }
 }
