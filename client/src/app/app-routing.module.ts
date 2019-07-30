@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AccueilComponent } from './components/home/accueil/accueil.component';
 import { NouvelleCampagneComponent } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagne.component';
-import { RouteComponentComponent2 } from './components/panelAdmin/route-component2/route-component.component';
+import { DashboadCampagneComponent } from './components/panelAdmin/route-component2/dashboard-campagne.component';
 import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
 import { ProtectionDeDonneesComponent } from './components/panelAdmin/protection-de-donnees/protection-de-donnees.component';
 import { FacturationComponent } from './components/panelAdmin/facturation/facturation.component';
@@ -37,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard/campaigns',
-    component: RouteComponentComponent2
+    component: DashboadCampagneComponent
   },
   {
     path: 'dashboard/campaigns/new',

@@ -1,5 +1,5 @@
 @import '../sidibar-right/sidibar-right.component.css';
-@import '../route-component2/route-component.component.css';
+@import '../dashboard-campagne/dashboard-campagne.component.css';
 .contenu-view-content-left {
     display: flex;
     flex-direction: column;
@@ -201,8 +201,6 @@ label {
 {
     display: block
 } */
-
-
 
 .contenu-techno-content .contenu-branche a:hover .branche-content-noti-item span {
     color: #f2bb13

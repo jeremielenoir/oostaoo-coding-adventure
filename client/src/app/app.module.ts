@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr);
+
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -42,7 +46,7 @@ import {
   NouvelleCampagnePage3Component, PopupCampaign
 } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component';
 
-import { RouteComponentComponent2 } from './components/panelAdmin/route-component2/route-component.component';
+import { DashboadCampagneComponent } from './components/panelAdmin/route-component2/dashboard-campagne.component';
 import { CompagneComponent } from './components/panelAdmin/compagne/compagne.component';
 import { SidibarRightComponent } from './components/panelAdmin/sidibar-right/sidibar-right.component';
 import { DatePipe } from '@angular/common';
@@ -90,7 +94,7 @@ import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.c
     NouvelleCampagnePage2Component,
     PopupCampaign,
     NouvelleCampagnePage3Component,
-    RouteComponentComponent2,
+    DashboadCampagneComponent,
     CompagneComponent,
     SidibarRightComponent,
     ProfilUtilisateurComponent,
