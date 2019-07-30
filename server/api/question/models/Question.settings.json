@@ -67,8 +67,8 @@
     },
     "campaigns": {
       "collection": "campaign",
-      "dominant": true,
-      "via": "questions"
+      "via": "questions",
+      "dominant": true
     }
   }
 }
