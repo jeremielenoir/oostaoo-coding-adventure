@@ -12,6 +12,7 @@ export class ClientTestComponent implements OnInit {
   public checkedBoolean: boolean;
   public ActiveTest: boolean;
   public StatueTestingQuestion = 'eval';
+  public candidat: string;
 
   @ViewChild('btnchecked') btnchecked: ElementRef;
   idCampaign: any;
@@ -55,6 +56,7 @@ export class ClientTestComponent implements OnInit {
     this.apiClientService.get(API_URI_CANDIDATS).toPromise().then(res => {
       for (const candidat of res) {
         if (this.idParam === candidat.token) {
+          this.candidat = candidat;
           this.idCampaign = candidat.campaign.id;
           // console.log('this.idCampaign : ', this.idCampaign);
           this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.idCampaign).toPromise().then(res1 => {
