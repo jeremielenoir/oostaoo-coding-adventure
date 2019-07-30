@@ -60,7 +60,7 @@ module.exports = {
    * @return {Object}
    */
 
-  create: async (ctx) => {
+  create: async ctx => {
     // console.log(strapi.services.campaign);
     //faire un get campaigns avec ctx.request.body.token? qui est l'id de la campaign?
     var idCampaignNom = ctx.request.body.idCampaign + ctx.request.body.Nom;
@@ -75,18 +75,22 @@ module.exports = {
     let getEmail_message = ctx.request.body.email_content;
     console.log('getEmail_message: ', getEmail_message);
     let email_title = ctx.request.body.email_title;
-    let getEmail_message_crypto = getEmail_message.replace(/http:\/\/localhost:4200\/evaluate\/.../gm,'http://localhost:4200/evaluate/?id='+cryptoData);
+    let getEmail_message_crypto = getEmail_message.replace(
+      /http:\/\/localhost:4200\/evaluate\/.../gm,'http://192.168.1.30:4200/evaluate/?id=' + cryptoData);
     // console.log('postEmail_message: ', postEmail_message);
     let getNom = ctx.request.body.Nom;
     console.log('nom: ', getNom);
     let nameCandidats = ctx.request.body.name_candidats.join();
     console.log('nameCandidats: ', nameCandidats);
-    let postEmail_message = getEmail_message_crypto.replace(nameCandidats, getNom);
-    
+    let postEmail_message = getEmail_message_crypto.replace(
+      nameCandidats,
+      getNom
+    );
+
     ctx.request.body = {
-      Nom : ctx.request.body.Nom,
-      email : ctx.request.body.email,
-      token : ctx.request.body.idCampaign
+      Nom: ctx.request.body.Nom,
+      email: ctx.request.body.email,
+      token: ctx.request.body.idCampaign
     };
     const depositObj = {
       ...ctx.request.body,
