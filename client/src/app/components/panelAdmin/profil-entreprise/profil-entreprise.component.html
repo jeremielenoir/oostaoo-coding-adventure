@@ -219,9 +219,9 @@
                       <div class="block-form-flex">
       
       
-                        <select  class="champ-form-gestion">
+                        <select [formControl]="lang" class="champ-form-gestion">
       
-                          <option *ngFor="let industrie of industrie" value="{{industrie}}">{{ industrie }}</option>
+                          <option *ngFor="let lang of langlist" name="lang" value="{{lang.name}}">{{ lang.name }}</option>
       
                         </select>
       
@@ -233,9 +233,9 @@
 
                       <label>Lien vidéo</label>
       
-                      <div class="block-form-flex incrage">
+                      <div  class="block-form-flex incrage">
       
-                        <input type="text" class="champ-form-gestion champ-incrage" value=""/>
+                        <input [formControl]="videolink" name="videolink" type="text" class="champ-form-gestion champ-incrage" value=""/>
       
                         <span class="span-incrage">url:</span>
                         
@@ -247,9 +247,9 @@
       
                       <label>Lien du site</label>
       
-                      <div class="block-form-flex">
+                      <div  class="block-form-flex">
       
-                          <input type="text" class="champ-form-gestion champ-incrage" value=""/>
+                          <input [formControl]="websitelink" name="websitelink" type="text" class="champ-form-gestion champ-incrage" value=""/>
       
                           <span class="span-incrage">url:</span>
                         
@@ -261,9 +261,9 @@
 
                       <label>Teaser de l'entreprise</label>
       
-                      <div class="block-form-flex">
+                      <div  class="block-form-flex">
       
-                        <textarea class="champ-form-gestion textarea-gestion" style="height:150px;resize:none;"></textarea>
+                        <textarea [formControl]="teaser" name="teaser" class="champ-form-gestion textarea-gestion" style="height:150px;resize:none;"></textarea>
       
                         <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
                         
@@ -275,9 +275,9 @@
 
                       <label></label>
       
-                      <div class="block-form-flex btn-block-flex">
+                      <div (click)="clickchange()" class="block-form-flex btn-block-flex">
       
-                          <button mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
+                          <button  mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
           
                       </div>
       
@@ -381,7 +381,7 @@
 
                 <div class="block-form-flex">
 
-                  <input type="text" class="champ-form-gestion" value=""/>
+                  <input [formControl]="name" name="name" type="text" class="champ-form-gestion" value=""/>
 
                   <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
                   
@@ -395,7 +395,7 @@
 
                 <div class="block-form-flex">
 
-                  <input type="text" class="champ-form-gestion" value=""/>
+                  <input [formControl]="email" name="email" type="text" class="champ-form-gestion" value=""/>
 
                   <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
                   
@@ -409,7 +409,7 @@
 
                 <div class="block-form-flex">
 
-                  <input type="text" class="champ-form-gestion" value=""/>
+                  <input [formControl]="phone" type="text" class="champ-form-gestion" value=""/>
 
                   <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
                   
@@ -424,9 +424,9 @@
                 <div class="block-form-flex">
 
 
-                  <select  class="champ-form-gestion">
+                  <select [formControl]="industrie" name="industrie"  class="champ-form-gestion">
 
-                    <option *ngFor="let industrie of industrie" value="{{industrie}}">{{ industrie }}</option>
+                    <option *ngFor="let industrie of industrieList" value="{{industrie}}">{{ industrie }}</option>
 
                   </select>
 
@@ -440,9 +440,9 @@
 
                 <div class="block-form-flex">
 
-                    <select  class="champ-form-gestion">
+                    <select [formControl]="numberofemployee" name="numberofemployee"  class="champ-form-gestion">
 
-                        <option *ngFor="let nbr_employe of nbr_employe" value="{{nbr_employe}}">{{ nbr_employe }}</option>
+                        <option *ngFor="let numberofemployee of  numberofemployeeList" value="{{numberofemployee}}">{{ numberofemployee }}</option>
     
                     </select>
                   
@@ -456,9 +456,9 @@
 
                 <div class="block-form-flex">
 
-                    <select  class="champ-form-gestion">
+                    <select  [formControl]="numberofdev" name="numberofdev" class="champ-form-gestion">
 
-                        <option *ngFor="let nbr_employe of nbr_employe" value="{{nbr_employe}}">{{ nbr_employe }}</option>
+                        <option *ngFor="let numberofdev of numberofemployeeList" value="{{numberofdev}}">{{ numberofdev }}</option>
     
                     </select>
                   
@@ -474,7 +474,7 @@
 
                     <mat-form-field class="select-tech">
                         <mat-label>Toppings</mat-label>
-                        <mat-select [formControl]="toppings" multiple>
+                        <mat-select [formControl]="techno" name techno multiple>
                           <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
                         </mat-select>
                       </mat-form-field>
@@ -489,7 +489,7 @@
 
                 <div class="block-form-flex incrage">
 
-                  <input type="text" class="champ-form-gestion champ-incrage" value=""/>
+                  <input [formControl]="videolink" type="text" class="champ-form-gestion champ-incrage" value=""/>
 
                   <span class="span-incrage">url:</span>
                   
@@ -503,7 +503,7 @@
 
                 <div class="block-form-flex">
 
-                    <input type="text" class="champ-form-gestion champ-incrage" value=""/>
+                    <input [formControl]="websitelink" type="text" class="champ-form-gestion champ-incrage" value=""/>
 
                     <span class="span-incrage">url:</span>
                   
@@ -517,7 +517,7 @@
 
                 <div class="block-form-flex">
 
-                  <textarea class="champ-form-gestion textarea-gestion" style="height:150px;resize:none;"></textarea>
+                  <textarea [formControl]="teaser" class="champ-form-gestion textarea-gestion" style="height:150px;resize:none;"></textarea>
 
                   <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
                   
@@ -551,11 +551,11 @@
 
                 <div class="block-form-flex">
 
-                    <input type="text" class="champ-form-gestion champ-incrage-network" value=""/>
+                    <input [formControl]="linkedin" name="linkedin" type="text" class="champ-form-gestion champ-incrage-network" value=""/>
 
                     <span class="span-incrage span-incrage-network">
                       <i class="fab fa-linkedin-in icon-network"></i>
-                      Linkidin
+                      Linkedin
                     </span>
     
                 </div>
@@ -568,11 +568,11 @@
 
                 <div class="block-form-flex">
 
-                    <input type="text" class="champ-form-gestion champ-incrage-network" value=""/>
+                    <input [formControl]="facebook" name="facebook" type="text" class="champ-form-gestion champ-incrage-network" value=""/>
 
                     <span class="span-incrage span-incrage-network">
                       <i class="fab fa-facebook-f icon-network"></i>
-                      Linkidin
+                      Facebook
                     </span>
     
                 </div>
@@ -585,11 +585,11 @@
 
                 <div class="block-form-flex">
 
-                    <input type="text" class="champ-form-gestion champ-incrage-network" value=""/>
+                    <input [formControl]="twitter" name="twitter" type="text" class="champ-form-gestion champ-incrage-network" value=""/>
 
                     <span class="span-incrage span-incrage-network">
                       <i class="fab fa-twitter icon-network"></i>
-                      Linkidin
+                      Twitter
                     </span>
     
                 </div>
@@ -601,7 +601,7 @@
 
                 <label></label>
 
-                <div class="block-form-flex btn-block-flex">
+                <div (click)="clickchange2()" class="block-form-flex btn-block-flex">
 
                     <button mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
     
