@@ -94,7 +94,6 @@ export class CandidatsComponent implements OnInit {
         const getInfoCandidat = [];
         let dateInvite;
         for (const candidat of this.candidats) {
-          console.log('candidat.invitation_date: ', candidat.invitation_date);
           dateInvite = new Date(candidat.invitation_date);
           getInfoCandidat.push({
             Candidats: candidat.Nom,
