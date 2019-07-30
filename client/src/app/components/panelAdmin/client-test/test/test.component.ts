@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiClientService, API_URI_CANDIDATS } from '../../../../api-client/api-client.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-test',
@@ -21,6 +22,7 @@ export class TestComponent implements OnInit {
   @Input() public technoCampaign: any;
   @Input() public candidat: any;
   public language: string;
+  public dateFinishTest: any;
 
 
   constructor(private apiClientService: ApiClientService) { }
@@ -61,7 +63,8 @@ export class TestComponent implements OnInit {
       this.Countertime();
     } else {
       if (this.index === this.questions.length - 1) {
-        console.log('test terminer');
+        this.dateFinishTest = new Date().toISOString();
+        console.log('testdate: ', this.dateFinishTest);
         clearInterval(this.stopTimeInterval);
         for (const nbrtime of this.Alltime) {
           console.log('chaque temp passe sur chaque question', nbrtime);
@@ -86,7 +89,8 @@ export class TestComponent implements OnInit {
 
   postTimeTest(dureeTest): Promise<any> {
     return this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
-      duree: dureeTest
+      duree: dureeTest,
+      invitation_date: this.dateFinishTest
     }).toPromise().then(res => {
       console.log('succes', res);
     });
