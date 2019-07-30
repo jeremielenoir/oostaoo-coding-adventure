@@ -39,28 +39,27 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
 
   ngOnInit() {
+    this.getAllQuestions();
+  }
+
+  getAllQuestions() {
+    // console.log('this.formCampagne.value(): ', this.formCampagne.value);
     this.apiClientService.get(API_URI_QUESTIONS).subscribe((datas) => {
+      // console.log('datas: ', datas);
       this.questions = datas;
-      for (var i = 0; i < this.questions.length; i++) {
-        if (this.formCampagne.value.technoSelectedId.includes(this.questions[i].technologies.id)) {
-          this.allQuestions.push(this.questions[i]);
+      for (const question of this.questions) {
+        // console.log('question.technologies.id: ', question.technologies.id);
+        if (this.formCampagne.value.technoSelectedId.includes(question.technologies.id)) {
+          this.allQuestions.push(question);
         }
       }
     });
-    setTimeout(() => {
-      console.log('this.allQuestions: ', this.allQuestions)
-      this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.formCampagne.value.CampaignID.id).subscribe((datas) => {
-        console.log('resultat from get', datas);
-      });
-    }, 1000);
   }
 
   SendQuestionSelected() {
-    for (let index = 0; index < this.Questions.length; index++) {
-      const element = this.Questions[index];
-      this.QuestionsCampaign.push(element['id']);
+    for (const question of this.Questions) {
+      this.QuestionsCampaign.push(question.id);
     }
-    // console.log("this array for update questions", this.QuestionsCampaign)
     this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.formCampagne.value.CampaignID.id, {
       questions: this.QuestionsCampaign
     }).subscribe(
