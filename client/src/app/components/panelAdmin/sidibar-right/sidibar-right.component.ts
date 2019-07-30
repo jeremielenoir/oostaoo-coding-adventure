@@ -14,14 +14,14 @@ export class SidibarRightComponent implements OnInit {
   ngOnInit() {
   }
 
-  public param_cog(){
+  public param_cog() {
 
     this.Isactive = true;
 
   }
 
-  public param_cog_non_active(){
- 
+  public param_cog_non_active() {
+
     this.Isactive = false;
 
   }
