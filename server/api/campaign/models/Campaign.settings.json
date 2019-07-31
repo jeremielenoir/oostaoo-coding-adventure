@@ -78,6 +78,10 @@
     "questions": {
       "collection": "question",
       "via": "campaigns"
+    },
+    "NbCandidatFinish": {
+      "default": "",
+      "type": "integer"
     }
   }
 }
