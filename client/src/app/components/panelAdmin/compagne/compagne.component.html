@@ -59,7 +59,11 @@
                 <span>Invité</span>
               </span>
               <span class="branche-content-noti-item">
-                <strong>1</strong>
+                <strong>{{
+                  campaign.NbCandidatFinish !== null
+                    ? campaign.NbCandidatFinish
+                    : 0
+                }}</strong>
                 <span>Terminé</span>
               </span>
             </div>

@@ -13,8 +13,7 @@ export class CompagneComponent implements OnInit {
   public campaigns: any[];
   public searchHeader: string;
 
-  constructor(public apiClientService: ApiClientService,
-              public dialog: MatDialog) {
+  constructor(public apiClientService: ApiClientService, public dialog: MatDialog) {
     this.searchHeader = null;
   }
 
@@ -26,6 +25,7 @@ export class CompagneComponent implements OnInit {
         console.log('CAMPAIGNS', this.campaigns);
       });
   }
+
   recupID(idCampaign: string) {
     console.log(idCampaign);
   }
