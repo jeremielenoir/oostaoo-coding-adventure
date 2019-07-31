@@ -13,6 +13,7 @@ export class ClientTestComponent implements OnInit {
   public ActiveTest: boolean;
   public StatueTestingQuestion = 'eval';
   public candidat: string;
+  public dateOpenTest: any;
 
   @ViewChild('btnchecked') btnchecked: ElementRef;
   idCampaign: any;
@@ -26,6 +27,7 @@ export class ClientTestComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dateOpenTest = new Date().toISOString();
     console.log('this.idParam : ', this.idParam);
     this.getCandidats();
   }
@@ -58,6 +60,7 @@ export class ClientTestComponent implements OnInit {
         if (this.idParam === candidat.token) {
           this.candidat = candidat;
           this.idCampaign = candidat.campaign.id;
+          this.postOpenTimeTest(this.dateOpenTest, candidat.id);
           // console.log('this.idCampaign : ', this.idCampaign);
           this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.idCampaign).toPromise().then(res1 => {
             // console.log('res campaing: ', res);
@@ -74,6 +77,14 @@ export class ClientTestComponent implements OnInit {
         }
       }
       return this.router.navigate(['/home']);
+    });
+  }
+
+  postOpenTimeTest(dateOpen, candidat): Promise<any> {
+    return this.apiClientService.put(API_URI_CANDIDATS + '/' + candidat, {
+      test_ouvert: dateOpen
+    }).toPromise().then(res => {
+      console.log('succes', res);
     });
   }
 }

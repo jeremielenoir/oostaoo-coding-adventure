@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiClientService, API_URI_CANDIDATS } from '../../../../api-client/api-client.service';
-import { formatDate } from '@angular/common';
+import { ApiClientService, API_URI_CANDIDATS, API_URI_CAMPAIGNS } from '../../../../api-client/api-client.service';
 
 @Component({
   selector: 'app-test',
@@ -87,12 +86,22 @@ export class TestComponent implements OnInit {
     return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
   }
 
-  postTimeTest(dureeTest): Promise<any> {
-    return this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
+  postTimeTest(dureeTest) {
+    this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
       duree: dureeTest,
-      invitation_date: this.dateFinishTest
+      test_terminer: this.dateFinishTest
     }).toPromise().then(res => {
-      console.log('succes', res);
+      console.log('succes time send');
+      this.apiClientService.get(API_URI_CAMPAIGNS + '/' + res.campaign.id).subscribe(res1 => {
+        console.log('campaign : ', res1);
+        const nbCandidats = res1.NbCandidatFinish;
+        console.log(nbCandidats);
+        this.apiClientService.put(API_URI_CAMPAIGNS + '/' + res.campaign.id, {
+          NbCandidatFinish: nbCandidats + 1
+        }).subscribe(res2 => {
+          console.log('campaign : ', res2);
+        });
+      });
     });
   }
 }

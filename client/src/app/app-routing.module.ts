@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AccueilComponent } from './components/home/accueil/accueil.component';
 import { NouvelleCampagneComponent } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagne.component';
-import { DashboadCampagneComponent } from './components/panelAdmin/route-component2/dashboard-campagne.component';
+import { DashboadCampagneComponent } from './components/panelAdmin/dashboard-campagne/dashboard-campagne.component';
 import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
 import { ProtectionDeDonneesComponent } from './components/panelAdmin/protection-de-donnees/protection-de-donnees.component';
 import { FacturationComponent } from './components/panelAdmin/facturation/facturation.component';
@@ -16,7 +16,6 @@ import { SettingsComponent } from './components/panelAdmin/edit-campagne/setting
 import { GeneralComponent } from './components/panelAdmin/edit-campagne/settings/general/general.component';
 import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne/settings/personnalisation/personnalisation.component';
 import { ClientTestComponent } from './components/panelAdmin/client-test/client-test.component';
-import { TestComponent } from './components/panelAdmin/client-test/test/test.component';
 import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
 
 const routes: Routes = [
