@@ -38,6 +38,14 @@
     "duree": {
       "default": "",
       "type": "integer"
+    },
+    "test_terminer": {
+      "default": "",
+      "type": "date"
+    },
+    "test_ouvert": {
+      "default": "",
+      "type": "date"
     }
   }
 }
