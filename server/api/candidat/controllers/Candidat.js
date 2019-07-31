@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 // Create reusable transporter object using SMTP transport.
 const transporter = nodemailer.createTransport({
-  service: 'Gmail',
+  service: "Gmail",
   auth: {
-    user: 'lenoir.jeremie@oostaoo.com',
-    pass: 'marijuana'
+    user: "lenoir.jeremie@oostaoo.com",
+    pass: "marijuana"
   }
 });
 
@@ -67,21 +67,23 @@ module.exports = {
     // console.log('ctx.request.body.token: ', ctx.request.body.token);
     // console.log("idCampaignNom: ", idCampaignNom);
     var cryptoData = crypto
-      .createHash('md5')
+      .createHash("md5")
       .update(idCampaignNom)
-      .digest('hex');
+      .digest("hex");
     // console.log("cryptoData: ", cryptoData);
     // console.log('ctx.request.body: ', ctx.request.body);
     let getEmail_message = ctx.request.body.email_content;
-    console.log('getEmail_message: ', getEmail_message);
+    console.log("getEmail_message: ", getEmail_message);
     let email_title = ctx.request.body.email_title;
     let getEmail_message_crypto = getEmail_message.replace(
-      /http:\/\/localhost:4200\/evaluate\/.../gm,'http://192.168.1.30:4200/evaluate/?id=' + cryptoData);
+      /http:\/\/localhost:4200\/evaluate\/.../gm,
+      "http://localhost:4200/evaluate/?id=" + cryptoData
+    );
     // console.log('postEmail_message: ', postEmail_message);
     let getNom = ctx.request.body.Nom;
-    console.log('nom: ', getNom);
+    console.log("nom: ", getNom);
     let nameCandidats = ctx.request.body.name_candidats.join();
-    console.log('nameCandidats: ', nameCandidats);
+    console.log("nameCandidats: ", nameCandidats);
     let postEmail_message = getEmail_message_crypto.replace(
       nameCandidats,
       getNom
@@ -103,8 +105,8 @@ module.exports = {
       let candidat = await strapi.services.candidat.add(depositObj);
       const options = {
         to: ctx.request.body.email,
-        from: 'lenoir.jeremie@gmail.com',
-        replyTo: 'no-reply@strapi.io',
+        from: "lenoir.jeremie@gmail.com",
+        replyTo: "no-reply@strapi.io",
         subject: email_title,
         html: postEmail_message
       };
