@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-campagne.component.css']
 })
 export class DashboadCampagneComponent implements OnInit {
+  public campaigns: any;
 
   constructor() { }
 
   ngOnInit() {
-  }
 
+  }
+  getCampaignsFromChild(campaigns) {
+    // console.log('my campaigns from dashboard-campagne', campaigns);
+    this.campaigns = campaigns;
+  }
 }

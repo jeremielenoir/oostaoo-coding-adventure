@@ -6,9 +6,13 @@
     </div>
 
     <div class="contenu-view-content">
-      <app-compagne></app-compagne>
-
-      <app-sidibar-right></app-sidibar-right>
+      <app-compagne
+        (campaignsChild)="getCampaignsFromChild($event)"
+      ></app-compagne>
+      <app-sidibar-right
+        *ngIf="campaigns"
+        [campaignsFromParent]="campaigns"
+      ></app-sidibar-right>
     </div>
   </section>
 </div>
