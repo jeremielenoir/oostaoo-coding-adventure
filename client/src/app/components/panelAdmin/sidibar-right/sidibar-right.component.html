@@ -207,7 +207,14 @@
   </div>
 
   <div class="sidibar-content">
-    <div class="list-sidibar">
+    <div *ngFor="let campaing of campaignsFromParent">
+      <div *ngFor="let candidat of candidats">
+        <div *ngIf="candidat.campaign === campaing.id">
+          {{ candidat.Nom }}
+        </div>
+      </div>
+    </div>
+    <!-- <div class="list-sidibar">
       <div class="list-sidibar-left">
         <p class="list-sidibar-left-content">
           <a
@@ -255,6 +262,6 @@
         <p>01/04/2019</p>
         <p>17:53</p>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
