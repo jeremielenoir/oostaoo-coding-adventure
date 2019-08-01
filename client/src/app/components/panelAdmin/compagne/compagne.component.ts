@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiClientService, API_URI_CAMPAIGNS } from '../../../api-client/api-client.service';
 import { InviteCandidat } from '../edit-campagne/candidats/invite-candidat.component';
 import { MatDialog } from '@angular/material';
@@ -12,6 +12,7 @@ export class CompagneComponent implements OnInit {
 
   public campaigns: any[];
   public searchHeader: string;
+  @Output() campaignsChild = new EventEmitter<any>();
 
   constructor(public apiClientService: ApiClientService, public dialog: MatDialog) {
     this.searchHeader = null;
@@ -23,11 +24,8 @@ export class CompagneComponent implements OnInit {
       .subscribe((datas) => {
         this.campaigns = datas;
         console.log('CAMPAIGNS', this.campaigns);
+        this.giveCampaigns();
       });
-  }
-
-  recupID(idCampaign: string) {
-    console.log(idCampaign);
   }
 
   openDialog(idCampaign) {
@@ -35,6 +33,10 @@ export class CompagneComponent implements OnInit {
       data: idCampaign,
       height: '80vh'
     });
+  }
+
+  giveCampaigns() {
+    this.campaignsChild.emit(this.campaigns);
   }
 
 }
