@@ -48,20 +48,63 @@ export class ProfilUtilisateurComponent implements OnInit {
   }
 
   updateprofil() {
+
+    this.apiClientService.put(API_URI_USER_ADMIN + '/' + 1, {
+      Prenom: this.prenom.value,
+      Nom: this.nom.value,
+      Pays: this.pays.value,
+      Langue: this.langue.value,
+      Tel: this.tel.value,
+      mobile: this.mobile.value,
+      function: this.fonction.value,
+    }).subscribe(
+      (res) => {
+        alert('Profil mis à jour');
+       // console.log('res', res);
+      },
+      err => console.log(err)
+    );
     console.log( 'form profil =', this.prenom.value,
                  this.nom.value, this.pays.value,
                  this.langue.value, this.tel.value, this.mobile.value, this.fonction.value );
  }
 
  updatesignature() {
+  this.apiClientService.put(API_URI_USER_ADMIN + '/' + 1, {
+    Signature: this.signature.value,
+  }).subscribe(
+    (res) => {
+      alert('Profil mis à jour');
+     // console.log('res', res);
+    },
+    err => console.log(err)
+  );
   console.log( 'form signature =', this.signature.value );
 }
 
 updateemail() {
+  this.apiClientService.put(API_URI_USER_ADMIN + '/' + 1, {
+    Email: this.email.value,
+  }).subscribe(
+    (res) => {
+      alert('Profil mis à jour');
+     // console.log('res', res);
+    },
+    err => console.log(err)
+  );
   console.log( 'form email =', this.email.value );
 }
 
 updatepassword() {
+  this.apiClientService.put(API_URI_USER_ADMIN + '/' + 1, {
+    password: this.newpassword.value,
+  }).subscribe(
+    (res) => {
+      alert('Profil mis à jour');
+     // console.log('res', res);
+    },
+    err => console.log(err)
+  );
   console.log( 'form password =', this.newpassword.value);
 }
 

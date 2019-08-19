@@ -1,5 +1,6 @@
 import { Component, OnInit, QueryList, ViewChild, ElementRef} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import {  ApiClientService, API_URI_USER_ADMIN, API_URI_ENTREPRISE} from 'src/app/api-client/api-client.service';
 
 @Component({
   selector: 'app-profil-entreprise',
@@ -17,6 +18,7 @@ export class ProfilEntrepriseComponent implements OnInit {
 
 
   public currentValue: number;
+  public user: any;
   public interval: any;
   public shadowcog = false;
   public shadowcogImage = false;
@@ -796,21 +798,72 @@ export class ProfilEntrepriseComponent implements OnInit {
     'C', 'C++', 'C#', 'Clojure', 'Cloud', 'Cobol', 'DBA', 'Dart', 'Delphi',
     '.NET', 'F#'];
 
-  constructor() { }
+    constructor(public apiClientService: ApiClientService) {
+    }
 
   ngOnInit() {
-console.log(this.lang);
+    this.getUser().then(user => {
+      console.log(user[0].entreprise);
+      this.logo = new FormControl(user[0].entreprise.logo);
+      this.name = new FormControl(user[0].entreprise.nom);
+      this.email = new FormControl(user[0].entreprise.email);
+      this.lang = new FormControl(user[0].entreprise.langue);
+      this.phone = new FormControl(user[0].entreprise.tel);
+      this.industrie = new FormControl(user[0].entreprise.mobile);
+      this.numberofemployee = new FormControl(user[0].entreprise.nb_employe);
+      this.numberofdev = new FormControl(user[0].entreprise.nb_dev);
+      this.techno = new FormControl(user[0].entreprise.techno);
+      this.videolink = new FormControl(user[0].entreprise.lien_video);
+      this.websitelink = new FormControl(user[0].entreprise.url_site);
+      this.teaser = new FormControl(user[0].entreprise.teaser);
+      this.picture = new FormControl(user[0].entreprise.picture);
+      this.linkedin = new FormControl(user[0].entreprise.linkedin);
+      this.facebook = new FormControl(user[0].entreprise.facebook);
+      this.twitter = new FormControl(user[0].entreprise.twitter);
+    // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
+    });
 
   }
 
   clickchange() {
+
+    this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.user[0].entreprise.id, {
+      Lien_video: this.videolink.value,
+      Url_site: this.websitelink.value,
+      Teaser: this.teaser.value
+    }).subscribe(
+      (res) => {
+        alert('Profil mis à jour');
+       // console.log('res', res);
+      },
+      err => console.log(err)
+    );
     console.log(this.lang.value);
-    console.log(this.videolink.value);
+    console.log(this.user[0].entreprise.id);
     console.log(this.websitelink.value);
     console.log(this.teaser.value);
   }
 
-  clickchange2(){
+  clickchange2() {
+    this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.user[0].entreprise.id, {
+      Nom: this.name.value,
+      Email: this.email.value,
+      Tel: this.phone.value,
+      Nb_employe: this.numberofemployee.value,
+      Nb_dev: this.numberofdev.value,
+      Lien_video: this.videolink.value,
+      Url_site: this.websitelink.value,
+      Teaser: this.teaser.value,
+      Linkedin: this.linkedin.value,
+      Facebook: this.facebook.value,
+      Twitter: this.twitter.value,
+    }).subscribe(
+      (res) => {
+        alert('Profil mis à jour');
+       // console.log('res', res);
+      },
+      err => console.log(err)
+    );
     console.log(this.name.value);
     console.log(this.email.value);
     console.log(this.phone.value);
@@ -941,5 +994,16 @@ console.log(this.lang);
 
     }
 
+  }
+
+  async getUser(): Promise<any> {
+    try {
+      const datas = await this.apiClientService
+        .get(API_URI_USER_ADMIN + '/' +  1)
+        .toPromise();
+      return this.user = [datas];
+    } catch (err) {
+      return err;
+    }
   }
 }

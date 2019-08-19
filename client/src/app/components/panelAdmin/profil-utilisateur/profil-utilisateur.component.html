@@ -108,7 +108,7 @@
             <h3 class="input-title">Langue *</h3>
             <select [formControl]="langue" class="input-section1" name="langue" required>
                 <option value="Anglais">Anglais</option>
-                <option value="Francais" selected>Français</option>
+                <option value="Francais">Français</option>
             </select>
         </div>
       </div>
@@ -133,11 +133,11 @@
             <h3 class="input-title">Fonction *</h3>
             <select [formControl]="fonction" class="input-section1" name="fonction" required>
                 <option value="unknown" disabled="">-</option>
-                <option value="sales">Commercial</option>
-                <option value="executive">Direction</option>
+                <option value="commercial">Commercial</option>
+                <option value="direction">Direction</option>
                 <option value="tech">Équipe technique</option>
                 <option value="marketing">Marketing/Communication</option>
-                <option value="hr">Ressources humaines</option>
+                <option value="rh">Ressources humaines</option>
                 <option value="other">Autre</option>
             </select>
           </div>  
@@ -245,7 +245,7 @@
               
               <div class="form-line">
                   <div class="input-bloc">
-                    <button (click)="updatepassword()"
+                    <button  (click)="updatepassword()"
                      class="btn-submit" 
                      type="submit">Enregistrer</button>
                   </div>
