@@ -19,9 +19,14 @@ export class CompagneComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiClientService
+    this.getCampaigns();
+  }
+
+  getCampaigns(): Promise<any> {
+    return this.apiClientService
       .get(API_URI_CAMPAIGNS)
-      .subscribe((datas) => {
+      .toPromise()
+      .then((datas) => {
         this.campaigns = datas;
         console.log('CAMPAIGNS', this.campaigns);
         this.giveCampaigns();
@@ -29,9 +34,14 @@ export class CompagneComponent implements OnInit {
   }
 
   openDialog(idCampaign) {
-    this.dialog.open(InviteCandidat, {
+    const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
       data: idCampaign,
       height: '80vh'
+    });
+    inviteCandidatDialog.afterClosed().subscribe((data) => {
+      this.getCampaigns().then(datas => {
+        console.log('AFTER CLOSE ALL DATAS', datas);
+      });
     });
   }
 
