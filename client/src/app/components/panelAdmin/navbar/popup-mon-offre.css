@@ -46,8 +46,7 @@
 
 /* CLASS COMMON */
 
-#popup {
-}
+#popup {}
 
 #titre {
   display: flex;
@@ -95,18 +94,18 @@
   padding-top: 0px;
 }
 
-::ng-deep .mat-bottom-sheet-container {
+:host ::ng-deep .mat-bottom-sheet-container {
   padding: 0px;
   max-height: 100vh;
 }
 
-::ng-deep .cdk-overlay-pane {
+:host ::ng-deep .cdk-overlay-pane {
   /* à enlever sous format mobile le width 60%*/
   width: 72%;
   height: 100vh;
 }
 
-::ng-deep .mat-bottom-sheet-container-large {
+:host ::ng-deep .mat-bottom-sheet-container-large {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 }
@@ -114,19 +113,19 @@
 /* css for popup */
 
 @media (min-width: 300px) and (max-width: 768px) {
-  ::ng-deep .cdk-overlay-pane {
+  :host ::ng-deep .cdk-overlay-pane {
     width: inherit;
   }
 }
 
 @media (min-width: 770px) and (max-width: 1024px) {
-  ::ng-deep .cdk-overlay-pane {
+  :host ::ng-deep .cdk-overlay-pane {
     width: 54%;
   }
 }
 
 @media (min-width: 1030px) and (max-width: 1440px) {
-  ::ng-deep .cdk-overlay-pane {
+  :host ::ng-deep .cdk-overlay-pane {
     width: 64%;
   }
 }

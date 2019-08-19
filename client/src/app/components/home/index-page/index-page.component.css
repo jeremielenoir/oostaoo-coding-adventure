@@ -108,7 +108,7 @@ mat-error {
   margin: 0
 }
 
-::ng-deep .mat-form-field-infix {
+:host ::ng-deep .mat-form-field-infix {
   border: 0;
 }
 
@@ -132,7 +132,7 @@ mat-error {
   padding: 15px;
 }
 
-::ng-deep .mat-form-field-underline {
+:host ::ng-deep .mat-form-field-underline {
   display: none;
 }
 

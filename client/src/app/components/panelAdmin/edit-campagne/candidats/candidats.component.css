@@ -84,7 +84,7 @@ table {
   color: white;
 }
 
-.candidat-finish-custom-select ::ng-deep .mat-select-value {
+:host .candidat-finish-custom-select ::ng-deep .mat-select-value {
   color: white;
 }
 
@@ -112,18 +112,20 @@ table {
 }
 
 /* Change color row table on hover */
+
 .mat-row:hover {
   background-color: #20252a;
 }
-.mat-cell:hover{
+
+.mat-cell:hover {
   color: white;
 }
 
-::ng-deep .mat-form-field-underline {
+:host ::ng-deep .mat-form-field-underline {
   display: none;
 }
 
-::ng-deep .mat-form-field-flex {
+:host ::ng-deep .mat-form-field-flex {
   margin-top: 0px;
 }
 
