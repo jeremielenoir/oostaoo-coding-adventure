@@ -56,11 +56,11 @@ export class NouvelleCampagnePage3Component implements OnInit {
     });
   }
 
-  SendQuestionSelected() {
+  SendQuestionSelected(id) {
     for (const question of this.Questions) {
       this.QuestionsCampaign.push(question.id);
     }
-    this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.formCampagne.value.CampaignID.id, {
+    this.apiClientService.put(API_URI_CAMPAIGNS + '/' + id, {
       questions: this.QuestionsCampaign
     }).subscribe(
       (res) => {
@@ -76,6 +76,38 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
   public onIncrementPage(): void {
     this.incrementPage.emit();  // Déclenche l'output
+  }
+
+  postCampagne() {
+    // Confirm true for post
+    let truecp;
+    if (this.formCampagne.value.utilisationCopieColler === 'true') {
+      truecp = true;
+    } else {
+      truecp = false;
+    }
+    let envoiRapportSimplifie;
+    if (this.formCampagne.value.envoiRapportSimplifie === 'true') {
+      envoiRapportSimplifie = true;
+    } else {
+      envoiRapportSimplifie = false;
+    }
+
+    this.apiClientService.post(API_URI_CAMPAIGNS, {
+      Name: this.formCampagne.value.nomDeCampagne,
+      level: this.formCampagne.value.experience,
+      langs: this.formCampagne.value.langue,
+      copy_paste: truecp,
+      sent_report: envoiRapportSimplifie,
+      profile: this.formCampagne.value.roleSelectedId,
+      technologies: this.formCampagne.value.technoSelectedId
+    }).subscribe(
+      (res) => {
+        console.log('resultat from post', res);
+        this.SendQuestionSelected(res.id);
+      },
+      err => console.log(err)
+    );
   }
 }
 

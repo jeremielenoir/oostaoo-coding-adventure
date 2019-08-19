@@ -30,37 +30,6 @@ export class NouvelleCampagnePage2Component implements OnInit {
       envoiRapportSimplifie: this.formCampagne.value.envoiRapportSimplifie,
       langue: this.selectedLangue
     });
-    // Confirm true for post
-    let truecp;
-    if (this.formCampagne.value.utilisationCopieColler === 'true') {
-      truecp = true;
-    } else {
-      truecp = false;
-    }
-    let envoiRapportSimplifie;
-    if (this.formCampagne.value.envoiRapportSimplifie === 'true') {
-       envoiRapportSimplifie = true;
-    } else {
-       envoiRapportSimplifie = false;
-    }
-
-    this.apiClientService.post(API_URI_CAMPAIGNS, {
-      Name: this.formCampagne.value.nomDeCampagne,
-      level: this.formCampagne.value.experience,
-      langs: this.formCampagne.value.langue,
-      copy_paste: truecp,
-      sent_report: envoiRapportSimplifie,
-      profile: this.formCampagne.value.roleSelectedId,
-      technologies: this.formCampagne.value.technoSelectedId
-    }).subscribe(
-      (res) => {
-        console.log('resultat from post', res);
-        this.formCampagne.patchValue({
-          CampaignID: { 'id': res.id }
-        });
-      },
-      err => console.log(err)
-    );
   }
 
   public onDecrementPage(): void {
