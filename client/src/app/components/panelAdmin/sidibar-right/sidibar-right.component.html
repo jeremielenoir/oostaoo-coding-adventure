@@ -207,16 +207,18 @@
   </div>
 
   <div class="sidibar-content">
-    <div class="list-sidibar">
+    <div class="">
       <div class="list-sidibar-left">
         <div *ngFor="let campaing of campaignsFromParent">
-          <div *ngFor="let candidat of candidats">
+          <div *ngFor="let candidat of candidats" >
+          
             <div *ngIf="candidat.campaign === campaing.id">
-              <div *ngIf="candidat.invitation_date !== candidat.test_terminer">
+
+              <div *ngIf="candidat.invitation_date !== candidat.test_terminer" class="list-sidibar">
                 <p class="list-sidibar-left-content">
                   <a
                     href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487"
-                    >{{ candidat.Nom }}</a
+                    >{{ candidat.Nom }} </a
                   >
                   &lt;<a
                     href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487"
@@ -228,33 +230,43 @@
                   }}</a
                   >'
                 </p>
-                <p>
+                <p class="list-sidibar-right list-sidibar-right-bottom">
                   {{
                     candidat.test_terminer | date: "short":"undefined":"fr-FR"
                   }}
                 </p>
+
               </div>
-              <p class="list-sidibar-left-content">
-                <a
-                  href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487"
-                  >{{ candidat.Nom }}</a
-                >
-                &lt;<a
-                  href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487"
-                  >{{ candidat.email }}</a
-                >
-                &gt; a été invité(e) à '
-                <a href="/work/fr/dashboard/campaign/177710/candidates/">{{
-                  campaing.Name
-                }}</a
-                >'
-              </p>
-              <p>
-                {{
-                  candidat.invitation_date | date: "short":"undefined":"fr-FR"
-                }}
-              </p>
+
+              
+             <div class="list-sidibar">
+            
+                  <p class="list-sidibar-left-content">
+                    <a
+                    href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487"
+                    >{{ candidat.Nom }}</a
+                    >
+                    &lt;<a
+                    href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487"
+                    >{{ candidat.email }}</a
+                    >
+                    &gt; a été invité(e) à '
+                    <a href="/work/fr/dashboard/campaign/177710/candidates/">{{
+                    campaing.Name
+                    }}</a
+                    >'
+                 </p>
+                    <p class="list-sidibar-right list-sidibar-right-bottom">
+                        {{
+                        candidat.invitation_date | date: "short":"undefined":"fr-FR"
+                        }}
+                  </p>
+            
             </div>
+
+
+            </div>
+
           </div>
         </div>
       </div>
