@@ -22,6 +22,10 @@ export class TestComponent implements OnInit {
   @Input() public candidat: any;
   public language: string;
   public dateFinishTest: any;
+  public responses: Array<string>;
+  public responseUser: string;
+  public counterCheck = 0; // counter good response
+  public counterTotal = 0;
 
 
   constructor(private apiClientService: ApiClientService) { }
@@ -32,7 +36,11 @@ export class TestComponent implements OnInit {
     this.timeDanger = this.questionCampaign[0].time - 5;
     this.type = this.questionCampaign[0];
     this.Countertime();
-    console.log('question id', this.technoCampaign);
+    console.log('techno id', this.technoCampaign);
+    // FIRST QUESTIONS
+    this.responses = this.question.content.split(', ');
+    console.log('this.responses: ', this.responses);
+    console.log('this.question: ', this.question);
     for (const techno of this.technoCampaign) {
       if (this.question.technologies === techno.id) {
         this.language = techno.name;
@@ -53,6 +61,13 @@ export class TestComponent implements OnInit {
   }
 
   public QuestNext() {
+    this.counterTotal++;
+    console.log('this.question: ', this.question);
+    console.log('this.responseUser: ', this.responseUser);
+    if (this.responseUser === this.question.answer_value) {
+      console.log('ok');
+      this.counterCheck++;
+    }
     this.Alltime.push(this.timedefault);
     this.Activetime = false;
     if (this.index < this.questions.length - 1) {
@@ -74,6 +89,9 @@ export class TestComponent implements OnInit {
       }
     }
     this.question = this.questions[this.index];
+    // NEXT QUESTIONS
+    this.responses = this.question.content.trim().split(', ');
+    console.log('this.responses in QUESTNEXT: ', this.responses);
     for (const techno of this.technoCampaign) {
       if (this.question.technologies === techno.id) {
         this.language = techno.name;
@@ -81,6 +99,8 @@ export class TestComponent implements OnInit {
     }
     this.timeDanger = this.questions[this.index].time - 5;
     console.log('type ', this.question.type);
+    console.log('COUNTER CHECK: ', this.counterCheck);
+    console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
   }
   public fmtMSS(s) {
     return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
@@ -105,5 +125,3 @@ export class TestComponent implements OnInit {
     });
   }
 }
-
-

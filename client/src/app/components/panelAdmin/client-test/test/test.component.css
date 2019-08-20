@@ -1,309 +1,279 @@
-.block-testing{
-
-    background-color: #f9f9f9;
-    padding:20px;
-    display: flex;
-    flex-direction:row;
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0;
-    right: 0;
-    bottom: 0px;
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
 }
 
-.block-testing .testing-left,.block-testing .testing-right{
-    width: 50%;
+.example-radio-button {
+  margin: 5px;
 }
 
-.cube-testing{
-    display:flex;
-    border: 1px solid #e3e3e3;
-    background:#fff;
-    flex-direction: column;
-    margin-left:5px;
-    margin-right:5px;
- 
+.block-testing {
+  background-color: #f9f9f9;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+}
+
+.block-testing .testing-left,
+.block-testing .testing-right {
+  width: 50%;
+}
+
+.cube-testing {
+  display: flex;
+  border: 1px solid #e3e3e3;
+  background: #fff;
+  flex-direction: column;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 /*-- partie header--*/
 
-.cube-testing .header-cube-testing
-{
-    display:flex;
-    border-bottom: 1px solid #e3e3e3;
-    align-items: center;
-    flex-direction: row
+.cube-testing .header-cube-testing {
+  display: flex;
+  border-bottom: 1px solid #e3e3e3;
+  align-items: center;
+  flex-direction: row;
 }
 
-.f030{
-
-    display: flex;
-    flex-direction: row;
-    padding: 12px 15px;
-    flex: 1;
-    border-right: 1px solid #e3e3e3;
+.f030 {
+  display: flex;
+  flex-direction: row;
+  padding: 12px 15px;
+  flex: 1;
+  border-right: 1px solid #e3e3e3;
 }
 
-.f030 .icon-testing{
-
-    margin-right: 15px;
-    color: #f4c73e;
-    display: block;
-    font-size: 24px;
+.f030 .icon-testing {
+  margin-right: 15px;
+  color: #f4c73e;
+  display: block;
+  font-size: 24px;
 }
 
-.f030 .title-testing{
-
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 0px;
-    display: inline-block
-
+.f030 .title-testing {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 0px;
+  display: inline-block;
 }
 
-.testing-timer{
-
-    display: flex;
-    flex-direction: row;   
-    align-items: center;
-    padding: 0px 15px;
+.testing-timer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 15px;
 }
 
-.testing-timer .testing-timer-icon{
-
-    margin-right: 10px;
-    font-size: 20px;
-
+.testing-timer .testing-timer-icon {
+  margin-right: 10px;
+  font-size: 20px;
 }
 
-.testing-timer .testing-timer-text{
-    
-    display: inline-block
+.testing-timer .testing-timer-text {
+  display: inline-block;
 }
 
-.testing-timer .testing-timer-text strong{
-
-    font-size: 14px;
-    font-size: 900
-    
+.testing-timer .testing-timer-text strong {
+  font-size: 14px;
+  font-size: 900;
 }
 
 /* .block-testing .testing-right{
 
 } */
 
-
 /*--partie content--*/
 
-.scroll-auto-testing
-{
-    overflow-y: auto;
+.scroll-auto-testing {
+  overflow-y: auto;
 }
 
-.content-testing{
-
-    margin: 60px;
-    
+.content-testing {
+  margin: 60px;
 }
 
-.content-testing-seconde{
-
-    min-height: 410px;
+.content-testing-seconde {
+  min-height: 410px;
 }
 
-.textarea{
-    border: 1px solid #e3e3e3;
-    padding: 15px 20px;
-    font-size: 18px;
-   height: 410px;
-   width: 100%;
+.textarea {
+  border: 1px solid #e3e3e3;
+  padding: 15px 20px;
+  font-size: 18px;
+  height: 410px;
+  width: 100%;
 }
 
-.label-response{
-
-    border: 1px solid #e3e3e3;
-    cursor: pointer;
-    display: flex;
-    padding: 20px;
-    align-items: center;
-    position: relative;
+.label-response {
+  border: 1px solid #e3e3e3;
+  cursor: pointer;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  position: relative;
 }
 
-.check-label{
-
-    border:1px solid #f2bb13;
-
+.check-label {
+  border: 1px solid #f2bb13;
 }
 
-
-.label-response .radio-response{
-
-    margin-top: 4px;
-    cursor: pointer;
+.label-response .radio-response {
+  margin-top: 4px;
+  cursor: pointer;
 }
 
-.label-response .check-radio,.label-response .check-checkbox{
-
-    position: absolute;
-    top: 10;
-    left: 15px;
-    height: 16px;
-    width: 16px;
-    border:2px solid #7E8082;
-    border-radius: 50%;
+.label-response .check-radio,
+.label-response .check-checkbox {
+  position: absolute;
+  top: 10;
+  left: 15px;
+  height: 16px;
+  width: 16px;
+  border: 2px solid #7e8082;
+  border-radius: 50%;
 }
 
-.label-response .check-checkbox{
-    border-radius: 4px
+.label-response .check-checkbox {
+  border-radius: 4px;
 }
 
-.radio-response{
-    opacity: 0;
+.radio-response {
+  opacity: 0;
 }
 
-.check-checkbox::after{
-    content: "\f00c";
-    font-weight: 900;
-    font-family: "Font Awesome 5 Free";
-    font-size:9px;
-    position: absolute;
-    top: 0px;
-    left: 2px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    /* background: #f2bb13; */
-    color:#f2bb13;
-    display: none
-
-    
+.check-checkbox::after {
+  content: "\f00c";
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  font-size: 9px;
+  position: absolute;
+  top: 0px;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  /* background: #f2bb13; */
+  color: #f2bb13;
+  display: none;
 }
 
-.radio-response:checked ~ .check-checkbox{
-
-    border-color:#f2bb13
+.radio-response:checked ~ .check-checkbox {
+  border-color: #f2bb13;
 }
 
-.radio-response:checked ~ .check-checkbox::after{
-    display: block
+.radio-response:checked ~ .check-checkbox::after {
+  display: block;
 }
 
-.label-response .contenu{
-
-    margin-left: 22px;
-    
+.label-response .contenu {
+  margin-left: 22px;
 }
 
-.check-radio::after{
-    content: "";
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #f2bb13;
-    display: none
+.check-radio::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f2bb13;
+  display: none;
 }
 
-.radio-response:checked ~ .check-radio{
-
-    border-color:#f2bb13
+.radio-response:checked ~ .check-radio {
+  border-color: #f2bb13;
 }
 
-.radio-response:checked ~ .check-radio::after{
-    display: block
+.radio-response:checked ~ .check-radio::after {
+  display: block;
 }
 
-.button{
-
-    margin-top:7px;
-    margin-left: 5px;
-    margin-right:0px;
-    color: white;
-    height: 50px;
-    padding: 10px;
-    position: relative;
-    transition: opacity 0.2s, background 0.2s;
-    font-weight: 700;
-    background-color: #f2bb13;
-    border: none;
-    cursor: pointer;
-    outline: 0;
-    width: 98.8%;
+.button {
+  margin-top: 7px;
+  margin-left: 5px;
+  margin-right: 0px;
+  color: white;
+  height: 50px;
+  padding: 10px;
+  position: relative;
+  transition: opacity 0.2s, background 0.2s;
+  font-weight: 700;
+  background-color: #f2bb13;
+  border: none;
+  cursor: pointer;
+  outline: 0;
+  width: 98.8%;
 }
 
-.button:hover{
-    background-color: #ffd200;
+.button:hover {
+  background-color: #ffd200;
 }
 
 /*--modal css--*/
 
-.modall-header
-{
-    background-color: #d03737;
-    color:white;
+.modall-header {
+  background-color: #d03737;
+  color: white;
 }
 
-.modall-title{
-
-
+.modall-title {
 }
 
-.modall-content{
-
-     padding: 20px;
-    max-width: 875px;
-
+.modall-content {
+  padding: 20px;
+  max-width: 875px;
 }
 
-.modall-content p{
-    margin-top: 40px;
-    font-size: 20px;
+.modall-content p {
+  margin-top: 40px;
+  font-size: 20px;
 }
 
-.modall-footer{
-    display: flex;
-    padding-bottom: 20px;
+.modall-footer {
+  display: flex;
+  padding-bottom: 20px;
 }
 
-.btn{
-    flex: 1;
-    color: white;
-    height: 50px;
-    margin: 20px;
-    font-size: 18px;
-    transition: background 0.2s;
-    font-weight: 600;
-    background-color: #7e8082;
+.btn {
+  flex: 1;
+  color: white;
+  height: 50px;
+  margin: 20px;
+  font-size: 18px;
+  transition: background 0.2s;
+  font-weight: 600;
+  background-color: #7e8082;
 }
 
-.btn:hover{
-background-color: #aaaaaa;
+.btn:hover {
+  background-color: #aaaaaa;
 }
 
-.active-time-danger
-{
-    color:red;
-    font-weight:bold;
+.active-time-danger {
+  color: red;
+  font-weight: bold;
 }
 
- @media screen and (max-width: 760px) {
-
-     .block-testing{
-
-         flex-direction:column;
-         height:auto;
-         overflow:hidden;
-         position:static!important;
-     }
-
-     .block-testing .testing-left,.block-testing .testing-right{
-
-         width:100%;
-         margin-bottom:12px;
-
-     }
-
- }
+@media screen and (max-width: 760px) {
+  .block-testing {
+    flex-direction: column;
+    height: auto;
+    overflow: hidden;
+    position: static !important;
+  }
+  .block-testing .testing-left,
+  .block-testing .testing-right {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+}
