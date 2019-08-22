@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 @Component({
@@ -11,12 +11,19 @@ export class RouteComponentComponent implements OnInit {
   isShowNavCompte = false;
   isShowNavTesting = false;
   isShow2 = false;
+  public viewcontentDefaults: boolean;
+
+  @Output() ContentViewDefault = new EventEmitter<any>();
+
 
   constructor(private bottomSheet: MatBottomSheet) { }
   openBottomSheet(): void {
     this.bottomSheet.open(PopupMonOffre);
   }
   ngOnInit() {
+
+
+
   }
 
   public active_menu() {
@@ -27,7 +34,11 @@ export class RouteComponentComponent implements OnInit {
     totalLeft.classList.toggle('new-totalLeft');
 
     btnArrow.classList.toggle('fa-arrow-right');
- 
+
+    this.ContentViewDefault.emit(this.viewcontentDefaults = !this.viewcontentDefaults);
+
+
+
   }
 
 }

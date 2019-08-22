@@ -1,0 +1,13 @@
+.header-notification {
+    border-bottom: 1px solid #e4e4e4;
+    padding: 4px 20px 6px 290px;
+    background-color: white;
+ 
+}
+
+.header-notification p {
+    display: block;
+    color: #7e8082;
+    font-size: 12px;
+    font-weight: 400;
+}

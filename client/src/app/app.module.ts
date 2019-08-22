@@ -70,6 +70,7 @@ import { TestComponent } from './components/panelAdmin/client-test/test/test.com
 
 import { NgxEditorModule } from 'ngx-editor';
 import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
+import { BreadcrumbComponent } from './components/panelAdmin/breadcrumb/breadcrumb.component';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -113,7 +114,8 @@ import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.c
     PersonnalisationComponent,
     ClientTestComponent,
     TestComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,

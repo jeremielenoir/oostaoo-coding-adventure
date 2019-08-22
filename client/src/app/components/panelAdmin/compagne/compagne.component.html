@@ -4,18 +4,9 @@
       <div class="sous-header-form">
         <div class="form-group-header">
           <form>
-            <span class="icon-form-group-header-contenu"
-              ><i class="fas fa-search"></i
-            ></span>
-            <input
-              type="text"
-              name="search"
-              [(ngModel)]="searchText"
-              class="champ-header-contenu"
-              placeholder="Filtrer par titre ou candidat"
-              id="search-header"
-              (input)="Hundelesearch($event)"
-            />
+            <span class="icon-form-group-header-contenu"><i class="fas fa-search"></i></span>
+            <input type="text" name="search" [(ngModel)]="searchText" class="champ-header-contenu"
+              placeholder="Filtrer par titre ou candidat" id="search-header" (input)="Hundelesearch($event)" />
           </form>
         </div>
 
@@ -43,10 +34,7 @@
     </div>
 
     <div class="content-scroll">
-      <div
-        *ngFor="let campaign of campaigns | filter: searchText"
-        class="contenu-techno-content"
-      >
+      <div *ngFor="let campaign of campaigns | filter: searchText" class="contenu-techno-content">
         <div class="contenu-branche">
           <a [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats']">
             <p class="branche-content-text">
@@ -71,10 +59,7 @@
         </div>
 
         <div class="branche-content-list-end">
-          <span
-            class="branche-content-list-end-contenu-icon"
-            (click)="openDialog(campaign.id)"
-          >
+          <span class="branche-content-list-end-contenu-icon" (click)="openDialog(campaign.id)">
             <i class="far fa-user"></i>
           </span>
           <span class="branche-content-list-end-contenu-icon dashed">

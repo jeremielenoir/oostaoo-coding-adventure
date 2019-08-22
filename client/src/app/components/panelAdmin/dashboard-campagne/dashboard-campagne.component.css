@@ -1,8 +1,34 @@
+.new-contenu-view-content{
+   /* margin-left: 5%!important */
+   transform: translateX(5%)!important;
+   width: 95%!important;
+}
 .rowter {
-    display: flex;
-    flex-direction: row;
+    /* display: flex;
+    flex-direction: row; */
     background: #f9f9f9;
 }
+
+.header-notification.header-notification-default-text span{
+    transform: translateX(90px);
+}
+
+.header-notification {
+    border-bottom: 1px solid #e4e4e4;
+    padding: 4px 20px 6px 0px;
+    background-color: white;
+ 
+}
+
+.header-notification span {
+    display: block;
+    color: #7e8082;
+    font-size: 12px;
+    font-weight: 400;
+    transform: translateX(290px);
+    transition: .3s
+}
+
 
 /*--partie dashboard a supprimé plus tard --**/
 
@@ -22,20 +48,11 @@
     flex-direction: column;
     overflow: hidden;
     background-color: #f9f9f9;
-    margin-left: 18%;
-}
-
-.header-notification {
-    border-bottom: 1px solid #e4e4e4;
-    padding: 4px 20px 6px 20px;
-    background-color: white;
-}
-
-.header-notification p {
-    display: block;
-    color: #7e8082;
-    font-size: 12px;
-    font-weight: 400;
+    /* margin-left: 18%;; */
+    transition:.3s;
+    transform: translateX(22%);
+    width: 81%;
+  
 }
 
 /*-- contenu-view-content --*/
