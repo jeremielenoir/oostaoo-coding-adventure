@@ -78,10 +78,18 @@
 
       <div *ngIf="question.type === 'free'" class="scroll-auto-testing">
         <div class="content-testing content-testing-seconde">
-          <textarea
+          <!-- <textarea
             class="textarea"
             placeholder="Tapez votre réponse"
-          ></textarea>
+            [(ngModel)]="responseUser"
+          ></textarea> -->
+          <mat-form-field class="example-full-width">
+            <textarea
+              matInput
+              placeholder="Leave a comment"
+              [(ngModel)]="responseUser"
+            ></textarea>
+          </mat-form-field>
         </div>
       </div>
 
@@ -111,38 +119,14 @@
         *ngIf="question.type === 'multiple'"
         class="content-testing content-testing-seconde"
       >
-        <form>
-          <label class="label-response">
-            <span class="contenu">document.md</span>
-            <input
-              type="checkbox"
-              class="radio-response"
-              name="check"
-              value="test3"
-            />
-            <span class="check-checkbox"></span>
-          </label>
-          <label class="label-response">
-            <span class="contenu">document.md</span>
-            <input
-              type="checkbox"
-              class="radio-response"
-              name="check"
-              value="test3"
-            />
-            <span class="check-checkbox"></span>
-          </label>
-          <label class="label-response">
-            <span class="contenu">document.md</span>
-            <input
-              type="checkbox"
-              class="radio-response"
-              name="check"
-              value="test3"
-            />
-            <span class="check-checkbox"></span>
-          </label>
-        </form>
+        <div *ngFor="let response of responses">
+          <mat-checkbox
+            (change)="checkCheckBoxvalue($event, response)"
+            [value]="response"
+          >
+            {{ response }}
+          </mat-checkbox>
+        </div>
       </div>
     </div>
     <button class="button" (click)="QuestNext()">Question suivante</button>
