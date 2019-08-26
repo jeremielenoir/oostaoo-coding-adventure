@@ -121,7 +121,7 @@
       >
         <div *ngFor="let response of responses">
           <mat-checkbox
-            (change)="checkCheckBoxvalue($event, response)"
+            (change)="checkCheckBoxvalue($event)"
             [value]="response"
           >
             {{ response }}

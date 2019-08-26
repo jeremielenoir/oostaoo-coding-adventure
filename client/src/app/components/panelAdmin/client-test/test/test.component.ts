@@ -26,8 +26,8 @@ export class TestComponent implements OnInit {
   public responseUser: string;
   public counterCheck = 0; // counter good response
   public counterTotal = 0;
-  public arrayReponseUser: any = [];
-  public test: boolean;
+  public arrayReponseUser: Array<string> = [];
+  public arrayGoodRep: Array<string> = [];
 
 
   constructor(private apiClientService: ApiClientService) { }
@@ -52,35 +52,18 @@ export class TestComponent implements OnInit {
     }
   }
 
-  checkCheckBoxvalue(event, response) {
-    // console.log('this.checkReponse: ', this.checkReponse);
-    const arrayGoodRep = this.question.answer_value.split(', ');
+  checkCheckBoxvalue(event) {
+    this.arrayGoodRep = this.question.answer_value.split(', ').sort();
     if (event.source.checked) {
-      this.arrayReponseUser.push(response);
-      this.arrayReponseUser.sort();
-      arrayGoodRep.sort();
-      console.log('this.arrayReponseUser.sort(): ', this.arrayReponseUser);
-      console.log('arrayGoodRep.sort(): ', arrayGoodRep);
-      this.checkLengthAndItemArray(this.arrayReponseUser, arrayGoodRep);
+      this.arrayReponseUser.push(event.source.value);
     } else {
-      const element = this.arrayReponseUser.find(item => item === response);
+      const element = this.arrayReponseUser.find(item => item === event.source.value);
       if (element) {
         this.arrayReponseUser.splice(this.arrayReponseUser.indexOf(element), 1);
-        this.checkLengthAndItemArray(this.arrayReponseUser, arrayGoodRep);
       }
     }
-  }
-
-  checkLengthAndItemArray(arrayUser, arrayReponse) {
-    if (arrayUser.length === arrayReponse.length &&
-      arrayUser.every((element1, index) =>
-        element1 === arrayReponse[index])) {
-      console.log('ok');
-      console.log('this.arrayReponseUser: ', arrayUser);
-      this.test = true;
-    } else {
-      this.test = false;
-    }
+    console.log('arrayGoodRep: ', this.arrayGoodRep);
+    console.log('this.arrayReponseUser: ', this.arrayReponseUser);
   }
 
   Countertime() {
@@ -95,7 +78,6 @@ export class TestComponent implements OnInit {
   }
 
   public QuestNext() {
-    console.log('this.test: ', this.test);
     // console.log('this.checkReponse: ', this.checkReponse);
     this.counterTotal++; // counter total questions
     // console.log('this.question: ', this.question);
@@ -142,8 +124,8 @@ export class TestComponent implements OnInit {
       console.log('ok');
       this.counterCheck++;
     }
-    this.responseUser = '';
-    this.arrayReponseUser = [];
+    // this.responseUser = '';
+    // this.arrayReponseUser = [];
     console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
   }
   public fmtMSS(s) {
