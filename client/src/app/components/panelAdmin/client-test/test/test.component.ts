@@ -57,10 +57,11 @@ export class TestComponent implements OnInit {
     const arrayGoodRep = this.question.answer_value.split(', ');
     if (event.source.checked) {
       this.arrayReponseUser.push(response);
-      this.arrayReponseUser.sort();
+      let sort = this.arrayReponseUser.sort();
+      console.log('sort',sort)
+
       arrayGoodRep.sort();
-      console.log('this.arrayReponseUser.sort(): ', this.arrayReponseUser);
-      console.log('arrayGoodRep.sort(): ', arrayGoodRep);
+     
       this.checkLengthAndItemArray(this.arrayReponseUser, arrayGoodRep);
     } else {
       const element = this.arrayReponseUser.find(item => item === response);

@@ -20,6 +20,7 @@ export class QuestionsComponent implements OnInit {
   public allQuestionsCampaign;
   public questionsByCampaign;
   public updateQuestionsCampaign = [];
+  public searchText = ''
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {

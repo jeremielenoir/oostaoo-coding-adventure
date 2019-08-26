@@ -13,6 +13,7 @@ export class CompagneComponent implements OnInit {
   public campaigns: any[];
   public searchHeader: string;
   @Output() campaignsChild = new EventEmitter<any>();
+  public searchText:string = ''
 
   constructor(public apiClientService: ApiClientService, public dialog: MatDialog) {
     this.searchHeader = null;
