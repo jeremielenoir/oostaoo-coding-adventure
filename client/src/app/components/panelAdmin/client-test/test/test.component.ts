@@ -53,7 +53,6 @@ export class TestComponent implements OnInit {
   }
 
   checkCheckBoxvalue(event) {
-    this.arrayGoodRep = this.question.answer_value.split(', ').sort();
     if (event.source.checked) {
       this.arrayReponseUser.push(event.source.value);
     } else {
@@ -62,8 +61,6 @@ export class TestComponent implements OnInit {
         this.arrayReponseUser.splice(this.arrayReponseUser.indexOf(element), 1);
       }
     }
-    console.log('arrayGoodRep: ', this.arrayGoodRep);
-    console.log('this.arrayReponseUser: ', this.arrayReponseUser);
   }
 
   Countertime() {
@@ -77,12 +74,27 @@ export class TestComponent implements OnInit {
     }, 1000);
   }
 
+  // checkReponses(arr1, arr2) {
+  //   if (arr1.sort().toString() === arr2.sort().toString()) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
   public QuestNext() {
-    // console.log('this.checkReponse: ', this.checkReponse);
+    this.arrayGoodRep = this.question.answer_value.split(', ').sort();
+    console.log('this.arrayGoodRep: ', this.arrayGoodRep);
     this.counterTotal++; // counter total questions
-    // console.log('this.question: ', this.question);
-    // console.log('this.responseUser: ', this.responseUser);
-    // check reponseUser
+    // this.arrayReponseUser.push(this.responseUser);
+    console.log('this.arrayReponseUser IN QUESTNEXT: ', this.arrayReponseUser);
+    if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
+      console.log('ITS OK !!');
+      this.counterCheck++;
+    } else {
+      console.log('NOT OK !!');
+    }
+
     this.Alltime.push(this.timedefault);
     this.Activetime = false;
     if (this.index < this.questions.length - 1) {
@@ -100,16 +112,19 @@ export class TestComponent implements OnInit {
           this.CalculTimeTotal += nbrtime;
         }
         // console.log('this.CalculTimeTotal: ', this.CalculTimeTotal);
-        this.postTimeTest(this.CalculTimeTotal);
+        // this.postTimeTest(this.CalculTimeTotal);
       }
     }
     this.question = this.questions[this.index];
+    // console.log('this.question: ', this.question);
     // NEXT QUESTIONS
     if (this.question.content !== null) {
       this.responses = this.question.content.split(', ');
     } else {
       this.responses = this.question;
     }
+    this.arrayGoodRep = this.question.answer_value.split(', ').sort();
+    console.log('this.arrayGoodRep: ', this.arrayGoodRep);
     // console.log('this.responses in QUESTNEXT: ', this.responses);
     for (const techno of this.technoCampaign) {
       if (this.question.technologies === techno.id) {
@@ -119,15 +134,11 @@ export class TestComponent implements OnInit {
     this.timeDanger = this.questions[this.index].time - 5;
     // console.log('type ', this.question.type);
     // console.log('COUNTER CHECK: ', this.counterCheck);
-    if (this.responseUser === this.question.answer_value ||
-      this.question.answer_value.includes(this.responseUser)) {
-      console.log('ok');
-      this.counterCheck++;
-    }
-    // this.responseUser = '';
-    // this.arrayReponseUser = [];
+    this.responseUser = null;
+    this.arrayReponseUser = [];
     console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
   }
+
   public fmtMSS(s) {
     return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
   }
