@@ -86,8 +86,6 @@ export class TestComponent implements OnInit {
   // }
 
   public QuestNext() {
-    this.arrayGoodRep = this.question.answer_value.split(', ').sort();
-    console.log('this.arrayGoodRep: ', this.arrayGoodRep);
     this.counterTotal++; // counter total questions
     // this.arrayReponseUser.push(this.responseUser);
     console.log('this.arrayReponseUser IN QUESTNEXT: ', this.arrayReponseUser);
