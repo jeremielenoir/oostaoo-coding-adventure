@@ -45,11 +45,10 @@ export class UtilisateursComponent implements OnInit {
   public nomIsactive = false;
   public prenomIsactive = false;
   public emailIsactive;
-  public Textmail: string;
+  public Textmail = 'salut';
   public shadowcog1 = false;
   public shadowcog2 = false;
-
-
+  public searchText = '';
   public nomIsactiveUpdate = false;
   public prenomIsactiveUpdate = false;
   public emailIsactiveUpdate = false;
@@ -113,7 +112,7 @@ export class UtilisateursComponent implements OnInit {
   }
 
 
-  public Hundelesubmit(event) {
+  public Hundelesubmit() {
     const prenom = this.formulaire.nativeElement.prenom.value;
     const nom = this.formulaire.nativeElement.nom.value;
     const email = this.formulaire.nativeElement.email.value;

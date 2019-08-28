@@ -75,13 +75,40 @@
           *ngFor="let item of allQuestionsCampaign | filter: searchText"
           cdkDrag
         >
-          <p class="question-techno">{{ item.technologies.name }}</p>
 
-          {{ item.name }}
-          <i class="fas fa-puzzle-piece drop-icon"></i> |
-          <p>{{ item.points }} points</p>
+
+        <div class="partie-left-example-box">
+        
+             <p class="question-techno">{{ item.technologies.name }}</p>
+
+             <p class="question-name" matTooltip="{{item.name}}">{{ item.name }}</p>
+        
+        </div>
+
+
+         <span *ngIf="item.level === 'expert'"  matTooltip="Difficulté Expert">
+             <i class="fas fa-puzzle-piece drop-icon"></i> |
+             <i class="fas fa-puzzle-piece drop-icon"></i> |
+             <i class="fas fa-puzzle-piece drop-icon"></i> |
+         </span>
+
+          <span *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
+             <i class="fas fa-puzzle-piece drop-icon"></i> |
+             <i class="fas fa-puzzle-piece drop-icon"></i> |
+             
+         </span>
+          <span *ngIf="item.level === 'facile'" matTooltip="Difficulté Facile">
+             <i class="fas fa-puzzle-piece drop-icon"></i> |
+            
+         </span>
+
+             <p>{{ item.points }} points</p>
           | <i class="fas fa-list-ul drop-icon"></i> |
-          <p>{{ item.time }}</p>
+          <p  matTooltip="Durée(heure:min:sec)">{{ fmtMSS(item.time) }}</p>
+        
+        
+
+
         </div>
       </div>
     </div>
@@ -116,16 +143,35 @@
           *ngFor="let itemQuestions of questionsByCampaign"
           cdkDrag
         >
-          <div>
+
+       
+
+      <div class="partie-left-example-box">
             <p class="question-techno">
               {{ itemQuestions.technologies.name }}
             </p>
-          </div>
-          <p>{{ itemQuestions.name }}</p>
-          <i class="fas fa-puzzle-piece drop-icon"></i> |
+      
+           <p class="question-name"  matTooltip="{{itemQuestions.name}}">{{ itemQuestions.name }}</p>
+
+      </div>
+            <span *ngIf="itemQuestions.level === 'expert'" matTooltip="Difficulté Expert">
+             <i class="fas fa-puzzle-piece drop-icon"></i> |
+             <i class="fas fa-puzzle-piece drop-icon"></i> |
+             <i class="fas fa-puzzle-piece drop-icon"></i> |
+         </span>
+
+          <span *ngIf="itemQuestions.level === 'moyen'" matTooltip="Difficulté Moyen">
+             <i class="fas fa-puzzle-piece drop-icon"></i> |
+             <i class="fas fa-puzzle-piece drop-icon"></i> |
+             
+         </span>
+          <span *ngIf="itemQuestions.level === 'facile'" matTooltip="Difficulté Facile">
+             <i class="fas fa-puzzle-piece drop-icon"></i> |
+            
+         </span>
           <p>{{ itemQuestions.points }} points</p>
           | <i class="fas fa-list-ul drop-icon"></i> |
-          <p>{{ itemQuestions.time }}</p>
+          <p matTooltip="Durée(heure:min:sec)">{{  fmtMSS(itemQuestions.time) }}</p>
         </div>
       </div>
     </div>

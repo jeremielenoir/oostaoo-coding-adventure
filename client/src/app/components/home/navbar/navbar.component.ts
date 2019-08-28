@@ -23,7 +23,6 @@ export class NavbarComponent implements OnInit {
 
   public showOrHideManually() {
     this.shouldShow = !this.shouldShow;
-
   }
 
   @HostListener('window:scroll', ['$event'])

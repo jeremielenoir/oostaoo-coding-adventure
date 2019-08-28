@@ -64,7 +64,7 @@
         <div class="col-md-12">
           <label
             for="utilisationCopieColler"
-            [ngStyle]="errorExperience ? { color: 'red' } : null"
+            [ngStyle]="errorNomCampgane ? { color: 'red' } : null"
           >
           Voulez-vous empêcher l'utilisation du copier/coller pendant le test ?
           
@@ -88,7 +88,7 @@
         <div class="col-md-12">
           <label
             for="envoiRapportSimplifie"
-            [ngStyle]="errorExperience ? { color: 'red' } : null"
+             [ngStyle]="errorNomCampgane ? { color: 'red' } : null"
           >
             Souhaitez-vous envoyer le rapport simplifié au candidat à l'issue de
             son test ?
@@ -114,7 +114,7 @@
             type="button"
             id="button"
             mat-flat-button
-            (click)="onDecrementPage(formCampagne.value)"
+            (click)="onDecrementPage()"
           >
             Étapes précédente : Profil recherché
           </button>
@@ -124,7 +124,7 @@
             type="button"
             id="button"
             mat-flat-button
-            (click)="onIncrementPage(formCampagne.value)"
+            (click)="onIncrementPage()"
             (click)="postData()"
           >
             <!-- (click)="postData()" -->

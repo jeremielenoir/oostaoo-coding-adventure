@@ -133,6 +133,7 @@
     display: inline-block;
     contain: content;
     position: relative;
+    width:120px;
 }
 
 #search-input {
@@ -163,11 +164,11 @@
     display: block;
     font-size: 14px;
     line-height: 40px;
-    margin: 0 13% 0 0;
+    /* margin: 0 13% 0 0; */
     font-weight: bold;
-    white-space: nowrap;
+    /* white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; */
 }
 
 #bar-btn-search {
@@ -222,6 +223,29 @@
     cursor: move;
     background: white;
     font-size: 14px;
+    position:relative
+}
+
+:host ::ng-deep .example-box {
+    height: 35px;
+    margin: 10px !important;
+    border: 1px solid #e7e7e7 !important;
+    transition: .5s;
+}
+
+.partie-left-example-box
+{
+    flex: 1;
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    justify-content: flex-start;
+    max-width:250px;
+}
+
+:host ::ng-deep .example-box:hover {
+    box-shadow: 0px 0px 5px grey;
+    transform: translate(2px, -3px);
 }
 
 .cdk-drag-preview {
@@ -258,6 +282,11 @@
     line-height: 30px;
 }
 
+.example-box p 
+{
+    margin-bottom:0px;
+}
+
 .question-techno {
     display: block;
     height: 20px;
@@ -265,15 +294,31 @@
     font-size: 12px;
     color: white;
     text-align: center;
-    padding: 2px;
+    padding: 0px 2px;
+    margin-right:5px;
+  
 }
 
-:host ::ng-deep .example-box {
-    height: 35px;
-    padding: 0px 0px;
-    margin: 10px !important;
-    border: 1px solid #e7e7e7 !important;
-    transition: .5s;
+.question-name{
+    max-width:240px;
+    white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+.detail-question-name
+{
+    width:95%;
+    max-width:95%;
+    height:auto;
+    padding:10px;
+    background:#333;
+    color:white;
+    top:40px;
+    position:absolute;
+    z-index:2;
+    /* bottom:10px; */
+    display:none;
 }
 
 #ctnts {
@@ -282,10 +327,8 @@
     justify-content: center;
 }
 
-:host ::ng-deep .example-box:hover {
-    box-shadow: 0px 0px 5px grey;
-    transform: translate(2px, -3px);
-}
+
+
 
 :host ::ng-deep .exemple-list, .cdk-drop-list {
     background-color: #f9f9f9!important;
