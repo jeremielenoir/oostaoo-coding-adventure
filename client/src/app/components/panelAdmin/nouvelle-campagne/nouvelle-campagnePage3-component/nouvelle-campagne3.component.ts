@@ -16,6 +16,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
   @Output() incrementPage = new EventEmitter<any>();
   @Output() decrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
+  public searchText = '';
 
   public questions: any[];
 

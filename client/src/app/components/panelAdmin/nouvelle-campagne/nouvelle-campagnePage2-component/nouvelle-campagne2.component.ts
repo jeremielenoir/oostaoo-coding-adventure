@@ -33,6 +33,8 @@ export class NouvelleCampagnePage2Component implements OnInit {
   }
 
   public onDecrementPage(): void {
+
+
     this.decrementPage.emit();  // Déclenche l'output
   }
 

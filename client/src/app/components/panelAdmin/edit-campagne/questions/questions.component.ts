@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TooltipPosition } from '@angular/material';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -20,6 +21,8 @@ export class QuestionsComponent implements OnInit {
   public allQuestionsCampaign;
   public questionsByCampaign;
   public updateQuestionsCampaign = [];
+  public searchText = '';
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -111,5 +114,8 @@ export class QuestionsComponent implements OnInit {
       },
       err => console.log(err)
     );
+  }
+  fmtMSS(s) {
+    return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
   }
 }

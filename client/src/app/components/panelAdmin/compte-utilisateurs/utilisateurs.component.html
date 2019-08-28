@@ -24,7 +24,7 @@
 
         <div class="modall-content">
 
-           <form (ngSubmit)="Hundelesubmit(event)" class="form" method="POST" #form>
+           <form (ngSubmit)="Hundelesubmit()" class="form" method="POST" #form>
 
               <div class="content-form-first">
 
@@ -77,7 +77,7 @@
 
                       <label [ngClass]="{'new-label': emailIsactive === true}" class="libele">email</label>
 
-                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactive === true}">{{Text_mail}}</span>
+                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactive === true}">{{Textmail}}</span>
 
                     </div>
 
@@ -100,7 +100,7 @@
 
                   <div class="element-gestion-permition">
 
-                    <div class="element-gestion-permition-header"matTooltip="(Compte > facturation) : l’utilisateur aura accès à la page facturation et recevra les factures par email."
+                    <div class="element-gestion-permition-header" matTooltip="(Compte > facturation) : l’utilisateur aura accès à la page facturation et recevra les factures par email."
                     [matTooltipPosition]="position.value"
                     aria-label="Button that displays a tooltip in various positions">
 
@@ -344,7 +344,7 @@
   
                           <label class="libele" [ngClass]="{'new-label': emailIsactiveUpdate === true}">email</label>
 
-                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactiveUpdate === true}">{{ Text_mail }}</span>
+                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactiveUpdate === true}">{{ Textmail }}</span>
   
                       </div>
   
@@ -548,7 +548,7 @@
 
       
           <span class="icon-form-group-header-contenu"><i class="fas fa-search"></i></span>
-          <input type="text" name="search" [(ngModel)]="searchText" class="input-champ-utilisateurs" placeholder="Filtrer par titre ou candidat" id="search-header" (input)="Hundelesearch($event)">
+          <input type="text" name="search" [(ngModel)]="searchText" class="input-champ-utilisateurs" placeholder="Filtrer par titre ou candidat" id="search-header">
 
 
         </form>

@@ -20,10 +20,27 @@ export class SidibarRightComponent implements OnInit {
       for (const candidat of campaign.candidats) {
         console.log('candidat', candidat);
         myArrayCandidat.push(candidat);
-        this.candidats = myArrayCandidat;
+        this.candidats =  myArrayCandidat.sort((a,b) => {
+          if(a.invitation_date < b.invitation_date) return 1;
+          else if (b.invitation_date < a.invitation_date) return -1
+          else return 0;
+        })
+
+        // for(let date of this.candidats){
+
+        //     console.log('date',date.invitation_date)
+        // }
+        
       }
+
     }
   }
+
+  //  public sortFunction(a,b){  
+  //         var dateA = new Date(a.invitation_date).getTime();
+  //         var dateB = new Date(b.invitation_date).getTime();
+  //         return dateA > dateB ? 1 : -1;  
+  //     }; 
 
   public param_cog() {
 

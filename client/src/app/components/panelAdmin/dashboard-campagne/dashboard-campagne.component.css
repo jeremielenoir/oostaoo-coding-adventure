@@ -2,15 +2,17 @@
    /* margin-left: 5%!important */
    transform: translateX(5%)!important;
    width: 95%!important;
+  
 }
 .rowter {
     /* display: flex;
     flex-direction: row; */
     background: #f9f9f9;
+    overflow:hidden
 }
 
 .header-notification.header-notification-default-text span{
-    transform: translateX(90px);
+    transform: translateX(6.1%);
 }
 
 .header-notification {
@@ -25,7 +27,7 @@
     color: #7e8082;
     font-size: 12px;
     font-weight: 400;
-    transform: translateX(290px);
+    transform: translateX(19.3%);
     transition: .3s
 }
 
@@ -52,6 +54,7 @@
     transition:.3s;
     transform: translateX(22%);
     width: 81%;
+     
   
 }
 
