@@ -37,6 +37,7 @@ export class TestComponent implements OnInit {
     this.question = this.questionCampaign[this.index];
     this.timeDanger = this.questionCampaign[0].time - 5;
     this.type = this.questionCampaign[0];
+    console.log('this.type: ', this.type);
     this.Countertime();
     // console.log('techno id', this.technoCampaign);
     // FIRST QUESTIONS
@@ -50,10 +51,11 @@ export class TestComponent implements OnInit {
         this.language = techno.name;
       }
     }
+    this.arrayGoodRep = this.question.answer_value.split(', ').sort();
+    console.log('arrayGoodRep: ', this.arrayGoodRep);
   }
 
   checkCheckBoxvalue(event) {
-    this.arrayGoodRep = this.question.answer_value.split(', ').sort();
     if (event.source.checked) {
       this.arrayReponseUser.push(event.source.value);
     } else {
@@ -62,8 +64,6 @@ export class TestComponent implements OnInit {
         this.arrayReponseUser.splice(this.arrayReponseUser.indexOf(element), 1);
       }
     }
-    console.log('arrayGoodRep: ', this.arrayGoodRep);
-    console.log('this.arrayReponseUser: ', this.arrayReponseUser);
   }
 
   Countertime() {
@@ -80,9 +80,15 @@ export class TestComponent implements OnInit {
   public QuestNext() {
     // console.log('this.checkReponse: ', this.checkReponse);
     this.counterTotal++; // counter total questions
+    // this.arrayReponseUser.push(this.responseUser); // button radio or textarea
+    if (this.arrayReponseUser.sort().toString() === this.arrayGoodRep.sort().toString()) {
+      console.log('ITS OK!!');
+    } else {
+      console.log('ITS NOT OK!!');
+    }
     // console.log('this.question: ', this.question);
     // console.log('this.responseUser: ', this.responseUser);
-    // check reponseUser
+
     this.Alltime.push(this.timedefault);
     this.Activetime = false;
     if (this.index < this.questions.length - 1) {
@@ -116,16 +122,13 @@ export class TestComponent implements OnInit {
         this.language = techno.name;
       }
     }
+    this.arrayGoodRep = this.question.answer_value.split(', ').sort();
+    console.log('arrayGoodRep: ', this.arrayGoodRep);
     this.timeDanger = this.questions[this.index].time - 5;
     // console.log('type ', this.question.type);
     // console.log('COUNTER CHECK: ', this.counterCheck);
-    if (this.responseUser === this.question.answer_value ||
-      this.question.answer_value.includes(this.responseUser)) {
-      console.log('ok');
-      this.counterCheck++;
-    }
-    // this.responseUser = '';
-    // this.arrayReponseUser = [];
+    this.responseUser = '';
+    this.arrayReponseUser = [];
     console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
   }
   public fmtMSS(s) {
