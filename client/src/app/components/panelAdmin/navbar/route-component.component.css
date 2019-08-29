@@ -105,11 +105,8 @@ i:hover {
   justify-content: flex-start;
   color: white;
   overflow-y: auto;
-  height: 95vh;
-  
-  
- 
-  
+  height: 96vh;
+  /* visibility:hidden */
 }
 
 #left-top {
@@ -274,7 +271,7 @@ button:hover {
 }
 
 #left2 {
-  height: 95vh;
+  height: 96vh;
   background-color: #20252a;
   display: flex;
   flex-direction: column;
@@ -284,15 +281,13 @@ button:hover {
   display: flex;
   flex-direction: column;
   position: fixed;
-  width: 18%;
+  width: 80px;
   z-index: 10;
-  transition: width .3s,min-width .3s;
+  transition: width .3s, min-width .3s;
 }
 
-#totalLeft.new-totalLeft
-{
-  width: 80px;
-  transition: width .3s,min-width .3s;
+#totalLeft.totalLeftActive {
+  width: 230px;
 }
 
 /* NAV MENU MOBILE */
@@ -353,6 +348,7 @@ button:hover {
   .fixNavMobile {
     position: absolute;
     z-index: 99;
+    width: 300px;
   }
   .unfixNavMobile {
     position: inherit;
@@ -362,15 +358,10 @@ button:hover {
   }
 }
 
-
-
-@media screen and (max-width:768px){
-
-  .fixNavMobile
-  {
+@media screen and (max-width:768px) {
+  .fixNavMobile {
     display: block
   }
-
 }
 
 app-compagne {

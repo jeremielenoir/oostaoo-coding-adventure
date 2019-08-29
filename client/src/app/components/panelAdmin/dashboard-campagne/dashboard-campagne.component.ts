@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { } from '@angular/core';
 
 
 
@@ -17,7 +16,6 @@ export class DashboadCampagneComponent implements OnInit {
 
   ngOnInit() {
 
-    // console.log('callback output', this.callbackContentViewDefault);
 
   }
   getCampaignsFromChild(campaigns) {

@@ -7,9 +7,9 @@ import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
   styleUrls: ['./route-component.component.css']
 })
 export class RouteComponentComponent implements OnInit {
-  isShow = false;
   isShowNavCompte = false;
   isShowNavTesting = false;
+  isShow = false;
   isShow2 = false;
   public viewcontentDefaults: boolean;
 
@@ -21,8 +21,6 @@ export class RouteComponentComponent implements OnInit {
     this.bottomSheet.open(PopupMonOffre);
   }
   ngOnInit() {
-
-
 
   }
 
@@ -36,9 +34,10 @@ export class RouteComponentComponent implements OnInit {
     btnArrow.classList.toggle('fa-arrow-right');
 
     this.ContentViewDefault.emit(this.viewcontentDefaults = !this.viewcontentDefaults);
+  }
 
-
-
+  public Activet_isShow() {
+    this.isShow = !this.isShow;
   }
 
 }
