@@ -43,11 +43,11 @@ export class NouvelleCampagneComponent implements OnInit {
   }
 
   getTechno(techno: Array<string>) {
-    this.technoFromChild = techno;
+    return this.technoFromChild = techno;
   }
 
   getProfil(profil: string) {
-    this.selectProfilFromChild = profil;
+    return this.selectProfilFromChild = profil;
   }
 
   showtechno() {

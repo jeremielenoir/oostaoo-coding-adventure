@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NouvelleCampagne3Component } from './nouvelle-campagne3.component';
+import { NouvelleCampagnePage3Component } from './nouvelle-campagne3.component';
 
 describe('NouvelleCampagne3Component', () => {
-  let component: NouvelleCampagne3Component;
-  let fixture: ComponentFixture<NouvelleCampagne3Component>;
+  let component: NouvelleCampagnePage3Component;
+  let fixture: ComponentFixture<NouvelleCampagnePage3Component>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NouvelleCampagne3Component ]
+      declarations: [NouvelleCampagnePage3Component]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NouvelleCampagne3Component);
+    fixture = TestBed.createComponent(NouvelleCampagnePage3Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

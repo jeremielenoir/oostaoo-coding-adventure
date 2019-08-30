@@ -8,9 +8,9 @@ describe('NouvelleCampagneComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NouvelleCampagneComponent ]
+      declarations: [NouvelleCampagneComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
