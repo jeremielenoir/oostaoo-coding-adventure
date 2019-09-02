@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { TooltipPosition } from '@angular/material';
+import {  ApiClientService, API_URI_USER_ADMIN, API_URI_USER_ENTREPRISE} from 'src/app/api-client/api-client.service';
+
 
 
 export interface PeriodicElement {
@@ -36,11 +38,20 @@ export class UtilisateursComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(public apiClientService: ApiClientService) {
+  }
 
   public PrenomValue = 'Jérémie';
   public NomValue = 'lenoir';
   public MailValue = 'lenoir.jeremie@oostaoo.com';
+
+  public user: any;
+
+  prenom = new FormControl('', Validators.required);
+  nom = new FormControl('', Validators.required);
+  email = new FormControl('', Validators.required);
+  privileges = new FormControl('', Validators.required);
+  password = new FormControl('', Validators.required);
 
   public nomIsactive = false;
   public prenomIsactive = false;
@@ -68,7 +79,18 @@ export class UtilisateursComponent implements OnInit {
 
   @ViewChild('form') formulaire;
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getUser().then(user => {
+      console.log(user[0].utilsateurentreprises);
+      this.prenom = new FormControl(user[0].utilsateurentreprises.prenom);
+      this.nom = new FormControl(user[0].utilsateurentreprises.nom);
+      this.email = new FormControl(user[0].utilsateurentreprises.email);
+      this.privileges = new FormControl(user[0].utilsateurentreprises.privileges);
+      this.password = new FormControl(user[0].utilsateurentreprises.password);
+
+    // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
+    });
+  }
 
 
   public param_cog() {
@@ -249,6 +271,17 @@ export class UtilisateursComponent implements OnInit {
 
     }
 
+  }
+
+  async getUser(): Promise<any> {
+    try {
+      const datas = await this.apiClientService
+        .get(API_URI_USER_ADMIN + '/' +  1)
+        .toPromise();
+      return this.user = [datas];
+    } catch (err) {
+      return err;
+    }
   }
 }
 

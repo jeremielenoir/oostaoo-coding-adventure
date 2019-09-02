@@ -17,6 +17,10 @@ export const API_URI_CANDIDATS: string = prefix + 'candidats';
 export const API_URI_EMAIL: string = prefix + 'email';
 export const API_URI_USER_ADMIN: string = prefix + 'utilisateursadmins';
 export const API_URI_ENTREPRISE: string = prefix + 'entreprises';
+export const API_URI_USER_ENTREPRISE: string = prefix + 'utilsateurentreprises';
+export const API_URI_USER = 'http://localhost:1337/users';
+
+
 
 
 @Injectable()

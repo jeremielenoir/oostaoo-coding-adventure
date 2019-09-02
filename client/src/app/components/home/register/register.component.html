@@ -1,0 +1,17 @@
+<div id="register">
+  <form action="" method="POST">
+    <label for="username"> Username :</label>
+    <input name="username" [formControl]="username" class="input-section1" maxlength="64" type="text" required>
+
+    <label for="email">Email :</label>
+    <input name="email" [formControl]="email" class="input-section1" maxlength="64" type="email" required>
+
+    <label for="password"> Password :</label>
+    <input name="password" [formControl]="password" class="input-section1" maxlength="64" type="password" required>
+
+    <button (click)="register()">S'inscrire</button>
+    
+    <button (click)="login()">login</button>
+    <button (click)="tryget()">TryGet</button>
+  </form>
+</div>

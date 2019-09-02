@@ -17,6 +17,7 @@ import { GeneralComponent } from './components/panelAdmin/edit-campagne/settings
 import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne/settings/personnalisation/personnalisation.component';
 import { ClientTestComponent } from './components/panelAdmin/client-test/client-test.component';
 import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
+import { RegisterComponent } from './components/home/register/register.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,12 @@ const routes: Routes = [
     path: 'home',
     component: AccueilComponent
   },
+  {
+    path: 'home/register',
+    component: RegisterComponent
+  },
+
+
   {
     path: 'dashboard',
     redirectTo: 'dashboard/campaigns',
@@ -81,12 +88,12 @@ const routes: Routes = [
     component: UtilisateursComponent
   },
   {
-    path: 'nod-found',
+    path: 'not-found',
     component: NotFoundComponent
   },
   {
     path: '**',
-    redirectTo: 'nod-found'
+    redirectTo: 'not-found'
   }
 ];
 

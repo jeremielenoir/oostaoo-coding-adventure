@@ -576,47 +576,27 @@
 
   <div class="table-info-user">
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-bordore">
-
-        <ng-container matColumnDef="name" class="tr-table-user">
-          <th mat-header-cell *matHeaderCellDef> Nom </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-      
-        <!-- Name Column -->
-        <ng-container matColumnDef="mail">
-          <th mat-header-cell *matHeaderCellDef> Email </th>
-          <td mat-cell *matCellDef="let element"> {{element.mail}} </td>
-        </ng-container>
-      
-        <!-- Weight Column -->
-        <ng-container matColumnDef="gestion">
-          <th mat-header-cell *matHeaderCellDef> Privileges </th>
-          <td mat-cell *matCellDef="let element"> {{element.gestion}} </td>
-        </ng-container>
-      
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="symbol">
-          <th mat-header-cell *matHeaderCellDef> </th>
-          <td mat-cell *matCellDef="let element" class="last-td-icon">
-
-            <span class="gestion-block-icon-user" (click)="param_cog_deux()">
-
-                <i class="fas fa-pencil-alt"></i>
-
-            </span>
-
-            <span class="gestion-block-icon-user">
-
-                <i class="fas fa-trash-alt"></i>
-  
-            </span>
-            
-          </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <table class="table_user">
+        <thead class="table_head">
+            <tr class="table_row">
+                <th class="table_head_cell">Nom</th>
+                <th class="table_head_cell">Email</th>
+                <th class="table_head_cell">Privileges</th>
+                <th class="table_head_cell"></th>
+                
+            </tr>
+        </thead>
+        <tbody class="table_body">
+            <tr class="table_row" *ngFor="let user of  user">
+                <td class="table_body_cell">{{user.prenom}} {{user.nom}}</td>
+                <td class="table_body_cell">{{user.email}}</td>
+                <td class="table_body_cell">{{user.privileges}}</td>
+                <td  class="table_body_cell table_icon">
+                  <i (click)="param_cog_deux()" class="fas fa-pencil-alt icon"></i>
+                  <i class="fas fa-trash-alt icon"></i>
+                </td>
+            </tr>
+        </tbody>
       </table>
 
   </div>

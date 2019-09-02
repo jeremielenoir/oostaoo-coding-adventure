@@ -193,6 +193,41 @@
     max-width: 92px;
     padding: inherit
 }
+.table_user{
+ background: #fff;
+ width: 100%;
+ margin: 0 10px 0px 10px;
+ 
+}
+
+ .table_header, .table_head_cell, .table_body, .table_body_cell, .table_row{
+    border: 1px solid #e7e9eb;
+    padding: 5px;
+    margin: 5px;
+}
+
+.table_body_cell,.table_head_cell{
+    padding: 10px;
+}
+
+.table_body_cell:nth-child(1),.table_head_cell:nth-child(1){
+    width: 20%;
+}
+.table_body_cell:nth-child(2),.table_head_cell:nth-child(2){
+    width: 20%;
+}
+.table_body_cell:nth-child(3),.table_head_cell:nth-child(3){
+    width: 55%;
+}
+.table_body_cell:nth-child(4),.table_head_cell:nth-child(4){
+    width: 5%;
+}
+
+
+.icon{
+    margin: 5px;
+    color: #f2bb13;
+}
 
 .mat-cell
 {
@@ -217,33 +252,8 @@
     display: flex
 }
 
-.gestion-block-icon-user
-{
-    width: 46px;
-    color: #f2bb13;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    cursor: pointer;
-}
 
-.gestion-block-icon-user:hover{
 
-    background-color: #f2bb13;
-    color:#fff
-}
-
-.gestion-block-icon-user i
-{
-    font-size: 19px;
-   
-}
-
-.gestion-block-icon-user:first-child
-{
-    border-right: 1px solid #e4e4e4;
-}
 
 
  .modall > .modall-content

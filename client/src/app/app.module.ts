@@ -9,7 +9,7 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiClientService } from './api-client/api-client.service';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -71,6 +71,7 @@ import { TestComponent } from './components/panelAdmin/client-test/test/test.com
 import { NgxEditorModule } from 'ngx-editor';
 import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
 import { BreadcrumbComponent } from './components/panelAdmin/breadcrumb/breadcrumb.component';
+import { RegisterComponent } from './components/home/register/register.component';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -115,7 +116,8 @@ import { BreadcrumbComponent } from './components/panelAdmin/breadcrumb/breadcru
     ClientTestComponent,
     TestComponent,
     NotFoundComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -134,7 +136,12 @@ import { BreadcrumbComponent } from './components/panelAdmin/breadcrumb/breadcru
   ],
   providers: [
     ApiClientService,
-    DatePipe
+    DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RegisterComponent,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
