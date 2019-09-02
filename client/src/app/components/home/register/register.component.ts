@@ -44,7 +44,7 @@ export class RegisterComponent implements HttpInterceptor, OnInit {
     private addToken(request: HttpRequest<any>, token: string) {
       return request.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${this.token}`
         }
       });
     }
@@ -99,9 +99,9 @@ export class RegisterComponent implements HttpInterceptor, OnInit {
     tryget() {
     axios
   .get('http://localhost:1337/api/campaigns', {
-    // headers: {
-    //   Authorization:  this.token,
-    // }
+    headers: {
+      Authorization:  `Bearer ${this.token}`
+    }
   })
   .then(response => {
     // Handle success.
