@@ -52,11 +52,23 @@ export class NouvelleCampagnePage1Component implements OnInit {
   ngOnInit() {
     this.technosSelect = this.technoByParent;
     this.roleSelect = this.profilByParent;
-    this.apiClientService.get(API_URI_TECHNO).subscribe((datas) => {
-      this.technos = datas;
-    });
+    this.getProfiles();
+    this.getTechnos();
+  }
+
+  // somme(a, b) {
+  //   return a + b;
+  // }
+
+  getProfiles() {
     this.apiClientService.get(API_URI_PROFILES).subscribe((datas) => {
-      this.profiles = datas;
+      return this.profiles = datas;
+    });
+  }
+
+  getTechnos() {
+    this.apiClientService.get(API_URI_TECHNO).subscribe((datas) => {
+      return this.technos = datas;
     });
   }
   selected(event: MatSelectChange) {

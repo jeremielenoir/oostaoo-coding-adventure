@@ -13,6 +13,7 @@ fdescribe('NouvelleCampagneComponent', () => { // f for select only this TEST
   let component: NouvelleCampagnePage1Component;
   let fixture: ComponentFixture<NouvelleCampagnePage1Component>;
   const formBuilder: FormBuilder = new FormBuilder();
+  // const profiles = [];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -45,5 +46,12 @@ fdescribe('NouvelleCampagneComponent', () => { // f for select only this TEST
     component.valueChange.subscribe(techno => technosSelected = techno);
     component.valueChanged();
     expect(technosSelected).not.toBeNull();
+  });
+  // it('test myfunction somme', () => {
+  //   const monResultat = 2;
+  //   expect(component.somme(1, 1)).toEqual(monResultat);
+  // });
+  it('get profiles not null from server', () => {
+    expect(component.getProfiles()).not.toBeNull(); // not.tobeNull(); toequalNull();
   });
 });
