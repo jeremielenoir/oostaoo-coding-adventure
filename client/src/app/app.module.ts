@@ -72,6 +72,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
 import { BreadcrumbComponent } from './components/panelAdmin/breadcrumb/breadcrumb.component';
 import { RegisterComponent } from './components/home/register/register.component';
+import { BlockCopyPasteDirective } from './components/panelAdmin/client-test/block-copy-paste.directive';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -117,7 +118,8 @@ import { RegisterComponent } from './components/home/register/register.component
     TestComponent,
     NotFoundComponent,
     BreadcrumbComponent,
-    RegisterComponent
+    RegisterComponent,
+    BlockCopyPasteDirective
   ],
   imports: [
     BrowserModule,
