@@ -77,24 +77,43 @@ export class TestComponent implements OnInit {
     }, 1000);
   }
 
-  // checkReponses(arr1, arr2) {
-  //   if (arr1.sort().toString() === arr2.sort().toString()) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
   public QuestNext() {
     this.counterTotal++; // counter total questions
-    // this.arrayReponseUser.push(this.responseUser);
-    console.log('this.arrayReponseUser IN QUESTNEXT: ', this.arrayReponseUser);
-    if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
-      console.log('ITS OK !!');
-      this.counterCheck++;
-    } else {
-      console.log('NOT OK !!');
+    if (this.questions[this.index].type === 'one') {
+      console.log('typeONE');
+      this.arrayReponseUser.push(this.responseUser);
+      if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
+        console.log('ITS OK !!');
+        this.counterCheck++;
+      } else {
+        console.log('NOT OK !!');
+      }
     }
+    if (this.questions[this.index].type === 'free') {
+      console.log('typeFREE');
+      if (this.responseUser !== null) {
+        this.arrayReponseUser.push(this.responseUser.toLowerCase().trim());
+      } else {
+        this.arrayReponseUser.push(this.responseUser);
+      }
+      console.log('this.arrayReponseUser IN FREE: ', this.arrayReponseUser);
+      if (this.arrayReponseUser.every(reps => this.arrayGoodRep.includes(reps))) {
+        console.log('item ok !');
+        this.counterCheck++;
+      }
+    }
+    if (this.questions[this.index].type === 'multiple') {
+      console.log('typeMULTIPLE');
+      if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
+        console.log('ITS OK !!');
+        this.counterCheck++;
+      } else {
+        console.log('NOT OK !!');
+      }
+    }
+    // this.arrayReponseUser.push(this.responseUser);
+    // console.log('this.arrayReponseUser IN QUESTNEXT: ', this.arrayReponseUser);
+
 
     this.Alltime.push(this.timedefault);
     this.Activetime = false;
@@ -117,7 +136,7 @@ export class TestComponent implements OnInit {
       }
     }
     this.question = this.questions[this.index];
-    // console.log('this.question: ', this.question);
+    console.log('this.question: ', this.question);
     // NEXT QUESTIONS
     if (this.question.content !== null) {
       this.responses = this.question.content.split(', ');
@@ -132,8 +151,8 @@ export class TestComponent implements OnInit {
         this.language = techno.name;
       }
     }
-    this.arrayGoodRep = this.question.answer_value.split(', ').sort();
-    console.log('arrayGoodRep: ', this.arrayGoodRep);
+    // this.arrayGoodRep = this.question.answer_value.split(', ').sort();
+    // console.log('arrayGoodRep: ', this.arrayGoodRep);
     this.timeDanger = this.questions[this.index].time - 5;
     // console.log('type ', this.question.type);
     // console.log('COUNTER CHECK: ', this.counterCheck);
