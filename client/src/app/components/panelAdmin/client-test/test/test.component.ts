@@ -208,6 +208,7 @@ export class TestComponent implements OnInit {
   }
 
   @HostListener('window:beforeunload', ['$event'])
+  // work only if Press F5 or cancel close window
   public beforeunloadHandler($event) {
     // console.log(this.timedefault);
     this.postPauseTest();
