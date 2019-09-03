@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { ApiClientService, API_URI_CANDIDATS, API_URI_CAMPAIGNS } from '../../../../api-client/api-client.service';
 
 @Component({
@@ -30,14 +30,27 @@ export class TestComponent implements OnInit {
   public arrayGoodRep: Array<string> = [];
 
 
-  constructor(private apiClientService: ApiClientService) { }
+  constructor(private apiClientService: ApiClientService) {
+  }
 
   ngOnInit() {
+    console.log('console.log(this.candidat.index_question): ', this.candidat.index_question);
+    console.log('this.candidat.test_pause: ', this.candidat.test_pause);
+    if (this.candidat.index_question !== 0) {
+      this.index = this.candidat.index_question;
+    } else {
+      this.index = 0;
+    }
+    if (this.candidat.test_pause !== 0) {
+      this.timedefault = this.candidat.test_pause;
+    } else {
+      this.timedefault = 0;
+    }
     this.questions = this.questionCampaign;
     this.question = this.questionCampaign[this.index];
     this.timeDanger = this.questionCampaign[0].time - 5;
     this.type = this.questionCampaign[0];
-    console.log('this.type: ', this.type);
+    // console.log('this.type: ', this.type); // afficher
     this.Countertime();
     // console.log('techno id', this.technoCampaign);
     // FIRST QUESTIONS
@@ -52,7 +65,7 @@ export class TestComponent implements OnInit {
       }
     }
     this.arrayGoodRep = this.question.answer_value.split(', ').sort();
-    console.log('arrayGoodRep: ', this.arrayGoodRep);
+    // console.log('arrayGoodRep: ', this.arrayGoodRep);
   }
 
   checkCheckBoxvalue(event) {
@@ -91,7 +104,7 @@ export class TestComponent implements OnInit {
     }
     if (this.questions[this.index].type === 'free') {
       console.log('typeFREE');
-      if (this.responseUser !== null) {
+      if (this.responseUser !== null || this.responseUser !== undefined) {
         this.arrayReponseUser.push(this.responseUser.toLowerCase().trim());
       } else {
         this.arrayReponseUser.push(this.responseUser);
@@ -136,7 +149,7 @@ export class TestComponent implements OnInit {
       }
     }
     this.question = this.questions[this.index];
-    console.log('this.question: ', this.question);
+    // console.log('this.question: ', this.question); // afficher
     // NEXT QUESTIONS
     if (this.question.content !== null) {
       this.responses = this.question.content.split(', ');
@@ -144,7 +157,7 @@ export class TestComponent implements OnInit {
       this.responses = this.question;
     }
     this.arrayGoodRep = this.question.answer_value.split(', ').sort();
-    console.log('this.arrayGoodRep: ', this.arrayGoodRep);
+    // console.log('this.arrayGoodRep: ', this.arrayGoodRep);
     // console.log('this.responses in QUESTNEXT: ', this.responses);
     for (const techno of this.technoCampaign) {
       if (this.question.technologies === techno.id) {
@@ -182,5 +195,23 @@ export class TestComponent implements OnInit {
         });
       });
     });
+  }
+
+  postPauseTest() {
+
+    this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
+      index_question: this.index,
+      test_pause: this.timedefault
+    }).toPromise().then(res => {
+      console.log('pause: ', res);
+    });
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  public beforeunloadHandler($event) {
+    // console.log(this.timedefault);
+    this.postPauseTest();
+    console.log($event);
+    $event.returnValue = 'Sure?';
   }
 }

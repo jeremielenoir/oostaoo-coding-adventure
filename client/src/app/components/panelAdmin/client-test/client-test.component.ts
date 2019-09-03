@@ -14,6 +14,7 @@ export class ClientTestComponent implements OnInit {
   public StatueTestingQuestion = 'eval';
   public candidat: string;
   public dateOpenTest: any;
+  public index: number;
 
   @ViewChild('btnchecked') btnchecked: ElementRef;
   idCampaign: any;
@@ -84,7 +85,7 @@ export class ClientTestComponent implements OnInit {
     return this.apiClientService.put(API_URI_CANDIDATS + '/' + candidat, {
       test_ouvert: dateOpen
     }).toPromise().then(res => {
-      console.log('succes', res);
+      console.log('candidat', res);
     });
   }
 }
