@@ -46,6 +46,14 @@
     "test_ouvert": {
       "default": "",
       "type": "date"
+    },
+    "index_question": {
+      "default": "",
+      "type": "integer"
+    },
+    "test_pause": {
+      "default": "",
+      "type": "integer"
     }
   }
 }
