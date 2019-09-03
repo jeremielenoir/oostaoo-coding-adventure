@@ -77,7 +77,7 @@ module.exports = {
     let email_title = ctx.request.body.email_title;
     let getEmail_message_crypto = getEmail_message.replace(
       /http:\/\/localhost:4200\/evaluate\/.../gm,
-      "http://localhost:4200/evaluate/?id=" + cryptoData
+      "http://localhost:4200/evaluate/?id=" + cryptoData //or iplocal replace localhost
     );
     // console.log('postEmail_message: ', postEmail_message);
     let getNom = ctx.request.body.Nom;
