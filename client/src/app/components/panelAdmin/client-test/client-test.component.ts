@@ -14,7 +14,6 @@ export class ClientTestComponent implements OnInit {
   public StatueTestingQuestion = 'eval';
   public candidat: string;
   public dateOpenTest: any;
-  public index: number;
 
   @ViewChild('btnchecked') btnchecked: ElementRef;
   idCampaign: any;
