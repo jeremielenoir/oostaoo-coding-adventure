@@ -106,6 +106,7 @@
 #content {
     width: 100%;
     display: flex;
+    position: relative;
 }
 
 .bar {
@@ -241,6 +242,7 @@
     align-items: center;
     justify-content: flex-start;
     max-width:250px;
+    
 }
 
 :host ::ng-deep .example-box:hover {
@@ -327,9 +329,14 @@
     justify-content: center;
 }
 
-
-
-
 :host ::ng-deep .exemple-list, .cdk-drop-list {
     background-color: #f9f9f9!important;
+}
+
+.active-dropList{
+    position: fixed!important;
+    top:1%;
+    width: 32%;
+    right: 86px;
+    
 }

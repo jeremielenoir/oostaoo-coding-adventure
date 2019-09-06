@@ -1,11 +1,9 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef, } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 import { ApiClientService, API_URI_QUESTIONS, API_URI_CAMPAIGNS } from '../../../../api-client/api-client.service';
-
-
 
 @Component({
   selector: 'app-NouvelleCampagnePage3Component',
@@ -17,12 +15,16 @@ export class NouvelleCampagnePage3Component implements OnInit {
   @Output() decrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
   public searchText = '';
-
+  public experience: string
   public questions: any[];
+  public allQuestionLevel: any[] = [];
+  public activeClassScrollTopDropList = false;
 
   Questions = [];
   allQuestions = [];
   QuestionsCampaign = [];
+
+  @ViewChild('droplist') public droplist: ElementRef;
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -41,19 +43,61 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
   ngOnInit() {
     this.getAllQuestions();
+
+    window.scroll(10, 0);
+
+    this.experience = this.formCampagne.value.experience;
+
+    // let body = document.querySelector('body');
+
+    window.addEventListener('scroll', () => {
+
+      this.headerChangePositioinDropList();
+
+    })
+  }
+  fmtMSS(s) {
+    return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
+  }
+
+  headerChangePositioinDropList() {
+
+    if (window.pageYOffset > 160) {
+      this.activeClassScrollTopDropList = true;
+    } else {
+      this.activeClassScrollTopDropList = false;
+    }
+
   }
 
   getAllQuestions() {
     // console.log('this.formCampagne.value(): ', this.formCampagne.value);
     this.apiClientService.get(API_URI_QUESTIONS).subscribe((datas) => {
-      // console.log('datas: ', datas);
+
       this.questions = datas;
       for (const question of this.questions) {
         // console.log('question.technologies.id: ', question.technologies.id);
         if (this.formCampagne.value.technoSelectedId.includes(question.technologies.id)) {
           this.allQuestions.push(question);
+
         }
       }
+
+      for (let questionLevel of this.allQuestions) {
+
+        if (questionLevel.level === this.experience) {
+
+          this.allQuestionLevel.push(questionLevel)
+
+        }
+
+      }
+
+      for (let itemQuestionLevel of this.allQuestionLevel) {
+
+        this.allQuestions = this.allQuestions.filter(element => element !== itemQuestionLevel);
+      }
+
     });
   }
 

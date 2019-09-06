@@ -25,23 +25,14 @@
       <p>diagramme</p>
     </div>
     <div id="segment3-right">
-      <button
-        class="custom-buttom"
-        mat-flat-button
-        id="back"
-        (click)="onDecrementPage()"
-      >
+      <button class="custom-buttom" mat-flat-button id="back" (click)="onDecrementPage()">
         RETOUR
       </button>
-      <button
-        class="custom-buttom"
-        mat-flat-button
-        id="save"
-        [routerLink]="['/dashboard/campaigns']"
-        (click)="postCampagne()"
-      >
+      <button class="custom-buttom" mat-flat-button id="save" [routerLink]="['/dashboard/campaigns']"
+        (click)="postCampagne()">
         ENREGISTRER
       </button>
+
     </div>
   </div>
 </div>
@@ -52,13 +43,7 @@
       <i class="far fa-question-circle bar-icon"></i>
       <p class="bar-text">Notre collection de questions</p>
       <div id="div-search">
-        <input
-          type="text"
-          id="search-input"
-          placeholder="Recherche"
-          name="search"
-          [(ngModel)]="searchText"
-        />
+        <input type="text" id="search-input" placeholder="Recherche" name="search" [(ngModel)]="searchText" />
         <i class="fas fa-search search-icon"></i>
       </div>
       <button mat-flat-button id="bar-btn-search" class="custom-buttom">
@@ -69,31 +54,54 @@
       </button>
     </div>
 
-    <div
-      cdkDropList
-      #todoList="cdkDropList"
-      [cdkDropListData]="allQuestions"
-      [cdkDropListConnectedTo]="[doneList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <div
-        class="example-box"
-        *ngFor="let item of allQuestions | filter: searchText"
-        cdkDrag
-      >
-        <p class="question-techno">{{ item.technologies.name }}</p>
+
+    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="allQuestions" [cdkDropListConnectedTo]="[doneList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of allQuestions | filter: searchText" cdkDrag>
+        <!-- <p class="question-techno">{{ item.technologies.name }}</p>
 
         {{ item.name }}
         <i class="fas fa-puzzle-piece drop-icon"></i> |
         <p>{{ item.points }} points</p>
         | <i class="fas fa-list-ul drop-icon"></i> |
-        <p>{{ item.time }}</p>
+        <p>{{ item.time }}</p> -->
+
+
+        <div class="partie-left-example-box">
+          <p class="question-techno">
+            {{ item.technologies.name }}
+          </p>
+
+          <p class="question-name" matTooltip="{{item.name}}">{{ item.name }}</p>
+
+        </div>
+
+        <span *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+        </span>
+
+        <span *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+
+        </span>
+        <span *ngIf="item.level === 'facile'" matTooltip="Difficulté Facile">
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+
+        </span>
+
+
+        <p>{{ item.points }} points</p>
+        | <i class="fas fa-list-ul drop-icon"></i> |
+        <p matTooltip="Durée(heure:min:sec)">{{  fmtMSS(item.time) }}</p>
+
       </div>
     </div>
   </div>
 
-  <div class="example-container">
+  <div class="example-container" [class.active-dropList]="activeClassScrollTopDropList">
     <div class="bar" id="">
       <div id="bar2-left">
         <i class="far fa-list-alt bar-icon"></i>
@@ -109,22 +117,44 @@
       </div>
     </div>
 
-    <div
-      cdkDropList
-      #doneList="cdkDropList"
-      [cdkDropListData]="Questions"
-      [cdkDropListConnectedTo]="[todoList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)"
-    >
+
+
+    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="allQuestionLevel" [cdkDropListConnectedTo]="[todoList]"
+      class="example-list" (cdkDropListDropped)="drop($event)" #droplist>
       <p id="drop-text">Glissez/déposez une question ici</p>
-      <div class="example-box" *ngFor="let item of Questions" cdkDrag>
-        <p class="question-techno">{{ item.technologies.name }}</p>
-        {{ item.name }}
-        <i class="fas fa-puzzle-piece drop-icon"></i> |
+      <div class=" example-box" *ngFor="let item of allQuestionLevel" cdkDrag>
+
+        <div class="partie-left-example-box">
+          <p class="question-techno">
+            {{ item.technologies.name }}
+          </p>
+
+          <p class="question-name" matTooltip="{{item.name}}">{{ item.name }}</p>
+
+        </div>
+
+        <span *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+        </span>
+
+        <span *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+
+        </span>
+        <span *ngIf="item.level === 'facile'" matTooltip="Difficulté Facile">
+          <i class="fas fa-puzzle-piece drop-icon"></i> |
+
+        </span>
+
+
         <p>{{ item.points }} points</p>
         | <i class="fas fa-list-ul drop-icon"></i> |
-        <p>{{ item.time }}</p>
+        <p matTooltip="Durée(heure:min:sec)">{{  fmtMSS(item.time) }}</p>
+
+
       </div>
     </div>
   </div>
