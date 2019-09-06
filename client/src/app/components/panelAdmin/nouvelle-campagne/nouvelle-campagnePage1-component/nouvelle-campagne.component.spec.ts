@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApiClientService } from '../../../../api-client/api-client.service';
 
 
-fdescribe('NouvelleCampagneComponent', () => { // f for select only this TEST
+describe('NouvelleCampagneComponent', () => { // f for select only this TEST
   let component: NouvelleCampagnePage1Component;
   let fixture: ComponentFixture<NouvelleCampagnePage1Component>;
   const formBuilder: FormBuilder = new FormBuilder();

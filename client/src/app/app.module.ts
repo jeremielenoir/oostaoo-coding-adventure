@@ -139,11 +139,7 @@ import { BlockCopyPasteDirective } from './components/panelAdmin/client-test/blo
   providers: [
     ApiClientService,
     DatePipe,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RegisterComponent,
-      multi: true
-    }
+
   ],
   bootstrap: [AppComponent]
 })
