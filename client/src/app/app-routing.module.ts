@@ -18,8 +18,13 @@ import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne
 import { ClientTestComponent } from './components/panelAdmin/client-test/client-test.component';
 import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
 import { RegisterComponent } from './components/home/register/register.component';
+import { FinTestComponent } from './components/panelAdmin/client-test/fin-test/fin-test.component';
 
 const routes: Routes = [
+  {
+    path: 'fin',
+    component: FinTestComponent
+  },
   {
     path: 'evaluate',
     component: ClientTestComponent

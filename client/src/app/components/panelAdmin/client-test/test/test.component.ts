@@ -189,12 +189,6 @@ export class TestComponent implements OnInit {
     return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
   }
 
-  testFini() {
-    if (this.questions.length === this.index) {
-      console.log('FIN ');
-    }
-  }
-
   postTimeTest(dureeTest) {
     this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
       duree: dureeTest,

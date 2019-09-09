@@ -1,0 +1,62 @@
+@import '../client-test.component.css';
+.oos-margin-left {
+  margin-left: 20px;
+}
+
+.test-container {
+  flex-direction: column;
+}
+
+.invitation {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.invitation .test-invit {
+  justify-content: left;
+}
+
+.test-invit h3 {
+  width: inherit !important;
+}
+
+.text {
+  padding: 30px 0px 0px 0px;
+}
+
+.tutorial {
+  height: inherit !important;
+}
+
+.tutorial-test {
+  width: 100%;
+}
+
+.oos-note {
+  display: flex;
+  justify-content: center;
+  border-top: 1px dashed #e3e3e3;
+  border-bottom: 1px dashed #e3e3e3;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.example-full-width {
+  min-width: 150px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.oos-custom-feedback {
+  color: white;
+  background-color: #f2bb13;
+  border-radius: 0px;
+  width: 100%;
+  height: 50px;
+  font-size: large;
+}
+
+.oos-custom-feedback:hover {
+  border: 1px solid #ffd200;
+  background-color: #ffd200;
+}

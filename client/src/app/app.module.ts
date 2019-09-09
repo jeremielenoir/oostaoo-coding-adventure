@@ -73,6 +73,7 @@ import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.c
 import { BreadcrumbComponent } from './components/panelAdmin/breadcrumb/breadcrumb.component';
 import { RegisterComponent } from './components/home/register/register.component';
 import { BlockCopyPasteDirective } from './components/panelAdmin/client-test/block-copy-paste.directive';
+import { FinTestComponent } from './components/panelAdmin/client-test/fin-test/fin-test.component';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -119,7 +120,8 @@ import { BlockCopyPasteDirective } from './components/panelAdmin/client-test/blo
     NotFoundComponent,
     BreadcrumbComponent,
     RegisterComponent,
-    BlockCopyPasteDirective
+    BlockCopyPasteDirective,
+    FinTestComponent
   ],
   imports: [
     BrowserModule,
