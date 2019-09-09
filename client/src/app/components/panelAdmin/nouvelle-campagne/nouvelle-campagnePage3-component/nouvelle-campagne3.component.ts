@@ -15,14 +15,13 @@ export class NouvelleCampagnePage3Component implements OnInit {
   @Output() decrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
   public searchText = '';
-  public experience: string
+  public experience: string;
   public questions: any[];
   public allQuestionLevel: any[] = [];
   public activeClassScrollTopDropList = false;
 
   Questions = [];
   allQuestions = [];
-  QuestionsCampaign = [];
 
   @ViewChild('droplist') public droplist: ElementRef;
 
@@ -42,6 +41,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
 
   ngOnInit() {
+    console.log('this.allQuestionLevel : ', this.allQuestionLevel);
     this.getAllQuestions();
 
     window.scroll(10, 0);
@@ -54,7 +54,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
       this.headerChangePositioinDropList();
 
-    })
+    });
   }
   fmtMSS(s) {
     return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
@@ -73,40 +73,29 @@ export class NouvelleCampagnePage3Component implements OnInit {
   getAllQuestions() {
     // console.log('this.formCampagne.value(): ', this.formCampagne.value);
     this.apiClientService.get(API_URI_QUESTIONS).subscribe((datas) => {
-
       this.questions = datas;
       for (const question of this.questions) {
         // console.log('question.technologies.id: ', question.technologies.id);
         if (this.formCampagne.value.technoSelectedId.includes(question.technologies.id)) {
           this.allQuestions.push(question);
-
         }
       }
 
-      for (let questionLevel of this.allQuestions) {
-
+      for (const questionLevel of this.allQuestions) {
         if (questionLevel.level === this.experience) {
-
-          this.allQuestionLevel.push(questionLevel)
-
+          this.allQuestionLevel.push(questionLevel);
         }
-
       }
 
-      for (let itemQuestionLevel of this.allQuestionLevel) {
-
+      for (const itemQuestionLevel of this.allQuestionLevel) {
         this.allQuestions = this.allQuestions.filter(element => element !== itemQuestionLevel);
       }
-
     });
   }
 
   SendQuestionSelected(id) {
-    for (const question of this.Questions) {
-      this.QuestionsCampaign.push(question.id);
-    }
     this.apiClientService.put(API_URI_CAMPAIGNS + '/' + id, {
-      questions: this.QuestionsCampaign
+      questions: this.allQuestionLevel
     }).subscribe(
       (res) => {
         console.log(res);
