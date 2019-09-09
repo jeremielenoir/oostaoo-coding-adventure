@@ -28,23 +28,23 @@ export class TestComponent implements OnInit {
   public counterTotal = 0;
   public arrayReponseUser: Array<string> = [];
   public arrayGoodRep: Array<string> = [];
+  isDisabled: boolean;
 
 
   constructor(private apiClientService: ApiClientService) {
   }
 
   ngOnInit() {
-    console.log('console.log(this.candidat.index_question): ', this.candidat.index_question);
-    console.log('this.candidat.test_pause: ', this.candidat.test_pause);
-    if (this.candidat.index_question !== 0) {
-      this.index = this.candidat.index_question;
-    } else {
+    if (this.candidat.index_question === null) {
+      //   this.index = this.candidat.index_question;
       this.index = 0;
-    }
-    if (this.candidat.test_pause !== 0) {
-      this.timedefault = this.candidat.test_pause;
     } else {
+      this.index = this.candidat.index_question;
+    }
+    if (this.candidat.test_pause === null) {
       this.timedefault = 0;
+    } else {
+      this.timedefault = this.candidat.test_pause;
     }
     this.questions = this.questionCampaign;
     this.question = this.questionCampaign[this.index];
@@ -54,18 +54,17 @@ export class TestComponent implements OnInit {
     this.Countertime();
     // console.log('techno id', this.technoCampaign);
     // FIRST QUESTIONS
-    if (this.question.content !== null) {
+    if (this.question.content === null) {
+      this.responses = [];
+    } else {
       this.responses = this.question.content.split(', ');
     }
-    // console.log('this.responses: ', this.responses);
-    // console.log('this.question: ', this.question);
     for (const techno of this.technoCampaign) {
       if (this.question.technologies === techno.id) {
         this.language = techno.name;
       }
     }
     this.arrayGoodRep = this.question.answer_value.split(', ').sort();
-    // console.log('arrayGoodRep: ', this.arrayGoodRep);
   }
 
   checkCheckBoxvalue(event) {
@@ -80,10 +79,13 @@ export class TestComponent implements OnInit {
   }
 
   Countertime() {
+    console.log('this.questions : ', this.questions[this.index]);
     this.stopTimeInterval = setInterval(() => {
       if (this.timedefault < this.questions[this.index].time) {
         this.timedefault++;
       } else {
+        this.disableRep(this.questions[this.index].time);
+        console.log('temps FINI');
         this.Activetime = !this.Activetime;
         clearInterval(this.stopTimeInterval);
       }
@@ -104,10 +106,10 @@ export class TestComponent implements OnInit {
     }
     if (this.questions[this.index].type === 'free') {
       console.log('typeFREE');
-      if (this.responseUser !== null || this.responseUser !== undefined) {
-        this.arrayReponseUser.push(this.responseUser.toLowerCase().trim());
-      } else {
+      if (this.responseUser === null || this.responseUser === undefined) {
         this.arrayReponseUser.push(this.responseUser);
+      } else {
+        this.arrayReponseUser.push(this.responseUser.toLowerCase().trim());
       }
       console.log('this.arrayReponseUser IN FREE: ', this.arrayReponseUser);
       if (this.arrayReponseUser.every(reps => this.arrayGoodRep.includes(reps))) {
@@ -144,7 +146,7 @@ export class TestComponent implements OnInit {
           // console.log('chaque temp passe sur chaque question', nbrtime);
           this.CalculTimeTotal += nbrtime;
         }
-        // console.log('this.CalculTimeTotal: ', this.CalculTimeTotal);
+        console.log('this.CalculTimeTotal: ', this.CalculTimeTotal);
         // this.postTimeTest(this.CalculTimeTotal);
       }
     }
@@ -171,11 +173,26 @@ export class TestComponent implements OnInit {
     // console.log('COUNTER CHECK: ', this.counterCheck);
     this.responseUser = null;
     this.arrayReponseUser = [];
+    this.isDisabled = false;
     console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
+    console.log('this.questions[this.index].time: ', this.questions[this.index].time);
+
+  }
+
+  disableRep(timeQuestion) {
+    if (timeQuestion === this.timedefault) {
+      this.isDisabled = true;
+    }
   }
 
   public fmtMSS(s) {
     return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
+  }
+
+  testFini() {
+    if (this.questions.length === this.index) {
+      console.log('FIN ');
+    }
   }
 
   postTimeTest(dureeTest) {
@@ -209,10 +226,16 @@ export class TestComponent implements OnInit {
 
   @HostListener('window:beforeunload', ['$event'])
   // work only if Press F5 or cancel close window
-  public beforeunloadHandler($event) {
+  beforeunloadHandler($event) {
     // console.log(this.timedefault);
+    console.log($event.isTrusted);
+    $event.returnValue = 'Are you sure?';
+    if ($event.isTrusted === true) {
+      this.postPauseTest();
+    }
+  }
+  @HostListener('window:unload', ['$event'])
+  sendData() {
     this.postPauseTest();
-    console.log($event);
-    $event.returnValue = 'Sure?';
   }
 }

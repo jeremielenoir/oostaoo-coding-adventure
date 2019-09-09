@@ -80,6 +80,7 @@
         <div class="content-testing content-testing-seconde">
           <mat-form-field class="example-full-width">
             <textarea
+              [disabled]="isDisabled"
               appBlockCopyPaste
               matInput
               placeholder="Leave a comment"
@@ -96,6 +97,7 @@
         class="content-testing content-testing-seconde"
       >
         <mat-radio-group
+          [disabled]="isDisabled"
           aria-labelledby="example-radio-group-label"
           class="example-radio-group"
           [(ngModel)]="responseUser"
@@ -117,6 +119,7 @@
       >
         <div *ngFor="let response of responses">
           <mat-checkbox
+            [disabled]="isDisabled"
             (change)="checkCheckBoxvalue($event)"
             [value]="response"
           >
