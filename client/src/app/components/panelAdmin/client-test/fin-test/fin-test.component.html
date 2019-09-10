@@ -33,10 +33,25 @@
           CodinGame uniquement).
         </p>
         <div class="oos-note">
-          <div *ngFor="let item of myStars">
-            <i class="material-icons">
-              grade
-            </i>
+          <div
+            *ngFor="let item of myStars; let index = index"
+            (mouseover)="numberStar = index"
+            (mouseout)="numberStar = null"
+          >
+            <button
+              class="oos-custom-star"
+              [value]="index"
+              (click)="checkStarSelected(index)"
+            >
+              <i class="material-icons">
+                grade
+              </i>
+            </button>
+            <div>
+              <p class="oos-nameStar" *ngIf="numberStar === index">
+                {{ item }}
+              </p>
+            </div>
           </div>
         </div>
         <mat-form-field class="example-full-width">

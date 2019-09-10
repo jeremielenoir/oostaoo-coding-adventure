@@ -60,3 +60,17 @@
   border: 1px solid #ffd200;
   background-color: #ffd200;
 }
+
+.oos-nameStar {
+  text-align: center;
+  position: absolute;
+}
+
+.oos-custom-star {
+  background-color: white;
+  border: inherit !important;
+}
+
+.example-full-width{
+  margin-top: 20px;
+}

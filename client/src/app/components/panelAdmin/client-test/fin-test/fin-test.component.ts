@@ -6,11 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fin-test.component.css']
 })
 export class FinTestComponent implements OnInit {
-  public myStars = [1, 2, 3, 4, 5];
+  public myStars = ['Très mauvaise', 'Mauvaise', 'Moyenne', 'Bonne', 'Très bonne'];
   isSelected: boolean;
+  index: number;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  checkStarSelected(index) {
+    this.index = index + 1;
+    console.log('this.index: ', this.index);
   }
 
 }
