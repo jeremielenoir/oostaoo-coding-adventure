@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostListener, Output, EventEmitter } from '@angular/core';
 import { ApiClientService, API_URI_CANDIDATS, API_URI_CAMPAIGNS } from '../../../../api-client/api-client.service';
 
 @Component({
@@ -29,6 +29,8 @@ export class TestComponent implements OnInit {
   public arrayReponseUser: Array<string> = [];
   public arrayGoodRep: Array<string> = [];
   isDisabled: boolean;
+  @Output() refresh = new EventEmitter();
+  dataForParent: string;
 
 
   constructor(private apiClientService: ApiClientService) {
@@ -147,7 +149,7 @@ export class TestComponent implements OnInit {
           this.CalculTimeTotal += nbrtime;
         }
         console.log('this.CalculTimeTotal: ', this.CalculTimeTotal);
-        // this.postTimeTest(this.CalculTimeTotal);
+        this.postTimeTest(this.CalculTimeTotal);
       }
     }
     this.question = this.questions[this.index];
@@ -203,19 +205,23 @@ export class TestComponent implements OnInit {
           NbCandidatFinish: nbCandidats + 1
         }).subscribe(res2 => {
           console.log('campaign : ', res2);
+          this.refreshComponent();
         });
       });
     });
   }
 
   postPauseTest() {
-
     this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
       index_question: this.index,
       test_pause: this.timedefault
     }).toPromise().then(res => {
       console.log('pause: ', res);
     });
+  }
+
+  refreshComponent() {
+    this.refresh.emit(this.dataForParent = 'fin');
   }
 
   @HostListener('window:beforeunload', ['$event'])

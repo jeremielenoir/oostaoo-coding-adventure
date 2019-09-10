@@ -59,6 +59,9 @@ export class ClientTestComponent implements OnInit {
       for (const candidat of res) {
         if (this.idParam === candidat.token) {
           this.candidat = candidat;
+          if (candidat.invitation_date !== candidat.test_terminer) {
+            this.StatueTestingQuestion = 'fin';
+          }
           this.idCampaign = candidat.campaign.id;
           this.postOpenTimeTest(this.dateOpenTest, candidat.id);
           // console.log('this.idCampaign : ', this.idCampaign);
@@ -86,5 +89,8 @@ export class ClientTestComponent implements OnInit {
     }).toPromise().then(res => {
       console.log('candidat', res);
     });
+  }
+  refreshComponent(event) {
+    this.StatueTestingQuestion = event;
   }
 }

@@ -125,6 +125,10 @@
       [candidat]="candidat"
       [questionCampaign]="questionCampaign"
       [technoCampaign]="technoCampaign"
+      (refresh)="refreshComponent($event)"
     ></app-test>
+  </div>
+  <div *ngSwitchCase="'fin'">
+    <app-fin-test></app-fin-test>
   </div>
 </div>
