@@ -128,6 +128,12 @@
         </div>
       </div>
     </div>
-    <button class="button" (click)="QuestNext()">Question suivante</button>
+    <button class="button" (click)="QuestNext()">
+      {{
+        index === questions.length - 1
+          ? "Soumettre le test"
+          : "Question suivante"
+      }}
+    </button>
   </div>
 </div>
