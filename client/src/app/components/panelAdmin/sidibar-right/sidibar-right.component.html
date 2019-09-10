@@ -210,16 +210,17 @@
     <div class="">
       <div class="list-sidibar-left">
         <div *ngFor="let campaing of campaignsFromParent">
-          <div *ngFor="let candidat of candidats" >
-          
+          <div *ngFor="let candidat of candidats">
             <div *ngIf="candidat.campaign === campaing.id">
-
-              <!-- <div *ngIf="candidat.invitation_date !== candidat.test_terminer" class="list-sidibar">
+              <div
+                *ngIf="candidat.invitation_date !== candidat.test_terminer"
+                class="list-sidibar"
+              >
                 <p class="list-sidibar-left-content">
                   <a
                     href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487"
-                    >{{ candidat.Nom }} </a
-                  >
+                    >{{ candidat.Nom }}
+                  </a>
                   &lt;<a
                     href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487"
                     >{{ candidat.email }}</a
@@ -235,71 +236,34 @@
                     candidat.test_terminer | date: "short":"undefined":"fr-FR"
                   }}
                 </p>
+              </div>
 
-              </div> -->
-
-              
-             <div class="list-sidibar">
-            
-                  <p class="list-sidibar-left-content">
-                    <a
+              <div class="list-sidibar">
+                <p class="list-sidibar-left-content">
+                  <a
                     href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487"
                     >{{ candidat.Nom }}</a
-                    >
-                    &lt;<a
+                  >
+                  &lt;<a
                     href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487"
                     >{{ candidat.email }}</a
-                    >
-                    &gt; a été invité(e) à '
-                    <a href="/work/fr/dashboard/campaign/177710/candidates/">{{
+                  >
+                  &gt; a été invité(e) à '
+                  <a href="/work/fr/dashboard/campaign/177710/candidates/">{{
                     campaing.Name
-                    }}</a
-                    >'
-                 </p>
-                    <p class="list-sidibar-right list-sidibar-right-bottom">
-                        {{
-                        candidat.invitation_date | date: "short":"undefined":"fr-FR"
-                        }}
-                  </p>
-            
+                  }}</a
+                  >'
+                </p>
+                <p class="list-sidibar-right list-sidibar-right-bottom">
+                  {{
+                    candidat.invitation_date | date: "short":"undefined":"fr-FR"
+                  }}
+                </p>
+              </div>
             </div>
-
-
-            </div>
-
           </div>
         </div>
       </div>
-      <!-- <div class="list-sidibar-right">
-        <p>01/04/2019</p>
-        <p>17:53</p>
-      </div>
-    </div>
-
-    <div class="list-sidibar">
-      <div class="list-sidibar-left">
-        <p class="list-sidibar-left-content">
-          <a
-            href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487"
-            >Famady</a
-          >
-          &lt;
-          <a
-            href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487"
-            >kebe.famady@oostaoo.com</a
-          >
-          &gt; a terminé l'évaluation technique de '
-          <a href="/work/fr/dashboard/campaign/177710/candidates/"
-            >Git, JavaScript, HTML, CSS, Node.js - Junior[[NOM CAMPAGNE]]</a
-          >'
-        </p>
-      </div>
-
-      <div class="list-sidibar-right">
-        <p>01/04/2019</p>
-        <p>17:53</p>
-      </div>
-    </div> -->
     </div>
   </div>
 </div>
