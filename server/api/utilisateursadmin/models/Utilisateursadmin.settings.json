@@ -43,20 +43,12 @@
       "default": "",
       "type": "text"
     },
-    "email": {
-      "default": "",
-      "type": "email"
-    },
     "entreprise": {
       "model": "entreprise",
       "via": "utilisateursadmin"
     },
     "factures": {
       "collection": "facture",
-      "via": "utilisateursadmin"
-    },
-    "utilsateurentreprises": {
-      "collection": "utilsateurentreprise",
       "via": "utilisateursadmin"
     }
   }

@@ -12,8 +12,9 @@
   },
   "attributes": {
     "utilisateursadmin": {
-      "model": "utilisateursadmin",
-      "via": "entreprise"
+      "model": "user",
+      "via": "entreprise",
+      "plugin": "users-permissions"
     },
     "logo": {
       "model": "file",

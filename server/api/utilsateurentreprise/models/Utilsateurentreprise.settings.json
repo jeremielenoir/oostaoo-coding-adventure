@@ -27,10 +27,6 @@
       "default": "",
       "type": "password"
     },
-    "utilisateursadmin": {
-      "model": "utilisateursadmin",
-      "via": "utilsateurentreprises"
-    },
     "prenom": {
       "default": "",
       "type": "string"
