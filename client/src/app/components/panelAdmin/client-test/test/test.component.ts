@@ -42,6 +42,8 @@ export class TestComponent implements OnInit {
       this.index = 0;
     } else {
       this.index = this.candidat.index_question;
+      const dateStartQuestion = new Date();
+      console.log('dateStartQuestion: ', dateStartQuestion);
     }
     if (this.candidat.test_pause === null) {
       this.timedefault = 0;
@@ -88,6 +90,7 @@ export class TestComponent implements OnInit {
       } else {
         this.disableRep(this.questions[this.index].time);
         console.log('temps FINI');
+        console.log(this.responseUser);
         this.Activetime = !this.Activetime;
         clearInterval(this.stopTimeInterval);
       }
@@ -95,43 +98,13 @@ export class TestComponent implements OnInit {
   }
 
   public QuestNext() {
+    const dateStartQuestion = new Date();
+    console.log('dateStartQuestion: ', dateStartQuestion);
     this.counterTotal++; // counter total questions
-    if (this.questions[this.index].type === 'one') {
-      console.log('typeONE');
-      this.arrayReponseUser.push(this.responseUser);
-      if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
-        console.log('ITS OK !!');
-        this.counterCheck++;
-      } else {
-        console.log('NOT OK !!');
-      }
-    }
-    if (this.questions[this.index].type === 'free') {
-      console.log('typeFREE');
-      if (this.responseUser === null || this.responseUser === undefined) {
-        this.arrayReponseUser.push(this.responseUser);
-      } else {
-        this.arrayReponseUser.push(this.responseUser.toLowerCase().trim());
-      }
-      console.log('this.arrayReponseUser IN FREE: ', this.arrayReponseUser);
-      if (this.arrayReponseUser.every(reps => this.arrayGoodRep.includes(reps))) {
-        console.log('item ok !');
-        this.counterCheck++;
-      }
-    }
-    if (this.questions[this.index].type === 'multiple') {
-      console.log('typeMULTIPLE');
-      if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
-        console.log('ITS OK !!');
-        this.counterCheck++;
-      } else {
-        console.log('NOT OK !!');
-      }
-    }
+
+    this.checkRep();
     // this.arrayReponseUser.push(this.responseUser);
     // console.log('this.arrayReponseUser IN QUESTNEXT: ', this.arrayReponseUser);
-
-
     this.Alltime.push(this.timedefault);
     this.Activetime = false;
     if (this.index < this.questions.length - 1) {
@@ -178,7 +151,43 @@ export class TestComponent implements OnInit {
     this.isDisabled = false;
     console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
     console.log('this.questions[this.index].time: ', this.questions[this.index].time);
+  }
 
+  checkRep() {
+    const dateEndQuestion = new Date();
+    console.log('dateEndQuestion: ', dateEndQuestion);
+    if (this.questions[this.index].type === 'one') {
+      console.log('typeONE');
+      this.arrayReponseUser.push(this.responseUser);
+      if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
+        console.log('ITS OK !!');
+        this.counterCheck++;
+      } else {
+        console.log('NOT OK !!');
+      }
+    }
+    if (this.questions[this.index].type === 'free') {
+      console.log('typeFREE');
+      if (this.responseUser === null || this.responseUser === undefined) {
+        this.arrayReponseUser.push(this.responseUser);
+      } else {
+        this.arrayReponseUser.push(this.responseUser.toLowerCase().trim());
+      }
+      console.log('this.arrayReponseUser IN FREE: ', this.arrayReponseUser);
+      if (this.arrayReponseUser.every(reps => this.arrayGoodRep.includes(reps))) {
+        console.log('item ok !');
+        this.counterCheck++;
+      }
+    }
+    if (this.questions[this.index].type === 'multiple') {
+      console.log('typeMULTIPLE');
+      if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
+        console.log('ITS OK !!');
+        this.counterCheck++;
+      } else {
+        console.log('NOT OK !!');
+      }
+    }
   }
 
   disableRep(timeQuestion) {
