@@ -138,7 +138,11 @@ import { FinTestComponent } from './components/panelAdmin/client-test/fin-test/f
     RoundProgressModule,
     NgxEditorModule
   ],
-  providers: [
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: RegisterComponent,
+    multi: true,
+  },
     ApiClientService,
     DatePipe,
 

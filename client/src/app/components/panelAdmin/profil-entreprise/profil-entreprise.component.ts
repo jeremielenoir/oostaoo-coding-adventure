@@ -1,6 +1,7 @@
 import { Component, OnInit, QueryList, ViewChild, ElementRef} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import {  ApiClientService, API_URI_USER_ADMIN, API_URI_ENTREPRISE} from 'src/app/api-client/api-client.service';
+import {  ApiClientService, API_URI_USER, API_URI_ENTREPRISE} from 'src/app/api-client/api-client.service';
+import { tokenKey } from '@angular/core/src/view';
 
 @Component({
   selector: 'app-profil-entreprise',
@@ -16,6 +17,9 @@ export class ProfilEntrepriseComponent implements OnInit {
   @ViewChild('btnValideParent') btnValideParent: ElementRef;
   @ViewChild('btnValideParentAddImage') btnValideParentAddImage:ElementRef;
 
+ ca = localStorage.getItem('token');
+ base64Url = this.ca.split('.')[1];
+ decodedValue = JSON.parse(window.atob(this.base64Url));
 
   public currentValue: number;
   public user: any;
@@ -823,6 +827,8 @@ export class ProfilEntrepriseComponent implements OnInit {
     // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
     });
 
+    console.log(this.decodedValue);
+
   }
 
   clickchange() {
@@ -845,7 +851,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   }
 
   clickchange2() {
-    this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.user[0].entreprise.id, {
+    this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.user.entreprise.id, {
       Nom: this.name.value,
       Email: this.email.value,
       Tel: this.phone.value,
@@ -999,7 +1005,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   async getUser(): Promise<any> {
     try {
       const datas = await this.apiClientService
-        .get(API_URI_USER_ADMIN + '/' +  1)
+        .get(API_URI_USER + '/' +  this.decodedValue.id)
         .toPromise();
       return this.user = [datas];
     } catch (err) {
@@ -1007,3 +1013,4 @@ export class ProfilEntrepriseComponent implements OnInit {
     }
   }
 }
+

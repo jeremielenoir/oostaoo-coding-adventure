@@ -28,10 +28,6 @@
       "type": "string"
     },
     "utilisateursadmin": {
-      "model": "utilisateursadmin",
-      "via": "factures"
-    },
-    "user": {
       "model": "user",
       "via": "factures",
       "plugin": "users-permissions"

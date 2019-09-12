@@ -1,17 +1,65 @@
 <div id="register">
-  <form action="" method="POST">
-    <label for="username"> Username :</label>
-    <input name="username" [formControl]="username" class="input-section1" maxlength="64" type="text" required>
 
-    <label for="email">Email :</label>
-    <input name="email" [formControl]="email" class="input-section1" maxlength="64" type="email" required>
+  <div id="left-side">
 
-    <label for="password"> Password :</label>
-    <input name="password" [formControl]="password" class="input-section1" maxlength="64" type="password" required>
+      <div id="left-panel">
+          <div id="left-panel-text">
+              <h2 id="left">Déjà client ?</h2>
+              <button id="button_left_panel" (click)="translateLeft()">Se connecter</button>
+              <p id="text_left_panel">Connectez vous à votre compte pour avoir accès a vos campagnes, votre profil, etc
+              </p>
+            </div>
+        </div>
 
-    <button (click)="register()">S'inscrire</button>
-    
-    <button (click)="login()">login</button>
-    <button (click)="tryget()">TryGet</button>
-  </form>
+    <form class="forms" id="form_login" action="" method="POST">
+
+      <h2>Déjà client ?</h2>
+
+      <label for="email">Email *</label>
+      <input name="email" [formControl]="email" class="input-section1" maxlength="64" type="email" required>
+
+      <label for="password"> Password *</label>
+      <input name="password" [formControl]="password" class="input-section1" maxlength="64" type="password" required>
+      
+      <button (click)="login()">Connexion</button>
+
+      <div id="last-lign">
+        <div>
+          <input type="checkbox" id="staylog" name="staylog">
+          <label for="staylog">Rester connecté</label>
+        </div>
+       
+        <a href="">Mot de passe oublié ?</a>
+      </div>
+    </form>
+
+  </div>
+
+  <div id="right-side">
+
+      <div id="right-panel">
+        <div id="right-panel-text">
+          <h2 id="title_right_panel">Nouveau client</h2>
+          <button id="button_right_panel" (click)="translateRight()">Créer un compte</button>
+          <p id="text_right_panel">Évaluez vos candidats en ligne
+              Sourcez, recrutez des développeurs passionnés
+              Créez vos propres événements de code
+          </p>
+        </div>
+      </div>
+
+      <form class="forms" id="form_register" action="" method="POST">
+        <label for="username"> Username :</label>
+        <input name="username" [formControl]="username" class="input-section1" maxlength="64" type="text" required>
+  
+        <label for="email">Email :</label>
+        <input name="email" [formControl]="email" class="input-section1" maxlength="64" type="email" required>
+  
+        <label for="password"> Password :</label>
+        <input name="password" [formControl]="password" class="input-section1" maxlength="64" type="password" required>
+  
+        <button (click)="register()">S'inscrire</button>
+      </form>
+    </div>
+
 </div>

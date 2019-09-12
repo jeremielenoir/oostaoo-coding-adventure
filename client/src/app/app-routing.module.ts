@@ -40,10 +40,12 @@ const routes: Routes = [
     path: 'dashboard',
     redirectTo: 'dashboard/campaigns',
     pathMatch: 'full'
+
   },
   {
     path: 'dashboard/campaigns',
     component: DashboadCampagneComponent
+
   },
   {
     path: 'dashboard/campaigns/new',
