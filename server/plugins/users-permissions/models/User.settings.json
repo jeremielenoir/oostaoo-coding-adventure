@@ -60,6 +60,38 @@
     "entreprise": {
       "model": "entreprise",
       "via": "utilisateursadmin"
+    },
+    "prenom": {
+      "default": "",
+      "type": "string"
+    },
+    "nom": {
+      "default": "",
+      "type": "string"
+    },
+    "pays": {
+      "default": "",
+      "type": "string"
+    },
+    "langue": {
+      "default": "",
+      "type": "string"
+    },
+    "tel": {
+      "default": "",
+      "type": "string"
+    },
+    "mobile": {
+      "default": "",
+      "type": "string"
+    },
+    "function": {
+      "default": "",
+      "type": "string"
+    },
+    "signature": {
+      "default": "",
+      "type": "text"
     }
   },
   "collectionName": "users-permissions_user"

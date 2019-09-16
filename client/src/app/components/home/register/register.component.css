@@ -27,17 +27,7 @@
     font-size: 40px;
 }
 
-#button_left_panel{
-    width: 50%;
-    height: 50px;
-    margin: 20px 0px;
-    border-radius: 40px;
-    font-size: 18px;
-    border: 0px solid white;
-    color: #f2bb14;
-    font-weight: bold;
-    text-transform: uppercase;
-}
+
 
 #text_left_panel{
     width: 70%;
@@ -64,8 +54,9 @@
     font-size: 40px;
 }
 
-#button_right_panel{
+#button_right_panel, #button_left_panel{
     width: 50%;
+    min-width: 175px;
     height: 50px;
     margin: 20px 0px;
     border-radius: 40px;

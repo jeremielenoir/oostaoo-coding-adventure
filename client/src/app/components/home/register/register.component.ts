@@ -96,7 +96,7 @@ export class RegisterComponent implements HttpInterceptor, OnInit {
     localStorage.setItem ('token', response.data.jwt);
     this.token = response.data.jwt;
     console.log('token', this.token);
-    // this.router.navigate(['/dashboard/campaigns']);
+    this.router.navigate(['/dashboard/campaigns']);
   })
   .catch(error => {
     // Handle error.
