@@ -54,6 +54,10 @@
     "test_pause": {
       "default": "",
       "type": "integer"
+    },
+    "date_pause": {
+      "default": "",
+      "type": "date"
     }
   }
 }
