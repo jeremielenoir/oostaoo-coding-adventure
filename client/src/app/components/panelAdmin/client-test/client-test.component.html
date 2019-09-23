@@ -106,10 +106,11 @@
             </div>
 
             <p>
-              Ce test est composé de 26 questions. Chaque question est
-              chronométrée. La durée totale est estimée à 9 minutes mais le test
-              peut durer jusqu’à 19 minutes. Merci de prévoir 19 minutes
-              consécutives pour faire ce test.
+              Ce test est composé de {{ nbQuestion }} questions. Chaque question
+              est chronométrée. La durée totale est estimée à
+              {{ durationTotalTest }} minutes mais le test peut durer jusqu’à
+              {{ durationMaxTest }} minutes. Merci de prévoir
+              {{ durationMaxTest }} minutes consécutives pour faire ce test.
             </p>
             <button class="btn-compo yellow" (click)="hundleActiveTest()">
               Démarrer le test

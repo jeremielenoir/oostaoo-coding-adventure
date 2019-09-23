@@ -14,6 +14,9 @@ export class ClientTestComponent implements OnInit {
   public StatueTestingQuestion = 'eval';
   public candidat: string;
   public dateOpenTest: any;
+  public nbQuestion: number;
+  public durationTotalTest: number;
+  public durationMaxTest: number;
 
   @ViewChild('btnchecked') btnchecked: ElementRef;
   idCampaign: any;
@@ -66,7 +69,14 @@ export class ClientTestComponent implements OnInit {
           this.postOpenTimeTest(this.dateOpenTest, candidat.id);
           // console.log('this.idCampaign : ', this.idCampaign);
           this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.idCampaign).toPromise().then(res1 => {
-            // console.log('res campaing: ', res);
+            this.nbQuestion = res1.questions.length;
+            let secondTime = 0;
+            for (const question of res1.questions) {
+              secondTime = secondTime + question.time;
+            }
+            this.durationTotalTest = Math.floor(secondTime / 60);
+            this.durationMaxTest = this.durationTotalTest + 10;
+            console.log('duration Test en minutes: ', this.durationTotalTest);
             this.questionCampaign = [...res1.questions];
             this.technoCampaign = [...res1.technologies];
             // console.log('this.questionCampaign: ', this.questionCampaign);

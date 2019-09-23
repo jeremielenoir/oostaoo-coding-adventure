@@ -38,6 +38,7 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('this.candidat.campaign.copy_paste : ', this.candidat.campaign.copy_paste);
     if (this.candidat.index_question === null) {
       //   this.index = this.candidat.index_question;
       this.index = 0;
