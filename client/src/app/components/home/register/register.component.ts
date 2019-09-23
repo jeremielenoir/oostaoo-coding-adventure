@@ -37,6 +37,8 @@ export class RegisterComponent implements HttpInterceptor, OnInit {
     return next.handle(newRequest);
   }
 
+  public switchPanel: boolean = true
+
   ngOnInit() {
     // axios
     // .post('http://localhost:1337/auth/local', {
@@ -58,6 +60,10 @@ export class RegisterComponent implements HttpInterceptor, OnInit {
     //   // Handle error.
     //   console.log('An error occurred:', error);
     // });
+  }
+
+  switch(){
+      this.switchPanel = ! this.switchPanel;
   }
 
 
@@ -121,65 +127,5 @@ export class RegisterComponent implements HttpInterceptor, OnInit {
       });
   }
 
-  translateRight() {
-    if (document.getElementById('left-panel').style.display === 'none') {
-      document.getElementById('left-panel').style.display = 'block';
-    } else {
-      document.getElementById('left-panel').animate([
-        // keyframes
-        { transform: 'translateX(-3000px)' },
-        { transform: 'translateX(0px)' }
-      ], {
-        // timing options
-        duration: 500,
-        fill: 'forwards'
-      }),
-        document.getElementById('left-panel').style.display = 'block';
-
-      document.getElementById('right-panel').animate([
-        // keyframes
-        { transform: 'translateX(0px)' },
-        { transform: 'translateX(3000px)' },
-      ], {
-        // timing options
-        duration: 500,
-        fill: 'forwards'
-      });
-    }
-    setTimeout(this.disappear, 500);
-  }
-
-  disappear() {
-    document.getElementById('right-panel').style.display = 'none';
-  }
-
-  translateLeft() {
-    if (document.getElementById('left-panel').style.display === 'none') {
-      document.getElementById('left-panel').style.display = 'block';
-    } else {
-      document.getElementById('left-panel').animate([
-        // keyframes
-        { transform: 'translateX(0px)' },
-        { transform: 'translateX(-3000px)' }
-      ], {
-        // timing options
-        duration: 500,
-        delay: 500,
-        fill: 'forwards'
-      }),
-
-        document.getElementById('right-panel').style.display = 'block';
-      document.getElementById('right-panel').animate([
-        // keyframes
-        { transform: 'translateX(3000px)' },
-        { transform: 'translateX(0px)' },
-      ], {
-        // timing options
-        duration: 500,
-
-        fill: 'forwards'
-      });
-      document.getElementById('right-panel').style.display = 'block';
-    }
-  }
+  
 }
