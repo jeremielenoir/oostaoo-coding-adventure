@@ -9,15 +9,14 @@ import { CandidatsMailComponent } from '../candidats-mail/candidats-mail.compone
   styleUrls: ['./candidats-form.component.css']
 })
 export class CandidatsFormComponent implements OnInit {
+  emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 
   // returns all form groups under contacts
   get contactFormGroup() {
     return this.form.get('contacts') as FormArray;
   }
 
-  constructor(private fb: FormBuilder,
-              public dialog: MatDialog) {
-  }
+  constructor(private fb: FormBuilder, public dialog: MatDialog) { }
   public form: FormGroup;
   public contactList: FormArray;
   @Input() globalId: string;
@@ -36,7 +35,9 @@ export class CandidatsFormComponent implements OnInit {
     return this.fb.group({
       type: ['email', Validators.compose([Validators.required])],
       name: [null, Validators.compose([Validators.required])],
-      value: [null, Validators.compose([Validators.required, Validators.email])]
+      value: [null, Validators.compose([
+        Validators.required,
+        Validators.pattern(this.emailRegex)])]
     });
   }
   // add a contact form group
@@ -60,12 +61,12 @@ export class CandidatsFormComponent implements OnInit {
   }
 
   openDialog() {
-      this.dialog.open(CandidatsMailComponent, {
-        data: {
-          globalId: this.globalId,
-          contact: this.form.value.contacts,
-        },
-        height: '80vh'
-      });
+    this.dialog.open(CandidatsMailComponent, {
+      data: {
+        globalId: this.globalId,
+        contact: this.form.value.contacts,
+      },
+      height: '80vh'
+    });
   }
 }
