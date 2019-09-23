@@ -265,19 +265,19 @@ export class TestComponent implements OnInit {
   postRapportCandidat() {
     this.apiClientService.get(API_URI_CANDIDATS + '/' + this.candidat.id).toPromise().then(res => {
       console.log('res for JSONRAPPORT : ', res);
-      if (res.raport_candidat !== null || res.raport_candidat !== undefined) {
+      if (res.raport_candidat !== null) {
         this.jsonRapport = res.raport_candidat;
       }
-    });
-    this.jsonRapport.rapport.push({
-      index_question: this.questions[this.index], // JSON to PDF and rapport candidat
-      array_rep_candidat: this.arrayReponseUser,
-      timeRep: this.timedefault
-    });
-    this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
-      raport_candidat: this.jsonRapport
-    }).toPromise().then(res => {
-      console.log(res);
+      this.jsonRapport.rapport.push({
+        index_question: this.questions[this.index], // JSON to PDF and rapport candidat
+        array_rep_candidat: this.arrayReponseUser,
+        timeRep: this.timedefault
+      });
+      this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
+        raport_candidat: this.jsonRapport
+      }).toPromise().then(res1 => {
+        console.log(res1);
+      });
     });
   }
 
