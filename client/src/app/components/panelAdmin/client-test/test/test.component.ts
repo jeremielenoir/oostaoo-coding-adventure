@@ -41,14 +41,15 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit() {
+    // if (this.candidat.raport_candidat !== null || this.candidat.raport_candidat !== undefined) {
+    //   this.postRapportCandidat();
+    // }
     // console.log('this.candidat.campaign.copy_paste : ', this.candidat.campaign.copy_paste);
     if (this.candidat.index_question === null) {
       //   this.index = this.candidat.index_question;
       this.index = 0;
     } else {
       this.index = this.candidat.index_question;
-      const dateStartQuestion = new Date();
-      console.log('dateStartQuestion: ', dateStartQuestion);
     }
     if (this.candidat.test_pause === null) {
       this.timedefault = 0;
@@ -106,15 +107,11 @@ export class TestComponent implements OnInit {
   }
 
   public QuestNext() {
-    this.jsonRapport.rapport.push({
-      index_question: this.questions[this.index]
-    });
-    const dateStartQuestion = new Date();
-    console.log('dateStartQuestion: ', dateStartQuestion);
     this.counterTotal++; // counter total questions
     if (this.checkTimeDefault === false) {
       this.checkRep();
     }
+    this.postRapportCandidat();
     // this.arrayReponseUser.push(this.responseUser);
     // console.log('this.arrayReponseUser IN QUESTNEXT: ', this.arrayReponseUser);
     this.Alltime.push(this.timedefault);
@@ -137,6 +134,7 @@ export class TestComponent implements OnInit {
         this.postTimeTest(this.CalculTimeTotal);
       }
     }
+
     this.question = this.questions[this.index];
     // console.log('this.question: ', this.question); // afficher
     // NEXT QUESTIONS
@@ -260,6 +258,26 @@ export class TestComponent implements OnInit {
       date_pause: new Date().toISOString()
     }).toPromise().then(res => {
       console.log('pause: ', res);
+    });
+  }
+
+
+  postRapportCandidat() {
+    this.apiClientService.get(API_URI_CANDIDATS + '/' + this.candidat.id).toPromise().then(res => {
+      console.log('res for JSONRAPPORT : ', res);
+      if (res.raport_candidat !== null || res.raport_candidat !== undefined) {
+        this.jsonRapport = res.raport_candidat;
+      }
+    });
+    this.jsonRapport.rapport.push({
+      index_question: this.questions[this.index], // JSON to PDF and rapport candidat
+      array_rep_candidat: this.arrayReponseUser,
+      timeRep: this.timedefault
+    });
+    this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
+      raport_candidat: this.jsonRapport
+    }).toPromise().then(res => {
+      console.log(res);
     });
   }
 
