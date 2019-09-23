@@ -58,6 +58,10 @@
     "date_pause": {
       "default": "",
       "type": "date"
+    },
+    "raport_candidat": {
+      "default": "",
+      "type": "json"
     }
   }
 }

@@ -32,13 +32,16 @@ export class TestComponent implements OnInit {
   @Output() refresh = new EventEmitter();
   dataForParent: string;
   public checkTimeDefault = false;
+  public jsonRapport = {
+    rapport: []
+  };
 
 
   constructor(private apiClientService: ApiClientService) {
   }
 
   ngOnInit() {
-    console.log('this.candidat.campaign.copy_paste : ', this.candidat.campaign.copy_paste);
+    // console.log('this.candidat.campaign.copy_paste : ', this.candidat.campaign.copy_paste);
     if (this.candidat.index_question === null) {
       //   this.index = this.candidat.index_question;
       this.index = 0;
@@ -58,6 +61,7 @@ export class TestComponent implements OnInit {
     this.type = this.questionCampaign[0];
     // console.log('this.type: ', this.type); // afficher
     this.Countertime();
+    this.controleTimeTest();
     // console.log('techno id', this.technoCampaign);
     // FIRST QUESTIONS
     if (this.question.content === null) {
@@ -102,6 +106,9 @@ export class TestComponent implements OnInit {
   }
 
   public QuestNext() {
+    this.jsonRapport.rapport.push({
+      index_question: this.questions[this.index]
+    });
     const dateStartQuestion = new Date();
     console.log('dateStartQuestion: ', dateStartQuestion);
     this.counterTotal++; // counter total questions
@@ -157,6 +164,7 @@ export class TestComponent implements OnInit {
     this.checkTimeDefault = false;
     console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
     console.log('this.questions[this.index].time: ', this.questions[this.index].time);
+    console.log('this.jsonRapport: ', this.jsonRapport);
   }
 
   checkRep() {
@@ -224,10 +232,32 @@ export class TestComponent implements OnInit {
     });
   }
 
+  controleTimeTest() {
+    let dateNow;
+    let dateServeur;
+    let dateDiff;
+    let diffSeconds;
+    let timePuaseDiff;
+
+    if (this.candidat.date_pause !== this.candidat.invitation_date) {
+      dateNow = new Date();
+      dateServeur = new Date(this.candidat.date_pause);
+      dateDiff = dateNow - dateServeur;
+      diffSeconds = Math.floor(dateDiff / 1e3); // diff date by seconds
+      timePuaseDiff = this.candidat.test_pause + diffSeconds;
+      if (this.question.time < timePuaseDiff) {
+        this.QuestNext();
+      } else {
+        this.timedefault = timePuaseDiff;
+      }
+    }
+  }
+
   postPauseTest() {
     this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
       index_question: this.index,
-      test_pause: this.timedefault
+      test_pause: this.timedefault,
+      date_pause: new Date().toISOString()
     }).toPromise().then(res => {
       console.log('pause: ', res);
     });
@@ -243,9 +273,7 @@ export class TestComponent implements OnInit {
     // console.log(this.timedefault);
     console.log($event.isTrusted);
     $event.returnValue = 'Are you sure?';
-    if ($event.isTrusted === true) {
-      this.postPauseTest();
-    }
+    this.postPauseTest();
   }
   @HostListener('window:unload', ['$event'])
   sendData() {
