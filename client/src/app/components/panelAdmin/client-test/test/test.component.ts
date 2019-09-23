@@ -31,6 +31,7 @@ export class TestComponent implements OnInit {
   isDisabled: boolean;
   @Output() refresh = new EventEmitter();
   dataForParent: string;
+  public testRep = false;
 
 
   constructor(private apiClientService: ApiClientService) {
@@ -87,9 +88,11 @@ export class TestComponent implements OnInit {
       if (this.timedefault < this.questions[this.index].time) {
         this.timedefault++;
       } else {
+        this.testRep = true;
         this.disableRep(this.questions[this.index].time);
         console.log('temps FINI');
         console.log(this.responseUser);
+        this.checkRep();
         this.Activetime = !this.Activetime;
         clearInterval(this.stopTimeInterval);
       }
@@ -98,8 +101,9 @@ export class TestComponent implements OnInit {
 
   public QuestNext() {
     this.counterTotal++; // counter total questions
-
-    this.checkRep();
+    if (this.testRep === false) {
+      this.checkRep();
+    }
     // this.arrayReponseUser.push(this.responseUser);
     // console.log('this.arrayReponseUser IN QUESTNEXT: ', this.arrayReponseUser);
     this.Alltime.push(this.timedefault);
@@ -146,13 +150,12 @@ export class TestComponent implements OnInit {
     this.responseUser = null;
     this.arrayReponseUser = [];
     this.isDisabled = false;
+    this.testRep = false;
     console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
     console.log('this.questions[this.index].time: ', this.questions[this.index].time);
   }
 
   checkRep() {
-    const dateEndQuestion = new Date();
-    console.log('dateEndQuestion: ', dateEndQuestion);
     if (this.questions[this.index].type === 'one') {
       console.log('typeONE');
       this.arrayReponseUser.push(this.responseUser);
