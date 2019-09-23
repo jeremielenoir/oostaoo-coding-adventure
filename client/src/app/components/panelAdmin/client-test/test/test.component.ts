@@ -31,7 +31,7 @@ export class TestComponent implements OnInit {
   isDisabled: boolean;
   @Output() refresh = new EventEmitter();
   dataForParent: string;
-  public testRep = false;
+  public checkTimeDefault = false;
 
 
   constructor(private apiClientService: ApiClientService) {
@@ -39,23 +39,24 @@ export class TestComponent implements OnInit {
 
   ngOnInit() {
     if (this.candidat.index_question === null) {
+      //   this.index = this.candidat.index_question;
       this.index = 0;
     } else {
       this.index = this.candidat.index_question;
+      const dateStartQuestion = new Date();
+      console.log('dateStartQuestion: ', dateStartQuestion);
     }
     if (this.candidat.test_pause === null) {
       this.timedefault = 0;
     } else {
       this.timedefault = this.candidat.test_pause;
     }
-
     this.questions = this.questionCampaign;
     this.question = this.questionCampaign[this.index];
     this.timeDanger = this.questionCampaign[0].time - 5;
+    this.type = this.questionCampaign[0];
+    // console.log('this.type: ', this.type); // afficher
     this.Countertime();
-
-    this.controleTimeTest();
-
     // console.log('techno id', this.technoCampaign);
     // FIRST QUESTIONS
     if (this.question.content === null) {
@@ -83,12 +84,12 @@ export class TestComponent implements OnInit {
   }
 
   Countertime() {
-    console.log('this.questions[this.index] : ', this.questions[this.index]);
+    console.log('this.questions : ', this.questions[this.index]);
     this.stopTimeInterval = setInterval(() => {
       if (this.timedefault < this.questions[this.index].time) {
         this.timedefault++;
       } else {
-        this.testRep = true;
+        this.checkTimeDefault = true;
         this.disableRep(this.questions[this.index].time);
         console.log('temps FINI');
         console.log(this.responseUser);
@@ -100,8 +101,10 @@ export class TestComponent implements OnInit {
   }
 
   public QuestNext() {
+    const dateStartQuestion = new Date();
+    console.log('dateStartQuestion: ', dateStartQuestion);
     this.counterTotal++; // counter total questions
-    if (this.testRep === false) {
+    if (this.checkTimeDefault === false) {
       this.checkRep();
     }
     // this.arrayReponseUser.push(this.responseUser);
@@ -150,7 +153,7 @@ export class TestComponent implements OnInit {
     this.responseUser = null;
     this.arrayReponseUser = [];
     this.isDisabled = false;
-    this.testRep = false;
+    this.checkTimeDefault = false;
     console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
     console.log('this.questions[this.index].time: ', this.questions[this.index].time);
   }
@@ -196,27 +199,6 @@ export class TestComponent implements OnInit {
     }
   }
 
-  controleTimeTest() {
-    let dateNow;
-    let dateServeur;
-    let dateDiff;
-    let diffSeconds;
-    let timePuaseDiff;
-
-    if (this.candidat.date_pause !== this.candidat.invitation_date) {
-      dateNow = new Date();
-      dateServeur = new Date(this.candidat.date_pause);
-      dateDiff = dateNow - dateServeur;
-      diffSeconds = Math.floor(dateDiff / 1e3); // diff date by seconds
-      timePuaseDiff = this.candidat.test_pause + diffSeconds;
-      if (this.question.time < timePuaseDiff) {
-        this.QuestNext();
-      } else {
-        this.timedefault = timePuaseDiff;
-      }
-    }
-  }
-
   public fmtMSS(s) {
     return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
   }
@@ -244,8 +226,7 @@ export class TestComponent implements OnInit {
   postPauseTest() {
     this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
       index_question: this.index,
-      test_pause: this.timedefault,
-      date_pause: new Date().toISOString()
+      test_pause: this.timedefault
     }).toPromise().then(res => {
       console.log('pause: ', res);
     });
@@ -261,7 +242,9 @@ export class TestComponent implements OnInit {
     // console.log(this.timedefault);
     console.log($event.isTrusted);
     $event.returnValue = 'Are you sure?';
-    this.postPauseTest();
+    if ($event.isTrusted === true) {
+      this.postPauseTest();
+    }
   }
   @HostListener('window:unload', ['$event'])
   sendData() {
