@@ -58,6 +58,7 @@ export class TestComponent implements OnInit {
     }
     this.questions = this.questionCampaign;
     this.question = this.questionCampaign[this.index];
+    console.log('this.question : ', this.question);
     this.timeDanger = this.questionCampaign[0].time - 5;
     this.type = this.questionCampaign[0];
     // console.log('this.type: ', this.type); // afficher
@@ -266,12 +267,13 @@ export class TestComponent implements OnInit {
   postRapportCandidat() {
     const myReps = this.arrayReponseUser;
     const myTime = this.timedefault;
+    const myQuestion = this.question;
     this.apiClientService.get(API_URI_CANDIDATS + '/' + this.candidat.id).toPromise().then(res => {
       if (res.raport_candidat !== null) {
         this.jsonRapport = res.raport_candidat;
       }
       this.jsonRapport.rapport.push({
-        index_question: this.questions[this.index], // JSON to PDF and rapport candidat
+        index_question: myQuestion, // JSON to PDF and rapport candidat
         array_rep_candidat: myReps,
         timeRep: myTime
       });
