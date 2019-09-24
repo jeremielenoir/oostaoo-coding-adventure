@@ -90,15 +90,15 @@ export class TestComponent implements OnInit {
   }
 
   Countertime() {
-    console.log('this.questions : ', this.questions[this.index]);
+    // console.log('this.questions : ', this.questions[this.index]);
     this.stopTimeInterval = setInterval(() => {
       if (this.timedefault < this.questions[this.index].time) {
         this.timedefault++;
       } else {
         this.checkTimeDefault = true;
         this.disableRep(this.questions[this.index].time);
-        console.log('temps FINI');
-        console.log(this.responseUser);
+        // console.log('temps FINI');
+        // console.log(this.responseUser);
         this.checkRep();
         this.Activetime = !this.Activetime;
         clearInterval(this.stopTimeInterval);
@@ -130,7 +130,7 @@ export class TestComponent implements OnInit {
           // console.log('chaque temp passe sur chaque question', nbrtime);
           this.CalculTimeTotal += nbrtime;
         }
-        console.log('this.CalculTimeTotal: ', this.CalculTimeTotal);
+        // console.log('this.CalculTimeTotal: ', this.CalculTimeTotal);
         this.postTimeTest(this.CalculTimeTotal);
       }
     }
@@ -160,14 +160,14 @@ export class TestComponent implements OnInit {
     this.arrayReponseUser = [];
     this.isDisabled = false;
     this.checkTimeDefault = false;
-    console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
-    console.log('this.questions[this.index].time: ', this.questions[this.index].time);
-    console.log('this.jsonRapport: ', this.jsonRapport);
+    // console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
+    // console.log('this.questions[this.index].time: ', this.questions[this.index].time);
+    // console.log('this.jsonRapport: ', this.jsonRapport);
   }
 
   checkRep() {
     if (this.questions[this.index].type === 'one') {
-      console.log('typeONE');
+      // console.log('typeONE');
       this.arrayReponseUser.push(this.responseUser);
       if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
         console.log('ITS OK !!');
@@ -177,7 +177,7 @@ export class TestComponent implements OnInit {
       }
     }
     if (this.questions[this.index].type === 'free') {
-      console.log('typeFREE');
+      // console.log('typeFREE');
       if (this.responseUser === null || this.responseUser === undefined) {
         this.arrayReponseUser.push(this.responseUser);
       } else {
@@ -190,7 +190,7 @@ export class TestComponent implements OnInit {
       }
     }
     if (this.questions[this.index].type === 'multiple') {
-      console.log('typeMULTIPLE');
+      // console.log('typeMULTIPLE');
       if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
         console.log('ITS OK !!');
         this.counterCheck++;
@@ -198,6 +198,7 @@ export class TestComponent implements OnInit {
         console.log('NOT OK !!');
       }
     }
+    console.log(' this.arrayReponseUser : ', this.arrayReponseUser);
   }
 
   disableRep(timeQuestion) {
@@ -215,15 +216,15 @@ export class TestComponent implements OnInit {
       duree: dureeTest,
       test_terminer: this.dateFinishTest
     }).toPromise().then(res => {
-      console.log('succes time send');
+      // console.log('succes time send');
       this.apiClientService.get(API_URI_CAMPAIGNS + '/' + res.campaign.id).subscribe(res1 => {
-        console.log('campaign : ', res1);
+        // console.log('campaign : ', res1);
         const nbCandidats = res1.NbCandidatFinish;
-        console.log(nbCandidats);
+        // console.log(nbCandidats);
         this.apiClientService.put(API_URI_CAMPAIGNS + '/' + res.campaign.id, {
           NbCandidatFinish: nbCandidats + 1
         }).subscribe(res2 => {
-          console.log('campaign : ', res2);
+          // console.log('campaign : ', res2);
           this.refreshComponent();
         });
       });
@@ -257,26 +258,28 @@ export class TestComponent implements OnInit {
       test_pause: this.timedefault,
       date_pause: new Date().toISOString()
     }).toPromise().then(res => {
-      console.log('pause: ', res);
+      // console.log('pause: ', res);
     });
   }
 
 
   postRapportCandidat() {
+    const myReps = this.arrayReponseUser;
+    const myTime = this.timedefault;
     this.apiClientService.get(API_URI_CANDIDATS + '/' + this.candidat.id).toPromise().then(res => {
-      console.log('res for JSONRAPPORT : ', res);
       if (res.raport_candidat !== null) {
         this.jsonRapport = res.raport_candidat;
       }
       this.jsonRapport.rapport.push({
         index_question: this.questions[this.index], // JSON to PDF and rapport candidat
-        array_rep_candidat: this.arrayReponseUser,
-        timeRep: this.timedefault
+        array_rep_candidat: myReps,
+        timeRep: myTime
       });
+      console.log('this.jsonRapport : ', this.jsonRapport);
       this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
         raport_candidat: this.jsonRapport
       }).toPromise().then(res1 => {
-        console.log(res1);
+        // console.log(res1);
       });
     });
   }
@@ -288,8 +291,6 @@ export class TestComponent implements OnInit {
   @HostListener('window:beforeunload', ['$event'])
   // work only if Press F5 or cancel close window
   beforeunloadHandler($event) {
-    // console.log(this.timedefault);
-    console.log($event.isTrusted);
     $event.returnValue = 'Are you sure?';
     this.postPauseTest();
   }
