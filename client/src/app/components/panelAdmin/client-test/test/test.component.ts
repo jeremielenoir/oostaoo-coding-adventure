@@ -20,6 +20,7 @@ export class TestComponent implements OnInit {
   @Input() public questionCampaign: any;
   @Input() public technoCampaign: any;
   @Input() public candidat: any;
+  @Input() public durationMaxTest: number;
   public language: string;
   public dateFinishTest: any;
   public responses: Array<string>;
@@ -36,14 +37,13 @@ export class TestComponent implements OnInit {
     rapport: []
   };
 
-
   constructor(private apiClientService: ApiClientService) {
   }
 
   ngOnInit() {
-    // if (this.candidat.raport_candidat !== null || this.candidat.raport_candidat !== undefined) {
-    //   this.postRapportCandidat();
-    // }
+    // console.log('questionCampaign: ', this.questionCampaign);
+    console.log('technoCampaign : ', this.technoCampaign);
+    this.sumPointsByNumTechno();
     // console.log('this.candidat.campaign.copy_paste : ', this.candidat.campaign.copy_paste);
     if (this.candidat.index_question === null) {
       //   this.index = this.candidat.index_question;
@@ -58,7 +58,7 @@ export class TestComponent implements OnInit {
     }
     this.questions = this.questionCampaign;
     this.question = this.questionCampaign[this.index];
-    console.log('this.question : ', this.question);
+    // console.log('this.question : ', this.question);
     this.timeDanger = this.questionCampaign[0].time - 5;
     this.type = this.questionCampaign[0];
     // console.log('this.type: ', this.type); // afficher
@@ -163,7 +163,6 @@ export class TestComponent implements OnInit {
     this.checkTimeDefault = false;
     // console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
     // console.log('this.questions[this.index].time: ', this.questions[this.index].time);
-    // console.log('this.jsonRapport: ', this.jsonRapport);
   }
 
   checkRep() {
@@ -184,10 +183,12 @@ export class TestComponent implements OnInit {
       } else {
         this.arrayReponseUser.push(this.responseUser.toLowerCase().trim());
       }
-      console.log('this.arrayReponseUser IN FREE: ', this.arrayReponseUser);
+      // console.log('this.arrayReponseUser IN FREE: ', this.arrayReponseUser);
       if (this.arrayReponseUser.every(reps => this.arrayGoodRep.includes(reps))) {
         console.log('item ok !');
         this.counterCheck++;
+      } else {
+        console.log('item not ok !');
       }
     }
     if (this.questions[this.index].type === 'multiple') {
@@ -199,8 +200,9 @@ export class TestComponent implements OnInit {
         console.log('NOT OK !!');
       }
     }
-    console.log(' this.arrayReponseUser : ', this.arrayReponseUser);
+    // console.log(' this.arrayReponseUser : ', this.arrayReponseUser);
   }
+
 
   disableRep(timeQuestion) {
     if (timeQuestion === this.timedefault) {
@@ -265,6 +267,7 @@ export class TestComponent implements OnInit {
 
 
   postRapportCandidat() {
+    console.log('questionCampaign: ', this.questionCampaign);
     const myReps = this.arrayReponseUser;
     const myTime = this.timedefault;
     const myQuestion = this.question;
@@ -277,13 +280,42 @@ export class TestComponent implements OnInit {
         array_rep_candidat: myReps,
         timeRep: myTime
       });
-      console.log('this.jsonRapport : ', this.jsonRapport);
+      // console.log('this.jsonRapport : ', this.jsonRapport);
       this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
         raport_candidat: this.jsonRapport
       }).toPromise().then(res1 => {
         // console.log(res1);
       });
     });
+  }
+
+  sumPointsByNumTechno() {
+    const sumPoints = {};
+    this.questionCampaign.forEach(element => {
+      if (sumPoints.hasOwnProperty(element.technologies)) {
+        sumPoints[element.technologies] = sumPoints[element.technologies] + element.points;
+      } else {
+        sumPoints[element.technologies] = element.points;
+      }
+    });
+
+    const arraySumPoints = [];
+
+    for (const [key, value] of Object.entries(sumPoints)) {
+      arraySumPoints.push({
+        technologies: key,
+        points: value
+      });
+    }
+    console.log('arraySumPoints : ', arraySumPoints);
+    for (const techno of this.technoCampaign) {
+      for (const technoArray of arraySumPoints) {
+        if (techno.id === Number(technoArray.technologies)) {
+          technoArray.technologies = techno.name;
+        }
+      }
+    }
+    console.log('arraySumPoints AFTER BOUCLE : ', arraySumPoints);
   }
 
   refreshComponent() {

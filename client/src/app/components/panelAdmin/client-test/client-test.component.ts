@@ -76,7 +76,6 @@ export class ClientTestComponent implements OnInit {
             }
             this.durationTotalTest = Math.floor(secondTime / 60);
             this.durationMaxTest = this.durationTotalTest + 10;
-            console.log('duration Test en minutes: ', this.durationTotalTest);
             this.questionCampaign = [...res1.questions];
             this.technoCampaign = [...res1.technologies];
             // console.log('this.questionCampaign: ', this.questionCampaign);
