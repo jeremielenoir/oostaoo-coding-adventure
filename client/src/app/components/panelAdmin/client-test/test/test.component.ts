@@ -36,6 +36,9 @@ export class TestComponent implements OnInit {
   public jsonRapport = {
     rapport: []
   };
+  public sumPointsbyTechno = [];
+  public SumPointsCandidat = [];
+
 
   constructor(private apiClientService: ApiClientService) {
   }
@@ -44,6 +47,7 @@ export class TestComponent implements OnInit {
     // console.log('questionCampaign: ', this.questionCampaign);
     console.log('technoCampaign : ', this.technoCampaign);
     this.sumPointsByNumTechno();
+    console.log('this.sumPointsbyTechno: ', this.sumPointsbyTechno);
     // console.log('this.candidat.campaign.copy_paste : ', this.candidat.campaign.copy_paste);
     if (this.candidat.index_question === null) {
       //   this.index = this.candidat.index_question;
@@ -58,7 +62,7 @@ export class TestComponent implements OnInit {
     }
     this.questions = this.questionCampaign;
     this.question = this.questionCampaign[this.index];
-    // console.log('this.question : ', this.question);
+    console.log('this.question : ', this.question);
     this.timeDanger = this.questionCampaign[0].time - 5;
     this.type = this.questionCampaign[0];
     // console.log('this.type: ', this.type); // afficher
@@ -110,6 +114,7 @@ export class TestComponent implements OnInit {
   public QuestNext() {
     this.counterTotal++; // counter total questions
     if (this.checkTimeDefault === false) {
+      this.arrayGoodRep = this.question.answer_value.split(', ').sort();
       this.checkRep();
     }
     this.postRapportCandidat();
@@ -131,6 +136,7 @@ export class TestComponent implements OnInit {
           // console.log('chaque temp passe sur chaque question', nbrtime);
           this.CalculTimeTotal += nbrtime;
         }
+        console.log(this.SumPointsCandidat);
         // console.log('this.CalculTimeTotal: ', this.CalculTimeTotal);
         this.postTimeTest(this.CalculTimeTotal);
       }
@@ -169,9 +175,12 @@ export class TestComponent implements OnInit {
     if (this.questions[this.index].type === 'one') {
       // console.log('typeONE');
       this.arrayReponseUser.push(this.responseUser);
+      console.log('this.arrayGoodRep.sort().toString(): ', this.arrayGoodRep.sort().toString());
+      console.log('this.arrayReponseUser.sort().toString(): ', this.arrayReponseUser.sort().toString());
       if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
         console.log('ITS OK !!');
         this.counterCheck++;
+        this.sumPointsByRepCandidat(this.questions[this.index].technologies, this.questions[this.index].points);
       } else {
         console.log('NOT OK !!');
       }
@@ -187,6 +196,7 @@ export class TestComponent implements OnInit {
       if (this.arrayReponseUser.every(reps => this.arrayGoodRep.includes(reps))) {
         console.log('item ok !');
         this.counterCheck++;
+        this.sumPointsByRepCandidat(this.questions[this.index].technologies, this.questions[this.index].points);
       } else {
         console.log('item not ok !');
       }
@@ -196,6 +206,7 @@ export class TestComponent implements OnInit {
       if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
         console.log('ITS OK !!');
         this.counterCheck++;
+        this.sumPointsByRepCandidat(this.questions[this.index].technologies, this.questions[this.index].points);
       } else {
         console.log('NOT OK !!');
       }
@@ -298,7 +309,6 @@ export class TestComponent implements OnInit {
         sumPoints[element.technologies] = element.points;
       }
     });
-
     const arraySumPoints = [];
 
     for (const [key, value] of Object.entries(sumPoints)) {
@@ -307,7 +317,7 @@ export class TestComponent implements OnInit {
         points: value
       });
     }
-    console.log('arraySumPoints : ', arraySumPoints);
+    // console.log('arraySumPoints : ', arraySumPoints);
     for (const techno of this.technoCampaign) {
       for (const technoArray of arraySumPoints) {
         if (techno.id === Number(technoArray.technologies)) {
@@ -315,7 +325,25 @@ export class TestComponent implements OnInit {
         }
       }
     }
-    console.log('arraySumPoints AFTER BOUCLE : ', arraySumPoints);
+    // console.log('arraySumPoints AFTER BOUCLE : ', arraySumPoints);
+    this.sumPointsbyTechno = arraySumPoints;
+  }
+
+  sumPointsByRepCandidat(techno, point) {
+    this.apiClientService.get(API_URI_CANDIDATS + '/' + this.candidat.id).toPromise().then(res => {
+      if (res.points_candidat !== null) {
+        this.SumPointsCandidat = res.points_candidat;
+      }
+      this.SumPointsCandidat.push({
+        technologies: techno,
+        points: point
+      });
+      this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
+        points_candidat: this.SumPointsCandidat
+      }).toPromise().then(res1 => {
+        console.log(res1);
+      });
+    });
   }
 
   refreshComponent() {

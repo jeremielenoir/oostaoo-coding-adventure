@@ -62,6 +62,10 @@
     "raport_candidat": {
       "default": "",
       "type": "json"
+    },
+    "points_candidat": {
+      "default": "",
+      "type": "json"
     }
   }
 }
