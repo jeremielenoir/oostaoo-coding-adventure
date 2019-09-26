@@ -51,6 +51,7 @@ export class TestComponent implements OnInit {
     this.sumPointsByNumTechno(this.questionCampaign);
     this.allPointsTechnos = this.sumPointsbyTechno;
     console.log('this.allPointsTechnos: ', this.allPointsTechnos);
+    this.calculTotalPoints(this.allPointsTechnos);
     // console.log('this.candidat.campaign.copy_paste : ', this.candidat.campaign.copy_paste);
     if (this.candidat.index_question === null) {
       //   this.index = this.candidat.index_question;
@@ -120,7 +121,6 @@ export class TestComponent implements OnInit {
       this.arrayGoodRep = this.question.answer_value.split(', ').sort();
       this.checkRep();
     }
-    this.postRapportCandidat();
     // this.arrayReponseUser.push(this.responseUser);
     // console.log('this.arrayReponseUser IN QUESTNEXT: ', this.arrayReponseUser);
     this.Alltime.push(this.timedefault);
@@ -183,6 +183,7 @@ export class TestComponent implements OnInit {
         this.counterCheck++;
         this.sumPointsByRepCandidat(this.questions[this.index].technologies, this.questions[this.index].points);
       } else {
+        this.sumPointsByRepCandidat(this.questions[this.index].technologies, 0);
         console.log('NOT OK !!');
       }
     }
@@ -199,6 +200,7 @@ export class TestComponent implements OnInit {
         this.counterCheck++;
         this.sumPointsByRepCandidat(this.questions[this.index].technologies, this.questions[this.index].points);
       } else {
+        this.sumPointsByRepCandidat(this.questions[this.index].technologies, 0);
         console.log('item not ok !');
       }
     }
@@ -209,9 +211,11 @@ export class TestComponent implements OnInit {
         this.counterCheck++;
         this.sumPointsByRepCandidat(this.questions[this.index].technologies, this.questions[this.index].points);
       } else {
+        this.sumPointsByRepCandidat(this.questions[this.index].technologies, 0);
         console.log('NOT OK !!');
       }
     }
+    this.postRapportCandidat();
     // console.log(' this.arrayReponseUser : ', this.arrayReponseUser);
   }
 
@@ -243,23 +247,28 @@ export class TestComponent implements OnInit {
           this.refreshComponent();
           this.sumPointsByNumTechno(this.SumPointsCandidat);
           this.allPointsCandidat = this.sumPointsbyTechno;
+          console.log('this.allPointsCandidat : ', this.allPointsCandidat);
+          this.calculTotalPoints(this.allPointsCandidat);
           let getPourcent;
           for (const pointsTechno of this.allPointsTechnos) {
             for (const pointsCandidat of this.allPointsCandidat) {
               if (pointsTechno.technologies === pointsCandidat.technologies) {
-                console.log('pointsCandidat.points : ', pointsCandidat.points);
-                console.log('pointsTechno : ', pointsTechno.points);
-                getPourcent = pointsCandidat.points / pointsTechno.points * 100;
-                console.log('getPourcent: ', getPourcent);
+                if (pointsCandidat.points === null) {
+                  getPourcent = 0;
+                } else {
+                  getPourcent = Math.round(pointsCandidat.points / pointsTechno.points * 100);
+                }
+                console.log('getPourcent By Techno: ', {
+                  techno: pointsTechno.technologies,
+                  percentage: getPourcent
+                });
               }
             }
           }
-          console.log('this.allPointsCandidat: ', this.allPointsCandidat);
+          // console.log('this.allPointsCandidat: ', this.allPointsCandidat);
           this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
             points_candidat: this.allPointsCandidat
-          }).toPromise().then(res => {
-            // console.log(res);
-          });
+          }).toPromise();
         });
       });
     });
@@ -270,18 +279,19 @@ export class TestComponent implements OnInit {
     let dateServeur;
     let dateDiff;
     let diffSeconds;
-    let timePuaseDiff;
+    let timePauseDiff;
 
     if (this.candidat.date_pause !== this.candidat.invitation_date) {
       dateNow = new Date();
       dateServeur = new Date(this.candidat.date_pause);
       dateDiff = dateNow - dateServeur;
       diffSeconds = Math.floor(dateDiff / 1e3); // diff date by seconds
-      timePuaseDiff = this.candidat.test_pause + diffSeconds;
-      if (this.question.time < timePuaseDiff) {
+      timePauseDiff = this.candidat.test_pause + diffSeconds;
+      if (this.question.time < timePauseDiff) {
+        this.checkTimeDefault = true;
         this.QuestNext();
       } else {
-        this.timedefault = timePuaseDiff;
+        this.timedefault = timePauseDiff;
       }
     }
   }
@@ -320,6 +330,7 @@ export class TestComponent implements OnInit {
   }
 
   sumPointsByNumTechno(array) {
+    console.log('array : ', array);
     const sumPoints = {};
     array.forEach(element => {
       if (sumPoints.hasOwnProperty(element.technologies)) {
@@ -349,6 +360,8 @@ export class TestComponent implements OnInit {
   }
 
   sumPointsByRepCandidat(techno, point) {
+    console.log('techno : ', techno);
+    console.log('point : ', point);
     this.apiClientService.get(API_URI_CANDIDATS + '/' + this.candidat.id).toPromise().then(res => {
       if (res.points_candidat !== null) {
         this.SumPointsCandidat = res.points_candidat;
@@ -363,6 +376,12 @@ export class TestComponent implements OnInit {
         // console.log(res1);
       });
     });
+  }
+
+  calculTotalPoints(array) {
+    if (typeof array !== 'undefined' && array.length > 0) {
+      array.reduce((a, b) => (console.log({ x: a.points + b.points })));
+    }
   }
 
   refreshComponent() {
