@@ -40,6 +40,9 @@ export class TestComponent implements OnInit {
   public SumPointsCandidat = [];
   public allPointsTechnos;
   public allPointsCandidat;
+  public totalPoints;
+  public totalPointsCampaign;
+  public totalPointsCandidat;
 
 
   constructor(private apiClientService: ApiClientService) {
@@ -52,6 +55,10 @@ export class TestComponent implements OnInit {
     this.allPointsTechnos = this.sumPointsbyTechno;
     console.log('this.allPointsTechnos: ', this.allPointsTechnos);
     this.calculTotalPoints(this.allPointsTechnos);
+    if (this.totalPoints) {
+      this.totalPointsCampaign = this.totalPoints;
+    }
+    console.log('this.totalPointsCampaign: ', this.totalPointsCampaign);
     // console.log('this.candidat.campaign.copy_paste : ', this.candidat.campaign.copy_paste);
     if (this.candidat.index_question === null) {
       //   this.index = this.candidat.index_question;
@@ -249,6 +256,10 @@ export class TestComponent implements OnInit {
           this.allPointsCandidat = this.sumPointsbyTechno;
           console.log('this.allPointsCandidat : ', this.allPointsCandidat);
           this.calculTotalPoints(this.allPointsCandidat);
+          if (this.totalPoints) {
+            this.totalPointsCandidat = this.totalPoints;
+          }
+          console.log('this.totalPointsCandidat: ', this.totalPointsCandidat);
           let getPourcent;
           for (const pointsTechno of this.allPointsTechnos) {
             for (const pointsCandidat of this.allPointsCandidat) {
@@ -265,6 +276,10 @@ export class TestComponent implements OnInit {
               }
             }
           }
+          console.log('this.totalPointsCandidat.total_points: ', this.totalPointsCandidat.total_points);
+          console.log('this.totalPointsCampaign.total_points: ', this.totalPointsCampaign.total_points);
+          const getPourcentTest = Math.round(this.totalPointsCandidat.total_points / this.totalPointsCampaign.total_points * 100);
+          console.log('test SUM TOTAL OF THE TEST', getPourcentTest);
           // console.log('this.allPointsCandidat: ', this.allPointsCandidat);
           this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
             points_candidat: this.allPointsCandidat
@@ -380,7 +395,7 @@ export class TestComponent implements OnInit {
 
   calculTotalPoints(array) {
     if (typeof array !== 'undefined' && array.length > 0) {
-      array.reduce((a, b) => (console.log({ x: a.points + b.points })));
+      array.reduce((a, b) => (this.totalPoints = { total_points: a.points + b.points }));
     }
   }
 
