@@ -17,8 +17,10 @@ import { catchError } from 'rxjs/operators';
 
 
 @Injectable()
+
 export class RegisterComponent implements HttpInterceptor, OnInit {
 
+  public switchPanel = true;
   username = new FormControl('', Validators.required);
   email = new FormControl('', Validators.required);
   password = new FormControl('', Validators.required);
@@ -36,8 +38,6 @@ export class RegisterComponent implements HttpInterceptor, OnInit {
     });
     return next.handle(newRequest);
   }
-
-  public switchPanel: boolean = true
 
   ngOnInit() {
     // axios
@@ -60,6 +60,7 @@ export class RegisterComponent implements HttpInterceptor, OnInit {
     //   // Handle error.
     //   console.log('An error occurred:', error);
     // });
+    
   }
 
   switch(){
@@ -126,6 +127,6 @@ export class RegisterComponent implements HttpInterceptor, OnInit {
         console.log('An error occurred:', error);
       });
   }
-
-  
 }
+
+

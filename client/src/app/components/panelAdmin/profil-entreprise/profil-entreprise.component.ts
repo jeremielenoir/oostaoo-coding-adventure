@@ -1,7 +1,7 @@
 import { Component, OnInit, QueryList, ViewChild, ElementRef} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import {  ApiClientService, API_URI_USER, API_URI_ENTREPRISE} from 'src/app/api-client/api-client.service';
-import { tokenKey } from '@angular/core/src/view';
+import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 
 @Component({
   selector: 'app-profil-entreprise',
@@ -15,11 +15,9 @@ export class ProfilEntrepriseComponent implements OnInit {
   @ViewChild('uploadimgfirst') uploadimgfirst: ElementRef;
   @ViewChild('uploadimgLast') uploadimgLast: ElementRef;
   @ViewChild('btnValideParent') btnValideParent: ElementRef;
-  @ViewChild('btnValideParentAddImage') btnValideParentAddImage:ElementRef;
+  @ViewChild('btnValideParentAddImage') btnValideParentAddImage: ElementRef;
 
- ca = localStorage.getItem('token');
- base64Url = this.ca.split('.')[1];
- decodedValue = JSON.parse(window.atob(this.base64Url));
+
 
   public currentValue: number;
   public user: any;
@@ -802,7 +800,7 @@ export class ProfilEntrepriseComponent implements OnInit {
     'C', 'C++', 'C#', 'Clojure', 'Cloud', 'Cobol', 'DBA', 'Dart', 'Delphi',
     '.NET', 'F#'];
 
-    constructor(public apiClientService: ApiClientService) {
+    constructor(public apiClientService: ApiClientService, public decryptTokenService: DecryptTokenService) {
     }
 
   ngOnInit() {
@@ -826,8 +824,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       this.twitter = new FormControl(user[0].entreprise.twitter);
     // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
     });
-
-    console.log(this.decodedValue);
+    console.log('test', this.decryptTokenService.userId);
 
   }
 
@@ -1005,7 +1002,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   async getUser(): Promise<any> {
     try {
       const datas = await this.apiClientService
-        .get(API_URI_USER + '/' +  this.decodedValue.id)
+        .get(API_URI_USER + '/' +  this.decryptTokenService.userId)
         .toPromise();
       return this.user = [datas];
     } catch (err) {
