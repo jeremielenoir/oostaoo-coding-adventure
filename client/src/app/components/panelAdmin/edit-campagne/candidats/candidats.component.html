@@ -97,23 +97,24 @@
                 <!-- {{ dataInfos.Checked }} -->
               </td>
             </div>
+            <div class="color-text">
+              <div *ngIf="column === 'Candidats'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ column }}
+                </th>
+                <td mat-cell *matCellDef="let dataInfos">
+                  {{ dataInfos.Candidats }} <br />
+                  {{ dataInfos.Email }}
+                </td>
+              </div>
 
-            <div *ngIf="column === 'Candidats'">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>
                 {{ column }}
               </th>
               <td mat-cell *matCellDef="let dataInfos">
-                {{ dataInfos.Candidats }} <br />
-                {{ dataInfos.Email }}
+                {{ dataInfos[column] }}
               </td>
             </div>
-
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              {{ column }}
-            </th>
-            <td mat-cell *matCellDef="let dataInfos">
-              {{ dataInfos[column] }}
-            </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -55,7 +55,7 @@ export class CandidatsComponent implements OnInit {
 
     inviteCandidatDialog.afterClosed().subscribe((data) => {
       this.getCampaign().then(datas => {
-        console.log('AFTER CLOSE ALL DATAS', datas);
+        // console.log('AFTER CLOSE ALL DATAS', datas);
       });
     });
 
@@ -63,7 +63,7 @@ export class CandidatsComponent implements OnInit {
 
   ngOnInit() {
     this.getCampaign().then(datas => {
-      console.log('INIT DATAS', datas);
+      // console.log('INIT DATAS', datas);
     });
   }
 
@@ -93,24 +93,71 @@ export class CandidatsComponent implements OnInit {
         const defaultColumns = ['Checked', 'Candidats', 'Dernière activité', 'Score'];
         const getInfoCandidat = [];
         let dateInvite;
-        for (const candidat of this.candidats) {
-          dateInvite = new Date(candidat.invitation_date);
-          getInfoCandidat.push({
-            Candidats: candidat.Nom,
-            Email: candidat.email,
-            Checked: false,
-            'Dernière activité': dateInvite.toLocaleString()
-          });
-        }
+        let percentCandidat;
+        let duree;
         // INFOS FOR ADD COLUMN
         const getTechnos = [];
+        const getPercentCandidat = [];
         for (const technos of this.technologies) {
           getTechnos.push(technos.name);
         }
         this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
+        // console.log('getTechnos: ', getTechnos);
+        for (const candidat of this.candidats) {
+          // console.log('candidat : ', candidat.points_candidat[2].getpourcentByCandidat);
+
+          if (candidat.duree !== null) {
+            // console.log('candidat : ', candidat);
+            duree = this.secondsToHms(candidat.duree);
+          } else {
+            duree = 0;
+          }
+          if (candidat.invitation_date === candidat.test_terminer) {
+            dateInvite = new Date(candidat.invitation_date);
+            percentCandidat = 0 + '%';
+          } else {
+            dateInvite = new Date(candidat.test_terminer);
+            percentCandidat = candidat.points_candidat[5].PourcentTest + '%';
+          }
+          getInfoCandidat.push({
+            Candidats: candidat.Nom,
+            Email: candidat.email,
+            Checked: false,
+            'Dernière activité': dateInvite.toLocaleString(),
+            Score: percentCandidat,
+            Durée: duree
+          });
+          // console.log('candidat.points_candidat[2].getpourcentByCandidat: ', candidat.points_candidat[2].getpourcentByCandidat);
+          if (candidat.points_candidat !== null) {
+            for (const percentTechno of candidat.points_candidat[2].getpourcentByCandidat) {
+              // console.log('percentTechno: ', percentTechno);
+              for (const techno of getTechnos) {
+                for (const iterator of getInfoCandidat) {
+                  if (percentTechno.techno === techno && candidat.Nom === iterator.Candidats) {
+                    iterator[techno] = percentTechno.percentage + '%';
+                  }
+                }
+              }
+            }
+          } else {
+            for (const techno of getTechnos) {
+              for (const iterator of getInfoCandidat) {
+                if (candidat.Nom === iterator.Candidats) {
+                  iterator[techno] = 0 + '%';
+                }
+              }
+            }
+          }
+
+          console.log('candidat: ', candidat);
+        }
+        console.log('getTechnos: ', getTechnos);
+        console.log('this.displayedColumns : ', this.displayedColumns);
+        console.log('getInfoCandidat : ', getInfoCandidat);
+        console.log('getPercentCandidat: ', getPercentCandidat);
         return getInfoCandidat;
       }).then((getInfoCandidat) => {
-        console.log('INFOS CANDIDATS', getInfoCandidat);
+        // console.log('INFOS CANDIDATS', getInfoCandidat);
         this.infosCandidats = new MatTableDataSource(getInfoCandidat);
         this.infosCandidats.sort = this.sort;
         this.isLoading = false;
@@ -119,6 +166,17 @@ export class CandidatsComponent implements OnInit {
       .catch(error => {
         console.log('ERROR', error);
       });
+  }
+
+  secondsToHms(duree) {
+    const h = Math.floor(duree / 3600);
+    const m = Math.floor(duree % 3600 / 60);
+    const s = Math.floor(duree % 3600 % 60);
+
+    const hour = h > 0 ? h + (h === 1 ? ' hour, ' : ' hours, ') : '';
+    const minute = m > 0 ? m + (m === 1 ? ' minute, ' : ' minutes, ') : '';
+    const second = s > 0 ? s + (s === 1 ? ' second' : ' seconds') : '';
+    return hour + minute + second;
   }
 
   applyFilter(filterValue: string) {

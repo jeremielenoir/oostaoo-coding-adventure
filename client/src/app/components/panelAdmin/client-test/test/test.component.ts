@@ -376,14 +376,14 @@ export class TestComponent implements OnInit {
         points: value
       });
     }
-    // console.log('arraySumPoints : ', arraySumPoints);
-    // for (const techno of this.technoCampaign) {
-    //   for (const technoArray of arraySumPoints) {
-    //     if (techno.id === Number(technoArray.technologies)) {
-    //       technoArray.technologies = techno.name;
-    //     }
-    //   }
-    // }
+    console.log('arraySumPoints : ', arraySumPoints);
+    for (const techno of this.technoCampaign) {
+      for (const technoArray of arraySumPoints) {
+        if (techno.id === Number(technoArray.technologies)) {
+          technoArray.technologies = techno.name;
+        }
+      }
+    }
     // console.log('arraySumPoints AFTER BOUCLE : ', arraySumPoints);
     return this.sumPointsbyTechno = arraySumPoints;
   }
