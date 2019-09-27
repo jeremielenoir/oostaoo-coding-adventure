@@ -294,7 +294,7 @@ export class TestComponent implements OnInit {
             { totalPointsCandidat: this.totalPointsCandidat.total_points },
             { totalPointsCampaign: this.totalPointsCampaign.total_points },
             { PourcentTest: getPourcentTest }
-          ]
+          ];
           this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
             points_candidat: newOBjectToPostCandidat
           }).toPromise();
