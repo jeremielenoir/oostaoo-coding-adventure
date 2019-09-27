@@ -261,6 +261,7 @@ export class TestComponent implements OnInit {
           }
           console.log('this.totalPointsCandidat: ', this.totalPointsCandidat);
           let getPourcent;
+          const objectGetpourcent = [];
           for (const pointsTechno of this.allPointsTechnos) {
             for (const pointsCandidat of this.allPointsCandidat) {
               if (pointsTechno.technologies === pointsCandidat.technologies) {
@@ -269,20 +270,33 @@ export class TestComponent implements OnInit {
                 } else {
                   getPourcent = Math.round(pointsCandidat.points / pointsTechno.points * 100);
                 }
-                console.log('getPourcent By Techno: ', {
+                objectGetpourcent.push({
                   techno: pointsTechno.technologies,
                   percentage: getPourcent
                 });
+                // console.log('getPourcent By Techno: ', {
+                //   techno: pointsTechno.technologies,
+                //   percentage: getPourcent
+                // });
               }
             }
           }
+          console.log('objectGetpourcent: ', objectGetpourcent);
           console.log('this.totalPointsCandidat.total_points: ', this.totalPointsCandidat.total_points);
           console.log('this.totalPointsCampaign.total_points: ', this.totalPointsCampaign.total_points);
           const getPourcentTest = Math.round(this.totalPointsCandidat.total_points / this.totalPointsCampaign.total_points * 100);
           console.log('test SUM TOTAL OF THE TEST', getPourcentTest);
           // console.log('this.allPointsCandidat: ', this.allPointsCandidat);
+          const newOBjectToPostCandidat = [
+            { allPointsTechnos: this.allPointsTechnos },
+            { allPointsCandidat: this.allPointsCandidat },
+            { getpourcentByCandidat: objectGetpourcent },
+            { totalPointsCandidat: this.totalPointsCandidat.total_points },
+            { totalPointsCampaign: this.totalPointsCampaign.total_points },
+            { PourcentTest: getPourcentTest }
+          ]
           this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
-            points_candidat: this.allPointsCandidat
+            points_candidat: newOBjectToPostCandidat
           }).toPromise();
         });
       });
@@ -408,6 +422,7 @@ export class TestComponent implements OnInit {
   beforeunloadHandler($event) {
     $event.returnValue = 'Are you sure?';
     this.postPauseTest();
+    this.controleTimeTest();
   }
   @HostListener('window:unload', ['$event'])
   sendData() {
