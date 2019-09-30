@@ -32,13 +32,8 @@ export class RegisterComponent implements HttpInterceptor, OnInit {
     request: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    const re = '/api/candidats';
-    if ( localStorage.getItem('token') === null ) {
-    const newRequest = request.clone({
-       headers: request.headers.set('Authorization', ''),
-    });
-    return next.handle(newRequest);
-    } else {
+    const re = /evaluate/ ;
+    if ( request.url.search(re) < 0 ) {
       const newRequest = request.clone({
         headers: request.headers.set('Authorization', 'Bearer' + ' ' + localStorage.getItem('token')),
      });
