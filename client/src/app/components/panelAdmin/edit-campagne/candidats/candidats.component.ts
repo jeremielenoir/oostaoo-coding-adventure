@@ -128,7 +128,7 @@ export class CandidatsComponent implements OnInit {
             Durée: duree
           });
           // console.log('candidat.points_candidat[2].getpourcentByCandidat: ', candidat.points_candidat[2].getpourcentByCandidat);
-          if (candidat.points_candidat !== null) {
+          if (candidat.invitation_date !== candidat.test_terminer) {
             for (const percentTechno of candidat.points_candidat[2].getpourcentByCandidat) {
               // console.log('percentTechno: ', percentTechno);
               for (const techno of getTechnos) {
