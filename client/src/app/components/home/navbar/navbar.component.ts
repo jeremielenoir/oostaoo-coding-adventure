@@ -49,13 +49,13 @@ export class NavbarComponent implements OnInit {
 
 
   getLogin() {
-    return JSON.parse(localStorage.getItem('user')).login;
+    return JSON.parse(localStorage.getItem('token'));
   }
 
   logout() {
     console.log('Tentative de déconnexion');
 
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     this.router.navigate(['/home/register']);
   }
 

@@ -29,16 +29,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(public apiClientService: ApiClientService, private router: Router) { }
 
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler,
-  ): Observable<HttpEvent<any>> {
-    const newRequest = request.clone({
-      headers: request.headers.set('Authorization', 'Bearer' + ' ' + localStorage.getItem('token')),
-    });
-    return next.handle(newRequest);
-  }
-
   ngOnInit() {
     // axios
     // .post('http://localhost:1337/auth/local', {
@@ -99,10 +89,9 @@ export class RegisterComponent implements OnInit {
         console.log('Well done!', response.data);
         console.log('User profile', response.data.user);
         console.log('User token', response.data.jwt);
-        localStorage.setItem('token', response.data.jwt);
         this.token = response.data.jwt;
         console.log('token', this.token);
-        localStorage.setItem('user', JSON.stringify({ login: this.model.username }));
+        localStorage.setItem('token', response.data.jwt);
         // this.router.navigate(['/dashboard/campaigns']);
         this.router.navigate(['/home']);
         return true;
