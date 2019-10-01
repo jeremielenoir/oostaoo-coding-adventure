@@ -59,7 +59,7 @@ export class TestComponent implements OnInit {
       this.totalPointsCampaign = this.totalPoints;
     }
     console.log('this.totalPointsCampaign: ', this.totalPointsCampaign);
-    // console.log('this.candidat.campaign.copy_paste : ', this.candidat.campaign.copy_paste);
+    console.log('this.candidat.campaign.copy_paste : ', this.candidat.campaign.copy_paste);
     if (this.candidat.index_question === null) {
       //   this.index = this.candidat.index_question;
       this.index = 0;
