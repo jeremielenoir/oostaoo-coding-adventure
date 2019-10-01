@@ -52,7 +52,9 @@ export class TestComponent implements OnInit {
     // console.log('questionCampaign: ', this.questionCampaign);
     // console.log('technoCampaign : ', this.technoCampaign);
     this.sumPointsByNumTechno(this.questionCampaign);
-    this.allPointsTechnos = this.sumPointsbyTechno;
+    if (this.sumPointsbyTechno) {
+      this.allPointsTechnos = this.sumPointsbyTechno;
+    }
     console.log('this.allPointsTechnos: ', this.allPointsTechnos);
     this.calculTotalPoints(this.allPointsTechnos);
     if (this.totalPoints) {
@@ -254,7 +256,6 @@ export class TestComponent implements OnInit {
           this.refreshComponent();
           this.sumPointsByNumTechno(this.SumPointsCandidat);
           this.allPointsCandidat = this.sumPointsbyTechno;
-          console.log('this.allPointsCandidat : ', this.allPointsCandidat);
           this.calculTotalPoints(this.allPointsCandidat);
           if (this.totalPoints) {
             this.totalPointsCandidat = this.totalPoints;
@@ -282,17 +283,18 @@ export class TestComponent implements OnInit {
             }
           }
           console.log('objectGetpourcent: ', objectGetpourcent);
-          console.log('this.totalPointsCandidat.total_points: ', this.totalPointsCandidat.total_points);
-          console.log('this.totalPointsCampaign.total_points: ', this.totalPointsCampaign.total_points);
-          const getPourcentTest = Math.round(this.totalPointsCandidat.total_points / this.totalPointsCampaign.total_points * 100);
+          console.log('this.totalPointsCandidat.total_points: ', this.totalPointsCandidat);
+          console.log('this.totalPointsCampaign.total_points: ', this.totalPointsCampaign);
+          const getPourcentTest = Math.round((this.totalPointsCandidat.total_points
+            || this.totalPointsCandidat.points) / (this.totalPointsCampaign.total_points || this.totalPointsCampaign.points) * 100);
           console.log('test SUM TOTAL OF THE TEST', getPourcentTest);
           // console.log('this.allPointsCandidat: ', this.allPointsCandidat);
           const newOBjectToPostCandidat = [
             { allPointsTechnos: this.allPointsTechnos },
             { allPointsCandidat: this.allPointsCandidat },
             { getpourcentByCandidat: objectGetpourcent },
-            { totalPointsCandidat: this.totalPointsCandidat.total_points },
-            { totalPointsCampaign: this.totalPointsCampaign.total_points },
+            { totalPointsCandidat: this.totalPointsCandidat.total_points || this.totalPointsCandidat.points },
+            { totalPointsCampaign: this.totalPointsCampaign.total_points || this.totalPointsCampaign.points },
             { PourcentTest: getPourcentTest }
           ];
           this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
@@ -364,8 +366,10 @@ export class TestComponent implements OnInit {
     array.forEach(element => {
       if (sumPoints.hasOwnProperty(element.technologies)) {
         sumPoints[element.technologies] = sumPoints[element.technologies] + element.points;
+        console.log('sumPoints[element.technologies]: ', sumPoints[element.technologies]);
       } else {
         sumPoints[element.technologies] = element.points;
+        console.log('sumPoints[element.technologies] = element.points: ', sumPoints[element.technologies]);
       }
     });
     const arraySumPoints = [];
@@ -408,8 +412,9 @@ export class TestComponent implements OnInit {
   }
 
   calculTotalPoints(array) {
+    console.log('CALCUL TOTAL POINTS : ', array);
     if (typeof array !== 'undefined' && array.length > 0) {
-      array.reduce((a, b) => (this.totalPoints = { total_points: a.points + b.points }));
+      this.totalPoints = array.reduce((a, b) => ({ total_points: a.points + b.points }));
     }
   }
 
