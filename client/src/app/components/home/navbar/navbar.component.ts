@@ -1,11 +1,12 @@
 import {
-Component,
+  Component,
   OnInit,
   ViewChild,
   HostListener,
   Inject
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(@Inject(DOCUMENT) document) { }
+  constructor(@Inject(DOCUMENT) document, private router: Router) { }
 
   public shouldShow = true;
   public Removeshould = true;
@@ -44,6 +45,18 @@ export class NavbarComponent implements OnInit {
 
     this.onWindowScroll();
 
-   }
+  }
+
+
+  getLogin() {
+    return JSON.parse(localStorage.getItem('user')).login;
+  }
+
+  logout() {
+    console.log('Tentative de déconnexion');
+
+    localStorage.removeItem('user');
+    this.router.navigate(['/home/register']);
+  }
 
 }

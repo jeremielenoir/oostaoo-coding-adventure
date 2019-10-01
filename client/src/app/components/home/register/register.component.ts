@@ -18,13 +18,14 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 
-export class RegisterComponent implements HttpInterceptor, OnInit {
+export class RegisterComponent implements OnInit {
 
   public switchPanel = true;
   username = new FormControl('', Validators.required);
   email = new FormControl('', Validators.required);
   password = new FormControl('', Validators.required);
   token: string;
+  model: any = {};
 
   constructor(public apiClientService: ApiClientService, private router: Router) { }
 
@@ -32,13 +33,10 @@ export class RegisterComponent implements HttpInterceptor, OnInit {
     request: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    const re = /evaluate/ ;
-    if ( request.url.search(re) < 0 ) {
-      const newRequest = request.clone({
-        headers: request.headers.set('Authorization', 'Bearer' + ' ' + localStorage.getItem('token')),
-     });
-      return next.handle(newRequest);
-    }
+    const newRequest = request.clone({
+      headers: request.headers.set('Authorization', 'Bearer' + ' ' + localStorage.getItem('token')),
+    });
+    return next.handle(newRequest);
   }
 
   ngOnInit() {
@@ -65,7 +63,7 @@ export class RegisterComponent implements HttpInterceptor, OnInit {
   }
 
   switch() {
-      this.switchPanel = ! this.switchPanel;
+    this.switchPanel = !this.switchPanel;
   }
 
 
@@ -104,12 +102,16 @@ export class RegisterComponent implements HttpInterceptor, OnInit {
         localStorage.setItem('token', response.data.jwt);
         this.token = response.data.jwt;
         console.log('token', this.token);
-        this.router.navigate(['/dashboard/campaigns']);
+        localStorage.setItem('user', JSON.stringify({ login: this.model.username }));
+        // this.router.navigate(['/dashboard/campaigns']);
+        this.router.navigate(['/home']);
+        return true;
       })
       .catch(error => {
         // Handle error.
         console.log('An error occurred:', error);
       });
+    console.log('Tentative de connexion');
   }
 
   tryget() {

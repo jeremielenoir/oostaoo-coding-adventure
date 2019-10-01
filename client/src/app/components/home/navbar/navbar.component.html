@@ -1,10 +1,13 @@
 <!-- <button (click)="showOrHideManually()">Show/Hide manually</button>
 <label #myLabel> SOME TEXT BLABLA </label> -->
-<div #header id="navbar" (scroll)="onWindowScroll()" [className]="shouldShow ? 'remove-index': 'add-index'">
-
+<div
+  #header
+  id="navbar"
+  (scroll)="onWindowScroll()"
+  [className]="shouldShow ? 'remove-index' : 'add-index'"
+>
   <mat-toolbar color="primary">
-
-      <img src="../../assets/logo.png" alt="Logo" />
+    <img src="../../assets/logo.png" alt="Logo" />
 
     <mat-toolbar-row class="super">
       <button
@@ -35,6 +38,7 @@
         <a href="#">Fidéliser</a>
         <a href="#">Prix</a>
         <a href="/dashboard">Connexion</a>
+        <a (click)="logout()">Se déconnecter</a>
         <a href="#" mat-button>Démo Gratuite</a>
       </div>
     </mat-toolbar-row>
@@ -51,6 +55,7 @@
         <a href="#" mat-list-item>Fidéliser</a>
         <a href="#" mat-list-item>Prix</a>
         <a href="#" mat-list-item>Connexion</a>
+        <a (click)="logout()">Se déconnecter</a>
         <a href="#" mat-button>Demo Gratuite</a>
       </mat-nav-list>
     </mat-sidenav>

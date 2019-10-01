@@ -18,6 +18,7 @@ import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne
 import { ClientTestComponent } from './components/panelAdmin/client-test/client-test.component';
 import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
 import { RegisterComponent } from './components/home/register/register.component';
+import { AuthGuard } from '../app/components/home/register/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -39,21 +40,24 @@ const routes: Routes = [
   {
     path: 'dashboard',
     redirectTo: 'dashboard/campaigns',
-    pathMatch: 'full'
-
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard/campaigns',
-    component: DashboadCampagneComponent
+    component: DashboadCampagneComponent,
+    canActivate: [AuthGuard]
 
   },
   {
     path: 'dashboard/campaigns/new',
-    component: NouvelleCampagneComponent
+    component: NouvelleCampagneComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard/campaigns/:id',
     component: EditCampagneComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'candidats', component: CandidatsComponent },
       { path: 'questions', component: QuestionsComponent },
@@ -71,23 +75,28 @@ const routes: Routes = [
 
   {
     path: 'dashboard/profil-utilisateur',
-    component: ProfilUtilisateurComponent
+    component: ProfilUtilisateurComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard/profil-entreprise',
-    component: ProfilEntrepriseComponent
+    component: ProfilEntrepriseComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard/facturation',
-    component: FacturationComponent
+    component: FacturationComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard/protection-des-donnees',
-    component: ProtectionDeDonneesComponent
+    component: ProtectionDeDonneesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard/utilisateurs',
-    component: UtilisateursComponent
+    component: UtilisateursComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'not-found',
@@ -101,6 +110,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
