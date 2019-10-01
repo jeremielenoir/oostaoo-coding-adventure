@@ -75,7 +75,6 @@ import { RegisterComponent } from './components/home/register/register.component
 import { DecryptTokenService } from './components/home/register/register.service';
 import { BlockCopyPasteDirective } from './components/panelAdmin/client-test/block-copy-paste.directive';
 import { FinTestComponent } from './components/panelAdmin/client-test/fin-test/fin-test.component';
-import { TestExempleComponent } from './components/panelAdmin/client-test/test-exemple/test-exemple.component';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -123,8 +122,7 @@ import { TestExempleComponent } from './components/panelAdmin/client-test/test-e
     BreadcrumbComponent,
     RegisterComponent,
     BlockCopyPasteDirective,
-    FinTestComponent,
-    TestExempleComponent
+    FinTestComponent
   ],
   imports: [
     BrowserModule,
