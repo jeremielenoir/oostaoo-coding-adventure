@@ -19,6 +19,9 @@ import { ClientTestComponent } from './components/panelAdmin/client-test/client-
 import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
 import { RegisterComponent } from './components/home/register/register.component';
 import { AuthGuard } from '../app/components/home/register/guard/auth.guard';
+import { JwtInterceptor } from './components/home/register/service/jwt.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorInterceptor } from './components/home/register/service/error.interceptor';
 
 const routes: Routes = [
   {
@@ -111,6 +114,8 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }]
 })
 export class AppRoutingModule { }

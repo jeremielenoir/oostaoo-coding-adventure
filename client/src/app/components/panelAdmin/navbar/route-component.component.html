@@ -1,15 +1,25 @@
 <div id="container">
-  <div id="totalLeft" [ngClass]="{totalLeftActive: isShow === true}">
-    <div *ngIf="isShow === true" id="left" [ngClass]="{
+  <div id="totalLeft" [ngClass]="{ totalLeftActive: isShow === true }">
+    <div
+      *ngIf="isShow === true"
+      id="left"
+      [ngClass]="{
         fixNavMobile: isShow1 === true,
         unfixNavMobile: isShow2 === true
-      }">
+      }"
+    >
       <div id="left-top">
         <div id="logo">
-          <a href="/dashboard"><img src="../../../../assets/logo-codingame-for-work.png" alt="img-site" /></a>
+          <a href="/dashboard"
+            ><img
+              src="../../../../assets/logo-codingame-for-work.png"
+              alt="img-site"
+          /></a>
         </div>
         <div id="profil">
-          <a href="#"><img src="../../../../assets/Oostaoo Logo.png" alt="img-profil" /></a>
+          <a href="#"
+            ><img src="../../../../assets/Oostaoo Logo.png" alt="img-profil"
+          /></a>
           <a id="color-notif" href="">
             <div id="photoNotif">
               <div class="notif">
@@ -23,7 +33,11 @@
           </div>
         </div>
       </div>
-      <button mat-stroked-button class="custom-button" (click)="isShowNavTesting = !isShowNavTesting">
+      <button
+        mat-stroked-button
+        class="custom-button"
+        (click)="isShowNavTesting = !isShowNavTesting"
+      >
         <i class="fa fa-bar-chart fa-2x color-site" aria-hidden="true"></i>
         TESTING
       </button>
@@ -42,7 +56,11 @@
             <a href="#">Intégration</a>
           </li>
         </ul>
-        <button mat-button class="custom-button-testing color-white" (click)="openBottomSheet()">
+        <button
+          mat-button
+          class="custom-button-testing color-white"
+          (click)="openBottomSheet()"
+        >
           MODIFIER MON OFFRE
         </button>
       </div>
@@ -54,7 +72,11 @@
         <i class="fa fa-users fa-2x color-site" aria-hidden="true"></i> TEAM
         BUILDING
       </button>
-      <button mat-stroked-button class=" custom-button" (click)="isShowNavCompte = !isShowNavCompte">
+      <button
+        mat-stroked-button
+        class=" custom-button"
+        (click)="isShowNavCompte = !isShowNavCompte"
+      >
         <i class="fa fa-user-circle-o fa-2x color-site" aria-hidden="true"></i>
         COMPTE
       </button>
@@ -70,13 +92,15 @@
             <a routerLink="/dashboard/facturation">Facturation</a>
           </li>
           <li>
-            <a routerLink="/dashboard/protection-des-donnees">Protection des données</a>
+            <a routerLink="/dashboard/protection-des-donnees"
+              >Protection des données</a
+            >
           </li>
           <li>
             <a routerLink="/dashboard/utilisateurs">Utilisateurs</a>
           </li>
           <li>
-            <a href="#">Déconnexion</a>
+            <a [routerLink]="['/home/register']">Déconnexion</a>
           </li>
         </ul>
       </div>
@@ -104,7 +128,12 @@
       <div id="testing2" class="padding-left2">
         <ul>
           <li>
-            <a href=""><i class="fa fa-bar-chart fa-2x color-site" aria-hidden="true"></i></a>
+            <a href=""
+              ><i
+                class="fa fa-bar-chart fa-2x color-site"
+                aria-hidden="true"
+              ></i
+            ></a>
             <ul>
               <h4>TESTING</h4>
               <li class="padding10pxcompagne">
@@ -126,7 +155,12 @@
       <div id="sourcing2" class="padding-left2">
         <ul>
           <li>
-            <a href=""><i class="fa fa-crosshairs fa-2x color-site" aria-hidden="true"></i></a>
+            <a href=""
+              ><i
+                class="fa fa-crosshairs fa-2x color-site"
+                aria-hidden="true"
+              ></i
+            ></a>
             <ul class="fixmarginleft">
               <h4>SOURCING</h4>
             </ul>
@@ -136,7 +170,9 @@
       <div id="team2" class="padding-left2">
         <ul>
           <li>
-            <a href=""><i class="fa fa-users fa-2x color-site" aria-hidden="true"></i></a>
+            <a href=""
+              ><i class="fa fa-users fa-2x color-site" aria-hidden="true"></i
+            ></a>
             <ul>
               <h4>TEAM BUILDING</h4>
             </ul>
@@ -146,11 +182,18 @@
       <div id="compte2" class="padding-left2">
         <ul>
           <li>
-            <a href=""><i class="fa fa-user-circle-o fa-2x color-site" aria-hidden="true"></i></a>
+            <a href=""
+              ><i
+                class="fa fa-user-circle-o fa-2x color-site"
+                aria-hidden="true"
+              ></i
+            ></a>
             <ul>
               <h4>COMPTE</h4>
               <li class="padding10pxcompagne">
-                <a routerLink="/dashboard/profil-utilisateur">Profil utilisateur</a>
+                <a routerLink="/dashboard/profil-utilisateur"
+                  >Profil utilisateur</a
+                >
               </li>
               <li class="padding10pxcompagne">
                 <a href="/dashboard/profil-entreprise">Profil entreprise</a>
@@ -159,13 +202,15 @@
                 <a routerLink="/dashboard/facturation">Facturation</a>
               </li>
               <li class="padding10pxcompagne">
-                <a routerLink="/dashboard/protection-des-donnees">Protection des données</a>
+                <a routerLink="/dashboard/protection-des-donnees"
+                  >Protection des données</a
+                >
               </li>
               <li class="padding10pxcompagne">
                 <a routerLink="/dashboard/utilisateurs">Utilisateurs</a>
               </li>
               <li class="padding10pxcompagne">
-                <a href="#">Déconnexion</a>
+                <a [routerLink]="['/home/register']">Déconnexion</a>
               </li>
             </ul>
           </li>
@@ -174,7 +219,9 @@
       <div id="contact2" class="padding-left2">
         <ul>
           <li>
-            <a href=""><i class="fa fa-envelope fa-2x color-site" aria-hidden="true"></i></a>
+            <a href=""
+              ><i class="fa fa-envelope fa-2x color-site" aria-hidden="true"></i
+            ></a>
             <ul>
               <h4>CONTACTEZ-NOUS</h4>
             </ul>
@@ -182,23 +229,38 @@
         </ul>
       </div>
       <div id="news" class="padding-left2">
-        <a href="#"><i class="fa fa-newspaper-o fa-2x color-site" aria-hidden="true"></i></a>
+        <a href="#"
+          ><i class="fa fa-newspaper-o fa-2x color-site" aria-hidden="true"></i
+        ></a>
       </div>
     </div>
     <!-- button for show or hidden nav in desktop -->
-    <button id="nonemobile" mat-button (click)="Activet_isShow()" class="custom-button-nav" (click)="active_menu()">
+    <button
+      id="nonemobile"
+      mat-button
+      (click)="Activet_isShow()"
+      class="custom-button-nav"
+      (click)="active_menu()"
+    >
       <i class="fa fa-arrow-left fa-2x" aria-hidden="true" id="btn-arrow"></i>
     </button>
   </div>
   <!-- button for show or hidden nav in desktop -->
   <div id="menu-nav-mobile">
     <div id="nav-mobile">
-      <div id="icon-mobile" (click)="isShow2 = !isShow2" (click)="isShow = true">
+      <div
+        id="icon-mobile"
+        (click)="isShow2 = !isShow2"
+        (click)="isShow = true"
+      >
         <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
       </div>
       <div id="logo-mobile">
         <a href="/dashboard">
-          <img src="../../../../assets/Coding-game-img/logo-mobile.svg" alt="logo-mobile" />
+          <img
+            src="../../../../assets/Coding-game-img/logo-mobile.svg"
+            alt="logo-mobile"
+          />
         </a>
       </div>
       <div id="notif-mobile">

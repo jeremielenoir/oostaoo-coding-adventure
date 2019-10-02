@@ -1,6 +1,6 @@
-import { Component, OnInit, QueryList, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import {  ApiClientService, API_URI_USER, API_URI_ENTREPRISE} from 'src/app/api-client/api-client.service';
+import { ApiClientService, API_URI_USER, API_URI_ENTREPRISE } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 
 @Component({
@@ -791,7 +791,7 @@ export class ProfilEntrepriseComponent implements OnInit {
     }
   ];
 
-  numberofemployeeList: string[] = [ '1-9', '10-49', '50-199', '+200'];
+  numberofemployeeList: string[] = ['1-9', '10-49', '50-199', '+200'];
 
   industrieList: string[] = ['Communications', 'Game publisher', 'Industry', 'Internet',
     'IT Services', 'Recruiting Agency', 'Security', 'Software', 'Startup', 'Other'];
@@ -800,8 +800,8 @@ export class ProfilEntrepriseComponent implements OnInit {
     'C', 'C++', 'C#', 'Clojure', 'Cloud', 'Cobol', 'DBA', 'Dart', 'Delphi',
     '.NET', 'F#'];
 
-    constructor(public apiClientService: ApiClientService, public decryptTokenService: DecryptTokenService) {
-    }
+  constructor(public apiClientService: ApiClientService, public decryptTokenService: DecryptTokenService) {
+  }
 
   ngOnInit() {
     this.getUser().then(user => {
@@ -822,7 +822,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       this.linkedin = new FormControl(user[0].entreprise.linkedin);
       this.facebook = new FormControl(user[0].entreprise.facebook);
       this.twitter = new FormControl(user[0].entreprise.twitter);
-    // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
+      // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
     });
     console.log('test', this.decryptTokenService.userId);
 
@@ -837,7 +837,7 @@ export class ProfilEntrepriseComponent implements OnInit {
     }).subscribe(
       (res) => {
         alert('Profil mis à jour');
-       // console.log('res', res);
+        // console.log('res', res);
       },
       err => console.log(err)
     );
@@ -863,7 +863,7 @@ export class ProfilEntrepriseComponent implements OnInit {
     }).subscribe(
       (res) => {
         alert('Profil mis à jour');
-       // console.log('res', res);
+        // console.log('res', res);
       },
       err => console.log(err)
     );
@@ -914,7 +914,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   // function modal add images
 
 
-  param_cog_non_active_add_image(){
+  param_cog_non_active_add_image() {
 
     this.shadowcogImage = true;
 
@@ -933,37 +933,37 @@ export class ProfilEntrepriseComponent implements OnInit {
 
   readURL(event) {
 
-   if (event.target.files && event.target.files[0]) {
+    if (event.target.files && event.target.files[0]) {
 
-    this.blockUpload = true;
-    this.cadrageImgBoolean = true;
+      this.blockUpload = true;
+      this.cadrageImgBoolean = true;
 
-    const extensionsAutorise = ['.png', '.gif', '.jpg', '.jpeg', '.PNG', '.GIF', '.JPG', '.JPEG'];
-    const extension = this.verifExtension(event.target.value);
+      const extensionsAutorise = ['.png', '.gif', '.jpg', '.jpeg', '.PNG', '.GIF', '.JPG', '.JPEG'];
+      const extension = this.verifExtension(event.target.value);
 
 
-    if (extension === extensionsAutorise[0]
-      || extension === extensionsAutorise[1] ||
-      extension === extensionsAutorise[2] ||
-      extension === extensionsAutorise[3] || extension === extensionsAutorise[4] || extension === extensionsAutorise[5] ||
-      extension === extensionsAutorise[6] || extension === extensionsAutorise[7]
-    ) {
+      if (extension === extensionsAutorise[0]
+        || extension === extensionsAutorise[1] ||
+        extension === extensionsAutorise[2] ||
+        extension === extensionsAutorise[3] || extension === extensionsAutorise[4] || extension === extensionsAutorise[5] ||
+        extension === extensionsAutorise[6] || extension === extensionsAutorise[7]
+      ) {
 
-      this.cadrageImgBooleanState = false;
+        this.cadrageImgBooleanState = false;
 
-      this.btnValideParent.nativeElement.children[0].disabled = false;
+        this.btnValideParent.nativeElement.children[0].disabled = false;
 
-      this.uploadimgfirst.nativeElement.src = URL.createObjectURL(event.target.files[0]);
+        this.uploadimgfirst.nativeElement.src = URL.createObjectURL(event.target.files[0]);
 
-    } else {
+      } else {
 
-      this.cadrageImgBooleanState = true;
-      this.btnValideParent.nativeElement.children[0].disabled = true;
+        this.cadrageImgBooleanState = true;
+        this.btnValideParent.nativeElement.children[0].disabled = true;
+
+      }
+
 
     }
-
-
-   }
 
   }
 
@@ -1002,7 +1002,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   async getUser(): Promise<any> {
     try {
       const datas = await this.apiClientService
-        .get(API_URI_USER + '/' +  this.decryptTokenService.userId)
+        .get(API_URI_USER + '/' + this.decryptTokenService.userId)
         .toPromise();
       return this.user = [datas];
     } catch (err) {

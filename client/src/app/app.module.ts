@@ -72,9 +72,12 @@ import { NgxEditorModule } from 'ngx-editor';
 import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
 import { BreadcrumbComponent } from './components/panelAdmin/breadcrumb/breadcrumb.component';
 import { RegisterComponent } from './components/home/register/register.component';
-import { DecryptTokenService } from './components/home/register/register.service';
+// import { DecryptTokenService } from './components/home/register/register.service';
 import { BlockCopyPasteDirective } from './components/panelAdmin/client-test/block-copy-paste.directive';
 import { FinTestComponent } from './components/panelAdmin/client-test/fin-test/fin-test.component';
+import { JwtInterceptor } from './components/home/register/service/jwt.interceptor';
+import { ErrorInterceptor } from './components/home/register/service/error.interceptor';
+import { DecryptTokenService } from './components/home/register/register.service';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -143,7 +146,6 @@ import { FinTestComponent } from './components/panelAdmin/client-test/fin-test/f
     ApiClientService,
     DatePipe,
     DecryptTokenService
-
   ],
   bootstrap: [AppComponent]
 })

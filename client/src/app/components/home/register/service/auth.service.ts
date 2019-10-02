@@ -1,55 +1,40 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
-@Injectable()
-export class AuthService {
+// authentication service is used to LOGIN and LOGOUT of the application
+// it posts the creds (username and password) to the backend and check for the response if it has JWT token
+// if the response from the backend has jwt token, then the authentication was succesful
+// on successful authentication, the user details are stored in the local storage + jwt token
+const config = {
+  apiUrl: 'http://localhost:1337'
+};
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute
-  ) { }
+@Injectable({ providedIn: 'root' })
+export class AuthenticationService {
+  constructor(private http: HttpClient) { }
 
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler,
-  ): Observable<HttpEvent<any>> {
-    const newRequest = request.clone({
-      headers: request.headers.set('Authorization', 'Bearer' + ' ' + localStorage.getItem('token')),
-    });
-    return next.handle(newRequest);
+  // login
+  login(identifier: string, password: string) {
+    return this.http.post<any>(`${config.apiUrl}/auth/local`, { identifier, password })
+      .pipe(
+        // the backend service sends an instance of the user
+        // user: any (because .post<any>)
+        map(user => {
+          console.log('AUTH SERVICE user: ', user);
+          // login successful if the response has jwt token
+          if (user && user.jwt) {
+            // store user details and jwt token in the local storage to keep the user logged in between page refreshes
+            localStorage.setItem('currentUser', user.jwt);
+          }
+          return user;
+        })
+      );
   }
 
-  login(loginForm: any) {
-    console.log('Tentative de connexion');
-
-    // this.setUser({ login: loginForm.username });
-
-    // On récupère l'url de redirection
-    const redirectUrl = this.route.snapshot.queryParams.redirectUrl || '/home';
-
-    // On accède à la page souhaitée
-    this.router.navigate([redirectUrl]);
-  }
-
+  // logout
   logout() {
-    console.log('Tentative de déconnexion');
-
-    this.clearUser();
-    this.router.navigate(['/home/register']);
+    // remove user from local storage
+    localStorage.removeItem('currentUser');
   }
-
-  getUser() {
-    return JSON.parse(localStorage.getItem('token'));
-  }
-
-  // setUser(user: any) {
-  //   localStorage.setItem('token', JSON.stringify(user));
-  // }
-
-  clearUser() {
-    localStorage.removeItem('token');
-  }
-
 }

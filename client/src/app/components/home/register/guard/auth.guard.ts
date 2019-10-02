@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { isNull } from 'util';
-import { HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+
+/*
+The auth guard is used to prevent unauthenticated users from accessing restricted routes.
+The auth guard will return:
+TRUE: If the user is logged in and is authenticated to access the route
+FALSE: If the user is logged out, thus not authenticated to access the route
+
+Here the route access condition is to be logged in (it works on the presence of a valid JWT token)
+There can be other conditions too, like role based authentication
+ */
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+  constructor(private router: Router) { }
 
-  constructor(
-    private router: Router
-  ) { }
-
-
-
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    // Récupération de l'utilisateur connecté
-    const isLoggedIn = !isNull(localStorage.getItem('token'));
-    console.log('isLoggedIn: ', isLoggedIn);
-
-    if (!isLoggedIn) {
-      // Si pas d'utilisateur connecté : redirection vers la page de login
-      console.log('Vous n\'êtes pas connectés');
-      this.router.navigate(['/home/register']);
+  canActivate(router: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    // check if the user is logged in
+    if (localStorage.getItem('currentUser')) {
+      return true;
     }
-    return isLoggedIn;
+
+    // not logged in so redirect to login page with the return url
+    this.router.navigate(['/home/register'], { queryParams: { returnUrl: state.url } });
+    return false;
   }
+
 }
