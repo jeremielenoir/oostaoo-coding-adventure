@@ -30,26 +30,7 @@ export class RegisterComponent implements OnInit {
   constructor(public apiClientService: ApiClientService, private router: Router) { }
 
   ngOnInit() {
-    // axios
-    // .post('http://localhost:1337/auth/local', {
-    //     identifier: 'user@strapi.io',
-    //     password: 'strapiPassword',
-    // })
-    // .then(response => {
-    //   // Handle success.
-    //   console.log('data !', response);
-    //   console.log('Well done!', response.data);
-    //   console.log('User profile', response.data.user);
-    //   console.log('User token', response.data.jwt);
-    //   localStorage.setItem ('yolo', response.data.jwt);
-    //   this.token = response.data.jwt;
-    //   console.log('token', this.token);
-    //   // this.router.navigate(['/dashboard/campaigns']);
-    // })
-    // .catch(error => {
-    //   // Handle error.
-    //   console.log('An error occurred:', error);
-    // });
+
   }
 
   switch() {
