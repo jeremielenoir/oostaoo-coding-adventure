@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatSort, MatTableDataSource} from '@angular/material';
-import {  ApiClientService, API_URI_USER_ADMIN} from 'src/app/api-client/api-client.service';
+import {  ApiClientService, API_URI_USER_ADMIN, API_URI_USER} from 'src/app/api-client/api-client.service';
+import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 
 export interface PeriodicElement {
   date: string;
@@ -50,7 +51,7 @@ export class FacturationComponent implements OnInit {
 
   // @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public apiClientService: ApiClientService) {
+  constructor(public apiClientService: ApiClientService, public decryptTokenService: DecryptTokenService) {
   }
 
   ngOnInit() {
@@ -67,7 +68,7 @@ export class FacturationComponent implements OnInit {
   async getUser(): Promise<any> {
     try {
       const datas = await this.apiClientService
-        .get(API_URI_USER_ADMIN + '/' +  1)
+        .get(API_URI_USER + '/' + this.decryptTokenService.userId)
         .toPromise();
       return this.user = [datas];
     } catch (err) {

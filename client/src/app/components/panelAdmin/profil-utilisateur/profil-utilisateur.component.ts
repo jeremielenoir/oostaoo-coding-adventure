@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import {  ApiClientService, API_URI_USER_ADMIN} from 'src/app/api-client/api-client.service';
+import {  ApiClientService, API_URI_USER, API_URI_USER_ADMIN} from 'src/app/api-client/api-client.service';
+import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 
 @Component({
   selector: 'app-profil-utilisateur',
@@ -9,7 +10,7 @@ import {  ApiClientService, API_URI_USER_ADMIN} from 'src/app/api-client/api-cli
 })
 export class ProfilUtilisateurComponent implements OnInit {
 
-  constructor(public apiClientService: ApiClientService) {
+  constructor(public apiClientService: ApiClientService,  public decryptTokenService: DecryptTokenService) {
   }
 
   public globalId: any;
@@ -111,7 +112,7 @@ updatepassword() {
   async getUser(): Promise<any> {
     try {
       const datas = await this.apiClientService
-        .get(API_URI_USER_ADMIN + '/' +  1)
+        .get(API_URI_USER + '/' + this.decryptTokenService.userId)
         .toPromise();
       return this.user = [datas];
     } catch (err) {
