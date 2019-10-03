@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 // authentication service is used to LOGIN and LOGOUT of the application
 // it posts the creds (username and password) to the backend and check for the response if it has JWT token
@@ -12,7 +13,14 @@ const config = {
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  constructor(private http: HttpClient) { }
+  currentUserSubject: BehaviorSubject<any>;
+  constructor(private http: HttpClient) {
+    this.currentUserSubject = new BehaviorSubject(localStorage.getItem('currentUser'));
+  }
+
+  public get currentUserValue() {
+    return this.currentUserSubject.value;
+  }
 
   // login
   login(identifier: string, password: string) {
@@ -26,6 +34,7 @@ export class AuthenticationService {
           if (user && user.jwt) {
             // store user details and jwt token in the local storage to keep the user logged in between page refreshes
             localStorage.setItem('currentUser', user.jwt);
+            this.currentUserSubject.next(user);
           }
           return user;
         })

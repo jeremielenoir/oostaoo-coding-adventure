@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { map, catchError, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { Options } from 'selenium-webdriver';
 
 
 const prefix = '/api/';

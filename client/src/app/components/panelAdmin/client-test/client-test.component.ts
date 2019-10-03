@@ -7,6 +7,7 @@ import { API_URI_CAMPAIGNS, ApiClientService, API_URI_CANDIDATS } from '../../..
   templateUrl: './client-test.component.html',
   styleUrls: ['./client-test.component.css']
 })
+
 export class ClientTestComponent implements OnInit {
   public idParam: string;
   public checkedBoolean: boolean;

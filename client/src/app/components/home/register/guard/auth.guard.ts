@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { AuthenticationService } from '../service/auth.service';
 
 /*
 The auth guard is used to prevent unauthenticated users from accessing restricted routes.
@@ -11,13 +12,15 @@ Here the route access condition is to be logged in (it works on the presence of 
 There can be other conditions too, like role based authentication
  */
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
   canActivate(router: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // check if the user is logged in
-    if (localStorage.getItem('currentUser')) {
+    const currentUser = this.authenticationService.currentUserValue;
+    console.log('currentUser IN GUARD: ', currentUser);
+    if (currentUser) {
       return true;
     }
 
