@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:700,800");
+@import '../../../../roodeo-variables.scss';
+
 * {
   box-sizing: border-box;
 }
@@ -8,33 +10,34 @@
   background-position: bottom left;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 88vh;
+  //height: 88px;
   display: flex;
-  flex-wrap: wrap;
+  color: $text-color;
   padding-top: 80px;
   align-content: center;
-  justify-content: space-around
+  justify-content: space-around;
+  //margin-top: 60px;
 }
 
 .slidingVertical {
   display: inline;
   text-indent: 8px;
-}
 
-.slidingVertical span {
-  animation: topToBottom 11s linear infinite 0s;
-  color: #f2bb13;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-}
+  span {
+    animation: topToBottom 11s linear infinite 0s;
+    color: #f2bb13;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+  }
 
-.slidingVertical span:nth-child(2) {
-  animation-delay: 3.5s;
-}
-
-.slidingVertical span:nth-child(3) {
-  animation-delay: 7s;
+  span:nth-child(2) {
+    animation-delay: 3.5s;
+  }
+  
+  span:nth-child(3) {
+    animation-delay: 7s;
+  }
 }
 
 /*topToBottom Animation*/
@@ -77,11 +80,11 @@
   font-family: "Open Sans", sans-serif;
   font-size: 42px;
   font-weight: 700;
-  color: white;
+  
 }
 
 #text h3 {
-  color: white;
+  
   font-size: 22px;
   font-weight: 400;
 }
@@ -115,7 +118,7 @@ mat-error {
 .custom-buttom {
   border-radius: 0px;
   background-color: #252e38;
-  color: white;
+  
   font-size: 14px;
   font-weight: 600;
   padding: 0px 20px;
