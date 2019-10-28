@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef, 
 import { FormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
+import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 
 import { ApiClientService, API_URI_QUESTIONS, API_URI_CAMPAIGNS } from '../../../../api-client/api-client.service';
 
@@ -37,7 +38,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
       // console.log("this Question: ", this.Questions)
     }
   }
-  constructor(public apiClientService: ApiClientService) { }
+  constructor(public apiClientService: ApiClientService,  public decryptTokenService: DecryptTokenService) { }
 
 
   ngOnInit() {
@@ -134,7 +135,8 @@ export class NouvelleCampagnePage3Component implements OnInit {
       copy_paste: truecp,
       sent_report: envoiRapportSimplifie,
       profile: this.formCampagne.value.roleSelectedId,
-      technologies: this.formCampagne.value.technoSelectedId
+      technologies: this.formCampagne.value.technoSelectedId,
+      user: this.decryptTokenService.userId
     }).subscribe(
       (res) => {
         console.log('resultat from post', res);

@@ -141,27 +141,28 @@ module.exports = {
   },
 
   connect: async (ctx, next) => {
-    const grantConfig = await strapi.store({
-      environment: '',
-      type: 'plugin',
-      name: 'users-permissions',
-      key: 'grant'
-    }).get();
-
-    const [ protocol, host ] = strapi.config.url.split('://');
-    _.defaultsDeep(grantConfig, { server: { protocol, host } });
-
-    const provider = process.platform === 'win32' ? ctx.request.url.split('\\')[2] : ctx.request.url.split('/')[2];
-    const config = grantConfig[provider];
-
-    if (!_.get(config, 'enabled')) {
-      return ctx.badRequest(null, 'This provider is disabled.');
-    }
-
-    const Grant = require('grant-koa');
-    const grant = new Grant(grantConfig);
-
-    return strapi.koaMiddlewares.compose(grant.middleware)(ctx, next);
+    const grantConfig = await strapi
+    .store({
+      environment: "",
+      type: "plugin",
+      name: "users-permissions",
+      key: "grant"
+    })
+    .get();
+  const [protocol, host] = strapi.config.url.split("://");
+  _.defaultsDeep(grantConfig, { server: { protocol, host } });
+  const provider =
+    process.platform === "win32"
+      ? ctx.request.url.split("\\")[2]
+      : ctx.request.url.split("/")[2];
+  const config = grantConfig[provider];
+  if (!_.get(config, "enabled")) {
+    return ctx.badRequest(null, "This provider is disabled.");
+  }
+  const grant = require("grant-koa");
+  const g = grant(grantConfig);
+  ctx.query.code = ctx.query.code && ctx.query.code.replace("\\", "/"); // ADD THIS LINE
+  return g(ctx, next);
   },
 
   forgotPassword: async (ctx) => {

@@ -82,6 +82,11 @@
     "NbCandidatFinish": {
       "default": "",
       "type": "integer"
+    },
+    "user": {
+      "model": "user",
+      "via": "campaigns",
+      "plugin": "users-permissions"
     }
   }
 }
