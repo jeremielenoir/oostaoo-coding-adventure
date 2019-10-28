@@ -6,9 +6,6 @@ import { DecryptTokenService } from 'src/app/components/home/register/register.s
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-
-
-
 @Component({
   selector: 'app-compagne',
   templateUrl: './compagne.component.html',
