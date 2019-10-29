@@ -80,32 +80,3 @@ $align-column-mobile: center;
     }
   }
 }
-
-@media screen and (min-width: 200px) and (max-width: 640px) {
-  @mixin fixNumber($size-police) {
-    text-align: center;
-    font-size: $size-police;
-    font-weight: 700;
-  }
-  p.chiffres {
-    @include fixNumber($chiffre-size-mobile);
-  }
-  #compteur {
-    display: flex;
-    padding: 20px;
-    flex-wrap: wrap;
-  }
-  .padding-mobile {
-    padding-bottom: 20px;
-  }
-  #column-left {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  #column-right {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-}
