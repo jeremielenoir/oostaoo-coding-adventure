@@ -8,7 +8,7 @@ import { API_URI_CAMPAIGNS, ApiClientService } from 'src/app/api-client/api-clie
 @Component({
   selector: 'app-general',
   templateUrl: './general.component.html',
-  styleUrls: ['./general.component.css']
+  styleUrls: ['./general.component.scss']
 })
 export class GeneralComponent implements OnInit {
 

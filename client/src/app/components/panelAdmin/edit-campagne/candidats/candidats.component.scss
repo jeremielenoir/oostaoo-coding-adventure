@@ -1,0 +1,172 @@
+/* @import '../../compagne/compagne.component.css'; */
+
+
+// Style sans candidat
+
+
+
+#editQuestion {
+  background-color: #f9f9f9;
+  padding: 5px;
+  padding-left: 18%;
+  /* height: 100vh; */
+
+    .style-link {
+      border-bottom: 1px solid #e4e4e4;
+      color: #7e8082;
+      padding-left: 25px;
+      padding-top: 5px;
+      padding-right: 5px;
+      padding-bottom: 5px;
+      margin-bottom: 0px;
+    }
+
+    .border1pxgray {
+      margin: 5vh;
+      border: 1px solid #e4e4e4;
+      background-color: white;
+    }
+    
+    .border1pxdashedgray {
+      margin: 15px;
+      border: 1px dashed #e4e4e4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-items: center;
+      padding: 50px;
+      /* height: 50vh; */
+      padding-bottom: 13vh
+    }
+    
+    #img-editquestion {
+      background-image: url("../../../../../assets/Coding-game-img/editQuestion.jpg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      width: 100%;
+      height: 50vh;
+    }
+    
+    .btn-question {
+      padding: 0 50px;
+      margin-top: 20px;
+      text-transform: uppercase;
+      height: 50px;
+      font-size: 14px;
+      transition: background-color 200ms;
+      font-weight: 700;
+      background-color: #f2bb13;
+    }
+    
+    .border1pxdashedgray h1 {
+      text-align: center
+    }
+}
+
+
+
+// Style avec candidats
+
+.barre-nav {
+  display: flex;
+  padding: 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+
+
+
+    .candidat-custom-select {
+      border: 1px solid #e4e4e4;
+      background-color: white;
+      /* width: 15%; */
+      display: flex;
+      justify-content: center;
+      height: 50px;
+    }
+
+    .candidat-finish-custom-select {
+      background-color: #20242a;
+      /* width: 15%; */
+      display: flex;
+      justify-content: center;
+      height: 50px;
+    }
+
+    .candidat-finish-custom-select mat-label {
+      color: white;
+    }
+
+    :host .candidat-finish-custom-select ::ng-deep .mat-select-value {
+      color: white;
+    }
+
+
+
+    .fix-button {
+      margin-top: inherit;
+    }
+
+    .custom-input-filtre {
+      width: 50%;
+      border: 1px solid #e4e4e4;
+      background: white;
+      height: 50px;
+    }
+
+    
+
+    .table-container {
+      width: 100%;
+      margin-top: 20px;
+
+      table {
+        width: 100%;
+
+        .mat-row:hover {
+          background-color: #20252a;
+        }
+      
+        .mat-cell:hover {
+          color: white;
+        }
+
+      }
+    } 
+}
+
+:host ::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+:host ::ng-deep .mat-form-field-flex {
+  margin-top: 0px;
+}
+
+filter-table {
+  display: flex;
+}
+
+@media screen and (max-width: 1020px) {
+  #img-editquestion {
+    height: 20vh;
+  }
+  .border1pxdashedgray {
+    padding: 12vh;
+    height: 85vh;
+  }
+  .border1pxgray {
+    margin: inherit;
+    height: 90vh;
+  }
+  h1 {
+    font-size: 1.5em;
+  }
+  #editQuestion {
+    height: 100vh;
+  }
+  .btn-question {
+    padding: 5px;
+  }
+}

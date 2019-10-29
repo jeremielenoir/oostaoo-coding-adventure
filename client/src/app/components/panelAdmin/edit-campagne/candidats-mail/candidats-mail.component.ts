@@ -9,7 +9,7 @@ import {
 @Component({
   selector: 'app-candidats-mail',
   templateUrl: './candidats-mail.component.html',
-  styleUrls: ['./candidats-mail.component.css']
+  styleUrls: ['./candidats-mail.component.scss']
 })
 export class CandidatsMailComponent implements OnInit {
   public campaigns: any;

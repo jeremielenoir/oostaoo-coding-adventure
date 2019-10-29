@@ -19,7 +19,7 @@ import { AuthenticationService } from './service/auth.service';
 
 @Injectable()
 
-export class RegisterComponent implements OnInit {
+ export class RegisterComponent implements OnInit {
 
   public switchPanel = true;
 

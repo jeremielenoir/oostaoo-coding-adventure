@@ -1,119 +1,124 @@
-#new-campaign {
-    min-height: 60vh;
-    width: 71%;
-    margin: 100px auto;
-    font-weight: bold;
-    border: 1px solid #f0eeee;
-    background: white;
-}
 
-.input-length {
-    width: 100%;
-}
+// #new-campaign {
+//     min-height: 60vh;
+//     width: 71%;
+//     margin: 100px auto;
+//     font-weight: bold;
+//     border: 1px solid #f0eeee;
+//     background: white;
+// }
 
-#form {
-    margin: 0 5%;
-}
+// .input-length {
+//     width: 100%;
+// }
 
-#campaign-name p {
-    font-size: 16px;
-    margin-top: 40px;
-}
+// #form {
+//     margin: 0 5%;
+// }
 
-#campaign-name-input {
-    margin-top: 10px;
-    border: 1px solid black;
-    width: 100%;
-    height: 50px;
-}
+// #campaign-name p {
+//     font-size: 16px;
+//     margin-top: 40px;
+// }
 
-#campaign-lang p {
-    margin: 20px 0px;
-}
+// #campaign-name-input {
+//     margin-top: 10px;
+//     border: 1px solid black;
+//     width: 100%;
+//     height: 50px;
+// }
 
-.example-margin {
-    margin: 0px 10px 0 0;
-}
+// #campaign-lang p {
+//     margin: 20px 0px;
+// }
 
-#campaign-copypaste p {
-    margin: 20px 0px;
-    font-weight: bold;
-}
+// .example-margin {
+//     margin: 0px 10px 0 0;
+// }
 
-#radio {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-}
+// #campaign-copypaste p {
+//     margin: 20px 0px;
+//     font-weight: bold;
+// }
 
-#radio p {
-    margin-bottom: 10px;
-    font-weight: bold;
-}
+// #radio {
+//     display: flex;
+//     flex-direction: column;
+//     flex-wrap: wrap;
+//     margin-bottom: 40px;
+// }
 
-.example-radio-button {
-    margin: 0 10px 0 0;
-}
+// #radio p {
+//     margin-bottom: 10px;
+//     font-weight: bold;
+// }
 
-.info {
-    color: #7e8082;
-    margin: 0 15px 0 0px;
-}
+// .example-radio-button {
+//     margin: 0 10px 0 0;
+// }
+
+// .info {
+//     color: #7e8082;
+//     margin: 0 15px 0 0px;
+// }
 
 #bloc-chrono {
     display: flex;
     justify-content: space-between;
+
+    .chrono {
+        width: 48%;
+        padding: 5%;
+        border: 1px solid lightgrey;
+    }
+    
+    .chrono-title {
+        font-size: 18px;
+        padding: 0% 5%;
+        font-weight: 700;
+        text-align: center;
+    }
+    
+    .chrono-last-line {
+        margin-top: 20px;
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    .chrono-input {
+        width: 100%;
+    }
 }
 
-.chrono {
-    width: 48%;
-    padding: 5%;
-    border: 1px solid lightgrey;
-}
 
-.chrono-title {
-    font-size: 18px;
-    padding: 0% 5%;
-    font-weight: 700;
-    text-align: center;
-}
-
-.chrono-last-line {
-    margin-top: 20px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.chrono-input {
-    width: 100%;
-}
 
 #button-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    
+    .button {
+        height: 50px;
+        margin: 20px 0 90px;
+        width: 48%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        cursor: pointer;
+        border-radius: 0px;
+    }
+    
+    .grey {
+        background: grey;
+    }
+    
+    .yellow {
+        background: #f2bb31;
+    }
 }
 
-.button {
-    height: 50px;
-    margin: 20px 0 90px;
-    width: 48%;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    cursor: pointer;
-    border-radius: 0px;
-}
 
-.grey {
-    background: grey;
-}
-
-.yellow {
-    background: #f2bb31;
-}
 
 :host ::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
     opacity: 0.5 !important;

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-edit-campagne',
   templateUrl: './edit-campagne.component.html',
-  styleUrls: ['./edit-campagne.component.css']
+  styleUrls: ['./edit-campagne.component.scss']
 })
 export class EditCampagneComponent implements OnInit {
 

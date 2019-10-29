@@ -6,7 +6,7 @@ import {ApiClientService, API_URI_CAMPAIGNS} from '../../../../api-client/api-cl
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+  styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
 

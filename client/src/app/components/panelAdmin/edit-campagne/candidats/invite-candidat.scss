@@ -1,0 +1,48 @@
+.modal-candidat {
+  padding: 50px;
+
+  .header-question {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #f2bb13; */
+
+      h2 {
+        margin-bottom: 0px !important;
+        font-weight: 600;
+        color: black;
+      }
+      
+      p {
+        color: #7e8082;
+      }
+
+      .rond-custom {
+        padding: 10px;
+        border-radius: 50px;
+        border: 1px solid #f2bb13;
+        height: 30px;
+        line-height: 10px;
+      }
+  }
+  
+
+  
+  .content-modal-question {
+    padding: 24px;
+  }
+  
+  // .btn-question {
+  //   padding: 0 15px;
+  //   margin-top: 20px;
+  //   text-transform: uppercase;
+  //   height: 50px;
+  //   font-size: 14px;
+  //   transition: background-color 200ms;
+  //   font-weight: 700;
+  //   height: 50px;
+  //   background-color: #f2bb13;
+  // }
+}
+

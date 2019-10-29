@@ -10,7 +10,7 @@ import {
 @Component({
   selector: 'app-candidats',
   templateUrl: './candidats.component.html',
-  styleUrls: ['./candidats.component.css'],
+  styleUrls: ['./candidats.component.scss'],
 })
 export class CandidatsComponent implements OnInit {
   public globalId: string;
