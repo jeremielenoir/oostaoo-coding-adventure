@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { API_URI_CAMPAIGNS, ApiClientService } from './../../../../api-client/api-client.service';
 
 // authentication service is used to LOGIN and LOGOUT of the application
 // it posts the creds (username and password) to the backend and check for the response if it has JWT token
@@ -14,7 +15,7 @@ const config = {
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   currentUserSubject: BehaviorSubject<any>;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public apiClientService: ApiClientService) {
     this.currentUserSubject = new BehaviorSubject(localStorage.getItem('currentUser'));
   }
 
@@ -46,5 +47,9 @@ export class AuthenticationService {
   logout() {
     // remove user from local storage
     localStorage.removeItem('currentUser');
+  }
+
+  getCampaignsUser(idUser: number) {
+    return this.apiClientService.get(API_URI_CAMPAIGNS + '?user_in=' + idUser).toPromise();
   }
 }

@@ -19,7 +19,7 @@ export class DashboadCampagneComponent implements OnInit {
 
   }
   getCampaignsFromChild(campaigns) {
-    // console.log('my campaigns from dashboard-campagne', campaigns);
+    console.log('my campaigns from dashboard-campagne', campaigns);
     this.campaigns = campaigns;
   }
 

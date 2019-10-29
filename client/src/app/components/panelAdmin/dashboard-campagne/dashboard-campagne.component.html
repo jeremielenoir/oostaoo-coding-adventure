@@ -1,14 +1,25 @@
 <div class="rowter">
-
-  <app-route-component (ContentViewDefault)="DefaultViewContent($event)"></app-route-component>
-  <div class="header-notification" [class.header-notification-default-text]="booleanViewContentDefault">
+  <app-route-component
+    (ContentViewDefault)="DefaultViewContent($event)"
+  ></app-route-component>
+  <div
+    class="header-notification"
+    [class.header-notification-default-text]="booleanViewContentDefault"
+  >
     <span>Mes campagnes</span>
   </div>
-  <section class=" view-content" [class.new-contenu-view-content]="booleanViewContentDefault">
-
+  <section
+    class=" view-content"
+    [class.new-contenu-view-content]="booleanViewContentDefault"
+  >
     <div class="contenu-view-content">
-      <app-compagne (campaignsChild)="getCampaignsFromChild($event)"></app-compagne>
-      <app-sidibar-right *ngIf="campaigns" [campaignsFromParent]="campaigns"></app-sidibar-right>
+      <app-compagne
+        (campaignsChild)="getCampaignsFromChild($event)"
+      ></app-compagne>
+      <app-sidibar-right
+        *ngIf="campaigns"
+        [campaignsFromParent]="campaigns"
+      ></app-sidibar-right>
     </div>
   </section>
 </div>

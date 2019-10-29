@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthenticationService } from './../../home/register/service/auth.service';
 
 @Component({
   selector: 'app-compagne',
@@ -18,42 +19,20 @@ export class CompagneComponent implements OnInit {
   @Output() campaignsChild = new EventEmitter<any>();
   public searchText = '';
 
-  constructor(public apiClientService: ApiClientService, public dialog: MatDialog, public decryptTokenService: DecryptTokenService) {
+  constructor(public apiClientService: ApiClientService, public dialog: MatDialog,
+              public decryptTokenService: DecryptTokenService,
+              public authenticationService: AuthenticationService) {
     this.searchHeader = null;
   }
 
   ngOnInit() {
-    this.getCampaigns();
     console.log(this.decryptTokenService.userId);
-    // Observable.of(campaigns)
-    // .map(content => JSON.parse(content))
-    // .concatMap(arr => Observable.from(arr.data))
-    // .filter(user.id => user.id.Type === 5)
-    // .subscribe(val => console.log(val))
+    this.authenticationService.getCampaignsUser(this.decryptTokenService.userId).then(resultat => {
+      console.log('CONNECTED GET CAMPAING: ', resultat);
+      this.campaigns = resultat;
+      this.giveCampaigns();
+    });
   }
-
-  getCampaigns(): Promise<any> {
-    // return this.apiClientService
-    //   .get(API_URI_CAMPAIGNS)
-    //   .toPromise()
-    //   .then((datas) => {
-    //     this.campaigns = datas;
-    //     console.log('CAMPAIGNS', this.campaigns);
-    //     this.giveCampaigns();
-    //   });
-       return this.apiClientService.get(API_URI_CAMPAIGNS).toPromise().then(campaigns => {
-        for (const campaign of campaigns) {
-         if (campaign.user.id === this.decryptTokenService.userId) {
-           console.log(campaign);
-           this.campaigns.push(campaign);
-         }
-        }
-        this.giveCampaigns();
-      }
-    );
-  }
-
-
 
   openDialog(idCampaign) {
     const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
@@ -68,7 +47,10 @@ export class CompagneComponent implements OnInit {
   }
 
   giveCampaigns() {
-    this.campaignsChild.emit(this.campaigns);
+    console.log('CAMPAINGS GIVE CAMPAIGNS: ', this.campaigns);
+    if (this.campaigns) {
+      this.campaignsChild.emit(this.campaigns);
+    }
   }
 
 }
