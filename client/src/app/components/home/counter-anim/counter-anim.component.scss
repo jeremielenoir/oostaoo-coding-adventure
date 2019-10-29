@@ -64,14 +64,14 @@ $align-column-mobile: center;
       padding-top: 20px;
       padding-bottom: 0px;
     }
-    #column-left {
+    .column-left {
       @include structureBlock(
         $width-column-desktop,
         $display-column-device,
         $align-column-desktop
       );
     }
-    #column-right {
+    .column-right {
       @include structureBlock(
         $width-column-desktop,
         $display-column-device,
