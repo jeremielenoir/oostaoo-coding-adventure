@@ -1,14 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { AuthFormVerification } from 'src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator';
+import { Component, OnInit, Input } from "@angular/core";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { AuthFormVerification } from "src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator";
 
 @Component({
-  selector: 'app-nouvelle-campagne',
-  templateUrl: './nouvelle-campagne.component.html',
-  styleUrls: ['./nouvelle-campagne.component.css']
+  selector: "app-nouvelle-campagne",
+  templateUrl: "./nouvelle-campagne.component.html",
+  styleUrls: ["./nouvelle-campagne.component.scss"]
 })
 export class NouvelleCampagneComponent implements OnInit {
-
   nNumeorPage: number;
   ParentFormCampagne: FormGroup;
   public oAuthFormVerification: AuthFormVerification;
@@ -20,15 +19,18 @@ export class NouvelleCampagneComponent implements OnInit {
     this.oAuthFormVerification = new AuthFormVerification();
     this.ParentFormCampagne = this._formBuilder.group({
       role: this.oAuthFormVerification.getRoleValidator(),
-      roleSelectedId: { id: '' },
+      roleSelectedId: { id: "" },
       techno: this.oAuthFormVerification.getTechnoValidator(),
       technoSelectedId: [],
-      experience: ['junior', this.oAuthFormVerification.getExperienceValidator()],
-      utilisationCopieColler: 'false',
-      envoiRapportSimplifie: 'false',
-      nomDeCampagne: '',
+      experience: [
+        "junior",
+        this.oAuthFormVerification.getExperienceValidator()
+      ],
+      utilisationCopieColler: "false",
+      envoiRapportSimplifie: "false",
+      nomDeCampagne: "",
       langue: [],
-      CampaignID: { id: '' }
+      CampaignID: { id: "" }
     });
   }
 
@@ -43,17 +45,16 @@ export class NouvelleCampagneComponent implements OnInit {
   }
 
   getTechno(techno: Array<string>) {
-    return this.technoFromChild = techno;
+    return (this.technoFromChild = techno);
   }
 
   getProfil(profil: string) {
-    return this.selectProfilFromChild = profil;
+    return (this.selectProfilFromChild = profil);
   }
 
   showtechno() {
-    console.log('this.technoFromChild: ', this.technoFromChild);
+    console.log("this.technoFromChild: ", this.technoFromChild);
   }
-
 
   public nextPage(): void {
     this.nNumeorPage++;

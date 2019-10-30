@@ -1,4 +1,4 @@
-@import "./route-component.component.css";
+@import "./route-component.component.scss";
 /* CLASS COMMON */
 
 .white {
@@ -46,7 +46,8 @@
 
 /* CLASS COMMON */
 
-#popup {}
+#popup {
+}
 
 #titre {
   display: flex;

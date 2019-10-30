@@ -1,17 +1,22 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { AuthFormVerification } from 'src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator';
-import { ApiClientService, API_URI_TECHNO, API_URI_PROFILES } from '../../../../api-client/api-client.service';
-import { MatSelectChange } from '@angular/material';
-
+import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { AuthFormVerification } from "src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator";
+import {
+  ApiClientService,
+  API_URI_TECHNO,
+  API_URI_PROFILES
+} from "../../../../api-client/api-client.service";
+import { MatSelectChange } from "@angular/material";
 
 @Component({
-  selector: 'app-profile-rechercher',
-  templateUrl: './nouvelle-campagne.component.html',
-  styleUrls: ['./nouvelle-campagne.component.css', '../nouvelle-campagne.component.css']
+  selector: "app-profile-rechercher",
+  templateUrl: "./nouvelle-campagne.component.html",
+  styleUrls: [
+    "./nouvelle-campagne.component.scss",
+    "../nouvelle-campagne.component.scss"
+  ]
 })
 export class NouvelleCampagnePage1Component implements OnInit {
-
   @Output() incrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
   @Input() technoByParent;
@@ -29,21 +34,65 @@ export class NouvelleCampagnePage1Component implements OnInit {
   @Output() valueChange = new EventEmitter();
   @Output() valueChangeProfil = new EventEmitter();
 
-  TechnoList: string[] = ['AWS', 'Android', 'Angular 2+', 'AngularJS (1.x)', 'Apache Spark', 'C', 'C#', 'C++',
-    'Data Science', 'Docker', 'Git', 'Hadoop Ecosystem', 'Java', 'Javascript, HTML, CSS',
-    'Mobile iOS/Swift', 'Node.js', 'PHP', 'Python 3', 'React', 'SQL', 'Scala', 'Spring Framework',
-    'Symfony', 'Windows Administration'];
+  TechnoList: string[] = [
+    "AWS",
+    "Android",
+    "Angular 2+",
+    "AngularJS (1.x)",
+    "Apache Spark",
+    "C",
+    "C#",
+    "C++",
+    "Data Science",
+    "Docker",
+    "Git",
+    "Hadoop Ecosystem",
+    "Java",
+    "Javascript, HTML, CSS",
+    "Mobile iOS/Swift",
+    "Node.js",
+    "PHP",
+    "Python 3",
+    "React",
+    "SQL",
+    "Scala",
+    "Spring Framework",
+    "Symfony",
+    "Windows Administration"
+  ];
 
-  RoleList: string[] = ['Développeur Angular Front-End', 'Administrateur base de données (SQL)',
-    'Data Engineer (Hadoop, Spark)', 'Data Scientist (Python)', 'Développeur .NET C#',
-    'Développeur .NET C# Back-End', 'Développeur AngularJS Front-End', 'Développeur C',
-    'Développeur C# Full Stack', 'Développeur C++', 'Développeur Hadoop', 'Développeur Java',
-    'Développeur Java Back-End', 'Développeur Java Full Stack', 'Développeur Java Spring Back-End',
-    'Développeur Mobile Android', 'Développeur Mobile iOS (Swift)', 'Développeur Node.js',
-    'Développeur PHP', 'Développeur PHP Fullstack', 'Développeur PHP Symfony', 'Développeur Python',
-    'Développeur React Front-End', 'Développeur Scala', 'Développeur Spark',
-    'Développeur Web (JavaScript, HTML, CSS)', 'Expert Git', 'Ingénieur DevOps AWS/Docker',
-    'SysAdmin Windows', 'Personnalisé'];
+  RoleList: string[] = [
+    "Développeur Angular Front-End",
+    "Administrateur base de données (SQL)",
+    "Data Engineer (Hadoop, Spark)",
+    "Data Scientist (Python)",
+    "Développeur .NET C#",
+    "Développeur .NET C# Back-End",
+    "Développeur AngularJS Front-End",
+    "Développeur C",
+    "Développeur C# Full Stack",
+    "Développeur C++",
+    "Développeur Hadoop",
+    "Développeur Java",
+    "Développeur Java Back-End",
+    "Développeur Java Full Stack",
+    "Développeur Java Spring Back-End",
+    "Développeur Mobile Android",
+    "Développeur Mobile iOS (Swift)",
+    "Développeur Node.js",
+    "Développeur PHP",
+    "Développeur PHP Fullstack",
+    "Développeur PHP Symfony",
+    "Développeur Python",
+    "Développeur React Front-End",
+    "Développeur Scala",
+    "Développeur Spark",
+    "Développeur Web (JavaScript, HTML, CSS)",
+    "Expert Git",
+    "Ingénieur DevOps AWS/Docker",
+    "SysAdmin Windows",
+    "Personnalisé"
+  ];
 
   constructor(public apiClientService: ApiClientService) {
     this.oAuthFormVerification = new AuthFormVerification();
@@ -61,14 +110,14 @@ export class NouvelleCampagnePage1Component implements OnInit {
   // }
 
   getProfiles() {
-    this.apiClientService.get(API_URI_PROFILES).subscribe((datas) => {
-      return this.profiles = datas;
+    this.apiClientService.get(API_URI_PROFILES).subscribe(datas => {
+      return (this.profiles = datas);
     });
   }
 
   getTechnos() {
-    this.apiClientService.get(API_URI_TECHNO).subscribe((datas) => {
-      return this.technos = datas;
+    this.apiClientService.get(API_URI_TECHNO).subscribe(datas => {
+      return (this.technos = datas);
     });
   }
   selected(event: MatSelectChange) {
@@ -81,32 +130,36 @@ export class NouvelleCampagnePage1Component implements OnInit {
         });
         const technoData = [];
         const technoDataID = [];
-        iterator.technologies.forEach((item) => {
+        iterator.technologies.forEach(item => {
           // console.log('item forEach : ', item);
           technoData.push(item);
           technoDataID.push(item.id);
         });
         this.technosSelect = technoData;
-        console.log('this.technosSelect: ', this.technosSelect);
+        console.log("this.technosSelect: ", this.technosSelect);
         this.formCampagne.patchValue({
           techno: technoData,
           technoSelectedId: technoDataID
         });
       }
     }
-    console.log('this.formCampagne.value: ', this.formCampagne.value);
+    console.log("this.formCampagne.value: ", this.formCampagne.value);
   }
 
-
   getTechnoChecked() {
-    console.log('this.formCampagne.value.techno: ', this.formCampagne.value.techno);
+    console.log(
+      "this.formCampagne.value.techno: ",
+      this.formCampagne.value.techno
+    );
     for (const profile of this.profiles) {
-      if (this.profileHasTechnologies(profile, this.formCampagne.value.techno)) {
-        console.log('profile : ', profile);
+      if (
+        this.profileHasTechnologies(profile, this.formCampagne.value.techno)
+      ) {
+        console.log("profile : ", profile);
         this.roleSelect = profile.name;
         break;
       } else {
-        this.roleSelect = 'Personnalisé';
+        this.roleSelect = "Personnalisé";
       }
     }
     const technoDataID = [];
@@ -118,7 +171,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
     this.formCampagne.patchValue({
       technoSelectedId: technoDataID
     });
-    console.log('this.formCampagne.value: ', this.formCampagne.value);
+    console.log("this.formCampagne.value: ", this.formCampagne.value);
   }
 
   compareObjects(o1: any, o2: any): boolean {
@@ -129,9 +182,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
     return o1.id === o2.id;
   }
 
-
   profileHasTechnologies(profile: any, listTechno: Array<string>): boolean {
-
     if (profile.technologies.length !== listTechno.length) {
       return false;
     }
@@ -140,7 +191,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
     for (const techno of profile.technologies) {
       // console.log('techno: ', techno);
       for (const technoFromList of listTechno) {
-        if (techno.name === technoFromList['name']) {
+        if (techno.name === technoFromList["name"]) {
           nbCounterTechno++;
         }
       }
@@ -148,8 +199,9 @@ export class NouvelleCampagnePage1Component implements OnInit {
     return profile.technologies.length === nbCounterTechno;
   }
 
-  valueChanged() { // You can give any function name
-    console.log('this.technosSelect: ', this.technosSelect);
+  valueChanged() {
+    // You can give any function name
+    console.log("this.technosSelect: ", this.technosSelect);
     this.valueChange.emit(this.technosSelect);
     this.valueChangeProfil.emit(this.roleSelect);
   }
@@ -157,31 +209,33 @@ export class NouvelleCampagnePage1Component implements OnInit {
   // validation du formulaire et passage à l'étap suivante.
   public onIncrementPage(pDatafromValue: any): void {
     this.formValid(pDatafromValue);
-    if (AuthFormVerification._sMessageError === '') {
-      this.incrementPage.emit();  // Déclenche l'output pour passer à la paga suivante.
+    if (AuthFormVerification._sMessageError === "") {
+      this.incrementPage.emit(); // Déclenche l'output pour passer à la paga suivante.
     }
   }
 
   public formValid(pDatafromValue: any): void {
-
     AuthFormVerification.startVerificationFrom();
 
-    if (AuthFormVerification.validateExprience(pDatafromValue.experience) === false) {
+    if (
+      AuthFormVerification.validateExprience(pDatafromValue.experience) ===
+      false
+    ) {
       this.errorExperience = AuthFormVerification._sMessageError;
     } else {
-      this.errorExperience = '';
+      this.errorExperience = "";
     }
 
     if (AuthFormVerification.validateRole(pDatafromValue.role) === false) {
       this.errorRole = AuthFormVerification._sMessageError;
     } else {
-      this.errorRole = '';
+      this.errorRole = "";
     }
 
     if (AuthFormVerification.validateTechno(pDatafromValue.techno) === false) {
       this.errorTechno = AuthFormVerification._sMessageError;
     } else {
-      this.errorTechno = '';
+      this.errorTechno = "";
     }
   }
 }

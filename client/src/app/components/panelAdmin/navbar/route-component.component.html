@@ -64,7 +64,7 @@
           MODIFIER MON OFFRE
         </button>
       </div>
-      <button mat-stroked-button class=" custom-button">
+      <button mat-stroked-button class="custom-button">
         <i class="fa fa-crosshairs fa-2x color-site" aria-hidden="true"></i>
         SOURCING
       </button>
@@ -240,11 +240,17 @@
       mat-button
       (click)="Activet_isShow()"
       class="custom-button-nav"
-      (click)="active_menu()"
     >
-      <i class="fa fa-arrow-left fa-2x" aria-hidden="true" id="btn-arrow"></i>
+      <i
+        class="fa fa-2x"
+        aria-hidden="true"
+        id="btn-arrow"
+        [ngClass]="isShow ? 'fa-arrow-left' : 'fa-arrow-right'"
+      ></i>
     </button>
   </div>
+
+  <!-- (click)="active_menu()" -->
   <!-- button for show or hidden nav in desktop -->
   <div id="menu-nav-mobile">
     <div id="nav-mobile">

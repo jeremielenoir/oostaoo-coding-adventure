@@ -1,10 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { MatBottomSheet, MatBottomSheetRef } from "@angular/material";
 
 @Component({
-  selector: 'app-route-component',
-  templateUrl: './route-component.component.html',
-  styleUrls: ['./route-component.component.css']
+  selector: "app-route-component",
+  templateUrl: "./route-component.component.html",
+  styleUrls: ["./route-component.component.scss"]
 })
 export class RouteComponentComponent implements OnInit {
   isShowNavCompte = false;
@@ -15,41 +15,40 @@ export class RouteComponentComponent implements OnInit {
 
   @Output() ContentViewDefault = new EventEmitter<any>();
 
-
-  constructor(private bottomSheet: MatBottomSheet) { }
+  constructor(private bottomSheet: MatBottomSheet) {}
   openBottomSheet(): void {
     this.bottomSheet.open(PopupMonOffre);
   }
-  ngOnInit() {
+  ngOnInit() {}
 
-  }
+  // public active_menu() {
+  //   const totalLeft = document.getElementById("totalLeft");
+  //   const btnArrow = document.getElementById("btn-arrow");
 
-  public active_menu() {
+  //   // totalLeft.classList.toggle("new-totalLeft");
 
-    const totalLeft = document.getElementById('totalLeft');
-    const btnArrow = document.getElementById('btn-arrow');
+  //   btnArrow.classList.add("fa-arrow-left");
+  //   btnArrow.classList.toggle("fa-arrow-right");
 
-    totalLeft.classList.toggle('new-totalLeft');
-
-    btnArrow.classList.toggle('fa-arrow-right');
-
-    this.ContentViewDefault.emit(this.viewcontentDefaults = !this.viewcontentDefaults);
-  }
+  //   this.ContentViewDefault.emit(
+  //     (this.viewcontentDefaults = !this.viewcontentDefaults)
+  //   );
+  // }
 
   public Activet_isShow() {
-    this.isShow = !this.isShow;
+    setTimeout(() => {
+      this.isShow = !this.isShow;
+    }, 1000);
   }
-
 }
 
 @Component({
-  selector: 'popup-mon-offre',
-  templateUrl: './popup-mon-offre.html',
-  styleUrls: ['./popup-mon-offre.css'],
+  selector: "popup-mon-offre",
+  templateUrl: "./popup-mon-offre.html",
+  styleUrls: ["./popup-mon-offre.css"]
 })
-
 export class PopupMonOffre {
-  constructor(private bottomSheetRef: MatBottomSheetRef<PopupMonOffre>) { }
+  constructor(private bottomSheetRef: MatBottomSheetRef<PopupMonOffre>) {}
 
   openLink(event: MouseEvent): void {
     this.bottomSheetRef.dismiss();
