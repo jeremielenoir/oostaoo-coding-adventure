@@ -105,7 +105,7 @@ p {
         .image {
           width: 200px;
           height: 200px;
-          background-image: url("../../../../assets/fileservlet.png");
+          background-image: url($logoPath);
           background-size: cover;
           @media #{$deviceMaxDesktop} {
             width: 130px !important;
