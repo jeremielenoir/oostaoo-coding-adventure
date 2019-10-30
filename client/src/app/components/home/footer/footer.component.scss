@@ -5,6 +5,9 @@ $color-dash-text-footer: #f2bb13;
 
 @mixin structureBlock($padding, $parellex: false) {
   padding: $padding;
+  @media #{$smallDevice} {
+    padding: 25px 25px 50px 25px;
+  }
   .row-footer {
     max-width: 1400px;
     margin-left: auto;
@@ -17,6 +20,9 @@ $color-dash-text-footer: #f2bb13;
       .parellex {
         padding: 10px;
         width: 20%;
+        @media #{$smallDevice} {
+          width: 100%;
+        }
         .title-elementor {
           font-family: "Open Sans", sans-serif;
           font-size: 18px;
@@ -134,6 +140,9 @@ $color-dash-text-footer: #f2bb13;
     } @else {
       .parellex-img {
         width: 5.714%;
+        @media #{$smallDevice} {
+          width: 100%;
+        }
         display: inline-block;
         text-align: center;
         img {
@@ -151,6 +160,11 @@ $color-dash-text-footer: #f2bb13;
         font-weight: 500;
         display: flex;
         align-items: center;
+        @media #{$smallDevice} {
+          text-align: center;
+          display: inline-block;
+          width: 100%;
+        }
       }
     }
   }
@@ -170,26 +184,3 @@ $color-dash-text-footer: #f2bb13;
     @include structureBlock($padding-block, $parellex: true);
   }
 }
-
-// @media (max-width: 1024px) and (min-width: 768px) {
-//     .parellex {
-//         width: 25%;
-//     }
-// }
-
-// @media (max-width: 767px) {
-//     #block_one, #block_deux {
-//         padding: 25px 25px 50px 25px;
-//     }
-//     .parellex {
-//         width: 100%;
-//     }
-//     .parellex-img {
-//         width: 100%
-//     }
-//     .heading-title {
-//         text-align: center;
-//         display: inline-block;
-//         width: 100%;
-//     }
-// }
