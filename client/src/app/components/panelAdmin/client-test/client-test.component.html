@@ -1,8 +1,6 @@
 <div [ngSwitch]="StatueTestingQuestion">
   <div *ngSwitchCase="'eval'">
     <div id="shadow-cog" [class.shadow-cog-active]="ActiveTest">
-      <div id="remove"></div>
-
       <div class="modall">
         <div class="modall-header">
           <h3 class="modall-title">
@@ -23,7 +21,7 @@
             d'utilisation sont privilégiées par le système de notation.
           </p>
 
-          <p class=" claire-text">
+          <p class="claire-text">
             Nous vous rappelons qu'il est interdit de tricher. Notre système
             détecte les tentatives de triche, et préviendra le recruteur le cas
             échéant.
@@ -60,7 +58,7 @@
       </div>
     </div>
 
-    <section id="container">
+    <section class="container">
       <div class="test-container">
         <div class="invitation">
           <div class="test-invit">
@@ -112,7 +110,7 @@
               {{ durationMaxTest }} minutes. Merci de prévoir
               {{ durationMaxTest }} minutes consécutives pour faire ce test.
             </p>
-            <button class="btn-compo yellow" (click)="hundleActiveTest()">
+            <button class="btn-compo" (click)="hundleActiveTest()">
               Démarrer le test
             </button>
           </div>

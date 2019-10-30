@@ -5,7 +5,7 @@ import { API_URI_CAMPAIGNS, ApiClientService, API_URI_CANDIDATS } from '../../..
 @Component({
   selector: 'app-client-test',
   templateUrl: './client-test.component.html',
-  styleUrls: ['./client-test.component.css']
+  styleUrls: ['./client-test.component.scss']
 })
 
 export class ClientTestComponent implements OnInit {

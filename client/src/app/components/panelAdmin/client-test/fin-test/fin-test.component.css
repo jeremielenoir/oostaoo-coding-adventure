@@ -1,4 +1,5 @@
-@import '../client-test.component.css';
+/* @import '../client-test.component.scss'; */
+
 .oos-margin-left {
   margin-left: 20px;
 }
@@ -71,6 +72,6 @@
   border: inherit !important;
 }
 
-.example-full-width{
+.example-full-width {
   margin-top: 20px;
 }
