@@ -14,7 +14,7 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-facturation',
   templateUrl: './facturation.component.html',
-  styleUrls: ['./facturation.component.css']
+  styleUrls: ['./facturation.component.scss']
 })
 export class FacturationComponent implements OnInit {
 

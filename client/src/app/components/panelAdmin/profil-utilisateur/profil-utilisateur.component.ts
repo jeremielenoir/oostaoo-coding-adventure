@@ -6,7 +6,7 @@ import { DecryptTokenService } from 'src/app/components/home/register/register.s
 @Component({
   selector: 'app-profil-utilisateur',
   templateUrl: './profil-utilisateur.component.html',
-  styleUrls: ['./profil-utilisateur.component.css']
+  styleUrls: ['./profil-utilisateur.component.scss']
 })
 export class ProfilUtilisateurComponent implements OnInit {
 

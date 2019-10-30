@@ -5,7 +5,7 @@ import { DecryptTokenService } from 'src/app/components/home/register/register.s
 @Component({
   selector: 'app-protection-de-donnees',
   templateUrl: './protection-de-donnees.component.html',
-  styleUrls: ['./protection-de-donnees.component.css']
+  styleUrls: ['./protection-de-donnees.component.scss']
 })
 export class ProtectionDeDonneesComponent implements OnInit {
 
