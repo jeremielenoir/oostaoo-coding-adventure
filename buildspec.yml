@@ -23,7 +23,7 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
-      - cd client && npm run build
+      - cd ../client && npm run build
     finally:
       - echo This always runs even if the install command fails
   post_build:
