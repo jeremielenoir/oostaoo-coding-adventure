@@ -10,6 +10,8 @@ phases:
       nodejs: 10
     commands:
       - echo Entered the install phase...
+      - cd client && npm install
+      - cd server && npm install
     finally:
       - echo This always runs even if the update or install command fails 
   pre_build:
@@ -21,6 +23,7 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
+      - cd client && npm run build
     finally:
       - echo This always runs even if the install command fails
   post_build:
