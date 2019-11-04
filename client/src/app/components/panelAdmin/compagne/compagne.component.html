@@ -1,5 +1,5 @@
 <div class="contenu-view-content-left">
-  <div class="header-form-contenu">
+  <div>
     <div class="header-form">
       <div class="sous-header-form">
         <div class="form-group-header">
@@ -14,7 +14,6 @@
               class="champ-header-contenu"
               placeholder="Filtrer par titre ou candidat"
               id="search-header"
-              (input)="Hundelesearch($event)"
             />
           </form>
         </div>
@@ -32,12 +31,12 @@
   </div>
 
   <div class="contenu-techno">
-    <div class="sidibar-header contenu-techno-header">
-      <span class="icon-contenu contenu-techno-header-icon">
+    <div class="contenu-techno-header">
+      <span class="contenu-techno-header-icon">
         <i class="far fa-list-alt"></i>
       </span>
 
-      <h2 class="sidibar-header-title contenu-techno-header-title">
+      <h2 class="contenu-techno-header-title">
         Campagnes
       </h2>
     </div>
@@ -59,7 +58,10 @@
                 <span>Invité</span>
               </span>
               <span class="branche-content-noti-item">
-                <strong>1</strong>
+                <strong
+                  >{{ campaign.NbCandidatFinish !== null ?
+                  campaign.NbCandidatFinish : 0 }}</strong
+                >
                 <span>Terminé</span>
               </span>
             </div>
@@ -69,7 +71,6 @@
         <div class="branche-content-list-end">
           <span
             class="branche-content-list-end-contenu-icon"
-            (click)="recupID(campaign.id)"
             (click)="openDialog(campaign.id)"
           >
             <i class="far fa-user"></i>

@@ -31,9 +31,41 @@
       "default": "",
       "type": "date"
     },
-    "updated_at": {
+    "token": {
+      "default": "",
+      "type": "string"
+    },
+    "duree": {
+      "default": "",
+      "type": "integer"
+    },
+    "test_terminer": {
       "default": "",
       "type": "date"
+    },
+    "test_ouvert": {
+      "default": "",
+      "type": "date"
+    },
+    "index_question": {
+      "default": "",
+      "type": "integer"
+    },
+    "test_pause": {
+      "default": "",
+      "type": "integer"
+    },
+    "date_pause": {
+      "default": "",
+      "type": "date"
+    },
+    "raport_candidat": {
+      "default": "",
+      "type": "json"
+    },
+    "points_candidat": {
+      "default": "",
+      "type": "json"
     }
   }
 }

@@ -12,15 +12,10 @@
       <div class="col-md-5">
         <div id="select">
           <div>
-            <label for="role" [ngStyle]="errorRole ? { color: 'red' } : null"
-              >Sélectionnez un rôle</label
-            >
+            <label for="role" [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</label>
             <mat-form-field [formGroup]="formCampagne">
-              <mat-select
-                name="role"
-                formControlName="role"
-                (selectionChange)="selected($event)"
-              >
+              <mat-select name="role" formControlName="role" [(ngModel)]="roleSelect"
+                (selectionChange)="selected($event)">
                 <mat-option *ngFor="let role of profiles" [value]="role.name">{{
                   role.name
                 }}</mat-option>
@@ -37,23 +32,14 @@
       <div class="col-md-5">
         <div id="select">
           <div>
-            <label
-              for="techno"
-              [ngStyle]="errorTechno ? { color: 'red' } : null"
-              >Sélectionnez les technologies à tester</label
-            >
+            <label for="techno" [ngStyle]="errorTechno ? { color: 'red' } : null">Sélectionnez les technologies à
+              tester</label>
             <mat-form-field [formGroup]="formCampagne">
-              <mat-select
-                multiple
-                name="techno"
-                formControlName="techno"
-                [(ngModel)]="selectedValue"
-              >
-                <mat-option
-                  *ngFor="let techno of technos"
-                  [value]="techno.name"
-                  >{{ techno.name }}</mat-option
-                >
+              <mat-select multiple name="techno" formControlName="techno" [compareWith]="compareObjects"
+                [(ngModel)]="technosSelect" (selectionChange)="getTechnoChecked()">
+                <mat-option *ngFor="let techno of technos" [value]="techno">{{
+                  techno.name
+                }}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -62,35 +48,25 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <label
-          for="experience"
-          [ngStyle]="errorExperience ? { color: 'red' } : null"
-          >Sélectionnez l'expérience requise</label
-        >
+        <label for="experience" [ngStyle]="errorExperience ? { color: 'red' } : null">Sélectionnez l'expérience
+          requise</label>
         <div class="example-radio-button" [formGroup]="formCampagne">
           <mat-radio-group formControlName="experience">
-            <mat-radio-button value="junior">
+            <mat-radio-button value="facile" checked>
               Junior
-              <i
-                class="fas fa-info-circle info"
-                title="Questions et challenges de code pour des développeurs de 0 à 2 ans d'expérience."
-              >
+              <i class="fas fa-info-circle info"
+                title="Questions et challenges de code pour des développeurs de 0 à 2 ans d'expérience.">
               </i>
             </mat-radio-button>
-            <mat-radio-button value="senior"
-              >Sénior
-              <i
-                class="fas fa-info-circle info"
-                title="Questions et challenges de code pour des développeurs de 3 à 5 ans d'expérience."
-              >
+            <mat-radio-button value="moyen">Sénior
+              <i class="fas fa-info-circle info"
+                title="Questions et challenges de code pour des développeurs de 3 à 5 ans d'expérience.">
               </i>
             </mat-radio-button>
             <mat-radio-button value="expert">
               Expert
-              <i
-                class="fas fa-info-circle info"
-                title="Questions et challenges de code pour des développeurs qui ont une expertise sur une ou plusieurs technologies."
-              >
+              <i class="fas fa-info-circle info"
+                title="Questions et challenges de code pour des développeurs qui ont une expertise sur une ou plusieurs technologies.">
               </i>
             </mat-radio-button>
           </mat-radio-group>
@@ -100,12 +76,8 @@
     <div class="row formQuestion finalQuestion">
       <div class="col-md-12">
         <div class="button">
-          <button
-            type="button"
-            id="button"
-            mat-flat-button
-            (click)="onIncrementPage(formCampagne.value)"
-          >
+          <button type="button" id="button" mat-flat-button (click)="onIncrementPage(formCampagne.value)"
+            (click)="valueChanged()">
             Étapes suivante : Paramètres
           </button>
         </div>

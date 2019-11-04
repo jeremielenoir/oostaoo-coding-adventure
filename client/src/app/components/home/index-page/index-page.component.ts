@@ -12,7 +12,7 @@ import {
 @Component({
   selector: 'app-index-page',
   templateUrl: './index-page.component.html',
-  styleUrls: ['./index-page.component.css'],
+  styleUrls: ['./index-page.component.scss'],
   animations: [
     trigger('move', [
       state('in', style({ top: 50 })),

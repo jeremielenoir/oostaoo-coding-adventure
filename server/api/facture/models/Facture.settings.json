@@ -1,0 +1,36 @@
+{
+  "connection": "default",
+  "collectionName": "factures",
+  "info": {
+    "name": "facture",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "date": {
+      "default": "",
+      "type": "date"
+    },
+    "montant": {
+      "default": "",
+      "type": "float"
+    },
+    "statut": {
+      "default": "",
+      "type": "string"
+    },
+    "numero_facture": {
+      "default": "",
+      "type": "string"
+    },
+    "utilisateursadmin": {
+      "model": "user",
+      "via": "factures",
+      "plugin": "users-permissions"
+    }
+  }
+}

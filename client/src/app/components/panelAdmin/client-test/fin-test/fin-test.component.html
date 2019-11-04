@@ -1,0 +1,73 @@
+<section class="container-section">
+  <div class="test-container">
+    <div class="invitation">
+      <div class="test-invit">
+        <div class="image"></div>
+        <img
+          class="oos-margin-left"
+          src="../../../../../assets/Check.svg"
+          alt="Check"
+        />
+        <h3><b>Merci d'avoir passé ce test !</b></h3>
+      </div>
+
+      <div class="text">
+        <p>
+          Le recruteur reviendra vers vous rapidement pour vous donner les
+          résultats. <br />
+          Nous vous souhaitons bonne chance pour la suite !
+        </p>
+      </div>
+    </div>
+
+    <div class="tutorial-test">
+      <div class="tutorial">
+        <div class="title">
+          <h3>Notez l’expérience</h3>
+        </div>
+        <p>
+          Ce test a été créé sur la plateforme CodinGame. <br />
+          Nous cherchons sans cesse à nous améliorer et votre avis nous
+          intéresse ! Dites-nous ce que vous avez pensé de ce test (votre retour
+          sera communiqué à l’équipe <br />
+          CodinGame uniquement).
+        </p>
+        <div class="oos-note">
+          <div
+            *ngFor="let item of myStars; let index = index"
+            (mouseover)="numberStar = index"
+            (mouseout)="numberStar = null"
+          >
+            <button
+              class="oos-custom-star"
+              [value]="index"
+              (click)="checkStarSelected(index)"
+            >
+              <i class="material-icons">
+                grade
+              </i>
+            </button>
+            <div>
+              <p class="oos-nameStar" *ngIf="numberStar === index">
+                {{ item }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Commentaires (Optionnel)</mat-label>
+          <textarea
+            matInput
+            placeholder="Leave a comment"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="10"
+          ></textarea>
+        </mat-form-field>
+        <button mat-flat-button class="oos-custom-feedback">
+          Envoyer Feedback
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

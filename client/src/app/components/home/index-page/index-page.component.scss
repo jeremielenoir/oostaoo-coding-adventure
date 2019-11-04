@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:700,800");
+@import '../../../../roodeo-variables.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+#home {
+  /*background-image: url(../../../../assets/Coding-game-img/Page-accueil/header.jpg);*/
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  //height: 88px;
+  display: flex;
+  color: $text-color;
+  padding-top: 80px;
+  align-content: center;
+  justify-content: space-around;
+  //margin-top: 60px;
+}
+
+.slidingVertical {
+  display: inline;
+  text-indent: 8px;
+
+  span {
+    animation: topToBottom 11s linear infinite 0s;
+    color: #f2bb13;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+  }
+
+  span:nth-child(2) {
+    animation-delay: 3.5s;
+  }
+  
+  span:nth-child(3) {
+    animation-delay: 7s;
+  }
+}
+
+/*topToBottom Animation*/
+
+@keyframes topToBottom {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 0;
+    -ms-transform: translateY(-50px);
+  }
+  10% {
+    opacity: 1;
+    -ms-transform: translateY(0px);
+  }
+  25% {
+    opacity: 1;
+    -ms-transform: translateY(0px);
+  }
+  50% {
+    opacity: 0;
+    -ms-transform: translateY(50px);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.left {
+  width: 30%
+}
+
+.right {
+  width: 40%
+}
+
+#text h1 {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  
+}
+
+#text h3 {
+  
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.form {
+  display: flex;
+}
+
+.custom-email input {
+  background-color: white;
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 300px;
+}
+
+.mat-focused .placeholder {
+  color: yellow;
+}
+
+mat-error {
+  color: yellow !important;
+  margin: 0
+}
+
+:host ::ng-deep .mat-form-field-infix {
+  border: 0;
+}
+
+.custom-buttom {
+  border-radius: 0px;
+  background-color: #252e38;
+  
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0px 20px;
+  height: 50px;
+  margin-top: 5px
+}
+
+.custom-buttom:hover {
+  background-color: #f2bb13
+}
+
+.input-custom {
+  background-color: white;
+  padding: 15px;
+}
+
+:host ::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+/* .mat-form-field {
+  margin-bottom: 10px;
+} */
+
+/* ::ng-deep .mat-form-field-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+::ng-deep .mat-form-field-flex {
+  order: 2 !important;
+}
+
+::ng-deep .mat-form-field-subscript-wrapper {
+  position: static !important;
+} */
+
+#anim {
+  padding-top: 100px;
+  position: absolute;
+  width: 500px;
+  bottom: 30px;
+  right: 300px;
+}
+
+/* CSS format mobile */
+
+@media screen and (min-width: 200px) and (max-width: 640px) {
+  #home {
+    height: 100vh;
+  }
+  .slidingVertical {
+    left: 300px;
+    display: inherit
+  }
+  .left {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+  }
+  #text {
+    padding-top: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  #text h1 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 30px;
+  }
+  #text h3 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .mat-form-field {
+    width: 100%;
+  }
+  .custom-buttom {
+    width: 60%;
+  }
+  .right {
+    visibility: hidden
+  }
+}
+
+@media (min-width: 767px)and (max-width: 1024px) {
+  .left {
+    width: 80%;
+    padding-left: 38px;
+    padding-right: 38px;
+  }
+  .right {
+    display: none
+  }
+  #home {
+    height: 60vh;
+  }
+}

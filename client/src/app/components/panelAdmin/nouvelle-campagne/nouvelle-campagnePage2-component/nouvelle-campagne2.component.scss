@@ -1,0 +1,179 @@
+#new-campaign {
+    min-height: 60vh;
+    width: 71%;
+    margin: 100px auto;
+    font-weight: bold;
+    border: 1px solid #f0eeee;
+    background: white;
+}
+
+#form {
+    margin: 0 5%;
+}
+
+#campaign-name p {
+    font-size: 16px;
+    margin-top: 40px;
+}
+
+#campaign-name-input {
+    margin-top: 10px;
+    border: 1px solid black;
+    width: 100%;
+    height: 50px;
+}
+
+#campaign-lang p {
+    margin: 20px 0px;
+}
+
+.example-margin {
+    margin: 0px 10px 0 0;
+}
+
+#campaign-copypaste p {
+    margin: 20px 0px;
+    font-weight: bold;
+}
+
+#radio {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+#radio p {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.button {
+    display: flex;
+    height: 50px;
+    margin: 20px 0 90px;
+}
+
+.example-radio-button {
+    margin: 0 10px 0 0;
+}
+
+.info {
+    color: #7e8082;
+    margin: 0 15px 0 0px;
+}
+
+:host ::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    opacity: 0.5 !important;
+    /*click effect color change*/
+    background-color: #f2bb31 !important;
+}
+
+:host ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #f2bb31!important;
+    /*inner circle color change*/
+}
+
+:host ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #f2bb31!important;
+    /*outer ring color change*/
+}
+
+:host ::ng-deep .mat-radio-button .mat-radio-ripple {
+    height: 0px!important;
+    width: 0px!important;
+}
+
+:host ::ng-deep .mat-checkbox .mat-checkbox-ripple {
+    height: 0px!important;
+    width: 0px!important;
+}
+
+:host ::ng-deep .mat-form-field-infix {
+    width: 270px !important;
+}
+
+:host ::ng-deep .mat-form-field-flex {
+    display: inline-flex;
+    align-items: baseline;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #f9f9f9;
+    height: 60px;
+    padding: 0px 10px 10px;
+    margin-top: 15px;
+}
+
+:host ::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+:host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background: #f2bb31;
+}
+
+@media screen and (min-width:768px) and (max-width:959px) {
+    #new-campaign {
+        width: 100%;
+        margin: 0px;
+    }
+    #form {
+        margin: 0px 10px;
+    }
+    #select span {
+        font-size: 20px;
+        font-weight: bold;
+        color: #7e8082;
+        margin: 20px 140px 25px;
+    }
+    .button {
+        flex-wrap: wrap;
+    }
+    #button {
+        margin: 5px;
+    }
+}
+
+@media screen and (min-width:460px) and (max-width:767px) {
+    #new-campaign {
+        width: 100%;
+        margin: 0px;
+    }
+    #form {
+        margin: 0px 10px;
+    }
+    #select span {
+        font-size: 20px;
+        font-weight: bold;
+        color: #7e8082;
+        margin: 20px 140px 25px;
+    }
+    .button {
+        flex-wrap: wrap;
+    }
+    #button {
+        margin: 5px;
+    }
+}
+
+@media screen and (max-width:459px) {
+    #new-campaign {
+        width: 100%;
+        margin: 0px;
+    }
+    #form {
+        margin: 0px 10px;
+    }
+    #select span {
+        font-size: 20px;
+        font-weight: bold;
+        color: #7e8082;
+        margin: 20px 140px 25px;
+    }
+    .button {
+        flex-wrap: wrap;
+    }
+    #button {
+        margin: 5px;
+    }
+}

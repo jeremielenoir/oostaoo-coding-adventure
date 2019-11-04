@@ -15,10 +15,6 @@
       "default": "",
       "type": "text"
     },
-    "created_at": {
-      "default": "",
-      "type": "date"
-    },
     "user": {
       "model": "user",
       "via": "notifications",

@@ -3,7 +3,7 @@
 
   <div id="content">
 
-<div id="shadow-cog">
+<div id="shadow-cog" [ngClass]= "{'shadow-cog-active': shadowcog == true}">
 
     <div id="remove"  (click)="param_cog_non_active()"></div>
 
@@ -15,7 +15,7 @@
 
         <div class="modall-content">
 
-         <div class="block-upload" id="block-upload">
+         <div class="block-upload" [class.block-upload-hidden]="blockUpload">
 
 
             <i class="modal-content-icon fas fa-camera"></i>
@@ -30,7 +30,7 @@
   
               <span class="modal-text-btn-upload">ou télécharger une photo</span>
   
-              <input type="file" class="file" id="file" (change)="readURL($event,this)"/>
+              <input type="file" class="file" id="file" (change)="readURL($event)"/>
   
             </div>
 
@@ -38,13 +38,13 @@
 
          </div>
 
-         <div class="cadrage-img">
+         <div class="cadrage-img" [class.cadrage-img-active]="cadrageImgBoolean">
 
-          <figure class="img-figure">
-              <img src="" class="upload_img"/>
+          <figure class="img-figure" [class.img-figure-active]="!cadrageImgBooleanState">
+              <img src="" class="upload_img" #uploadimgfirst/>
           </figure>
 
-          <div class="text-error-upload">
+          <div class="text-error-upload" [class.text-error-upload-show]="cadrageImgBooleanState">
 
               <i class="fas fa-ban ban-error"></i>
 
@@ -54,9 +54,9 @@
   
                 <span class="modal-text-btn-upload">ou télécharger une photo</span>
     
-                <input type="file" class="file" id="file" (change)="readURL($event,this)"/>
+                <input type="file" class="file" id="file" (change)="readURL($event)"/>
     
-              </div>
+            </div>
 
           </div>
 
@@ -66,9 +66,9 @@
         </div>
 
   
-        <div class="modall-footer">
+        <div class="modall-footer" #btnValideParent>
 
-            <button mat-button class="modal-btn-footer" disabled="disabled" id="btn-valide">valider</button>  
+            <button mat-button class="modal-btn-footer" disabled="disabled" id="btn-valide" >valider</button>  
             <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()">annuler</button>
 
 
@@ -81,17 +81,11 @@
 
 </div>
 
-
-
-
-
-
-
-
-
-<div id="shadow-cog-add-images">
+<div id="shadow-cog-add-images" [ngClass]= "{'shadow-cog-active': shadowcogImage === true}">
 
     <div id="remove_add_image"   (click)="param_cog_non_active_add_img()"></div>
+
+   
 
     <div class="modall">
 
@@ -101,7 +95,7 @@
 
         <div class="modall-content">
 
-         <div class="block-upload" id="block-upload-deux">
+         <div class="block-upload" id="block-upload-deux" [ngClass]="{'block-upload-hidden': blockUploadLast == true}">
 
 
             <i class="modal-content-icon fas fa-camera"></i>
@@ -116,7 +110,7 @@
   
               <span class="modal-text-btn-upload">ou télécharger une photo</span>
   
-              <input type="file" class="file" id="file" (change)="readURL_deux($event,this)"/>
+              <input type="file" class="file" id="file" (change)="readURL_deux($event)"/>
   
             </div>
 
@@ -124,13 +118,13 @@
 
          </div>
 
-         <div class="cadrage-img">
+         <div class="cadrage-img" [ngClass]="{'cadrage-img-active' : cadrageImgBooleanLast === true}">
 
-          <figure class="img-figure">
-              <img src="" class="upload_img"/>
+          <figure class="img-figure" [ngClass]="{'img-figure-active' : cadrageImgBooleanStateLast === false}">
+              <img src="" class="upload_img" #uploadimgLast/>
           </figure>
 
-          <div class="text-error-upload">
+          <div class="text-error-upload" [ngClass]="{'text-error-upload-show' : cadrageImgBooleanStateLast === true}">
 
               <i class="fas fa-ban ban-error"></i>
 
@@ -140,7 +134,7 @@
   
                 <span class="modal-text-btn-upload">ou télécharger une photo</span>
     
-                <input type="file" class="file" id="file" (change)="readURL($event,this)"/>
+                <input type="file" class="file" id="file" (change)="readURL_deux($event)"/>
     
               </div>
 
@@ -152,7 +146,7 @@
         </div>
 
   
-        <div class="modall-footer">
+        <div class="modall-footer" #btnValideParentAddImage>
 
             <button mat-button class="modal-btn-footer" disabled="disabled" id="btn-valide-deuxx">valider</button>  
             <button mat-button class="modal-btn-footer" (click)="param_cog_non_active_add_img()">annuler</button>
@@ -166,11 +160,6 @@
 
 
 </div>
-
-
-
-
-
 
 
 <div class="big-content">
@@ -219,20 +208,20 @@
             </div>
           </header>
 
-          <div class="param-header">
+          <div class="param-header" #paramHeader>
 
               <form>
 
-                  <div class="regroupe-form">
+                  <div class="regroupe-form" #regroupeform>
 
                       <label class="first-label-param-header">Choisissez votre langue</label>
       
                       <div class="block-form-flex">
       
       
-                        <select  class="champ-form-gestion">
+                        <select [formControl]="lang" class="champ-form-gestion">
       
-                          <option *ngFor="let industrie of industrie" value="{{industrie}}">{{ industrie }}</option>
+                          <option *ngFor="let lang of langlist" name="lang" value="{{lang.name}}">{{ lang.name }}</option>
       
                         </select>
       
@@ -244,9 +233,9 @@
 
                       <label>Lien vidéo</label>
       
-                      <div class="block-form-flex incrage">
+                      <div  class="block-form-flex incrage">
       
-                        <input type="text" class="champ-form-gestion champ-incrage" value=""/>
+                        <input [formControl]="videolink" name="videolink" type="text" class="champ-form-gestion champ-incrage" value=""/>
       
                         <span class="span-incrage">url:</span>
                         
@@ -258,9 +247,9 @@
       
                       <label>Lien du site</label>
       
-                      <div class="block-form-flex">
+                      <div  class="block-form-flex">
       
-                          <input type="text" class="champ-form-gestion champ-incrage" value=""/>
+                          <input [formControl]="websitelink" name="websitelink" type="text" class="champ-form-gestion champ-incrage" value=""/>
       
                           <span class="span-incrage">url:</span>
                         
@@ -272,9 +261,9 @@
 
                       <label>Teaser de l'entreprise</label>
       
-                      <div class="block-form-flex">
+                      <div  class="block-form-flex">
       
-                        <textarea class="champ-form-gestion textarea-gestion" style="height:150px;resize:none;"></textarea>
+                        <textarea [formControl]="teaser" name="teaser" class="champ-form-gestion textarea-gestion" style="height:150px;resize:none;"></textarea>
       
                         <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
                         
@@ -286,9 +275,9 @@
 
                       <label></label>
       
-                      <div class="block-form-flex btn-block-flex">
+                      <div (click)="clickchange()" class="block-form-flex btn-block-flex">
       
-                          <button mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
+                          <button  mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
           
                       </div>
       
@@ -392,7 +381,7 @@
 
                 <div class="block-form-flex">
 
-                  <input type="text" class="champ-form-gestion" value=""/>
+                  <input [formControl]="name" name="name" type="text" class="champ-form-gestion" value=""/>
 
                   <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
                   
@@ -406,7 +395,7 @@
 
                 <div class="block-form-flex">
 
-                  <input type="text" class="champ-form-gestion" value=""/>
+                  <input [formControl]="email" name="email" type="text" class="champ-form-gestion" value=""/>
 
                   <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
                   
@@ -420,7 +409,7 @@
 
                 <div class="block-form-flex">
 
-                  <input type="text" class="champ-form-gestion" value=""/>
+                  <input [formControl]="phone" type="text" class="champ-form-gestion" value=""/>
 
                   <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
                   
@@ -435,9 +424,9 @@
                 <div class="block-form-flex">
 
 
-                  <select  class="champ-form-gestion">
+                  <select [formControl]="industrie" name="industrie"  class="champ-form-gestion">
 
-                    <option *ngFor="let industrie of industrie" value="{{industrie}}">{{ industrie }}</option>
+                    <option *ngFor="let industrie of industrieList" value="{{industrie}}">{{ industrie }}</option>
 
                   </select>
 
@@ -451,9 +440,9 @@
 
                 <div class="block-form-flex">
 
-                    <select  class="champ-form-gestion">
+                    <select [formControl]="numberofemployee" name="numberofemployee"  class="champ-form-gestion">
 
-                        <option *ngFor="let nbr_employe of nbr_employe" value="{{nbr_employe}}">{{ nbr_employe }}</option>
+                        <option *ngFor="let numberofemployee of  numberofemployeeList" value="{{numberofemployee}}">{{ numberofemployee }}</option>
     
                     </select>
                   
@@ -467,9 +456,9 @@
 
                 <div class="block-form-flex">
 
-                    <select  class="champ-form-gestion">
+                    <select  [formControl]="numberofdev" name="numberofdev" class="champ-form-gestion">
 
-                        <option *ngFor="let nbr_employe of nbr_employe" value="{{nbr_employe}}">{{ nbr_employe }}</option>
+                        <option *ngFor="let numberofdev of numberofemployeeList" value="{{numberofdev}}">{{ numberofdev }}</option>
     
                     </select>
                   
@@ -485,7 +474,7 @@
 
                     <mat-form-field class="select-tech">
                         <mat-label>Toppings</mat-label>
-                        <mat-select [formControl]="toppings" multiple>
+                        <mat-select [formControl]="techno" name techno multiple>
                           <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
                         </mat-select>
                       </mat-form-field>
@@ -500,7 +489,7 @@
 
                 <div class="block-form-flex incrage">
 
-                  <input type="text" class="champ-form-gestion champ-incrage" value=""/>
+                  <input [formControl]="videolink" type="text" class="champ-form-gestion champ-incrage" value=""/>
 
                   <span class="span-incrage">url:</span>
                   
@@ -514,7 +503,7 @@
 
                 <div class="block-form-flex">
 
-                    <input type="text" class="champ-form-gestion champ-incrage" value=""/>
+                    <input [formControl]="websitelink" type="text" class="champ-form-gestion champ-incrage" value=""/>
 
                     <span class="span-incrage">url:</span>
                   
@@ -528,7 +517,7 @@
 
                 <div class="block-form-flex">
 
-                  <textarea class="champ-form-gestion textarea-gestion" style="height:150px;resize:none;"></textarea>
+                  <textarea [formControl]="teaser" class="champ-form-gestion textarea-gestion" style="height:150px;resize:none;"></textarea>
 
                   <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
                   
@@ -562,11 +551,11 @@
 
                 <div class="block-form-flex">
 
-                    <input type="text" class="champ-form-gestion champ-incrage-network" value=""/>
+                    <input [formControl]="linkedin" name="linkedin" type="text" class="champ-form-gestion champ-incrage-network" value=""/>
 
                     <span class="span-incrage span-incrage-network">
                       <i class="fab fa-linkedin-in icon-network"></i>
-                      Linkidin
+                      Linkedin
                     </span>
     
                 </div>
@@ -579,11 +568,11 @@
 
                 <div class="block-form-flex">
 
-                    <input type="text" class="champ-form-gestion champ-incrage-network" value=""/>
+                    <input [formControl]="facebook" name="facebook" type="text" class="champ-form-gestion champ-incrage-network" value=""/>
 
                     <span class="span-incrage span-incrage-network">
                       <i class="fab fa-facebook-f icon-network"></i>
-                      Linkidin
+                      Facebook
                     </span>
     
                 </div>
@@ -596,11 +585,11 @@
 
                 <div class="block-form-flex">
 
-                    <input type="text" class="champ-form-gestion champ-incrage-network" value=""/>
+                    <input [formControl]="twitter" name="twitter" type="text" class="champ-form-gestion champ-incrage-network" value=""/>
 
                     <span class="span-incrage span-incrage-network">
                       <i class="fab fa-twitter icon-network"></i>
-                      Linkidin
+                      Twitter
                     </span>
     
                 </div>
@@ -612,7 +601,7 @@
 
                 <label></label>
 
-                <div class="block-form-flex btn-block-flex">
+                <div (click)="clickchange2()" class="block-form-flex btn-block-flex">
 
                     <button mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
     

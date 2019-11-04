@@ -1,31 +1,40 @@
 <div class="modal-candidat">
   <header class="header-question">
-    <span class="rond-custom"><p>2</p></span>
+    <span class="rond-custom">
+      <p>2</p>
+    </span>
     <div class="info-campaign-candidats">
       <h2>Configuration de l'email</h2>
       <p *ngFor="let campaign of campaigns">{{ campaign.Name }}</p>
+      <p>Vous avez sélectionné <strong>{{nbCandidat}}</strong> destinataires</p>
     </div>
   </header>
   <hr />
   <div class="content-modal-question"></div>
-  <p><b>Sujet :</b></p>
-  <p>Évaluation technique</p> <br>
 
-  <p><b>Message :</b></p>
-  <p *ngFor="let candidat of candidats">Bonjour {{ candidat.Nom }},</p> <br>
 
-  <p>Votre candidature a retenu notre attention.</p> <br>
-  
-  <p>Dans le cadre de notre processus de recrutement, nous avons le plaisir de vous inviter à passer une évaluation technique.
-    Vous pourrez choisir le moment le plus approprié pour vous pour passer ce test.</p> <br>
-  
-  <p>Quand vous serez prêt(e), cliquez sur le lien ci-dessous pour accéder à la page d’accueil de votre session : "LINK INVITATION"</p>
-  
-  <p>Bonne chance !</p> <br>
+  <div class="col-12 form-group">
 
-  <p>Cordialement,</p>
-</div>
+    <label>Sujet :</label>
 
-<button (click)="onClose()">ENVOYER EMAIL</button>
-<button (click)="retourCandidat()">RETOUR AUX CANDIDATS</button>
-<button (click)="showCandidats()" (click)="updateCampaign()">showCandidats</button>
+    <input type="" name="" class="form-control" [(ngModel)]="sujet" *ngIf="show" />
+    <p *ngIf="!show">{{sujet}}</p>
+
+  </div>
+  <br />
+
+  <div class="col-12 form-group">
+
+    <label>Message :</label>
+
+    <app-ngx-editor *ngIf="show" [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="htmlContent">
+    </app-ngx-editor>
+    <div *ngIf="!show" [innerHTML]="htmlContent"></div>
+  </div>
+
+
+  <button (click)="updateCampaignPostCandidats()">
+    ENVOYER EMAIL
+  </button>
+  <button (click)="retourCandidat()">RETOUR AUX CANDIDATS</button>
+  <button (click)="show=!show">{{show ? 'OK' : 'Personnaliser cet email'}}</button>

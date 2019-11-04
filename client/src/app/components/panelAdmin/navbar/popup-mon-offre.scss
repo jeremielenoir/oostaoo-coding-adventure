@@ -1,0 +1,132 @@
+@import "./route-component.component.scss";
+/* CLASS COMMON */
+
+.white {
+  color: white;
+}
+
+.yellow-site {
+  color: #f2bb13;
+}
+
+.maj {
+  text-transform: uppercase;
+}
+
+.width50 {
+  width: 50%;
+}
+
+.width40 {
+  width: 40%;
+}
+
+.font-size13 {
+  font-size: 13px;
+}
+
+.borderblack {
+  border-left: 1px black solid;
+}
+
+.margin-padding {
+  margin: 7px 0;
+  padding: 0 20px;
+}
+
+.padding-section {
+  padding: 20px;
+}
+
+.padding-sous-section {
+  padding: 30px 40px;
+  border: 1px solid #e7e7e7;
+  background-color: white;
+}
+
+/* CLASS COMMON */
+
+#popup {
+}
+
+#titre {
+  display: flex;
+  align-items: baseline;
+  background-color: #20252a;
+  padding: 0px 20px;
+}
+
+#titre img {
+  margin-right: 10px;
+}
+
+#infos {
+  background-color: #2b3035;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#premier-sous-section ul {
+  list-style-type: square;
+}
+
+.spaceforText {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e7e7e7;
+  padding-bottom: 15px;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.cssForPrix {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+#second-sous-section {
+  margin-top: 20px;
+}
+
+/* css for popup */
+
+.mat-list-base {
+  padding-top: 0px;
+}
+
+:host ::ng-deep .mat-bottom-sheet-container {
+  padding: 0px;
+  max-height: 100vh;
+}
+
+:host ::ng-deep .cdk-overlay-pane {
+  /* à enlever sous format mobile le width 60%*/
+  width: 72%;
+  height: 100vh;
+}
+
+:host ::ng-deep .mat-bottom-sheet-container-large {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+/* css for popup */
+
+@media (min-width: 300px) and (max-width: 768px) {
+  :host ::ng-deep .cdk-overlay-pane {
+    width: inherit;
+  }
+}
+
+@media (min-width: 770px) and (max-width: 1024px) {
+  :host ::ng-deep .cdk-overlay-pane {
+    width: 54%;
+  }
+}
+
+@media (min-width: 1030px) and (max-width: 1440px) {
+  :host ::ng-deep .cdk-overlay-pane {
+    width: 64%;
+  }
+}

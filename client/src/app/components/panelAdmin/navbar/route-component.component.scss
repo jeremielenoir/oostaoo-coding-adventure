@@ -1,0 +1,350 @@
+#container {
+  display: flex;
+  #totalLeft {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: 80px;
+    z-index: 10;
+    transition: width 0.3s, min-width 0.3s;
+    &.totalLeftActive {
+      width: 230px;
+    }
+    #campaign {
+      padding: 20px;
+      background-color: #2b3035;
+      ul {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    .custom-button {
+      width: 100%;
+      border-radius: 0%;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      &:focus {
+        background-color: #f2bb13;
+        color: black;
+
+        &:focus i {
+          color: black;
+        }
+      }
+    }
+    #left-top {
+      padding: 20px;
+      #logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px 20px 20px;
+        a {
+          img {
+            max-height: 120px;
+            max-width: 120px;
+          }
+        }
+      }
+      #profil {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        background-color: #2b3035;
+        padding-top: 20px;
+        #user-name {
+          color: white;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding-top: 5px;
+          &:hover p {
+            color: #f2bb13;
+          }
+        }
+        #color-notif {
+          #photoNotif {
+            display: flex;
+            justify-content: space-around;
+            background-color: #20252a;
+            /* margin-top: 20px; */
+            padding: 10px 30px 10px 30px;
+            align-items: center;
+            .notif {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          }
+        }
+        #color-notif:hover a {
+          color: #f2bb13;
+        }
+      }
+    }
+  }
+  a:hover {
+    color: #f2bb13;
+  }
+
+  a {
+    color: white;
+  }
+
+  button:hover {
+    color: #f2bb13;
+  }
+}
+
+#btn-arrow:hover {
+  color: #f2bb31;
+}
+
+.padding-left2 {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid black;
+  &:hover {
+    background-color: #f2bb13;
+  }
+  &:hover i {
+    color: black;
+  }
+}
+
+/* Dropdown */
+
+ul {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  display: inline-block;
+}
+
+.padding-left2:hover {
+  background: #f2bb13;
+}
+
+.padding-left2:hover ul {
+  display: block;
+}
+
+ul li ul {
+  position: absolute;
+  width: 200px;
+  display: none;
+  margin-left: 54px;
+  margin-top: -43px;
+  line-height: normal;
+  z-index: 99;
+}
+
+ul li ul li {
+  background: #20252a;
+  display: block;
+}
+
+ul li ul li a {
+  display: block !important;
+}
+
+ul li ul li:hover {
+  background: #20252a;
+}
+
+.padding-left2 ul li ul h4 {
+  padding: 15px 12px 17px 12px;
+  background-color: #f2bb13;
+  color: black;
+  font-weight: 800;
+  margin-bottom: 0px;
+  font-size: 18px;
+}
+
+.padding10pxcompagne {
+  padding: 10px;
+}
+
+/* Dropdown */
+
+/* logo css */
+
+#logo2:hover {
+  background-color: black;
+}
+
+i:hover {
+  color: black;
+}
+
+.background-button {
+  background-color: #f2bb13;
+}
+
+.color-white {
+  color: white;
+}
+
+/* CLASS COLOR CSS */
+
+#left {
+  background-color: #20252a;
+  /* width: 13%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  color: white;
+  overflow-y: auto;
+  height: 96vh;
+  /* visibility:hidden */
+}
+
+.color-site {
+  color: #f2bb13;
+}
+.notif i:hover {
+  color: #f2bb13;
+}
+
+#compte {
+  padding: 20px;
+  background-color: #2b3035;
+  ul {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+#contact {
+  padding: 20px;
+  text-align: center;
+  #centerContact {
+    padding: 20px;
+  }
+  a {
+    text-decoration: underline;
+    font-weight: bold;
+  }
+  .custom-button-testing {
+    width: 100%;
+    border: 1px #f2bb13 solid;
+    &:hover {
+      color: #f2bb13;
+    }
+  }
+}
+
+.custom-button-nav {
+  display: flex;
+  justify-content: flex-start;
+  color: white;
+  background-color: #20252a;
+  border-top: 1px solid black;
+  border-radius: 0px;
+  outline: none;
+}
+
+.custom-button-nav:hover {
+  color: #f2bb13;
+}
+
+#test {
+  width: 100%;
+  height: 100vh;
+  background-color: red;
+}
+
+#left2 {
+  height: 96vh;
+  background-color: #20252a;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAV MENU MOBILE */
+
+#menu-nav-mobile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 10px;
+}
+
+#nav-mobile {
+  display: flex;
+  justify-content: space-around;
+}
+
+#logo-mobile img {
+  width: 200px;
+}
+
+#url-mobile {
+  padding-left: 10px;
+}
+
+#menu-nav-mobile {
+  display: none;
+}
+
+/* NAV MENU MOBILE */
+
+@media screen and (max-width: 1024px) {
+  #menu-nav-mobile {
+    display: block;
+  }
+  button {
+    font-size: 14px;
+  }
+  #left2 {
+    display: none;
+  }
+  /* #profil {
+    display: none;
+  } */
+  #left-top {
+    display: none;
+  }
+  #nonemobile {
+    display: none;
+  }
+  /* #left {
+    display: none;
+  } */
+  #container {
+    display: flex;
+    flex-wrap: wrap;
+    height: inherit;
+  }
+  .fixNavMobile {
+    position: absolute;
+    z-index: 99;
+    width: 300px;
+  }
+  .unfixNavMobile {
+    position: inherit;
+    margin-top: inherit;
+    height: inherit;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .fixNavMobile {
+    display: block;
+  }
+}
+
+app-compagne {
+  display: flex;
+  flex-wrap: wrap;
+}

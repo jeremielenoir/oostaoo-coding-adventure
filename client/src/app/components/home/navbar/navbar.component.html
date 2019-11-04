@@ -1,9 +1,14 @@
-<!-- <button (click)="showOrHideManually()">Show/Hide manually</button>
-<label #myLabel> SOME TEXT BLABLA </label> -->
-<div #myLabel id="navbar" (scroll)="onWindowScroll($event)">
+<div
+  #header
+  id="navbar"
+  (scroll)="onWindowScroll()"
+  [className]="shouldShow ? 'remove-index' : 'add-index'"
+>
   <mat-toolbar color="primary">
+    <img src="../../assets/logo.png" alt="Logo" />
+
     <mat-toolbar-row class="super">
-      <button
+      <!--button
         mat-icon-button
         (click)="sidenav.toggle()"
         (click)="showOrHideManually()"
@@ -11,28 +16,24 @@
         fxHide.gt-sm
       >
         <mat-icon class="size-nav">menu</mat-icon>
-      </button>
-      <img src="../../assets/logo.png" alt="Logo" />
+      </button-->
 
       <span class="menu-spacer"></span>
       <div fxShow="true" fxHide.lt-md>
-        <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-        <a href="#">Sourcer</a>
-        <a href="#" [matMenuTriggerFor]="menu"
-          >Évaluer
-          <i class="material-icons arrow">
-            keyboard_arrow_down
-          </i></a
-        >
-        <mat-menu class="plMenuCSS" #menu="matMenu">
-          <button mat-menu-item>Notre Solution</button>
-          <button mat-menu-item>Nos fonctionnalités</button>
-        </mat-menu>
-
-        <a href="#">Fidéliser</a>
+        <a href="#">
+          Testez les développeurs
+        </a>
+        <a href="#">
+          Profils recherchés
+        </a>
+        <a href="#">
+          Technologies
+        </a>
+        <a href="/dashboard">Fonctionnalités</a>
         <a href="#">Prix</a>
-        <a href="/dashboard">Connexion</a>
-        <a href="#" mat-button>Démo Gratuite</a>
+        
+        <!--a (click)="logout()">Se déconnecter</a-->
+        <a href="#" mat-button>Connexion</a>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -43,12 +44,11 @@
   >
     <mat-sidenav #sidenav>
       <mat-nav-list>
-        <a href="#" mat-list-item>Sourcer</a>
-        <a href="#" mat-list-item [matMenuTriggerFor]="menu">Évaluer</a>
-        <a href="#" mat-list-item>Fidéliser</a>
+        <a href="#" mat-list-item>Évaluez et testez les développeurs</a>
         <a href="#" mat-list-item>Prix</a>
         <a href="#" mat-list-item>Connexion</a>
-        <a href="#" mat-button>Demo Gratuite</a>
+        <!--a (click)="logout()">Se déconnecter</a-->
+        <a href="#" mat-button>30 jours d'evaluation gratuits</a>
       </mat-nav-list>
     </mat-sidenav>
   </mat-sidenav-container>

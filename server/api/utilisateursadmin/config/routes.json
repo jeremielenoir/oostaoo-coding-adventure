@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/utilisateursadmins",
+      "handler": "Utilisateursadmin.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/utilisateursadmins/count",
+      "handler": "Utilisateursadmin.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/utilisateursadmins/:id",
+      "handler": "Utilisateursadmin.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/utilisateursadmins",
+      "handler": "Utilisateursadmin.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/utilisateursadmins/:id",
+      "handler": "Utilisateursadmin.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/utilisateursadmins/:id",
+      "handler": "Utilisateursadmin.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

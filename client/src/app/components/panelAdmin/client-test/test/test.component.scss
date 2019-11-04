@@ -1,0 +1,171 @@
+@import "../../../../../roodeo-variables.scss";
+
+@mixin structureBlock {
+  width: 50%;
+  @media #{$smallDevice} {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  /*-- partie header--*/
+  .cube-testing {
+    display: flex;
+    border: 1px solid #e3e3e3;
+    background: #fff;
+    flex-direction: column;
+    margin-left: 5px;
+    margin-right: 5px;
+    .header-cube-testing {
+      display: flex;
+      border-bottom: 1px solid #e3e3e3;
+      align-items: center;
+      flex-direction: row;
+      .f030 {
+        display: flex;
+        flex-direction: row;
+        padding: 12px 15px;
+        flex: 1;
+        border-right: 1px solid #e3e3e3;
+        .icon-testing {
+          margin-right: 15px;
+          color: #f4c73e;
+          display: block;
+          font-size: 24px;
+        }
+        .title-testing {
+          font-size: 17px;
+          font-weight: 700;
+          margin-bottom: 0px;
+          display: inline-block;
+        }
+        .testing-timer {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 0px 15px;
+          .testing-timer-icon {
+            margin-right: 10px;
+            font-size: 20px;
+          }
+          .testing-timer-text {
+            display: inline-block;
+            strong {
+              font-size: 14px;
+              font-size: 900;
+            }
+          }
+        }
+      }
+    }
+    .scroll-auto-testing {
+      overflow-y: auto;
+      .content-testing {
+        margin: 60px;
+        &.content-testing-seconde {
+          min-height: 410px;
+        }
+        .example-full-width {
+          width: 100%;
+        }
+      }
+    }
+    .content-testing {
+      margin: 60px;
+      &.content-testing-seconde {
+        min-height: 410px;
+      }
+      .example-radio-group {
+        display: flex;
+        flex-direction: column;
+        margin: 15px 0;
+        .example-radio-button {
+          margin: 5px;
+        }
+      }
+    }
+  }
+}
+
+.block-testing {
+  background-color: #f9f9f9;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  @media #{$smallDevice} {
+    flex-direction: column;
+    height: auto;
+    overflow: hidden;
+    position: static !important;
+  }
+  .testing-left {
+    @include structureBlock();
+  }
+  .testing-right {
+    @include structureBlock();
+    .button {
+      margin-top: 7px;
+      margin-left: 5px;
+      margin-right: 0px;
+      color: white;
+      height: 50px;
+      padding: 10px;
+      position: relative;
+      transition: opacity 0.2s, background 0.2s;
+      font-weight: 700;
+      background-color: #f2bb13;
+      border: none;
+      cursor: pointer;
+      outline: 0;
+      width: 98.8%;
+      &:hover {
+        background-color: #ffd200;
+      }
+    }
+  }
+}
+
+/*--modal css--*/
+
+.modall {
+  .modall-header {
+    background-color: #d03737;
+    color: white;
+    .modall-title {
+    }
+  }
+  .modall-content {
+    padding: 20px;
+    max-width: 875px;
+    p {
+      margin-top: 40px;
+      font-size: 20px;
+    }
+  }
+  .modall-footer {
+    display: flex;
+    padding-bottom: 20px;
+    .btn {
+      flex: 1;
+      color: white;
+      height: 50px;
+      margin: 20px;
+      font-size: 18px;
+      transition: background 0.2s;
+      font-weight: 600;
+      background-color: #7e8082;
+      &:hover {
+        background-color: #aaaaaa;
+      }
+    }
+  }
+}
+
+.active-time-danger {
+  color: red;
+  font-weight: bold;
+}

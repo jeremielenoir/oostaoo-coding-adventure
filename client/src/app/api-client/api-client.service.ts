@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { map, catchError, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { Options } from 'selenium-webdriver';
 
 
 const prefix = '/api/';
@@ -15,6 +14,12 @@ export const API_URI_PROFILES: string = prefix + 'profiles';
 export const API_URI_QUESTIONS: string = prefix + 'questions';
 export const API_URI_CANDIDATS: string = prefix + 'candidats';
 export const API_URI_EMAIL: string = prefix + 'email';
+export const API_URI_USER_ADMIN: string = prefix + 'utilisateursadmins';
+export const API_URI_ENTREPRISE: string = prefix + 'entreprises';
+export const API_URI_USER_ENTREPRISE: string = prefix + 'utilsateurentreprises';
+export const API_URI_USER = 'http://localhost:1337/users';
+
+
 
 
 @Injectable()

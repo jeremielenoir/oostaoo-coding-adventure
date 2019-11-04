@@ -1,0 +1,55 @@
+{
+  "connection": "default",
+  "collectionName": "utilisateursadmin",
+  "info": {
+    "name": "utilisateursadmin",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "prenom": {
+      "default": "",
+      "type": "string"
+    },
+    "nom": {
+      "default": "",
+      "type": "string"
+    },
+    "pays": {
+      "default": "",
+      "type": "string"
+    },
+    "langue": {
+      "default": "",
+      "type": "string"
+    },
+    "tel": {
+      "default": "",
+      "type": "string"
+    },
+    "mobile": {
+      "default": "",
+      "type": "string"
+    },
+    "function": {
+      "default": "",
+      "type": "string"
+    },
+    "signature": {
+      "default": "",
+      "type": "text"
+    },
+    "entreprise": {
+      "model": "entreprise",
+      "via": "utilisateursadmin"
+    },
+    "factures": {
+      "collection": "facture",
+      "via": "utilisateursadmin"
+    }
+  }
+}

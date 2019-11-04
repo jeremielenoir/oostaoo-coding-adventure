@@ -6,59 +6,57 @@ import {
   Inject
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
-  styles: [
-    `
-      .remove-index {
-        z-index: 0;
-        height: 0vh;
-      }
-
-      .add-index {
-        z-index: 1000;
-        height: 100vh;
-      }
-    `
-  ]
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(@Inject(DOCUMENT) document) { }
+  constructor(@Inject(DOCUMENT) document, private router: Router) { }
 
   public shouldShow = true;
-  @ViewChild('myLabel') lab;
+  public Removeshould = true;
+  public IsheaderTrue = false;
+  public AddIndex = false;
+  @ViewChild('header') header;
 
-  showOrHideManually() {
+  public showOrHideManually() {
     this.shouldShow = !this.shouldShow;
-    if (this.shouldShow) {
-      this.lab.nativeElement.classList.add('remove-index');
-      this.lab.nativeElement.classList.remove('add-index');
-    } else {
-      this.lab.nativeElement.classList.add('add-index');
-      this.lab.nativeElement.classList.remove('remove-index');
-    }
   }
-
-  ngOnInit() { }
 
   @HostListener('window:scroll', ['$event'])
-  onWindowScroll(e) {
+  public onWindowScroll() {
     if (window.pageYOffset > 100) {
-      const element = document.getElementById('navbar');
-      element.classList.add('style-nav-scroll');
+
+      this.IsheaderTrue = true;
+
+
     } else {
-      const element = document.getElementById('navbar');
-      element.classList.remove('style-nav-scroll');
+      this.IsheaderTrue = false;
+
     }
-    if (window.pageYOffset < 100) {
-      const element = document.getElementById('navbar');
-      element.classList.add('style-nav-scroll2');
-    } else {
-      const element = document.getElementById('navbar');
-      element.classList.remove('style-nav-scroll2');
-    }
+
   }
+
+
+  ngOnInit() {
+
+    this.onWindowScroll();
+
+  }
+
+
+  getLogin() {
+    return JSON.parse(localStorage.getItem('token'));
+  }
+
+  logout() {
+    console.log('Tentative de déconnexion');
+
+    localStorage.removeItem('token');
+    this.router.navigate(['/home/register']);
+  }
+
 }

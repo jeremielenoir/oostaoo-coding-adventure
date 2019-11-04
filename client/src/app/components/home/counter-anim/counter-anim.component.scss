@@ -1,0 +1,82 @@
+@import "../../../../roodeo-variables.scss";
+
+$chiffre-size-desktop: 38px;
+$chiffre-size-mobile: 24px;
+$width-column-desktop: 50%;
+$width-column-mobile: 100%;
+$display-column-device: flex;
+$align-column-desktop: flex-end;
+$align-column-mobile: center;
+
+@mixin fixColumn() {
+  display: flex;
+  flex-direction: column;
+  margin: 0 5%;
+  color: $text-color-white;
+  text-align: center;
+}
+@mixin fixNumber($size-police) {
+  text-align: center;
+  @media #{$smallDevice} {
+    font-size: $chiffre-size-mobile;
+  }
+  font-size: $size-police;
+  font-weight: 700;
+}
+@mixin columnBlock() {
+  .block {
+    @include fixColumn();
+    p.chiffres {
+      @include fixNumber($chiffre-size-desktop);
+    }
+    p.txt {
+      font-size: 16px;
+    }
+  }
+}
+@mixin structureBlock($width, $display, $align) {
+  @media #{$smallDevice} {
+    width: $width-column-mobile;
+    display: $display-column-device;
+    justify-content: $align-column-mobile;
+  }
+  width: $width;
+  display: $display;
+  justify-content: $align;
+  @include columnBlock();
+}
+
+#counter {
+  width: 100%;
+  min-height: 130px;
+  background-color: transparent;
+  background-image: linear-gradient(330deg, #276b9c 0%, #113656 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  #compteur {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    @media #{$smallDevice} {
+      padding-top: 20px;
+      padding-bottom: 0px;
+    }
+    .column-left {
+      @include structureBlock(
+        $width-column-desktop,
+        $display-column-device,
+        $align-column-desktop
+      );
+    }
+    .column-right {
+      @include structureBlock(
+        $width-column-desktop,
+        $display-column-device,
+        null
+      );
+    }
+  }
+}

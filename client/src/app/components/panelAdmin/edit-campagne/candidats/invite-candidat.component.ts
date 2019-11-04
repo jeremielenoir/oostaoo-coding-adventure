@@ -11,7 +11,7 @@ import {
 @Component({
   selector: "invite-candidat",
   templateUrl: './invite-candidat.html',
-  styleUrls: ['./invite-candidat.css']
+  styleUrls: ['./invite-candidat.scss']
 })
 export class InviteCandidat {
   candidatID: any[];

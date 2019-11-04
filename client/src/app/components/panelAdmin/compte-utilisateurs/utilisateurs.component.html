@@ -4,12 +4,11 @@
 
 <div id="content">
 
-<div id="shadow-cog">
+<div id="shadow-cog" [ngClass]="{'shadow-cog-active': shadowcog1 == true}">
 
-  <div id="remove"  (click)="param_cog_non_active()"></div>
+<div id="remove"  (click)="param_cog_non_active()"></div>
 
 
-  
     <div class="modall">
         
         <div class="modall-header">
@@ -25,7 +24,7 @@
 
         <div class="modall-content">
 
-           <form (ngSubmit)="Hundelesubmit()">
+           <form (ngSubmit)="Hundelesubmit()" class="form" method="POST" #form>
 
               <div class="content-form-first">
 
@@ -35,17 +34,16 @@
 
                     <div class="title-and-error-span">
 
-                      <label class="libele">prenom</label>
+                      <label class="libele" [ngClass]="{'new-label': prenomIsactive === true}">prenom</label>
 
-                      <span class="title-champ-default">Obligatoire</span>
+                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactive === true}">Obligatoire</span>
 
                     </div>
 
                   </div>
                   <div>
             
-                    <!-- <span [ngStyle]="errorPrenom ? { color: 'red' } : null">{{errorPrenom}}</span>      -->
-                    <input type="" name="prenom" class="champ-form" required id="prenom" (input)="is_valid_prenom($event)" (blur)="is_valid_prenom($event)"/>
+                    <input type="" name="prenom" [ngClass]="{'errorChamp': prenomIsactive === true}" class="champ-form" required id="prenom" (input)="is_valid_prenom($event)" (blur)="is_valid_prenom($event)"/>
                   </div>
                   
 
@@ -57,15 +55,15 @@
 
                     <div class="title-and-error-span">
 
-                      <label class="libele">nom</label>
+                      <label [ngClass]="{'new-label': nomIsactive === true}" class="libele">nom</label>
 
-                      <span class="title-champ-default">Obligatoire</span>
+                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactive === true}">Obligatoire</span>
 
                     </div>
 
                   </div>
                   <div>
-                    <input type="" name="nom"class="champ-form" id="nom" (input)="is_valid_nom($event)" (blur)="is_valid_nom($event)"/>
+                    <input type="" name="nom"  [ngClass]="{'errorChamp': nomIsactive === true}" class="champ-form" (input)="is_valid_nom($event)" (blur)="is_valid_nom($event)"/>
                   </div>
                   
 
@@ -77,15 +75,15 @@
 
                     <div class="title-and-error-span">
 
-                      <label class="libele">email</label>
+                      <label [ngClass]="{'new-label': emailIsactive === true}" class="libele">email</label>
 
-                      <span class="title-champ-default">Obligatoire</span>
+                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactive === true}">{{Textmail}}</span>
 
                     </div>
 
                   </div>
                   <div>
-                    <input type="" name="email"class="champ-form" id="email" (input)="is_valid_email($event)" (blur)="is_valid_email($event)"/>
+                    <input type="" [ngClass]="{'errorChamp': emailIsactive === true}" name="email"class="champ-form" id="email" (input)="is_valid_emaill($event)" (blur)="is_valid_emaill($event)"/>
                   </div>
                   
 
@@ -102,7 +100,7 @@
 
                   <div class="element-gestion-permition">
 
-                    <div class="element-gestion-permition-header"matTooltip="(Compte > facturation) : l’utilisateur aura accès à la page facturation et recevra les factures par email."
+                    <div class="element-gestion-permition-header" matTooltip="(Compte > facturation) : l’utilisateur aura accès à la page facturation et recevra les factures par email."
                     [matTooltipPosition]="position.value"
                     aria-label="Button that displays a tooltip in various positions">
 
@@ -140,8 +138,6 @@
                         <input type="checkbox" id="check-1" class="checkbox"/>
                         <span class="checkbox-span"></span>
                       </label>
-
-                    
 
                     </div>
                   </div>
@@ -262,7 +258,7 @@
               </div>
 
               <div class="footer-form-last">
-                <button class="btn-gestion" type="submit">INVITER</button>
+                <input class="btn-gestion" type="submit" value="INVITER" />
               </div>
             </div>
           </form>
@@ -276,7 +272,7 @@
 
 </div>
 
-<div id="shadow-cog-2">
+<div id="shadow-cog-2" [ngClass]="{'shadow-cog-active': shadowcog2 == true}">
 
     <div id="remove-2"  (click)="param_cog_non_active_deux()"></div>
   
@@ -294,10 +290,9 @@
   
           </div>
   
-  
           <div class="modall-content">
   
-             <form (ngSubmit)="Hundelesubmit_modif()">
+             <form>
   
                 <div class="content-form-first">
   
@@ -307,17 +302,16 @@
   
                       <div class="title-and-error-span">
   
-                        <label class="update_libele">prenom</label>
-  
-                        <span class="title-champ-default-update">Obligatoire</span>
+                          <label class="libele" [ngClass]="{'new-label': prenomIsactiveUpdate === true}">prenom</label>
+
+                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactiveUpdate === true}">Obligatoire</span>
   
                       </div>
   
                     </div>
                     <div>
-              
-                      <!-- <span [ngStyle]="errorPrenom ? { color: 'red' } : null">{{errorPrenom}}</span>      -->
-                      <input type="" value="Jérémie" class="champ-form" required id="update_prenom" (input)="is_valid_prenom_update($event)"/>
+            
+                      <input type="" value="{{prenomIsactiveUpdate ? '' : PrenomValue}}" class="champ-form" (input)="is_valid_prenom_update($event)" [ngClass]="{'errorChamp': prenomIsactiveUpdate === true}"/>
                     </div>
                     
   
@@ -328,19 +322,18 @@
                     <div class="top-form-groupe">
   
                       <div class="title-and-error-span">
-  
-                        <label class="update_libele">nom</label>
-  
-                        <span class="title-champ-default-update">Obligatoire</span>
-  
+                        
+                          <label class="libele" [ngClass]="{'new-label': nomIsactiveUpdate === true}">nom</label>
+
+                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactiveUpdate === true}">Obligatoire</span>
+                       
                       </div>
   
                     </div>
                     <div>
-                      <input type="" value="Lenoir"class="champ-form" id="update_nom" (input)="is_valid_nom_update($event)"/>
+                      <input type="" class="champ-form"  (input)="is_valid_nom_update($event)" value="{{nomIsactiveUpdate ? '' : NomValue}}" [ngClass]="{'errorChamp': nomIsactiveUpdate === true}"/>
                     </div>
                     
-  
                   </div>
   
                   <div class="form-groupe">
@@ -349,15 +342,15 @@
   
                       <div class="title-and-error-span">
   
-                        <label class="update_libele">email</label>
-  
-                        <span class="title-champ-default-update">Obligatoire</span>
+                          <label class="libele" [ngClass]="{'new-label': emailIsactiveUpdate === true}">email</label>
+
+                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactiveUpdate === true}">{{ Textmail }}</span>
   
                       </div>
   
                     </div>
                     <div>
-                      <input type="" value="lenoir.jeremie@oostaoo.com"class="champ-form" id="update_email" (input)="is_valid_email_update($event)"/>
+                      <input type="" value="{{emailIsactiveUpdate ? '' : MailValue}}" class="champ-form"  (input)="is_valid_email_update($event)"  [ngClass]="{'errorChamp': emailIsactiveUpdate === true}"/>
                     </div>
                     
   
@@ -555,7 +548,7 @@
 
       
           <span class="icon-form-group-header-contenu"><i class="fas fa-search"></i></span>
-          <input type="text" name="search" [(ngModel)]="searchText" class="input-champ-utilisateurs" placeholder="Filtrer par titre ou candidat" id="search-header" (input)="Hundelesearch($event)">
+          <input type="text" name="search" [(ngModel)]="searchText" class="input-champ-utilisateurs" placeholder="Filtrer par titre ou candidat" id="search-header">
 
 
         </form>
@@ -583,47 +576,27 @@
 
   <div class="table-info-user">
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-bordore">
-
-        <ng-container matColumnDef="name" class="tr-table-user">
-          <th mat-header-cell *matHeaderCellDef> Nom </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-      
-        <!-- Name Column -->
-        <ng-container matColumnDef="mail">
-          <th mat-header-cell *matHeaderCellDef> Email </th>
-          <td mat-cell *matCellDef="let element"> {{element.mail}} </td>
-        </ng-container>
-      
-        <!-- Weight Column -->
-        <ng-container matColumnDef="gestion">
-          <th mat-header-cell *matHeaderCellDef> Privileges </th>
-          <td mat-cell *matCellDef="let element"> {{element.gestion}} </td>
-        </ng-container>
-      
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="symbol">
-          <th mat-header-cell *matHeaderCellDef> </th>
-          <td mat-cell *matCellDef="let element" class="last-td-icon">
-
-            <span class="gestion-block-icon-user" (click)="param_cog_deux()">
-
-                <i class="fas fa-pencil-alt"></i>
-
-            </span>
-
-            <span class="gestion-block-icon-user">
-
-                <i class="fas fa-trash-alt"></i>
-  
-            </span>
-            
-          </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <table class="table_user">
+        <thead class="table_head">
+            <tr class="table_row">
+                <th class="table_head_cell">Nom</th>
+                <th class="table_head_cell">Email</th>
+                <th class="table_head_cell">Privileges</th>
+                <th class="table_head_cell"></th>
+                
+            </tr>
+        </thead>
+        <tbody class="table_body">
+            <tr class="table_row" *ngFor="let user of  user">
+                <td class="table_body_cell">{{user.prenom}} {{user.nom}}</td>
+                <td class="table_body_cell">{{user.email}}</td>
+                <td class="table_body_cell">{{user.privileges}}</td>
+                <td  class="table_body_cell table_icon">
+                  <i (click)="param_cog_deux()" class="fas fa-pencil-alt icon"></i>
+                  <i class="fas fa-trash-alt icon"></i>
+                </td>
+            </tr>
+        </tbody>
       </table>
 
   </div>

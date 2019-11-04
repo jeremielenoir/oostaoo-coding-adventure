@@ -1,4 +1,17 @@
-'use strict';
+"use strict";
+
+const nodemailer = require("nodemailer");
+
+const crypto = require("crypto");
+
+// Create reusable transporter object using SMTP transport.
+const transporter = nodemailer.createTransport({
+  service: "Gmail",
+  auth: {
+    user: "lenoir.jeremie@oostaoo.com",
+    pass: "marijuana"
+  }
+});
 
 /**
  * Candidat.js controller
@@ -7,14 +20,13 @@
  */
 
 module.exports = {
-
   /**
    * Retrieve candidat records.
    *
    * @return {Object|Array}
    */
 
-  find: async (ctx) => {
+  find: async ctx => {
     if (ctx.query._q) {
       return strapi.services.candidat.search(ctx.query);
     } else {
@@ -28,7 +40,7 @@ module.exports = {
    * @return {Object}
    */
 
-  findOne: async (ctx) => {
+  findOne: async ctx => {
     return strapi.services.candidat.fetch(ctx.params);
   },
 
@@ -38,7 +50,7 @@ module.exports = {
    * @return {Number}
    */
 
-  count: async (ctx) => {
+  count: async ctx => {
     return strapi.services.candidat.count(ctx.query);
   },
 
@@ -48,8 +60,61 @@ module.exports = {
    * @return {Object}
    */
 
-  create: async (ctx) => {
-    return strapi.services.candidat.add(ctx.request.body);
+  create: async ctx => {
+    // console.log(strapi.services.campaign);
+    //faire un get campaigns avec ctx.request.body.token? qui est l'id de la campaign?
+    var idCampaignNom = ctx.request.body.idCampaign + ctx.request.body.Nom;
+    // console.log('ctx.request.body.token: ', ctx.request.body.token);
+    // console.log("idCampaignNom: ", idCampaignNom);
+    var cryptoData = crypto
+      .createHash("md5")
+      .update(idCampaignNom)
+      .digest("hex");
+    // console.log("cryptoData: ", cryptoData);
+    // console.log('ctx.request.body: ', ctx.request.body);
+    let getEmail_message = ctx.request.body.email_content;
+    console.log("getEmail_message: ", getEmail_message);
+    let email_title = ctx.request.body.email_title;
+    let getEmail_message_crypto = getEmail_message.replace(
+      /http:\/\/localhost:4200\/evaluate\/.../gm,
+      "http://localhost:4200/evaluate/?id=" + cryptoData //or iplocal replace localhost
+    );
+    // console.log('postEmail_message: ', postEmail_message);
+    let getNom = ctx.request.body.Nom;
+    console.log("nom: ", getNom);
+    let nameCandidats = ctx.request.body.name_candidats.join();
+    console.log("nameCandidats: ", nameCandidats);
+    let postEmail_message = getEmail_message_crypto.replace(
+      nameCandidats,
+      getNom
+    );
+
+    ctx.request.body = {
+      Nom: ctx.request.body.Nom,
+      email: ctx.request.body.email,
+      token: ctx.request.body.idCampaign
+    };
+    const depositObj = {
+      ...ctx.request.body,
+      token: cryptoData
+    };
+
+    try {
+      // console.log('ctx.request.body dans TRY: ', ctx.request.body);
+      // console.log(email_title);
+      let candidat = await strapi.services.candidat.add(depositObj);
+      const options = {
+        to: ctx.request.body.email,
+        from: "lenoir.jeremie@gmail.com",
+        replyTo: "no-reply@strapi.io",
+        subject: email_title,
+        html: postEmail_message
+      };
+      await transporter.sendMail(options);
+      return candidat;
+    } catch (e) {
+      return null;
+    }
   },
 
   /**
@@ -59,7 +124,7 @@ module.exports = {
    */
 
   update: async (ctx, next) => {
-    return strapi.services.candidat.edit(ctx.params, ctx.request.body) ;
+    return strapi.services.candidat.edit(ctx.params, ctx.request.body);
   },
 
   /**

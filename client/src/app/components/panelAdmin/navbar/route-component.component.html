@@ -1,12 +1,12 @@
 <div id="container">
-  <div id="totalLeft">
+  <div id="totalLeft" [ngClass]="{ totalLeftActive: isShow === true }">
     <div
+      *ngIf="isShow === true"
       id="left"
       [ngClass]="{
-        fixNavMobile: isShow2 === false,
+        fixNavMobile: isShow1 === true,
         unfixNavMobile: isShow2 === true
       }"
-      *ngIf="isShow === false || isShow2 === false"
     >
       <div id="left-top">
         <div id="logo">
@@ -64,7 +64,7 @@
           MODIFIER MON OFFRE
         </button>
       </div>
-      <button mat-stroked-button class=" custom-button">
+      <button mat-stroked-button class="custom-button">
         <i class="fa fa-crosshairs fa-2x color-site" aria-hidden="true"></i>
         SOURCING
       </button>
@@ -83,7 +83,7 @@
       <div id="compte" *ngIf="isShowNavCompte">
         <ul>
           <li>
-            <a  routerLink="/dashboard/profil-utilisateur">Profil utilisateur</a>
+            <a routerLink="/dashboard/profil-utilisateur">Profil utilisateur</a>
           </li>
           <li>
             <a href="/dashboard/profil-entreprise">Profil entreprise</a>
@@ -92,13 +92,15 @@
             <a routerLink="/dashboard/facturation">Facturation</a>
           </li>
           <li>
-            <a routerLink="/dashboard/protection-des-donnees">Protection des données</a>
+            <a routerLink="/dashboard/protection-des-donnees"
+              >Protection des données</a
+            >
           </li>
           <li>
-              <a routerLink="/dashboard/utilisateurs">Utilisateurs</a>
+            <a routerLink="/dashboard/utilisateurs">Utilisateurs</a>
           </li>
           <li>
-            <a href="#">Déconnexion</a>
+            <a [routerLink]="['/home/register']">Déconnexion</a>
           </li>
         </ul>
       </div>
@@ -112,14 +114,14 @@
       </div>
     </div>
 
-    <div id="left2" *ngIf="isShow === true">
+    <div id="left2" *ngIf="isShow === false">
       <a href="#">
         <div id="logo2" class="padding-left2">
           <img src="../../../../assets/Oostaoo Logo.png" alt="img-profil" />
         </div>
       </a>
-      <a href="#"
-        ><div id="notif2" class="padding-left2">
+      <a href="#">
+        <div id="notif2" class="padding-left2">
           <i class="fa fa-bell-o fa-2x color-site" aria-hidden="true"></i>
         </div>
       </a>
@@ -189,7 +191,9 @@
             <ul>
               <h4>COMPTE</h4>
               <li class="padding10pxcompagne">
-                <a  routerLink="/dashboard/profil-utilisateur">Profil utilisateur</a>
+                <a routerLink="/dashboard/profil-utilisateur"
+                  >Profil utilisateur</a
+                >
               </li>
               <li class="padding10pxcompagne">
                 <a href="/dashboard/profil-entreprise">Profil entreprise</a>
@@ -198,13 +202,15 @@
                 <a routerLink="/dashboard/facturation">Facturation</a>
               </li>
               <li class="padding10pxcompagne">
-                <a routerLink="/dashboard/protection-des-donnees">Protection des données</a>
+                <a routerLink="/dashboard/protection-des-donnees"
+                  >Protection des données</a
+                >
               </li>
               <li class="padding10pxcompagne">
-                  <a routerLink="/dashboard/utilisateurs">Utilisateurs</a>
+                <a routerLink="/dashboard/utilisateurs">Utilisateurs</a>
               </li>
               <li class="padding10pxcompagne">
-                <a href="#">Déconnexion</a>
+                <a [routerLink]="['/home/register']">Déconnexion</a>
               </li>
             </ul>
           </li>
@@ -232,13 +238,19 @@
     <button
       id="nonemobile"
       mat-button
-      (click)="isShow = !isShow"
-      (click)="isShow2 = true"
-      class="custom-button-nav"(click)="active_menu()"
+      (click)="Activet_isShow()"
+      class="custom-button-nav"
     >
-      <i class="fa fa-arrow-left fa-2x" aria-hidden="true" id="btn-arrow"></i>
+      <i
+        class="fa fa-2x"
+        aria-hidden="true"
+        id="btn-arrow"
+        [ngClass]="isShow ? 'fa-arrow-left' : 'fa-arrow-right'"
+      ></i>
     </button>
   </div>
+
+  <!-- (click)="active_menu()" -->
   <!-- button for show or hidden nav in desktop -->
   <div id="menu-nav-mobile">
     <div id="nav-mobile">
@@ -251,11 +263,11 @@
       </div>
       <div id="logo-mobile">
         <a href="/dashboard">
-        <img
-          src="../../../../assets/Coding-game-img/logo-mobile.svg"
-          alt="logo-mobile"
-        />
-      </a>
+          <img
+            src="../../../../assets/Coding-game-img/logo-mobile.svg"
+            alt="logo-mobile"
+          />
+        </a>
       </div>
       <div id="notif-mobile">
         <i class="fa fa-bell-o fa-2x" aria-hidden="true"></i>

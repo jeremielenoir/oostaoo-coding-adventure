@@ -1,0 +1,81 @@
+{
+  "connection": "default",
+  "collectionName": "entreprise",
+  "info": {
+    "name": "entreprise",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "utilisateursadmin": {
+      "model": "user",
+      "via": "entreprise",
+      "plugin": "users-permissions"
+    },
+    "logo": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "nom": {
+      "default": "",
+      "type": "string"
+    },
+    "email": {
+      "default": "",
+      "type": "email"
+    },
+    "tel": {
+      "default": "",
+      "type": "string"
+    },
+    "nb_employe": {
+      "default": "",
+      "type": "string"
+    },
+    "nb_dev": {
+      "default": "",
+      "type": "string"
+    },
+    "technologies": {
+      "collection": "technologies",
+      "via": "technologies",
+      "dominant": true
+    },
+    "lien_video": {
+      "default": "",
+      "type": "string"
+    },
+    "url_site": {
+      "default": "",
+      "type": "string"
+    },
+    "teaser": {
+      "default": "",
+      "type": "string"
+    },
+    "image_entreprise": {
+      "collection": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "linkedin": {
+      "default": "",
+      "type": "string"
+    },
+    "facebook": {
+      "default": "",
+      "type": "string"
+    },
+    "twitter": {
+      "default": "",
+      "type": "string"
+    }
+  }
+}

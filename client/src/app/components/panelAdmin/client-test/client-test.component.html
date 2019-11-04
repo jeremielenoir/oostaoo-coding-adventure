@@ -1,0 +1,134 @@
+<div [ngSwitch]="StatueTestingQuestion">
+  <div *ngSwitchCase="'eval'">
+    <div id="shadow-cog" [class.shadow-cog-active]="ActiveTest">
+      <div class="modall">
+        <div class="modall-header">
+          <h3 class="modall-title">
+            <i class="fa fa-user icon"></i>
+            Vous êtes sur le point de démarrer votre test
+          </h3>
+        </div>
+
+        <div class="modall-content">
+          <p class=" claire-text">
+            Une fois que vous aurez cliqué sur le bouton "Commencer", vous ne
+            pourrez plus interrompre l'enchainement des questions. Une fois
+            qu'une réponse est soumise, vous ne pourrez plus revenir à la
+            question précédente.
+          </p>
+          <p class="claire-text text-gras">
+            Les solutions qui prennent en considération un maximum de cas
+            d'utilisation sont privilégiées par le système de notation.
+          </p>
+
+          <p class="claire-text">
+            Nous vous rappelons qu'il est interdit de tricher. Notre système
+            détecte les tentatives de triche, et préviendra le recruteur le cas
+            échéant.
+          </p>
+
+          <p class=" claire-text">Bonne chance !</p>
+
+          <label class="block-condition claire-text">
+            <span class="checkbox-condition"
+              ><input type="checkbox" (change)="hundelechecked($event)"
+            /></span>
+
+            <p class="text-condition">
+              J'ai lu et j'accepte les
+              <a href="" class="text-link">conditions d'utilisation </a> et la
+              politique de confidentialité. Je comprends que la politique de
+              confidentialité qui s'applique est celle de l'entreprise qui m'a
+              invité à passer ce test.
+            </p>
+          </label>
+        </div>
+
+        <div class="modall-footer">
+          <button class="btn" (click)="NohundleActiveTest()">Annuler</button>
+          <button
+            class=" btn btn-valide"
+            disabled="disabled"
+            #btnchecked
+            (click)="HundleStatueTestingQuestion()"
+          >
+            Commencer
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <section class="container-section">
+      <div class="test-container">
+        <div class="invitation">
+          <div class="test-invit">
+            <div class="image"></div>
+            <h3>Bonjour, vous avez été invité(e) à passer un test.</h3>
+          </div>
+
+          <div class="text">
+            <p>
+              Vous devrez effectuer cette évaluation sans l’aide d’une tierce
+              personne. Cependant, vous pouvez (et nous le conseillons vivement)
+              vous servir de toutes les ressources à votre disposition
+              (Internet, livres, etc.). Vous pouvez également utiliser votre
+              environnement de développement préféré pour préparer vos réponses.
+            </p>
+            <p>
+              Un tutoriel et une aide sont à votre disposition pour vous
+              permettre de vous familiariser avec l'application dans les
+              meilleures conditions.
+            </p>
+          </div>
+        </div>
+
+        <div class="tutorial-test">
+          <div class="tutorial">
+            <div class="title">
+              <div class="img"></div>
+              <h3>Tutoriel</h3>
+            </div>
+            <p>
+              Voici un tutoriel qui vous permet de découvrir votre environnement
+              d’évaluation en vous familiarisant avec les fonctionnalités de
+              l’application en toute tranquillité. Le résultat de ce tutoriel ne
+              fait pas partie de l’évaluation. Vous avez la possibilité de
+              recommencer ce tutoriel autant de fois que vous le souhaitez.
+            </p>
+            <button class="btn-compo">Démarrer le tutoriel</button>
+          </div>
+          <div class="test">
+            <div class="title">
+              <div class="img"></div>
+              <h3>Test</h3>
+            </div>
+
+            <p>
+              Ce test est composé de {{ nbQuestion }} questions. Chaque question
+              est chronométrée. La durée totale est estimée à
+              {{ durationTotalTest }} minutes mais le test peut durer jusqu’à
+              {{ durationMaxTest }} minutes. Merci de prévoir
+              {{ durationMaxTest }} minutes consécutives pour faire ce test.
+            </p>
+            <button class="btn-compo" (click)="hundleActiveTest()">
+              Démarrer le test
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div *ngSwitchCase="'testing'">
+    <app-test
+      [candidat]="candidat"
+      [questionCampaign]="questionCampaign"
+      [technoCampaign]="technoCampaign"
+      [durationMaxTest]="durationMaxTest"
+      (refresh)="refreshComponent($event)"
+    ></app-test>
+  </div>
+  <div *ngSwitchCase="'fin'">
+    <app-fin-test></app-fin-test>
+  </div>
+</div>

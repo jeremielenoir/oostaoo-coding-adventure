@@ -1,82 +1,11 @@
 <div id="background">
-       <div id="form">
-         <p> Nom de la campagne </p>
-
-         <mat-form-field  class="fullWidth">
-            <input
-              matInput
-              name="nomDeCampagne"
-            />
-          </mat-form-field>
-
-         <p> En quelle langue les questions doivent-elles être posées à vos candidats ? </p>
-         <mat-radio-group [(ngModel)]="selectedLangue">
-            <mat-radio-button value="FR">
-              FR
-            </mat-radio-button>
-            <mat-radio-button value="EN">
-              EN
-            </mat-radio-button>
-            <mat-radio-button value="ES">
-              ES
-            </mat-radio-button>
-            <mat-radio-button value="JP">
-              JP
-            </mat-radio-button>
-          </mat-radio-group>
-
-        <p> Voulez-vous empêcher l'utilisation du copier/coller pendant le test ? </p>
-          
-          <div>
-              <mat-radio-group >
-                  <mat-radio-button value="true">
-                    Oui
-                  </mat-radio-button>
-                  <mat-radio-button  value="false">
-                    Non
-                  </mat-radio-button>
-                </mat-radio-group>
-          </div>
-
-        <p>  Nombre de jours au bout desquels une invitation expire </p>
-          <input type="text">
-
-
-        <p> Souhaitez-vous envoyer le rapport simplifié au candidat à l'issue de son test ? </p>
-
-          <div>
-              <mat-radio-group >
-                  <mat-radio-button value="true">
-                    Oui
-                  </mat-radio-button>
-                  <mat-radio-button  value="false">
-                    Non
-                  </mat-radio-button>
-                </mat-radio-group>
-          </div>
-
-          
-        <p>  Comment souhaitez-vous que le candidat soit chronométré ? </p>
-
-            <div>
-              <div>
-                  UN CHRONOMÈTRE PAR QUESTION
-                  Chaque question sera chronométrée. Une fois le test démarré, les questions se succèderont selon l’ordre défini. Le candidat ne pourra pas revenir à une question précédente. Nous conseillons ce mode pour obtenir un aperçu des connaissances théoriques et pratiques des candidats.
-                  (recommandé)
-              </div>
-              <div>
-                  UN CHRONOMÈTRE GLOBAL
-                  Un temps global est alloué au candidat pour réaliser l’ensemble du test. Le candidat peut gérer son temps comme bon lui semble : il peut répondre aux questions dans n’importe quel ordre et les modifier plusieurs fois. Nous conseillons ce mode pour évaluer, uniquement, les connaissances pratiques des candidats (lors d’exercices de code par exemple).
-                  Temps alloué pour ce test (minutes)
-
-                  <input type="text"> x temps
-              </div>
-          </div>
-
-          <div>
-            <button>Prévisualiser</button>
-            <button>Enregistrer</button>
-          </div>
-       </div>
-
+  <div id="content">
+    <div id="nav">
+        <a class="link-nav" [routerLink]="['general']" routerLinkActive="active-link">Général</a>
+        <a class="link-nav" [routerLink]="['personnalisation']" routerLinkActive="active-link">Personnalisation</a>
+    </div>     
+    <div id="formbox">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

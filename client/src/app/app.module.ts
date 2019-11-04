@@ -1,11 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr, 'fr');
+
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiClientService } from './api-client/api-client.service';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -42,10 +46,10 @@ import {
   NouvelleCampagnePage3Component, PopupCampaign
 } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component';
 
-import { RouteComponentComponent2 } from './components/panelAdmin/route-component2/route-component.component';
+import { DashboadCampagneComponent } from './components/panelAdmin/dashboard-campagne/dashboard-campagne.component';
 import { CompagneComponent } from './components/panelAdmin/compagne/compagne.component';
 import { SidibarRightComponent } from './components/panelAdmin/sidibar-right/sidibar-right.component';
-
+import { DatePipe } from '@angular/common';
 import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
 import { ProtectionDeDonneesComponent } from './components/panelAdmin/protection-de-donnees/protection-de-donnees.component';
 import { FacturationComponent } from './components/panelAdmin/facturation/facturation.component';
@@ -59,6 +63,21 @@ import { QuestionsComponent } from './components/panelAdmin/edit-campagne/questi
 import { SettingsComponent } from './components/panelAdmin/edit-campagne/settings/settings.component';
 import { CandidatsFormComponent } from './components/panelAdmin/edit-campagne/candidats-form/candidats-form.component';
 import { CandidatsMailComponent } from './components/panelAdmin/edit-campagne/candidats-mail/candidats-mail.component';
+import { GeneralComponent } from './components/panelAdmin/edit-campagne/settings/general/general.component';
+import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne/settings/personnalisation/personnalisation.component';
+import { ClientTestComponent } from './components/panelAdmin/client-test/client-test.component';
+import { TestComponent } from './components/panelAdmin/client-test/test/test.component';
+
+import { NgxEditorModule } from 'ngx-editor';
+import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
+import { BreadcrumbComponent } from './components/panelAdmin/breadcrumb/breadcrumb.component';
+import { RegisterComponent } from './components/home/register/register.component';
+// import { DecryptTokenService } from './components/home/register/register.service';
+import { BlockCopyPasteDirective } from './components/panelAdmin/client-test/block-copy-paste.directive';
+import { FinTestComponent } from './components/panelAdmin/client-test/fin-test/fin-test.component';
+import { JwtInterceptor } from './components/home/register/service/jwt.interceptor';
+import { ErrorInterceptor } from './components/home/register/service/error.interceptor';
+import { DecryptTokenService } from './components/home/register/register.service';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -83,7 +102,7 @@ import { CandidatsMailComponent } from './components/panelAdmin/edit-campagne/ca
     NouvelleCampagnePage2Component,
     PopupCampaign,
     NouvelleCampagnePage3Component,
-    RouteComponentComponent2,
+    DashboadCampagneComponent,
     CompagneComponent,
     SidibarRightComponent,
     ProfilUtilisateurComponent,
@@ -97,7 +116,16 @@ import { CandidatsMailComponent } from './components/panelAdmin/edit-campagne/ca
     QuestionsComponent,
     SettingsComponent,
     CandidatsFormComponent,
-    CandidatsMailComponent
+    CandidatsMailComponent,
+    GeneralComponent,
+    PersonnalisationComponent,
+    ClientTestComponent,
+    TestComponent,
+    NotFoundComponent,
+    BreadcrumbComponent,
+    RegisterComponent,
+    BlockCopyPasteDirective,
+    FinTestComponent
   ],
   imports: [
     BrowserModule,
@@ -111,10 +139,13 @@ import { CandidatsMailComponent } from './components/panelAdmin/edit-campagne/ca
     DragScrollModule,
     HttpClientModule,
     Ng2SearchPipeModule,
-    RoundProgressModule
+    RoundProgressModule,
+    NgxEditorModule
   ],
   providers: [
-    ApiClientService
+    ApiClientService,
+    DatePipe,
+    DecryptTokenService
   ],
   bootstrap: [AppComponent]
 })
