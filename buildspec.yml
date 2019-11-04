@@ -30,4 +30,5 @@ phases:
 
 artifacts:
   files:
-    -  README.md
+    - '**/*'
+  name: roodeo
