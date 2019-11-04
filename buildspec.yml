@@ -24,6 +24,8 @@ phases:
       - echo Entered the build phase...
       - echo Build started on `date`
       - cd ../client && npm run build
+      - mkdir ../server/public
+      - cp -R ./dist/client/ ../server/public/
     finally:
       - echo This always runs even if the install command fails
   post_build:
