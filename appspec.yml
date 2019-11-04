@@ -1,5 +1,5 @@
 version: 0.0
 os: linux
 files:
-  - source: ./roodeo.zip
+  - source: ./server
     destination: /tmp
