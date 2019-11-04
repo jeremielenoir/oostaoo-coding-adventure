@@ -6,6 +6,8 @@ env:
     
 phases:
   install:
+    runtime-versions:
+      nodejs: 10
     commands:
       - echo Entered the install phase...
     finally:
