@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-dashboard-campagne',
   templateUrl: './dashboard-campagne.component.html',
-  styleUrls: ['./dashboard-campagne.component.css']
+  styleUrls: ['./dashboard-campagne.component.scss']
 })
 export class DashboadCampagneComponent implements OnInit {
   public campaigns: any;

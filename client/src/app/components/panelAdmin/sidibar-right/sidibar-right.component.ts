@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-sidibar-right',
   templateUrl: './sidibar-right.component.html',
-  styleUrls: ['./sidibar-right.component.css']
+  styleUrls: ['./sidibar-right.component.scss']
 })
 export class SidibarRightComponent implements OnInit {
   @Input() campaignsFromParent;

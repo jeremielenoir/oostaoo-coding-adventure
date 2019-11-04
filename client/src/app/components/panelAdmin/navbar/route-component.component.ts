@@ -45,7 +45,7 @@ export class RouteComponentComponent implements OnInit {
 @Component({
   selector: "popup-mon-offre",
   templateUrl: "./popup-mon-offre.html",
-  styleUrls: ["./popup-mon-offre.css"]
+  styleUrls: ["./popup-mon-offre.scss"]
 })
 export class PopupMonOffre {
   constructor(private bottomSheetRef: MatBottomSheetRef<PopupMonOffre>) {}

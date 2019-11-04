@@ -6,7 +6,7 @@ import { CandidatsMailComponent } from '../candidats-mail/candidats-mail.compone
 @Component({
   selector: 'app-candidats-form',
   templateUrl: './candidats-form.component.html',
-  styleUrls: ['./candidats-form.component.css']
+  styleUrls: ['./candidats-form.component.scss']
 })
 export class CandidatsFormComponent implements OnInit {
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
