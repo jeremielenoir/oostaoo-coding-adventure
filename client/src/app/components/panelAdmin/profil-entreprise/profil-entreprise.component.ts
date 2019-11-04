@@ -829,7 +829,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   }
 
   clickchange() {
-
+    console.log('this.user :', this.user);
     this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.user[0].entreprise.id, {
       Lien_video: this.videolink.value,
       Url_site: this.websitelink.value,
@@ -848,7 +848,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   }
 
   clickchange2() {
-    this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.user.entreprise.id, {
+    this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.user[0].entreprise.id, {
       Nom: this.name.value,
       Email: this.email.value,
       Tel: this.phone.value,
@@ -1004,6 +1004,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       const datas = await this.apiClientService
         .get(API_URI_USER + '/' + this.decryptTokenService.userId)
         .toPromise();
+      console.log('datas PROFIUL ENTREPRISE: ', datas);
       return this.user = [datas];
     } catch (err) {
       return err;

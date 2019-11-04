@@ -117,7 +117,11 @@ export class CandidatsComponent implements OnInit {
             percentCandidat = 0 + '%';
           } else {
             dateInvite = new Date(candidat.test_terminer);
+            console.log('candidat.points_candidat[5].PourcentTest: ', candidat.points_candidat[5].PourcentTest);
             percentCandidat = candidat.points_candidat[5].PourcentTest + '%';
+            if (candidat.points_candidat[5].PourcentTest === null) {
+              percentCandidat = 0 + '%';
+            }
           }
           getInfoCandidat.push({
             Candidats: candidat.Nom,
@@ -129,6 +133,7 @@ export class CandidatsComponent implements OnInit {
           });
           // console.log('candidat.points_candidat[2].getpourcentByCandidat: ', candidat.points_candidat[2].getpourcentByCandidat);
           if (candidat.invitation_date !== candidat.test_terminer) {
+            // console.log('candidat.points_candidat[2].getpourcentByCandidat: ', candidat);
             for (const percentTechno of candidat.points_candidat[2].getpourcentByCandidat) {
               // console.log('percentTechno: ', percentTechno);
               for (const techno of getTechnos) {

@@ -29,22 +29,10 @@ export class SidibarRightComponent implements OnInit {
             return 0;
           }
         });
-
-        // for(let date of this.candidats){
-
-        //     console.log('date',date.invitation_date)
-        // }
-
       }
-
     }
   }
 
-  //  public sortFunction(a,b){
-  //         var dateA = new Date(a.invitation_date).getTime();
-  //         var dateB = new Date(b.invitation_date).getTime();
-  //         return dateA > dateB ? 1 : -1;
-  //     };
 
   public param_cog() {
 
