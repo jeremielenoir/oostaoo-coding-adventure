@@ -36,4 +36,5 @@ phases:
 artifacts:
   files:
     - 'server/**/*'
+    - 'appspec.yml'
   name: roodeo
