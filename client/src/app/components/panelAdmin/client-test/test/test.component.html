@@ -1,6 +1,4 @@
 <div id="shadow-cog" [class.shadow-cog-active]="Activetime">
-  <div id="remove"></div>
-
   <div class="modall">
     <div class="modall-header">
       <h3 class="modall-title">
@@ -54,7 +52,11 @@
         </div>
       </header>
 
-      <div class="scroll-auto-testing" appBlockCopyPaste [appActive]="candidat.campaign.copy_paste">
+      <div
+        class="scroll-auto-testing"
+        appBlockCopyPaste
+        [appActive]="candidat.campaign.copy_paste"
+      >
         <div class="content-testing">
           <span style="display:block;padding:15px;">{{ question.name }}</span>
         </div>

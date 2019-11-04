@@ -4,7 +4,7 @@ import { ApiClientService, API_URI_CANDIDATS, API_URI_CAMPAIGNS } from '../../..
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements OnInit {
   public questions: any;
