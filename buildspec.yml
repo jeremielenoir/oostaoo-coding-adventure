@@ -33,5 +33,5 @@ phases:
 
 artifacts:
   files:
-    - '**/*'
+    - 'server/*'
   name: roodeo
