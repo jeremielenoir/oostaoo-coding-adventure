@@ -561,7 +561,7 @@
 
             <i class="far fa-user btn-icon-utilisateur"></i>
 
-            <span class="title-utilisateur">Utilisateurs 1/3</span>
+            <span>Utilisateurs 1/3</span>
 
           </div>
 
@@ -588,9 +588,9 @@
         </thead>
         <tbody class="table_body">
             <tr class="table_row" *ngFor="let user of  user">
-                <td class="table_body_cell">{{user.prenom}} {{user.nom}}</td>
-                <td class="table_body_cell">{{user.email}}</td>
-                <td class="table_body_cell">{{user.privileges}}</td>
+                <td class="table_body_cell">user.prenom user.nom</td>
+                <td class="table_body_cell">user.email</td>
+                <td class="table_body_cell">user.privileges</td>
                 <td  class="table_body_cell table_icon">
                   <i (click)="param_cog_deux()" class="fas fa-pencil-alt icon"></i>
                   <i class="fas fa-trash-alt icon"></i>

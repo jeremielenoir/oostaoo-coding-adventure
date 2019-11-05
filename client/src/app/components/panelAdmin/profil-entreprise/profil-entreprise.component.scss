@@ -434,14 +434,7 @@
   .champ-incrage {
     padding-left: 85px !important;
   }
-  .span-incrage-network {
-    width: 130px;
-    justify-content: flex-start !important;
 
-    .icon-network {
-      margin: 0 17px;
-    }
-  }
   .span-incrage {
     display: block;
     height: 52px;
@@ -479,7 +472,14 @@
   margin-bottom: 0px !important;
 }
 
-// les css restant
+.span-incrage-network {
+  width: 130px !important;
+  justify-content: flex-start !important;
+
+  .icon-network {
+    margin: 0 17px;
+  }
+}
 
 :host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
   display: flex;
