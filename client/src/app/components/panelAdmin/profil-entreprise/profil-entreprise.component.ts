@@ -854,7 +854,6 @@ export class ProfilEntrepriseComponent implements OnInit {
   }
 
   clickchange() {
-<<<<<<< HEAD
     console.log('this.user :', this.user);
     this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.user[0].entreprise.id, {
       Lien_video: this.videolink.value,
@@ -867,21 +866,6 @@ export class ProfilEntrepriseComponent implements OnInit {
       },
       err => console.log(err)
     );
-=======
-    this.apiClientService
-      .put(API_URI_ENTREPRISE + "/" + this.user[0].entreprise.id, {
-        Lien_video: this.videolink.value,
-        Url_site: this.websitelink.value,
-        Teaser: this.teaser.value
-      })
-      .subscribe(
-        res => {
-          alert("Profil mis à jour");
-          // console.log('res', res);
-        },
-        err => console.log(err)
-      );
->>>>>>> =update profil-entreprise
     console.log(this.lang.value);
     console.log(this.user[0].entreprise.id);
     console.log(this.websitelink.value);
@@ -889,7 +873,6 @@ export class ProfilEntrepriseComponent implements OnInit {
   }
 
   clickchange2() {
-<<<<<<< HEAD
     this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.user[0].entreprise.id, {
       Nom: this.name.value,
       Email: this.email.value,
@@ -909,29 +892,6 @@ export class ProfilEntrepriseComponent implements OnInit {
       },
       err => console.log(err)
     );
-=======
-    this.apiClientService
-      .put(API_URI_ENTREPRISE + "/" + this.user.entreprise.id, {
-        Nom: this.name.value,
-        Email: this.email.value,
-        Tel: this.phone.value,
-        Nb_employe: this.numberofemployee.value,
-        Nb_dev: this.numberofdev.value,
-        Lien_video: this.videolink.value,
-        Url_site: this.websitelink.value,
-        Teaser: this.teaser.value,
-        Linkedin: this.linkedin.value,
-        Facebook: this.facebook.value,
-        Twitter: this.twitter.value
-      })
-      .subscribe(
-        res => {
-          alert("Profil mis à jour");
-          // console.log('res', res);
-        },
-        err => console.log(err)
-      );
->>>>>>> =update profil-entreprise
     console.log(this.name.value);
     console.log(this.email.value);
     console.log(this.phone.value);
@@ -1072,12 +1032,8 @@ export class ProfilEntrepriseComponent implements OnInit {
       const datas = await this.apiClientService
         .get(API_URI_USER + "/" + this.decryptTokenService.userId)
         .toPromise();
-<<<<<<< HEAD
       console.log('datas PROFIUL ENTREPRISE: ', datas);
       return this.user = [datas];
-=======
-      return (this.user = [datas]);
->>>>>>> =update profil-entreprise
     } catch (err) {
       return err;
     }
