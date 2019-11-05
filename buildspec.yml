@@ -11,7 +11,6 @@ phases:
     commands:
       - echo Entered the install phase...
       - cd client && npm install
-      - cd ../server && npm install
     finally:
       - echo This always runs even if the update or install command fails 
   pre_build:
