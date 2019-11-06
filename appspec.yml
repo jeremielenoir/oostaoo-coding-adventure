@@ -4,7 +4,10 @@ files:
   - source: ./server
     destination: /home/ec2-user/roodeo
 hooks:
+  BeforeInstall:
+    - location: scripts/install_node_modules.sh
+      runas: root
   ApplicationStart:
-    - location: /home/ec2-user/roodeo/start_server
+    - location: scripts/launch_roodeo.sh
       timeout: 300
       runas: root
