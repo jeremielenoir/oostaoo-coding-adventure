@@ -1,8 +1,7 @@
 <div id="register">
+  <!-- Partie de gauche -->
 
-   <!-- Partie de gauche -->
-
-    <!-- Panel cote gauche -->
+  <!-- Panel cote gauche -->
   <div id="left-side">
     <div *ngIf="!switchPanel" id="left-panel">
       <div id="left-panel-text">
@@ -17,7 +16,7 @@
 
     <!-- Formulaire cote gauche -->
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="forms">
-        <h2>Se connecter ?</h2>
+      <h2>Se connecter ?</h2>
       <div class="form-group">
         <label for="username">Username</label>
         <input
@@ -49,11 +48,9 @@
     </form>
   </div>
 
+  <!-- Partie de droite -->
 
- <!-- Partie de droite -->
-
-
- <!-- Panel cote droit -->
+  <!-- Panel cote droit -->
   <div id="right-side">
     <div *ngIf="switchPanel" id="right-panel">
       <div id="right-panel-text">
@@ -68,9 +65,8 @@
       </div>
     </div>
 
-
-     <!-- Formulaire cote droit -->
-    <form class="forms" id="form_register" action="" method="POST">
+    <!-- Formulaire cote droit -->
+    <form class="forms" id="form_register">
       <h2>Nouveau client ?</h2>
 
       <label for="username"> Username :</label>

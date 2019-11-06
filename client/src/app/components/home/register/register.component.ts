@@ -19,7 +19,7 @@ import { AuthenticationService } from './service/auth.service';
 
 @Injectable()
 
- export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   public switchPanel = true;
 
@@ -28,11 +28,15 @@ import { AuthenticationService } from './service/auth.service';
   loading = false;
   returnUrl: string;
   error = '';
+  username = new FormControl('');
+  email = new FormControl('');
+  password = new FormControl('');
 
 
 
   constructor(
     private formBuilder: FormBuilder,
+    private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService
@@ -83,22 +87,23 @@ import { AuthenticationService } from './service/auth.service';
   }
 
 
-  // register() {
-  //   axios
-  //     .post('http://localhost:1337/auth/local/register', {
-  //       username: this.username.value,
-  //       email: this.email.value,
-  //       password: this.password.value,
-  //     })
-  //     .then(response => {
-  //       // Handle success.
-  //       console.log('Well done!');
-  //       console.log('User profile', response.data.user);
-  //       console.log('User token', response.data.jwt);
-  //     })
-  //     .catch(error => {
-  //       // Handle error.
-  //       console.log('An error occurred:', error);
-  //     });
-  // }
+  register() {
+    console.log('this.username.value : ', this.username.value);
+    console.log('this.email.value : ', this.email.value);
+    console.log('this.password.value : ', this.password.value);
+    this.http.post<any>('http://localhost:1337/auth/local/register', {
+      username: this.username.value,
+      email: this.email.value,
+      password: this.password.value,
+    }).toPromise()
+      .then(response => {
+        // Handle success.
+        console.log('Well done!');
+        console.log('User profile', response);
+      })
+      .catch(error => {
+        // Handle error.
+        console.log('An error occurred:', error);
+      });
+  }
 }
