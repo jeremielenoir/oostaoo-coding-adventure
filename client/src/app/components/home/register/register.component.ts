@@ -23,14 +23,14 @@ export class RegisterComponent implements OnInit {
 
   public switchPanel = true;
 
+
+  registerForm: FormGroup;
   loginForm: FormGroup;
   submitted = false;
   loading = false;
   returnUrl: string;
   error = '';
-  username = new FormControl('');
-  email = new FormControl('');
-  password = new FormControl('');
+  errorRegister = '';
 
 
 
@@ -46,6 +46,12 @@ export class RegisterComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
+    }),
+
+    this.registerForm = this.formBuilder.group({
+        username: ['', Validators.required],
+        email: ['', Validators.required],
+        password: ['', Validators.required]
     });
 
     // logout the person when he opens the app for the first time
@@ -58,6 +64,10 @@ export class RegisterComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() {
     return this.loginForm.controls;
+  }
+
+  get fr() {
+    return this.registerForm.controls;
   }
 
   // on submit
@@ -82,28 +92,30 @@ export class RegisterComponent implements OnInit {
         }
       );
   }
+
   switch() {
     this.switchPanel = !this.switchPanel;
   }
 
 
   register() {
-    console.log('this.username.value : ', this.username.value);
-    console.log('this.email.value : ', this.email.value);
-    console.log('this.password.value : ', this.password.value);
-    this.http.post<any>('http://localhost:1337/auth/local/register', {
-      username: this.username.value,
-      email: this.email.value,
-      password: this.password.value,
-    }).toPromise()
-      .then(response => {
-        // Handle success.
-        console.log('Well done!');
-        console.log('User profile', response);
-      })
-      .catch(error => {
-        // Handle error.
-        console.log('An error occurred:', error);
-      });
+    this.submitted = true;
+
+    // stop if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+
+    this.authenticationService.register(this.fr.username.value, this.fr.email.value, this.fr.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+        },
+        error => {
+          this.errorRegister = error;
+        }
+      );
   }
 }

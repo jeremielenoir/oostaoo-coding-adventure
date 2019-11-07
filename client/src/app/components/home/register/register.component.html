@@ -65,41 +65,59 @@
       </div>
     </div>
 
-    <!-- Formulaire cote droit -->
-    <form class="forms" id="form_register">
+
+     <!-- Formulaire cote droit -->
+    <form class="forms" [formGroup]="registerForm" (ngSubmit)="register()" id="form_register">
       <h2>Nouveau client ?</h2>
 
+    <div class="form-group">
       <label for="username"> Username :</label>
       <input
-        name="username"
-        [formControl]="username"
-        class="input-section1"
+        formControlName="username"
+        class="input-section1 form-control"
         maxlength="64"
         type="text"
-        required
+        [ngClass]="{ 'is-invalid': submitted && fr.username.errors }"
+        
       />
+      <div *ngIf="submitted && fr.username.errors" class="invalid-feedback">
+          <div *ngIf="fr.username.errors.required">Username is required</div>
+        </div>
+    </div>
 
+    <div class="form-group">
       <label for="email">Email :</label>
       <input
-        name="email"
-        [formControl]="email"
-        class="input-section1"
+        formControlName="email"
+        class="input-section1 form-control"
         maxlength="64"
         type="email"
-        required
+        [ngClass]="{ 'is-invalid': submitted && fr.email.errors }"
+        
       />
+      <div *ngIf="submitted && fr.email.errors" class="invalid-feedback">
+      <div *ngIf="fr.email.errors.required">Email is required</div>
+      </div>
+    </div>
 
+    <div class="form-group">
       <label for="password"> Password :</label>
       <input
-        name="password"
-        [formControl]="password"
-        class="input-section1"
+        formControlName="password"
+        class="input-section1 form-control"
         maxlength="64"
         type="password"
-        required
+        [ngClass]="{ 'is-invalid': submitted && fr.password.errors }"
+        
       />
-
-      <button class="button" (click)="register()">S'inscrire</button>
+      <div *ngIf="submitted && fr.password.errors" class="invalid-feedback">
+      <div *ngIf="fr.password.errors.required">Password is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button class=" btn btn-primary button">S'inscrire</button>
+    </div>
+    <div *ngIf="errorRegister" class="alert alert-danger">{{ errorRegister }}</div>
     </form>
   </div>
 </div>
