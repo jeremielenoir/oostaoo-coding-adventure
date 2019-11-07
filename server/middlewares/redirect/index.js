@@ -7,6 +7,7 @@ module.exports = strapi => {
         if(ctx.request.url.indexOf('api') > -1 || ctx.request.url.indexOf('assets') > -1 || ctx.request.url.indexOf('admin') > -1 || ctx.request.url.indexOf('content-manager') > -1){
           await next();
         }else {
+          ctx.url = '/index.html';
           await next();
         }
 
