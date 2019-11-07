@@ -2,6 +2,7 @@
   "timeout": 100,
   "load": {
     "before": [
+      "redirect",
       "responseTime",
       "logger",
       "cors",
