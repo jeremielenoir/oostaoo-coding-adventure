@@ -43,6 +43,26 @@ export class AuthenticationService {
       );
   }
 
+  register(username: string, email: string, password: string) {
+    return this.http.post<any>(`${config.apiUrl}/auth/local/register`, {
+        username,
+        email,
+        password
+      })
+      .pipe(
+        map(user =>{
+          console.log('AUTH SERVICE user: ', user);
+          // login successful if the response has jwt token
+          if (user && user.jwt) {
+            // store user details and jwt token in the local storage to keep the user logged in between page refreshes
+            localStorage.setItem('currentUser', user.jwt);
+            this.currentUserSubject.next(user);
+          }
+          return user;
+      })
+      );
+  }
+
   // logout
   logout() {
     // remove user from local storage

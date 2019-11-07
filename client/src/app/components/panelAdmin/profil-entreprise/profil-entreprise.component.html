@@ -5,7 +5,7 @@
 
 <div id="shadow-cog" [ngClass]= "{'shadow-cog-active': shadowcog == true}">
 
-    <div id="remove"  (click)="param_cog_non_active()"></div>
+    <div id="remove" (click)="param_cog_non_active()"></div>
 
     <div class="modall">
 
@@ -28,20 +28,17 @@
   
             <div class="btn-modal-content" id="btn-modal-content">
   
-              <span class="modal-text-btn-upload">ou télécharger une photo</span>
+              <span >ou télécharger une photo</span>
   
               <input type="file" class="file" id="file" (change)="readURL($event)"/>
   
             </div>
-
-
-
          </div>
 
          <div class="cadrage-img" [class.cadrage-img-active]="cadrageImgBoolean">
 
           <figure class="img-figure" [class.img-figure-active]="!cadrageImgBooleanState">
-              <img src="" class="upload_img" #uploadimgfirst/>
+              <img src="" #uploadimgfirst/>
           </figure>
 
           <div class="text-error-upload" [class.text-error-upload-show]="cadrageImgBooleanState">
@@ -65,7 +62,6 @@
         
         </div>
 
-  
         <div class="modall-footer" #btnValideParent>
 
             <button mat-button class="modal-btn-footer" disabled="disabled" id="btn-valide" >valider</button>  
@@ -84,8 +80,6 @@
 <div id="shadow-cog-add-images" [ngClass]= "{'shadow-cog-active': shadowcogImage === true}">
 
     <div id="remove_add_image"   (click)="param_cog_non_active_add_img()"></div>
-
-   
 
     <div class="modall">
 
@@ -218,7 +212,6 @@
       
                       <div class="block-form-flex">
       
-      
                         <select [formControl]="lang" class="champ-form-gestion">
       
                           <option *ngFor="let lang of langlist" name="lang" value="{{lang.name}}">{{ lang.name }}</option>
@@ -300,7 +293,6 @@
                 <figure class="img-country"><img src="../../../../assets/country.png" role="img" alt="country"/></figure>
             </h2>
       
-      
               <div class="sous-edit-panel-left">
       
                     <span class="chart-title">Complétion</span>
@@ -352,7 +344,7 @@
                     <figure class="img-upload"><img src="../../../../assets/oosatoo-logo.png" alt="" role=""></figure>
 
     
-                    <div class="gestion-info-img">
+                    <div>
     
                         <div class="gestion-info-img-header">
       
@@ -617,38 +609,33 @@
 
    </div>
 
-   <div class="content-left">
+   <div >
 
       <div class="completion_fiche">
 
 
         <div class="completion_fiche_progress">
 
-            <h2 class="text_number_progress_responsive">Complétion de votre fiche</h2>
+          <h2 class="text_number_progress_responsive">Complétion de votre fiche</h2>
 
-         <div class="progres">
-           
-
-            <round-progress
-                        [current]="56"
-                        [max]="100"
-                        [color]="'#fff'"
-                        [background]="'#5CD2BC'"
-                        [radius]="200"
-                        [stroke]="20"
-                        [semicircle]="false"
-                        [rounded]="true"
-                        [clockwise]="true"
-                        [responsive]="true"
-                        [duration]="800"
-                        [animation]="'easeInOutQuart'"
-                        [animationDelay]="1000"
-                        >
-            </round-progress>
-
+          <div class="progres">
+              <round-progress
+                          [current]="56"
+                          [max]="100"
+                          [color]="'#fff'"
+                          [background]="'#5CD2BC'"
+                          [radius]="200"
+                          [stroke]="20"
+                          [semicircle]="false"
+                          [rounded]="true"
+                          [clockwise]="true"
+                          [responsive]="true"
+                          [duration]="800"
+                          [animation]="'easeInOutQuart'"
+                          [animationDelay]="1000"
+                          >
+              </round-progress>
           </div> 
-
-
             <div class="detail_progresse">
 
                 <span class="number_progress">56</span>
@@ -658,8 +645,6 @@
             </div>
 
         </div>
-
-
 
       </div>
 

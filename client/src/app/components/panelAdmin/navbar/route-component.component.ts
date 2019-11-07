@@ -15,11 +15,11 @@ export class RouteComponentComponent implements OnInit {
 
   @Output() ContentViewDefault = new EventEmitter<any>();
 
-  constructor(private bottomSheet: MatBottomSheet) {}
+  constructor(private bottomSheet: MatBottomSheet) { }
   openBottomSheet(): void {
     this.bottomSheet.open(PopupMonOffre);
   }
-  ngOnInit() {}
+  ngOnInit() { }
 
   // public active_menu() {
   //   const totalLeft = document.getElementById("totalLeft");
@@ -48,7 +48,7 @@ export class RouteComponentComponent implements OnInit {
   styleUrls: ["./popup-mon-offre.scss"]
 })
 export class PopupMonOffre {
-  constructor(private bottomSheetRef: MatBottomSheetRef<PopupMonOffre>) {}
+  constructor(private bottomSheetRef: MatBottomSheetRef<PopupMonOffre>) { }
 
   openLink(event: MouseEvent): void {
     this.bottomSheetRef.dismiss();

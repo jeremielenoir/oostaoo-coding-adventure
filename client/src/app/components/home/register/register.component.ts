@@ -13,26 +13,30 @@ import { AuthenticationService } from './service/auth.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 
 
 @Injectable()
 
- export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   public switchPanel = true;
 
+
+  registerForm: FormGroup;
   loginForm: FormGroup;
   submitted = false;
   loading = false;
   returnUrl: string;
   error = '';
+  errorRegister = '';
 
 
 
   constructor(
     private formBuilder: FormBuilder,
+    private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService
@@ -42,6 +46,12 @@ import { AuthenticationService } from './service/auth.service';
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
+    }),
+
+    this.registerForm = this.formBuilder.group({
+        username: ['', Validators.required],
+        email: ['', Validators.required],
+        password: ['', Validators.required]
     });
 
     // logout the person when he opens the app for the first time
@@ -54,6 +64,10 @@ import { AuthenticationService } from './service/auth.service';
   // convenience getter for easy access to form fields
   get f() {
     return this.loginForm.controls;
+  }
+
+  get fr() {
+    return this.registerForm.controls;
   }
 
   // on submit
@@ -78,27 +92,30 @@ import { AuthenticationService } from './service/auth.service';
         }
       );
   }
+
   switch() {
     this.switchPanel = !this.switchPanel;
   }
 
 
-  // register() {
-  //   axios
-  //     .post('http://localhost:1337/auth/local/register', {
-  //       username: this.username.value,
-  //       email: this.email.value,
-  //       password: this.password.value,
-  //     })
-  //     .then(response => {
-  //       // Handle success.
-  //       console.log('Well done!');
-  //       console.log('User profile', response.data.user);
-  //       console.log('User token', response.data.jwt);
-  //     })
-  //     .catch(error => {
-  //       // Handle error.
-  //       console.log('An error occurred:', error);
-  //     });
-  // }
+  register() {
+    this.submitted = true;
+
+    // stop if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+
+    this.authenticationService.register(this.fr.username.value, this.fr.email.value, this.fr.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+        },
+        error => {
+          this.errorRegister = error;
+        }
+      );
+  }
 }
