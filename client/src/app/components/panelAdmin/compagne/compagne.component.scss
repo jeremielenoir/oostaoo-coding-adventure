@@ -110,6 +110,31 @@
         margin-bottom: 0px !important;
       }
     }
+
+    .no-campaign{
+      width: 50%;
+      border: 1px solid #e4e4e4;
+      text-align: center;
+      margin: 20px auto 0;
+      padding: 10px;
+
+      p{
+        text-align: center;
+      }
+
+      .icon{
+        color: #f2bb13;
+      }
+
+      .button{
+        margin: 10px auto 0;
+        width: 38%;
+      }
+    
+    }
+
+    
+
     .content-scroll {
       overflow-y: auto;
       height: 100%;
