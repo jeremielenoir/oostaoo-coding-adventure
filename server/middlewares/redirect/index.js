@@ -6,14 +6,20 @@ module.exports = strapi => {
       strapi.app.use(async (ctx, next) => {
         if(ctx.request.url.indexOf('api') > -1 || ctx.request.url.indexOf('assets') > -1 || ctx.request.url.indexOf('admin') > -1 || ctx.request.url.indexOf('content-manager') > -1){
           await next();
-        }else {
+        } else if(ctx.request.url.indexOf('evaluate') > -1 ||
+          ctx.request.url.indexOf('campaigns') > -1 ||
+          ctx.request.url.indexOf('home') > -1 ||
+          ctx.request.url.indexOf('candidats') > -1 ||
+          ctx.request.url.indexOf('questions') > -1 ||
+          ctx.request.url.indexOf('not-found') > -1
+        ) {
           ctx.url = '/index.html';
-          console.log('PASSE');
           await next();
         }
-
+        else{
+          await next();
+        }
       });
-
       cb();
     }
   };
