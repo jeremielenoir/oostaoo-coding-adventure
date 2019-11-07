@@ -8,6 +8,7 @@ module.exports = strapi => {
           await next();
         }else {
           ctx.url = '/index.html';
+          console.log('PASSE');
           await next();
         }
 
