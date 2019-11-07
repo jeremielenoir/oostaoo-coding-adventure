@@ -24,8 +24,14 @@
       min-width: 100px;
       font-size: 15px;
       height: 850px;
-      align-items: center;
       overflow-y: auto;
+      flex-direction: column;
+      display: flex;
+      .no-tofication{
+        align-self: center;
+        padding-top: 120px;
+        color:#dedbdb
+      }
      
       .list-sidibar {
         color: #7e8082;
@@ -33,7 +39,7 @@
         overflow: hidden;
         border-top: 1px solid #e7e7e7;
         flex-direction: row;
-        height: 100%;
+        transition: 1s;
         .list-sidibar-left-content {
           word-wrap: break-word;
           margin-bottom: 0px;
@@ -67,6 +73,11 @@
           padding-left: 10px;
           text-align: center;
         }
+      }
+
+      .list-sidibar.active-list-bar{
+        transition:height 1s ease;
+        height:100px
       }
     }
   }
@@ -118,27 +129,7 @@
   }
   .modall > .modall-content form {
     padding: 30px;
-    .checked-block {
-      position: relative;
-      font-size: 16px;
-      display: block;
-      font-weight: 400;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      color: #7e8082;
-      .check-label {
-        display: inline-block;
-        margin-left: 25px;
-      }
-      .checkbox {
-        width: 0px;
-        height: 0px;
-        opacity: 0;
-      }
-    }
+  
   }
 
   .btn-modal {
@@ -170,6 +161,28 @@
   right: 0px;
   bottom: 0px;
   z-index: -1;
+}
+
+.checked-block {
+  position: relative;
+  font-size: 16px;
+  display: block;
+  font-weight: 400;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #7e8082;
+  .check-label {
+    display: inline-block;
+    margin-left: 25px;
+  }
+  .checkbox {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+  }
 }
 
 .checked-block input:checked ~ .checkbox-span {
