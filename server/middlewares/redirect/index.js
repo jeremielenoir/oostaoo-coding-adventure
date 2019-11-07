@@ -14,7 +14,6 @@ module.exports = strapi => {
           ctx.request.url.indexOf('questions') > -1 ||
           ctx.request.url.indexOf('not-found') > -1
         ) {
-          console.log('PASSE');
           ctx.url = '/index.html';
           await next();
         }
