@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -9,13 +9,15 @@ export class BreadcrumbComponent implements OnInit {
 
   constructor() { }
 
-  public DefaultViewContent(event) {
+  @Input('') namePage: string;
 
-    console.log('breadcrumb', event)
+  public DefaultViewContent(event) {
 
   }
 
   ngOnInit() {
+
+
   }
 
 }

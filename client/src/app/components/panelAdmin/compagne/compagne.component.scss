@@ -3,9 +3,7 @@
 .contenu-view-content-left {
   display: flex;
   flex-direction: column;
-
   .header-form {
-    margin: 0 0px 20px 0px;
     display: flex;
     flex-direction: row;
     .sous-header-form {
@@ -16,18 +14,42 @@
       padding-left: 5px;
       padding-right: 5px;
       margin-right: 10px;
+      flex: 2;
       .form-group-header {
         width: 285px;
         height: 46px;
         label {
           display: block;
         }
+        .checked-block {
+          position: relative;
+          font-size: 16px;
+          display: block;
+          font-weight: 400;
+          cursor: pointer;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          color: #7e8082;
+
+          .checkbox {
+            width: 0px;
+            height: 0px;
+            opacity: 0;
+          }
+
+          .checked-text{
+            position: relative;
+            left: 20px;
+          }
+        }
         form {
           height: 100%;
           width: 100%;
           .icon-form-group-header-contenu {
             display: inline-block;
-            padding-left: 5px;
+            padding-left: 10px;
             color: #ffd200;
             font-size: 24px;
           }
@@ -54,11 +76,6 @@
         display: flex;
         align-items: center;
         flex-direction: row;
-
-        .form-header-checkbox {
-          padding-right: 4px;
-          margin-top: 5px;
-        }
       }
     }
   }
@@ -70,6 +87,7 @@
     border: 1px solid #e4e4e4;
     display: flex;
     flex-direction: column;
+    height: 83vh;
     .contenu-techno-header {
       border-bottom: 1px solid #e7e7e7;
       padding: 0 20px;
@@ -94,7 +112,7 @@
     }
     .content-scroll {
       overflow-y: auto;
-      height: 549px;
+      height: 100%;
       .contenu-techno-content {
         height: 50px;
         display: flex;
@@ -102,7 +120,7 @@
         transition: height 500ms, opacity 500ms;
         border-bottom: 1px solid #e4e4e4;
         .contenu-branche {
-          width: 715px;
+         flex: 2;
           &:hover a {
             background-color: #2b3035;
             color: #fff;
@@ -120,7 +138,7 @@
               font-size: 15px;
               margin-bottom: 0px !important;
               display: inline-block;
-              width: 518px;
+             flex: 2;
             }
             .branche-content-noti {
               width: 120px;

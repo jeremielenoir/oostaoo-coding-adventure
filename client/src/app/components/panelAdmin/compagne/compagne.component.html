@@ -4,26 +4,19 @@
       <div class="sous-header-form">
         <div class="form-group-header">
           <form>
-            <span class="icon-form-group-header-contenu"
-              ><i class="fas fa-search"></i
-            ></span>
-            <input
-              type="text"
-              name="search"
-              [(ngModel)]="searchText"
-              class="champ-header-contenu"
-              placeholder="Filtrer par titre ou candidat"
-              id="search-header"
-            />
+            <span class="icon-form-group-header-contenu"><i class="fas fa-search"></i></span>
+            <input type="text" name="search" [(ngModel)]="searchText" class="champ-header-contenu"
+              placeholder="Filtrer par titre ou candidat" id="search-header" />
           </form>
         </div>
 
         <div class="form-group-header form-group-header-2">
-          <span class="form-header-checkbox">
-            <input type="checkbox" name="" id="archive" />
-          </span>
 
-          <label for="archive">Inclure les campagnes archivées</label>
+          <!-- <label for="archive" class="checked-block" for="check-1">
+            <input class="checkbox" id="check-1" type="checkbox">
+            <span class="checkbox-span"></span>
+            <span class="checked-text">Inclure les campagnes archivées</span>
+          </label> -->
         </div>
       </div>
       <app-integration-bouton> </app-integration-bouton>
@@ -42,10 +35,7 @@
     </div>
 
     <div class="content-scroll">
-      <div
-        *ngFor="let campaign of campaigns | filter: searchText"
-        class="contenu-techno-content"
-      >
+      <div *ngFor="let campaign of campaigns | filter: searchText" class="contenu-techno-content">
         <div class="contenu-branche">
           <a [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats']">
             <p class="branche-content-text">
@@ -58,10 +48,8 @@
                 <span>Invité</span>
               </span>
               <span class="branche-content-noti-item">
-                <strong
-                  >{{ campaign.NbCandidatFinish !== null ?
-                  campaign.NbCandidatFinish : 0 }}</strong
-                >
+                <strong>{{ campaign.NbCandidatFinish !== null ?
+                  campaign.NbCandidatFinish : 0 }}</strong>
                 <span>Terminé</span>
               </span>
             </div>
@@ -69,10 +57,7 @@
         </div>
 
         <div class="branche-content-list-end">
-          <span
-            class="branche-content-list-end-contenu-icon"
-            (click)="openDialog(campaign.id)"
-          >
+          <span class="branche-content-list-end-contenu-icon" (click)="openDialog(campaign.id)">
             <i class="far fa-user"></i>
           </span>
           <span class="branche-content-list-end-contenu-icon dashed">
