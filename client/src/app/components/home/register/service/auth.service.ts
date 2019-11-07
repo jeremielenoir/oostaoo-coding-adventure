@@ -9,7 +9,7 @@ import { API_URI_CAMPAIGNS, ApiClientService } from './../../../../api-client/ap
 // if the response from the backend has jwt token, then the authentication was succesful
 // on successful authentication, the user details are stored in the local storage + jwt token
 const config = {
-  apiUrl: 'http://localhost:1337'
+  apiUrl: ''
 };
 
 @Injectable({ providedIn: 'root' })
