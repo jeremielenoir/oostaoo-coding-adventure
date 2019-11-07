@@ -8,11 +8,13 @@ module.exports = strapi => {
           await next();
         } else if(ctx.request.url.indexOf('evaluate') > -1 ||
           ctx.request.url.indexOf('campaigns') > -1 ||
+          ctx.request.url.indexOf('dashboard') > -1 ||
           ctx.request.url.indexOf('home') > -1 ||
           ctx.request.url.indexOf('candidats') > -1 ||
           ctx.request.url.indexOf('questions') > -1 ||
           ctx.request.url.indexOf('not-found') > -1
         ) {
+          console.log('PASSE');
           ctx.url = '/index.html';
           await next();
         }
