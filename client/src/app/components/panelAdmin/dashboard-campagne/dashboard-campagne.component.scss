@@ -6,7 +6,7 @@
 
 .rowter {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background: #f9f9f9;
     overflow: hidden;
 
@@ -24,7 +24,7 @@
             color: #7e8082;
             font-size: 12px;
             font-weight: 400;
-            transform: translateX(19.3%);
+            transform: translateX(9.3%);
             transition: .3s
         }
         
@@ -33,21 +33,24 @@
     /*-- css view-content--*/
 
     .view-content {
-        display: flex;
-        flex-direction: column;
         overflow: hidden;
         background-color: #f9f9f9;
-        /* margin-left: 18%;; */
         transition: .3s;
-        /* transform: translateX(22%); */
-        /* width: 81%; */
-
+        padding-left: 120px;
         /*-- contenu-view-content --*/
         .contenu-view-content {
             display: flex;
-            position: relative;
             flex-direction: row;
             padding: 20px;
+            flex: 1;
+            .app-compagne{
+                flex: 2;
+            }
+            .app-sidbar{
+                flex:1;
+               
+                overflow: hidden;
+            }
         }
     }
 }

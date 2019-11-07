@@ -3,11 +3,14 @@
     padding: 4px 20px 6px 290px;
     background-color: white;
 
-    p {
-        display: block;
-        color: #7e8082;
-        font-size: 12px;
-        font-weight: 400;
+    span{
+    display: block;
+    color: #7e8082;
+    font-size: 12px;
+    font-weight: 400;
+    // -webkit-transform: translateX(9.3%);
+    // transform: translateX(9.3%);
+    transition: .3s;
     }
  
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-sidibar-right',
@@ -7,20 +8,28 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SidibarRightComponent implements OnInit {
   @Input() campaignsFromParent;
+  @ViewChild('option') option: ElementRef;
+  @ViewChild('check1') check1: ElementRef;
+  @ViewChild('check2') check2: ElementRef;
+
   public Isactive = false;
-  public candidats: Array<any>;
+  public candidatbydate: Array<any>;
+  public myArrayCandidat: any[] = [];
+  public optionFilter: string[];
 
   constructor() { }
 
   ngOnInit() {
+
     // console.log('this.campaignsFromParent SIDIBAR: ', this.campaignsFromParent);
-    const myArrayCandidat = [];
+
+    console.log('all campagne', this.campaignsFromParent);
     for (const campaign of this.campaignsFromParent) {
       // console.log('campaigns: ', campaign);
       for (const candidat of campaign.candidats) {
-        console.log('candidat', candidat);
-        myArrayCandidat.push(candidat);
-        this.candidats = myArrayCandidat.sort((a, b) => {
+        this.myArrayCandidat.push(candidat);
+        console.log('candidat', this.myArrayCandidat)
+        this.candidatbydate = this.myArrayCandidat.sort((a, b) => {
           if (a.invitation_date < b.invitation_date) {
             return 1;
           } else if (b.invitation_date < a.invitation_date) {
@@ -34,6 +43,7 @@ export class SidibarRightComponent implements OnInit {
   }
 
 
+
   public param_cog() {
 
     this.Isactive = true;
@@ -43,6 +53,35 @@ export class SidibarRightComponent implements OnInit {
   public param_cog_non_active() {
 
     this.Isactive = false;
+
+  }
+
+  public hundeleSubmit() {
+
+    if (this.check1.nativeElement.checked) {
+
+      this.candidatbydate = this.candidatbydate.filter(element => {
+        return element.invitation_date == element.test_terminer;
+      })
+
+    } else {
+      console.log('pas ok');
+      this.candidatbydate = this.myArrayCandidat;
+    }
+
+
+    // if (this.check2.nativeElement.checked) {
+
+    //   this.candidatbydate = this.candidatbydate.filter(element => {
+    //     return element.invitation_date == element.test_terminer;
+    //   })
+
+    // } else {
+    //   console.log('pas ok');
+    //   this.candidatbydate = this.myArrayCandidat;
+    // }
+
+
 
   }
 
