@@ -215,6 +215,37 @@
             &:hover {
               background: #f2bb13;
               color: #fff;
+              .popup{
+                display: flex;  
+                flex-direction: column;
+                justify-content: center;
+                
+              }
+            }
+          }
+        }
+
+        .popup{
+          display: none;
+          width: 150px;
+          font-size: 16px;
+          color: #2b3035;
+          border: 1px solid #7e8082;
+          background: white;
+          position: absolute;
+          margin-left: 100px;
+          margin-top: 25px;
+
+          span{
+            border-bottom: 1px solid #7e8082;
+            padding-left: 5px;
+
+            &:last-child{
+              border: none;
+            }
+            &:hover{
+              color: white;
+              background: #f2bb13;
             }
           }
         }
