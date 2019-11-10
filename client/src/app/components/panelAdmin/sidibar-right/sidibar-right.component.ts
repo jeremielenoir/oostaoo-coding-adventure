@@ -25,7 +25,6 @@ export class SidibarRightComponent implements OnInit {
 
     console.log('all campagne', this.campaignsFromParent);
     for (const campaign of this.campaignsFromParent) {
-      // console.log('campaigns: ', campaign);
       for (const candidat of campaign.candidats) {
         this.myArrayCandidat.push(candidat);
         console.log('candidat', this.myArrayCandidat)
@@ -43,7 +42,6 @@ export class SidibarRightComponent implements OnInit {
   }
 
 
-
   public param_cog() {
 
     this.Isactive = true;
@@ -58,30 +56,44 @@ export class SidibarRightComponent implements OnInit {
 
   public hundeleSubmit() {
 
-    if (this.check1.nativeElement.checked) {
+    if (this.check1.nativeElement.checked && this.check2.nativeElement.checked) {
 
-      this.candidatbydate = this.candidatbydate.filter(element => {
-        return element.invitation_date == element.test_terminer;
-      })
+      this.candidatbydate = this.myArrayCandidat;
 
     } else {
-      console.log('pas ok');
-      this.candidatbydate = this.myArrayCandidat;
+
+      if (!this.check2.nativeElement.checked && !this.check2.nativeElement.checked) {
+        this.candidatbydate = []
+      }
+
+      if (this.check1.nativeElement.checked) {
+
+        if (this.candidatbydate.length === 0) {
+          this.candidatbydate = this.myArrayCandidat
+        }
+
+        this.candidatbydate = this.candidatbydate.filter(element => {
+          return element.invitation_date == element.test_terminer;
+        })
+
+
+      }
+
+      if (this.check2.nativeElement.checked) {
+
+        if (this.candidatbydate.length === 0) {
+          this.candidatbydate = this.myArrayCandidat
+        }
+
+        this.candidatbydate = this.candidatbydate.filter(element => {
+          return element.invitation_date !== element.test_terminer;
+        })
+
+      }
+
     }
 
-
-    // if (this.check2.nativeElement.checked) {
-
-    //   this.candidatbydate = this.candidatbydate.filter(element => {
-    //     return element.invitation_date == element.test_terminer;
-    //   })
-
-    // } else {
-    //   console.log('pas ok');
-    //   this.candidatbydate = this.myArrayCandidat;
-    // }
-
-
+    this.Isactive = false;
 
   }
 
