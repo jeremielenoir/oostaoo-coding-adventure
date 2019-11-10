@@ -3,7 +3,8 @@
   overflow: hidden;
   background-color: white;
   margin-left: 20px;
-  height: 92.3vh;
+  min-height: 200px;
+  //height: 92.3vh;
   .sidibar-header {
     padding: 0 20px;
     display: flex;
@@ -23,7 +24,7 @@
     .list-sidibar-left {
       min-width: 100px;
       font-size: 15px;
-      height: 850px;
+      //height: 850px;
       overflow-y: auto;
       flex-direction: column;
       display: flex;
