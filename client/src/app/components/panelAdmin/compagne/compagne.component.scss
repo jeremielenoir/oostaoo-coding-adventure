@@ -3,6 +3,7 @@
 .contenu-view-content-left {
   display: flex;
   flex-direction: column;
+  height: 100%;
   .header-form {
     display: flex;
     flex-direction: row;
@@ -86,8 +87,8 @@
     background-color: white;
     border: 1px solid #e4e4e4;
     display: flex;
+    flex: 1;
     flex-direction: column;
-    height: 83vh;
     .contenu-techno-header {
       border-bottom: 1px solid #e7e7e7;
       padding: 0 20px;
@@ -137,13 +138,14 @@
 
     .content-scroll {
       overflow-y: auto;
-      height: 100%;
+      flex: 1 1 0px;
       .contenu-techno-content {
         height: 50px;
         display: flex;
         flex-direction: row;
         transition: height 500ms, opacity 500ms;
         border-bottom: 1px solid #e4e4e4;
+       
         .contenu-branche {
          flex: 2;
           &:hover a {

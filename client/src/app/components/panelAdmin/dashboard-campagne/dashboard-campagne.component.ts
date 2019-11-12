@@ -9,15 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboadCampagneComponent implements OnInit {
   public campaigns: any;
-  public booleanViewContentDefault: boolean;
-
+  public booleanViewContentDefault = false;
+  public IsactiveNoCountryside: boolean;
 
   constructor() { }
 
   ngOnInit() {
 
+  }
+
+  display(value) {
+
+    this.booleanViewContentDefault = value;
 
   }
+
   getCampaignsFromChild(campaigns) {
     console.log('my campaigns from dashboard-campagne', campaigns);
     this.campaigns = campaigns;

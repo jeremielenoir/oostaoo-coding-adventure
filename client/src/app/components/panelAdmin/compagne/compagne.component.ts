@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, } from '@angular/core';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -20,6 +20,8 @@ export class CompagneComponent implements OnInit {
   public campaigns = [];
   public searchHeader: string;
   @Output() campaignsChild = new EventEmitter<any>();
+  @Output() emitIsactiveNoCountryside = new EventEmitter()
+  public IsactiveNoCountryside = false;
   public searchText = '';
 
   constructor(
@@ -36,8 +38,15 @@ export class CompagneComponent implements OnInit {
     this.authenticationService
       .getCampaignsUser(this.decryptTokenService.userId)
       .then(resultat => {
-        console.log('CONNECTED GET CAMPAING: ', resultat);
         this.campaigns = resultat;
+        this.IsactiveNoCountryside = true;
+        console.log('cest good')
+        // setTimeout(() => {
+        //   this.IsactiveNoCountryside = true;
+        // }, 2000)
+
+        this.emitIsactiveNoCountryside.emit(this.IsactiveNoCountryside);
+        // console.log('CONNECTED GET CAMPAING: ', resultat);
         this.giveCampaigns();
       });
   }

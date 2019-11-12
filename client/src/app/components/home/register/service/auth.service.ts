@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs'
 import { API_URI_CAMPAIGNS, ApiClientService } from './../../../../api-client/api-client.service';
 
 // authentication service is used to LOGIN and LOGOUT of the application
@@ -9,7 +9,7 @@ import { API_URI_CAMPAIGNS, ApiClientService } from './../../../../api-client/ap
 // if the response from the backend has jwt token, then the authentication was succesful
 // on successful authentication, the user details are stored in the local storage + jwt token
 const config = {
-  apiUrl: ''
+  apiUrl: 'http://localhost:1337'
 };
 
 @Injectable({ providedIn: 'root' })
@@ -45,12 +45,12 @@ export class AuthenticationService {
 
   register(username: string, email: string, password: string) {
     return this.http.post<any>(`${config.apiUrl}/auth/local/register`, {
-        username,
-        email,
-        password
-      })
+      username,
+      email,
+      password
+    })
       .pipe(
-        map(user =>{
+        map(user => {
           console.log('AUTH SERVICE user: ', user);
           // login successful if the response has jwt token
           if (user && user.jwt) {
@@ -59,7 +59,7 @@ export class AuthenticationService {
             this.currentUserSubject.next(user);
           }
           return user;
-      })
+        })
       );
   }
 

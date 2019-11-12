@@ -40,16 +40,18 @@
       </h2>
     </div>
 
-   
+
 
     <div class="content-scroll">
-        <div class="no-campaign" *ngIf="campaigns.length === 0">
-            <p> Vous n'avez pas encore de campagnes, cliquer sur le bouton en dessous pour en créer une.</p>
-            <i class="fas fa-times-circle fa-4x icon"></i>
-            <div class="button">
-             <app-integration-bouton> </app-integration-bouton>
-            </div>
+
+      <div class="no-campaign" *ngIf="campaigns.length === 0">
+        <p> Vous n'avez pas encore de campagnes, cliquer sur le bouton en dessous pour en créer une.</p>
+        <i class="fas fa-times-circle fa-4x icon"></i>
+        <div class="button">
+          <app-integration-bouton> </app-integration-bouton>
         </div>
+      </div>
+
       <div *ngFor="let campaign of campaigns | filter: searchText" class="contenu-techno-content">
         <div class="contenu-branche">
           <a [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats']">
@@ -80,6 +82,7 @@
           </span>
         </div>
       </div>
+
     </div>
   </div>
 </div>

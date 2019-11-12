@@ -13,21 +13,16 @@ export class SidibarRightComponent implements OnInit {
   @ViewChild('check2') check2: ElementRef;
 
   public Isactive = false;
-  public candidatbydate: Array<any>;
+  public candidatbydate: Array<any> = [];
   public myArrayCandidat: any[] = [];
   public optionFilter: string[];
-
   constructor() { }
 
   ngOnInit() {
 
-    // console.log('this.campaignsFromParent SIDIBAR: ', this.campaignsFromParent);
-
-    console.log('all campagne', this.campaignsFromParent);
     for (const campaign of this.campaignsFromParent) {
       for (const candidat of campaign.candidats) {
         this.myArrayCandidat.push(candidat);
-        console.log('candidat', this.myArrayCandidat)
         this.candidatbydate = this.myArrayCandidat.sort((a, b) => {
           if (a.invitation_date < b.invitation_date) {
             return 1;
@@ -37,6 +32,8 @@ export class SidibarRightComponent implements OnInit {
             return 0;
           }
         });
+
+        console.log('candidat', this.myArrayCandidat)
       }
     }
   }

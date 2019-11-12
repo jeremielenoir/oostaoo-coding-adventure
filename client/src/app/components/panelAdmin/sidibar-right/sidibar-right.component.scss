@@ -1,9 +1,12 @@
 .sidibar {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   border: 1px solid #e4e4e4;
   overflow: hidden;
   background-color: white;
   margin-left: 20px;
-  height: 92.3vh;
+  position: relative;
   .sidibar-header {
     padding: 0 20px;
     display: flex;
@@ -20,13 +23,16 @@
     }
   }
   .sidibar-content {
-    .list-sidibar-left {
-      min-width: 100px;
+    display: flex;
+    flex: 1;
+    min-height: 300px;
+    .list-sidibar-left { 
+      display: flex;
       font-size: 15px;
-      height: 850px;
       overflow-y: auto;
       flex-direction: column;
-      display: flex;
+      flex: 1 1 0px;
+      height: 800px;
       .no-tofication{
         align-self: center;
         padding-top: 120px;
