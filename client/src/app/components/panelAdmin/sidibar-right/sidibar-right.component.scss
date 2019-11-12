@@ -6,7 +6,7 @@
   overflow: hidden;
   background-color: white;
   margin-left: 20px;
-  position: relative;
+  min-height: 200px;
   .sidibar-header {
     padding: 0 20px;
     display: flex;
@@ -29,6 +29,7 @@
     .list-sidibar-left { 
       display: flex;
       font-size: 15px;
+      //height: 850px;
       overflow-y: auto;
       flex-direction: column;
       flex: 1 1 0px;

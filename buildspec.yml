@@ -6,8 +6,11 @@ env:
     
 phases:
   install:
+    runtime-versions:
+      nodejs: 10
     commands:
       - echo Entered the install phase...
+      - cd client && npm install
     finally:
       - echo This always runs even if the update or install command fails 
   pre_build:
@@ -19,9 +22,19 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
+      - cd ../client && npm run build
+      - mkdir ../server/public
+      - cp -R ./dist/client/* ../server/public/
     finally:
       - echo This always runs even if the install command fails
   post_build:
     commands:
       - echo Entered the post_build phase...
       - echo Build completed on `date`
+
+artifacts:
+  files:
+    - 'server/**/*'
+    - 'scripts/**/*'
+    - 'appspec.yml'
+  name: roodeo

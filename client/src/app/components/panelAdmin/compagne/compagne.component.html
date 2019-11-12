@@ -78,6 +78,12 @@
             <i class="far fa-user"></i>
           </span>
           <span class="branche-content-list-end-contenu-icon dashed">
+              <div class="popup">
+                  <span (click)="openDialog(campaign.id)">Dupliquer <i class="fas fa-copy"></i></span>
+                  <span (click)="openDialog(campaign.id)">Epingler <i class="fas fa-thumbtack"></i></span>
+                  <span (click)="openDialog(campaign.id)">Archiver <i class="fas fa-archive"></i></span>
+                  <span (click)="openDialog(campaign.id)">Supprimer <i class="fas fa-trash"></i> </span>
+                </div>
             <i class="fas fa-ellipsis-h"></i>
           </span>
         </div>
