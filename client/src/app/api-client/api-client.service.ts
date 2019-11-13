@@ -4,7 +4,7 @@ import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 
-const prefix = '/api/';
+const prefix = 'api/';
 
 
 export const API_URI_CAMPAIGNS: string = prefix + 'campaigns';
@@ -17,7 +17,7 @@ export const API_URI_EMAIL: string = prefix + 'email';
 export const API_URI_USER_ADMIN: string = prefix + 'utilisateursadmins';
 export const API_URI_ENTREPRISE: string = prefix + 'entreprises';
 export const API_URI_USER_ENTREPRISE: string = prefix + 'utilsateurentreprises';
-export const API_URI_USER = '';
+export const API_URI_USER = 'http://localhost:80/users';
 
 
 

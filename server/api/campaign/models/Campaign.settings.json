@@ -87,6 +87,14 @@
       "model": "user",
       "via": "campaigns",
       "plugin": "users-permissions"
+    },
+    "pin": {
+      "default": false,
+      "type": "boolean"
+    },
+    "archive": {
+      "default": false,
+      "type": "boolean"
     }
   }
 }

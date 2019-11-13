@@ -10,6 +10,7 @@ import { DecryptTokenService } from 'src/app/components/home/register/register.s
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from './../../home/register/service/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-compagne',
@@ -57,6 +58,35 @@ export class CompagneComponent implements OnInit {
       height: '80vh'
     });
   }
+
+  duplicatecampaign(idCampaign) {
+    console.log('duplicate');
+  }
+
+  pincampaign(idCampaign) {
+    console.log('pin');
+  }
+
+  archivecampaign(idCampaign) {
+    console.log('archive');
+  }
+
+  deletecampaign(idCampaign) {
+
+    const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
+
+    return this.apiClientService
+      .delete(apiURL)
+      .toPromise()
+      .then(res => { // Success
+        alert('Campagne supprimé');
+        window.location.reload();
+      });
+  }
+
+  showIdCampaign(idCampaign) {
+    console.log(idCampaign);
+    }
 
   giveCampaigns() {
     console.log('CAMPAINGS GIVE CAMPAIGNS: ', this.campaigns);
