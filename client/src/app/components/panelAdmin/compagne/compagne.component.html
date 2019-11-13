@@ -12,12 +12,6 @@
 
         <div class="form-group-header form-group-header-2">
 
-          <!-- <label for="archive" class="checked-block" for="check-1">
-            <input class="checkbox" id="check-1" type="checkbox">
-            <span class="checkbox-span"></span>
-            <span class="checked-text">Inclure les campagnes archivées</span>
-          </label> -->
-
           <label class="checked-block" for="archive">
             <span class="check-label">Inclure les campagnes archivées</span>
             <input type="checkbox" id="archive" class="checkbox" />
@@ -78,12 +72,12 @@
             <i class="far fa-user"></i>
           </span>
           <span class="branche-content-list-end-contenu-icon dashed">
-              <div class="popup">
-                  <span (click)="openDialog(campaign.id)">Dupliquer <i class="fas fa-copy"></i></span>
-                  <span (click)="openDialog(campaign.id)">Epingler <i class="fas fa-thumbtack"></i></span>
-                  <span (click)="openDialog(campaign.id)">Archiver <i class="fas fa-archive"></i></span>
-                  <span (click)="openDialog(campaign.id)">Supprimer <i class="fas fa-trash"></i> </span>
-                </div>
+            <div class="popup">
+              <span (click)="openDialog(campaign.id)">Dupliquer <i class="fas fa-copy"></i></span>
+              <span (click)="openDialog(campaign.id)">Epingler <i class="fas fa-thumbtack"></i></span>
+              <span (click)="openDialog(campaign.id)">Archiver <i class="fas fa-archive"></i></span>
+              <span (click)="openDialog(campaign.id)">Supprimer <i class="fas fa-trash"></i> </span>
+            </div>
             <i class="fas fa-ellipsis-h"></i>
           </span>
         </div>
