@@ -89,6 +89,7 @@
       <h2 *ngIf="candidatbydate.length === 0" class="no-tofication">Aucune notication</h2>
 
       <div *ngFor="let campaing of campaignsFromParent">
+
         <div *ngFor="let candidat of candidatbydate">
           <div *ngIf="candidat.campaign === campaing.id">
             <div *ngIf="candidat.invitation_date !== candidat.test_terminer" class="list-sidibar">
