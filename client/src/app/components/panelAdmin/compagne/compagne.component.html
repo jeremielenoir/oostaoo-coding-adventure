@@ -71,9 +71,10 @@
           <span class="branche-content-list-end-contenu-icon" (click)="openDialog(campaign.id)">
             <i class="far fa-user"></i>
           </span>
-          <span class="branche-content-list-end-contenu-icon dashed" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <span class="branche-content-list-end-contenu-icon dashed" [matMenuTriggerFor]="menu"
+            aria-label="Example icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
-        </span>
+          </span>
           <mat-menu #menu="matMenu">
             <button (click)="showIdCampaign(campaign.id)" mat-menu-item>
               <mat-icon>file_copy</mat-icon>
@@ -103,7 +104,6 @@
           </span> -->
         </div>
       </div>
-
     </div>
   </div>
 </div>

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, HostListener, Output, EventEmitter } from '@angular/core';
 import { ApiClientService, API_URI_CANDIDATS, API_URI_CAMPAIGNS } from '../../../../api-client/api-client.service';
-
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
@@ -43,11 +42,8 @@ export class TestComponent implements OnInit {
   public totalPoints;
   public totalPointsCampaign;
   public totalPointsCandidat;
-
-
   constructor(private apiClientService: ApiClientService) {
   }
-
   ngOnInit() {
     // console.log('questionCampaign: ', this.questionCampaign);
     // console.log('technoCampaign : ', this.technoCampaign);
@@ -95,7 +91,6 @@ export class TestComponent implements OnInit {
     }
     this.arrayGoodRep = this.question.answer_value.split(', ').sort();
   }
-
   checkCheckBoxvalue(event) {
     if (event.source.checked) {
       this.arrayReponseUser.push(event.source.value);
@@ -106,7 +101,6 @@ export class TestComponent implements OnInit {
       }
     }
   }
-
   Countertime() {
     // console.log('this.questions : ', this.questions[this.index]);
     this.stopTimeInterval = setInterval(() => {
@@ -123,7 +117,6 @@ export class TestComponent implements OnInit {
       }
     }, 1000);
   }
-
   public QuestNext() {
     this.counterTotal++; // counter total questions
     if (this.checkTimeDefault === false) {
@@ -153,7 +146,6 @@ export class TestComponent implements OnInit {
         this.postTimeTest(this.CalculTimeTotal);
       }
     }
-
     this.question = this.questions[this.index];
     // console.log('this.question: ', this.question); // afficher
     // NEXT QUESTIONS
@@ -182,7 +174,6 @@ export class TestComponent implements OnInit {
     // console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
     // console.log('this.questions[this.index].time: ', this.questions[this.index].time);
   }
-
   checkRep() {
     if (this.questions[this.index].type === 'one') {
       // console.log('typeONE');
@@ -227,18 +218,14 @@ export class TestComponent implements OnInit {
     this.postRapportCandidat();
     // console.log(' this.arrayReponseUser : ', this.arrayReponseUser);
   }
-
-
   disableRep(timeQuestion) {
     if (timeQuestion === this.timedefault) {
       this.isDisabled = true;
     }
   }
-
   public fmtMSS(s) {
     return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
   }
-
   postTimeTest(dureeTest) {
     this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
       duree: dureeTest,
@@ -304,14 +291,12 @@ export class TestComponent implements OnInit {
       });
     });
   }
-
   controleTimeTest() {
     let dateNow;
     let dateServeur;
     let dateDiff;
     let diffSeconds;
     let timePauseDiff;
-
     if (this.candidat.date_pause !== this.candidat.invitation_date) {
       dateNow = new Date();
       dateServeur = new Date(this.candidat.date_pause);
@@ -326,7 +311,6 @@ export class TestComponent implements OnInit {
       }
     }
   }
-
   postPauseTest() {
     this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
       index_question: this.index,
@@ -336,8 +320,6 @@ export class TestComponent implements OnInit {
       // console.log('pause: ', res);
     });
   }
-
-
   postRapportCandidat() {
     const myReps = this.arrayReponseUser;
     const myTime = this.timedefault;
@@ -359,7 +341,6 @@ export class TestComponent implements OnInit {
       });
     });
   }
-
   sumPointsByNumTechno(array) {
     console.log('array : ', array);
     const sumPoints = {};
@@ -373,7 +354,6 @@ export class TestComponent implements OnInit {
       }
     });
     const arraySumPoints = [];
-
     for (const [key, value] of Object.entries(sumPoints)) {
       arraySumPoints.push({
         technologies: key,
@@ -391,7 +371,6 @@ export class TestComponent implements OnInit {
     // console.log('arraySumPoints AFTER BOUCLE : ', arraySumPoints);
     return this.sumPointsbyTechno = arraySumPoints;
   }
-
   sumPointsByRepCandidat(techno, point) {
     console.log('techno : ', techno);
     console.log('point : ', point);
@@ -410,18 +389,15 @@ export class TestComponent implements OnInit {
       });
     });
   }
-
   calculTotalPoints(array) {
     console.log('CALCUL TOTAL POINTS : ', array);
     if (typeof array !== 'undefined' && array.length > 0) {
       this.totalPoints = array.reduce((a, b) => ({ total_points: a.points + b.points }));
     }
   }
-
   refreshComponent() {
     this.refresh.emit(this.dataForParent = 'fin');
   }
-
   @HostListener('window:beforeunload', ['$event'])
   // work only if Press F5 or cancel close window
   beforeunloadHandler($event) {

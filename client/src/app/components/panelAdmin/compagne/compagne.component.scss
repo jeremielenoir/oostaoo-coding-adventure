@@ -17,7 +17,6 @@
       margin-right: 10px;
       flex: 2;
       .form-group-header {
-        width: 285px;
         height: 46px;
         label {
           display: block;
@@ -258,19 +257,39 @@
 
 /* FIXE FOR MOBILE */
 
-@media (min-width: 300px) and (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
   .header-form {
-    margin: inherit;
-    flex-direction: column;
+    flex-direction: column!important;
+      .sous-header-form{
+        flex: 1;
+        .form-group-header:first-child{
+          .icon-form-group-header-contenu{
+            padding-left: 3px!important;
+            font-size: 15px!important;
+          }
+        }
+        .form-group-header:last-child{
+         .check-label{
+           font-size: 12px;
+         }
+        }
+      }
   }
-  .sous-header-form {
-    flex-direction: column;
-    /* width: 280px; */
-  }
+ 
   .no-margin-bottom {
     margin-bottom: inherit;
   }
+
 }
+
+@media screen and (max-width: 767px) {
+  .contenu-techno{
+    .content-scroll{
+      max-height: 800px;
+    }
+  }
+}
+
 
 @media (min-width: 300px) and (max-width: 320px) {
 }
