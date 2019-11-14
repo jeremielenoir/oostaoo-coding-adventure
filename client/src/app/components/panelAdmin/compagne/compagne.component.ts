@@ -79,90 +79,90 @@ export class CompagneComponent implements OnInit {
   duplicatecampaign(idCampaign) {
     const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
     return this.apiClientService
-    .get(apiURL)
-    .toPromise()
-    .then(res => { // Success
-      this.result = res;
+      .get(apiURL)
+      .toPromise()
+      .then(res => { // Success
+        this.result = res;
 
-      this.apiClientService
-    .post(API_URI_CAMPAIGNS, {
-      Name: this.result.Name + ' copie',
-      archive: this.result.archive,
-      copy_paste: this.result.copy_paste,
-      langs: this.result.langs,
-      level: this.result.level,
-      pin: this.result.pin,
-      profile: this.result.profile,
-      sent_report: this.result.sent_report,
-      technologies: this.result.technologies,
-      user: this.result.user,
-    }).subscribe((resultat) => {
-      alert('Campagne dupliqué');
-      window.location.reload();
-     });
+        this.apiClientService
+          .post(API_URI_CAMPAIGNS, {
+            Name: this.result.Name + ' copie',
+            archive: this.result.archive,
+            copy_paste: this.result.copy_paste,
+            langs: this.result.langs,
+            level: this.result.level,
+            pin: this.result.pin,
+            profile: this.result.profile,
+            sent_report: this.result.sent_report,
+            technologies: this.result.technologies,
+            user: this.result.user,
+          }).subscribe((resultat) => {
+            alert('Campagne dupliqué');
+            window.location.reload();
+          });
 
-    });
+      });
   }
 
 
   pincampaign(idCampaign, pinCampaign) {
     const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
     if (pinCampaign === false) {
-    return this.apiClientService
-      .put(apiURL, {
-        pin : true
-      }).subscribe(
-        (res) => {
-          alert('Campagne épingler');
-          window.location.reload();
-         // console.log('res', res);
-        },
-        err => console.log(err)
-      );
-  } else {
-    return this.apiClientService
-      .put(apiURL, {
-        pin : false
-      }).subscribe(
-        (res) => {
-          alert('Campagne désépingler');
-          window.location.reload();
-         // console.log('res', res);
-        },
-        err => console.log(err)
-      );
-   }
-}
+      return this.apiClientService
+        .put(apiURL, {
+          pin: true
+        }).subscribe(
+          (res) => {
+            alert('Campagne épingler');
+            window.location.reload();
+            // console.log('res', res);
+          },
+          err => console.log(err)
+        );
+    } else {
+      return this.apiClientService
+        .put(apiURL, {
+          pin: false
+        }).subscribe(
+          (res) => {
+            alert('Campagne désépingler');
+            window.location.reload();
+            // console.log('res', res);
+          },
+          err => console.log(err)
+        );
+    }
+  }
 
   archivecampaign(idCampaign, archiveCampaign) {
 
     const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
 
     if (archiveCampaign === false) {
-    return this.apiClientService
-      .put(apiURL, {
-        archive : true
-      }).subscribe(
-        (res) => {
-          alert('Campagne archiver');
-          window.location.reload();
-         // console.log('res', res);
-        },
-        err => console.log(err)
-      );
-  } else {
-    return this.apiClientService
-      .put(apiURL, {
-        archive : false
-      }).subscribe(
-        (res) => {
-          alert('Campagne désarchiver');
-          window.location.reload();
-         // console.log('res', res);
-        },
-        err => console.log(err)
-      );
-   }
+      return this.apiClientService
+        .put(apiURL, {
+          archive: true
+        }).subscribe(
+          (res) => {
+            alert('Campagne archiver');
+            window.location.reload();
+            // console.log('res', res);
+          },
+          err => console.log(err)
+        );
+    } else {
+      return this.apiClientService
+        .put(apiURL, {
+          archive: false
+        }).subscribe(
+          (res) => {
+            alert('Campagne désarchiver');
+            window.location.reload();
+            // console.log('res', res);
+          },
+          err => console.log(err)
+        );
+    }
   }
 
   deletecampaign(idCampaign) {
