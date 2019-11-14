@@ -21,13 +21,13 @@ import { RouterLink } from '@angular/router';
 export class CompagneComponent implements OnInit {
   public campaigns = [];
   public campaignsFiltered = [];
-  public campaignsArchived = [];
   public searchHeader: string;
   @Output() campaignsChild = new EventEmitter<any>();
   @Output() emitIsactiveNoCountryside = new EventEmitter();
   public IsactiveNoCountryside = false;
   public searchText = '';
   public result: any;
+  public test: any;
 
   constructor(
     public apiClientService: ApiClientService,
@@ -49,13 +49,10 @@ export class CompagneComponent implements OnInit {
         for (const campaign of this.campaigns) {
           if (campaign.archive === false) {
             this.campaignsFiltered.push(campaign);
-            // console.log('camp filter', this.campaignsFilter);
-          } else if (campaign.archive === true) {
-            this.campaignsArchived.push(campaign);
-            // console.log('campaign archive', this.campaignsArchive);
+            this.test = this.campaignsFiltered;
+            console.log('camp filter', this.campaignsFiltered);
           }
           console.log('camp filter', this.campaignsFiltered);
-          console.log('campaign archive', this.campaignsArchived);
         }
 
 
@@ -67,6 +64,17 @@ export class CompagneComponent implements OnInit {
         // console.log('CONNECTED GET CAMPAING: ', resultat);
         this.giveCampaigns();
       });
+  }
+
+  includeArchivedCampaigns(checked: any) {
+    if (checked) {
+      this.test = this.campaignsFiltered;
+    }
+    if (!checked) {
+      this.test = this.campaigns;
+
+    }
+
   }
 
   openDialog(idCampaign) {
