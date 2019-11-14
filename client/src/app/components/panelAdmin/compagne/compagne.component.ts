@@ -2,7 +2,8 @@ import { Component, OnInit, Output, EventEmitter, } from '@angular/core';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
-  API_URI_USER
+  API_URI_USER,
+  API_URI_CAMPAIGN
 } from '../../../api-client/api-client.service';
 import { InviteCandidat } from '../edit-campagne/candidats/invite-candidat.component';
 import { MatDialog } from '@angular/material';
@@ -19,11 +20,14 @@ import { RouterLink } from '@angular/router';
 })
 export class CompagneComponent implements OnInit {
   public campaigns = [];
+  public campaignsFiltered = [];
+  public campaignsArchived = [];
   public searchHeader: string;
   @Output() campaignsChild = new EventEmitter<any>();
-  @Output() emitIsactiveNoCountryside = new EventEmitter()
+  @Output() emitIsactiveNoCountryside = new EventEmitter();
   public IsactiveNoCountryside = false;
   public searchText = '';
+  public result: any;
 
   constructor(
     public apiClientService: ApiClientService,
@@ -35,17 +39,30 @@ export class CompagneComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.decryptTokenService.userId);
+
     this.authenticationService
       .getCampaignsUser(this.decryptTokenService.userId)
       .then(resultat => {
+        // console.log('resultat = ', resultat);
         this.campaigns = resultat;
+
+        for (const campaign of this.campaigns) {
+          if (campaign.archive === false) {
+            this.campaignsFiltered.push(campaign);
+            // console.log('camp filter', this.campaignsFilter);
+          } else if (campaign.archive === true) {
+            this.campaignsArchived.push(campaign);
+            // console.log('campaign archive', this.campaignsArchive);
+          }
+          console.log('camp filter', this.campaignsFiltered);
+          console.log('campaign archive', this.campaignsArchived);
+        }
+
+
         this.IsactiveNoCountryside = true;
-        console.log('cest good')
         // setTimeout(() => {
         //   this.IsactiveNoCountryside = true;
         // }, 2000)
-
         this.emitIsactiveNoCountryside.emit(this.IsactiveNoCountryside);
         // console.log('CONNECTED GET CAMPAING: ', resultat);
         this.giveCampaigns();
@@ -60,19 +77,95 @@ export class CompagneComponent implements OnInit {
   }
 
   duplicatecampaign(idCampaign) {
-    console.log('duplicate');
+    const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
+    return this.apiClientService
+    .get(apiURL)
+    .toPromise()
+    .then(res => { // Success
+      this.result = res;
+
+      this.apiClientService
+    .post(API_URI_CAMPAIGNS, {
+      Name: this.result.Name + ' copie',
+      archive: this.result.archive,
+      copy_paste: this.result.copy_paste,
+      langs: this.result.langs,
+      level: this.result.level,
+      pin: this.result.pin,
+      profile: this.result.profile,
+      sent_report: this.result.sent_report,
+      technologies: this.result.technologies,
+      user: this.result.user,
+    }).subscribe((resultat) => {
+      alert('Campagne dupliqué');
+      window.location.reload();
+     });
+
+    });
   }
 
-  pincampaign(idCampaign) {
-    console.log('pin');
-  }
 
-  archivecampaign(idCampaign) {
-    console.log('archive');
+  pincampaign(idCampaign, pinCampaign) {
+    const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
+    if (pinCampaign === false) {
+    return this.apiClientService
+      .put(apiURL, {
+        pin : true
+      }).subscribe(
+        (res) => {
+          alert('Campagne épingler');
+          window.location.reload();
+         // console.log('res', res);
+        },
+        err => console.log(err)
+      );
+  } else {
+    return this.apiClientService
+      .put(apiURL, {
+        pin : false
+      }).subscribe(
+        (res) => {
+          alert('Campagne désépingler');
+          window.location.reload();
+         // console.log('res', res);
+        },
+        err => console.log(err)
+      );
+   }
+}
+
+  archivecampaign(idCampaign, archiveCampaign) {
+
+    const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
+
+    if (archiveCampaign === false) {
+    return this.apiClientService
+      .put(apiURL, {
+        archive : true
+      }).subscribe(
+        (res) => {
+          alert('Campagne archiver');
+          window.location.reload();
+         // console.log('res', res);
+        },
+        err => console.log(err)
+      );
+  } else {
+    return this.apiClientService
+      .put(apiURL, {
+        archive : false
+      }).subscribe(
+        (res) => {
+          alert('Campagne désarchiver');
+          window.location.reload();
+         // console.log('res', res);
+        },
+        err => console.log(err)
+      );
+   }
   }
 
   deletecampaign(idCampaign) {
-
     const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
 
     return this.apiClientService
@@ -84,12 +177,7 @@ export class CompagneComponent implements OnInit {
       });
   }
 
-  showIdCampaign(idCampaign) {
-    console.log(idCampaign);
-    }
-
   giveCampaigns() {
-    console.log('CAMPAINGS GIVE CAMPAIGNS: ', this.campaigns);
     if (this.campaigns) {
       this.campaignsChild.emit(this.campaigns);
     }
