@@ -20,9 +20,11 @@ import { RouterLink } from '@angular/router';
 })
 export class CompagneComponent implements OnInit {
   public campaigns = [];
+  public campaignsFiltered = [];
+  public campaignsArchived = [];
   public searchHeader: string;
   @Output() campaignsChild = new EventEmitter<any>();
-  @Output() emitIsactiveNoCountryside = new EventEmitter()
+  @Output() emitIsactiveNoCountryside = new EventEmitter();
   public IsactiveNoCountryside = false;
   public searchText = '';
   public result: any;
@@ -37,13 +39,27 @@ export class CompagneComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.decryptTokenService.userId);
+
     this.authenticationService
       .getCampaignsUser(this.decryptTokenService.userId)
       .then(resultat => {
+        // console.log('resultat = ', resultat);
         this.campaigns = resultat;
+
+        for (const campaign of this.campaigns) {
+          if (campaign.archive === false) {
+            this.campaignsFiltered.push(campaign);
+            // console.log('camp filter', this.campaignsFilter);
+          } else if (campaign.archive === true) {
+            this.campaignsArchived.push(campaign);
+            // console.log('campaign archive', this.campaignsArchive);
+          }
+          console.log('camp filter', this.campaignsFiltered);
+          console.log('campaign archive', this.campaignsArchived);
+        }
+
+
         this.IsactiveNoCountryside = true;
-        console.log('cest good')
         // setTimeout(() => {
         //   this.IsactiveNoCountryside = true;
         // }, 2000)
@@ -61,16 +77,12 @@ export class CompagneComponent implements OnInit {
   }
 
   duplicatecampaign(idCampaign) {
-    console.log('duplicate');
     const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
-    console.log(apiURL);
     return this.apiClientService
     .get(apiURL)
     .toPromise()
     .then(res => { // Success
-      console.log(res);
       this.result = res;
-      console.log('result =', this.result);
 
       this.apiClientService
     .post(API_URI_CAMPAIGNS, {
@@ -94,10 +106,7 @@ export class CompagneComponent implements OnInit {
 
 
   pincampaign(idCampaign, pinCampaign) {
-    console.log('pin');
-
     const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
-
     if (pinCampaign === false) {
     return this.apiClientService
       .put(apiURL, {
@@ -126,7 +135,6 @@ export class CompagneComponent implements OnInit {
 }
 
   archivecampaign(idCampaign, archiveCampaign) {
-    console.log('archive');
 
     const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
 
@@ -158,7 +166,6 @@ export class CompagneComponent implements OnInit {
   }
 
   deletecampaign(idCampaign) {
-
     const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
 
     return this.apiClientService
@@ -170,12 +177,7 @@ export class CompagneComponent implements OnInit {
       });
   }
 
-  showIdCampaign(idCampaign) {
-    console.log(idCampaign);
-    }
-
   giveCampaigns() {
-    console.log('CAMPAINGS GIVE CAMPAIGNS: ', this.campaigns);
     if (this.campaigns) {
       this.campaignsChild.emit(this.campaigns);
     }
