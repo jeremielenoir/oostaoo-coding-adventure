@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <div *ngFor="let campaign of test | filter: searchText" class="contenu-techno-content">
+      <div *ngFor="let campaign of test  | orderBy:'pin':true:customComparator | filter: searchText" class="contenu-techno-content">
         <div class="contenu-branche">
           <a [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats']">
             <p class="branche-content-text">

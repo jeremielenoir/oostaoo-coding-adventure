@@ -58,6 +58,7 @@ import { ProfilEntrepriseComponent } from './components/panelAdmin/profil-entrep
 import { EditCampagneComponent } from './components/panelAdmin/edit-campagne/edit-campagne.component';
 import { CandidatsComponent } from './components/panelAdmin/edit-campagne/candidats/candidats.component';
 import { InviteCandidat } from './components/panelAdmin/edit-campagne/candidats/invite-candidat.component';
+import { OrderModule } from 'ngx-order-pipe';
 
 import { QuestionsComponent } from './components/panelAdmin/edit-campagne/questions/questions.component';
 import { SettingsComponent } from './components/panelAdmin/edit-campagne/settings/settings.component';
@@ -140,13 +141,15 @@ import { DecryptTokenService } from './components/home/register/register.service
     HttpClientModule,
     Ng2SearchPipeModule,
     RoundProgressModule,
-    NgxEditorModule
+    NgxEditorModule,
+    OrderModule,
   ],
   providers: [
     ApiClientService,
     DatePipe,
-    DecryptTokenService
-  ],
+    DecryptTokenService,
+    CompagneComponent
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

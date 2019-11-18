@@ -13,11 +13,15 @@ import { map } from 'rxjs/operators';
 import { AuthenticationService } from './../../home/register/service/auth.service';
 import { RouterLink } from '@angular/router';
 
+
 @Component({
   selector: 'app-compagne',
   templateUrl: './compagne.component.html',
-  styleUrls: ['./compagne.component.scss']
+  styleUrls: ['./compagne.component.scss'],
 })
+
+
+
 export class CompagneComponent implements OnInit {
   public campaigns = [];
   public campaignsFiltered = [];
@@ -28,6 +32,9 @@ export class CompagneComponent implements OnInit {
   public searchText = '';
   public result: any;
   public test: any;
+
+
+
 
   constructor(
     public apiClientService: ApiClientService,
@@ -66,15 +73,17 @@ export class CompagneComponent implements OnInit {
       });
   }
 
+  customComparator(itemA ) {
+    return itemA = true ;
+}
+
   includeArchivedCampaigns(checked: any) {
     if (checked) {
       this.test = this.campaignsFiltered;
     }
     if (!checked) {
       this.test = this.campaigns;
-
     }
-
   }
 
   openDialog(idCampaign) {
