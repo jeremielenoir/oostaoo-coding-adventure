@@ -13,12 +13,19 @@ export class SidibarRightComponent implements OnInit {
   @ViewChild('check2') check2: ElementRef;
 
   public Isactive = false;
+  public isActiveNotiFinish = false;
+  public isActiveNotifInvite = false;
   public candidatbydate: Array<any> = [];
+  public storageRecuperationCheck: any
+
   public myArrayCandidat: any[] = [];
   public optionFilter: string[];
+  public testCheck: any;
   constructor() { }
 
   ngOnInit() {
+
+
 
     for (const campaign of this.campaignsFromParent) {
       for (const candidat of campaign.candidats) {
@@ -33,9 +40,35 @@ export class SidibarRightComponent implements OnInit {
           }
         });
 
-        console.log('candidat', this.myArrayCandidat)
+
       }
     }
+
+    //session storage
+
+    if (localStorage.getItem('notification') === undefined || localStorage.getItem('notification') === null) {
+      console.log('cest null ton truc');
+      this.check1.nativeElement.checked = true;
+      this.check2.nativeElement.checked = true;
+      localStorage.setItem('notification', JSON.stringify(this.allCheckevent()));
+    } else {
+      this.storageRecuperationCheck = localStorage.getItem('notification');
+      this.storageRecuperationCheck = JSON.parse(this.storageRecuperationCheck);
+      this.check1.nativeElement.checked = this.storageRecuperationCheck.valueCheckeventFirst;
+      this.check2.nativeElement.checked = this.storageRecuperationCheck.valueCheckeventLast;
+    }
+
+    this.saveCheckValue();
+
+  }
+
+
+  public allCheckevent() {
+    return {
+      valueCheckeventFirst: this.check1.nativeElement.checked,
+      valueCheckeventLast: this.check2.nativeElement.checked,
+    }
+
   }
 
 
@@ -49,19 +82,29 @@ export class SidibarRightComponent implements OnInit {
 
     this.Isactive = false;
 
+    this.check1.nativeElement.checked = this.storageRecuperationCheck.valueCheckeventFirst;
+    this.check2.nativeElement.checked = this.storageRecuperationCheck.valueCheckeventLast;
   }
 
-  public hundeleSubmit() {
+  public saveCheckValue() {
+
+    console.log('salut les gens')
+
+    if (!this.check1.nativeElement.checked && !this.check2.nativeElement.checked) {
+
+      this.candidatbydate = [];
+
+    }
 
     if (this.check1.nativeElement.checked && this.check2.nativeElement.checked) {
-
-      this.candidatbydate = this.myArrayCandidat;
+      if (this.candidatbydate.length === 0) {
+        this.candidatbydate = this.myArrayCandidat
+      }
+      this.isActiveNotiFinish = false;
+      this.isActiveNotifInvite = false
 
     } else {
 
-      if (!this.check2.nativeElement.checked && !this.check2.nativeElement.checked) {
-        this.candidatbydate = []
-      }
 
       if (this.check1.nativeElement.checked) {
 
@@ -69,26 +112,33 @@ export class SidibarRightComponent implements OnInit {
           this.candidatbydate = this.myArrayCandidat
         }
 
-        this.candidatbydate = this.candidatbydate.filter(element => {
-          return element.invitation_date == element.test_terminer;
-        })
-
+        this.isActiveNotifInvite = true;
+        this.isActiveNotiFinish = false;
 
       }
 
       if (this.check2.nativeElement.checked) {
-
         if (this.candidatbydate.length === 0) {
           this.candidatbydate = this.myArrayCandidat
         }
 
-        this.candidatbydate = this.candidatbydate.filter(element => {
-          return element.invitation_date !== element.test_terminer;
-        })
+        this.isActiveNotiFinish = true;
+        this.isActiveNotifInvite = false;
+
+        console.log('salut')
 
       }
 
     }
+  }
+
+
+  public hundeleSubmit() {
+
+
+    localStorage.setItem('notification', JSON.stringify(this.allCheckevent()));
+
+    this.saveCheckValue()
 
     this.Isactive = false;
 

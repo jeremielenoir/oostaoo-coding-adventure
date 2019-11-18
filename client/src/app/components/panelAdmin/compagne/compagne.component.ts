@@ -166,7 +166,7 @@ export class CompagneComponent implements OnInit {
           (res) => {
             alert('Campagne désarchiver');
             window.location.reload();
-            // console.log('res', res);
+
           },
           err => console.log(err)
         );
