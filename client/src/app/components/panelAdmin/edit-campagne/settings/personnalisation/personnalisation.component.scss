@@ -1,3 +1,4 @@
+@import"../../../../../../roodeo-variables.scss";
 .input-length {
     width: 100%;
 }
@@ -11,7 +12,7 @@
     align-items: baseline;
     box-sizing: border-box;
     width: 100%;
-    border: 1px solid #f9f9f9;
+    border: $border-table;
     height: 60px;
     padding: 0px 10px 10px;
     margin-top: 15px;
@@ -24,11 +25,11 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    color: white;
+    color: $text-color-white;
     cursor: pointer;
     border-radius: 0px;
 }
 
 .yellow {
-    background: #f2bb31;
+    background: $color-gold-background;
 }

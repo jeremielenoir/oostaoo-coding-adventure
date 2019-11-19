@@ -1,4 +1,4 @@
-
+@import"../../../../../../roodeo-variables.scss";
 // #new-campaign {
 //     min-height: 60vh;
 //     width: 71%;
@@ -69,7 +69,7 @@
     .chrono {
         width: 48%;
         padding: 5%;
-        border: 1px solid lightgrey;
+        border: 1px solid $color-border-second;
     }
     
     .chrono-title {
@@ -90,8 +90,6 @@
     }
 }
 
-
-
 #button-container {
     display: flex;
     justify-content: space-between;
@@ -104,17 +102,17 @@
         display: flex;
         justify-content: center;
         text-align: center;
-        color: white;
+        color: $text-color-white;
         cursor: pointer;
         border-radius: 0px;
     }
     
     .grey {
-        background: grey;
+        background: $color-grey;
     }
     
     .yellow {
-        background: #f2bb31;
+        background: $color-gold-background;
     }
 }
 
@@ -123,16 +121,16 @@
 :host ::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
     opacity: 0.5 !important;
     /*click effect color change*/
-    background-color: #f2bb31 !important;
+    background-color: $color-gold-background !important;
 }
 
 :host ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
-    background-color: #f2bb31!important;
+    background-color: $color-gold-background!important;
     /*inner circle color change*/
 }
 
 :host ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-    border-color: #f2bb31!important;
+    border-color: $color-gold-background!important;
     /*outer ring color change*/
 }
 
@@ -155,7 +153,7 @@
     align-items: baseline;
     box-sizing: border-box;
     width: 100%;
-    border: 1px solid #f9f9f9;
+    border: $border-table;
     height: 60px;
     padding: 0px 10px 10px;
     margin-top: 15px;
@@ -166,7 +164,7 @@
 }
 
 :host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-    background: #f2bb31;
+    background: $color-gold-background;
 }
 
 /* ::ng-deep .mat-form-field-flex {
@@ -228,7 +226,7 @@
     #select span {
         font-size: 20px;
         font-weight: bold;
-        color: #7e8082;
+        color: $color-grey;
         margin: 20px 140px 25px;
     }
     .button {
