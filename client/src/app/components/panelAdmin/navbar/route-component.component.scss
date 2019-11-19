@@ -1,3 +1,5 @@
+@import "../../../../roodeo-variables.scss";
+
 #container {
   display: flex;
   #totalLeft {
@@ -26,7 +28,7 @@
       padding-top: 10px;
       padding-bottom: 10px;
       &:focus {
-        background-color: #f2bb13;
+        background-color: $color-gold;
         color: black;
 
         &:focus i {
@@ -63,7 +65,7 @@
           align-items: center;
           padding-top: 5px;
           &:hover p {
-            color: #f2bb13;
+            color: $color-gold;
           }
         }
         #color-notif {
@@ -82,13 +84,13 @@
           }
         }
         #color-notif:hover a {
-          color: #f2bb13;
+          color: $color-gold;
         }
       }
     }
   }
   a:hover {
-    color: #f2bb13;
+    color: $color-gold;
   }
 
   a {
@@ -96,12 +98,12 @@
   }
 
   button:hover {
-    color: #f2bb13;
+    color: $color-gold;
   }
 }
 
 #btn-arrow:hover {
-  color: #f2bb31;
+  color: $color-gold;
 }
 
 .padding-left2 {
@@ -110,7 +112,7 @@
   justify-content: center;
   border-bottom: 1px solid black;
   &:hover {
-    background-color: #f2bb13;
+    background-color: $color-gold;
   }
   &:hover i {
     color: black;
@@ -130,7 +132,7 @@ ul li {
 }
 
 .padding-left2:hover {
-  background: #f2bb13;
+  background: $color-gold;
 }
 
 .padding-left2:hover ul {
@@ -162,7 +164,7 @@ ul li ul li:hover {
 
 .padding-left2 ul li ul h4 {
   padding: 15px 12px 17px 12px;
-  background-color: #f2bb13;
+  background-color: $color-gold;
   color: black;
   font-weight: 800;
   margin-bottom: 0px;
@@ -186,7 +188,7 @@ i:hover {
 }
 
 .background-button {
-  background-color: #f2bb13;
+  background-color: $color-gold;
 }
 
 .color-white {
@@ -208,10 +210,10 @@ i:hover {
 }
 
 .color-site {
-  color: #f2bb13;
+  color: $color-gold;
 }
 .notif i:hover {
-  color: #f2bb13;
+  color: $color-gold;
 }
 
 #compte {
@@ -236,9 +238,9 @@ i:hover {
   }
   .custom-button-testing {
     width: 100%;
-    border: 1px #f2bb13 solid;
+    border: 1px $color-gold solid;
     &:hover {
-      color: #f2bb13;
+      color: $color-gold;
     }
   }
 }
@@ -254,7 +256,7 @@ i:hover {
 }
 
 .custom-button-nav:hover {
-  color: #f2bb13;
+  color: $color-gold;
 }
 
 #test {
