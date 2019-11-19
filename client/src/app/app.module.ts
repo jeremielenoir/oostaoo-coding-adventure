@@ -47,7 +47,7 @@ import {
 } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component';
 
 import { DashboadCampagneComponent } from './components/panelAdmin/dashboard-campagne/dashboard-campagne.component';
-import { CompagneComponent } from './components/panelAdmin/compagne/compagne.component';
+import { CampagneComponent } from './components/panelAdmin/campagne/campagne.component';
 import { SidibarRightComponent } from './components/panelAdmin/sidibar-right/sidibar-right.component';
 import { DatePipe } from '@angular/common';
 import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
@@ -104,7 +104,7 @@ import { DecryptTokenService } from './components/home/register/register.service
     PopupCampaign,
     NouvelleCampagnePage3Component,
     DashboadCampagneComponent,
-    CompagneComponent,
+    CampagneComponent,
     SidibarRightComponent,
     ProfilUtilisateurComponent,
     FacturationComponent,
@@ -148,7 +148,7 @@ import { DecryptTokenService } from './components/home/register/register.service
     ApiClientService,
     DatePipe,
     DecryptTokenService,
-    CompagneComponent
+    CampagneComponent
     ],
   bootstrap: [AppComponent]
 })

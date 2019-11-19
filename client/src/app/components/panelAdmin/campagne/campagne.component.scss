@@ -1,3 +1,4 @@
+@import "../../../../roodeo-variables.scss";
 @import "../sidibar-right/sidibar-right.component.scss";
 @import "../dashboard-campagne/dashboard-campagne.component.scss";
 .contenu-view-content-left {
@@ -8,7 +9,7 @@
     display: flex;
     flex-direction: row;
     .sous-header-form {
-      border: 1px solid #e4e4e4;
+      border: $border-table;
       display: flex;
       align-items: center;
       background-color: white;
@@ -84,12 +85,12 @@
   .contenu-techno {
     margin-top: 20px;
     background-color: white;
-    border: 1px solid #e4e4e4;
+    border: $border-table;
     display: flex;
     flex: 1;
     flex-direction: column;
     .contenu-techno-header {
-      border-bottom: 1px solid #e7e7e7;
+      border-bottom: $border-table;
       padding: 0 20px;
       display: flex;
       align-items: center;
@@ -99,7 +100,7 @@
       .contenu-techno-header-icon {
         margin-right: 15px;
         display: inline-block;
-        color: #f2bb13;
+        color: $color-gold;
         font-size: 24px;
         border-radius: 4px;
         /* margin-top: 3px; */
@@ -113,7 +114,7 @@
 
     .no-campaign{
       width: 50%;
-      border: 1px solid #e4e4e4;
+      border: $border-table;
       text-align: center;
       margin: 20px auto 0;
       padding: 10px;
@@ -123,7 +124,7 @@
       }
 
       .icon{
-        color: #f2bb13;
+        color: $color-gold;
       }
 
       .button{
@@ -143,7 +144,7 @@
         display: flex;
         flex-direction: row;
         transition: height 500ms, opacity 500ms;
-        border-bottom: 1px solid #e4e4e4;
+        border-bottom: $border-table;
        
         .contenu-branche {
          flex: 2;
@@ -183,7 +184,7 @@
                 /* display:none; */
               }
               .branche-content-noti-item:hover {
-                background-color: #f2bb13;
+                background-color: $color-gold;
               }
 
               .branche-content-noti-item:hover span {
@@ -195,7 +196,7 @@
 
         .branche-content-list-end {
           width: 99px;
-          border-left: 1px solid #e4e4e4;
+          border-left: $border-table;
           display: flex;
           flex-direction: row;
 
@@ -203,7 +204,7 @@
             display: flex;
             align-items: center;
             width: 50px;
-            color: #f2bb13;
+            color: $color-gold;
             height: 100%;
             cursor: pointer;
             display: inline-flex;
@@ -211,10 +212,10 @@
             font-size: 24px;
           }
           .dashed {
-            border-left: 1px solid #e4e4e4;
+            border-left: $border-table;
             transition: 0.5s;
             &:hover {
-              background: #f2bb13;
+              background: $color-gold;
               color: #fff;
               .popup{
                 display: flex;  
@@ -246,7 +247,7 @@
             }
             &:hover{
               color: white;
-              background: #f2bb13;
+              background: $color-gold;
             }
           }
         }

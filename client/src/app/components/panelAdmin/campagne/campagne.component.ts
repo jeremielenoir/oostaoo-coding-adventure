@@ -15,14 +15,14 @@ import { RouterLink } from '@angular/router';
 
 
 @Component({
-  selector: 'app-compagne',
-  templateUrl: './compagne.component.html',
-  styleUrls: ['./compagne.component.scss'],
+  selector: 'app-campagne',
+  templateUrl: './campagne.component.html',
+  styleUrls: ['./campagne.component.scss'],
 })
 
 
 
-export class CompagneComponent implements OnInit {
+export class CampagneComponent implements OnInit {
   public campaigns = [];
   public campaignsFiltered = [];
   public searchHeader: string;
