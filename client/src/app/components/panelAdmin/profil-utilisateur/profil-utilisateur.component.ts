@@ -50,7 +50,7 @@ export class ProfilUtilisateurComponent implements OnInit {
 
   updateprofil() {
 
-    this.apiClientService.put(API_URI_USER_ADMIN + '/' + 1, {
+    this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
       Prenom: this.prenom.value,
       Nom: this.nom.value,
       Pays: this.pays.value,
@@ -71,7 +71,7 @@ export class ProfilUtilisateurComponent implements OnInit {
  }
 
  updatesignature() {
-  this.apiClientService.put(API_URI_USER_ADMIN + '/' + 1, {
+  this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
     Signature: this.signature.value,
   }).subscribe(
     (res) => {
@@ -84,7 +84,7 @@ export class ProfilUtilisateurComponent implements OnInit {
 }
 
 updateemail() {
-  this.apiClientService.put(API_URI_USER_ADMIN + '/' + 1, {
+  this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
     Email: this.email.value,
   }).subscribe(
     (res) => {
@@ -97,7 +97,7 @@ updateemail() {
 }
 
 updatepassword() {
-  this.apiClientService.put(API_URI_USER_ADMIN + '/' + 1, {
+  this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
     password: this.newpassword.value,
   }).subscribe(
     (res) => {
