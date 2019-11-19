@@ -13,9 +13,8 @@
         <div class="form-group-header form-group-header-2">
 
           <label class="checked-block" for="archive">
-            <span class="check-label">Inclure les campagnes archivées</span>
-            <input type="checkbox" id="archive" class="checkbox" [(ngModel)]="myVar" />
-            <span class="checkbox-span"></span>
+            <mat-checkbox [(ngModel)]="checked" (click)="includeArchivedCampaigns(checked)">Inclure les campagnes
+              archivées</mat-checkbox>
           </label>
         </div>
       </div>
@@ -46,7 +45,7 @@
         </div>
       </div>
 
-      <div *ngFor="let campaign of campaignsFiltered | filter: searchText" class="contenu-techno-content">
+      <div *ngFor="let campaign of test  | orderBy:'pin':true:customComparator | filter: searchText" class="contenu-techno-content">
         <div class="contenu-branche">
           <a [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats']">
             <p class="branche-content-text">
@@ -63,7 +62,7 @@
               </span>
               <span class="branche-content-noti-item">
                 <strong>{{ campaign.NbCandidatFinish !== null ?
-                  campaign.NbCandidatFinish : 0 }}</strong>
+                    campaign.NbCandidatFinish : 0 }}</strong>
                 <span>Terminé</span>
               </span>
             </div>

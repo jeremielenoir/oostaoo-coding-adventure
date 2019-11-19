@@ -13,21 +13,28 @@ import { map } from 'rxjs/operators';
 import { AuthenticationService } from './../../home/register/service/auth.service';
 import { RouterLink } from '@angular/router';
 
+
 @Component({
-  selector: 'app-compagne',
-  templateUrl: './compagne.component.html',
-  styleUrls: ['./compagne.component.scss']
+  selector: 'app-campagne',
+  templateUrl: './campagne.component.html',
+  styleUrls: ['./campagne.component.scss'],
 })
-export class CompagneComponent implements OnInit {
+
+
+
+export class CampagneComponent implements OnInit {
   public campaigns = [];
   public campaignsFiltered = [];
-  public campaignsArchived = [];
   public searchHeader: string;
   @Output() campaignsChild = new EventEmitter<any>();
   @Output() emitIsactiveNoCountryside = new EventEmitter();
   public IsactiveNoCountryside = false;
   public searchText = '';
   public result: any;
+  public test: any;
+
+
+
 
   constructor(
     public apiClientService: ApiClientService,
@@ -49,13 +56,10 @@ export class CompagneComponent implements OnInit {
         for (const campaign of this.campaigns) {
           if (campaign.archive === false) {
             this.campaignsFiltered.push(campaign);
-            // console.log('camp filter', this.campaignsFilter);
-          } else if (campaign.archive === true) {
-            this.campaignsArchived.push(campaign);
-            // console.log('campaign archive', this.campaignsArchive);
+            this.test = this.campaignsFiltered;
+            console.log('camp filter', this.campaignsFiltered);
           }
           console.log('camp filter', this.campaignsFiltered);
-          console.log('campaign archive', this.campaignsArchived);
         }
 
 
@@ -69,6 +73,19 @@ export class CompagneComponent implements OnInit {
       });
   }
 
+  customComparator(itemA ) {
+    return itemA = true ;
+}
+
+  includeArchivedCampaigns(checked: any) {
+    if (checked) {
+      this.test = this.campaignsFiltered;
+    }
+    if (!checked) {
+      this.test = this.campaigns;
+    }
+  }
+
   openDialog(idCampaign) {
     const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
       data: idCampaign,
@@ -79,90 +96,90 @@ export class CompagneComponent implements OnInit {
   duplicatecampaign(idCampaign) {
     const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
     return this.apiClientService
-    .get(apiURL)
-    .toPromise()
-    .then(res => { // Success
-      this.result = res;
+      .get(apiURL)
+      .toPromise()
+      .then(res => { // Success
+        this.result = res;
 
-      this.apiClientService
-    .post(API_URI_CAMPAIGNS, {
-      Name: this.result.Name + ' copie',
-      archive: this.result.archive,
-      copy_paste: this.result.copy_paste,
-      langs: this.result.langs,
-      level: this.result.level,
-      pin: this.result.pin,
-      profile: this.result.profile,
-      sent_report: this.result.sent_report,
-      technologies: this.result.technologies,
-      user: this.result.user,
-    }).subscribe((resultat) => {
-      alert('Campagne dupliqué');
-      window.location.reload();
-     });
+        this.apiClientService
+          .post(API_URI_CAMPAIGNS, {
+            Name: this.result.Name + ' copie',
+            archive: this.result.archive,
+            copy_paste: this.result.copy_paste,
+            langs: this.result.langs,
+            level: this.result.level,
+            pin: this.result.pin,
+            profile: this.result.profile,
+            sent_report: this.result.sent_report,
+            technologies: this.result.technologies,
+            user: this.result.user,
+          }).subscribe((resultat) => {
+            alert('Campagne dupliqué');
+            window.location.reload();
+          });
 
-    });
+      });
   }
 
 
   pincampaign(idCampaign, pinCampaign) {
     const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
     if (pinCampaign === false) {
-    return this.apiClientService
-      .put(apiURL, {
-        pin : true
-      }).subscribe(
-        (res) => {
-          alert('Campagne épingler');
-          window.location.reload();
-         // console.log('res', res);
-        },
-        err => console.log(err)
-      );
-  } else {
-    return this.apiClientService
-      .put(apiURL, {
-        pin : false
-      }).subscribe(
-        (res) => {
-          alert('Campagne désépingler');
-          window.location.reload();
-         // console.log('res', res);
-        },
-        err => console.log(err)
-      );
-   }
-}
+      return this.apiClientService
+        .put(apiURL, {
+          pin: true
+        }).subscribe(
+          (res) => {
+            alert('Campagne épingler');
+            window.location.reload();
+            // console.log('res', res);
+          },
+          err => console.log(err)
+        );
+    } else {
+      return this.apiClientService
+        .put(apiURL, {
+          pin: false
+        }).subscribe(
+          (res) => {
+            alert('Campagne désépingler');
+            window.location.reload();
+            // console.log('res', res);
+          },
+          err => console.log(err)
+        );
+    }
+  }
 
   archivecampaign(idCampaign, archiveCampaign) {
 
     const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
 
     if (archiveCampaign === false) {
-    return this.apiClientService
-      .put(apiURL, {
-        archive : true
-      }).subscribe(
-        (res) => {
-          alert('Campagne archiver');
-          window.location.reload();
-         // console.log('res', res);
-        },
-        err => console.log(err)
-      );
-  } else {
-    return this.apiClientService
-      .put(apiURL, {
-        archive : false
-      }).subscribe(
-        (res) => {
-          alert('Campagne désarchiver');
-          window.location.reload();
-         // console.log('res', res);
-        },
-        err => console.log(err)
-      );
-   }
+      return this.apiClientService
+        .put(apiURL, {
+          archive: true
+        }).subscribe(
+          (res) => {
+            alert('Campagne archiver');
+            window.location.reload();
+            // console.log('res', res);
+          },
+          err => console.log(err)
+        );
+    } else {
+      return this.apiClientService
+        .put(apiURL, {
+          archive: false
+        }).subscribe(
+          (res) => {
+            alert('Campagne désarchiver');
+            window.location.reload();
+
+          },
+          err => console.log(err)
+        );
+    }
   }
 
   deletecampaign(idCampaign) {

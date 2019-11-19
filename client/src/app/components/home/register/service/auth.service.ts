@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject } from 'rxjs';
 import { API_URI_CAMPAIGNS, ApiClientService } from './../../../../api-client/api-client.service';
 
 // authentication service is used to LOGIN and LOGOUT of the application

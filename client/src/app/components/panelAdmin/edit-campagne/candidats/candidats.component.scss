@@ -1,19 +1,15 @@
 /* @import '../../compagne/compagne.component.css'; */
-
-
+@import"../../../../../roodeo-variables.scss";
 // Style sans candidat
-
-
-
 #editQuestion {
-  background-color: #f9f9f9;
+  background-color: $background-color;
   padding: 5px;
   padding-left: 18%;
   /* height: 100vh; */
 
     .style-link {
-      border-bottom: 1px solid #e4e4e4;
-      color: #7e8082;
+      border-bottom: 1px solid $color-table;
+      color: $color-grey;
       padding-left: 25px;
       padding-top: 5px;
       padding-right: 5px;
@@ -23,13 +19,13 @@
 
     .border1pxgray {
       margin: 5vh;
-      border: 1px solid #e4e4e4;
-      background-color: white;
+      border: $border-table;
+      background-color:$color-white-background;
     }
     
     .border1pxdashedgray {
       margin: 15px;
-      border: 1px dashed #e4e4e4;
+      border: 1px dashed $color-table;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -56,15 +52,13 @@
       font-size: 14px;
       transition: background-color 200ms;
       font-weight: 700;
-      background-color: #f2bb13;
+      background-color: $color-gold-background;
     }
     
     .border1pxdashedgray h1 {
       text-align: center
     }
 }
-
-
 
 // Style avec candidats
 
@@ -73,36 +67,28 @@
   padding: 10px;
   flex-wrap: wrap;
   justify-content: space-between;
-
-
-
-
     .candidat-custom-select {
-      border: 1px solid #e4e4e4;
-      background-color: white;
-      /* width: 15%; */
+      border: $border-table;
+      background-color:$color-white-background;
       display: flex;
       justify-content: center;
       height: 50px;
     }
 
     .candidat-finish-custom-select {
-      background-color: #20242a;
-      /* width: 15%; */
+      background-color: $color-black-background;
       display: flex;
       justify-content: center;
       height: 50px;
     }
 
     .candidat-finish-custom-select mat-label {
-      color: white;
+      color:$text-color-white;
     }
 
     :host .candidat-finish-custom-select ::ng-deep .mat-select-value {
-      color: white;
+      color: $text-color-white;
     }
-
-
 
     .fix-button {
       margin-top: inherit;
@@ -110,12 +96,10 @@
 
     .custom-input-filtre {
       width: 50%;
-      border: 1px solid #e4e4e4;
-      background: white;
+      border: $border-table;
+      background: $color-white-background;
       height: 50px;
     }
-
-    
 
     .table-container {
       width: 100%;
@@ -125,11 +109,11 @@
         width: 100%;
 
         .mat-row:hover {
-          background-color: #20252a;
+          background-color: $color-black-background;
         }
       
         .mat-cell:hover {
-          color: white;
+          color:$text-color-white;
         }
 
       }

@@ -43,10 +43,6 @@
       "default": "",
       "type": "text"
     },
-    "entreprise": {
-      "model": "entreprise",
-      "via": "utilisateursadmin"
-    },
     "factures": {
       "collection": "facture",
       "via": "utilisateursadmin"

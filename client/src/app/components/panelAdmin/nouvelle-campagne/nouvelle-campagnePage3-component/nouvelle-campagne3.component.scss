@@ -1,8 +1,10 @@
+@import"../../../../../roodeo-variables.scss";
+
 #top-bar {
     display: flex;
     width: 100%;
     height: 65px;
-    border: 1px solid #7e8082;
+    border: 1px solid $color-grey;
 }
 
 #segment1 {
@@ -10,8 +12,7 @@
     display: flex;
     width: 12%;
     height: 64px;
-    border-right: 1px solid #7e8082;
-    /* background: blue; */
+    border-right: 1px solid $color-grey;
 }
 
 #diagram {
@@ -29,11 +30,11 @@
     position: absolute;
     top: 16px;
     right: -15px;
-    background: white;
+    background: $text-color-white;
     text-align: center;
     font-size: 14px;
     line-height: 28px;
-    border: 1px solid #7e8082;
+    border: 1px solid $color-grey;
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -43,7 +44,7 @@
     position: relative;
     width: 10%;
     height: 64px;
-    border-right: 1px solid grey;
+    border-right: 1px solid $color-grey;
 }
 
 #segment2-content {
@@ -51,11 +52,11 @@
 }
 
 #techno {
-    color: #f28730;
+    color: $color-gold-second;
 }
 
 .drop-icon {
-    color: #f2bb31;
+    color: $color-gold;
 }
 
 #segment3 {
@@ -84,11 +85,11 @@
 
 #score {
     font-size: 22px !important;
-    color: #f28730;
+    color: $color-gold-second;
 }
 
 .info {
-    color: #7e8082;
+    color: $color-grey;
 }
 
 #back, #save {
@@ -100,7 +101,7 @@
 }
 
 #save {
-    background: #f2bb31 !important;
+    background: $color-gold-background !important;
 }
 
 #content {
@@ -112,8 +113,8 @@
 .bar {
     width: 100%;
     height: 40px;
-    color: white;
-    background: #20242a;
+    color: $text-color-white;
+    background: $color-black-background;
     display: flex;
     contain: content;
     justify-content: space-between;
@@ -140,8 +141,8 @@
 #search-input {
     height: 30px;
     margin-top: 5px;
-    color: white;
-    background: #2b3035;
+    color: $text-color-white;
+    background: $color-black-background-seconde;
     border: none;
     font-size: 12px;
     padding: 0 0 0 10px;
@@ -151,12 +152,12 @@
     position: absolute;
     right: 10px;
     top: 10px;
-    color: #f2bb31;
+    color: $color-gold;
 }
 
 .bar-icon {
     font-size: 26px;
-    color: #f2bb31;
+    color: $color-gold;
     line-height: 38px;
     margin: 0 8px;
 }
@@ -165,21 +166,17 @@
     display: block;
     font-size: 14px;
     line-height: 40px;
-    /* margin: 0 13% 0 0; */
     font-weight: bold;
-    /* white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; */
 }
 
 #bar-btn-search {
-    background: #f2bb31!important;
+    background: $color-gold-background!important;
 }
 
 .custom-buttom {
     height: 30px !important;
     line-height: 0px !important;
-    background: #7e8082 !important;
+    background: $color-grey !important;
     border-radius: 0px !important;
     font-size: 10px !important;
     contain: content;
@@ -187,7 +184,7 @@
     padding: 0px 10px !important;
     margin: 5px 2px 0px !important;
     text-transform: uppercase !important;
-    color: white !important;
+    color: $text-color-white !important;
 }
 
 :host ::ng-deep .mat-button-wrapper {
@@ -204,9 +201,9 @@
 }
 
 .example-list {
-    border: solid 1px #ccc;
+    border: solid 1px $color-border-second;
     min-height: 60px;
-    background: white;
+    background: $text-color-white;
     border-radius: 4px;
     overflow: hidden;
     display: block;
@@ -214,15 +211,15 @@
 
 .example-box {
     padding: 20px 10px;
-    border-bottom: solid 1px #ccc;
-    color: rgba(0, 0, 0, 0.87);
+    border-bottom: solid 1px $color-border-second;
+    color: $text-color;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
     cursor: move;
-    background: white;
+    background:$color-white-background;
     font-size: 14px;
     position:relative
 }
@@ -230,7 +227,7 @@
 :host ::ng-deep .example-box {
     height: 35px;
     margin: 10px !important;
-    border: 1px solid #e7e7e7 !important;
+    border: $border-table !important;
     transition: .5s;
 }
 
@@ -246,7 +243,7 @@
 }
 
 :host ::ng-deep .example-box:hover {
-    box-shadow: 0px 0px 5px grey;
+    box-shadow: 0px 0px 5px $color-grey;
     transform: translate(2px, -3px);
 }
 
@@ -276,9 +273,9 @@
     height: 35px;
     padding: 0px 0px;
     margin: 10px !important;
-    border: 1px dashed #e7e7e7 !important;
+    border: 1px dashed $color-table !important;
     transition: .5s;
-    color: grey;
+    color: $color-grey;
     text-align: center;
     font-size: 18px;
     line-height: 30px;
@@ -292,9 +289,9 @@
 .question-techno {
     display: block;
     height: 20px;
-    background: #f28730;
+    background: $color-gold-second;
     font-size: 12px;
-    color: white;
+    color: $text-color-white;
     text-align: center;
     padding: 0px 2px;
     margin-right:5px;
@@ -314,8 +311,8 @@
     max-width:95%;
     height:auto;
     padding:10px;
-    background:#333;
-    color:white;
+    background:$color-black-background;
+    color:$text-color-white;
     top:40px;
     position:absolute;
     z-index:2;
@@ -330,7 +327,7 @@
 }
 
 :host ::ng-deep .exemple-list, .cdk-drop-list {
-    background-color: #f9f9f9!important;
+    background-color: $background-color!important;
 }
 
 .active-dropList{

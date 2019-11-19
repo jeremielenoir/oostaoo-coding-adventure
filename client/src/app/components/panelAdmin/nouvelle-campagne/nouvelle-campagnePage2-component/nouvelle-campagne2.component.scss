@@ -1,10 +1,11 @@
+@import"../../../../../roodeo-variables.scss";
 #new-campaign {
     min-height: 60vh;
     width: 71%;
     margin: 100px auto;
     font-weight: bold;
-    border: 1px solid #f0eeee;
-    background: white;
+    border: 1px solid $border-table-second;
+    background: $color-white-background;
 }
 
 #form {
@@ -18,7 +19,7 @@
 
 #campaign-name-input {
     margin-top: 10px;
-    border: 1px solid black;
+    border: 1px solid $color-black-background;
     width: 100%;
     height: 50px;
 }
@@ -59,23 +60,23 @@
 }
 
 .info {
-    color: #7e8082;
+    color: $color-grey;
     margin: 0 15px 0 0px;
 }
 
 :host ::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
     opacity: 0.5 !important;
     /*click effect color change*/
-    background-color: #f2bb31 !important;
+    background-color: $color-gold-background !important;
 }
 
 :host ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
-    background-color: #f2bb31!important;
+    background-color: $color-gold-background!important;
     /*inner circle color change*/
 }
 
 :host ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-    border-color: #f2bb31!important;
+    border-color: $color-gold!important;
     /*outer ring color change*/
 }
 
@@ -98,7 +99,7 @@
     align-items: baseline;
     box-sizing: border-box;
     width: 100%;
-    border: 1px solid #f9f9f9;
+    border: 1px solid $background-color;
     height: 60px;
     padding: 0px 10px 10px;
     margin-top: 15px;
@@ -109,7 +110,7 @@
 }
 
 :host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-    background: #f2bb31;
+    background: $color-gold-background;
 }
 
 @media screen and (min-width:768px) and (max-width:959px) {
@@ -123,7 +124,7 @@
     #select span {
         font-size: 20px;
         font-weight: bold;
-        color: #7e8082;
+        color: $color-grey;
         margin: 20px 140px 25px;
     }
     .button {
@@ -145,7 +146,7 @@
     #select span {
         font-size: 20px;
         font-weight: bold;
-        color: #7e8082;
+        color: $color-grey;
         margin: 20px 140px 25px;
     }
     .button {
@@ -167,7 +168,7 @@
     #select span {
         font-size: 20px;
         font-weight: bold;
-        color: #7e8082;
+        color: $color-grey;
         margin: 20px 140px 25px;
     }
     .button {

@@ -9,8 +9,8 @@
   <section class="view-content" [class.new-contenu-view-content]="booleanViewContentDefault">
 
     <div class="contenu-view-content">
-      <app-compagne (emitIsactiveNoCountryside)="display($event)" (campaignsChild)="getCampaignsFromChild($event)"
-        class="app-compagne"></app-compagne>
+      <app-campagne (emitIsactiveNoCountryside)="display($event)" (campaignsChild)="getCampaignsFromChild($event)"
+        class="app-campagne"></app-campagne>
       <app-sidibar-right *ngIf="campaigns" [campaignsFromParent]="campaigns" class="app-sidbar"></app-sidibar-right>
     </div>
   </section>

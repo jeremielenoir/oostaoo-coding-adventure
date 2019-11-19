@@ -76,6 +76,10 @@
     "twitter": {
       "default": "",
       "type": "string"
+    },
+    "lang": {
+      "default": "",
+      "type": "string"
     }
   }
 }

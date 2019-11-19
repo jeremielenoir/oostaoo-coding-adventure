@@ -47,7 +47,7 @@ import {
 } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component';
 
 import { DashboadCampagneComponent } from './components/panelAdmin/dashboard-campagne/dashboard-campagne.component';
-import { CompagneComponent } from './components/panelAdmin/compagne/compagne.component';
+import { CampagneComponent } from './components/panelAdmin/campagne/campagne.component';
 import { SidibarRightComponent } from './components/panelAdmin/sidibar-right/sidibar-right.component';
 import { DatePipe } from '@angular/common';
 import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
@@ -58,6 +58,7 @@ import { ProfilEntrepriseComponent } from './components/panelAdmin/profil-entrep
 import { EditCampagneComponent } from './components/panelAdmin/edit-campagne/edit-campagne.component';
 import { CandidatsComponent } from './components/panelAdmin/edit-campagne/candidats/candidats.component';
 import { InviteCandidat } from './components/panelAdmin/edit-campagne/candidats/invite-candidat.component';
+import { OrderModule } from 'ngx-order-pipe';
 
 import { QuestionsComponent } from './components/panelAdmin/edit-campagne/questions/questions.component';
 import { SettingsComponent } from './components/panelAdmin/edit-campagne/settings/settings.component';
@@ -103,7 +104,7 @@ import { DecryptTokenService } from './components/home/register/register.service
     PopupCampaign,
     NouvelleCampagnePage3Component,
     DashboadCampagneComponent,
-    CompagneComponent,
+    CampagneComponent,
     SidibarRightComponent,
     ProfilUtilisateurComponent,
     FacturationComponent,
@@ -140,13 +141,15 @@ import { DecryptTokenService } from './components/home/register/register.service
     HttpClientModule,
     Ng2SearchPipeModule,
     RoundProgressModule,
-    NgxEditorModule
+    NgxEditorModule,
+    OrderModule,
   ],
   providers: [
     ApiClientService,
     DatePipe,
-    DecryptTokenService
-  ],
+    DecryptTokenService,
+    CampagneComponent
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

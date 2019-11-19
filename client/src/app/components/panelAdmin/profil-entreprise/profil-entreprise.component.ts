@@ -850,12 +850,13 @@ export class ProfilEntrepriseComponent implements OnInit {
       this.twitter = new FormControl(user[0].entreprise.twitter);
       // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
     });
-    console.log("test", this.decryptTokenService.userId);
+    console.log('test', this.decryptTokenService.userId);
   }
 
   clickchange() {
     console.log('this.user :', this.user);
     this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.user[0].entreprise.id, {
+      lang: this.lang.value,
       Lien_video: this.videolink.value,
       Url_site: this.websitelink.value,
       Teaser: this.teaser.value

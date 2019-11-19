@@ -1,3 +1,5 @@
+@import "../../../../roodeo-variables.scss";
+
 #global {
     display: flex;
 
@@ -9,7 +11,7 @@
         margin-left: 18%;
 
         .icon {
-            color: #f2bb31;
+            color: $color-gold;
         
             .icoheight {
                 font-size: 20px;
@@ -24,7 +26,7 @@
     margin: 15px 0px 0 0;
     background: white;
     padding: 30px;
-    border: 1px solid #e4e4e4;
+    border: $border-table;
 
     .title {
         margin-bottom: 20px;
@@ -32,11 +34,11 @@
 
     table {
         width: 100%;
-        border: 1px solid #f7f7f7;
+        border: $border-table;
         box-shadow: none;
     
         th, td, tr {
-            border: 1px solid #f7f7f7;
+            border: $border-table;
             text-align: left !important;
             font-size: 18px !important;
         }
@@ -52,7 +54,7 @@
     margin: 15px 0 0 0px;
     background: white;
     padding: 30px;
-    border: 1px solid #e4e4e4;
+    border: $border-table;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -64,7 +66,7 @@
     
     #section2-title a {
         font-size: 16px;
-        color: #f2bb31;
+        color: $color-gold;
         margin-top: 10px;
         text-decoration: none;
     }
@@ -73,7 +75,7 @@
         display: flex;
         width: 100%;
         justify-content: space-around;
-        border: 1px solid #f7f7f7;
+        border: $border-table;
         margin: 20px 0px;
         padding: 15px;
 
@@ -92,7 +94,7 @@
         width: 100%;
         display: flex;
         justify-content: space-around;
-        border: 1px solid #f7f7f7;
+        border: $border-table;
         margin: 20px 0px;
         padding: 15px;
     
@@ -105,7 +107,7 @@
         }
     
         .bouton-modifier {
-            background: #f2bb31;
+            background: $color-gold;
             margin-top: 5px;
             color: white;
             max-height: 35px;
@@ -143,11 +145,11 @@
     }
     table {
         width: 100%;
-        border: 1px solid #f7f7f7;
+        border: $background-color;
         box-shadow: none;
     }
     th, td, tr {
-        border: 1px solid #f7f7f7;
+        border: $background-color;
         text-align: left !important;
         font-size: 14px !important;
     }
@@ -167,7 +169,7 @@
         min-width: 300px;
         width: 100%;
         justify-content: space-around;
-        border: 1px solid #f7f7f7;
+        border: $border-table;
         margin: 20px 0px;
         padding: 15px;
     }
@@ -178,7 +180,7 @@
         flex-wrap: wrap;
         min-width: 300px;
         justify-content: space-around;
-        border: 1px solid #f7f7f7;
+        border: $border-table;
         margin: 20px 0px;
         padding: 15px;
     }
@@ -193,11 +195,11 @@
     }
     table {
         width: 100%;
-        border: 1px solid #f7f7f7;
+        border: $border-table;
         box-shadow: none;
     }
     th, td, tr {
-        border: 1px solid #f7f7f7;
+        border: $border-table;
         text-align: left !important;
         font-size: 14px !important;
     }
@@ -222,7 +224,7 @@
         flex-wrap: wrap;
         width: 100%;
         justify-content: space-around;
-        border: 1px solid #f7f7f7;
+        border: $border-table;
         margin: 20px 0px 20px;
         padding: 15px;
     }
@@ -232,7 +234,7 @@
         font-size: 12px;
         flex-wrap: wrap;
         justify-content: space-around;
-        border: 1px solid #f7f7f7;
+        border: $border-table;
         margin: 20px 0px 0;
         padding: 15px;
     }
