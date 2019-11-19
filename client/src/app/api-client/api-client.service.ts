@@ -17,7 +17,7 @@ export const API_URI_EMAIL: string = prefix + 'email';
 export const API_URI_USER_ADMIN: string = prefix + 'utilisateursadmins';
 export const API_URI_ENTREPRISE: string = prefix + 'entreprises';
 export const API_URI_USER_ENTREPRISE: string = prefix + 'utilsateurentreprises';
-export const API_URI_USER = 'http://localhost:80/users';
+export const API_URI_USER = '/users';
 
 
 
