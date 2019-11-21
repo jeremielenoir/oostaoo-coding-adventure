@@ -112,6 +112,19 @@
           <a class="color-site" href="#">Nouveautés</a>
         </div>
       </div>
+      <button
+        id="nonemobile"
+        mat-button
+        (click)="Activet_isShow()"
+        class="custom-button-nav"
+      >
+        <i
+          class="fa fa-2x"
+          aria-hidden="true"
+          id="btn-arrow"
+          [ngClass]="isShow ? 'fa-arrow-left' : 'fa-arrow-right'"
+        ></i>
+      </button>
     </div>
 
     <div id="left2" *ngIf="isShow === false">
@@ -233,23 +246,27 @@
           ><i class="fa fa-newspaper-o fa-2x color-site" aria-hidden="true"></i
         ></a>
       </div>
-    </div>
-    <!-- button for show or hidden nav in desktop -->
-    <button
-      id="nonemobile"
-      mat-button
-      (click)="Activet_isShow()"
-      class="custom-button-nav"
-    >
-      <i
-        class="fa fa-2x"
-        aria-hidden="true"
-        id="btn-arrow"
-        [ngClass]="isShow ? 'fa-arrow-left' : 'fa-arrow-right'"
-      ></i>
-    </button>
-  </div>
 
+       <!-- button for show or hidden nav in desktop -->
+
+     <!-- button for show or hidden nav in desktop -->
+
+      <button
+          id="nonemobile"
+          mat-button
+          (click)="Activet_isShow()"
+          class="custom-button-nav"
+        >
+          <i
+            class="fa fa-2x"
+            aria-hidden="true"
+            id="btn-arrow"
+            [ngClass]="isShow ? 'fa-arrow-left' : 'fa-arrow-right'"
+          ></i>
+        </button>
+     </div>
+    </div>
+   
   <!-- (click)="active_menu()" -->
   <!-- button for show or hidden nav in desktop -->
   <div id="menu-nav-mobile">

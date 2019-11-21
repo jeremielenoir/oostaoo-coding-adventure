@@ -36,9 +36,9 @@ export class RouteComponentComponent implements OnInit {
   // }
 
   public Activet_isShow() {
-    setTimeout(() => {
+   
       this.isShow = !this.isShow;
-    }, 1000);
+   
   }
 }
 
