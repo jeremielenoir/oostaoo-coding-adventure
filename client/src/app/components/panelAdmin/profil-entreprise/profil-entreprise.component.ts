@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit,  } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
 import {
   ApiClientService,
@@ -12,7 +12,7 @@ import { DecryptTokenService } from "src/app/components/home/register/register.s
   templateUrl: "./profil-entreprise.component.html",
   styleUrls: ["./profil-entreprise.component.scss"]
 })
-export class ProfilEntrepriseComponent implements OnInit {
+export class ProfilEntrepriseComponent implements OnInit, DoCheck {
   @ViewChild("paramHeader") paramHeader: ElementRef;
   @ViewChild("uploadimgfirst") uploadimgfirst: ElementRef;
   @ViewChild("uploadimgLast") uploadimgLast: ElementRef;
@@ -30,6 +30,9 @@ export class ProfilEntrepriseComponent implements OnInit {
   public blockUploadLast = false;
   public cadrageImgBooleanLast = false;
   public cadrageImgBooleanStateLast = false;
+  public current1 = 0;
+  public current2 = 0;
+  public currentTotal = 0;
 
   logo = new FormControl("", Validators.required);
   name = new FormControl("", Validators.required);
@@ -829,15 +832,15 @@ export class ProfilEntrepriseComponent implements OnInit {
     public decryptTokenService: DecryptTokenService
   ) {}
 
+
   ngOnInit() {
     this.getUser().then(user => {
-      console.log(user[0].entreprise);
       this.logo = new FormControl(user[0].entreprise.logo);
       this.name = new FormControl(user[0].entreprise.nom);
       this.email = new FormControl(user[0].entreprise.email);
-      this.lang = new FormControl(user[0].entreprise.langue);
+      this.lang = new FormControl(user[0].entreprise.lang);
       this.phone = new FormControl(user[0].entreprise.tel);
-      this.industrie = new FormControl(user[0].entreprise.mobile);
+      this.industrie = new FormControl(user[0].entreprise.industrie);
       this.numberofemployee = new FormControl(user[0].entreprise.nb_employe);
       this.numberofdev = new FormControl(user[0].entreprise.nb_dev);
       this.techno = new FormControl(user[0].entreprise.techno);
@@ -848,13 +851,18 @@ export class ProfilEntrepriseComponent implements OnInit {
       this.linkedin = new FormControl(user[0].entreprise.linkedin);
       this.facebook = new FormControl(user[0].entreprise.facebook);
       this.twitter = new FormControl(user[0].entreprise.twitter);
-      // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
+
+      this.progressbar1();
+      this.progressbar2();
+      this.progressbarTotal();
     });
-    console.log('test', this.decryptTokenService.userId);
+  }
+  ngDoCheck() {
+
   }
 
   clickchange() {
-    console.log('this.user :', this.user);
+    // console.log('this.user :', this.user);
     this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.user[0].entreprise.id, {
       lang: this.lang.value,
       Lien_video: this.videolink.value,
@@ -867,10 +875,6 @@ export class ProfilEntrepriseComponent implements OnInit {
       },
       err => console.log(err)
     );
-    console.log(this.lang.value);
-    console.log(this.user[0].entreprise.id);
-    console.log(this.websitelink.value);
-    console.log(this.teaser.value);
   }
 
   clickchange2() {
@@ -878,6 +882,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       Nom: this.name.value,
       Email: this.email.value,
       Tel: this.phone.value,
+      industrie: this.industrie.value,
       Nb_employe: this.numberofemployee.value,
       Nb_dev: this.numberofdev.value,
       Lien_video: this.videolink.value,
@@ -893,19 +898,6 @@ export class ProfilEntrepriseComponent implements OnInit {
       },
       err => console.log(err)
     );
-    console.log(this.name.value);
-    console.log(this.email.value);
-    console.log(this.phone.value);
-    console.log(this.industrie.value);
-    console.log(this.numberofemployee.value);
-    console.log(this.numberofdev.value);
-    console.log(this.techno.value);
-    console.log(this.videolink.value);
-    console.log(this.websitelink.value);
-    console.log(this.teaser.value);
-    console.log(this.linkedin.value);
-    console.log(this.facebook.value);
-    console.log(this.twitter.value);
   }
 
   verifExtension(chemin) {
@@ -988,6 +980,57 @@ export class ProfilEntrepriseComponent implements OnInit {
     }
   }
 
+  progressbar1() {
+    const total = [this.lang.value, this.videolink.value, this.websitelink.value, this.teaser.value];
+    const percent = 100 / total.length;
+
+
+    for (const element of total ) {
+      if (element !== null && element !== '' ) {
+        this.current1 = this.current1 + percent;
+
+        this.current1 = Math.round(this.current1);
+      }
+
+    }
+  }
+  progressbar2() {
+
+    const total = [
+                   this.logo.value, this.name.value, this.email.value, this.phone.value,
+                   this.industrie.value, this.numberofemployee.value, this.numberofdev.value,
+                   this.techno.value, this.videolink.value, this.websitelink.value,
+                   this.teaser.value, this.picture.value, this.linkedin.value, this.facebook.value, this.twitter.value
+                  ];
+    const percent = 6.666666666;
+    for (const element of total ) {
+      if (element !== null && element !== '' ) {
+        this.current2 = this.current2 + percent;
+
+        this.current2 = Math.round(this.current2);
+      }
+
+    }
+  }
+  progressbarTotal() {
+    const total = [
+                    this.lang.value, this.videolink.value, this.websitelink.value, this.teaser.value,
+                    this.logo.value, this.name.value, this.email.value, this.phone.value,
+                    this.industrie.value, this.numberofemployee.value, this.numberofdev.value,
+                    this.techno.value, this.videolink.value, this.websitelink.value,
+                    this.teaser.value, this.picture.value, this.linkedin.value, this.facebook.value, this.twitter.value
+                  ];
+    const percent = 5.263157894;
+
+
+    for (const element of total ) {
+      if (element !== null && element !== '' ) {
+        this.currentTotal = this.currentTotal + percent;
+        this.currentTotal = Math.round(this.currentTotal);
+      }
+    }
+  }
+
   readURL_deux(event) {
     this.blockUploadLast = true;
     this.cadrageImgBooleanLast = true;
@@ -1033,7 +1076,6 @@ export class ProfilEntrepriseComponent implements OnInit {
       const datas = await this.apiClientService
         .get(API_URI_USER + "/" + this.decryptTokenService.userId)
         .toPromise();
-      console.log('datas PROFIUL ENTREPRISE: ', datas);
       return this.user = [datas];
     } catch (err) {
       return err;

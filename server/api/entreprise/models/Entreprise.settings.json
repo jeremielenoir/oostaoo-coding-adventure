@@ -80,6 +80,10 @@
     "lang": {
       "default": "",
       "type": "string"
+    },
+    "industrie": {
+      "default": "",
+      "type": "string"
     }
   }
 }
