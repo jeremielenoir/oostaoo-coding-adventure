@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SidibarRightComponent } from './sidibar-right.component';
+import { SidibarRightComponent } from './sidebar-right.component';
 
 describe('SidibarRightComponent', () => {
   let component: SidibarRightComponent;

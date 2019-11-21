@@ -48,7 +48,7 @@ import {
 
 import { DashboadCampagneComponent } from './components/panelAdmin/dashboard-campagne/dashboard-campagne.component';
 import { CampagneComponent } from './components/panelAdmin/campagne/campagne.component';
-import { SidibarRightComponent } from './components/panelAdmin/sidibar-right/sidibar-right.component';
+import { SidibarRightComponent } from './components/panelAdmin/sidebar-right/sidebar-right.component';
 import { DatePipe } from '@angular/common';
 import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
 import { ProtectionDeDonneesComponent } from './components/panelAdmin/protection-de-donnees/protection-de-donnees.component';

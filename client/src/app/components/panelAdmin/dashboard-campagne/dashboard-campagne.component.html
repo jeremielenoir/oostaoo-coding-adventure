@@ -9,7 +9,7 @@
     <div class="contenu-view-content">
       <app-campagne (emitIsactiveNoCountryside)="display($event)" (campaignsChild)="getCampaignsFromChild($event)"
         class="app-campagne"></app-campagne>
-      <app-sidibar-right *ngIf="campaigns" [campaignsFromParent]="campaigns" class="app-sidbar"></app-sidibar-right>
+      <app-sidebar-right *ngIf="campaigns" [campaignsFromParent]="campaigns" class="app-sidbar"></app-sidebar-right>
     </div>
   </section>
 </div>
