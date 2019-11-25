@@ -34,6 +34,7 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
   public current2 = 0;
   public currentTotal = 0;
   public entreprise: any;
+  public isVerifUser = true;
 
   logo = new FormControl("", Validators.required);
   name = new FormControl("", Validators.required);
@@ -817,7 +818,8 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.getUser().then(user => {
-      console.log('user=', user);
+      console.log('All user=', user);
+      this.isVerifUser = false
       if ( user[0].entreprise === null) {
       this.entreprise = user[0].entreprise;
       console.log('entreprise', this.entreprise);
