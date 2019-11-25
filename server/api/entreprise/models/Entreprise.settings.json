@@ -11,11 +11,6 @@
     "comment": ""
   },
   "attributes": {
-    "utilisateursadmin": {
-      "model": "user",
-      "via": "entreprise",
-      "plugin": "users-permissions"
-    },
     "logo": {
       "model": "file",
       "via": "related",
@@ -41,11 +36,6 @@
     "nb_dev": {
       "default": "",
       "type": "string"
-    },
-    "technologies": {
-      "collection": "technologies",
-      "via": "technologies",
-      "dominant": true
     },
     "lien_video": {
       "default": "",
@@ -84,6 +74,11 @@
     "industrie": {
       "default": "",
       "type": "string"
+    },
+    "useradmin": {
+      "model": "user",
+      "via": "entreprise",
+      "plugin": "users-permissions"
     }
   }
 }

@@ -30,10 +30,6 @@
     "campaigns": {
       "collection": "campaign",
       "via": "technologies"
-    },
-    "technologies": {
-      "collection": "entreprise",
-      "via": "technologies"
     }
   }
 }

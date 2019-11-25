@@ -59,7 +59,7 @@
     },
     "entreprise": {
       "model": "entreprise",
-      "via": "utilisateursadmin"
+      "via": "useradmin"
     },
     "prenom": {
       "default": "",

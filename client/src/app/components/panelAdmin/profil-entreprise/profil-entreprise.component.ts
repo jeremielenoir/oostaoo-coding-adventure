@@ -33,6 +33,7 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
   public current1 = 0;
   public current2 = 0;
   public currentTotal = 0;
+  public entreprise: any;
 
   logo = new FormControl("", Validators.required);
   name = new FormControl("", Validators.required);
@@ -42,7 +43,6 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
   industrie = new FormControl("", Validators.required);
   numberofemployee = new FormControl("", Validators.required);
   numberofdev = new FormControl("", Validators.required);
-  techno = new FormControl("", Validators.required);
   videolink = new FormControl("", Validators.required);
   websitelink = new FormControl("", Validators.required);
   teaser = new FormControl("", Validators.required);
@@ -809,24 +809,6 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
     "Other"
   ];
 
-  toppingList: string[] = [
-    "Ada",
-    "Android",
-    "Bash",
-    "Big Data",
-    "C",
-    "C++",
-    "C#",
-    "Clojure",
-    "Cloud",
-    "Cobol",
-    "DBA",
-    "Dart",
-    "Delphi",
-    ".NET",
-    "F#"
-  ];
-
   constructor(
     public apiClientService: ApiClientService,
     public decryptTokenService: DecryptTokenService
@@ -835,6 +817,11 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.getUser().then(user => {
+      console.log('user=', user);
+      if ( user[0].entreprise === null) {
+      this.entreprise = user[0].entreprise;
+      console.log('entreprise', this.entreprise);
+      } else {
       this.logo = new FormControl(user[0].entreprise.logo);
       this.name = new FormControl(user[0].entreprise.nom);
       this.email = new FormControl(user[0].entreprise.email);
@@ -843,7 +830,6 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
       this.industrie = new FormControl(user[0].entreprise.industrie);
       this.numberofemployee = new FormControl(user[0].entreprise.nb_employe);
       this.numberofdev = new FormControl(user[0].entreprise.nb_dev);
-      this.techno = new FormControl(user[0].entreprise.techno);
       this.videolink = new FormControl(user[0].entreprise.lien_video);
       this.websitelink = new FormControl(user[0].entreprise.url_site);
       this.teaser = new FormControl(user[0].entreprise.teaser);
@@ -851,14 +837,32 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
       this.linkedin = new FormControl(user[0].entreprise.linkedin);
       this.facebook = new FormControl(user[0].entreprise.facebook);
       this.twitter = new FormControl(user[0].entreprise.twitter);
-
+      this.entreprise = user[0].entreprise;
+      console.log('entreprise', this.entreprise);
+      }
       this.progressbar1();
       this.progressbar2();
       this.progressbarTotal();
+
     });
   }
   ngDoCheck() {
 
+  }
+
+  addentreprise() {
+    this.apiClientService.post(API_URI_ENTREPRISE, {
+      Nom: this.name.value,
+      Email: this.email.value,
+      Tel: this.phone.value,
+      useradmin: this.decryptTokenService.userId
+    }).subscribe(
+      (res) => {
+        alert('Entreprise ajouter');
+        // console.log('res', res);
+      },
+      err => console.log(err)
+    );
   }
 
   clickchange() {
@@ -982,7 +986,7 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
 
   progressbar1() {
     const total = [this.lang.value, this.videolink.value, this.websitelink.value, this.teaser.value];
-    const percent = 100 / total.length;
+    const percent = 25;
 
 
     for (const element of total ) {
@@ -998,11 +1002,11 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
 
     const total = [
                    this.logo.value, this.name.value, this.email.value, this.phone.value,
-                   this.industrie.value, this.numberofemployee.value, this.numberofdev.value,
-                   this.techno.value, this.videolink.value, this.websitelink.value,
+                   this.industrie.value, this.numberofemployee.value,
+                   this.numberofdev.value, this.videolink.value, this.websitelink.value,
                    this.teaser.value, this.picture.value, this.linkedin.value, this.facebook.value, this.twitter.value
                   ];
-    const percent = 6.666666666;
+    const percent = 7.142857142;
     for (const element of total ) {
       if (element !== null && element !== '' ) {
         this.current2 = this.current2 + percent;
@@ -1017,10 +1021,10 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
                     this.lang.value, this.videolink.value, this.websitelink.value, this.teaser.value,
                     this.logo.value, this.name.value, this.email.value, this.phone.value,
                     this.industrie.value, this.numberofemployee.value, this.numberofdev.value,
-                    this.techno.value, this.videolink.value, this.websitelink.value,
-                    this.teaser.value, this.picture.value, this.linkedin.value, this.facebook.value, this.twitter.value
+                    this.videolink.value, this.websitelink.value, this.teaser.value, this.picture.value,
+                    this.linkedin.value, this.facebook.value, this.twitter.value
                   ];
-    const percent = 5.263157894;
+    const percent = 5.555555555;
 
 
     for (const element of total ) {
