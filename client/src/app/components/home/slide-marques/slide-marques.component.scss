@@ -1,3 +1,4 @@
+@import"../../../../roodeo-variables.scss";
 .demo-one {
   height: 130px;
   padding-left: 20%;
@@ -12,8 +13,9 @@
 }
 
 .demo-border {
-  background-image: linear-gradient(330deg, #276b9c 0%, #113656 100%);
-  box-sizing: border-box;
+  border-top: 1px solid $color-blue;
+  border-bottom: 1px solid $color-blue;
+  box-shadow: 0 4px 10px -2px #00000080;
 }
 
 @media screen and (min-width: 200px) and (max-width: 640px) {

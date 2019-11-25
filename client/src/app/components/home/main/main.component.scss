@@ -1,4 +1,5 @@
 @import "../second-section/second-section.component.css";
+@import"../../../../roodeo-variables.scss";
 section {
     display: inline-block;
     width: 100%;
@@ -42,6 +43,10 @@ p {
     color: #252e38;
     font-size: 42px;
     line-height: 42px;
+    font-family:$font-poppins;
+    text-transform: uppercase;
+    font-size: 22px;
+    color:#1D3552;
 }
 
 .modern-heading-description {
@@ -114,7 +119,7 @@ p {
 
 .title-heading-block {
     text-align: center;
-    margin: 80px 0px 80px 0px;
+    margin: 50px 0px 24px 0px;
 }
 
 .content-article {

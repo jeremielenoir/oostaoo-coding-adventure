@@ -5,18 +5,70 @@
   box-sizing: border-box;
 }
 
+.lab-item.mat-card{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border:1px solid $color-blue;
+  -webkit-box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40); 
+box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
+  align-items: center;
+  height: 310px;
+  .mat-card-icon{
+    font-size: 60px;
+    color:$color-blue;
+  }
+
+  .mat-card-content{
+    padding:20px 10px;
+    display: flex;
+    align-items: center;
+    height: 120px;
+  }
+
+  .mat-card-title{
+    font-family:$font-poppins;
+    text-transform: uppercase;
+    color:rgb(31, 54, 98);
+    text-align: center;
+    font-size: 18px!important;
+    font-weight: 400;
+  }
+
+  .lab-item{
+    border:1px solid $color-pink;
+    background-color: transparent;
+    color:$color-pink;
+    border-radius: 100px;
+    font-weight: 600;
+    outline: none;
+    font-size: $font-size-home;
+  }
+}
+
+
+
 #home {
   /*background-image: url(../../../../assets/Coding-game-img/Page-accueil/header.jpg);*/
   background-position: bottom left;
   background-repeat: no-repeat;
   background-size: cover;
-  //height: 88px;
+  border-bottom: 1px solid $color-blue;
   display: flex;
   color: $text-color;
-  padding-top: 80px;
+  padding-top: 124px;
   align-content: center;
   justify-content: space-around;
-  //margin-top: 60px;
+  padding-bottom: 40px;
+  box-shadow: 0 4px 10px -2px #00000080;
+
+  .row-home{
+    display: flex;
+    flex-direction: row;
+    padding: 0px 4px;
+  }
+ 
 }
 
 .slidingVertical {

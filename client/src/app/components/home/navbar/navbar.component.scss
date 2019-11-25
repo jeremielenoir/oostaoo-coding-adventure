@@ -15,6 +15,13 @@
   position: fixed;
   width: 100%;
   z-index: 3;
+ 
+}
+
+.mat-toolbar{
+
+  box-shadow: 0 4px 10px -2px #00000080;
+  border-bottom: 1px solid $color-blue;
 }
 
 .style-nav-scroll {

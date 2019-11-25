@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
 $text-color: #212529;
 $text-color-white: #ffffff;
 $color-white-background:#fff;
@@ -7,13 +9,14 @@ $color-gold-background:#f2bb13;
 $color-gray-background:#5f5c5c;
 $smallDevice: "screen and (min-width: 200px) and (max-width: 640px)";
 $deviceMaxDesktop: "screen and (max-width: 1024px)";
-
+$color-pink:#f44336;
 $font-family-home: "Open Sans", Open Sans;
+$font-poppins:'Poppins', sans-serif;
 $font-size-home: 14px;
 $color-gold: #f2bb13;
 $color-gold-second:#f28730;
 $color-grey: #7e8082;
-
+$color-blue:rgb(84, 114, 141);
 
 
 $logoPath: "src/assets/fileservlet.png";
