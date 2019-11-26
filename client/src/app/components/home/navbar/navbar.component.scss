@@ -48,7 +48,7 @@
 
 img {
   width: 160px;
-  margin: 10px 0 0 20px;
+  margin: -10px 0 0 20px;
 
 }
 
@@ -73,7 +73,11 @@ a:hover {
   height: 50px;
   line-height: 10px;
   border-radius: 0px;
+  &:hover{
+    color:white!important;
+  }
 }
+
 
 .style-nav-scroll,.add-index{
 

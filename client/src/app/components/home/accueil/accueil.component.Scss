@@ -1,0 +1,25 @@
+@import"../../../../roodeo-variables.scss";
+.title-dashed{
+    color:$color-blue;
+    text-transform: uppercase;
+    font-family: $font-poppins;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    
+  }
+
+  .title-dashed:first-child{
+    margin-bottom: 80px;
+  }
+  .dashed{
+    padding:4px;
+    display: block;
+    background-color: $background-color;
+    border:1px solid rgb(126, 181, 206);
+    border-radius: 100px;
+    width: 125px;
+    position: relative;
+    left: -40px;
+    top: 10px;
+  }

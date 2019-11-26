@@ -9,10 +9,31 @@
     position: relative;
 }
 
+.title-heading-block{
+    display: flex;
+    justify-content: center;
+    .modern-heading-title{
+        text-transform: uppercase;
+        color:$color-blue;
+        font-family: $font-poppins;
+        font-size:22px;
+        margin-top: 42px;
+        margin-bottom: 22px;
+        text-align: center;
+        letter-spacing: 1px;
+        span{
+            display: block;
+            margin-top: 12px;
+        }
+    }
+}
+
 .row-ov {
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+
+    
 }
 
 .contenu-slider {
