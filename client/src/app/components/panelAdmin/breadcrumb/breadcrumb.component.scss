@@ -2,7 +2,8 @@
 
 .header-notification {
     border-bottom: $border-table;
-    padding: 4px 20px 6px 290px;
+    padding: 4px 20px 6px 0px;
+    padding-left: 8%;
     background-color: white;
 
     span{
@@ -10,8 +11,6 @@
     color: #7e8082;
     font-size: 12px;
     font-weight: 400;
-    // -webkit-transform: translateX(9.3%);
-    // transform: translateX(9.3%);
     transition: .3s;
     }
  

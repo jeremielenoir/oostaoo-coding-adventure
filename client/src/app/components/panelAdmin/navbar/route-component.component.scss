@@ -7,8 +7,10 @@
     flex-direction: column;
     position: fixed;
     width: 80px;
+    height: 100%;
     z-index: 10;
     transition: width 0.3s, min-width 0.3s;
+
     &.totalLeftActive {
       width: 230px;
     }
@@ -199,14 +201,11 @@ i:hover {
 
 #left {
   background-color: #20252a;
-  /* width: 13%; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   color: white;
-  overflow-y: auto;
-  height: 96vh;
-  /* visibility:hidden */
+  flex: 1;
 }
 
 .color-site {
@@ -247,12 +246,15 @@ i:hover {
 
 .custom-button-nav {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   color: white;
   background-color: #20252a;
   border-top: 1px solid black;
   border-radius: 0px;
   outline: none;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
 }
 
 .custom-button-nav:hover {
@@ -266,7 +268,7 @@ i:hover {
 }
 
 #left2 {
-  height: 96vh;
+  height: 100%;
   background-color: #20252a;
   display: flex;
   flex-direction: column;

@@ -1,0 +1,26 @@
+@import "../second-section/second-section.component.scss";
+@import"../../../../roodeo-variables.scss";
+
+#main{
+    padding-top:20px;
+    padding-bottom: 20px;
+    background-color: rgb(233, 241, 244);
+
+    .row{
+        flex-direction: column;
+    }
+
+    .list-para{
+        color:rgb(52, 87, 120);;
+        font-family: $font-poppins;
+        font-size: 15px;
+        font-weight: 600;
+       
+    }
+}
+@media screen and (max-width:760px){
+    .list-para{
+        font-size: 12px!important;
+        padding-left: 15px;
+    }
+}

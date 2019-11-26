@@ -2,9 +2,9 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { element } from '@angular/core/src/render3';
 
 @Component({
-  selector: 'app-sidibar-right',
-  templateUrl: './sidibar-right.component.html',
-  styleUrls: ['./sidibar-right.component.scss']
+  selector: 'app-sidebar-right',
+  templateUrl: './sidebar-right.component.html',
+  styleUrls: ['./sidebar-right.component.scss']
 })
 export class SidibarRightComponent implements OnInit {
   @Input() campaignsFromParent;

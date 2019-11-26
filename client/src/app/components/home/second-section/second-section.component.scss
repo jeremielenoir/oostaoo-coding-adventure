@@ -1,8 +1,18 @@
+@import'../../../../roodeo-variables.scss';
+@import"../accueil/accueil.component.Scss";
 #secondSection {
-  background-image: url(../../../../assets/Coding-game-img/Page-accueil/fond-section.jpg);
-  background-size: contain;
-  background-repeat: no-repeat;
-  /* height: 50vh; */
+  padding-top:60px;
+  padding-bottom: 40px;
+
+  .row{
+    flex-direction: column;
+  }
+ 
+
+  .title-dashed:first-child{
+    margin-bottom: 80px;
+  }
+ 
 }
 
 #titre-second-section {

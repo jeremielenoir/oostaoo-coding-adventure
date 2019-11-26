@@ -1,8 +1,6 @@
 <div class="rowter">
   <app-route-component (ContentViewDefault)="DefaultViewContent($event)"></app-route-component>
-  <div class="header-notification" [class.header-notification-default-text]="booleanViewContentDefault">
-    <span>Mes campagnes</span>
-  </div>
+  <app-breadcrumb [namePage]=""></app-breadcrumb>
   <div *ngIf="booleanViewContentDefault == false" class="loading">
     <span class="fa fa-spinner fa-pulse"></span>
   </div>
@@ -11,7 +9,7 @@
     <div class="contenu-view-content">
       <app-campagne (emitIsactiveNoCountryside)="display($event)" (campaignsChild)="getCampaignsFromChild($event)"
         class="app-campagne"></app-campagne>
-      <app-sidibar-right *ngIf="campaigns" [campaignsFromParent]="campaigns" class="app-sidbar"></app-sidibar-right>
+      <app-sidebar-right *ngIf="campaigns" [campaignsFromParent]="campaigns" class="app-sidbar"></app-sidebar-right>
     </div>
   </section>
 </div>

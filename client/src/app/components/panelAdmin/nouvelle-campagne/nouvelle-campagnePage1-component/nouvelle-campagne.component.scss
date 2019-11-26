@@ -1,0 +1,30 @@
+.or-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .or-text-span{
+        margin-top: 15px;
+    }
+}
+
+.champ-group{
+    width: 100%;
+}
+
+.spacing{
+    justify-content: space-around;
+}
+
+.mat-form-field{
+    width: 100%;
+}
+
+.offset-exp{
+    margin-left: 22px;
+
+    label{
+        padding-left: 5px;
+    }
+}
+

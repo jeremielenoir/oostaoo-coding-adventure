@@ -48,7 +48,7 @@ import {
 
 import { DashboadCampagneComponent } from './components/panelAdmin/dashboard-campagne/dashboard-campagne.component';
 import { CampagneComponent } from './components/panelAdmin/campagne/campagne.component';
-import { SidibarRightComponent } from './components/panelAdmin/sidibar-right/sidibar-right.component';
+import { SidibarRightComponent } from './components/panelAdmin/sidebar-right/sidebar-right.component';
 import { DatePipe } from '@angular/common';
 import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
 import { ProtectionDeDonneesComponent } from './components/panelAdmin/protection-de-donnees/protection-de-donnees.component';
@@ -79,6 +79,7 @@ import { FinTestComponent } from './components/panelAdmin/client-test/fin-test/f
 import { JwtInterceptor } from './components/home/register/service/jwt.interceptor';
 import { ErrorInterceptor } from './components/home/register/service/error.interceptor';
 import { DecryptTokenService } from './components/home/register/register.service';
+import { TechnoComponent } from './components/home/techno/techno.component';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -126,7 +127,8 @@ import { DecryptTokenService } from './components/home/register/register.service
     BreadcrumbComponent,
     RegisterComponent,
     BlockCopyPasteDirective,
-    FinTestComponent
+    FinTestComponent,
+    TechnoComponent
   ],
   imports: [
     BrowserModule,

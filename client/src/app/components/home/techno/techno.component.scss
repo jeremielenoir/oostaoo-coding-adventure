@@ -1,0 +1,35 @@
+@import"../../../../roodeo-variables.scss";
+@import"../accueil/accueil.component.Scss";
+
+#techno{
+    padding:70px 0px;
+
+    .title-fonction{
+        margin-top:60px;
+        margin-bottom: 95px;
+    }
+
+    .row-img-techno{
+        margin-top: 60px;
+    }
+  
+        .img-techo{
+            width: 160px;
+            text-align:center;
+            display: block;
+            margin-bottom: 30px;
+        }
+
+        .spacing-padding{
+            padding-top: 19px;
+        }
+
+        .img-techo img{
+        }
+
+        .spacing{
+            width: 190px;
+        }
+
+    
+}

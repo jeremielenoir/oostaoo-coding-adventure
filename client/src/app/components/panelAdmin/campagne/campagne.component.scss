@@ -1,5 +1,5 @@
 @import "../../../../roodeo-variables.scss";
-@import "../sidibar-right/sidibar-right.component.scss";
+@import "../sidebar-right/sidebar-right.component.scss";
 @import "../dashboard-campagne/dashboard-campagne.component.scss";
 .contenu-view-content-left {
   display: flex;
@@ -33,7 +33,7 @@
           -ms-user-select: none;
           user-select: none;
           color: #7e8082;
-
+          padding-top: 10px;
           .checkbox {
             width: 0px;
             height: 0px;

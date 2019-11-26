@@ -15,6 +15,13 @@
   position: fixed;
   width: 100%;
   z-index: 3;
+ 
+}
+
+.mat-toolbar{
+
+  box-shadow: 0 4px 10px -2px #00000080;
+  border-bottom: 1px solid $color-blue;
 }
 
 .style-nav-scroll {
@@ -41,7 +48,7 @@
 
 img {
   width: 160px;
-  margin: 10px 0 0 20px;
+  margin: -10px 0 0 20px;
 
 }
 
@@ -66,7 +73,11 @@ a:hover {
   height: 50px;
   line-height: 10px;
   border-radius: 0px;
+  &:hover{
+    color:white!important;
+  }
 }
+
 
 .style-nav-scroll,.add-index{
 
