@@ -43,7 +43,6 @@
     -webkit-box-shadow: 12px 13px 11px -2px rgba(188,188,188,0.56); 
     box-shadow: 12px 13px 11px -2px rgba(188,188,188,0.56);
     padding: 10px;
-    height: 400px;
     border-radius: 4px;
     border:1px solid $color-pink
 }
@@ -73,7 +72,8 @@
     font-size: 16px;
     font-weight: 500;
     text-transform: none;
-    height: 150px;
+    height: 160px;
+    overflow: hidden;
 }
 
 .name-carousel {
@@ -93,4 +93,33 @@
 
 .carousel-control-prev, .carousel-control-next {
     font-size: 50px;
+}
+
+.carousel-control-prev{
+    left: -31px;
+}
+.carousel-control-next{
+    right:-31px;
+}
+
+@media screen and (max-width:1024px){
+    .contenu-slider{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:760px){
+
+    #element_open_trust{
+        padding: 0px 0px 40px 0px!important;
+    }
+    .carousel-control-prev{
+        left:-20px;
+        
+    }
+    .carousel-control-next{
+        right: -20px;
+    }
+
+
 }

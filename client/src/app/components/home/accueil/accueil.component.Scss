@@ -9,9 +9,7 @@
     
   }
 
-  .title-dashed:first-child{
-    margin-bottom: 80px;
-  }
+
   .dashed{
     padding:4px;
     display: block;
@@ -22,4 +20,13 @@
     position: relative;
     left: -40px;
     top: 10px;
+  }
+
+  @media screen and (max-width:760px){
+
+    .dashed{
+      left:0px;
+    }
+
+
   }

@@ -67,6 +67,7 @@ box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
     display: flex;
     flex-direction: row;
     padding: 0px 4px;
+    flex-wrap: wrap;
   }
  
 }
@@ -218,54 +219,18 @@ mat-error {
 
 /* CSS format mobile */
 
-@media screen and (min-width: 200px) and (max-width: 640px) {
-  #home {
-    height: 100vh;
-  }
-  .slidingVertical {
-    left: 300px;
-    display: inherit
-  }
-  .left {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100%;
-  }
-  #text {
-    padding-top: 50px;
-    padding-left: 30px;
-    padding-right: 30px;
-    display: flex;
-    flex-direction: column;
-  }
-  #text h1 {
-    font-family: "Open Sans", sans-serif;
-    font-size: 30px;
-  }
-  #text h3 {
-    font-family: "Open Sans", sans-serif;
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  .form {
-    display: flex;
-    flex-direction: column;
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-  .mat-form-field {
-    width: 100%;
-  }
-  .custom-buttom {
-    width: 60%;
-  }
-  .right {
-    visibility: hidden
-  }
-}
+@media screen and (max-width: 1024px) {
 
-@media (min-width: 767px)and (max-width: 1024px) {
+  .row-home{
+    .lab-item.mat-card{
+      margin-bottom: 9px!important;
+    }
+
+    .mat-raised-button{
+      font-size: 11px!important; 
+    }
+  
+  }
   .left {
     width: 80%;
     padding-left: 38px;
@@ -274,7 +239,51 @@ mat-error {
   .right {
     display: none
   }
-  #home {
-    height: 60vh;
-  }
-}
+ 
+} 
+
+// @media screen and (min-width: 200px) and (max-width: 640px) {
+ 
+//   .slidingVertical {
+//     left: 300px;
+//     display: inherit
+//   }
+//   .left {
+//     display: flex;
+//     flex-direction: column;
+//     height: 100vh;
+//     width: 100%;
+//   }
+//   #text {
+//     padding-top: 50px;
+//     padding-left: 30px;
+//     padding-right: 30px;
+//     display: flex;
+//     flex-direction: column;
+//   }
+//   #text h1 {
+//     font-family: "Open Sans", sans-serif;
+//     font-size: 30px;
+//   }
+//   #text h3 {
+//     font-family: "Open Sans", sans-serif;
+//     font-size: 18px;
+//     margin-bottom: 10px;
+//   }
+//   .form {
+//     display: flex;
+//     flex-direction: column;
+//     padding-left: 30px;
+//     padding-right: 30px;
+//   }
+//   .mat-form-field {
+//     width: 100%;
+//   }
+//   .custom-buttom {
+//     width: 60%;
+//   }
+//   .right {
+//     visibility: hidden
+//   }
+// }
+
