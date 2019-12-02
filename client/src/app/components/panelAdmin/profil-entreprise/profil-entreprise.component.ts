@@ -18,6 +18,8 @@ export class ProfilEntrepriseComponent implements OnInit {
   @ViewChild("uploadimgLast") uploadimgLast: ElementRef;
   @ViewChild("btnValideParent") btnValideParent: ElementRef;
   @ViewChild("btnValideParentAddImage") btnValideParentAddImage: ElementRef;
+  @ViewChild('fileLoading') fileLoading:ElementRef;
+  @ViewChild('uploadFileFirst') uploadFileFirst:ElementRef;
 
   public currentValue: number;
   public user: any;
@@ -34,6 +36,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   public current2 = 0;
   public currentTotal = 0;
   public entreprise: any;
+
 
   public entre: any;
 
@@ -818,6 +821,7 @@ export class ProfilEntrepriseComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.getUser().then(user => {
       // console.log('user getUser=', user);
       // if ( user[0].entreprise === null) {
@@ -866,6 +870,7 @@ export class ProfilEntrepriseComponent implements OnInit {
           this.entreprise = entreprise[0];
           console.log('entreprise user', entreprise);
           console.log('this.entreprise=', this.entreprise);
+          console.log('entreprise picture',this.picture)
         }
         this.progressbar1();
         this.progressbar2();
@@ -960,6 +965,8 @@ export class ProfilEntrepriseComponent implements OnInit {
     this.cadrageImgBoolean = false;
     this.blockUpload = false;
     this.uploadimgfirst.nativeElement.src = "";
+    console.log('uploadFileFirst',this.uploadFileFirst.nativeElement)
+    this.uploadFileFirst.nativeElement.value = ''
   }
 
   public show_header_param() {
@@ -978,7 +985,8 @@ export class ProfilEntrepriseComponent implements OnInit {
     this.btnValideParentAddImage.nativeElement.children[0].disabled = true;
     this.cadrageImgBooleanLast = false;
     this.blockUploadLast = false;
-    this.uploadimgLast.nativeElement.src = "";
+    this.uploadimgLast.nativeElement.src = "salut";
+    this.fileLoading.nativeElement.value = ''
   }
 
   readURL(event) {
@@ -1101,6 +1109,7 @@ export class ProfilEntrepriseComponent implements OnInit {
     ) {
       this.cadrageImgBooleanStateLast = false;
 
+    
       this.uploadimgLast.nativeElement.src = URL.createObjectURL(
         event.target.files[0]
       );

@@ -72,10 +72,10 @@
             
                         <span >ou télécharger une photo</span>
             
-                        <input  type="file" class="file"  name="files" (change)="readURL($event)"/>  
-                        <input type="text" name="ref" value="entreprise" />
+                        <input  type="file" class="file"  name="files" accept="image/x-png,image/gif,image/jpeg" (change)="readURL($event)" #uploadFileFirst/>  
+                        <input class="hidden-file" type="text" name="ref" value="entreprise" />
                         <input type="text" name="refId" value="9" />
-                        <input type="text" name="field" value="logo" />          
+                        <input type="text" name="field" value="logo"/>          
                       </div>
                   </div>
       
@@ -146,13 +146,10 @@
                       <div class="btn-modal-content" id="btn-modal-content">
             
                         <span class="modal-text-btn-upload">ou télécharger une photo</span>
+                        
+                        <input type="file" class="file"  name="files" accept="image/x-png,image/gif,image/jpeg" (change)="readURL_deux($event)" #fileLoading/>
             
-                        <input type="file" class="file"  name="files" multiple (change)="readURL_deux($event)"/>
-            
-                      </div>
-      
-      
-      
+                      </div>  
                   </div>
       
                   <div class="cadrage-img" [ngClass]="{'cadrage-img-active' : cadrageImgBooleanLast === true}">
@@ -171,8 +168,8 @@
             
                           <span class="modal-text-btn-upload">ou télécharger une photo</span>
               
-                          <input type="file" class="file"  multiple (change)="readURL_deux($event)"/>
-                          <input type="text" name="ref" value="entreprise" />
+                          <input type="file" class="file" (change)="readURL_deux($event)"/>
+                          <input class="hidden-file" type="text" name="ref" value="entreprise" />
                           <input type="text" name="refId" value="9" />
                           <input type="text" name="field" value="image_entreprise" />   
               
@@ -558,8 +555,18 @@
       
                           </div>
 
-                          <div *ngFor='let image of picture'>
-                            <img src="{{image.url}}" alt="">
+                          <div *ngFor='let image of picture' class="picture">
+                            <div class="img-gestion">
+
+                                <div class="bg-transparent-img">
+                                  <span class="fa fa-window-close"></span>
+                                  
+
+                                </div>
+
+                                <img src="{{image.url}}" alt="">
+
+                            </div>
                           </div>
                         </div>
                           
