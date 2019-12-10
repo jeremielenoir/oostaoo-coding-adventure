@@ -5,30 +5,74 @@ $color-dash-text-footer: #f2bb13;
 
 #footer{
   background-color: rgb(29, 53, 82);
-  height: 360px;
+  height: 250px;
   width: 100%;
   margin-bottom: 10px;
   display: flex;
-  justify-content: center;
-  .list-network{
-    display: flex;
-    list-style-type: none;
-    justify-content: center;
-    align-items: flex-end;
-  }
+  // justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
 
-  .list-network li a{
+    .footer-left{
+      display: flex;
+      flex: 2;
+      padding-top: 42px;
+      .help-network{
+        display: flex;
+        flex-direction: column;
+        margin-left: 110px;
+        .title-help-network{
+          text-transform: uppercase;
+          color: $text-color-white;
+          font-family: $font-poppins;
+          font-size: 16px;
+          margin-bottom: 20px;
+        }
+    
+        .list-help-footer{
+    
+          li{
+    
+            a{
+              font-size: $font-size-home;
+              color:#4a7f9c;
+              font-family: sans-serif;
+              transition:
+              &{
+                color:$text-color-white;
 
-    padding:5px;
-    width: 40px;
-    height: 40px;
-    margin-left: 9px;
-    border-radius: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color:white
-  }
+              }
+            }
+    
+          }
+    
+        }
+    
+      }
+    }
+
+    .footer-right{
+      flex: 2;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .list-network{
+        display: flex;
+        list-style-type: none;
+        li a{
+    
+          padding:5px;
+          width: 40px;
+          height: 40px;
+          margin-left: 9px;
+          border-radius: 100px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color:white
+        }
+      }
+    }
 
   #facebook{
     background-color: #3c5a99;

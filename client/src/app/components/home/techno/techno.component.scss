@@ -13,23 +13,112 @@
         margin-top: 60px;
     }
   
+        #angular{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/Angular.svg");
+        }
+
+        #angular:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/Angular.svg");
+        }
+        #html{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/HTML5.svg");
+        }
+        #html:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/HTML5.svg");
+        }
+        #css{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/CSS3.svg");
+        }
+        #css:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/CSS3.svg");
+        }
+        #android{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/Android.svg");
+        }
+        #android:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/Android.svg");
+        }
+        #javascript{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/JavaScript.svg");
+        }
+        #javascript:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/JavaScript.svg");
+        }
+        #node{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/NodeJS.svg");
+        }
+        #node:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/NodeJS.svg");
+        }
+        #php{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/PHP.svg"); 
+        }
+        #php:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/Php.svg");
+        }
+        #jquery{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/jQuery.svg");
+        }
+        #jquery:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/jQuery.svg");
+        }
+        #swift{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/Swift.svg");   
+        }
+        #swift:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/Swift.svg");
+        }
+        #symfony{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/Symfony.svg");
+        }
+        #symfony:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/Symfony.svg");
+        }
+        #git{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/Git.svg");
+        }
+        #git:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/Git.svg");
+        }
+        #python{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/Python.svg");
+        }
+        #python:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/Python.svg");
+        }
+        #vue{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/VueJS.svg");
+        }
+        #vue:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/VueJS.svg");
+        }
+        #react{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-orange/React.svg");
+        }
+        #react:hover{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/Page-accueil/SVG-couleur/React.svg");
+        }
+
         .img-techo{
-            width: 160px;
+            width: 65px;
+            height: 65px;
+            margin-left: 90px;
             text-align:center;
             display: block;
             margin-bottom: 30px;
+            background-repeat:no-repeat;
+            background-position: center;
+           
         }
 
-        .spacing-padding{
-            padding-top: 19px;
+        .spacing{
+           
         }
 
         .img-techo img{
         }
 
-        .spacing{
-            width: 190px;
-        }
+      
 
     
 }

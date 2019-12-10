@@ -80,6 +80,7 @@ import { JwtInterceptor } from './components/home/register/service/jwt.intercept
 import { ErrorInterceptor } from './components/home/register/service/error.interceptor';
 import { DecryptTokenService } from './components/home/register/register.service';
 import { TechnoComponent } from './components/home/techno/techno.component';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -145,13 +146,14 @@ import { TechnoComponent } from './components/home/techno/techno.component';
     RoundProgressModule,
     NgxEditorModule,
     OrderModule,
+    ScrollToModule.forRoot()
   ],
   providers: [
     ApiClientService,
     DatePipe,
     DecryptTokenService,
     CampagneComponent
-    ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
