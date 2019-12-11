@@ -18,8 +18,8 @@ export class ProfilEntrepriseComponent implements OnInit {
   @ViewChild("uploadimgLast") uploadimgLast: ElementRef;
   @ViewChild("btnValideParent") btnValideParent: ElementRef;
   @ViewChild("btnValideParentAddImage") btnValideParentAddImage: ElementRef;
-  @ViewChild('fileLoading') fileLoading:ElementRef;
-  @ViewChild('uploadFileFirst') uploadFileFirst:ElementRef;
+  @ViewChild('fileLoading') fileLoading: ElementRef;
+  @ViewChild('uploadFileFirst') uploadFileFirst: ElementRef;
 
   public currentValue: number;
   public user: any;
@@ -33,8 +33,8 @@ export class ProfilEntrepriseComponent implements OnInit {
   public cadrageImgBooleanLast = false;
   public cadrageImgBooleanStateLast = false;
   public current1 = 0;
-  public current2 = 0;
-  public currentTotal = 0;
+  public current2 = 4;
+  public currentTotal = 4;
   public entreprise: any;
 
 
@@ -870,7 +870,7 @@ export class ProfilEntrepriseComponent implements OnInit {
           this.entreprise = entreprise[0];
           console.log('entreprise user', entreprise);
           console.log('this.entreprise=', this.entreprise);
-          console.log('entreprise picture',this.picture)
+          console.log('entreprise picture', this.picture)
         }
         this.progressbar1();
         this.progressbar2();
@@ -965,7 +965,7 @@ export class ProfilEntrepriseComponent implements OnInit {
     this.cadrageImgBoolean = false;
     this.blockUpload = false;
     this.uploadimgfirst.nativeElement.src = "";
-    console.log('uploadFileFirst',this.uploadFileFirst.nativeElement)
+    console.log('uploadFileFirst', this.uploadFileFirst.nativeElement)
     this.uploadFileFirst.nativeElement.value = ''
   }
 
@@ -1050,14 +1050,13 @@ export class ProfilEntrepriseComponent implements OnInit {
                    this.name.value, this.email.value, this.phone.value,
                    this.industrie.value, this.numberofemployee.value,
                    this.numberofdev.value, this.videolink.value, this.websitelink.value,
-                   this.teaser.value, this.picture, this.linkedin.value, this.facebook.value, this.twitter.value
+                   this.teaser.value, this.linkedin.value, this.facebook.value, this.twitter.value
                   ];
-    const percent = 7.69;
+    const percent = 8.33333333;
     for (const element of total ) {
       if (element !== null && element !== '' ) {
         this.current2 = this.current2 + percent;
-
-        this.current2 = Math.round(this.current2);
+        this.current2 = Math.trunc(this.current2);
       }
 
     }
@@ -1067,10 +1066,10 @@ export class ProfilEntrepriseComponent implements OnInit {
                     this.lang.value, this.videolink.value, this.websitelink.value, this.teaser.value,
                     this.name.value, this.email.value, this.phone.value,
                     this.industrie.value, this.numberofemployee.value, this.numberofdev.value,
-                    this.videolink.value, this.websitelink.value, this.teaser.value, this.picture,
+                    this.videolink.value, this.websitelink.value, this.teaser.value,
                     this.linkedin.value, this.facebook.value, this.twitter.value
                   ];
-    const percent = 5.88;
+    const percent = 6.25;
 
 
     for (const element of total ) {
