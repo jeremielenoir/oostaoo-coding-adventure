@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { MatBottomSheet, MatBottomSheetRef } from "@angular/material";
+import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: "app-route-component",
@@ -19,7 +20,22 @@ export class RouteComponentComponent implements OnInit {
   openBottomSheet(): void {
     this.bottomSheet.open(PopupMonOffre);
   }
-  ngOnInit() { }
+  ngOnInit() {
+
+    let textMenu = document.querySelectorAll('.text-menu');
+
+    textMenu.forEach(element => {
+
+      element.addEventListener('click', function (e) {
+
+        e.preventDefault();
+
+      })
+
+    })
+
+  }
+
 
   // public active_menu() {
   //   const totalLeft = document.getElementById("totalLeft");
@@ -36,9 +52,9 @@ export class RouteComponentComponent implements OnInit {
   // }
 
   public Activet_isShow() {
-   
-      this.isShow = !this.isShow;
-   
+
+    this.isShow = !this.isShow;
+
   }
 }
 

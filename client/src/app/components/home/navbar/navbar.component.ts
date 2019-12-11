@@ -59,7 +59,6 @@ export class NavbarComponent implements OnInit {
 
   }
 
-
   getLogin() {
     return JSON.parse(localStorage.getItem('token'));
   }

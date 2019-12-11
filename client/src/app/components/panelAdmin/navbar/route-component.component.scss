@@ -1,354 +1,117 @@
 @import "../../../../roodeo-variables.scss";
 
-#container {
+#nav-menu{
+  background: #1d3551;;
+  box-shadow: 0 4px 10px -2px #00000080;
   display: flex;
-  #totalLeft {
+  justify-content: center;
+  ul,figure{
+    margin:0px
+  }
+
+  .list-menu{
+    list-style-type: none;
     display: flex;
-    flex-direction: column;
-    position: fixed;
-    width: 80px;
-    height: 100%;
-    z-index: 10;
-    transition: width 0.3s, min-width 0.3s;
-
-    &.totalLeftActive {
-      width: 230px;
-    }
-    #campaign {
-      padding: 20px;
-      background-color: #2b3035;
-      ul {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
+    flex-direction: row;
+    li{
+      &:hover .dropdownn{
+        display: block;
       }
-    }
-
-    .custom-button {
-      width: 100%;
-      border-radius: 0%;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      &:focus {
-        background-color: $color-gold;
-        color: black;
-
-        &:focus i {
-          color: black;
-        }
-      }
-    }
-    #left-top {
-      padding: 20px;
-      #logo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 20px 20px 20px;
-        a {
-          img {
-            max-height: 120px;
-            max-width: 120px;
+      margin-left: 18px;
+      .dropdownn{
+        position: absolute;
+        list-style-type: none;
+        width: 200px;
+        height: auto;
+        background: #0d6192;
+        padding:9px 3px;
+        z-index: 2;
+        display: none;
+        li{
+          width: 92%;
+         .a-first{
+            text-transform: uppercase;
+            font-weight: 700;
           }
-        }
-      }
-      #profil {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        background-color: #2b3035;
-        padding-top: 20px;
-        #user-name {
-          color: white;
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding-top: 5px;
-          &:hover p {
-            color: $color-gold;
-          }
-        }
-        #color-notif {
-          #photoNotif {
-            display: flex;
-            justify-content: space-around;
-            background-color: #20252a;
-            /* margin-top: 20px; */
-            padding: 10px 30px 10px 30px;
-            align-items: center;
-            .notif {
-              display: flex;
-              align-items: center;
-              justify-content: center;
+          a{
+            color: white;
+            padding-bottom:0px;
+            font-size:13px;
+            display: inline-block;
+            width: 100%;
+            &:hover{
+              color:#68b4d3
             }
           }
         }
-        #color-notif:hover a {
-          color: $color-gold;
+      }
+      .text-menu{
+        padding:15px 15px;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        position: relative;
+       
+        #notif{
+          background-image: url("http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/orange/notifications.svg");
         }
+        #test{
+          background-image: url("http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/orange/Tests.svg");
+        }
+        #compte{
+          background-image: url("http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/orange/compte.svg");
+        }
+        #contact{
+          background-image: url("http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/orange/contacter.svg");
+        }
+        #new{
+          background-image: url("http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/orange/nouveautes.svg");
+        }
+        &:hover{
+          background: #0d6192;
+          #notif{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/notifications.svg");
+          }
+
+          #test{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/tests.svg");
+          }
+
+          #compte{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/compte.svg");
+          }
+          #contact{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/contacter.svg");
+          }
+          #new{
+            background-image: url("http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/nouveautes.svg");
+          }
+         
+        }
+        .content-img{
+          background-repeat: no-repeat;
+          display: block;
+          width: 60px;
+          height: 60px;
+        }
+        
       }
     }
   }
-  a:hover {
-    color: $color-gold;
-  }
-
-  a {
-    color: white;
-  }
-
-  button:hover {
-    color: $color-gold;
-  }
 }
 
-#btn-arrow:hover {
-  color: $color-gold;
-}
+@media screen and (max-width:768px){
+  .list-menu li{
+    margin-left: 0px!important;
 
-.padding-left2 {
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  border-bottom: 1px solid black;
-  &:hover {
-    background-color: $color-gold;
-  }
-  &:hover i {
-    color: black;
-  }
-}
+    .text-menu{
+      width: 70px!important;
+      height: 70px!important;
 
-/* Dropdown */
-
-ul {
-  display: inline;
-  margin: 0;
-  padding: 0;
-}
-
-ul li {
-  display: inline-block;
-}
-
-.padding-left2:hover {
-  background: $color-gold;
-}
-
-.padding-left2:hover ul {
-  display: block;
-}
-
-ul li ul {
-  position: absolute;
-  width: 200px;
-  display: none;
-  margin-left: 54px;
-  margin-top: -43px;
-  line-height: normal;
-  z-index: 99;
-}
-
-ul li ul li {
-  background: #20252a;
-  display: block;
-}
-
-ul li ul li a {
-  display: block !important;
-}
-
-ul li ul li:hover {
-  background: #20252a;
-}
-
-.padding-left2 ul li ul h4 {
-  padding: 15px 12px 17px 12px;
-  background-color: $color-gold;
-  color: black;
-  font-weight: 800;
-  margin-bottom: 0px;
-  font-size: 18px;
-}
-
-.padding10pxcompagne {
-  padding: 10px;
-}
-
-/* Dropdown */
-
-/* logo css */
-
-#logo2:hover {
-  background-color: black;
-}
-
-i:hover {
-  color: black;
-}
-
-.background-button {
-  background-color: $color-gold;
-}
-
-.color-white {
-  color: white;
-}
-
-/* CLASS COLOR CSS */
-
-#left {
-  background-color: #20252a;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  color: white;
-  flex: 1;
-}
-
-.color-site {
-  color: $color-gold;
-}
-.notif i:hover {
-  color: $color-gold;
-}
-
-#compte {
-  padding: 20px;
-  background-color: #2b3035;
-  ul {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-#contact {
-  padding: 20px;
-  text-align: center;
-  #centerContact {
-    padding: 20px;
-  }
-  a {
-    text-decoration: underline;
-    font-weight: bold;
-  }
-  .custom-button-testing {
-    width: 100%;
-    border: 1px $color-gold solid;
-    &:hover {
-      color: $color-gold;
+      .content-img{
+        width: 40px!important;
+        height: 40px!important;
+      }
     }
   }
-}
-
-.custom-button-nav {
-  display: flex;
-  justify-content: center;
-  color: white;
-  background-color: #20252a;
-  border-top: 1px solid black;
-  border-radius: 0px;
-  outline: none;
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-}
-
-.custom-button-nav:hover {
-  color: $color-gold;
-}
-
-#test {
-  width: 100%;
-  height: 100vh;
-  background-color: red;
-}
-
-#left2 {
-  height: 100%;
-  background-color: #20252a;
-  display: flex;
-  flex-direction: column;
-}
-
-/* NAV MENU MOBILE */
-
-#menu-nav-mobile {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding-top: 10px;
-}
-
-#nav-mobile {
-  display: flex;
-  justify-content: space-around;
-}
-
-#logo-mobile img {
-  width: 200px;
-}
-
-#url-mobile {
-  padding-left: 10px;
-}
-
-#menu-nav-mobile {
-  display: none;
-}
-
-/* NAV MENU MOBILE */
-
-@media screen and (max-width: 1024px) {
-  #menu-nav-mobile {
-    display: block;
-  }
-  button {
-    font-size: 14px;
-  }
-  #left2 {
-    display: none;
-  }
-  /* #profil {
-    display: none;
-  } */
-  #left-top {
-    display: none;
-  }
-  #nonemobile {
-    display: none;
-  }
-  /* #left {
-    display: none;
-  } */
-  #container {
-    display: flex;
-    flex-wrap: wrap;
-    height: inherit;
-  }
-  .fixNavMobile {
-    position: absolute;
-    z-index: 99;
-    width: 300px;
-  }
-  .unfixNavMobile {
-    position: inherit;
-    margin-top: inherit;
-    height: inherit;
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .fixNavMobile {
-    display: block;
-  }
-}
-
-app-compagne {
-  display: flex;
-  flex-wrap: wrap;
 }
