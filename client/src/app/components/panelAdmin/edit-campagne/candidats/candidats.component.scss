@@ -22,7 +22,7 @@
       border: $border-table;
       background-color:$color-white-background;
     }
-    
+
     .border1pxdashedgray {
       margin: 15px;
       border: 1px dashed $color-table;
@@ -34,7 +34,7 @@
       /* height: 50vh; */
       padding-bottom: 13vh
     }
-    
+
     #img-editquestion {
       background-image: url("../../../../../assets/Coding-game-img/editQuestion.jpg");
       background-repeat: no-repeat;
@@ -43,7 +43,7 @@
       width: 100%;
       height: 50vh;
     }
-    
+
     .btn-question {
       padding: 0 50px;
       margin-top: 20px;
@@ -54,7 +54,7 @@
       font-weight: 700;
       background-color: $color-gold-background;
     }
-    
+
     .border1pxdashedgray h1 {
       text-align: center
     }
@@ -111,13 +111,13 @@
         .mat-row:hover {
           background-color: $color-black-background;
         }
-      
+
         .mat-cell:hover {
           color:$text-color-white;
         }
 
       }
-    } 
+    }
 }
 
 :host ::ng-deep .mat-form-field-underline {
