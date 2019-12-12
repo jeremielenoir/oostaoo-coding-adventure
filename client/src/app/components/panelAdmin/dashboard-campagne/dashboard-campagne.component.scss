@@ -5,7 +5,6 @@
     flex: 1;
     height: 100vh;
     flex-direction: column;
-    background: $background-color;
     overflow: hidden;
     .header-notification.header-notification-default-text span {
         transform: translateX(6.1%);
@@ -47,10 +46,11 @@
     
     .view-content {
         overflow: hidden;
-        background-color: $background-color;
+        background-color:#c1d5e0;;
         transition: .3s;
         padding-left: 90px;
         position: relative;
+        
       
         /*-- contenu-view-content --*/
         .contenu-view-content {

@@ -1,39 +1,53 @@
 <div class="contenu-view-content-left">
   <div>
     <div class="header-form">
-      <div class="sous-header-form">
-        <div class="form-group-header">
-          <form>
-            <span class="icon-form-group-header-contenu"><i class="fas fa-search"></i></span>
-            <input type="text" name="search" [(ngModel)]="searchText" class="champ-header-contenu"
-              placeholder="Filtrer par titre ou candidat" id="search-header" />
-          </form>
-        </div>
+      <div class="sous-header-one">
 
-        <div class="form-group-header form-group-header-2">
+        <figure class="info-content-img-header-dashboard"><img
+            src="http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/orange/Tests.svg" alt="" /></figure>
+        <h3 class="info-title-header-dashboard">TESTS D’ÉVALUATIONS</h3>
 
-          <label class="checked-block" for="archive">
-            <mat-checkbox [(ngModel)]="checked" (click)="includeArchivedCampaigns(checked)">Inclure les campagnes
-              archivées</mat-checkbox>
-          </label>
-        </div>
       </div>
-      <app-integration-bouton></app-integration-bouton>
+      <div class="sous-header-two">
+
+        <div class="block-btn-test">
+
+          <span class="number-test">50</span>
+          <button class="btn-test">
+            Nouveau test
+            <span>+</span>
+          </button>
+
+        </div>
+
+        <div class="sous-header-form">
+
+          <div class="form-group-header form-group-header-2">
+
+            <label class="checked-block" for="archive">
+              <mat-checkbox [(ngModel)]="checked" (click)="includeArchivedCampaigns(checked)">
+                Inclure archives
+              </mat-checkbox>
+            </label>
+          </div>
+
+          <div class="form-group-header">
+            <form>
+
+              <input type="text" name="search" [(ngModel)]="searchText" class="champ-header-contenu"
+                placeholder="Rechercher" id="search-header" />
+
+              <span class="icon-form-group-header-contenu"><i class="fas fa-search"></i></span>
+            </form>
+          </div>
+        </div>
+
+
+      </div>
     </div>
   </div>
 
   <div class="contenu-techno">
-    <div class="contenu-techno-header">
-      <span class="contenu-techno-header-icon">
-        <i class="far fa-list-alt"></i>
-      </span>
-
-      <h2 class="contenu-techno-header-title">
-        Campagnes
-      </h2>
-    </div>
-
-
 
     <div class="content-scroll">
 
@@ -45,71 +59,75 @@
         </div>
       </div>
 
-      <div *ngFor="let campaign of test  | orderBy:'pin':true:customComparator | filter: searchText" class="contenu-techno-content">
+      <div *ngFor="let campaign of test  | orderBy:'pin':true:customComparator | filter: searchText"
+        class="contenu-techno-content">
+
+        <div class="branche-content-list-start">
+          <i class="fa fa-user"></i>
+        </div>
+
         <div class="contenu-branche">
-          <a [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats']">
-            <p class="branche-content-text">
-              {{ campaign.Name }}
-            </p>
+          <div class="corpo">
+            <a [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats']" class="contenu-branche-content">
+              <p class="branche-content-text">
+                {{ campaign.Name }}
+              </p>
 
-            <mat-icon *ngIf="campaign.pin === true">bookmark</mat-icon>
-            <mat-icon *ngIf="campaign.archive === true">archive</mat-icon>
+              <mat-icon *ngIf="campaign.pin === true">bookmark</mat-icon>
+              <mat-icon *ngIf="campaign.archive === true">archive</mat-icon>
 
-            <div class="branche-content-noti">
-              <span class="branche-content-noti-item">
-                <strong>{{ campaign.candidats.length }}</strong>
-                <span>Invité</span>
-              </span>
-              <span class="branche-content-noti-item">
-                <strong>{{ campaign.NbCandidatFinish !== null ?
-                    campaign.NbCandidatFinish : 0 }}</strong>
-                <span>Terminé</span>
-              </span>
+            </a>
+
+            <span class="branche-content-list-end-contenu-icon dashed" [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </span>
+            <mat-menu #menu="matMenu">
+
+              <button (click)="duplicatecampaign(campaign.id)" mat-menu-item>
+                <mat-icon>file_copy</mat-icon>
+                <span>Dupliquer</span>
+              </button>
+
+              <button *ngIf="campaign.pin === true" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+                <mat-icon>bookmark</mat-icon>
+                <span>Désépingler</span>
+              </button>
+              <button *ngIf="campaign.pin === false" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+                <mat-icon>bookmark</mat-icon>
+                <span>Epingler</span>
+              </button>
+
+              <button *ngIf="campaign.archive === true" (click)="archivecampaign(campaign.id,campaign.archive)"
+                mat-menu-item>
+                <mat-icon>unarchive</mat-icon>
+                <span>Désarchiver</span>
+              </button>
+              <button *ngIf="campaign.archive === false" (click)="archivecampaign(campaign.id,campaign.archive)"
+                mat-menu-item>
+                <mat-icon>archive</mat-icon>
+                <span>Archiver</span>
+              </button>
+
+              <button (click)="deletecampaign(campaign.id)" mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Supprimer</span>
+              </button>
+            </mat-menu>
+
+            <div class="branche-content-list-end">
+
+              <p>{{ campaign.candidats.length }} invite</p>
+              <p>
+                {{ campaign.NbCandidatFinish !== null ?
+                  campaign.NbCandidatFinish : 0 }} terminer
+              </p>
+
             </div>
-          </a>
+          </div>
         </div>
 
-        <div class="branche-content-list-end">
-          <span class="branche-content-list-end-contenu-icon" (click)="openDialog(campaign.id)">
-            <i class="far fa-user"></i>
-          </span>
-          <span class="branche-content-list-end-contenu-icon dashed" [matMenuTriggerFor]="menu"
-            aria-label="Example icon-button with a menu">
-            <mat-icon>more_vert</mat-icon>
-          </span>
-          <mat-menu #menu="matMenu">
 
-            <button (click)="duplicatecampaign(campaign.id)" mat-menu-item>
-              <mat-icon>file_copy</mat-icon>
-              <span>Dupliquer</span>
-            </button>
-
-            <button *ngIf="campaign.pin === true" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
-              <mat-icon>bookmark</mat-icon>
-              <span>Désépingler</span>
-            </button>
-            <button *ngIf="campaign.pin === false" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
-              <mat-icon>bookmark</mat-icon>
-              <span>Epingler</span>
-            </button>
-
-            <button *ngIf="campaign.archive === true" (click)="archivecampaign(campaign.id,campaign.archive)"
-              mat-menu-item>
-              <mat-icon>unarchive</mat-icon>
-              <span>Désarchiver</span>
-            </button>
-            <button *ngIf="campaign.archive === false" (click)="archivecampaign(campaign.id,campaign.archive)"
-              mat-menu-item>
-              <mat-icon>archive</mat-icon>
-              <span>Archiver</span>
-            </button>
-
-            <button (click)="deletecampaign(campaign.id)" mat-menu-item>
-              <mat-icon>delete</mat-icon>
-              <span>Supprimer</span>
-            </button>
-          </mat-menu>
-        </div>
       </div>
     </div>
   </div>
