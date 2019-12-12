@@ -12,12 +12,14 @@ import { DecryptTokenService } from "src/app/components/home/register/register.s
   templateUrl: "./profil-entreprise.component.html",
   styleUrls: ["./profil-entreprise.component.scss"]
 })
-export class ProfilEntrepriseComponent implements OnInit, DoCheck {
+export class ProfilEntrepriseComponent implements OnInit {
   @ViewChild("paramHeader") paramHeader: ElementRef;
   @ViewChild("uploadimgfirst") uploadimgfirst: ElementRef;
   @ViewChild("uploadimgLast") uploadimgLast: ElementRef;
   @ViewChild("btnValideParent") btnValideParent: ElementRef;
   @ViewChild("btnValideParentAddImage") btnValideParentAddImage: ElementRef;
+  @ViewChild('fileLoading') fileLoading: ElementRef;
+  @ViewChild('uploadFileFirst') uploadFileFirst: ElementRef;
 
   public currentValue: number;
   public user: any;
@@ -31,12 +33,14 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
   public cadrageImgBooleanLast = false;
   public cadrageImgBooleanStateLast = false;
   public current1 = 0;
-  public current2 = 0;
-  public currentTotal = 0;
+  public current2 = 4;
+  public currentTotal = 4;
   public entreprise: any;
-  public isVerifUser = true;
 
-  logo = new FormControl("", Validators.required);
+
+  public entre: any;
+
+  logo: any;
   name = new FormControl("", Validators.required);
   email = new FormControl("", Validators.required);
   lang = new FormControl("", Validators.required);
@@ -47,7 +51,7 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
   videolink = new FormControl("", Validators.required);
   websitelink = new FormControl("", Validators.required);
   teaser = new FormControl("", Validators.required);
-  picture = new FormControl("", Validators.required);
+  picture = [];
   linkedin = new FormControl("", Validators.required);
   facebook = new FormControl("", Validators.required);
   twitter = new FormControl("", Validators.required);
@@ -817,39 +821,62 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
 
 
   ngOnInit() {
+
     this.getUser().then(user => {
-      console.log('All user=', user);
-      this.isVerifUser = false
-      if ( user[0].entreprise === null) {
-      this.entreprise = user[0].entreprise;
-      console.log('entreprise', this.entreprise);
-      } else {
-      this.logo = new FormControl(user[0].entreprise.logo);
-      this.name = new FormControl(user[0].entreprise.nom);
-      this.email = new FormControl(user[0].entreprise.email);
-      this.lang = new FormControl(user[0].entreprise.lang);
-      this.phone = new FormControl(user[0].entreprise.tel);
-      this.industrie = new FormControl(user[0].entreprise.industrie);
-      this.numberofemployee = new FormControl(user[0].entreprise.nb_employe);
-      this.numberofdev = new FormControl(user[0].entreprise.nb_dev);
-      this.videolink = new FormControl(user[0].entreprise.lien_video);
-      this.websitelink = new FormControl(user[0].entreprise.url_site);
-      this.teaser = new FormControl(user[0].entreprise.teaser);
-      this.picture = new FormControl(user[0].entreprise.picture);
-      this.linkedin = new FormControl(user[0].entreprise.linkedin);
-      this.facebook = new FormControl(user[0].entreprise.facebook);
-      this.twitter = new FormControl(user[0].entreprise.twitter);
-      this.entreprise = user[0].entreprise;
-      console.log('entreprise', this.entreprise);
-      }
-      this.progressbar1();
-      this.progressbar2();
-      this.progressbarTotal();
-
+      // console.log('user getUser=', user);
+      // if ( user[0].entreprise === null) {
+      // this.entreprise = user[0].entreprise;
+      // // console.log('entreprise', this.entreprise);
+      // } else {
+      // this.logo = new FormControl(user[0].entreprise.logo);
+      // this.name = new FormControl(user[0].entreprise.nom);
+      // this.email = new FormControl(user[0].entreprise.email);
+      // this.lang = new FormControl(user[0].entreprise.lang);
+      // this.phone = new FormControl(user[0].entreprise.tel);
+      // this.industrie = new FormControl(user[0].entreprise.industrie);
+      // this.numberofemployee = new FormControl(user[0].entreprise.nb_employe);
+      // this.numberofdev = new FormControl(user[0].entreprise.nb_dev);
+      // this.videolink = new FormControl(user[0].entreprise.lien_video);
+      // this.websitelink = new FormControl(user[0].entreprise.url_site);
+      // this.teaser = new FormControl(user[0].entreprise.teaser);
+      // this.picture = new FormControl(user[0].entreprise.picture);
+      // this.linkedin = new FormControl(user[0].entreprise.linkedin);
+      // this.facebook = new FormControl(user[0].entreprise.facebook);
+      // this.twitter = new FormControl(user[0].entreprise.twitter);
+      // this.entreprise = user[0].entreprise;
+      // // console.log('entreprise', this.entreprise);
+      // }
+      this.getentreprise().then(entreprise => {
+        console.log('entre entreprise=', entreprise);
+        if ( entreprise === null) {
+          this.entreprise = entreprise[0];
+          console.log('entreprise', this.entreprise);
+        } else {
+          this.logo = entreprise[0].logo.url;
+          this.name = new FormControl(entreprise[0].nom);
+          this.email = new FormControl(entreprise[0].email);
+          this.lang = new FormControl(entreprise[0].lang);
+          this.phone = new FormControl(entreprise[0].tel);
+          this.industrie = new FormControl(entreprise[0].industrie);
+          this.numberofemployee = new FormControl(entreprise[0].nb_employe);
+          this.numberofdev = new FormControl(entreprise[0].nb_dev);
+          this.videolink = new FormControl(entreprise[0].lien_video);
+          this.websitelink = new FormControl(entreprise[0].url_site);
+          this.teaser = new FormControl(entreprise[0].teaser);
+          this.picture = entreprise[0].image_entreprise;
+          this.linkedin = new FormControl(entreprise[0].linkedin);
+          this.facebook = new FormControl(entreprise[0].facebook);
+          this.twitter = new FormControl(entreprise[0].twitter);
+          this.entreprise = entreprise[0];
+          console.log('entreprise user', entreprise);
+          console.log('this.entreprise=', this.entreprise);
+          console.log('entreprise picture', this.picture)
+        }
+        this.progressbar1();
+        this.progressbar2();
+        this.progressbarTotal();
+        });
     });
-  }
-  ngDoCheck() {
-
   }
 
   addentreprise() {
@@ -869,7 +896,7 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
 
   clickchange() {
     // console.log('this.user :', this.user);
-    this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.user[0].entreprise.id, {
+    this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
       lang: this.lang.value,
       Lien_video: this.videolink.value,
       Url_site: this.websitelink.value,
@@ -884,7 +911,7 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
   }
 
   clickchange2() {
-    this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.user[0].entreprise.id, {
+    this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
       Nom: this.name.value,
       Email: this.email.value,
       Tel: this.phone.value,
@@ -906,6 +933,20 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
     );
   }
 
+  uploadLogo() {
+    const formElement = document.querySelector('.formlogo') as any;
+    const request = new XMLHttpRequest();
+    request.open('POST', '/upload');
+    request.send(new FormData(formElement));
+  }
+
+  uploadImage() {
+    const formElement = document.querySelector('.formimage') as any;
+    const request = new XMLHttpRequest();
+    request.open('POST', '/upload');
+    request.send(new FormData(formElement));
+  }
+
   verifExtension(chemin) {
     const longueur = chemin.length;
     const indiceDebut = longueur - 4;
@@ -924,6 +965,8 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
     this.cadrageImgBoolean = false;
     this.blockUpload = false;
     this.uploadimgfirst.nativeElement.src = "";
+    console.log('uploadFileFirst', this.uploadFileFirst.nativeElement)
+    this.uploadFileFirst.nativeElement.value = ''
   }
 
   public show_header_param() {
@@ -942,7 +985,8 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
     this.btnValideParentAddImage.nativeElement.children[0].disabled = true;
     this.cadrageImgBooleanLast = false;
     this.blockUploadLast = false;
-    this.uploadimgLast.nativeElement.src = "";
+    this.uploadimgLast.nativeElement.src = "salut";
+    this.fileLoading.nativeElement.value = ''
   }
 
   readURL(event) {
@@ -1003,17 +1047,16 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
   progressbar2() {
 
     const total = [
-                   this.logo.value, this.name.value, this.email.value, this.phone.value,
+                   this.name.value, this.email.value, this.phone.value,
                    this.industrie.value, this.numberofemployee.value,
                    this.numberofdev.value, this.videolink.value, this.websitelink.value,
-                   this.teaser.value, this.picture.value, this.linkedin.value, this.facebook.value, this.twitter.value
+                   this.teaser.value, this.linkedin.value, this.facebook.value, this.twitter.value
                   ];
-    const percent = 7.142857142;
+    const percent = 8.33333333;
     for (const element of total ) {
       if (element !== null && element !== '' ) {
         this.current2 = this.current2 + percent;
-
-        this.current2 = Math.round(this.current2);
+        this.current2 = Math.trunc(this.current2);
       }
 
     }
@@ -1021,12 +1064,12 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
   progressbarTotal() {
     const total = [
                     this.lang.value, this.videolink.value, this.websitelink.value, this.teaser.value,
-                    this.logo.value, this.name.value, this.email.value, this.phone.value,
+                    this.name.value, this.email.value, this.phone.value,
                     this.industrie.value, this.numberofemployee.value, this.numberofdev.value,
-                    this.videolink.value, this.websitelink.value, this.teaser.value, this.picture.value,
+                    this.videolink.value, this.websitelink.value, this.teaser.value,
                     this.linkedin.value, this.facebook.value, this.twitter.value
                   ];
-    const percent = 5.555555555;
+    const percent = 6.25;
 
 
     for (const element of total ) {
@@ -1065,6 +1108,7 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
     ) {
       this.cadrageImgBooleanStateLast = false;
 
+    
       this.uploadimgLast.nativeElement.src = URL.createObjectURL(
         event.target.files[0]
       );
@@ -1080,11 +1124,24 @@ export class ProfilEntrepriseComponent implements OnInit, DoCheck {
   async getUser(): Promise<any> {
     try {
       const datas = await this.apiClientService
-        .get(API_URI_USER + "/" + this.decryptTokenService.userId)
+        .get(API_URI_USER + '/' + this.decryptTokenService.userId)
         .toPromise();
       return this.user = [datas];
     } catch (err) {
       return err;
     }
   }
+
+  async getentreprise(): Promise<any> {
+    try {
+      const user = await this.user;
+      const datas = await this.apiClientService
+        .get(API_URI_ENTREPRISE + '/' + user[0].entreprise.id)
+        .toPromise();
+      return this.entre = [datas];
+    } catch (err) {
+      return err;
+    }
+  }
+
 }

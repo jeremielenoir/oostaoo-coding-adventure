@@ -25,6 +25,7 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "@nicky-lenaers/ngx-scroll-to": "^2.0.0",
     "angular-svg-round-progressbar": "^2.0.0",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
@@ -37,6 +38,7 @@
     "ngx-drag-scroll": "^7.1.5",
     "ngx-editor": "^4.1.0",
     "ngx-order-pipe": "^2.0.4",
+    "pdfmake": "^0.1.62",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"

@@ -8,8 +8,8 @@
     <div id="section1">
       <h2 class="title"><i class="far fa-clock icon"></i> Historique des factures</h2>
 
-      
- 
+
+
 
       <table>
         <thead>
@@ -19,6 +19,7 @@
                 <th>Statut</th>
                 <th>Numéro de facture</th>
                 <th>Voir</th>
+                <th>Télécharger</th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +28,9 @@
                 <td>{{facture.montant}} €</td>
                 <td>{{facture.statut}}</td>
                 <td>{{facture.numero_facture}}</td>
-                <td><a href=""><i class="far fa-eye icon"></i></a></td>
+                <td><i (click)="exportPdf()" class="far fa-eye icon"></i></td>
+                <td><i (click)="downloadPdf()" class="fa fa-download icon"
+                [ngStyle]="{'margin': 'auto'}"></i></td>
             </tr>
         </tbody>
     </table>
@@ -51,7 +54,7 @@
 
       <h2> <i class="far fa-credit-card icon"></i> Carte de crédit</h2>
       <div id="section2-bottom">
-          
+
           <p class="centrage-bottom">Numéro de carte : MasterCard ***-9376</p>
           <p>Expire le : <br> 01/2021</p>
           <button  mat-flat-button class="bouton-modifier" >Modifier</button>

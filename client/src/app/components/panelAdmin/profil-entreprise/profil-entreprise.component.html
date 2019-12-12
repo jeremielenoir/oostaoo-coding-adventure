@@ -4,7 +4,7 @@
       <span class="fa fa-spinner fa-pulse"></span>
   </div>
   <div *ngIf="!isVerifUser">
-      <div *ngIf='entreprise === null || entreprise === undefined' id="content">
+      <div *ngIf='user === null || user === undefined' id="content">
           <div class="">
               <div class="all-group-content ajout-entreprise">
                 <div class="content-ajout-entreprise">
@@ -48,23 +48,18 @@
   </div>
 
   <div *ngIf="!isVerifUser">
-      <div *ngIf='entreprise !== null || entreprise !== undefined' id="content">
+    
+      <div *ngIf='user !== null || user !== undefined' id="content">
 
           <div id="shadow-cog" [ngClass]= "{'shadow-cog-active': shadowcog == true}">
       
               <div id="remove" (click)="param_cog_non_active()"></div>
       
               <div class="modall">
-      
-                <form enctype="multipart/form-data">
-      
+                <form id='formlogo' class="formlogo" enctype="multipart/form-data">
                   <div class="modall-header"></div>
-      
                   <div class="modall-content">
-      
                   <div class="block-upload" [class.block-upload-hidden]="blockUpload">
-      
-      
                       <i class="modal-content-icon fas fa-camera"></i>
       
                       <span class="modal-content-text">
@@ -77,8 +72,10 @@
             
                         <span >ou télécharger une photo</span>
             
-                        <input type="file" class="file" id="file" (change)="readURL($event)"/>
-            
+                        <input  type="file" class="file"  name="files" accept="image/x-png,image/gif,image/jpeg" (change)="readURL($event)" #uploadFileFirst/>  
+                        <input class="hidden-file" type="text" name="ref" value="entreprise" />
+                        <input type="text" name="refId" value="9" />
+                        <input type="text" name="field" value="logo"/>          
                       </div>
                   </div>
       
@@ -98,7 +95,7 @@
             
                           <span class="modal-text-btn-upload">ou télécharger une photo</span>
               
-                          <input type="file" class="file" id="file" (change)="readURL($event)"/>
+                          <input type="file" class="file"  (change)="readURL($event)"/>
               
                       </div>
       
@@ -110,8 +107,7 @@
                   </div>
       
                   <div class="modall-footer" #btnValideParent>
-      
-                      <button mat-button class="modal-btn-footer" disabled="disabled" id="btn-valide" >valider</button>  
+                      <button mat-button class="modal-btn-footer" (click)="uploadLogo()" disabled="disabled" id="btn-valide" >valider</button>  
                       <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()">annuler</button>
       
       
@@ -130,7 +126,7 @@
       
               <div class="modall">
       
-                <form enctype="multipart/form-data">
+                <form class="formimage" enctype="multipart/form-data">
       
                   <div class="modall-header"></div>
       
@@ -150,13 +146,10 @@
                       <div class="btn-modal-content" id="btn-modal-content">
             
                         <span class="modal-text-btn-upload">ou télécharger une photo</span>
+                        
+                        <input type="file" class="file"  name="files" accept="image/x-png,image/gif,image/jpeg" (change)="readURL_deux($event)" #fileLoading/>
             
-                        <input type="file" class="file" id="file" (change)="readURL_deux($event)"/>
-            
-                      </div>
-      
-      
-      
+                      </div>  
                   </div>
       
                   <div class="cadrage-img" [ngClass]="{'cadrage-img-active' : cadrageImgBooleanLast === true}">
@@ -175,7 +168,10 @@
             
                           <span class="modal-text-btn-upload">ou télécharger une photo</span>
               
-                          <input type="file" class="file" id="file" (change)="readURL_deux($event)"/>
+                          <input type="file" class="file" (change)="readURL_deux($event)"/>
+                          <input class="hidden-file" type="text" name="ref" value="entreprise" />
+                          <input type="text" name="refId" value="9" />
+                          <input type="text" name="field" value="image_entreprise" />   
               
                         </div>
       
@@ -189,7 +185,7 @@
             
                   <div class="modall-footer" #btnValideParentAddImage>
       
-                      <button mat-button class="modal-btn-footer" disabled="disabled" id="btn-valide-deuxx">valider</button>  
+                      <button mat-button class="modal-btn-footer" (click)='uploadImage()' disabled="disabled" id="btn-valide-deuxx">valider</button>  
                       <button mat-button class="modal-btn-footer" (click)="param_cog_non_active_add_img()">annuler</button>
       
       
@@ -379,15 +375,14 @@
                   </div>
       
                   <form>
-      
                       <div class="regroupe-form">
-      
+                         
                           <label>Logo de l'entreprise</label>
                           
                         <div class="all-gestion-info">
       
-      
-                              <figure class="img-upload"><img src="../../../../assets/oosatoo-logo.png" alt="" role=""></figure>
+                            
+                              <figure class="img-upload"><img src=" {{logo}}" alt="" role=""></figure>
       
               
                               <div>
@@ -559,7 +554,20 @@
                               <span class="text-upload">ADD PIC</span>
       
                           </div>
-      
+
+                          <div *ngFor='let image of picture' class="picture">
+                            <div class="img-gestion">
+
+                                <div class="bg-transparent-img">
+                                  <span class="fa fa-window-close"></span>
+                                  
+
+                                </div>
+
+                                <img src="{{image.url}}" alt="">
+
+                            </div>
+                          </div>
                         </div>
                           
       

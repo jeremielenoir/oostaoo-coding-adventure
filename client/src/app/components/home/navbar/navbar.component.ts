@@ -45,8 +45,19 @@ export class NavbarComponent implements OnInit {
 
     this.onWindowScroll();
 
-  }
+    let linkMenu = document.querySelectorAll('#all-list-menu .link-menu');
 
+    linkMenu.forEach(element => {
+
+      element.addEventListener('click', function (evt) {
+
+        evt.preventDefault();
+
+      })
+
+    })
+
+  }
 
   getLogin() {
     return JSON.parse(localStorage.getItem('token'));
