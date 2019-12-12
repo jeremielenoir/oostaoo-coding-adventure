@@ -1,11 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatTableDataSource, MatSort } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import { InviteCandidat } from './invite-candidat.component';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
 } from '../../../../api-client/api-client.service';
+import { getResultsDefinition} from './getResultsDefinition';
+import pdfMake from 'pdfmake/build/pdfmake';
+
 
 @Component({
   selector: 'app-candidats',
@@ -19,6 +23,9 @@ export class CandidatsComponent implements OnInit {
   public technologies;
   public displayedColumns;
   public infosCandidats;
+  public infosCandidatsPdf;
+  public questions;
+  datePipe = new DatePipe('fr');
   ViewCandidats;
   isLoading = true;
 
@@ -47,6 +54,8 @@ export class CandidatsComponent implements OnInit {
     { value: 'expirer', viewValue: 'Expirés' }
   ];
 
+
+
   openDialog() {
     const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
       data: this.globalId,
@@ -68,16 +77,15 @@ export class CandidatsComponent implements OnInit {
   }
 
   getCampaign(): Promise<any> {
-
     const apiURL = API_URI_CAMPAIGNS + '/' + this.globalId;
-
     return this.apiClientService
       .get(apiURL)
       .toPromise()
       .then(res => { // Success
         this.campaigns = res;
-        // console.log('this.campaign: ', this.campaigns);
+        console.log('this.campaign: ', this.campaigns);
         this.candidats = res.candidats;
+
         // console.log('this.candidats: ', this.candidats);
         this.technologies = res.technologies;
         // console.log('this.technologies: ', this.technologies);
@@ -103,6 +111,8 @@ export class CandidatsComponent implements OnInit {
         }
         this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
         // console.log('getTechnos: ', getTechnos);
+
+        const questions = this.questions;
         for (const candidat of this.candidats) {
           // console.log('candidat : ', candidat.points_candidat[2].getpourcentByCandidat);
 
@@ -117,19 +127,23 @@ export class CandidatsComponent implements OnInit {
             percentCandidat = 0 + '%';
           } else {
             dateInvite = new Date(candidat.test_terminer);
-            console.log('candidat.points_candidat[5].PourcentTest: ', candidat.points_candidat[5].PourcentTest);
+            // console.log('candidat.points_candidat[5].PourcentTest: ', candidat.points_candidat[5].PourcentTest);
             percentCandidat = candidat.points_candidat[5].PourcentTest + '%';
             if (candidat.points_candidat[5].PourcentTest === null) {
               percentCandidat = 0 + '%';
             }
           }
           getInfoCandidat.push({
+            candidat_id: candidat.id,
             Candidats: candidat.Nom,
             Email: candidat.email,
             Checked: false,
             'Dernière activité': dateInvite.toLocaleString(),
             Score: percentCandidat,
-            Durée: duree
+            Durée: duree,
+            rapport: candidat.raport_candidat.rapport,
+            points: candidat.points_candidat,
+            date: candidat.test_ouvert
           });
           // console.log('candidat.points_candidat[2].getpourcentByCandidat: ', candidat.points_candidat[2].getpourcentByCandidat);
           if (candidat.invitation_date !== candidat.test_terminer) {
@@ -153,16 +167,9 @@ export class CandidatsComponent implements OnInit {
               }
             }
           }
-
-          console.log('candidat: ', candidat);
         }
-        console.log('getTechnos: ', getTechnos);
-        console.log('this.displayedColumns : ', this.displayedColumns);
-        console.log('getInfoCandidat : ', getInfoCandidat);
-        console.log('getPercentCandidat: ', getPercentCandidat);
         return getInfoCandidat;
       }).then((getInfoCandidat) => {
-        // console.log('INFOS CANDIDATS', getInfoCandidat);
         this.infosCandidats = new MatTableDataSource(getInfoCandidat);
         this.infosCandidats.sort = this.sort;
         this.isLoading = false;
@@ -172,6 +179,67 @@ export class CandidatsComponent implements OnInit {
         console.log('ERROR', error);
       });
   }
+
+  collectCandidateResults(candidat_id){
+      const selectedCandidate =  this.candidats.find(unit=>unit.id == candidat_id);
+      const name = selectedCandidate.Nom;
+      const email = selectedCandidate.email;
+      const duration = selectedCandidate.duree;
+      const rapport = selectedCandidate.raport_candidat.rapport;
+      const date = this.datePipe.transform(selectedCandidate.test_ouvert, 'dd-MM-yy');
+      const points = selectedCandidate.points_candidat;
+
+      let resultsByLanguage = {};
+      let totalPointsCandidat = 0;
+      let totalPointsMax = 0;
+      points[1].allPointsCandidat.forEach(techno => {
+        totalPointsCandidat += techno.points;
+        const pointsMaxTechno = points[0].allPointsTechnos
+        .find(tech=>tech.technologies===techno.technologies).points;
+        totalPointsMax += pointsMaxTechno;
+        const percentage_techno = techno.points / pointsMaxTechno * 100 + ' %';
+        resultsByLanguage[techno.technologies] = {note: techno.points,
+          max: pointsMaxTechno, percentage_techno};
+      })
+
+     const score = totalPointsCandidat / totalPointsMax * 100 + ' %';
+     let languages = '';
+      Object.keys(resultsByLanguage).map(language=>{languages=`${languages} ${language}`});
+      let questionsRapport = [];
+      Object.values(rapport).map(question=>{
+        const candidate_answer = question.array_rep_candidat[0];
+        const correct_answer = question.index_question.answer_value;
+        const question_max_score = question.index_question.points;
+        const question_candidate_score = candidate_answer ===
+        correct_answer ? question_max_score : 0;
+        const content = question.index_question.content ?
+         question.index_question.content.split(', ') : null;
+        if(content && content[3] === 'Aucune'){
+          content.splice(3, 4, "Aucune des solutions précédentes");
+          }
+        const questionsRapportUnit = {
+          question_id: question.index_question.id,
+          name: question.index_question.name,
+          content,
+          candidate_answer,
+          correct_answer,
+          question_max_score,
+          question_candidate_score,
+          question_time: question.index_question.time,
+          question_timeRep: question.timeRep
+        };
+        questionsRapport.push(questionsRapportUnit);
+      })
+      return { name, email, duration, score, date, resultsByLanguage,
+         languages, questionsRapport };
+    }
+
+  viewResultsPdf(candidat_id){
+    const candidateResults = this.collectCandidateResults(candidat_id);
+    pdfMake.createPdf(getResultsDefinition(candidateResults)).open();
+  }
+
+
 
   secondsToHms(duree) {
     const h = Math.floor(duree / 3600);
@@ -187,5 +255,4 @@ export class CandidatsComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.infosCandidats.filter = filterValue.trim().toLowerCase();
   }
-
 }
