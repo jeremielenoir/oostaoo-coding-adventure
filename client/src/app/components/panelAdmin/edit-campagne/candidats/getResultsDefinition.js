@@ -2,6 +2,17 @@ export function getResultsDefinition(candidat){
 
   const {name, email, date, languages, duration, score } = candidat;
 
+  let separatorString = '-';
+  let separatorUnderscrore = '_';
+
+  for (let i = 0; i <52; i++) {
+    separatorString += ' -';
+  }
+
+  for (let i = 0; i < 92; i++) {
+    separatorUnderscrore += '_'
+  }
+
   return {
     content : [
       {
@@ -18,7 +29,7 @@ export function getResultsDefinition(candidat){
       {
         margin: [0,16],
         style: 'separator-dot',
-        text: `- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - `
+        text: separatorString
       },
       {
         columns: [
@@ -97,7 +108,7 @@ export function getResultsDefinition(candidat){
       },{
         style: 'separator-dot',
         margin: [0,20],
-        text: `- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - `
+        text: separatorString
       }, {
         style: 'language-label',
         columns: [
@@ -120,14 +131,210 @@ export function getResultsDefinition(candidat){
         // ]
         table: {
           headerRows: 1,
-          widths:['50%','30%','20%'],
+          widths:['40%','50%','10%'],
           layout: 'resultTableLayout',
           body: [
-            [{text: 'Connaissance du langage'}, '___', '60%'],
-            [{text: 'Fiabilité'}, '___', '60%'],
-            [{text: 'Modélisation '}, '___', '60%'],
+            [
+              {
+                text: 'Connaissance du langage', 
+                fontSize: 12
+              }, 
+              {
+                alignment:'right',
+                text: [{
+                  text: '',
+                  color: '#2FB994',
+                  style: 'font-awesome-icons',
+                  fontSize: 26,
+                  lineHeight: ''
+                },{
+                  text: '',
+                  color: '#EEEEEE',
+                  style: 'font-awesome-icons',
+                  fontSize: 26,
+                  lineHeight: '' 
+                }]
+              }, 
+              '60%'
+            ],
+            // [{text: 'Fiabilité'}, '___', '60%'],
+            // [{text: 'Modélisation '}, '___', '60%'],
           ]
         }
+      }, {
+        text: ' ',
+        style: 'blank-separator',
+      },
+      
+      {
+        // encard gris avec la question le temps, points
+        id: 'break-end',
+        table: {
+          layout: 'detailQuestionLayout',
+          headerRows: 1,
+          widths: ['100%'],
+          body: [
+            [{
+              fillColor: '#2b3035',
+              border: [false, false, false, false],
+              columns: [
+                [{
+                  margin: [10,10,10,4],
+                  text: [{
+                    text: 'Question 1: ',
+                    style: 'question-detail-label'
+                  },{
+                    text: 'Option -m',
+                    style: 'question-detail-data'
+                  }],
+                },
+                {
+                  margin: [10,4,10,10],
+                  text: [
+                  {
+                    text: ' ',
+                    style: 'font-awesome-icons',
+                    fontSize: 20,
+                    color: '#F7BB13',
+                  },
+                  {
+                    text: 'Git  ',
+                    style: 'question-detail-info'
+                  },{
+                    text: ' ',
+                    style: 'font-awesome-icons',
+                    color: '#F7BB13',
+                    fontSize: 20,
+                   
+                  },
+                  {
+                    text: '0:15 : 0:30  ',
+                    style: 'question-detail-info',
+                    lineHeight: -1.5
+                  },{
+                    text: ' ',
+                    style: 'font-awesome-icons',
+                    fontSize: 20,
+                    color: '#F7BB13',
+                  },{
+                    text: '20 / 20 pts  ',
+                    style: 'question-detail-info'
+                  }],
+                }],
+              ],
+              // one line first row 
+            }],
+          ]
+        }
+      }, {
+        // ? Question
+        margin: [0,10],
+        text: [{
+          text: ' ',
+          color: '#F7BB13',
+          style: 'font-awesome-icons',
+          fontSize: 22
+        }, {
+          text: 'Question',
+          fontSize: '22',
+        }],
+      }, {
+        text: 'Quelle option de la ligne de commande permet de spécifier un commentaire de commit à l\'exécution de git commit ?'
+      }, {
+        text: separatorString,
+        style: 'separator-dot',
+        margin: [0,10]
+      }, {
+        margin: [0,0,10,0],
+        text: [{
+          // text: '',
+          text: ' ',
+          style: 'font-awesome-icons',
+          color: '#F7BB13',
+          fontSize: 22,
+        }, {
+          text: 'Réponse',
+          fontSize: '22',
+        }],
+        
+      }, {
+        markerColor: 'white',
+        ul: [
+          {
+            text: [
+              {
+                text: ' ',
+                style: 'font-awesome-icons',
+                fontSize: 16
+              },
+              {
+                text: '-m',
+                color: '#2FB994',
+                fontSize: 16
+              }
+            ]
+          },
+          {
+            text: [
+              {
+                text: ' ',
+                style: 'font-awesome-icons',
+                fontSize: 16
+              },
+              {
+                text: '-i',
+                fontSize: 16
+              }
+            ]
+          },
+          {
+            text: [
+              {
+                text: ' ',
+                style: 'font-awesome-icons',
+                fontSize: 16
+              },
+              {
+                text: '-l',
+                
+                fontSize: 16
+              }
+            ]
+          },
+        ]
+      }, {
+        text: separatorString,
+        style: 'separator-dot',
+        margin: [0,10]
+      },{
+        text: [
+          {
+           text: ' ',
+           style: 'font-awesome-icons',
+           color: '#F7BB13'
+          },
+          {
+            text: 'Résultat'
+          }
+        ],
+        margin: [0,0,10,0],
+        fontSize: '22',
+      }, {
+        columns: [
+        {
+          width: 16,
+          text: ' ',
+          fontSize: 16,
+          style: 'font-awesome-icons',
+          color: '#2FB994',
+        },
+        [{
+          text: 'Réponse correcte',
+        }, {
+          text: 'Connaissance du langage',
+          fontSize: 8
+        }],
+        ]
       }
     ],
     styles: {
@@ -153,7 +360,7 @@ export function getResultsDefinition(candidat){
       },
       'separator-dot': {
         color: '#D8D8D8',
-        fontSize: 8
+        fontSize: 6
       },
       'text-info-label': {
         color: '#F5C026',
@@ -171,18 +378,64 @@ export function getResultsDefinition(candidat){
         fontSize: 16
         // padding: 15,
         // border: '1px solid #ccc'
+      },
+      'blank-separator': {
+        margin: [0,20]
+      },
+      'blank-separator-small': {
+        margin: [0,5]
+      },
+      'question-detail-label': {
+        fontSize: 16,
+        color: '#F7BB13'
+      },
+      'question-detail-data': {
+        fontSize: 16,
+        color: 'white'
+      },
+      'question-detail-info': {
+        fontSize: 10,
+        color: 'white',
+      },
+      'font-awesome-icons': {
+        font: 'FontAwesome'
       }
     },
 
     tableLayouts: {
       resultTableLayout: {
-        hLineColor: function(i, node) {
-          return (i === 0 || i === node.table.body.length) ? 'red' : '';
+        // short report 
+        hLineWidth: function (i, node) {
+          if (i === 0 || i === node.table.body.length) {
+            return 0;
+          }
+          return (i === node.table.headerRows) ? 2 : 1;
+        },
+        vLineWidth: function (i, node) {
+          return 0;
+        },
+        hLineColor: function (i) {
+          return i === 1 ? 'black' : '#aaa';
         },
         vLineColor: function(i, node) {
-            return (i === 0 || i === node.table.widths.length) ? 'red' : '';
+            return (i === 0 || i === node.table.widths.length) ? 'white' : 'white';
         },
+        border: [false,false, false, false]
+      },
+      detailQuestionLayout: {
+        border: [false, false, false, false],
       }
-    }
+    },
+    pageBreakBefore: function(currentNode, followingNodesOnPage, nodesOnNextPage, previousNodesOnPage) {
+      //check if signature part is completely on the last page, add pagebreak if not
+      if (currentNode.id === 'break-end' && (currentNode.pageNumbers.length != 1 || currentNode.pageNumbers[0] != currentNode.pages)) {
+        return true;
+      }
+      //check if last paragraph is entirely on a single page, add pagebreak if not
+      else if (currentNode.id === 'closingParagraph' && currentNode.pageNumbers.length != 1) {
+        return true;
+      }
+      return false;
+    },
   }
 }
