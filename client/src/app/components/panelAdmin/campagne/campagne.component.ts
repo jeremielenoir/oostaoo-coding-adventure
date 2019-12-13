@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -47,6 +47,7 @@ export class CampagneComponent implements OnInit {
 
   ngOnInit() {
 
+
     this.authenticationService
       .getCampaignsUser(this.decryptTokenService.userId)
       .then(resultat => {
@@ -73,9 +74,10 @@ export class CampagneComponent implements OnInit {
       });
   }
 
-  customComparator(itemA ) {
-    return itemA = true ;
-}
+  customComparator(itemA) {
+    return itemA = true;
+  }
+
 
   includeArchivedCampaigns(checked: any) {
     if (checked) {

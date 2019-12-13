@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 
 
@@ -11,6 +11,7 @@ export class DashboadCampagneComponent implements OnInit {
   public campaigns: any;
   public booleanViewContentDefault = false;
   public IsactiveNoCountryside: boolean;
+  public IsBooaleanDashboardMaxSize: any;
 
   constructor() { }
 
@@ -28,6 +29,14 @@ export class DashboadCampagneComponent implements OnInit {
     console.log('my campaigns from dashboard-campagne', campaigns);
     this.campaigns = campaigns;
   }
+
+  IsBoaleanSmallSidibarOutputClbk(event) {
+
+    console.log('resultat', event)
+    this.IsBooaleanDashboardMaxSize = event;
+
+  }
+
 
   public DefaultViewContent(event) {
 
