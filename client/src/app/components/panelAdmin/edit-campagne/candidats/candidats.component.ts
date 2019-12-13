@@ -226,8 +226,12 @@ export class CandidatsComponent implements OnInit {
      let languages = '';
       Object.keys(resultsByLanguage).map(language=>{languages=`${languages} ${language}`});
       let questionsRapport = [];
+      let totalTestDuration = 0;
+      let totalCandidateDuration = 0;
       Object.values(rapport).map((question:any)=>{
         const candidate_answer = question.array_rep_candidat[0];
+        totalTestDuration += question.index_question.time;
+        totalCandidateDuration += question.timeRep;
         const correct_answer = question.index_question.answer_value;
         const question_max_score = question.index_question.points;
         const question_candidate_score = candidate_answer ===
@@ -250,8 +254,19 @@ export class CandidatsComponent implements OnInit {
         };
         questionsRapport.push(questionsRapportUnit);
       })
-      return { name, email, duration, score, date, resultsByLanguage,
-         languages, questionsRapport };
+
+      let hours = Math.floor(totalTestDuration / 60);
+      let minutes = totalTestDuration % 60;
+      let minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
+      const totalTestTime = `${hours} h ${minutesString}`;
+      hours = Math.floor(totalCandidateDuration / 60);
+      minutes = totalCandidateDuration % 60;
+      minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
+      const totalCandidateTime = `${hours} h ${minutesString}`;
+
+      return { name, email, duration, score, totalPointsMax,
+         totalPointsCandidat, date, resultsByLanguage,
+         languages, questionsRapport, totalTestTime, totalCandidateTime };
     }
 
   viewResultsPdf(candidat_id){

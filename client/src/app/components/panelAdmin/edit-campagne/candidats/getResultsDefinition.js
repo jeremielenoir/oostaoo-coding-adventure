@@ -1,17 +1,19 @@
 
 export function getResultsDefinition(candidateResults){
 
-  const {name, email, date, languages, duration, score, resultsByLanguage, questionsRapport } = candidateResults;
+  const {name, email, date, languages, duration, score, resultsByLanguage, totalPointsMax, totalPointsCandidat, questionsRapport, totalTestTime, totalCandidateTime } = candidateResults;
+
+console.log('candidateResults : ', candidateResults);
 
   let separatorString = '-';
-  let separatorUnderscrore = '_';
+  let separatorUnderscore = '_';
 
   for (let i = 0; i <52; i++) {
     separatorString += ' -';
   }
 
   for (let i = 0; i < 92; i++) {
-    separatorUnderscrore += '_'
+    separatorUnderscore += '_'
   }
 
   return {
@@ -88,16 +90,16 @@ export function getResultsDefinition(candidateResults){
                 text: score,
                 style: 'score-figure'
               },{
-                text: '1080/2180 pts'
+                text: `${totalPointsCandidat}/${totalPointsMax} pts`
               }],
               [{
                 text: 'Durée',
                 style: 'score-title'
               },{
-                text: duration,
+                text: totalTestTime,
                 style: 'score-figure'
               },{
-                text: '/ 1 h 28'
+                text: totalCandidateTime
               }],
             ]
           }
