@@ -45,7 +45,7 @@
       NOTIFICATIONS
     </h3>
 
-    <span class="icon-right-sidibar" id="param-cog" (click)="param_cog()">
+    <span *ngIf="!IsBoaleanSmallSidibar" class="icon-right-sidibar" id="param-cog" (click)="param_cog()">
       <i class="fas fa-cog"></i>
     </span>
 
