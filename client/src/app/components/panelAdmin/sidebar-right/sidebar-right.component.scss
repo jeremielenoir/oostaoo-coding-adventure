@@ -1,34 +1,92 @@
 @import "../../../../roodeo-variables.scss";
 
+.info-content-img-header-dashboard-MinSize{
+  margin:0px auto!important
+}
+.list-sidibar-right-MinSize{
+  border-right:none!important;
+}
+.sidibar.sidibar-small{
+  width: 100px!important;
+  flex: 0;
+}
+
+.icon-right-sidibar{
+  color:#ce5637;
+  font-size: 25px;
+  padding-top: 4px;
+  cursor: pointer;
+}
+
 .list-sidibar.test{
  transform: translateX(300px)!important
 }
+
+.sous-header-one{
+  background: #eaeff3;
+  height: 60px;
+  padding: 7px 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .info-content-img-header-dashboard{
+      width: 45px;
+      height: 45px;
+      margin-bottom: 0px;
+      margin-right: 45px;
+    
+    img{
+      width:100%;
+      height: 100%;
+    }
+  }
+  .info-title-header-dashboard{
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 0;
+    font-family: $font-poppins;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding-top: 7px;
+    flex: 1;
+  }
+}
+
+
 .sidibar {
   display: flex;
   flex: 1;
   flex-direction: column;
   border: $border-table;
-  overflow: hidden;
+  // overflow: hidden;
   background-color: white;
   margin-left: 20px;
   min-height: 200px;
-  .sidibar-header {
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    height: 48px;
-    justify-content: space-between;
-    .sidibar-header-title {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 0px !important;
-    }
-    .icon-right-sidibar {
+  border: 1.5px solid #e15028;
+  border-radius: 6px;
+  position: relative;
+
+  .arrow::after{
+    content:""; 
+      border-left:15px solid transparent;
+      border-right:15px solid transparent;
+      border-top: 15px solid #ce5637;
+      position: absolute;
+      transform: rotate(-90deg);
+      right: -24px;
+      top: 20px;
       cursor: pointer;
-    }
   }
+
+  .sidibar-sous-header{
+    border-bottom: 1.5px solid #e15028;
+    border-top-right-radius:5px;
+    border-top-left-radius:5px
+  }
+
   .sidibar-content {
     display: flex;
+    overflow: hidden;
     flex: 1;
     min-height: 300px;
     .list-sidibar-left { 
@@ -49,35 +107,36 @@
         color: #7e8082;
         display: flex;
         overflow: hidden;
-        border-top: $border-table;
-        flex-direction: row;
+        border-bottom: 1px dashed #e15028;
+        flex-direction: row-reverse;
         transition: 1s;
         .list-sidibar-left-content {
+          color: #3f526a;
+          font-size: 14px;
+          font-weight: 700;
           word-wrap: break-word;
           margin-bottom: 0px;
           padding: 6px 10px;
           width: 90%;
 
           a {
-            color: $color-gold;
+            color: #ce5637;
             border: none;
             transition: color 0.2s;
             font-weight: 700;
             text-decoration: none;
-            &:hover {
-              color: #ffd200;
-            }
           }
         }
         .list-sidibar-right {
           min-width: 100px !important;
           display: flex;
-          font-size: 12px;
-          border-left: $border-table;
-          font-weight: 400;
+          font-size: 14px;
+          border-right: 1px dashed #e15028;
+          font-weight: 700;
           align-items: center;
           flex-direction: column;
           justify-content: center;
+          color:#3f526a
         }
 
         .list-sidibar-right-bottom {
@@ -126,17 +185,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $color-gold;
-    height: 50px;
+    background-color: #eaeff3;
+    height: 60px;
     .modall-title {
-      color: white;
+      color: #1d3551;
       margin: 0;
-      padding: 0;
-      font-size: 20px;
+      font-size: 18px;
+      text-transform: uppercase;
       font-weight: 600;
       .icon-modal-header {
         margin-right: 10px;
       }
+    }
+
+    .icon-header{
+
     }
   }
   .modall > .modall-content form {
@@ -156,9 +219,9 @@
     transition: background-color 200ms;
     font-weight: 700;
     text-transform: uppercase;
-    background-color: $color-gold;
+    background-color: #1d3551;
     &:hover {
-      background-color: #ffd200;
+      background-color: #162c45;
     }
   }
 }
@@ -198,7 +261,7 @@
 }
 
 .checked-block input:checked ~ .checkbox-span {
-  border-color: $color-gold;
+  border-color: #1d3551;
 }
 
 .checkbox-span {
@@ -221,7 +284,7 @@
   top: 0px;
   width: 5px;
   height: 10px;
-  border: solid $color-gold;
+  border: solid #1d3551;
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);

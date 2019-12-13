@@ -1,11 +1,16 @@
 @import "../../../../roodeo-variables.scss";
 
+.app-campagneMaxSize{
+    flex: 11!important;
+}
+
 .rowter {
     display: flex;
     flex: 1;
     height: 100vh;
     flex-direction: column;
     overflow: hidden;
+    background-color:#c1d5e0;
     .header-notification.header-notification-default-text span {
         transform: translateX(6.1%);
     }
@@ -46,12 +51,11 @@
     
     .view-content {
         overflow: hidden;
-        background-color:#c1d5e0;;
+        margin-left: 40px;
+        margin-right: 40px;
         transition: .3s;
-        padding-left: 90px;
         position: relative;
         
-      
         /*-- contenu-view-content --*/
         .contenu-view-content {
             display: flex;
@@ -68,7 +72,6 @@
                 min-height: 400px;
                 flex: 1;
             }
-
           
         }
     }

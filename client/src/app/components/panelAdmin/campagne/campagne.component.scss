@@ -31,7 +31,7 @@
         flex: 2;
         align-items: center;
         .number-test{
-          padding-right: 30px;
+          padding-right: 31px;
           padding-left: 19px;
           color:#1d3551;
           font-size: 14px;
@@ -135,34 +135,7 @@
       }
     
     }
-    .sous-header-one{
-      background: #eaeff3;
-      height: 60px;
-      padding: 7px 12px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      .info-content-img-header-dashboard{
-          width: 45px;
-          height: 45px;
-          margin-bottom: 0px;
-          margin-right: 45px;
-        
-        img{
-          width:100%;
-          height: 100%;
-        }
-      }
-      .info-title-header-dashboard{
-        text-transform: uppercase;
-        font-size: 14px;
-        margin-bottom: 0;
-        font-family: $font-poppins;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        padding-top: 7px;
-      }
-    }
+   
   
   }
   /*--contenu--techno--*/
