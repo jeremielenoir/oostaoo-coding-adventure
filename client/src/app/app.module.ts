@@ -81,6 +81,7 @@ import { ErrorInterceptor } from './components/home/register/service/error.inter
 import { DecryptTokenService } from './components/home/register/register.service';
 import { TechnoComponent } from './components/home/techno/techno.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+import { OffersComponent } from './components/home/offers/offers.component';
 
 @NgModule({
   entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -129,7 +130,8 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
     RegisterComponent,
     BlockCopyPasteDirective,
     FinTestComponent,
-    TechnoComponent
+    TechnoComponent,
+    OffersComponent
   ],
   imports: [
     BrowserModule,
