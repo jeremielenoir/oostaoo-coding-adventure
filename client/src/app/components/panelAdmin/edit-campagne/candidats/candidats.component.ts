@@ -9,7 +9,26 @@ import {
 } from '../../../../api-client/api-client.service';
 import { getResultsDefinition} from './getResultsDefinition';
 import pdfMake from 'pdfmake/build/pdfmake';
+// font build has to be committed otherwise each developers has to build font locally.
+// import pdfFonts from 'pdfmake/build/vfs_fonts';
+import pdfFonts from '../../../../../assets/pdfmake-font-builds/vfs_fonts';
 
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+pdfMake.fonts = {
+  FontAwesome: {
+    normal: 'fontawesome-webfont.ttf',
+    bold: 'fontawesome-webfont.ttf',
+    italics: 'fontawesome-webfont.ttf',
+    bolditalics: 'fontawesome-webfont.ttf'
+  },
+  Roboto: {
+    normal: 'Roboto-Regular.ttf',
+    bold: 'Roboto-Medium.ttf',
+    italics: 'Roboto-Italic.ttf',
+    bolditalics: 'Roboto-MediumItalic.ttf'
+  }
+}
 
 @Component({
   selector: 'app-candidats',
@@ -171,6 +190,7 @@ export class CandidatsComponent implements OnInit {
         return getInfoCandidat;
       }).then((getInfoCandidat) => {
         this.infosCandidats = new MatTableDataSource(getInfoCandidat);
+        this.infosCandidatsPdf = getInfoCandidat;
         this.infosCandidats.sort = this.sort;
         this.isLoading = false;
         return this.campaigns;
@@ -206,7 +226,7 @@ export class CandidatsComponent implements OnInit {
      let languages = '';
       Object.keys(resultsByLanguage).map(language=>{languages=`${languages} ${language}`});
       let questionsRapport = [];
-      Object.values(rapport).map(question=>{
+      Object.values(rapport).map((question:any)=>{
         const candidate_answer = question.array_rep_candidat[0];
         const correct_answer = question.index_question.answer_value;
         const question_max_score = question.index_question.points;
