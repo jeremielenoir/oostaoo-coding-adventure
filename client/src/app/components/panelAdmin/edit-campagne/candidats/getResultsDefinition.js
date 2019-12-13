@@ -30,159 +30,8 @@ export function getResultsDefinition(candidateResults){
 
   let scoreBar = scoreBarBuilder(100);
 
-  return {
-    content : [
-      {
-        text: [
-          {
-            style: 'header-name-candidate',
-            text: name,
-          }, {
-            style: 'header-email-candidate',
-            text: `(${email})`
-          }
-        ]
-      },
-      {
-        margin: [0,16],
-        style: 'separator-dot',
-        text: separatorString
-      },
-      {
-        columns: [
-          {
-            text: [
-              {
-                text: 'Langages de programmation : ',
-                style: 'text-info-label'
-              },
-              {
-                text: languages,
-                style: 'text-info-data'
-              }
-            ],
-          },
-          {
-            text: [
-              {
-                style: 'text-info-label',
-                text: 'Langue: '
-              },
-              {
-                style: 'text-info-data',
-                text: 'Français'
-              }
-            ],
-          },
-          {
-            text: [
-              {
-                text: 'Date: ',
-                style: 'text-info-label'
-              },
-              {
-                text: date,
-                style: 'text-info-data'
-              }
-            ]
-          },
-        ]
-      },
-      {
-        style: 'separator',
-        margin: [0, 16],
-        text: '___________________________________________________________________________________________'
-      },
-      {
-        columns : [
-          [{
-            columns: [
-              [{
-                text: 'score',
-                style: 'score-title'
-              },{
-                text: score,
-                style: 'score-figure'
-              },{
-                text: '1080/2180 pts'
-              }],
-              [{
-                text: 'Durée',
-                style: 'score-title'
-              },{
-                text: duration,
-                style: 'score-figure'
-              },{
-                text: '/ 1 h 28'
-              }],
-            ]
-          }
-          ],
-          {
-            text: ' '
-          },
-        ]
-      },{
-        style: 'separator-dot',
-        margin: [0,20],
-        text: separatorString
-      }, {
-        style: 'language-label',
-        columns: [
-          [{
-            text: 'Git'
-          }],
-          [{
-            text: 'barre'
-          }]
-        ]
-      }, {
-        style: 'language-detail',
-        // columns: [
-        //   [{
-        //     text: 'Connaissance du langage'
-        //   }],
-        //   [{
-        //     text: '70%'
-        //   }]
-        // ]
-        table: {
-          headerRows: 1,
-          widths:['40%','50%','10%'],
-          layout: 'resultTableLayout',
-          body: [
-            [
-              {
-                text: 'Connaissance du langage',
-                fontSize: 12
-              },
-              {
-                alignment:'right',
-                text: [{
-                  text: scoreBar.fullBar,
-                  color: '#2FB994',
-                  style: 'font-awesome-icons',
-                  fontSize: 26,
-                  lineHeight: ''
-                },{
-                  text: scoreBar.emptyBar,
-                  color: '#EEEEEE',
-                  style: 'font-awesome-icons',
-                  fontSize: 26,
-                  lineHeight: ''
-                }]
-              },
-              '60%'
-            ],
-            // [{text: 'Fiabilité'}, '___', '60%'],
-            // [{text: 'Modélisation '}, '___', '60%'],
-          ]
-        }
-      }, {
-        text: ' ',
-        style: 'blank-separator',
-      },
-
+  function questionDetailLayout() {
+    return [
       {
         // encard gris avec la question le temps, points
         id: 'break-end',
@@ -353,6 +202,171 @@ export function getResultsDefinition(candidateResults){
         }],
         ]
       }
+    ]
+  }
+
+  let questionsLayout = [];
+  for(let i = 0; i < 10; i++) {
+    questionsLayout.push(...questionDetailLayout());
+  }
+
+  return {
+    content : [
+      {
+        text: [
+          {
+            style: 'header-name-candidate',
+            text: name,
+          }, {
+            style: 'header-email-candidate',
+            text: `(${email})`
+          }
+        ]
+      },
+      {
+        margin: [0,16],
+        style: 'separator-dot',
+        text: separatorString
+      },
+      {
+        columns: [
+          {
+            text: [
+              {
+                text: 'Langages de programmation : ',
+                style: 'text-info-label'
+              },
+              {
+                text: languages,
+                style: 'text-info-data'
+              }
+            ],
+          },
+          {
+            text: [
+              {
+                style: 'text-info-label',
+                text: 'Langue: '
+              },
+              {
+                style: 'text-info-data',
+                text: 'Français'
+              }
+            ],
+          },
+          {
+            text: [
+              {
+                text: 'Date: ',
+                style: 'text-info-label'
+              },
+              {
+                text: date,
+                style: 'text-info-data'
+              }
+            ]
+          },
+        ]
+      },
+      {
+        style: 'separator',
+        margin: [0, 16],
+        text: '___________________________________________________________________________________________'
+      },
+      {
+        columns : [
+          [{
+            columns: [
+              [{
+                text: 'score',
+                style: 'score-title'
+              },{
+                text: score,
+                style: 'score-figure'
+              },{
+                text: '1080/2180 pts'
+              }],
+              [{
+                text: 'Durée',
+                style: 'score-title'
+              },{
+                text: duration,
+                style: 'score-figure'
+              },{
+                text: '/ 1 h 28'
+              }],
+            ]
+          }
+          ],
+          {
+            text: ' '
+          },
+        ]
+      },{
+        style: 'separator-dot',
+        margin: [0,20],
+        text: separatorString
+      }, {
+        style: 'language-label',
+        columns: [
+          [{
+            text: 'Git'
+          }],
+          [{
+            text: 'barre'
+          }]
+        ]
+      }, {
+        style: 'language-detail',
+        // columns: [
+        //   [{
+        //     text: 'Connaissance du langage'
+        //   }],
+        //   [{
+        //     text: '70%'
+        //   }]
+        // ]
+        table: {
+          headerRows: 1,
+          widths:['40%','50%','10%'],
+          layout: 'resultTableLayout',
+          body: [
+            [
+              {
+                text: 'Connaissance du langage',
+                fontSize: 12
+              },
+              {
+                alignment:'right',
+                text: [{
+                  text: scoreBar.fullBar,
+                  color: '#2FB994',
+                  style: 'font-awesome-icons',
+                  fontSize: 26,
+                  lineHeight: ''
+                },{
+                  text: scoreBar.emptyBar,
+                  color: '#EEEEEE',
+                  style: 'font-awesome-icons',
+                  fontSize: 26,
+                  lineHeight: ''
+                }]
+              },
+              '60%'
+            ],
+            // [{text: 'Fiabilité'}, '___', '60%'],
+            // [{text: 'Modélisation '}, '___', '60%'],
+          ]
+        }
+      }, {
+        text: ' ',
+        style: 'blank-separator',
+      },
+
+      ...questionArray,
+      // ...questionDetailLayout(),
+      // ...questionDetailLayout(),
+      // ...questionDetailLayout()
     ],
     styles: {
       'header-name-candidate': {
