@@ -14,6 +14,22 @@ export function getResultsDefinition(candidateResults){
     separatorUnderscrore += '_'
   }
 
+  function scoreBarBuilder (scorePercentage) {
+    let fullBar = '';
+    let emptyBar = '';
+    let fullSquareIndex = Math.round(scorePercentage/10);
+    for(let i = 0; i <10; i++) {
+      if (i < fullSquareIndex) {
+        fullBar+='';
+      } else {
+        emptyBar+='';
+      }
+    }
+    return {fullBar,emptyBar};
+  }
+
+  let scoreBar = scoreBarBuilder(100);
+
   return {
     content : [
       {
@@ -143,13 +159,13 @@ export function getResultsDefinition(candidateResults){
               {
                 alignment:'right',
                 text: [{
-                  text: '',
+                  text: scoreBar.fullBar,
                   color: '#2FB994',
                   style: 'font-awesome-icons',
                   fontSize: 26,
                   lineHeight: ''
                 },{
-                  text: '',
+                  text: scoreBar.emptyBar,
                   color: '#EEEEEE',
                   style: 'font-awesome-icons',
                   fontSize: 26,

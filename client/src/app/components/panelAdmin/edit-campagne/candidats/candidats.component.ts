@@ -226,7 +226,7 @@ export class CandidatsComponent implements OnInit {
      let languages = '';
       Object.keys(resultsByLanguage).map(language=>{languages=`${languages} ${language}`});
       let questionsRapport = [];
-      Object.values(rapport).map(question=>{
+      Object.values(rapport).map((question:any)=>{
         const candidate_answer = question.array_rep_candidat[0];
         const correct_answer = question.index_question.answer_value;
         const question_max_score = question.index_question.points;
