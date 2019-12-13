@@ -363,7 +363,7 @@ export function getResultsDefinition(candidateResults){
         style: 'blank-separator',
       },
 
-      ...questionArray,
+      ...questionsLayout,
       // ...questionDetailLayout(),
       // ...questionDetailLayout(),
       // ...questionDetailLayout()
