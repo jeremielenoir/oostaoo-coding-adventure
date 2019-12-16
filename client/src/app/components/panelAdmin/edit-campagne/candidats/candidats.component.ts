@@ -1,11 +1,34 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatTableDataSource, MatSort } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import { InviteCandidat } from './invite-candidat.component';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
 } from '../../../../api-client/api-client.service';
+import { getResultsDefinition} from './getResultsDefinition';
+import pdfMake from 'pdfmake/build/pdfmake';
+// font build has to be committed otherwise each developers has to build font locally.
+// import pdfFonts from 'pdfmake/build/vfs_fonts';
+import pdfFonts from '../../../../../assets/pdfmake-font-builds/vfs_fonts';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+pdfMake.fonts = {
+  FontAwesome: {
+    normal: 'fontawesome-webfont.ttf',
+    bold: 'fontawesome-webfont.ttf',
+    italics: 'fontawesome-webfont.ttf',
+    bolditalics: 'fontawesome-webfont.ttf'
+  },
+  Roboto: {
+    normal: 'Roboto-Regular.ttf',
+    bold: 'Roboto-Medium.ttf',
+    italics: 'Roboto-Italic.ttf',
+    bolditalics: 'Roboto-MediumItalic.ttf'
+  }
+}
 
 @Component({
   selector: 'app-candidats',
@@ -19,6 +42,9 @@ export class CandidatsComponent implements OnInit {
   public technologies;
   public displayedColumns;
   public infosCandidats;
+  public infosCandidatsPdf;
+  public questions;
+  datePipe = new DatePipe('fr');
   ViewCandidats;
   isLoading = true;
 
@@ -47,6 +73,8 @@ export class CandidatsComponent implements OnInit {
     { value: 'expirer', viewValue: 'Expirés' }
   ];
 
+
+
   openDialog() {
     const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
       data: this.globalId,
@@ -68,16 +96,15 @@ export class CandidatsComponent implements OnInit {
   }
 
   getCampaign(): Promise<any> {
-
     const apiURL = API_URI_CAMPAIGNS + '/' + this.globalId;
-
     return this.apiClientService
       .get(apiURL)
       .toPromise()
       .then(res => { // Success
         this.campaigns = res;
-        // console.log('this.campaign: ', this.campaigns);
+        console.log('this.campaign: ', this.campaigns);
         this.candidats = res.candidats;
+
         // console.log('this.candidats: ', this.candidats);
         this.technologies = res.technologies;
         // console.log('this.technologies: ', this.technologies);
@@ -103,6 +130,8 @@ export class CandidatsComponent implements OnInit {
         }
         this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
         // console.log('getTechnos: ', getTechnos);
+
+        const questions = this.questions;
         for (const candidat of this.candidats) {
           // console.log('candidat : ', candidat.points_candidat[2].getpourcentByCandidat);
 
@@ -117,19 +146,23 @@ export class CandidatsComponent implements OnInit {
             percentCandidat = 0 + '%';
           } else {
             dateInvite = new Date(candidat.test_terminer);
-            console.log('candidat.points_candidat[5].PourcentTest: ', candidat.points_candidat[5].PourcentTest);
+            // console.log('candidat.points_candidat[5].PourcentTest: ', candidat.points_candidat[5].PourcentTest);
             percentCandidat = candidat.points_candidat[5].PourcentTest + '%';
             if (candidat.points_candidat[5].PourcentTest === null) {
               percentCandidat = 0 + '%';
             }
           }
           getInfoCandidat.push({
+            candidat_id: candidat.id,
             Candidats: candidat.Nom,
             Email: candidat.email,
             Checked: false,
             'Dernière activité': dateInvite.toLocaleString(),
             Score: percentCandidat,
-            Durée: duree
+            Durée: duree,
+            rapport: candidat.raport_candidat.rapport,
+            points: candidat.points_candidat,
+            date: candidat.test_ouvert
           });
           // console.log('candidat.points_candidat[2].getpourcentByCandidat: ', candidat.points_candidat[2].getpourcentByCandidat);
           if (candidat.invitation_date !== candidat.test_terminer) {
@@ -153,17 +186,11 @@ export class CandidatsComponent implements OnInit {
               }
             }
           }
-
-          console.log('candidat: ', candidat);
         }
-        console.log('getTechnos: ', getTechnos);
-        console.log('this.displayedColumns : ', this.displayedColumns);
-        console.log('getInfoCandidat : ', getInfoCandidat);
-        console.log('getPercentCandidat: ', getPercentCandidat);
         return getInfoCandidat;
       }).then((getInfoCandidat) => {
-        // console.log('INFOS CANDIDATS', getInfoCandidat);
         this.infosCandidats = new MatTableDataSource(getInfoCandidat);
+        this.infosCandidatsPdf = getInfoCandidat;
         this.infosCandidats.sort = this.sort;
         this.isLoading = false;
         return this.campaigns;
@@ -171,6 +198,94 @@ export class CandidatsComponent implements OnInit {
       .catch(error => {
         console.log('ERROR', error);
       });
+  }
+
+  collectCandidateResults(candidat_id){
+      const selectedCandidate =  this.candidats.find(unit=>unit.id == candidat_id);
+      const name = selectedCandidate.Nom;
+      const email = selectedCandidate.email;
+      const duration = selectedCandidate.duree;
+      const rapport = selectedCandidate.raport_candidat.rapport;
+      const date = this.datePipe.transform(selectedCandidate.test_ouvert, 'dd-MM-yy');
+      const points = selectedCandidate.points_candidat;
+
+      let resultsByLanguage = {};
+      let totalPointsCandidat = 0;
+      let totalPointsMax = 0;
+      points[1].allPointsCandidat.forEach(techno => {
+        totalPointsCandidat += techno.points;
+        const pointsMaxTechno = points[0].allPointsTechnos
+        .find(tech=>tech.technologies===techno.technologies).points;
+        totalPointsMax += pointsMaxTechno;
+        const percentage_techno = techno.points / pointsMaxTechno * 100 + ' %';
+        resultsByLanguage[techno.technologies] = {note: techno.points,
+          max: pointsMaxTechno, percentage_techno};
+      })
+
+     const score = totalPointsCandidat / totalPointsMax * 100 + '%';
+     let languages = '';
+      Object.keys(resultsByLanguage).map(language=>{languages=`${languages} ${language}`});
+      let questionsRapport = [];
+      let totalTestDuration = 0;
+      let totalCandidateDuration = 0;
+      Object.values(rapport).map((question:any)=>{
+        const candidate_answer = question.array_rep_candidat[0];
+        totalTestDuration += question.index_question.time;
+        totalCandidateDuration += question.timeRep;
+        const correct_answer = question.index_question.answer_value;
+        const question_max_score = question.index_question.points;
+        const question_candidate_score = candidate_answer ===
+        correct_answer ? question_max_score : 0;
+        const content = question.index_question.content ?
+         question.index_question.content.split(', ') : [];
+        if(content && content[3] === 'Aucune'){
+          content.splice(3, 4, "Aucune des solutions précédentes");
+        }
+
+        function convertToMin(time) {
+          let mind = time % (60 * 60);
+          let minutes = Math.floor(mind / 60);
+          let minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
+          let secd = mind % 60;
+          let seconds = Math.ceil(secd);
+          let secondsString = seconds < 10 ? `0${seconds}` : seconds.toString();
+          return `${minutesString}:${secondsString}`
+        }
+        
+        let question_time : string = convertToMin(question.index_question.time);
+        let question_timeRep : string = convertToMin(question.timeRep);
+
+        const questionsRapportUnit = {
+          question_id: question.index_question.id,
+          name: question.index_question.name,
+          content,
+          candidate_answer,
+          correct_answer,
+          question_max_score,
+          question_candidate_score,
+          question_time,
+          question_timeRep
+        };
+        questionsRapport.push(questionsRapportUnit);
+      })
+
+      let hours = Math.floor(totalTestDuration / 60);
+      let minutes = totalTestDuration % 60;
+      let minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
+      const totalTestTime = `${hours} h ${minutesString}`;
+      hours = Math.floor(totalCandidateDuration / 60);
+      minutes = totalCandidateDuration % 60;
+      minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
+      const totalCandidateTime = `${hours}h${minutesString}`;
+
+      return { name, email, duration, score, totalPointsMax,
+         totalPointsCandidat, date, resultsByLanguage,
+         languages, questionsRapport, totalTestTime, totalCandidateTime };
+    }
+
+  viewResultsPdf(candidat_id){
+    const candidateResults = this.collectCandidateResults(candidat_id);
+    pdfMake.createPdf(getResultsDefinition(candidateResults)).open();
   }
 
   secondsToHms(duree) {
@@ -187,5 +302,4 @@ export class CandidatsComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.infosCandidats.filter = filterValue.trim().toLowerCase();
   }
-
 }
