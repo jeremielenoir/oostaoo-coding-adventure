@@ -242,7 +242,7 @@ export function getResultsDefinition(candidateResults){
         [{
           text: 'Réponse correcte',
         }, {
-          text: 'Connaissance du langage',
+          text: correct_answer,
           fontSize: 8
         }],
         ]
@@ -254,7 +254,7 @@ export function getResultsDefinition(candidateResults){
   }
 
   function buildQuestionsLayout(questionsRapport) {
-    // push all questions in pdf content 
+    // push all questions in pdf content
     let counter = 1;
     let questionsLayout = [];
     questionsRapport.map(question => {
