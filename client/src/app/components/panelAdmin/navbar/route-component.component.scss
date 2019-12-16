@@ -53,38 +53,38 @@
         position: relative;
        
         #notif{
-          background-image: url("./assets/Coding-game-img/SVG-menu-Dashboard/orange/notifications.svg");
+          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/notifications.svg");
         }
         #test{
-          background-image: url("./assets/Coding-game-img/SVG-menu-Dashboard/orange/Tests.svg");
+          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/Tests.svg");
         }
         #compte{
-          background-image: url("./assets/Coding-game-img/SVG-menu-Dashboard/orange/compte.svg");
+          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/compte.svg");
         }
         #contact{
-          background-image: url("./assets/Coding-game-img/SVG-menu-Dashboard/orange/contacter.svg");
+          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/contacter.svg");
         }
         #new{
-          background-image: url("./assets/Coding-game-img/SVG-menu-Dashboard/orange/nouveautes.svg");
+          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/nouveautes.svg");
         }
         &:hover{
           background: #0d6192;
           #notif{
-            background-image: url("./assets/Coding-game-img/SVG-menu-Dashboard/Blanc/notifications.svg");
+            background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/notifications.svg");
           }
 
           #test{
-            background-image: url("./assets/Coding-game-img/SVG-menu-Dashboard/Blanc/tests.svg");
+            background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/tests.svg");
           }
 
           #compte{
-            background-image: url("./assets/Coding-game-img/SVG-menu-Dashboard/Blanc/compte.svg");
+            background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/compte.svg");
           }
           #contact{
-            background-image: url("./assets/Coding-game-img/SVG-menu-Dashboard/Blanc/contacter.svg");
+            background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/contacter.svg");
           }
           #new{
-            background-image: url("./assets/Coding-game-img/SVG-menu-Dashboard/Blanc/nouveautes.svg");
+            background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/nouveautes.svg");
           }
          
         }
