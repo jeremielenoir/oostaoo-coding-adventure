@@ -28,9 +28,96 @@ export function getResultsDefinition(candidateResults){
     return {fullBar,emptyBar};
   }
 
-  let scoreBar = scoreBarBuilder(100);
+  function buildLanguageTemplate(language) {
+    let {percentage_techno} = resultsByLanguage[language];
+    percentage_techno = parseInt(percentage_techno.split(' ')[0]);
+    let scoreBar = scoreBarBuilder(percentage_techno);
+    console.log(scoreBar, percentage_techno);
+    // one template for one lanauge
+    return {
+      style: 'language-label',
+      columns: [
+        [{
+          width: 40,
+          text: [
+            {
+              text: ' ',
+              style: 'font-awesome-icons',
+              fontSize: 20,
+              color: '#F7BB13',
+            },{
+              text: language
+            }
+          ]
+        }],
+        [{
+          width: 50,
+          text: [{
+            text: scoreBar.fullBar,
+            color: '#2FB994',
+            style: 'font-awesome-icons',
+            fontSize: 26,
+            lineHeight: '',
+            characterSpacing: 1,
+          },{
+            text: scoreBar.emptyBar,
+            color: '#EEEEEE',
+            style: 'font-awesome-icons',
+            fontSize: 26,
+            lineHeight: '',
+            characterSpacing: 1,
+          }]
+        }], {
+          width: 'auto',
+          text: `${percentage_techno}%`,
+          fontSize: 16
+        }
+      ]
+    }
+  }
 
-  function questionDetailLayout() {
+  function buildLanguagesTemplates(resultsByLanguage) {
+    return Object.keys(resultsByLanguage).map(language => {
+      console.log(language);
+      return buildLanguageTemplate(language);
+    });
+  }
+
+  let languagesTemplates = buildLanguagesTemplates(resultsByLanguage);
+  console.log('languagesTemplates' ,languagesTemplates);
+
+  function questionDetailLayout(question, counter) {
+    let {content, name, candidate_answer, correct_answer, question_max_score, question_candidate_score, question_time, question_timeRep} = question;
+    console.log('correct anwer', correct_answer);
+
+    function createChoiceTemplate (possibility) {
+      let icon = possibility === candidate_answer ? ' ': ' ';
+      let color = possibility === correct_answer ? '#2FB994' : '#000';
+
+      return {
+        text: [
+          {
+            text: icon,
+            style: 'font-awesome-icons',
+            fontSize: 16
+          },
+          {
+            text: possibility,
+            color: color,
+            fontSize: 16
+          }
+        ]
+      };
+    }
+
+    function buildQcmTemplate(content) {
+      return content.map(choice => {
+        return createChoiceTemplate(choice);
+      });
+    }
+
+    let qcmTemplate = buildQcmTemplate(content);
+
     return [
       {
         // encard gris avec la question le temps, points
@@ -47,10 +134,10 @@ export function getResultsDefinition(candidateResults){
                 [{
                   margin: [10,10,10,4],
                   text: [{
-                    text: 'Question 1: ',
+                    text: `Question ${counter} :`,
                     style: 'question-detail-label'
                   },{
-                    text: 'Option -m',
+                    text: '',
                     style: 'question-detail-data'
                   }],
                 },
@@ -74,7 +161,7 @@ export function getResultsDefinition(candidateResults){
 
                   },
                   {
-                    text: '0:15 : 0:30  ',
+                    text: `${question_timeRep} / ${question_time}  `,
                     style: 'question-detail-info',
                     lineHeight: -1.5
                   },{
@@ -83,7 +170,7 @@ export function getResultsDefinition(candidateResults){
                     fontSize: 20,
                     color: '#F7BB13',
                   },{
-                    text: '20 / 20 pts  ',
+                    text: `${question_candidate_score} / ${question_max_score} pts  `,
                     style: 'question-detail-info'
                   }],
                 }],
@@ -105,7 +192,7 @@ export function getResultsDefinition(candidateResults){
           fontSize: '22',
         }],
       }, {
-        text: 'Quelle option de la ligne de commande permet de spécifier un commentaire de commit à l\'exécution de git commit ?'
+        text: name
       }, {
         text: separatorString,
         style: 'separator-dot',
@@ -125,49 +212,7 @@ export function getResultsDefinition(candidateResults){
 
       }, {
         markerColor: 'white',
-        ul: [
-          {
-            text: [
-              {
-                text: ' ',
-                style: 'font-awesome-icons',
-                fontSize: 16
-              },
-              {
-                text: '-m',
-                color: '#2FB994',
-                fontSize: 16
-              }
-            ]
-          },
-          {
-            text: [
-              {
-                text: ' ',
-                style: 'font-awesome-icons',
-                fontSize: 16
-              },
-              {
-                text: '-i',
-                fontSize: 16
-              }
-            ]
-          },
-          {
-            text: [
-              {
-                text: ' ',
-                style: 'font-awesome-icons',
-                fontSize: 16
-              },
-              {
-                text: '-l',
-
-                fontSize: 16
-              }
-            ]
-          },
-        ]
+        ul: qcmTemplate,
       }, {
         text: separatorString,
         style: 'separator-dot',
@@ -205,10 +250,18 @@ export function getResultsDefinition(candidateResults){
     ]
   }
 
-  let questionsLayout = [];
-  for(let i = 0; i < 10; i++) {
-    questionsLayout.push(...questionDetailLayout());
+  function buildQuestionsLayout(questionsRapport) {
+    // push all questions in pdf content 
+    let counter = 1;
+    let questionsLayout = [];
+    questionsRapport.map(question => {
+      questionsLayout.push(...questionDetailLayout(question, counter));
+      counter++;
+    })
+    return questionsLayout;
   }
+
+  const questionsLayout = buildQuestionsLayout(questionsRapport);
 
   return {
     content : [
@@ -219,7 +272,7 @@ export function getResultsDefinition(candidateResults){
             text: name,
           }, {
             style: 'header-email-candidate',
-            text: `(${email})`
+            text: ` (${email})`
           }
         ]
       },
@@ -284,7 +337,7 @@ export function getResultsDefinition(candidateResults){
                 text: score,
                 style: 'score-figure'
               },{
-                text: `${totalPointsCandidat}/${totalPointsMax}`
+                text: `${totalPointsCandidat} / ${totalPointsMax} pts`
               }],
               [{
                 text: 'Durée',
@@ -293,7 +346,7 @@ export function getResultsDefinition(candidateResults){
                 text: totalCandidateTime,
                 style: 'score-figure'
               },{
-                text: totalTestTime
+                text: `/ ${totalTestTime}`
               }],
             ]
           }
@@ -306,17 +359,10 @@ export function getResultsDefinition(candidateResults){
         style: 'separator-dot',
         margin: [0,20],
         text: separatorString
-      }, {
-        style: 'language-label',
-        columns: [
-          [{
-            text: 'Git'
-          }],
-          [{
-            text: 'barre'
-          }]
-        ]
-      }, {
+      },
+      ...languagesTemplates,
+      /*
+      {
         style: 'language-detail',
         // columns: [
         //   [{
@@ -358,7 +404,8 @@ export function getResultsDefinition(candidateResults){
             // [{text: 'Modélisation '}, '___', '60%'],
           ]
         }
-      }, {
+      }, */
+      {
         text: ' ',
         style: 'blank-separator',
       },

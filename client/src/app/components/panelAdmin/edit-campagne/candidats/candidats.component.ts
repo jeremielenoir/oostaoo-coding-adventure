@@ -222,7 +222,7 @@ export class CandidatsComponent implements OnInit {
           max: pointsMaxTechno, percentage_techno};
       })
 
-     const score = totalPointsCandidat / totalPointsMax * 100 + ' %';
+     const score = totalPointsCandidat / totalPointsMax * 100 + '%';
      let languages = '';
       Object.keys(resultsByLanguage).map(language=>{languages=`${languages} ${language}`});
       let questionsRapport = [];
@@ -240,7 +240,21 @@ export class CandidatsComponent implements OnInit {
          question.index_question.content.split(', ') : [];
         if(content && content[3] === 'Aucune'){
           content.splice(3, 4, "Aucune des solutions précédentes");
-          }
+        }
+
+        function convertToMin(time) {
+          let mind = time % (60 * 60);
+          let minutes = Math.floor(mind / 60);
+          let minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
+          let secd = mind % 60;
+          let seconds = Math.ceil(secd);
+          let secondsString = seconds < 10 ? `0${seconds}` : seconds.toString();
+          return `${minutesString}:${secondsString}`
+        }
+        
+        let question_time : string = convertToMin(question.index_question.time);
+        let question_timeRep : string = convertToMin(question.timeRep);
+
         const questionsRapportUnit = {
           question_id: question.index_question.id,
           name: question.index_question.name,
@@ -249,8 +263,8 @@ export class CandidatsComponent implements OnInit {
           correct_answer,
           question_max_score,
           question_candidate_score,
-          question_time: question.index_question.time,
-          question_timeRep: question.timeRep
+          question_time,
+          question_timeRep
         };
         questionsRapport.push(questionsRapportUnit);
       })
@@ -262,7 +276,7 @@ export class CandidatsComponent implements OnInit {
       hours = Math.floor(totalCandidateDuration / 60);
       minutes = totalCandidateDuration % 60;
       minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
-      const totalCandidateTime = `${hours} h ${minutesString}`;
+      const totalCandidateTime = `${hours}h${minutesString}`;
 
       return { name, email, duration, score, totalPointsMax,
          totalPointsCandidat, date, resultsByLanguage,
