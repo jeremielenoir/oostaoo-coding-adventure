@@ -246,6 +246,9 @@ export function getResultsDefinition(candidateResults){
           fontSize: 8
         }],
         ]
+      }, {
+        text: ' ',
+        style: 'blank-separator'
       }
     ]
   }
@@ -504,16 +507,16 @@ export function getResultsDefinition(candidateResults){
         border: [false, false, false, false],
       }
     },
-    pageBreakBefore: function(currentNode, followingNodesOnPage, nodesOnNextPage, previousNodesOnPage) {
-      //check if signature part is completely on the last page, add pagebreak if not
-      if (currentNode.id === 'break-end' && (currentNode.pageNumbers.length != 1 || currentNode.pageNumbers[0] != currentNode.pages)) {
-        return true;
-      }
-      //check if last paragraph is entirely on a single page, add pagebreak if not
-      else if (currentNode.id === 'closingParagraph' && currentNode.pageNumbers.length != 1) {
-        return true;
-      }
-      return false;
-    },
+    // pageBreakBefore: function(currentNode, followingNodesOnPage, nodesOnNextPage, previousNodesOnPage) {
+    //   //check if signature part is completely on the last page, add pagebreak if not
+    //   if (currentNode.id === 'break-end' && (currentNode.pageNumbers.length != 1 || currentNode.pageNumbers[0] != currentNode.pages)) {
+    //     return true;
+    //   }
+    //   //check if last paragraph is entirely on a single page, add pagebreak if not
+    //   else if (currentNode.id === 'closingParagraph' && currentNode.pageNumbers.length != 1) {
+    //     return true;
+    //   }
+    //   return false;
+    // },
   }
 }
