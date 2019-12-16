@@ -28,7 +28,63 @@ export function getResultsDefinition(candidateResults){
     return {fullBar,emptyBar};
   }
 
-  let scoreBar = scoreBarBuilder(100);
+  function buildLanguageTemplate(language) {
+    let {percentage_techno} = resultsByLanguage[language];
+    percentage_techno = parseInt(percentage_techno.split(' ')[0]);
+    let scoreBar = scoreBarBuilder(percentage_techno);
+    console.log(scoreBar, percentage_techno);
+    // one template for one lanauge
+    return {
+      style: 'language-label',
+      columns: [
+        [{
+          width: 40,
+          text: [
+            {
+              text: ' ',
+              style: 'font-awesome-icons',
+              fontSize: 20,
+              color: '#F7BB13',
+            },{
+              text: language
+            }
+          ]
+        }],
+        [{
+          width: 50,
+          text: [{
+            text: scoreBar.fullBar,
+            color: '#2FB994',
+            style: 'font-awesome-icons',
+            fontSize: 26,
+            lineHeight: '',
+            characterSpacing: 1,
+          },{
+            text: scoreBar.emptyBar,
+            color: '#EEEEEE',
+            style: 'font-awesome-icons',
+            fontSize: 26,
+            lineHeight: '',
+            characterSpacing: 1,
+          }]
+        }], {
+          width: 'auto',
+          text: `${percentage_techno}%`,
+          fontSize: 16
+        }
+      ]
+    }
+  }
+
+  function buildLanguagesTemplates(resultsByLanguage) {
+    return Object.keys(resultsByLanguage).map(language => {
+      console.log(language);
+      return buildLanguageTemplate(language);
+    });
+  }
+
+  let languagesTemplates = buildLanguagesTemplates(resultsByLanguage);
+  console.log('languagesTemplates' ,languagesTemplates);
 
   function questionDetailLayout(question, counter) {
     let {content, name, candidate_answer, correct_answer, question_max_score, question_candidate_score, question_time, question_timeRep} = question;
@@ -216,7 +272,7 @@ export function getResultsDefinition(candidateResults){
             text: name,
           }, {
             style: 'header-email-candidate',
-            text: `(${email})`
+            text: ` (${email})`
           }
         ]
       },
@@ -281,7 +337,7 @@ export function getResultsDefinition(candidateResults){
                 text: score,
                 style: 'score-figure'
               },{
-                text: `${totalPointsCandidat}/${totalPointsMax}`
+                text: `${totalPointsCandidat} / ${totalPointsMax} pts`
               }],
               [{
                 text: 'Durée',
@@ -290,7 +346,7 @@ export function getResultsDefinition(candidateResults){
                 text: totalCandidateTime,
                 style: 'score-figure'
               },{
-                text: totalTestTime
+                text: `/ ${totalTestTime}`
               }],
             ]
           }
@@ -303,17 +359,10 @@ export function getResultsDefinition(candidateResults){
         style: 'separator-dot',
         margin: [0,20],
         text: separatorString
-      }, {
-        style: 'language-label',
-        columns: [
-          [{
-            text: 'Git'
-          }],
-          [{
-            text: 'barre'
-          }]
-        ]
-      }, {
+      },
+      ...languagesTemplates,
+      /*
+      {
         style: 'language-detail',
         // columns: [
         //   [{
@@ -355,7 +404,8 @@ export function getResultsDefinition(candidateResults){
             // [{text: 'Modélisation '}, '___', '60%'],
           ]
         }
-      }, {
+      }, */
+      {
         text: ' ',
         style: 'blank-separator',
       },

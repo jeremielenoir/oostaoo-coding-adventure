@@ -222,7 +222,7 @@ export class CandidatsComponent implements OnInit {
           max: pointsMaxTechno, percentage_techno};
       })
 
-     const score = totalPointsCandidat / totalPointsMax * 100 + ' %';
+     const score = totalPointsCandidat / totalPointsMax * 100 + '%';
      let languages = '';
       Object.keys(resultsByLanguage).map(language=>{languages=`${languages} ${language}`});
       let questionsRapport = [];
@@ -276,7 +276,7 @@ export class CandidatsComponent implements OnInit {
       hours = Math.floor(totalCandidateDuration / 60);
       minutes = totalCandidateDuration % 60;
       minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
-      const totalCandidateTime = `${hours} h ${minutesString}`;
+      const totalCandidateTime = `${hours}h${minutesString}`;
 
       return { name, email, duration, score, totalPointsMax,
          totalPointsCandidat, date, resultsByLanguage,
