@@ -237,7 +237,7 @@ export class CandidatsComponent implements OnInit {
         const question_candidate_score = candidate_answer ===
         correct_answer ? question_max_score : 0;
         const content = question.index_question.content ?
-         question.index_question.content.split(', ') : null;
+         question.index_question.content.split(', ') : [];
         if(content && content[3] === 'Aucune'){
           content.splice(3, 4, "Aucune des solutions précédentes");
           }
@@ -273,8 +273,6 @@ export class CandidatsComponent implements OnInit {
     const candidateResults = this.collectCandidateResults(candidat_id);
     pdfMake.createPdf(getResultsDefinition(candidateResults)).open();
   }
-
-
 
   secondsToHms(duree) {
     const h = Math.floor(duree / 3600);
