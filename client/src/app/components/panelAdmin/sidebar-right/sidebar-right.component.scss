@@ -66,14 +66,12 @@
   border-radius: 6px;
   position: relative;
 
-  .arrow::after{
-    content:""; 
-      border-left:15px solid transparent;
-      border-right:15px solid transparent;
-      border-top: 15px solid #ce5637;
+  .arrow{
+      width: 15px;
+      height: 50px;
+      background:url('http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/fleche.svg') no-repeat;
       position: absolute;
-      transform: rotate(-90deg);
-      right: -24px;
+      right: -16px;
       top: 20px;
       cursor: pointer;
   }

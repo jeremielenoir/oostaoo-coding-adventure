@@ -78,28 +78,54 @@
             user-select: none;
             color: #7e8082;
             padding-top: 10px;
-            .checkbox {
+            position: relative;
+            .archive-check{
+              opacity: 0;
               width: 0px;
               height: 0px;
-              opacity: 0;
+              &:checked + span{
+                background-image:url('http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/archive-inclue.svg');
+              }
             }
+            span{
+              width: 20px;
+              height: 20px;
+              display: block;
+              background-image:url('http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/archive-non-inclue.svg');
+              position: absolute;
+              left: -20px;
+              top: 11px;
+            }
+            // .checkbox {
+            //   width: 0px;
+            //   height: 0px;
+            //   opacity: 0;
+            // }
   
-            .checked-text{
-              position: relative;
-              left: 20px;
-            }
+            // .checked-text{
+            //   position: relative;
+            //   left: 20px;
+            // }
           }
           form {
             height: 100%;
             width: 100%;
+            position: relative;
+            margin-top:5px;
             .icon-form-group-header-contenu {
               display: inline-block;
               padding-left: 10px;
               color: #de522b;
               font-size: 24px;
-              position: relative;
-              top: 4px;
-              left: 3px;
+              top: 0px;
+              right: 10px;
+              position: absolute;
+              width: 28px;
+              height: 28px;
+              img{
+                width: 100%;
+                height: 100%;
+              }
             }
             .champ-header-contenu {
               width: 90%;
@@ -182,18 +208,17 @@
         .contenu-branche {
          flex: 11;
          display: flex;
+         cursor: pointer;
          .dashed {
           display: flex;
           align-items: center;
           height: 50px;
-          cursor: pointer;
           &:hover {
             color: #fff;
             .popup{
               display: flex;  
               flex-direction: column;
-              justify-content: center;
-              
+              justify-content: center; 
             }
           }
         }
@@ -207,6 +232,9 @@
             color:#1d3551;
             font-weight: 700;
             font-size: 16px;
+            .contenu-branche-content{
+              height:100%
+            }
           }
           &:hover .corpo {
             background-color:#0c6192;
@@ -271,7 +299,6 @@
              font-size: 14px;
            }
 
-        
          }
        
         }
@@ -282,9 +309,10 @@
           align-items: center;
           flex: 1;
           border-right: 1px dashed #e15028;
-          i{
-            font-size: 40px;
-            color:#e34e26
+          margin-bottom: 0px;
+          img{
+            width: 30px;
+            height: 30px;
           }
         }
 
@@ -346,12 +374,44 @@
 
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
+  .branche-content-list-end{
+    width: 100px!important;
+  }
+  .block-btn-test{
+    width:100%;
+    justify-content: space-between;
+    .number-test{
+      padding-left: 6px!important;
+    }
+  }
+  .sous-header-two{
+    padding-top: 10px!important;
+    padding-bottom: 10px!important;
+    flex-direction: column!important;
+    justify-content: space-between!important;
+    align-items: flex-start!important;
+    .sous-header-form{
+      margin-top:20px!important;
+      width:100%
+    }
+  }
   .contenu-techno{
+
     .content-scroll{
+      .branche-content-list-start{
+        i{
+          font-size:25px!important
+        }
+      }
       max-height: 800px;
     }
   }
+}
+
+@media screen and (max-width: 425px) {
+
+
 }
 
 
@@ -361,5 +421,4 @@
 @media (min-width: 320px) and (max-width: 375px) {
 }
 
-@media (min-width: 375px) and (max-width: 425px) {
-}
+
