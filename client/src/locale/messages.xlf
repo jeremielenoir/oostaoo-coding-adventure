@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="5268868541bca304938ca16ee387265117be6069" datatype="html">
         <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Historique des factures</source>
-        <target>History of factures</target>
+        <target>buildings</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
           <context context-type="linenumber">9</context>
@@ -12,7 +12,7 @@
       </trans-unit>
       <trans-unit id="2f933b826a570836cab04f683970a2d22068458c" datatype="html">
         <source>Date</source>
-        <target>Date</target>
+        <target>the date</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
           <context context-type="linenumber">17</context>

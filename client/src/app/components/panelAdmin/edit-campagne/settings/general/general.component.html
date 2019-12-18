@@ -9,7 +9,7 @@
   </mat-form-field>
 
   <div class="formQuestion">
-    <label for="nomDeCampagne">
+    <label for="nomDeCampagne" i18n>
       En quelle langue les questions doivent-elles être posées à vos candidats ?
     </label>
   </div>
@@ -30,22 +30,22 @@
     </mat-radio-group>
   </div>
 
-  <label for="utilisationCopieColler">
+  <label for="utilisationCopieColler" i18n>
     Voulez-vous empêcher l'utilisation du copier/coller pendant le test ?
   </label>
   <div class="example-radio-button">
     <mat-radio-group [formControl]="copypasteControl">
-      <mat-radio-button value=true [checked]="copypasteControl.value === true">
+      <mat-radio-button value=true [checked]="copypasteControl.value === true" i18n>
         Oui
       </mat-radio-button>
-      <mat-radio-button value=false [checked]="copypasteControl.value === false">
+      <mat-radio-button value=false [checked]="copypasteControl.value === false" i18n>
         Non
       </mat-radio-button>
     </mat-radio-group>
   </div>
 
   <div class="formQuestion">
-    <label for="nomDeCampagne">
+    <label for="nomDeCampagne" i18n>
       Nombre de jours au bout desquels une invitation expire
     </label>
   </div>
@@ -61,30 +61,30 @@
   </mat-form-field>
 
   <div class="formQuestion">
-    <label for="envoiRapportSimplifie">
+    <label for="envoiRapportSimplifie" i18n>
       Souhaitez-vous envoyer le rapport simplifié au candidat à l'issue de son
       test ?
     </label>
   </div>
   <div class="example-radio-button">
     <mat-radio-group [formControl]="rapportControl">
-      <mat-radio-button value=true [checked]="rapportControl.value === true">
+      <mat-radio-button value=true [checked]="rapportControl.value === true" i18n>
         Oui
       </mat-radio-button>
-      <mat-radio-button value=false [checked]="rapportControl.value === false">
+      <mat-radio-button value=false [checked]="rapportControl.value === false" i18n>
         Non
       </mat-radio-button>
     </mat-radio-group>
   </div>
 
-  <label for="nomDeCampagne">
+  <label for="nomDeCampagne" i18n>
     Comment souhaitez-vous que le candidat soit chronométré ?
   </label>
 
   <div id="bloc-chrono">
     <div class="chrono">
-      <p class="chrono-title">UN CHRONOMÈTRE PAR QUESTION</p>
-      <p>
+      <p class="chrono-title" i18n>UN CHRONOMÈTRE PAR QUESTION</p>
+      <p i18n>
         Chaque question sera chronométrée. Une fois le test démarré, les
         questions se succèderont selon l’ordre défini. Le candidat ne pourra pas
         revenir à une question précédente. Nous conseillons ce mode pour obtenir
@@ -93,15 +93,15 @@
       <p class="chrono-last-line">(recommandé)</p>
     </div>
     <div class="chrono">
-      <p class="chrono-title">UN CHRONOMÈTRE GLOBAL</p>
-      <p>
+      <p class="chrono-title" i18n>UN CHRONOMÈTRE GLOBAL</p>
+      <p i18n>
         Un temps global est alloué au candidat pour réaliser l’ensemble du test.
         Le candidat peut gérer son temps comme bon lui semble : il peut répondre
         aux questions dans n’importe quel ordre et les modifier plusieurs fois.
         Nous conseillons ce mode pour évaluer, uniquement, les connaissances
         pratiques des candidats (lors d’exercices de code par exemple).
       </p>
-      <p class="chrono-last-line">Temps alloué pour ce test (minutes)</p>
+      <p class="chrono-last-line" i18n>Temps alloué pour ce test (minutes)</p>
 
       <mat-form-field class="chrono-input input-style">
         <input matInput name="nomDeCampagne" />
@@ -119,6 +119,7 @@
       type="button"
       class="button yellow"
       mat-flat-button
+      i18n
     >
       Enregistrer
     </button>

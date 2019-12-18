@@ -33,6 +33,10 @@ export class CampagneComponent implements OnInit {
   public result: any;
   public test: any;
   public checked: any;
+<<<<<<< HEAD
+=======
+
+>>>>>>> ba70fcbea6fc13a68817c5aaa79e892eb133a9a2
 
 
 

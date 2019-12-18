@@ -6,8 +6,8 @@
     <div *ngIf="!switchPanel" id="left-panel">
       <div id="left-panel-text">
         <h2 id="left">Déjà client ?</h2>
-        <button id="button_left_panel" (click)="switch()">Se connecter</button>
-        <p id="text_left_panel">
+        <button i18n id="button_left_panel" (click)="switch()">Se connecter</button>
+        <p i18n id="text_left_panel">
           Connectez vous à votre compte pour avoir accès a vos campagnes, votre
           profil, etc
         </p>
@@ -16,7 +16,7 @@
 
     <!-- Formulaire cote gauche -->
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="forms">
-      <h2>Se connecter ?</h2>
+      <h2 i18n>Se connecter ?</h2>
       <div class="form-group">
         <label for="username">Username</label>
         <input
@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary button">Se connecter</button>
+        <button class="btn btn-primary button" i18n>Se connecter</button>
       </div>
       <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
     </form>
@@ -54,11 +54,11 @@
   <div id="right-side">
     <div *ngIf="switchPanel" id="right-panel">
       <div id="right-panel-text">
-        <h2 id="title_right_panel">Nouveau client</h2>
-        <button id="button_right_panel" (click)="switch()">
+        <h2 id="title_right_panel" i18n>Nouveau client</h2>
+        <button id="button_right_panel" (click)="switch()" i18n>
           Créer un compte
         </button>
-        <p id="text_right_panel">
+        <p id="text_right_panel" i18n>
           Évaluez vos candidats en ligne Sourcez, recrutez des développeurs
           passionnés Créez vos propres événements de code
         </p>
@@ -68,7 +68,7 @@
 
      <!-- Formulaire cote droit -->
     <form class="forms" [formGroup]="registerForm" (ngSubmit)="register()" id="form_register">
-      <h2>Nouveau client ?</h2>
+      <h2 i18n>Nouveau client ?</h2>
 
     <div class="form-group">
       <label for="username"> Username :</label>
@@ -78,7 +78,7 @@
         maxlength="64"
         type="text"
         [ngClass]="{ 'is-invalid': submitted && fr.username.errors }"
-        
+
       />
       <div *ngIf="submitted && fr.username.errors" class="invalid-feedback">
           <div *ngIf="fr.username.errors.required">Username is required</div>
@@ -93,7 +93,7 @@
         maxlength="64"
         type="email"
         [ngClass]="{ 'is-invalid': submitted && fr.email.errors }"
-        
+
       />
       <div *ngIf="submitted && fr.email.errors" class="invalid-feedback">
       <div *ngIf="fr.email.errors.required">Email is required</div>
@@ -108,14 +108,14 @@
         maxlength="64"
         type="password"
         [ngClass]="{ 'is-invalid': submitted && fr.password.errors }"
-        
+
       />
       <div *ngIf="submitted && fr.password.errors" class="invalid-feedback">
       <div *ngIf="fr.password.errors.required">Password is required</div>
       </div>
     </div>
     <div class="form-group">
-      <button class=" btn btn-primary button">S'inscrire</button>
+      <button class=" btn btn-primary button" i18n>S'inscrire</button>
     </div>
     <div *ngIf="errorRegister" class="alert alert-danger">{{ errorRegister }}</div>
     </form>
