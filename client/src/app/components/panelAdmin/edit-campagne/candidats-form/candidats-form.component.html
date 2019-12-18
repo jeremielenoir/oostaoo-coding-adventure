@@ -3,7 +3,7 @@
     <div class="col-12">
       <form [formGroup]="form" (submit)="submit()">
         <div class="card">
-          <div class="card-header">Contact Information</div>
+          <div class="card-header" i18n>Contact Information</div>
           <div class="card-body" formArrayName="contacts">
             <div class="row">
               <div
@@ -12,7 +12,7 @@
               >
                 <div [formGroupName]="i" class="row">
                   <div class="form-group col-6">
-                    <label>Nom</label>
+                    <label i18n>Nom</label>
                     <input
                       class="form-control"
                       formControlName="name"
@@ -21,7 +21,7 @@
                   </div>
 
                   <div class="form-group col-12">
-                    <label>Email*</label>
+                    <label i18n>Email*</label>
                     <input
                       class="form-control"
                       formControlName="value"
@@ -34,7 +34,7 @@
                       class="btn btn-danger"
                       type="button"
                       (click)="removeContact(i)"
-                    >
+                      i18n>
                       Supprimer
                     </button>
                   </div>
@@ -48,6 +48,7 @@
                 class="btn btn-primary m-1"
                 type="button"
                 (click)="addContact()"
+                i18n
               >
                 ajouter candidat
               </button>
@@ -59,6 +60,7 @@
                 [disabled]="!form.valid"
                 type="submit"
                 (click)="openDialog()"
+                i18n
               >
                 Prochaine étape : configuration d’email
               </button>

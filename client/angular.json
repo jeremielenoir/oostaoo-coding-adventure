@@ -47,6 +47,14 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "en": {
+              "aot": true,
+              "outputPath": "dist/client-en/",
+              "i18nFile": "src/locale/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "i18nMissingTranslation": "error"
             }
           }
         },
@@ -59,6 +67,9 @@
           "configurations": {
             "production": {
               "browserTarget": "client:build:production"
+            },
+            "en": {
+              "browserTarget": "client:build:en"
             }
           }
         },

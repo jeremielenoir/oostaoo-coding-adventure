@@ -11,17 +11,17 @@
                 <div class="form-entreprise">
                   <form>
                     <h2>Ajouter son entreprise</h2>
-                        <label   for="name">Nom de l'entreprise</label>
+                        <label i18n  for="name">Nom de l'entreprise</label>
                         <input [formControl]="name" name="name" type="text" class="champ-form-gestion"/>
                     
       
                     
-                        <label   for="email">Email de l'entreprise</label>
+                        <label i18n  for="email">Email de l'entreprise</label>
                         <input [formControl]="email" name="email" type="email" class="champ-form-gestion"/>
                   
       
                       <div class="form-group">
-                          <label   for="phone">Numéro de téléphone</label>
+                          <label i18n  for="phone">Numéro de téléphone</label>
                           <input [formControl]="phone" name="phone" type="text" class="champ-form-gestion"/>
                         </div>
       
@@ -31,13 +31,13 @@
                     </form>
                 </div>
                 <div class="text-entreprise">
-                  <h2>Personnalisation entreprise</h2>
-                  <p>Bienvenue sur la page de personnalisation de votre entreprise, avant
+                  <h2 i18n>Personnalisation entreprise</h2>
+                  <p i18n>Bienvenue sur la page de personnalisation de votre entreprise, avant
                     de pouvoir modifier les informations sur votre entreprise, merci de bien vouloir
                     remplir le formulaire ci-contre.
                   </p>
       
-                  <p>Une fois le formulaire remplis vous pourrez gérer les informations de votre entreprise comme,
+                  <p i18n>Une fois le formulaire remplis vous pourrez gérer les informations de votre entreprise comme,
                     les nombres d'employés, la langue de votre entreprise, le lien de votre site web, etc.
                    </p>
                 </div>
@@ -62,7 +62,7 @@
                   <div class="block-upload" [class.block-upload-hidden]="blockUpload">
                       <i class="modal-content-icon fas fa-camera"></i>
       
-                      <span class="modal-content-text">
+                      <span class="modal-content-text" i18n>
             
                           Déposez votre image ici
             
@@ -70,7 +70,7 @@
             
                       <div class="btn-modal-content" id="btn-modal-content">
             
-                        <span >ou télécharger une photo</span>
+                        <span i18n>ou télécharger une photo</span>
             
                         <input  type="file" class="file"  name="files" accept="image/x-png,image/gif,image/jpeg" (change)="readURL($event)" #uploadFileFirst/>  
                         <input class="hidden-file" type="text" name="ref" value="entreprise" />
@@ -89,11 +89,11 @@
       
                         <i class="fas fa-ban ban-error"></i>
       
-                      <span class="error">Fichier non supporté</span>
+                      <span class="error" i18n>Fichier non supporté</span>
       
                       <div class="btn-modal-content" id="btn-modal-content">
             
-                          <span class="modal-text-btn-upload">ou télécharger une photo</span>
+                          <span class="modal-text-btn-upload" i18n>ou télécharger une photo</span>
               
                           <input type="file" class="file"  (change)="readURL($event)"/>
               
@@ -107,8 +107,8 @@
                   </div>
       
                   <div class="modall-footer" #btnValideParent>
-                      <button mat-button class="modal-btn-footer" (click)="uploadLogo()" disabled="disabled" id="btn-valide" >valider</button>  
-                      <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()">annuler</button>
+                      <button mat-button class="modal-btn-footer" (click)="uploadLogo()" disabled="disabled" id="btn-valide" i18n>valider</button>  
+                      <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()" i18n>annuler</button>
       
       
                   </div>
@@ -137,7 +137,7 @@
       
                       <i class="modal-content-icon fas fa-camera"></i>
       
-                      <span class="modal-content-text">
+                      <span class="modal-content-text" i18n>
             
                           Déposez votre image ici
             
@@ -162,11 +162,11 @@
       
                         <i class="fas fa-ban ban-error"></i>
       
-                      <span class="error">Fichier non supporté</span>
+                      <span class="error" i18n>Fichier non supporté</span>
       
                       <div class="btn-modal-content" id="btn-modal-content">
             
-                          <span class="modal-text-btn-upload">ou télécharger une photo</span>
+                          <span class="modal-text-btn-upload" i18n>ou télécharger une photo</span>
               
                           <input type="file" class="file" (change)="readURL_deux($event)"/>
                           <input class="hidden-file" type="text" name="ref" value="entreprise" />
@@ -250,7 +250,7 @@
       
                             <div class="regroupe-form" #regroupeform>
       
-                                <label class="first-label-param-header">Choisissez votre langue</label>
+                                <label class="first-label-param-header" i18n>Choisissez votre langue</label>
                 
                                 <div class="block-form-flex">
                 
@@ -266,7 +266,7 @@
       
                             <div class="regroupe-form">
       
-                                <label>Lien vidéo</label>
+                                <label i18n>Lien vidéo</label>
                 
                                 <div  class="block-form-flex incrage">
                 
@@ -294,7 +294,7 @@
       
                             <div class="regroupe-form">
       
-                                <label>Teaser de l'entreprise</label>
+                                <label i18n>Teaser de l'entreprise</label>
                 
                                 <div  class="block-form-flex">
                 
@@ -312,7 +312,7 @@
                 
                                 <div (click)="clickchange()" class="block-form-flex btn-block-flex">
                 
-                                    <button  mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
+                                    <button  mat-button class="btn-validate" i18n>ENREGISTRER LES CHANGEMENTS</button>
                     
                                 </div>
                 
@@ -330,7 +330,7 @@
       
                   <div class="edit-panel-header">
       
-                      <h2 class="title-edit-panel">
+                      <h2 class="title-edit-panel" i18n>
                           Éditez les détails de votre entreprise en Anglais
                           <figure class="img-country"><img src="../../../../assets/country.png" role="img" alt="country"/></figure>
                       </h2>
@@ -377,7 +377,7 @@
                   <form>
                       <div class="regroupe-form">
                          
-                          <label>Logo de l'entreprise</label>
+                          <label i18n>Logo de l'entreprise</label>
                           
                         <div class="all-gestion-info">
       
@@ -389,14 +389,14 @@
               
                                   <div class="gestion-info-img-header">
                 
-                                      <button mat-button class="btn-gestion" (click)="modal_upload()">ENVOYER</button>
-                                      <button mat-button class="btn-gestion">SUPPRIMER</button>
+                                      <button mat-button class="btn-gestion" (click)="modal_upload()" i18n>ENVOYER</button>
+                                      <button mat-button class="btn-gestion" i18n>SUPPRIMER</button>
                 
                                   </div>
                 
-                                  <p class="gestion-info-img-contenu">4 Mo max.</p>
-                                  <p class="gestion-info-img-contenu">Taille recommandée : 500 x 500px</p>
-                                  <p class="gestion-info-img-contenu">Types de fichier recommandés : JPEG, PNG, GIF</p>
+                                  <p class="gestion-info-img-contenu" i18n>4 Mo max.</p>
+                                  <p class="gestion-info-img-contenu" i18n>Taille recommandée : 500 x 500px</p>
+                                  <p class="gestion-info-img-contenu" i18n>Types de fichier recommandés : JPEG, PNG, GIF</p>
       
                 
                               </div>
@@ -410,7 +410,7 @@
       
                       <div class="regroupe-form">
       
-                          <label>Nom de l'entreprise</label>
+                          <label i18n>Nom de l'entreprise</label>
                           <div class="block-form-flex">
       
                             <input [formControl]="name" name="name" type="text" class="champ-form-gestion" value=""/>
@@ -423,7 +423,7 @@
       
                       <div class="regroupe-form">
       
-                          <label>Adresse email de l'entreprise</label>
+                          <label i18n>Adresse email de l'entreprise</label>
       
                           <div class="block-form-flex">
       
@@ -437,7 +437,7 @@
       
                       <div class="regroupe-form">
       
-                          <label>Numéro de téléphone</label>
+                          <label i18n>Numéro de téléphone</label>
       
                           <div class="block-form-flex">
       
@@ -451,7 +451,7 @@
       
                       <div class="regroupe-form">
       
-                          <label>Industrie</label>
+                          <label i18n>Industrie</label>
       
                           <div class="block-form-flex">
       
@@ -468,7 +468,7 @@
       
                       <div class="regroupe-form">
       
-                          <label>Nombre d'employés</label>
+                          <label i18n>Nombre d'employés</label>
       
                           <div class="block-form-flex">
       
@@ -484,7 +484,7 @@
       
                       <div class="regroupe-form">
       
-                          <label>Nombre de développeurs</label>
+                          <label i18n>Nombre de développeurs</label>
       
                           <div class="block-form-flex">
       
@@ -528,7 +528,7 @@
       
                       <div class="regroupe-form">
       
-                          <label>Teaser de l'entreprise</label>
+                          <label i18n>Teaser de l'entreprise</label>
       
                           <div class="block-form-flex">
       
@@ -543,7 +543,7 @@
       
                       <div class="regroupe-form">
       
-                          <label>Ajouter des images (10 max)</label>
+                          <label i18n>Ajouter des images (10 max)</label>
       
                         <div class="all-gestion-info">
       
@@ -598,7 +598,7 @@
       
                               <input [formControl]="facebook" name="facebook" type="text" class="champ-form-gestion champ-incrage-network" value=""/>
       
-                              <span class="span-incrage span-incrage-network">
+                              <span class="span-incrage span-incrage-network" i18n>
                                 <i class="fab fa-facebook-f icon-network"></i>
                                 Facebook
                               </span>
@@ -615,7 +615,7 @@
       
                               <input [formControl]="twitter" name="twitter" type="text" class="champ-form-gestion champ-incrage-network" value=""/>
       
-                              <span class="span-incrage span-incrage-network">
+                              <span class="span-incrage span-incrage-network" i18n>
                                 <i class="fab fa-twitter icon-network"></i>
                                 Twitter
                               </span>
@@ -631,7 +631,7 @@
       
                           <div (click)="clickchange2()" class="block-form-flex btn-block-flex">
       
-                              <button mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
+                              <button mat-button class="btn-validate" i18n>ENREGISTRER LES CHANGEMENTS</button>
               
                           </div>
       
@@ -652,7 +652,7 @@
       
                   <div class="completion_fiche_progress">
       
-                    <h2 class="text_number_progress_responsive">Complétion de votre fiche</h2>
+                    <h2 class="text_number_progress_responsive" i18n>Complétion de votre fiche</h2>
       
                     <div class="progres">
                         <round-progress
@@ -676,7 +676,7 @@
       
                           <span class="number_progress">{{currentTotal}}</span>
       
-                          <span class="text_number_progress">Complétion de votre fiche</span>
+                          <span class="text_number_progress" i18n>Complétion de votre fiche</span>
       
                       </div>
       

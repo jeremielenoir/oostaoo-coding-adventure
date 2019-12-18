@@ -13,7 +13,7 @@
         
         <div class="modall-header">
 
-                <h3 class="modall-title">
+                <h3 class="modall-title" i18n>
 
                   Ajouter un utilisateur
 
@@ -36,7 +36,7 @@
 
                       <label class="libele" [ngClass]="{'new-label': prenomIsactive === true}">prenom</label>
 
-                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactive === true}">Obligatoire</span>
+                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactive === true}" i18n>Obligatoire</span>
 
                     </div>
 
@@ -55,9 +55,9 @@
 
                     <div class="title-and-error-span">
 
-                      <label [ngClass]="{'new-label': nomIsactive === true}" class="libele">nom</label>
+                      <label [ngClass]="{'new-label': nomIsactive === true}" class="libele" i18n>nom</label>
 
-                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactive === true}">Obligatoire</span>
+                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactive === true}"i18n>Obligatoire</span>
 
                     </div>
 
@@ -94,7 +94,7 @@
 
               <div class="content-form-last">
 
-                <h3 class="title-gestion-perm">PERMISSIONS</h3>
+                <h3 class="title-gestion-perm" i18n>PERMISSIONS</h3>
 
                 <div class="tbl-permition">
 
@@ -102,7 +102,7 @@
 
                     <div class="element-gestion-permition-header" matTooltip="(Compte > facturation) : l’utilisateur aura accès à la page facturation et recevra les factures par email."
                     [matTooltipPosition]="position.value"
-                    aria-label="Button that displays a tooltip in various positions">
+                    aria-label="Button that displays a tooltip in various positions" i18n>
 
                       facturation
 
@@ -125,7 +125,7 @@
 
                     <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra créer/modifier/supprimer les campagnes et les questions personnalisées."
                     [matTooltipPosition]="position.value"
-                    aria-label="Button that displays a tooltip in various positions">
+                    aria-label="Button that displays a tooltip in various positions" i18n>
 
                     Campagnes
 
@@ -146,7 +146,7 @@
 
                     <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra inviter les candidats aux campagnes. Il pourra également consulter les rapports de résultats."
                     [matTooltipPosition]="position.value"
-                    aria-label="Button that displays a tooltip in various positions">
+                    aria-label="Button that displays a tooltip in various positions" i18n>
 
                     Candidats
 
@@ -169,7 +169,7 @@
 
                     <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra créer/gérer/supprimer les utilisateurs."
                     [matTooltipPosition]="position.value"
-                    aria-label="Button that displays a tooltip in various positions">
+                    aria-label="Button that displays a tooltip in various positions" i18n>
 
                     Utilisateurs
 
@@ -192,7 +192,7 @@
 
                   <div class="element-gestion-permition-header"matTooltip="(Compte > profil entreprise) : l’utilisateur aura accès au profil d’entreprise et pourra y modifier les informations."
                     [matTooltipPosition]="position.value"
-                    aria-label="Button that displays a tooltip in various positions">
+                    aria-label="Button that displays a tooltip in various positions" i18n>
 
                     Profil entreprise
 
@@ -214,7 +214,7 @@
 
                     <div class="element-gestion-permition-header"matTooltip="(Testing > interview) : l’utilisateur pourra accéder au module Interview et inviter les candidats à participer à un entretien par visioconférence."
                     [matTooltipPosition]="position.value"
-                    aria-label="Button that displays a tooltip in various positions">
+                    aria-label="Button that displays a tooltip in various positions" i18n>
 
                    Interview
 
@@ -236,7 +236,7 @@
 
                     <div class="element-gestion-permition-header"matTooltip="(Compte > protection des données) : l’utilisateur pourra gérer les paramètres de protection des données."
                     [matTooltipPosition]="position.value"
-                    aria-label="Button that displays a tooltip in various positions">
+                    aria-label="Button that displays a tooltip in various positions" i18n>
 
                     Protection des données
 
@@ -282,7 +282,7 @@
           
           <div class="modall-header">
   
-                  <h3 class="modall-title">
+                  <h3 class="modall-title" i18n>
   
                       Modifier l'utilisateur
   
@@ -302,9 +302,9 @@
   
                       <div class="title-and-error-span">
   
-                          <label class="libele" [ngClass]="{'new-label': prenomIsactiveUpdate === true}">prenom</label>
+                          <label class="libele" [ngClass]="{'new-label': prenomIsactiveUpdate === true}" i18n>prenom</label>
 
-                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactiveUpdate === true}">Obligatoire</span>
+                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactiveUpdate === true}" i18n>Obligatoire</span>
   
                       </div>
   
@@ -325,7 +325,7 @@
                         
                           <label class="libele" [ngClass]="{'new-label': nomIsactiveUpdate === true}">nom</label>
 
-                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactiveUpdate === true}">Obligatoire</span>
+                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactiveUpdate === true}" i18n>Obligatoire</span>
                        
                       </div>
   
@@ -361,7 +361,7 @@
   
                 <div class="content-form-last">
   
-                  <h3 class="title-gestion-perm">PERMISSIONS</h3>
+                  <h3 class="title-gestion-perm" i18n>PERMISSIONS</h3>
   
                   <div class="tbl-permition">
   
@@ -392,7 +392,7 @@
   
                       <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra créer/modifier/supprimer les campagnes et les questions personnalisées."
                       [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
+                      aria-label="Button that displays a tooltip in various positions" i18n>
   
                       Campagnes
   
@@ -415,7 +415,7 @@
   
                       <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra inviter les candidats aux campagnes. Il pourra également consulter les rapports de résultats."
                       [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
+                      aria-label="Button that displays a tooltip in various positions" i18n>
   
                       Candidats
   
@@ -438,7 +438,7 @@
   
                       <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra créer/gérer/supprimer les utilisateurs."
                       [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
+                      aria-label="Button that displays a tooltip in various positions" i18n>
   
                       Utilisateurs
   
@@ -461,7 +461,7 @@
   
                     <div class="element-gestion-permition-header"matTooltip="(Compte > profil entreprise) : l’utilisateur aura accès au profil d’entreprise et pourra y modifier les informations."
                       [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
+                      aria-label="Button that displays a tooltip in various positions" i18n>
   
                       Profil entreprise
   
@@ -483,7 +483,7 @@
   
                       <div class="element-gestion-permition-header"matTooltip="(Testing > interview) : l’utilisateur pourra accéder au module Interview et inviter les candidats à participer à un entretien par visioconférence."
                       [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
+                      aria-label="Button that displays a tooltip in various positions" i18n>
   
                      Interview
   
@@ -505,7 +505,7 @@
   
                       <div class="element-gestion-permition-header"matTooltip="(Compte > protection des données) : l’utilisateur pourra gérer les paramètres de protection des données."
                       [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
+                      aria-label="Button that displays a tooltip in various positions" i18n>
   
                       Protection des données
   
@@ -525,7 +525,7 @@
                 </div>
   
                 <div class="footer-form-last">
-                  <button class="btn-gestion" type="submit">Sauvegarder</button>
+                  <button class="btn-gestion" type="submit" i18n>Sauvegarder</button>
                 </div>
               </div>
             </form>
@@ -565,7 +565,7 @@
 
           </div>
 
-          <button class="btn-header-contenu" (click)="param_cog()">
+          <button class="btn-header-contenu" (click)="param_cog()" i18n>
               <i class="far fa-plus-square btn-icon"  id="param-cog"></i> Ajouter utilisateur
           </button>
 
@@ -579,10 +579,10 @@
       <table class="table_user">
         <thead class="table_head">
             <tr class="table_row">
-                <th class="table_head_cell">Nom</th>
-                <th class="table_head_cell">Email</th>
-                <th class="table_head_cell">Privileges</th>
-                <th class="table_head_cell"></th>
+                <th class="table_head_cell" i18n>Nom</th>
+                <th class="table_head_cell" i18n>Email</th>
+                <th class="table_head_cell" i18n>Privileges</th>
+                <th class="table_head_cell" i18n></th>
                 
             </tr>
         </thead>

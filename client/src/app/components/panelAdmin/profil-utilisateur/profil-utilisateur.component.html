@@ -105,10 +105,10 @@
         </div>
 
         <div class="input-bloc">
-            <h3 class="input-title">Langue *</h3>
+            <h3 i18n class="input-title">Langue *</h3>
             <select [formControl]="langue" class="input-section1" name="langue" required>
-                <option value="Anglais">Anglais</option>
-                <option value="Francais">Français</option>
+                <option i18n value="Anglais">Anglais</option>
+                <option i18n value="Francais">Français</option>
             </select>
         </div>
       </div>
@@ -116,12 +116,12 @@
 
       <div class="form-line">
           <div class="input-bloc">
-              <h3 class="input-title" >N° de téléphone</h3>
+              <h3 i18n class="input-title" >N° de téléphone</h3>
               <input [formControl]="tel" name="phone" class="input-section1" maxlength="32" type="tel">
             </div>
     
             <div class="input-bloc">
-                <h3 class="input-title">Mobile</h3>
+                <h3 i18n class="input-title">Mobile</h3>
                 <input [formControl]="mobile" name="mobile" class="input-section1" maxlength="32" type="tel">
             </div>
       </div>
@@ -130,15 +130,15 @@
 
       <div class="form-line">
           <div class="input-bloc">
-            <h3 class="input-title">Fonction *</h3>
+            <h3 i18n class="input-title">Fonction *</h3>
             <select [formControl]="fonction" class="input-section1" name="fonction" required>
-                <option value="unknown" disabled="">-</option>
-                <option value="commercial">Commercial</option>
-                <option value="direction">Direction</option>
-                <option value="tech">Équipe technique</option>
-                <option value="marketing">Marketing/Communication</option>
-                <option value="rh">Ressources humaines</option>
-                <option value="other">Autre</option>
+                <option i18n value="unknown" disabled="">-</option>
+                <option i18n value="commercial">Commercial</option>
+                <option i18n value="direction">Direction</option>
+                <option i18n value="tech">Équipe technique</option>
+                <option i18n value="marketing">Marketing/Communication</option>
+                <option i18n value="rh">Ressources humaines</option>
+                <option i18n value="other">Autre</option>
             </select>
           </div>  
       </div>
@@ -146,7 +146,7 @@
 
       <div class="form-line">
         <div class="input-bloc">
-          <button (click)='updateprofil()' class="btn-submit" type="submit">Enregistrer</button>
+          <button i18n (click)='updateprofil()' class="btn-submit" type="submit">Enregistrer</button>
         </div>
       </div>
     </form>
@@ -157,7 +157,7 @@
 
       <div class="section-title">
         <i class="far fa-user-circle icon"></i>
-        <h2 class="title">Signature</h2>
+        <h2 i18n class="title">Signature</h2>
         
       </div>
 
@@ -166,7 +166,7 @@
               <div class="input-bloc">
 
                   <textarea [formControl]="signature" name="signature" id="signature" cols="100%" rows="10"></textarea>
-                <button (click)='updatesignature()' class="btn-submit" type="submit">Enregistrer</button>
+                <button i18n (click)='updatesignature()' class="btn-submit" type="submit">Enregistrer</button>
               </div>
             </div>
       </form>
@@ -177,28 +177,28 @@
 
       <div class="section-title">
         <i class="far fa-envelope-open icon"></i>
-        <h2 class="title"> Adresse Email</h2>
+        <h2 i18n class="title"> Adresse Email</h2>
       </div>
 
       <form action="">
 
               <div class="form-line">
                 <div class="input-bloc">
-                    <h3 class="input-title">Email actuel *</h3>
+                    <h3 i18n class="input-title">Email actuel *</h3>
                     <input [formControl]="email" name="current" class="input-section1" maxlength="64" type="email">
                 </div>
              </div>
 
               <div class="form-line">
                 <div class="input-bloc">
-                    <h3 class="input-title">Nouvel email *</h3>
+                    <h3 i18n class="input-title">Nouvel email *</h3>
                     <input [formControl]="email" name="new" class="input-section1" maxlength="64" type="email">
                 </div>
               </div>
 
               <div class="form-line">
                 <div class="input-bloc">
-                    <h3 class="input-title">Mot de passe *</h3>
+                    <h3 i18n class="input-title">Mot de passe *</h3>
                     <input name="password" class="input-section1" maxlength="64" type="password">
                 </div>
               </div>
@@ -206,7 +206,7 @@
               
               <div class="form-line">
                   <div class="input-bloc">
-                    <button (click)='updateemail()' class="btn-submit" type="submit">Enregistrer</button>
+                    <button i18n (click)='updateemail()' class="btn-submit" type="submit">Enregistrer</button>
                   </div>
               </div>
       </form>
@@ -217,27 +217,27 @@
       
       <div class="section-title">
         <i class="fas fa-lock icon"></i>
-        <h2 class="title"> Mot de passe</h2>
+        <h2 i18n class="title"> Mot de passe</h2>
       </div>
 
       <form action="">
                 <div class="form-line">
                 <div class="input-bloc">
-                    <h3 class="input-title">Mot de passe actuel *</h3>
+                    <h3 i18n class="input-title">Mot de passe actuel *</h3 i18n>
                     <input [formControl]="password" name="current" class="input-section1" maxlength="64" type="password">
                 </div>
              </div>
 
               <div class="form-line">
                 <div class="input-bloc">
-                    <h3 class="input-title">Nouveau mot de passe *</h3>
+                    <h3 i18n class="input-title">Nouveau mot de passe *</h3>
                     <input [formControl]="newpassword" name="new" class="input-section1" maxlength="64" type="password">
                 </div>
               </div>
 
               <div class="form-line">
                 <div class="input-bloc">
-                    <h3 class="input-title">Confirmer le mot de passe *</h3>
+                    <h3 i18n class="input-title">Confirmer le mot de passe *</h3>
                     <input name="confirm" class="input-section1" maxlength="64" type="password">
                 </div>
               </div>
@@ -245,7 +245,7 @@
               
               <div class="form-line">
                   <div class="input-bloc">
-                    <button  (click)="updatepassword()"
+                    <button i18n (click)="updatepassword()"
                      class="btn-submit" 
                      type="submit">Enregistrer</button>
                   </div>

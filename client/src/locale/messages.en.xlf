@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="5268868541bca304938ca16ee387265117be6069" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Historique des factures</source>
+        <target>History of factures</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2f933b826a570836cab04f683970a2d22068458c" datatype="html">
+        <source>Date</source>
+        <target>Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9bf76ef012909b8620e807d014554d3bb97c4824" datatype="html">
+        <source>Montant</source>
+        <target>Sum</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2f673bb913f414816f57ea4420da7d3c63856322" datatype="html">
+        <source>Statut</source>
+        <target>Status</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9f9ab9120fd0661b3acd5fbb1c657088165ed91a" datatype="html">
+        <source>Numéro de facture</source>
+        <target>Bill number</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c36b5f9fb44b479932caf1500ff163235c22707e" datatype="html">
+        <source>Voir</source>
+        <target>See</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4a57eaca9a982c80b653fb19649f2a99f50a600c" datatype="html">
+        <source>Télécharger</source>
+        <target>Download</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2b729543ccbb40893bbea4db51a26a8d7b78ea17" datatype="html">
+        <source>Se désabonner</source>
+        <target>Unsuscribe</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

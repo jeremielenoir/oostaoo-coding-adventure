@@ -3,29 +3,29 @@
 
   <div class="modall">
     <div class="modall-header">
-      <h3 class="modall-title">
+      <h3 i18n class="modall-title">
         <span class="icon-modal-header">
           <i class="fas fa-cog icon-header"></i>
         </span>
         Options des événements
-      </h3>
+      </h3 i18n>
     </div>
 
     <div class="modall-content">
       <form (submit)="hundeleSubmit()">
         <label class="checked-block" for="check-1">
-          <span class="check-label">Invitation de candidat</span>
+          <span i18n class="check-label">Invitation de candidat</span>
           <input type="checkbox" id="check-1" class="checkbox" #check1 />
           <span class="checkbox-span"></span>
         </label>
 
         <label class="checked-block" for="check-2">
-          <span class="check-label">Le candidat termine l'évaluation technique</span>
+          <span i18n class="check-label">Le candidat termine l'évaluation technique</span>
           <input type="checkbox" id="check-2" class="checkbox" #check2 />
           <span class="checkbox-span"></span>
         </label>
 
-        <button class="btn-modal">enregistre</button>
+        <button i18n class="btn-modal">enregistre</button>
       </form>
     </div>
   </div>
@@ -41,7 +41,7 @@
       [class.info-content-img-header-dashboard-MinSize]="IsBoaleanSmallSidibar"><img
         src="./assets/Coding-game-img/SVG-menu-Dashboard/orange/Tests.svg" alt="" />
     </figure>
-    <h3 *ngIf="!IsBoaleanSmallSidibar" class="info-title-header-dashboard">
+    <h3 i18n *ngIf="!IsBoaleanSmallSidibar" class="info-title-header-dashboard">
       NOTIFICATIONS
     </h3>
 
@@ -54,7 +54,7 @@
   <div class="sidibar-content">
     <div class="list-sidibar-left">
 
-      <h2 *ngIf="candidatbydate.length === 0 " class="no-tofication">Aucune notication</h2>
+      <h2 i18n *ngIf="candidatbydate.length === 0 " class="no-tofication">Aucune notication</h2>
 
       <div *ngFor="let campaing of campaignsFromParent">
 

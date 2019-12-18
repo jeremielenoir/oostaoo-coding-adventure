@@ -2,8 +2,8 @@
   <div id="segment1">
     <p id="diagram">diagram</p>
     <div id="segment1-content">
-      <p>point</p>
-      <p>temps</p>
+      <p i18n>point</p>
+      <p i18n>temps</p>
     </div>
     <p id="arrow"><i class="fas fa-chevron-right"></i></p>
   </div>
@@ -11,7 +11,7 @@
   <div id="segment2">
     <div id="segment2-content">
       <p id="techno">aws</p>
-      <p>point</p>
+      <p i18n>point</p i18n>
     </div>
   </div>
 
@@ -29,7 +29,7 @@
         RETOUR
       </button>
       <button class="custom-buttom" mat-flat-button id="save" [routerLink]="['/dashboard/campaigns']"
-        (click)="postCampagne()">
+        (click)="postCampagne()" i18n>
         ENREGISTRER
       </button>
 
@@ -41,15 +41,15 @@
   <div class="example-container">
     <div class="bar" id="">
       <i class="far fa-question-circle bar-icon"></i>
-      <p class="bar-text">Notre collection de questions</p>
+      <p class="bar-text" i18n>Notre collection de questions</p>
       <div id="div-search">
         <input type="text" id="search-input" placeholder="Recherche" name="search" [(ngModel)]="searchText" />
         <i class="fas fa-search search-icon"></i>
       </div>
-      <button mat-flat-button id="bar-btn-search" class="custom-buttom">
+      <button mat-flat-button id="bar-btn-search" class="custom-buttom" i18n>
         Recherche avancée
       </button>
-      <button mat-flat-button class="custom-buttom">
+      <button mat-flat-button class="custom-buttom" i18n>
         Trier par <i class="fas fa-chevron-right"></i>
       </button>
     </div>
@@ -105,10 +105,10 @@
     <div class="bar" id="">
       <div id="bar2-left">
         <i class="far fa-list-alt bar-icon"></i>
-        <p class="bar-text">Votre Campagne</p>
+        <p class="bar-text" i18n>Votre Campagne</p>
       </div>
       <div id="bar2-right">
-        <button mat-flat-button class="custom-buttom" color="primary">
+        <button mat-flat-button class="custom-buttom" color="primary" i18n>
           <i class="fas fa-play"></i> Prévisualiser
         </button>
         <button mat-flat-button class="custom-buttom" color="primary">
@@ -121,7 +121,7 @@
 
     <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="allQuestionLevel" [cdkDropListConnectedTo]="[todoList]"
       class="example-list" (cdkDropListDropped)="drop($event)" #droplist>
-      <p id="drop-text">Glissez/déposez une question ici</p>
+      <p id="drop-text" i18n>Glissez/déposez une question ici</p>
       <div class=" example-box" *ngFor="let item of allQuestionLevel" cdkDrag>
 
         <div class="partie-left-example-box">

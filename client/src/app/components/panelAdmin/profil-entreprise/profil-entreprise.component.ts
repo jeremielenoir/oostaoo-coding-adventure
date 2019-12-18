@@ -36,6 +36,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   public current2 = 4;
   public currentTotal = 4;
   public entreprise: any;
+  public isVerifUser: any;
 
 
   public entre: any;
