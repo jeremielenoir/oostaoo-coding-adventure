@@ -29,3 +29,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## i18n
 
 To translate the application in english, fill target tags within src/locale/messages.en.xlf
+
+Run `npm run start:en -- --port=4201` to serve the app in english 
