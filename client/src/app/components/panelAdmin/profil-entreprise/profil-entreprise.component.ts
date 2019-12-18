@@ -7,6 +7,8 @@ import {
 } from "src/app/api-client/api-client.service";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 
+
+
 @Component({
   selector: "app-profil-entreprise",
   templateUrl: "./profil-entreprise.component.html",
@@ -36,7 +38,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   public current2 = 4;
   public currentTotal = 4;
   public entreprise: any;
-
+  public isVerifUser: any;
 
   public entre: any;
 
@@ -1108,7 +1110,7 @@ export class ProfilEntrepriseComponent implements OnInit {
     ) {
       this.cadrageImgBooleanStateLast = false;
 
-    
+
       this.uploadimgLast.nativeElement.src = URL.createObjectURL(
         event.target.files[0]
       );

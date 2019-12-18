@@ -24,6 +24,14 @@
             "es5BrowserSupport": true
           },
           "configurations": {
+            "en": {
+              "aot": true,
+              "outputPath": "dist/client-en/",
+              "i18nFile": "src/locale/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "i18nMissingTranslation": "error"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -59,7 +67,10 @@
           "configurations": {
             "production": {
               "browserTarget": "client:build:production"
-            }
+            },
+              "en": {
+                "browserTarget": "client:build:en"
+              }
           }
         },
         "extract-i18n": {

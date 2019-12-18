@@ -32,6 +32,7 @@ export class CampagneComponent implements OnInit {
   public searchText = '';
   public result: any;
   public test: any;
+  public checked: any;
 
 
 
