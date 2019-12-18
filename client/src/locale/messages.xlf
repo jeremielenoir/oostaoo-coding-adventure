@@ -2,9 +2,880 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="c78a953787bef282f37b6dd3ddafde5e4a8b1527" datatype="html">
+        <source>
+          Testez les développeurs
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cb62377beeb5d8f6b4cff749f6032d95f41ba687" datatype="html">
+        <source>
+          Profils recherchés
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a6fe48bfbf0dc07537c3d0f6b0cb2b75366ea50c" datatype="html">
+        <source>
+          Technologies
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="560a5f8202199febb1bd22d2ac1fed94dab40c23" datatype="html">
+        <source>Fonctionnalités</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="21fded46b491c78ba3517620dccc07ea6bb4054e" datatype="html">
+        <source>Prix</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="55a57e6165759f4c48fd86a29d674304066044e9" datatype="html">
+        <source>Connexion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ed325b525a8a185089034c5d8beda3ab99e7e7ed" datatype="html">
+        <source>Évaluez et testez les développeurs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e1fb9fe2aa7b7a7ea7ace5257ed6a82ec1623340" datatype="html">
+        <source>30 jours d&apos;evaluation gratuits</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="715bc3dfb6355b0be6269649e9c28e8f4409f5fc" datatype="html">
+        <source>
+                                Envoyer vos tests d&apos;évaluation en 10 minutes
+                            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0856035eee7a0a8f878b5a082d4b49007920d1dc" datatype="html">
+        <source>Découvrir les fonctionnalités</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bc48eea4e23436e31b7c4c802d8fcf8971385556" datatype="html">
+        <source>
+                        Visualisez les resultats de vos candidats
+                    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b97ba263d66f48f4108f1daad25eb8c354bc9b49" datatype="html">
+        <source>Voir un rapport detaillé</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="69f28b97b21fe4dd95ae60a0feedbcbfeb2ece60" datatype="html">
+        <source>
+                            Nos prix
+                        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7e9c4cb587a34c6de538dec6b69328e18c1cbb94" datatype="html">
+        <source>
+                            Version gratuite
+                        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d6d90b807c1d48158d4eb24442bc31053e71db28" datatype="html">
+        <source>Démarrer avec ROODEO</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e6bddec48bc96d583c246093816a810fdd4279c3" datatype="html">
+        <source>
+          TESTEZ LES DÉVELOPPEURS
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/second-section/second-section.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="953ad2a43146819c7f747c2df94ba421e6e00de1" datatype="html">
+        <source>
+          PROFILS RECHERCHÉS
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/second-section/second-section.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e08b378adfcf859d33ee40abc2d272d9fb6aedea" datatype="html">
+        <source>développeurs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/counter-anim/counter-anim.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fcc18ee7d27431f523172432e00b7714bb77c501" datatype="html">
+        <source>de réduction des coûts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/counter-anim/counter-anim.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a74874514fccae6fc8c87cd5007c5d39a0baebbb" datatype="html">
+        <source>tests d&apos;évaluation effectués</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/counter-anim/counter-anim.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="193190003971c34d9668ceb1b81d19fff176be13" datatype="html">
+        <source>de clients satisfaits</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/counter-anim/counter-anim.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="308d883e1d2bc300e99d8fdb1eae282235704a35" datatype="html">
+        <source>- Développeur Expert Wordpress - Fullstacks</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/main/main.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/main/main.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b055f1636174cf678dfbf9de7ba0f0131a267cb8" datatype="html">
+        <source>- Intégrateur Web &amp; Emailing - Développeur Frontend</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/main/main.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/main/main.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="753cd5ddfa7482003cf5171825514cd12ec6c80e" datatype="html">
+        <source>- Développeur Backend Nodejs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/main/main.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="21f2689d0e38f9f284a1a4ad812a7fe0126ea6c6" datatype="html">
+        <source>- Developpeur Back-End Wordpress Prestashop Symfony</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/main/main.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/main/main.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="85cd747a0f0fabcbd7cdb6bbaa4bd321bf2d2c8a" datatype="html">
+        <source>- Développeur Full Stack Javascript Css Php</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/main/main.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/main/main.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b8791b05cd32f509ee770d0a0ebf86237920f996" datatype="html">
+        <source>- Intégrateur Web Responsive | Développeur Front End</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/main/main.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/main/main.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eda1c81af9d1bbc8324fc5db9390c952d7b3bf5d" datatype="html">
+        <source>
+               les recruteurs <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>nous font confiance<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/slider/slider.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f11719696c028c86936e7075a7f6d3c54d6070a1" datatype="html">
+        <source>
+
+                          Dassault Systèmes a choisi CodinGame pour évaluer et certifier ses équipes sur l’ensemble
+                          de son réseau mondial grâce à la simplicité de l&apos;outil, l’excellence du soutien apporté par CodinGame, et la rapidité de prise en compte de nos demandes d’évolution. L’évaluation
+                          a permis d’augmenter la confiance et la reconnaissance de chacun au sein de l’entreprise.
+                      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/slider/slider.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="27bc7f83fad8c7dfcca61b8b156a9c25e961c98f" datatype="html">
+        <source>
+                          CodinGame Assessment est arrivée en tête de notre comparatif des différentes solutions de tests
+                          disponibles sur le marché grâce à sa qualité de service, son prix et sa praticité. CodinGame nous permet de participer activement aux évolutions
+                          de sa plate-forme, nous assurant une prise en compte de nos besoins futurs.
+                        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/slider/slider.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="85285a8b58be95c75ec2480b089fc41ef68458aa" datatype="html">
+        <source>Modifier mon offre</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fa248c03293720776df1acfd939391903b6282d7" datatype="html">
+        <source>mon offre</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="acf908dad23cea26ffac1235e208ad7aaf2ec3ec" datatype="html">
+        <source>prochaine facture</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6aaa995c57a253fee9167b781c0c72ff83f81913" datatype="html">
+        <source>tests utilisés</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="238632072575a27d5da5a2a4629d3b8fb287873d" datatype="html">
+        <source>questions utilisées</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7ee96503e9bb4102b77658aa72480e68421f58fb" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Growth<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/> annuel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dac5c92a019ebbcc24a41113ef1d0064f484b24a" datatype="html">
+        <source>
+          Pour les entreprises qui recrutent quelques développeurs dans les
+          prochains mois
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="71fe62854ca5f986a52e6bc6e3ac972e4e760d0c" datatype="html">
+        <source>Accès à un set de 700+ questions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="150aa716cfd9d175c6df7b4bd2601e1f17bf193f" datatype="html">
+        <source>Questions de niveau Junior à Senior</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bec8671dc2f700bbac5504fbc027ac4d755976c3" datatype="html">
+        <source>10 questions personnalisées</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="393b57f2f99a3c35ba02308a935e48662b19a059" datatype="html">
+        <source>Tests et candidats illimités</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aa2368b64c4d72620713f844afd2e1aba22b528f" datatype="html">
+        <source>3 heures d&apos;entretiens techniques à distance</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="24ac09fa2e68d9e2ce6c4fcf7f30dfbbb7c3ddce" datatype="html">
+        <source>Support par chat sous 24 heures</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fc2e1fcafb26820688df0ff137c32ddec2cde494" datatype="html">
+        <source>
+        PASSEZ À L&apos;ILLIMITÉ
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0095b2087250c26a4265fa4733025df3e3214fb6" datatype="html">
+        <source>* Facturé annuellement</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/navbar/popup-mon-offre.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="73d796c0c3362dc270960637037d27cc8235d893" datatype="html">
+        <source>
+  <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Nouvelle campagne
+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/integration-bouton/integration-bouton.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1667aeb97874dd7c044b3a9f1e0d0dedb9a4160f" datatype="html">
+        <source>Sélectionnez un rôle</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="729f40586c440ad78916e9c42b386681c30928a6" datatype="html">
+        <source>Sélectionnez les technologies à
+              tester</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="79e2fa533af65eb23eb7268521c4a25afe9fd808" datatype="html">
+        <source>Sélectionnez l&apos;expérience
+          requise</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7ee8605f56bbaf482a238f694390c6789502f828" datatype="html">
+        <source>Sénior
+              <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>
+              <x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6f830d4fd5cf977b24157cff296b20e795cfbd47" datatype="html">
+        <source>
+              Expert
+              <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>
+              <x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="74310d6088a68c37560a021d03467d626c128335" datatype="html">
+        <source>
+            Étapes suivante : Paramètres
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component.html</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="889e051719fd1ce6eba485feb67eabfcec4bb43c" datatype="html">
+        <source>
+              Nom de la campagne
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage2-component/nouvelle-campagne2.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fb244fd6d33cf6a7a20652fea4ccd378a7bbc876" datatype="html">
+        <source>
+          En quelle langue les questions doivent-elles être posées à vos
+          candidats ?
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage2-component/nouvelle-campagne2.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="48d513e3b8e77ff583f78f10eb0fd0a32d2fa8d8" datatype="html">
+        <source>
+              Voulez-vous empêcher l&apos;utilisation du copier/coller pendant le test ?
+              
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage2-component/nouvelle-campagne2.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7a823bbc2e38a38b012ad367f7ee8cabc4807dc" datatype="html">
+        <source>
+                Souhaitez-vous envoyer le rapport simplifié au candidat à l&apos;issue de
+                son test ?
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage2-component/nouvelle-campagne2.component.html</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1cde0ecb1655843b8b682674d1ed9ff8138073b2" datatype="html">
+        <source>point</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/questions/questions.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b89c80fdaa0c8f645b2189cc72843083aa94894f" datatype="html">
+        <source>temps</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="25c451c6ccad19d673a3db408414e8b7cd44408b" datatype="html">
+        <source>
+        ENREGISTRER
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2620653e9cb9b1c1c3b46ff70d72ca18fe464b9a" datatype="html">
+        <source>Notre collection de questions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/questions/questions.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0a06428d0f334ba3dc2ca70ee47dc2f3b5cb8fcd" datatype="html">
+        <source>
+        Recherche avancée
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e8233ef6267c6b3087ba99068395a2e51b73e2db" datatype="html">
+        <source>
+        Trier par <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8f2f5246347950cd225371d4cfb2be0ba90b8121" datatype="html">
+        <source>Votre Campagne</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component.html</context>
+          <context context-type="linenumber">108</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/questions/questions.component.html</context>
+          <context context-type="linenumber">121</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3bd59f4bef4530da7e6b353c1f2f1e4607267f8e" datatype="html">
+        <source>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Prévisualiser
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component.html</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="49fc6cd967a6c912bb4c64a4a5bc085fcafc5f80" datatype="html">
+        <source>Glissez/déposez une question ici</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/questions/questions.component.html</context>
+          <context context-type="linenumber">141</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b78205657419c00c30c5054318e813246941be18" datatype="html">
+        <source>Dupliquer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/campagne/campagne.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5b4987cd016e09fa3dadc6d1eb646eac9473d4fb" datatype="html">
+        <source>Désépingler</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/campagne/campagne.component.html</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="59537bec84762df64d1781a6fc9fb590a6ca41fc" datatype="html">
+        <source>Epingler</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/campagne/campagne.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="451f4a2c29462cf28e8cf71b9b400fb4e3f3d502" datatype="html">
+        <source>Désarchiver</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/campagne/campagne.component.html</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f0bedbb5fdcc16646e2c38808c0289bc1bddec3b" datatype="html">
+        <source>Archiver</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/campagne/campagne.component.html</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e32da846622c2c2eb7a59b745110dbbdb05407b7" datatype="html">
+        <source>Supprimer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/campagne/campagne.component.html</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3c0c9205218e4c7f2a89ea1d218b85b6157a93a8" datatype="html">
+        <source>
+        <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+        <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        Options des événements
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/sidebar-right/sidebar-right.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="113abc210fdea44d0603ae2a84e356616b050272" datatype="html">
+        <source>Invitation de candidat</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/sidebar-right/sidebar-right.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fe93cb697ef752856e7aabbeb07efc0411638418" datatype="html">
+        <source>Le candidat termine l&apos;évaluation technique</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/sidebar-right/sidebar-right.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0032001747b3a80b0b92fbc31735ae201f1bc0a6" datatype="html">
+        <source>enregistre</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/sidebar-right/sidebar-right.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="74f7b9b094c64785b508d970cd97f8070b2d5446" datatype="html">
+        <source>
+      NOTIFICATIONS
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/sidebar-right/sidebar-right.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3ffa420132266395c34ce2bd55bfa479c9de04c8" datatype="html">
+        <source>Aucune notication</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/sidebar-right/sidebar-right.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f69045b2b0d4164b21fd047bec81325eea4f8655" datatype="html">
+        <source>Langue *</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">108</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0183cd55409bbd9e55d946b1093f25b4e623727d" datatype="html">
+        <source>Anglais</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="19abb683d505ad4f5e0959c18e9310b8f7c55290" datatype="html">
+        <source>Français</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2df562afdc05e54e05ec1837717398464084564a" datatype="html">
+        <source>N° de téléphone</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7ef67f76ab81c082a91782412af3639cca2126de" datatype="html">
+        <source>Mobile</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="14521f0c2c21d114461d229cdc54af426675f216" datatype="html">
+        <source>Fonction *</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">133</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="37a0c0fffef57ba4b1fe7bf2318fc9211267286e" datatype="html">
+        <source>-</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="58d58f9e033cbe924a466f7989c752e6c832a6f2" datatype="html">
+        <source>Commercial</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9200e09686136a1d42adfb89c12fbfef2deea125" datatype="html">
+        <source>Direction</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="73d26e3237e05e2889fdaf367db2f1e8e6b322f1" datatype="html">
+        <source>Équipe technique</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">138</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1c4b1e106133d0d9dacd2188a63692fb2a04bb11" datatype="html">
+        <source>Marketing/Communication</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">139</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a5a1d19e501a65f64a31021dece88c058e88ddcd" datatype="html">
+        <source>Ressources humaines</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">140</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="52f62b0fcce72dcae528f3814ef2900f0c67a9b4" datatype="html">
+        <source>Autre</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">141</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ed4e9803a21e1ebd2da72379252b471d64eda506" datatype="html">
+        <source>Enregistrer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">149</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">169</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">209</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">250</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c08ad7c89db46b0fc433db58d68ee336b16b132d" datatype="html">
+        <source>Signature</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="99ff748c40b0364edf675c99aca8f8b9fdb62bf7" datatype="html">
+        <source> Adresse Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">180</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b023617e41ae0137022e715c555ed0374ff338ca" datatype="html">
+        <source>Email actuel *</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">187</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="338cf401abdaeb0042d5675bdaca01db85956454" datatype="html">
+        <source>Nouvel email *</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">194</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="701eb4b41e6d24e38180773f80d700042aeb0e25" datatype="html">
+        <source>Mot de passe *</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">201</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7fd8ce11420949cf92c67f48c500d2deaf6abbf8" datatype="html">
+        <source> Mot de passe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">220</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5b715cfd5d5f21cee0232065fa0415548d95d356" datatype="html">
+        <source>Mot de passe actuel *</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">226</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9242e7f31b870aebf2acde086fd39365e3ddd99f" datatype="html">
+        <source>Nouveau mot de passe *</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">233</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cee7b7572644a53d6bb7f192125e522c96211148" datatype="html">
+        <source>Confirmer le mot de passe *</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-utilisateur/profil-utilisateur.component.html</context>
+          <context context-type="linenumber">240</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="5268868541bca304938ca16ee387265117be6069" datatype="html">
         <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Historique des factures</source>
-        <target>buildings</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
           <context context-type="linenumber">9</context>
@@ -12,7 +883,6 @@
       </trans-unit>
       <trans-unit id="2f933b826a570836cab04f683970a2d22068458c" datatype="html">
         <source>Date</source>
-        <target>the date</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
           <context context-type="linenumber">17</context>
@@ -20,10 +890,1183 @@
       </trans-unit>
       <trans-unit id="9bf76ef012909b8620e807d014554d3bb97c4824" datatype="html">
         <source>Montant</source>
-        <target>Sum</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
           <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2f673bb913f414816f57ea4420da7d3c63856322" datatype="html">
+        <source>Statut</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9f9ab9120fd0661b3acd5fbb1c657088165ed91a" datatype="html">
+        <source>Numéro de facture</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c36b5f9fb44b479932caf1500ff163235c22707e" datatype="html">
+        <source>Voir</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4a57eaca9a982c80b653fb19649f2a99f50a600c" datatype="html">
+        <source>Télécharger</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="332ed5e65ccb31f0d73c54c5f4cef0442b96abe5" datatype="html">
+        <source> <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Détails de l&apos;abonnement</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2b729543ccbb40893bbea4db51a26a8d7b78ea17" datatype="html">
+        <source>Se désabonner</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="edd7af8f4325bc678dc988233df3b2a3fab40253" datatype="html">
+        <source>Prochaine <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/> facturation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ec8c2513d4789a1275fcbbd903fcf6950fbf2117" datatype="html">
+        <source> <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Carte de crédit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6bc7486c3a35c7960481521f1d79128440446372" datatype="html">
+        <source>Numéro de carte : MasterCard ***-9376</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2a164939ce14ce18169f946603172cbdb06cda52" datatype="html">
+        <source>Expire le : <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/> 01/2021</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d15bda3a65f69a753035f13bcb6d8a40b7455552" datatype="html">
+        <source>Modifier</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/facturation/facturation.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2174509116a9c94c4475768b902758ec35d31b1c" datatype="html">
+        <source> <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Protection des données</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ce995ba3443a3d7bd846603b7304c9bd267c2fb6" datatype="html">
+        <source>Le RGPD exige que les rôles de responsable de traitement et de sous-traitant soient clairement établis. Pour la plupart des traitements, CodinGame agit en tant que sous-traitant et vous, le client, agissez en tant que responsable de traitement, notamment pour toutes les données personnelles des candidats.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fe831be6bff1e8d9742a393450054159f237ba1a" datatype="html">
+        <source>Les documents ci-après (Conditions d’utilisation, Conditions de vente, DPA, Politique de confidentialité) forment la base contractuelle de notre relation et détaillent nos rôles respectifs. Dans tous les cas les deux parties s’engagent à respecter la législation relative à la protection des données.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2469b57da5c93598a2ccc8d8325e603f42c869c6" datatype="html">
+        <source>Conditions d&apos;utilisation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a9688d778724b082dfd941f2c49ee57e3582bdef" datatype="html">
+        <source>Conditions de vente</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="798afb8c2b4cceb765cae103040fdd877f7a4a6a" datatype="html">
+        <source>DPA</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4d47099fd88c8455b39f5fd70bc859759dc68765" datatype="html">
+        <source>Politique de confidentialité</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="275c097b6698985310f9dff0f83ec1a69895fa60" datatype="html">
+        <source>Email de votre Data Privacy Officer <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b4440b0e6afa3850840bc42f261630da529762f7" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Conservation des données</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="be7c564b2f9cb02460e45e838408a0779baf110d" datatype="html">
+        <source>Les données personnelles ne doivent pas être conservées au-delà du temps nécessaire à l&apos;accomplissement de l&apos;objectif poursuivi lors de leur collecte.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="05c18b2aa2076838a05be430fcd2c68338399500" datatype="html">
+        <source>En tant que responsable de traitement des données personnelles des candidats c&apos;est à vous de décider de la durée de conservation de ces données.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7627b11320b0162ef46c460a5f98154d8977f059" datatype="html">
+        <source>Jours avant anonymisation <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="708d55cbaff41b63a3926ddeb64f63dc5d5c28b1" datatype="html">
+        <source>Jours avant suppression <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0bca6c9602804ee8237b2ba07e7c64b9f2fd5831" datatype="html">
+        <source> <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Accès au données</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fc50c311d2af6fffec893ea2b21e89c0ce152f98" datatype="html">
+        <source>Contactez-nous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d9e0e8c0f2efef4dd51a0646ee432d1a61cb9eda" datatype="html">
+        <source> <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Suppression du compte</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4682195588e3c706292468217e23e2bc0fd98d07" datatype="html">
+        <source>Toutes vos données, y compris celles des candidats, seront anonymisées et ne seront plus accessibles.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/protection-de-donnees/protection-de-donnees.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d9c9cfb9c22682afa2665b50d392c195842322cf" datatype="html">
+        <source>
+
+                  Ajouter un utilisateur
+
+                </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3ddeafc48ff7377b3486a31464b5fe9ce6c2d6bc" datatype="html">
+        <source>Obligatoire</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">307</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">328</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ada46dd20b8fc9a5d98b02832be6ec5306629ee5" datatype="html">
+        <source>nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cd0e7652994470494f56fbff4807b49000527466" datatype="html">
+        <source>PERMISSIONS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">364</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="113668bf4d34edea87d7aa61aa80bdfc9f0b3f15" datatype="html">
+        <source>
+
+                      facturation
+
+                    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="19d83b2c2ef23fba70eca4633b48f7ab36f86931" datatype="html">
+        <source>
+
+                    Campagnes
+
+                    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">128</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="66baf0e8f4212b82acc5d8b376e41fece2c42f8d" datatype="html">
+        <source>
+
+                    Candidats
+
+                    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">149</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f4ab245905ffd5a1e16ad36d0754889a9d5b23af" datatype="html">
+        <source>
+
+                    Utilisateurs
+
+                    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">172</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="92d784d43a38346ea302d13873c0f65546b0eb76" datatype="html">
+        <source>
+
+                    Profil entreprise
+
+                  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">195</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2570338f3538d4a004fb3b0a7ef53d6a8c528233" datatype="html">
+        <source>
+
+                   Interview
+
+                    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">217</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="756258892cf6765026766d4c3d48ec81bd29afe9" datatype="html">
+        <source>
+
+                    Protection des données
+
+                    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">239</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4bdb8f3f63d2c92e549cc82db1180879ea9de1cf" datatype="html">
+        <source>
+  
+                      Modifier l&apos;utilisateur
+  
+                  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">285</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bb71bd4a3723326e389192f32a24eaaf2305093e" datatype="html">
+        <source>prenom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">305</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ba40ce72bfa99e1134297faccbb942f6c8cf20ae" datatype="html">
+        <source>
+  
+                      Campagnes
+  
+                      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">395</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ddc010f044036d2e6632edd9ae60dd9375f16516" datatype="html">
+        <source>
+  
+                      Candidats
+  
+                      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">418</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3953d6a2ef78c23196887be2c3ee7cf4b6c3469a" datatype="html">
+        <source>
+  
+                      Utilisateurs
+  
+                      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">441</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c9258dc448a1d6353244787701e73909b5c7177b" datatype="html">
+        <source>
+  
+                      Profil entreprise
+  
+                    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">464</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d84ac78e5b23344ac7f0188122d1f15b090af890" datatype="html">
+        <source>
+  
+                     Interview
+  
+                      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">486</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4bb753a33f87790a2aa0dff9a9f9da9065b998e6" datatype="html">
+        <source>
+  
+                      Protection des données
+  
+                      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">508</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d21564c479b0eb98a9d2e8c22e3bf4e92eb2d6a1" datatype="html">
+        <source>Sauvegarder</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">528</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d89a5f9f265860f18c53f91ac652d3716e530754" datatype="html">
+        <source>
+              <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Ajouter utilisateur
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">568</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="01afa66a69c6cf5671972200a4e4e2720815b344" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">582</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/candidats-form/candidats-form.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="244aae9346da82b0922506c2d2581373a15641cc" datatype="html">
+        <source>Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">583</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e6deb306d99c3da64ee4436557039fbcbc45fea2" datatype="html">
+        <source>Privileges</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/compte-utilisateurs/utilisateurs.component.html</context>
+          <context context-type="linenumber">584</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="095251e18316664f72427a9dcee50a8751a7ac3d" datatype="html">
+        <source>Nom de l&apos;entreprise</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">413</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="81a2ddc4acb5136f89b7f7aa30964e8783435e27" datatype="html">
+        <source>Email de l&apos;entreprise</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="911209caeed1c1bcf67c07fecff548315d4123e3" datatype="html">
+        <source>Numéro de téléphone</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">440</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7d9c7476f7ea0959d1e6e24abc2987f7dd9cf4ca" datatype="html">
+        <source>Personnalisation entreprise</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c4bbba320de3a1a9fec64f357ed656826506b9bc" datatype="html">
+        <source>Bienvenue sur la page de personnalisation de votre entreprise, avant
+                    de pouvoir modifier les informations sur votre entreprise, merci de bien vouloir
+                    remplir le formulaire ci-contre.
+                  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3ab24cbff2dd5bd14fc05d8ae15d8cbf405ae253" datatype="html">
+        <source>Une fois le formulaire remplis vous pourrez gérer les informations de votre entreprise comme,
+                    les nombres d&apos;employés, la langue de votre entreprise, le lien de votre site web, etc.
+                   </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3d2db956d6917b16316766f7fb94a9d0ac98b6ee" datatype="html">
+        <source>
+            
+                          Déposez votre image ici
+            
+                      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">140</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="69b00905c86061c21a72f61f2bb3253a9157b687" datatype="html">
+        <source>ou télécharger une photo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">169</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0fbf8fb6ec735a590ddbf207da2a44212da51f16" datatype="html">
+        <source>Fichier non supporté</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">165</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="72a7143f7cf06514d2ae3eb28d6e7ca82ccdfdce" datatype="html">
+        <source>valider</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5927b0eeb9bf226ca5e6926bc8db7a8cc2e24e8d" datatype="html">
+        <source>annuler</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0563a2056de1fd795608ea75773b697f8d5e536f" datatype="html">
+        <source>Choisissez votre langue</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">253</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2b6cc4ffd5eb7285eead667fd92aba7dee3ac635" datatype="html">
+        <source>Lien vidéo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">269</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="af8a50c76d765da8aeb56a336920b54b02113e46" datatype="html">
+        <source>Teaser de l&apos;entreprise</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">297</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">531</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0cecf0ad902992996460665658fcf0f01ef383dc" datatype="html">
+        <source>ENREGISTRER LES CHANGEMENTS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">315</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">634</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a208146a5afb94ea7946fe628aa570cb607fafb7" datatype="html">
+        <source>
+                          Éditez les détails de votre entreprise en Anglais
+                          <x id="START_TAG_FIGURE" ctype="x-figure" equiv-text="&lt;figure&gt;"/><x id="TAG_IMG" ctype="image" equiv-text="&lt;img/&gt;"/><x id="CLOSE_TAG_FIGURE" ctype="x-figure" equiv-text="&lt;/figure&gt;"/>
+                      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">333</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2e117ac1a5b713bdfca735739a40142e4e541b9a" datatype="html">
+        <source>Logo de l&apos;entreprise</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">380</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="575878045fc3e2146097c162656415c2f296a255" datatype="html">
+        <source>ENVOYER</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">392</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8872f863dffa49288ce9ed09c207d331910714b2" datatype="html">
+        <source>SUPPRIMER</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">393</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cebb5d6f9d665c5e84de4d37e298e8d068e1a07b" datatype="html">
+        <source>4 Mo max.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">397</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7ba912b891f29537e92442ddbf3596d64c72ff12" datatype="html">
+        <source>Taille recommandée : 500 x 500px</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">398</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d255e5b64092d51df1e79fda847907ec802b2e07" datatype="html">
+        <source>Types de fichier recommandés : JPEG, PNG, GIF</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">399</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b28fe7340f098ad9a04f01a2be36474672f27f65" datatype="html">
+        <source>Adresse email de l&apos;entreprise</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">426</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b67109250b78f59ac1ba6c210b561ee4e034fbe9" datatype="html">
+        <source>Industrie</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">454</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="821c3836b51f04ed5c3ed6cbbd10123450d449ab" datatype="html">
+        <source>Nombre d&apos;employés</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">471</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7ef7dded9e9f24b673f634ade3b42074ce7da85f" datatype="html">
+        <source>Nombre de développeurs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">487</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e36b59fe4260a80d72b13a2da267fb175497b844" datatype="html">
+        <source>Ajouter des images (10 max)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">546</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="21e51c09b943b12fe0fa747d2f7b699750e84c07" datatype="html">
+        <source>
+                                <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+                                Facebook
+                              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">601</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5c13cd085c12b977da05ed67b94b5522beaf6262" datatype="html">
+        <source>
+                                <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+                                Twitter
+                              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">618</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3d543a5dcd4a0385c858cb6593ab845b7e758610" datatype="html">
+        <source>Complétion de votre fiche</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">655</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/profil-entreprise/profil-entreprise.component.html</context>
+          <context context-type="linenumber">679</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a29ae3e5d48a23c2cdcd5464e94642f06d822301" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Candidats</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/edit-campagne.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dbb0950b1515c8f9ea28b1df54ef7e49e2196b97" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Questions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/edit-campagne.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6a1c29f54b450bbc79a9c8f3ccc2998288c1c51c" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Paramètres</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/edit-campagne.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3fb04e813d27363f9e02f2260994d20a0110df19" datatype="html">
+        <source>
+          Score moyen <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          attendu
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/questions/questions.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bd4c4758541f14f8c5cc83e40477cebd0ca6945e" datatype="html">
+        <source>diagramme</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/questions/questions.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="66de6ec420d8f9174d393b597db46b8d009b84b8" datatype="html">
+        <source>
+          ENREGISTRER
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/questions/questions.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b34b16b3cb784141a1c2a824e2b87f966e2fe009" datatype="html">
+        <source>
+          Recherche avancée
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/questions/questions.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e549e615106010837d5fa1e6155ede103fe6a013" datatype="html">
+        <source>
+          Trier par <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/questions/questions.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6034b09ca5bd4abb0e3b2e77853b704743a2dc67" datatype="html">
+        <source>Vous avez sélectionné <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{nbCandidat}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> destinataires</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/candidats-mail/candidats-mail.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="62c6e9aecff7e04ef7d36fdee4ab4fb285a7a2b5" datatype="html">
+        <source>Contact Information</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/candidats-form/candidats-form.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5163eace152dceca5486d960b568603813870573" datatype="html">
+        <source>Email*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/candidats-form/candidats-form.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6fb9ce8c1ee3cdb97963a3737e6f615442d898da" datatype="html">
+        <source>
+                      Supprimer
+                    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/candidats-form/candidats-form.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="beef032e3a999323cf4f777de7a5100126c50dec" datatype="html">
+        <source>
+                ajouter candidat
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/candidats-form/candidats-form.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="da35064117a130839682dae00627e103481684f1" datatype="html">
+        <source>
+                Prochaine étape : configuration d’email
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/candidats-form/candidats-form.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7f2b3514e9106299b31c572995634afb9b1bbe15" datatype="html">
+        <source>
+      En quelle langue les questions doivent-elles être posées à vos candidats ?
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="373f15e26342919ef003dea1cae8ef0584697944" datatype="html">
+        <source>
+    Voulez-vous empêcher l&apos;utilisation du copier/coller pendant le test ?
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0bcb3eb5aa76d4bce96054a963c13929832355e1" datatype="html">
+        <source>
+        Oui
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3d5d9b74ef6eb6dc15004f0fce4ca247edd06ea8" datatype="html">
+        <source>
+        Non
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4ed9a7b684b828aba1ee9823dc5343f8be167a5b" datatype="html">
+        <source>
+      Nombre de jours au bout desquels une invitation expire
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="738cf7cde00ef51dc5c0a62ada970eda0bb9f9ff" datatype="html">
+        <source>
+      Souhaitez-vous envoyer le rapport simplifié au candidat à l&apos;issue de son
+      test ?
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="88f7ee32b87cf0911318c8bcc77b70fef8afa392" datatype="html">
+        <source>
+    Comment souhaitez-vous que le candidat soit chronométré ?
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="944e32dfb771d1d6d1269eac6ebc5edd588461be" datatype="html">
+        <source>UN CHRONOMÈTRE PAR QUESTION</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3fcd96b354e684729067e8f5accc6b2d90426adf" datatype="html">
+        <source>
+        Chaque question sera chronométrée. Une fois le test démarré, les
+        questions se succèderont selon l’ordre défini. Le candidat ne pourra pas
+        revenir à une question précédente. Nous conseillons ce mode pour obtenir
+        un aperçu des connaissances théoriques et pratiques des candidats.
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5a53e102f03f43bb11df01f07ff61cda14628e17" datatype="html">
+        <source>UN CHRONOMÈTRE GLOBAL</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="627c046508d7d989cd24bd67da242a3053a6e943" datatype="html">
+        <source>
+        Un temps global est alloué au candidat pour réaliser l’ensemble du test.
+        Le candidat peut gérer son temps comme bon lui semble : il peut répondre
+        aux questions dans n’importe quel ordre et les modifier plusieurs fois.
+        Nous conseillons ce mode pour évaluer, uniquement, les connaissances
+        pratiques des candidats (lors d’exercices de code par exemple).
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8cb089f25627c11097063916f55974aded75344a" datatype="html">
+        <source>Temps alloué pour ce test (minutes)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9d800bc74ca05c01c3224a1945a27e7b95d77f00" datatype="html">
+        <source>
+      Enregistrer
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/edit-campagne/settings/general/general.component.html</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="02784f4abb5098ff96618fe036531ab61b616b24" datatype="html">
+        <source>
+        Le temps imparti pour la question est écoulé. Votre réponse actuelle a
+        été soumise. Cliquez sur OK quand vous êtes prêt(e) à passer à la
+        question suivante.
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/client-test/test/test.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7a5b80bdfff39603e595a2a61d5032115874e412" datatype="html">
+        <source>Se connecter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/register/register.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/register/register.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8be9b59aa51c62875a81a995a634422e4a486a47" datatype="html">
+        <source>
+          Connectez vous à votre compte pour avoir accès a vos campagnes, votre
+          profil, etc
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/register/register.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ad4b7ec7a428fd3533727590dbf64b9c58a9ce21" datatype="html">
+        <source>Se connecter ?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/register/register.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="65cb040e832319c21b300215fa29000b31dc756c" datatype="html">
+        <source>Nouveau client</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/register/register.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e36c04aba1359c7372b8921376e709c51edd6273" datatype="html">
+        <source>
+          Créer un compte
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/register/register.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0ec44fc86c382ee860c74fa93af505fbb9379ad9" datatype="html">
+        <source>
+          Évaluez vos candidats en ligne Sourcez, recrutez des développeurs
+          passionnés Créez vos propres événements de code
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/register/register.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="89d908c3c87ae0438d77499900d1d5ce75cf9b59" datatype="html">
+        <source>Nouveau client ?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/register/register.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ae26fc7677cdbe7d0ad97f061bfc1dd1ed6e62aa" datatype="html">
+        <source>S&apos;inscrire</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/register/register.component.html</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="debd2ea6290d27a952549aa8eed05973ae3c99ba" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Merci d&apos;avoir passé ce test !<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/client-test/fin-test/fin-test.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ed2e2a3888dfcbdcb1abf30f83f7375af278a6c4" datatype="html">
+        <source>
+          Le recruteur reviendra vers vous rapidement pour vous donner les
+          résultats. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          Nous vous souhaitons bonne chance pour la suite !
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/client-test/fin-test/fin-test.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d89d8d4c17a6b4d1aa08110a225fd32fb8bd77aa" datatype="html">
+        <source>Notez l’expérience</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/client-test/fin-test/fin-test.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d8c59b971bd088aca8e2ae4e8c118f155741f2ab" datatype="html">
+        <source>
+          Ce test a été créé sur la plateforme CodinGame. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          Nous cherchons sans cesse à nous améliorer et votre avis nous
+          intéresse ! Dites-nous ce que vous avez pensé de ce test (votre retour
+          sera communiqué à l’équipe <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          CodinGame uniquement).
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/client-test/fin-test/fin-test.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a8c38fc0e5f990f56c1100451b59c78098e1ef7e" datatype="html">
+        <source>Commentaires (Optionnel)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/client-test/fin-test/fin-test.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ce08bb3d4353fb89be772804fdbe818cc24de793" datatype="html">
+        <source>
+          Envoyer Feedback
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/panelAdmin/client-test/fin-test/fin-test.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f99e083056b742ecf4f7f942de5af24b705baf18" datatype="html">
+        <source>
+      TECHNOLOGIES
+      <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/techno/techno.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a88e8fd3bed6860ef02e6cd8c4bca84b22f50b6b" datatype="html">
+        <source>
+        FONCTIONNALITÉS
+        <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/techno/techno.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bcf39f871801f2b1bf973246063baf03e8fd7c87" datatype="html">
+        <source>
+      NOS FORMULES
+      <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/offers/offers.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6992f865fa577865993f7dc82cb1f90618861199" datatype="html">
+        <source>
+                      Offre gratuite
+                  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/offers/offers.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ad94ed6f1332b921745df048b70009dabe8a52d5" datatype="html">
+        <source>
+                      Gratuit
+                  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/offers/offers.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ac74aa1fb077a5793a0ff19b65e7ecc0ce5f7816" datatype="html">
+        <source>Tout les avantages de l&apos;offre entreprise</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/offers/offers.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="47c89517d8809cdcf78a9939a01d89698af7d576" datatype="html">
+        <source>Accès a un chat textuel avec le candidat</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/offers/offers.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5215180e27573eb404b3d5e7bb3625a148d6dcee" datatype="html">
+        <source>Accès a un chat audio et visuel avec le candidat</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/offers/offers.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f9cd39c4792dd920ae287d7939010ce04ae223cf" datatype="html">
+        <source>Editeur de texte en direct</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/offers/offers.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0055ddf7b4755e297dcb4591b515f0aae2594734" datatype="html">
+        <source>S&apos;abonner</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/offers/offers.component.html</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
     </body>
