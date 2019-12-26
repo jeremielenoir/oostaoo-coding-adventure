@@ -3,8 +3,10 @@
     <div class="header-form">
       <div class="sous-header-one">
 
-        <figure class="info-content-img-header-dashboard"><img
-            src="./assets/Coding-game-img/SVG-menu-Dashboard/orange/Tests.svg" alt="" /></figure>
+        <figure class="info-content-img-header-dashboard">
+          <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
+        </figure>
+
         <h3 class="info-title-header-dashboard">TESTS D’ÉVALUATIONS</h3>
 
       </div>
@@ -25,9 +27,12 @@
           <div class="form-group-header form-group-header-2">
 
             <label class="checked-block" for="archive">
-              <mat-checkbox [(ngModel)]="checked" (click)="includeArchivedCampaigns(checked)">
+              <!-- <mat-checkbox [(ngModel)]="checked" (click)="includeArchivedCampaigns(checked)">
                 Inclure archives
-              </mat-checkbox>
+              </mat-checkbox> -->
+              <input type="checkbox" class="archive-check" id="archive" />
+              Inclure archives
+              <span></span>
             </label>
           </div>
 
@@ -37,7 +42,9 @@
               <input type="text" name="search" [(ngModel)]="searchText" class="champ-header-contenu"
                 placeholder="Rechercher" id="search-header" />
 
-              <span class="icon-form-group-header-contenu"><i class="fas fa-search"></i></span>
+              <figure class="icon-form-group-header-contenu">
+                <img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg">
+              </figure>
             </form>
           </div>
         </div>
@@ -47,7 +54,7 @@
     </div>
   </div>
 
-  <div class="contenu-techno">
+  <div class=" contenu-techno">
 
     <div class="content-scroll">
 
@@ -62,9 +69,9 @@
       <div *ngFor="let campaign of test  | orderBy:'pin':true:customComparator | filter: searchText"
         class="contenu-techno-content">
 
-        <div class="branche-content-list-start">
-          <i class="fa fa-user"></i>
-        </div>
+        <figure class="branche-content-list-start">
+          <img src="../assets/Coding-game-img/SVG-menu-Dashboard/perso-plein.svg">
+        </figure>
 
         <div class="contenu-branche">
           <div class="corpo">

@@ -33,13 +33,15 @@
 
 <div class="sidibar" [class.sidibar-small]="IsBoaleanSmallSidibar">
 
-  <span (click)="sidibar_small_modele()" class="arrow"></span>
+  <span (click)="sidibar_small_modele()" class="arrow">
+
+  </span>
 
   <div class="sous-header-one sidibar-sous-header">
 
     <figure class="info-content-img-header-dashboard"
-      [class.info-content-img-header-dashboard-MinSize]="IsBoaleanSmallSidibar"><img
-        src="./assets/Coding-game-img/SVG-menu-Dashboard/orange/Tests.svg" alt="" />
+      [class.info-content-img-header-dashboard-MinSize]="IsBoaleanSmallSidibar">
+      <img src="../assets/Coding-game-img/SVG-menu-Dashboard/Notifications.svg">
     </figure>
     <h3 *ngIf="!IsBoaleanSmallSidibar" class="info-title-header-dashboard">
       NOTIFICATIONS
