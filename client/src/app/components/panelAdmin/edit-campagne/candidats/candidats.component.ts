@@ -7,7 +7,7 @@ import {
   ApiClientService,
   API_URI_CAMPAIGNS,
 } from '../../../../api-client/api-client.service';
-import { getResultsDefinition} from './getResultsDefinition';
+import { getResultsDefinition } from './getResultsDefinition';
 import pdfMake from 'pdfmake/build/pdfmake';
 // font build has to be committed otherwise each developers has to build font locally.
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -83,7 +83,7 @@ export class CandidatsComponent implements OnInit {
 
     inviteCandidatDialog.afterClosed().subscribe((data) => {
       this.getCampaign().then(datas => {
-        // console.log('AFTER CLOSE ALL DATAS', datas);
+        console.log('AFTER CLOSE ALL DATAS', datas);
       });
     });
 
@@ -200,90 +200,94 @@ export class CandidatsComponent implements OnInit {
       });
   }
 
-  collectCandidateResults(candidat_id){
-      const selectedCandidate =  this.candidats.find(unit=>unit.id == candidat_id);
-      const name = selectedCandidate.Nom;
-      const email = selectedCandidate.email;
-      const duration = selectedCandidate.duree;
-      const rapport = selectedCandidate.raport_candidat.rapport;
-      const date = this.datePipe.transform(selectedCandidate.test_ouvert, 'dd-MM-yy');
-      const points = selectedCandidate.points_candidat;
+  collectCandidateResults(candidat_id) {
+    const selectedCandidate = this.candidats.find(unit => unit.id == candidat_id);
+    const name = selectedCandidate.Nom;
+    const email = selectedCandidate.email;
+    const duration = selectedCandidate.duree;
+    const rapport = selectedCandidate.raport_candidat.rapport;
+    const date = this.datePipe.transform(selectedCandidate.test_ouvert, 'dd-MM-yy');
+    const points = selectedCandidate.points_candidat;
 
-      let resultsByLanguage = {};
-      let totalPointsCandidat = 0;
-      let totalPointsMax = 0;
-      points[1].allPointsCandidat.forEach(techno => {
-        totalPointsCandidat += techno.points;
-        const pointsMaxTechno = points[0].allPointsTechnos
-        .find(tech=>tech.technologies===techno.technologies).points;
-        totalPointsMax += pointsMaxTechno;
-        const percentage_techno = techno.points / pointsMaxTechno * 100 + ' %';
-        resultsByLanguage[techno.technologies] = {note: techno.points,
-          max: pointsMaxTechno, percentage_techno};
-      })
+    let resultsByLanguage = {};
+    let totalPointsCandidat = 0;
+    let totalPointsMax = 0;
+    points[1].allPointsCandidat.forEach(techno => {
+      totalPointsCandidat += techno.points;
+      const pointsMaxTechno = points[0].allPointsTechnos
+        .find(tech => tech.technologies === techno.technologies).points;
+      totalPointsMax += pointsMaxTechno;
+      const percentage_techno = techno.points / pointsMaxTechno * 100 + ' %';
+      resultsByLanguage[techno.technologies] = {
+        note: techno.points,
+        max: pointsMaxTechno, percentage_techno
+      };
+    })
 
-     const score = totalPointsCandidat / totalPointsMax * 100 + '%';
-     let languages = '';
-      Object.keys(resultsByLanguage).map(language=>{languages=`${languages} ${language}`});
-      let questionsRapport = [];
-      let totalTestDuration = 0;
-      let totalCandidateDuration = 0;
-      Object.values(rapport).map((question:any)=>{
-        const candidate_answer = question.array_rep_candidat[0];
-        totalTestDuration += question.index_question.time;
-        totalCandidateDuration += question.timeRep;
-        const correct_answer = question.index_question.answer_value;
-        const question_max_score = question.index_question.points;
-        const question_candidate_score = candidate_answer ===
+    const score = totalPointsCandidat / totalPointsMax * 100 + '%';
+    let languages = '';
+    Object.keys(resultsByLanguage).map(language => { languages = `${languages} ${language}` });
+    let questionsRapport = [];
+    let totalTestDuration = 0;
+    let totalCandidateDuration = 0;
+    Object.values(rapport).map((question: any) => {
+      const candidate_answer = question.array_rep_candidat[0];
+      totalTestDuration += question.index_question.time;
+      totalCandidateDuration += question.timeRep;
+      const correct_answer = question.index_question.answer_value;
+      const question_max_score = question.index_question.points;
+      const question_candidate_score = candidate_answer ===
         correct_answer ? question_max_score : 0;
-        const content = question.index_question.content ?
-         question.index_question.content.split(', ') : [];
-        if(content && content[3] === 'Aucune'){
-          content.splice(3, 4, "Aucune des solutions précédentes");
-        }
+      const content = question.index_question.content ?
+        question.index_question.content.split(', ') : [];
+      if (content && content[3] === 'Aucune') {
+        content.splice(3, 4, "Aucune des solutions précédentes");
+      }
 
-        function convertToMin(time) {
-          let mind = time % (60 * 60);
-          let minutes = Math.floor(mind / 60);
-          let minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
-          let secd = mind % 60;
-          let seconds = Math.ceil(secd);
-          let secondsString = seconds < 10 ? `0${seconds}` : seconds.toString();
-          return `${minutesString}:${secondsString}`
-        }
-        
-        let question_time : string = convertToMin(question.index_question.time);
-        let question_timeRep : string = convertToMin(question.timeRep);
+      function convertToMin(time) {
+        let mind = time % (60 * 60);
+        let minutes = Math.floor(mind / 60);
+        let minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
+        let secd = mind % 60;
+        let seconds = Math.ceil(secd);
+        let secondsString = seconds < 10 ? `0${seconds}` : seconds.toString();
+        return `${minutesString}:${secondsString}`
+      }
 
-        const questionsRapportUnit = {
-          question_id: question.index_question.id,
-          name: question.index_question.name,
-          content,
-          candidate_answer,
-          correct_answer,
-          question_max_score,
-          question_candidate_score,
-          question_time,
-          question_timeRep
-        };
-        questionsRapport.push(questionsRapportUnit);
-      })
+      let question_time: string = convertToMin(question.index_question.time);
+      let question_timeRep: string = convertToMin(question.timeRep);
 
-      let hours = Math.floor(totalTestDuration / 60);
-      let minutes = totalTestDuration % 60;
-      let minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
-      const totalTestTime = `${hours} h ${minutesString}`;
-      hours = Math.floor(totalCandidateDuration / 60);
-      minutes = totalCandidateDuration % 60;
-      minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
-      const totalCandidateTime = `${hours}h${minutesString}`;
+      const questionsRapportUnit = {
+        question_id: question.index_question.id,
+        name: question.index_question.name,
+        content,
+        candidate_answer,
+        correct_answer,
+        question_max_score,
+        question_candidate_score,
+        question_time,
+        question_timeRep
+      };
+      questionsRapport.push(questionsRapportUnit);
+    })
 
-      return { name, email, duration, score, totalPointsMax,
-         totalPointsCandidat, date, resultsByLanguage,
-         languages, questionsRapport, totalTestTime, totalCandidateTime };
-    }
+    let hours = Math.floor(totalTestDuration / 60);
+    let minutes = totalTestDuration % 60;
+    let minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
+    const totalTestTime = `${hours} h ${minutesString}`;
+    hours = Math.floor(totalCandidateDuration / 60);
+    minutes = totalCandidateDuration % 60;
+    minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
+    const totalCandidateTime = `${hours}h${minutesString}`;
 
-  viewResultsPdf(candidat_id){
+    return {
+      name, email, duration, score, totalPointsMax,
+      totalPointsCandidat, date, resultsByLanguage,
+      languages, questionsRapport, totalTestTime, totalCandidateTime
+    };
+  }
+
+  viewResultsPdf(candidat_id) {
     const candidateResults = this.collectCandidateResults(candidat_id);
     pdfMake.createPdf(getResultsDefinition(candidateResults)).open();
   }

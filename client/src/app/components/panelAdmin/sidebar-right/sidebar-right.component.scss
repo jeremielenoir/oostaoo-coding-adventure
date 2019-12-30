@@ -86,15 +86,17 @@
     display: flex;
     overflow: hidden;
     flex: 1;
-    min-height: 300px;
     .list-sidibar-left { 
+      border:1px solid red;
       display: flex;
       font-size: 15px;
-      //height: 850px;
       overflow-y: auto;
+      scrollbar-color: #7f8183 #e3e3e3;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
       flex-direction: column;
       flex: 1 1 0px;
-      height: 800px;
+      // height: auto;
       .no-tofication{
         align-self: center;
         padding-top: 120px;

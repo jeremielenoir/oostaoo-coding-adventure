@@ -25,16 +25,14 @@ import { RouterLink } from '@angular/router';
 export class CampagneComponent implements OnInit {
   public campaigns = [];
   public campaignsFiltered = [];
+  public campaignsArchived = [];
   public searchHeader: string;
   @Output() campaignsChild = new EventEmitter<any>();
   @Output() emitIsactiveNoCountryside = new EventEmitter();
   public IsactiveNoCountryside = false;
   public searchText = '';
   public result: any;
-  public test: any;
-
-
-
+  public myVar: boolean;
 
   constructor(
     public apiClientService: ApiClientService,
@@ -57,10 +55,14 @@ export class CampagneComponent implements OnInit {
         for (const campaign of this.campaigns) {
           if (campaign.archive === false) {
             this.campaignsFiltered.push(campaign);
-            this.test = this.campaignsFiltered;
-            console.log('camp filter', this.campaignsFiltered);
+            // console.log('camp filter', this.campaignsFilter);
+          } else if (campaign.archive === true) {
+            this.campaignsArchived.push(campaign);
+            // console.log('campaign archive', this.campaignsArchive);
           }
           console.log('camp filter', this.campaignsFiltered);
+          console.log('campaign archive', this.campaignsArchived);
+
         }
 
 
@@ -79,17 +81,19 @@ export class CampagneComponent implements OnInit {
   }
 
 
-  includeArchivedCampaigns(checked: any) {
-    if (checked) {
-      this.test = this.campaignsFiltered;
-    }
-    if (!checked) {
-      this.test = this.campaigns;
-    }
+  includeArchivedCampaigns(element) {
+
+    let champValue = element.children[0]
+
+    this.myVar = champValue.checked;
+
+    console.log('this.myVar', this.myVar)
+
+
   }
 
   openDialog(idCampaign) {
-    const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
+    this.dialog.open(InviteCandidat, {
       data: idCampaign,
       height: '80vh'
     });

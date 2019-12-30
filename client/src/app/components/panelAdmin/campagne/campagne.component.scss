@@ -204,6 +204,9 @@
         flex-direction: row;
         transition: height 500ms, opacity 500ms;
         border-bottom:1px dashed #de522b;
+        scrollbar-color: #7f8183 #e3e3e3;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
       
         .contenu-branche {
          flex: 11;
@@ -291,7 +294,7 @@
            flex-direction: column;
            justify-content: center;
            align-content: center;
-           padding: 20px 15px;
+           padding: 9px 15px;
           
            p{
              margin-bottom: 0px;
@@ -310,6 +313,7 @@
           flex: 1;
           border-right: 1px dashed #e15028;
           margin-bottom: 0px;
+          cursor: pointer;
           img{
             width: 30px;
             height: 30px;
