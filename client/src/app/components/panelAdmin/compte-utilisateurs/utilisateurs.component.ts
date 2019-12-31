@@ -64,11 +64,14 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ["./utilisateurs.component.scss"]
 })
 export class UtilisateursComponent implements OnInit {
-  constructor(public apiClientService: ApiClientService) {}
+  constructor(public apiClientService: ApiClientService) {
+  }
 
-  public PrenomValue = "Jérémie";
-  public NomValue = "lenoir";
-  public MailValue = "lenoir.jeremie@oostaoo.com";
+  public PrenomValue = "";
+  public NomValue = "";
+  public UserName = "";
+  public EmailValue = "";
+  public PasswordValue = "1234";
 
   public users:[];
   prenom = new FormControl("", Validators.required);
@@ -107,9 +110,7 @@ export class UtilisateursComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers().then(users => {
-      console.log('users : ', users);
       this.users = users;
-      console.log('this.users: ', this.users);
 
       /**
       this.prenom = new FormControl(user[0].utilsateurentreprises.prenom);
@@ -124,6 +125,7 @@ export class UtilisateursComponent implements OnInit {
       // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
     });
   }
+
 
   public param_cog() {
     this.shadowcog1 = !this.shadowcog1;
@@ -150,11 +152,50 @@ export class UtilisateursComponent implements OnInit {
 
     this.NomValue = "Lenoir";
     this.PrenomValue = "Jéremie";
-    this.MailValue = "lenoir.jeremie@oostaoo.com";
+    this.EmailValue = "lenoir.jeremie@oostaoo.com";
 
     this.nomIsactiveUpdate = false;
     this.emailIsactiveUpdate = false;
     this.prenomIsactiveUpdate = false;
+  }
+
+  public addUser(){
+
+    this.PrenomValue = this.formulaire.nativeElement.prenom.value;
+    this.NomValue = this.formulaire.nativeElement.nom.value;
+    this.EmailValue = this.formulaire.nativeElement.email.value;
+    this.UserName = `${this.PrenomValue}-${this.NomValue}`;
+
+console.log('this.users : ', this.users);
+
+    if(!this.PrenomValue || !this.NomValue || !this.EmailValue){
+      return;
+    };
+    fetch('/users',
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify({prenom: this.PrenomValue,
+                              nom: this.NomValue,
+                              email: this.EmailValue,
+                              username: this.UserName,
+                              password: '1234'
+                            })
+    })
+    .then(async(res)=>{
+      this.users = [...this.users, {prenom: this.PrenomValue,
+                            nom: this.NomValue,
+                            email: this.EmailValue,
+                            username: this.UserName,
+                            password: '1234'
+                          }];
+      console.log(res) ;
+      this.param_cog();
+      })
+    .catch(function(res){ console.log(res) })
   }
 
   public Hundelesubmit() {
@@ -246,7 +287,7 @@ export class UtilisateursComponent implements OnInit {
 
     const champValue = event.target.value;
 
-    this.MailValue = event.target.value;
+    this.EmailValue = event.target.value;
 
     if (champValue.length < 1) {
       this.emailIsactiveUpdate = true;
