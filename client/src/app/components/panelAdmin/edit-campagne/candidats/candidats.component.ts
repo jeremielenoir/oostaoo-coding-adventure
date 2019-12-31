@@ -83,7 +83,7 @@ export class CandidatsComponent implements OnInit {
 
     inviteCandidatDialog.afterClosed().subscribe((data) => {
       this.getCampaign().then(datas => {
-        console.log('AFTER CLOSE ALL DATAS', datas);
+        // console.log('AFTER CLOSE ALL DATAS', datas);
       });
     });
 

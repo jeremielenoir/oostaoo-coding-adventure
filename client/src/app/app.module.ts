@@ -30,7 +30,7 @@ import { MainComponent } from './components/home/main/main.component';
 import { SliderComponent } from './components/home/slider/slider.component';
 
 import { SlideMarquesComponent } from './components/home/slide-marques/slide-marques.component';
-import { RouteComponentComponent, PopupMonOffre } from './components/panelAdmin/navbar/route-component.component';
+import { RouteComponentComponent, DistConnecTed } from './components/panelAdmin/navbar/route-component.component';
 import { AccueilComponent } from './components/home/accueil/accueil.component';
 
 import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
@@ -83,8 +83,11 @@ import { TechnoComponent } from './components/home/techno/techno.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { OffersComponent } from './components/home/offers/offers.component';
 
+
 @NgModule({
-  entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
+  // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
+  //   NouvelleCampagnePage3Component, CandidatsMailComponent],
+  entryComponents: [RouteComponentComponent, DistConnecTed, InviteCandidat, CandidatsComponent, PopupCampaign,
     NouvelleCampagnePage3Component, CandidatsMailComponent],
   declarations: [
     AppComponent,
@@ -97,7 +100,8 @@ import { OffersComponent } from './components/home/offers/offers.component';
     SliderComponent,
     SlideMarquesComponent,
     RouteComponentComponent,
-    PopupMonOffre,
+    DistConnecTed,
+    // PopupMonOffre,
     AccueilComponent,
     NavMobileAbsoluteDirective,
     IntegrationBoutonComponent,

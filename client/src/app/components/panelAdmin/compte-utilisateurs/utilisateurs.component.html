@@ -1,196 +1,207 @@
 <div id="global">
-  
-<app-route-component></app-route-component>
 
-<div id="content">
+  <app-route-component></app-route-component>
 
-<div id="shadow-cog" [ngClass]="{'shadow-cog-active': shadowcog1 == true}">
+  <div id="content">
 
-<div id="remove"  (click)="param_cog_non_active()"></div>
+    <div id="shadow-cog" [ngClass]="{'shadow-cog-active': shadowcog1 == true}">
+
+      <div id="remove" (click)="param_cog_non_active()"></div>
 
 
-    <div class="modall">
-        
+      <div class="modall">
+
         <div class="modall-header">
 
-                <h3 class="modall-title">
+          <h3 class="modall-title">
 
-                  Ajouter un utilisateur
+            Ajouter un utilisateur
 
-                </h3>
+          </h3>
 
         </div>
 
 
         <div class="modall-content">
 
-           <form (ngSubmit)="Hundelesubmit()" class="form" method="POST" #form>
+          <form (ngSubmit)="Hundelesubmit()" class="form" method="POST" #form>
 
-              <div class="content-form-first">
+            <div class="content-form-first">
 
-                <div class="form-groupe">
+              <div class="form-groupe">
 
-                  <div class="top-form-groupe">
+                <div class="top-form-groupe">
 
-                    <div class="title-and-error-span">
+                  <div class="title-and-error-span">
 
-                      <label class="libele" [ngClass]="{'new-label': prenomIsactive === true}">prenom</label>
+                    <label class="libele" [ngClass]="{'new-label': prenomIsactive === true}">prenom</label>
 
-                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactive === true}">Obligatoire</span>
-
-                    </div>
+                    <span class="title-champ-default"
+                      [ngClass]="{'title-champ-default-visible': prenomIsactive === true}">Obligatoire</span>
 
                   </div>
-                  <div>
-            
-                    <input type="" name="prenom" [ngClass]="{'errorChamp': prenomIsactive === true}" class="champ-form" required id="prenom" (input)="is_valid_prenom($event)" (blur)="is_valid_prenom($event)"/>
-                  </div>
-                  
 
                 </div>
+                <div>
 
-                <div class="form-groupe">
-
-                  <div class="top-form-groupe">
-
-                    <div class="title-and-error-span">
-
-                      <label [ngClass]="{'new-label': nomIsactive === true}" class="libele">nom</label>
-
-                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactive === true}">Obligatoire</span>
-
-                    </div>
-
-                  </div>
-                  <div>
-                    <input type="" name="nom"  [ngClass]="{'errorChamp': nomIsactive === true}" class="champ-form" (input)="is_valid_nom($event)" (blur)="is_valid_nom($event)"/>
-                  </div>
-                  
-
-                </div>
-
-                <div class="form-groupe">
-
-                  <div class="top-form-groupe">
-
-                    <div class="title-and-error-span">
-
-                      <label [ngClass]="{'new-label': emailIsactive === true}" class="libele">email</label>
-
-                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactive === true}">{{Textmail}}</span>
-
-                    </div>
-
-                  </div>
-                  <div>
-                    <input type="" [ngClass]="{'errorChamp': emailIsactive === true}" name="email"class="champ-form" id="email" (input)="is_valid_emaill($event)" (blur)="is_valid_emaill($event)"/>
-                  </div>
-                  
-
+                  <input type="" name="prenom" [ngClass]="{'errorChamp': prenomIsactive === true}" class="champ-form"
+                    required id="prenom" (input)="is_valid_prenom($event)" (blur)="is_valid_prenom($event)" />
                 </div>
 
 
               </div>
 
-              <div class="content-form-last">
+              <div class="form-groupe">
 
-                <h3 class="title-gestion-perm">PERMISSIONS</h3>
+                <div class="top-form-groupe">
 
-                <div class="tbl-permition">
+                  <div class="title-and-error-span">
 
-                  <div class="element-gestion-permition">
+                    <label [ngClass]="{'new-label': nomIsactive === true}" class="libele">nom</label>
 
-                    <div class="element-gestion-permition-header" matTooltip="(Compte > facturation) : l’utilisateur aura accès à la page facturation et recevra les factures par email."
+                    <span class="title-champ-default"
+                      [ngClass]="{'title-champ-default-visible': nomIsactive === true}">Obligatoire</span>
+
+                  </div>
+
+                </div>
+                <div>
+                  <input type="" name="nom" [ngClass]="{'errorChamp': nomIsactive === true}" class="champ-form"
+                    (input)="is_valid_nom($event)" (blur)="is_valid_nom($event)" />
+                </div>
+
+
+              </div>
+
+              <div class="form-groupe">
+
+                <div class="top-form-groupe">
+
+                  <div class="title-and-error-span">
+
+                    <label [ngClass]="{'new-label': emailIsactive === true}" class="libele">email</label>
+
+                    <span class="title-champ-default"
+                      [ngClass]="{'title-champ-default-visible': emailIsactive === true}">{{Textmail}}</span>
+
+                  </div>
+
+                </div>
+                <div>
+                  <input type="" [ngClass]="{'errorChamp': emailIsactive === true}" name="email" class="champ-form"
+                    id="email" (input)="is_valid_emaill($event)" (blur)="is_valid_emaill($event)" />
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+            <div class="content-form-last">
+
+              <h3 class="title-gestion-perm">PERMISSIONS</h3>
+
+              <div class="tbl-permition">
+
+                <div class="element-gestion-permition">
+
+                  <div class="element-gestion-permition-header"
+                    matTooltip="(Compte > facturation) : l’utilisateur aura accès à la page facturation et recevra les factures par email."
                     [matTooltipPosition]="position.value"
                     aria-label="Button that displays a tooltip in various positions">
 
-                      facturation
+                    facturation
 
-                    </div>
-
-                    <div class="element-gestion-permition-content">
-
-                      
-                      <label class="checked-block" for="check-1">
-                        <input type="checkbox" id="check-1" class="checkbox"/>
-                        <span class="checkbox-span"></span>
-                      </label>
-
-                    
-
-                    </div>
                   </div>
 
-                   <div class="element-gestion-permition">
+                  <div class="element-gestion-permition-content">
 
-                    <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra créer/modifier/supprimer les campagnes et les questions personnalisées."
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
+
+
+
+                  </div>
+                </div>
+
+                <div class="element-gestion-permition">
+
+                  <div class="element-gestion-permition-header"
+                    matTooltip="L’utilisateur pourra créer/modifier/supprimer les campagnes et les questions personnalisées."
                     [matTooltipPosition]="position.value"
                     aria-label="Button that displays a tooltip in various positions">
 
                     Campagnes
 
-                    </div>
-
-                    <div class="element-gestion-permition-content">
-
-                      
-                      <label class="checked-block" for="check-1">
-                        <input type="checkbox" id="check-1" class="checkbox"/>
-                        <span class="checkbox-span"></span>
-                      </label>
-
-                    </div>
                   </div>
 
-                  <div class="element-gestion-permition">
+                  <div class="element-gestion-permition-content">
 
-                    <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra inviter les candidats aux campagnes. Il pourra également consulter les rapports de résultats."
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
+
+                  </div>
+                </div>
+
+                <div class="element-gestion-permition">
+
+                  <div class="element-gestion-permition-header"
+                    matTooltip="L’utilisateur pourra inviter les candidats aux campagnes. Il pourra également consulter les rapports de résultats."
                     [matTooltipPosition]="position.value"
                     aria-label="Button that displays a tooltip in various positions">
 
                     Candidats
 
-                    </div>
-
-                    <div class="element-gestion-permition-content">
-
-                      
-                      <label class="checked-block" for="check-1">
-                        <input type="checkbox" id="check-1" class="checkbox"/>
-                        <span class="checkbox-span"></span>
-                      </label>
-
-                    
-
-                    </div>
                   </div>
 
-                  <div class="element-gestion-permition">
+                  <div class="element-gestion-permition-content">
 
-                    <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra créer/gérer/supprimer les utilisateurs."
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
+
+
+
+                  </div>
+                </div>
+
+                <div class="element-gestion-permition">
+
+                  <div class="element-gestion-permition-header"
+                    matTooltip="L’utilisateur pourra créer/gérer/supprimer les utilisateurs."
                     [matTooltipPosition]="position.value"
                     aria-label="Button that displays a tooltip in various positions">
 
                     Utilisateurs
 
-                    </div>
-
-                    <div class="element-gestion-permition-content">
-
-                      
-                      <label class="checked-block" for="check-1">
-                        <input type="checkbox" id="check-1" class="checkbox"/>
-                        <span class="checkbox-span"></span>
-                      </label>
-
-                    
-
-                    </div>
                   </div>
 
-                  <div class="element-gestion-permition">
+                  <div class="element-gestion-permition-content">
 
-                  <div class="element-gestion-permition-header"matTooltip="(Compte > profil entreprise) : l’utilisateur aura accès au profil d’entreprise et pourra y modifier les informations."
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
+
+
+
+                  </div>
+                </div>
+
+                <div class="element-gestion-permition">
+
+                  <div class="element-gestion-permition-header"
+                    matTooltip="(Compte > profil entreprise) : l’utilisateur aura accès au profil d’entreprise et pourra y modifier les informations."
                     [matTooltipPosition]="position.value"
                     aria-label="Button that displays a tooltip in various positions">
 
@@ -200,60 +211,62 @@
 
                   <div class="element-gestion-permition-content">
 
-                      
-                      <label class="checked-block" for="check-1">
-                        <input type="checkbox" id="check-1" class="checkbox"/>
-                        <span class="checkbox-span"></span>
-                      </label>
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
 
                   </div>
 
-                  </div>
+                </div>
 
-                  <div class="element-gestion-permition">
+                <div class="element-gestion-permition">
 
-                    <div class="element-gestion-permition-header"matTooltip="(Testing > interview) : l’utilisateur pourra accéder au module Interview et inviter les candidats à participer à un entretien par visioconférence."
+                  <div class="element-gestion-permition-header"
+                    matTooltip="(Testing > interview) : l’utilisateur pourra accéder au module Interview et inviter les candidats à participer à un entretien par visioconférence."
                     [matTooltipPosition]="position.value"
                     aria-label="Button that displays a tooltip in various positions">
 
-                   Interview
+                    Interview
 
-                    </div>
-
-                    <div class="element-gestion-permition-content">
-
-                      
-                      <label class="checked-block" for="check-1">
-                        <input type="checkbox" id="check-1" class="checkbox"/>
-                        <span class="checkbox-span"></span>
-                      </label>
-
-                    
-
-                    </div>
                   </div>
-                  <div class="element-gestion-permition">
 
-                    <div class="element-gestion-permition-header"matTooltip="(Compte > protection des données) : l’utilisateur pourra gérer les paramètres de protection des données."
+                  <div class="element-gestion-permition-content">
+
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
+
+
+
+                  </div>
+                </div>
+                <div class="element-gestion-permition">
+
+                  <div class="element-gestion-permition-header"
+                    matTooltip="(Compte > protection des données) : l’utilisateur pourra gérer les paramètres de protection des données."
                     [matTooltipPosition]="position.value"
                     aria-label="Button that displays a tooltip in various positions">
 
                     Protection des données
 
-                    </div>
-
-                    <div class="element-gestion-permition-content">
-
-                      
-                      <label class="checked-block" for="check-1">
-                        <input type="checkbox" id="check-1" class="checkbox"/>
-                        <span class="checkbox-span"></span>
-                      </label>
-
-                    
-
-                    </div>
                   </div>
+
+                  <div class="element-gestion-permition-content">
+
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
+
+
+
+                  </div>
+                </div>
 
               </div>
 
@@ -263,299 +276,315 @@
             </div>
           </form>
 
-           
+
 
         </div>
-        
+
+
+      </div>
 
     </div>
 
-</div>
+    <div id="shadow-cog-2" [ngClass]="{'shadow-cog-active': shadowcog2 == true}">
 
-<div id="shadow-cog-2" [ngClass]="{'shadow-cog-active': shadowcog2 == true}">
+      <div id="remove-2" (click)="param_cog_non_active_deux()"></div>
 
-    <div id="remove-2"  (click)="param_cog_non_active_deux()"></div>
-  
-  
-    
+
+
       <div class="modall">
-          
-          <div class="modall-header">
-  
-                  <h3 class="modall-title">
-  
-                      Modifier l'utilisateur
-  
-                  </h3>
-  
-          </div>
-  
-          <div class="modall-content">
-  
-             <form>
-  
-                <div class="content-form-first">
-  
-                  <div class="form-groupe">
-  
-                    <div class="top-form-groupe">
-  
-                      <div class="title-and-error-span">
-  
-                          <label class="libele" [ngClass]="{'new-label': prenomIsactiveUpdate === true}">prenom</label>
 
-                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactiveUpdate === true}">Obligatoire</span>
-  
-                      </div>
-  
-                    </div>
-                    <div>
-            
-                      <input type="" value="{{prenomIsactiveUpdate ? '' : PrenomValue}}" class="champ-form" (input)="is_valid_prenom_update($event)" [ngClass]="{'errorChamp': prenomIsactiveUpdate === true}"/>
-                    </div>
-                    
-  
-                  </div>
-  
-                  <div class="form-groupe">
-  
-                    <div class="top-form-groupe">
-  
-                      <div class="title-and-error-span">
-                        
-                          <label class="libele" [ngClass]="{'new-label': nomIsactiveUpdate === true}">nom</label>
+        <div class="modall-header">
 
-                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactiveUpdate === true}">Obligatoire</span>
-                       
-                      </div>
-  
-                    </div>
-                    <div>
-                      <input type="" class="champ-form"  (input)="is_valid_nom_update($event)" value="{{nomIsactiveUpdate ? '' : NomValue}}" [ngClass]="{'errorChamp': nomIsactiveUpdate === true}"/>
-                    </div>
-                    
-                  </div>
-  
-                  <div class="form-groupe">
-  
-                    <div class="top-form-groupe">
-  
-                      <div class="title-and-error-span">
-  
-                          <label class="libele" [ngClass]="{'new-label': emailIsactiveUpdate === true}">email</label>
+          <h3 class="modall-title">
 
-                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactiveUpdate === true}">{{ Textmail }}</span>
-  
-                      </div>
-  
-                    </div>
-                    <div>
-                      <input type="" value="{{emailIsactiveUpdate ? '' : MailValue}}" class="champ-form"  (input)="is_valid_email_update($event)"  [ngClass]="{'errorChamp': emailIsactiveUpdate === true}"/>
-                    </div>
-                    
-  
+            Modifier l'utilisateur
+
+          </h3>
+
+        </div>
+
+        <div class="modall-content">
+
+          <form>
+
+            <div class="content-form-first">
+
+              <div class="form-groupe">
+
+                <div class="top-form-groupe">
+
+                  <div class="title-and-error-span">
+
+                    <label class="libele" [ngClass]="{'new-label': prenomIsactiveUpdate === true}">prenom</label>
+
+                    <span class="title-champ-default"
+                      [ngClass]="{'title-champ-default-visible': prenomIsactiveUpdate === true}">Obligatoire</span>
+
                   </div>
-  
-  
+
                 </div>
-  
-                <div class="content-form-last">
-  
-                  <h3 class="title-gestion-perm">PERMISSIONS</h3>
-  
-                  <div class="tbl-permition">
-  
-                    <div class="element-gestion-permition">
-  
-                      <div class="element-gestion-permition-header"matTooltip="(Compte > facturation) : l’utilisateur aura accès à la page facturation et recevra les factures par email."
-                      [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
-  
-                        facturation
-  
-                      </div>
-  
-                      <div class="element-gestion-permition-content">
-  
-                        
-                        <label class="checked-block" for="check-1">
-                          <input type="checkbox" id="check-1" class="checkbox"/>
-                          <span class="checkbox-span"></span>
-                        </label>
-  
-                      
-  
-                      </div>
-                    </div>
-  
-                     <div class="element-gestion-permition">
-  
-                      <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra créer/modifier/supprimer les campagnes et les questions personnalisées."
-                      [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
-  
-                      Campagnes
-  
-                      </div>
-  
-                      <div class="element-gestion-permition-content">
-  
-                        
-                        <label class="checked-block" for="check-1">
-                          <input type="checkbox" id="check-1" class="checkbox"/>
-                          <span class="checkbox-span"></span>
-                        </label>
-  
-                      
-  
-                      </div>
-                    </div>
-  
-                    <div class="element-gestion-permition">
-  
-                      <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra inviter les candidats aux campagnes. Il pourra également consulter les rapports de résultats."
-                      [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
-  
-                      Candidats
-  
-                      </div>
-  
-                      <div class="element-gestion-permition-content">
-  
-                        
-                        <label class="checked-block" for="check-1">
-                          <input type="checkbox" id="check-1" class="checkbox"/>
-                          <span class="checkbox-span"></span>
-                        </label>
-  
-                      
-  
-                      </div>
-                    </div>
-  
-                    <div class="element-gestion-permition">
-  
-                      <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra créer/gérer/supprimer les utilisateurs."
-                      [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
-  
-                      Utilisateurs
-  
-                      </div>
-  
-                      <div class="element-gestion-permition-content">
-  
-                        
-                        <label class="checked-block" for="check-1">
-                          <input type="checkbox" id="check-1" class="checkbox"/>
-                          <span class="checkbox-span"></span>
-                        </label>
-  
-                      
-  
-                      </div>
-                    </div>
-  
-                    <div class="element-gestion-permition">
-  
-                    <div class="element-gestion-permition-header"matTooltip="(Compte > profil entreprise) : l’utilisateur aura accès au profil d’entreprise et pourra y modifier les informations."
-                      [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
-  
-                      Profil entreprise
-  
-                    </div>
-  
-                    <div class="element-gestion-permition-content">
-  
-                        
-                        <label class="checked-block" for="check-1">
-                          <input type="checkbox" id="check-1" class="checkbox"/>
-                          <span class="checkbox-span"></span>
-                        </label>
-  
-                    </div>
-  
-                    </div>
-  
-                    <div class="element-gestion-permition">
-  
-                      <div class="element-gestion-permition-header"matTooltip="(Testing > interview) : l’utilisateur pourra accéder au module Interview et inviter les candidats à participer à un entretien par visioconférence."
-                      [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
-  
-                     Interview
-  
-                      </div>
-  
-                      <div class="element-gestion-permition-content">
-  
-                        
-                        <label class="checked-block" for="check-1">
-                          <input type="checkbox" id="check-1" class="checkbox"/>
-                          <span class="checkbox-span"></span>
-                        </label>
-  
-                      
-  
-                      </div>
-                    </div>
-                    <div class="element-gestion-permition">
-  
-                      <div class="element-gestion-permition-header"matTooltip="(Compte > protection des données) : l’utilisateur pourra gérer les paramètres de protection des données."
-                      [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
-  
-                      Protection des données
-  
-                      </div>
-  
-                      <div class="element-gestion-permition-content">
-  
-                        
-                        <label class="checked-block" for="check-1">
-                          <input type="checkbox" id="check-1" class="checkbox"/>
-                          <span class="checkbox-span"></span>
-                        </label>
-  
-                      </div>
-                    </div>
-  
+                <div>
+
+                  <input type="" value="{{prenomIsactiveUpdate ? '' : PrenomValue}}" class="champ-form"
+                    (input)="is_valid_prenom_update($event)"
+                    [ngClass]="{'errorChamp': prenomIsactiveUpdate === true}" />
                 </div>
-  
-                <div class="footer-form-last">
-                  <button class="btn-gestion" type="submit">Sauvegarder</button>
-                </div>
+
+
               </div>
-            </form>
-  
-          </div>
-          
-  
+
+              <div class="form-groupe">
+
+                <div class="top-form-groupe">
+
+                  <div class="title-and-error-span">
+
+                    <label class="libele" [ngClass]="{'new-label': nomIsactiveUpdate === true}">nom</label>
+
+                    <span class="title-champ-default"
+                      [ngClass]="{'title-champ-default-visible': nomIsactiveUpdate === true}">Obligatoire</span>
+
+                  </div>
+
+                </div>
+                <div>
+                  <input type="" class="champ-form" (input)="is_valid_nom_update($event)"
+                    value="{{nomIsactiveUpdate ? '' : NomValue}}"
+                    [ngClass]="{'errorChamp': nomIsactiveUpdate === true}" />
+                </div>
+
+              </div>
+
+              <div class="form-groupe">
+
+                <div class="top-form-groupe">
+
+                  <div class="title-and-error-span">
+
+                    <label class="libele" [ngClass]="{'new-label': emailIsactiveUpdate === true}">email</label>
+
+                    <span class="title-champ-default"
+                      [ngClass]="{'title-champ-default-visible': emailIsactiveUpdate === true}">{{ Textmail }}</span>
+
+                  </div>
+
+                </div>
+                <div>
+                  <input type="" value="{{emailIsactiveUpdate ? '' : MailValue}}" class="champ-form"
+                    (input)="is_valid_email_update($event)" [ngClass]="{'errorChamp': emailIsactiveUpdate === true}" />
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+            <div class="content-form-last">
+
+              <h3 class="title-gestion-perm">PERMISSIONS</h3>
+
+              <div class="tbl-permition">
+
+                <div class="element-gestion-permition">
+
+                  <div class="element-gestion-permition-header"
+                    matTooltip="(Compte > facturation) : l’utilisateur aura accès à la page facturation et recevra les factures par email."
+                    [matTooltipPosition]="position.value"
+                    aria-label="Button that displays a tooltip in various positions">
+
+                    facturation
+
+                  </div>
+
+                  <div class="element-gestion-permition-content">
+
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
+
+
+
+                  </div>
+                </div>
+
+                <div class="element-gestion-permition">
+
+                  <div class="element-gestion-permition-header"
+                    matTooltip="L’utilisateur pourra créer/modifier/supprimer les campagnes et les questions personnalisées."
+                    [matTooltipPosition]="position.value"
+                    aria-label="Button that displays a tooltip in various positions">
+
+                    Campagnes
+
+                  </div>
+
+                  <div class="element-gestion-permition-content">
+
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
+
+
+
+                  </div>
+                </div>
+
+                <div class="element-gestion-permition">
+
+                  <div class="element-gestion-permition-header"
+                    matTooltip="L’utilisateur pourra inviter les candidats aux campagnes. Il pourra également consulter les rapports de résultats."
+                    [matTooltipPosition]="position.value"
+                    aria-label="Button that displays a tooltip in various positions">
+
+                    Candidats
+
+                  </div>
+
+                  <div class="element-gestion-permition-content">
+
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
+
+
+
+                  </div>
+                </div>
+
+                <div class="element-gestion-permition">
+
+                  <div class="element-gestion-permition-header"
+                    matTooltip="L’utilisateur pourra créer/gérer/supprimer les utilisateurs."
+                    [matTooltipPosition]="position.value"
+                    aria-label="Button that displays a tooltip in various positions">
+
+                    Utilisateurs
+
+                  </div>
+
+                  <div class="element-gestion-permition-content">
+
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
+
+
+
+                  </div>
+                </div>
+
+                <div class="element-gestion-permition">
+
+                  <div class="element-gestion-permition-header"
+                    matTooltip="(Compte > profil entreprise) : l’utilisateur aura accès au profil d’entreprise et pourra y modifier les informations."
+                    [matTooltipPosition]="position.value"
+                    aria-label="Button that displays a tooltip in various positions">
+
+                    Profil entreprise
+
+                  </div>
+
+                  <div class="element-gestion-permition-content">
+
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
+
+                  </div>
+
+                </div>
+
+                <div class="element-gestion-permition">
+
+                  <div class="element-gestion-permition-header"
+                    matTooltip="(Testing > interview) : l’utilisateur pourra accéder au module Interview et inviter les candidats à participer à un entretien par visioconférence."
+                    [matTooltipPosition]="position.value"
+                    aria-label="Button that displays a tooltip in various positions">
+
+                    Interview
+
+                  </div>
+
+                  <div class="element-gestion-permition-content">
+
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
+
+
+
+                  </div>
+                </div>
+                <div class="element-gestion-permition">
+
+                  <div class="element-gestion-permition-header"
+                    matTooltip="(Compte > protection des données) : l’utilisateur pourra gérer les paramètres de protection des données."
+                    [matTooltipPosition]="position.value"
+                    aria-label="Button that displays a tooltip in various positions">
+
+                    Protection des données
+
+                  </div>
+
+                  <div class="element-gestion-permition-content">
+
+
+                    <label class="checked-block" for="check-1">
+                      <input type="checkbox" id="check-1" class="checkbox" />
+                      <span class="checkbox-span"></span>
+                    </label>
+
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="footer-form-last">
+                <button class="btn-gestion" type="submit">Sauvegarder</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+
       </div>
-  
-</div>
 
-<div class="component-utilisateurs">
+    </div>
 
-  <header class="header-form">
+    <div class="component-utilisateurs">
 
-   
-      <div class="champ-utilisateur">
-        
-        <form>
-
-      
-          <span class="icon-form-group-header-contenu"><i class="fas fa-search"></i></span>
-          <input type="text" name="search" [(ngModel)]="searchText" class="input-champ-utilisateurs" placeholder="Filtrer par titre ou candidat" id="search-header">
+      <header class="header-form">
 
 
-        </form>
+        <div class="champ-utilisateur">
 
-      </div>
+          <form>
 
-      <div class="left-form-utilisateurs">
+
+            <span class="icon-form-group-header-contenu"><i class="fas fa-search"></i></span>
+            <input type="text" name="search" [(ngModel)]="searchText" class="input-champ-utilisateurs"
+              placeholder="Filtrer par titre ou candidat" id="search-header">
+
+
+          </form>
+
+        </div>
+
+        <div class="left-form-utilisateurs">
 
           <div class="nbr-utilisateurs">
 
@@ -566,42 +595,51 @@
           </div>
 
           <button class="btn-header-contenu" (click)="param_cog()">
-              <i class="far fa-plus-square btn-icon"  id="param-cog"></i> Ajouter utilisateur
+            <i class="far fa-plus-square btn-icon" id="param-cog"></i> Ajouter utilisateur
           </button>
+
+        </div>
+
+
+      </header>
+
+      <div class="table-info-user">
+
+        <table class="table_user">
+          <thead class="table_head">
+            <tr class="table_row">
+              <th class="table_head_cell">Nom</th>
+              <th class="table_head_cell">Email</th>
+              <th class="table_head_cell">Privileges</th>
+              <th class="table_head_cell"></th>
+
+            </tr>
+          </thead>
+          <tbody class="table_body">
+            <tr class="table_row" *ngFor="let user of  user">
+              <td class="table_body_cell">user.prenom user.nom</td>
+              <td class="table_body_cell">user.email</td>
+              <td class="table_body_cell">user.privileges</td>
+              <td class="table_body_cell table_icon">
+                <i (click)="param_cog_deux()" class="fas fa-pencil-alt icon" matTooltip="Modifier"></i>
+                <i class="fas fa-trash-alt icon" matTooltip="Supprimer"></i>
+              </td>
+            </tr>
+            <tr class="table_row" *ngFor="let user of  user">
+              <td class="table_body_cell">user.prenom user.nom</td>
+              <td class="table_body_cell">user.email</td>
+              <td class="table_body_cell">user.privileges</td>
+              <td class="table_body_cell table_icon">
+                <i (click)="param_cog_deux()" class="fas fa-pencil-alt icon"></i>
+                <i class="fas fa-trash-alt icon"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
       </div>
 
-
-  </header>
-
-  <div class="table-info-user">
-
-      <table class="table_user">
-        <thead class="table_head">
-            <tr class="table_row">
-                <th class="table_head_cell">Nom</th>
-                <th class="table_head_cell">Email</th>
-                <th class="table_head_cell">Privileges</th>
-                <th class="table_head_cell"></th>
-                
-            </tr>
-        </thead>
-        <tbody class="table_body">
-            <tr class="table_row" *ngFor="let user of  user">
-                <td class="table_body_cell">user.prenom user.nom</td>
-                <td class="table_body_cell">user.email</td>
-                <td class="table_body_cell">user.privileges</td>
-                <td  class="table_body_cell table_icon">
-                  <i (click)="param_cog_deux()" class="fas fa-pencil-alt icon"></i>
-                  <i class="fas fa-trash-alt icon"></i>
-                </td>
-            </tr>
-        </tbody>
-      </table>
+    </div>
 
   </div>
-
-</div>
-
-</div>
 </div>
