@@ -9,7 +9,8 @@ import { ErrorStateMatcher } from "@angular/material/core";
 import { TooltipPosition } from "@angular/material";
 import {
   ApiClientService,
-  API_URI_USER_ADMIN
+  API_URI_USER_ADMIN,
+  API_URI_USER
 } from "src/app/api-client/api-client.service";
 
 export interface PeriodicElement {
@@ -69,7 +70,7 @@ export class UtilisateursComponent implements OnInit {
   public NomValue = "lenoir";
   public MailValue = "lenoir.jeremie@oostaoo.com";
 
-  public user: any = ["exemple 1", "x", "x", "x", "x"];
+  public users:[];
   prenom = new FormControl("", Validators.required);
   nom = new FormControl("", Validators.required);
   email = new FormControl("", Validators.required);
@@ -105,8 +106,12 @@ export class UtilisateursComponent implements OnInit {
   @ViewChild("form") formulaire;
 
   ngOnInit() {
-    this.getUser().then(user => {
-      console.log(user[0].utilsateurentreprises);
+    this.getUsers().then(users => {
+      console.log('users : ', users);
+      this.users = users;
+      console.log('this.users: ', this.users);
+
+      /**
       this.prenom = new FormControl(user[0].utilsateurentreprises.prenom);
       this.nom = new FormControl(user[0].utilsateurentreprises.nom);
       this.email = new FormControl(user[0].utilsateurentreprises.email);
@@ -114,6 +119,7 @@ export class UtilisateursComponent implements OnInit {
         user[0].utilsateurentreprises.privileges
       );
       this.password = new FormControl(user[0].utilsateurentreprises.password);
+      */
 
       // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
     });
@@ -256,6 +262,7 @@ export class UtilisateursComponent implements OnInit {
     }
   }
 
+/**
   async getUser(): Promise<any> {
     try {
       const datas = await this.apiClientService
@@ -266,6 +273,19 @@ export class UtilisateursComponent implements OnInit {
       return err;
     }
   }
+*/
+
+  async getUsers(): Promise<any> {
+    try {
+      const users = await this.apiClientService
+        .get(API_URI_USER)
+        .toPromise();
+      return users;
+    } catch (err) {
+      return err;
+    }
+  }
+
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
