@@ -49,7 +49,7 @@ export class CampagneComponent implements OnInit {
 
 
     this.authenticationService
-      .getCampaignsUser(this.decryptTokenService.userId)
+      .getCampaignsUser(this.decryptTokenService.adminId)
       .then(resultat => {
         // console.log('resultat = ', resultat);
         this.campaigns = resultat;
