@@ -24,7 +24,7 @@
 
         <div class="modall-content">
 
-           <form (ngSubmit)="Hundelesubmit()" class="form" method="POST" #form>
+           <form (ngSubmit)="addUser()" class="form" method="POST" #form>
 
               <div class="content-form-first">
 
@@ -258,7 +258,7 @@
               </div>
 
               <div class="footer-form-last">
-                <input class="btn-gestion" type="submit" value="INVITER" />
+                <input class="btn-gestion" type="submit" value="AJOUTER" />
               </div>
             </div>
           </form>
@@ -350,7 +350,7 @@
 
                     </div>
                     <div>
-                      <input type="" value="{{emailIsactiveUpdate ? '' : MailValue}}" class="champ-form"  (input)="is_valid_email_update($event)"  [ngClass]="{'errorChamp': emailIsactiveUpdate === true}"/>
+                      <input type="" value="{{emailIsactiveUpdate ? '' : EmailValue}}" class="champ-form"  (input)="is_valid_email_update($event)"  [ngClass]="{'errorChamp': emailIsactiveUpdate === true}"/>
                     </div>
 
 
