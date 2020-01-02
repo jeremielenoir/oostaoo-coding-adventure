@@ -165,9 +165,6 @@ export class UtilisateursComponent implements OnInit {
     this.NomValue = this.formulaire.nativeElement.nom.value;
     this.EmailValue = this.formulaire.nativeElement.email.value;
     this.UserName = `${this.PrenomValue}-${this.NomValue}`;
-
-console.log('this.users : ', this.users);
-
     if(!this.PrenomValue || !this.NomValue || !this.EmailValue){
       return;
     };
