@@ -698,66 +698,69 @@
 
 
 @media (max-width: 1024px) {
-  .sidibar {
-    display: none;
-  }
+ 
   .all-group-content {
-    flex-direction: column-reverse;
+    flex-direction: column-reverse!important;
   }
   .title-edit-panel {
-    font-size: 16px;
+    font-size: 16px!important;
   }
   .charte-progress {
-    width: 50px;
-    height: 50px;
+    width: 50px!important;
+    height: 50px!important;
   }
   .sous-edit-panel-left {
-    align-items: center;
+    align-items: center!important;
   }
   .number_progress_mini {
     font-size: 12px !important;
   }
   /*--partie content-left--*/
   .completion_fiche {
-    max-width: 820px;
-    height: auto;
-    width: auto;
-    margin-left: 0px;
-    justify-content: flex-end;
-    padding: 5px 25px 5px 30px;
+    max-width: 820px!important;
+    height: auto!important;
+    width: auto!important;
+    margin-left: 0px!important;
+    justify-content: flex-end!important;
+    padding: 5px 25px 5px 30px!important;
   }
   .completion_fiche_progress {
-    justify-content: space-between;
-    flex-direction: row;
+    justify-content: space-between!important;
+    flex-direction: row!important;
   }
   .progres {
-    height: 50px;
-    width: 50px;
+    height: 50px!important;
+    width: 50px!important;
   }
   .number_progress {
     font-size: 12px !important;
   }
   .detail_progresse {
-    right: 10px;
+    right: 10px!important;
   }
   .text_number_progress {
-    display: none;
+    display: none!important;
   }
   .number_progress::after {
     font-size: 12px !important;
   }
   .text_number_progress_responsive {
-    display: block;
+    display: block!important;
     margin-bottom: 0px !important;
   }
   /*-- partie content view--*/
   .regroupe-form {
-    display: block;
+    display: block!important;
   }
   .regroupe-form label {
-    padding: 0px;
-    margin-bottom: 6px;
+    padding: 0px!important;
+    margin-bottom: 6px!important;
   }
+}
+
+
+@media (max-width: 767px) {
+ 
 }
 
 @media (max-width: 450px) {
