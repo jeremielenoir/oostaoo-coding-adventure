@@ -89,7 +89,7 @@
             </span>
             <mat-menu #menu="matMenu">
 
-              <button (click)="duplicatecampaign(campaign.id)" mat-menu-item>
+              <button (click)="openDialogDuplicate(campaign.id)" mat-menu-item>
                 <mat-icon>file_copy</mat-icon>
                 <span>Dupliquer</span>
               </button>
@@ -114,7 +114,7 @@
                 <span>Archiver</span>
               </button>
 
-              <button (click)="deletecampaign(campaign.id)" mat-menu-item>
+              <button (click)="openDialogDelete(campaign.id)" mat-menu-item>
                 <mat-icon>delete</mat-icon>
                 <span>Supprimer</span>
               </button>

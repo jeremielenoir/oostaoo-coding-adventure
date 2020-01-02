@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, Inject } from '@angular/core';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -6,13 +6,18 @@ import {
   API_URI_CAMPAIGN
 } from '../../../api-client/api-client.service';
 import { InviteCandidat } from '../edit-campagne/candidats/invite-candidat.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from './../../home/register/service/auth.service';
 import { RouterLink } from '@angular/router';
 
+
+export interface DialogData {
+  confirmed: boolean;
+
+}
 
 @Component({
   selector: 'app-campagne',
@@ -21,24 +26,28 @@ import { RouterLink } from '@angular/router';
 })
 
 
-
 export class CampagneComponent implements OnInit {
   public campaigns = [];
   public campaignsFiltered = [];
   public campaignsArchived = [];
   public searchHeader: string;
+  public confirmed: boolean;
   @Output() campaignsChild = new EventEmitter<any>();
   @Output() emitIsactiveNoCountryside = new EventEmitter();
   public IsactiveNoCountryside = false;
   public searchText = '';
   public result: any;
   public myVar: boolean;
+  public test: any;
+
+
 
   constructor(
     public apiClientService: ApiClientService,
     public dialog: MatDialog,
     public decryptTokenService: DecryptTokenService,
-    public authenticationService: AuthenticationService
+    public authenticationService: AuthenticationService,
+    private _snackBar: MatSnackBar,
   ) {
     this.searchHeader = null;
   }
@@ -51,7 +60,7 @@ export class CampagneComponent implements OnInit {
       .then(resultat => {
         // console.log('resultat = ', resultat);
         this.campaigns = resultat;
-
+        console.log('this.campaigns', this.campaigns)
         for (const campaign of this.campaigns) {
           if (campaign.archive === false) {
             this.campaignsFiltered.push(campaign);
@@ -83,7 +92,7 @@ export class CampagneComponent implements OnInit {
 
   includeArchivedCampaigns(element) {
 
-    let champValue = element.children[0]
+    const champValue = element.children[0];
 
     this.myVar = champValue.checked;
 
@@ -96,6 +105,52 @@ export class CampagneComponent implements OnInit {
     this.dialog.open(InviteCandidat, {
       data: idCampaign,
       height: '80vh'
+    });
+  }
+
+  openDialogDuplicate(idCampaign): void {
+    const dialogRef = this.dialog.open(DialogOverviewDuplicate, {
+      width: '250px',
+      data: {idCampaign, confirmed: this.confirmed}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log('res', result);
+      console.log('idcamp', idCampaign);
+      this.confirmed = result;
+      console.log('result=', result);
+      if (result === false) {
+        return ;
+      } else {
+       this.duplicatecampaign(idCampaign);
+      }
+    });
+  }
+
+  openDialogDelete(idCampaign): void {
+    const dialogRef = this.dialog.open(DialogOverviewDelete, {
+      width: '250px',
+      data: {idCampaign, confirmed: this.confirmed}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log('res', result);
+      console.log('idcamp', idCampaign);
+      this.confirmed = result;
+      console.log('result=', result);
+      if (result === false) {
+        return ;
+      } else {
+       this.deletecampaign(idCampaign);
+      }
+    });
+  }
+
+  openSnackBar(message: string, action) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
     });
   }
 
@@ -120,8 +175,8 @@ export class CampagneComponent implements OnInit {
             technologies: this.result.technologies,
             user: this.result.user,
           }).subscribe((resultat) => {
-            alert('Campagne dupliqué');
-            window.location.reload();
+            this.campaignsFiltered = [];
+            this.ngOnInit();
           });
 
       });
@@ -136,8 +191,9 @@ export class CampagneComponent implements OnInit {
           pin: true
         }).subscribe(
           (res) => {
-            alert('Campagne épingler');
-            window.location.reload();
+            this.openSnackBar('Campagne épingler', 'Fermer');
+            this.campaignsFiltered = [];
+            this.ngOnInit();
             // console.log('res', res);
           },
           err => console.log(err)
@@ -148,8 +204,9 @@ export class CampagneComponent implements OnInit {
           pin: false
         }).subscribe(
           (res) => {
-            alert('Campagne désépingler');
-            window.location.reload();
+            this.openSnackBar('Campagne désépingler', 'Fermer');
+            this.campaignsFiltered = [];
+            this.ngOnInit();
             // console.log('res', res);
           },
           err => console.log(err)
@@ -167,8 +224,9 @@ export class CampagneComponent implements OnInit {
           archive: true
         }).subscribe(
           (res) => {
-            alert('Campagne archiver');
-            window.location.reload();
+            this.openSnackBar('Campagne archiver', 'Fermer');
+            this.campaignsFiltered = [];
+            this.ngOnInit();
             // console.log('res', res);
           },
           err => console.log(err)
@@ -179,8 +237,9 @@ export class CampagneComponent implements OnInit {
           archive: false
         }).subscribe(
           (res) => {
-            alert('Campagne désarchiver');
-            window.location.reload();
+            this.openSnackBar('Campagne désarchiver', 'Fermer');
+            this.campaignsFiltered = [];
+            this.ngOnInit();
 
           },
           err => console.log(err)
@@ -195,8 +254,8 @@ export class CampagneComponent implements OnInit {
       .delete(apiURL)
       .toPromise()
       .then(res => { // Success
-        alert('Campagne supprimé');
-        window.location.reload();
+        this.campaignsFiltered = [];
+        this.ngOnInit();
       });
   }
 
@@ -204,5 +263,45 @@ export class CampagneComponent implements OnInit {
     if (this.campaigns) {
       this.campaignsChild.emit(this.campaigns);
     }
+  }
+
+}
+
+@Component({
+  selector: 'dialog-overview-duplicate',
+  templateUrl: 'dialog-overview-duplicate.html',
+})
+export class DialogOverviewDuplicate {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewDuplicate>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close(this.data.confirmed = false);
+  }
+  onClick(): void {
+    console.log(this.data);
+    this.dialogRef.close(this.data.confirmed = true);
+  }
+
+}
+
+@Component({
+  selector: 'dialog-overview-delete',
+  templateUrl: 'dialog-overview-delete.html',
+})
+export class DialogOverviewDelete {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewDelete>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close(this.data.confirmed = false);
+  }
+  onClick(): void {
+    console.log(this.data);
+    this.dialogRef.close(this.data.confirmed = true);
   }
 }

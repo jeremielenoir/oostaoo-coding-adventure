@@ -47,7 +47,7 @@ import {
 } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component';
 
 import { DashboadCampagneComponent } from './components/panelAdmin/dashboard-campagne/dashboard-campagne.component';
-import { CampagneComponent } from './components/panelAdmin/campagne/campagne.component';
+import { CampagneComponent, DialogOverviewDelete, DialogOverviewDuplicate } from './components/panelAdmin/campagne/campagne.component';
 import { SidibarRightComponent } from './components/panelAdmin/sidebar-right/sidebar-right.component';
 import { DatePipe } from '@angular/common';
 import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
@@ -88,7 +88,7 @@ import { OffersComponent } from './components/home/offers/offers.component';
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
   //   NouvelleCampagnePage3Component, CandidatsMailComponent],
   entryComponents: [RouteComponentComponent, DistConnecTed, InviteCandidat, CandidatsComponent, PopupCampaign,
-    NouvelleCampagnePage3Component, CandidatsMailComponent],
+    NouvelleCampagnePage3Component, CandidatsMailComponent,  DialogOverviewDelete, DialogOverviewDuplicate],
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -112,6 +112,8 @@ import { OffersComponent } from './components/home/offers/offers.component';
     NouvelleCampagnePage3Component,
     DashboadCampagneComponent,
     CampagneComponent,
+    DialogOverviewDelete,
+    DialogOverviewDuplicate,
     SidibarRightComponent,
     ProfilUtilisateurComponent,
     FacturationComponent,
