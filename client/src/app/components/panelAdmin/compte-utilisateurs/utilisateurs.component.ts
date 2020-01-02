@@ -73,7 +73,7 @@ export class UtilisateursComponent implements OnInit {
   public EmailValue = "";
   public PasswordValue = "1234";
 
-  public users:[];
+  public users:any[];
   prenom = new FormControl("", Validators.required);
   nom = new FormControl("", Validators.required);
   email = new FormControl("", Validators.required);
@@ -111,6 +111,7 @@ export class UtilisateursComponent implements OnInit {
   ngOnInit() {
     this.getUsers().then(users => {
       this.users = users;
+      console.log('this users : ', this.users);
 
       /**
       this.prenom = new FormControl(user[0].utilsateurentreprises.prenom);
@@ -160,7 +161,6 @@ export class UtilisateursComponent implements OnInit {
   }
 
   public addUser(){
-
     this.PrenomValue = this.formulaire.nativeElement.prenom.value;
     this.NomValue = this.formulaire.nativeElement.nom.value;
     this.EmailValue = this.formulaire.nativeElement.email.value;
@@ -189,8 +189,13 @@ export class UtilisateursComponent implements OnInit {
                             username: this.UserName,
                             password: '1234'
                           }];
+                          this.param_cog_non_active();
+                          this.PrenomValue = "";
+                          this.NomValue = "";
+                          this.EmailValue = "";
+                          this.UserName = "";
       console.log(res) ;
-      this.param_cog();
+
       })
     .catch(function(res){ console.log(res) })
   }
