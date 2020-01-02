@@ -73,7 +73,7 @@ export class UtilisateursComponent implements OnInit {
   public EmailValue = "";
   public PasswordValue = "1234";
 
-  public users:[];
+  public users:any[];
   prenom = new FormControl("", Validators.required);
   nom = new FormControl("", Validators.required);
   email = new FormControl("", Validators.required);
