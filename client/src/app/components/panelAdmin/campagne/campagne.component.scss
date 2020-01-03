@@ -43,10 +43,8 @@
             background: #1d3551;
             color:white;
             border:none;
-            padding-top: 20px;
-            padding-bottom: 20px;
-            padding-left: 15px;
-            padding-right: 60px;
+            text-transform: uppercase;
+            padding: 20px 30px;
             display: block;
             font-size: 15px;
         }
@@ -146,6 +144,7 @@
         }
         .form-group-header-2 {
           flex: 2!important;
+          margin-left: 20px;
           label {
             margin: 0px;
             color: #7e8082;
