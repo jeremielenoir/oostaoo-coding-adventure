@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, Inject } from "@angular/core";
 import { MatBottomSheet, MatBottomSheetRef } from "@angular/material";
-import { element } from '@angular/core/src/render3';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router'
+
 
 @Component({
   selector: "app-route-component",
@@ -16,10 +18,10 @@ export class RouteComponentComponent implements OnInit {
 
   @Output() ContentViewDefault = new EventEmitter<any>();
 
-  constructor(private bottomSheet: MatBottomSheet) { }
-  openBottomSheet(): void {
-    this.bottomSheet.open(PopupMonOffre);
-  }
+  constructor(public dialog: MatDialog, private bottomSheet: MatBottomSheet) { }
+  // openBottomSheet(): void {
+  //   this.bottomSheet.open(PopupMonOffre);
+  // }
   ngOnInit() {
 
     let textMenu = document.querySelectorAll('.text-menu');
@@ -35,6 +37,20 @@ export class RouteComponentComponent implements OnInit {
     })
 
   }
+
+  public disConnection(event) {
+
+    event.preventDefault();
+
+    console.log('Hello WORD !!!');
+
+    const dialogRef = this.dialog.open(DistConnecTed, {
+
+    })
+
+  }
+
+
 
 
   // public active_menu() {
@@ -58,16 +74,44 @@ export class RouteComponentComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: "popup-mon-offre",
-  templateUrl: "./popup-mon-offre.html",
-  styleUrls: ["./popup-mon-offre.scss"]
-})
-export class PopupMonOffre {
-  constructor(private bottomSheetRef: MatBottomSheetRef<PopupMonOffre>) { }
 
-  openLink(event: MouseEvent): void {
-    this.bottomSheetRef.dismiss();
-    event.preventDefault();
+@Component({
+  selector: 'distConnected',
+  templateUrl: 'distConnected.html',
+})
+export class DistConnecTed {
+
+  constructor(
+    public dialogRef: MatDialogRef<DistConnecTed>,
+    public route: Router,
+  ) { }
+
+  hideDialog(): void {
+    this.dialogRef.close();
   }
+
+  public confirmDisConnection() {
+
+    localStorage.removeItem('currentUser');
+
+    this.dialogRef.close();
+    this.route.navigate(['/home/register']);
+
+
+  }
+
 }
+
+// @Component({
+//   selector: "popup-mon-offre",
+//   templateUrl: "./popup-mon-offre.html",
+//   styleUrls: ["./popup-mon-offre.scss"]
+// })
+// export class PopupMonOffre {
+//   constructor(private bottomSheetRef: MatBottomSheetRef<PopupMonOffre>) { }
+
+//   openLink(event: MouseEvent): void {
+//     this.bottomSheetRef.dismiss();
+//     event.preventDefault();
+//   }
+// }

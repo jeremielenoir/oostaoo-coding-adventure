@@ -7,6 +7,11 @@
         <span class="content-img" id="notif">
         </span>
       </a>
+      <ul class="dropdownn">
+        <li>
+          <p>Notifications</p>
+        </li>
+      </ul>
     </li>
     <li>
       <a href="" class="text-menu">
@@ -16,17 +21,17 @@
       <ul class="dropdownn">
 
         <li>
-          <a href="" class="a-first">TESTINGS</a>
+          <p>Testings</p>
         </li>
         <li>
-          <a href="">Mes Tests</a>
+          <a href="" [routerLink]="['/dashboard/campaigns']">Mes Tests</a>
         </li>
         <li>
-          <a href="">Éditeurs</a>
+          <a href="" [routerLink]="['/dashboard/campaigns/new']">Nouveau test</a>
         </li>
-        <li>
-          <a href="">Éditeurs</a>
-        </li>
+        <!-- <li>
+          <a href="" [routerLink]="['/dashboard/utilisateurs']">Éditeurs</a>
+        </li> -->
 
       </ul>
     </li>
@@ -38,7 +43,7 @@
       <ul class="dropdownn">
 
         <li>
-          <a href="" class="a-first">profil</a>
+          <p>profil</p>
         </li>
         <li>
           <a href="" [routerLink]="['/dashboard/profil-utilisateur']">Profil utilisateur</a>
@@ -54,7 +59,7 @@
           <a href="" [routerLink]="['/dashboard/utilisateurs']">Utilisateurs</a>
         </li>
         <li>
-          <a href="">Déconnexion</a>
+          <a href="" (click)="disConnection($event)">Déconnexion</a>
         </li>
 
       </ul>
@@ -64,12 +69,22 @@
         <span class="content-img" id="contact">
         </span>
       </a>
+      <ul class="dropdownn">
+        <li>
+          <p>Contact</p>
+        </li>
+      </ul>
     </li>
     <li>
       <a href="" class="text-menu">
         <span class="content-img" id="new">
         </span>
       </a>
+      <ul class="dropdownn">
+        <li>
+          <p>News</p>
+        </li>
+      </ul>
     </li>
 
 

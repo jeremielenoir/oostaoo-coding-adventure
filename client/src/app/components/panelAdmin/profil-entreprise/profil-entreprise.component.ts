@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit,  } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
 import {
   ApiClientService,
@@ -817,7 +817,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   constructor(
     public apiClientService: ApiClientService,
     public decryptTokenService: DecryptTokenService
-  ) {}
+  ) { }
 
 
   ngOnInit() {
@@ -847,12 +847,11 @@ export class ProfilEntrepriseComponent implements OnInit {
       // // console.log('entreprise', this.entreprise);
       // }
       this.getentreprise().then(entreprise => {
-        console.log('entre entreprise=', entreprise);
-        if ( entreprise === null) {
+
+        if (entreprise === null) {
           this.entreprise = entreprise[0];
-          console.log('entreprise', this.entreprise);
         } else {
-          this.logo = entreprise[0].logo.url;
+          // this.logo = entreprise[0].logo.url;
           this.name = new FormControl(entreprise[0].nom);
           this.email = new FormControl(entreprise[0].email);
           this.lang = new FormControl(entreprise[0].lang);
@@ -875,7 +874,7 @@ export class ProfilEntrepriseComponent implements OnInit {
         this.progressbar1();
         this.progressbar2();
         this.progressbarTotal();
-        });
+      });
     });
   }
 
@@ -1035,8 +1034,8 @@ export class ProfilEntrepriseComponent implements OnInit {
     const percent = 25;
 
 
-    for (const element of total ) {
-      if (element !== null && element !== '' ) {
+    for (const element of total) {
+      if (element !== null && element !== '') {
         this.current1 = this.current1 + percent;
 
         this.current1 = Math.round(this.current1);
@@ -1047,14 +1046,14 @@ export class ProfilEntrepriseComponent implements OnInit {
   progressbar2() {
 
     const total = [
-                   this.name.value, this.email.value, this.phone.value,
-                   this.industrie.value, this.numberofemployee.value,
-                   this.numberofdev.value, this.videolink.value, this.websitelink.value,
-                   this.teaser.value, this.linkedin.value, this.facebook.value, this.twitter.value
-                  ];
+      this.name.value, this.email.value, this.phone.value,
+      this.industrie.value, this.numberofemployee.value,
+      this.numberofdev.value, this.videolink.value, this.websitelink.value,
+      this.teaser.value, this.linkedin.value, this.facebook.value, this.twitter.value
+    ];
     const percent = 8.33333333;
-    for (const element of total ) {
-      if (element !== null && element !== '' ) {
+    for (const element of total) {
+      if (element !== null && element !== '') {
         this.current2 = this.current2 + percent;
         this.current2 = Math.trunc(this.current2);
       }
@@ -1063,17 +1062,17 @@ export class ProfilEntrepriseComponent implements OnInit {
   }
   progressbarTotal() {
     const total = [
-                    this.lang.value, this.videolink.value, this.websitelink.value, this.teaser.value,
-                    this.name.value, this.email.value, this.phone.value,
-                    this.industrie.value, this.numberofemployee.value, this.numberofdev.value,
-                    this.videolink.value, this.websitelink.value, this.teaser.value,
-                    this.linkedin.value, this.facebook.value, this.twitter.value
-                  ];
+      this.lang.value, this.videolink.value, this.websitelink.value, this.teaser.value,
+      this.name.value, this.email.value, this.phone.value,
+      this.industrie.value, this.numberofemployee.value, this.numberofdev.value,
+      this.videolink.value, this.websitelink.value, this.teaser.value,
+      this.linkedin.value, this.facebook.value, this.twitter.value
+    ];
     const percent = 6.25;
 
 
-    for (const element of total ) {
-      if (element !== null && element !== '' ) {
+    for (const element of total) {
+      if (element !== null && element !== '') {
         this.currentTotal = this.currentTotal + percent;
         this.currentTotal = Math.round(this.currentTotal);
       }
@@ -1108,7 +1107,7 @@ export class ProfilEntrepriseComponent implements OnInit {
     ) {
       this.cadrageImgBooleanStateLast = false;
 
-    
+
       this.uploadimgLast.nativeElement.src = URL.createObjectURL(
         event.target.files[0]
       );

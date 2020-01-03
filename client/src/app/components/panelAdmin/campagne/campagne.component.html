@@ -26,10 +26,8 @@
 
           <div class="form-group-header form-group-header-2">
 
-            <label class="checked-block" for="archive">
-              <!-- <mat-checkbox [(ngModel)]="checked" (click)="includeArchivedCampaigns(checked)">
-                Inclure archives
-              </mat-checkbox> -->
+            <label class="checked-block" for="archive" (click)="includeArchivedCampaigns(checked)" #checked>
+
               <input type="checkbox" class="archive-check" id="archive" />
               Inclure archives
               <span></span>
@@ -66,7 +64,79 @@
         </div>
       </div>
 
-      <div *ngFor="let campaign of test  | orderBy:'pin':true:customComparator | filter: searchText"
+      <div *ngFor="let campaign of campaignsFiltered | orderBy:'pin':true:customComparator | filter: searchText"
+        class="contenu-techno-content">
+
+        <figure class="branche-content-list-start" (click)="openDialog(campaign.id)">
+          <img src="../assets/Coding-game-img/SVG-menu-Dashboard/perso-plein.svg">
+        </figure>
+
+        <div class="contenu-branche">
+          <div class="corpo">
+            <a [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats']" class="contenu-branche-content">
+              <p class="branche-content-text">
+                {{ campaign.Name }}
+              </p>
+
+              <mat-icon *ngIf="campaign.pin === true">bookmark</mat-icon>
+              <mat-icon *ngIf="campaign.archive === true">archive</mat-icon>
+
+            </a>
+
+            <span class="branche-content-list-end-contenu-icon dashed" [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </span>
+            <mat-menu #menu="matMenu">
+
+              <button (click)="openDialogDuplicate(campaign.id)" mat-menu-item>
+                <mat-icon>file_copy</mat-icon>
+                <span>Dupliquer</span>
+              </button>
+
+              <button *ngIf="campaign.pin === true" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+                <mat-icon>bookmark</mat-icon>
+                <span>Désépingler</span>
+              </button>
+              <button *ngIf="campaign.pin === false" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+                <mat-icon>bookmark</mat-icon>
+                <span>Epingler</span>
+              </button>
+
+              <button *ngIf="campaign.archive === true" (click)="archivecampaign(campaign.id,campaign.archive)"
+                mat-menu-item>
+                <mat-icon>unarchive</mat-icon>
+                <span>Désarchiver</span>
+              </button>
+              <button *ngIf="campaign.archive === false" (click)="archivecampaign(campaign.id,campaign.archive)"
+                mat-menu-item>
+                <mat-icon>archive</mat-icon>
+                <span>Archiver</span>
+              </button>
+
+              <button (click)="openDialogDelete(campaign.id)" mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Supprimer</span>
+              </button>
+            </mat-menu>
+
+            <div class="branche-content-list-end">
+
+              <p>{{ campaign.candidats.length }} invite</p>
+              <p>
+                {{ campaign.NbCandidatFinish !== null ?
+                  campaign.NbCandidatFinish : 0 }} terminer
+              </p>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!--compagne archiver-->
+
+      <div [hidden]="!myVar" *ngFor="let campaign of campaignsArchived | filter: searchText"
         class="contenu-techno-content">
 
         <figure class="branche-content-list-start">
@@ -127,15 +197,19 @@
               <p>{{ campaign.candidats.length }} invite</p>
               <p>
                 {{ campaign.NbCandidatFinish !== null ?
-                  campaign.NbCandidatFinish : 0 }} terminer
+                    campaign.NbCandidatFinish : 0 }} terminer
               </p>
 
             </div>
           </div>
         </div>
 
-
       </div>
+
+      <!--fin compagne archive-->
+
+
+
     </div>
   </div>
 </div>

@@ -14,6 +14,7 @@
     label{
       display: block!important;
       padding-left: 10px;
+      color:#445770
     }
     #select p {
       font-size: 16px;
@@ -43,7 +44,7 @@
     margin-top:30px;
     position: absolute;
     width: 86%;
-    margin-left: 9%;
+    margin-left: 7%;
   }
 }
 
@@ -52,10 +53,15 @@
 }
 
 #button {
-  width: 96%;
   height: 50px;
-  color: $text-color-white;
-  background: $color-gold-background;
+  color: #e15028;
+  border:1px solid #e15028;
+  border-radius: 100px;
+  font-weight: 700;
+  &:hover{
+    background-color: #e15028;
+    color: white;
+  }
 }
 
 #icon {
@@ -92,10 +98,9 @@
 
 .button {
   width: 100%;
-  height: 50px;
-  margin-bottom: 20px;
-  color: $text-color-white;
-  background: $color-gold-background;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
 }
 
 .example-radio-button {
@@ -117,18 +122,18 @@
   .mat-ripple-element {
   opacity: 0.5 !important;
   /*click effect color change*/
-  background-color: $color-gold-background !important;
+  background-color: #e15028 !important;
 }
 
 :host ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
-  background-color: $color-gold-background !important;
+  background-color: #e15028 !important;
   /*inner circle color change*/
 }
 
 :host
   ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked
   .mat-radio-outer-circle {
-  border-color: $color-gold-background !important;
+  border-color: #e15028 !important;
   /*outer ring color change*/
 }
 
@@ -152,6 +157,7 @@
   margin-top: 15px;
   margin-left:5px;
   margin-right: 5px;
+  border:1px solid #445770!important
 }
 
 :host ::ng-deep .mat-form-field-underline {

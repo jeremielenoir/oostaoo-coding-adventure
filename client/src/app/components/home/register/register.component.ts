@@ -85,7 +85,7 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate(['/dashboard/campaigns']);
         },
         error => {
           this.error = error;
