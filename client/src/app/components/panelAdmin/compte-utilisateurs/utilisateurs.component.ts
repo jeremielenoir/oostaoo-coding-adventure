@@ -61,21 +61,21 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 const CHECKBOX_DATA = [{
   id: 1,
-  name: "LEVEL 2 ACCOUNTING DYNAMIC",
+  name: "LEVEL 2 ACCOUNTING",
   checked: false,
   matTooltip: "bblabla",
   isChecked: false,
   roleId: 8
 },{
   id: 2,
-  name: "LEVEL 3 - SALES dynamic",
+  name: "LEVEL 3 - SALES",
   checked: false,
   matTooltip: "bblabla",
   isChecked: false,
   roleId: 5
 },{
   id: 3,
-  name: "LEVEL 4 - RH dynamic",
+  name: "LEVEL 4 - RH",
   checked: false,
   matTooltip: "bblabla",
   isChecked: false,
@@ -108,7 +108,7 @@ export class UtilisateursComponent implements OnInit {
 
   public checkbox_list :any[];
   public selectedRoleId;
-
+  public selectedRoleName;
   public PrenomValue = "";
   public NomValue = "";
   public UserName = "";
@@ -224,6 +224,7 @@ export class UtilisateursComponent implements OnInit {
   public list_change(id) {
     for (let value of Object.values(this.checkbox_list)) {
       if(value.id === id) {
+        this.selectedRoleName = value.name;
         value.isChecked = !value.isChecked;
         this.selectedRoleId = value.roleId;
       } else {
@@ -260,13 +261,15 @@ export class UtilisateursComponent implements OnInit {
                             nom: this.NomValue,
                             email: this.EmailValue,
                             username: this.UserName,
-                            password: '1234'
+                            password: '1234',
+                            role: {name: this.selectedRoleName}
                           }];
                           this.param_cog_non_active();
                           this.PrenomValue = "";
                           this.NomValue = "";
                           this.EmailValue = "";
                           this.UserName = "";
+                          this.selectedRoleName = "";
       console.log(res) ;
 
       })
