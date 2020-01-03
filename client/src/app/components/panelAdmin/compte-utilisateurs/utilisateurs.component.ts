@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
 import { TooltipPosition } from "@angular/material";
+import {} from "@angular/material/snack-bar";
 import {
   ApiClientService,
   API_URI_USER_ADMIN,
@@ -158,6 +159,25 @@ export class UtilisateursComponent implements OnInit {
     this.nomIsactiveUpdate = false;
     this.emailIsactiveUpdate = false;
     this.prenomIsactiveUpdate = false;
+  }
+
+
+  public deleteUser(id){
+    console.log('on va delete user ', id);
+    const token = localStorage.getItem('currentUser');
+    fetch(`users/${id}`,
+      {
+        headers:{
+          "authorization": `Bearer ${token}`
+        },
+      method: "DELETE"
+    })
+    .then(res=>{
+      res.json();
+      this.users = this.users.filter(user=>user.id !== id);
+    })
+    .then(res=>console.log(res))
+    .catch((e)=>console.log('error : ', e))
   }
 
   public addUser(){
