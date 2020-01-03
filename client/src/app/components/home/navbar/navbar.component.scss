@@ -58,13 +58,13 @@ a {
   text-decoration: none;
   font-size: 16px;
   display: inline-block;
-  margin: 20px 0px 0;
+  margin: 5px 0px 0;
   height: 80px;
   padding: 20px;
 }
 
 a:hover {
-  color: goldenrod;
+  color: #54728d;
 }
 
 .mat-button {
@@ -117,7 +117,7 @@ a:hover {
 
 .mat-button:hover {
   color: $text-color;
-  background: goldenrod;
+  background: #54728d;
 }
 
 .arrow {
