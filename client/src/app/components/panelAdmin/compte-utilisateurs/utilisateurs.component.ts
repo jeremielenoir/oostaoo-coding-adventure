@@ -59,6 +59,43 @@ const ELEMENT_DATA: PeriodicElement[] = [
   { name: "Jérémie Lenoir", mail: "Neon", gestion: "Privileges", symbol: "" }
 ];
 
+const CHECKBOX_DATA = [{
+  id: 1,
+  name: "LEVEL 2 ACCOUNTING DYNAMIC",
+  checked: false,
+  matTooltip: "bblabla",
+  isChecked: false,
+  roleId: 8
+},{
+  id: 2,
+  name: "LEVEL 3 - SALES dynamic",
+  checked: false,
+  matTooltip: "bblabla",
+  isChecked: false,
+  roleId: 5
+},{
+  id: 3,
+  name: "LEVEL 4 - RH dynamic",
+  checked: false,
+  matTooltip: "bblabla",
+  isChecked: false,
+  roleId: 6
+}, {
+  id: 4,
+  name: "LEVEL 5 - CTO",
+  checked: false,
+  matTooltip: "bblabla",
+  isChecked: false,
+  roleId: 7
+}, {
+  id: 5,
+  name: "LEVEL 6 - ADMINISTRATEUR",
+  checked: false,
+  matTooltip: "bblabla",
+  isChecked: false,
+  roleId: 2
+}]
+
 @Component({
   selector: "app-utilisateurs",
   templateUrl: "./utilisateurs.component.html",
@@ -66,7 +103,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class UtilisateursComponent implements OnInit {
   constructor(public apiClientService: ApiClientService) {
+    this.checkbox_list = CHECKBOX_DATA;
   }
+
+  public checkbox_list :any[];
+  public selectedRoleId;
 
   public PrenomValue = "";
   public NomValue = "";
@@ -180,6 +221,17 @@ export class UtilisateursComponent implements OnInit {
     .catch((e)=>console.log('error : ', e))
   }
 
+  public list_change(id) {
+    for (let value of Object.values(this.checkbox_list)) {
+      if(value.id === id) {
+        value.isChecked = !value.isChecked;
+        this.selectedRoleId = value.roleId;
+      } else {
+        value.isChecked = false;
+      }
+    }
+  }
+
   public addUser(){
     this.PrenomValue = this.formulaire.nativeElement.prenom.value;
     this.NomValue = this.formulaire.nativeElement.nom.value;
@@ -199,7 +251,8 @@ export class UtilisateursComponent implements OnInit {
                               nom: this.NomValue,
                               email: this.EmailValue,
                               username: this.UserName,
-                              password: '1234'
+                              password: '1234',
+                              role: this.selectedRoleId
                             })
     })
     .then(async(res)=>{

@@ -98,21 +98,22 @@
 
                 <div class="tbl-permition">
 
-                  <div class="element-gestion-permition">
+                  <!-- one element -->
+                  <div class="element-gestion-permition" *ngFor="let item of checkbox_list">
 
                     <div class="element-gestion-permition-header" matTooltip="l’utilisateur aura accès à la page facturation et recevra les factures par email."
                     [matTooltipPosition]="position.value"
                     aria-label="Button that displays a tooltip in various positions">
 
-                      LEVEL 2 - ACCOUNTING
+                      {{item.name}}
 
                     </div>
 
                     <div class="element-gestion-permition-content">
 
 
-                      <label class="checked-block" for="check-1">
-                        <input type="checkbox" id="check-1" class="checkbox"/>
+                      <label class="checked-block" [for]="item.id">
+                        <input type="checkbox" [id]="item.id" class="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.isChecked" (click)="list_change(item.id)"/>
                         <span class="checkbox-span"></span>
                       </label>
 
@@ -120,95 +121,7 @@
 
                     </div>
                   </div>
-
-                   <div class="element-gestion-permition">
-
-                    <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra inviter les candidats aux campagnes. Il pourra également consulter les rapports de résultats."
-                    [matTooltipPosition]="position.value"
-                    aria-label="Button that displays a tooltip in various positions">
-
-                    LEVEL 3 - SALES
-
-                    </div>
-
-                    <div class="element-gestion-permition-content">
-
-
-                      <label class="checked-block" for="check-1">
-                        <input type="checkbox" id="check-1" class="checkbox"/>
-                        <span class="checkbox-span"></span>
-                      </label>
-
-                    </div>
-                  </div>
-
-                  <div class="element-gestion-permition">
-
-                    <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra interviewer les candidats dans la vidéo/chat-room."
-                    [matTooltipPosition]="position.value"
-                    aria-label="Button that displays a tooltip in various positions">
-
-                    LEVEL 4 - RH
-
-                    </div>
-
-                    <div class="element-gestion-permition-content">
-
-
-                      <label class="checked-block" for="check-1">
-                        <input type="checkbox" id="check-1" class="checkbox"/>
-                        <span class="checkbox-span"></span>
-                      </label>
-
-
-
-                    </div>
-                  </div>
-
-                  <div class="element-gestion-permition">
-
-                    <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra créer/modifier/supprimer les campagnes et les questions personnalisées."
-                    [matTooltipPosition]="position.value"
-                    aria-label="Button that displays a tooltip in various positions">
-
-                    LEVEL 5 - CTO
-
-                    </div>
-
-                    <div class="element-gestion-permition-content">
-
-
-                      <label class="checked-block" for="check-1">
-                        <input type="checkbox" id="check-1" class="checkbox"/>
-                        <span class="checkbox-span"></span>
-                      </label>
-
-
-
-                    </div>
-                  </div>
-
-                  <div class="element-gestion-permition">
-
-                  <div class="element-gestion-permition-header"matTooltip="L’utilisateur pourra créer/gérer/supprimer les utilisateurs. Il aura accès au profil d’entreprise et pourra y modifier les informations."
-                    [matTooltipPosition]="position.value"
-                    aria-label="Button that displays a tooltip in various positions">
-
-                    LEVEL 6 - ADMINISTRATEUR
-
-                  </div>
-
-                  <div class="element-gestion-permition-content">
-
-
-                      <label class="checked-block" for="check-1">
-                        <input type="checkbox" id="check-1" class="checkbox"/>
-                        <span class="checkbox-span"></span>
-                      </label>
-
-                  </div>
-
-                  </div>
+                  
               </div>
 
               <div class="footer-form-last">
