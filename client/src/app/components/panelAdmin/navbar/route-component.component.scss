@@ -29,7 +29,12 @@
         display: none;
         li{
           width: 92%;
-         .a-first{
+          p{
+            color: white;
+            margin-bottom:0px !important;
+            font-size:13px;
+            display: inline-block;
+            width: 100%;
             text-transform: uppercase;
             font-weight: 700;
           }
@@ -42,6 +47,7 @@
             &:hover{
               color:#68b4d3
             }
+          
           }
         }
       }
