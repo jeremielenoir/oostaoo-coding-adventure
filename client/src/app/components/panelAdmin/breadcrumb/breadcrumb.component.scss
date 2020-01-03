@@ -6,13 +6,6 @@
     padding-left: 8%;
     background-color: white;
 
-    span{
-    display: block;
-    color: #7e8082;
-    font-size: 12px;
-    font-weight: 400;
-    transition: .3s;
-    }
     .breadrumb{
         margin-bottom: 0rem !important;
         color: #7e8082;
@@ -20,6 +13,16 @@
         font-weight: 400;
         transition: .3s;
     }
+
+        .first{
+        text-decoration: none;
+        color: #1d3551;
+            &:hover{
+                color: #54728d;
+              }
+        }
+       
+    
  
 }
 
