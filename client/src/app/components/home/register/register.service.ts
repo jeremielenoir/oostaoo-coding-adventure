@@ -8,5 +8,5 @@ export class DecryptTokenService {
   base64Url = this.ca.split('.')[1];
   decodedValue = JSON.parse(window.atob(this.base64Url));
   userId = this.decodedValue.id;
-
+  adminId = this.decodedValue.adminId;
 }

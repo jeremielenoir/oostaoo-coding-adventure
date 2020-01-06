@@ -7,9 +7,11 @@ import {
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
 import { TooltipPosition } from "@angular/material";
+import {} from "@angular/material/snack-bar";
 import {
   ApiClientService,
-  API_URI_USER_ADMIN
+  API_URI_USER_ADMIN,
+  API_URI_USER
 } from "src/app/api-client/api-client.service";
 
 export interface PeriodicElement {
@@ -57,19 +59,63 @@ const ELEMENT_DATA: PeriodicElement[] = [
   { name: "Jérémie Lenoir", mail: "Neon", gestion: "Privileges", symbol: "" }
 ];
 
+const CHECKBOX_DATA = [{
+  id: 1,
+  name: "LEVEL 2 ACCOUNTING",
+  checked: false,
+  matTooltip: "bblabla",
+  isChecked: false,
+  roleId: 8
+},{
+  id: 2,
+  name: "LEVEL 3 - SALES",
+  checked: false,
+  matTooltip: "bblabla",
+  isChecked: false,
+  roleId: 5
+},{
+  id: 3,
+  name: "LEVEL 4 - RH",
+  checked: false,
+  matTooltip: "bblabla",
+  isChecked: false,
+  roleId: 6
+}, {
+  id: 4,
+  name: "LEVEL 5 - CTO",
+  checked: false,
+  matTooltip: "bblabla",
+  isChecked: false,
+  roleId: 7
+}, {
+  id: 5,
+  name: "LEVEL 6 - ADMINISTRATEUR",
+  checked: false,
+  matTooltip: "bblabla",
+  isChecked: false,
+  roleId: 2
+}]
+
 @Component({
   selector: "app-utilisateurs",
   templateUrl: "./utilisateurs.component.html",
   styleUrls: ["./utilisateurs.component.scss"]
 })
 export class UtilisateursComponent implements OnInit {
-  constructor(public apiClientService: ApiClientService) {}
+  constructor(public apiClientService: ApiClientService) {
+    this.checkbox_list = CHECKBOX_DATA;
+  }
 
-  public PrenomValue = "Jérémie";
-  public NomValue = "lenoir";
-  public MailValue = "lenoir.jeremie@oostaoo.com";
+  public checkbox_list :any[];
+  public selectedRoleId;
+  public selectedRoleName;
+  public PrenomValue = "";
+  public NomValue = "";
+  public UserName = "";
+  public EmailValue = "";
+  public PasswordValue = "1234";
 
-  public user: any = ["exemple 1", "x", "x", "x", "x"];
+  public users:any[];
   prenom = new FormControl("", Validators.required);
   nom = new FormControl("", Validators.required);
   email = new FormControl("", Validators.required);
@@ -105,8 +151,11 @@ export class UtilisateursComponent implements OnInit {
   @ViewChild("form") formulaire;
 
   ngOnInit() {
-    this.getUser().then(user => {
-      console.log(user[0].utilsateurentreprises);
+    this.getUsers().then(users => {
+      this.users = users;
+      console.log('this users : ', this.users);
+
+      /**
       this.prenom = new FormControl(user[0].utilsateurentreprises.prenom);
       this.nom = new FormControl(user[0].utilsateurentreprises.nom);
       this.email = new FormControl(user[0].utilsateurentreprises.email);
@@ -114,10 +163,12 @@ export class UtilisateursComponent implements OnInit {
         user[0].utilsateurentreprises.privileges
       );
       this.password = new FormControl(user[0].utilsateurentreprises.password);
+      */
 
       // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
     });
   }
+
 
   public param_cog() {
     this.shadowcog1 = !this.shadowcog1;
@@ -144,11 +195,85 @@ export class UtilisateursComponent implements OnInit {
 
     this.NomValue = "Lenoir";
     this.PrenomValue = "Jéremie";
-    this.MailValue = "lenoir.jeremie@oostaoo.com";
+    this.EmailValue = "lenoir.jeremie@oostaoo.com";
 
     this.nomIsactiveUpdate = false;
     this.emailIsactiveUpdate = false;
     this.prenomIsactiveUpdate = false;
+  }
+
+
+  public deleteUser(id){
+    console.log('on va delete user ', id);
+    const token = localStorage.getItem('currentUser');
+    fetch(`users/${id}`,
+      {
+        headers:{
+          "authorization": `Bearer ${token}`
+        },
+      method: "DELETE"
+    })
+    .then(res=>{
+      res.json();
+      this.users = this.users.filter(user=>user.id !== id);
+    })
+    .then(res=>console.log(res))
+    .catch((e)=>console.log('error : ', e))
+  }
+
+  public list_change(id) {
+    for (let value of Object.values(this.checkbox_list)) {
+      if(value.id === id) {
+        this.selectedRoleName = value.name;
+        value.isChecked = !value.isChecked;
+        this.selectedRoleId = value.roleId;
+      } else {
+        value.isChecked = false;
+      }
+    }
+  }
+
+  public addUser(){
+    this.PrenomValue = this.formulaire.nativeElement.prenom.value;
+    this.NomValue = this.formulaire.nativeElement.nom.value;
+    this.EmailValue = this.formulaire.nativeElement.email.value;
+    this.UserName = `${this.PrenomValue}-${this.NomValue}`;
+    if(!this.PrenomValue || !this.NomValue || !this.EmailValue){
+      return;
+    };
+    fetch('/users',
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify({prenom: this.PrenomValue,
+                              nom: this.NomValue,
+                              email: this.EmailValue,
+                              username: this.UserName,
+                              password: '1234',
+                              role: this.selectedRoleId
+                            })
+    })
+    .then(async(res)=>{
+      this.users = [...this.users, {prenom: this.PrenomValue,
+                            nom: this.NomValue,
+                            email: this.EmailValue,
+                            username: this.UserName,
+                            password: '1234',
+                            role: {name: this.selectedRoleName}
+                          }];
+                          this.param_cog_non_active();
+                          this.PrenomValue = "";
+                          this.NomValue = "";
+                          this.EmailValue = "";
+                          this.UserName = "";
+                          this.selectedRoleName = "";
+      console.log(res) ;
+
+      })
+    .catch(function(res){ console.log(res) })
   }
 
   public Hundelesubmit() {
@@ -240,7 +365,7 @@ export class UtilisateursComponent implements OnInit {
 
     const champValue = event.target.value;
 
-    this.MailValue = event.target.value;
+    this.EmailValue = event.target.value;
 
     if (champValue.length < 1) {
       this.emailIsactiveUpdate = true;
@@ -256,6 +381,7 @@ export class UtilisateursComponent implements OnInit {
     }
   }
 
+/**
   async getUser(): Promise<any> {
     try {
       const datas = await this.apiClientService
@@ -266,6 +392,19 @@ export class UtilisateursComponent implements OnInit {
       return err;
     }
   }
+*/
+
+  async getUsers(): Promise<any> {
+    try {
+      const users = await this.apiClientService
+        .get(API_URI_USER)
+        .toPromise();
+      return users;
+    } catch (err) {
+      return err;
+    }
+  }
+
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

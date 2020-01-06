@@ -54,9 +54,9 @@ export class CampagneComponent implements OnInit {
 
   ngOnInit() {
 
-
+    const adminId = this.decryptTokenService.adminId || this.decryptTokenService.userId;
     this.authenticationService
-      .getCampaignsUser(this.decryptTokenService.userId)
+      .getCampaignsUser(adminId)
       .then(resultat => {
         // console.log('resultat = ', resultat);
         this.campaigns = resultat;
