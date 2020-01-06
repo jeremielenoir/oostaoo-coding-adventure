@@ -6,7 +6,7 @@ import {
   Validators
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
-import { TooltipPosition } from "@angular/material";
+import { TooltipPosition, MatSnackBar } from "@angular/material";
 import {} from "@angular/material/snack-bar";
 import {
   ApiClientService,
@@ -102,7 +102,10 @@ const CHECKBOX_DATA = [{
   styleUrls: ["./utilisateurs.component.scss"]
 })
 export class UtilisateursComponent implements OnInit {
-  constructor(public apiClientService: ApiClientService) {
+  constructor(
+    public apiClientService: ApiClientService,
+    private _snackBar: MatSnackBar,
+  ) {
     this.checkbox_list = CHECKBOX_DATA;
   }
 
@@ -202,6 +205,11 @@ export class UtilisateursComponent implements OnInit {
     this.prenomIsactiveUpdate = false;
   }
 
+  openSnackBar(message: string, action) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 
   public deleteUser(id){
     console.log('on va delete user ', id);
@@ -212,6 +220,7 @@ export class UtilisateursComponent implements OnInit {
       .then(res=>{
         console.log(res);
         this.users = this.users.filter(user=>user.id !== id);
+        this.openSnackBar('Utilisateur supprimé avec succès', 'Fermer');
       })
       .then(res=>console.log(res))
       .catch((e)=>console.log('error : ', e))
@@ -267,6 +276,7 @@ export class UtilisateursComponent implements OnInit {
                           this.UserName = "";
                           this.selectedRoleName = "";
         console.log(res) ;
+        this.openSnackBar('Utilisateur ajouté avec succès', 'Fermer');
       })
     .catch(function(res){ console.log(res) })
   }
