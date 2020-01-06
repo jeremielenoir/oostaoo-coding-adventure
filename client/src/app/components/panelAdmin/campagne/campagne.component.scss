@@ -167,14 +167,14 @@
 
   .contenu-techno {
     background-color: white;
-    border: $border-table;
+    border: $border-table-second;
     display: flex;
     flex: 1;
     flex-direction: column;
    
     .no-campaign{
       width: 50%;
-      border: $border-table;
+      border: $border-table-second;
       text-align: center;
       margin: 20px auto 0;
       padding: 10px;

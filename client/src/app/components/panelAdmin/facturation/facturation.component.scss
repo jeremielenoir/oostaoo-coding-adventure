@@ -12,11 +12,15 @@
         min-height: 90vh;
         height: 100%;
         .icon {
-            color: $color-gold;
+            color: $color-principal-blue;
         
             .icoheight {
                 font-size: 20px;
             }
+        }
+
+        .icon-button{
+            cursor: pointer;
         }
     }
 }
@@ -67,7 +71,7 @@
     
     #section2-title a {
         font-size: 16px;
-        color: $color-gold;
+        color: $color-principal-blue;
         margin-top: 10px;
         text-decoration: none;
     }
@@ -108,7 +112,7 @@
         }
     
         .bouton-modifier {
-            background: $color-gold;
+            background: $color-principal-blue;
             margin-top: 5px;
             color: white;
             max-height: 35px;
