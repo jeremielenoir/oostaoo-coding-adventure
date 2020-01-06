@@ -1,13 +1,15 @@
 @import "../../../../roodeo-variables.scss";
 
 #content {
-  margin-left: 18%;
+  padding-top: 30px;
+  margin-left: 8%;
+  margin-right: 8%;
   .icon {
     margin: 5px;
-    color: $color-gold;
+    color: #1d3551;
+    cursor: pointer;
   }
   .component-utilisateurs {
-    background-color: $background-color;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -18,11 +20,10 @@
       .champ-utilisateur {
         flex: 10000;
         margin: 0 10px 0px 10px;
-        border: $border-table;
+        border: 1px solid #de522b;
         display: flex;
         overflow: hidden;
         min-width: 300px;
-        background-color: $background-color;
         position: relative;
         min-height: 48px;
         form {
@@ -30,7 +31,7 @@
           .icon-form-group-header-contenu {
             display: inline-block;
             left: 9px;
-            color: #ffd200;
+            color:#de522b ;
             font-size: 24px;
             top: 4px;
             position: absolute;
@@ -40,7 +41,6 @@
             height: 100%;
             padding: 0 50px 0 35px;
             font-size: 15px;
-            background-color: $background-color;
             outline: none;
             border: none;
           }
@@ -62,10 +62,10 @@
           font-weight: 700;
           align-items: center;
           justify-content: center;
-          background-color: $color-gold;
+          background-color: #1d3551;
           margin-left: 10px;
           &:hover {
-            background-color: #ffd200;
+            background-color: #1d324ae0;
           }
           .btn-icon {
             font-size: 24px;
@@ -86,7 +86,7 @@
           .btn-icon-utilisateur {
             display: block;
             padding-right: 6px;
-            color: #ffd200;
+            color: #1d3551;
           }
         }
       }
@@ -165,6 +165,10 @@
 .mat-cell:last-child {
   max-width: 92px;
   padding: inherit;
+}
+
+.table_head{
+  background: #eaeff3!important;
 }
 
 .table_header,
@@ -291,7 +295,7 @@
         align-items: center;
         margin-bottom: 5px;
         &::after {
-          color: $color-gold;
+          color: #1d3551;
           content: "*";
           font-size: 20px;
           margin-top: 5px;
@@ -336,7 +340,7 @@
 }
 
 .checked-block input:checked ~ .checkbox-span {
-  border-color: $color-gold;
+  border-color: #1d3551;
 }
 
 .checkbox-span {
@@ -359,7 +363,7 @@
   top: 0px;
   width: 5px;
   height: 10px;
-  border: solid $color-gold;
+  border: solid #1d3551;
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -385,11 +389,11 @@
   transition: background-color 200ms;
   font-weight: 700;
   text-transform: uppercase;
-  background-color: $color-gold;
+  background-color:#1d3551;
 }
 
 .btn-gestion:hover {
-  background-color: #ffd200;
+  background-color: #1d324ae0;
 }
 
 .champ-form.errorChamp {
@@ -408,20 +412,15 @@
   /* .mat-cell */
 }
 
-@media screen and (min-width: 300px) and (max-width: 1024px) {
-  #content {
-    margin-left: 0%;
-  }
-}
 
-@media screen and (max-width: 760px) {
+
+@media screen and (max-width: 767px) {
   .modall {
     max-width: calc(100vw - 100px) !important;
   }
 
   .header-form {
-    flex-direction: column-reverse;
-    overflow: hidden;
+    
   }
 
   .champ-utilisateur {
@@ -440,6 +439,17 @@
 
 @media screen and (max-width: 420px) {
   /*--partie-header--*/
+
+  .header-form{
+    flex-direction: column!important;
+    .champ-utilisateur{
+      min-width: 0px!important;
+    }
+    .nbr-utilisateurs{
+      margin-top:10px!important;
+      margin-bottom: 10!important;
+    }
+  }
 
   .champ-utilisateur {
     margin-top: 8px;

@@ -30,7 +30,7 @@ import { MainComponent } from './components/home/main/main.component';
 import { SliderComponent } from './components/home/slider/slider.component';
 
 import { SlideMarquesComponent } from './components/home/slide-marques/slide-marques.component';
-import { RouteComponentComponent, PopupMonOffre } from './components/panelAdmin/navbar/route-component.component';
+import { RouteComponentComponent, DistConnecTed } from './components/panelAdmin/navbar/route-component.component';
 import { AccueilComponent } from './components/home/accueil/accueil.component';
 
 import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
@@ -47,7 +47,7 @@ import {
 } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component';
 
 import { DashboadCampagneComponent } from './components/panelAdmin/dashboard-campagne/dashboard-campagne.component';
-import { CampagneComponent } from './components/panelAdmin/campagne/campagne.component';
+import { CampagneComponent, DialogOverviewDelete, DialogOverviewDuplicate } from './components/panelAdmin/campagne/campagne.component';
 import { SidibarRightComponent } from './components/panelAdmin/sidebar-right/sidebar-right.component';
 import { DatePipe } from '@angular/common';
 import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
@@ -83,9 +83,12 @@ import { TechnoComponent } from './components/home/techno/techno.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { OffersComponent } from './components/home/offers/offers.component';
 
+
 @NgModule({
-  entryComponents: [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
-    NouvelleCampagnePage3Component, CandidatsMailComponent],
+  // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
+  //   NouvelleCampagnePage3Component, CandidatsMailComponent],
+  entryComponents: [RouteComponentComponent, DistConnecTed, InviteCandidat, CandidatsComponent, PopupCampaign,
+    NouvelleCampagnePage3Component, CandidatsMailComponent,  DialogOverviewDelete, DialogOverviewDuplicate],
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -97,7 +100,8 @@ import { OffersComponent } from './components/home/offers/offers.component';
     SliderComponent,
     SlideMarquesComponent,
     RouteComponentComponent,
-    PopupMonOffre,
+    DistConnecTed,
+    // PopupMonOffre,
     AccueilComponent,
     NavMobileAbsoluteDirective,
     IntegrationBoutonComponent,
@@ -108,6 +112,8 @@ import { OffersComponent } from './components/home/offers/offers.component';
     NouvelleCampagnePage3Component,
     DashboadCampagneComponent,
     CampagneComponent,
+    DialogOverviewDelete,
+    DialogOverviewDuplicate,
     SidibarRightComponent,
     ProfilUtilisateurComponent,
     FacturationComponent,

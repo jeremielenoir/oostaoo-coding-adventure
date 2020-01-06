@@ -96,6 +96,10 @@
     "campaigns": {
       "collection": "campaign",
       "via": "user"
+    },
+    "adminId": {
+      "default": "",
+      "type": "integer"
     }
   },
   "collectionName": "users-permissions_user"

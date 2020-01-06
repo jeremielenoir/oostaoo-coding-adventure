@@ -7,6 +7,69 @@
   padding-left: 18%;
   /* height: 100vh; */
 
+    .select-choince{
+      height: 48px;
+      padding: 0 20px;
+      border: 1px solid #e4e4e4;
+      margin: 0 10px 20px 10px;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      .menu-choince{
+        top: 47px;
+        left: 0;
+        right: 0;
+        cursor: pointer;
+        z-index: 1;
+        position: absolute;
+        box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
+        // padding-top: 48px;
+        background-color: #fff;
+        .menu-list-choince{
+          button{
+            width: 100%;
+            height: 48px;
+            display: flex;
+            border-top: 1px solid #e7e7e7!important;
+            background-color: transparent;
+            border: none;
+            font: inherit;
+            .icon{
+              display: inline-block;
+              margin-left: 15px;
+              opacity: .5;
+            }
+            span{
+              color: #e7e7e7;
+            }
+          }
+          .first-btn{
+            border:none!important
+          }
+        }
+      }
+      span{
+        color: #20252a;
+        display: inline-block;
+        font-size: 14px;
+        margin-left: 15px;
+      }
+
+      .icon-choince{
+        font-size: 24px;
+        color: $color-principal-blue;
+      }
+
+      .icon-choince-croche{
+       color: #7e8082;
+       margin-left: 15px;
+      }
+    }
+
+
     .style-link {
       border-bottom: 1px solid $color-table;
       color: $color-grey;

@@ -9,14 +9,14 @@ export class BreadcrumbComponent implements OnInit {
 
   constructor() { }
 
-  @Input('') namePage: string;
+  @Input('') namePage: string = "";
 
   public DefaultViewContent(event) {
 
   }
 
   ngOnInit() {
-
+    this.namePage = this.namePage != "" ? " > "+ this.namePage : "";
 
   }
 

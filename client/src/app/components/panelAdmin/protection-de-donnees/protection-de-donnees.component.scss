@@ -1,13 +1,12 @@
 @import "../../../../roodeo-variables.scss";
 
 #global {
-    display: flex;
+
 
     #content {
         background: $background-color;
         width: 100%;
         padding: 10px;
-        margin-left: 18%;
 
         .icon {
             color: $color-gold;

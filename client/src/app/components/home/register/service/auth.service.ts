@@ -69,7 +69,7 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
   }
 
-  getCampaignsUser(idUser: number) {
-    return this.apiClientService.get(API_URI_CAMPAIGNS + '?user_in=' + idUser).toPromise();
+  getCampaignsUser(adminId: number) {
+    return this.apiClientService.get(API_URI_CAMPAIGNS + '?user_in=' + adminId).toPromise();
   }
 }

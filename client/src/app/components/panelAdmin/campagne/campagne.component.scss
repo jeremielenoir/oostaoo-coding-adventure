@@ -43,10 +43,8 @@
             background: #1d3551;
             color:white;
             border:none;
-            padding-top: 20px;
-            padding-bottom: 20px;
-            padding-left: 15px;
-            padding-right: 60px;
+            text-transform: uppercase;
+            padding: 20px 30px;
             display: block;
             font-size: 15px;
         }
@@ -146,6 +144,7 @@
         }
         .form-group-header-2 {
           flex: 2!important;
+          margin-left: 20px;
           label {
             margin: 0px;
             color: #7e8082;
@@ -204,6 +203,9 @@
         flex-direction: row;
         transition: height 500ms, opacity 500ms;
         border-bottom:1px dashed #de522b;
+        scrollbar-color: #7f8183 #e3e3e3;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
       
         .contenu-branche {
          flex: 11;
@@ -291,7 +293,7 @@
            flex-direction: column;
            justify-content: center;
            align-content: center;
-           padding: 20px 15px;
+           padding: 9px 15px;
           
            p{
              margin-bottom: 0px;
@@ -310,6 +312,7 @@
           flex: 1;
           border-right: 1px dashed #e15028;
           margin-bottom: 0px;
+          cursor: pointer;
           img{
             width: 30px;
             height: 30px;

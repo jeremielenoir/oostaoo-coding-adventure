@@ -22,6 +22,7 @@ module.exports = async (ctx, next) => {
 
     role = ctx.state.user.role;
 
+
     if (role.type === 'root') {
       return await next();
     }
@@ -45,7 +46,7 @@ module.exports = async (ctx, next) => {
   if (!role) {
     role = await strapi.query('role', 'users-permissions').findOne({ type: 'public' }, []);
   }
-
+strapi.log.info('role : ', role);
   const route = ctx.request.route;
   const permission = await strapi.query('permission', 'users-permissions').findOne({
     role: role._id || role.id,

@@ -1,33 +1,32 @@
-
 <div id="global">
-<app-route-component></app-route-component>
+  <app-route-component></app-route-component>
+    <app-breadcrumb [namePage]="'Mon profil'"></app-breadcrumb>
 
-<div id="content">
+  <div class="content">
+    <div id="section1" class="border-none">
 
-  <div id="section1">
-
-    <div class="section-title">
-      <i class="far fa-user-circle icon"></i>
-      <h2 class="title">Profil</h2>
-    </div>
-
-    <form action="">
-      <div class="form-line">
-          <div class="input-bloc">
-              <h3 class="input-title">Prénom *</h3>
-              <input name="firstname" [formControl]="prenom" class="input-section1" maxlength="64" type="text" required>
-          </div>
-      
-          <div class="input-bloc">
-              <h3 class="input-title" maxlength="64">Nom *</h3>
-              <input name="lastname" [formControl]="nom" class="input-section1" type="text" required>
-          </div>
+      <div class="section-title">
+        <i class="far fa-user-circle icon"></i>
+        <h2 class="title">Profil</h2>
       </div>
 
-      <div class="form-line">
-        <div class="input-bloc">
-          <h3 class="input-title">Pays *</h3>
-          <select [formControl]="pays" class="input-section1" name="pays" required>
+      <form action="">
+        <div class="form-line">
+          <div class="input-bloc">
+            <h3 class="input-title">Prénom *</h3>
+            <input name="firstname" [formControl]="prenom" class="input-section1" maxlength="64" type="text" required>
+          </div>
+
+          <div class="input-bloc">
+            <h3 class="input-title" maxlength="64">Nom *</h3>
+            <input name="lastname" [formControl]="nom" class="input-section1" type="text" required>
+          </div>
+        </div>
+
+        <div class="form-line">
+          <div class="input-bloc">
+            <h3 class="input-title">Pays *</h3>
+            <select [formControl]="pays" class="input-section1" name="pays" required>
               <option value="Afrikanns">Afrikanns</option>
               <option value="Albanian">Albanian</option>
               <option value="Arabic">Arabic</option>
@@ -100,80 +99,84 @@
               <option value="Vietnamese">Vietnamese</option>
               <option value="Welsh">Welsh</option>
               <option value="Xhosa">Xhosa</option>
-          </select>
-          
-        </div>
+            </select>
 
-        <div class="input-bloc">
+          </div>
+
+          <div class="input-bloc">
             <h3 class="input-title">Langue *</h3>
             <select [formControl]="langue" class="input-section1" name="langue" required>
-                <option value="Anglais">Anglais</option>
-                <option value="Francais">Français</option>
+              <option value="Anglais">Anglais</option>
+              <option value="Francais">Français</option>
             </select>
+          </div>
         </div>
-      </div>
 
 
-      <div class="form-line">
+        <div class="form-line">
           <div class="input-bloc">
-              <h3 class="input-title" >N° de téléphone</h3>
-              <input [formControl]="tel" name="phone" class="input-section1" maxlength="32" type="tel">
-            </div>
-    
-            <div class="input-bloc">
-                <h3 class="input-title">Mobile</h3>
-                <input [formControl]="mobile" name="mobile" class="input-section1" maxlength="32" type="tel">
-            </div>
-      </div>
+            <h3 class="input-title">N° de téléphone</h3>
+            <input [formControl]="tel" name="phone" class="input-section1" maxlength="32" type="tel">
+          </div>
+
+          <div class="input-bloc">
+            <h3 class="input-title">Mobile</h3>
+            <input [formControl]="mobile" name="mobile" class="input-section1" maxlength="32" type="tel">
+          </div>
+        </div>
 
 
 
-      <div class="form-line">
+        <div class="form-line">
           <div class="input-bloc">
             <h3 class="input-title">Fonction *</h3>
             <select [formControl]="fonction" class="input-section1" name="fonction" required>
-                <option value="unknown" disabled="">-</option>
-                <option value="commercial">Commercial</option>
-                <option value="direction">Direction</option>
-                <option value="tech">Équipe technique</option>
-                <option value="marketing">Marketing/Communication</option>
-                <option value="rh">Ressources humaines</option>
-                <option value="other">Autre</option>
+              <option value="unknown" disabled="">-</option>
+              <option value="commercial">Commercial</option>
+              <option value="direction">Direction</option>
+              <option value="tech">Équipe technique</option>
+              <option value="marketing">Marketing/Communication</option>
+              <option value="rh">Ressources humaines</option>
+              <option value="other">Autre</option>
             </select>
-          </div>  
-      </div>
-
-
-      <div class="form-line">
-        <div class="input-bloc">
-          <button (click)='updateprofil()' class="btn-submit" type="submit">Enregistrer</button>
+          </div>
         </div>
-      </div>
-    </form>
-  </div>
 
 
-  <div id="section2">
+        <div class="form-line">
+          <div class="input-bloc">
+            <button (click)='updateprofil()' class="btn-submit" type="submit">Enregistrer</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <div id="section2">
 
       <div class="section-title">
         <i class="far fa-user-circle icon"></i>
         <h2 class="title">Signature</h2>
-        
+
       </div>
 
       <form action="">
-          <div class="form-line">
-              <div class="input-bloc">
+        <div class="form-line">
+          <div class="input-bloc">
 
-                  <textarea [formControl]="signature" name="signature" id="signature" cols="100%" rows="10"></textarea>
-                <button (click)='updatesignature()' class="btn-submit" type="submit">Enregistrer</button>
-              </div>
-            </div>
+            <textarea class="input-section1 input-section1-textarea" [formControl]="signature" name="signature"
+              id="signature"></textarea>
+            <button (click)='updatesignature()' class="btn-submit" type="submit">Enregistrer</button>
+          </div>
+        </div>
       </form>
+    </div>
+
   </div>
 
+  <div class="content">
 
-  <div id="section3">
+    <div id="section3" class="border-none">
 
       <div class="section-title">
         <i class="far fa-envelope-open icon"></i>
@@ -182,77 +185,75 @@
 
       <form action="">
 
-              <div class="form-line">
-                <div class="input-bloc">
-                    <h3 class="input-title">Email actuel *</h3>
-                    <input [formControl]="email" name="current" class="input-section1" maxlength="64" type="email">
-                </div>
-             </div>
+        <div class="form-line">
+          <div class="input-bloc">
+            <h3 class="input-title">Email actuel *</h3>
+            <input [formControl]="email" name="current" class="input-section1" maxlength="64" type="email">
+          </div>
+        </div>
 
-              <div class="form-line">
-                <div class="input-bloc">
-                    <h3 class="input-title">Nouvel email *</h3>
-                    <input [formControl]="email" name="new" class="input-section1" maxlength="64" type="email">
-                </div>
-              </div>
+        <div class="form-line">
+          <div class="input-bloc">
+            <h3 class="input-title">Nouvel email *</h3>
+            <input [formControl]="email" name="new" class="input-section1" maxlength="64" type="email">
+          </div>
+        </div>
 
-              <div class="form-line">
-                <div class="input-bloc">
-                    <h3 class="input-title">Mot de passe *</h3>
-                    <input name="password" class="input-section1" maxlength="64" type="password">
-                </div>
-              </div>
+        <div class="form-line">
+          <div class="input-bloc">
+            <h3 class="input-title">Mot de passe *</h3>
+            <input name="password" class="input-section1" maxlength="64" type="password">
+          </div>
+        </div>
 
-              
-              <div class="form-line">
-                  <div class="input-bloc">
-                    <button (click)='updateemail()' class="btn-submit" type="submit">Enregistrer</button>
-                  </div>
-              </div>
+
+        <div class="form-line">
+          <div class="input-bloc">
+            <button (click)='updateemail()' class="btn-submit" type="submit">Enregistrer</button>
+          </div>
+        </div>
       </form>
-  </div>
+    </div>
 
 
-  <div id="section4">
-      
+    <div id="section4">
+
       <div class="section-title">
         <i class="fas fa-lock icon"></i>
         <h2 class="title"> Mot de passe</h2>
       </div>
 
       <form action="">
-                <div class="form-line">
-                <div class="input-bloc">
-                    <h3 class="input-title">Mot de passe actuel *</h3>
-                    <input [formControl]="password" name="current" class="input-section1" maxlength="64" type="password">
-                </div>
-             </div>
+        <div class="form-line">
+          <div class="input-bloc">
+            <h3 class="input-title">Mot de passe actuel *</h3>
+            <input [formControl]="password" name="current" class="input-section1" maxlength="64" type="password">
+          </div>
+        </div>
 
-              <div class="form-line">
-                <div class="input-bloc">
-                    <h3 class="input-title">Nouveau mot de passe *</h3>
-                    <input [formControl]="newpassword" name="new" class="input-section1" maxlength="64" type="password">
-                </div>
-              </div>
+        <div class="form-line">
+          <div class="input-bloc">
+            <h3 class="input-title">Nouveau mot de passe *</h3>
+            <input [formControl]="newpassword" name="new" class="input-section1" maxlength="64" type="password">
+          </div>
+        </div>
 
-              <div class="form-line">
-                <div class="input-bloc">
-                    <h3 class="input-title">Confirmer le mot de passe *</h3>
-                    <input name="confirm" class="input-section1" maxlength="64" type="password">
-                </div>
-              </div>
+        <div class="form-line">
+          <div class="input-bloc">
+            <h3 class="input-title">Confirmer le mot de passe *</h3>
+            <input name="confirm" class="input-section1" maxlength="64" type="password">
+          </div>
+        </div>
 
-              
-              <div class="form-line">
-                  <div class="input-bloc">
-                    <button  (click)="updatepassword()"
-                     class="btn-submit" 
-                     type="submit">Enregistrer</button>
-                  </div>
-              </div>
+
+        <div class="form-line">
+          <div class="input-bloc">
+            <button (click)="updatepassword()" class="btn-submit" type="submit">Enregistrer</button>
+          </div>
+        </div>
       </form>
+    </div>
   </div>
-</div>
 
 
 </div>
