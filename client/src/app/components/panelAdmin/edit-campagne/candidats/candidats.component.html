@@ -1,4 +1,4 @@
-<div [ngSwitch]="ViewCandidats">
+<div [ngSwitch]="ViewCandidats" #global>
   <!-- <mat-card
     *ngIf="isLoading2"
     style="display: flex; justify-content: center; align-items: center"
@@ -26,29 +26,46 @@
 
   <div *ngSwitchCase="'CandidatTrue'" id="editQuestion">
     <div class="barre-nav">
-      <mat-form-field class="candidat-custom-select">
-        <mat-label>0 sélectionné</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let choice of choices" [value]="choice.value">
-            {{ choice.viewValue }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="select-choince" (click)="showChoinceList()">
+
+        <i class="fas fa-hand-pointer icon-choince"></i>
+
+        <span class="">0 sélectionné</span>
+
+        <i class="fas fa-caret-down icon-choince-croche"></i>
+
+        <ul class="menu-choince" *ngIf="choinceList">
+
+          <li class="menu-list-choince">
+            <button class="first-btn">
+              <i class="fas fa-caret-down icon-choince icon"></i>
+              <span>button 1</span>
+            </button>
+          </li>
+          <li class="menu-list-choince">
+            <button>
+              <i class="fas fa-caret-down icon-choince icon"></i>
+              <span>button 1</span>
+            </button>
+          </li>
+          <li class="menu-list-choince">
+            <button>
+              <i class="fas fa-caret-down icon-choince icon"></i>
+              <span>button 1</span>
+            </button>
+          </li>
+
+        </ul>
+
+      </div>
 
       <!-- <i class="fas fa-search"></i> -->
       <input class="custom-input-filtre" matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />
 
-      <mat-form-field class="candidat-finish-custom-select">
-        <mat-label>all candidats</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let choice of choicesTimeTest" [value]="choice.value">
-            {{ choice.viewValue }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+
 
       <button mat-raised-button color="primary" class="btn-question fix-button" mat-button (click)="openDialog()">
-        Invitez des candidats
+        Invitez des candidats Hello
       </button>
 
       <!--Table-->

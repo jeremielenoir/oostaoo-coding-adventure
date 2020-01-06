@@ -47,6 +47,7 @@ export class CandidatsComponent implements OnInit {
   datePipe = new DatePipe('fr');
   ViewCandidats;
   isLoading = true;
+  choinceList: boolean
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -93,6 +94,11 @@ export class CandidatsComponent implements OnInit {
     this.getCampaign().then(datas => {
       // console.log('INIT DATAS', datas);
     });
+  }
+
+  showChoinceList() {
+    this.choinceList = true;
+    console.log('Hellow ')
   }
 
   getCampaign(): Promise<any> {

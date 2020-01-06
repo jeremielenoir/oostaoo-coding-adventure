@@ -69,11 +69,12 @@
 
               <div *ngIf="candidat.invitation_date !== candidat.test_terminer" class="list-sidibar">
                 <p *ngIf="!IsBoaleanSmallSidibar" class=" list-sidibar-left-content">
-                  <a href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487">{{ candidat.Nom }}
+                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">
+                    {{ candidat.Nom }}
                   </a>
-                  &lt;<a href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487">{{ candidat.email }}</a>
+                  &lt;<a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.email }}</a>
                   &gt; a terminé l'évaluation technique de '
-                  <a href="/work/fr/dashboard/campaign/177710/candidates/">{{
+                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{
                     campaing.Name
                   }}</a>'
                 </p>
@@ -87,11 +88,11 @@
 
               <div class="list-sidibar">
                 <p *ngIf="!IsBoaleanSmallSidibar" class="list-sidibar-left-content">
-                  <a href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487">{{ candidat.Nom }}
+                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.Nom }}
                   </a>
-                  &lt;<a href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487">{{ candidat.email }}</a>
+                  &lt;<a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.email }}</a>
                   &gt;a été invité(e) à '
-                  <a href="/work/fr/dashboard/campaign/177710/candidates/">{{
+                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{
                       campaing.Name
                     }}</a>'
                 </p>
@@ -109,11 +110,11 @@
 
               <div *ngIf="candidat.invitation_date !== candidat.test_terminer" class="list-sidibar">
                 <p *ngIf="!IsBoaleanSmallSidibar" class=" list-sidibar-left-content">
-                  <a href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487">{{ candidat.Nom }}
+                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.Nom }}
                   </a>
-                  &lt;<a href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487">{{ candidat.email }}</a>
+                  &lt;<a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.email }}</a>
                   &gt; a terminé l'évaluation technique de '
-                  <a href="/work/fr/dashboard/campaign/177710/candidates/">{{
+                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{
                       campaing.Name
                     }}</a>'
                 </p>
@@ -131,11 +132,11 @@
             <div *ngIf="isActiveNotifInvite">
               <div class="list-sidibar">
                 <p *ngIf="!IsBoaleanSmallSidibar" class="list-sidibar-left-content">
-                  <a href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487">{{ candidat.Nom }}
+                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.Nom }}
                   </a>
-                  &lt;<a href="/work/fr/dashboard/campaign/177710/candidates/?selected=3301487">{{ candidat.email }}</a>
+                  &lt;<a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.email }}</a>
                   &gt;a été invité(e) à '
-                  <a href="/work/fr/dashboard/campaign/177710/candidates/">{{
+                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{
                         campaing.Name
                       }}</a>'
                 </p>
