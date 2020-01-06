@@ -206,19 +206,15 @@ export class UtilisateursComponent implements OnInit {
   public deleteUser(id){
     console.log('on va delete user ', id);
     const token = localStorage.getItem('currentUser');
-    fetch(`users/${id}`,
-      {
-        headers:{
-          "authorization": `Bearer ${token}`
-        },
-      method: "DELETE"
-    })
-    .then(res=>{
-      res.json();
-      this.users = this.users.filter(user=>user.id !== id);
-    })
-    .then(res=>console.log(res))
-    .catch((e)=>console.log('error : ', e))
+    this.apiClientService
+      .delete(`${API_URI_USER}/${id}`)
+      .toPromise()
+      .then(res=>{
+        console.log(res);
+        this.users = this.users.filter(user=>user.id !== id);
+      })
+      .then(res=>console.log(res))
+      .catch((e)=>console.log('error : ', e))
   }
 
   public list_change(id) {
@@ -241,23 +237,20 @@ export class UtilisateursComponent implements OnInit {
     if(!this.PrenomValue || !this.NomValue || !this.EmailValue){
       return;
     };
-    fetch('/users',
-      {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        body: JSON.stringify({prenom: this.PrenomValue,
-                              nom: this.NomValue,
-                              email: this.EmailValue,
-                              username: this.UserName,
-                              password: '1234',
-                              role: this.selectedRoleId
-                            })
-    })
-    .then(async(res)=>{
-      this.users = [...this.users, {prenom: this.PrenomValue,
+    const userPayload = ({
+      prenom: this.PrenomValue,
+      nom: this.NomValue,
+      email: this.EmailValue,
+      username: this.UserName,
+      password: '1234',
+      role: this.selectedRoleId
+    });
+
+    this.apiClientService
+      .post(API_URI_USER, userPayload)
+      .toPromise()
+      .then(async(res)=>{
+        this.users = [...this.users, {prenom: this.PrenomValue,
                             nom: this.NomValue,
                             email: this.EmailValue,
                             username: this.UserName,
@@ -270,8 +263,7 @@ export class UtilisateursComponent implements OnInit {
                           this.EmailValue = "";
                           this.UserName = "";
                           this.selectedRoleName = "";
-      console.log(res) ;
-
+        console.log(res) ;
       })
     .catch(function(res){ console.log(res) })
   }
