@@ -250,7 +250,10 @@ export class UtilisateursComponent implements OnInit {
       .post(API_URI_USER, userPayload)
       .toPromise()
       .then(async(res)=>{
-        this.users = [...this.users, {prenom: this.PrenomValue,
+        console.log(res);
+        this.users = [...this.users, {
+                            id: res.id,
+                            prenom: this.PrenomValue,
                             nom: this.NomValue,
                             email: this.EmailValue,
                             username: this.UserName,
