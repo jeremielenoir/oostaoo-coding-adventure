@@ -6,7 +6,7 @@ import {
   Validators
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
-import { TooltipPosition } from "@angular/material";
+import { TooltipPosition, MatSnackBar } from "@angular/material";
 import {} from "@angular/material/snack-bar";
 import {
   ApiClientService,
@@ -102,7 +102,10 @@ const CHECKBOX_DATA = [{
   styleUrls: ["./utilisateurs.component.scss"]
 })
 export class UtilisateursComponent implements OnInit {
-  constructor(public apiClientService: ApiClientService) {
+  constructor(
+    public apiClientService: ApiClientService,
+    private _snackBar: MatSnackBar,
+  ) {
     this.checkbox_list = CHECKBOX_DATA;
   }
 
@@ -202,23 +205,25 @@ export class UtilisateursComponent implements OnInit {
     this.prenomIsactiveUpdate = false;
   }
 
+  openSnackBar(message: string, action) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 
   public deleteUser(id){
     console.log('on va delete user ', id);
     const token = localStorage.getItem('currentUser');
-    fetch(`users/${id}`,
-      {
-        headers:{
-          "authorization": `Bearer ${token}`
-        },
-      method: "DELETE"
-    })
-    .then(res=>{
-      res.json();
-      this.users = this.users.filter(user=>user.id !== id);
-    })
-    .then(res=>console.log(res))
-    .catch((e)=>console.log('error : ', e))
+    this.apiClientService
+      .delete(`${API_URI_USER}/${id}`)
+      .toPromise()
+      .then(res=>{
+        console.log(res);
+        this.users = this.users.filter(user=>user.id !== id);
+        this.openSnackBar('Utilisateur supprimé avec succès', 'Fermer');
+      })
+      .then(res=>console.log(res))
+      .catch((e)=>console.log('error : ', e))
   }
 
   public list_change(id) {
@@ -241,23 +246,23 @@ export class UtilisateursComponent implements OnInit {
     if(!this.PrenomValue || !this.NomValue || !this.EmailValue){
       return;
     };
-    fetch('/users',
-      {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        body: JSON.stringify({prenom: this.PrenomValue,
-                              nom: this.NomValue,
-                              email: this.EmailValue,
-                              username: this.UserName,
-                              password: '1234',
-                              role: this.selectedRoleId
-                            })
-    })
-    .then(async(res)=>{
-      this.users = [...this.users, {prenom: this.PrenomValue,
+    const userPayload = ({
+      prenom: this.PrenomValue,
+      nom: this.NomValue,
+      email: this.EmailValue,
+      username: this.UserName,
+      password: '1234',
+      role: this.selectedRoleId
+    });
+
+    this.apiClientService
+      .post(API_URI_USER, userPayload)
+      .toPromise()
+      .then(async(res)=>{
+        console.log(res);
+        this.users = [...this.users, {
+                            id: res.id,
+                            prenom: this.PrenomValue,
                             nom: this.NomValue,
                             email: this.EmailValue,
                             username: this.UserName,
@@ -270,8 +275,8 @@ export class UtilisateursComponent implements OnInit {
                           this.EmailValue = "";
                           this.UserName = "";
                           this.selectedRoleName = "";
-      console.log(res) ;
-
+        console.log(res) ;
+        this.openSnackBar('Utilisateur ajouté avec succès', 'Fermer');
       })
     .catch(function(res){ console.log(res) })
   }

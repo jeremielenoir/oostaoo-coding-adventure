@@ -67,7 +67,7 @@
 
 
      <!-- Formulaire cote droit -->
-    <form class="forms" [formGroup]="registerForm" (ngSubmit)="register()" id="form_register">
+    <form class="forms" [formGroup]="registerForm" id="form_register">
       <h2>Nouveau client ?</h2>
 
     <div class="form-group">
@@ -115,7 +115,7 @@
       </div>
     </div>
     <div class="form-group">
-      <button class=" btn btn-primary button">S'inscrire</button>
+      <button (click)='register()' class="btn btn-primary button">S'inscrire</button>
     </div>
     <div *ngIf="errorRegister" class="alert alert-danger">{{ errorRegister }}</div>
     </form>

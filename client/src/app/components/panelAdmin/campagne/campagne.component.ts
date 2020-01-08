@@ -176,6 +176,7 @@ export class CampagneComponent implements OnInit {
             user: this.result.user,
           }).subscribe((resultat) => {
             this.campaignsFiltered = [];
+            this.campaignsArchived = [];
             this.ngOnInit();
           });
 
@@ -193,6 +194,7 @@ export class CampagneComponent implements OnInit {
           (res) => {
             this.openSnackBar('Campagne épingler', 'Fermer');
             this.campaignsFiltered = [];
+            this.campaignsArchived = [];
             this.ngOnInit();
             // console.log('res', res);
           },
@@ -206,6 +208,7 @@ export class CampagneComponent implements OnInit {
           (res) => {
             this.openSnackBar('Campagne désépingler', 'Fermer');
             this.campaignsFiltered = [];
+            this.campaignsArchived = [];
             this.ngOnInit();
             // console.log('res', res);
           },
@@ -226,6 +229,7 @@ export class CampagneComponent implements OnInit {
           (res) => {
             this.openSnackBar('Campagne archiver', 'Fermer');
             this.campaignsFiltered = [];
+            this.campaignsArchived = [];
             this.ngOnInit();
             // console.log('res', res);
           },
@@ -239,6 +243,7 @@ export class CampagneComponent implements OnInit {
           (res) => {
             this.openSnackBar('Campagne désarchiver', 'Fermer');
             this.campaignsFiltered = [];
+            this.campaignsArchived = [];
             this.ngOnInit();
 
           },
@@ -255,6 +260,7 @@ export class CampagneComponent implements OnInit {
       .toPromise()
       .then(res => { // Success
         this.campaignsFiltered = [];
+        this.campaignsArchived = [];
         this.ngOnInit();
       });
   }

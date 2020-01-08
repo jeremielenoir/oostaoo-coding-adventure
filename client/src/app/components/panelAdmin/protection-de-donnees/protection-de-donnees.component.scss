@@ -4,17 +4,17 @@
 
 
     #content {
-        background: $background-color;
+        background: $color-background-blue;
         width: 100%;
         padding: 10px;
 
         .icon {
-            color: #1d3551;
+            color: $color-principal-orange;
             margin-right: 10px;
         }
         
         .icon-info {
-            color: #1d3551;
+            color: $color-principal-orange;
         }
         
         .title {
@@ -22,7 +22,7 @@
         }
 
         .save {
-            background: #1d3551!important;
+            background: $color-principal-blue!important;
             color: white;
             min-width: 105px;
             margin-left: 15px;
@@ -36,6 +36,7 @@
             background: white;
             padding: 40px;
             border: $border-table;
+            border-radius: $border-radius;
 
             #section1-input {
                 margin: 15px 0px;
@@ -66,6 +67,7 @@
             display: flex;
             flex-wrap: wrap;
             border: $border-table;
+            border-radius: $border-radius;
 
             #section2-left {
                 width: 46%;
@@ -116,6 +118,7 @@
             display: flex;
             flex-wrap: wrap;
             border: $border-table;
+            border-radius: $border-radius;
 
 
             #section3-left {
@@ -166,10 +169,11 @@
                 padding: 40px;
                 text-align: center;
                 border: $border-table;
+                border-radius: $border-radius;
             
                 .section4-left-button {
                     color: white;
-                    background: $color-gold !important;
+                    background: $color-principal-blue !important;
                     margin-top: 15px;
                 }
             }

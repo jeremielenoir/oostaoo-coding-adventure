@@ -1,16 +1,20 @@
 @import "../../../../roodeo-variables.scss";
 
 #global{
-   
+    background: $color-background-blue;
+
     .content{
         // width: 95%;
         padding: 10px;
         display: flex;
+        width: 98%;
+        margin: 0 auto;
+        background: $color-background-blue;
         // .border-none{
         //    border-right:none
         // }
         .icon{
-            color: #1d3551;
+            color: $color-principal-orange;
             margin-left: 20px;
             margin-right: 10px;
             font-size: 32px;
@@ -88,10 +92,11 @@
 
         #section1{
             width: 98%;
-            margin: 18px auto 0;
+            margin: 18px 1% 0 0;
             background: white;
             padding: 40px 80px;
             border: $border-table;
+            border-radius: $border-radius;
         }
 
         /* Section 2 */
@@ -102,16 +107,18 @@
             background: white;
             padding: 40px 80px;
             border: $border-table;
+            border-radius: $border-radius;
         }
 
         /* Section 3 */
 
         #section3{
             width: 98%;
-            margin: 18px auto 0;
+            margin: 18px 1% 0 0;
             background: white;
             padding: 40px 80px;
             border: $border-table;
+            border-radius: $border-radius;
         }
 
         /* Section 4 */
@@ -122,6 +129,7 @@
             background: white;
             padding: 40px 80px;
             border: $border-table;
+            border-radius: $border-radius;
         }
     }
 }

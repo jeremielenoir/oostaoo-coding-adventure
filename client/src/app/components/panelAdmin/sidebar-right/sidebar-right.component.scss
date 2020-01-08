@@ -62,7 +62,6 @@
   background-color: white;
   margin-left: 20px;
   min-height: 200px;
-  border: 1.5px solid #e15028;
   border-radius: 6px;
   position: relative;
 
@@ -78,6 +77,8 @@
 
   .sidibar-sous-header{
     border-bottom: 1.5px solid #e15028;
+    border-right: .5px solid #e15028;
+    border-top: .5px solid #e15028;
     border-top-right-radius:5px;
     border-top-left-radius:5px
   }
@@ -87,7 +88,6 @@
     overflow: hidden;
     flex: 1;
     .list-sidibar-left { 
-      border:1px solid red;
       display: flex;
       font-size: 15px;
       overflow-y: auto;

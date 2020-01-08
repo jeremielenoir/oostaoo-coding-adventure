@@ -1,9 +1,16 @@
 @import "../../../../roodeo-variables.scss";
 
+#global{
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  background: $color-background-blue;
+}
+
 #content {
+  background: $color-background-blue;
   padding-top: 30px;
-  margin-left: 8%;
-  margin-right: 8%;
+  margin: 0px auto;
   .icon {
     margin: 5px;
     color: #1d3551;
@@ -20,7 +27,7 @@
       .champ-utilisateur {
         flex: 10000;
         margin: 0 10px 0px 10px;
-        border: 1px solid #de522b;
+        border: $border-table;
         display: flex;
         overflow: hidden;
         min-width: 300px;
@@ -168,7 +175,8 @@
 }
 
 .table_head{
-  background: #eaeff3!important;
+  background: $color-principal-blue !important;
+  color: white;
 }
 
 .table_header,
