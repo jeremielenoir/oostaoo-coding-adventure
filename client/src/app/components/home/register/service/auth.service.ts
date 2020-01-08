@@ -8,9 +8,7 @@ import { API_URI_CAMPAIGNS, ApiClientService } from './../../../../api-client/ap
 // it posts the creds (username and password) to the backend and check for the response if it has JWT token
 // if the response from the backend has jwt token, then the authentication was succesful
 // on successful authentication, the user details are stored in the local storage + jwt token
-const config = {
-  apiUrl: ''
-};
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -26,7 +24,7 @@ export class AuthenticationService {
 
   // login
   login(identifier: string, password: string) {
-    return this.http.post<any>(`${config.apiUrl}/auth/local`, { identifier, password })
+    return this.http.post<any>(`/auth/local`, { identifier, password })
       .pipe(
         // the backend service sends an instance of the user
         // user: any (because .post<any>)
@@ -44,7 +42,7 @@ export class AuthenticationService {
   }
 
   register(username: string, email: string, password: string) {
-    return this.http.post<any>(`${config.apiUrl}/auth/local/register`, {
+    return this.http.post<any>(`/auth/local/register`, {
       username,
       email,
       password

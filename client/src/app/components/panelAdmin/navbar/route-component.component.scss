@@ -73,6 +73,13 @@
         #new{
           background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/nouveautes.svg");
         }
+        #help{
+          color: #f44336;
+          margin-left: -5px;
+          margin-top: -15px;
+          font-size: 55px;
+          background-image: url();
+        }
         &:hover{
           background: #0d6192;
           #notif{
@@ -91,6 +98,10 @@
           }
           #new{
             background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/nouveautes.svg");
+          }
+          #help{
+            color: white;
+            background-image: url();
           }
          
         }
