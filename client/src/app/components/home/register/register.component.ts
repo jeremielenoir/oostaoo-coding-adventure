@@ -49,9 +49,9 @@ export class RegisterComponent implements OnInit {
     }),
 
     this.registerForm = this.formBuilder.group({
-        username: ['', Validators.required],
-        email: ['', Validators.required],
-        password: ['', Validators.required]
+        usernameregister: ['', Validators.required],
+        emailregister: ['', Validators.required],
+        passwordregister: ['', Validators.required]
     });
 
     // logout the person when he opens the app for the first time
@@ -102,13 +102,13 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
 
     // stop if form is invalid
-    if (this.loginForm.invalid) {
+    if (this.registerForm.invalid) {
       return;
     }
 
     this.loading = true;
 
-    this.authenticationService.register(this.fr.username.value, this.fr.email.value, this.fr.password.value)
+    this.authenticationService.register(this.fr.usernameregister.value, this.fr.emailregister.value, this.fr.passwordregister.value)
       .pipe(first())
       .subscribe(
         data => {

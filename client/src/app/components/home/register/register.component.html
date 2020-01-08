@@ -67,55 +67,55 @@
 
 
      <!-- Formulaire cote droit -->
-    <form class="forms" [formGroup]="registerForm" id="form_register">
+    <form class="forms" [formGroup]="registerForm" (ngSubmit)="register()" id="form_register">
       <h2>Nouveau client ?</h2>
 
     <div class="form-group">
-      <label for="username"> Username :</label>
+      <label for="usernameregister"> Username :</label>
       <input
-        formControlName="username"
+        formControlName="usernameregister"
         class="input-section1 form-control"
         maxlength="64"
         type="text"
-        [ngClass]="{ 'is-invalid': submitted && fr.username.errors }"
+        [ngClass]="{ 'is-invalid': submitted && fr.usernameregister.errors }"
         
       />
-      <div *ngIf="submitted && fr.username.errors" class="invalid-feedback">
-          <div *ngIf="fr.username.errors.required">Username is required</div>
+      <div *ngIf="submitted && fr.usernameregister.errors" class="invalid-feedback">
+          <div *ngIf="fr.usernameregister.errors.required">Username is required</div>
         </div>
     </div>
 
     <div class="form-group">
-      <label for="email">Email :</label>
+      <label for="emailregister">Email :</label>
       <input
-        formControlName="email"
+        formControlName="emailregister"
         class="input-section1 form-control"
         maxlength="64"
         type="email"
-        [ngClass]="{ 'is-invalid': submitted && fr.email.errors }"
+        [ngClass]="{ 'is-invalid': submitted && fr.emailregister.errors }"
         
       />
-      <div *ngIf="submitted && fr.email.errors" class="invalid-feedback">
-      <div *ngIf="fr.email.errors.required">Email is required</div>
+      <div *ngIf="submitted && fr.emailregister.errors" class="invalid-feedback">
+      <div *ngIf="fr.emailregister.errors.required">Email is required</div>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="password"> Password :</label>
+      <label for="passwordregister"> Password :</label>
       <input
-        formControlName="password"
+        formControlName="passwordregister"
         class="input-section1 form-control"
         maxlength="64"
         type="password"
-        [ngClass]="{ 'is-invalid': submitted && fr.password.errors }"
+        [ngClass]="{ 'is-invalid': submitted && fr.passwordregister.errors }"
         
       />
-      <div *ngIf="submitted && fr.password.errors" class="invalid-feedback">
-      <div *ngIf="fr.password.errors.required">Password is required</div>
+      <div *ngIf="submitted && fr.passwordregister.errors" class="invalid-feedback">
+      <div *ngIf="fr.passwordregister.errors.required">Password is required</div>
       </div>
     </div>
     <div class="form-group">
-      <button (click)='register()' class="btn btn-primary button">S'inscrire</button>
+      <button class="btn btn-primary button">S'inscrire</button>
     </div>
     <div *ngIf="errorRegister" class="alert alert-danger">{{ errorRegister }}</div>
     </form>
