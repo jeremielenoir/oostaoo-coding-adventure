@@ -2,17 +2,20 @@
 
 #global {
     height: 100%;
+    width: 100%;
+    background: $color-background-blue;
 
     #content {
-        background: #f9f9f9;
-        padding: 40px;
+        background: $color-background-blue;
+        width: 98%;
+        padding: 13px 10px 0px;
         display: flex;
         flex-wrap: wrap;
-        margin: 0px 5%;
+        margin: 0px auto;
         min-height: 90vh;
         height: 100%;
         .icon {
-            color: $color-principal-blue;
+            color: $color-principal-orange;
         
             .icoheight {
                 font-size: 20px;
@@ -32,6 +35,7 @@
     background: white;
     padding: 30px;
     border: $border-table;
+    border-radius: $border-radius;
 
     .title {
         margin-bottom: 20px;
@@ -44,8 +48,12 @@
     
         th, td, tr {
             border: $border-table;
-            text-align: left !important;
+            padding: 5px 10px;
             font-size: 18px !important;
+        }
+
+        td{
+            width: 15%;
         }
         
         th.mat-sort-header-sorted {
@@ -60,6 +68,7 @@
     background: white;
     padding: 30px;
     border: $border-table;
+    border-radius: $border-radius;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;

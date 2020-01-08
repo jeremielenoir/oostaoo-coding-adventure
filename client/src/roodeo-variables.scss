@@ -20,15 +20,17 @@ $color-blue:rgb(84, 114, 141);
 $color-principal-blue:#1d3551;
 $color-principal-blue-hover:#122740;
 $color-pricipal-blue-light:#eaeff3;
+$color-background-blue: #c1d5e0;
 $color-principal-orange:#ce5637;
 
 
 $logoPath: "src/assets/fileservlet.png";
 $background-color: #f9f9f9;
-$border-table: 1px solid #1d3551;
+$border-table: 1.5px solid #ce5637;
 $color-table:#e7e7e7;
 $color-border-second:#ccc;
 $border-table-second:1px solid #f0eeee;
+$border-radius: 4px;
 
 .sous-header-one{
   background: #eaeff3;
