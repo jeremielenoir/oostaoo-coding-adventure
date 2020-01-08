@@ -2,7 +2,8 @@
 
 .new-campaign {
   font-weight: bold;
-  border:$border-table-second;
+  border:$border-table;
+  border-radius: $border-radius;
   background: $color-white-background;
 
   #select {
