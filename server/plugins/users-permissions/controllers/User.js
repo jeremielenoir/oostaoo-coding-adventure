@@ -27,6 +27,15 @@ module.exports = {
     ctx.send(data);
   },
 
+
+ findByAdmin: async (ctx) => {
+   const data = await strapi.plugins['users-permissions'].services.user.fetchByAdmin({
+      adminId: ctx.params._adminId
+    });
+   ctx.send(data);
+ },
+
+
   /**
    * Retrieve authenticated user.
    *

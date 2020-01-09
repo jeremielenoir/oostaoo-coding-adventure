@@ -18,6 +18,7 @@ export const API_URI_USER_ADMIN: string = prefix + 'utilisateursadmins';
 export const API_URI_ENTREPRISE: string = prefix + 'entreprises';
 export const API_URI_USER_ENTREPRISE: string = prefix + 'utilsateurentreprises';
 export const API_URI_USER = 'users';
+export const API_URI_USERS_BY_ADMIN = 'usersByAdmin';
 
 
 
@@ -87,5 +88,3 @@ export class ApiClientService {
   }
 
 }
-
-

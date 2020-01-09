@@ -302,6 +302,21 @@
     },
     {
       "method": "GET",
+      "path": "/usersByAdmin/:_adminId",
+      "handler": "User.findByAdmin",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Retrieve all users created by the adminUser",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "find"
+        }
+      }
+    },
+    {
+      "method": "GET",
       "path": "/users/me",
       "handler": "User.me",
       "config": {

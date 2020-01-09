@@ -73,6 +73,10 @@ module.exports = {
    * @return {Promise}
    */
 
+   fetchByAdmin: (params) => {
+       return strapi.query('user', 'users-permissions').find(strapi.utils.models.convertParams('user', params));
+     },
+
   fetchAll: (params) => {
     return strapi.query('user', 'users-permissions').find(strapi.utils.models.convertParams('user', params));
   },

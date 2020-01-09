@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
-import { API_URI_CAMPAIGNS, ApiClientService } from './../../../../api-client/api-client.service';
+import { API_URI_CAMPAIGNS, ApiClientService, API_URI_USER, API_URI_USERS_BY_ADMIN } from './../../../../api-client/api-client.service';
 
 // authentication service is used to LOGIN and LOGOUT of the application
 // it posts the creds (username and password) to the backend and check for the response if it has JWT token
@@ -69,5 +69,9 @@ export class AuthenticationService {
 
   getCampaignsUser(adminId: number) {
     return this.apiClientService.get(API_URI_CAMPAIGNS + '?user_in=' + adminId).toPromise();
+  }
+
+  getUsers(adminId: number) {
+    return this.apiClientService.get(`${API_URI_USERS_BY_ADMIN}/${adminId}`).toPromise();
   }
 }
