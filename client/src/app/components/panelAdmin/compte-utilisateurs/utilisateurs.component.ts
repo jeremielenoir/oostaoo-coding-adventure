@@ -8,11 +8,14 @@ import {
 import { ErrorStateMatcher } from "@angular/material/core";
 import { TooltipPosition, MatSnackBar } from "@angular/material";
 import {} from "@angular/material/snack-bar";
+import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import {
   ApiClientService,
   API_URI_USER_ADMIN,
   API_URI_USER
 } from "src/app/api-client/api-client.service";
+import { AuthenticationService } from './../../home/register/service/auth.service';
+
 
 export interface PeriodicElement {
   name: string;
@@ -104,12 +107,15 @@ const CHECKBOX_DATA = [{
 export class UtilisateursComponent implements OnInit {
   constructor(
     public apiClientService: ApiClientService,
-    private _snackBar: MatSnackBar,
-  ) {
+    public authenticationService: AuthenticationService,
+    public decryptTokenService: DecryptTokenService,
+    private _snackBar: MatSnackBar
+    ) {
     this.checkbox_list = CHECKBOX_DATA;
   }
 
   public checkbox_list :any[];
+  public adminId: number;
   public selectedRoleId;
   public selectedRoleName;
   public PrenomValue = "";
@@ -136,6 +142,7 @@ export class UtilisateursComponent implements OnInit {
   public prenomIsactiveUpdate = false;
   public emailIsactiveUpdate = false;
 
+
   public displayedColumns: string[] = ["name", "mail", "gestion", "symbol"];
   public dataSource = ELEMENT_DATA;
 
@@ -154,9 +161,12 @@ export class UtilisateursComponent implements OnInit {
   @ViewChild("form") formulaire;
 
   ngOnInit() {
-    this.getUsers().then(users => {
+
+    this.adminId = this.decryptTokenService.adminId || this.decryptTokenService.userId;
+    this.authenticationService
+    .getUsers(this.adminId)
+    .then(users => {
       this.users = users;
-      console.log('this users : ', this.users);
 
       /**
       this.prenom = new FormControl(user[0].utilsateurentreprises.prenom);
@@ -212,7 +222,6 @@ export class UtilisateursComponent implements OnInit {
   }
 
   public deleteUser(id){
-    console.log('on va delete user ', id);
     const token = localStorage.getItem('currentUser');
     this.apiClientService
       .delete(`${API_URI_USER}/${id}`)
@@ -251,8 +260,9 @@ export class UtilisateursComponent implements OnInit {
       nom: this.NomValue,
       email: this.EmailValue,
       username: this.UserName,
-      password: '1234',
-      role: this.selectedRoleId
+      password: 'oostaoo',
+      role: this.selectedRoleId,
+      adminId: this.adminId
     });
 
     this.apiClientService
@@ -275,7 +285,6 @@ export class UtilisateursComponent implements OnInit {
                           this.EmailValue = "";
                           this.UserName = "";
                           this.selectedRoleName = "";
-        console.log(res) ;
         this.openSnackBar('Utilisateur ajouté avec succès', 'Fermer');
       })
     .catch(function(res){ console.log(res) })
@@ -398,17 +407,6 @@ export class UtilisateursComponent implements OnInit {
     }
   }
 */
-
-  async getUsers(): Promise<any> {
-    try {
-      const users = await this.apiClientService
-        .get(API_URI_USER)
-        .toPromise();
-      return users;
-    } catch (err) {
-      return err;
-    }
-  }
 
 }
 
