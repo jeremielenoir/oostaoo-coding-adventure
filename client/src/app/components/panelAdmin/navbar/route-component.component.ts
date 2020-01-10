@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Inject } from "@angular/core";
+import { Component, OnInit, Output, Input, EventEmitter, Inject } from "@angular/core";
 import { MatBottomSheet, MatBottomSheetRef } from "@angular/material";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router'
@@ -16,6 +16,7 @@ export class RouteComponentComponent implements OnInit {
   isShow2 = false;
   public viewcontentDefaults: boolean;
 
+  @Input('') notifications = [];
   @Output() ContentViewDefault = new EventEmitter<any>();
 
   constructor(public dialog: MatDialog, private bottomSheet: MatBottomSheet) { }
@@ -24,6 +25,7 @@ export class RouteComponentComponent implements OnInit {
   // }
   ngOnInit() {
 
+    console.log(this.notifications);
     let textMenu = document.querySelectorAll('.text-menu');
 
     textMenu.forEach(element => {

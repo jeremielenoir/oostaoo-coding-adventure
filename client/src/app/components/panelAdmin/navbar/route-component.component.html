@@ -9,9 +9,14 @@
       </a>
       <ul class="dropdownn">
         <li>
-          <p>Notifications</p>
+          <p>Notifications {{notifications.length}}</p>
         </li>
+            <div style="background-color:aqua; display: block; padding: 10px; margin-bottom: 10px;" *ngFor="let notif of notifications">
+              <span>{{notif.Message}}</span>
+              
+            </div>
       </ul>
+
     </li>
     <li>
       <a href="" [routerLink]="['/dashboard/campaigns']" class="text-menu">
