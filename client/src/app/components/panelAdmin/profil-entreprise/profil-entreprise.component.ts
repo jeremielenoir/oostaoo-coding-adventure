@@ -874,7 +874,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       err => console.log(err)
     );
   }
-  
+
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
       duration: 2000,
@@ -890,7 +890,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       Teaser: this.teaser.value
     }).subscribe(
       (res) => {
-        alert('Profil mis à jour');
+        this.openSnackBar('Entreprise mise à jour', 'Fermer');
         // console.log('res', res);
       },
       err => console.log(err)
@@ -913,7 +913,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       Twitter: this.twitter.value,
     }).subscribe(
       (res) => {
-        alert('Profil mis à jour');
+        this.openSnackBar('Entreprise mise à jour', 'Fermer');
         // console.log('res', res);
       },
       err => console.log(err)
