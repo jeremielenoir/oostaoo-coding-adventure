@@ -48,6 +48,8 @@ export class CandidatsComponent implements OnInit {
   ViewCandidats;
   isLoading = true;
   choinceList: boolean
+  checkedActionBoolean = true
+  nbrSelectedElementChecked: any[] = [];
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -96,9 +98,31 @@ export class CandidatsComponent implements OnInit {
     });
   }
 
-  showChoinceList() {
-    this.choinceList = true;
-    console.log('Hellow ')
+  showChoinceList(e) {
+    if (e) {
+      e.stopPropagation();
+    }
+    this.choinceList = !this.choinceList;
+  }
+
+  menuChoince(event) {
+    this.choinceList = false
+  }
+
+  checkedAction(e, check) {
+    e.stopPropagation();
+    this.checkedActionBoolean = check.checked;
+    if (check.checked == false) {
+      this.nbrSelectedElementChecked.push(check.value);
+    } else {
+      let index = this.nbrSelectedElementChecked.indexOf(check.value);
+
+      this.nbrSelectedElementChecked.splice(index, 1);
+
+      console.log('index', index)
+    }
+
+    console.log('tbl ==>', this.nbrSelectedElementChecked)
   }
 
   getCampaign(): Promise<any> {
@@ -130,14 +154,13 @@ export class CandidatsComponent implements OnInit {
         let duree;
         // INFOS FOR ADD COLUMN
         const getTechnos = [];
-        const getPercentCandidat = [];
         for (const technos of this.technologies) {
           getTechnos.push(technos.name);
         }
         this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
-        // console.log('getTechnos: ', getTechnos);
 
-        const questions = this.questions;
+        console.log('this.displayedColumns', this.displayedColumns)
+
         for (const candidat of this.candidats) {
           // console.log('candidat : ', candidat.points_candidat[2].getpourcentByCandidat);
 
