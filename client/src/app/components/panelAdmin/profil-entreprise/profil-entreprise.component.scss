@@ -1,5 +1,6 @@
 @import"../../../../roodeo-variables.scss";
 #global {
+  background: $color-background-blue;
   //display: flex;
 
   .hidden-file{
@@ -63,17 +64,19 @@
 
   .ajout-entreprise{
     display: flex;
-    height: 100vh;
-    justify-content: space-around;
+    height: 88vh;
+    justify-content: center;
+    margin: 0 auto;
     align-items: center;
     flex-wrap: wrap;
     width: 60%;
-    margin-left: 15%;
 
     .content-ajout-entreprise{
       display: flex;
       flex-wrap: wrap;
       background: #f9f9f9;
+      border: $border-table;
+      border-radius: $border-radius;
       padding: 20px;
     
       .form-entreprise{
@@ -103,7 +106,7 @@
 
 
   #content {
-    margin-left: 10%;
+   
     #shadow-cog,
     #shadow-cog-add-images {
       position: fixed;
@@ -141,6 +144,7 @@
       .all-group-content {
         padding: 30px;
         display: flex;
+        margin: auto;
         // flex: 1;
         flex-direction: row;
         color: #000;
@@ -152,7 +156,8 @@
             background-color: #fff;
             width: 100%;
             margin-bottom: 10px;
-            border: 1px solid #e7e7e7;
+            border: $border-table;
+            border-radius: $border-radius;
             padding: 5px 25px 5px 30px;
             .all-gestion-info {
               -webkit-flex: 3;
@@ -510,7 +515,7 @@
   }
 }
 .champ-form-gestion {
-  border: none;
+  border: 1px solid #1d3551;
   width: 100%;
   height: 52px;
   font-size: 15px;
@@ -520,14 +525,14 @@
   outline: none;
   &:active,
   &:focus {
-    border: 1px solid #e7e9eb !important;
+    border: 1px solid #1d3551 !important;
   }
 }
 .block-form-flex {
   flex: 3;
   margin-bottom: 20px;
   position: relative;
-  border: 1px solid #e7e9eb;
+  //border: 1px solid #122740;
   .champ-incrage {
     padding-left: 85px !important;
   }
@@ -544,6 +549,7 @@
     font-weight: 400;
     top: 0px;
     background: #fff;
+    border: 1px solid black;
   }
   .champ-incrage-network {
     padding-left: 145px;
@@ -582,7 +588,7 @@
   display: flex;
   align-items: center;
   background: #e7e9eb;
-  border: 1px solid #e7e9eb;
+  border: 1px solid #122740;
   /* width: 100%; */
   height: 52px;
   font-size: 15px;
@@ -614,7 +620,7 @@
 }
 
 :host ::ng-deep .mat-option-pseudo-checkbox {
-  border: 1px solid #dadada !important;
+  border: 1px solid #122740 !important;
 }
 
 :host ::ng-deep .mat-pseudo-checkbox-checked {

@@ -6,6 +6,7 @@ import {
   API_URI_ENTREPRISE
 } from "src/app/api-client/api-client.service";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: "app-profil-entreprise",
@@ -35,7 +36,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   public current1 = 0;
   public current2 = 4;
   public currentTotal = 4;
-  public entreprise: any;
+  public entreprise: any = null;
 
 
   public entre: any;
@@ -816,66 +817,47 @@ export class ProfilEntrepriseComponent implements OnInit {
 
   constructor(
     public apiClientService: ApiClientService,
-    public decryptTokenService: DecryptTokenService
+    public decryptTokenService: DecryptTokenService,
+    private _snackBar: MatSnackBar,
   ) { }
 
 
   ngOnInit() {
 
     this.getUser().then(user => {
-      // console.log('user getUser=', user);
-      // if ( user[0].entreprise === null) {
-      // this.entreprise = user[0].entreprise;
-      // // console.log('entreprise', this.entreprise);
-      // } else {
-      // this.logo = new FormControl(user[0].entreprise.logo);
-      // this.name = new FormControl(user[0].entreprise.nom);
-      // this.email = new FormControl(user[0].entreprise.email);
-      // this.lang = new FormControl(user[0].entreprise.lang);
-      // this.phone = new FormControl(user[0].entreprise.tel);
-      // this.industrie = new FormControl(user[0].entreprise.industrie);
-      // this.numberofemployee = new FormControl(user[0].entreprise.nb_employe);
-      // this.numberofdev = new FormControl(user[0].entreprise.nb_dev);
-      // this.videolink = new FormControl(user[0].entreprise.lien_video);
-      // this.websitelink = new FormControl(user[0].entreprise.url_site);
-      // this.teaser = new FormControl(user[0].entreprise.teaser);
-      // this.picture = new FormControl(user[0].entreprise.picture);
-      // this.linkedin = new FormControl(user[0].entreprise.linkedin);
-      // this.facebook = new FormControl(user[0].entreprise.facebook);
-      // this.twitter = new FormControl(user[0].entreprise.twitter);
-      // this.entreprise = user[0].entreprise;
-      // // console.log('entreprise', this.entreprise);
-      // }
+      console.log('user getUser=', user);
+      console.log('this this user', this.entreprise);
+      if ( user[0].entreprise === null) {
+        return console.log('no entreprise lel');
+      } else {
       this.getentreprise().then(entreprise => {
-
-        if (entreprise === null) {
-          this.entreprise = entreprise[0];
-        } else {
-          // this.logo = entreprise[0].logo.url;
-          this.name = new FormControl(entreprise[0].nom);
-          this.email = new FormControl(entreprise[0].email);
-          this.lang = new FormControl(entreprise[0].lang);
-          this.phone = new FormControl(entreprise[0].tel);
-          this.industrie = new FormControl(entreprise[0].industrie);
-          this.numberofemployee = new FormControl(entreprise[0].nb_employe);
-          this.numberofdev = new FormControl(entreprise[0].nb_dev);
-          this.videolink = new FormControl(entreprise[0].lien_video);
-          this.websitelink = new FormControl(entreprise[0].url_site);
-          this.teaser = new FormControl(entreprise[0].teaser);
-          this.picture = entreprise[0].image_entreprise;
-          this.linkedin = new FormControl(entreprise[0].linkedin);
-          this.facebook = new FormControl(entreprise[0].facebook);
-          this.twitter = new FormControl(entreprise[0].twitter);
-          this.entreprise = entreprise[0];
-          console.log('entreprise user', entreprise);
-          console.log('this.entreprise=', this.entreprise);
-          console.log('entreprise picture', this.picture)
-        }
+        console.log('entrepriseeeeuh', entreprise);
+        // this.logo = entreprise[0].logo.url;
+        this.name = new FormControl(entreprise[0].nom);
+        this.email = new FormControl(entreprise[0].email);
+        this.lang = new FormControl(entreprise[0].lang);
+        this.phone = new FormControl(entreprise[0].tel);
+        this.industrie = new FormControl(entreprise[0].industrie);
+        this.numberofemployee = new FormControl(entreprise[0].nb_employe);
+        this.numberofdev = new FormControl(entreprise[0].nb_dev);
+        this.videolink = new FormControl(entreprise[0].lien_video);
+        this.websitelink = new FormControl(entreprise[0].url_site);
+        this.teaser = new FormControl(entreprise[0].teaser);
+        this.picture = entreprise[0].image_entreprise;
+        this.linkedin = new FormControl(entreprise[0].linkedin);
+        this.facebook = new FormControl(entreprise[0].facebook);
+        this.twitter = new FormControl(entreprise[0].twitter);
+        this.entreprise = entreprise[0];
+        console.log('entreprise user', entreprise);
+        console.log('this.entreprise=', this.entreprise);
+        console.log('entreprise picture', this.picture);
         this.progressbar1();
         this.progressbar2();
         this.progressbarTotal();
       });
+    }
     });
+
   }
 
   addentreprise() {
@@ -886,11 +868,17 @@ export class ProfilEntrepriseComponent implements OnInit {
       useradmin: this.decryptTokenService.userId
     }).subscribe(
       (res) => {
-        alert('Entreprise ajouter');
-        // console.log('res', res);
+        this.openSnackBar('Entreprise ajouter', 'Fermer');
+        this.ngOnInit();
       },
       err => console.log(err)
     );
+  }
+
+  openSnackBar(message: string, action) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
   clickchange() {
@@ -902,7 +890,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       Teaser: this.teaser.value
     }).subscribe(
       (res) => {
-        alert('Profil mis à jour');
+        this.openSnackBar('Entreprise mise à jour', 'Fermer');
         // console.log('res', res);
       },
       err => console.log(err)
@@ -925,7 +913,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       Twitter: this.twitter.value,
     }).subscribe(
       (res) => {
-        alert('Profil mis à jour');
+        this.openSnackBar('Entreprise mise à jour', 'Fermer');
         // console.log('res', res);
       },
       err => console.log(err)

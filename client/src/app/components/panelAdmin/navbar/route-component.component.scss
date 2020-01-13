@@ -18,6 +18,16 @@
         display: block;
       }
       margin-left: 18px;
+      .dropdownn-notif{
+        width: 500px!important;
+        padding: 15px;
+        .notif-content{
+          margin:0px 20px;
+          .icon-gestion-notif{
+            cursor: pointer;
+          }
+        }
+      }
       .dropdownn{
         position: absolute;
         list-style-type: none;

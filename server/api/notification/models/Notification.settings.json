@@ -19,6 +19,14 @@
       "model": "user",
       "via": "notifications",
       "plugin": "users-permissions"
+    },
+    "campaign": {
+      "model": "campaign",
+      "via": "notifications"
+    },
+    "status": {
+      "default": false,
+      "type": "boolean"
     }
   }
 }
