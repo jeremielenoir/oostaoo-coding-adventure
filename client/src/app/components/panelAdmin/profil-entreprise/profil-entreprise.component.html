@@ -4,8 +4,9 @@
   <div *ngIf="isVerifUser" class="loading">
     <span class="fa fa-spinner fa-pulse"></span>
   </div>
+
   <div *ngIf="!isVerifUser">
-    <div *ngIf='user === null || user === undefined' id="content">
+    <div *ngIf='entreprise === null' id="content">
       <div class="">
         <div class="all-group-content ajout-entreprise">
           <div class="content-ajout-entreprise">
@@ -50,7 +51,7 @@
 
   <div *ngIf="!isVerifUser">
 
-    <div *ngIf='user !== null || user !== undefined' id="content">
+    <div *ngIf='entreprise !== null' id="content">
 
       <div id="shadow-cog" [ngClass]="{'shadow-cog-active': shadowcog == true}">
 
