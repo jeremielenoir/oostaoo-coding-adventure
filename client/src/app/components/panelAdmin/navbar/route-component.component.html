@@ -5,7 +5,18 @@
     <li>
       <a href="" class="text-menu">
         <span class="content-img" id="notif">
-        </span>
+        </span> <span style="position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 25px;
+        height: 25px;
+        background: #e34e26;
+        font-size: 12px;
+        border-radius: 12px;
+        margin: auto;
+        text-align: center;
+        padding: 3px;
+        color:#1d3551;">{{notifications.length}}</span>
       </a>
       <ul class="dropdownn dropdownn-notif">
         <li>
@@ -13,13 +24,15 @@
         </li>
         <div class="notif-content" style="background-color:aqua; display: block; padding: 10px; margin-bottom: 10px;"
           *ngFor="let notif of notifications">
-          <h4 class="notif-title">
-            Un candidat vient de finir le test
-            <span class="fas fa-trash-alt icon-gestion-notif"></span>
+          <a href="" [routerLink]="['/dashboard/campaigns', notif.campaign, 'candidats']">
+            <h4 class="notif-title">
+              Un candidat vient de finir le test
 
-          </h4>
-          <span class="notif-message">{{notif.Message}}</span>
-          <p class="notif-footer">{{notif.created_at | date:'dd/MM/yyyy'}}</p>
+            </h4>
+            <span class="notif-message">{{notif.Message}}</span>
+            <p class="notif-footer">{{notif.created_at | date:'dd/MM/yyyy'}}</p>
+          </a>
+              <span class="fas fa-trash-alt icon-gestion-notif"></span>
 
         </div>
       </ul>
