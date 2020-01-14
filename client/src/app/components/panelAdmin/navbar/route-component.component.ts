@@ -17,9 +17,10 @@ export class RouteComponentComponent implements OnInit {
   isShow2 = false;
   public viewcontentDefaults: boolean;
   public notifications =  [];
+  public notifNotRead = 0;
   @Output() ContentViewDefault = new EventEmitter<any>();
 
-  constructor(public dialog: MatDialog, private bottomSheet: MatBottomSheet, public apiClientService: ApiClientService) { }
+  constructor(public dialog: MatDialog, private bottomSheet: MatBottomSheet, public apiClientService: ApiClientService,public route: Router) { }
   // openBottomSheet(): void {
   //   this.bottomSheet.open(PopupMonOffre);
   // }
@@ -39,6 +40,7 @@ export class RouteComponentComponent implements OnInit {
 
     this.getNotifications().then(notifications => {
       this.notifications = notifications;
+      this.initNotifNotRead(notifications);
     });
   }
 
@@ -54,6 +56,16 @@ export class RouteComponentComponent implements OnInit {
 
   }
 
+  initNotifNotRead(array){
+    this.notifNotRead = 0;
+    console.log(this.notifNotRead);
+    array.forEach(element => {
+      if(!element.status){
+        this.notifNotRead += 1;
+      }
+    });
+  }
+
   async getNotifications(): Promise<any> {
     try {
       return await this.apiClientService.get(API_URI_NOTIFICATIONS).toPromise();
@@ -67,9 +79,30 @@ export class RouteComponentComponent implements OnInit {
     //alert(API_URI_NOTIFICATIONS+"/"+notificationID);
     this.apiClientService.delete(deleteUrl).toPromise().then(_=>{
       this.notifications = this.notifications.filter(notification => notification.id !== notificationID);
+      this.initNotifNotRead(this.notifications);
     }).catch(error=>{
       alert(error);
     });
+  }
+
+  navigateTo(idCampaign, idNotif, value){
+    const updateUrl = API_URI_NOTIFICATIONS+"/"+idNotif;
+    if(!value){
+      this.apiClientService.put(updateUrl, {
+        status: !value
+      }).toPromise().then( _=>{
+        this.notifications = this.notifications.filter(notification =>  {
+          notification.id == idNotif ? notification.status = !value : value
+          return notification;
+        });
+        this.initNotifNotRead(this.notifications);
+        this.route.navigate(["/dashboard/campaigns/"+idCampaign+"/candidats"]);
+      }).catch(err=>{
+        console.log(err);
+      });
+    }else{
+      this.route.navigate(["/dashboard/campaigns/"+idCampaign+"/candidats"]);
+    }
   }
 
 

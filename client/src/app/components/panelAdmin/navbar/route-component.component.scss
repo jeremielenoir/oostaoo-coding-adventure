@@ -128,18 +128,18 @@
 
     .icon-gestion-notif{
        cursor: pointer;
-    color: $color-principal-blue;
-    position: absolute;
-    right: 7px;
-    margin-top: -15px;
-    border: 1.5px solid #ce5637;
-    border-radius: 50%;
-    padding: 4px;
-    background: $color-background-blue;
+      color: $color-principal-blue;
+      position: absolute;
+      right: 7px;
+      margin-top: -15px;
+      border: 1.5px solid #ce5637;
+      border-radius: 50%;
+      padding: 4px;
+      background: $color-background-blue;
     }
 
     .icon-gestion-notif-read{
-     border: 1.5px solid $color-principal-blue !important;
+      border: 1.5px solid $color-principal-blue !important;
     }
 }
 
@@ -171,6 +171,12 @@
 
 .notif-content-read{
   border: 1.5px solid $color-principal-blue !important;
+  border-radius: $border-radius;
+  background-color: $color-background-blue; 
+  height: 130px;
+  display: block;
+  padding: 5px 10px;
+  margin: 13px !important;
 }
 
 @media screen and (max-width:768px){
