@@ -22,10 +22,14 @@
         <li>
           <p>Notifications</p>
         </li>
-        <div class="notif-content" style="background-color:aqua; display: block; padding: 10px; margin-bottom: 10px;"
+        <div class="notif-content"
           *ngFor="let notification of notifications">
+          
           <div *ngIf="!notification.status">
             <!-- ON click post new status of notification -->
+          <div>
+            <span (click)="deleteNotification(notification.id)" class=""><i class="fas fa-trash icon-gestion-notif"></i></span>
+          </div>
             <a [routerLink]="['/dashboard/campaigns', notification.campaign.id, 'candidats']">
               <h4 class="notif-title">
                 Un candidat vient de finir le test
@@ -33,7 +37,7 @@
               <span class="notif-message">{{notification.Message}}</span>
               <p class="notif-footer">{{notification.created_at | date:'dd/MM/yyyy'}}</p>
             </a>
-            <span (click)="deleteNotification(notification.id)" class="fas fa-trash-alt icon-gestion-notif"></span>
+            
           </div>
         </div>
       </ul>
