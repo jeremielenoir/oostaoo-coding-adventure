@@ -46,7 +46,7 @@
   background: #fff;
 }
 
-img {
+#logo img {
   width: 160px;
   margin: -10px 0 0 20px;
 
@@ -58,8 +58,8 @@ a {
   text-decoration: none;
   font-size: 16px;
   display: inline-block;
-  margin: 5px 0px 0;
-  height: 80px;
+  
+  height: 85px;
   padding: 20px;
 }
 
@@ -76,6 +76,30 @@ a:hover {
   &:hover{
     color:white!important;
   }
+}
+
+.align_flags{
+  display: inline-block;
+}
+
+.flags{
+  width: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.flags_img{
+  margin: 2px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.flags_img img{
+  width: 5px;
+  height: 5px;
+  max-width: 5px;
+  max-height: 5px;
 }
 
 
