@@ -12,12 +12,10 @@ export class DashboadCampagneComponent implements OnInit {
   public booleanViewContentDefault = false;
   public IsactiveNoCountryside: boolean;
   public IsBooaleanDashboardMaxSize: any;
-  public notifications = [];
 
   constructor() { }
 
   ngOnInit() {
-    this.notifications = [];
   }
 
   display(value) {
@@ -29,14 +27,7 @@ export class DashboadCampagneComponent implements OnInit {
   getCampaignsFromChild(campaigns) {
     console.log('my campaigns from dashboard-campagne', campaigns);
     this.campaigns = campaigns;
-    for(let element of this.campaigns){
-      if(element.notifications.length > 0){
-        this.notifications.push(...element.notifications);
-        /* for(let notif of element.notifications){
-          notifications.push(notif);
-        } */
-      }
-    }
+    
     //console.log(this.notifications);
   }
 
