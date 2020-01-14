@@ -3,6 +3,7 @@ import { MatBottomSheet, MatBottomSheetRef } from "@angular/material";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ApiClientService, API_URI_NOTIFICATIONS } from 'src/app/api-client/api-client.service';
+import { DecryptTokenService } from '../../home/register/register.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class RouteComponentComponent implements OnInit {
   public notifNotRead = 0;
   @Output() ContentViewDefault = new EventEmitter<any>();
 
-  constructor(public dialog: MatDialog, private bottomSheet: MatBottomSheet, public apiClientService: ApiClientService,public route: Router) { }
+  constructor(public dialog: MatDialog, private bottomSheet: MatBottomSheet, public apiClientService: ApiClientService,public route: Router, public decryptTokenService: DecryptTokenService) { }
   // openBottomSheet(): void {
   //   this.bottomSheet.open(PopupMonOffre);
   // }
@@ -39,8 +40,12 @@ export class RouteComponentComponent implements OnInit {
     })
 
     this.getNotifications().then(notifications => {
-      this.notifications = notifications;
-      this.initNotifNotRead(notifications);
+      notifications.forEach(element => {
+        if (element.user.id == this.decryptTokenService.userId){
+          this.notifications.push(element);
+        }
+      });
+      this.initNotifNotRead(this.notifications);
     });
   }
 
