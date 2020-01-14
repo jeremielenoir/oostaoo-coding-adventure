@@ -832,7 +832,6 @@ export class ProfilEntrepriseComponent implements OnInit {
       } else {
       this.getentreprise().then(entreprise => {
         console.log('entrepriseeeeuh', entreprise);
-        // this.logo = entreprise[0].logo.url;
         this.name = new FormControl(entreprise[0].nom);
         this.email = new FormControl(entreprise[0].email);
         this.lang = new FormControl(entreprise[0].lang);
@@ -848,8 +847,11 @@ export class ProfilEntrepriseComponent implements OnInit {
         this.facebook = new FormControl(entreprise[0].facebook);
         this.twitter = new FormControl(entreprise[0].twitter);
         this.entreprise = entreprise[0];
+        if ( entreprise[0].logo !== undefined) {
+          this.logo = entreprise[0].logo.url;
+        }
         console.log('entreprise user', entreprise);
-        console.log('this.entreprise=', this.entreprise);
+        console.log('this.entreprise=', this.entreprise.logo);
         console.log('entreprise picture', this.picture);
         this.progressbar1();
         this.progressbar2();

@@ -77,7 +77,7 @@
                   <input type="file" class="file" name="files" accept="image/x-png,image/gif,image/jpeg"
                     (change)="readURL($event)" #uploadFileFirst />
                   <input class="hidden-file" type="text" name="ref" value="entreprise" />
-                  <input type="text" name="refId" value="9" />
+                  <input type="text" name="refId" value="{{entreprise.id}}" />
                   <input type="text" name="field" value="logo" />
                 </div>
               </div>

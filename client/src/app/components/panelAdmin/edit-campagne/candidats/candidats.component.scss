@@ -18,6 +18,12 @@
       align-items: center;
       cursor: pointer;
       position: relative;
+      .selected-text-active{
+        color:red!important
+      }
+      .menu-choince.choince-active{
+        display: block
+      }
       .menu-choince{
         top: 47px;
         left: 0;
@@ -28,6 +34,7 @@
         box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
         // padding-top: 48px;
         background-color: #fff;
+        display: none;
         .menu-list-choince{
           button{
             width: 100%;
@@ -37,14 +44,25 @@
             background-color: transparent;
             border: none;
             font: inherit;
+
             .icon{
-              display: inline-block;
+              
               margin-left: 15px;
-              opacity: .5;
+  
             }
-            span{
-              color: #e7e7e7;
+            &:disabled{
+               
+                span{
+                color: #e7e7e7;
+              }
+
+              .icon{
+            
+                opacity: .5;
+              }
             }
+            
+           
           }
           .first-btn{
             border:none!important
