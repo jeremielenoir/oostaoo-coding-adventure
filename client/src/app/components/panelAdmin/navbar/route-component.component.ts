@@ -41,7 +41,7 @@ export class RouteComponentComponent implements OnInit {
 
     this.getNotifications().then(notifications => {
       notifications.forEach(element => {
-        if (element.user.id == this.decryptTokenService.userId){
+        if (element.user.id === this.decryptTokenService.userId){
           this.notifications.push(element);
         }
       });

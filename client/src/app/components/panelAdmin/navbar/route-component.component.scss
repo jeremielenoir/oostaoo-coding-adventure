@@ -124,6 +124,7 @@
 .dropdownn-notif{
   width: 350px!important;
   padding: 15px;
+  
 
 
     .icon-gestion-notif{
@@ -139,7 +140,15 @@
     }
 
     .icon-gestion-notif-read{
+      cursor: pointer;
+      color: $color-principal-blue;
+      position: absolute;
+      right: 7px;
+      margin-top: -15px;
       border: 1.5px solid $color-principal-blue !important;
+      border-radius: 50%;
+      padding: 4px;
+      background: rgb(121, 121, 121);
     }
 }
 
@@ -173,7 +182,7 @@
 .notif-content-read{
   border: 1.5px solid $color-principal-blue !important;
   border-radius: $border-radius;
-  background-color: $color-background-blue; 
+  background-color: rgb(121, 121, 121); 
   height: 130px;
   display: block;
   padding: 5px 10px;

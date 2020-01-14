@@ -24,7 +24,7 @@
         </li>
         <div class="notif-content" *ngFor="let notification of notifications" [className]="notification.status ? 'notif-content-read' : 'notif-content'">
           <div>
-            <span (click)="deleteNotification(notification.id)" class=""><i class="fas fa-trash icon-gestion-notif"></i></span>
+            <span (click)="deleteNotification(notification.id)" class=""><i [className]="notification.status ? 'fas fa-trash icon-gestion-notif-read' : 'fas fa-trash icon-gestion-notif'"></i></span>
           </div>
             <span (click)="navigateTo(notification.campaign.id, notification.id, notification.status)" style="display: block;">
 
