@@ -2,8 +2,34 @@
 @import "../sidebar-right/sidebar-right.component.scss";
 @import "../dashboard-campagne/dashboard-campagne.component.scss";
 
+// .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element{
+//   color:#e15028!important;
+// }
+
+::ng-deep .mat-checkbox-frame{
+  width: 20px!important;
+  height: 20px!important;
+  border-radius: 50px!important;
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-ripple{
+  left: calc(50% - 18px)!important;
+  top: calc(50% - 18px)!important;
+}
+
+::ng-deep .mat-checkbox-checkmark{
+  display: none!important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent ::ng-deep .mat-checkbox-background, ::ng-deep .mat-checkbox-indeterminate.mat-accent ::ng-deep.mat-checkbox-background {
+  background-color: #e15028;
+  border-radius: 100px!important;
+  position: absolute!important;
+  left: 3.5px!important;
+  top: 3.5px!important;
+}
 .mat-checkbox-layout .mat-checkbox-label{
-  color:#de522b!important;
+  
 }
 .contenu-view-content-left {
   display: flex;
@@ -65,45 +91,9 @@
             display: block;
           }
           .checked-block {
-            position: relative;
-            font-size: 16px;
-            display: block;
-            font-weight: 400;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            color: #7e8082;
-            padding-top: 10px;
-            position: relative;
-            .archive-check{
-              opacity: 0;
-              width: 0px;
-              height: 0px;
-              &:checked + span{
-                background-image:url('http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/archive-inclue.svg');
-              }
-            }
-            span{
-              width: 20px;
-              height: 20px;
-              display: block;
-              background-image:url('http://localhost:4200/assets/Coding-game-img/SVG-menu-Dashboard/archive-non-inclue.svg');
-              position: absolute;
-              left: -20px;
-              top: 11px;
-            }
-            // .checkbox {
-            //   width: 0px;
-            //   height: 0px;
-            //   opacity: 0;
-            // }
-  
-            // .checked-text{
-            //   position: relative;
-            //   left: 20px;
-            // }
+            
+            margin-top: 5px;
+            
           }
           form {
             height: 100%;
