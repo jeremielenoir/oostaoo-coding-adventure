@@ -20,20 +20,21 @@
       </a>
       <ul class="dropdownn dropdownn-notif">
         <li>
-          <p>Notifications {{notifications.length}}</p>
+          <p>Notifications</p>
         </li>
         <div class="notif-content" style="background-color:aqua; display: block; padding: 10px; margin-bottom: 10px;"
-          *ngFor="let notif of notifications">
-          <a href="" [routerLink]="['/dashboard/campaigns', notif.campaign, 'candidats']">
-            <h4 class="notif-title">
-              Un candidat vient de finir le test
-
-            </h4>
-            <span class="notif-message">{{notif.Message}}</span>
-            <p class="notif-footer">{{notif.created_at | date:'dd/MM/yyyy'}}</p>
-          </a>
-              <span class="fas fa-trash-alt icon-gestion-notif"></span>
-
+          *ngFor="let notification of notifications">
+          <div *ngIf="!notification.status">
+            <!-- ON click post new status of notification -->
+            <a [routerLink]="['/dashboard/campaigns', notification.campaign.id, 'candidats']">
+              <h4 class="notif-title">
+                Un candidat vient de finir le test
+              </h4>
+              <span class="notif-message">{{notification.Message}}</span>
+              <p class="notif-footer">{{notification.created_at | date:'dd/MM/yyyy'}}</p>
+            </a>
+            <span (click)="deleteNotification(notification.id)" class="fas fa-trash-alt icon-gestion-notif"></span>
+          </div>
         </div>
       </ul>
 
