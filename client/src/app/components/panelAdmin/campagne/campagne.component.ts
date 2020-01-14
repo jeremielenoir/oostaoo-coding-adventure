@@ -37,7 +37,7 @@ export class CampagneComponent implements OnInit {
   public IsactiveNoCountryside = false;
   public searchText = '';
   public result: any;
-  public myVar: boolean;
+  public myVar = false;
   public test: any;
 
 
@@ -92,11 +92,14 @@ export class CampagneComponent implements OnInit {
 
   includeArchivedCampaigns(element) {
 
-    const champValue = element.children[0];
+    console.log('element', element.checked)
 
-    this.myVar = champValue.checked;
+    if (element.checked) {
+      this.myVar = !this.myVar;
+    } else {
+      this.myVar = !this.myVar;
+    }
 
-    console.log('this.myVar', this.myVar)
 
 
   }
@@ -111,7 +114,7 @@ export class CampagneComponent implements OnInit {
   openDialogDuplicate(idCampaign): void {
     const dialogRef = this.dialog.open(DialogOverviewDuplicate, {
       width: '250px',
-      data: {idCampaign, confirmed: this.confirmed}
+      data: { idCampaign, confirmed: this.confirmed }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -121,9 +124,9 @@ export class CampagneComponent implements OnInit {
       this.confirmed = result;
       console.log('result=', result);
       if (result === false) {
-        return ;
+        return;
       } else {
-       this.duplicatecampaign(idCampaign);
+        this.duplicatecampaign(idCampaign);
       }
     });
   }
@@ -131,7 +134,7 @@ export class CampagneComponent implements OnInit {
   openDialogDelete(idCampaign): void {
     const dialogRef = this.dialog.open(DialogOverviewDelete, {
       width: '250px',
-      data: {idCampaign, confirmed: this.confirmed}
+      data: { idCampaign, confirmed: this.confirmed }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -141,9 +144,9 @@ export class CampagneComponent implements OnInit {
       this.confirmed = result;
       console.log('result=', result);
       if (result === false) {
-        return ;
+        return;
       } else {
-       this.deletecampaign(idCampaign);
+        this.deletecampaign(idCampaign);
       }
     });
   }
@@ -281,7 +284,7 @@ export class DialogOverviewDuplicate {
 
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewDuplicate>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   onNoClick(): void {
     this.dialogRef.close(this.data.confirmed = false);
@@ -301,7 +304,7 @@ export class DialogOverviewDelete {
 
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewDelete>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   onNoClick(): void {
     this.dialogRef.close(this.data.confirmed = false);
