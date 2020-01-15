@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/offers",
+      "path": "/api/offers",
       "handler": "Offer.find",
       "config": {
         "policies": []
@@ -10,7 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/offers/count",
+      "path": "/api/offers/count",
       "handler": "Offer.count",
       "config": {
         "policies": []
@@ -18,7 +18,7 @@
     },
     {
       "method": "GET",
-      "path": "/offers/:id",
+      "path": "/api/offers/:id",
       "handler": "Offer.findOne",
       "config": {
         "policies": []
@@ -26,7 +26,7 @@
     },
     {
       "method": "POST",
-      "path": "/offers",
+      "path": "/api/offers",
       "handler": "Offer.create",
       "config": {
         "policies": []
@@ -34,7 +34,7 @@
     },
     {
       "method": "PUT",
-      "path": "/offers/:id",
+      "path": "/api/offers/:id",
       "handler": "Offer.update",
       "config": {
         "policies": []
@@ -42,7 +42,7 @@
     },
     {
       "method": "DELETE",
-      "path": "/offers/:id",
+      "path": "/api/offers/:id",
       "handler": "Offer.destroy",
       "config": {
         "policies": []
