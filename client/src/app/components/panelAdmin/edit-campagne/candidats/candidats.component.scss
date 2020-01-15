@@ -1,17 +1,60 @@
 /* @import '../../compagne/compagne.component.css'; */
 @import"../../../../../roodeo-variables.scss";
 // Style sans candidat
+.mat-header-row{
+  background-color: $color-principal-blue!important;
+}
+ ::ng-deep .mat-row:hover{
+  background-color: $color-principal-blue!important;
+  cursor: pointer;
+  .mat-cell{
+    color:white!important
+  }
+  .mat-checkbox-frame{
+    border-color: white!important;
+  }
+}
+::ng-deep .mat-sort-header-button{
+  color:white!important;
+  font-size: 18px!important;
+  padding-left: 32px!important;
+
+}
+.name-candidat{
+  font-weight: 700;
+}
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
+  padding-left: 0px!important;
+  text-align: center!important;
+}
+.mat-cell:first-child{
+  text-align: left!important;
+}
+ .mat-cell{
+  border-right: 1px solid $color-principal-blue!important;
+  text-align: center!important;
+}
+.mat-cell:last-child{
+  border-right: none!important;
+}
+// td.mat-cell, td.mat-footer-cell, th.mat-header-cell{
+//   border-width: 1.5px!important;
+//   border-color: $color-principal-blue!important;
+// }
+.tr.mat-footer-row, tr.mat-row{
+  border-bottom: 2px solid $color-principal-blue!important;
+}
 #editQuestion {
   background-color: $background-color;
-  padding: 5px;
-  padding-left: 18%;
+  padding-top: 20px;
+  padding-left: 7%;
+  padding-right: 7%;
   /* height: 100vh; */
 
     .select-choince{
       height: 48px;
-      padding: 0 20px;
+      padding: 0 13px;
       border: 1px solid #e4e4e4;
-      margin: 0 10px 20px 10px;
       background-color: white;
       display: flex;
       justify-content: center;
@@ -19,7 +62,7 @@
       cursor: pointer;
       position: relative;
       .selected-text-active{
-        color:red!important
+        font-weight: 700;
       }
       .menu-choince.choince-active{
         display: block
@@ -35,23 +78,31 @@
         // padding-top: 48px;
         background-color: #fff;
         display: none;
+        
         .menu-list-choince{
+          .selected-button{
+           
+            &:hover{
+              background-color: $color-principal-orange;
+              .icon{
+                color:white
+              }
+            }
+          }
           button{
             width: 100%;
             height: 48px;
             display: flex;
             border-top: 1px solid #e7e7e7!important;
-            background-color: transparent;
             border: none;
-            font: inherit;
-
-            .icon{
-              
+            background-color: transparent;
+            .icon{  
               margin-left: 15px;
-  
             }
-            &:disabled{
-               
+          }
+          button:disabled{
+           
+            font: inherit;
                 span{
                 color: #e7e7e7;
               }
@@ -60,7 +111,7 @@
             
                 opacity: .5;
               }
-            }
+          
             
            
           }
@@ -78,7 +129,7 @@
 
       .icon-choince{
         font-size: 24px;
-        color: $color-principal-blue;
+        color: $color-principal-orange;
       }
 
       .icon-choince-croche{
@@ -125,15 +176,22 @@
       height: 50vh;
     }
 
+    .diplex-1{
+      display: flex;
+      flex: 1;
+    }
+
     .btn-question {
       padding: 0 50px;
-      margin-top: 20px;
       text-transform: uppercase;
       height: 50px;
       font-size: 14px;
       transition: background-color 200ms;
       font-weight: 700;
-      background-color: $color-gold-background;
+      background-color: $color-principal-blue;
+      border-radius: 0!important;
+      display: flex;
+      
     }
 
     .border1pxdashedgray h1 {
@@ -147,7 +205,6 @@
   display: flex;
   padding: 10px;
   flex-wrap: wrap;
-  justify-content: space-between;
     .candidat-custom-select {
       border: $border-table;
       background-color:$color-white-background;
@@ -174,13 +231,28 @@
     .fix-button {
       margin-top: inherit;
     }
+    .custom-input-filtre-contenu{
+        width: 50%;
+        position: relative;
+        .icon-search{
+          font-size: 25px;
+          right: 0px;
+          top: 9px;
+          color:$color-principal-orange;
+          position: absolute;
+        }
+      .custom-input-filtre {
+       width: 100%;
+        border: 1px solid $color-principal-orange;
+        background: $color-white-background;
+        height: 48px;
+        padding: 10px 23px!important;
+        outline: none;
+        margin-left:18px
+      }
 
-    .custom-input-filtre {
-      width: 50%;
-      border: $border-table;
-      background: $color-white-background;
-      height: 50px;
     }
+    
 
     .table-container {
       width: 100%;

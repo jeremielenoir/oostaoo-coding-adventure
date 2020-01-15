@@ -89,8 +89,9 @@ export class CandidatsMailComponent implements OnInit {
           const idCandidat = [];
           idCandidat.push(res.id);
           return idCandidat;
-        },
-        err => console.log(err)
+        }, err => {
+          console.log('log error', err)
+        }
       )
       .then(idCandidat => {
         this.updateCampaign(idCandidat);
@@ -98,6 +99,7 @@ export class CandidatsMailComponent implements OnInit {
   }
 
   updateCampaignPostCandidats() {
+
     for (const iterator of this.candidats) {
       console.log('iterator: ', iterator);
       this.postCandidat(iterator.name, iterator.value);
