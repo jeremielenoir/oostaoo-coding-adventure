@@ -27,14 +27,26 @@
         <a class="link-menu" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'fonction'">Fonctionnalités</a>
         <a class="link-menu" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'offers'">Prix</a>
         <!--a (click)="logout()">Se déconnecter</a-->
-        <a (click)="gotToLoginPage()" mat-button>Connexion</a>
+        <a (click)="gotToLoginPage()" href="" class="link-menu mat-button">Connexion</a>
+
         <div class="align_flags">
-        <div class="link-menu flags">
+            <!-- <button mat-button [matMenuTriggerFor]="menu">  -->
+              <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
+              <img  class="flags_img" src="../../../../assets/drapeau/france-flag-round-icon-32.png" alt="Français">
+              <i class="fas fa-caret-down arrow"></i>
+            </div>
+            <!-- </button> -->
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item><img class="flags_img" src="../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png" alt="Anglais"></button>
+              <button mat-menu-item><img class="flags_img" src="../../../../assets/drapeau/spain-flag-round-icon-32.png" alt="Espagnol"></button>
+              <button mat-menu-item><img class="flags_img" src="../../../../assets/drapeau/japan-flag-round-icon-32.png" alt="Japonais"></button>
+            </mat-menu>
+        <!-- <div class="link-menu flags">
             <img class="flags_img" src="../../../../assets/drapeau/france-flag-round-icon-32.png" alt="Français">
             <img class="flags_img" src="../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png" alt="Anglais">
             <img class="flags_img" src="../../../../assets/drapeau/spain-flag-round-icon-32.png" alt="Espagnol">
             <img class="flags_img" src="../../../../assets/drapeau/japan-flag-round-icon-32.png" alt="Japonais">
-        </div>
+        </div> -->
       </div>
       
       

@@ -306,8 +306,8 @@ export class TestComponent implements OnInit {
             points_candidat: newOBjectToPostCandidat
           }).toPromise();
           this.apiClientService.post(API_URI_NOTIFICATIONS, {
-            title: "Un candidat a finis le test "+ res.campaign.Name,
-            message: this.candidat.Nom+" à finis le test\nCliquez ici pour voir le résultat",
+            title: "Un candidat viens de finir le test \""+ res.campaign.Name+"\"",
+            message: "Le rapport d'évaluation de \""+this.candidat.Nom+"\" est disponible.",
             status: false,
             user: res.campaign.user,
             idCampaign: res.campaign.id
