@@ -13,7 +13,7 @@
                         </mat-card-content>
                     
                         <mat-card-actions>
-                            <button routerLink="" mat-raised-button color="warn" class="lab-item">Découvrir les fonctionnalités</button>
+                            <button [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'fonction'" routerLink="" mat-raised-button color="warn" class="lab-item">Découvrir les fonctionnalités</button>
                         </mat-card-actions>
                     
                     </mat-card>
@@ -54,7 +54,7 @@
                     </mat-card-content>
                 
                     <mat-card-actions>
-                        <button routerLink="" mat-raised-button color="warn" class="lab-item">Découvrir nos offres</button>
+                        <button [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'#offers'" routerLink="" mat-raised-button color="warn" class="lab-item">Découvrir nos offres</button>
                     </mat-card-actions>
                 
                 </mat-card>
@@ -74,7 +74,7 @@
                     </mat-card-content>
                 
                     <mat-card-actions>
-                        <button routerLink="" mat-raised-button color="warn" class="lab-item">Démarrer avec ROODEO</button>
+                        <button routerLink="/home/register" mat-raised-button color="warn" class="lab-item">Démarrer avec ROODEO</button>
                     </mat-card-actions>
                 
                 </mat-card>

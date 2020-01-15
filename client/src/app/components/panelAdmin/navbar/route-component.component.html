@@ -16,26 +16,25 @@
         margin: auto;
         text-align: center;
         padding: 3px;
-        color:#1d3551;">{{notifications.length}}</span>
+        color:#1d3551;">{{notifNotRead}}</span>
       </a>
       <ul class="dropdownn dropdownn-notif">
         <li>
           <p>Notifications</p>
         </li>
-        <div class="notif-content" style="background-color:aqua; display: block; padding: 10px; margin-bottom: 10px;"
-          *ngFor="let notification of notifications">
-          <div *ngIf="!notification.status">
-            <!-- ON click post new status of notification -->
-            <a [routerLink]="['/dashboard/campaigns', notification.campaign.id, 'candidats']">
+        <div class="notif-content" *ngFor="let notification of notifications" [className]="notification.status ? 'notif-content-read' : 'notif-content'">
+          <div>
+            <span (click)="deleteNotification(notification.id)" class=""><i [className]="notification.status ? 'fas fa-trash icon-gestion-notif-read' : 'fas fa-trash icon-gestion-notif'"></i></span>
+          </div>
+            <span (click)="navigateTo(notification.campaign.id, notification.id, notification.status)" style="display: block;">
+
               <h4 class="notif-title">
                 Un candidat vient de finir le test
               </h4>
               <span class="notif-message">{{notification.Message}}</span>
               <p class="notif-footer">{{notification.created_at | date:'dd/MM/yyyy'}}</p>
-            </a>
-            <span (click)="deleteNotification(notification.id)" class="fas fa-trash-alt icon-gestion-notif"></span>
+            </span>
           </div>
-        </div>
       </ul>
 
     </li>
