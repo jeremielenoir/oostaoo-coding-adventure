@@ -20,13 +20,17 @@
       "via": "notifications",
       "plugin": "users-permissions"
     },
-    "campaign": {
-      "model": "campaign",
-      "via": "notifications"
-    },
     "status": {
       "default": false,
       "type": "boolean"
+    },
+    "title": {
+      "default": "",
+      "type": "string"
+    },
+    "idCampaign": {
+      "default": "",
+      "type": "integer"
     }
   }
 }

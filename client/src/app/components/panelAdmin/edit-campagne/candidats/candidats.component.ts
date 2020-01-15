@@ -189,7 +189,7 @@ export class CandidatsComponent implements OnInit {
             'Dernière activité': dateInvite.toLocaleString(),
             Score: percentCandidat,
             Durée: duree,
-            rapport: candidat.raport_candidat.rapport,
+            rapport: (candidat.raport_candidat ? candidat.raport_candidat.rapport : null ),
             points: candidat.points_candidat,
             date: candidat.test_ouvert
           });

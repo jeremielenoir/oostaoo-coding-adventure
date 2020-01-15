@@ -16,7 +16,7 @@
         margin: auto;
         text-align: center;
         padding: 3px;
-        color:#1d3551;">{{notifNotRead}}</span>
+        color:#1d3551;">{{notifUnread}}</span>
       </a>
       <ul class="dropdownn dropdownn-notif">
         <li>
@@ -26,10 +26,10 @@
           <div>
             <span (click)="deleteNotification(notification.id)" class=""><i [className]="notification.status ? 'fas fa-trash icon-gestion-notif-read' : 'fas fa-trash icon-gestion-notif'"></i></span>
           </div>
-            <span (click)="navigateTo(notification.campaign.id, notification.id, notification.status)" style="display: block;">
+            <span (click)="navigateTo(notification.idCampaign, notification.id, notification.status)" style="display: block;">
 
               <h4 class="notif-title">
-                Un candidat vient de finir le test
+                {{notification.title}}
               </h4>
               <span class="notif-message">{{notification.Message}}</span>
               <p class="notif-footer">{{notification.created_at | date:'dd/MM/yyyy'}}</p>
