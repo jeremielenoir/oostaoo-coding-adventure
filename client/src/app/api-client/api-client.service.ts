@@ -21,7 +21,7 @@ export const API_URI_USER = 'users';
 export const API_URI_USERS_BY_ADMIN = 'usersByAdmin';
 export const API_URI_NOTIFICATIONS: string = 'notifications';
 export const API_URI_OFFER: string = prefix + 'offers';
-
+export const API_URI_PAYMENT: string = prefix + 'payments';
 
 
 @Injectable()

@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/payments",
+      "path": "/api/payments",
       "handler": "Payment.find",
       "config": {
         "policies": []
@@ -10,7 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/payments/count",
+      "path": "/api/payments/count",
       "handler": "Payment.count",
       "config": {
         "policies": []
@@ -18,7 +18,7 @@
     },
     {
       "method": "GET",
-      "path": "/payments/:id",
+      "path": "/api/payments/:id",
       "handler": "Payment.findOne",
       "config": {
         "policies": []
@@ -26,15 +26,23 @@
     },
     {
       "method": "POST",
-      "path": "/payments",
+      "path": "/api/payments",
       "handler": "Payment.create",
       "config": {
         "policies": []
       }
     },
     {
+      "method": "POST",
+      "path": "/api/payments/subscribe",
+      "handler": "Payment.charge",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
-      "path": "/payments/:id",
+      "path": "/api/payments/:id",
       "handler": "Payment.update",
       "config": {
         "policies": []
@@ -42,7 +50,7 @@
     },
     {
       "method": "DELETE",
-      "path": "/payments/:id",
+      "path": "/api/payments/:id",
       "handler": "Payment.destroy",
       "config": {
         "policies": []

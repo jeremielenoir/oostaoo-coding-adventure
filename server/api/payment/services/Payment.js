@@ -9,6 +9,8 @@
 
 // Public dependencies.
 const _ = require('lodash');
+const STRIPE_API_KEY = process.env.STRIPEAPIKEY;
+const stripe = require('stripe')(STRIPE_API_KEY);
 
 // Strapi utilities.
 const utils = require('strapi-hook-bookshelf/lib/utils/');
@@ -239,5 +241,15 @@ module.exports = {
     }).fetchAll({
       withRelated: populate
     });
+  },
+
+  charge: async (body) => {
+    return await stripe.charges.create({
+      source: body.token.id,
+      amount: body.amount,
+      currency: 'eur',
+    })
+    .then(res =>  res)
+    .catch(error => error)
   }
 };

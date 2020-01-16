@@ -83,6 +83,9 @@ import { TechnoComponent } from './components/home/techno/techno.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { OffersComponent } from './components/home/offers/offers.component';
 
+// Import your library
+import { NgxStripeModule } from 'ngx-stripe';
+
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -154,7 +157,8 @@ import { OffersComponent } from './components/home/offers/offers.component';
     RoundProgressModule,
     NgxEditorModule,
     OrderModule,
-    ScrollToModule.forRoot()
+    ScrollToModule.forRoot(),
+    NgxStripeModule.forRoot('pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq'),
   ],
   providers: [
     ApiClientService,

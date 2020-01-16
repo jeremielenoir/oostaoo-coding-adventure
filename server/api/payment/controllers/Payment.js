@@ -70,5 +70,9 @@ module.exports = {
 
   destroy: async (ctx, next) => {
     return strapi.services.payment.remove(ctx.params);
+  },
+
+  charge: async (ctx, next) => {
+    return strapi.services.payment.charge(ctx.request.body);
   }
 };
