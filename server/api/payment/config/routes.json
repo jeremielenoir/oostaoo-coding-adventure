@@ -35,6 +35,14 @@
     {
       "method": "POST",
       "path": "/api/payments/subscribe",
+      "handler": "Payment.subscribe",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/payments/charge",
       "handler": "Payment.charge",
       "config": {
         "policies": []

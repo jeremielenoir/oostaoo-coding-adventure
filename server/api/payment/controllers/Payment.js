@@ -73,6 +73,30 @@ module.exports = {
   },
 
   charge: async (ctx, next) => {
-    return strapi.services.payment.charge(ctx.request.body);
-  }
+    return strapi.services.payment.charge(ctx.request.body)
+    .then(res =>  {
+      console.log(res);
+      return {
+        status: res.status,
+        amount: res.amount,
+        capture: res.captured
+      };
+    })
+    .catch(error => error)
+  },
+
+  subscribe: async (ctx, next) => {
+    console.log('subscribe coontroller')
+    return strapi.services.payment.subscribe(ctx.request.body)
+    .then(res =>  {
+      console.log(res);
+      // return {
+      //   status: res.status,
+      //   amount: res.amount,
+      //   capture: res.captured
+      // };
+      return res;
+    })
+    .catch(error => error)
+  },
 };

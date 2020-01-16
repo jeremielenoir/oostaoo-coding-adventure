@@ -249,7 +249,31 @@ module.exports = {
       amount: body.amount,
       currency: 'eur',
     })
-    .then(res =>  res)
-    .catch(error => error)
+  },
+
+  subscribe: async (body) => {
+    console.log('service subscribe')
+    try {
+      const customer = await stripe.customers.create({
+        // email: body.email,
+        email: 'youcef@youcef.fr',
+        source: body.token.id,
+      })
+      
+      const subscription = await stripe.subscriptions.create({
+        customer: customer.id, 
+        items: [{
+          plan: 'plan_GYgIMYKG0onZrr',
+
+        }],
+        trial_period_days: 30
+      })
+    } catch(err) {
+      console.log('subscription',err);
+    }
+    return {subscription: 'toto'};
   }
+  // subscribe: async (body) => {
+  //   const session = stripe.checkout.sessions.create({})
+  // }
 };
