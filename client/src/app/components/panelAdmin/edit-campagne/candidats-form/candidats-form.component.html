@@ -1,71 +1,44 @@
 <div class="container p-3">
-  <div class="row">
-    <div class="col-12">
-      <form [formGroup]="form" (submit)="submit()">
-        <div class="card">
-          <div class="card-header">Contact Information</div>
-          <div class="card-body" formArrayName="contacts">
-            <div class="row">
-              <div
-                class="col-6"
-                *ngFor="let contact of contactFormGroup.controls; let i = index"
-              >
-                <div [formGroupName]="i" class="row">
-                  <div class="form-group col-6">
-                    <label>Nom</label>
-                    <input
-                      class="form-control"
-                      formControlName="name"
-                      type="text"
-                    />
-                  </div>
-
-                  <div class="form-group col-12">
-                    <label>Email*</label>
-                    <input
-                      class="form-control"
-                      formControlName="value"
-                      type="text"
-                      required
-                    />
-                  </div>
-                  <div class="form-group col-12 text-right">
-                    <button
-                      class="btn btn-danger"
-                      type="button"
-                      (click)="removeContact(i)"
-                    >
-                      Supprimer
-                    </button>
-                  </div>
+  <div lass="form-scroll">
+    <div class="row">
+      <div class="col-12">
+        <form [formGroup]="form" (submit)="submit()">
+          <div class="card">
+            <div class="card-body" formArrayName="contacts">
+              <div [formGroupName]="i" class="row" *ngFor="let contact of contactFormGroup.controls; let i = index">
+                <div class="form-group col-6">
+                  <label>Nom</label>
+                  <input class="form-control" formControlName="name" type="text" />
                 </div>
+
+                <div class="form-group col-6">
+                  <label>Email*</label>
+                  <input class="form-control" formControlName="value" type="text" required />
+                </div>
+                <div class="form-group col-12 text-right">
+                  <button class="btn btn-danger" type="button" (click)="removeContact(i)"
+                    [hidden]="contactList.length === 1">
+                    Supprimer
+                  </button>
+                </div>
+
+
               </div>
             </div>
-          </div>
-          <div class="card-body">
-            <div class="col-12">
-              <button
-                class="btn btn-primary m-1"
-                type="button"
-                (click)="addContact()"
-              >
+            <div class="card-body">
+              <button class="button btn m-1" type="button" (click)="addContact()">
                 ajouter candidat
               </button>
-              <button
-                mat-raised-button
-                color="primary"
-                class="btn-question"
-                mat-button
-                [disabled]="!form.valid"
-                type="submit"
-                (click)="openDialog()"
-              >
+              <button mat-raised-button color="primary" class="button btn-question" mat-button [disabled]="!form.valid"
+                type="submit" (click)="openDialog()">
                 Prochaine étape : configuration d’email
               </button>
+
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
+
 </div>
