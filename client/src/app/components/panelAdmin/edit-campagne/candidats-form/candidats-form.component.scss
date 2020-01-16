@@ -1,0 +1,51 @@
+@import"../../../../../roodeo-variables.scss";
+::ng-deep .content-modal-question{
+       
+}
+.form-scroll{
+    height: 400px;
+    overflow-y: auto;
+}
+.card-body{
+    padding: 0px!important;
+    
+}
+.card{
+    border:none!important;
+    border-radius: 0px!important;
+}
+
+label{
+    font-weight: 700;
+    font-size: 17px;
+    color:$color-principal-blue;
+}
+
+input{
+    height: 50px;
+    font-size: 15px;
+    border:1px solid $color-principal-blue!important;
+    outline: none;
+    border-radius: 0px!important;
+}
+
+.button{
+    font-weight: 700;
+    height: 50px;
+    font-size: 14px;
+    background-color: $color-principal-blue;
+    border-radius: 0px!important;
+    text-transform: uppercase;
+    color: white;
+}
+
+.m-1{
+    margin: 0px;
+    margin-right: 9px!important;
+    margin-left: 0px!important;
+}
+
+.m-1:hover{
+    background-color:$color-principal-blue-hover;
+    color: white;
+}

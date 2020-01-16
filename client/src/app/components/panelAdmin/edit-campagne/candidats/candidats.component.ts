@@ -118,11 +118,8 @@ export class CandidatsComponent implements OnInit {
       let index = this.nbrSelectedElementChecked.indexOf(check.value);
 
       this.nbrSelectedElementChecked.splice(index, 1);
-
-      console.log('index', index)
     }
 
-    console.log('tbl ==>', this.nbrSelectedElementChecked)
   }
 
   getCampaign(): Promise<any> {
@@ -189,7 +186,7 @@ export class CandidatsComponent implements OnInit {
             'Dernière activité': dateInvite.toLocaleString(),
             Score: percentCandidat,
             Durée: duree,
-            rapport: candidat.raport_candidat.rapport,
+            rapport: (candidat.raport_candidat ? candidat.raport_candidat.rapport : null),
             points: candidat.points_candidat,
             date: candidat.test_ouvert
           });

@@ -20,6 +20,16 @@ export class NavbarComponent implements OnInit {
   public Removeshould = true;
   public IsheaderTrue = false;
   public AddIndex = false;
+  public lang = window.navigator.language ;
+
+  public currentLanguage;
+  public otherLanguage = [
+   {codelang: 'fr-FR',  img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/FR'},
+   {codelang: 'en-US', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/EN'},
+   {codelang: 'es-ES', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/ES'},
+   {codelang: 'ja-JA', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/JP'}
+  ];
+
   @ViewChild('header') header;
 
   public showOrHideManually() {
@@ -49,14 +59,19 @@ export class NavbarComponent implements OnInit {
 
     linkMenu.forEach(element => {
 
-      element.addEventListener('click', function (evt) {
+      element.addEventListener('click', function(evt) {
 
         evt.preventDefault();
 
-      })
+      });
 
-    })
+    });
 
+    this.otherLanguage.forEach( element => {
+      if ( element.codelang === this.lang) {
+        this.currentLanguage = element.img;
+      }
+    });
   }
 
   getLogin() {
@@ -74,4 +89,8 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/home/register']);
   }
 
+
+  setCurrentLanguage(img) {
+    this.currentLanguage = img;
+  }
 }
