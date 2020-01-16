@@ -28,7 +28,7 @@
       <button class="custom-buttom" mat-flat-button id="back" (click)="onDecrementPage()">
         RETOUR
       </button>
-      <button class="custom-buttom" mat-flat-button id="save" [routerLink]="['/dashboard/campaigns']"
+      <button [ngClass]="allQuestionLevel.length > 0 ? 'button-enabled' : 'button-disabled'" [disabled]="allQuestionLevel.length > 0 ? 'false' : 'true'" mat-flat-button [routerLink]="['/dashboard/campaigns']"
         (click)="postCampagne()">
         ENREGISTRER
       </button>

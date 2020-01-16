@@ -100,6 +100,27 @@
     margin: 0 10px !important;
 }
 
+.button-disabled{
+    color:white !important;
+    border-radius: 0px;
+    background-color:gray !important;
+    margin: 0 10px !important;
+    height: 40px !important;
+    width: 120px !important;
+    font-size: 14px !important;
+    font-weight: bold;
+}
+.button-enabled{
+    color:white;
+    border-radius: 0px;
+    background-color: green;
+    margin: 0 10px !important;
+    height: 40px !important;
+    width: 120px !important;
+    font-size: 14px !important;
+    font-weight: bold;
+}
+
 #save {
     background: $color-gold-background !important;
 }
