@@ -124,8 +124,9 @@
 .dropdownn-notif{
   width: 350px!important;
   padding: 15px;
-  height: 50% !important;
-  overflow-y: scroll;
+  min-height: 0px;
+  max-height: 50%;
+  overflow-y: auto;
   
 
 
