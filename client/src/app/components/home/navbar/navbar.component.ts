@@ -72,7 +72,6 @@ export class NavbarComponent implements OnInit {
         this.currentLanguage = element.img;
       }
     });
-
   }
 
   getLogin() {
