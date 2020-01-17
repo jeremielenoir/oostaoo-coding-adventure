@@ -153,9 +153,13 @@ module.exports = {
   _.defaultsDeep(grantConfig, { server: { protocol, host } });
   const provider =
     process.platform === "win32"
-      ? ctx.request.url.split("\\")[2]
-      : ctx.request.url.split("/")[2];
+      ? ctx.request.url.split("\\")[2].split('?')[0]
+      : ctx.request.url.split("/")[2].split('?')[0];
+
   const config = grantConfig[provider];
+  console.log('config : ', config);
+  console.log('grantConfig : ', grantConfig);
+
   if (!_.get(config, "enabled")) {
     return ctx.badRequest(null, "This provider is disabled.");
   }
