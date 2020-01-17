@@ -41,10 +41,11 @@ export class RouteComponentComponent implements OnInit {
 
     this.getNotifications().then(notifications => {
       notifications.forEach(element => {
-        if (element.user.id === this.decryptTokenService.userId){
+        if (element.user.adminId === this.decryptTokenService.userId){
           this.notifications.push(element);
         }
       });
+      this.notifications.reverse();
       this.notifications.sort((a, b)=> a.status - b.status);
       console.log(this.notifications);
       this.initNotifNotRead(this.notifications);
