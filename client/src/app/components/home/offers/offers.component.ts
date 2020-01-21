@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApiClientService, API_URI_OFFER, API_URI_USER, API_URI_PAYMENT } from 'src/app/api-client/api-client.service';
 import { StripeService, Elements, Element as StripeElement, ElementsOptions } from 'ngx-stripe';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Offer } from 'src/app/models/offer.model';
 
 @Component({
   selector: 'app-offers',
@@ -13,13 +14,12 @@ export class OffersComponent implements OnInit {
   handler: any = null;
   subscriptionChoice = null;
   subscriptionPage = false;
-  listOffers = [];
-  payload: {amount: number, token: any} ;
+  listOffers: Offer[] = [];
+  payload: {amount: number, periodicity: number, token: any};
 
   elements: Elements;
   card: StripeElement;
-  
- 
+
   // optional parameters
   elementsOptions: ElementsOptions = {
     locale: 'fr'
@@ -34,21 +34,48 @@ export class OffersComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-      this.apiClientService.get(API_URI_OFFER).subscribe( offers => {
-        this.listOffers = offers; console.log(offers);
-      });
-
       // recuperation de l'abonnement selectionné
-      this.subscriptionChoice = localStorage.getItem('subscriptionChoice');
+      this.subscriptionChoice = +localStorage.getItem('subscriptionChoice');
       // savoir si on est sur la page home ou sur la page abonnement interne (log)
       this.subscriptionPage = this.router.url.startsWith('/subscription');
 
+      this.apiClientService.get(API_URI_OFFER).subscribe( offers => {
+        console.log(offers);
+        offers.forEach(offer => {
+          offer.description = offer.description.split('$');
+          this.listOffers.push(offer);
+        });
+      },
+        err => console.log
+      );
 
+      this.stripeForm();
+    }
 
+    gotToLoginOrDashboardPage(subscriptionAmount) {
+      // sauvegarde de l'abonnement selectionné
+      localStorage.setItem('subscriptionChoice', subscriptionAmount);
+      this.subscriptionChoice = subscriptionAmount;
 
+      if (subscriptionAmount === 0 && this.subscriptionPage) {
+        this.router.navigate(['/dashboard/campaigns']);
+      } else {
+        if (this.router.url.startsWith('/subscription')) {
+          console.log('Nous sommes sur abonnement interne');
+          //this.pay(subscriptionAmount);
+          // this.router.navigate(['/dashboard/campaigns']);
+        } else {
+          console.log('Nous sommes sur abonnement home');
+          this.router.navigate(['/home/register']);
+        }
+      }
+    }
+
+    stripeForm() {
       this.stripeTest = this.fb.group({
         name: ['', [Validators.required]]
       });
+      console.log('VOIR', this.stripeService);
       this.stripeService.elements(this.elementsOptions)
         .subscribe(elements => {
           this.elements = elements;
@@ -86,38 +113,18 @@ export class OffersComponent implements OnInit {
 
             this.payload = {
               amount: 249 * 100,
+              periodicity: 3,
               token: result.token
             }
             console.log(this.payload);
             this.apiClientService.post(API_URI_PAYMENT + '/subscribe', this.payload)
             .subscribe(data => console.log('data from constroll back', data));
-            // console.log(result.token);
           } else if (result.error) {
             // Error creating the token
             console.log(result.error.message);
           }
         });
     }
-
-
-  gotToLoginOrDashboardPage(subscriptionAmount) {
-    // sauvegarde de l'abonnement selectionné
-    localStorage.setItem('subscriptionChoice', subscriptionAmount);
-    this.subscriptionChoice = localStorage.getItem('subscriptionChoice');
-
-
-    if (this.router.url.startsWith('/subscription')) {
-      console.log('Nous sommes sur abonnement interne');
-      //this.pay(subscriptionAmount);
-      // this.router.navigate(['/dashboard/campaigns']);
-    } else {
-      console.log('Nous sommes sur abonnement home');
-      this.router.navigate(['/home/register']);
-    }
-  }
-
-
-
 
 
 }

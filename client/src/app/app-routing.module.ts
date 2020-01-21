@@ -42,7 +42,8 @@ const routes: Routes = [
 
   {
     path: 'subscription',
-    component: OffersComponent
+    component: OffersComponent,
+    canActivate: [AuthGuard]
   },
 
 

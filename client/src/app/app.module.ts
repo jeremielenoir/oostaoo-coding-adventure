@@ -83,7 +83,7 @@ import { TechnoComponent } from './components/home/techno/techno.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { OffersComponent } from './components/home/offers/offers.component';
 
-// Import your library
+// https://www.npmjs.com/package/ngx-stripe
 import { NgxStripeModule } from 'ngx-stripe';
 
 

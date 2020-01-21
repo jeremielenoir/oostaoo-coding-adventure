@@ -11,10 +11,6 @@
     "comment": ""
   },
   "attributes": {
-    "periodicity": {
-      "default": "",
-      "type": "string"
-    },
     "price": {
       "default": "",
       "type": "decimal"
@@ -26,6 +22,10 @@
     "description": {
       "default": "",
       "type": "text"
+    },
+    "periodicity": {
+      "default": "",
+      "type": "string"
     }
   }
 }
