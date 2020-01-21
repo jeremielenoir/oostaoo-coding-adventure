@@ -1,0 +1,31 @@
+{
+  "connection": "default",
+  "collectionName": "offers",
+  "info": {
+    "name": "offer",
+    "description": "tarif, title, desciption, periodicity"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "price": {
+      "default": "",
+      "type": "decimal"
+    },
+    "title": {
+      "default": "",
+      "type": "text"
+    },
+    "description": {
+      "default": "",
+      "type": "text"
+    },
+    "periodicity": {
+      "default": "",
+      "type": "string"
+    }
+  }
+}
