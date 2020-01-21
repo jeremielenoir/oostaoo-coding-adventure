@@ -109,20 +109,28 @@ export class CandidatsComponent implements OnInit {
     this.choinceList = false
   }
 
-  checkedAction(e, check) {
+  checkedAction(e?, check?) {
     e.stopPropagation();
     this.checkedActionBoolean = check.checked;
-    if (check.checked == false) {
-      this.nbrSelectedElementChecked.push(check.value);
+    if (!check.checked) {
+      if (this.nbrSelectedElementChecked.includes(check.value)) {
+        console.log('effectivement il est la ')
+      } else {
+        this.nbrSelectedElementChecked.push(check.value);
+      }
     } else {
       let index = this.nbrSelectedElementChecked.indexOf(check.value);
-
       this.nbrSelectedElementChecked.splice(index, 1);
-
-      console.log('index', index)
     }
 
-    console.log('tbl ==>', this.nbrSelectedElementChecked)
+    console.log('nbrSelectedElementChecked', this.nbrSelectedElementChecked)
+
+  }
+
+  allcheckedActiveted(allChecked) {
+
+    console.log('all checked', allChecked)
+
   }
 
   getCampaign(): Promise<any> {
@@ -189,7 +197,7 @@ export class CandidatsComponent implements OnInit {
             'Dernière activité': dateInvite.toLocaleString(),
             Score: percentCandidat,
             Durée: duree,
-            rapport: candidat.raport_candidat.rapport,
+            rapport: (candidat.raport_candidat ? candidat.raport_candidat.rapport : null),
             points: candidat.points_candidat,
             date: candidat.test_ouvert
           });

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, HostListener, Output, EventEmitter } from '@angular/core';
-import { ApiClientService, API_URI_CANDIDATS, API_URI_CAMPAIGNS } from '../../../../api-client/api-client.service';
+import { ApiClientService, API_URI_CANDIDATS, API_URI_CAMPAIGNS, API_URI_NOTIFICATIONS } from '../../../../api-client/api-client.service';
 
 @Component({
   selector: 'app-test',
@@ -305,6 +305,17 @@ export class TestComponent implements OnInit {
           this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
             points_candidat: newOBjectToPostCandidat
           }).toPromise();
+          this.apiClientService.post(API_URI_NOTIFICATIONS, {
+            title: "Un candidat viens de finir le test \""+ res.campaign.Name+"\"",
+            message: "Le rapport d'évaluation de \""+this.candidat.Nom+"\" est disponible.",
+            status: false,
+            user: res.campaign.user,
+            idCampaign: res.campaign.id
+          }).toPromise().then(resolve => {
+            console.log("SUCCESS POST NOTIF ",resolve);
+          }).catch(reject=>{
+            console.log("ERROR POST NOTIF ",reject);
+          });
         });
       });
     });

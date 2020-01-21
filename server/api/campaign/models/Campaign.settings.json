@@ -95,10 +95,6 @@
     "archive": {
       "default": false,
       "type": "boolean"
-    },
-    "notifications": {
-      "collection": "notification",
-      "via": "campaign"
     }
   }
 }

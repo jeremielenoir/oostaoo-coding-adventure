@@ -1,5 +1,47 @@
 @import '../candidats/invite-candidat.scss';
+
+::ng-deep .mat-dialog-container{
+    overflow:initial!important;
+}
+
 .textarea-champ{
     min-width:860px;
     height:410px;
+}
+
+.content-modal-question{
+    padding: 0px!important;
+}
+
+.sroll-body{
+    overflow-y: scroll;
+    height: 360px;
+    margin-bottom: 9px;
+    margin-top: 9px;
+}
+
+.rond-custom{
+    top:-25px!important
+}
+label{
+    font-weight: 700;
+    color: $color-principal-blue;
+}
+
+button{
+    font-weight: 700;
+    height: 50px;
+    font-size: 14px;
+    background-color: $color-principal-blue;
+    border-radius: 0px!important;
+    text-transform: uppercase;
+    color: white;
+    padding: 9px 30px;
+    margin-right: 9px;
+    border:1px solid $color-principal-blue;
+    margin-bottom: 25px;
+}
+
+button:hover{
+    background-color:$color-principal-blue-hover!important;
 }

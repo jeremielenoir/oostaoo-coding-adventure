@@ -18,7 +18,7 @@ export class RouteComponentComponent implements OnInit {
   isShow2 = false;
   public viewcontentDefaults: boolean;
   public notifications =  [];
-  public notifNotRead = 0;
+  public notifUnread = 0;
   @Output() ContentViewDefault = new EventEmitter<any>();
 
   constructor(public dialog: MatDialog, private bottomSheet: MatBottomSheet, public apiClientService: ApiClientService,public route: Router, public decryptTokenService: DecryptTokenService) { }
@@ -41,11 +41,13 @@ export class RouteComponentComponent implements OnInit {
 
     this.getNotifications().then(notifications => {
       notifications.forEach(element => {
-        if (element.user.id === this.decryptTokenService.userId){
+        if (element.user.adminId === this.decryptTokenService.userId){
           this.notifications.push(element);
         }
       });
+      this.notifications.reverse();
       this.notifications.sort((a, b)=> a.status - b.status);
+      console.log(this.notifications);
       this.initNotifNotRead(this.notifications);
     });
   }
@@ -63,11 +65,10 @@ export class RouteComponentComponent implements OnInit {
   }
 
   initNotifNotRead(array){
-    this.notifNotRead = 0;
-    console.log(this.notifNotRead);
+    this.notifUnread = 0;
     array.forEach(element => {
       if(!element.status){
-        this.notifNotRead += 1;
+        this.notifUnread += 1;
       }
     });
   }

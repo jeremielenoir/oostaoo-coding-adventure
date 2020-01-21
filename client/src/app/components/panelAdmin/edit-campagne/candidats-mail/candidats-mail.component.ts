@@ -58,8 +58,8 @@ export class CandidatsMailComponent implements OnInit {
        de recrutement,nous avons le plaisir de vous inviter à passer une évaluation technique.</div>
        <div>Vous pourrez choisir le moment le plus approprié pour vous pour passer ce test.</div>
        <div>Quand vous serez prêt(e), cliquez sur le lien ci-dessous pour accéder à la page d’accueil de votre session :&nbsp;
-       <a href="http://localhost:4200/evaluate/..." target="_blank" style="font-size: 1rem;">
-       http://localhost:4200/evaluate/...</a></div>
+       <a href="http://${window.location.host}/evaluate/..." target="_blank" style="font-size: 1rem;">
+       http://${window.location.host}/evaluate/...</a></div>
        <div><br></div><div><br></div>
        <div>Bonne chance !</div><div>Cordialement </div>
     `;
@@ -89,8 +89,9 @@ export class CandidatsMailComponent implements OnInit {
           const idCandidat = [];
           idCandidat.push(res.id);
           return idCandidat;
-        },
-        err => console.log(err)
+        }, err => {
+          console.log('log error', err)
+        }
       )
       .then(idCandidat => {
         this.updateCampaign(idCandidat);
@@ -98,6 +99,7 @@ export class CandidatsMailComponent implements OnInit {
   }
 
   updateCampaignPostCandidats() {
+
     for (const iterator of this.candidats) {
       console.log('iterator: ', iterator);
       this.postCandidat(iterator.name, iterator.value);
