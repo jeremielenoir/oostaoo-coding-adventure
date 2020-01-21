@@ -7,6 +7,7 @@ import { debug } from 'util';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
 import { AuthenticationService } from './service/auth.service';
 
 
@@ -37,7 +38,8 @@ export class RegisterComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -99,6 +101,12 @@ export class RegisterComponent implements OnInit {
      this.authenticationService.gitAuthenticate();
   }
 
+  openSnackBar(message: string, action) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
   register() {
     this.submitted = true;
 
@@ -113,6 +121,8 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.openSnackBar('Compte créer', 'Fermer');
+          this.router.navigate(['/dashboard/campaigns']);
         },
         error => {
           this.errorRegister = error;

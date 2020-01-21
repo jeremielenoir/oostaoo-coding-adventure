@@ -47,30 +47,32 @@ export class QuestionsComponent implements OnInit {
   ngOnInit() {
     Promise.all([this.loadCampaign(), this.loadAllQuestion()]).then(values => {
       const campaigns = values[0];
+      const questions = values[1]
       console.log('this.loadCampaign', values[0]);
-      console.log('this.loadCampaign', values[1]);
+      console.log('oui questions', questions);
       const nameQuestionByTechno = [];
       campaigns[0].questions.forEach(element => {
-        console.log(element);
+        console.log('question campagne', element);
         nameQuestionByTechno.push(element.name);
       });
       const questionByTechnoCampaing = [];
       const nameQuestionCampaignByTechno = [];
-      for (const iterator of this.allQuestions) {
-        // console.log('iterator from all questions: ', iterator);
+      for (let question of questions) {
         campaigns[0].technologies.forEach(element => {
-          if (iterator.technologies.id === element.id && !nameQuestionByTechno.includes(iterator.name)) {
-            // console.log(iterator);
-            questionByTechnoCampaing.push(iterator);
+
+          if (question.technologies.id === element.id && !nameQuestionByTechno.includes(question.name)) {
+            // console.log(question);
+            questionByTechnoCampaing.push(question);
+
           }
-          if (iterator.technologies.id === element.id && nameQuestionByTechno.includes(iterator.name)) {
-            // console.log(iterator);
-            nameQuestionCampaignByTechno.push(iterator);
+          if (question.technologies.id === element.id && nameQuestionByTechno.includes(question.name)) {
+            // console.log(question);
+            nameQuestionCampaignByTechno.push(question);
           }
         });
         // console.log('nameQuestionCampaignByTechno: ', nameQuestionCampaignByTechno);
         // console.log(this.yourCampaign[0].questions);
-        // console.log('iteName: ', iterator.name);
+        // console.log('iteName: ', question.name);
       }
       this.questionsByCampaign = nameQuestionCampaignByTechno;
       console.log('this.questionsByCampaign: ', this.questionsByCampaign);
@@ -94,8 +96,8 @@ export class QuestionsComponent implements OnInit {
     return this.apiClientService.get(API_URI_QUESTIONS)
       .toPromise()
       .then(response => {
-        // console.log('all questions: ', response);
-        return this.allQuestions = response;
+        console.log('all questions: ', response);
+        return response;
       })
       .catch(err => err);
   }
