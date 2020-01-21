@@ -74,4 +74,10 @@ export class AuthenticationService {
   getUsers(adminId: number) {
     return this.apiClientService.get(`${API_URI_USERS_BY_ADMIN}/${adminId}`).toPromise();
   }
+
+  gitAuthenticate(){
+    console.log('gitAuthenticate : ');
+    fetch("/connect/github")
+    .then(res=>{return console.log('res : ', res)});
+  }
 }

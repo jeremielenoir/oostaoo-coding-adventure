@@ -32,8 +32,6 @@ export class RegisterComponent implements OnInit {
   error = '';
   errorRegister = '';
 
-
-
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
@@ -97,6 +95,9 @@ export class RegisterComponent implements OnInit {
     this.switchPanel = !this.switchPanel;
   }
 
+  gitAuth(){
+     this.authenticationService.gitAuthenticate();
+  }
 
   register() {
     this.submitted = true;

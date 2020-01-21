@@ -38,8 +38,10 @@ const routes: Routes = [
     path: 'home/register',
     component: RegisterComponent
   },
-
-
+  {
+    path: 'connect/github/callback',
+    component: RegisterComponent
+  },
   {
     path: 'dashboard',
     redirectTo: 'dashboard/campaigns',
