@@ -4,6 +4,7 @@ import { ApiClientService, API_URI_OFFER, API_URI_USER, API_URI_PAYMENT } from '
 import { StripeService, Elements, Element as StripeElement, ElementsOptions } from 'ngx-stripe';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Offer } from 'src/app/models/offer.model';
+import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
   selector: 'app-offers',
@@ -12,7 +13,7 @@ import { Offer } from 'src/app/models/offer.model';
 })
 export class OffersComponent implements OnInit {
   handler: any = null;
-  subscriptionChoice = null;
+  offerChoiceAmount: number = null;
   subscriptionPage = false;
   listOffers: Offer[] = [];
   payload: {amount: number, periodicity: number, token: any};
@@ -30,15 +31,18 @@ export class OffersComponent implements OnInit {
   constructor(private router: Router,
               private apiClientService: ApiClientService,
               private fb: FormBuilder,
-              private stripeService: StripeService
+              private stripeService: StripeService,
+              private session: SessionService
     ) { }
 
     ngOnInit() {
-      // recuperation de l'abonnement selectionné
-      this.subscriptionChoice = +localStorage.getItem('subscriptionChoice');
+      // recuperation l'offre selectionné
+      this.offerChoiceAmount = this.session.offerChoiceAmount ? this.session.offerChoiceAmount : null;
+
       // savoir si on est sur la page home ou sur la page abonnement interne (log)
       this.subscriptionPage = this.router.url.startsWith('/subscription');
 
+      // recuperation offres back
       this.apiClientService.get(API_URI_OFFER).subscribe( offers => {
         console.log(offers);
         offers.forEach(offer => {
@@ -52,18 +56,18 @@ export class OffersComponent implements OnInit {
       this.stripeForm();
     }
 
-    gotToLoginOrDashboardPage(subscriptionAmount) {
-      // sauvegarde de l'abonnement selectionné
-      localStorage.setItem('subscriptionChoice', subscriptionAmount);
-      this.subscriptionChoice = subscriptionAmount;
+    gotToLoginOrDashboardPage(offer) {
+      // changement d'offre
+      this.session.offerChoiceAmount = offer.price;
+      this.offerChoiceAmount = offer.price;
 
-      if (subscriptionAmount === 0 && this.subscriptionPage) {
+      if (offer.price === 0 && this.subscriptionPage) {
         this.router.navigate(['/dashboard/campaigns']);
       } else {
         if (this.router.url.startsWith('/subscription')) {
           console.log('Nous sommes sur abonnement interne');
-          //this.pay(subscriptionAmount);
-          // this.router.navigate(['/dashboard/campaigns']);
+          this.session.offerChoice = offer;
+          // this.router.navigate(['/stripePayment']);
         } else {
           console.log('Nous sommes sur abonnement home');
           this.router.navigate(['/home/register']);
