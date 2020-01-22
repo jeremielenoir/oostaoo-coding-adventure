@@ -22,6 +22,7 @@ import { AuthGuard } from '../app/components/home/register/guard/auth.guard';
 import { JwtInterceptor } from './components/home/register/service/jwt.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './components/home/register/service/error.interceptor';
+import { OffersComponent } from './components/home/offers/offers.component';
 
 const routes: Routes = [
   {
@@ -38,8 +39,11 @@ const routes: Routes = [
     path: 'home/register',
     component: RegisterComponent
   },
-
-
+  {
+    path: 'subscription',
+    component: OffersComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'dashboard',
     redirectTo: 'dashboard/campaigns',

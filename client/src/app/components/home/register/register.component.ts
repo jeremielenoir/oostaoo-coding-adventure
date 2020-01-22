@@ -32,8 +32,7 @@ export class RegisterComponent implements OnInit {
   returnUrl: string;
   error = '';
   errorRegister = '';
-
-
+  jwt: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,9 +41,19 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private _snackBar: MatSnackBar
-  ) { }
+  ) {
+        this.route.queryParams.subscribe(params => {
+        this.jwt = params['jwt'];
+    })
+   }
 
   ngOnInit() {
+    if(this.jwt){
+       localStorage.clear();
+        localStorage.setItem('currentUser', this.jwt);
+        this.router.navigate(['/dashboard/campaigns']);
+      }
+
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -57,7 +66,7 @@ export class RegisterComponent implements OnInit {
     });
 
     // logout the person when he opens the app for the first time
-    this.authenticationService.logout();
+    // this.authenticationService.logout();
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
@@ -87,7 +96,8 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(['/dashboard/campaigns']);
+          //this.router.navigate(['/dashboard/campaigns']);
+          this.router.navigate(['/subscription']);
         },
         error => {
           this.error = error;
@@ -99,6 +109,9 @@ export class RegisterComponent implements OnInit {
     this.switchPanel = !this.switchPanel;
   }
 
+  gitAuth(){
+     this.authenticationService.gitAuthenticate();
+  }
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
