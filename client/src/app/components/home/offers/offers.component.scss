@@ -17,64 +17,84 @@
         flex-direction: column;
         border:1px solid $color-blue;
         -webkit-box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40); 
-      box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
+        box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
         align-items: center;
         height: 400px;
         .mat-card-icon{
           font-size: 60px;
           color:$color-blue;
         }
+
+        .mat-card-content{
+          padding:5px 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+  
+          ul{
+              color: #1f3662;
+              li{
+                  list-style: square;
+              }
+          }
+
+          .mat-card-title{
+            text-align: center;
+            font-size: 18px;
+            color: #1f3662;
+            border: 1px solid $color-blue;
+            border-radius: 20px;
+            padding: 10px;
+            width: 100%;
+            font-weight: 600;
+          }
+    
+          .mat-card-subtitle{
+            margin: 0px 0px;
+            text-align: center;
+            font-size: 28px;
+            color: #1f3662;
+          }
+
+          .mat-card-actions{
+            position: absolute;
+            bottom: 10px;
+            
+            button{
+                padding: 0 50px;
+            }
+          }
+
+        }
+
+
+        &.highlight {
+          background: #1f3662;
+          .mat-card-content{ 
+            .mat-card-title, .mat-card-subtitle, .mat-card-icon, ul{
+              color: $text-color-white;
+            }
+          }
+          .mat-card-actions button{
+            background: $color-principal-orange;
+            color: $text-color-white;
+          }
+        }
     }
 
-    .mat-card-content{
-        padding:5px 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+   
 
-        ul{
-            color: #1f3662;
-            li{
-                list-style: square;
-            }
-        }
-      }
 
-      .mat-card-title{
-      text-align: center;
-    font-size: 18px;
-    color: #1f3662;
-    border: 1px solid $color-blue;
-    border-radius: 20px;
-    padding: 10px;
-    width: 100%;
-    font-weight: 600;
-      }
-
-      .mat-card-subtitle{
-        margin: 0px 0px;
-        text-align: center;
-        font-size: 28px;
-        color: #1f3662;
-      }
     
-      .lab-item{
-        border:1px solid $color-pink;
-        background-color: transparent;
-        color:$color-pink;
-        border-radius: 15px;
-        font-weight: 600;
-        outline: none;
-        font-size: $font-size-home;
-      }
+    .lab-item{
+      border:1px solid $color-pink;
+      background-color: transparent;
+      color:$color-pink;
+      border-radius: 15px;
+      font-weight: 600;
+      outline: none;
+      font-size: $font-size-home;
+    }
 
-      .mat-card-actions{
-        position: absolute;
-        bottom: 10px;
-        
-        button{
-            padding: 0 50px;
-        }
 
-      }
 }

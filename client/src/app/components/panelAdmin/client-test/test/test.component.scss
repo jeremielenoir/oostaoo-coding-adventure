@@ -1,4 +1,7 @@
 @import "../../../../../roodeo-variables.scss";
+.testing-timer{
+  margin-left: 10px!important;
+}
 
 @mixin structureBlock {
   width: 50%;
@@ -7,27 +10,33 @@
     margin-bottom: 12px;
   }
   /*-- partie header--*/
+  .cube-testing-right{
+    height: 93.5%!important;
+  }
   .cube-testing {
+    border:1px solid $color-background-blue;
     display: flex;
-    border: 1px solid #e3e3e3;
     background: #fff;
     flex-direction: column;
     margin-left: 5px;
     margin-right: 5px;
+    height: 100%;
     .header-cube-testing {
       display: flex;
-      border-bottom: 1px solid #e3e3e3;
+      border-bottom: 1px solid $color-principal-blue;
       align-items: center;
       flex-direction: row;
+      background-color: $color-pricipal-blue-light;
+      color:$color-principal-blue;
       .f030 {
         display: flex;
         flex-direction: row;
-        padding: 12px 15px;
+        padding: 20px 15px;
         flex: 1;
-        border-right: 1px solid #e3e3e3;
+        border-right: 1px solid $color-principal-blue;
         .icon-testing {
           margin-right: 15px;
-          color: #f4c73e;
+          color: $color-principal-orange;
           display: block;
           font-size: 24px;
         }
@@ -41,6 +50,7 @@
           display: flex;
           flex-direction: row;
           align-items: center;
+          
           padding: 0px 15px;
           .testing-timer-icon {
             margin-right: 10px;
@@ -103,9 +113,11 @@
     position: static !important;
   }
   .testing-left {
+    
     @include structureBlock();
   }
   .testing-right {
+    
     @include structureBlock();
     .button {
       margin-top: 7px;
@@ -117,13 +129,13 @@
       position: relative;
       transition: opacity 0.2s, background 0.2s;
       font-weight: 700;
-      background-color: #f2bb13;
+      background-color: $color-principal-blue;
       border: none;
       cursor: pointer;
       outline: 0;
       width: 98.8%;
       &:hover {
-        background-color: #ffd200;
+        background-color: $color-principal-blue-hover;
       }
     }
   }

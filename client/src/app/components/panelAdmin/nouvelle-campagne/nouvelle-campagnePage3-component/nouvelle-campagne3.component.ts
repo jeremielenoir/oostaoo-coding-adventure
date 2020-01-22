@@ -66,7 +66,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
   constructor(
     public apiClientService: ApiClientService,
     public decryptTokenService: DecryptTokenService
-  ) {}
+  ) { }
 
   ngOnInit() {
     console.log("this.allQuestionLevel : ", this.allQuestionLevel);
@@ -98,15 +98,21 @@ export class NouvelleCampagnePage3Component implements OnInit {
     // console.log('this.formCampagne.value(): ', this.formCampagne.value);
     this.apiClientService.get(API_URI_QUESTIONS).subscribe(datas => {
       this.questions = datas;
+
       for (const question of this.questions) {
-        // console.log('question.technologies.id: ', question.technologies.id);
-        if (
-          this.formCampagne.value.technoSelectedId.includes(
-            question.technologies.id
-          )
-        ) {
-          this.allQuestions.push(question);
+        if (question.technologies) {
+
+          console.log('question.technologies.id: ', question.technologies);
+          if (
+            this.formCampagne.value.technoSelectedId.includes(
+              question.technologies.id
+            )
+          ) {
+            this.allQuestions.push(question);
+          }
+
         }
+
       }
 
       for (const questionLevel of this.allQuestions) {
@@ -186,7 +192,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
   styleUrls: ["./popup-campaign.css"]
 })
 export class PopupCampaign {
-  constructor(private bottomSheetRef: MatBottomSheetRef<PopupCampaign>) {}
+  constructor(private bottomSheetRef: MatBottomSheetRef<PopupCampaign>) { }
 
   openLink(event: MouseEvent): void {
     this.bottomSheetRef.dismiss();
