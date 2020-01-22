@@ -38,7 +38,6 @@
     "ngx-drag-scroll": "^7.1.5",
     "ngx-editor": "^4.1.0",
     "ngx-order-pipe": "^2.0.4",
-    "ngx-stripe": "^7.4.4",
     "pdfmake": "^0.1.62",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",

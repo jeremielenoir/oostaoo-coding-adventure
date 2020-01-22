@@ -30,7 +30,9 @@
           <p class=" claire-text">Bonne chance !</p>
 
           <label class="block-condition claire-text">
-            <span class="checkbox-condition"><input type="checkbox" (change)="hundelechecked($event)" /></span>
+            <span class="checkbox-condition"
+              ><input type="checkbox" (change)="hundelechecked($event)"
+            /></span>
 
             <p class="text-condition">
               J'ai lu et j'accepte les
@@ -44,7 +46,12 @@
 
         <div class="modall-footer">
           <button class="btn" (click)="NohundleActiveTest()">Annuler</button>
-          <button class=" btn btn-valide" disabled="disabled" #btnchecked (click)="HundleStatueTestingQuestion()">
+          <button
+            class=" btn btn-valide"
+            disabled="disabled"
+            #btnchecked
+            (click)="HundleStatueTestingQuestion()"
+          >
             Commencer
           </button>
         </div>
@@ -113,8 +120,13 @@
   </div>
 
   <div *ngSwitchCase="'testing'">
-    <app-test [candidat]="candidat" [questionCampaign]="questionCampaign" [technoCampaign]="technoCampaign"
-      [durationMaxTest]="durationMaxTest" (refresh)="refreshComponent($event)"></app-test>
+    <app-test
+      [candidat]="candidat"
+      [questionCampaign]="questionCampaign"
+      [technoCampaign]="technoCampaign"
+      [durationMaxTest]="durationMaxTest"
+      (refresh)="refreshComponent($event)"
+    ></app-test>
   </div>
   <div *ngSwitchCase="'fin'">
     <app-fin-test></app-fin-test>

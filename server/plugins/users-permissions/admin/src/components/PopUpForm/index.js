@@ -50,7 +50,7 @@ class PopUpForm extends React.Component { // eslint-disable-line react/prefer-st
       case 'google':
         return `${strapi.backendURL}/connect/google/callback`;
       case 'github':
-          return `${strapi.backendURL}/connect/github/callback`;
+        return get(this.props.values, 'redirect_uri', '');
       case 'microsoft':
         return `${strapi.backendURL}/connect/microsoft/callback`;
       case 'twitter':

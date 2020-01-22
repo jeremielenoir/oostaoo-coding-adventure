@@ -1,10 +1,7 @@
 @import "../client-test.component.scss";
-@import"../../../../../roodeo-variables.scss";
 
 .oos-margin-left {
   margin-left: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .test-container {
@@ -54,14 +51,14 @@
     }
     .oos-custom-feedback {
       color: white;
-      background-color: $color-principal-blue;
+      background-color: #f2bb13;
       border-radius: 0px;
       width: 100%;
       height: 50px;
       font-size: large;
       &:hover {
-        border: 1px solid $color-principal-blue-hover;
-        background-color: $color-principal-blue-hover;
+        border: 1px solid #ffd200;
+        background-color: #ffd200;
       }
     }
   }

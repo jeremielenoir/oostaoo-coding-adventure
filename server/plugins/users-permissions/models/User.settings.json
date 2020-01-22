@@ -100,10 +100,6 @@
     "adminId": {
       "default": "",
       "type": "integer"
-    },
-    "payments": {
-      "collection": "payment",
-      "via": "user"
     }
   },
   "collectionName": "users-permissions_user"

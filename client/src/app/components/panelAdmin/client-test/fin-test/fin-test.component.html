@@ -3,7 +3,11 @@
     <div class="invitation">
       <div class="test-invit">
         <div class="image"></div>
-        <img class="oos-margin-left" src="../../../../../assets/Check.svg" alt="Check" />
+        <img
+          class="oos-margin-left"
+          src="../../../../../assets/Check.svg"
+          alt="Check"
+        />
         <h3><b>Merci d'avoir passé ce test !</b></h3>
       </div>
 
@@ -29,9 +33,16 @@
           CodinGame uniquement).
         </p>
         <div class="oos-note">
-          <div *ngFor="let item of myStars; let index = index" (mouseover)="numberStar = index"
-            (mouseout)="numberStar = null">
-            <button class="oos-custom-star" [value]="index" (click)="checkStarSelected(index)">
+          <div
+            *ngFor="let item of myStars; let index = index"
+            (mouseover)="numberStar = index"
+            (mouseout)="numberStar = null"
+          >
+            <button
+              class="oos-custom-star"
+              [value]="index"
+              (click)="checkStarSelected(index)"
+            >
               <i class="material-icons">
                 grade
               </i>
@@ -45,8 +56,13 @@
         </div>
         <mat-form-field class="example-full-width">
           <mat-label>Commentaires (Optionnel)</mat-label>
-          <textarea matInput placeholder="Leave a comment" cdkTextareaAutosize cdkAutosizeMinRows="5"
-            cdkAutosizeMaxRows="10"></textarea>
+          <textarea
+            matInput
+            placeholder="Leave a comment"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="10"
+          ></textarea>
         </mat-form-field>
         <button mat-flat-button class="oos-custom-feedback">
           Envoyer Feedback
