@@ -24,6 +24,7 @@ module.exports = {
     });
 
     if (provider === 'local') {
+
       if (!_.get(await store.get({key: 'grant'}), 'email.enabled') && !ctx.request.admin) {
         return ctx.badRequest(null, 'This provider is disabled.');
       }
@@ -102,10 +103,8 @@ module.exports = {
       if (!user) {
         return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error);
       }
-      const jwt = strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user, ['_id', 'id']));
-      user = _.omit(user.toJSON ? user.toJSON() : user, ['password', 'resetPasswordToken']);
-      console.log('jwt :',jwt, 'user ', user);
-      return ctx.response.redirect(`http://localhost:4200/home?jwt=${jwt}`);
+      const jwt = strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user, ['_id', 'id', 'adminId']));
+      return ctx.response.redirect(`http://localhost:4200/home/register?jwt=${jwt}`);
     }
   },
 
