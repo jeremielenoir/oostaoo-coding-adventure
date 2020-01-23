@@ -63,10 +63,14 @@ export class ClientTestComponent implements OnInit {
       for (const candidat of res) {
         if (this.idParam === candidat.token) {
           this.candidat = candidat;
+
           if (candidat.invitation_date !== candidat.test_terminer) {
             this.StatueTestingQuestion = 'fin';
           }
+
           this.idCampaign = candidat.campaign.id;
+          // console.log('test', this.idCampaign)
+
           this.postOpenTimeTest(this.dateOpenTest, candidat.id);
           // console.log('this.idCampaign : ', this.idCampaign);
           this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.idCampaign).toPromise().then(res1 => {

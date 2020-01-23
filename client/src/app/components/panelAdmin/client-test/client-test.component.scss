@@ -22,7 +22,7 @@ $text-color-client-test: #333;
   width: 100%;
   height: 45%;
   border: 1px solid $color-principal-orange;
-  margin: 20px 0 0px 0;
+  margin: 0px 0 0px 0;
   @media #{$deviceMaxDesktop} {
     height: auto !important;
     margin-bottom: 20px;
@@ -43,19 +43,23 @@ $text-color-client-test: #333;
 
 @mixin btn-color($yellow: true) {
   .btn-compo {
+    margin-bottom: 60px;
     width: 200px;
     height: 50px;
-    border: 1px solid $color-gold;
+    border: 1px solid $color-principal-blue;
     font-size: 14px;
     text-align: center;
     transition: all 0.2s;
     text-transform: uppercase;
     @if $yellow {
-      background-color: $color-gold;
+      background-color: $color-principal-blue;
       color: white;
+      &:hover{
+        background-color: $color-principal-blue-hover
+      }
     } @else {
       background: transparent;
-      color: $color-gold;
+      color: $color-principal-blue;;
     }
   }
 }
@@ -76,6 +80,7 @@ p {
     margin-left: 5%;
     margin-right: 5%;
     display: flex;
+    margin-top: 30px;
     
     @media #{$deviceMaxDesktop} {
       flex-direction: column;
@@ -83,6 +88,7 @@ p {
       height: 100%;
     }
     .invitation {
+      justify-content: normal!important;
       margin-right: 9px;
       padding: 40px;
       background: white;
@@ -94,8 +100,10 @@ p {
         flex-direction: column;
         color:$color-principal-blue;
         h3 {
-          width: 250px;
           margin-left: 20px;
+          margin-top: 20px;
+          padding-top: 6px;
+          padding-bottom: 6px;
           padding-bottom: 10px;
           margin-bottom: 0px;
           font-size: 24px;
@@ -108,8 +116,8 @@ p {
         }
         .image {
           margin: 0px auto;
-          width: 200px;
-          height: 57px;
+          width: 205px;
+          height: 58px;
           background-image: url($logoPath);
           background-size: cover;
           @media #{$deviceMaxDesktop} {
@@ -171,7 +179,7 @@ p {
           display: inline-block;
           width: 95%;
           .text-link {
-            color: #f2bb13;
+            color: $color-principal-blue;
             font-weight: 700;
             text-decoration: underline;
           }
@@ -202,10 +210,10 @@ p {
         background-color: #aaaaaa;
       }
       &:not(:disabled):last-child {
-        background-color: #ffd200;
+        background-color: $color-principal-blue;
       }
       &:not(:disabled):last-child:hover {
-        background-color: red;
+        background-color: $color-principal-blue-hover;
       }
     }
   }

@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material';
 import { AuthenticationService } from './service/auth.service';
 
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -59,11 +60,11 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required]
     }),
 
-    this.registerForm = this.formBuilder.group({
+      this.registerForm = this.formBuilder.group({
         usernameregister: ['', Validators.required],
         emailregister: ['', Validators.required],
         passwordregister: ['', Validators.required]
-    });
+      });
 
     // logout the person when he opens the app for the first time
     // this.authenticationService.logout();
@@ -98,6 +99,7 @@ export class RegisterComponent implements OnInit {
         data => {
           //this.router.navigate(['/dashboard/campaigns']);
           this.router.navigate(['/subscription']);
+
         },
         error => {
           this.error = error;
