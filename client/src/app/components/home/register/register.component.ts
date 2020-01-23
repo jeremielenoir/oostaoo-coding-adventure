@@ -109,10 +109,6 @@ export class RegisterComponent implements OnInit {
     this.switchPanel = !this.switchPanel;
   }
 
-  gitAuth(){
-     this.authenticationService.gitAuthenticate();
-  }
-
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
       duration: 2000,
