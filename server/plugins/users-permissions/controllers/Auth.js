@@ -104,7 +104,8 @@ module.exports = {
         return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error);
       }
       const jwt = strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user, ['_id', 'id', 'adminId']));
-      return ctx.response.redirect(`http://localhost:4200/home/register?jwt=${jwt}`);
+
+      return ctx.response.redirect(`${ctx.request.header.referer}?jwt=${jwt}`);
     }
   },
 
@@ -141,6 +142,7 @@ module.exports = {
   },
 
   connect: async (ctx, next) => {
+
     const grantConfig = await strapi
     .store({
       environment: "",
