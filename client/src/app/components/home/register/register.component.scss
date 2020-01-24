@@ -134,6 +134,9 @@
         bottom: 10vh;
         transform: translateX(-50%);
         width:350px;
+        background-color: white;
+        border-radius: 5px;
+        max-width: 350px
     }
 
     #github-connect {
@@ -179,6 +182,10 @@
         -o-transition: all .3s ease;
         transition: all .3s ease-out;
         color: white;
+    }
+
+    #error-provider {
+        text-align: center;
     }
 }
 

@@ -96,8 +96,10 @@ module.exports = {
 
       try {
         [user, error] = await strapi.plugins['users-permissions'].services.providers.connect(provider, ctx.query);
-      } catch([user, error]) {
-        return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error);
+      } catch([error, user]) {
+        // redirect user with error message
+        return ctx.response.redirect(`/home/register?error=${error.message}`);
+        // return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error.message);
       }
 
       if (!user) {
@@ -105,7 +107,7 @@ module.exports = {
       }
       const jwt = strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user, ['_id', 'id', 'adminId']));
 
-      return ctx.response.redirect(`${ctx.request.header.referer}?jwt=${jwt}`);
+      return ctx.response.redirect(`/home/register?jwt=${jwt}`);
     }
   },
 

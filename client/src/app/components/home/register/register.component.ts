@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
   error = '';
   errorRegister = '';
   jwt: any;
+  errorProvider = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,6 +45,10 @@ export class RegisterComponent implements OnInit {
   ) {
         this.route.queryParams.subscribe(params => {
         this.jwt = params['jwt'];
+        this.errorProvider = params['error'];
+        setTimeout(() => {
+          this.errorProvider = null;
+        }, 2000)
     })
    }
 
