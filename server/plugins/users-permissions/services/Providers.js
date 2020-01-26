@@ -145,17 +145,38 @@ const getProfile = async (provider, query, callback) => {
       const facebook = new Purest({
         provider: 'facebook'
       });
-
-      facebook.query().get('me?fields=name,email').auth(access_token).request((err, res, body) => {
-        if (err) {
-          callback(err);
-        } else {
-          callback(null, {
-            username: body.name,
-            email: body.email
-          });
+      console.log('in case', access_token, grant.facebook.callback)
+      // 1 - send code and clientId to authorization server (We can use Get+query params or Post+body each are working)
+      // code is called access_token wchich is confusing but the code has to be exchanged to an access token to get user info
+      request.post({
+        // works
+        // url: `https://graph.facebook.com/oauth/access_token?redirect_uri=https://782106e2.ngrok.io/auth/facebook/callback`,
+        url: 'https://graph.facebook.com/v5.0/oauth/access_token',
+        form: {
+          client_id: grant.facebook.key, 
+          code: access_token,
+          client_secret: grant.facebook.secret,
+          // https://tools.ietf.org/html/rfc3986
+          // redirect_uri: `https://782106e2.ngrok.io/auth/facebook/callback`,
+          redirect_uri: grant.facebook.callback
         }
-      });
+      }, (err, res, body) => {
+        // 2 - send access_token to facebook api and get user info
+        const {access_token} = JSON.parse(body)
+        facebook.query().get('me?fields=name,email').auth(access_token).request((err, res, body) => {
+          if (err) {
+            callback(err);
+          } else {
+            callback(null, {
+              username: body.name,
+              email: body.email
+            });
+          }
+        });
+      
+      })
+
+     
       break;
     }
     case 'google': {

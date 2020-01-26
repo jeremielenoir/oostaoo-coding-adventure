@@ -169,6 +169,9 @@ module.exports = {
   }
   const grant = require("grant-koa");
   const g = grant(grantConfig);
+  
+  g.config.facebook.redirect_uri = config.callback;
+
   ctx.query.code = ctx.query.code && ctx.query.code.replace("\\", "/"); // ADD THIS LINE
   return g(ctx, next);
   },
