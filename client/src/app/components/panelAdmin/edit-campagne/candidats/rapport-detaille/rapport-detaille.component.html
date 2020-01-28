@@ -1,0 +1,45 @@
+<div id="content">
+  <div id="container">
+    <h2>{{ candidat?.campaign.Name }}</h2>
+
+    <div>
+      <p> {{ candidat?.Nom }} </p>
+      <p> {{ candidat?.email }} </p>
+    </div>
+
+    <div>
+
+      
+      <div *ngFor="let question of rapport; let i = index; let tech of techno">
+        
+        <h3>Question {{ i+1 }} </h3>
+        <div class="header_question">
+        <p id="techno" *ngFor="let tech of techno">
+         <span *ngIf="question.index_question.technologies == tech.id"> {{tech.name}} </span> 
+        </p>
+       
+        <p>{{ question.timeRep }} / {{ question.index_question.time }} secondes</p> 
+        <p *ngIf=" question.array_rep_candidat  ==  question.index_question.answer_value "> {{ question.index_question.points }} / {{ question.index_question.points }} pts</p>
+        <p *ngIf=" question.array_rep_candidat  !=  question.index_question.answer_value "> 0 / {{ question.index_question.points }} pts</p>
+        </div>
+        <hr style="border-style:dashed;">
+
+        <h5>Question</h5>
+        <p> - {{ question.index_question.name }}</p>
+
+        <h5>Réponse</h5>
+
+        <p> - {{ question.array_rep_candidat }}</p>
+
+        <h5>Resultats</h5>
+        <p *ngIf="question.array_rep_candidat  ==  question.index_question.answer_value">Réponse correcte :{{ question.index_question.theme }}</p>
+        <div *ngIf="question.array_rep_candidat  !=  question.index_question.answer_value">
+        <p>Mauvaise réponse</p>
+        <p>La/Les réponses correcte est/sont : {{ question.index_question.answer_value }}</p> 
+        </div>
+
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>

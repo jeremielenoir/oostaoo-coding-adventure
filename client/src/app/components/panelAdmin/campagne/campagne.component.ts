@@ -13,7 +13,6 @@ import { map } from 'rxjs/operators';
 import { AuthenticationService } from './../../home/register/service/auth.service';
 import { RouterLink } from '@angular/router';
 
-
 export interface DialogData {
   confirmed: boolean;
 

@@ -1,0 +1,25 @@
+@import"../../../../../../roodeo-variables.scss";
+
+#content{
+    // background: $color-background-blue;
+    width: 100%;
+    height: 100%;
+    color: $color-principal-blue;
+}
+
+#container{
+    
+    padding: 15px;
+    margin: auto;
+    width: 70%;
+}
+
+.header_question{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#techno:empty{
+    display: none;
+}
