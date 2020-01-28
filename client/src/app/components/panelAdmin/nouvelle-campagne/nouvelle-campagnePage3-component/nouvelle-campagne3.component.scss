@@ -1,30 +1,68 @@
 @import"../../../../../roodeo-variables.scss";
 
+.custom-buttom {
+    line-height: 0px;
+    background: $color-orange-light!important;
+    border-radius: 0px !important;
+    font-size: 16px !important;
+    contain: content;
+    font-weight: 600;
+    padding: 15px 30px !important;
+    color: $text-color-white !important;
+    height: 62px;
+}
+
+.custom-buttom-anul{
+    background-color: $color-gray-blue!important;
+   
+}
+
+.icon-arrow-btn{
+    font-size: 25px;
+    position: relative;
+    left: -12px;
+}
+
 #top-bar {
     display: flex;
     width: 100%;
     height: 65px;
-    border: 1px solid $color-grey;
-}
-
-#segment1 {
-    position: relative;
+    border: 1.5px solid $color-principal-orange;
+    border-left: none;
+    border-right: none;
+    background-color: $color-pricipal-blue-light;
     display: flex;
-    width: 12%;
-    height: 64px;
-    border-right: 1px solid $color-grey;
+    padding-right: 6%;
+
+    .segment2{
+
+    }
+    .segment3{
+        flex: 6.5;
+        display: flex;
+        align-items: center;
+        padding-left: 12%;
+        .title-segment{
+            font-size: 17px;
+            font-family: $font-poppins;
+            font-weight: 400;
+            color: $color-principal-blue;
+            margin-bottom: 0px;
+            margin-right: 12px;
+        }
+
+        #score{
+
+            color:$color-orange-light;
+            font-size: 30px;
+            margin-bottom: 0px;
+            margin-top: -5px;
+            font-family: $font-poppins;
+        }
+    }
 }
 
-#diagram {
-    margin: 0 5px;
-    line-height: 65px;
-}
 
-#segment1-content {
-    font-size: 12px;
-    margin-left: 10px;
-    margin-top: 12px;
-}
 
 #arrow {
     position: absolute;
@@ -40,17 +78,6 @@
     height: 30px;
 }
 
-#segment2 {
-    position: relative;
-    width: 10%;
-    height: 64px;
-    border-right: 1px solid $color-grey;
-}
-
-#segment2-content {
-    margin: 8px 45px 0;
-}
-
 #techno {
     color: $color-gold-second;
 }
@@ -59,45 +86,11 @@
     color: $color-gold;
 }
 
-#segment3 {
-    width: 78%;
-    height: 65px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    contain: content;
-}
 
-#segment3-left {
-    display: flex;
-    margin: 0 0 0 10px;
-}
 
-#segment3-left p {
-    margin: 0 5px;
-    font-size: 12px;
-}
-
-#segment3-right {
-    display: flex;
-    flex-wrap: nowrap;
-}
-
-#score {
-    font-size: 22px !important;
-    color: $color-gold-second;
-}
 
 .info {
     color: $color-grey;
-}
-
-#back, #save {
-    height: 40px !important;
-    width: 120px !important;
-    font-size: 14px !important;
-    font-weight: bold;
-    margin: 0 10px !important;
 }
 
 .button-disabled{
@@ -121,9 +114,6 @@
     font-weight: bold;
 }
 
-#save {
-    background: $color-gold-background !important;
-}
 
 #content {
     width: 100%;
@@ -194,19 +184,6 @@
     background: $color-gold-background!important;
 }
 
-.custom-buttom {
-    height: 30px !important;
-    line-height: 0px !important;
-    background: $color-grey !important;
-    border-radius: 0px !important;
-    font-size: 10px !important;
-    contain: content;
-    font-weight: bold;
-    padding: 0px 10px !important;
-    margin: 5px 2px 0px !important;
-    text-transform: uppercase !important;
-    color: $text-color-white !important;
-}
 
 :host ::ng-deep .mat-button-wrapper {
     contain: content;

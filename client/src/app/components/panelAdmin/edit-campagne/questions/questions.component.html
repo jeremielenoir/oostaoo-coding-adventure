@@ -1,38 +1,30 @@
-<div class="container-edit-question">
-  <div id="top-bar">
-    <div id="segment1">
-      <p id="diagram">diagram</p>
-      <div id="segment1-content">
-        <p>point</p>
-        <p>temps</p>
-      </div>
-      <p id="arrow"><i class="fas fa-chevron-right"></i></p>
-    </div>
+<div id="top-bar">
 
-    <div id="segment2">
-      <div id="segment2-content">
-        <p id="techno">aws</p>
-        <p>point</p>
-      </div>
-    </div>
+  <div class="segment3">
 
-    <div id="segment3">
-      <div id="segment3-left">
-        <p>
-          Score moyen <br />
-          attendu
-        </p>
-        <p id="score">33% <i class="fas fa-info-circle info"></i></p>
-        <p>diagramme</p>
-      </div>
-      <div id="segment3-right">
-        <button class="custom-buttom" mat-flat-button id="save" [routerLink]="['/dashboard/campaigns']"
-          (click)="SendQuestionSelected()">
-          ENREGISTRER
-        </button>
-      </div>
-    </div>
+    <h3 class="title-segment">Score moyen attendu</h3>
+    <p id="score">
+      33%
+      <!-- <i class="fas fa-info-circle info"></i> -->
+    </p>
+
   </div>
+
+  <div class="segment2">
+    <button class="custom-buttom custom-buttom-anul" mat-flat-button [routerLink]="['/dashboard/campaigns']"
+      (click)="SendQuestionSelected()">
+      <i class="fas fa-chevron-left icon-arrow-btn"></i>
+
+      Retour
+    </button>
+    <button class="custom-buttom" mat-flat-button [routerLink]="['/dashboard/campaigns']"
+      (click)="SendQuestionSelected()">
+      Enregistre
+    </button>
+  </div>
+</div>
+<div class="container-edit-question">
+
 
   <div id="content">
     <div class="example-container">
