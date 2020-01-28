@@ -84,6 +84,7 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { OffersComponent } from './components/home/offers/offers.component';
 import { RapportDetailleComponent } from './components/home/rapport-detaille/rapport-detaille.component';
 import { FonctionnaliteComponent } from './components/home/fonctionnalite/fonctionnalite.component';
+import { StripePaymentComponent } from './components/home/stripe-payment/stripe-payment.component';
 
 // https://www.npmjs.com/package/ngx-stripe
 import { NgxStripeModule } from 'ngx-stripe';
@@ -144,7 +145,8 @@ import { NgxStripeModule } from 'ngx-stripe';
     TechnoComponent,
     OffersComponent,
     RapportDetailleComponent,
-    FonctionnaliteComponent
+    FonctionnaliteComponent,
+    StripePaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -162,7 +164,7 @@ import { NgxStripeModule } from 'ngx-stripe';
     NgxEditorModule,
     OrderModule,
     ScrollToModule.forRoot(),
-    NgxStripeModule.forRoot('pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq'),
+    NgxStripeModule.forRoot('pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq')
   ],
   providers: [
     ApiClientService,
