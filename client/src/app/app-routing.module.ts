@@ -23,6 +23,7 @@ import { JwtInterceptor } from './components/home/register/service/jwt.intercept
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './components/home/register/service/error.interceptor';
 import { OffersComponent } from './components/home/offers/offers.component';
+import { StripePaymentComponent } from './components/home/stripe-payment/stripe-payment.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,12 @@ const routes: Routes = [
     component: OffersComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'stripePayment',
+    component: StripePaymentComponent,
+    canActivate: [AuthGuard]
+  },
+
   {
     path: 'dashboard',
     redirectTo: 'dashboard/campaigns',
