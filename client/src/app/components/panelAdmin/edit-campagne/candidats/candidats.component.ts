@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatTableDataSource, MatSort } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MatTableDataSource, MatSort, MatSidenav } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { InviteCandidat } from './invite-candidat.component';
 import {
@@ -12,6 +12,8 @@ import pdfMake from 'pdfmake/build/pdfmake';
 // font build has to be committed otherwise each developers has to build font locally.
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfFonts from '../../../../../assets/pdfmake-font-builds/vfs_fonts';
+
+
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -38,7 +40,9 @@ pdfMake.fonts = {
 export class CandidatsComponent implements OnInit {
   public globalId: string;
   public campaigns;
+  public campaign;
   public candidats;
+  public currentCandidat = {Candidats: ''};
   public technologies;
   public displayedColumns;
   public infosCandidats;
@@ -50,14 +54,16 @@ export class CandidatsComponent implements OnInit {
   choinceList: boolean
   checkedActionBoolean = true
   nbrSelectedElementChecked: any[] = [];
+  opened: boolean;
+  public yes = 'yes salut';
 
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(public dialog: MatDialog, private route: ActivatedRoute, public apiClientService: ApiClientService) {
+
+  constructor(public dialog: MatDialog, private route: ActivatedRoute, public apiClientService: ApiClientService, private router: Router) {
     this.route.parent.params.subscribe(params => {
       this.globalId = params.id;
-      // console.log('data', this.globalId);
     });
 
     this.dialog.afterAllClosed.subscribe(() => {
@@ -94,7 +100,10 @@ export class CandidatsComponent implements OnInit {
 
   ngOnInit() {
     this.getCampaign().then(datas => {
-      // console.log('INIT DATAS', datas);
+      console.log('INIT DATAS', datas);
+      this.campaign = datas;
+      console.log('this camp', this.campaign);
+      console.log('this candid', this.candidats);
     });
   }
 
@@ -106,7 +115,7 @@ export class CandidatsComponent implements OnInit {
   }
 
   menuChoince(event) {
-    this.choinceList = false
+    this.choinceList = false;
   }
 
   checkedAction(e?, check?) {
@@ -129,7 +138,7 @@ export class CandidatsComponent implements OnInit {
 
   allcheckedActiveted(allChecked) {
 
-    console.log('all checked', allChecked)
+    console.log('all checked', allChecked);
 
   }
 
@@ -165,9 +174,9 @@ export class CandidatsComponent implements OnInit {
         for (const technos of this.technologies) {
           getTechnos.push(technos.name);
         }
-        this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
+        this.displayedColumns = defaultColumns.concat(getTechnos, ['Duree']);
 
-        console.log('this.displayedColumns', this.displayedColumns)
+        console.log('this.displayedColumns', this.displayedColumns);
 
         for (const candidat of this.candidats) {
           // console.log('candidat : ', candidat.points_candidat[2].getpourcentByCandidat);
@@ -196,7 +205,7 @@ export class CandidatsComponent implements OnInit {
             Checked: false,
             'Dernière activité': dateInvite.toLocaleString(),
             Score: percentCandidat,
-            Durée: duree,
+            Duree: duree,
             rapport: (candidat.raport_candidat ? candidat.raport_candidat.rapport : null),
             points: candidat.points_candidat,
             date: candidat.test_ouvert
@@ -236,6 +245,8 @@ export class CandidatsComponent implements OnInit {
         console.log('ERROR', error);
       });
   }
+
+
 
   collectCandidateResults(candidat_id) {
     const selectedCandidate = this.candidats.find(unit => unit.id == candidat_id);
@@ -343,4 +354,15 @@ export class CandidatsComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.infosCandidats.filter = filterValue.trim().toLowerCase();
   }
+
+  menuSidenav(sidenav, candidat) {
+    this.currentCandidat = candidat;
+    sidenav.toggle();
+    console.log('candidattt', candidat);
+    console.log('this current', this.currentCandidat);
+  }
+
+
 }
+
+

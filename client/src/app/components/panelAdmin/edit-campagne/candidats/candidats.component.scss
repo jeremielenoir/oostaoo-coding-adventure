@@ -307,3 +307,42 @@ filter-table {
     padding: 5px;
   }
 }
+
+.example-container {
+  position: absolute;
+  // background: transparent;
+  visibility: hidden;
+  min-height: 700px;
+  
+  width: 100%;
+  top: 150px;
+  // bottom: 0;
+  left: 0;
+  // right: 0;
+}
+::ng-deep .mat-sidenav{
+  width: 50%;
+  
+  background: $color-background-blue;
+  
+}
+.sidenav-content{
+  width: 100%;
+  height: 100%;
+  border: $border-table;
+  background: $color-background-blue;
+  padding: 20px;
+  overflow: auto;
+  
+}
+
+.button-rapport{
+  border: 1px solid black;
+  border-radius: 0px;
+  background: $color-principal-blue;
+  width: 40%;
+  height: 50px;
+  margin: 212px 20px 20px 20px;
+  outline: 0;
+  color: white;
+}

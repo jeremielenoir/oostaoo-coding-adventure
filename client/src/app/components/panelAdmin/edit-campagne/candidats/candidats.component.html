@@ -1,3 +1,5 @@
+
+
 <div [ngSwitch]="ViewCandidats" (click)="menuChoince($event)">
   <!-- <mat-card
     *ngIf="isLoading2"
@@ -6,6 +8,9 @@
     <mat-progress-spinner color="primary" mode="indeterminate">
     </mat-progress-spinner>
   </mat-card> -->
+
+  
+
   <div *ngSwitchCase="'CandidatFalse'" id="editQuestion">
     <p class="style-link">
       LINK page
@@ -83,7 +88,7 @@
         <table mat-table [dataSource]="infosCandidats" matSort>
           <!-- Item Column -->
 
-          <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+          <ng-container  *ngFor="let column of displayedColumns; let i = index" [matColumnDef]="column">
             <!-- CHANGE COLUMN FOR CHECKBOX -->
             <div *ngIf="column === 'Checked'">
               <th mat-header-cell *matHeaderCellDef="let dataInfos">
@@ -118,7 +123,7 @@
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns; let dataInfos"
-            (click)="viewResultsPdf(dataInfos.candidat_id)"></tr>
+          (click)="menuSidenav(sidenav, dataInfos)"></tr>
         </table>
 
         <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
@@ -132,3 +137,47 @@
 
   <div *ngSwitchDefault id="editQuestion">...</div>
 </div>
+
+
+<mat-sidenav-container class="example-container" >
+  <mat-sidenav  #sidenav mode="over" [(opened)]="opened">
+    <div class="sidenav-content" *ngIf='currentCandidat.Candidats !== "" '>
+
+    
+      <h2 style="text-align: center;">{{campaign.Name}}</h2>
+      <h3 style="text-align: center; margin-top: 20px;">Rapport</h3>
+      <h4> <i class="far fa-user-circle"></i> {{currentCandidat.Candidats}}</h4>
+      <p> <i class="far fa-envelope"></i> {{currentCandidat.Email}}</p>
+      <p> <i class="fas fa-poll-h"></i> Pourcentage de bonne réponses : {{currentCandidat.Score}} </p>
+      <p><i class="far fa-clock"></i> Durée du test : {{currentCandidat.Duree}}</p>
+
+      <hr style="border-style: dashed; background-color: red;">
+
+    <div style="display: flex; flex-direction: column;" *ngIf='currentCandidat.points'>
+      <div style="display: flex; flex-direction: row; justify-content: space-between; width: 60%;" *ngFor="let candidatPointTechno of currentCandidat.points[2].getpourcentByCandidat">
+        <p style="margin-right: 40%;">{{candidatPointTechno.techno}} </p>
+
+        <hr style="border-style: dashed; background-color: red;">
+
+        <p>{{candidatPointTechno.percentage}} %</p>
+    </div>
+
+      <hr style="border-style: dashed; background-color: red;">
+
+      <div style="display: flex; flex-direction: row; justify-content: space-between; width: 60%;">
+      <p style="margin-right: 40%;" >Total :</p>
+      <p>{{currentCandidat.Score}} </p>
+    </div>
+    </div>
+
+
+
+        <div>
+            <button class="button-rapport" [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats', currentCandidat.candidat_id,'rapport-detaille']" mat-button>Voir le rapport détaillé</button>
+            <button class="button-rapport" (click)="viewResultsPdf(currentCandidat.candidat_id)" mat-button> <i class="far fa-file-pdf"></i> Télécharger le PDF</button>
+        </div>
+    </div>
+  </mat-sidenav>
+
+
+</mat-sidenav-container>
