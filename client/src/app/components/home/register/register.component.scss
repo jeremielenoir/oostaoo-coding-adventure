@@ -100,6 +100,93 @@
             text-transform: uppercase;
         }
     }
+
+    .social-button {
+        background-position: 25px 0px;
+      box-sizing: border-box;
+      cursor: pointer;
+      height: 50px;
+        line-height: 50px;
+      text-align: left;
+      text-decoration: none;
+      text-transform: uppercase;
+      vertical-align: middle;
+        border-radius: 3px;
+      outline: rgb(255, 255, 255) none 0px;
+      padding-left: 50px;
+      transition: all 0.2s cubic-bezier(0.72, 0.01, 0.56, 1) 0s;
+        -webkit-transition: all .3s ease;
+      -moz-transition: all .3s ease;
+      -ms-transition: all .3s ease;
+      -o-transition: all .3s ease;
+      transition: all .3s ease;
+      margin: 10px;
+    }
+    
+    .social-box{
+        flex-direction: column;
+        justify-self: center ;
+        z-index: 5;
+        align-self: center;
+        display: flex;
+        position: absolute;
+        left: 50%;
+        bottom: 10vh;
+        transform: translateX(-50%);
+        width:350px;
+        background-color: white;
+        border-radius: 5px;
+        max-width: 350px
+    }
+
+    #github-connect {
+        background: rgb(255, 255, 255) url('https://www.brandeps.com/logo-download/G/GitHub-Icon-logo-vector-01.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+        border: 1px solid rgb(60, 90, 154);
+    }
+    #facebook-connect {
+        background: rgb(255, 255, 255) url('https://upload.wikimedia.org/wikipedia/commons/f/ff/Facebook_logo_36x36.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+        border: 1px solid rgb(60, 90, 154);
+    }
+    #google-connect {
+        background: rgb(255, 255, 255) url('https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+        border: 1px solid rgb(220, 74, 61);
+    }
+
+    #github-connect:hover {
+        border-color: rgb(60, 90, 154);
+        background: rgb(60, 90, 154) url('https://www.brandeps.com/logo-download/G/GitHub-Icon-logo-vector-01.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+        -webkit-transition: all .8s ease-out;
+        -moz-transition: all .3s ease;
+        -ms-transition: all .3s ease;
+        -o-transition: all .3s ease;
+        transition: all .3s ease-out;
+        color: white;
+    }
+    #google-connect:hover {
+        border-color: rgb(220, 74, 61);
+        background: rgb(220, 74, 61)  url('https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+        -webkit-transition: all .8s ease-out;
+        -moz-transition: all .3s ease;
+        -ms-transition: all .3s ease;
+        -o-transition: all .3s ease;
+        transition: all .3s ease-out;
+        color: white;
+    }
+
+    #facebook-connect:hover {
+        border-color: rgb(60, 90, 154);
+        background: rgb(60, 90, 154) url('https://upload.wikimedia.org/wikipedia/commons/f/ff/Facebook_logo_36x36.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+        -webkit-transition: all .8s ease-out;
+        -moz-transition: all .3s ease;
+        -ms-transition: all .3s ease;
+        -o-transition: all .3s ease;
+        transition: all .3s ease-out;
+        color: white;
+    }
+
+    #error-provider {
+        text-align: center;
+    }
 }
 
 

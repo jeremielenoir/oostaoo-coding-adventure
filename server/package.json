@@ -23,6 +23,7 @@
     "knex": "latest",
     "lodash": "^4.17.14",
     "mysql": "2.16.0",
+    "ngrok": "^3.2.7",
     "strapi": "^3.0.0-alpha.25.2",
     "strapi-hook-bookshelf": "3.0.0-alpha.25.2",
     "strapi-hook-knex": "3.0.0-alpha.25.2",

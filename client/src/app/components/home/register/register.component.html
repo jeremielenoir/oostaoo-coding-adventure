@@ -46,8 +46,16 @@
       </div>
       <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
     </form>
+    
+    <!-- <a class="button button--social-login button--github" href="#"><i class="icon fa fa-github"></i>Login With Github</a> -->
   </div>
 
+ <div class="social-box">
+   <a href="/connect/github" class="social-button" id="github-connect"> <span>Connect with Github</span></a>
+   <a href="/connect/google" class="social-button" id="google-connect"> <span>Connect with Google</span></a>
+   <a href="/connect/facebook" class="social-button" id="facebook-connect"> <span>Connect with Facebook</span></a>
+   <div *ngIf="errorProvider" id="error-provider" class="alert alert-danger">{{ errorProvider }}</div>
+  </div>
   <!-- Partie de droite -->
 
   <!-- Panel cote droit -->
@@ -78,7 +86,7 @@
         maxlength="64"
         type="text"
         [ngClass]="{ 'is-invalid': submitted && fr.usernameregister.errors }"
-        
+
       />
       <div *ngIf="submitted && fr.usernameregister.errors" class="invalid-feedback">
           <div *ngIf="fr.usernameregister.errors.required">Username is required</div>
@@ -93,7 +101,7 @@
         maxlength="64"
         type="email"
         [ngClass]="{ 'is-invalid': submitted && fr.emailregister.errors }"
-        
+
       />
       <div *ngIf="submitted && fr.emailregister.errors" class="invalid-feedback">
       <div *ngIf="fr.emailregister.errors.required">Email is required</div>
@@ -108,7 +116,7 @@
         maxlength="64"
         type="password"
         [ngClass]="{ 'is-invalid': submitted && fr.passwordregister.errors }"
-        
+
       />
       <div *ngIf="submitted && fr.passwordregister.errors" class="invalid-feedback">
       <div *ngIf="fr.passwordregister.errors.required">Password is required</div>

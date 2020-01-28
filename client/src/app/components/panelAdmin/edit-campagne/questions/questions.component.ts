@@ -58,17 +58,22 @@ export class QuestionsComponent implements OnInit {
       const questionByTechnoCampaing = [];
       const nameQuestionCampaignByTechno = [];
       for (let question of questions) {
+        // console.log('question.technologies.id', question.technologies.id)
         campaigns[0].technologies.forEach(element => {
 
-          if (question.technologies.id === element.id && !nameQuestionByTechno.includes(question.name)) {
-            // console.log(question);
+          console.log('element.tech.id', element.id)
+
+          if (question.technologies && question.technologies.id === element.id && !nameQuestionByTechno.includes(question.name)) {
+
             questionByTechnoCampaing.push(question);
 
           }
-          if (question.technologies.id === element.id && nameQuestionByTechno.includes(question.name)) {
-            // console.log(question);
+          if (question.technologies && question.technologies.id === element.id && nameQuestionByTechno.includes(question.name)) {
+
             nameQuestionCampaignByTechno.push(question);
           }
+
+
         });
         // console.log('nameQuestionCampaignByTechno: ', nameQuestionCampaignByTechno);
         // console.log(this.yourCampaign[0].questions);

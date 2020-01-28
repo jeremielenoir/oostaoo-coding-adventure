@@ -13,6 +13,13 @@
             "^/":""
         }
     },
+    "/connect": {
+        "target": "http://localhost:80",
+        "secure": false,
+        "pathRewrite":{
+            "^/":""
+        }
+    },
     "/auth": {
         "target": "http://localhost:80",
         "secure": false,

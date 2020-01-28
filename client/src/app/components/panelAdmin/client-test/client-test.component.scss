@@ -4,8 +4,8 @@ $Bg-client-test: #f9f9f9;
 $text-color-client-test: #333;
 
 @mixin structureBlockPrincipal {
-  width: 45%;
-  height: 100%;
+  flex: 1;
+  // height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -21,8 +21,8 @@ $text-color-client-test: #333;
   padding: 40px;
   width: 100%;
   height: 45%;
-  border: 1px solid #e3e3e3;
-  margin: 20px 0 25px 0;
+  border: 1px solid $color-principal-orange;
+  margin: 0px 0 0px 0;
   @media #{$deviceMaxDesktop} {
     height: auto !important;
     margin-bottom: 20px;
@@ -43,19 +43,23 @@ $text-color-client-test: #333;
 
 @mixin btn-color($yellow: true) {
   .btn-compo {
+    margin-bottom: 60px;
     width: 200px;
     height: 50px;
-    border: 1px solid $color-gold;
+    border: 1px solid $color-principal-blue;
     font-size: 14px;
     text-align: center;
     transition: all 0.2s;
     text-transform: uppercase;
     @if $yellow {
-      background-color: $color-gold;
+      background-color: $color-principal-blue;
       color: white;
+      &:hover{
+        background-color: $color-principal-blue-hover
+      }
     } @else {
       background: transparent;
-      color: $color-gold;
+      color: $color-principal-blue;;
     }
   }
 }
@@ -71,28 +75,35 @@ p {
   font-weight: 300;
   color: $text-color-client-test;
   .test-container {
-    max-width: 1200px;
-    min-height: 100vh;
+    flex-direction: row;
+    width: 85%;
+    margin-left: 5%;
+    margin-right: 5%;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: auto;
+    margin-top: 30px;
+    
     @media #{$deviceMaxDesktop} {
       flex-direction: column;
       justify-content: space-around;
       height: 100%;
     }
     .invitation {
+      justify-content: normal!important;
+      margin-right: 9px;
       padding: 40px;
       background: white;
-      border: 1px solid #e3e3e3;
+      border: 1px solid $color-principal-orange;
       @include structureBlockPrincipal();
       .test-invit {
         display: flex;
-        // justify-content: space-between;
+        justify-content: center;
+        flex-direction: column;
+        color:$color-principal-blue;
         h3 {
-          width: 250px;
           margin-left: 20px;
+          margin-top: 20px;
+          padding-top: 6px;
+          padding-bottom: 6px;
           padding-bottom: 10px;
           margin-bottom: 0px;
           font-size: 24px;
@@ -101,10 +112,12 @@ p {
           align-items: center;
           border-top: 1px dashed #e3e3e3;
           border-bottom: 1px dashed #e3e3e3;
+          
         }
         .image {
-          width: 200px;
-          height: 200px;
+          margin: 0px auto;
+          width: 205px;
+          height: 58px;
           background-image: url($logoPath);
           background-size: cover;
           @media #{$deviceMaxDesktop} {
@@ -116,6 +129,9 @@ p {
       }
       .text {
         padding: 30px 0 80px 0;
+        p{
+          color: $color-principal-blue!important;
+        }
       }
     }
 
@@ -163,7 +179,7 @@ p {
           display: inline-block;
           width: 95%;
           .text-link {
-            color: #f2bb13;
+            color: $color-principal-blue;
             font-weight: 700;
             text-decoration: underline;
           }
@@ -194,10 +210,10 @@ p {
         background-color: #aaaaaa;
       }
       &:not(:disabled):last-child {
-        background-color: #ffd200;
+        background-color: $color-principal-blue;
       }
       &:not(:disabled):last-child:hover {
-        background-color: red;
+        background-color: $color-principal-blue-hover;
       }
     }
   }

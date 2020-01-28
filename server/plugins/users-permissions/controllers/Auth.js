@@ -24,6 +24,7 @@ module.exports = {
     });
 
     if (provider === 'local') {
+
       if (!_.get(await store.get({key: 'grant'}), 'email.enabled') && !ctx.request.admin) {
         return ctx.badRequest(null, 'This provider is disabled.');
       }
@@ -91,20 +92,22 @@ module.exports = {
 
       // Connect the user thanks to the third-party provider.
       let user, error;
+
+
       try {
         [user, error] = await strapi.plugins['users-permissions'].services.providers.connect(provider, ctx.query);
-      } catch([user, error]) {
-        return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error);
+      } catch([error, user]) {
+        // redirect user with error message
+        return ctx.response.redirect(`/home/register?error=${error.message}`);
+        // return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error.message);
       }
 
       if (!user) {
         return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error);
       }
+      const jwt = strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user, ['_id', 'id', 'adminId']));
 
-      ctx.send({
-        jwt: strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user, ['_id', 'id'])),
-        user: _.omit(user.toJSON ? user.toJSON() : user, ['password', 'resetPasswordToken'])
-      });
+      return ctx.response.redirect(`/home/register?jwt=${jwt}`);
     }
   },
 
@@ -141,6 +144,7 @@ module.exports = {
   },
 
   connect: async (ctx, next) => {
+
     const grantConfig = await strapi
     .store({
       environment: "",
@@ -149,18 +153,25 @@ module.exports = {
       key: "grant"
     })
     .get();
+
   const [protocol, host] = strapi.config.url.split("://");
   _.defaultsDeep(grantConfig, { server: { protocol, host } });
   const provider =
     process.platform === "win32"
-      ? ctx.request.url.split("\\")[2]
-      : ctx.request.url.split("/")[2];
+      ? ctx.request.url.split("\\")[2].split('?')[0]
+      : ctx.request.url.split("/")[2].split('?')[0];
+
+
   const config = grantConfig[provider];
+
   if (!_.get(config, "enabled")) {
     return ctx.badRequest(null, "This provider is disabled.");
   }
   const grant = require("grant-koa");
   const g = grant(grantConfig);
+  
+  g.config.facebook.redirect_uri = config.callback;
+
   ctx.query.code = ctx.query.code && ctx.query.code.replace("\\", "/"); // ADD THIS LINE
   return g(ctx, next);
   },

@@ -40,7 +40,6 @@ const routes: Routes = [
     path: 'home/register',
     component: RegisterComponent
   },
-
   {
     path: 'subscription',
     component: OffersComponent,
@@ -51,7 +50,6 @@ const routes: Routes = [
     component: StripePaymentComponent,
     canActivate: [AuthGuard]
   },
-
 
   {
     path: 'dashboard',

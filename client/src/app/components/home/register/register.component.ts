@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material';
 import { AuthenticationService } from './service/auth.service';
 
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -32,8 +33,8 @@ export class RegisterComponent implements OnInit {
   returnUrl: string;
   error = '';
   errorRegister = '';
-
-
+  jwt: any;
+  errorProvider = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,22 +43,36 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private _snackBar: MatSnackBar
-  ) { }
+  ) {
+        this.route.queryParams.subscribe(params => {
+        this.jwt = params['jwt'];
+        this.errorProvider = params['error'];
+        setTimeout(() => {
+          this.errorProvider = null;
+        }, 2000)
+    })
+   }
 
   ngOnInit() {
+    if(this.jwt){
+       localStorage.clear();
+        localStorage.setItem('currentUser', this.jwt);
+        this.router.navigate(['/dashboard/campaigns']);
+      }
+
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     }),
 
-    this.registerForm = this.formBuilder.group({
+      this.registerForm = this.formBuilder.group({
         usernameregister: ['', Validators.required],
         emailregister: ['', Validators.required],
         passwordregister: ['', Validators.required]
-    });
+      });
 
     // logout the person when he opens the app for the first time
-    this.authenticationService.logout();
+    // this.authenticationService.logout();
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
@@ -89,6 +104,7 @@ export class RegisterComponent implements OnInit {
         data => {
           //this.router.navigate(['/dashboard/campaigns']);
           this.router.navigate(['/subscription']);
+
         },
         error => {
           this.error = error;
@@ -99,7 +115,6 @@ export class RegisterComponent implements OnInit {
   switch() {
     this.switchPanel = !this.switchPanel;
   }
-
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
