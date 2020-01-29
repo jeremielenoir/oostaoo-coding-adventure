@@ -1,17 +1,25 @@
 @import"../../../../../roodeo-variables.scss";
 
-.custom-buttom {
+.custom-buttom,.mat-flat-button {
     line-height: 0px;
     background: $color-orange-light!important;
     border-radius: 0px !important;
     font-size: 16px !important;
     contain: content;
     font-weight: 600;
-    padding: 15px 30px !important;
+    padding: 15px 40px !important;
     color: $text-color-white !important;
-    height: 62px;
+    height: 80px;   
 }
 
+::ng-deep .cdk-overlay-pane{
+    width: 165px;
+}
+
+ ::ng-deep .mat-menu-panel{
+    width: 100%!important;
+    border-radius: 0px!important;
+}
 .custom-buttom-anul{
     background-color: $color-gray-blue!important;
    
@@ -26,16 +34,16 @@
 #top-bar {
     display: flex;
     width: 100%;
-    height: 65px;
     border: 1.5px solid $color-principal-orange;
     border-left: none;
     border-right: none;
     background-color: $color-pricipal-blue-light;
     display: flex;
     padding-right: 6%;
-
+    height: 82px;
+   
     .segment2{
-
+        margin-top: -1px;
     }
     .segment3{
         flex: 6.5;
@@ -121,64 +129,104 @@
     position: relative;
 }
 
+.option-question-help{
+    display: flex;
+    flex-direction: row;
+    border-top: 1.5px solid #e15028;
+    border-bottom: 1.5px solid #e15028;
+    padding-left: 18px;
+    align-items: center;
+    background: #fff;
+    justify-content: space-between;
+    #div-search {
+        position: relative;
+        .search-input{
+            font-size: 15px;
+            background-color: white;
+            border:none;
+            border-bottom: 1.5px solid #de522b;
+            outline: none;
+            padding: 6px 6px;
+            width: 150px;
+            &::placeholder{
+                font-family: $font-poppins;
+                color:$color-orange-light
+            }
+        }
+        .icon-search{
+            display: inline-block;
+            padding-left: 10px;
+            // color: #de522b;
+            font-size: 24px;
+            top: 0px;
+            right: -38px;
+            position: absolute;
+            width: 40px;
+            height: 40px;
+        }
+    }
+    .search-advanced{
+        color:$color-orange-light;
+        font-family: $font-poppins;
+        font-size: 18px;
+        justify-content: center;
+        margin-left: 12px;
+        i{
+            left: 12px;
+            top: 5px;
+        }
+    }
+
+    .trie-cat{
+        i{
+            left: 21px;
+        }
+    }
+}
+.preview{
+    justify-content: flex-end;
+    .icon-trash{
+        color: $color-orange-light;
+        font-size: 28px;
+        margin-right: 28px;
+        &:hover{
+            color:$color-principal-orange
+        }
+    }
+    .preview-btn{
+        background-color: $color-principal-blue!important;
+        letter-spacing: 1px;
+       
+    }
+}
 .bar {
     width: 100%;
-    height: 40px;
-    color: $text-color-white;
-    background: $color-black-background;
+    background: #eaeff3;
+    height: 70px;
+    padding: 7px 12px;
     display: flex;
-    contain: content;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    .bar-content-img{
+        width: 45px;
+        height: 45px;
+        margin-bottom: 0px;
+        margin-right: 45px;
+    }
+    .bar-text{
+        text-transform: uppercase;
+        font-size: 16px;
+        margin-bottom: 0;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        padding-top: 7px;
+    }
 }
 
-#bar2-left {
-    display: flex;
-    width: 40%;
-}
-
-#bar2-right {
-    display: flex;
-    flex-wrap: nowrap;
-}
-
-#div-search {
-    display: inline-block;
-    contain: content;
-    position: relative;
-    width:120px;
-}
-
-#search-input {
-    height: 30px;
-    margin-top: 5px;
-    color: $text-color-white;
-    background: $color-black-background-seconde;
-    border: none;
-    font-size: 12px;
-    padding: 0 0 0 10px;
-}
-
-.search-icon {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    color: $color-gold;
-}
-
-.bar-icon {
-    font-size: 26px;
-    color: $color-gold;
-    line-height: 38px;
-    margin: 0 8px;
-}
-
-.bar-text {
-    display: block;
-    font-size: 14px;
-    line-height: 40px;
-    font-weight: bold;
-}
 
 #bar-btn-search {
     background: $color-gold-background!important;
@@ -187,6 +235,7 @@
 
 :host ::ng-deep .mat-button-wrapper {
     contain: content;
+    font-family: $font-poppins!important;
 }
 
 /* DRAG AND DROP */
@@ -196,15 +245,37 @@
     max-width: 100%;
     margin: 10px 1% 0;
     vertical-align: top;
+    border:1.5px solid $color-principal-orange;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .example-list {
-    border: solid 1px $color-border-second;
     min-height: 60px;
-    background: $text-color-white;
-    border-radius: 4px;
+    background: $text-color-white!important;
     overflow: hidden;
     display: block;
+    overflow-y: auto;
+    max-height: 300px;
+    min-height: 30px!important;
+    scrollbar-color: #7f8183 #e3e3e3;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin; 
+}
+.example-list::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+}
+.example-list::-webkit-scrollbar-thumb {
+    background-color: #7f8183;
+ }
+
+ .example-list::-webkit-scrollbar-thumb:hover{
+     background-color: #67686a;
+ }
+
+ .example-list::-webkit-scrollbar-track {
+    background: #e3e3e3;
 }
 
 .example-box {
@@ -270,10 +341,10 @@
 #drop-text {
     height: 35px;
     padding: 0px 0px;
-    margin: 10px !important;
-    border: 1px dashed $color-table !important;
+    margin: 12px !important;
     transition: .5s;
-    color: $color-grey;
+    color: $color-orange-light;
+    font-family: $font-poppins;
     text-align: center;
     font-size: 18px;
     line-height: 30px;
@@ -324,9 +395,6 @@
     justify-content: center;
 }
 
-:host ::ng-deep .exemple-list, .cdk-drop-list {
-    background-color: $background-color!important;
-}
 
 .active-dropList{
     position: fixed!important;
