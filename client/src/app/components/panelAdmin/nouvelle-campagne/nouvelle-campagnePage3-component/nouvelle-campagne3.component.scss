@@ -147,10 +147,12 @@
             border-bottom: 1.5px solid #de522b;
             outline: none;
             padding: 6px 6px;
+            font-size: 18px;
             width: 150px;
             &::placeholder{
                 font-family: $font-poppins;
-                color:$color-orange-light
+                color:$color-orange-light;
+                
             }
         }
         .icon-search{
@@ -256,7 +258,7 @@
     overflow: hidden;
     display: block;
     overflow-y: auto;
-    max-height: 300px;
+    max-height: 290px;
     min-height: 30px!important;
     scrollbar-color: #7f8183 #e3e3e3;
     -webkit-overflow-scrolling: touch;
@@ -294,9 +296,7 @@
 }
 
 :host ::ng-deep .example-box {
-    height: 35px;
-    margin: 10px !important;
-    border: $border-table !important;
+    padding: 20px 0px;
     transition: .5s;
 }
 
@@ -307,8 +307,13 @@
     min-width: 0;
     align-items: center;
     justify-content: flex-start;
-    max-width:250px;
-    
+    // max-width:250px;
+    border:1px solid red;
+}
+.partie-left-example-box-2{
+    flex: 1;
+    display: flex;
+    border:1px solid red;
 }
 
 :host ::ng-deep .example-box:hover {

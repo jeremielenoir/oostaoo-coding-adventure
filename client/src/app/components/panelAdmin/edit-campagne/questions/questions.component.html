@@ -74,25 +74,27 @@
           </div>
 
 
-          <span *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
-          </span>
+          <div class="partie-left-example-box-2">
+            <span *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
+              <i class="fas fa-puzzle-piece drop-icon"></i> |
+              <i class="fas fa-puzzle-piece drop-icon"></i> |
+              <i class="fas fa-puzzle-piece drop-icon"></i> |
+            </span>
 
-          <span *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
+            <span *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
+              <i class="fas fa-puzzle-piece drop-icon"></i> |
+              <i class="fas fa-puzzle-piece drop-icon"></i> |
 
-          </span>
-          <span *ngIf="item.level === 'facile'" matTooltip="Difficulté Facile">
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
+            </span>
+            <span *ngIf="item.level === 'facile'" matTooltip="Difficulté Facile">
+              <i class="fas fa-puzzle-piece drop-icon"></i> |
 
-          </span>
+            </span>
 
-          <p>{{ item.points }} points</p>
-          | <i class="fas fa-list-ul drop-icon"></i> |
-          <p matTooltip="Durée(heure:min:sec)">{{ fmtMSS(item.time) }}</p>
+            <p>{{ item.points }} points</p>
+            | <i class="fas fa-list-ul drop-icon"></i> |
+            <p matTooltip="Durée(heure:min:sec)">{{ fmtMSS(item.time) }}</p>
+          </div>
 
 
 
