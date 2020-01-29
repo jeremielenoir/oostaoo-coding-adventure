@@ -20,6 +20,22 @@
     justify-content: space-between;
 }
 
+.subtitle_h5{
+  text-transform: uppercase;
+}
+
 #techno:empty{
     display: none;
+}
+
+.right_answer{
+    color: green;
+}
+
+.wrong_answer{
+    color: red;
+}
+
+.separator{
+    border-style:dashed;
 }

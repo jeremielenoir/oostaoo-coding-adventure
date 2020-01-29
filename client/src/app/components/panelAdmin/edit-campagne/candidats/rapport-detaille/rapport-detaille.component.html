@@ -22,19 +22,19 @@
         <p *ngIf=" question.array_rep_candidat  ==  question.index_question.answer_value "> {{ question.index_question.points }} / {{ question.index_question.points }} pts</p>
         <p *ngIf=" question.array_rep_candidat  !=  question.index_question.answer_value "> 0 / {{ question.index_question.points }} pts</p>
         </div>
-        <hr style="border-style:dashed;">
+        <hr class="separator">
 
-        <h5>Question</h5>
+        <h5 class="subtitle_h5">Question :</h5>
         <p> - {{ question.index_question.name }}</p>
 
-        <h5>Réponse</h5>
+        <h5 class="subtitle_h5">Réponse :</h5>
 
         <p> - {{ question.array_rep_candidat }}</p>
 
-        <h5>Resultats</h5>
-        <p *ngIf="question.array_rep_candidat  ==  question.index_question.answer_value">Réponse correcte :{{ question.index_question.theme }}</p>
+        <h5 class="subtitle_h5">Résultats :</h5>
+        <p *ngIf="question.array_rep_candidat  ==  question.index_question.answer_value"> <span class="right_answer"> Réponse correcte :</span>{{ question.index_question.theme }}</p>
         <div *ngIf="question.array_rep_candidat  !=  question.index_question.answer_value">
-        <p>Mauvaise réponse</p>
+        <p class="wrong_answer">Mauvaise réponse</p>
         <p>La/Les réponses correcte est/sont : {{ question.index_question.answer_value }}</p> 
         </div>
 
