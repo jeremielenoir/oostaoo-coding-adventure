@@ -23,6 +23,8 @@ import { JwtInterceptor } from './components/home/register/service/jwt.intercept
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './components/home/register/service/error.interceptor';
 import { OffersComponent } from './components/home/offers/offers.component';
+import { StripePaymentComponent } from './components/home/stripe-payment/stripe-payment.component';
+import { RapportDetailleComponent } from './components/panelAdmin/edit-campagne/candidats/rapport-detaille/rapport-detaille.component';
 
 const routes: Routes = [
   {
@@ -45,6 +47,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'stripePayment',
+    component: StripePaymentComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
     path: 'dashboard',
     redirectTo: 'dashboard/campaigns',
     pathMatch: 'full',
@@ -66,7 +74,8 @@ const routes: Routes = [
     component: EditCampagneComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'candidats', component: CandidatsComponent },
+      { path: 'candidats/:idCandidat/rapport-detaille', component: RapportDetailleComponent },
+      { path: 'candidats', component: CandidatsComponent},
       { path: 'questions', component: QuestionsComponent },
       {
         path: 'settings',
@@ -117,7 +126,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+  RouterModule.forRoot(routes),
   ],
   exports: [RouterModule],
   providers: [AuthGuard,

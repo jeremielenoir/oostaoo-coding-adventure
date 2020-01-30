@@ -4,15 +4,13 @@
     padding-left: 18%;
     height: 100%;
     width: 100%;
-    background: $background-color;
-    display: flex;
-    justify-content: center;
+    background: $color-background-blue;
 
     #content{
         width: 80%;
         // background: $background-color;
-        background: red;
-       
+        border: $border-table;
+
         #nav{
             display: flex;
             width: 100%;

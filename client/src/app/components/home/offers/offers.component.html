@@ -1,13 +1,5 @@
 <section id="offers">
 
-    <form novalidate (ngSubmit)="buy()" [formGroup]="stripeTest">
-        <input type="text" formControlName="name" placeholder="Jane Doe">
-        <div id="card-element" class="field"></div>
-        <button type="submit">
-          BUY
-        </button>
-    </form>
-
 <div class="container">
     <h3 class="title-dashed">
       NOS FORMULES
@@ -15,7 +7,7 @@
     </h3>
 
     <div class="content">
-        <mat-card class="lab-item" *ngFor="let offer of listOffers" [class.highlight]="subscriptionChoice === offer.price && subscriptionPage">
+        <mat-card class="lab-item" *ngFor="let offer of listOffers" [class.highlight]="offerChoiceAmount === offer.price && subscriptionPage">
             <mat-card-content>
                 <mat-card-title>{{ offer.title }}</mat-card-title>
 
@@ -31,86 +23,10 @@
                     <li *ngFor="let description of offer.description">{{ description }}</li>
                 </ul>
                 <mat-card-actions>
-                    <button (click)="gotToLoginOrDashboardPage(offer.price)" mat-raised-button color="warn" class="lab-item">S'abonner</button>
+                    <button (click)="gotToLoginOrDashboardPage(offer)" mat-raised-button color="warn" class="lab-item">S'abonner</button>
                 </mat-card-actions>
             </mat-card-content>
         </mat-card>
-
-          <!-- <mat-card class="lab-item" [class.flash]="subscriptionChoice === '0' && subscriptionPage">
-              <mat-card-content>
-                  <mat-card-title>
-                      Offre gratuite
-                  </mat-card-title>
-                 
-                  <mat-card-subtitle>
-                      Gratuit
-                  </mat-card-subtitle>
-
-                  <ul>
-                      <li>Tout les avantages de l'offre entreprise</li>
-                      <li>Accès a un chat textuel avec le candidat</li>
-                      <li>Accès a un chat audio et visuel avec le candidat</li>
-                      <li>Editeur de texte en direct</li>
-                    </ul>
-    
-                  <mat-card-actions>
-
-                      <button (click)="gotToLoginOrDashboardPage(0,0)" mat-raised-button color="warn" class="lab-item">S'abonner</button>
-
-                      <button routerLink="" mat-raised-button color="warn" class="lab-item">S'inscrire</button>
-
-                  </mat-card-actions>
-              </mat-card-content>
-          </mat-card>
-
-          <mat-card class="lab-item" [class.flash]="subscriptionChoice === '249' && subscriptionPage">
-              <mat-card-content>
-                  <mat-card-title>
-                      Offre entreprise
-                  </mat-card-title>
-                 
-                  <mat-card-subtitle>
-                      249€/mois
-                  </mat-card-subtitle>
-
-                  <ul>
-                      <li>Tout les avantages de l'offre entreprise</li>
-                      <li>Accès a un chat textuel avec le candidat</li>
-                      <li>Accès a un chat audio et visuel avec le candidat</li>
-                      <li>Editeur de texte en direct</li>
-                    </ul>
-               
-                  <mat-card-actions>
-                      <button (click)="gotToLoginOrDashboardPage(249,1)" mat-raised-button color="warn" class="lab-item">S'abonner</button>
-                  </mat-card-actions>
-
-              </mat-card-content>
-          </mat-card>
-
-          <mat-card class="lab-item" [class.flash]="subscriptionChoice === '549' && subscriptionPage">
-              <mat-card-content>
-                  <mat-card-title>
-                      Offre entreprise + entretien personnalisés
-                  </mat-card-title>
-                 
-                  <mat-card-subtitle>
-                      549€/mois
-                  </mat-card-subtitle>
-      
-                  <ul>
-                      <li>Tout les avantages de l'offre entreprise</li>
-                      <li>Accès a un chat textuel avec le candidat</li>
-                      <li>Accès a un chat audio et visuel avec le candidat</li>
-                      <li>Editeur de texte en direct</li>
-                    </ul>
-               
-                  <mat-card-actions>
-                      <button (click)="gotToLoginOrDashboardPage(549,1)" mat-raised-button color="warn" class="lab-item">S'abonner</button>
-                  </mat-card-actions>
-
-              </mat-card-content>
-          </mat-card> -->
-
     </div>
 </div>
 

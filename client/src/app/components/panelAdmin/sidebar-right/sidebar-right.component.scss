@@ -87,6 +87,21 @@
     display: flex;
     overflow: hidden;
     flex: 1;
+    .list-sidibar-left::-webkit-scrollbar{
+      width: 8px;
+      height: 8px;
+      }
+      .list-sidibar-left::-webkit-scrollbar-thumb {
+          background-color: #7f8183;
+      }
+      
+      .list-sidibar-left::-webkit-scrollbar-thumb:hover{
+          background-color: #67686a;
+      }
+      
+      .list-sidibar-left::-webkit-scrollbar-track {
+          background: #e3e3e3;
+      }
     .list-sidibar-left { 
       display: flex;
       font-size: 15px;

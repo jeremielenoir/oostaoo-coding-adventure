@@ -1,30 +1,76 @@
 @import"../../../../../roodeo-variables.scss";
 
+.custom-buttom,.mat-flat-button {
+    line-height: 0px;
+    background: $color-orange-light!important;
+    border-radius: 0px !important;
+    font-size: 16px !important;
+    contain: content;
+    font-weight: 600;
+    padding: 15px 40px !important;
+    color: $text-color-white !important;
+    height: 80px;   
+}
+
+::ng-deep .cdk-overlay-pane{
+    width: 165px;
+}
+
+ ::ng-deep .mat-menu-panel{
+    width: 100%!important;
+    border-radius: 0px!important;
+}
+.custom-buttom-anul{
+    background-color: $color-gray-blue!important;
+   
+}
+
+.icon-arrow-btn{
+    font-size: 25px;
+    position: relative;
+    left: -12px;
+}
+
 #top-bar {
     display: flex;
     width: 100%;
-    height: 65px;
-    border: 1px solid $color-grey;
-}
-
-#segment1 {
-    position: relative;
+    border: 1.5px solid $color-principal-orange;
+    border-left: none;
+    border-right: none;
+    background-color: $color-pricipal-blue-light;
     display: flex;
-    width: 12%;
-    height: 64px;
-    border-right: 1px solid $color-grey;
+    padding-right: 6%;
+    height: 82px;
+   
+    .segment2{
+        margin-top: -1px;
+    }
+    .segment3{
+        flex: 6.5;
+        display: flex;
+        align-items: center;
+        padding-left: 12%;
+        .title-segment{
+            font-size: 17px;
+            font-family: $font-poppins;
+            font-weight: 400;
+            color: $color-principal-blue;
+            margin-bottom: 0px;
+            margin-right: 12px;
+        }
+
+        #score{
+
+            color:$color-orange-light;
+            font-size: 30px;
+            margin-bottom: 0px;
+            margin-top: -5px;
+            font-family: $font-poppins;
+        }
+    }
 }
 
-#diagram {
-    margin: 0 5px;
-    line-height: 65px;
-}
 
-#segment1-content {
-    font-size: 12px;
-    margin-left: 10px;
-    margin-top: 12px;
-}
 
 #arrow {
     position: absolute;
@@ -40,17 +86,6 @@
     height: 30px;
 }
 
-#segment2 {
-    position: relative;
-    width: 10%;
-    height: 64px;
-    border-right: 1px solid $color-grey;
-}
-
-#segment2-content {
-    margin: 8px 45px 0;
-}
-
 #techno {
     color: $color-gold-second;
 }
@@ -59,45 +94,52 @@
     color: $color-gold;
 }
 
-#segment3 {
-    width: 78%;
-    height: 65px;
+.content-rouded{
+    border-left: 1px dashed $color-orange-light;
+    border-right: 1px dashed $color-orange-light;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    contain: content;
+    justify-content: center;
+    padding: 20px 6px;
+    .niveau-rouded,.niveau-rouded-no-active{
+        width:16px;
+        height: 16px;
+        background-color: white;
+        border:1px solid $color-orange-light;
+        border-radius: 50px;
+        display: inline-block;
+        margin-right: 3px;
+        margin-left: 3px;
+        margin-top: 6px;
+        position: relative;
+        padding: 2px 2px;
+    }
+
+    .niveau-rouded::after{
+        content: "";
+        display: block;
+        width: 10px;
+        height: 10px;
+        background-color: $color-orange-light;
+        border-radius: 50px;
+    }
 }
 
-#segment3-left {
-    display: flex;
-    margin: 0 0 0 10px;
-}
-
-#segment3-left p {
-    margin: 0 5px;
-    font-size: 12px;
-}
-
-#segment3-right {
-    display: flex;
-    flex-wrap: nowrap;
-}
-
-#score {
-    font-size: 22px !important;
-    color: $color-gold-second;
+.point{
+  color: $color-principal-blue;
+  font-size: 16px;
+  font-family: $font-poppins;
+  font-weight: 700;;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 18px;
+  padding-right: 18px;
+  margin-bottom: 0px;
+  border-right: 1px dashed $color-orange-light;
 }
 
 .info {
     color: $color-grey;
-}
-
-#back, #save {
-    height: 40px !important;
-    width: 120px !important;
-    font-size: 14px !important;
-    font-weight: bold;
-    margin: 0 10px !important;
 }
 
 .button-disabled{
@@ -121,95 +163,124 @@
     font-weight: bold;
 }
 
-#save {
-    background: $color-gold-background !important;
-}
 
 #content {
     width: 100%;
     display: flex;
     position: relative;
+    border:1px solid red;
+    flex: 1;
 }
 
+.option-question-help{
+    display: flex;
+    flex-direction: row;
+    border-top: 1.5px solid #e15028;
+    border-bottom: 1.5px solid #e15028;
+    padding-left: 18px;
+    align-items: center;
+    background: #fff;
+    justify-content: space-between;
+    #div-search {
+        position: relative;
+        .search-input{
+            font-size: 15px;
+            background-color: white;
+            border:none;
+            border-bottom: 1.5px solid #de522b;
+            outline: none;
+            padding: 6px 6px;
+            font-size: 18px;
+            width: 150px;
+            &::placeholder{
+                font-family: $font-poppins;
+                color:$color-orange-light;
+                
+            }
+        }
+        .icon-search{
+            display: inline-block;
+            padding-left: 10px;
+            // color: #de522b;
+            font-size: 24px;
+            top: 0px;
+            right: -38px;
+            position: absolute;
+            width: 40px;
+            height: 40px;
+        }
+    }
+    .search-advanced{
+        color:$color-orange-light;
+        font-family: $font-poppins;
+        font-size: 18px;
+        justify-content: center;
+        margin-left: 12px;
+        i{
+            left: 12px;
+            top: 5px;
+        }
+    }
+
+    .trie-cat{
+        i{
+            left: 21px;
+        }
+    }
+}
+.preview{
+    justify-content: flex-end;
+    .icon-trash{
+        color: $color-orange-light;
+        font-size: 28px;
+        margin-right: 28px;
+        &:hover{
+            color:$color-principal-orange
+        }
+    }
+    .preview-btn{
+        background-color: $color-principal-blue!important;
+        letter-spacing: 1px;
+       
+    }
+}
 .bar {
     width: 100%;
-    height: 40px;
-    color: $text-color-white;
-    background: $color-black-background;
+    background: #eaeff3;
+    height: 70px;
+    padding: 7px 12px;
     display: flex;
-    contain: content;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    .bar-content-img{
+        width: 45px;
+        height: 45px;
+        margin-bottom: 0px;
+        margin-right: 45px;
+    }
+    .bar-text{
+        text-transform: uppercase;
+        font-size: 16px;
+        margin-bottom: 0;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        padding-top: 7px;
+    }
 }
 
-#bar2-left {
-    display: flex;
-    width: 40%;
-}
-
-#bar2-right {
-    display: flex;
-    flex-wrap: nowrap;
-}
-
-#div-search {
-    display: inline-block;
-    contain: content;
-    position: relative;
-    width:120px;
-}
-
-#search-input {
-    height: 30px;
-    margin-top: 5px;
-    color: $text-color-white;
-    background: $color-black-background-seconde;
-    border: none;
-    font-size: 12px;
-    padding: 0 0 0 10px;
-}
-
-.search-icon {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    color: $color-gold;
-}
-
-.bar-icon {
-    font-size: 26px;
-    color: $color-gold;
-    line-height: 38px;
-    margin: 0 8px;
-}
-
-.bar-text {
-    display: block;
-    font-size: 14px;
-    line-height: 40px;
-    font-weight: bold;
-}
 
 #bar-btn-search {
     background: $color-gold-background!important;
 }
 
-.custom-buttom {
-    height: 30px !important;
-    line-height: 0px !important;
-    background: $color-grey !important;
-    border-radius: 0px !important;
-    font-size: 10px !important;
-    contain: content;
-    font-weight: bold;
-    padding: 0px 10px !important;
-    margin: 5px 2px 0px !important;
-    text-transform: uppercase !important;
-    color: $text-color-white !important;
-}
 
 :host ::ng-deep .mat-button-wrapper {
     contain: content;
+    font-family: $font-poppins!important;
 }
 
 /* DRAG AND DROP */
@@ -219,16 +290,40 @@
     max-width: 100%;
     margin: 10px 1% 0;
     vertical-align: top;
+    border:1.5px solid $color-principal-orange;
+    border-radius: 5px;
+    overflow: hidden;
+    flex-direction: column;
+   flex: 1;
 }
 
 .example-list {
-    border: solid 1px $color-border-second;
-    min-height: 60px;
-    background: $text-color-white;
-    border-radius: 4px;
-    overflow: hidden;
+    height: 40vh;
+    border-bottom: 1px solid blue;
+    background: $text-color-white!important;
     display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: #7f8183 #e3e3e3;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    
 }
+.example-list::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+}
+.example-list::-webkit-scrollbar-thumb {
+    background-color: #7f8183;
+ }
+
+ .example-list::-webkit-scrollbar-thumb:hover{
+     background-color: #67686a;
+ }
+
+//  .example-list::-webkit-scrollbar-track {
+//     background: #e3e3e3;
+// }
 
 .example-box {
     padding: 20px 10px;
@@ -246,10 +341,11 @@
 }
 
 :host ::ng-deep .example-box {
-    height: 35px;
-    margin: 10px !important;
-    border: $border-table !important;
+    padding: 0px 18px;
     transition: .5s;
+    border-bottom: 1px dashed $color-orange-light;
+    display: flex;
+    justify-content: space-between;
 }
 
 .partie-left-example-box
@@ -259,8 +355,12 @@
     min-width: 0;
     align-items: center;
     justify-content: flex-start;
-    max-width:250px;
-    
+    // max-width:250px;
+   
+}
+.partie-left-example-box-2{
+    flex: 1;
+    display: flex;
 }
 
 :host ::ng-deep .example-box:hover {
@@ -293,10 +393,10 @@
 #drop-text {
     height: 35px;
     padding: 0px 0px;
-    margin: 10px !important;
-    border: 1px dashed $color-table !important;
+    margin: 12px !important;
     transition: .5s;
-    color: $color-grey;
+    color: $color-orange-light;
+    font-family: $font-poppins;
     text-align: center;
     font-size: 18px;
     line-height: 30px;
@@ -309,21 +409,28 @@
 
 .question-techno {
     display: block;
-    height: 20px;
-    background: $color-gold-second;
-    font-size: 12px;
-    color: $text-color-white;
+    flex: 1;
+    font-size: 16px;
+    color: $color-orange-light;
+    font-family: $font-poppins;
     text-align: center;
-    padding: 0px 2px;
     margin-right:5px;
-  
+    padding: 20px 18px;
+    border-right: 1px dashed $color-orange-light;
 }
 
 .question-name{
+    margin-bottom: 0px;
     max-width:240px;
+    font-size: 16px;
+    font-family: $font-poppins;
+    padding-left: 17px;
+    padding-right: 6px;
+    font-weight: 700;
     white-space: nowrap;
-   overflow: hidden;
-   text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: $color-principal-blue;
 }
 
 .detail-question-name
@@ -347,9 +454,6 @@
     justify-content: center;
 }
 
-:host ::ng-deep .exemple-list, .cdk-drop-list {
-    background-color: $background-color!important;
-}
 
 .active-dropList{
     position: fixed!important;
