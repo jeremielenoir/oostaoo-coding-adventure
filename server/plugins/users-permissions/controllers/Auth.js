@@ -98,6 +98,7 @@ module.exports = {
         [user, error] = await strapi.plugins['users-permissions'].services.providers.connect(provider, ctx.query);
       } catch([error, user]) {
         // redirect user with error message
+        console.log('error : ', error.message);
         return ctx.response.redirect(`/home/register?error=${error.message}`);
         // return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error.message);
       }
@@ -106,8 +107,7 @@ module.exports = {
         return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error);
       }
       const jwt = strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user, ['_id', 'id', 'adminId']));
-
-      return ctx.response.redirect(`/home/register?jwt=${jwt}`);
+      return ctx.response.redirect(`/dashboard/campaigns?jwt=${jwt}`);
     }
   },
 
@@ -169,7 +169,7 @@ module.exports = {
   }
   const grant = require("grant-koa");
   const g = grant(grantConfig);
-  
+
   g.config.facebook.redirect_uri = config.callback;
 
   ctx.query.code = ctx.query.code && ctx.query.code.replace("\\", "/"); // ADD THIS LINE
@@ -349,7 +349,6 @@ module.exports = {
       });
     } catch(err) {
       const adminError = _.includes(err.message, 'username') ? 'Auth.form.error.username.taken' : 'Auth.form.error.email.taken';
-
       ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: adminError }] }] : err.message);
     }
   },

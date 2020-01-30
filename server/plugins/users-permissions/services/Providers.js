@@ -22,6 +22,8 @@ const Purest = require('purest');
  */
 
 exports.connect = (provider, query) => {
+
+
   const access_token = query.access_token || query.code || query.oauth_token;
 
   return new Promise((resolve, reject) => {
@@ -30,10 +32,10 @@ exports.connect = (provider, query) => {
         message: 'No access_token.'
       });
     }
-
     // Get the profile.
     getProfile(provider, query, async (err, profile) => {
       if (err) {
+        console.log('error : ', err);
         return reject(err);
       }
 
@@ -61,7 +63,6 @@ exports.connect = (provider, query) => {
         }
 
         const user = _.find(users, {provider});
-
         if (!_.isEmpty(user)) {
           return resolve([user, null]);
         }
@@ -145,19 +146,16 @@ const getProfile = async (provider, query, callback) => {
       const facebook = new Purest({
         provider: 'facebook'
       });
-      console.log('in case', access_token, grant.facebook.callback)
       // 1 - send code and clientId to authorization server (We can use Get+query params or Post+body each are working)
-      // code is called access_token wchich is confusing but the code has to be exchanged to an access token to get user info
+      // code is called access_token which is confusing but the code has to be exchanged to an access token to get user info
       request.post({
         // works
         // url: `https://graph.facebook.com/oauth/access_token?redirect_uri=https://782106e2.ngrok.io/auth/facebook/callback`,
         url: 'https://graph.facebook.com/v5.0/oauth/access_token',
         form: {
-          client_id: grant.facebook.key, 
+          client_id: grant.facebook.key,
           code: access_token,
           client_secret: grant.facebook.secret,
-          // https://tools.ietf.org/html/rfc3986
-          // redirect_uri: `https://782106e2.ngrok.io/auth/facebook/callback`,
           redirect_uri: grant.facebook.callback
         }
       }, (err, res, body) => {
@@ -173,10 +171,8 @@ const getProfile = async (provider, query, callback) => {
             });
           }
         });
-      
-      })
 
-     
+      })
       break;
     }
     case 'google': {
@@ -184,16 +180,30 @@ const getProfile = async (provider, query, callback) => {
         provider: 'google'
       });
 
-      google.query('plus').get('people/me').auth(access_token).request((err, res, body) => {
-        if (err) {
-          callback(err);
-        } else {
-          callback(null, {
-            username: body.emails[0].value.split("@")[0],
-            email: body.emails[0].value
-          });
+//https://developers.google.com/identity/protocols/OAuth2InstalledApp  step5
+
+      request.post({
+        url: 'https://oauth2.googleapis.com/token',
+        form: {
+          code: access_token,
+          client_id: grant.google.key,
+          client_secret: grant.google.secret,
+          redirect_uri: grant.google.callback
         }
-      });
+      }, (err, res, body) => {
+        const {access_token} = JSON.parse(body);
+
+          google.query('plus').get('people/me').auth(access_token).request((err, res, body) => {
+            if (err) {
+              callback(err);
+            } else {
+              callback(null, {
+                username: body.emails[0].value.split("@")[0],
+                email: body.emails[0].value
+              });
+             }
+          });
+        });
       break;
     }
     case 'github': {
@@ -218,6 +228,7 @@ const getProfile = async (provider, query, callback) => {
           if (err) {
             callback(err);
           } else {
+            console.log('body : ', body);
             callback(null, {
               username: body.login,
               email: body.email

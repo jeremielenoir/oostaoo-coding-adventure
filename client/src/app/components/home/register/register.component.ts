@@ -55,9 +55,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     if(this.jwt){
-       localStorage.clear();
-        localStorage.setItem('currentUser', this.jwt);
-        this.router.navigate(['/dashboard/campaigns']);
+      localStorage.setItem('currentUser', this.jwt);
+      this.router.navigate(['/dashboard/campaigns']);
+        // this.router.navigate(['/subscription']);
       }
 
     this.loginForm = this.formBuilder.group({
@@ -102,9 +102,8 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //this.router.navigate(['/dashboard/campaigns']);
           this.router.navigate(['/subscription']);
-
+          //if(user.subscribe){this.router.navigate(['/dashboard/campaigns'])};
         },
         error => {
           this.error = error;

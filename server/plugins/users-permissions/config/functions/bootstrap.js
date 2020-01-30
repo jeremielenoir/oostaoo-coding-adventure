@@ -51,7 +51,7 @@ module.exports = async cb => {
       ]
     },
     facebook: {
-      enabled: false,
+      enabled: true,
       icon: 'facebook-official',
       key: '',
       secret: '',
@@ -59,7 +59,7 @@ module.exports = async cb => {
       scope: ['email']
     },
     google: {
-      enabled: false,
+      enabled: true,
       icon: 'google',
       key: '',
       secret: '',
@@ -67,7 +67,7 @@ module.exports = async cb => {
       scope: ['email']
     },
     github: {
-      enabled: false,
+      enabled: true,
       icon: 'github',
       key: '',
       secret: '',
