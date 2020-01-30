@@ -17,6 +17,7 @@ export class RapportDetailleComponent implements OnInit {
   public rapportTechno = [];
   public uniquetechno;
   public techno = [];
+  public totalTime = 0;
 
   constructor(route: ActivatedRoute, public apiClientService: ApiClientService) {
     this.idCandidat = route.snapshot.params.idCandidat;
@@ -42,12 +43,15 @@ export class RapportDetailleComponent implements OnInit {
     this.candidat = data;
     console.log('this candid', this.candidat);
     this.rapport = data.raport_candidat.rapport;
-    console.log('this rap', this.rapport);
+    console.log('this rapport', this.rapport);
+
+
     this.rapport.forEach(element => {
      this.rapportTechno.push(element.index_question.technologies);
-
+     this.totalTime = this.totalTime + element.index_question.time;
 
     });
+
     this.uniquetechno = this.removeDuplicates(this.rapportTechno);
     this.uniquetechno.forEach(idTechno => {
       this.getTechno(idTechno);

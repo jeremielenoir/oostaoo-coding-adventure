@@ -126,7 +126,7 @@
           (click)="menuSidenav(sidenav, dataInfos)"></tr>
         </table>
 
-        <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+        <mat-card *ngIf="isLoading" class="matcard_style">
           <mat-progress-spinner color="primary" mode="indeterminate">
           </mat-progress-spinner>
         </mat-card>
@@ -138,36 +138,37 @@
   <div *ngSwitchDefault id="editQuestion">...</div>
 </div>
 
+<!-- SIDENAV -->
 
-<mat-sidenav-container class="example-container" >
+<mat-sidenav-container class="sidenav-container" >
   <mat-sidenav  #sidenav mode="over" [(opened)]="opened">
     <div class="sidenav-content" *ngIf='currentCandidat.Candidats !== "" '>
 
     
-      <h2 style="text-align: center;">{{campaign.Name}}</h2>
-      <h3 style="text-align: center; margin-top: 20px;">Rapport</h3>
+      <h2 class="sidenav_campaign_name">{{campaign.Name}}</h2>
+      <h3 class="sidenav_name">Rapport</h3>
       <h4> <i class="far fa-user-circle"></i> {{currentCandidat.Candidats}}</h4>
       <p> <i class="far fa-envelope"></i> {{currentCandidat.Email}}</p>
       <p> <i class="fas fa-poll-h"></i> Pourcentage de bonne réponses : {{currentCandidat.Score}} </p>
       <p><i class="far fa-clock"></i> Durée du test : {{currentCandidat.Duree}}</p>
 
-      <hr style="border-style: dashed; background-color: red;">
+      <hr class="sidenav_separator">
 
-    <div style="display: flex; flex-direction: column;" *ngIf='currentCandidat.points'>
-      <div style="display: flex; flex-direction: row; justify-content: space-between; width: 60%;" *ngFor="let candidatPointTechno of currentCandidat.points[2].getpourcentByCandidat">
-        <p style="margin-right: 40%;">{{candidatPointTechno.techno}} </p>
+    <div class="sidenav_candidat_content"  *ngIf='currentCandidat.points'>
+      <div class="sidenav_candidat_result" *ngFor="let candidatPointTechno of currentCandidat.points[2].getpourcentByCandidat">
+        <p class="sidenav_candidat_text">{{candidatPointTechno.techno}} </p>
 
-        <hr style="border-style: dashed; background-color: red;">
+        <hr class="sidenav_separator">
 
         <p>{{candidatPointTechno.percentage}} %</p>
-    </div>
+      </div>
 
-      <hr style="border-style: dashed; background-color: red;">
+        <hr class="sidenav_separator">
 
-      <div style="display: flex; flex-direction: row; justify-content: space-between; width: 60%;">
-      <p style="margin-right: 40%;" >Total :</p>
-      <p>{{currentCandidat.Score}} </p>
-    </div>
+        <div class="sidenav_candidat_result">
+        <p class="sidenav_candidat_text">Total :</p>
+        <p>{{currentCandidat.Score}} </p>
+      </div>
     </div>
 
 
