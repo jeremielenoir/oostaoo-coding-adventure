@@ -12,10 +12,14 @@
     align-items: baseline;
     box-sizing: border-box;
     width: 100%;
-    border: $border-table;
+    border: 1.5px solid grey;
     height: 60px;
     padding: 0px 10px 10px;
     margin-top: 15px;
+}
+
+textarea {
+    width: 100%;
 }
 
 .button {
@@ -28,8 +32,5 @@
     color: $text-color-white;
     cursor: pointer;
     border-radius: 0px;
-}
-
-.yellow {
-    background: $color-gold-background;
+    background-color: $color-principal-blue;
 }

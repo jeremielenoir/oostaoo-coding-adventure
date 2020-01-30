@@ -77,47 +77,15 @@
     </mat-radio-group>
   </div>
 
-  <label for="nomDeCampagne">
-    Comment souhaitez-vous que le candidat soit chronométré ?
-  </label>
-
-  <div id="bloc-chrono">
-    <div class="chrono">
-      <p class="chrono-title">UN CHRONOMÈTRE PAR QUESTION</p>
-      <p>
-        Chaque question sera chronométrée. Une fois le test démarré, les
-        questions se succèderont selon l’ordre défini. Le candidat ne pourra pas
-        revenir à une question précédente. Nous conseillons ce mode pour obtenir
-        un aperçu des connaissances théoriques et pratiques des candidats.
-      </p>
-      <p class="chrono-last-line">(recommandé)</p>
-    </div>
-    <div class="chrono">
-      <p class="chrono-title">UN CHRONOMÈTRE GLOBAL</p>
-      <p>
-        Un temps global est alloué au candidat pour réaliser l’ensemble du test.
-        Le candidat peut gérer son temps comme bon lui semble : il peut répondre
-        aux questions dans n’importe quel ordre et les modifier plusieurs fois.
-        Nous conseillons ce mode pour évaluer, uniquement, les connaissances
-        pratiques des candidats (lors d’exercices de code par exemple).
-      </p>
-      <p class="chrono-last-line">Temps alloué pour ce test (minutes)</p>
-
-      <mat-form-field class="chrono-input input-style">
-        <input matInput name="nomDeCampagne" />
-      </mat-form-field>
-    </div>
-  </div>
-
   <div id="button-container">
-    <button type="button" class="button grey" mat-flat-button>
+    <button type="button" class="button" mat-flat-button>
       Prévisualiser
     </button>
 
     <button
       (click)="updateCampaign()"
       type="button"
-      class="button yellow"
+      class="button"
       mat-flat-button
     >
       Enregistrer
