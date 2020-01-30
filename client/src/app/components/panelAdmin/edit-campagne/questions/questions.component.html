@@ -75,23 +75,28 @@
 
 
           <div class="partie-left-example-box-2">
-            <span *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
-              <i class="fas fa-puzzle-piece drop-icon"></i> |
-              <i class="fas fa-puzzle-piece drop-icon"></i> |
-              <i class="fas fa-puzzle-piece drop-icon"></i> |
-            </span>
+            <div class="content-rouded" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
+              <span class="niveau-rouded"></span>
+              <span class="niveau-rouded"></span>
+              <span class="niveau-rouded"></span>
+            </div>
 
-            <span *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
-              <i class="fas fa-puzzle-piece drop-icon"></i> |
-              <i class="fas fa-puzzle-piece drop-icon"></i> |
+            <div class="content-rouded" *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
+              <span class="niveau-rouded"></span>
+              <span class="niveau-rouded"></span>
+              <span class="niveau-rouded-no-active"></span>
 
-            </span>
-            <span *ngIf="item.level === 'facile'" matTooltip="Difficulté Facile">
-              <i class="fas fa-puzzle-piece drop-icon"></i> |
+            </div>
+            <div class="content-rouded" *ngIf="item.level === 'facile'" matTooltip="Difficulté Facile">
+              <span class="niveau-rouded"></span>
+              <span class="niveau-rouded-no-active"></span>
+              <span class="niveau-rouded-no-active"></span>
 
-            </span>
+            </div>
 
-            <p>{{ item.points }} points</p>
+            <p class="point">{{ item.points }} points</p>
+
+
             | <i class="fas fa-list-ul drop-icon"></i> |
             <p matTooltip="Durée(heure:min:sec)">{{ fmtMSS(item.time) }}</p>
           </div>
@@ -140,24 +145,28 @@
             <p class="question-name" matTooltip="{{itemQuestions.name}}">{{ itemQuestions.name }}</p>
 
           </div>
-          <span *ngIf="itemQuestions.level === 'expert'" matTooltip="Difficulté Expert">
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
-          </span>
+          <div class="partie-left-example-box-2">
+            <div class="content-rouded" *ngIf="itemQuestions.level === 'expert'" matTooltip="Difficulté Expert">
+              <span class="niveau-rouded"></span>
+              <span class="niveau-rouded"></span>
+              <span class="niveau-rouded"></span>
+            </div>
 
-          <span *ngIf="itemQuestions.level === 'moyen'" matTooltip="Difficulté Moyen">
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
+            <div class="content-rouded" *ngIf="itemQuestions.level === 'moyen'" matTooltip="Difficulté Moyen">
+              <span class="niveau-rouded"></span>
+              <span class="niveau-rouded"></span>
+              <span class="niveau-rouded-no-active"></span>
 
-          </span>
-          <span *ngIf="itemQuestions.level === 'facile'" matTooltip="Difficulté Facile">
-            <i class="fas fa-puzzle-piece drop-icon"></i> |
-
-          </span>
-          <p>{{ itemQuestions.points }} points</p>
-          | <i class="fas fa-list-ul drop-icon"></i> |
-          <p matTooltip="Durée(heure:min:sec)">{{  fmtMSS(itemQuestions.time) }}</p>
+            </div>
+            <div class="content-rouded" *ngIf="itemQuestions.level === 'facile'" matTooltip="Difficulté Facile">
+              <span class="niveau-rouded"></span>
+              <span class="niveau-rouded-no-active"></span>
+              <span class="niveau-rouded-no-active"></span>
+            </div>
+            <p>{{ itemQuestions.points }} points</p>
+            | <i class="fas fa-list-ul drop-icon"></i> |
+            <p matTooltip="Durée(heure:min:sec)">{{  fmtMSS(itemQuestions.time) }}</p>
+          </div>
         </div>
       </div>
     </div>

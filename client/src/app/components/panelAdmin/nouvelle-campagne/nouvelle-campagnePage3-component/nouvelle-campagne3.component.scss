@@ -94,8 +94,49 @@
     color: $color-gold;
 }
 
+.content-rouded{
+    border-left: 1px dashed $color-orange-light;
+    border-right: 1px dashed $color-orange-light;
+    display: flex;
+    justify-content: center;
+    padding: 20px 6px;
+    .niveau-rouded,.niveau-rouded-no-active{
+        width:16px;
+        height: 16px;
+        background-color: white;
+        border:1px solid $color-orange-light;
+        border-radius: 50px;
+        display: inline-block;
+        margin-right: 3px;
+        margin-left: 3px;
+        margin-top: 6px;
+        position: relative;
+        padding: 2px 2px;
+    }
 
+    .niveau-rouded::after{
+        content: "";
+        display: block;
+        width: 10px;
+        height: 10px;
+        background-color: $color-orange-light;
+        border-radius: 50px;
+    }
+}
 
+.point{
+  color: $color-principal-blue;
+  font-size: 16px;
+  font-family: $font-poppins;
+  font-weight: 700;;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 18px;
+  padding-right: 18px;
+  margin-bottom: 0px;
+  border-right: 1px dashed $color-orange-light;
+}
 
 .info {
     color: $color-grey;
@@ -127,6 +168,8 @@
     width: 100%;
     display: flex;
     position: relative;
+    border:1px solid red;
+    flex: 1;
 }
 
 .option-question-help{
@@ -250,19 +293,21 @@
     border:1.5px solid $color-principal-orange;
     border-radius: 5px;
     overflow: hidden;
+    flex-direction: column;
+   flex: 1;
 }
 
 .example-list {
-    min-height: 60px;
+    height: 40vh;
+    border-bottom: 1px solid blue;
     background: $text-color-white!important;
-    overflow: hidden;
     display: block;
     overflow-y: auto;
-    max-height: 290px;
-    min-height: 30px!important;
+    overflow-x: hidden;
     scrollbar-color: #7f8183 #e3e3e3;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin; 
+    scrollbar-width: thin;
+    
 }
 .example-list::-webkit-scrollbar{
     width: 8px;
@@ -276,9 +321,9 @@
      background-color: #67686a;
  }
 
- .example-list::-webkit-scrollbar-track {
-    background: #e3e3e3;
-}
+//  .example-list::-webkit-scrollbar-track {
+//     background: #e3e3e3;
+// }
 
 .example-box {
     padding: 20px 10px;
@@ -296,8 +341,11 @@
 }
 
 :host ::ng-deep .example-box {
-    padding: 20px 0px;
+    padding: 0px 18px;
     transition: .5s;
+    border-bottom: 1px dashed $color-orange-light;
+    display: flex;
+    justify-content: space-between;
 }
 
 .partie-left-example-box
@@ -308,12 +356,11 @@
     align-items: center;
     justify-content: flex-start;
     // max-width:250px;
-    border:1px solid red;
+   
 }
 .partie-left-example-box-2{
     flex: 1;
     display: flex;
-    border:1px solid red;
 }
 
 :host ::ng-deep .example-box:hover {
@@ -362,21 +409,28 @@
 
 .question-techno {
     display: block;
-    height: 20px;
-    background: $color-gold-second;
-    font-size: 12px;
-    color: $text-color-white;
+    flex: 1;
+    font-size: 16px;
+    color: $color-orange-light;
+    font-family: $font-poppins;
     text-align: center;
-    padding: 0px 2px;
     margin-right:5px;
-  
+    padding: 20px 18px;
+    border-right: 1px dashed $color-orange-light;
 }
 
 .question-name{
+    margin-bottom: 0px;
     max-width:240px;
+    font-size: 16px;
+    font-family: $font-poppins;
+    padding-left: 17px;
+    padding-right: 6px;
+    font-weight: 700;
     white-space: nowrap;
-   overflow: hidden;
-   text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: $color-principal-blue;
 }
 
 .detail-question-name

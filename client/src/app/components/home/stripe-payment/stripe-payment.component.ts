@@ -20,7 +20,7 @@ export class StripePaymentComponent implements OnInit {
   stripeError: string = null;
   stripeLoader = false;
 
-  payload: {amount: number, periodicity: number, token: any};
+  payload: { amount: number, periodicity: number, token: any };
 
   elements: Elements;
   card: StripeElement;
@@ -31,12 +31,12 @@ export class StripePaymentComponent implements OnInit {
   stripeTest: FormGroup;
 
   constructor(private router: Router,
-              private apiClientService: ApiClientService,
-              private fb: FormBuilder,
-              private stripeService: StripeService,
-              private session: SessionService,
-              private userToken: DecryptTokenService
-    ) { }
+    private apiClientService: ApiClientService,
+    private fb: FormBuilder,
+    private stripeService: StripeService,
+    private session: SessionService,
+    private userToken: DecryptTokenService
+  ) { }
 
   ngOnInit() {
     // recuperation de l'offre
@@ -44,7 +44,7 @@ export class StripePaymentComponent implements OnInit {
     this.offerChoice = JSON.parse(localStorage.getItem('offerChoice'));
 
     // info utilisateur a recuperer de la bdd
-    this.apiClientService.get(API_URI_USER + '/' + this.userToken.userId).subscribe( user => this.userInfo = user);
+    this.apiClientService.get(API_URI_USER + '/' + this.userToken.userId).subscribe(user => this.userInfo = user);
 
     this.stripeForm();
   }
@@ -102,18 +102,18 @@ export class StripePaymentComponent implements OnInit {
             token: result.token
           };
 
-          console.log(this.payload);
+          console.log('isma', this.payload);
 
           this.apiClientService.post(API_URI_PAYMENT + '/subscribe', this.payload)
-          .subscribe(data => {
-            console.log('data from constroll back', data);
-            this.stripeLoader = false;
-            this.router.navigate(['/dashboard/campaigns']);
-          }, error => {
-            // switch case d'apres la reponse de stripe
-            this.stripeError = error;
-            this.stripeLoader = false;
-          });
+            .subscribe(data => {
+              console.log('data from constroll back', data);
+              this.stripeLoader = false;
+              this.router.navigate(['/dashboard/campaigns']);
+            }, error => {
+              // switch case d'apres la reponse de stripe
+              this.stripeError = error;
+              this.stripeLoader = false;
+            });
         } else if (result.error) {
           // Error creating the token
           console.log(result.error.message);
