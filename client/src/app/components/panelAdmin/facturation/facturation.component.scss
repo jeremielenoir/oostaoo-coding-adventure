@@ -36,6 +36,9 @@
     padding: 30px;
     border: $border-table;
     border-radius: $border-radius;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
 
     .title {
         margin-bottom: 20px;
@@ -60,6 +63,21 @@
             color: black;
         }
     }
+
+    #section1-title {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #section1-top {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        border: 1px solid $color-principal-blue;
+        margin: 20px 0px;
+        padding: 15px;
+    }
 }
 
 #section2 {
@@ -67,7 +85,7 @@
     margin: 15px 0 0 0px;
     background: white;
     padding: 30px;
-    border: $border-table;
+    border: 1px solid $color-principal-blue;
     border-radius: $border-radius;
     display: flex;
     flex-wrap: wrap;
@@ -89,7 +107,7 @@
         display: flex;
         width: 100%;
         justify-content: space-around;
-        border: $border-table;
+        border: 1px solid $color-principal-blue;
         margin: 20px 0px;
         padding: 15px;
 
@@ -108,7 +126,7 @@
         width: 100%;
         display: flex;
         justify-content: space-around;
-        border: $border-table;
+        border: 1px solid $color-principal-blue;
         margin: 20px 0px;
         padding: 15px;
     
