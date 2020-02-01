@@ -14,11 +14,11 @@ import { API_URI_CAMPAIGNS, ApiClientService, API_URI_USER, API_URI_USERS_BY_ADM
 export class AuthenticationService {
   currentUserSubject: BehaviorSubject<any>;
   constructor(private http: HttpClient, public apiClientService: ApiClientService) {
-    this.currentUserSubject = new BehaviorSubject(localStorage.getItem('currentUser'));
+  this.currentUserSubject = new BehaviorSubject(localStorage.getItem('currentUser'));
   }
 
   public get currentUserValue() {
-    console.log('this.currentUserSubject.value: ', this.currentUserSubject);
+    this.currentUserSubject = new BehaviorSubject(localStorage.getItem('currentUser'));
     return this.currentUserSubject.value;
   }
 

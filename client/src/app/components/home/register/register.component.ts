@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {
         this.route.queryParams.subscribe(params => {
-        this.jwt = params['jwt'];
+        // this.jwt = params['jwt'];
         this.errorProvider = params['error'];
         setTimeout(() => {
           this.errorProvider = null;
@@ -54,11 +54,11 @@ export class RegisterComponent implements OnInit {
    }
 
   ngOnInit() {
-    if(this.jwt){
+    this.jwt = this.route.snapshot.queryParams.jwt;
+    if(this.jwt && this.jwt.length>0){
       localStorage.setItem('currentUser', this.jwt);
       this.router.navigate(['/dashboard/campaigns']);
-        // this.router.navigate(['/subscription']);
-      }
+    }
 
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -76,6 +76,7 @@ export class RegisterComponent implements OnInit {
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+
   }
 
   // convenience getter for easy access to form fields
