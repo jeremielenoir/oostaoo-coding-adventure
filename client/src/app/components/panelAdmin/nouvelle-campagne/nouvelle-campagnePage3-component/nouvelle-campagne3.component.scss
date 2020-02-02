@@ -4,7 +4,7 @@
     line-height: 0px;
     background: $color-orange-light!important;
     border-radius: 0px !important;
-    font-size: 16px !important;
+    font-size: 15px !important;
     contain: content;
     font-weight: 600;
     padding: 15px 40px !important;
@@ -94,49 +94,6 @@
     color: $color-gold;
 }
 
-.content-rouded{
-    border-left: 1px dashed $color-orange-light;
-    border-right: 1px dashed $color-orange-light;
-    display: flex;
-    justify-content: center;
-    padding: 20px 6px;
-    .niveau-rouded,.niveau-rouded-no-active{
-        width:16px;
-        height: 16px;
-        background-color: white;
-        border:1px solid $color-orange-light;
-        border-radius: 50px;
-        display: inline-block;
-        margin-right: 3px;
-        margin-left: 3px;
-        margin-top: 6px;
-        position: relative;
-        padding: 2px 2px;
-    }
-
-    .niveau-rouded::after{
-        content: "";
-        display: block;
-        width: 10px;
-        height: 10px;
-        background-color: $color-orange-light;
-        border-radius: 50px;
-    }
-}
-
-.point{
-  color: $color-principal-blue;
-  font-size: 16px;
-  font-family: $font-poppins;
-  font-weight: 700;;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-left: 18px;
-  padding-right: 18px;
-  margin-bottom: 0px;
-  border-right: 1px dashed $color-orange-light;
-}
 
 .info {
     color: $color-grey;
@@ -263,7 +220,7 @@
     }
     .bar-text{
         text-transform: uppercase;
-        font-size: 16px;
+        font-size: 15px;
         margin-bottom: 0;
         font-family: "Poppins", sans-serif;
         font-weight: 700;
@@ -342,6 +299,7 @@
 
 :host ::ng-deep .example-box {
     padding: 0px 18px;
+    padding-right: 0px;
     transition: .5s;
     border-bottom: 1px dashed $color-orange-light;
     display: flex;
@@ -351,16 +309,129 @@
 .partie-left-example-box
 {
     flex: 1;
+    border-right: 1px dashed $color-orange-light;
     display: flex;
     min-width: 0;
     align-items: center;
     justify-content: flex-start;
     // max-width:250px;
-   
+   .question-techno {
+    display: block;
+    width: 100px;
+    font-size: 15px;
+    color: $color-orange-light;
+    font-family: $font-poppins;
+    text-align: center;
+    margin-right:5px;
+    padding: 20px 0px;
+    // border-right: 1px dashed $color-orange-light;
+    }
 }
 .partie-left-example-box-2{
-    flex: 1;
+    flex: 5;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-left: 5px;
+    padding-right: 5px;
+    &:hover{
+        background-color: $color-blue-light;
+        .question-name,.drop i,.point,.time{
+            color:white;
+        }
+        
+    }
+    .question-name{
+      
+        margin-bottom: 0px;
+        max-width:240px;
+        flex: 4;
+        font-size: 15px;
+        font-family: $font-poppins;
+        padding-right: 6px;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: $color-principal-blue;
+    }
+
+    .content-rouded{
+        border-left: 1px dashed $color-orange-light;
+        border-right: 1px dashed $color-orange-light;
+        display: flex;
+        flex: 2;
+        justify-content: center;
+        padding: 20px 6px;
+        flex: 2px;
+        max-width: 80px;
+        .niveau-rouded,.niveau-rouded-no-active{
+            width:16px;
+            height: 16px;
+            background-color: white;
+            border:1px solid $color-orange-light;
+            border-radius: 50px;
+            display: inline-block;
+            margin-right: 3px;
+            margin-left: 3px;
+            margin-top: 6px;
+            position: relative;
+            padding: 2px 2px;
+        }
+    
+        .niveau-rouded::after{
+            content: "";
+            display: block;
+            width: 10px;
+            height: 10px;
+            background-color: $color-orange-light;
+            border-radius: 50px;
+        }
+    }
+    
+    .point{
+      color: $color-principal-blue;
+      font-size: 15px;
+      font-family: $font-poppins;
+      font-weight: 700;
+      padding-top:20px;
+      padding-bottom: 20px;
+      display: flex;
+      flex: 2;
+      justify-content: center;
+      align-items: center;
+      padding-left: 8px;
+      padding-right: 8px;
+      margin-bottom: 0px;
+      border-right: 1px dashed $color-orange-light;
+    }
+
+    .drop{
+        display: flex;
+        justify-content: center;
+        // flex: 2;
+        border-right: 1px dashed $color-orange-light;
+        padding: 15px 10px;
+        font-size: 28px;
+        i{
+            color: $color-orange-light;
+        }
+    }
+
+    .time{
+        flex: 1.5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 5px;
+        font-size: 15px;
+        font-family: $font-poppins;
+        font-weight: 700;
+        color:$color-principal-blue
+
+    }
+    
 }
 
 :host ::ng-deep .example-box:hover {
@@ -407,31 +478,9 @@
     margin-bottom:0px;
 }
 
-.question-techno {
-    display: block;
-    flex: 1;
-    font-size: 16px;
-    color: $color-orange-light;
-    font-family: $font-poppins;
-    text-align: center;
-    margin-right:5px;
-    padding: 20px 18px;
-    border-right: 1px dashed $color-orange-light;
-}
 
-.question-name{
-    margin-bottom: 0px;
-    max-width:240px;
-    font-size: 16px;
-    font-family: $font-poppins;
-    padding-left: 17px;
-    padding-right: 6px;
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: $color-principal-blue;
-}
+
+
 
 .detail-question-name
 {
