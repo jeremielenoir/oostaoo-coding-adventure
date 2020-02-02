@@ -95,10 +95,10 @@ module.exports = {
 
 
       try {
-        [user, error] = await strapi.plugins['users-permissions'].services.providers.connect(provider, ctx.query);
-      } catch([error, user]) {
+        [user] = await strapi.plugins['users-permissions'].services.providers.connect(provider, ctx.query);
+      } catch(error) {
         // redirect user with error message
-        return ctx.response.redirect(`/home/register?error=${error.message}`);
+        return ctx.response.redirect(`/home/register?error=${error}`);
         // return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error.message);
       }
 

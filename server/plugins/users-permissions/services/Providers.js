@@ -35,8 +35,8 @@ exports.connect = (provider, query) => {
     // Get the profile.
     getProfile(provider, query, async (err, profile) => {
       if (err) {
-        console.log('error : ', err);
-        return reject(err);
+        const message = err.error.message;
+        return reject(message);
       }
 
       // We need at least the mail.
@@ -192,7 +192,6 @@ const getProfile = async (provider, query, callback) => {
         }
       }, (err, res, body) => {
         const {access_token} = JSON.parse(body);
-
           google.query('plus').get('people/me').auth(access_token).request((err, res, body) => {
             if (err) {
               callback(err);
