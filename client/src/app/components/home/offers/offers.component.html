@@ -12,11 +12,9 @@
                 <mat-card-title>{{ offer.title }}</mat-card-title>
 
                 <div [ngSwitch]="offer.periodicity">
-                    <mat-card-subtitle *ngSwitchCase="'0'">Gratuit</mat-card-subtitle>
-                    <mat-card-subtitle *ngSwitchCase="'1'">{{ offer.price }}€/jour</mat-card-subtitle>
-                    <mat-card-subtitle *ngSwitchCase="'2'">{{ offer.price }}€/semaine</mat-card-subtitle>
-                    <mat-card-subtitle *ngSwitchCase="'3'">{{ offer.price }}€/mois</mat-card-subtitle>
-                    <mat-card-subtitle *ngSwitchCase="'4'">{{ offer.price }}€/an</mat-card-subtitle>
+                    <mat-card-subtitle *ngSwitchCase="'unique'">Gratuit</mat-card-subtitle>
+                    <mat-card-subtitle *ngSwitchCase="'monthly'">{{ offer.price }}€/mois</mat-card-subtitle>
+ 
                 </div>
 
                 <ul>

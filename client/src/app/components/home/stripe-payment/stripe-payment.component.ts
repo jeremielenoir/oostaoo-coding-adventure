@@ -20,7 +20,7 @@ export class StripePaymentComponent implements OnInit {
   stripeError: string = null;
   stripeLoader = false;
 
-  payload: { amount: number, periodicity: number, token: any };
+  payload: any;
 
   elements: Elements;
   card: StripeElement;
@@ -42,6 +42,7 @@ export class StripePaymentComponent implements OnInit {
     // recuperation de l'offre
     //this.offerChoice = this.session.offerChoice;
     this.offerChoice = JSON.parse(localStorage.getItem('offerChoice'));
+    console.log(this.offerChoice);
 
     // info utilisateur a recuperer de la bdd
     this.apiClientService.get(API_URI_USER + '/' + this.userToken.userId).subscribe(user => this.userInfo = user);
@@ -87,6 +88,7 @@ export class StripePaymentComponent implements OnInit {
     //const name = this.stripeTest.get('name').value;
     this.stripeLoader = true;
     // username utilisateur
+    console.log('totoro', this.userInfo);
     const name = this.userInfo.username;
 
     this.stripeService
@@ -96,9 +98,10 @@ export class StripePaymentComponent implements OnInit {
           // Use the token to create a charge or a customer
           // https://stripe.com/docs/charges
 
+
           this.payload = {
-            amount: this.offerChoice.price * 100,
-            periodicity: this.offerChoice.periodicity,
+            offer: this.offerChoice,
+            email: this.userInfo.email,
             token: result.token
           };
 
