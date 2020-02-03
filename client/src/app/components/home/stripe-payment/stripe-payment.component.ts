@@ -98,13 +98,13 @@ export class StripePaymentComponent implements OnInit {
 
           this.payload = {
             amount: this.offerChoice.price * 100,
-            periodicity: +this.offerChoice.periodicity,
+            periodicity: this.offerChoice.periodicity,
             token: result.token
           };
 
           console.log('isma', this.payload);
 
-          this.apiClientService.post(API_URI_PAYMENT + '/subscribe', this.payload)
+          this.apiClientService.post(API_URI_PAYMENT + '/', this.payload)
             .subscribe(data => {
               console.log('data from constroll back', data);
               this.stripeLoader = false;
