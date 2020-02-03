@@ -26,6 +26,10 @@
     "periodicity": {
       "default": "",
       "type": "string"
+    },
+    "nom": {
+      "default": "",
+      "type": "string"
     }
   }
 }
