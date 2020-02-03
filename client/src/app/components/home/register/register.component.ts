@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material';
 import { AuthenticationService } from './service/auth.service';
 
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -33,6 +34,7 @@ export class RegisterComponent implements OnInit {
   error = '';
   errorRegister = '';
   jwt: any;
+  errorProvider = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,33 +45,38 @@ export class RegisterComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {
         this.route.queryParams.subscribe(params => {
-        this.jwt = params['jwt'];
+        // this.jwt = params['jwt'];
+        this.errorProvider = params['error'];
+        setTimeout(() => {
+          this.errorProvider = null;
+        }, 2000)
     })
    }
 
   ngOnInit() {
-    if(this.jwt){
-       localStorage.clear();
-        localStorage.setItem('currentUser', this.jwt);
-        this.router.navigate(['/dashboard/campaigns']);
-      }
+    this.jwt = this.route.snapshot.queryParams.jwt;
+    if(this.jwt && this.jwt.length>0){
+      localStorage.setItem('currentUser', this.jwt);
+      this.router.navigate(['/dashboard/campaigns']);
+    }
 
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     }),
 
-    this.registerForm = this.formBuilder.group({
+      this.registerForm = this.formBuilder.group({
         usernameregister: ['', Validators.required],
         emailregister: ['', Validators.required],
         passwordregister: ['', Validators.required]
-    });
+      });
 
     // logout the person when he opens the app for the first time
     // this.authenticationService.logout();
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+
   }
 
   // convenience getter for easy access to form fields
@@ -96,8 +103,8 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //this.router.navigate(['/dashboard/campaigns']);
           this.router.navigate(['/subscription']);
+          //if(user.subscribe){this.router.navigate(['/dashboard/campaigns'])};
         },
         error => {
           this.error = error;

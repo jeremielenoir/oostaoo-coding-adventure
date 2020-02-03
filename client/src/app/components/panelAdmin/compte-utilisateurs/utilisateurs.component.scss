@@ -226,7 +226,8 @@
     .tbl-permition {
       display: flex;
       flex-wrap: wrap;
-      $border: $border-table;
+      border-right: 1px solid #ce5637;
+      // $border: 1px solid #ce5637;
       flex-direction: row;
       .element-gestion-permition {
         flex: 1;
@@ -241,7 +242,8 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          border: $border-table;
+          border-left: 1px solid #ce5637;
+          border-bottom: 1px solid #ce5637;
 
           .checked-block {
             position: relative;
@@ -269,7 +271,9 @@
           display: flex;
           font-size: 14px;
           align-items: center;
-          border: $border-table;
+          border-left: 1px solid #ce5637;
+          border-bottom: 1px solid #ce5637;
+          border-top: 1px solid #ce5637;
           justify-content: center;
         }
       }
@@ -291,7 +295,7 @@
         background-color: #e7e9eb;
         font-weight: 400;
         font-size: 13px;
-        border: $border-table;
+        border: 1px solid $color-principal-blue;
         background: #fff;
         outline: none;
         width: 100%;
@@ -425,10 +429,6 @@
 @media screen and (max-width: 767px) {
   .modall {
     max-width: calc(100vw - 100px) !important;
-  }
-
-  .header-form {
-    
   }
 
   .champ-utilisateur {

@@ -60,8 +60,8 @@ export class TestComponent implements OnInit {
     if (this.totalPoints) {
       this.totalPointsCampaign = this.totalPoints;
     }
-    console.log('this.totalPointsCampaign: ', this.totalPointsCampaign);
-    console.log('this.candidat.campaign.copy_paste : ', this.candidat.campaign.copy_paste);
+    // console.log('this.totalPointsCampaign: ', this.totalPointsCampaign);
+    // console.log('this.candidat.campaign.copy_paste : ', this.candidat.campaign.copy_paste);
     if (this.candidat.index_question === null) {
       //   this.index = this.candidat.index_question;
       this.index = 0;
@@ -306,15 +306,15 @@ export class TestComponent implements OnInit {
             points_candidat: newOBjectToPostCandidat
           }).toPromise();
           this.apiClientService.post(API_URI_NOTIFICATIONS, {
-            title: "Un candidat viens de finir le test \""+ res.campaign.Name+"\"",
-            message: "Le rapport d'évaluation de \""+this.candidat.Nom+"\" est disponible.",
+            title: "Un candidat viens de finir le test \"" + res.campaign.Name + "\"",
+            message: "Le rapport d'évaluation de \"" + this.candidat.Nom + "\" est disponible.",
             status: false,
             user: res.campaign.user,
             idCampaign: res.campaign.id
           }).toPromise().then(resolve => {
-            console.log("SUCCESS POST NOTIF ",resolve);
-          }).catch(reject=>{
-            console.log("ERROR POST NOTIF ",reject);
+            console.log("SUCCESS POST NOTIF ", resolve);
+          }).catch(reject => {
+            console.log("ERROR POST NOTIF ", reject);
           });
         });
       });

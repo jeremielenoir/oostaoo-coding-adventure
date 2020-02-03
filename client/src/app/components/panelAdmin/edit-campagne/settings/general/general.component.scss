@@ -105,32 +105,27 @@
         color: $text-color-white;
         cursor: pointer;
         border-radius: 0px;
-    }
-    
-    .grey {
-        background: $color-grey;
-    }
-    
-    .yellow {
-        background: $color-gold-background;
+        background-color: $color-principal-blue;
     }
 }
 
-
+:host ::ng-deep .mat-radio-label-content {
+    padding-right: 8px;
+}
 
 :host ::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
     opacity: 0.5 !important;
     /*click effect color change*/
-    background-color: $color-gold-background !important;
+    background-color: $color-principal-blue !important;
 }
 
 :host ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
-    background-color: $color-gold-background!important;
+    background-color: $color-principal-blue!important;
     /*inner circle color change*/
 }
 
 :host ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-    border-color: $color-gold-background!important;
+    border-color: $color-principal-blue!important;
     /*outer ring color change*/
 }
 
@@ -153,7 +148,7 @@
     align-items: baseline;
     box-sizing: border-box;
     width: 100%;
-    border: $border-table;
+    border: 1.5px solid grey;
     height: 60px;
     padding: 0px 10px 10px;
     margin-top: 15px;

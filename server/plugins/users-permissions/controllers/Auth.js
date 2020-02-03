@@ -95,17 +95,18 @@ module.exports = {
 
 
       try {
-        [user, error] = await strapi.plugins['users-permissions'].services.providers.connect(provider, ctx.query);
-      } catch([user, error]) {
-        return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error);
+        [user] = await strapi.plugins['users-permissions'].services.providers.connect(provider, ctx.query);
+      } catch(error) {
+        // redirect user with error message
+        return ctx.response.redirect(`/home/register?error=${error}`);
+        // return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error.message);
       }
 
       if (!user) {
         return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error);
       }
       const jwt = strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user, ['_id', 'id', 'adminId']));
-
-      return ctx.response.redirect(`${ctx.request.header.referer}?jwt=${jwt}`);
+      return ctx.response.redirect(`/home/register?jwt=${jwt}`);
     }
   },
 
@@ -167,6 +168,9 @@ module.exports = {
   }
   const grant = require("grant-koa");
   const g = grant(grantConfig);
+
+  g.config.facebook.redirect_uri = config.callback;
+  g.config.google.redirect_uri = config.callback;
   ctx.query.code = ctx.query.code && ctx.query.code.replace("\\", "/"); // ADD THIS LINE
   return g(ctx, next);
   },
@@ -285,12 +289,15 @@ module.exports = {
       email: params.email
     });
 
+    const emailTakenMessage = 'Email already taken';
     if (user && user.provider === params.provider) {
-      return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.email.taken' }] }] : 'Email is already taken.');
+      return ctx.response.redirect(`/home/register?error=${emailTakenMessage}`);
+      // return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.email.taken' }] }] : 'Email is already taken.');
     }
 
     if (user && user.provider !== params.provider && settings.unique_email) {
-      return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.email.taken' }] }] : 'Email is already taken.');
+      return ctx.response.redirect(`/home/register?error=${emailTakenMessage}`);
+      // return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.email.taken' }] }] : 'Email is already taken.');
     }
 
     try {
@@ -343,9 +350,16 @@ module.exports = {
         user: _.omit(user.toJSON ? user.toJSON() : user, ['password', 'resetPasswordToken'])
       });
     } catch(err) {
-      const adminError = _.includes(err.message, 'username') ? 'Auth.form.error.username.taken' : 'Auth.form.error.email.taken';
 
-      ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: adminError }] }] : err.message);
+      if(_.includes(err.message, 'username')){
+        const usernameTakenMessage = 'Username already taken';
+        return ctx.response.redirect(`/home/register?error=${usernameTakenMessage}`);
+      }else{
+        return ctx.response.redirect(`/home/register?error=${emailTakenMessage}`);
+      }
+
+      // const adminError = _.includes(err.message, 'username') ? 'Auth.form.error.username.taken' : 'Auth.form.error.email.taken';
+      // ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: adminError }] }] : err.message);
     }
   },
 

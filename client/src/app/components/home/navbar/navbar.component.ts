@@ -84,8 +84,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     console.log('Tentative de déconnexion');
-
-    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
     this.router.navigate(['/home/register']);
   }
 
