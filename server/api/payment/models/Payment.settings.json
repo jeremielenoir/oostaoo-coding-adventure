@@ -15,20 +15,17 @@
       "default": "",
       "type": "decimal"
     },
-    "email": {
-      "default": "",
-      "type": "email"
-    },
     "offer": {
       "model": "offer"
-    },
-    "card": {
-      "model": "card"
     },
     "user": {
       "model": "user",
       "via": "payments",
       "plugin": "users-permissions"
+    },
+    "date_payment": {
+      "default": "",
+      "type": "integer"
     }
   }
 }

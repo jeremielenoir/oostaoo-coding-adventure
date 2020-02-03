@@ -1,16 +1,14 @@
-/* global Payment */
+/* global Formule */
 'use strict';
 
 /**
- * Payment.js service
+ * Formule.js service
  *
  * @description: A set of functions similar to controller's actions to avoid code duplication.
  */
 
 // Public dependencies.
 const _ = require('lodash');
-const STRIPE_API_KEY = "sk_test_SHGN7PIdottD4WBLCcdSfbwA00kPGubvOC";
-const stripe = require('stripe')(STRIPE_API_KEY);
 
 // Strapi utilities.
 const utils = require('strapi-hook-bookshelf/lib/utils/');
@@ -18,20 +16,20 @@ const utils = require('strapi-hook-bookshelf/lib/utils/');
 module.exports = {
 
   /**
-   * Promise to fetch all payments.
+   * Promise to fetch all formules.
    *
    * @return {Promise}
    */
 
   fetchAll: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('payment', params);
+    const filters = strapi.utils.models.convertParams('formule', params);
     // Select field to populate.
-    const populate = Payment.associations
+    const populate = Formule.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    return Payment.query(function(qb) {
+    return Formule.query(function(qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value) && where.symbol !== 'IN' && where.symbol !== 'NOT IN') {
           for (const value in where.value) {
@@ -54,33 +52,33 @@ module.exports = {
   },
 
   /**
-   * Promise to fetch a/an payment.
+   * Promise to fetch a/an formule.
    *
    * @return {Promise}
    */
 
   fetch: (params) => {
     // Select field to populate.
-    const populate = Payment.associations
+    const populate = Formule.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    return Payment.forge(_.pick(params, 'id')).fetch({
+    return Formule.forge(_.pick(params, 'id')).fetch({
       withRelated: populate
     });
   },
 
   /**
-   * Promise to count a/an payment.
+   * Promise to count a/an formule.
    *
    * @return {Promise}
    */
 
   count: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('payment', params);
+    const filters = strapi.utils.models.convertParams('formule', params);
 
-    return Payment.query(function(qb) {
+    return Formule.query(function(qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value)) {
           for (const value in where.value) {
@@ -94,50 +92,50 @@ module.exports = {
   },
 
   /**
-   * Promise to add a/an payment.
+   * Promise to add a/an formule.
    *
    * @return {Promise}
    */
 
   add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Payment.associations.map(ast => ast.alias));
-    const data = _.omit(values, Payment.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Formule.associations.map(ast => ast.alias));
+    const data = _.omit(values, Formule.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Payment.forge(data).save();
+    const entry = await Formule.forge(data).save();
 
     // Create relational data and return the entry.
-    return Payment.updateRelations({ id: entry.id , values: relations });
+    return Formule.updateRelations({ id: entry.id , values: relations });
   },
 
   /**
-   * Promise to edit a/an payment.
+   * Promise to edit a/an formule.
    *
    * @return {Promise}
    */
 
   edit: async (params, values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Payment.associations.map(ast => ast.alias));
-    const data = _.omit(values, Payment.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Formule.associations.map(ast => ast.alias));
+    const data = _.omit(values, Formule.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Payment.forge(params).save(data);
+    const entry = await Formule.forge(params).save(data);
 
     // Create relational data and return the entry.
-    return Payment.updateRelations(Object.assign(params, { values: relations }));
+    return Formule.updateRelations(Object.assign(params, { values: relations }));
   },
 
   /**
-   * Promise to remove a/an payment.
+   * Promise to remove a/an formule.
    *
    * @return {Promise}
    */
 
   remove: async (params) => {
     params.values = {};
-    Payment.associations.map(association => {
+    Formule.associations.map(association => {
       switch (association.nature) {
         case 'oneWay':
         case 'oneToOne':
@@ -154,45 +152,45 @@ module.exports = {
       }
     });
 
-    await Payment.updateRelations(params);
+    await Formule.updateRelations(params);
 
-    return Payment.forge(params).destroy();
+    return Formule.forge(params).destroy();
   },
 
   /**
-   * Promise to search a/an payment.
+   * Promise to search a/an formule.
    *
    * @return {Promise}
    */
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('payment', params);
+    const filters = strapi.utils.models.convertParams('formule', params);
     // Select field to populate.
-    const populate = Payment.associations
+    const populate = Formule.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    const associations = Payment.associations.map(x => x.alias);
-    const searchText = Object.keys(Payment._attributes)
-      .filter(attribute => attribute !== Payment.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['string', 'text'].includes(Payment._attributes[attribute].type));
+    const associations = Formule.associations.map(x => x.alias);
+    const searchText = Object.keys(Formule._attributes)
+      .filter(attribute => attribute !== Formule.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['string', 'text'].includes(Formule._attributes[attribute].type));
 
-    const searchNoText = Object.keys(Payment._attributes)
-      .filter(attribute => attribute !== Payment.primaryKey && !associations.includes(attribute))
-      .filter(attribute => !['string', 'text', 'boolean', 'integer', 'decimal', 'float'].includes(Payment._attributes[attribute].type));
+    const searchNoText = Object.keys(Formule._attributes)
+      .filter(attribute => attribute !== Formule.primaryKey && !associations.includes(attribute))
+      .filter(attribute => !['string', 'text', 'boolean', 'integer', 'decimal', 'float'].includes(Formule._attributes[attribute].type));
 
-    const searchInt = Object.keys(Payment._attributes)
-      .filter(attribute => attribute !== Payment.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['integer', 'decimal', 'float'].includes(Payment._attributes[attribute].type));
+    const searchInt = Object.keys(Formule._attributes)
+      .filter(attribute => attribute !== Formule.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['integer', 'decimal', 'float'].includes(Formule._attributes[attribute].type));
 
-    const searchBool = Object.keys(Payment._attributes)
-      .filter(attribute => attribute !== Payment.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['boolean'].includes(Payment._attributes[attribute].type));
+    const searchBool = Object.keys(Formule._attributes)
+      .filter(attribute => attribute !== Formule.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['boolean'].includes(Formule._attributes[attribute].type));
 
     const query = (params._q || '').replace(/[^a-zA-Z0-9.-\s]+/g, '');
 
-    return Payment.query(qb => {
+    return Formule.query(qb => {
       // Search in columns which are not text value.
       searchNoText.forEach(attribute => {
         qb.orWhereRaw(`LOWER(${attribute}) LIKE '%${_.toLower(query)}%'`);
@@ -211,7 +209,7 @@ module.exports = {
       }
 
       // Search in columns with text using index.
-      switch (Payment.client) {
+      switch (Formule.client) {
         case 'mysql':
           qb.orWhereRaw(`MATCH(${searchText.join(',')}) AGAINST(? IN BOOLEAN MODE)`, `*${query}*`);
           break;
@@ -241,53 +239,5 @@ module.exports = {
     }).fetchAll({
       withRelated: populate
     });
-  },
-
-  charge: async (body) => {
-    return await stripe.charges.create({
-      source: body.token.id,
-      amount: body.amount,
-      currency: 'eur',
-    })
-  },
-
-  subscribe: async (body) => {
-    console.log('body : ', body);
-
-    const { email, id, periodicity } = body.token;
-
-    try {
-      const customer = await stripe.customers.create({
-        email: email,
-        source: id,
-      })
-
-      let payment;
-
-      if(periodicity === "monthly"){
-         payment = await stripe.subscriptions.create({
-          customer: customer.id,
-          items: [{
-            plan: 'plan_GYgIMYKG0onZrr',
-
-          }],
-          trial_period_days: 30
-        })
-      }else if(periodicity === "unique"){
-        payment = await stripe.charge.create({
-         customer: customer.id,
-         items: [{
-           plan: 'plan_GYgIMYKG0onZrr',
-         }],
-      });
-    }
-
-    } catch(err) {
-      console.log('subscription',err);
-    }
-    return {subscription: 'toto'};
   }
-  // subscribe: async (body) => {
-  //   const session = stripe.checkout.sessions.create({})
-  // }
 };

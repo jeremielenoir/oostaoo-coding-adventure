@@ -104,7 +104,7 @@ export class StripePaymentComponent implements OnInit {
 
           console.log('isma', this.payload);
 
-          this.apiClientService.post(API_URI_PAYMENT + '/', this.payload)
+          this.apiClientService.post(API_URI_PAYMENT + '/subscribe', this.payload)
             .subscribe(data => {
               console.log('data from constroll back', data);
               this.stripeLoader = false;
