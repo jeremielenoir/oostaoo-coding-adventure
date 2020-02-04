@@ -67,12 +67,16 @@
 
           <div class="partie-left-example-box">
 
+
             <p class="question-techno">{{ item.technologies.name }}</p>
 
           </div>
 
 
           <div class="partie-left-example-box-2">
+            <div class="tooltip-information">
+              {{item.name}}
+            </div>
             <p class="question-name" matTooltip="{{item.name}}">{{ item.name }}</p>
             <div class="content-rouded" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
               <span class="niveau-rouded"></span>
@@ -100,9 +104,6 @@
             </div>
             <p class="time" matTooltip="Durée(heure:min:sec)">{{ fmtMSS(item.time) }}</p>
           </div>
-
-
-
 
         </div>
       </div>
@@ -146,7 +147,10 @@
           </div>
 
           <div class="partie-left-example-box-2">
-            <p class="question-name" matTooltip="{{itemQuestions.name}}">{{ itemQuestions.name }}</p>
+            <div class="tooltip-information">
+              {{itemQuestions.name}}
+            </div>
+            <p class="question-name">{{ itemQuestions.name }}</p>
             <div class="content-rouded" *ngIf="itemQuestions.level === 'expert'" matTooltip="Difficulté Expert">
               <span class="niveau-rouded"></span>
               <span class="niveau-rouded"></span>
@@ -168,7 +172,7 @@
             <div class="drop">
               <i class="fas fa-list-ul drop-icon"></i>
             </div>
-            <p class="time" matTooltip="Durée(heure:min:sec)">{{  fmtMSS(itemQuestions.time) }}</p>
+            <p class="time" matTooltip="Durée(heure:min:sec)">{{ fmtMSS(itemQuestions.time) }}</p>
           </div>
         </div>
       </div>

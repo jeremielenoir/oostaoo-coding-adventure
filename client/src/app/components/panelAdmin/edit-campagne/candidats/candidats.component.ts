@@ -42,7 +42,7 @@ export class CandidatsComponent implements OnInit {
   public campaigns;
   public campaign;
   public candidats;
-  public currentCandidat = {Candidats: ''};
+  public currentCandidat = { Candidats: '' };
   public technologies;
   public displayedColumns;
   public infosCandidats;
@@ -358,10 +358,14 @@ export class CandidatsComponent implements OnInit {
   menuSidenav(sidenav, candidat) {
     this.currentCandidat = candidat;
     sidenav.toggle();
-    console.log('candidattt', candidat);
+    console.log('sidenav', sidenav);
     console.log('this current', this.currentCandidat);
   }
 
+  sidnavClose(sidenav) {
+    sidenav.close()
+    console.log('hellow', sidenav)
+  }
 
 }
 
