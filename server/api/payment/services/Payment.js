@@ -253,32 +253,35 @@ module.exports = {
 
   subscribe: async (body) => {
     console.log('body : ', body);
-
-    const { email, id, periodicity } = body.token;
-
+    console.log('token envoyé : ', body.token);
+    const { email } = body;
+    const token_id = body.token.id;
+    const { id, periodicity, price, plan } = body.offer;
+    console.log('plan : ', plan);
     try {
       const customer = await stripe.customers.create({
         email: email,
-        source: id,
+        source: token_id,
       })
 
       let payment;
-
       if(periodicity === "monthly"){
          payment = await stripe.subscriptions.create({
           customer: customer.id,
           items: [{
-            plan: 'plan_GYgIMYKG0onZrr',
-
+            plan: plan
           }],
           trial_period_days: 30
         })
       }else if(periodicity === "unique"){
-        payment = await stripe.charge.create({
-         customer: customer.id,
-         items: [{
-           plan: 'plan_GYgIMYKG0onZrr',
-         }],
+        console.log('periodicity unique');
+        console.log('body token : ', body.token);
+         payment = await stripe.charges.create({
+          amount: price,
+          description: 'description',
+          currency: 'eur',
+          source: body.token,
+          metadata: {order_id: plan}
       });
     }
 

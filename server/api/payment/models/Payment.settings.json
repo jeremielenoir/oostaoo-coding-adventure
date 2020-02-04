@@ -15,12 +15,13 @@
       "default": "",
       "type": "decimal"
     },
-    "offer": {
-      "model": "offer"
+    "offer_id": {
+      "model": "offer",
+      "via": "Id"
     },
-    "user": {
+    "user_id": {
       "model": "user",
-      "via": "payments",
+      "via": "Id",
       "plugin": "users-permissions"
     },
     "date_payment": {
