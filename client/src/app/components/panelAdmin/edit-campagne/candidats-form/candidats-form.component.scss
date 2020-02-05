@@ -1,13 +1,14 @@
 @import"../../../../../roodeo-variables.scss";
-::ng-deep .content-modal-question{
+// ::ng-deep .content-modal-question{
        
-}
+// }
 .form-scroll{
     height: 400px;
     overflow-y: auto;
 }
 .card-body{
     padding: 0px!important;
+    text-align: center;
     
 }
 .card{
@@ -37,6 +38,7 @@ input{
     border-radius: 0px!important;
     text-transform: uppercase;
     color: white;
+    margin: 10px;
 }
 
 .m-1{
@@ -48,4 +50,10 @@ input{
 .m-1:hover{
     background-color:$color-principal-blue-hover;
     color: white;
+}
+
+.information {
+    font-size: 12px;
+    color: $color-grey;
+    margin-top: 20px;
 }
