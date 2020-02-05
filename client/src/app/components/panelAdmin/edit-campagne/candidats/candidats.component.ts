@@ -48,6 +48,8 @@ export class CandidatsComponent implements OnInit {
   public infosCandidats;
   public infosCandidatsPdf;
   public questions;
+  public idElementExported: string;
+  public bolleanAnonymiser: boolean;
   datePipe = new DatePipe('fr');
   ViewCandidats;
   isLoading = true;
@@ -120,13 +122,20 @@ export class CandidatsComponent implements OnInit {
 
   checkedAction(e?, check?) {
     e.stopPropagation();
+    console.log('change ......')
+
     this.checkedActionBoolean = check.checked;
     if (!check.checked) {
       if (this.nbrSelectedElementChecked.includes(check.value)) {
-        console.log('effectivement il est la ')
+        console.log('effectivement il est la ');
+        this.idElementExported = check.value;
       } else {
         this.nbrSelectedElementChecked.push(check.value);
+        this.idElementExported = check.value;
+        console.log(' il est pasla ')
       }
+
+
     } else {
       let index = this.nbrSelectedElementChecked.indexOf(check.value);
       this.nbrSelectedElementChecked.splice(index, 1);
@@ -140,6 +149,15 @@ export class CandidatsComponent implements OnInit {
 
     console.log('all checked', allChecked);
 
+  }
+
+  exported() {
+    this.viewResultsPdf(this.idElementExported)
+    console.log('exported', this.idElementExported)
+  }
+
+  Anonymiser() {
+    this.bolleanAnonymiser = true;
   }
 
   getCampaign(): Promise<any> {

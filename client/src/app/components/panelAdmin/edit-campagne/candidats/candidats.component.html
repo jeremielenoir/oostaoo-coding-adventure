@@ -28,6 +28,31 @@
   </div>
 
   <div *ngSwitchCase="'CandidatTrue'" id="editQuestion">
+
+    <div id="shadow-cog" [class.shadow-cog-active]="bolleanAnonymiser">
+      <div id="remove" (click)="param_cog_non_active()"></div>
+
+      <div class="modall">
+        <div class="modall-header">
+          <h3 class="modall-title">
+            Options des événements
+          </h3>
+        </div>
+
+        <div class="modall-content">
+          <i class="fa fa-user content-icon"></i>
+          <h4 class="modal-content-title">Anonymiser</h4>
+          <p>
+            Dans le cadre de la protection des données personnelles, vous êtes sur le point de procéder à
+            l'anonymisation
+            de ce/cette candidat(e) : ses données personnelles seront supprimées.
+            Cependant, ses résultats et son rapport d'évaluation resteront visibles dans votre liste candidats de
+            manière
+            anonyme pour vous permettre de comparer son score aux candidats ultérieurs.
+          </p>
+        </div>
+      </div>
+    </div>
     <div class="barre-nav">
       <div class="diplex-1">
         <div class="select-choince" (click)="showChoinceList($event)">
@@ -43,14 +68,15 @@
           <ul class="menu-choince" (click)="showChoinceList($event)" [class.choince-active]="choinceList">
 
             <li class="menu-list-choince">
-              <button class="first-btn" [class.selected-button]="nbrSelectedElementChecked.length > 0"
+              <button (click)="exported()" class="first-btn"
+                [class.selected-button]="nbrSelectedElementChecked.length > 0"
                 [disabled]="nbrSelectedElementChecked.length == 0">
                 <i class="fas fa-file-export icon-choince icon"></i>
                 <span>Exporter</span>
               </button>
             </li>
             <li class="menu-list-choince">
-              <button [class.selected-button]="nbrSelectedElementChecked.length > 0"
+              <button (click)="Anonymiser()" [class.selected-button]="nbrSelectedElementChecked.length > 0"
                 [disabled]="nbrSelectedElementChecked.length == 0">
                 <i class="fas fa-user-secret icon-choince icon"></i>
                 <span>Anonymiser</span>
