@@ -6,6 +6,7 @@ import { InviteCandidat } from './invite-candidat.component';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
+  API_URI_CANDIDATS
 } from '../../../../api-client/api-client.service';
 import { getResultsDefinition } from './getResultsDefinition';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -158,6 +159,17 @@ export class CandidatsComponent implements OnInit {
 
   Anonymiser() {
     this.bolleanAnonymiser = true;
+  }
+  removeAnonymiser() {
+    this.bolleanAnonymiser = false;
+  }
+  AnonymiserFinal() {
+    const urlApi = API_URI_CANDIDATS + '/' + '500'
+    this.apiClientService.put(urlApi, {
+
+    }).subscribe(response => {
+      console.log('response', response)
+    })
   }
 
   getCampaign(): Promise<any> {

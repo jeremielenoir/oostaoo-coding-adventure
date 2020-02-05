@@ -30,7 +30,7 @@
   <div *ngSwitchCase="'CandidatTrue'" id="editQuestion">
 
     <div id="shadow-cog" [class.shadow-cog-active]="bolleanAnonymiser">
-      <div id="remove" (click)="param_cog_non_active()"></div>
+      <div id="remove" (click)="removeAnonymiser()"></div>
 
       <div class="modall">
         <div class="modall-header">
@@ -40,9 +40,10 @@
         </div>
 
         <div class="modall-content">
-          <i class="fa fa-user content-icon"></i>
+          <i class="fas fa-user-secret content-icon"></i>
+
           <h4 class="modal-content-title">Anonymiser</h4>
-          <p>
+          <p class="content">
             Dans le cadre de la protection des données personnelles, vous êtes sur le point de procéder à
             l'anonymisation
             de ce/cette candidat(e) : ses données personnelles seront supprimées.
@@ -50,6 +51,11 @@
             manière
             anonyme pour vous permettre de comparer son score aux candidats ultérieurs.
           </p>
+
+        </div>
+        <div class="modall-footer">
+          <button class="btn-modal" (click)="removeAnonymiser()">Annuler</button>
+          <button class="btn-modal" (click)="AnonymiserFinal()">Anonymiser ce candidat</button>
         </div>
       </div>
     </div>

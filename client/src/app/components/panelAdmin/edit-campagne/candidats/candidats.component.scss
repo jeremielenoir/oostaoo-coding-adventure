@@ -6,6 +6,66 @@
 
 }
 
+.modall{
+  // min-width: 450px;
+  width: 600px;
+  .modall-content{
+     padding: 40px;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+  }
+  .content-icon{
+    font-size: 60px;
+    color:$color-principal-orange;
+    margin-bottom: 25px;
+  }
+
+  .modal-content-title{
+   color: #7e8082;
+
+  }
+  .content{
+    margin-bottom: 12px;
+  }
+
+  .modall-footer{
+    display: flex;
+    flex-direction: row;
+    padding: 20px 40px;
+    .btn-modal{
+      color: white;
+      height: 50px;
+      padding: 0 10px;
+      font-size: 17px;
+      transition: background 0.2s;
+      font-weight: 600;
+      border:none
+    }
+
+    .btn-modal:first-child{
+      flex: 1;
+      margin-right: 10px;
+    background-color: #7e8082;
+    &:hover{
+      background-color: #aaaaaa;
+    }
+    }
+ 
+    .btn-modal:last-child{
+      flex: 1;
+      margin-right: 10px;
+    background-color:$color-principal-blue;
+    &:hover{
+      background-color: $color-principal-blue-hover;
+    }
+    }
+  }
+}
+
+
 .mat-cell,.cdk-column-Checked{
   position: relative!important;
   width: 30px!important;
@@ -14,7 +74,7 @@
 .mat-checkbox{
   position: absolute;
   top: 15px;
-  left: 6px;
+  left: 15px;
   width: 15px!important;
   height: 15px!important;
 }
