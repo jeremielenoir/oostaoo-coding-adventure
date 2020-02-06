@@ -98,7 +98,6 @@ export class StripePaymentComponent implements OnInit {
           // Use the token to create a charge or a customer
           // https://stripe.com/docs/charges
 
-
           this.payload = {
             offer: this.offerChoice,
             email: this.userInfo.email,
