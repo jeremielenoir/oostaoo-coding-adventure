@@ -92,7 +92,7 @@ export class ProfilUtilisateurComponent implements OnInit {
     Signature: this.signature.value,
   }).subscribe(
     (res) => {
-      alert('Profil mis à jour');
+      this.openSnackBar('Signature mise à jour', 'Fermer');
      // console.log('res', res);
     },
     err => console.log(err)
