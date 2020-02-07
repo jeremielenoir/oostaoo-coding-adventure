@@ -2,6 +2,12 @@
 @import"../../../../../roodeo-variables.scss";
 // Style sans candidat
 
+.big-content{
+  display: flex;
+  flex: 1 0 auto;
+  height: 100%;
+}
+
 ::ng-deep .mat-table tbody{
 
 }
@@ -74,7 +80,7 @@
 .mat-checkbox{
   position: absolute;
   top: 15px;
-  left: 15px;
+  left: 30%;
   width: 15px!important;
   height: 15px!important;
 }
@@ -342,7 +348,9 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
     .table-container {
       width: 100%;
       margin-top: 20px;
-      height: 430px;
+      display: flex;
+      // max-height: 63vh;
+      flex: 1 0 auto;
       overflow-y: auto;
       overflow-x: hidden;
       &::-webkit-scrollbar{

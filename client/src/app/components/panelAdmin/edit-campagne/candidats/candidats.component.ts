@@ -51,6 +51,7 @@ export class CandidatsComponent implements OnInit {
   public questions;
   public idElementExported: string;
   public bolleanAnonymiser: boolean;
+  public bolleanDeleteCandidat: boolean;
   datePipe = new DatePipe('fr');
   ViewCandidats;
   isLoading = true;
@@ -123,7 +124,6 @@ export class CandidatsComponent implements OnInit {
 
   checkedAction(e?, check?) {
     e.stopPropagation();
-    console.log('change ......')
 
     this.checkedActionBoolean = check.checked;
     if (!check.checked) {
@@ -163,12 +163,31 @@ export class CandidatsComponent implements OnInit {
   removeAnonymiser() {
     this.bolleanAnonymiser = false;
   }
+  deleteCandidat() {
+    this.bolleanDeleteCandidat = true
+  }
+  removeDeleteCandidat() {
+    this.bolleanDeleteCandidat = false
+  }
   AnonymiserFinal() {
-    const urlApi = API_URI_CANDIDATS + '/' + '500'
+    const urlApi = API_URI_CANDIDATS + '/' + this.idElementExported
     this.apiClientService.put(urlApi, {
-
+      Nom: '-',
+      email: '-'
     }).subscribe(response => {
-      console.log('response', response)
+      this.bolleanAnonymiser = false;
+      this.nbrSelectedElementChecked = [];
+      this.ngOnInit();
+
+    })
+  }
+
+  delteCandidat() {
+    const urlApi = API_URI_CANDIDATS + '/' + this.idElementExported
+    this.apiClientService.delete(urlApi).subscribe(response => {
+      this.bolleanDeleteCandidat = false;
+      this.nbrSelectedElementChecked = [];
+      this.ngOnInit()
     })
   }
 

@@ -1,4 +1,4 @@
-<div [ngSwitch]="ViewCandidats" (click)="menuChoince($event)">
+<div [ngSwitch]="ViewCandidats" (click)="menuChoince($event)" class="big-content">
   <!-- <mat-card
     *ngIf="isLoading2"
     style="display: flex; justify-content: center; align-items: center"
@@ -59,6 +59,33 @@
         </div>
       </div>
     </div>
+    <div id="shadow-cog" [class.shadow-cog-active]="bolleanDeleteCandidat">
+      <div id="remove" (click)="removeDeleteCandidat()"></div>
+
+      <div class="modall">
+        <div class="modall-header">
+          <h3 class="modall-title">
+            Supprimer le candidat
+          </h3>
+        </div>
+
+        <div class="modall-content">
+          <i class="fas fa-close content-icon"></i>
+
+          <h4 class="modal-content-title">Supprimer</h4>
+          <p class="content">
+            Attention, vous êtes sur le point de supprimer ce/cette candidat(e) de votre liste.
+            Dans le cadre de la protection des données personnelles, ses données seront anonymisées et vous ne pourrez
+            plus accéder à ses résultats.
+          </p>
+
+        </div>
+        <div class="modall-footer">
+          <button class="btn-modal" (click)="removeDeleteCandidat()">Annuler</button>
+          <button class="btn-modal" (click)="delteCandidat()">Supprimer ce candidat</button>
+        </div>
+      </div>
+    </div>
     <div class="barre-nav">
       <div class="diplex-1">
         <div class="select-choince" (click)="showChoinceList($event)">
@@ -89,7 +116,7 @@
               </button>
             </li>
             <li class="menu-list-choince">
-              <button [class.selected-button]="nbrSelectedElementChecked.length > 0"
+              <button (click)="deleteCandidat()" [class.selected-button]="nbrSelectedElementChecked.length > 0"
                 [disabled]="nbrSelectedElementChecked.length == 0">
                 <i class="fas fa-trash-alt icon-choince icon"></i>
                 <span>Supprime</span>
