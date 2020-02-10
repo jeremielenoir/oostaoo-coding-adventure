@@ -243,54 +243,59 @@ module.exports = {
     });
   },
 
-  charge: async (body) => {
-    return await stripe.charges.create({
-      source: body.token.id,
-      amount: body.amount,
-      currency: 'eur',
-    })
-  },
+  // charge: async (body) => {
+  //   return await stripe.charges.create({
+  //     source: body.token.id,
+  //     amount: body.amount,
+  //     currency: 'eur',
+  //   })
+  // },
 
   subscribe: async (body) => {
-    console.log('body : ', body);
-    console.log('token envoyé : ', body.token);
     const { email } = body;
     const token_id = body.token.id;
     const { id, periodicity, price, plan } = body.offer;
-    console.log('plan : ', plan);
-    try {
+    console.log('data : ', email, token_id, id, periodicity, price);
+    let payment;
+
       const customer = await stripe.customers.create({
         email: email,
         source: token_id,
       })
 
-      let payment;
-      if(periodicity === "monthly"){
-         payment = await stripe.subscriptions.create({
-          customer: customer.id,
-          items: [{
-            plan: plan
-          }],
-          trial_period_days: 30
-        })
-      }else if(periodicity === "unique"){
-        console.log('periodicity unique');
-        console.log('body token : ', body.token);
-         payment = await stripe.charges.create({
-          amount: price,
-          description: 'description',
-          currency: 'eur',
-          source: body.token,
-          metadata: {order_id: plan}
-      });
-    }
 
-    } catch(err) {
-      console.log('subscription',err);
+
+      if(periodicity === "monthly"){
+
+         try {
+           payment = await stripe.subscriptions.create({
+             customer: customer.id,
+             items: [{
+             plan: plan
+             }]
+          });
+          return payment;
+        }catch(error){
+          return error;
+        }
+
+      }else if(periodicity === "unique"){
+
+        try{
+            payment = await stripe.charges.create({
+             amount: price*100,
+             currency: 'EUR',
+             customer: customer.id
+         });
+        return payment;
+       }catch(error){
+         const { statusCode, message, type } = error.raw;
+         throw { statusCode, message, type };
+       }
     }
-    return {subscription: 'toto'};
   }
+
+};
   // subscribe: async (body) => {
   //   const session = stripe.checkout.sessions.create({})
   // }
-};

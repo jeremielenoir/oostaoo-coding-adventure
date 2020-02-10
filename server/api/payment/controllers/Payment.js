@@ -86,17 +86,12 @@ module.exports = {
   },
 
   subscribe: async (ctx, next) => {
-    console.log('subscribe controller!!')
     return strapi.services.payment.subscribe(ctx.request.body)
     .then(res =>  {
-      console.log("res : ", res);
-      // return {
-      //   status: res.status,
-      //   amount: res.amount,
-      //   capture: res.captured
-      // };
       return res;
     })
-    .catch(error => error)
+    .catch(error =>{
+       return error;
+    })
   },
 };

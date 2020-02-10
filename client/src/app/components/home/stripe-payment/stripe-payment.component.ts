@@ -110,9 +110,10 @@ export class StripePaymentComponent implements OnInit {
             .subscribe(data => {
               console.log('data from constroll back', data);
               this.stripeLoader = false;
-              this.router.navigate(['/dashboard/campaigns']);
+              // this.router.navigate(['/dashboard/campaigns']);
             }, error => {
               // switch case d'apres la reponse de stripe
+              console.log('err : ', error);
               this.stripeError = error;
               this.stripeLoader = false;
             });
