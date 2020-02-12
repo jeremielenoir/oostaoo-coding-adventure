@@ -31,7 +31,7 @@ pdfMake.fonts = {
     italics: 'Roboto-Italic.ttf',
     bolditalics: 'Roboto-MediumItalic.ttf'
   }
-}
+};
 
 @Component({
   selector: 'app-candidats',
