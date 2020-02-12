@@ -25,6 +25,7 @@ import { ErrorInterceptor } from './components/home/register/service/error.inter
 import { OffersComponent } from './components/home/offers/offers.component';
 import { StripePaymentComponent } from './components/home/stripe-payment/stripe-payment.component';
 import { RapportDetailleComponent } from './components/panelAdmin/edit-campagne/candidats/rapport-detaille/rapport-detaille.component';
+import { RapportDetailleExempleComponent } from './components/home/rapport-detaille/rapport-detaille.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: AccueilComponent
+  },
+  {
+    path: 'home/rapport_exemple',
+    component: RapportDetailleExempleComponent
   },
   {
     path: 'home/register',
