@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog, MatTableDataSource, MatSort, MatSidenav } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -13,6 +13,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 // font build has to be committed otherwise each developers has to build font locally.
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfFonts from '../../../../../assets/pdfmake-font-builds/vfs_fonts';
+import { element } from 'protractor';
 
 
 
@@ -59,9 +60,10 @@ export class CandidatsComponent implements OnInit {
   checkedActionBoolean = true
   nbrSelectedElementChecked: any[] = [];
   opened: boolean;
-  public yes = 'yes salut';
+  public checkedBox: boolean = false;
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('allChecked') allChecked: ElementRef
 
 
 
@@ -104,10 +106,8 @@ export class CandidatsComponent implements OnInit {
 
   ngOnInit() {
     this.getCampaign().then(datas => {
-      console.log('INIT DATAS', datas);
       this.campaign = datas;
-      console.log('this camp', this.campaign);
-      console.log('this candid', this.candidats);
+      console.log('candidat', this.candidats)
     });
   }
 
@@ -122,39 +122,98 @@ export class CandidatsComponent implements OnInit {
     this.choinceList = false;
   }
 
-  checkedAction(e?, check?) {
+
+  checkedAction(e, check) {
+
     e.stopPropagation();
 
-    this.checkedActionBoolean = check.checked;
     if (!check.checked) {
-      if (this.nbrSelectedElementChecked.includes(check.value)) {
-        console.log('effectivement il est la ');
-        this.idElementExported = check.value;
-      } else {
+      if (!this.nbrSelectedElementChecked.includes(check.value)) {
+
         this.nbrSelectedElementChecked.push(check.value);
-        this.idElementExported = check.value;
-        console.log(' il est pasla ')
+      }
+      this.idElementExported = check.value;
+      if (this.candidats.length == this.nbrSelectedElementChecked.length) {
+        this.allChecked['checked'] = true;
+      } else {
+
       }
 
-
     } else {
+
       let index = this.nbrSelectedElementChecked.indexOf(check.value);
       this.nbrSelectedElementChecked.splice(index, 1);
+      if (this.candidats.length != this.nbrSelectedElementChecked.length) {
+        this.allChecked['checked'] = false;
+      }
+      // this.allChecked['checked'] = false;
+
     }
 
-    console.log('nbrSelectedElementChecked', this.nbrSelectedElementChecked)
 
   }
 
-  allcheckedActiveted(allChecked) {
+  allcheckedActiveted(allChecked, ) {
+    this.nbrSelectedElementChecked = []
+    this.candidats.forEach(element => {
 
-    console.log('all checked', allChecked);
+      if (!allChecked.checked) {
+        this.ngOnInit();
+        this.checkedBox = true
+        this.nbrSelectedElementChecked.push(String(element.id));
+      } else {
+        let index = this.nbrSelectedElementChecked.indexOf(element.id);
+        this.nbrSelectedElementChecked.splice(index, 1);
+        this.checkedBox = false;
+        this.ngOnInit()
+      }
+    })
 
+
+  }
+  checkSeveralIdDelete() {
+    if (this.nbrSelectedElementChecked.length > 1) {
+      this.nbrSelectedElementChecked.forEach(idDelete => {
+        const urlApi = API_URI_CANDIDATS + '/' + idDelete;
+        this.apiClientService.delete(urlApi).subscribe(response => {
+
+          this.bolleanDeleteCandidat = false;
+          this.nbrSelectedElementChecked = [];
+          this.checkedBox = false;
+          this.allChecked['checked'] = false;
+          this.ngOnInit();
+
+        })
+
+      })
+      return;
+    }
+  }
+  checkSeveralIdAnonymiser() {
+    if (this.nbrSelectedElementChecked.length > 1) {
+
+      this.nbrSelectedElementChecked.forEach(elementid => {
+        const urlApi = API_URI_CANDIDATS + '/' + elementid;
+        this.apiClientService.put(urlApi, {
+          Nom: '-',
+          email: '-'
+        }).subscribe(response => {
+
+          this.bolleanDeleteCandidat = false;
+          this.nbrSelectedElementChecked = [];
+          this.checkedBox = false;
+          this.allChecked['checked'] = false;
+          this.ngOnInit()
+        })
+
+      })
+      return;
+    }
   }
 
   exported() {
-    this.viewResultsPdf(this.idElementExported)
-    console.log('exported', this.idElementExported)
+
+    this.viewResultsPdf(this.nbrSelectedElementChecked)
   }
 
   Anonymiser() {
@@ -170,6 +229,7 @@ export class CandidatsComponent implements OnInit {
     this.bolleanDeleteCandidat = false
   }
   AnonymiserFinal() {
+    this.checkSeveralIdAnonymiser();
     const urlApi = API_URI_CANDIDATS + '/' + this.idElementExported
     this.apiClientService.put(urlApi, {
       Nom: '-',
@@ -183,6 +243,7 @@ export class CandidatsComponent implements OnInit {
   }
 
   delteCandidat() {
+    this.checkSeveralIdDelete()
     const urlApi = API_URI_CANDIDATS + '/' + this.idElementExported
     this.apiClientService.delete(urlApi).subscribe(response => {
       this.bolleanDeleteCandidat = false;
@@ -298,7 +359,10 @@ export class CandidatsComponent implements OnInit {
 
 
   collectCandidateResults(candidat_id) {
-    const selectedCandidate = this.candidats.find(unit => unit.id == candidat_id);
+
+    // console.log('%c counterId', 'font-size:24px;color:blue', candidat_id)
+
+    const selectedCandidate = this.candidats.find(unit => unit.id == element);
     const name = selectedCandidate.Nom;
     const email = selectedCandidate.email;
     const duration = selectedCandidate.duree;
@@ -381,13 +445,17 @@ export class CandidatsComponent implements OnInit {
       name, email, duration, score, totalPointsMax,
       totalPointsCandidat, date, resultsByLanguage,
       languages, questionsRapport, totalTestTime, totalCandidateTime
-    };
+    }
+
+
   }
 
   viewResultsPdf(candidat_id) {
+
     const candidateResults = this.collectCandidateResults(candidat_id);
     pdfMake.createPdf(getResultsDefinition(candidateResults)).open();
   }
+
 
   secondsToHms(duree) {
     const h = Math.floor(duree / 3600);
@@ -407,13 +475,12 @@ export class CandidatsComponent implements OnInit {
   menuSidenav(sidenav, candidat) {
     this.currentCandidat = candidat;
     sidenav.toggle();
-    console.log('sidenav', sidenav);
-    console.log('this current', this.currentCandidat);
+
   }
 
   sidnavClose(sidenav) {
     sidenav.close()
-    console.log('hellow', sidenav)
+
   }
 
 }
