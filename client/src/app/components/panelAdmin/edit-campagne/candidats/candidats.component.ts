@@ -13,7 +13,6 @@ import pdfMake from 'pdfmake/build/pdfmake';
 // font build has to be committed otherwise each developers has to build font locally.
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfFonts from '../../../../../assets/pdfmake-font-builds/vfs_fonts';
-import { element } from 'protractor';
 
 
 
