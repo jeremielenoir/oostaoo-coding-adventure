@@ -361,7 +361,7 @@ export class CandidatsComponent implements OnInit {
 
     // console.log('%c counterId', 'font-size:24px;color:blue', candidat_id)
 
-    const selectedCandidate = this.candidats.find(unit => unit.id == element);
+    const selectedCandidate = this.candidats.find(unit => unit.id == candidat_id);
     const name = selectedCandidate.Nom;
     const email = selectedCandidate.email;
     const duration = selectedCandidate.duree;
