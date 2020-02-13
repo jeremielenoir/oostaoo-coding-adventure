@@ -15,6 +15,7 @@ import {
   API_URI_USER
 } from "src/app/api-client/api-client.service";
 import { AuthenticationService } from './../../home/register/service/auth.service';
+import { forEach } from '@angular/router/src/utils/collection';
 
 
 export interface PeriodicElement {
@@ -114,6 +115,7 @@ export class UtilisateursComponent implements OnInit {
     this.checkbox_list = CHECKBOX_DATA;
   }
 
+  public submittedUser = false;
   public checkbox_list :any[];
   public adminId: number;
   public selectedRoleId;
@@ -126,8 +128,11 @@ export class UtilisateursComponent implements OnInit {
 
   public users:any[];
   prenom = new FormControl("", Validators.required);
+  editPrenom = new FormControl("", Validators.required);
   nom = new FormControl("", Validators.required);
+  editNom = new FormControl("", Validators.required);
   email = new FormControl("", Validators.required);
+  editEmail = new FormControl("", Validators.required);
   privileges = new FormControl("", Validators.required);
   password = new FormControl("", Validators.required);
 
@@ -141,6 +146,8 @@ export class UtilisateursComponent implements OnInit {
   public nomIsactiveUpdate = false;
   public prenomIsactiveUpdate = false;
   public emailIsactiveUpdate = false;
+  public editingId = null;
+  public editingUser = null;
 
 
   public displayedColumns: string[] = ["name", "mail", "gestion", "symbol"];
@@ -199,20 +206,37 @@ export class UtilisateursComponent implements OnInit {
     this.emailIsactive = false;
   }
 
-  public param_cog_deux() {
+  // public param_cog_deux() {
+  //   this.shadowcog2 = true;
+  // }
+
+  public openForm(user) {
+
+    this.editingUser = user;
+    this.editPrenom = new FormControl(this.editingUser.prenom, Validators.required);
+    this.editNom = new FormControl(this.editingUser.nom, Validators.required);
+    this.editEmail = new FormControl(this.editingUser.email, Validators.required);
+    this.editingId = user.id;
+    console.log('userdfezijhfelf',this.editingUser)
     this.shadowcog2 = true;
+
+    this.formulaire.nativeElement.prenom.value = user.prenom;
+    this.formulaire.nativeElement.nom.value = user.nom;
+    this.formulaire.nativeElement.email.value = user.email;
+
+    this.list_change(user.role.id);
   }
 
   public param_cog_non_active_deux() {
     this.shadowcog2 = false;
 
-    this.NomValue = "Lenoir";
-    this.PrenomValue = "Jéremie";
-    this.EmailValue = "lenoir.jeremie@oostaoo.com";
+    // this.NomValue = "Lenoir";
+    // this.PrenomValue = "Jéremie";
+    // this.EmailValue = "lenoir.jeremie@oostaoo.com";
 
-    this.nomIsactiveUpdate = false;
-    this.emailIsactiveUpdate = false;
-    this.prenomIsactiveUpdate = false;
+    this.nomIsactiveUpdate = true;
+    this.emailIsactiveUpdate = true;
+    this.prenomIsactiveUpdate = true;
   }
 
   openSnackBar(message: string, action) {
@@ -280,6 +304,41 @@ export class UtilisateursComponent implements OnInit {
                             role: {name: this.selectedRoleName}
                           }];
                           this.param_cog_non_active();
+                          this.PrenomValue = "";
+                          this.NomValue = "";
+                          this.EmailValue = "";
+                          this.UserName = "";
+                          this.selectedRoleName = "";
+        this.openSnackBar('Utilisateur ajouté avec succès', 'Fermer');
+      })
+    .catch(function(res){ console.log(res) })
+  }
+
+  public updateUser() {
+    this.apiClientService
+      .put(`${API_URI_USER}/${this.editingId}`,{
+        prenom: this.editPrenom.value,
+        nom: this.editNom.value,
+        email: this.editEmail.value,
+        username: this.editPrenom.value + this.editNom.value,
+        role: this.selectedRoleId,
+      })
+      .toPromise()
+      .then(async(res)=>{
+        this.ngOnInit();
+        console.log(res);
+        // this.users = [...this.users, {
+        //                     id: res.id,
+        //                     prenom: this.PrenomValue,
+        //                     nom: this.NomValue,
+        //                     email: this.EmailValue,
+        //                     username: this.UserName,
+        //                     role: {name: this.selectedRoleName}
+        //                   }];
+                          this.param_cog_non_active_deux();
+                          this.editPrenom = new FormControl( "", Validators.required);
+                          this.editNom = new FormControl( "", Validators.required);
+                          this.editEmail = new FormControl( "", Validators.required);
                           this.PrenomValue = "";
                           this.NomValue = "";
                           this.EmailValue = "";

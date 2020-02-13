@@ -161,7 +161,7 @@
 
           <div class="modall-content">
 
-             <form>
+             <form (ngSubmit)="updateUser()" class="form" method="PUT" #form>
 
                 <div class="content-form-first">
 
@@ -180,7 +180,7 @@
                     </div>
                     <div>
 
-                      <input type="" value="{{prenomIsactiveUpdate ? '' : PrenomValue}}" class="champ-form" (input)="is_valid_prenom_update($event)" [ngClass]="{'errorChamp': prenomIsactiveUpdate === true}"/>
+                      <input [formControl]="editPrenom" type="" value="{{editingUser?.prenom}}" class="champ-form" (input)="is_valid_prenom_update($event)" [ngClass]="{'errorChamp': prenomIsactiveUpdate === true}"/>
                     </div>
 
 
@@ -200,7 +200,7 @@
 
                     </div>
                     <div>
-                      <input type="" class="champ-form"  (input)="is_valid_nom_update($event)" value="{{nomIsactiveUpdate ? '' : NomValue}}" [ngClass]="{'errorChamp': nomIsactiveUpdate === true}"/>
+                      <input [formControl]="editNom" type="" class="champ-form"  (input)="is_valid_nom_update($event)" value="{{editingUser?.nom}}" [ngClass]="{'errorChamp': nomIsactiveUpdate === true}"/>
                     </div>
 
                   </div>
@@ -219,7 +219,7 @@
 
                     </div>
                     <div>
-                      <input type="" value="{{emailIsactiveUpdate ? '' : EmailValue}}" class="champ-form"  (input)="is_valid_email_update($event)"  [ngClass]="{'errorChamp': emailIsactiveUpdate === true}"/>
+                      <input [formControl]="editEmail" type="" value="{{editingUser?.email}}" class="champ-form"  (input)="is_valid_email_update($event)"  [ngClass]="{'errorChamp': emailIsactiveUpdate === true}"/>
                     </div>
 
 
@@ -248,7 +248,7 @@
 
 
                         <label class="checked-block" [for]="item.id">
-                          <input type="checkbox" [id]="item.id" class="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.isChecked" (click)="list_change(item.id)"/>
+                          <input type="checkbox" [id]="item.id" class="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.isChecked" (click)="list_change(item.id)" />
                           <span class="checkbox-span"></span>
                         </label>
 
@@ -325,7 +325,7 @@
                 <td class="table_body_cell">{{user.email}}</td>
                 <td class="table_body_cell">{{user.role.name}}</td>
                 <td  class="table_body_cell table_icon">
-                  <i (click)="param_cog_deux()" class="fas fa-pencil-alt icon"></i>
+                  <i (click)="openForm(user)" class="fas fa-pencil-alt icon"></i>
                   <i
                   (click)=deleteUser(user.id)
                   class="fas fa-trash-alt icon"></i>
