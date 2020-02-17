@@ -93,7 +93,10 @@ export class UtilisateursComponent implements OnInit {
   privileges = new FormControl("", Validators.required);
   password = new FormControl("", Validators.required);
   addPassword  = new FormControl("", Validators.required);
+  editPassword = new FormControl("", Validators.required);
   confirmPassword = new FormControl("", Validators.required);
+  addUsername = new FormControl("", Validators.required);
+  editUsername = new FormControl("", Validators.required);
 
 
   public nomIsactive = false;
@@ -158,6 +161,9 @@ export class UtilisateursComponent implements OnInit {
     this.formulaire.nativeElement.prenom.value = "";
     this.formulaire.nativeElement.nom.value = "";
     this.formulaire.nativeElement.email.value = "";
+    this.formulaire.nativeElement.username.value = "";
+    this.formulaire.nativeElement.password.value = "";
+
 
     this.shadowcog1 = false;
 
@@ -239,15 +245,15 @@ export class UtilisateursComponent implements OnInit {
     // this.UserName = `${this.PrenomValue}-${this.NomValue}`;
     if(this.addPrenom.value === "" || this.addNom.value === "" || this.addEmail.value === "" || this.addEmail.invalid || 
       this.addPassword.value === "" || this.confirmPassword.value === "" || this.addPassword.value === null ||
-      this.addPassword.value !== this.confirmPassword){
+      this.addPassword.value !== this.confirmPassword.value || this.addUsername.value === ""){
       return;
     };
     const userPayload = ({
       prenom: this.addPrenom.value,
       nom: this.addNom.value,
       email: this.addEmail.value,
-      username: this.addPrenom.value + "" + this.addNom.value,
-      password: this.addPassword,
+      username: this.addUsername.value,
+      password: this.addPassword.value,
       role: this.selectedRoleId,
       adminId: this.adminId
     });
@@ -281,7 +287,9 @@ export class UtilisateursComponent implements OnInit {
 
   public updateUser() {
     this.modifiedUser = true;
-    if (this.editPrenom.value === '' || this.editNom.value === '' || this.editEmail.value === '' || this.editEmail.invalid) {
+    if (this.editPrenom.value === '' || this.editNom.value === '' || this.editEmail.value === '' || this.editEmail.invalid ||
+      this.editPassword.value === "" || this.confirmPassword.value === "" || this.editPassword.value === null ||
+      this.editPassword.value !== this.confirmPassword.value || this.editUsername.value === "") {
       this.openSnackBar('Erreur veuillez remplir tout les champs requis correctement', 'Fermer');
       return console.log('Erreur veuillez remplir tout les champs requis');
     } else {
@@ -290,7 +298,8 @@ export class UtilisateursComponent implements OnInit {
         prenom: this.editPrenom.value,
         nom: this.editNom.value,
         email: this.editEmail.value,
-        username: this.editPrenom.value + "" + this.editNom.value,
+        username: this.editUsername.value,
+        password: this.editPassword.value,
         role: this.selectedRoleId,
       })
       .toPromise()
@@ -309,6 +318,7 @@ export class UtilisateursComponent implements OnInit {
                           this.editPrenom = new FormControl( "", Validators.required);
                           this.editNom = new FormControl( "", Validators.required);
                           this.editEmail = new FormControl( "", Validators.required);
+                          this.editUsername = new FormControl("", Validators.required);
                           // this.PrenomValue = "";
                           // this.NomValue = "";
                           // this.EmailValue = "";
