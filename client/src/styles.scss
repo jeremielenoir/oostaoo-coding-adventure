@@ -7,8 +7,12 @@
 // roodeo themes variables
 $text-color: #212529;
 $background-color: #f9f9f9;
-html{
+html,body{
   background-color: $background-color;
+  height: 100%;
+}
+.ng-star-inserted{
+  flex: 1;
 }
 * {
   margin: 0px;
