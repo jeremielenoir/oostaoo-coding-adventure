@@ -36,16 +36,21 @@
 
                     <div class="title-and-error-span">
 
-                      <label class="libele" [ngClass]="{'new-label': prenomIsactive === true}">prenom</label>
+                      <label class="libele">prenom</label>
 
-                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactive === true}">Obligatoire</span>
+                      <!-- <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactive === true}">Obligatoire</span> -->
 
                     </div>
 
                   </div>
                   <div>
 
-                    <input type="" name="prenom" [ngClass]="{'errorChamp': prenomIsactive === true}" class="champ-form" required id="prenom" (input)="is_valid_prenom($event)" (blur)="is_valid_prenom($event)"/>
+                    <input [formControl]="addPrenom" type="" name="prenom" class="champ-form" required id="prenom"/>
+                    <div *ngIf=" submittedUser && addPrenom.invalid" class="alert alert-danger">
+                      <div *ngIf="addPrenom.errors.required">
+                        Prénom requis.
+                      </div>
+                    </div>
                   </div>
 
 
@@ -57,15 +62,20 @@
 
                     <div class="title-and-error-span">
 
-                      <label [ngClass]="{'new-label': nomIsactive === true}" class="libele">nom</label>
+                      <label class="libele">nom</label>
 
-                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactive === true}">Obligatoire</span>
+                      <!-- <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactive === true}">Obligatoire</span> -->
 
                     </div>
 
                   </div>
                   <div>
-                    <input type="" name="nom"  [ngClass]="{'errorChamp': nomIsactive === true}" class="champ-form" (input)="is_valid_nom($event)" (blur)="is_valid_nom($event)"/>
+                    <input [formControl]="addNom" type="" name="nom" class="champ-form"/>
+                    <div *ngIf=" submittedUser && addNom.invalid" class="alert alert-danger">
+                      <div *ngIf="addNom.errors.required">
+                        Nom requis.
+                      </div>
+                    </div>
                   </div>
 
 
@@ -77,20 +87,98 @@
 
                     <div class="title-and-error-span">
 
-                      <label [ngClass]="{'new-label': emailIsactive === true}" class="libele">email</label>
+                      <label class="libele">email</label>
 
-                      <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactive === true}">{{Textmail}}</span>
+                      <!-- <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactive === true}">{{Textmail}}</span> -->
 
                     </div>
 
                   </div>
                   <div>
-                    <input type="" [ngClass]="{'errorChamp': emailIsactive === true}" name="email"class="champ-form" id="email" (input)="is_valid_emaill($event)" (blur)="is_valid_emaill($event)"/>
+                    <input [formControl]="addEmail" type="" name="email"class="champ-form" id="email"/>
+                    <div *ngIf=" submittedUser && addEmail.invalid" class="alert alert-danger">
+                      <div *ngIf="addEmail.errors.required">
+                        Email requis.
+                      </div>
+                      <div *ngIf="addEmail.errors.email">
+                        Email valide requis.
+                      </div>
+                    </div>
                   </div>
 
 
                 </div>
 
+                <div class="form-groupe">
+
+                  <div class="top-form-groupe">
+
+                    <div class="title-and-error-span">
+
+                      <label class="libele">Mot de passe</label>
+
+                    </div>
+
+                  </div>
+                  <div>
+                    <input [formControl]="addPassword" type="password" name="password"class="champ-form" id="password"/>
+                    <div *ngIf=" submittedUser && addPassword.invalid" class="alert alert-danger">
+                      <div *ngIf="addPassword.errors.required">
+                        Mot de passe requis.
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="form-groupe">
+
+                  <div class="top-form-groupe">
+
+                    <div class="title-and-error-span">
+
+                      <label class="libele">Confirmer le mot de passe</label>
+
+                    </div>
+
+                  </div>
+                  <div>
+                    <input [formControl]="confirmPassword" type="password" name="confirmPassword"class="champ-form" id="confirmPassword"/>
+                    <div *ngIf=" submittedUser && confirmPassword.invalid" class="alert alert-danger">
+                      <div *ngIf="confirmPassword.errors.required">
+                        Confirmation du mot de passe requis.
+                      </div>
+                    </div>
+                    <div *ngIf=" submittedUser && addPassword.value !== confirmPassword.value"  class="alert alert-danger">
+                      Les mots de passe ne correspondent pas.
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <div class="form-groupe">
+
+                  <div class="top-form-groupe">
+
+                    <div class="title-and-error-span">
+
+                      <label class="libele">Pseudo</label>
+
+                    </div>
+
+                  </div>
+                  <div>
+                    <input [formControl]="addUsername" type="text" name="username"class="champ-form" id="username"/>
+                    <div *ngIf=" submittedUser && addUsername.invalid" class="alert alert-danger">
+                      <div *ngIf="addUsername.errors.required">
+                        Pseudo requis.
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
 
               </div>
 
@@ -161,7 +249,7 @@
 
           <div class="modall-content">
 
-             <form>
+             <form (ngSubmit)="updateUser()" class="form" method="PUT" #form>
 
                 <div class="content-form-first">
 
@@ -171,16 +259,22 @@
 
                       <div class="title-and-error-span">
 
-                          <label class="libele" [ngClass]="{'new-label': prenomIsactiveUpdate === true}">prenom</label>
-
-                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactiveUpdate === true}">Obligatoire</span>
+                          <label class="libele" >prenom</label>
+                          
+                          <!-- <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactiveUpdate === true}">Obligatoire</span> -->
 
                       </div>
 
                     </div>
                     <div>
 
-                      <input type="" value="{{prenomIsactiveUpdate ? '' : PrenomValue}}" class="champ-form" (input)="is_valid_prenom_update($event)" [ngClass]="{'errorChamp': prenomIsactiveUpdate === true}"/>
+                      <input [formControl]="editPrenom" type="" value="{{editingUser?.prenom}}" class="champ-form"/>
+                      <div *ngIf=" modifiedUser && editPrenom.invalid"
+                      class="alert alert-danger">
+                        <div *ngIf="editPrenom.errors.required">
+                          Prénom requis.
+                        </div>
+                      </div>
                     </div>
 
 
@@ -192,15 +286,20 @@
 
                       <div class="title-and-error-span">
 
-                          <label class="libele" [ngClass]="{'new-label': nomIsactiveUpdate === true}">nom</label>
+                          <label class="libele" >nom</label>
 
-                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactiveUpdate === true}">Obligatoire</span>
+                          <!-- <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactiveUpdate === true}">Obligatoire</span> -->
 
                       </div>
 
                     </div>
                     <div>
-                      <input type="" class="champ-form"  (input)="is_valid_nom_update($event)" value="{{nomIsactiveUpdate ? '' : NomValue}}" [ngClass]="{'errorChamp': nomIsactiveUpdate === true}"/>
+                      <input [formControl]="editNom" type="" class="champ-form"  value="{{editingUser?.nom}}"/>
+                      <div *ngIf=" modifiedUser && editNom.invalid" class="alert alert-danger">
+                        <div *ngIf="editNom.errors.required">
+                          Nom requis.
+                        </div>
+                      </div>
                     </div>
 
                   </div>
@@ -211,20 +310,96 @@
 
                       <div class="title-and-error-span">
 
-                          <label class="libele" [ngClass]="{'new-label': emailIsactiveUpdate === true}">email</label>
+                          <label class="libele">email</label>
 
-                          <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactiveUpdate === true}">{{ Textmail }}</span>
+                          <!-- <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactiveUpdate === true}">{{ Textmail }}</span> -->
 
                       </div>
 
                     </div>
                     <div>
-                      <input type="" value="{{emailIsactiveUpdate ? '' : EmailValue}}" class="champ-form"  (input)="is_valid_email_update($event)"  [ngClass]="{'errorChamp': emailIsactiveUpdate === true}"/>
+                      <input [formControl]="editEmail" type="" value="{{editingUser?.email}}" class="champ-form"/>
+                      <div *ngIf=" modifiedUser && editEmail.invalid" class="alert alert-danger">
+                        <div *ngIf="editEmail.errors.required">
+                          Email requis.
+                        </div>
+                        <div *ngIf="editEmail.errors.email">
+                          Email valide requis.
+                        </div>
+                      </div>
                     </div>
 
 
                   </div>
+                  <div class="form-groupe">
 
+                    <div class="top-form-groupe">
+  
+                      <div class="title-and-error-span">
+  
+                        <label class="libele">Mot de passe</label>
+  
+                      </div>
+  
+                    </div>
+                    <div>
+                      <input [formControl]="editPassword" type="password" name="password"class="champ-form" id="editPassword"/>
+                      <div *ngIf=" submittedUser && editPassword.invalid" class="alert alert-danger">
+                        <div *ngIf="editPassword.errors.required">
+                          Mot de passe requis.
+                        </div>
+                      </div>
+                    </div>
+  
+  
+                  </div>
+                  <div class="form-groupe">
+  
+                    <div class="top-form-groupe">
+  
+                      <div class="title-and-error-span">
+  
+                        <label class="libele">Confirmer le mot de passe</label>
+  
+                      </div>
+  
+                    </div>
+                    <div>
+                      <input [formControl]="confirmPassword" type="password" name="confirmPassword"class="champ-form" id="confirmPassword"/>
+                      <div *ngIf=" submittedUser && confirmPassword.invalid" class="alert alert-danger">
+                        <div *ngIf="confirmPassword.errors.required">
+                          Confirmation du mot de passe requis.
+                        </div>
+                      </div>
+                      <div *ngIf=" submittedUser && editPassword.value !== confirmPassword.value"  class="alert alert-danger">
+                        Les mots de passe ne correspondent pas.
+                      </div>
+                    </div>
+  
+  
+                  </div>
+                  <div class="form-groupe">
+
+                    <div class="top-form-groupe">
+  
+                      <div class="title-and-error-span">
+  
+                        <label class="libele">Pseudo</label>
+  
+                      </div>
+  
+                    </div>
+                    <div>
+                      <input [formControl]="editUsername" type="text" name="username"class="champ-form" id="editUsername"/>
+                      <div *ngIf=" submittedUser && editUsername.invalid" class="alert alert-danger">
+                        <div *ngIf="editUsername.errors.required">
+                          Pseudo requis.
+                        </div>
+                      </div>
+                    </div>
+  
+  
+                  </div>
 
                 </div>
 
@@ -248,7 +423,7 @@
 
 
                         <label class="checked-block" [for]="item.id">
-                          <input type="checkbox" [id]="item.id" class="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.isChecked" (click)="list_change(item.id)"/>
+                          <input type="checkbox" [id]="item.id" class="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.isChecked" (click)="list_change(item.id)" />
                           <span class="checkbox-span"></span>
                         </label>
 
@@ -321,11 +496,11 @@
         </thead>
         <tbody class="table_body">
             <tr class="table_row" *ngFor="let user of  users">
-                <td class="table_body_cell">{{user.prenom}} {{user.nom}}</td>
+                <td class="table_body_cell">{{user.username}}</td>
                 <td class="table_body_cell">{{user.email}}</td>
                 <td class="table_body_cell">{{user.role.name}}</td>
                 <td  class="table_body_cell table_icon">
-                  <i (click)="param_cog_deux()" class="fas fa-pencil-alt icon"></i>
+                  <i (click)="openForm(user)" class="fas fa-pencil-alt icon"></i>
                   <i
                   (click)=deleteUser(user.id)
                   class="fas fa-trash-alt icon"></i>

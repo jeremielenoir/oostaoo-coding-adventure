@@ -1,6 +1,7 @@
 
 export function getResultsDefinition(candidateResults){
 
+ 
   const {name, email, date, languages, duration, score, resultsByLanguage, totalPointsMax, totalPointsCandidat, questionsRapport, totalTestTime, totalCandidateTime } = candidateResults;
 
   let separatorString = '-';
@@ -32,7 +33,7 @@ export function getResultsDefinition(candidateResults){
     let {percentage_techno} = resultsByLanguage[language];
     percentage_techno = parseInt(percentage_techno.split(' ')[0]);
     let scoreBar = scoreBarBuilder(percentage_techno);
-    console.log(scoreBar, percentage_techno);
+    //  console.log(scoreBar, percentage_techno);
     // one template for one lanauge
     return {
       style: 'language-label',
@@ -78,17 +79,14 @@ export function getResultsDefinition(candidateResults){
 
   function buildLanguagesTemplates(resultsByLanguage) {
     return Object.keys(resultsByLanguage).map(language => {
-      console.log(language);
       return buildLanguageTemplate(language);
     });
   }
 
   let languagesTemplates = buildLanguagesTemplates(resultsByLanguage);
-  console.log('languagesTemplates' ,languagesTemplates);
 
   function questionDetailLayout(question, counter) {
     let {content, name, candidate_answer, correct_answer, question_max_score, question_candidate_score, question_time, question_timeRep} = question;
-    console.log('correct anwer', correct_answer);
 
     function createChoiceTemplate (possibility) {
       let icon = possibility === candidate_answer ? ' ': ' ';
@@ -151,7 +149,7 @@ export function getResultsDefinition(candidateResults){
                     color: '#F7BB13',
                   },
                   {
-                    text: 'Git  ',
+                    text: 'Javascript  ',
                     style: 'question-detail-info'
                   },{
                     text: ' ',
