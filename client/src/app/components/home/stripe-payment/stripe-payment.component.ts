@@ -42,7 +42,7 @@ export class StripePaymentComponent implements OnInit {
     // recuperation de l'offre
     //this.offerChoice = this.session.offerChoice;
     this.offerChoice = JSON.parse(localStorage.getItem('offerChoice'));
-    console.log(this.offerChoice);
+    console.log('offerChoice : ', this.offerChoice);
 
     // info utilisateur a recuperer de la bdd
     this.apiClientService.get(API_URI_USER + '/' + this.userToken.userId).subscribe(user => this.userInfo = user);
@@ -104,9 +104,7 @@ export class StripePaymentComponent implements OnInit {
             token: result.token
           };
 
-          console.log('isma', this.payload);
-
-          this.apiClientService.post(API_URI_PAYMENT + '/subscribe', this.payload)
+          this.apiClientService.post(API_URI_PAYMENT + '/pay', this.payload)
             .subscribe(data => {
               console.log('data from constroll back', data);
               this.stripeLoader = false;

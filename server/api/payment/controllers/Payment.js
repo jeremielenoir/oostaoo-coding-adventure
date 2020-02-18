@@ -72,26 +72,25 @@ module.exports = {
     return strapi.services.payment.remove(ctx.params);
   },
 
-  charge: async (ctx, next) => {
-    return strapi.services.payment.charge(ctx.request.body)
-    .then(res =>  {
-      console.log(res);
-      return {
-        status: res.status,
-        amount: res.amount,
-        capture: res.captured
-      };
-    })
-    .catch(error => error)
-  },
+  // charge: async (ctx, next) => {
+  //   return strapi.services.payment.charge(ctx.request.body)
+  //   .then(res =>  {
+  //     console.log(res);
+  //     return {
+  //       status: res.status,
+  //       amount: res.amount,
+  //       capture: res.captured
+  //     };
+  //   })
+  //   .catch(error => error)
+  // },
 
-  subscribe: async (ctx, next) => {
-    return strapi.services.payment.subscribe(ctx.request.body)
-    .then(res =>  {
-      return res;
-    })
-    .catch(error =>{
-       return error;
-    })
-  },
+  pay: async (ctx, next) => {
+    const { periodicity } = ctx.request.body.offer;
+    if(periodicity == 'unique'){
+        return strapi.services.payment.charge(ctx.request.body);
+    }else if(periodicity == 'monthly'){
+        return strapi.services.payment.subscribe(ctx.request.body);
+      }
+   }
 };

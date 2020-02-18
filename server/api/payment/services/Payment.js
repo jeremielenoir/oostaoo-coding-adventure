@@ -243,29 +243,37 @@ module.exports = {
     });
   },
 
-  // charge: async (body) => {
-  //   return await stripe.charges.create({
-  //     source: body.token.id,
-  //     amount: body.amount,
-  //     currency: 'eur',
-  //   })
-  // },
+  charge: async (body) => {
+    let payment;
+    const customer = await stripe.customers.create({
+      email: body.email,
+      source: body.token.id,
+    })
+    try{
+        payment = await stripe.charges.create({
+         amount: body.offer.price*100,
+         currency: 'EUR',
+         customer: customer.id
+     });
+    return payment;
+    }catch(error){
+      console.log('error : ', error);
+     return { statusCode, message, type } = error.raw;
+    }
+
+    // return await stripe.charges.create({
+    //   source: body.token.id,
+    //   amount: body.amount,
+    //   currency: 'eur',
+    // })
+  },
 
   subscribe: async (body) => {
-    const { email } = body;
-    const token_id = body.token.id;
-    const { id, periodicity, price, plan } = body.offer;
-    console.log('data : ', email, token_id, id, periodicity, price);
     let payment;
-
       const customer = await stripe.customers.create({
-        email: email,
-        source: token_id,
+        email: body.email,
+        source: body.token.id,
       })
-
-
-
-      if(periodicity === "monthly"){
 
          try {
            payment = await stripe.subscriptions.create({
@@ -276,25 +284,10 @@ module.exports = {
           });
           return payment;
         }catch(error){
+          console.log('error : ', error);
           return error;
         }
-
-      }else if(periodicity === "unique"){
-
-        try{
-            payment = await stripe.charges.create({
-             amount: price*100,
-             currency: 'EUR',
-             customer: customer.id
-         });
-        return payment;
-       }catch(error){
-         const { statusCode, message, type } = error.raw;
-         throw { statusCode, message, type };
-       }
-    }
   }
-
 };
   // subscribe: async (body) => {
   //   const session = stripe.checkout.sessions.create({})
