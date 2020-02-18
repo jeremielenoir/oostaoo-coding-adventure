@@ -87,32 +87,32 @@
             </span>
             <mat-menu #menu="matMenu">
 
-              <button (click)="openDialogDuplicate(campaign.id)" mat-menu-item>
+              <button class="button-matMenu" (click)="openDialogDuplicate(campaign.id)" mat-menu-item>
                 <mat-icon>file_copy</mat-icon>
                 <span>Dupliquer</span>
               </button>
 
-              <button *ngIf="campaign.pin === true" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.pin === true" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
                 <mat-icon>bookmark</mat-icon>
                 <span>Désépingler</span>
               </button>
-              <button *ngIf="campaign.pin === false" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.pin === false" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
                 <mat-icon>bookmark</mat-icon>
                 <span>Epingler</span>
               </button>
 
-              <button *ngIf="campaign.archive === true" (click)="archivecampaign(campaign.id,campaign.archive)"
+              <button class="button-matMenu" *ngIf="campaign.archive === true" (click)="archivecampaign(campaign.id,campaign.archive)"
                 mat-menu-item>
                 <mat-icon>unarchive</mat-icon>
                 <span>Désarchiver</span>
               </button>
-              <button *ngIf="campaign.archive === false" (click)="archivecampaign(campaign.id,campaign.archive)"
+              <button class="button-matMenu" *ngIf="campaign.archive === false" (click)="archivecampaign(campaign.id,campaign.archive)"
                 mat-menu-item>
                 <mat-icon>archive</mat-icon>
                 <span>Archiver</span>
               </button>
 
-              <button (click)="openDialogDelete(campaign.id)" mat-menu-item>
+              <button class="button-matMenu" (click)="openDialogDelete(campaign.id)" mat-menu-item>
                 <mat-icon>delete</mat-icon>
                 <span>Supprimer</span>
               </button>
