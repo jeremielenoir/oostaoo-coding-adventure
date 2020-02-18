@@ -42,7 +42,7 @@ export class StripePaymentComponent implements OnInit {
     // recuperation de l'offre
     //this.offerChoice = this.session.offerChoice;
     this.offerChoice = JSON.parse(localStorage.getItem('offerChoice'));
-    console.log(this.offerChoice);
+    console.log('offerChoice : ', this.offerChoice);
 
     // info utilisateur a recuperer de la bdd
     this.apiClientService.get(API_URI_USER + '/' + this.userToken.userId).subscribe(user => this.userInfo = user);
@@ -104,19 +104,18 @@ export class StripePaymentComponent implements OnInit {
             token: result.token
           };
 
-          console.log('isma', this.payload);
+            this.apiClientService.post(API_URI_PAYMENT + '/pay', this.payload)
+              .subscribe(res => {
+                if(!res.status){
+                  this.stripeError = res.raw.message;
+                  this.stripeLoader = false;
+                }else if(res.status=='succeeded' || 'active'){
+                  this.stripeLoader = false;
+                  this.router.navigate(['/dashboard/campaigns']);
+                }
+              });
 
-          this.apiClientService.post(API_URI_PAYMENT + '/subscribe', this.payload)
-            .subscribe(data => {
-              console.log('data from constroll back', data);
-              this.stripeLoader = false;
-              // this.router.navigate(['/dashboard/campaigns']);
-            }, error => {
-              // switch case d'apres la reponse de stripe
-              console.log('err : ', error);
-              this.stripeError = error;
-              this.stripeLoader = false;
-            });
+            // });
         } else if (result.error) {
           // Error creating the token
           console.log(result.error.message);
