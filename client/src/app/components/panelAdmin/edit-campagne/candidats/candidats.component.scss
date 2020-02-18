@@ -5,12 +5,17 @@
 .big-content{
   display: flex;
   flex: 1 0 auto;
-  height: 100%;
+  min-height: 100%;
 }
 
 ::ng-deep .mat-table tbody{
 
 }
+
+::ng-deep .mat-checkbox-layout{
+  width: 19px!important;
+}
+
 
 .modall{
   // min-width: 450px;
@@ -84,9 +89,7 @@
   width: 15px!important;
   height: 15px!important;
 }
-.barre-nav{
 
-}
 .mat-header-row{
   background-color: $color-principal-blue!important;
 }
@@ -134,12 +137,20 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
 .tr.mat-footer-row, tr.mat-row{
   border-bottom: 2px solid $color-principal-blue!important;
 }
+.route-component{
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 #editQuestion {
-  background-color: $background-color;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
   padding-top: 20px;
   padding-left: 7%;
   padding-right: 7%;
-
 
     .select-choince{
       height: 48px;
@@ -200,10 +211,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
               .icon{
             
                 opacity: .5;
-              }
-          
-            
-           
+              } 
           }
           .first-btn{
             border:none!important
@@ -295,7 +303,6 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   display: flex;
   padding: 10px;
   flex-wrap: wrap;
-    overflow: hidden!important;
     .candidat-custom-select {
       border: $border-table;
       background-color:$color-white-background;
@@ -345,43 +352,50 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
     }
     
 
-    .table-container {
-      width: 100%;
-      margin-top: 20px;
-      display: flex;
-      // max-height: 63vh;
-      flex: 1 0 auto;
-      overflow-y: auto;
-      overflow-x: hidden;
-      &::-webkit-scrollbar{
-        width: 8px;
-        height: 8px;
-      }
-      &::-webkit-scrollbar-thumb {
-          background-color: #7f8183;
-      }
-      
-      &::-webkit-scrollbar-thumb:hover{
-          background-color: #67686a;
-      }
-      
-      &::-webkit-scrollbar-track {
-          background: #e3e3e3;
-      }
-
-      table {
-        width: 100%;
-
-        .mat-row:hover {
-          background-color: $color-black-background;
-        }
-
-        .mat-cell:hover {
-          color:$text-color-white;
-        }
-
-      }
+}
+.table-container {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  padding: 10px;
+  margin-bottom: 20px;
+ 
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  .sous-table-content{
+    border:1px solid $color-principal-blue;
+    width: 100%;
+    &::-webkit-scrollbar{
+      width: 8px;
+      height: 8px;
     }
+    &::-webkit-scrollbar-thumb {
+        background-color: #7f8183;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover{
+        background-color: #67686a;
+    }
+  }
+
+  
+  &::-webkit-scrollbar-track {
+      background: #e3e3e3;
+  }
+
+  table {
+    width: 100%;
+
+    .mat-row:hover {
+      background-color: $color-black-background;
+    }
+
+    .mat-cell:hover {
+      color:$text-color-white;
+    }
+
+  }
 }
 
 .matcard_style{
@@ -468,6 +482,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
 }
 
 .sidenav_candidat_result{
+  padding-right: 8px;
   color:$color-principal-blue;
   position: relative;
   top: 8px;
@@ -475,7 +490,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   font-weight: 600;
   display: flex;
   flex-direction: row; 
-  width: 60%;
+  // width: 60%;
   .icon-techno{
     padding-right:6px;
     color: $color-principal-orange;
@@ -537,4 +552,30 @@ filter-table {
     padding: 5px;
   }
 }
+
+@media screen and (max-width: 960px){
+  .sous-table-content{
+    overflow-x: auto;
+  }
+  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
+    padding-left: 50px!important;
+  }
+  .barre-nav{
+    .select-choince{
+      width: 200px!important;
+    }
+    .custom-input-filtre-contenu{
+      width: 65%!important;
+    }
+    flex-direction: column!important;
+    .btn-question{
+      margin-top: 8px;
+      width: 250px;
+
+    }
+  }
+ 
+}
+
+
 

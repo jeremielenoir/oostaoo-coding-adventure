@@ -97,7 +97,7 @@ export class CandidatsComponent implements OnInit {
 
     inviteCandidatDialog.afterClosed().subscribe((data) => {
       this.getCampaign().then(datas => {
-        // console.log('AFTER CLOSE ALL DATAS', datas);
+        console.log('AFTER CLOSE ALL DATAS', datas);
       });
     });
 
@@ -106,7 +106,7 @@ export class CandidatsComponent implements OnInit {
   ngOnInit() {
     this.getCampaign().then(datas => {
       this.campaign = datas;
-      console.log('candidat', this.candidats)
+      console.log('depuis candidat', this.candidats)
     });
   }
 

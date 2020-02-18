@@ -1,9 +1,10 @@
 @import"../../../../roodeo-variables.scss";
+
 .edit-content{
     display: flex;
     flex-direction: column;
-    float: 1px;
-    min-height: 100%;
+    flex: 1px;
+    height: 100%;
 }
 #nav{
 display: flex;
