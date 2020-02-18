@@ -55,7 +55,9 @@ export class CompagneComponent implements OnInit {
           if (campaign.archive === false) {
             this.campaignsFiltered.push(campaign);
             this.test = this.campaignsFiltered;
+            console.log('camp filter', this.campaignsFiltered);
           }
+          console.log('camp filter', this.campaignsFiltered);
         }
 
 

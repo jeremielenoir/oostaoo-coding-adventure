@@ -5,7 +5,7 @@
     </button>
     <form novalidate (ngSubmit)="buy()" [formGroup]="stripeTest">
         <h2 class="title">
-          Vous avez opté pour la formule <b>{{ offerChoice?.title }}</b> de <b>{{ offerChoice?.price }} € <span *ngIf="offerChoice?.periodicity === 'monthly'">/mois</span></b>
+          Vous avez opté pour la formule <b>{{ offerChoice?.title }}</b> de <b>{{ offerChoice?.price }} € <span *ngIf="offerChoice?.periodicity">/mois</span></b>
         </h2>
         <!-- <input type="text" formControlName="name" placeholder="Votre nom"> -->
         <div id="card-element" class="field"></div>

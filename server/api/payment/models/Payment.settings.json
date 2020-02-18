@@ -15,18 +15,20 @@
       "default": "",
       "type": "decimal"
     },
-    "offer_id": {
-      "model": "offer",
-      "via": "Id"
-    },
-    "user_id": {
-      "model": "user",
-      "via": "Id",
-      "plugin": "users-permissions"
-    },
-    "date_payment": {
+    "email": {
       "default": "",
-      "type": "integer"
+      "type": "email"
+    },
+    "offer": {
+      "model": "offer"
+    },
+    "card": {
+      "model": "card"
+    },
+    "user": {
+      "model": "user",
+      "via": "payments",
+      "plugin": "users-permissions"
     }
   }
 }

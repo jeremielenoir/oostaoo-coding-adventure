@@ -31,7 +31,7 @@ export class OffersComponent implements OnInit {
 
       // recuperation offres back
       this.apiClientService.get(API_URI_OFFER).subscribe( offers => {
-        console.log('offers :', offers);
+        console.log(offers);
         offers.forEach(offer => {
           offer.description = offer.description.split('$');
           this.listOffers.push(offer);

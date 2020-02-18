@@ -9,7 +9,7 @@
 
 // Public dependencies.
 const _ = require('lodash');
-const STRIPE_API_KEY = "sk_test_SHGN7PIdottD4WBLCcdSfbwA00kPGubvOC";
+const STRIPE_API_KEY = process.env.STRIPEAPIKEY;
 const stripe = require('stripe')(STRIPE_API_KEY);
 
 // Strapi utilities.
@@ -244,51 +244,36 @@ module.exports = {
   },
 
   charge: async (body) => {
-    let payment;
-    const customer = await stripe.customers.create({
-      email: body.email,
+    return await stripe.charges.create({
       source: body.token.id,
+      amount: body.amount,
+      currency: 'eur',
     })
-    try{
-        payment = await stripe.charges.create({
-         amount: body.offer.price*100,
-         currency: 'EUR',
-         customer: customer.id
-     });
-    return payment;
-    }catch(error){
-      console.log('error : ', error);
-     return { statusCode, message, type } = error.raw;
-    }
-
-    // return await stripe.charges.create({
-    //   source: body.token.id,
-    //   amount: body.amount,
-    //   currency: 'eur',
-    // })
   },
 
   subscribe: async (body) => {
-    let payment;
+    console.log('service subscribe')
+    try {
       const customer = await stripe.customers.create({
-        email: body.email,
+        // email: body.email,
+        email: 'youcef@youcef.fr',
         source: body.token.id,
       })
+      
+      const subscription = await stripe.subscriptions.create({
+        customer: customer.id, 
+        items: [{
+          plan: 'plan_GYgIMYKG0onZrr',
 
-         try {
-           payment = await stripe.subscriptions.create({
-             customer: customer.id,
-             items: [{
-             plan: body.offer.plan
-             }]
-          });
-          return payment;
-        }catch(error){
-          console.log('error : ', error);
-          return error;
-        }
+        }],
+        trial_period_days: 30
+      })
+    } catch(err) {
+      console.log('subscription',err);
+    }
+    return {subscription: 'toto'};
   }
-};
   // subscribe: async (body) => {
   //   const session = stripe.checkout.sessions.create({})
   // }
+};

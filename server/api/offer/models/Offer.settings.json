@@ -30,18 +30,6 @@
     "nom": {
       "default": "",
       "type": "string"
-    },
-    "plan": {
-      "default": "",
-      "type": "string"
-    },
-    "Id": {
-      "collection": "payment",
-      "via": "offer_id"
-    },
-    "tests_stock": {
-      "default": "",
-      "type": "integer"
     }
   }
 }

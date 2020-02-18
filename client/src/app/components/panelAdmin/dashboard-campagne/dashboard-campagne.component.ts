@@ -25,13 +25,15 @@ export class DashboadCampagneComponent implements OnInit {
   }
 
   getCampaignsFromChild(campaigns) {
+    console.log('my campaigns from dashboard-campagne', campaigns);
     this.campaigns = campaigns;
-
+    
     //console.log(this.notifications);
   }
 
   IsBoaleanSmallSidibarOutputClbk(event) {
 
+    console.log('resultat', event)
     this.IsBooaleanDashboardMaxSize = event;
 
   }
@@ -41,6 +43,7 @@ export class DashboadCampagneComponent implements OnInit {
 
     this.booleanViewContentDefault = event;
 
+    console.log(this.booleanViewContentDefault);
 
   }
 }
