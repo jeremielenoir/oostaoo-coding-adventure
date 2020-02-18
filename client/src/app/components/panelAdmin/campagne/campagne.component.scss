@@ -25,9 +25,10 @@
 //   transition: none!important;
 // }
 
-.mat-checkbox-layout .mat-checkbox-label{
-  
+.button-matMenu{
+  outline: none;
 }
+
 .contenu-view-content-left {
   display: flex;
   flex-direction: column;
@@ -45,7 +46,7 @@
       flex-direction: row;
       border-top:1.5px solid #e15028;
       border-bottom:1.5px solid #e15028;
-      padding: 0px 12px;
+      // padding: 0px 12px;
       align-items: center;
       background: #fff;
 
@@ -55,8 +56,9 @@
         flex: 2;
         align-items: center;
         .number-test{
-          padding-right: 31px;
-          padding-left: 19px;
+          // padding-right: 6%;
+          // padding-left: 6%;
+          margin: 0 10%;
           color:#1d3551;
           font-size: 14px;
           font-weight: 700;
@@ -307,10 +309,11 @@
              align-self: center;
              font-size: 14px;
            }
-
          }
        
         }
+
+
 
         .branche-content-list-start{
           display: flex;
