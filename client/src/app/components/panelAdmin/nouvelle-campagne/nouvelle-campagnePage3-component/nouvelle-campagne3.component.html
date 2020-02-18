@@ -53,9 +53,9 @@
         </button>
       </div>
 
-      <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="allQuestionsCampaign"
+      <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="allQuestions"
         [cdkDropListConnectedTo]="[doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of allQuestionsCampaign | filter: searchText" cdkDrag>
+        <div class="example-box" *ngFor="let item of allQuestions | filter: searchText" cdkDrag>
 
           <div class="partie-left-example-box">
             <p class="question-techno">{{ item.technologies.name}}</p>
