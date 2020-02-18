@@ -12,6 +12,11 @@
 
 }
 
+::ng-deep .mat-checkbox-layout{
+  width: 19px!important;
+}
+
+
 .modall{
   // min-width: 450px;
   width: 600px;
@@ -84,9 +89,7 @@
   width: 15px!important;
   height: 15px!important;
 }
-.barre-nav{
 
-}
 .mat-header-row{
   background-color: $color-principal-blue!important;
 }
@@ -300,7 +303,6 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   display: flex;
   padding: 10px;
   flex-wrap: wrap;
-    overflow: hidden!important;
     .candidat-custom-select {
       border: $border-table;
       background-color:$color-white-background;
@@ -362,7 +364,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   overflow-y: auto;
   overflow-x: hidden;
   .sous-table-content{
-    border:1px solid red;
+    border:1px solid $color-principal-blue;
     width: 100%;
     &::-webkit-scrollbar{
       width: 8px;
@@ -480,6 +482,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
 }
 
 .sidenav_candidat_result{
+  padding-right: 8px;
   color:$color-principal-blue;
   position: relative;
   top: 8px;
@@ -487,7 +490,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   font-weight: 600;
   display: flex;
   flex-direction: row; 
-  width: 60%;
+  // width: 60%;
   .icon-techno{
     padding-right:6px;
     color: $color-principal-orange;
@@ -549,4 +552,30 @@ filter-table {
     padding: 5px;
   }
 }
+
+@media screen and (max-width: 960px){
+  .sous-table-content{
+    overflow-x: auto;
+  }
+  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
+    padding-left: 50px!important;
+  }
+  .barre-nav{
+    .select-choince{
+      width: 200px!important;
+    }
+    .custom-input-filtre-contenu{
+      width: 65%!important;
+    }
+    flex-direction: column!important;
+    .btn-question{
+      margin-top: 8px;
+      width: 250px;
+
+    }
+  }
+ 
+}
+
+
 
