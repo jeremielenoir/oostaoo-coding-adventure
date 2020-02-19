@@ -28,9 +28,9 @@ ul li {
   list-style-type: none;
 }
 .checkbox {
-  // width: 0px;
-  // height: 0px;
-  // opacity: 0;
+  width: 0px;
+  height: 0px;
+  opacity: 0;
 }
 .checked-block input:checked ~ .checkbox-span {
 border-color: #1d3551;
