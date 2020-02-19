@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/formules",
+      "handler": "Formule.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/formules/count",
+      "handler": "Formule.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/formules/:id",
+      "handler": "Formule.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/formules",
+      "handler": "Formule.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/formules/:id",
+      "handler": "Formule.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/formules/:id",
+      "handler": "Formule.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

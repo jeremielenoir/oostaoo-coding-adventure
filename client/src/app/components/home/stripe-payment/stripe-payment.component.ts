@@ -18,9 +18,10 @@ export class StripePaymentComponent implements OnInit {
   userInfo: any;
 
   stripeError: string = null;
+  stripeSuccess: string=null;
   stripeLoader = false;
 
-  payload: { amount: number, periodicity: number, token: any };
+  payload: any;
 
   elements: Elements;
   card: StripeElement;
@@ -42,6 +43,7 @@ export class StripePaymentComponent implements OnInit {
     // recuperation de l'offre
     //this.offerChoice = this.session.offerChoice;
     this.offerChoice = JSON.parse(localStorage.getItem('offerChoice'));
+    console.log('offerChoice : ', this.offerChoice);
 
     // info utilisateur a recuperer de la bdd
     this.apiClientService.get(API_URI_USER + '/' + this.userToken.userId).subscribe(user => this.userInfo = user);
@@ -87,6 +89,7 @@ export class StripePaymentComponent implements OnInit {
     //const name = this.stripeTest.get('name').value;
     this.stripeLoader = true;
     // username utilisateur
+    console.log('totoro', this.userInfo);
     const name = this.userInfo.username;
 
     this.stripeService
@@ -97,23 +100,27 @@ export class StripePaymentComponent implements OnInit {
           // https://stripe.com/docs/charges
 
           this.payload = {
-            amount: this.offerChoice.price * 100,
-            periodicity: this.offerChoice.periodicity,
+            offer: this.offerChoice,
+            email: this.userInfo.email,
             token: result.token
           };
 
-          console.log('isma', this.payload);
+            this.apiClientService.post(API_URI_PAYMENT + '/pay', this.payload)
+              .subscribe(res => {
+                if(!res.status){
+                  this.stripeError = res.raw.message;
+                  this.stripeLoader = false;
+                }else if(res.status=='succeeded' || 'active'){
+                  
+                  this.stripeSuccess = 'Votre paiement a été effectué';
+                  this.stripeLoader = false;
+                  setTimeout(()=>{
+                    this.router.navigate(['/dashboard/campaigns']);
+                  }, 1200);
+                }
+              });
 
-          this.apiClientService.post(API_URI_PAYMENT + '/', this.payload)
-            .subscribe(data => {
-              console.log('data from constroll back', data);
-              this.stripeLoader = false;
-              this.router.navigate(['/dashboard/campaigns']);
-            }, error => {
-              // switch case d'apres la reponse de stripe
-              this.stripeError = error;
-              this.stripeLoader = false;
-            });
+            // });
         } else if (result.error) {
           // Error creating the token
           console.log(result.error.message);
