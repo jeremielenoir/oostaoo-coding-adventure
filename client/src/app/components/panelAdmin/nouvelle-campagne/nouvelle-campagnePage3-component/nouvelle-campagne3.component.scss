@@ -125,7 +125,6 @@
     width: 100%;
     display: flex;
     position: relative;
-    border:1px solid red;
     flex: 1;
 }
 
@@ -256,7 +255,6 @@
 
 .example-list {
     height: 40vh;
-    border-bottom: 1px solid blue;
     background: $text-color-white!important;
     display: block;
     overflow-y: auto;
@@ -294,7 +292,6 @@
     cursor: move;
     background:$color-white-background;
     font-size: 14px;
-    position:relative
 }
 
 :host ::ng-deep .example-box {
@@ -332,11 +329,33 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
     padding-left: 5px;
     padding-right: 5px;
+    position: relative;
+    .tooltip-information{
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        top: 60px;
+        padding-left: 10px;
+        padding-right: 35px;
+        display:none;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: white;
+        font-family: $font-poppins;
+        font-size: 15px;
+    }
     &:hover{
         background-color: $color-blue-light;
+        -webkit-box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
+        -moz-box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
+        box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
+        
+        .tooltip-information{
+            background-color:$color-blue-light;
+           display: block;
+        }
         .question-name,.drop i,.point,.time{
             color:white;
         }
@@ -509,5 +528,10 @@
     top:1%;
     width: 32%;
     right: 86px;
-    
+}
+.container-edit-question {
+  margin-left: 5%;
+  margin-right: 5%;
+  padding-bottom: 25px;
+  height: 100%;
 }

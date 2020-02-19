@@ -1,11 +1,17 @@
 @import"../../../../../roodeo-variables.scss";
 #new-campaign {
     min-height: 60vh;
-    width: 71%;
+    // width: 50%;
     margin: 100px auto;
     font-weight: bold;
     border: 8px solid $border-table-second;
     background: $color-white-background;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 #form {

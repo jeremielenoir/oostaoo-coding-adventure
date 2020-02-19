@@ -1,4 +1,11 @@
 @import"../../../../roodeo-variables.scss";
+
+.edit-content{
+    display: flex;
+    flex-direction: column;
+    flex: 1px;
+    height: 100%;
+}
 #nav{
 display: flex;
 width: 100%;

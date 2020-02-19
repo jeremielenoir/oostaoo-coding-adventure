@@ -16,52 +16,6 @@ import {
 } from "src/app/api-client/api-client.service";
 import { AuthenticationService } from './../../home/register/service/auth.service';
 
-
-export interface PeriodicElement {
-  name: string;
-  mail: string;
-  gestion: string;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    name: "Jérémie Lenoir",
-    mail: "Hydrogen",
-    gestion: "Privileges",
-    symbol: ""
-  },
-  { name: "Jérémie Lenoir", mail: "Helium", gestion: "Privileges", symbol: "" },
-  {
-    name: "Jérémie Lenoir",
-    mail: "Lithium",
-    gestion: "Privileges",
-    symbol: ""
-  },
-  {
-    name: "Jérémie Lenoir",
-    mail: "Beryllium",
-    gestion: "Privileges",
-    symbol: ""
-  },
-  { name: "Jérémie Lenoir", mail: "Boron", gestion: "Privileges", symbol: "" },
-  { name: "Jérémie Lenoir", mail: "Carbon", gestion: "Privileges", symbol: "" },
-  {
-    name: "Jérémie Lenoir",
-    mail: "Nitrogen",
-    gestion: "Privileges",
-    symbol: ""
-  },
-  { name: "Jérémie Lenoir", mail: "Oxygen", gestion: "Privileges", symbol: "" },
-  {
-    name: "Jérémie Lenoir",
-    mail: "Fluorine",
-    gestion: "Privileges",
-    symbol: ""
-  },
-  { name: "Jérémie Lenoir", mail: "Neon", gestion: "Privileges", symbol: "" }
-];
-
 const CHECKBOX_DATA = [{
   id: 1,
   name: "LEVEL 2 ACCOUNTING",
@@ -114,22 +68,36 @@ export class UtilisateursComponent implements OnInit {
     this.checkbox_list = CHECKBOX_DATA;
   }
 
+  public submittedUser = false;
+  public modifiedUser = false;
   public checkbox_list :any[];
   public adminId: number;
   public selectedRoleId;
   public selectedRoleName;
-  public PrenomValue = "";
-  public NomValue = "";
-  public UserName = "";
-  public EmailValue = "";
-  public PasswordValue = "1234";
+  // public PrenomValue = "";
+  // public NomValue = "";
+  // public UserName = "";
+  // public EmailValue = "";
+  // public PasswordValue = "";
 
   public users:any[];
   prenom = new FormControl("", Validators.required);
+  addPrenom  = new FormControl("", Validators.required);
+  editPrenom = new FormControl("", Validators.required);
   nom = new FormControl("", Validators.required);
+  addNom  = new FormControl("", Validators.required);
+  editNom = new FormControl("", Validators.required);
   email = new FormControl("", Validators.required);
+  addEmail  = new FormControl("", [Validators.required, Validators.email]);
+  editEmail = new FormControl("", [Validators.required, Validators.email]);
   privileges = new FormControl("", Validators.required);
   password = new FormControl("", Validators.required);
+  addPassword  = new FormControl("", Validators.required);
+  editPassword = new FormControl("", Validators.required);
+  confirmPassword = new FormControl("", Validators.required);
+  addUsername = new FormControl("", Validators.required);
+  editUsername = new FormControl("", Validators.required);
+
 
   public nomIsactive = false;
   public prenomIsactive = false;
@@ -141,10 +109,12 @@ export class UtilisateursComponent implements OnInit {
   public nomIsactiveUpdate = false;
   public prenomIsactiveUpdate = false;
   public emailIsactiveUpdate = false;
+  public editingId = null;
+  public editingUser = null;
 
 
   public displayedColumns: string[] = ["name", "mail", "gestion", "symbol"];
-  public dataSource = ELEMENT_DATA;
+  // public dataSource = ELEMENT_DATA;
 
   positionOptions: TooltipPosition[] = [
     "after",
@@ -191,6 +161,9 @@ export class UtilisateursComponent implements OnInit {
     this.formulaire.nativeElement.prenom.value = "";
     this.formulaire.nativeElement.nom.value = "";
     this.formulaire.nativeElement.email.value = "";
+    this.formulaire.nativeElement.username.value = "";
+    this.formulaire.nativeElement.password.value = "";
+
 
     this.shadowcog1 = false;
 
@@ -199,20 +172,37 @@ export class UtilisateursComponent implements OnInit {
     this.emailIsactive = false;
   }
 
-  public param_cog_deux() {
+  // public param_cog_deux() {
+  //   this.shadowcog2 = true;
+  // }
+
+  public openForm(user) {
+
+    this.editingUser = user;
+    this.editPrenom = new FormControl(this.editingUser.prenom, Validators.required);
+    this.editNom = new FormControl(this.editingUser.nom, Validators.required);
+    this.editEmail = new FormControl(this.editingUser.email, Validators.required);
+    this.editingId = user.id;
+    console.log('userdfezijhfelf',this.editingUser)
     this.shadowcog2 = true;
+
+    this.formulaire.nativeElement.prenom.value = user.prenom;
+    this.formulaire.nativeElement.nom.value = user.nom;
+    this.formulaire.nativeElement.email.value = user.email;
+
+    this.list_change(user.role.id);
   }
 
   public param_cog_non_active_deux() {
     this.shadowcog2 = false;
 
-    this.NomValue = "Lenoir";
-    this.PrenomValue = "Jéremie";
-    this.EmailValue = "lenoir.jeremie@oostaoo.com";
+    // this.NomValue = "Lenoir";
+    // this.PrenomValue = "Jéremie";
+    // this.EmailValue = "lenoir.jeremie@oostaoo.com";
 
-    this.nomIsactiveUpdate = false;
-    this.emailIsactiveUpdate = false;
-    this.prenomIsactiveUpdate = false;
+    this.nomIsactiveUpdate = true;
+    this.emailIsactiveUpdate = true;
+    this.prenomIsactiveUpdate = true;
   }
 
   openSnackBar(message: string, action) {
@@ -248,19 +238,22 @@ export class UtilisateursComponent implements OnInit {
   }
 
   public addUser(){
-    this.PrenomValue = this.formulaire.nativeElement.prenom.value;
-    this.NomValue = this.formulaire.nativeElement.nom.value;
-    this.EmailValue = this.formulaire.nativeElement.email.value;
-    this.UserName = `${this.PrenomValue}-${this.NomValue}`;
-    if(!this.PrenomValue || !this.NomValue || !this.EmailValue){
+    this.submittedUser = true;
+    // this.addPrenom = this.formulaire.nativeElement.prenom.value;
+    // this.addNom = this.formulaire.nativeElement.nom.value;
+    // this.addEmail = this.formulaire.nativeElement.email.value;
+    // this.UserName = `${this.PrenomValue}-${this.NomValue}`;
+    if(this.addPrenom.value === "" || this.addNom.value === "" || this.addEmail.value === "" || this.addEmail.invalid || 
+      this.addPassword.value === "" || this.confirmPassword.value === "" || this.addPassword.value === null ||
+      this.addPassword.value !== this.confirmPassword.value || this.addUsername.value === ""){
       return;
     };
     const userPayload = ({
-      prenom: this.PrenomValue,
-      nom: this.NomValue,
-      email: this.EmailValue,
-      username: this.UserName,
-      password: 'oostaoo',
+      prenom: this.addPrenom.value,
+      nom: this.addNom.value,
+      email: this.addEmail.value,
+      username: this.addUsername.value,
+      password: this.addPassword.value,
       role: this.selectedRoleId,
       adminId: this.adminId
     });
@@ -270,130 +263,177 @@ export class UtilisateursComponent implements OnInit {
       .toPromise()
       .then(async(res)=>{
         console.log(res);
-        this.users = [...this.users, {
-                            id: res.id,
-                            prenom: this.PrenomValue,
-                            nom: this.NomValue,
-                            email: this.EmailValue,
-                            username: this.UserName,
-                            password: '1234',
-                            role: {name: this.selectedRoleName}
-                          }];
-                          this.param_cog_non_active();
-                          this.PrenomValue = "";
-                          this.NomValue = "";
-                          this.EmailValue = "";
-                          this.UserName = "";
-                          this.selectedRoleName = "";
+        this.ngOnInit();
+        // this.users = [...this.users, {
+        //                     id: res.id,
+        //                     prenom: this.PrenomValue,
+        //                     nom: this.NomValue,
+        //                     email: this.EmailValue,
+        //                     username: this.UserName,
+        //                     password: this.PasswordValue,
+        //                     role: {name: this.selectedRoleName}
+        //                   }];
+        this.param_cog_non_active();
+                          // this.PrenomValue = "";
+                          // this.NomValue = "";
+                          // this.EmailValue = "";
+                          // this.UserName = "";
+                          // this.PasswordValue = "";
+                          // this.selectedRoleName = "";
         this.openSnackBar('Utilisateur ajouté avec succès', 'Fermer');
       })
     .catch(function(res){ console.log(res) })
   }
 
-  public Hundelesubmit() {
-    const prenom = this.formulaire.nativeElement.prenom.value;
-    const nom = this.formulaire.nativeElement.nom.value;
-    const email = this.formulaire.nativeElement.email.value;
-
-    if (prenom === "") {
-      return this.prenomIsactive;
-    }
-
-    if (nom === "") {
-      this.nomIsactive = true;
-    }
-
-    if (email === "") {
-      this.emailIsactive = true;
-    }
-  }
-
-  public is_valid_prenom(event) {
-    const champValue = event.target.value;
-
-    if (champValue.length < 1) {
-      this.prenomIsactive = true;
+  public updateUser() {
+    this.modifiedUser = true;
+    if (this.editPrenom.value === '' || this.editNom.value === '' || this.editEmail.value === '' || this.editEmail.invalid ||
+      this.editPassword.value === "" || this.confirmPassword.value === "" || this.editPassword.value === null ||
+      this.editPassword.value !== this.confirmPassword.value || this.editUsername.value === "") {
+      this.openSnackBar('Erreur veuillez remplir tout les champs requis correctement', 'Fermer');
+      return console.log('Erreur veuillez remplir tout les champs requis');
     } else {
-      this.prenomIsactive = false;
+    this.apiClientService
+      .put(`${API_URI_USER}/${this.editingId}`,{
+        prenom: this.editPrenom.value,
+        nom: this.editNom.value,
+        email: this.editEmail.value,
+        username: this.editUsername.value,
+        password: this.editPassword.value,
+        role: this.selectedRoleId,
+      })
+      .toPromise()
+      .then(async(res)=>{
+        this.ngOnInit();
+        console.log(res);
+        // this.users = [...this.users, {
+        //                     id: res.id,
+        //                     prenom: this.PrenomValue,
+        //                     nom: this.NomValue,
+        //                     email: this.EmailValue,
+        //                     username: this.UserName,
+        //                     role: {name: this.selectedRoleName}
+        //                   }];
+                          this.param_cog_non_active_deux();
+                          this.editPrenom = new FormControl( "", Validators.required);
+                          this.editNom = new FormControl( "", Validators.required);
+                          this.editEmail = new FormControl( "", Validators.required);
+                          this.editUsername = new FormControl("", Validators.required);
+                          // this.PrenomValue = "";
+                          // this.NomValue = "";
+                          // this.EmailValue = "";
+                          // this.UserName = "";
+                          // this.selectedRoleName = "";
+        this.openSnackBar('Utilisateur modifié avec succès', 'Fermer');
+      })
+    .catch(function(res){ console.log(res) })
     }
   }
 
-  public is_valid_nom(event) {
-    const champValue = event.target.value;
+  // public Hundelesubmit() {
+  //   const prenom = this.formulaire.nativeElement.prenom.value;
+  //   const nom = this.formulaire.nativeElement.nom.value;
+  //   const email = this.formulaire.nativeElement.email.value;
 
-    if (champValue.length < 1) {
-      this.nomIsactive = true;
-    } else {
-      this.nomIsactive = false;
-    }
-  }
+  //   if (prenom === "") {
+  //     return this.prenomIsactive;
+  //   }
 
-  public is_valid_emaill(event) {
-    const verifyMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   if (nom === "") {
+  //     this.nomIsactive = true;
+  //   }
 
-    const champValue = event.target.value;
+  //   if (email === "") {
+  //     this.emailIsactive = true;
+  //   }
+  // }
 
-    if (champValue.length < 1) {
-      this.emailIsactive = true;
-      this.Textmail = "Obligatoire";
-    } else {
-      if (verifyMail.test(champValue)) {
-        this.Textmail = "Obligatoire";
-        this.emailIsactive = false;
-      } else {
-        this.emailIsactive = true;
-        this.Textmail = "Email invalide";
-      }
-    }
-  }
+  // public is_valid_prenom(event) {
+  //   const champValue = event.target.value;
 
-  // update form
-  public is_valid_prenom_update(event) {
-    const champValue = event.target.value;
+  //   if (champValue.length < 1) {
+  //     this.prenomIsactive = true;
+  //   } else {
+  //     this.prenomIsactive = false;
+  //   }
+  // }
 
-    this.PrenomValue = "";
+  // public is_valid_nom(event) {
+  //   const champValue = event.target.value;
 
-    console.log(champValue);
+  //   if (champValue.length < 1) {
+  //     this.nomIsactive = true;
+  //   } else {
+  //     this.nomIsactive = false;
+  //   }
+  // }
 
-    if (champValue.length < 1) {
-      this.prenomIsactiveUpdate = true;
-    } else {
-      this.prenomIsactiveUpdate = false;
-    }
-  }
+  // public is_valid_emaill(event) {
+  //   const verifyMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  public is_valid_nom_update(event) {
-    const champValue = event.target.value;
+  //   const champValue = event.target.value;
 
-    this.NomValue = "";
+  //   if (champValue.length < 1) {
+  //     this.emailIsactive = true;
+  //     this.Textmail = "Obligatoire";
+  //   } else {
+  //     if (verifyMail.test(champValue)) {
+  //       this.Textmail = "Obligatoire";
+  //       this.emailIsactive = false;
+  //     } else {
+  //       this.emailIsactive = true;
+  //       this.Textmail = "Email invalide";
+  //     }
+  //   }
+  // }
 
-    if (champValue.length < 1) {
-      this.nomIsactiveUpdate = true;
-    } else {
-      this.nomIsactiveUpdate = false;
-    }
-  }
+  // // update form
+  // public is_valid_prenom_update(event) {
+  //   const champValue = event.target.value;
 
-  public is_valid_email_update(event) {
-    const verifyMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   this.PrenomValue = "";
 
-    const champValue = event.target.value;
+  //   console.log(champValue);
 
-    this.EmailValue = event.target.value;
+  //   if (champValue.length < 1) {
+  //     this.prenomIsactiveUpdate = true;
+  //   } else {
+  //     this.prenomIsactiveUpdate = false;
+  //   }
+  // }
 
-    if (champValue.length < 1) {
-      this.emailIsactiveUpdate = true;
-      this.Textmail = "Obligatoire";
-    } else {
-      if (verifyMail.test(champValue)) {
-        this.Textmail = "Obligatoire";
-        this.emailIsactiveUpdate = false;
-      } else {
-        this.emailIsactiveUpdate = true;
-        this.Textmail = "Email invalide";
-      }
-    }
-  }
+  // public is_valid_nom_update(event) {
+  //   const champValue = event.target.value;
+
+  //   this.NomValue = "";
+
+  //   if (champValue.length < 1) {
+  //     this.nomIsactiveUpdate = true;
+  //   } else {
+  //     this.nomIsactiveUpdate = false;
+  //   }
+  // }
+
+  // public is_valid_email_update(event) {
+  //   const verifyMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  //   const champValue = event.target.value;
+
+  //   this.EmailValue = event.target.value;
+
+  //   if (champValue.length < 1) {
+  //     this.emailIsactiveUpdate = true;
+  //     this.Textmail = "Obligatoire";
+  //   } else {
+  //     if (verifyMail.test(champValue)) {
+  //       this.Textmail = "Obligatoire";
+  //       this.emailIsactiveUpdate = false;
+  //     } else {
+  //       this.emailIsactiveUpdate = true;
+  //       this.Textmail = "Email invalide";
+  //     }
+  //   }
+  // }
 
 /**
   async getUser(): Promise<any> {

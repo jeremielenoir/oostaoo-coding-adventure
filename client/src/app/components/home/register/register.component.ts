@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.jwt = this.route.snapshot.queryParams.jwt;
-    if(this.jwt && this.jwt.length>0){
+    if (this.jwt && this.jwt.length > 0) {
       localStorage.setItem('currentUser', this.jwt);
       this.router.navigate(['/dashboard/campaigns']);
     }
