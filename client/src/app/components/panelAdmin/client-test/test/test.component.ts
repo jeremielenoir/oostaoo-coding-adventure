@@ -49,6 +49,7 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('this.candidat =', this.candidat);
     // console.log('questionCampaign: ', this.questionCampaign);
     // console.log('technoCampaign : ', this.technoCampaign);
     this.sumPointsByNumTechno(this.questionCampaign);

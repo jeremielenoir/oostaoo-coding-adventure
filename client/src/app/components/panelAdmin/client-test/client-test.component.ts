@@ -59,10 +59,12 @@ export class ClientTestComponent implements OnInit {
   }
 
   getCandidats() {
-    this.apiClientService.get(API_URI_CANDIDATS).toPromise().then(res => {
+    this.apiClientService.get(`${API_URI_CANDIDATS}?token=${this.idParam}`).toPromise().then(res => {
       for (const candidat of res) {
+        console.log('candidat of res', candidat);
         if (this.idParam === candidat.token) {
           this.candidat = candidat;
+          console.log('candidat this.candidat', this.candidat);
 
           if (candidat.invitation_date !== candidat.test_terminer) {
             this.StatueTestingQuestion = 'fin';
@@ -93,7 +95,7 @@ export class ClientTestComponent implements OnInit {
           });
         }
       }
-      return this.router.navigate(['/home']);
+      return 
     });
   }
 

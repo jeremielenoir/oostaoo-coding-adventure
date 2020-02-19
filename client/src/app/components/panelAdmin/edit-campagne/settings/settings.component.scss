@@ -8,20 +8,23 @@
 
     #content{
         width: 80%;
-        // background: $background-color;
+        //background: $background-color;
+        border-radius: 6px;
         border: $border-table;
 
         #nav{
+
             display: flex;
             width: 100%;
-            border-top: 1px solid $color-table;
-            border-left: 1px solid $color-table;
-            border-right: 1px solid $color-table;
+            border-top: 1px solid $color-principal-orange;
+            // border-left: 1px solid $color-table;
+            // border-right: 1px solid $color-table;
             
             .link-nav{
                 width: 50%;
                 height: 50px;
                 background: $color-black-background-seconde;
+                border-radius: 2px;
                 color: $text-color-white;
                 text-decoration: none;
                 text-align: center;
