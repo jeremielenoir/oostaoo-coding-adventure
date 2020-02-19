@@ -1,6 +1,8 @@
 <div id="content">
   <div id="container">
-    <h2>{{ candidat?.campaign.Name }}</h2>
+    <div class="header-detail">
+      <h2>{{ candidat?.campaign.Name }}</h2>
+    </div>
 
     <div>
       <h5 class="subtitle_h5">Résultats du test</h5>
@@ -9,46 +11,49 @@
       <p>Langue : {{candidat?.campaign.langs}}</p>
     </div>
 
-     
+
     <hr class="separator">
 
     <div class="header_result">
 
       <div class="progressbar_container">
-        <round-progress  [current]="candidat?.points_candidat[5].PourcentTest" [max]="100" [color]="'#ce5637'" [background]="'#c1d5e0'"
-          [radius]="10" [stroke]="3" [semicircle]="false" [rounded]="true" [clockwise]="true"
+        <round-progress [current]="candidat?.points_candidat[5].PourcentTest" [max]="100" [color]="'#ce5637'"
+          [background]="'#c1d5e0'" [radius]="10" [stroke]="3" [semicircle]="false" [rounded]="true" [clockwise]="true"
           [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'" [animationDelay]="100">
         </round-progress>
       </div>
-  
-  
+
+
       <div>
         <p>Score</p>
         <p class="header_stats">{{candidat?.points_candidat[5].PourcentTest}}%</p>
-        <p>{{candidat?.points_candidat[3].totalPointsCandidat}} / {{candidat?.points_candidat[4].totalPointsCampaign}} points </p>
+        <p>{{candidat?.points_candidat[3].totalPointsCandidat}} / {{candidat?.points_candidat[4].totalPointsCampaign}}
+          points </p>
       </div>
       <div>
-        <p >Durée</p>
+        <p>Durée</p>
         <p class="header_stats">{{ candidat?.duree }} / {{ totalTime }} secondes</p>
       </div>
-        </div>
+    </div>
 
     <hr class="separator">
-    
+
 
     <div>
 
       <div *ngFor="let question of rapport; let i = index; let tech of techno">
-        
+
         <h3 class="question_number">Question {{ i+1 }} </h3>
         <div class="header_question">
-        <p id="techno" *ngFor="let tech of techno">
-         <span *ngIf="question.index_question.technologies == tech.id"> {{tech.name}} </span> 
-        </p>
-       
-        <p>{{ question.timeRep }} / {{ question.index_question.time }} secondes</p> 
-        <p *ngIf=" question.array_rep_candidat  ==  question.index_question.answer_value "> {{ question.index_question.points }} / {{ question.index_question.points }} pts</p>
-        <p *ngIf=" question.array_rep_candidat  !=  question.index_question.answer_value "> 0 / {{ question.index_question.points }} pts</p>
+          <p id="techno" *ngFor="let tech of techno">
+            <span *ngIf="question.index_question.technologies == tech.id"> {{tech.name}} </span>
+          </p>
+
+          <p>{{ question.timeRep }} / {{ question.index_question.time }} secondes</p>
+          <p *ngIf=" question.array_rep_candidat  ==  question.index_question.answer_value ">
+            {{ question.index_question.points }} / {{ question.index_question.points }} pts</p>
+          <p *ngIf=" question.array_rep_candidat  !=  question.index_question.answer_value "> 0 /
+            {{ question.index_question.points }} pts</p>
         </div>
         <hr class="separator">
 
@@ -60,10 +65,11 @@
         <p> - {{ question.array_rep_candidat }}</p>
 
         <h5 class="subtitle_h5">Résultats :</h5>
-        <p *ngIf="question.array_rep_candidat  ==  question.index_question.answer_value"> <span class="right_answer"> Réponse correcte :</span>{{ question.index_question.theme }}</p>
+        <p *ngIf="question.array_rep_candidat  ==  question.index_question.answer_value"> <span class="right_answer">
+            Réponse correcte :</span>{{ question.index_question.theme }}</p>
         <div *ngIf="question.array_rep_candidat  !=  question.index_question.answer_value">
-        <p class="wrong_answer">Mauvaise réponse</p>
-        <p>La/Les réponses correcte est/sont : {{ question.index_question.answer_value }}</p> 
+          <p class="wrong_answer">Mauvaise réponse</p>
+          <p>La/Les réponses correcte est/sont : {{ question.index_question.answer_value }}</p>
         </div>
 
         <hr class="separator_red">
