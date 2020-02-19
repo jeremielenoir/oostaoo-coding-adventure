@@ -161,9 +161,10 @@
                 </th>
                 <td mat-cell *matCellDef="let dataInfos">
                   <div class="sous-content-check-action-candidat">
+
                     <input type="checkbox" class="check-action-candidat" (click)="checkedAction($event)"
-                      value="{{dataInfos.candidat_id}}" id="f" />
-                    <label for="f" class="candidat-check"></label>
+                      value="{{dataInfos.candidat_id}}" />
+                    <label id="candidat-check" (click)="activedCheck()"></label>
                   </div>
                 </td>
               </div>

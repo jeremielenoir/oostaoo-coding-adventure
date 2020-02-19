@@ -4,17 +4,17 @@
     line-height: 0px;
     background: $color-orange-light!important;
     border-radius: 0px !important;
-    font-size: 15px !important;
+    font-size: 14px !important;
     contain: content;
     font-weight: 600;
     padding: 15px 40px !important;
     color: $text-color-white !important;
-    height: 80px;   
+    height: 62px;   
 }
 
-::ng-deep .cdk-overlay-pane{
-    width: 165px;
-}
+// ::ng-deep .cdk-overlay-pane{
+//     width: 165px;
+// }
 
  ::ng-deep .mat-menu-panel{
     width: 100%!important;
@@ -40,9 +40,11 @@
     background-color: $color-pricipal-blue-light;
     display: flex;
     padding-right: 6%;
-    height: 82px;
+    height: 65px;
    
     .segment2{
+        display: flex;
+        align-items: center;
         margin-top: -1px;
     }
     .segment3{
@@ -138,7 +140,8 @@
     background: #fff;
     justify-content: space-between;
     #div-search {
-        position: relative;
+        display: flex;
+        
         .search-input{
             font-size: 15px;
             background-color: white;
@@ -146,7 +149,6 @@
             border-bottom: 1.5px solid #de522b;
             outline: none;
             padding: 6px 6px;
-            font-size: 18px;
             width: 150px;
             &::placeholder{
                 font-family: $font-poppins;
@@ -155,21 +157,16 @@
             }
         }
         .icon-search{
-            display: inline-block;
-            padding-left: 10px;
-            // color: #de522b;
-            font-size: 24px;
-            top: 0px;
-            right: -38px;
-            position: absolute;
-            width: 40px;
-            height: 40px;
+            // display: inline-block;
+            width: 25px;
+            height: 25px;
+            font-size: 27px;
         }
     }
     .search-advanced{
         color:$color-orange-light;
         font-family: $font-poppins;
-        font-size: 18px;
+        font-size: 15px;
         justify-content: center;
         margin-left: 12px;
         i{
@@ -186,14 +183,7 @@
 }
 .preview{
     justify-content: flex-end;
-    .icon-trash{
-        color: $color-orange-light;
-        font-size: 28px;
-        margin-right: 28px;
-        &:hover{
-            color:$color-principal-orange
-        }
-    }
+
     .preview-btn{
         background-color: $color-principal-blue!important;
         letter-spacing: 1px;
@@ -244,7 +234,7 @@
 .example-container {
     width: 50%;
     max-width: 100%;
-    margin: 10px 1% 0;
+    margin: 10px 10px 0;
     vertical-align: top;
     border:1.5px solid $color-principal-orange;
     border-radius: 5px;
@@ -315,7 +305,7 @@
    .question-techno {
     display: block;
     width: 100px;
-    font-size: 15px;
+    font-size: 14px;
     color: $color-orange-light;
     font-family: $font-poppins;
     text-align: center;
@@ -355,6 +345,7 @@
         .tooltip-information{
             background-color:$color-blue-light;
            display: block;
+           z-index: 3;
         }
         .question-name,.drop i,.point,.time{
             color:white;
@@ -366,7 +357,7 @@
         margin-bottom: 0px;
         max-width:240px;
         flex: 4;
-        font-size: 15px;
+        font-size: 14px;
         font-family: $font-poppins;
         padding-right: 6px;
         font-weight: 700;
@@ -453,10 +444,10 @@
     
 }
 
-:host ::ng-deep .example-box:hover {
-    box-shadow: 0px 0px 5px $color-grey;
-    transform: translate(2px, -3px);
-}
+// :host ::ng-deep .example-box:hover {
+//     box-shadow: 0px 0px 5px $color-grey;
+//     transform: translate(2px, -3px);
+// }
 
 .cdk-drag-preview {
     box-sizing: border-box;
@@ -483,13 +474,14 @@
 #drop-text {
     height: 35px;
     padding: 0px 0px;
-    margin: 12px !important;
     transition: .5s;
     color: $color-orange-light;
     font-family: $font-poppins;
     text-align: center;
     font-size: 18px;
-    line-height: 30px;
+    line-height: 15px;
+    border-bottom: 1px dashed $color-orange-light;
+    margin: 20px 0px 0px;
 }
 
 .example-box p 
@@ -511,7 +503,7 @@
     color:$text-color-white;
     top:40px;
     position:absolute;
-    z-index:2;
+    z-index:38;
     /* bottom:10px; */
     display:none;
 }
@@ -530,8 +522,8 @@
     right: 86px;
 }
 .container-edit-question {
-  margin-left: 5%;
-  margin-right: 5%;
-  padding-bottom: 25px;
-  height: 100%;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 25px;
+    height: 100%;
 }

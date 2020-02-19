@@ -76,7 +76,7 @@
             <div class="tooltip-information">
               {{item.name}}
             </div>
-            <p class="question-name" matTooltip="{{item.name}}">{{ item.name }}</p>
+            <p class="question-name">{{ item.name }}</p>
             <div class="content-rouded" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
               <span class="niveau-rouded"></span>
               <span class="niveau-rouded"></span>
@@ -121,10 +121,6 @@
 
       <div class="option-question-help preview">
 
-        <a href="" class="icon-trash">
-          <i class="fas fa-trash"></i>
-
-        </a>
         <button mat-flat-button class="trie-cat preview-btn">
           Prévisualiser
           <i class="fas fa-chevron-right icon-arrow-btn"></i>

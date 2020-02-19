@@ -16,12 +16,12 @@
     font-size: 18px;
     padding: 40px 0;
   }
-  
+
   button#go-back {
     margin-top: 30px;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
   }
-  
+
   button#payment {
     margin-top: 40px;
     width: 100%;
@@ -29,6 +29,11 @@
 
   .error-stripe {
     margin-top: 40px;
+  }
+
+  .success-stripe {
+    margin-top: 40px;
+    text-align: center;
   }
 
   .loader {

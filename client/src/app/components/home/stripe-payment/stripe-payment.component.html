@@ -5,15 +5,16 @@
     </button>
     <form novalidate (ngSubmit)="buy()" [formGroup]="stripeTest">
         <h2 class="title">
-          Vous avez opté pour la formule <b>{{ offerChoice?.title }}</b> de <b>{{ offerChoice?.price }} € <span *ngIf="offerChoice?.periodicity">/mois</span></b>
+          Vous avez opté pour la formule <b>{{ offerChoice?.title }}</b> de <b>{{ offerChoice?.price }} € <span *ngIf="offerChoice?.periodicity === 'monthly'">/mois</span></b>
         </h2>
         <!-- <input type="text" formControlName="name" placeholder="Votre nom"> -->
-        <div (change)="onChange($event)" id="card-element" class="field"></div>
-  
+        <div id="card-element" class="field"></div>
+
         <button type="submit" mat-flat-button color="primary" id="payment">PAYER {{ offerChoice?.price }} €</button>
     </form>
 
     <div class="alert alert-danger error-stripe" *ngIf="stripeError">{{ stripeError }}</div>
+    <div class="alert alert-success success-stripe" *ngIf="stripeSuccess">{{ stripeSuccess }}</div>
   </div>
 
   <div class="loader" *ngIf="stripeLoader">
@@ -25,8 +26,3 @@
   </div>
 
 </section>
-
-
-
-
-

@@ -162,6 +162,9 @@ export class CandidatsComponent implements OnInit {
 
 
   }
+  activedCheck() {
+
+  }
   checkSeveralIdDelete() {
     if (this.nbrSelectedElementChecked.length > 1) {
       this.nbrSelectedElementChecked.forEach(idDelete => {
