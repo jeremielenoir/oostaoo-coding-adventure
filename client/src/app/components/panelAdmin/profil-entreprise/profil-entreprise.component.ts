@@ -34,28 +34,32 @@ export class ProfilEntrepriseComponent implements OnInit {
   public cadrageImgBooleanLast = false;
   public cadrageImgBooleanStateLast = false;
   public current1 = 0;
-  public current2 = 4;
-  public currentTotal = 4;
+  public current2 = 0;
+  public currentTotal = 0;
   public entreprise: any = null;
 
 
   public entre: any;
 
+  submitted = false;
   logo: any;
   name = new FormControl("", Validators.required);
+  newEntreprise = new FormControl("", Validators.required);
   email = new FormControl("", Validators.required);
-  lang = new FormControl("", Validators.required);
+  newEmail = new FormControl("", [Validators.required, Validators.email]);
+  lang = new FormControl("");
   phone = new FormControl("", Validators.required);
-  industrie = new FormControl("", Validators.required);
-  numberofemployee = new FormControl("", Validators.required);
-  numberofdev = new FormControl("", Validators.required);
-  videolink = new FormControl("", Validators.required);
-  websitelink = new FormControl("", Validators.required);
-  teaser = new FormControl("", Validators.required);
+  newPhone = new FormControl("", Validators.required);
+  industrie = new FormControl("");
+  numberofemployee = new FormControl("");
+  numberofdev = new FormControl("");
+  videolink = new FormControl("");
+  websitelink = new FormControl("");
+  teaser = new FormControl("");
   picture = [];
-  linkedin = new FormControl("", Validators.required);
-  facebook = new FormControl("", Validators.required);
-  twitter = new FormControl("", Validators.required);
+  linkedin = new FormControl("");
+  facebook = new FormControl("");
+  twitter = new FormControl("");
 
   langlist = [
     {
@@ -832,10 +836,10 @@ export class ProfilEntrepriseComponent implements OnInit {
       } else {
       this.getentreprise().then(entreprise => {
         console.log('entrepriseeeeuh', entreprise);
-        this.name = new FormControl(entreprise[0].nom);
-        this.email = new FormControl(entreprise[0].email);
+        this.name = new FormControl(entreprise[0].nom, Validators.required);
+        this.email = new FormControl(entreprise[0].email, [Validators.required, Validators.email]);
         this.lang = new FormControl(entreprise[0].lang);
-        this.phone = new FormControl(entreprise[0].tel);
+        this.phone = new FormControl(entreprise[0].tel, Validators.required);
         this.industrie = new FormControl(entreprise[0].industrie);
         this.numberofemployee = new FormControl(entreprise[0].nb_employe);
         this.numberofdev = new FormControl(entreprise[0].nb_dev);
@@ -853,8 +857,8 @@ export class ProfilEntrepriseComponent implements OnInit {
         console.log('entreprise user', entreprise);
         console.log('this.entreprise=', this.entreprise.logo);
         console.log('entreprise picture', this.picture);
-        this.progressbar1();
-        this.progressbar2();
+        // this.progressbar1();
+        // this.progressbar2();
         this.progressbarTotal();
       });
     }
@@ -863,18 +867,24 @@ export class ProfilEntrepriseComponent implements OnInit {
   }
 
   addentreprise() {
-    this.apiClientService.post(API_URI_ENTREPRISE, {
-      Nom: this.name.value,
-      Email: this.email.value,
-      Tel: this.phone.value,
-      useradmin: this.decryptTokenService.userId
-    }).subscribe(
-      (res) => {
-        this.openSnackBar('Entreprise ajouter', 'Fermer');
-        this.ngOnInit();
-      },
-      err => console.log(err)
-    );
+    this.submitted = true;  
+    if (this.newEntreprise.value === '' || this.newEmail.value === '' || this.newPhone.value === '' || this.newEmail.invalid) {
+      this.openSnackBar('Erreur dans le formulaire merci de vérifier les champs', 'Fermer');
+      return console.log('password not updated');
+    } else {
+      this.apiClientService.post(API_URI_ENTREPRISE, {
+        Nom: this.newEntreprise.value,
+        Email: this.newEmail.value,
+        Tel: this.newPhone.value,
+        useradmin: this.decryptTokenService.userId
+      }).subscribe(
+        (res) => {
+          this.openSnackBar('Entreprise ajouter', 'Fermer');
+          this.ngOnInit();
+        },
+        err => console.log(err)
+      );
+    }
   }
 
   openSnackBar(message: string, action) {
@@ -900,26 +910,35 @@ export class ProfilEntrepriseComponent implements OnInit {
   }
 
   clickchange2() {
-    this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
-      Nom: this.name.value,
-      Email: this.email.value,
-      Tel: this.phone.value,
-      industrie: this.industrie.value,
-      Nb_employe: this.numberofemployee.value,
-      Nb_dev: this.numberofdev.value,
-      Lien_video: this.videolink.value,
-      Url_site: this.websitelink.value,
-      Teaser: this.teaser.value,
-      Linkedin: this.linkedin.value,
-      Facebook: this.facebook.value,
-      Twitter: this.twitter.value,
-    }).subscribe(
-      (res) => {
-        this.openSnackBar('Entreprise mise à jour', 'Fermer');
-        // console.log('res', res);
-      },
-      err => console.log(err)
-    );
+    console.log('bonjour' + this.name.value)
+    this.submitted = true;  
+    if (this.name.value === '' || this.email.value === '' || this.phone.value === '' || this.email.invalid) {
+      this.openSnackBar('Erreur dans le formulaire merci de vérifier les champs', 'Fermer');
+      return console.log('password not updated');
+    } else {
+      this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
+        Nom: this.name.value,
+        Email: this.email.value,
+        Tel: this.phone.value,
+        industrie: this.industrie.value,
+        Nb_employe: this.numberofemployee.value,
+        Nb_dev: this.numberofdev.value,
+        Lien_video: this.videolink.value,
+        Url_site: this.websitelink.value,
+        Teaser: this.teaser.value,
+        Linkedin: this.linkedin.value,
+        Facebook: this.facebook.value,
+        Twitter: this.twitter.value,
+      }).subscribe(
+        (res) => {
+          this.openSnackBar('Entreprise mise à jour', 'Fermer');
+          this.currentTotal = 0;
+          this.ngOnInit();
+          // console.log('res', res);
+        },
+        err => console.log(err)
+      );
+    }
   }
 
   uploadLogo() {
@@ -1019,54 +1038,52 @@ export class ProfilEntrepriseComponent implements OnInit {
     }
   }
 
-  progressbar1() {
-    const total = [this.lang.value, this.videolink.value, this.websitelink.value, this.teaser.value];
-    const percent = 25;
+  // progressbar1() {
+  //   const total = [this.lang.value, this.videolink.value, this.websitelink.value, this.teaser.value];
+  //   const percent = 25;
 
 
-    for (const element of total) {
-      if (element !== null && element !== '') {
-        this.current1 = this.current1 + percent;
+  //   for (const element of total) {
+  //     if (element !== null && element !== '') {
+  //       this.current1 = this.current1 + percent;
 
-        this.current1 = Math.round(this.current1);
-      }
+  //       this.current1 = Math.round(this.current1);
+  //     }
 
-    }
-  }
-  progressbar2() {
+  //   }
+  // }
+  // progressbar2() {
 
-    const total = [
-      this.name.value, this.email.value, this.phone.value,
-      this.industrie.value, this.numberofemployee.value,
-      this.numberofdev.value, this.videolink.value, this.websitelink.value,
-      this.teaser.value, this.linkedin.value, this.facebook.value, this.twitter.value
-    ];
-    const percent = 8.33333333;
-    for (const element of total) {
-      if (element !== null && element !== '') {
-        this.current2 = this.current2 + percent;
-        this.current2 = Math.trunc(this.current2);
-      }
+  //   const total = [
+  //     this.name.value, this.email.value, this.phone.value,
+  //     this.industrie.value, this.numberofemployee.value,
+  //     this.numberofdev.value, this.videolink.value, this.websitelink.value,
+  //     this.teaser.value, this.linkedin.value, this.facebook.value, this.twitter.value
+  //   ];
+  //   const percent = 8.33333333;
+  //   for (const element of total) {
+  //     if (element !== null && element !== '') {
+  //       this.current2 = this.current2 + percent;
+  //       this.current2 = Math.trunc(this.current2);
+  //     }
 
-    }
-  }
+  //   }
+  // }
   progressbarTotal() {
     const total = [
       this.lang.value, this.videolink.value, this.websitelink.value, this.teaser.value,
       this.name.value, this.email.value, this.phone.value,
       this.industrie.value, this.numberofemployee.value, this.numberofdev.value,
-      this.videolink.value, this.websitelink.value, this.teaser.value,
       this.linkedin.value, this.facebook.value, this.twitter.value
     ];
-    const percent = 6.25;
-
-
+    const percent = 100 / total.length ;
     for (const element of total) {
       if (element !== null && element !== '') {
         this.currentTotal = this.currentTotal + percent;
-        this.currentTotal = Math.round(this.currentTotal);
       }
     }
+    this.currentTotal = Math.trunc(this.currentTotal);
+
   }
 
   readURL_deux(event) {

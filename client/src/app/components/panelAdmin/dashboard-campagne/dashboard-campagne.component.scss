@@ -51,7 +51,7 @@
     
     .view-content {
         overflow: hidden;
-        margin-left: 40px;
+        margin-left: 4px;
         margin-right: 40px;
         transition: .3s;
         position: relative;
@@ -63,7 +63,7 @@
             flex: 1;
             height: 100%;
             flex-direction: row;
-            padding: 20px;
+            padding: 28px 20px;
             .app-campagne{
                 min-height: 400px;
                 flex: 2;

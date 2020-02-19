@@ -4,9 +4,22 @@
   padding: 0px 15px!important;
 }
 
-.mat-radio-inner-circle{
-  background: $color-background-blue;
+::ng-deep .mat-radio-inner-circle{
+  background: $color-principal-blue!important;
 }
+
+::ng-deep .mat-radio-outer-circle{
+  border-color:$color-principal-blue!important;
+}
+
+::ng-deep .mat-radio-button{
+  border-color:$color-principal-blue!important;
+}
+
+::ng-deep .mat-ripple-element,::ng-deep .mat-radio-persistent-ripple{
+  background: $color-principal-blue!important;
+}
+
 
 @mixin structureBlock {
   width: 50%;
