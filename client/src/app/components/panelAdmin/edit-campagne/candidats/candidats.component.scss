@@ -7,10 +7,45 @@
   flex: 1 0 auto;
   min-height: 100%;
 }
-
-::ng-deep .mat-table tbody{
-
+.sous-content-check-action-candidat{
+  position: relative;
+  #candidat-check{
+    position: absolute;
+    top: -5;
+    left: 2px;
+    height: 17px;
+    width: 17px;
+    border: 2px solid #7e8082;
+    display: inline-block;
+    border-radius: 2px;
+    margin-top: 4px;
+  }
 }
+
+
+.content-check-action-candidat{
+  position: relative;
+  .checkbox-span{
+    top: -5px;
+    left: 2px;  
+  }
+  .checkbox-span{
+    cursor: pointer;
+  }
+  .checkbox-span::after {
+    border-color:#fff!important;
+ }
+ 
+  input:checked ~ .checkbox-span {
+    border-color: $color-principal-orange;
+    background-color: $color-principal-orange;
+  }
+}
+
+::ng-deep .ng-star-inserted{
+ flex: 1;
+}
+
 
 ::ng-deep .mat-checkbox-layout{
   width: 19px!important;
@@ -346,7 +381,8 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
         height: 48px;
         padding: 10px 23px!important;
         outline: none;
-        margin-left:18px
+        margin-left:18px;
+        border-radius: 5px;
       }
 
     }
@@ -359,12 +395,12 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   display: flex;
   padding: 10px;
   margin-bottom: 20px;
- 
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   .sous-table-content{
-    border:1px solid $color-principal-blue;
+    border-radius: 5px;
+    border:1.5px solid $color-principal-blue;
     width: 100%;
     &::-webkit-scrollbar{
       width: 8px;

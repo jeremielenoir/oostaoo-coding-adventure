@@ -49,7 +49,7 @@ export class CandidatsComponent implements OnInit {
   public infosCandidats;
   public infosCandidatsPdf;
   public questions;
-  public idElementExported: string;
+  public idElementExported: any;
   public bolleanAnonymiser: boolean;
   public bolleanDeleteCandidat: boolean;
   datePipe = new DatePipe('fr');
@@ -62,7 +62,8 @@ export class CandidatsComponent implements OnInit {
   public checkedBox: boolean = false;
 
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('allChecked') allChecked: ElementRef
+  @ViewChild('allChecked') allChecked: ElementRef;
+  @ViewChild('check') check: ElementRef
 
 
 
@@ -87,8 +88,6 @@ export class CandidatsComponent implements OnInit {
     { value: 'expirer', viewValue: 'Expirés' }
   ];
 
-
-
   openDialog() {
     const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
       data: this.globalId,
@@ -106,6 +105,7 @@ export class CandidatsComponent implements OnInit {
   ngOnInit() {
     this.getCampaign().then(datas => {
       this.campaign = datas;
+
       console.log('depuis candidat', this.candidats)
     });
   }
@@ -122,51 +122,43 @@ export class CandidatsComponent implements OnInit {
   }
 
 
-  checkedAction(e, check) {
+  checkedAction(e, check, itemBolean, infosCandidats) {
 
     e.stopPropagation();
-
-    if (!check.checked) {
-      if (!this.nbrSelectedElementChecked.includes(check.value)) {
-
-        this.nbrSelectedElementChecked.push(check.value);
-      }
-      this.idElementExported = check.value;
-      if (this.candidats.length == this.nbrSelectedElementChecked.length) {
-        this.allChecked['checked'] = true;
-      } else {
-
-      }
-
+    let element = e.target;
+    let firstCheckAction = document.querySelector('#first-check-action');
+    if (element.checked) {
+      this.nbrSelectedElementChecked.push(element.value);
+      this.idElementExported = element.value;
     } else {
-
-      let index = this.nbrSelectedElementChecked.indexOf(check.value);
+      let index = this.nbrSelectedElementChecked.indexOf(element.value);
       this.nbrSelectedElementChecked.splice(index, 1);
-      if (this.candidats.length != this.nbrSelectedElementChecked.length) {
-        this.allChecked['checked'] = false;
-      }
-      // this.allChecked['checked'] = false;
-
     }
 
+    if (this.nbrSelectedElementChecked.length !== this.candidats.length) {
+      firstCheckAction['checked'] = false;
+    } else {
+      firstCheckAction['checked'] = true;
+    }
 
   }
 
-  allcheckedActiveted(allChecked, ) {
-    this.nbrSelectedElementChecked = []
-    this.candidats.forEach(element => {
+  allcheckedActiveted(e, allChecked, infosCandidats) {
 
-      if (!allChecked.checked) {
-        this.ngOnInit();
-        this.checkedBox = true
-        this.nbrSelectedElementChecked.push(String(element.id));
+    this.nbrSelectedElementChecked = [];
+    let checkElements = document.querySelectorAll('.check-action-candidat');
+    checkElements.forEach(check => {
+      if (e.target.checked) {
+        check['checked'] = true;
+        this.nbrSelectedElementChecked.push(check['value'])
       } else {
-        let index = this.nbrSelectedElementChecked.indexOf(element.id);
+        check['checked'] = false;
+        let index = this.nbrSelectedElementChecked.indexOf(check['value']);
         this.nbrSelectedElementChecked.splice(index, 1);
-        this.checkedBox = false;
-        this.ngOnInit()
       }
     })
+
+    console.log('this.nbrSelectedElementChecked', this.nbrSelectedElementChecked)
 
 
   }
@@ -189,25 +181,24 @@ export class CandidatsComponent implements OnInit {
     }
   }
   checkSeveralIdAnonymiser() {
-    if (this.nbrSelectedElementChecked.length > 1) {
 
-      this.nbrSelectedElementChecked.forEach(elementid => {
-        const urlApi = API_URI_CANDIDATS + '/' + elementid;
-        this.apiClientService.put(urlApi, {
-          Nom: '-',
-          email: '-'
-        }).subscribe(response => {
+    this.nbrSelectedElementChecked.forEach(elementid => {
+      const urlApi = API_URI_CANDIDATS + '/' + elementid;
+      this.apiClientService.put(urlApi, {
+        Nom: '-',
+        email: '-'
+      }).subscribe(response => {
 
-          this.bolleanDeleteCandidat = false;
-          this.nbrSelectedElementChecked = [];
-          this.checkedBox = false;
-          this.allChecked['checked'] = false;
-          this.ngOnInit()
-        })
-
+        this.bolleanDeleteCandidat = false;
+        this.nbrSelectedElementChecked = [];
+        this.checkedBox = false;
+        this.allChecked['checked'] = false;
+        this.ngOnInit()
       })
-      return;
-    }
+
+    })
+    return;
+
   }
 
   exported() {
@@ -228,7 +219,11 @@ export class CandidatsComponent implements OnInit {
     this.bolleanDeleteCandidat = false
   }
   AnonymiserFinal() {
-    this.checkSeveralIdAnonymiser();
+    if (this.nbrSelectedElementChecked.length > 1) {
+      this.checkSeveralIdAnonymiser();
+      return;
+    }
+
     const urlApi = API_URI_CANDIDATS + '/' + this.idElementExported
     this.apiClientService.put(urlApi, {
       Nom: '-',
@@ -260,8 +255,10 @@ export class CandidatsComponent implements OnInit {
         this.campaigns = res;
         console.log('this.campaign: ', this.campaigns);
         this.candidats = res.candidats;
-
-        // console.log('this.candidats: ', this.candidats);
+        this.candidats.forEach(element => {
+          element.status = false;
+        });
+        console.log('this.candidats: ', this.candidats);
         this.technologies = res.technologies;
         // console.log('this.technologies: ', this.technologies);
         if (this.campaigns.candidats.length > 0) {
@@ -311,6 +308,7 @@ export class CandidatsComponent implements OnInit {
             candidat_id: candidat.id,
             Candidats: candidat.Nom,
             Email: candidat.email,
+            status: candidat.status,
             Checked: false,
             'Dernière activité': dateInvite.toLocaleString(),
             Score: percentCandidat,
