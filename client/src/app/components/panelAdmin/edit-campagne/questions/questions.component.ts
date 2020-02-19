@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TooltipPosition } from '@angular/material';
+import { TooltipPosition, MatSnackBar } from '@angular/material';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -37,7 +37,7 @@ export class QuestionsComponent implements OnInit {
     }
   }
 
-  constructor(private route: ActivatedRoute, public apiClientService: ApiClientService) {
+  constructor(private route: ActivatedRoute, public apiClientService: ApiClientService, private _snackBar: MatSnackBar,) {
     this.route.parent.params.subscribe(params => {
       this.globalId = params.id;
       // console.log('data', this.globalId);
@@ -107,6 +107,12 @@ export class QuestionsComponent implements OnInit {
       .catch(err => err);
   }
 
+  openSnackBar(message: string, action) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
   SendQuestionSelected() {
     for (const element of this.questionsByCampaign) {
       console.log('element: ', element);
@@ -117,6 +123,7 @@ export class QuestionsComponent implements OnInit {
       questions: this.updateQuestionsCampaign
     }).subscribe(
       (res) => {
+        this.openSnackBar('Questions éditées', 'Fermer');
         console.log(res);
       },
       err => console.log(err)

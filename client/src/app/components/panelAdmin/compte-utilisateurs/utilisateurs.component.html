@@ -115,6 +115,29 @@
 
                     <div class="title-and-error-span">
 
+                      <label class="libele">Pseudo</label>
+
+                    </div>
+
+                  </div>
+                  <div>
+                    <input [formControl]="addUsername" type="text" name="username"class="champ-form" id="username"/>
+                    <div *ngIf=" submittedUser && addUsername.invalid" class="alert alert-danger">
+                      <div *ngIf="addUsername.errors.required">
+                        Pseudo requis.
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <div class="form-groupe">
+
+                  <div class="top-form-groupe">
+
+                    <div class="title-and-error-span">
+
                       <label class="libele">Mot de passe</label>
 
                     </div>
@@ -151,29 +174,6 @@
                     </div>
                     <div *ngIf=" submittedUser && addPassword.value !== confirmPassword.value"  class="alert alert-danger">
                       Les mots de passe ne correspondent pas.
-                    </div>
-                  </div>
-
-
-                </div>
-
-                <div class="form-groupe">
-
-                  <div class="top-form-groupe">
-
-                    <div class="title-and-error-span">
-
-                      <label class="libele">Pseudo</label>
-
-                    </div>
-
-                  </div>
-                  <div>
-                    <input [formControl]="addUsername" type="text" name="username"class="champ-form" id="username"/>
-                    <div *ngIf=" submittedUser && addUsername.invalid" class="alert alert-danger">
-                      <div *ngIf="addUsername.errors.required">
-                        Pseudo requis.
-                      </div>
                     </div>
                   </div>
 
@@ -331,6 +331,29 @@
 
 
                   </div>
+
+                  <div class="form-groupe">
+
+                    <div class="top-form-groupe">
+  
+                      <div class="title-and-error-span">
+  
+                        <label class="libele">Pseudo</label>
+  
+                      </div>
+  
+                    </div>
+                    <div>
+                      <input [formControl]="editUsername" type="text" name="username"class="champ-form" id="editUsername"/>
+                      <div *ngIf=" submittedUser && editUsername.invalid" class="alert alert-danger">
+                        <div *ngIf="editUsername.errors.required">
+                          Pseudo requis.
+                        </div>
+                      </div>
+                    </div>
+  
+  
+                  </div>
                   <div class="form-groupe">
 
                     <div class="top-form-groupe">
@@ -373,28 +396,6 @@
                       </div>
                       <div *ngIf=" submittedUser && editPassword.value !== confirmPassword.value"  class="alert alert-danger">
                         Les mots de passe ne correspondent pas.
-                      </div>
-                    </div>
-  
-  
-                  </div>
-                  <div class="form-groupe">
-
-                    <div class="top-form-groupe">
-  
-                      <div class="title-and-error-span">
-  
-                        <label class="libele">Pseudo</label>
-  
-                      </div>
-  
-                    </div>
-                    <div>
-                      <input [formControl]="editUsername" type="text" name="username"class="champ-form" id="editUsername"/>
-                      <div *ngIf=" submittedUser && editUsername.invalid" class="alert alert-danger">
-                        <div *ngIf="editUsername.errors.required">
-                          Pseudo requis.
-                        </div>
                       </div>
                     </div>
   
