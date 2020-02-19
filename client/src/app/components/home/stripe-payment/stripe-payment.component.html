@@ -9,11 +9,12 @@
         </h2>
         <!-- <input type="text" formControlName="name" placeholder="Votre nom"> -->
         <div id="card-element" class="field"></div>
-  
+
         <button type="submit" mat-flat-button color="primary" id="payment">PAYER {{ offerChoice?.price }} €</button>
     </form>
 
     <div class="alert alert-danger error-stripe" *ngIf="stripeError">{{ stripeError }}</div>
+    <div class="alert alert-success success-stripe" *ngIf="stripeSuccess">{{ stripeSuccess }}</div>
   </div>
 
   <div class="loader" *ngIf="stripeLoader">
@@ -25,8 +26,3 @@
   </div>
 
 </section>
-
-
-
-
-

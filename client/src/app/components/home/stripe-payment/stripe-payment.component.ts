@@ -18,6 +18,7 @@ export class StripePaymentComponent implements OnInit {
   userInfo: any;
 
   stripeError: string = null;
+  stripeSuccess: string=null;
   stripeLoader = false;
 
   payload: any;
@@ -110,8 +111,11 @@ export class StripePaymentComponent implements OnInit {
                   this.stripeError = res.raw.message;
                   this.stripeLoader = false;
                 }else if(res.status=='succeeded' || 'active'){
+                  this.stripeSuccess = 'Votre paiement a été effectué';
                   this.stripeLoader = false;
-                  this.router.navigate(['/dashboard/campaigns']);
+                  setTimeout(()=>{
+                    this.router.navigate(['/dashboard/campaigns']);
+                  }, 1200);
                 }
               });
 
