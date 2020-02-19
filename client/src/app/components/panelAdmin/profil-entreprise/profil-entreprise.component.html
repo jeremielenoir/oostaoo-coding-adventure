@@ -14,17 +14,33 @@
               <form>
                 <h2>Ajouter son entreprise</h2>
                 <label for="name">Nom de l'entreprise</label>
-                <input [formControl]="name" name="name" type="text" class="champ-form-gestion" />
-
+                <input [formControl]="newEntreprise" name="name" type="text" class="champ-form-gestion" />
+                <div *ngIf=" submitted && newEntreprise.invalid" class="alert alert-danger">
+                  <div *ngIf="newEntreprise.errors.required">
+                    Veuillez saisir le nom de l'entreprise.
+                  </div>
+                </div>
 
 
                 <label for="email">Email de l'entreprise</label>
-                <input [formControl]="email" name="email" type="email" class="champ-form-gestion" />
-
+                <input [formControl]="newEmail" name="email" type="email" class="champ-form-gestion" />
+                <div *ngIf=" submitted && newEmail.invalid" class="alert alert-danger">
+                  <div *ngIf="newEmail.errors.required">
+                    Veuillez saisir l'email de l'entreprise.
+                  </div>
+                  <div *ngIf="newEmail.errors.email">
+                    Veuillez saisir un email correct.
+                  </div>
+                </div>
 
                 <div class="form-group">
                   <label for="phone">Numéro de téléphone</label>
-                  <input [formControl]="phone" name="phone" type="text" class="champ-form-gestion" />
+                  <input [formControl]="newPhone" name="phone" type="tel" class="champ-form-gestion" />
+                  <div *ngIf=" submitted && newPhone.invalid" class="alert alert-danger">
+                    <div *ngIf="newPhone.errors.required">
+                      Veuillez saisir le numéro de l'entreprise.
+                    </div>
+                  </div>
                 </div>
 
                 <div class="form-group">
@@ -212,7 +228,7 @@
         <div class="all-group-content">
 
           <div class="view-content-center">
-
+<!-- 
             <div class="edit-panel">
 
               <header class="edit-panel-header">
@@ -241,102 +257,19 @@
                 </div>
               </header>
 
-              <div class="param-header" #paramHeader>
-
-                <form>
-
-                  <div class="regroupe-form" #regroupeform>
-
-                    <label class="first-label-param-header">Choisissez votre langue</label>
-
-                    <div class="block-form-flex">
-
-                      <select [formControl]="lang" name="lang" class="champ-form-gestion">
-
-                        <option *ngFor="let lang of langlist" value="{{lang.name}}">{{ lang.name }}</option>
-
-                      </select>
-
-                    </div>
-
-                  </div>
-
-                  <div class="regroupe-form">
-
-                    <label>Lien vidéo</label>
-
-                    <div class="block-form-flex incrage">
-
-                      <input [formControl]="videolink" name="videolink" type="text"
-                        class="champ-form-gestion champ-incrage" value="" />
-
-                      <span class="span-incrage">url:</span>
-
-                    </div>
-
-                  </div>
-
-                  <div class="regroupe-form">
-
-                    <label>Lien du site</label>
-
-                    <div class="block-form-flex">
-
-                      <input [formControl]="websitelink" name="websitelink" type="text"
-                        class="champ-form-gestion champ-incrage" value="" />
-
-                      <span class="span-incrage">url:</span>
-
-                    </div>
-
-                  </div>
-
-                  <div class="regroupe-form">
-
-                    <label>Teaser de l'entreprise</label>
-
-                    <div class="block-form-flex">
-
-                      <textarea [formControl]="teaser" name="teaser" class="champ-form-gestion textarea-gestion"
-                        style="height:150px;resize:none;"></textarea>
-
-                      <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
-
-                    </div>
-
-                  </div>
-
-                  <div class="regroupe-form">
-
-                    <label></label>
-
-                    <div (click)="clickchange()" class="block-form-flex btn-block-flex">
-
-                      <button mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
-
-                    </div>
-
-                  </div>
-
-
-                </form>
-
-
-              </div>
-
-            </div>
+            </div> -->
 
             <div class="edit-panel">
 
               <div class="edit-panel-header">
 
                 <h2 class="title-edit-panel">
-                  Éditez les détails de votre entreprise en Anglais
+                  Éditez les détails de votre entreprise dans la langue de votre choix
                   <figure class="img-country"><img src="../../../../assets/country.png" role="img" alt="country" />
                   </figure>
                 </h2>
 
-                <div class="sous-edit-panel-left">
+                <!-- <div class="sous-edit-panel-left">
 
                   <span class="chart-title">Complétion</span>
 
@@ -357,13 +290,28 @@
 
                   </div>
 
-                </div>
+                </div> -->
 
 
 
               </div>
 
               <form>
+                <div class="regroupe-form" #regroupeform>
+
+                  <label class="first-label-param-header">Choisissez votre langue</label>
+
+                  <div class="block-form-flex">
+
+                    <select [formControl]="lang" name="lang" class="champ-form-gestion">
+
+                      <option *ngFor="let lang of langlist" value="{{lang.name}}">{{ lang.name }}</option>
+
+                    </select>
+
+                  </div>
+
+                </div>
                 <div class="regroupe-form">
 
                   <label>Logo de l'entreprise</label>
@@ -405,7 +353,12 @@
                     <input [formControl]="name" name="name" type="text" class="champ-form-gestion" value="" />
 
                     <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
-
+                    
+                  </div>
+                  <div *ngIf=" submitted && name.invalid" class="alert alert-danger">
+                    <div *ngIf="name.errors.required">
+                      Veuillez saisir le nom de l'entreprise.
+                    </div>
                   </div>
 
                 </div>
@@ -421,6 +374,15 @@
                     <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
 
                   </div>
+                  <div *ngIf=" submitted && email.invalid" class="alert alert-danger">
+                    <div *ngIf="email.errors.required">
+                      Veuillez saisir l'email de l'entreprise.
+                    </div>
+                    <div *ngIf="email.errors.email">
+                      Veuillez saisir un email correct.
+                    </div>
+                  </div>
+
 
                 </div>
 
@@ -430,10 +392,15 @@
 
                   <div class="block-form-flex">
 
-                    <input [formControl]="phone" type="text" class="champ-form-gestion" value="" />
+                    <input [formControl]="phone" type="tel" class="champ-form-gestion" value="" />
 
                     <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
 
+                  </div>
+                  <div *ngIf=" submitted && phone.invalid" class="alert alert-danger">
+                    <div *ngIf="phone.errors.required">
+                      Veuillez saisir le numéro de téléphone de l'entreprise.
+                    </div>
                   </div>
 
                 </div>
@@ -526,7 +493,7 @@
                     <textarea [formControl]="teaser" class="champ-form-gestion textarea-gestion"
                       style="height:150px;resize:none;"></textarea>
 
-                    <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
+                    <!-- <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span> -->
 
                   </div>
 

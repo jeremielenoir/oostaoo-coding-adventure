@@ -28,6 +28,7 @@
         flex: 10000;
         margin: 0 10px 0px 10px;
         border: $border-table;
+        border-radius: $border-radius;
         display: flex;
         overflow: hidden;
         min-width: 300px;
@@ -84,6 +85,7 @@
           color: #20252a;
           margin: 0 10px 0px 10px;
           border: $border-table;
+          border-radius: $border-radius;
           padding: 0 20px;
           display: flex;
           font-size: 14px;
@@ -184,7 +186,7 @@
 .table_body,
 .table_body_cell,
 .table_row {
-  border: $border-table;
+  // border: $border-table;
   padding: 5px;
   margin: 5px;
 }

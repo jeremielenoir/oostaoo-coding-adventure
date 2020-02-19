@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import {  ApiClientService, API_URI_USER, API_URI_USER_ADMIN} from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-profil-utilisateur',
@@ -10,7 +11,7 @@ import { DecryptTokenService } from 'src/app/components/home/register/register.s
 })
 export class ProfilUtilisateurComponent implements OnInit {
 
-  constructor(public apiClientService: ApiClientService,  public decryptTokenService: DecryptTokenService) {
+  constructor(public apiClientService: ApiClientService,  public decryptTokenService: DecryptTokenService, private _snackBar: MatSnackBar) {
   }
 
   public globalId: any;
@@ -19,6 +20,9 @@ export class ProfilUtilisateurComponent implements OnInit {
   dateExp: string | number | Date;
   NewDateExp: Date;
 
+  submittedPassword = false;
+  submittedProfil = false;
+  submittedEmail = false;
   prenom = new FormControl('', Validators.required);
   nom = new FormControl('', Validators.required);
   pays = new FormControl('', Validators.required);
@@ -27,29 +31,41 @@ export class ProfilUtilisateurComponent implements OnInit {
   mobile = new FormControl('', Validators.required);
   fonction = new FormControl('', Validators.required);
   signature = new FormControl('', Validators.required);
-  email = new FormControl('', Validators.required);
+  email = new FormControl('', [Validators.required, Validators.email]);
+  newEmail = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', Validators.required);
   newpassword = new FormControl('', Validators.required);
+  confirmpassword = new FormControl('', Validators.required);
 
   ngOnInit() {
     this.getUser().then(user => {
       console.log(user);
-      this.prenom = new FormControl(user[0].prenom);
-      this.nom = new FormControl(user[0].nom);
-      this.pays = new FormControl(user[0].pays);
+      this.prenom = new FormControl(user[0].prenom, Validators.required);
+      this.nom = new FormControl(user[0].nom, Validators.required);
+      this.pays = new FormControl(user[0].pays, Validators.required);
       this.langue = new FormControl(user[0].langue);
       this.tel = new FormControl(user[0].tel);
       this.mobile = new FormControl(user[0].mobile);
-      this.fonction = new FormControl(user[0].function);
+      this.fonction = new FormControl(user[0].function, Validators.required);
       this.signature = new FormControl(user[0].signature);
-      this.email = new FormControl(user[0].email);
-      this.password = new FormControl(user[0].password);
+      this.email = new FormControl(user[0].email, [Validators.required, Validators.email]);
+      this.password = new FormControl(user[0].password, Validators.required);
      // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
     });
   }
 
-  updateprofil() {
+  openSnackBar(message: string, action) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 
+  updateprofil() {
+    this.submittedProfil = true;
+    if (this.prenom.value === '' || this.nom.value === '' || this.pays.value === '' || this.langue.value === 'value') {
+      this.openSnackBar('Erreur veuillez remplir tout les champs requis correctement', 'Fermer');
+      return console.log('Erreur veuillez remplir tout les champs requis');
+    } else {
     this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
       Prenom: this.prenom.value,
       Nom: this.nom.value,
@@ -60,7 +76,7 @@ export class ProfilUtilisateurComponent implements OnInit {
       function: this.fonction.value,
     }).subscribe(
       (res) => {
-        alert('Profil mis à jour');
+        this.openSnackBar('Profil mis à jour', 'Fermer');
        // console.log('res', res);
       },
       err => console.log(err)
@@ -69,13 +85,14 @@ export class ProfilUtilisateurComponent implements OnInit {
                  this.nom.value, this.pays.value,
                  this.langue.value, this.tel.value, this.mobile.value, this.fonction.value );
  }
+}
 
  updatesignature() {
   this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
     Signature: this.signature.value,
   }).subscribe(
     (res) => {
-      alert('Profil mis à jour');
+      this.openSnackBar('Signature mise à jour', 'Fermer');
      // console.log('res', res);
     },
     err => console.log(err)
@@ -84,29 +101,41 @@ export class ProfilUtilisateurComponent implements OnInit {
 }
 
 updateemail() {
+  this.submittedEmail = true;
+  if (this.email.value === '' || this.newEmail.value === '' || this.email.invalid || this.newEmail.invalid) {
+    this.openSnackBar('Erreur veuillez remplir tout les champs requis correctement', 'Fermer');
+    return console.log('Erreur veuillez remplir tout les champs requis');
+  } else {
   this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
-    Email: this.email.value,
+    Email: this.newEmail.value,
   }).subscribe(
     (res) => {
-      alert('Profil mis à jour');
+      this.openSnackBar('Email mis à jour', 'Fermer');
      // console.log('res', res);
     },
     err => console.log(err)
   );
-  console.log( 'form email =', this.email.value );
+  console.log( 'form email =', this.newEmail.value );
+  }
 }
 
 updatepassword() {
+
+  this.submittedPassword = true;
+  if (this.newpassword.value === null || this.newpassword.value === '' || this.newpassword.value !== this.confirmpassword.value) {
+    return console.log("Erreur le mot de passe n'a pas été modifié ");
+  } else {
   this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
     password: this.newpassword.value,
   }).subscribe(
     (res) => {
-      alert('Profil mis à jour');
+      this.openSnackBar('Mot de passe mis a jour', 'Fermer');
      // console.log('res', res);
     },
     err => console.log(err)
   );
   console.log( 'form password =', this.newpassword.value);
+  }
 }
 
   async getUser(): Promise<any> {

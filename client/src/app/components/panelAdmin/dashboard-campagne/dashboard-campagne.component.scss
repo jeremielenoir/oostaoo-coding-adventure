@@ -4,6 +4,10 @@
     flex: 11!important;
 }
 
+::ng-deep .mat-icon{
+    flex: initial!important;
+  }
+
 .rowter {
     display: flex;
     flex: 1;
@@ -12,7 +16,7 @@
     overflow: hidden;
     background-color:#c1d5e0;
     .header-notification.header-notification-default-text span {
-        transform: translateX(6.1%);
+       
     }
     
     .header-notification {
@@ -51,7 +55,7 @@
     
     .view-content {
         overflow: hidden;
-        margin-left: 40px;
+        margin-left: 4px;
         margin-right: 40px;
         transition: .3s;
         position: relative;
@@ -63,7 +67,7 @@
             flex: 1;
             height: 100%;
             flex-direction: row;
-            padding: 20px;
+            padding: 28px 20px;
             .app-campagne{
                 min-height: 400px;
                 flex: 2;
@@ -83,12 +87,9 @@
 
 @media (min-width: 300px) and (max-width: 1024px) {
     .rowter {
-        flex-wrap: wrap;
         height: 100%;
         .view-content{
             padding-left: 0px;
-           
-           
         }
      
             .new-contenu-view-content{

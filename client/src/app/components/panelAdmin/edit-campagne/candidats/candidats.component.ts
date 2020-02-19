@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog, MatTableDataSource, MatSort, MatSidenav } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -6,6 +6,7 @@ import { InviteCandidat } from './invite-candidat.component';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
+  API_URI_CANDIDATS
 } from '../../../../api-client/api-client.service';
 import { getResultsDefinition } from './getResultsDefinition';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -30,7 +31,7 @@ pdfMake.fonts = {
     italics: 'Roboto-Italic.ttf',
     bolditalics: 'Roboto-MediumItalic.ttf'
   }
-}
+};
 
 @Component({
   selector: 'app-candidats',
@@ -42,12 +43,15 @@ export class CandidatsComponent implements OnInit {
   public campaigns;
   public campaign;
   public candidats;
-  public currentCandidat = {Candidats: ''};
+  public currentCandidat = { Candidats: '' };
   public technologies;
   public displayedColumns;
   public infosCandidats;
   public infosCandidatsPdf;
   public questions;
+  public idElementExported: any;
+  public bolleanAnonymiser: boolean;
+  public bolleanDeleteCandidat: boolean;
   datePipe = new DatePipe('fr');
   ViewCandidats;
   isLoading = true;
@@ -55,9 +59,11 @@ export class CandidatsComponent implements OnInit {
   checkedActionBoolean = true
   nbrSelectedElementChecked: any[] = [];
   opened: boolean;
-  public yes = 'yes salut';
+  public checkedBox: boolean = false;
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('allChecked') allChecked: ElementRef;
+  @ViewChild('check') check: ElementRef
 
 
 
@@ -82,8 +88,6 @@ export class CandidatsComponent implements OnInit {
     { value: 'expirer', viewValue: 'Expirés' }
   ];
 
-
-
   openDialog() {
     const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
       data: this.globalId,
@@ -92,7 +96,7 @@ export class CandidatsComponent implements OnInit {
 
     inviteCandidatDialog.afterClosed().subscribe((data) => {
       this.getCampaign().then(datas => {
-        // console.log('AFTER CLOSE ALL DATAS', datas);
+        console.log('AFTER CLOSE ALL DATAS', datas);
       });
     });
 
@@ -100,10 +104,9 @@ export class CandidatsComponent implements OnInit {
 
   ngOnInit() {
     this.getCampaign().then(datas => {
-      console.log('INIT DATAS', datas);
       this.campaign = datas;
-      console.log('this camp', this.campaign);
-      console.log('this candid', this.candidats);
+
+      console.log('depuis candidat', this.candidats)
     });
   }
 
@@ -118,28 +121,129 @@ export class CandidatsComponent implements OnInit {
     this.choinceList = false;
   }
 
-  checkedAction(e?, check?) {
+
+  checkedAction(e, check, itemBolean, infosCandidats) {
+
     e.stopPropagation();
-    this.checkedActionBoolean = check.checked;
-    if (!check.checked) {
-      if (this.nbrSelectedElementChecked.includes(check.value)) {
-        console.log('effectivement il est la ')
-      } else {
-        this.nbrSelectedElementChecked.push(check.value);
-      }
+    let element = e.target;
+    let firstCheckAction = document.querySelector('#first-check-action');
+    if (element.checked) {
+      this.nbrSelectedElementChecked.push(element.value);
+      this.idElementExported = element.value;
     } else {
-      let index = this.nbrSelectedElementChecked.indexOf(check.value);
+      let index = this.nbrSelectedElementChecked.indexOf(element.value);
       this.nbrSelectedElementChecked.splice(index, 1);
     }
 
-    console.log('nbrSelectedElementChecked', this.nbrSelectedElementChecked)
+    if (this.nbrSelectedElementChecked.length !== this.candidats.length) {
+      firstCheckAction['checked'] = false;
+    } else {
+      firstCheckAction['checked'] = true;
+    }
 
   }
 
-  allcheckedActiveted(allChecked) {
+  allcheckedActiveted(e, allChecked, infosCandidats) {
 
-    console.log('all checked', allChecked);
+    this.nbrSelectedElementChecked = [];
+    let checkElements = document.querySelectorAll('.check-action-candidat');
+    checkElements.forEach(check => {
+      if (e.target.checked) {
+        check['checked'] = true;
+        this.nbrSelectedElementChecked.push(check['value'])
+      } else {
+        check['checked'] = false;
+        let index = this.nbrSelectedElementChecked.indexOf(check['value']);
+        this.nbrSelectedElementChecked.splice(index, 1);
+      }
+    })
 
+    console.log('this.nbrSelectedElementChecked', this.nbrSelectedElementChecked)
+
+
+  }
+  checkSeveralIdDelete() {
+    if (this.nbrSelectedElementChecked.length > 1) {
+      this.nbrSelectedElementChecked.forEach(idDelete => {
+        const urlApi = API_URI_CANDIDATS + '/' + idDelete;
+        this.apiClientService.delete(urlApi).subscribe(response => {
+
+          this.bolleanDeleteCandidat = false;
+          this.nbrSelectedElementChecked = [];
+          this.checkedBox = false;
+          this.allChecked['checked'] = false;
+          this.ngOnInit();
+
+        })
+
+      })
+      return;
+    }
+  }
+  checkSeveralIdAnonymiser() {
+
+    this.nbrSelectedElementChecked.forEach(elementid => {
+      const urlApi = API_URI_CANDIDATS + '/' + elementid;
+      this.apiClientService.put(urlApi, {
+        Nom: '-',
+        email: '-'
+      }).subscribe(response => {
+
+        this.bolleanDeleteCandidat = false;
+        this.nbrSelectedElementChecked = [];
+        this.checkedBox = false;
+        this.allChecked['checked'] = false;
+        this.ngOnInit()
+      })
+
+    })
+    return;
+
+  }
+
+  exported() {
+
+    this.viewResultsPdf(this.nbrSelectedElementChecked)
+  }
+
+  Anonymiser() {
+    this.bolleanAnonymiser = true;
+  }
+  removeAnonymiser() {
+    this.bolleanAnonymiser = false;
+  }
+  deleteCandidat() {
+    this.bolleanDeleteCandidat = true
+  }
+  removeDeleteCandidat() {
+    this.bolleanDeleteCandidat = false
+  }
+  AnonymiserFinal() {
+    if (this.nbrSelectedElementChecked.length > 1) {
+      this.checkSeveralIdAnonymiser();
+      return;
+    }
+
+    const urlApi = API_URI_CANDIDATS + '/' + this.idElementExported
+    this.apiClientService.put(urlApi, {
+      Nom: '-',
+      email: '-'
+    }).subscribe(response => {
+      this.bolleanAnonymiser = false;
+      this.nbrSelectedElementChecked = [];
+      this.ngOnInit();
+
+    })
+  }
+
+  delteCandidat() {
+    this.checkSeveralIdDelete()
+    const urlApi = API_URI_CANDIDATS + '/' + this.idElementExported
+    this.apiClientService.delete(urlApi).subscribe(response => {
+      this.bolleanDeleteCandidat = false;
+      this.nbrSelectedElementChecked = [];
+      this.ngOnInit()
+    })
   }
 
   getCampaign(): Promise<any> {
@@ -151,8 +255,10 @@ export class CandidatsComponent implements OnInit {
         this.campaigns = res;
         console.log('this.campaign: ', this.campaigns);
         this.candidats = res.candidats;
-
-        // console.log('this.candidats: ', this.candidats);
+        this.candidats.forEach(element => {
+          element.status = false;
+        });
+        console.log('this.candidats: ', this.candidats);
         this.technologies = res.technologies;
         // console.log('this.technologies: ', this.technologies);
         if (this.campaigns.candidats.length > 0) {
@@ -202,6 +308,7 @@ export class CandidatsComponent implements OnInit {
             candidat_id: candidat.id,
             Candidats: candidat.Nom,
             Email: candidat.email,
+            status: candidat.status,
             Checked: false,
             'Dernière activité': dateInvite.toLocaleString(),
             Score: percentCandidat,
@@ -249,6 +356,9 @@ export class CandidatsComponent implements OnInit {
 
 
   collectCandidateResults(candidat_id) {
+
+    // console.log('%c counterId', 'font-size:24px;color:blue', candidat_id)
+
     const selectedCandidate = this.candidats.find(unit => unit.id == candidat_id);
     const name = selectedCandidate.Nom;
     const email = selectedCandidate.email;
@@ -332,13 +442,17 @@ export class CandidatsComponent implements OnInit {
       name, email, duration, score, totalPointsMax,
       totalPointsCandidat, date, resultsByLanguage,
       languages, questionsRapport, totalTestTime, totalCandidateTime
-    };
+    }
+
+
   }
 
   viewResultsPdf(candidat_id) {
+
     const candidateResults = this.collectCandidateResults(candidat_id);
     pdfMake.createPdf(getResultsDefinition(candidateResults)).open();
   }
+
 
   secondsToHms(duree) {
     const h = Math.floor(duree / 3600);
@@ -358,10 +472,13 @@ export class CandidatsComponent implements OnInit {
   menuSidenav(sidenav, candidat) {
     this.currentCandidat = candidat;
     sidenav.toggle();
-    console.log('candidattt', candidat);
-    console.log('this current', this.currentCandidat);
+
   }
 
+  sidnavClose(sidenav) {
+    sidenav.close()
+
+  }
 
 }
 

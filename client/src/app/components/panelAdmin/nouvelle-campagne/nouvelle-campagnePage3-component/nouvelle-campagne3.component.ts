@@ -21,6 +21,7 @@ import {
   API_URI_QUESTIONS,
   API_URI_CAMPAIGNS
 } from "../../../../api-client/api-client.service";
+import { Router } from "@angular/router"
 
 @Component({
   selector: "app-NouvelleCampagnePage3Component",
@@ -65,7 +66,8 @@ export class NouvelleCampagnePage3Component implements OnInit {
   }
   constructor(
     public apiClientService: ApiClientService,
-    public decryptTokenService: DecryptTokenService
+    public decryptTokenService: DecryptTokenService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -180,6 +182,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
         res => {
           console.log("resultat from post", res);
           this.SendQuestionSelected(res.id);
+          this.router.navigate([`/dashboard/campaigns/${res.id}/candidats`])
         },
         err => console.log(err)
       );
