@@ -59,7 +59,6 @@ export class CampagneComponent implements OnInit {
       .then(resultat => {
         // console.log('resultat = ', resultat);
         this.campaigns = resultat;
-        console.log('this.campaigns', this.campaigns)
         for (const campaign of this.campaigns) {
           if (campaign.archive === false) {
             this.campaignsFiltered.push(campaign);
@@ -68,9 +67,6 @@ export class CampagneComponent implements OnInit {
             this.campaignsArchived.push(campaign);
             // console.log('campaign archive', this.campaignsArchive);
           }
-          console.log('camp filter', this.campaignsFiltered);
-          console.log('campaign archive', this.campaignsArchived);
-
         }
 
 
