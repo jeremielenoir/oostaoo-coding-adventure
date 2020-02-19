@@ -16,6 +16,7 @@
   font-size: 25px;
   padding-top: 4px;
   cursor: pointer;
+  flex: initial;
 }
 
 .list-sidibar.test{
@@ -133,6 +134,7 @@
           margin-bottom: 0px;
           padding: 6px 10px;
           width: 90%;
+          flex: initial;
 
           a {
             color: #ce5637;
@@ -268,46 +270,7 @@
     display: inline-block;
     margin-left: 25px;
   }
-  .checkbox {
-    width: 0px;
-    height: 0px;
-    opacity: 0;
-  }
-}
-
-.checked-block input:checked ~ .checkbox-span {
-  border-color: #1d3551;
-}
-
-.checkbox-span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 17px;
-  width: 17px;
-  border: 2px solid #7e8082;
-  display: inline-block;
-  border-radius: 2px;
-  margin-top: 4px;
-}
-
-.checkbox-span::after {
-  content: "";
-  position: absolute;
-  display: none;
-  left: 4px;
-  top: 0px;
-  width: 5px;
-  height: 10px;
-  border: solid #1d3551;
-  border-width: 0 2px 2px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-.checked-block input:checked ~ .checkbox-span:after {
-  display: block;
+ 
 }
 
 
