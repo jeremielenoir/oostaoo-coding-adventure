@@ -101,13 +101,17 @@
       "default": "",
       "type": "integer"
     },
-    "Id": {
+    "payment_id": {
       "collection": "payment",
       "via": "user_id"
     },
     "tests_available": {
       "default": "",
       "type": "integer"
+    },
+    "offer_id": {
+      "model": "offer",
+      "via": "user_id"
     }
   },
   "collectionName": "users-permissions_user"

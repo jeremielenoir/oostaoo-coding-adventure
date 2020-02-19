@@ -17,11 +17,11 @@
     },
     "offer_id": {
       "model": "offer",
-      "via": "Id"
+      "via": "payment_id"
     },
     "user_id": {
       "model": "user",
-      "via": "Id",
+      "via": "payment_id",
       "plugin": "users-permissions"
     },
     "date_payment": {

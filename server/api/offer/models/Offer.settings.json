@@ -35,13 +35,18 @@
       "default": "",
       "type": "string"
     },
-    "Id": {
+    "payment_id": {
       "collection": "payment",
       "via": "offer_id"
     },
     "tests_stock": {
       "default": "",
       "type": "integer"
+    },
+    "user_id": {
+      "collection": "user",
+      "via": "offer_id",
+      "plugin": "users-permissions"
     }
   }
 }

@@ -111,6 +111,7 @@ export class StripePaymentComponent implements OnInit {
                   this.stripeError = res.raw.message;
                   this.stripeLoader = false;
                 }else if(res.status=='succeeded' || 'active'){
+                  
                   this.stripeSuccess = 'Votre paiement a été effectué';
                   this.stripeLoader = false;
                   setTimeout(()=>{
