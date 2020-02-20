@@ -1,8 +1,7 @@
 @import"../../../../roodeo-variables.scss";
 
 .new-campaign {
-  width: 90%;
-  margin: 0 auto;
+  width: 100%;
   font-weight: bold;
   border:$border-table;
   border-radius: $border-radius;
@@ -43,11 +42,9 @@
 
 .backgroundColor {
   width: 100%;
-  height: 100%;
   background-color: $color-background-blue;
   .cadreQuestion {
-    margin-top:30px;
-    position: absolute;
+    padding: 30px 20px 0px;
     width: 100%;
   }
 }
