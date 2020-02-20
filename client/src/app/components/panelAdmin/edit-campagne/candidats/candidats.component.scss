@@ -438,7 +438,6 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   margin-top: 20px;
   display: flex;
   padding: 10px;
-  margin-bottom: 20px;
   overflow-y: auto;
   overflow-x: hidden;
   .sous-table-content{
@@ -553,10 +552,6 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   margin-top: 20px;
 }
 
-.sidenav_separator{
-
-}
-
 .sidenav_candidat_content{
   display: flex; 
   flex-direction: column;
@@ -637,9 +632,6 @@ filter-table {
 @media screen and (max-width: 960px){
   .sous-table-content{
     overflow-x: auto;
-  }
-  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
-    
   }
   .barre-nav{
     .select-choince{
