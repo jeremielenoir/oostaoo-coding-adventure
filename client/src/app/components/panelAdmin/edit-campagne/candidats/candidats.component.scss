@@ -8,6 +8,9 @@
 ::ng-deep app-candidats{
   flex:1
 }
+.invit-btn-candidat{
+  margin-top: 60px;
+}
 .big-content{
   display: flex;
   flex: 1 0 auto;
@@ -324,19 +327,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
       }
     }
 
-
-    .style-link {
-      border-bottom: 1px solid $color-table;
-      color: $color-grey;
-      padding-left: 25px;
-      padding-top: 5px;
-      padding-right: 5px;
-      padding-bottom: 5px;
-      margin-bottom: 0px;
-    }
-
     .border1pxgray {
-      margin: 5vh;
       border: $border-table;
       background-color:$color-white-background;
     }
@@ -359,7 +350,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
       background-size: contain;
       background-position: center;
       width: 100%;
-      height: 50vh;
+      height: 35vh;
     }
 
     .diplex-1{
