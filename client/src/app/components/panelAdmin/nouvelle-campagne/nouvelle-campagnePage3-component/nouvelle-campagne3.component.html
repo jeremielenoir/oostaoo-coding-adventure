@@ -12,7 +12,7 @@
       <i class="fas fa-chevron-left icon-arrow-btn"></i>
       Retour
     </button>
-    <button class="custom-buttom" mat-flat-button (click)="postCampagne()">
+    <button class="custom-buttom" [ngClass]="allQuestionLevel.length > 0 ? 'button-enabled' : 'button-disabled'" [disabled]="allQuestionLevel.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
       Enregistrer
     </button>
 
