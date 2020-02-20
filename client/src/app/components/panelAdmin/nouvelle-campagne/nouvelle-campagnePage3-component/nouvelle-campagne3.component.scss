@@ -102,24 +102,26 @@
 }
 
 .button-disabled{
-    color:white !important;
-    border-radius: 0px;
-    background-color:gray !important;
-    margin: 0 10px !important;
-    height: 40px !important;
-    width: 120px !important;
+    line-height: 0px;
+    background: grey!important;
+    border-radius: 0px !important;
     font-size: 14px !important;
-    font-weight: bold;
+    contain: content;
+    font-weight: 600;
+    padding: 15px 40px !important;
+    color: $text-color-white !important;
+    height: 62px;
 }
 .button-enabled{
-    color:white;
-    border-radius: 0px;
-    background-color: green;
-    margin: 0 10px !important;
-    height: 40px !important;
-    width: 120px !important;
+    line-height: 0px;
+    background: $color-orange-light!important;
+    border-radius: 0px !important;
     font-size: 14px !important;
-    font-weight: bold;
+    contain: content;
+    font-weight: 600;
+    padding: 15px 40px !important;
+    color: $text-color-white !important;
+    height: 62px;
 }
 
 
