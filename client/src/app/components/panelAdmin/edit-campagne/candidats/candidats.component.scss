@@ -11,19 +11,23 @@
 }
 .sous-content-check-action-candidat{
   position: relative;
-  border:1px solid red;
+  padding-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  ;
   .check-action-candidat{
     // position: absolute;
     cursor: pointer;
     width: 15px;
     height: 13.5px;
-    top: -5px;
-    left: -3px;
     z-index: 2;
-    opacity: 1;
+    margin-top: 8px;
+    opacity: 0;
   }
   #candidat-check{
-    // position: absolute;
+    position: absolute;
     // top: -10px;
     // left: -3px;
     height: 15px;
