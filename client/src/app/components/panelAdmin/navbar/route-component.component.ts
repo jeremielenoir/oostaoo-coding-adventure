@@ -6,6 +6,7 @@ import { ApiClientService, API_URI_NOTIFICATIONS } from 'src/app/api-client/api-
 import { DecryptTokenService } from '../../home/register/register.service';
 
 
+
 @Component({
   selector: "app-route-component",
   templateUrl: "./route-component.component.html",
@@ -35,21 +36,35 @@ export class RouteComponentComponent implements OnInit {
 
         e.preventDefault();
 
-      })
+      });
 
-    })
-
+    });
     this.getNotifications().then(notifications => {
+      this.notifications = [];
       notifications.forEach(element => {
-        if (element.user.adminId === this.decryptTokenService.userId){
+        if (element.user.adminId === this.decryptTokenService.userId) {
           this.notifications.push(element);
         }
       });
       this.notifications.reverse();
-      this.notifications.sort((a, b)=> a.status - b.status);
+      this.notifications.sort((a, b) => a.status - b.status);
       console.log(this.notifications);
       this.initNotifNotRead(this.notifications);
     });
+
+    setInterval(() => this.getNotifications().then(notifications => {
+      this.notifications = [];
+      notifications.forEach(element => {
+        if (element.user.adminId === this.decryptTokenService.userId) {
+          this.notifications.push(element);
+        }
+      });
+      this.notifications.reverse();
+      this.notifications.sort((a, b) => a.status - b.status);
+      console.log(this.notifications);
+      this.initNotifNotRead(this.notifications);
+    }), 5000);
+
   }
 
   public disConnection(event) {
