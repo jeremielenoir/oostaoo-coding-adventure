@@ -11,20 +11,21 @@
 }
 .sous-content-check-action-candidat{
   position: relative;
+  border:1px solid red;
   .check-action-candidat{
-    position: absolute;
+    // position: absolute;
     cursor: pointer;
     width: 15px;
     height: 13.5px;
     top: -5px;
     left: -3px;
     z-index: 2;
-    opacity: 0;
+    opacity: 1;
   }
   #candidat-check{
-    position: absolute;
-    top: -10px;
-    left: -3px;
+    // position: absolute;
+    // top: -10px;
+    // left: -3px;
     height: 15px;
     width: 15px;
     border: 2px solid #7e8082;
@@ -144,9 +145,11 @@
 }
 
 
-.mat-cell,.cdk-column-Checked{
-  position: relative!important;
-  width: 30px!important;
+.mat-cell{
+  padding-left: 0!important;
+  // position: relative!important;
+  // min-width: 40px!important;
+  // max-width: 40px!important;
 }
 
 .mat-checkbox{
@@ -627,7 +630,7 @@ filter-table {
     overflow-x: auto;
   }
   td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
-    padding-left: 50px!important;
+    
   }
   .barre-nav{
     .select-choince{
