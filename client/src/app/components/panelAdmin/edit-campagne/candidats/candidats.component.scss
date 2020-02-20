@@ -4,12 +4,17 @@
 // ::ng-deep .ng-star-inserted{
 //    flex: 1;
 //   }
+
+::ng-deep app-candidats{
+  flex:1
+}
 .big-content{
   display: flex;
   flex: 1 0 auto;
   min-height: 100%;
 }
 .sous-content-check-action-candidat{
+  align-items: center;
   position: relative;
   padding-bottom: 6px;
   display: flex;
@@ -28,8 +33,6 @@
   }
   #candidat-check{
     position: absolute;
-    // top: -10px;
-    // left: -3px;
     height: 15px;
     width: 15px;
     border: 2px solid #7e8082;
@@ -66,9 +69,14 @@
 
 .content-check-action-candidat{
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .checkbox-span{
-    top: -5px;
-    left: -3px;  
+    position: relative!important;
+    margin-top:0px!important;
+    height: 15px!important;
+    width: 15px!important;
   }
   .checkbox-span{
     cursor: pointer;
@@ -149,8 +157,9 @@
 }
 
 
-.mat-cell{
-  padding-left: 0!important;
+.mat-cell,.mat-header-cell{
+  padding-left: 5px!important;
+  padding-right: 5px;
   // position: relative!important;
   // min-width: 40px!important;
   // max-width: 40px!important;
@@ -439,13 +448,14 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   display: flex;
   padding: 10px;
   margin-bottom: 20px;
-  flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   .sous-table-content{
     border-radius: 5px;
     border:1.5px solid $color-principal-blue;
     width: 100%;
+    overflow: hidden;
+    
     &::-webkit-scrollbar{
       width: 8px;
       height: 8px;
