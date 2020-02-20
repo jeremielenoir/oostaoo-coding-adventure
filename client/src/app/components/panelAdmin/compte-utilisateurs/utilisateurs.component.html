@@ -345,7 +345,7 @@
                     </div>
                     <div>
                       <input [formControl]="editUsername" type="text" name="username"class="champ-form" id="editUsername"/>
-                      <div *ngIf=" submittedUser && editUsername.invalid" class="alert alert-danger">
+                      <div *ngIf=" modifiedUser && editUsername.invalid" class="alert alert-danger">
                         <div *ngIf="editUsername.errors.required">
                           Pseudo requis.
                         </div>
@@ -367,7 +367,7 @@
                     </div>
                     <div>
                       <input [formControl]="editPassword" type="password" name="password"class="champ-form" id="editPassword"/>
-                      <div *ngIf=" submittedUser && editPassword.invalid" class="alert alert-danger">
+                      <div *ngIf=" modifiedUser && editPassword.invalid" class="alert alert-danger">
                         <div *ngIf="editPassword.errors.required">
                           Mot de passe requis.
                         </div>
@@ -389,12 +389,12 @@
                     </div>
                     <div>
                       <input [formControl]="confirmPassword" type="password" name="confirmPassword"class="champ-form" id="confirmPassword"/>
-                      <div *ngIf=" submittedUser && confirmPassword.invalid" class="alert alert-danger">
+                      <div *ngIf=" modifiedUser && confirmPassword.invalid" class="alert alert-danger">
                         <div *ngIf="confirmPassword.errors.required">
                           Confirmation du mot de passe requis.
                         </div>
                       </div>
-                      <div *ngIf=" submittedUser && editPassword.value !== confirmPassword.value"  class="alert alert-danger">
+                      <div *ngIf=" modifiedUser && editPassword.value !== confirmPassword.value"  class="alert alert-danger">
                         Les mots de passe ne correspondent pas.
                       </div>
                     </div>
