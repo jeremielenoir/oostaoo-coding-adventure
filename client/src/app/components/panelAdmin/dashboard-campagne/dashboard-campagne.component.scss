@@ -54,9 +54,10 @@
     /*-- css view-content--*/
     
     .view-content {
-        overflow: hidden;
+        // overflow: hidden;
+        overflow-x: auto;
         margin-left: 4px;
-        margin-right: 40px;
+        flex: 1;
         transition: .3s;
         position: relative;
         height: 100%;

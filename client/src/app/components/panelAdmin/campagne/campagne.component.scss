@@ -25,6 +25,13 @@
 //   transition: none!important;
 // }
 
+::ng-deep .mat-checkbox-layout{
+  margin-bottom: .5px!important;
+}
+::ng-deep .mat-checkbox-inner-container{
+  margin-right: 0px!important;
+}
+
 .button-matMenu{
   outline: none;
 }
@@ -56,6 +63,7 @@
         flex: 1;
         align-items: center;
         justify-content: center;
+        min-width: 43px;
         .number-test{
           color:#1d3551;
           font-size: 14px;
@@ -89,9 +97,8 @@
         .form-group-header {
           flex: 3;
           height: 46px;
-          label {
-            display: block;
-          }
+          min-width: 170px;
+          
           .checked-block {
             
             margin-top: 5px;
@@ -325,6 +332,7 @@
           border-right: 1px dashed #e15028;
           margin-bottom: 0px;
           cursor: pointer;
+          min-width: 40px;
           img{
             width: 30px;
             height: 30px;

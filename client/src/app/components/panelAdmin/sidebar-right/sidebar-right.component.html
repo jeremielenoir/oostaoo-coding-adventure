@@ -43,13 +43,16 @@
       [class.info-content-img-header-dashboard-MinSize]="IsBoaleanSmallSidibar">
       <img src="../assets/Coding-game-img/SVG-menu-Dashboard/Notifications.svg">
     </figure>
-    <h3 *ngIf="!IsBoaleanSmallSidibar" class="info-title-header-dashboard">
-      NOTIFICATIONS
-    </h3>
 
-    <span *ngIf="!IsBoaleanSmallSidibar" class="icon-right-sidibar" id="param-cog" (click)="param_cog()">
-      <i class="fas fa-cog"></i>
-    </span>
+    <div class="info-content-header-right-dashboard">
+      <h3 *ngIf="!IsBoaleanSmallSidibar" class="info-title-header-dashboard">
+        NOTIFICATIONS
+      </h3>
+
+      <span *ngIf="!IsBoaleanSmallSidibar" class="icon-right-sidibar" id="param-cog" (click)="param_cog()">
+        <i class="fas fa-cog"></i>
+      </span>
+    </div>
 
   </div>
 
