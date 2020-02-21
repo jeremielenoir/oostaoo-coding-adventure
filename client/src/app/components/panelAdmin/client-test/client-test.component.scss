@@ -8,7 +8,7 @@ $text-color-client-test: #333;
   // height: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
   @media #{$deviceMaxDesktop} {
     margin: 20px 0 20px 0;
     width: 90% !important;
@@ -20,15 +20,24 @@ $text-color-client-test: #333;
   background-color: white;
   padding: 40px;
   width: 100%;
-  height: 45%;
+  height: 40%;
   border: $border-table;
   border-radius: $border-radius;
   margin: 0px 0 0px 0;
+  padding-top: 10px;
   @media #{$deviceMaxDesktop} {
     height: auto !important;
     margin-bottom: 20px;
   }
   @include structureTitle();
+}
+
+.test {
+  margin-top: 26px!important;
+}
+
+.tutorial {
+  height: 48%!important;
 }
 
 @mixin structureTitle {
@@ -44,7 +53,7 @@ $text-color-client-test: #333;
 
 @mixin btn-color($yellow: true) {
   .btn-compo {
-    margin-bottom: 60px;
+    margin-bottom: 0;
     width: 200px;
     height: 50px;
     border: 1px solid $color-principal-blue;
@@ -83,7 +92,7 @@ p {
     margin-left: 5%;
     margin-right: 5%;
     display: flex;
-    margin-top: 30px;
+    margin-top: 60px;
     
     @media #{$deviceMaxDesktop} {
       flex-direction: column;
@@ -97,6 +106,8 @@ p {
       background: white;
       border: $border-table;
       border-radius: $border-radius;
+      height: 92.9%;
+      padding-top: 10px;
       @include structureBlockPrincipal();
       .test-invit {
         display: flex;
