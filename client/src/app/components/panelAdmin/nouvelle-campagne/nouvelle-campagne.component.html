@@ -1,7 +1,7 @@
 <app-route-component></app-route-component>
 <app-breadcrumb [namePage]="'Nouveau test'"></app-breadcrumb>
 <div class="backgroundColor">
-  <div class="cadreQuestion">
+  <div >
     <form [formGroup]="ParentFormCampagne" (ngSubmit)="nouvelleCampagne(ParentFormCampagne.value)">
       <div [ngSwitch]="nNumeorPage">
         <div *ngSwitchCase="1">

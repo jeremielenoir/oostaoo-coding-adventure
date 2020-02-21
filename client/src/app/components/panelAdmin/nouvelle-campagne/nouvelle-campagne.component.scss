@@ -6,6 +6,7 @@
   border:$border-table;
   border-radius: $border-radius;
   background: $color-white-background;
+  
 
   #select {
     display: flex;
@@ -59,6 +60,7 @@
   border:1px solid #e15028;
   border-radius: 100px;
   font-weight: 700;
+  outline: none;
   &:hover{
     background-color: #e15028;
     color: white;
@@ -102,6 +104,7 @@
   display: flex;
   justify-content: flex-end;
   margin-right: 20px;
+  outline: none;
 }
 
 .example-radio-button {

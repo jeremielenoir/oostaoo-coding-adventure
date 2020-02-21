@@ -1,5 +1,12 @@
 @import"../../../../../roodeo-variables.scss";
 
+@import"../nouvelle-campagne.component.scss";
+
+
+.cadreQuestion{
+    padding: 0px 0px 0 !important;
+}
+
 .custom-buttom,.mat-flat-button {
     line-height: 0px;
     background: $color-orange-light!important;
@@ -9,7 +16,8 @@
     font-weight: 600;
     padding: 15px 40px !important;
     color: $text-color-white !important;
-    height: 62px;   
+    height: 64.5px;   
+    outline: none;
 }
 
 // ::ng-deep .cdk-overlay-pane{
@@ -22,6 +30,7 @@
 }
 .custom-buttom-anul{
     background-color: $color-gray-blue!important;
+    outline: none;
    
 }
 
@@ -35,6 +44,7 @@
     display: flex;
     width: 100%;
     border: 1.5px solid $color-principal-orange;
+    border-top: none;
     border-left: none;
     border-right: none;
     background-color: $color-pricipal-blue-light;
@@ -110,7 +120,8 @@
     font-weight: 600;
     padding: 15px 40px !important;
     color: $text-color-white !important;
-    height: 62px;
+    height: 64.5px; 
+    outline: none; 
 }
 .button-enabled{
     line-height: 0px;
@@ -121,7 +132,8 @@
     font-weight: 600;
     padding: 15px 40px !important;
     color: $text-color-white !important;
-    height: 62px;
+    height: 64.5px;  
+    outline: none;
 }
 
 
@@ -233,10 +245,10 @@
 
 /* DRAG AND DROP */
 
-.example-container {
+.block-container {
     width: 50%;
     max-width: 100%;
-    margin: 10px 10px 0;
+    margin: 10px 20px 0;
     vertical-align: top;
     border:1.5px solid $color-principal-orange;
     border-radius: 5px;
