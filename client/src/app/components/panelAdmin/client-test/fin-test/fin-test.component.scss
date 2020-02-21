@@ -1,6 +1,10 @@
 @import "../client-test.component.scss";
 @import"../../../../../roodeo-variables.scss";
 
+body, html {
+  height: auto!important;
+}
+
 .oos-margin-left {
   margin-left: 20px;
   margin-top: 20px;

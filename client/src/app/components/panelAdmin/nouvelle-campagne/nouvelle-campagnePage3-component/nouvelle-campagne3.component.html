@@ -122,13 +122,15 @@
           </div>
 
           <div class="partie-left-example-box-2">
-            <p class="question-name" matTooltip="{{item.name}}">{{ item.name }}</p>
+            <div class="tooltip-information">
+              {{item.name}}
+            </div>
+            <p class="question-name">{{ item.name }}</p>
             <div class="content-rouded" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
               <span class="niveau-rouded"></span>
               <span class="niveau-rouded"></span>
               <span class="niveau-rouded"></span>
             </div>
-          </div>
 
           <div class="content-rouded" *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
             <span class="niveau-rouded"></span>

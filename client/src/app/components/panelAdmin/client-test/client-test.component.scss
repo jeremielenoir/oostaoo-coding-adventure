@@ -3,7 +3,6 @@ $font-family-client-test: Open Sans, Lato, sans-serif;
 $Bg-client-test: #f9f9f9;
 $text-color-client-test: #333;
 
-
 @mixin structureBlockPrincipal {
   flex: 1;
   // height: 500px;
@@ -71,6 +70,8 @@ p {
 }
 
 .container-section {
+  display: flex;
+  justify-content: center;
   width: 100%;
   background-color: $color-background-blue;
   font-family: $font-family-client-test;
