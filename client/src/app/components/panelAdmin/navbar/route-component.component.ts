@@ -48,7 +48,7 @@ export class RouteComponentComponent implements OnInit {
       });
       this.notifications.reverse();
       this.notifications.sort((a, b) => a.status - b.status);
-      console.log(this.notifications);
+      // console.log(this.notifications);
       this.initNotifNotRead(this.notifications);
     });
 
@@ -61,7 +61,7 @@ export class RouteComponentComponent implements OnInit {
       });
       this.notifications.reverse();
       this.notifications.sort((a, b) => a.status - b.status);
-      console.log(this.notifications);
+      // console.log(this.notifications);
       this.initNotifNotRead(this.notifications);
     }), 5000);
 

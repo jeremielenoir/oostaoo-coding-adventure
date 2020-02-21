@@ -105,6 +105,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
     // console.log('this.formCampagne.value(): ', this.formCampagne.value);
     this.apiClientService.get(API_URI_QUESTIONS).subscribe(datas => {
       this.questions = datas;
+      console.log('les questions', this.questions);
 
       for (const question of this.questions) {
         if (question.technologies) {
@@ -116,6 +117,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
             )
           ) {
             this.allQuestions.push(question);
+            console.log('tableau allQuestion', this.allQuestions);
           }
 
         }
