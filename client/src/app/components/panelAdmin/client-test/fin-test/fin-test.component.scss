@@ -11,16 +11,88 @@ body, html {
   margin-bottom: 20px;
 }
 
-.test-container {
-  flex-direction: column;
-}
-
-.invitation {
+.container-section2 {
+  display: flex;
+  justify-content: space-around;
   width: 100%;
-  .test-invit {
-    justify-content: left;
+  background-color: $color-background-blue;
+  font-family: $font-family-client-test;
+  font-weight: 300;
+  color: $text-color-client-test;
+  .test-container2 {
+    flex-direction: row;
+    width: 85%;
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+    margin-top: 20px;
+    
+    @media #{$deviceMaxDesktop} {
+      flex-direction: column;
+      justify-content: space-around;
+      height: 100%;
+    }
+    .invitation2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: normal!important;
+      margin-right: 9px;
+      padding: 40px;
+      background: white;
+      border: $border-table;
+      border-radius: $border-radius;
+      padding-top: 10px;
+      width: 100%;
+      text-align: center;
+      @media #{$deviceMaxDesktop} {
+        margin: 20px 0 20px 0;
+        width: 90% !important;
+        height: auto !important;
+      }    
+      .text2 {
+        padding: 30px 0 80px 0;
+        p{
+          color: $color-principal-blue!important;
+          font-size: $font-size-home;
+        }
+      }
+      .test-invit {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        color:$color-principal-blue;
+        h3 {
+          margin-left: 20px;
+          margin-top: 20px;
+          padding-top: 6px;
+          padding-bottom: 6px;
+          padding-bottom: 10px;
+          margin-bottom: 0px;
+          font-size: 24px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-top: 1px dashed #e3e3e3;
+          border-bottom: 1px dashed #e3e3e3;
+          
+        }
+        .image {
+          margin: 0px auto;
+          width: 205px;
+          height: 58px;
+          background-image: url($logoPath);
+          background-size: cover;
+          @media #{$deviceMaxDesktop} {
+            width: 130px !important;
+            height: 85px !important;
+            margin-right: 10px !important;
+          }
+        }
+      }
+    }
   }
 }
+
 
 .test-invit h3 {
   width: inherit !important;
@@ -32,8 +104,19 @@ body, html {
 
 .tutorial-test {
   width: 100%;
-  .tutorial {
-    height: 93%!important;
+  .tutorial2 {
+    height: 100%!important;
+    background-color: white;
+    padding: 40px;
+    width: 100%;
+    border: $border-table;
+    border-radius: $border-radius;
+    padding-top: 10px;
+    @media #{$deviceMaxDesktop} {
+      height: auto !important;
+      margin-bottom: 20px;
+    }
+  @include structureTitle();
     .oos-note {
       display: flex;
       justify-content: center;
