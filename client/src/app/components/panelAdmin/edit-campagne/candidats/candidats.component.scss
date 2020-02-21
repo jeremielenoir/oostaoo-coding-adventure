@@ -90,6 +90,8 @@
   }
   .checkbox-span::after {
     border-color:#fff!important;
+    width: 4px!important;
+    height: 9px!important;
  }
  
   input:checked ~ .checkbox-span {

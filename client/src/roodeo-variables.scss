@@ -34,35 +34,6 @@ $color-border-second:#ccc;
 $border-table-second:1px solid #f0eeee;
 $border-radius: 4px;
 
-.sous-header-one{
-  display: flex;
-  background: #eaeff3;
-  height: 60px;
-  padding: 7px 0px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  .info-content-img-header-dashboard{
-    flex: 1;
-      width: 45px;
-      height: 45px;
-      margin-bottom: 0px;    
-    img{
-      width:100%;
-      height: 100%;
-    }
-  }
-  .info-title-header-dashboard{
-    flex: 11;
-    text-transform: uppercase;
-    font-size: 14px;
-    margin-bottom: 0;
-    font-family: $font-poppins;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    padding-top: 7px;
-  }
-}
 
 ::ng-deep .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element{
   background-color: #e15028!important;
