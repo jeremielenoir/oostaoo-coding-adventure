@@ -17,7 +17,7 @@
         </div>
         <div class="test-right-header">
 
-          <button class="btn-test"  [routerLink]="['/dashboard/campaigns/new']">
+          <button class="btn-test" [routerLink]="['/dashboard/campaigns/new']">
             Nouveau test
           </button>
 
@@ -122,10 +122,12 @@
 
             <div class="branche-content-list-end">
 
-              <p>{{ campaign.candidats.length }} invite</p>
-              <p>
+              <p class="invite-left" [ngClass]="{'invite-left-many':campaign.candidats.length > 1}">
+                {{ campaign.candidats.length }}
+                {{campaign.candidats.length > 1 ? 'invités' : 'invité'}}</p>
+              <p class="termine-left" [ngClass]="{'termine-left-many':campaign.NbCandidatFinish > 1}">
                 {{ campaign.NbCandidatFinish !== null ?
-                  campaign.NbCandidatFinish : 0 }} terminer
+                  campaign.NbCandidatFinish : 0 }} {{ campaign.NbCandidatFinish > 1 ? 'terminés' : 'terminé'}}
               </p>
 
             </div>
@@ -194,11 +196,14 @@
 
             <div class="branche-content-list-end">
 
-              <p>{{ campaign.candidats.length }} invite</p>
-              <p>
+              <p class="invite-left" [ngClass]="{'invite-left-many':campaign.candidats.length > 1}">
+                {{ campaign.candidats.length }}
+                {{campaign.candidats.length > 1 ? 'invités' : 'invité'}}</p>
+              <p class="termine-left" [ngClass]="{'termine-left-many':campaign.NbCandidatFinish > 1}">
                 {{ campaign.NbCandidatFinish !== null ?
-                    campaign.NbCandidatFinish : 0 }} terminer
+                  campaign.NbCandidatFinish : 0 }} {{ campaign.NbCandidatFinish > 1 ? 'terminés' : 'terminé'}}
               </p>
+
 
             </div>
           </div>

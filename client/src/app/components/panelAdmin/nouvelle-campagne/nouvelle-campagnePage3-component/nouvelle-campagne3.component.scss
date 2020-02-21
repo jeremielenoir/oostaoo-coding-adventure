@@ -2,7 +2,11 @@
 
 @import"../nouvelle-campagne.component.scss";
 
-
+::ng-deep app-nouvellecampagnepage3component{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 .cadreQuestion{
     padding: 0px 0px 0 !important;
 }
@@ -246,8 +250,256 @@
 
 /* DRAG AND DROP */
 
+@import"../../../../../roodeo-variables.scss";
+
+@import"../nouvelle-campagne.component.scss";
+
+
+.cadreQuestion{
+    padding: 0px 0px 0 !important;
+}
+
+.custom-buttom,.mat-flat-button {
+    height: 100%;
+    line-height: 0px;
+    background: $color-orange-light!important;
+    border-radius: 0px !important;
+    font-size: 14px !important;
+    contain: content;
+    font-weight: 600;
+    padding: 15px 40px !important;
+    color: $text-color-white !important;
+    height: 64.5px;   
+    outline: none;
+}
+
+// ::ng-deep .cdk-overlay-pane{
+//     width: 165px;
+// }
+
+ ::ng-deep .mat-menu-panel{
+    width: 100%!important;
+    border-radius: 0px!important;
+}
+.custom-buttom-anul{
+    background-color: $color-gray-blue!important;
+    outline: none;
+   
+}
+
+.icon-arrow-btn{
+    font-size: 25px;
+    position: relative;
+    left: -12px;
+}
+
+#top-bar {
+    display: flex;
+    width: 100%;
+    border: 1.5px solid $color-principal-orange;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: $color-pricipal-blue-light;
+    display: flex;
+    padding-right: 6%;
+    height: 65px;
+   
+    .segment2{
+        display: flex;
+        align-items: center;
+        margin-top: -1px;
+    }
+    .segment3{
+        flex: 6.5;
+        display: flex;
+        align-items: center;
+        padding-left: 12%;
+        .title-segment{
+            font-size: 17px;
+            font-family: $font-poppins;
+            font-weight: 400;
+            color: $color-principal-blue;
+            margin-bottom: 0px;
+            margin-right: 12px;
+        }
+
+        #score{
+
+            color:$color-orange-light;
+            font-size: 30px;
+            margin-bottom: 0px;
+            margin-top: -5px;
+            font-family: $font-poppins;
+        }
+    }
+}
+
+
+
+#arrow {
+    position: absolute;
+    top: 16px;
+    right: -15px;
+    background: $text-color-white;
+    text-align: center;
+    font-size: 14px;
+    line-height: 28px;
+    border: 1px solid $color-grey;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+#techno {
+    color: $color-gold-second;
+}
+
+.drop-icon {
+    color: $color-gold;
+}
+
+
+.info {
+    color: $color-grey;
+}
+
+.button-disabled{
+    line-height: 0px;
+    background: grey!important;
+    border-radius: 0px !important;
+    font-size: 14px !important;
+    contain: content;
+    font-weight: 600;
+    padding: 15px 40px !important;
+    color: $text-color-white !important;
+    height: 64.5px; 
+    outline: none; 
+}
+.button-enabled{
+    line-height: 0px;
+    background: $color-orange-light!important;
+    border-radius: 0px !important;
+    font-size: 14px !important;
+    contain: content;
+    font-weight: 600;
+    padding: 15px 40px !important;
+    color: $text-color-white !important;
+    height: 64.5px;  
+    outline: none;
+}
+
+
+#content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+}
+
+.option-question-help{
+    display: flex;
+    flex-direction: row;
+    border-top: 1.5px solid #e15028;
+    border-bottom: 1.5px solid #e15028;
+    padding-left: 18px;
+    align-items: center;
+    background: #fff;
+    justify-content: space-between;
+    #div-search {
+        display: flex;
+        
+        .search-input{
+            font-size: 15px;
+            background-color: white;
+            border:none;
+            border-bottom: 1.5px solid #de522b;
+            outline: none;
+            padding: 6px 6px;
+            width: 150px;
+            &::placeholder{
+                font-family: $font-poppins;
+                color:$color-orange-light;
+                
+            }
+        }
+        .icon-search{
+            // display: inline-block;
+            width: 25px;
+            height: 25px;
+            font-size: 27px;
+        }
+    }
+    .search-advanced{
+        color:$color-orange-light;
+        font-family: $font-poppins;
+        font-size: 15px;
+        justify-content: center;
+        margin-left: 12px;
+        i{
+            left: 12px;
+            top: 5px;
+        }
+    }
+
+    .trie-cat{
+        i{
+            left: 21px;
+        }
+    }
+}
+.preview{
+    justify-content: flex-end;
+
+    .preview-btn{
+        background-color: $color-principal-blue!important;
+        letter-spacing: 1px;
+       
+    }
+}
+.bar {
+    width: 100%;
+    background: #eaeff3;
+    height: 70px;
+    padding: 7px 12px;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    .bar-content-img{
+        width: 45px;
+        height: 45px;
+        margin-bottom: 0px;
+        margin-right: 45px;
+    }
+    .bar-text{
+        text-transform: uppercase;
+        font-size: 15px;
+        margin-bottom: 0;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        padding-top: 7px;
+    }
+}
+
+
+#bar-btn-search {
+    background: $color-gold-background!important;
+}
+
+
+:host ::ng-deep .mat-button-wrapper {
+    contain: content;
+    font-family: $font-poppins!important;
+}
+
+/* DRAG AND DROP */
+
 .block-container {
-    // display: flex;
+    display: flex;
     width: 50%;
     max-width: 100%;
     margin: 10px 20px 0;
@@ -260,11 +512,14 @@
 }
 
 .example-list {
-    height: 38vh;
+    flex: 1 1 0px;
     background: $text-color-white!important;
     display: block;
     overflow-y: auto;
-
+    overflow-x: hidden;
+    scrollbar-color: #7f8183 #e3e3e3;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
     
 }
 .example-list::-webkit-scrollbar{

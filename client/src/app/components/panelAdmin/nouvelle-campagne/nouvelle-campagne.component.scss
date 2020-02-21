@@ -1,5 +1,17 @@
 @import"../../../../roodeo-variables.scss";
 
+// ::ng-deep app-nouvelle-campagne{
+//     display: flex;
+//     flex-direction: column;
+//     height: 100%
+// }
+.form-etape{
+  height: 100%;
+  form{
+    height: 100%;
+  }
+}
+
 .new-campaign {
   width: 100%;
   font-weight: bold;
@@ -43,6 +55,7 @@
 
 .backgroundColor {
   width: 100%;
+  height: 85%;
   background-color: $color-background-blue;
   .cadreQuestion {
     padding: 30px 20px 0px;

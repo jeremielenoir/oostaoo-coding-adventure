@@ -1,9 +1,9 @@
 <app-route-component></app-route-component>
 <app-breadcrumb [namePage]="'Nouveau test'"></app-breadcrumb>
 <div class="backgroundColor">
-  <div >
+  <div class="form-etape">
     <form [formGroup]="ParentFormCampagne" (ngSubmit)="nouvelleCampagne(ParentFormCampagne.value)">
-      <div [ngSwitch]="nNumeorPage">
+      <div class="form-etape" [ngSwitch]="nNumeorPage">
         <div *ngSwitchCase="1">
           <app-profile-rechercher (incrementPage)="nextPage()" [formCampagne]="ParentFormCampagne"
             (valueChange)="getTechno($event)" (valueChangeProfil)="getProfil($event)" [technoByParent]="technoFromChild"
@@ -15,7 +15,7 @@
             [formCampagne]="ParentFormCampagne">
           </app-NouvelleCampagnePage2Component>
         </div>
-        <div *ngSwitchCase="3">
+        <div style="height:100%" *ngSwitchCase="3">
           <app-NouvelleCampagnePage3Component (incrementPage)="nextPage()" (decrementPage)="previousPage()"
             [formCampagne]="ParentFormCampagne">
           </app-NouvelleCampagnePage3Component>
