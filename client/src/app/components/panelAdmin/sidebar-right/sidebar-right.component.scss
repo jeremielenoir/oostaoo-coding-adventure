@@ -3,6 +3,7 @@
 .info-content-img-header-dashboard-MinSize{
   margin:0px auto!important;
   flex: auto!important;
+  min-width: 100%;
 }
 .list-sidibar-right-MinSize{
   border-right:none!important;
@@ -27,10 +28,10 @@
 .sous-header-one{
    
   .info-content-img-header-dashboard{
-     flex: 2.5;
+     flex: 2;
   }
   .info-content-header-right-dashboard{
-    flex: 8;
+    flex: 9;
     display: flex;
     padding-right: 15px;
     align-items: center;

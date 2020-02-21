@@ -5,7 +5,13 @@
   padding-left: 15px;
   padding-right: 15px;
   // padding-bottom: 25px;
-  // height: 100%;
+
+}
+::ng-deep app-questions{
+  padding-bottom: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .block-container {
