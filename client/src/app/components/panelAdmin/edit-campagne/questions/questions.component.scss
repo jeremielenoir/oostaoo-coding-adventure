@@ -7,3 +7,15 @@
   // padding-bottom: 25px;
   // height: 100%;
 }
+
+.block-container {
+  width: 50%;
+  max-width: 100%;
+  margin: 10px 8px 0;
+  vertical-align: top;
+  border:1.5px solid $color-principal-orange;
+  border-radius: 5px;
+  overflow: hidden;
+  flex-direction: column;
+ flex: 1;
+}

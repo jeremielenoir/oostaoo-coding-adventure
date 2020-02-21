@@ -166,29 +166,35 @@
 
   .contenu-techno {
     background-color: white;
-    border: $border-table-second;
+    // border: $border-table-second;
     display: flex;
     flex: 1;
     flex-direction: column;
    
     .no-campaign{
       width: 50%;
-      border: $border-table-second;
+      // border: $border-table-second;
       text-align: center;
       margin: 20px auto 0;
       padding: 10px;
 
       p{
         text-align: center;
-      }
-
-      .icon{
-        color: $color-gold;
+        font-size: 20px;
+        font-weight: 700;
       }
 
       .button{
-        margin: 10px auto 0;
-        width: 38%;
+        -webkit-box-flex: 2;
+        cursor: pointer;
+        flex: 2;
+        background: #1d3551;
+        color: white;
+        border: none;
+        text-transform: uppercase;
+        padding: 20px 30px;
+        display: block;
+        font-size: 15px;
       }
     
     }

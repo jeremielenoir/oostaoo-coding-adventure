@@ -17,7 +17,7 @@
         </div>
         <div class="test-right-header">
 
-          <button class="btn-test" (click)="testT()" [routerLink]="['/dashboard/campaigns/new']">
+          <button class="btn-test"  [routerLink]="['/dashboard/campaigns/new']">
             Nouveau test
           </button>
 
@@ -56,10 +56,9 @@
     <div class="content-scroll">
 
       <div class="no-campaign" *ngIf="campaigns.length === 0">
-        <p> Vous n'avez pas encore de campagnes, cliquer sur le bouton en dessous pour en créer une.</p>
-        <i class="fas fa-times-circle fa-4x icon"></i>
-        <div class="button">
-          <app-integration-bouton> </app-integration-bouton>
+        <p> Vous n'avez pas encore de tests, cliquer sur le bouton en dessous pour en créer un.</p>
+        <div class="button btn-test" [routerLink]="['/dashboard/campaigns/new']">
+          Nouveau Test
         </div>
       </div>
 
