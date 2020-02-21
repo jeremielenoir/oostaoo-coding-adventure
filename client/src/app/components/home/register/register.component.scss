@@ -1,6 +1,12 @@
+@import '../../../../roodeo-variables.scss';
+
+body{
+    background: white !important;
+}
 #register{
     display: flex;
-    
+    background: white;
+    height: 100vh;
 
     // Style des panel
     
@@ -13,7 +19,7 @@
         position: absolute;
         background: #54728d;
         width: 50%;
-        min-height: 980px;
+        height: 100vh;
        
         #left-panel-text{
             position: relative;
@@ -37,7 +43,7 @@
         position: absolute;
         background: #54728d;
         width: 50%;
-        min-height: 980px;
+        height: 100vh;
         z-index: 3;
     
         #right-panel-text{
@@ -102,7 +108,8 @@
     }
 
     .social-button {
-        background-position: 25px 0px;
+    background-position: 25px 0px;
+    // border: $border-table;
       box-sizing: border-box;
       cursor: pointer;
       height: 50px;
@@ -125,36 +132,45 @@
     
     .social-box{
         flex-direction: column;
-        justify-self: center ;
+        justify-self: center;
         z-index: 5;
         align-self: center;
         display: flex;
         position: absolute;
+        border: $border-table;
         left: 50%;
-        bottom: 10vh;
         transform: translateX(-50%);
-        width:350px;
-        background-color: white;
+        width:23%;
+        background: rgb(255,255,255);
+        // background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(84,114,141,1) 50%, rgba(84,114,141,1) 100%);
         border-radius: 5px;
-        max-width: 350px
+        min-width: 213px;
+        max-width: 350px;
+        
+
+        a{
+            text-decoration: none;
+            color: black;
+            contain: content;
+        }
     }
 
     #github-connect {
-        background: rgb(255, 255, 255) url('https://www.brandeps.com/logo-download/G/GitHub-Icon-logo-vector-01.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
-        border: 1px solid rgb(60, 90, 154);
+        background: rgb(255, 255, 255) url('../../../../assets/icones_social/github-brands.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+        border: 1.5px solid rgb(0, 0, 0);
     }
     #facebook-connect {
-        background: rgb(255, 255, 255) url('https://upload.wikimedia.org/wikipedia/commons/f/ff/Facebook_logo_36x36.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
-        border: 1px solid rgb(60, 90, 154);
+        background: rgb(255, 255, 255) url('../../../../assets/icones_social/facebook-brands.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+        border: 1.5px solid rgb(60, 90, 154);
     }
     #google-connect {
-        background: rgb(255, 255, 255) url('https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
-        border: 1px solid rgb(220, 74, 61);
+        background: rgb(255, 255, 255) url('../../../../assets/icones_social/google-brands.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+        border: 1.5px solid rgb(220, 74, 61);
     }
 
     #github-connect:hover {
-        border-color: rgb(60, 90, 154);
-        background: rgb(60, 90, 154) url('https://www.brandeps.com/logo-download/G/GitHub-Icon-logo-vector-01.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+        border-color: rgb(0, 0, 0);
+        background: rgb(0, 0, 0) url('../../../../assets/icones_social/github-brandshover.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
         -webkit-transition: all .8s ease-out;
         -moz-transition: all .3s ease;
         -ms-transition: all .3s ease;
@@ -164,7 +180,7 @@
     }
     #google-connect:hover {
         border-color: rgb(220, 74, 61);
-        background: rgb(220, 74, 61)  url('https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+        background: rgb(220, 74, 61)  url('../../../../assets/icones_social/google-brandshover.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
         -webkit-transition: all .8s ease-out;
         -moz-transition: all .3s ease;
         -ms-transition: all .3s ease;
@@ -175,7 +191,7 @@
 
     #facebook-connect:hover {
         border-color: rgb(60, 90, 154);
-        background: rgb(60, 90, 154) url('https://upload.wikimedia.org/wikipedia/commons/f/ff/Facebook_logo_36x36.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+        background: rgb(60, 90, 154) url('../../../../assets/icones_social/facebook-brandshover.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
         -webkit-transition: all .8s ease-out;
         -moz-transition: all .3s ease;
         -ms-transition: all .3s ease;

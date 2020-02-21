@@ -18,7 +18,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="forms">
       <h2>Se connecter ?</h2>
       <div class="form-group">
-        <label for="username">Username</label>
+        <label for="username">Identifiant</label>
         <input
           type="text"
           formControlName="username"
@@ -26,11 +26,11 @@
           [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
         />
         <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-          <div *ngIf="f.username.errors.required">Username is required</div>
+          <div *ngIf="f.username.errors.required">Identifiant requis</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">Mot de passe</label>
         <input
           type="password"
           formControlName="password"
@@ -38,7 +38,7 @@
           [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
         />
         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors.required">Mot de passe requis</div>
         </div>
       </div>
       <div class="form-group">
@@ -52,9 +52,9 @@
 
  <div class="social-box">
    
-   <a href="/connect/github" class="social-button" id="github-connect"> <span>Connect with Github</span></a>
-   <a href="/connect/google" class="social-button" id="google-connect"> <span>Connect with Google</span></a>
-   <a href="/connect/facebook" class="social-button" id="facebook-connect"> <span>Connect with Facebook</span></a>
+   <a href="/connect/github" class="social-button" id="github-connect"> <span>Se connecter avec Github</span></a>
+   <a href="/connect/google" class="social-button" id="google-connect"> <span>Se connecter avec Google</span></a>
+   <a href="/connect/facebook" class="social-button" id="facebook-connect"> <span>Se connecter avec Facebook</span></a>
    <div *ngIf="errorProvider" id="error-provider" class="alert alert-danger">{{ errorProvider }}</div>
   </div>
   <!-- Partie de droite -->
@@ -80,7 +80,7 @@
       <h2>Nouveau client ?</h2>
 
     <div class="form-group">
-      <label for="usernameregister"> Username :</label>
+      <label for="usernameregister"> Pseudo :</label>
       <input
         formControlName="usernameregister"
         class="input-section1 form-control"
@@ -90,7 +90,7 @@
 
       />
       <div *ngIf="submitted && fr.usernameregister.errors" class="invalid-feedback">
-          <div *ngIf="fr.usernameregister.errors.required">Username is required</div>
+          <div *ngIf="fr.usernameregister.errors.required">Pseudo</div>
         </div>
     </div>
 
@@ -105,12 +105,12 @@
 
       />
       <div *ngIf="submitted && fr.emailregister.errors" class="invalid-feedback">
-      <div *ngIf="fr.emailregister.errors.required">Email is required</div>
+      <div *ngIf="fr.emailregister.errors.required">Email requis</div>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="passwordregister"> Password :</label>
+      <label for="passwordregister"> Mot de passe :</label>
       <input
         formControlName="passwordregister"
         class="input-section1 form-control"
@@ -120,7 +120,7 @@
 
       />
       <div *ngIf="submitted && fr.passwordregister.errors" class="invalid-feedback">
-      <div *ngIf="fr.passwordregister.errors.required">Password is required</div>
+      <div *ngIf="fr.passwordregister.errors.required">Mot de passe</div>
       </div>
     </div>
     <div class="form-group">
