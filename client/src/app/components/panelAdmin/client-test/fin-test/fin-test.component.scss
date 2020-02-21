@@ -5,12 +5,6 @@ body, html {
   height: auto!important;
 }
 
-.oos-margin-left {
-  margin-left: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
 .container-section2 {
   display: flex;
   justify-content: space-around;
@@ -87,6 +81,12 @@ body, html {
             height: 85px !important;
             margin-right: 10px !important;
           }
+        }
+        .oos-margin-left {
+          margin: auto;
+          margin-top: 20px;
+          width: 100px;
+          height: 100px;
         }
       }
     }
