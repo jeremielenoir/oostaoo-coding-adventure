@@ -96,14 +96,18 @@ module.exports = {
   /**
    * Promise to add a/an payment.
    *
-   * @return {Promise}
+  //  * @return {Promise}
    */
 
   add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Payment.associations.map(ast => ast.alias));
-    const data = _.omit(values, Payment.associations.map(ast => ast.alias));
+    console.log('SERVICE ADD : values : ', values);
 
+    values.yo = 'yo';
+    const relations = _.pick(values, Payment.associations.map(ast => ast.alias));
+    // console.log('relations : ', relations);
+    const data = _.omit(values, Payment.associations.map(ast => ast.alias));
+    // console.log('data : ', data);
     // Create entry with no-relational data.
     const entry = await Payment.forge(data).save();
 
@@ -116,6 +120,21 @@ module.exports = {
    *
    * @return {Promise}
    */
+  refund: async (paymentId) => {
+    console.log('SERVICE REFUND : paymentId : ', paymentId);
+      let refund;
+      const paymentType = paymentId.substring(0, 2);
+      if (paymentType == 'ch'){
+         refund = await stripe.refunds.create({
+          charge: paymentId
+        });
+      }else if (paymentType == 'su'){
+        refund = await stripe.subscriptions.del(paymentId);
+      }
+
+
+    return refund;
+  },
 
   edit: async (params, values) => {
     // Extract values related to relational data.
@@ -256,11 +275,11 @@ module.exports = {
          customer: customer.id
      });
     return payment;
-    }catch(error){
-      console.log('error : ', error);
-     return { statusCode, message, type } = error.raw;
-    }
 
+    }catch(error){
+     console.log('error : ', error);
+     return error;
+   }
     // return await stripe.charges.create({
     //   source: body.token.id,
     //   amount: body.amount,
@@ -282,6 +301,7 @@ module.exports = {
              plan: body.offer.plan
              }]
           });
+
           return payment;
         }catch(error){
           console.log('error : ', error);

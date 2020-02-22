@@ -22,7 +22,7 @@ export class StripePaymentComponent implements OnInit {
   stripeLoader = false;
 
   payload: any;
-
+  paymentCreationBody: any;
   elements: Elements;
   card: StripeElement;
   // optional parameters
@@ -47,7 +47,6 @@ export class StripePaymentComponent implements OnInit {
 
     // info utilisateur a recuperer de la bdd
     this.apiClientService.get(API_URI_USER + '/' + this.userToken.userId).subscribe(user => this.userInfo = user);
-
     this.stripeForm();
   }
 
@@ -89,7 +88,7 @@ export class StripePaymentComponent implements OnInit {
     //const name = this.stripeTest.get('name').value;
     this.stripeLoader = true;
     // username utilisateur
-    console.log('totoro', this.userInfo);
+    console.log('this user info : ', this.userInfo);
     const name = this.userInfo.username;
 
     this.stripeService
@@ -104,19 +103,54 @@ export class StripePaymentComponent implements OnInit {
             email: this.userInfo.email,
             token: result.token
           };
-
+          console.log('this payload : ', this.payload);
             this.apiClientService.post(API_URI_PAYMENT + '/pay', this.payload)
               .subscribe(res => {
+
                 if(!res.status){
-                  this.stripeError = res.raw.message;
+                  console.log('erreur : ', res.raw.message);
+                  this.stripeError = "Votre paiement a échoué";
+                  if(this.card){
+                    this.card.unmount();
+                    this.card.mount('#card-element');
+                  }
+                  setTimeout(()=>{this.stripeError = ''}, 2000);
                   this.stripeLoader = false;
+
                 }else if(res.status=='succeeded' || 'active'){
-                  
-                  this.stripeSuccess = 'Votre paiement a été effectué';
-                  this.stripeLoader = false;
-                  setTimeout(()=>{
-                    this.router.navigate(['/dashboard/campaigns']);
-                  }, 1200);
+                  console.log('res : : ', res);
+                  this.paymentCreationBody = {
+                    amount: this.offerChoice.price,
+                    offer_id: this.offerChoice.id,
+                    user_id: this.userInfo.id,
+                    date_payment: Date.now(),
+                    paymentId: res.id
+                  }
+                  console.log('this paymentCreationBody : ', this.paymentCreationBody);
+                    this.apiClientService.post(API_URI_PAYMENT, this.paymentCreationBody)
+                    .subscribe(res=>{
+                      console.log('payment create res : ', res);
+                      if(res.refund){
+                         console.log('refund: ', res.refund);
+                         if(this.card){
+                          this.card.unmount();
+                         }
+                        setTimeout(()=>{
+                          this.stripeError = '';
+                          this.card.mount('#card-element');
+                        }, 2000);
+
+                         this.stripeError = "Un problème technique est survenu";
+                         this.stripeLoader = false;
+                        return;
+                      }else{
+                        this.stripeSuccess = 'Votre paiement a été effectué';
+                        this.stripeLoader = false;
+                        setTimeout(()=>{
+                          this.router.navigate(['/dashboard/campaigns']);
+                        }, 1200);
+                      }
+                    })
                 }
               });
 

@@ -15,10 +15,6 @@
       "default": "",
       "type": "decimal"
     },
-    "offer_id": {
-      "model": "offer",
-      "via": "payment_id"
-    },
     "user_id": {
       "model": "user",
       "via": "payment_id",
@@ -27,6 +23,10 @@
     "date_payment": {
       "default": "",
       "type": "integer"
+    },
+    "offer_id": {
+      "model": "offer",
+      "via": "payment_id"
     }
   }
 }
