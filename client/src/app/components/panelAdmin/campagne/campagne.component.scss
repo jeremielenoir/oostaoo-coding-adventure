@@ -2,6 +2,17 @@
 @import "../sidebar-right/sidebar-right.component.scss";
 @import "../dashboard-campagne/dashboard-campagne.component.scss";
 
+
+
+::ng-deep .mat-dialog-container{
+  border: $border-table;
+  background: $color-background-blue;
+
+
+    .mat-button{
+      outline: none;
+    }
+}
 // .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element{
 //   color:#e15028!important;
 // }

@@ -103,12 +103,17 @@
                 <span>Epingler</span>
               </button>
 
-              <button class="button-matMenu" *ngIf="campaign.archive === true"
+              <button class="button-matMenu" *ngIf="campaign.archive === true "
                 (click)="archivecampaign(campaign.id,campaign.archive)" mat-menu-item>
                 <mat-icon>unarchive</mat-icon>
                 <span>Désarchiver</span>
               </button>
-              <button class="button-matMenu" *ngIf="campaign.archive === false"
+              <button class="button-matMenu" *ngIf="campaign.archive === false && campaign.pin === true"
+              (click)="archivecampaign(campaign.id,campaign.archive)" disabled mat-menu-item>
+              <mat-icon>archive</mat-icon>
+              <span>Archiver</span>
+            </button>
+              <button class="button-matMenu" *ngIf="campaign.archive === false && campaign.pin === false"
                 (click)="archivecampaign(campaign.id,campaign.archive)" mat-menu-item>
                 <mat-icon>archive</mat-icon>
                 <span>Archiver</span>
@@ -163,32 +168,32 @@
             </span>
             <mat-menu #menu="matMenu">
 
-              <button (click)="duplicatecampaign(campaign.id)" mat-menu-item>
+              <button class="button-matMenu" (click)="openDialogDuplicate(campaign.id)" mat-menu-item>
                 <mat-icon>file_copy</mat-icon>
                 <span>Dupliquer</span>
               </button>
 
-              <button *ngIf="campaign.pin === true" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.pin === true" disabled (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
                 <mat-icon>bookmark</mat-icon>
                 <span>Désépingler</span>
               </button>
-              <button *ngIf="campaign.pin === false" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.pin === false" disabled (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
                 <mat-icon>bookmark</mat-icon>
                 <span>Epingler</span>
               </button>
 
-              <button *ngIf="campaign.archive === true" (click)="archivecampaign(campaign.id,campaign.archive)"
+              <button class="button-matMenu" *ngIf="campaign.archive === true"  (click)="archivecampaign(campaign.id,campaign.archive)"
                 mat-menu-item>
                 <mat-icon>unarchive</mat-icon>
                 <span>Désarchiver</span>
               </button>
-              <button *ngIf="campaign.archive === false" (click)="archivecampaign(campaign.id,campaign.archive)"
+              <button class="button-matMenu" *ngIf="campaign.archive === false"  (click)="archivecampaign(campaign.id,campaign.archive)"
                 mat-menu-item>
                 <mat-icon>archive</mat-icon>
                 <span>Archiver</span>
               </button>
 
-              <button (click)="deletecampaign(campaign.id)" mat-menu-item>
+              <button class="button-matMenu" (click)="openDialogDelete(campaign.id)" mat-menu-item>
                 <mat-icon>delete</mat-icon>
                 <span>Supprimer</span>
               </button>
