@@ -103,7 +103,6 @@ module.exports = {
     // Extract values related to relational data.
     console.log('SERVICE ADD : values : ', values);
 
-    values.yo = 'yo';
     const relations = _.pick(values, Payment.associations.map(ast => ast.alias));
     // console.log('relations : ', relations);
     const data = _.omit(values, Payment.associations.map(ast => ast.alias));
