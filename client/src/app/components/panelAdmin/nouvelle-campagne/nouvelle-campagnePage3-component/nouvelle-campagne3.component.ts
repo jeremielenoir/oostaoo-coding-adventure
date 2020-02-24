@@ -84,8 +84,13 @@ export class NouvelleCampagnePage3Component implements OnInit {
       this.headerChangePositioinDropList();
     });
   }
-  fmtMSS(s) {
-    return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
+  fmtMSS(d) {
+    d = Number(d);
+    var h = Math.floor(d/3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+
+    return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
   }
 
   headerChangePositioinDropList() {
@@ -100,6 +105,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
     // console.log('this.formCampagne.value(): ', this.formCampagne.value);
     this.apiClientService.get(API_URI_QUESTIONS).subscribe(datas => {
       this.questions = datas;
+      console.log('les questions', this.questions);
 
       for (const question of this.questions) {
         if (question.technologies) {
@@ -111,6 +117,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
             )
           ) {
             this.allQuestions.push(question);
+            console.log('tableau allQuestion', this.allQuestions);
           }
 
         }

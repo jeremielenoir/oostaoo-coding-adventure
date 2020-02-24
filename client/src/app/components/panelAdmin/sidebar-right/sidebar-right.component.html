@@ -7,7 +7,7 @@
         <span class="icon-modal-header">
           <i class="fas fa-cog icon-header"></i>
         </span>
-        Options des événements
+        Options des notifications
       </h3>
     </div>
 
@@ -25,7 +25,7 @@
           <span class="checkbox-span"></span>
         </label>
 
-        <button class="btn-modal">enregistre</button>
+        <button class="btn-modal">Enregistrer</button>
       </form>
     </div>
   </div>
@@ -39,17 +39,20 @@
 
   <div class="sous-header-one sidibar-sous-header">
 
-    <figure class="info-content-img-header-dashboard"
+    <figure style="flex:2" class="info-content-img-header-dashboard"
       [class.info-content-img-header-dashboard-MinSize]="IsBoaleanSmallSidibar">
       <img src="../assets/Coding-game-img/SVG-menu-Dashboard/Notifications.svg">
     </figure>
-    <h3 *ngIf="!IsBoaleanSmallSidibar" class="info-title-header-dashboard">
-      NOTIFICATIONS
-    </h3>
 
-    <span *ngIf="!IsBoaleanSmallSidibar" class="icon-right-sidibar" id="param-cog" (click)="param_cog()">
-      <i class="fas fa-cog"></i>
-    </span>
+    <div class="info-content-header-right-dashboard">
+      <h3 *ngIf="!IsBoaleanSmallSidibar" class="info-title-header-dashboard">
+        NOTIFICATIONS
+      </h3>
+
+      <span *ngIf="!IsBoaleanSmallSidibar" class="icon-right-sidibar" id="param-cog" (click)="param_cog()">
+        <i class="fas fa-cog"></i>
+      </span>
+    </div>
 
   </div>
 

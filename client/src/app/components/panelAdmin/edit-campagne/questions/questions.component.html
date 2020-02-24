@@ -16,7 +16,7 @@
 
       Retour
     </button>
-    <button class="custom-buttom" mat-flat-button
+    <button class="custom-buttom" [ngClass]="questionsByCampaign.length > 0 ? 'button-enabled' : 'button-disabled'" [disabled]="questionsByCampaign.length > 0 ? 'false' : 'true'" mat-flat-button
       (click)="SendQuestionSelected()">
       Enregistrer
     </button>
@@ -25,7 +25,7 @@
 <div class="container-edit-question">
 
   <div id="content">
-    <div class="example-container">
+    <div class="block-container">
       <div class="bar">
         <figure class="bar-content-img">
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
@@ -108,7 +108,7 @@
       </div>
     </div>
 
-    <div class="example-container">
+    <div class="block-container">
       <div class="bar">
         <figure class="bar-content-img">
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
@@ -167,7 +167,7 @@
             <div class="drop">
               <i class="fas fa-list-ul drop-icon"></i>
             </div>
-            <p class="time" matTooltip="Durée(heure:min:sec)">{{ fmtMSS(itemQuestions.time) }}</p>
+            <p class="time" matTooltip="Durée(heure:min:sec)">{{ fmtMSS(itemQuestions.time)}}</p>
           </div>
         </div>
       </div>

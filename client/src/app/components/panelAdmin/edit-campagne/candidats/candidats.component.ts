@@ -432,14 +432,14 @@ export class CandidatsComponent implements OnInit {
       questionsRapport.push(questionsRapportUnit);
     })
 
-    let hours = Math.floor(totalTestDuration / 60);
+    let heures = Math.floor(totalTestDuration / 60);
     let minutes = totalTestDuration % 60;
     let minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
-    const totalTestTime = `${hours} h ${minutesString}`;
-    hours = Math.floor(totalCandidateDuration / 60);
+    const totalTestTime = `${heures} h ${minutesString}`;
+    heures = Math.floor(totalCandidateDuration / 60);
     minutes = totalCandidateDuration % 60;
     minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
-    const totalCandidateTime = `${hours}h${minutesString}`;
+    const totalCandidateTime = `${heures}h${minutesString}`;
 
     return {
       name, email, duration, score, totalPointsMax,
@@ -462,10 +462,10 @@ export class CandidatsComponent implements OnInit {
     const m = Math.floor(duree % 3600 / 60);
     const s = Math.floor(duree % 3600 % 60);
 
-    const hour = h > 0 ? h + (h === 1 ? ' hour, ' : ' hours, ') : '';
+    const hour = h > 0 ? h + (h === 1 ? ' heure ' : ' heures, ') : '';
     const minute = m > 0 ? m + (m === 1 ? ' minute, ' : ' minutes, ') : '';
-    const second = s > 0 ? s + (s === 1 ? ' second' : ' seconds') : '';
-    return hour + minute + second;
+    const secondes = s > 0 ? s + (s === 1 ? ' seconde' : ' secondes') : '';
+    return hour + minute + secondes;
   }
 
   applyFilter(filterValue: string) {

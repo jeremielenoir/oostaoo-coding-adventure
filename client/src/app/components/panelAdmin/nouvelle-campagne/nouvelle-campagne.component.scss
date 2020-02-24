@@ -1,12 +1,24 @@
 @import"../../../../roodeo-variables.scss";
 
+// ::ng-deep app-nouvelle-campagne{
+//     display: flex;
+//     flex-direction: column;
+//     height: 100%
+// }
+.form-etape{
+  height: 100%;
+  form{
+    height: 100%;
+  }
+}
+
 .new-campaign {
-  width: 90%;
-  margin: 0 auto;
+  width: 100%;
   font-weight: bold;
   border:$border-table;
   border-radius: $border-radius;
   background: $color-white-background;
+  
 
   #select {
     display: flex;
@@ -43,11 +55,10 @@
 
 .backgroundColor {
   width: 100%;
-  height: 100%;
+  height: 80%;
   background-color: $color-background-blue;
   .cadreQuestion {
-    margin-top:30px;
-    position: absolute;
+    padding: 30px 20px 0px;
     width: 100%;
   }
 }
@@ -62,6 +73,7 @@
   border:1px solid #e15028;
   border-radius: 100px;
   font-weight: 700;
+  outline: none;
   &:hover{
     background-color: #e15028;
     color: white;
@@ -105,6 +117,7 @@
   display: flex;
   justify-content: flex-end;
   margin-right: 20px;
+  outline: none;
 }
 
 .example-radio-button {

@@ -12,7 +12,7 @@
       <i class="fas fa-chevron-left icon-arrow-btn"></i>
       Retour
     </button>
-    <button class="custom-buttom" mat-flat-button (click)="postCampagne()">
+    <button class="custom-buttom" [ngClass]="allQuestionLevel.length > 0 ? 'button-enabled' : 'button-disabled'" [disabled]="allQuestionLevel.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
       Enregistrer
     </button>
 
@@ -20,7 +20,7 @@
 </div>
 <div class="container-edit-question">
   <div id="content">
-    <div class="example-container">
+    <div class="block-container">
       <div class="bar">
         <figure class="bar-content-img">
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
@@ -95,7 +95,7 @@
       </div>
     </div>
 
-    <div class="example-container">
+    <div class="block-container">
       <div class="bar">
         <figure class="bar-content-img">
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
@@ -122,13 +122,15 @@
           </div>
 
           <div class="partie-left-example-box-2">
-            <p class="question-name" matTooltip="{{item.name}}">{{ item.name }}</p>
+            <div class="tooltip-information">
+              {{item.name}}
+            </div>
+            <p class="question-name">{{ item.name }}</p>
             <div class="content-rouded" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
               <span class="niveau-rouded"></span>
               <span class="niveau-rouded"></span>
               <span class="niveau-rouded"></span>
             </div>
-          </div>
 
           <div class="content-rouded" *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
             <span class="niveau-rouded"></span>

@@ -38,6 +38,8 @@ export class ProfilEntrepriseComponent implements OnInit {
   public currentTotal = 0;
   public entreprise: any = null;
 
+  public isVerifUser = false;
+
 
   public entre: any;
 
@@ -832,6 +834,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       console.log('user getUser=', user);
       console.log('this this user', this.entreprise);
       if ( user[0].entreprise === null) {
+        this.isVerifUser = true;
         return console.log('no entreprise lel');
       } else {
       this.getentreprise().then(entreprise => {
@@ -859,6 +862,7 @@ export class ProfilEntrepriseComponent implements OnInit {
         console.log('entreprise picture', this.picture);
         // this.progressbar1();
         // this.progressbar2();
+        this.isVerifUser = true;
         this.progressbarTotal();
       });
     }
@@ -867,7 +871,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   }
 
   addentreprise() {
-    this.submitted = true;  
+    this.submitted = true;
     if (this.newEntreprise.value === '' || this.newEmail.value === '' || this.newPhone.value === '' || this.newEmail.invalid) {
       this.openSnackBar('Erreur dans le formulaire merci de vérifier les champs', 'Fermer');
       return console.log('password not updated');

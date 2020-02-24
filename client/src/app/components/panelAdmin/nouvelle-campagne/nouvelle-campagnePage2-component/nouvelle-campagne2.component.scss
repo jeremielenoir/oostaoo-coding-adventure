@@ -8,6 +8,12 @@
     background: $color-white-background;
 }
 
+.cadreQuestion {
+    margin: 30px 20px 0px;
+    margin-bottom: 30px;
+    width: 97%;
+  }
+
 .buttons {
     display: flex;
     flex-wrap: wrap;
@@ -135,6 +141,7 @@
     #new-campaign {
         width: 100%;
         margin: 0px;
+
     }
     #form {
         margin: 0px 10px;

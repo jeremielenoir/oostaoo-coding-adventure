@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { AuthFormVerification } from "src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: "app-nouvelle-campagne",
