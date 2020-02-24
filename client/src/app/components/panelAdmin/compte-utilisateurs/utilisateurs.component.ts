@@ -182,13 +182,14 @@ export class UtilisateursComponent implements OnInit {
     this.editPrenom = new FormControl(this.editingUser.prenom, Validators.required);
     this.editNom = new FormControl(this.editingUser.nom, Validators.required);
     this.editEmail = new FormControl(this.editingUser.email, Validators.required);
+    this.editUsername = new FormControl(this.editingUser.username, Validators.required);
     this.editingId = user.id;
     console.log('userdfezijhfelf',this.editingUser)
     this.shadowcog2 = true;
 
-    this.formulaire.nativeElement.prenom.value = user.prenom;
-    this.formulaire.nativeElement.nom.value = user.nom;
-    this.formulaire.nativeElement.email.value = user.email;
+    // this.formulaire.nativeElement.prenom.value = user.prenom;
+    // this.formulaire.nativeElement.nom.value = user.nom;
+    // this.formulaire.nativeElement.email.value = user.email;
 
     this.list_change(user.role.id);
   }

@@ -32,7 +32,7 @@
       </div>
       <div>
         <p>Durée</p>
-        <p class="header_stats">{{ candidat?.duree }} / {{ totalTime }} secondes</p>
+        <p class="header_stats">{{ fmtMSS(candidat?.duree) }} / {{ fmtMSS(totalTime) }}</p>
       </div>
     </div>
 
@@ -49,7 +49,7 @@
             <span *ngIf="question.index_question.technologies == tech.id"> {{tech.name}} </span>
           </p>
 
-          <p>{{ question.timeRep }} / {{ question.index_question.time }} secondes</p>
+          <p>{{ fmtMSS(question.timeRep) }} / {{ fmtMSS(question.index_question.time) }}</p>
           <p *ngIf=" question.array_rep_candidat  ==  question.index_question.answer_value ">
             {{ question.index_question.points }} / {{ question.index_question.points }} pts</p>
           <p *ngIf=" question.array_rep_candidat  !=  question.index_question.answer_value "> 0 /

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from '@angular/material';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -26,6 +26,7 @@ export class CandidatsMailComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     public apiClientService: ApiClientService,
     private dialog: MatDialog,
+    private _snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<CandidatsMailComponent>
   ) {
     this.candidats = this.data.contact;
@@ -88,6 +89,7 @@ export class CandidatsMailComponent implements OnInit {
           console.log('res', res.id);
           const idCandidat = [];
           idCandidat.push(res.id);
+          this.openSnackBar('Candidat invité', 'Fermer');
           return idCandidat;
         }, err => {
           console.log('log error', err)
@@ -96,6 +98,12 @@ export class CandidatsMailComponent implements OnInit {
       .then(idCandidat => {
         this.updateCampaign(idCandidat);
       });
+  }
+
+  openSnackBar(message: string, action) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
   updateCampaignPostCandidats() {

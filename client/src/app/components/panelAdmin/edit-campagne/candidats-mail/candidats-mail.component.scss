@@ -15,7 +15,7 @@
 
 .sroll-body{
     overflow-y: scroll;
-    height: 360px;
+    height: 330px;
     margin-bottom: 9px;
     margin-top: 9px;
 }
@@ -28,6 +28,11 @@ label{
     color: $color-principal-blue;
 }
 
+.block-button{
+    display: flex;
+    justify-content: center;
+}
+
 button{
     font-weight: 700;
     height: 50px;
@@ -37,7 +42,6 @@ button{
     text-transform: uppercase;
     color: white;
     padding: 9px 30px;
-    margin-right: 9px;
     border:1px solid $color-principal-blue;
     margin-bottom: 25px;
 }

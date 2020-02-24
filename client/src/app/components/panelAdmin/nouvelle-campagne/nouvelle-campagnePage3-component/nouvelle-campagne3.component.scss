@@ -1,20 +1,33 @@
 @import"../../../../../roodeo-variables.scss";
 
+@import"../nouvelle-campagne.component.scss";
+
+::ng-deep app-nouvellecampagnepage3component{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.cadreQuestion{
+    padding: 0px 0px 0 !important;
+}
+
 .custom-buttom,.mat-flat-button {
+    // height: 100%;
     line-height: 0px;
     background: $color-orange-light!important;
     border-radius: 0px !important;
-    font-size: 15px !important;
+    font-size: 14px !important;
     contain: content;
     font-weight: 600;
     padding: 15px 40px !important;
     color: $text-color-white !important;
-    height: 80px;   
+    height: 64.5px;   
+    outline: none;
 }
 
-::ng-deep .cdk-overlay-pane{
-    width: 165px;
-}
+// ::ng-deep .cdk-overlay-pane{
+//     width: 165px;
+// }
 
  ::ng-deep .mat-menu-panel{
     width: 100%!important;
@@ -22,6 +35,7 @@
 }
 .custom-buttom-anul{
     background-color: $color-gray-blue!important;
+    outline: none;
    
 }
 
@@ -35,14 +49,17 @@
     display: flex;
     width: 100%;
     border: 1.5px solid $color-principal-orange;
+    border-top: none;
     border-left: none;
     border-right: none;
     background-color: $color-pricipal-blue-light;
     display: flex;
     padding-right: 6%;
-    height: 82px;
+    height: 65px;
    
     .segment2{
+        display: flex;
+        align-items: center;
         margin-top: -1px;
     }
     .segment3{
@@ -100,32 +117,36 @@
 }
 
 .button-disabled{
-    color:white !important;
-    border-radius: 0px;
-    background-color:gray !important;
-    margin: 0 10px !important;
-    height: 40px !important;
-    width: 120px !important;
+    line-height: 0px;
+    background: grey!important;
+    border-radius: 0px !important;
     font-size: 14px !important;
-    font-weight: bold;
+    contain: content;
+    font-weight: 600;
+    padding: 15px 40px !important;
+    color: $text-color-white !important;
+    height: 64.5px; 
+    outline: none; 
 }
 .button-enabled{
-    color:white;
-    border-radius: 0px;
-    background-color: green;
-    margin: 0 10px !important;
-    height: 40px !important;
-    width: 120px !important;
+    line-height: 0px;
+    background: $color-orange-light!important;
+    border-radius: 0px !important;
     font-size: 14px !important;
-    font-weight: bold;
+    contain: content;
+    font-weight: 600;
+    padding: 15px 40px !important;
+    color: $text-color-white !important;
+    height: 64.5px;  
+    outline: none;
 }
 
 
 #content {
     width: 100%;
+    flex: 1;
     display: flex;
     position: relative;
-    flex: 1;
 }
 
 .option-question-help{
@@ -138,7 +159,8 @@
     background: #fff;
     justify-content: space-between;
     #div-search {
-        position: relative;
+        display: flex;
+        
         .search-input{
             font-size: 15px;
             background-color: white;
@@ -146,7 +168,6 @@
             border-bottom: 1.5px solid #de522b;
             outline: none;
             padding: 6px 6px;
-            font-size: 18px;
             width: 150px;
             &::placeholder{
                 font-family: $font-poppins;
@@ -155,21 +176,16 @@
             }
         }
         .icon-search{
-            display: inline-block;
-            padding-left: 10px;
-            // color: #de522b;
-            font-size: 24px;
-            top: 0px;
-            right: -38px;
-            position: absolute;
-            width: 40px;
-            height: 40px;
+            // display: inline-block;
+            width: 25px;
+            height: 25px;
+            font-size: 27px;
         }
     }
     .search-advanced{
         color:$color-orange-light;
         font-family: $font-poppins;
-        font-size: 18px;
+        font-size: 15px;
         justify-content: center;
         margin-left: 12px;
         i{
@@ -186,14 +202,7 @@
 }
 .preview{
     justify-content: flex-end;
-    .icon-trash{
-        color: $color-orange-light;
-        font-size: 28px;
-        margin-right: 28px;
-        &:hover{
-            color:$color-principal-orange
-        }
-    }
+
     .preview-btn{
         background-color: $color-principal-blue!important;
         letter-spacing: 1px;
@@ -241,10 +250,259 @@
 
 /* DRAG AND DROP */
 
-.example-container {
+@import"../../../../../roodeo-variables.scss";
+
+@import"../nouvelle-campagne.component.scss";
+
+
+.cadreQuestion{
+    padding: 0px 0px 0 !important;
+}
+
+.custom-buttom,.mat-flat-button {
+    height: 100%;
+    line-height: 0px;
+    background: $color-orange-light!important;
+    border-radius: 0px !important;
+    font-size: 14px !important;
+    contain: content;
+    font-weight: 600;
+    padding: 15px 40px !important;
+    color: $text-color-white !important;
+    height: 64.5px;   
+    outline: none;
+}
+
+// ::ng-deep .cdk-overlay-pane{
+//     width: 165px;
+// }
+
+ ::ng-deep .mat-menu-panel{
+    width: 100%!important;
+    border-radius: 0px!important;
+}
+.custom-buttom-anul{
+    background-color: $color-gray-blue!important;
+    outline: none;
+   
+}
+
+.icon-arrow-btn{
+    font-size: 25px;
+    position: relative;
+    left: -12px;
+}
+
+#top-bar {
+    display: flex;
+    width: 100%;
+    border: 1.5px solid $color-principal-orange;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: $color-pricipal-blue-light;
+    display: flex;
+    padding-right: 6%;
+    height: 65px;
+   
+    .segment2{
+        display: flex;
+        align-items: center;
+        margin-top: -1px;
+    }
+    .segment3{
+        flex: 6.5;
+        display: flex;
+        align-items: center;
+        padding-left: 12%;
+        .title-segment{
+            font-size: 17px;
+            font-family: $font-poppins;
+            font-weight: 400;
+            color: $color-principal-blue;
+            margin-bottom: 0px;
+            margin-right: 12px;
+        }
+
+        #score{
+
+            color:$color-orange-light;
+            font-size: 30px;
+            margin-bottom: 0px;
+            margin-top: -5px;
+            font-family: $font-poppins;
+        }
+    }
+}
+
+
+
+#arrow {
+    position: absolute;
+    top: 16px;
+    right: -15px;
+    background: $text-color-white;
+    text-align: center;
+    font-size: 14px;
+    line-height: 28px;
+    border: 1px solid $color-grey;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+#techno {
+    color: $color-gold-second;
+}
+
+.drop-icon {
+    color: $color-gold;
+}
+
+
+.info {
+    color: $color-grey;
+}
+
+.button-disabled{
+    line-height: 0px;
+    background: grey!important;
+    border-radius: 0px !important;
+    font-size: 14px !important;
+    contain: content;
+    font-weight: 600;
+    padding: 15px 40px !important;
+    color: $text-color-white !important;
+    height: 64.5px; 
+    outline: none; 
+}
+.button-enabled{
+    line-height: 0px;
+    background: $color-orange-light!important;
+    border-radius: 0px !important;
+    font-size: 14px !important;
+    contain: content;
+    font-weight: 600;
+    padding: 15px 40px !important;
+    color: $text-color-white !important;
+    height: 64.5px;  
+    outline: none;
+}
+
+
+#content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+}
+
+.option-question-help{
+    display: flex;
+    flex-direction: row;
+    border-top: 1.5px solid #e15028;
+    border-bottom: 1.5px solid #e15028;
+    padding-left: 18px;
+    align-items: center;
+    background: #fff;
+    justify-content: space-between;
+    #div-search {
+        display: flex;
+        
+        .search-input{
+            font-size: 15px;
+            background-color: white;
+            border:none;
+            border-bottom: 1.5px solid #de522b;
+            outline: none;
+            padding: 6px 6px;
+            width: 150px;
+            &::placeholder{
+                font-family: $font-poppins;
+                color:$color-orange-light;
+                
+            }
+        }
+        .icon-search{
+            // display: inline-block;
+            width: 25px;
+            height: 25px;
+            font-size: 27px;
+        }
+    }
+    .search-advanced{
+        color:$color-orange-light;
+        font-family: $font-poppins;
+        font-size: 15px;
+        justify-content: center;
+        margin-left: 12px;
+        i{
+            left: 12px;
+            top: 5px;
+        }
+    }
+
+    .trie-cat{
+        i{
+            left: 21px;
+        }
+    }
+}
+.preview{
+    justify-content: flex-end;
+
+    .preview-btn{
+        background-color: $color-principal-blue!important;
+        letter-spacing: 1px;
+       
+    }
+}
+.bar {
+    width: 100%;
+    background: #eaeff3;
+    height: 70px;
+    padding: 7px 12px;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    .bar-content-img{
+        width: 45px;
+        height: 45px;
+        margin-bottom: 0px;
+        margin-right: 45px;
+    }
+    .bar-text{
+        text-transform: uppercase;
+        font-size: 15px;
+        margin-bottom: 0;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        padding-top: 7px;
+    }
+}
+
+
+#bar-btn-search {
+    background: $color-gold-background!important;
+}
+
+
+:host ::ng-deep .mat-button-wrapper {
+    contain: content;
+    font-family: $font-poppins!important;
+}
+
+/* DRAG AND DROP */
+
+.block-container {
+    display: flex;
     width: 50%;
     max-width: 100%;
-    margin: 10px 1% 0;
+    margin: 10px 20px 0;
     vertical-align: top;
     border:1.5px solid $color-principal-orange;
     border-radius: 5px;
@@ -254,7 +512,7 @@
 }
 
 .example-list {
-    height: 40vh;
+    flex: 1 1 0px;
     background: $text-color-white!important;
     display: block;
     overflow-y: auto;
@@ -315,7 +573,7 @@
    .question-techno {
     display: block;
     width: 100px;
-    font-size: 15px;
+    font-size: 14px;
     color: $color-orange-light;
     font-family: $font-poppins;
     text-align: center;
@@ -327,7 +585,7 @@
 .partie-left-example-box-2{
     flex: 5;
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
     padding-left: 5px;
     padding-right: 5px;
@@ -355,6 +613,7 @@
         .tooltip-information{
             background-color:$color-blue-light;
            display: block;
+           z-index: 3;
         }
         .question-name,.drop i,.point,.time{
             color:white;
@@ -366,7 +625,7 @@
         margin-bottom: 0px;
         max-width:240px;
         flex: 4;
-        font-size: 15px;
+        font-size: 14px;
         font-family: $font-poppins;
         padding-right: 6px;
         font-weight: 700;
@@ -453,10 +712,10 @@
     
 }
 
-:host ::ng-deep .example-box:hover {
-    box-shadow: 0px 0px 5px $color-grey;
-    transform: translate(2px, -3px);
-}
+// :host ::ng-deep .example-box:hover {
+//     box-shadow: 0px 0px 5px $color-grey;
+//     transform: translate(2px, -3px);
+// }
 
 .cdk-drag-preview {
     box-sizing: border-box;
@@ -472,9 +731,9 @@
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.example-box:last-child {
-    border: none;
-}
+// .example-box:last-child {
+//     border: none;
+// }
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
@@ -483,13 +742,14 @@
 #drop-text {
     height: 35px;
     padding: 0px 0px;
-    margin: 12px !important;
     transition: .5s;
     color: $color-orange-light;
     font-family: $font-poppins;
     text-align: center;
     font-size: 18px;
-    line-height: 30px;
+    line-height: 15px;
+    border-bottom: 1px dashed $color-orange-light;
+    margin: 20px 0px 0px;
 }
 
 .example-box p 
@@ -511,7 +771,7 @@
     color:$text-color-white;
     top:40px;
     position:absolute;
-    z-index:2;
+    z-index:38;
     /* bottom:10px; */
     display:none;
 }
@@ -530,8 +790,8 @@
     right: 86px;
 }
 .container-edit-question {
-  margin-left: 5%;
-  margin-right: 5%;
-  padding-bottom: 25px;
-  height: 100%;
+    width: 100%;
+    margin: 0;
+    // padding-bottom: 25px;
+    height: 100%;
 }

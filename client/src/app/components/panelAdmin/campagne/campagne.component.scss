@@ -2,6 +2,17 @@
 @import "../sidebar-right/sidebar-right.component.scss";
 @import "../dashboard-campagne/dashboard-campagne.component.scss";
 
+
+
+::ng-deep .mat-dialog-container{
+  border: $border-table;
+  background: $color-background-blue;
+
+
+    .mat-button{
+      outline: none;
+    }
+}
 // .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element{
 //   color:#e15028!important;
 // }
@@ -25,6 +36,26 @@
 //   transition: none!important;
 // }
 
+::ng-deep .mat-checkbox-layout{
+  margin-bottom: .5px!important;
+}
+::ng-deep .mat-checkbox-inner-container{
+  margin-right: 0px!important;
+}
+
+.invite-left{
+  margin-left: -21px;
+}
+.invite-left-many{
+  margin-left: -15px;
+}
+.termine-left{
+  margin-left: -5px;
+}
+
+.termine-left-many{
+  margin-left: 1px;
+}
 .button-matMenu{
   outline: none;
 }
@@ -38,7 +69,7 @@
   height: 100%;
 
   .header-form{
-        
+       
     display: flex;
     flex-direction: column;
     .sous-header-two{
@@ -53,43 +84,45 @@
       .block-btn-test{
         display: flex;
         flex-direction: row;
-        flex: 2;
+        flex: 1;
         align-items: center;
+        justify-content: center;
+        min-width: 43px;
         .number-test{
-          // padding-right: 6%;
-          // padding-left: 6%;
-          margin: 0 10%;
           color:#1d3551;
           font-size: 14px;
           font-weight: 700;
-          align-items: center;
-        }
-  
-        .btn-test{
-            background: #1d3551;
-            color:white;
-            border:none;
-            text-transform: uppercase;
-            padding: 20px 30px;
-            display: block;
-            font-size: 15px;
         }
 
       }
+    
+    }
 
+    .test-right-header{
+      display: flex;
+      flex: 11;
+        .btn-test{
+          flex: 2;
+          background: #1d3551;
+          color:white;
+          border:none;
+          text-transform: uppercase;
+          padding: 20px 30px;
+          display: block;
+          font-size: 15px;
+      }
       .sous-header-form {
         display: flex;
         align-items: center;
         background-color: white;
         padding-left: 5px;
         padding-right: 5px;
-        flex: 4;
+        flex: 8;
         .form-group-header {
           flex: 3;
           height: 46px;
-          label {
-            display: block;
-          }
+          min-width: 170px;
+          
           .checked-block {
             
             margin-top: 5px;
@@ -105,8 +138,8 @@
               padding-left: 10px;
               color: #de522b;
               font-size: 24px;
-              top: 0px;
-              right: 10px;
+              // top: -5px;
+              right: 22px;
               position: absolute;
               width: 28px;
               height: 28px;
@@ -117,8 +150,10 @@
             }
             .champ-header-contenu {
               width: 90%;
-              height: 70%;
+              height: 73%;
               // padding: 0 20px 0 10px;
+              padding-bottom: 8px;
+              padding-top: 8px;
               font-size: 15px;
               background-color: white;
               border-bottom: 1.5px solid #de522b!important;
@@ -141,7 +176,7 @@
             font-size: 15px;
             display: inline-block;
           }
-  
+
           padding: 0 5px;
           display: flex;
           align-items: center;
@@ -150,36 +185,40 @@
       }
     
     }
-   
-  
   }
   /*--contenu--techno--*/
 
   .contenu-techno {
     background-color: white;
-    border: $border-table-second;
+    // border: $border-table-second;
     display: flex;
     flex: 1;
     flex-direction: column;
    
     .no-campaign{
       width: 50%;
-      border: $border-table-second;
+      // border: $border-table-second;
       text-align: center;
-      margin: 20px auto 0;
+      margin: 17% auto 0;
       padding: 10px;
 
       p{
         text-align: center;
-      }
-
-      .icon{
-        color: $color-gold;
+        font-size: 20px;
+        font-weight: 700;
       }
 
       .button{
-        margin: 10px auto 0;
-        width: 38%;
+        -webkit-box-flex: 2;
+        cursor: pointer;
+        flex: 2;
+        background: #1d3551;
+        color: white;
+        border: none;
+        text-transform: uppercase;
+        padding: 20px 30px;
+        display: block;
+        font-size: 15px;
       }
     
     }
@@ -323,6 +362,7 @@
           border-right: 1px dashed #e15028;
           margin-bottom: 0px;
           cursor: pointer;
+          min-width: 40px;
           img{
             width: 30px;
             height: 30px;
@@ -391,9 +431,13 @@
   .branche-content-list-end{
     width: 100px!important;
   }
+  .test-right-header{
+    width: 100%;
+    flex-direction: column!important;
+  }
   .block-btn-test{
     width:100%;
-    justify-content: space-between;
+    justify-content: space-between!important;
     .number-test{
       padding-left: 6px!important;
     }

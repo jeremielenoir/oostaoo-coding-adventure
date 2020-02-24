@@ -3,13 +3,12 @@ $font-family-client-test: Open Sans, Lato, sans-serif;
 $Bg-client-test: #f9f9f9;
 $text-color-client-test: #333;
 
-
 @mixin structureBlockPrincipal {
   flex: 1;
   // height: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
   @media #{$deviceMaxDesktop} {
     margin: 20px 0 20px 0;
     width: 90% !important;
@@ -21,14 +20,18 @@ $text-color-client-test: #333;
   background-color: white;
   padding: 40px;
   width: 100%;
-  height: 45%;
-  border: 1px solid $color-principal-orange;
-  margin: 0px 0 0px 0;
+  border: $border-table;
+  border-radius: $border-radius;
+  padding-top: 10px;
   @media #{$deviceMaxDesktop} {
     height: auto !important;
     margin-bottom: 20px;
   }
   @include structureTitle();
+}
+
+.test {
+  margin-top: 65px!important;
 }
 
 @mixin structureTitle {
@@ -44,7 +47,7 @@ $text-color-client-test: #333;
 
 @mixin btn-color($yellow: true) {
   .btn-compo {
-    margin-bottom: 60px;
+    margin-bottom: 0;
     width: 200px;
     height: 50px;
     border: 1px solid $color-principal-blue;
@@ -70,8 +73,10 @@ p {
 }
 
 .container-section {
+  display: flex;
+  justify-content: center;
   width: 100%;
-  background-color: $Bg-client-test;
+  background-color: $color-background-blue;
   font-family: $font-family-client-test;
   font-weight: 300;
   color: $text-color-client-test;
@@ -81,7 +86,7 @@ p {
     margin-left: 5%;
     margin-right: 5%;
     display: flex;
-    margin-top: 30px;
+    margin-top: 20px;
     
     @media #{$deviceMaxDesktop} {
       flex-direction: column;
@@ -93,7 +98,9 @@ p {
       margin-right: 9px;
       padding: 40px;
       background: white;
-      border: 1px solid $color-principal-orange;
+      border: $border-table;
+      border-radius: $border-radius;
+      padding-top: 10px;
       @include structureBlockPrincipal();
       .test-invit {
         display: flex;
@@ -151,8 +158,6 @@ p {
 }
 
 .modall {
-  .modall-header {
-  }
   .modall-content {
     width: 1000px;
     max-width: 90vw;

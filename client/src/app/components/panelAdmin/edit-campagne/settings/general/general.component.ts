@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { DatePipe } from '@angular/common';
 import { API_URI_CAMPAIGNS, ApiClientService } from 'src/app/api-client/api-client.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-general',
@@ -12,7 +13,7 @@ import { API_URI_CAMPAIGNS, ApiClientService } from 'src/app/api-client/api-clie
 })
 export class GeneralComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, public apiClientService: ApiClientService, public datepipe: DatePipe) {
+  constructor(private route: ActivatedRoute, public apiClientService: ApiClientService, public datepipe: DatePipe, private _snackBar: MatSnackBar,) {
     this.route.parent.parent.params.subscribe(params => {
       this.globalId = params.id;
     });
@@ -86,11 +87,17 @@ export class GeneralComponent implements OnInit {
       expiration_date: this.formatDate(this.NewDateExp),
     }).subscribe(
       (res) => {
-        alert('Campagne mise à jour');
+        this.openSnackBar('Test edité', 'Fermer');
        // console.log('res', res);
       },
       err => console.log(err)
     );
+  }
+
+  openSnackBar(message: string, action) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
 

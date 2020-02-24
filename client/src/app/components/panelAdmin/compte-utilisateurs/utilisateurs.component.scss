@@ -2,8 +2,6 @@
 
 #global{
   width: 100%;
-  min-height: 100vh;
-  height: 100%;
   background: $color-background-blue;
 }
 
@@ -186,7 +184,7 @@
 .table_body,
 .table_body_cell,
 .table_row {
-  // border: $border-table;
+  border: $border-table;
   padding: 5px;
   margin: 5px;
 }

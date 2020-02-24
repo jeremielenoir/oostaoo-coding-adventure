@@ -9,17 +9,15 @@
 
   <div class="route-component">
     <div *ngSwitchCase="'CandidatFalse'" id="editQuestion">
-      <p class="style-link">
-        LINK page
-      </p>
       <div class="border1pxgray">
-        <div class="border1pxdashedgray">
+        <div class="border1pxdashedgray border1pxdashedgray-candidat">
           <div id="img-editquestion"></div>
           <h1>
             Votre campagne est prête. Il est temps d'inviter quelques candidats !
           </h1>
 
-          <button mat-raised-button color="primary" class="btn-question" mat-button (click)="openDialog()">
+          <button mat-raised-button color="primary" class="btn-question invit-btn-candidat" mat-button
+            (click)="openDialog()">
             Invitez des candidats
           </button>
         </div>
@@ -133,7 +131,8 @@
           </div>
         </div>
 
-        <button mat-raised-button color="primary" class="btn-question fix-button" mat-button (click)="openDialog()">
+        <button mat-raised-button style="border-radius: 5px" color="primary" class="btn-question fix-button" mat-button
+          (click)="openDialog()">
           Invitez des candidats
         </button>
 

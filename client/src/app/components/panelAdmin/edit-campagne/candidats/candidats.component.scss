@@ -1,28 +1,44 @@
 /* @import '../../compagne/compagne.component.css'; */
 @import"../../../../../roodeo-variables.scss";
 // Style sans candidat
+// ::ng-deep .ng-star-inserted{
+//    flex: 1;
+//   }
 
+::ng-deep app-candidats{
+  flex:1
+}
+.invit-btn-candidat{
+  margin-top: 60px;
+}
+.border1pxdashedgray-candidat{
+  border-radius:5px
+}
 .big-content{
   display: flex;
   flex: 1 0 auto;
   min-height: 100%;
 }
 .sous-content-check-action-candidat{
+  align-items: center;
   position: relative;
+  padding-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  ;
   .check-action-candidat{
-    position: absolute;
+    // position: absolute;
     cursor: pointer;
     width: 15px;
     height: 13.5px;
-    top: -5px;
-    left: -3px;
     z-index: 2;
+    margin-top: 8px;
     opacity: 0;
   }
   #candidat-check{
     position: absolute;
-    top: -10px;
-    left: -3px;
     height: 15px;
     width: 15px;
     border: 2px solid #7e8082;
@@ -46,10 +62,7 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
     }
-    .check-action-candidat + p{
-      color:red
-    }
-
+   
     .check-action-candidat:checked ~ #candidat-check:after {
       display: block;
     }
@@ -62,25 +75,29 @@
 
 .content-check-action-candidat{
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .checkbox-span{
-    top: -5px;
-    left: -3px;  
+    margin-bottom: 0px!important;
+    position: relative!important;
+    margin-top:0px!important;
+    height: 15px!important;
+    width: 15px!important;
   }
   .checkbox-span{
     cursor: pointer;
   }
   .checkbox-span::after {
     border-color:#fff!important;
+    width: 4px!important;
+    height: 9px!important;
  }
  
   input:checked ~ .checkbox-span {
     border-color: $color-principal-orange;
     background-color: $color-principal-orange;
   }
-}
-
-::ng-deep .ng-star-inserted{
- flex: 1;
 }
 
 
@@ -149,9 +166,12 @@
 }
 
 
-.mat-cell,.cdk-column-Checked{
-  position: relative!important;
-  width: 30px!important;
+.mat-cell,.mat-header-cell{
+  padding-left: 5px!important;
+  padding-right: 5px;
+  // position: relative!important;
+  // min-width: 40px!important;
+  // max-width: 40px!important;
 }
 
 .mat-checkbox{
@@ -186,10 +206,9 @@
   font-weight: 700;
 
 }
-
-
 td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
   // padding-left: 12px!important;
+  // border-left: 1px solid $color-principal-blue !important;
   text-align: center!important;
 }
 .mat-cell:first-child{
@@ -209,6 +228,10 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
 .tr.mat-footer-row, tr.mat-row{
   border-bottom: 2px solid $color-principal-blue!important;
 }
+
+.tr.mat-footer-row, tr.mat-row:last-child{
+  border-bottom: none!important;
+}
 .route-component{
     flex: 1 0 auto;
     display: flex;
@@ -220,14 +243,16 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   flex: 1;
   flex-direction: column;
   width: 100%;
+  background: $color-background-blue;
   padding-top: 20px;
-  padding-left: 7%;
-  padding-right: 7%;
+  padding-left: 15px;
+  padding-right: 15px;
 
     .select-choince{
+      border-radius: 5px;
       height: 48px;
       padding: 0 13px;
-      border: 1px solid #e4e4e4;
+      border: $border-table;
       background-color: white;
       display: flex;
       justify-content: center;
@@ -308,21 +333,10 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
       }
     }
 
-
-    .style-link {
-      border-bottom: 1px solid $color-table;
-      color: $color-grey;
-      padding-left: 25px;
-      padding-top: 5px;
-      padding-right: 5px;
-      padding-bottom: 5px;
-      margin-bottom: 0px;
-    }
-
     .border1pxgray {
-      margin: 5vh;
       border: $border-table;
       background-color:$color-white-background;
+      border-radius: 5px;
     }
 
     .border1pxdashedgray {
@@ -343,7 +357,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
       background-size: contain;
       background-position: center;
       width: 100%;
-      height: 50vh;
+      height: 35vh;
     }
 
     .diplex-1{
@@ -413,7 +427,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
         }
       .custom-input-filtre {
        width: 100%;
-        border: 1px solid $color-principal-orange;
+        border: 1.5px solid $color-principal-orange;
         background: $color-white-background;
         height: 48px;
         padding: 10px 23px!important;
@@ -431,14 +445,14 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   margin-top: 20px;
   display: flex;
   padding: 10px;
-  margin-bottom: 20px;
-  flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   .sous-table-content{
     border-radius: 5px;
     border:1.5px solid $color-principal-blue;
     width: 100%;
+    overflow: hidden;
+    
     &::-webkit-scrollbar{
       width: 8px;
       height: 8px;
@@ -545,10 +559,6 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   margin-top: 20px;
 }
 
-.sidenav_separator{
-
-}
-
 .sidenav_candidat_content{
   display: flex; 
   flex-direction: column;
@@ -629,9 +639,6 @@ filter-table {
 @media screen and (max-width: 960px){
   .sous-table-content{
     overflow-x: auto;
-  }
-  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
-    padding-left: 50px!important;
   }
   .barre-nav{
     .select-choince{

@@ -13,38 +13,39 @@
       <div class="sous-header-two">
 
         <div class="block-btn-test">
-
           <span class="number-test">{{ campaigns.length }}</span>
-          <button class="btn-test" (click)="testT()" [routerLink]="['/dashboard/campaigns/new']">
+        </div>
+        <div class="test-right-header">
+
+          <button class="btn-test" [routerLink]="['/dashboard/campaigns/new']">
             Nouveau test
           </button>
 
-        </div>
+          <div class="sous-header-form">
 
-        <div class="sous-header-form">
+            <div class="form-group-header form-group-header-2">
 
-          <div class="form-group-header form-group-header-2">
+              <!-- <mat-radio-button value="1">Option 1</mat-radio-button> -->
 
-            <!-- <mat-radio-button value="1">Option 1</mat-radio-button> -->
+              <mat-checkbox class="checked-block" (click)="includeArchivedCampaigns(checked)" #checked>
+                Inclure archives
+              </mat-checkbox>
+            </div>
 
-            <mat-checkbox class="checked-block" (click)="includeArchivedCampaigns(checked)" #checked>
-              Inclure archives
-            </mat-checkbox>
+            <div class="form-group-header">
+              <form>
+
+                <input type="text" name="search" [(ngModel)]="searchText" class="champ-header-contenu"
+                  placeholder="Rechercher" id="search-header" />
+
+                <figure class="icon-form-group-header-contenu">
+                  <img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg">
+                </figure>
+              </form>
+            </div>
           </div>
 
-          <div class="form-group-header">
-            <form>
-
-              <input type="text" name="search" [(ngModel)]="searchText" class="champ-header-contenu"
-                placeholder="Rechercher" id="search-header" />
-
-              <figure class="icon-form-group-header-contenu">
-                <img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg">
-              </figure>
-            </form>
-          </div>
         </div>
-
 
       </div>
     </div>
@@ -55,10 +56,9 @@
     <div class="content-scroll">
 
       <div class="no-campaign" *ngIf="campaigns.length === 0">
-        <p> Vous n'avez pas encore de campagnes, cliquer sur le bouton en dessous pour en créer une.</p>
-        <i class="fas fa-times-circle fa-4x icon"></i>
-        <div class="button">
-          <app-integration-bouton> </app-integration-bouton>
+        <p> Vous n'avez pas encore de tests, cliquer sur le bouton en dessous pour en créer un.</p>
+        <div class="button btn-test" [routerLink]="['/dashboard/campaigns/new']">
+          Nouveau Test
         </div>
       </div>
 
@@ -92,22 +92,29 @@
                 <span>Dupliquer</span>
               </button>
 
-              <button class="button-matMenu" *ngIf="campaign.pin === true" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.pin === true"
+                (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
                 <mat-icon>bookmark</mat-icon>
                 <span>Désépingler</span>
               </button>
-              <button class="button-matMenu" *ngIf="campaign.pin === false" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.pin === false"
+                (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
                 <mat-icon>bookmark</mat-icon>
                 <span>Epingler</span>
               </button>
 
-              <button class="button-matMenu" *ngIf="campaign.archive === true" (click)="archivecampaign(campaign.id,campaign.archive)"
-                mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.archive === true "
+                (click)="archivecampaign(campaign.id,campaign.archive)" mat-menu-item>
                 <mat-icon>unarchive</mat-icon>
                 <span>Désarchiver</span>
               </button>
-              <button class="button-matMenu" *ngIf="campaign.archive === false" (click)="archivecampaign(campaign.id,campaign.archive)"
-                mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.archive === false && campaign.pin === true"
+              (click)="archivecampaign(campaign.id,campaign.archive)" disabled mat-menu-item>
+              <mat-icon>archive</mat-icon>
+              <span>Archiver</span>
+            </button>
+              <button class="button-matMenu" *ngIf="campaign.archive === false && campaign.pin === false"
+                (click)="archivecampaign(campaign.id,campaign.archive)" mat-menu-item>
                 <mat-icon>archive</mat-icon>
                 <span>Archiver</span>
               </button>
@@ -120,10 +127,12 @@
 
             <div class="branche-content-list-end">
 
-              <p>{{ campaign.candidats.length }} invite</p>
-              <p>
+              <p class="invite-left" [ngClass]="{'invite-left-many':campaign.candidats.length > 1}">
+                {{ campaign.candidats.length }}
+                {{campaign.candidats.length > 1 ? 'invités' : 'invité'}}</p>
+              <p class="termine-left" [ngClass]="{'termine-left-many':campaign.NbCandidatFinish > 1}">
                 {{ campaign.NbCandidatFinish !== null ?
-                  campaign.NbCandidatFinish : 0 }} terminer
+                  campaign.NbCandidatFinish : 0 }} {{ campaign.NbCandidatFinish > 1 ? 'terminés' : 'terminé'}}
               </p>
 
             </div>
@@ -159,32 +168,32 @@
             </span>
             <mat-menu #menu="matMenu">
 
-              <button (click)="duplicatecampaign(campaign.id)" mat-menu-item>
+              <button class="button-matMenu" (click)="openDialogDuplicate(campaign.id)" mat-menu-item>
                 <mat-icon>file_copy</mat-icon>
                 <span>Dupliquer</span>
               </button>
 
-              <button *ngIf="campaign.pin === true" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.pin === true" disabled (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
                 <mat-icon>bookmark</mat-icon>
                 <span>Désépingler</span>
               </button>
-              <button *ngIf="campaign.pin === false" (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.pin === false" disabled (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
                 <mat-icon>bookmark</mat-icon>
                 <span>Epingler</span>
               </button>
 
-              <button *ngIf="campaign.archive === true" (click)="archivecampaign(campaign.id,campaign.archive)"
+              <button class="button-matMenu" *ngIf="campaign.archive === true"  (click)="archivecampaign(campaign.id,campaign.archive)"
                 mat-menu-item>
                 <mat-icon>unarchive</mat-icon>
                 <span>Désarchiver</span>
               </button>
-              <button *ngIf="campaign.archive === false" (click)="archivecampaign(campaign.id,campaign.archive)"
+              <button class="button-matMenu" *ngIf="campaign.archive === false"  (click)="archivecampaign(campaign.id,campaign.archive)"
                 mat-menu-item>
                 <mat-icon>archive</mat-icon>
                 <span>Archiver</span>
               </button>
 
-              <button (click)="deletecampaign(campaign.id)" mat-menu-item>
+              <button class="button-matMenu" (click)="openDialogDelete(campaign.id)" mat-menu-item>
                 <mat-icon>delete</mat-icon>
                 <span>Supprimer</span>
               </button>
@@ -192,11 +201,14 @@
 
             <div class="branche-content-list-end">
 
-              <p>{{ campaign.candidats.length }} invite</p>
-              <p>
+              <p class="invite-left" [ngClass]="{'invite-left-many':campaign.candidats.length > 1}">
+                {{ campaign.candidats.length }}
+                {{campaign.candidats.length > 1 ? 'invités' : 'invité'}}</p>
+              <p class="termine-left" [ngClass]="{'termine-left-many':campaign.NbCandidatFinish > 1}">
                 {{ campaign.NbCandidatFinish !== null ?
-                    campaign.NbCandidatFinish : 0 }} terminer
+                  campaign.NbCandidatFinish : 0 }} {{ campaign.NbCandidatFinish > 1 ? 'terminés' : 'terminé'}}
               </p>
+
 
             </div>
           </div>
