@@ -17,7 +17,7 @@
     },
     "user_id": {
       "model": "user",
-      "via": "payment_id",
+      "via": "payments",
       "plugin": "users-permissions"
     },
     "date_payment": {
@@ -26,7 +26,7 @@
     },
     "offer_id": {
       "model": "offer",
-      "via": "payment_id"
+      "via": "payments"
     }
   }
 }
