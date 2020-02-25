@@ -109,7 +109,8 @@ export class CampagneComponent implements OnInit {
   openDialogDuplicate(idCampaign): void {
     const dialogRef = this.dialog.open(DialogOverviewDuplicate, {
       width: '250px',
-      data: { idCampaign, confirmed: this.confirmed }
+      data: { idCampaign, confirmed: this.confirmed },
+      disableClose: true,
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -129,7 +130,8 @@ export class CampagneComponent implements OnInit {
   openDialogDelete(idCampaign): void {
     const dialogRef = this.dialog.open(DialogOverviewDelete, {
       width: '250px',
-      data: { idCampaign, confirmed: this.confirmed }
+      data: { idCampaign, confirmed: this.confirmed },
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {

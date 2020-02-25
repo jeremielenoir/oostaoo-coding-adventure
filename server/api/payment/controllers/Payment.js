@@ -1,10 +1,14 @@
 'use strict';
-
 /**
  * Payment.js controller
  *
  * @description: A set of functions called "actions" for managing `Payment`.
  */
+
+
+
+const _ = require('lodash');
+
 
 module.exports = {
 
@@ -49,7 +53,21 @@ module.exports = {
    */
 
   create: async (ctx) => {
-    return strapi.services.payment.add(ctx.request.body);
+    try{
+      console.log('CONTROLLER CREATE : ctx request body : ', ctx.request.body);
+      const values = _.omit(ctx.request.body, ['paymentId']);
+      const result = await strapi.services.payment.add(values);
+      // console.log('result : ', result);
+      return result;
+    }catch(err){
+      console.log('CREATE CONTROLLER : erreur d ecriture en base : ', err);
+
+      // Payment Refund
+      const refund = await strapi.services.payment.refund(ctx.request.body.paymentId);
+      console.log(' CONTROLLER CREATE : refund : ', refund);
+      return {refund: refund};
+      // return err;
+    }
   },
 
   /**

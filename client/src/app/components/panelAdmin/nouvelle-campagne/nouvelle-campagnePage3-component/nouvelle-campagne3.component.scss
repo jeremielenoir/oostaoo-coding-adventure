@@ -48,7 +48,7 @@
 #top-bar {
     display: flex;
     width: 100%;
-    border: 1.5px solid $color-principal-orange;
+    border: 1px solid $color-principal-orange;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -152,8 +152,8 @@
 .option-question-help{
     display: flex;
     flex-direction: row;
-    border-top: 1.5px solid #e15028;
-    border-bottom: 1.5px solid #e15028;
+    border-top: 1px solid #e15028;
+    border-bottom: 1px solid #e15028;
     padding-left: 18px;
     align-items: center;
     background: #fff;
@@ -165,7 +165,7 @@
             font-size: 15px;
             background-color: white;
             border:none;
-            border-bottom: 1.5px solid #de522b;
+            border-bottom: 1px solid #de522b;
             outline: none;
             padding: 6px 6px;
             width: 150px;
@@ -296,7 +296,7 @@
 #top-bar {
     display: flex;
     width: 100%;
-    border: 1.5px solid $color-principal-orange;
+    border: 1px solid $color-principal-orange;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -400,8 +400,8 @@
 .option-question-help{
     display: flex;
     flex-direction: row;
-    border-top: 1.5px solid #e15028;
-    border-bottom: 1.5px solid #e15028;
+    border-top: 1px solid #e15028;
+    border-bottom: 1px solid #e15028;
     padding-left: 18px;
     align-items: center;
     background: #fff;
@@ -413,7 +413,7 @@
             font-size: 15px;
             background-color: white;
             border:none;
-            border-bottom: 1.5px solid #de522b;
+            border-bottom: 1px solid #de522b;
             outline: none;
             padding: 6px 6px;
             width: 150px;
@@ -504,7 +504,7 @@
     max-width: 100%;
     margin: 10px 20px 0;
     vertical-align: top;
-    border:1.5px solid $color-principal-orange;
+    border:1px solid $color-principal-orange;
     border-radius: 5px;
     overflow: hidden;
     flex-direction: column;

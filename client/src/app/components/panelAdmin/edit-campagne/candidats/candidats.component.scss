@@ -427,7 +427,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
         }
       .custom-input-filtre {
        width: 100%;
-        border: 1.5px solid $color-principal-orange;
+        border: 1px solid $color-principal-orange;
         background: $color-white-background;
         height: 48px;
         padding: 10px 23px!important;
@@ -449,7 +449,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   overflow-x: hidden;
   .sous-table-content{
     border-radius: 5px;
-    border:1.5px solid $color-principal-blue;
+    border:1px solid $color-principal-blue;
     width: 100%;
     overflow: hidden;
     

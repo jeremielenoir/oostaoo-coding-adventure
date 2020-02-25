@@ -24,7 +24,7 @@
       "via": "technologies"
     },
     "profile": {
-      "model": "profile",
+      "collection": "profile",
       "via": "technologies"
     },
     "campaigns": {
