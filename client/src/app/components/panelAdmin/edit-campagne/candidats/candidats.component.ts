@@ -91,7 +91,7 @@ export class CandidatsComponent implements OnInit {
   openDialog() {
     const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
       data: this.globalId,
-      height: '80vh'
+      height: '580px'
     });
 
     inviteCandidatDialog.afterClosed().subscribe((data) => {

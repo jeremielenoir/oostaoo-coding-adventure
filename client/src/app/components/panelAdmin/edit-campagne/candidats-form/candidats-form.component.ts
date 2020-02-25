@@ -66,7 +66,7 @@ export class CandidatsFormComponent implements OnInit {
         globalId: this.globalId,
         contact: this.form.value.contacts,
       },
-      height: '80vh'
+      height: '580px'
     });
   }
 }
