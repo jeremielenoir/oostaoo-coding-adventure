@@ -17,7 +17,8 @@
     },
     "technologies": {
       "collection": "technologies",
-      "via": "profile"
+      "via": "profile",
+      "dominant": true
     },
     "campaigns": {
       "collection": "campaign",
