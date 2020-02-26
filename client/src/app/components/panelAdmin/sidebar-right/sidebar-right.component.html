@@ -39,7 +39,7 @@
 
   <div class="sous-header-one sidibar-sous-header">
 
-    <figure style="flex:2" class="info-content-img-header-dashboard"
+    <figure style="flex:2;" class="info-content-img-header info-content-img-header-dashboard"
       [class.info-content-img-header-dashboard-MinSize]="IsBoaleanSmallSidibar">
       <img src="../assets/Coding-game-img/SVG-menu-Dashboard/Notifications.svg">
     </figure>
@@ -70,7 +70,8 @@
             <div *ngIf="!isActiveNotiFinish && !isActiveNotifInvite">
 
 
-              <div *ngIf="candidat.invitation_date !== candidat.test_terminer" class="list-sidibar">
+              <div *ngIf="candidat.invitation_date !== candidat.test_terminer"
+                [class.list-sidibar-MinSize]="IsBoaleanSmallSidibar" class="list-sidibar">
                 <p *ngIf="!IsBoaleanSmallSidibar" class=" list-sidibar-left-content">
                   <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">
                     {{ candidat.Nom }}
@@ -89,7 +90,7 @@
                 </p>
               </div>
 
-              <div class="list-sidibar">
+              <div class="list-sidibar" [class.list-sidibar-MinSize]="IsBoaleanSmallSidibar">
                 <p *ngIf="!IsBoaleanSmallSidibar" class="list-sidibar-left-content">
                   <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.Nom }}
                   </a>
@@ -111,7 +112,8 @@
 
             <div *ngIf="isActiveNotiFinish">
 
-              <div *ngIf="candidat.invitation_date !== candidat.test_terminer" class="list-sidibar">
+              <div *ngIf="candidat.invitation_date !== candidat.test_terminer" class="list-sidibar"
+                [class.list-sidibar-MinSize]="IsBoaleanSmallSidibar">
                 <p *ngIf="!IsBoaleanSmallSidibar" class=" list-sidibar-left-content">
                   <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.Nom }}
                   </a>
@@ -133,7 +135,7 @@
 
 
             <div *ngIf="isActiveNotifInvite">
-              <div class="list-sidibar">
+              <div class="list-sidibar" [class.list-sidibar-MinSize]="IsBoaleanSmallSidibar">
                 <p *ngIf="!IsBoaleanSmallSidibar" class="list-sidibar-left-content">
                   <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.Nom }}
                   </a>

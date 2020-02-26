@@ -18,7 +18,7 @@
         <div class="test-right-header">
 
           <button class="btn-test" [routerLink]="['/dashboard/campaigns/new']">
-            Nouveau test <i class="fas fa-plus"></i>
+            Nouveau Test <i class="fas fa-plus"></i>
           </button>
 
           <div class="sous-header-form">
@@ -109,10 +109,10 @@
                 <span>Désarchiver</span>
               </button>
               <button class="button-matMenu" *ngIf="campaign.archive === false && campaign.pin === true"
-              (click)="archivecampaign(campaign.id,campaign.archive)" disabled mat-menu-item>
-              <mat-icon>archive</mat-icon>
-              <span>Archiver</span>
-            </button>
+                (click)="archivecampaign(campaign.id,campaign.archive)" disabled mat-menu-item>
+                <mat-icon>archive</mat-icon>
+                <span>Archiver</span>
+              </button>
               <button class="button-matMenu" *ngIf="campaign.archive === false && campaign.pin === false"
                 (click)="archivecampaign(campaign.id,campaign.archive)" mat-menu-item>
                 <mat-icon>archive</mat-icon>
@@ -173,22 +173,24 @@
                 <span>Dupliquer</span>
               </button>
 
-              <button class="button-matMenu" *ngIf="campaign.pin === true" disabled (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.pin === true" disabled
+                (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
                 <mat-icon>bookmark</mat-icon>
                 <span>Désépingler</span>
               </button>
-              <button class="button-matMenu" *ngIf="campaign.pin === false" disabled (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.pin === false" disabled
+                (click)="pincampaign(campaign.id, campaign.pin)" mat-menu-item>
                 <mat-icon>bookmark</mat-icon>
                 <span>Epingler</span>
               </button>
 
-              <button class="button-matMenu" *ngIf="campaign.archive === true"  (click)="archivecampaign(campaign.id,campaign.archive)"
-                mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.archive === true"
+                (click)="archivecampaign(campaign.id,campaign.archive)" mat-menu-item>
                 <mat-icon>unarchive</mat-icon>
                 <span>Désarchiver</span>
               </button>
-              <button class="button-matMenu" *ngIf="campaign.archive === false"  (click)="archivecampaign(campaign.id,campaign.archive)"
-                mat-menu-item>
+              <button class="button-matMenu" *ngIf="campaign.archive === false"
+                (click)="archivecampaign(campaign.id,campaign.archive)" mat-menu-item>
                 <mat-icon>archive</mat-icon>
                 <span>Archiver</span>
               </button>

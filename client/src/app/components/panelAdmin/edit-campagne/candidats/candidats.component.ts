@@ -3,6 +3,7 @@ import { MatDialog, MatTableDataSource, MatSort, MatSidenav } from '@angular/mat
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { InviteCandidat } from './invite-candidat.component';
+import { DecryptTokenService } from '../../../home/register/register.service';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -60,6 +61,7 @@ export class CandidatsComponent implements OnInit {
   nbrSelectedElementChecked: any[] = [];
   opened: boolean;
   public checkedBox: boolean = false;
+  public DecryptTokenService = new DecryptTokenService();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('allChecked') allChecked: ElementRef;
@@ -105,9 +107,8 @@ export class CandidatsComponent implements OnInit {
   ngOnInit() {
     this.getCampaign().then(datas => {
       this.campaign = datas;
-
       console.log('depuis candidat', this.candidats)
-    });
+    })
   }
 
   showChoinceList(e) {
@@ -255,13 +256,17 @@ export class CandidatsComponent implements OnInit {
       .get(apiURL)
       .toPromise()
       .then(res => { // Success
+        let userId = res.user.id;
+        let userIdConnect = this.DecryptTokenService.userIdExporte['userId'];
+        if (userId !== userIdConnect) {
+          this.router.navigate(['/dashboard/campaigns']);
+          return;
+        }
         this.campaigns = res;
-        console.log('this.campaign: ', this.campaigns);
         this.candidats = res.candidats;
         this.candidats.forEach(element => {
           element.status = false;
         });
-        console.log('this.candidats: ', this.candidats);
         this.technologies = res.technologies;
         // console.log('this.technologies: ', this.technologies);
         if (this.campaigns.candidats.length > 0) {
@@ -270,6 +275,8 @@ export class CandidatsComponent implements OnInit {
           this.ViewCandidats = 'CandidatFalse';
         }
         return this.campaigns;
+      }, err => {
+        this.router.navigate(['/dashboard/campaigns'])
       })
       .then((data) => {
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE

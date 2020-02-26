@@ -16,8 +16,8 @@
 
       Retour
     </button>
-    <button class="custom-buttom" [ngClass]="questionsByCampaign.length > 0 ? 'button-enabled' : 'button-disabled'" [disabled]="questionsByCampaign.length > 0 ? 'false' : 'true'" mat-flat-button
-      (click)="SendQuestionSelected()">
+    <button class="custom-buttom" [ngClass]="questionsByCampaign.length > 0 ? 'button-enabled' : 'button-disabled'"
+      [disabled]="questionsByCampaign.length > 0 ? 'false' : 'true'" mat-flat-button (click)="SendQuestionSelected()">
       Enregistrer
     </button>
   </div>
