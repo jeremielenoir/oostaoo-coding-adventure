@@ -1,8 +1,7 @@
 <section id="stripe-payment">
   <div id="form-payment">
-    <button (click)="goBack()" mat-flat-button color="primary"  id="go-back">
-      <i class="material-icons">arrow_back</i> Retour aux offres
-    </button>
+    <p><a href="" [routerLink]="['/subscription']">Retour aux offres</a></p>
+
     <form novalidate (ngSubmit)="buy()" [formGroup]="stripeTest">
         <h2 class="title">
           Vous avez opté pour la formule <b>{{ offerChoice?.title }}</b> de <b>{{ offerChoice?.price }} € <span *ngIf="offerChoice?.periodicity === 'monthly'">/mois</span></b>
