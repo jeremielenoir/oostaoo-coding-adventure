@@ -34,13 +34,19 @@
 
             <div class="form-group-header">
               <form>
-
-                <input type="text" name="search" [(ngModel)]="searchText" class="champ-header-contenu"
+                <div id="div-search">
+                  <input type="text" class="champ-header-contenu" placeholder="Rechercher" name="search"
+                    [(ngModel)]="searchText" id="search-header"/>
+                  <figure class="icon-form-group-header-contenu">
+                    <img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg">
+                  </figure>
+                </div>
+                <!-- <input type="text" name="search" [(ngModel)]="searchText" class="champ-header-contenu"
                   placeholder="Rechercher" id="search-header" />
 
                 <figure class="icon-form-group-header-contenu">
                   <img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg">
-                </figure>
+                </figure> -->
               </form>
             </div>
           </div>
