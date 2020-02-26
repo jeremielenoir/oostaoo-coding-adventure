@@ -81,7 +81,7 @@ module.exports = {
         return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.invalid' }] }] : 'Identifier or password invalid.');
       } else {
         ctx.send({
-          jwt: strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user.toJSON ? user.toJSON() : user, ['_id', 'id', 'adminId'])),
+          jwt: strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user.toJSON ? user.toJSON() : user, ['_id', 'id', 'adminId', 'offer_id', 'tests_available'])),
           user: _.omit(user.toJSON ? user.toJSON() : user, ['password', 'resetPasswordToken'])
         });
       }
