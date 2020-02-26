@@ -18,7 +18,7 @@
         <div class="test-right-header">
 
           <button class="btn-test" [routerLink]="['/dashboard/campaigns/new']">
-            Nouveau test
+           Nouveau test <i class="fas fa-plus plus-icon"></i>
           </button>
 
           <div class="sous-header-form">
@@ -64,7 +64,7 @@
       <div class="no-campaign" *ngIf="campaigns.length === 0">
         <p> Vous n'avez pas encore de tests, cliquer sur le bouton en dessous pour en créer un.</p>
         <div class="button btn-test" [routerLink]="['/dashboard/campaigns/new']">
-          Nouveau Test
+          Nouveau Test <i class="fas fa-plus plus-icon"></i>
         </div>
       </div>
 
