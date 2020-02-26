@@ -305,6 +305,9 @@ module.exports = {
         params.confirmed = true;
       }
 
+      // by default, every new registered user has a free offer (id: 14)
+      params.offer_id= 14;
+
       const user = await strapi.query('user', 'users-permissions').create(params);
 
       const jwt = strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user.toJSON ? user.toJSON() : user, ['_id', 'id']));

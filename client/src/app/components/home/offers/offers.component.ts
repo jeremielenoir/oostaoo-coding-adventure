@@ -57,14 +57,11 @@ export class OffersComponent implements OnInit {
       //   this.router.navigate(['/dashboard/campaigns']);
       // } else {
         if (this.router.url.startsWith('/subscription')) {
-          console.log('Nous sommes sur abonnement interne');
           // traitement user back
           // this.session.offerChoice = offer;
           localStorage.setItem('offerChoice', JSON.stringify(offer));
-
           this.router.navigate(['/stripePayment']);
         } else {
-          console.log('Nous sommes sur abonnement home');
           this.router.navigate(['/home/register']);
         }
       }
