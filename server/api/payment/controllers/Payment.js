@@ -56,6 +56,10 @@ module.exports = {
     try{
       console.log('CONTROLLER CREATE : ctx request body : ', ctx.request.body);
       const values = _.omit(ctx.request.body, ['paymentId']);
+
+      // to test datawriting failure and refund service
+      // values.echec='echec';
+
       const result = await strapi.services.payment.add(values);
       // console.log('result : ', result);
       const {user_id, offer_id} = values;
