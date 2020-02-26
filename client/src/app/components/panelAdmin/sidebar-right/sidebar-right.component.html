@@ -61,7 +61,49 @@
 
       <h2 *ngIf="candidatbydate.length === 0 " class="no-tofication">Aucune notication</h2>
 
-      <div *ngFor="let campaing of campaignsFromParent">
+      <div *ngFor="let candidat of candidatbydate">
+
+        <div *ngIf="candidat.duree !== null" class="list-sidibar">
+          <div *ngIf="!IsBoaleanSmallSidibar" class=" list-sidibar-left-content">
+            <a [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">
+              {{ candidat.Nom }}
+            </a>
+            &lt; <a [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{ candidat.email }}</a>
+            &gt; a terminé l'évaluation technique de
+            <span *ngFor="let campaing of campaignsFromParent"><a *ngIf=' campaing.id === candidat.campaign'
+                [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{campaing.Name}}</a></span>
+
+          </div>
+          <p class="list-sidibar-right list-sidibar-right-bottom"
+            [class.list-sidibar-right-MinSize]="IsBoaleanSmallSidibar">
+            {{
+              candidat.test_terminer | date: "short":"undefined":"fr-FR"
+            }}
+          </p>
+        </div>
+        <div *ngIf="candidat.duree === null || candidat.duree !== null" class="list-sidibar">
+          <div *ngIf="!IsBoaleanSmallSidibar" class="list-sidibar-left-content">
+            <a [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{ candidat.Nom }}
+            </a>
+
+            &lt; <a [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{ candidat.email }}</a> &gt;
+            a été invité(e) à
+            <span *ngFor="let campaing of campaignsFromParent"><a *ngIf=' campaing.id === candidat.campaign'
+                [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{campaing.Name}}</a></span>
+
+          </div>
+
+          <p class="list-sidibar-right list-sidibar-right-bottom"
+            [class.list-sidibar-right-MinSize]="IsBoaleanSmallSidibar">
+            {{
+                candidat.invitation_date | date: "short":"undefined":"fr-FR"
+          }}
+          </p>
+        </div>
+      </div>
+
+
+      <!-- <div *ngFor="let campaing of campaignsFromParent">
 
         <div *ngFor="let candidat of candidatbydate">
 
@@ -157,7 +199,7 @@
 
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

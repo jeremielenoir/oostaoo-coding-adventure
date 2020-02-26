@@ -20,6 +20,8 @@ export class SidibarRightComponent implements OnInit {
   public isActiveNotifInvite = false;
   public IsBoaleanSmallSidibar: boolean;
   public candidatbydate: Array<any> = [];
+  public candidatByFinish: Array<any> = [];
+  public candidatAll: Array<any> = [];
   public storageRecuperationCheck: any
 
   public myArrayCandidat: any[] = [];
@@ -32,17 +34,17 @@ export class SidibarRightComponent implements OnInit {
     for (const campaign of this.campaignsFromParent) {
       for (const candidat of campaign.candidats) {
         this.myArrayCandidat.push(candidat);
+        console.log("coucou " + this.myArrayCandidat);
         this.candidatbydate = this.myArrayCandidat.sort((a, b) => {
-          if (a.invitation_date < b.invitation_date) {
+          if (a.test_terminer < b.test_terminer) {
+            console.log("A " + a.test_terminer + " B " + b.test_terminer)
             return 1;
-          } else if (b.invitation_date < a.invitation_date) {
+          } else if (b.test_terminer < a.test_terminer) {
             return -1;
           } else {
             return 0;
           }
         });
-
-
       }
     }
 
@@ -61,8 +63,21 @@ export class SidibarRightComponent implements OnInit {
     }
 
     this.saveCheckValue();
+    // this.finishedTest();
 
   }
+
+  // public finishedTest() {
+  //   this.myArrayCandidat.forEach(finished => {
+  //     if(finished.duree !== null) {
+  //       this.candidatByFinish.push(finished);
+  //       console.log("candidatfinish " + this.candidatByFinish);
+  //     }
+  //     console.log("finished " + finished)
+  //   })
+    
+
+  // }
 
 
   public sidibar_small_modele() {
