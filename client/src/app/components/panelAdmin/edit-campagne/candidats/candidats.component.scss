@@ -203,7 +203,7 @@
 
 }
 .name-candidat{
-  font-weight: 700;
+   
 
 }
 td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
@@ -260,7 +260,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
       cursor: pointer;
       position: relative;
       .selected-text-active{
-        font-weight: 700;
+         
       }
       .menu-choince.choince-active{
         display: block
@@ -371,7 +371,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
       height: 50px;
       font-size: 14px;
       transition: background-color 200ms;
-      font-weight: 700;
+       
       background-color: $color-principal-blue;
       border-radius: 0!important;
       display: flex;
@@ -584,7 +584,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   font-size: 18px;
 }
 .sidenav_candidat_score{
-  font-weight: 700;
+   
   font-size: 1.8em;
   color: $color-principal-orange;
 }

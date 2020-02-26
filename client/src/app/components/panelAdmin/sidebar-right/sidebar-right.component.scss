@@ -125,7 +125,7 @@
         .list-sidibar-left-content {
           color: #3f526a;
           font-size: 14px;
-          font-weight: 700;
+           
           word-wrap: break-word;
           margin-bottom: 0px;
           padding: 6px 10px;
@@ -136,7 +136,7 @@
             color: #ce5637;
             border: none;
             transition: color 0.2s;
-            font-weight: 700;
+             
             text-decoration: none;
           }
         }
@@ -145,7 +145,7 @@
           display: flex;
           font-size: 14px;
           border-right: 1px dashed #e15028;
-          font-weight: 700;
+           
           align-items: center;
           flex-direction: column;
           justify-content: center;
@@ -225,7 +225,7 @@
     position: relative;
     font-size: 14px;
     transition: background-color 200ms;
-    font-weight: 700;
+     
     text-transform: uppercase;
     background-color: #1d3551;
     &:hover {

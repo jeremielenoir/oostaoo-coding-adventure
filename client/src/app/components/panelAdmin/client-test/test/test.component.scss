@@ -60,7 +60,7 @@
         }
         .title-testing {
           font-size: 17px;
-          font-weight: 700;
+           
           margin-bottom: 0px;
           display: inline-block;
         }
@@ -145,7 +145,7 @@
       padding: 10px;
       position: relative;
       transition: opacity 0.2s, background 0.2s;
-      font-weight: 700;
+       
       background-color: $color-principal-blue;
       border: none;
       cursor: pointer;
@@ -196,5 +196,5 @@
 
 .active-time-danger {
   color: red;
-  font-weight: bold;
+   
 }
