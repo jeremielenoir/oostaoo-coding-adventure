@@ -87,7 +87,6 @@
           padding: 0 20px;
           display: flex;
           font-size: 14px;
-          font-weight: 600;
           align-items: center;
           background-color: white;
           .btn-icon-utilisateur {
@@ -154,7 +153,6 @@
 
 .mat-header-cell {
   font-size: 16px;
-  font-weight: 600;
   color: #000000;
   border-left: $border-table;
   padding: 0 20px;
@@ -219,7 +217,6 @@
     padding: 20px;
     .title-gestion-perm {
       font-size: 14px;
-      font-weight: 600;
       margin-bottom: 5px;
       text-transform: uppercase;
     }
@@ -288,7 +285,6 @@
       padding: 20px;
       font-size: 16px;
       flex-basis: 50%;
-      font-weight: 600;
       .champ-form {
         padding: 10px 15px;
         margin: 0;
@@ -326,7 +322,6 @@
             width: auto;
             display: block;
             font-size: 14px;
-            font-weight: 600;
             text-transform: uppercase;
             margin-bottom: 0px;
           }
