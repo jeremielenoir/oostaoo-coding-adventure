@@ -52,6 +52,7 @@
   min-height: 200px;
   border-radius: 6px;
   position: relative;
+  box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
 
   .arrow{
       width: 15px;
@@ -208,6 +209,10 @@
         margin-right: 10px;
       }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> fadd6381706cfb0675a984a901ac21dc749d28a5
   }
   .modall > .modall-content form {
     padding: 30px;

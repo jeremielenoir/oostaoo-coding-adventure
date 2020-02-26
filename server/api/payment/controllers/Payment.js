@@ -58,15 +58,19 @@ module.exports = {
       const values = _.omit(ctx.request.body, ['paymentId']);
       const result = await strapi.services.payment.add(values);
       // console.log('result : ', result);
+      const {user_id, offer_id} = values;
+      if(result){
+       await strapi.plugins['users-permissions'].services.user.edit({id: user_id}, {offer_id: offer_id});
+      }
       return result;
+
     }catch(err){
-      console.log('CREATE CONTROLLER : erreur d ecriture en base : ', err);
+      console.log(`CREATE CONTROLLER : erreur d'écriture en base : `, err);
 
       // Payment Refund
       const refund = await strapi.services.payment.refund(ctx.request.body.paymentId);
       console.log(' CONTROLLER CREATE : refund : ', refund);
       return {refund: refund};
-      // return err;
     }
   },
 
