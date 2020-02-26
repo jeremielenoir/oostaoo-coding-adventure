@@ -102,13 +102,14 @@ export class CampagneComponent implements OnInit {
   openDialog(idCampaign) {
     this.dialog.open(InviteCandidat, {
       data: idCampaign,
-      height: '80vh'
+      height: '580px'
     });
   }
 
   openDialogDuplicate(idCampaign): void {
     const dialogRef = this.dialog.open(DialogOverviewDuplicate, {
       width: '250px',
+
       data: { idCampaign, confirmed: this.confirmed },
       disableClose: true,
     });
@@ -130,6 +131,7 @@ export class CampagneComponent implements OnInit {
   openDialogDelete(idCampaign): void {
     const dialogRef = this.dialog.open(DialogOverviewDelete, {
       width: '250px',
+
       data: { idCampaign, confirmed: this.confirmed },
       disableClose: true
     });
