@@ -40,6 +40,7 @@ export class StripePaymentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     // recuperation de l'offre
     //this.offerChoice = this.session.offerChoice;
     this.offerChoice = JSON.parse(localStorage.getItem('offerChoice'));

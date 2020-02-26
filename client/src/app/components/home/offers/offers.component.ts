@@ -31,26 +31,29 @@ export class OffersComponent implements OnInit {
 
       // recuperation offres back
       this.apiClientService.get(API_URI_OFFER).subscribe( offers => {
-        console.log('offers :', offers);
+        offers = offers.filter(offer=>offer.title!=="Gratuit" && offer.title !== "Expirée");
         offers.forEach(offer => {
           offer.description = offer.description.split('$');
           this.listOffers.push(offer);
         });
       },
-        err => console.log
       );
     }
 
-    gotToLoginOrDashboardPage(offer) {
+    goBack(){
+        this.router.navigate(['/dashboard/campaigns']);
+    }
+
+    goToPay(offer) {
       // changement d'offre
       localStorage.setItem('offerChoiceAmount' , offer.price);
       // this.session.offerChoiceAmount = offer.price;
       this.offerChoiceAmount = offer.price;
 
-      if (offer.price === 0 && this.subscriptionPage) {
-        // version gratuite
-        this.router.navigate(['/dashboard/campaigns']);
-      } else {
+      // if (offer.price === 0 && this.subscriptionPage) {
+      //   // version gratuite
+      //   this.router.navigate(['/dashboard/campaigns']);
+      // } else {
         if (this.router.url.startsWith('/subscription')) {
           console.log('Nous sommes sur abonnement interne');
           // traitement user back
@@ -63,6 +66,6 @@ export class OffersComponent implements OnInit {
           this.router.navigate(['/home/register']);
         }
       }
-    }
+    // }
 
 }

@@ -3,7 +3,10 @@
 .info-content-img-header-dashboard-MinSize{
   margin:0px auto!important;
   flex: auto!important;
-  min-width: 100%;
+  min-width: 100%!important
+}
+.info-content-img-header{
+  min-width: 100px;
 }
 .list-sidibar-right-MinSize{
   border-right:none!important;
@@ -106,6 +109,11 @@
         padding-top: 120px;
         color:#dedbdb
       }
+
+      .list-sidibar-MinSize{
+        padding-bottom: 12px!important;
+        padding-top: 12px!important;
+      }
      
       .list-sidibar {
         color: #7e8082;
@@ -201,7 +209,6 @@
         margin-right: 10px;
       }
     }
-
   }
   .modall > .modall-content form {
     padding: 30px;

@@ -21,7 +21,7 @@ export class RapportDetailleComponent implements OnInit {
 
   constructor(route: ActivatedRoute, public apiClientService: ApiClientService) {
     this.idCandidat = route.snapshot.params.idCandidat;
-
+    console.log('id candidat')
   }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class RapportDetailleComponent implements OnInit {
 
   removeDuplicates(rapportTechno) {
     const unique = {};
-    rapportTechno.forEach( i => {
+    rapportTechno.forEach(i => {
       if (!unique[i]) {
         unique[i] = true;
       }
@@ -38,41 +38,41 @@ export class RapportDetailleComponent implements OnInit {
     return Object.keys(unique);
   }
 
- getCandidat() {
-  this.apiClientService.get(API_URI_CANDIDATS + '/' + this.idCandidat).subscribe( data => {
-    this.candidat = data;
-    console.log('this candid', this.candidat);
-    this.rapport = data.raport_candidat.rapport;
-    console.log('this rapport', this.rapport);
+  getCandidat() {
+    this.apiClientService.get(API_URI_CANDIDATS + '/' + this.idCandidat).subscribe(data => {
+      this.candidat = data;
+      console.log('this candid', this.candidat);
+      this.rapport = data.raport_candidat.rapport;
+      console.log('this rapport', this.rapport);
 
 
-    this.rapport.forEach(element => {
-     this.rapportTechno.push(element.index_question.technologies);
-     this.totalTime = this.totalTime + element.index_question.time;
+      this.rapport.forEach(element => {
+        this.rapportTechno.push(element.index_question.technologies);
+        this.totalTime = this.totalTime + element.index_question.time;
 
+      });
+
+      this.uniquetechno = this.removeDuplicates(this.rapportTechno);
+      this.uniquetechno.forEach(idTechno => {
+        this.getTechno(idTechno);
+      });
     });
+  }
 
-    this.uniquetechno = this.removeDuplicates(this.rapportTechno);
-    this.uniquetechno.forEach(idTechno => {
-      this.getTechno(idTechno);
+  getTechno(id) {
+    this.apiClientService.get(API_URI_TECHNO + '/' + id).subscribe(data => {
+      this.techno.push(data);
+      console.log('this techno', this.techno);
     });
-  });
-}
+  }
 
- getTechno(id) {
-  this.apiClientService.get(API_URI_TECHNO + '/' + id).subscribe( data => {
-    this.techno.push(data);
-    console.log('this techno', this.techno);
-  });
- }
+  fmtMSS(d) {
+    d = Number(d);
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
 
- fmtMSS(d) {
-  d = Number(d);
-  var h = Math.floor(d/3600);
-  var m = Math.floor(d % 3600 / 60);
-  var s = Math.floor(d % 3600 % 60);
-
-  return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
-  // return (m - (m %= 60)) / 60 + (9 < m ? ':' : ':0') + m;
-}
+    return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
+    // return (m - (m %= 60)) / 60 + (9 < m ? ':' : ':0') + m;
+  }
 }

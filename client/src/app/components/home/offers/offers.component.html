@@ -1,10 +1,17 @@
 <section id="offers">
 
 <div class="">
-    <h3 class="title-dashed">
-      NOS FORMULES
-      <span class="dashed"></span>
-    </h3>
+
+  <button (click)="goBack()" mat-flat-button color="primary"  id="go-back">
+    <i class="material-icons">arrow_back</i> Retour
+  </button>
+
+    <div class="title-dashed-container">
+        <h3 class="title-dashed">
+          NOS FORMULES
+          <span class="dashed"></span>
+        </h3>
+    </div>
 
     <div class="content">
         <mat-card class="lab-item" *ngFor="let offer of listOffers" [class.highlight]="offerChoiceAmount === offer.price && subscriptionPage">
@@ -12,7 +19,7 @@
                 <mat-card-title>{{ offer.title }}</mat-card-title>
 
                 <div [ngSwitch]="offer.periodicity">
-                    <mat-card-subtitle *ngSwitchCase="'special'">Gratuit</mat-card-subtitle>
+                    <!-- <mat-card-subtitle *ngSwitchCase="'special'">Gratuit</mat-card-subtitle> -->
                     <mat-card-subtitle *ngSwitchCase="'unique'">{{ offer.price }}€/{{ offer.title }}</mat-card-subtitle>
                     <mat-card-subtitle *ngSwitchCase="'monthly'">{{ offer.price }}€/mois</mat-card-subtitle>
                 </div>
@@ -21,7 +28,8 @@
                     <li *ngFor="let description of offer.description">{{ description }}</li>
                 </ul>
                 <mat-card-actions>
-                    <button (click)="gotToLoginOrDashboardPage(offer)" mat-raised-button color="warn" class="lab-item">S'abonner</button>
+                    <button (click)="goToPay(offer)"
+                     mat-raised-button color="warn" class="lab-item lab-item-button">S'abonner</button>
                 </mat-card-actions>
             </mat-card-content>
         </mat-card>
