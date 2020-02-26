@@ -26,11 +26,13 @@ export class OffersComponent implements OnInit {
       // this.offerChoiceAmount = this.session.offerChoiceAmount ? this.session.offerChoiceAmount : null;
       this.offerChoiceAmount = +localStorage.getItem('offerChoiceAmount') || null;
 
+
       // savoir si on est sur la page home ou sur la page abonnement interne (log)
       this.subscriptionPage = this.router.url.startsWith('/subscription');
 
       // recuperation offres back
       this.apiClientService.get(API_URI_OFFER).subscribe( offers => {
+
         offers = offers.filter(offer=>offer.title!=="Gratuit" && offer.title !== "Expirée");
         offers.forEach(offer => {
           offer.description = offer.description.split('$');
