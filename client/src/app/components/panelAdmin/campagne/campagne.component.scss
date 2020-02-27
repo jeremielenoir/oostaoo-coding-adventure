@@ -66,7 +66,7 @@
 .contenu-view-content-left {
   display: flex;
   flex-direction: column;
-  border:1px solid #e15028;
+  border: $border-table;
   border-radius: 4px;
   overflow: hidden;
   height: 100%;
@@ -79,8 +79,8 @@
     .sous-header-two{
       display: flex;
       flex-direction: row;
-      border-top:1px solid #e15028;
-      border-bottom:1px solid #e15028;
+      border-top: $border-table;
+      border-bottom: $border-table;
       // padding: 0px 12px;
       align-items: center;
       background: #fff;
@@ -93,7 +93,7 @@
         justify-content: center;
         min-width: 43px;
         .number-test{
-          color:#1d3551;
+          color:$color-principal-blue;
           font-size: 14px;
            
         }
@@ -107,7 +107,7 @@
       flex: 11;
         .btn-test{
           flex: 2;
-          background: #1d3551;
+          background: $color-principal-blue;
           color:white;
           border:none;
           padding: 20px 30px;
@@ -216,7 +216,7 @@
         -webkit-box-flex: 2;
         cursor: pointer;
         flex: 2;
-        background: #1d3551;
+        background: $color-principal-blue;
         color: white;
         border: none;
         text-transform: uppercase;
@@ -254,7 +254,7 @@
         display: flex;
         flex-direction: row;
         transition: height 500ms, opacity 500ms;
-        border-bottom:1px dashed #de522b;
+        border-bottom:1px dashed $color-principal-blue;
         scrollbar-color: #7f8183 #e3e3e3;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: thin;
@@ -283,7 +283,7 @@
             align-items: center;
             flex-direction: row;
             height: 100%; 
-            color:#1d3551;
+            color:$color-principal-blue;
              
             font-size: 16px;
             .contenu-branche-content{
@@ -303,7 +303,7 @@
             flex: 3;
             align-items: center;
             padding-left: 19px;
-            color:#1d3551;
+            color:$color-principal-blue;
            
           .branche-content-text {
               font-size: 15px;
@@ -340,7 +340,7 @@
 
          .branche-content-list-end {
            width: 160px;
-           border-left:1px dashed #de522b;
+           border-left:1px dashed $color-principal-blue;
            display: flex;
            flex-direction: column;
            justify-content: center;
@@ -363,7 +363,7 @@
           justify-content: center;
           align-items: center;
           flex: 1;
-          border-right: 1px dashed #e15028;
+          border-right: 1px dashed $color-principal-blue;
           margin-bottom: 0px;
           cursor: pointer;
           min-width: 40px;

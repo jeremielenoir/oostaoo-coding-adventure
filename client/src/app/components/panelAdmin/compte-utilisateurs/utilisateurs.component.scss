@@ -11,7 +11,7 @@
   margin: 0px auto;
   .icon {
     margin: 5px;
-    color: #1d3551;
+    color: $color-principal-blue;
     cursor: pointer;
   }
   .component-utilisateurs {
@@ -68,7 +68,7 @@
            
           align-items: center;
           justify-content: center;
-          background-color: #1d3551;
+          background-color: $color-principal-blue;
           margin-left: 10px;
           &:hover {
             background-color: #1d324ae0;
@@ -92,7 +92,7 @@
           .btn-icon-utilisateur {
             display: block;
             padding-right: 6px;
-            color: #1d3551;
+            color: $color-principal-blue;
           }
         }
       }
@@ -303,7 +303,7 @@
         align-items: center;
         margin-bottom: 5px;
         &::after {
-          color: #1d3551;
+          color: $color-principal-blue;
           content: "*";
           font-size: 20px;
           margin-top: 5px;
@@ -347,7 +347,7 @@
 }
 
 .checked-block input:checked ~ .checkbox-span {
-  border-color: #1d3551;
+  border-color: $color-principal-blue;
 }
 
 .checkbox-span {
@@ -370,7 +370,7 @@
   top: 0px;
   width: 5px;
   height: 10px;
-  border: solid #1d3551;
+  border: solid $color-principal-blue;
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -396,7 +396,7 @@
   transition: background-color 200ms;
    
   text-transform: uppercase;
-  background-color:#1d3551;
+  background-color:$color-principal-blue;
 }
 
 .btn-gestion:hover {

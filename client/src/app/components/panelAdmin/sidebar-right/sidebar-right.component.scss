@@ -65,9 +65,9 @@
   }
 
   .sidibar-sous-header{
-    border-right: 1px solid #e15028;
-    border-top: 1px solid #e15028;
-    border-left: 1px solid #e15028;
+    border-right: $border-table;
+    border-top: $border-table;
+    border-left: $border-table;
     border-top-right-radius:4px;
     border-top-left-radius:4px;
   }
@@ -119,7 +119,7 @@
         color: #7e8082;
         display: flex;
         overflow: hidden;
-        border-bottom: 1px dashed #e15028;
+        border-bottom: 1px dashed $color-principal-blue;
         flex-direction: row-reverse;
         transition: 1s;
         .list-sidibar-left-content {
@@ -144,7 +144,7 @@
           min-width: 100px !important;
           display: flex;
           font-size: 14px;
-          border-right: 1px dashed #e15028;
+          border-right: 1px dashed $color-principal-blue;
            
           align-items: center;
           flex-direction: column;
@@ -200,7 +200,7 @@
     background-color: #eaeff3;
     height: 60px;
     .modall-title {
-      color: #1d3551;
+      color: $color-principal-blue;
       margin: 0;
       font-size: 18px;
       text-transform: uppercase;
@@ -226,7 +226,7 @@
     transition: background-color 200ms;
      
     text-transform: uppercase;
-    background-color: #1d3551;
+    background-color: $color-principal-blue;
     &:hover {
       background-color: #162c45;
     }

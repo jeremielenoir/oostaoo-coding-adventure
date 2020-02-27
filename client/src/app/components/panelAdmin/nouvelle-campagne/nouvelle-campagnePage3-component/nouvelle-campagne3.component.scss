@@ -47,7 +47,7 @@
 #top-bar {
     display: flex;
     width: 100%;
-    border: 1px solid $color-principal-orange;
+    border: $border-table;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -149,8 +149,8 @@
 .option-question-help{
     display: flex;
     flex-direction: row;
-    border-top: 1px solid #e15028;
-    border-bottom: 1px solid #e15028;
+    border-top: $border-table;
+    border-bottom: $border-table;
     padding-left: 18px;
     align-items: center;
     background: #fff;
@@ -292,7 +292,7 @@
 #top-bar {
     display: flex;
     width: 100%;
-    border: 1px solid $color-principal-orange;
+    border: $border-table;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -394,8 +394,8 @@
 .option-question-help{
     display: flex;
     flex-direction: row;
-    border-top: 1px solid #e15028;
-    border-bottom: 1px solid #e15028;
+    border-top: $border-table;
+    border-bottom: $border-table;
     padding-left: 18px;
     align-items: center;
     background: #fff;
@@ -498,7 +498,7 @@
     max-width: 100%;
     margin: 10px 20px 0;
     vertical-align: top;
-    border:1px solid $color-principal-orange;
+    border: $border-table;
     border-radius: 5px;
     overflow: hidden;
     flex-direction: column;
@@ -550,7 +550,7 @@
     padding: 0px 18px;
     padding-right: 0px;
     transition: .5s;
-    border-bottom: 1px dashed $color-orange-light;
+    border-bottom: 1px dashed $color-principal-blue;
     display: flex;
     justify-content: space-between;
 }
@@ -558,7 +558,7 @@
 .partie-left-example-box
 {
     flex: 1;
-    border-right: 1px dashed $color-orange-light;
+    border-right: 1px dashed $color-principal-blue;
     display: flex;
     min-width: 0;
     align-items: center;
@@ -630,8 +630,8 @@
     }
 
     .content-rouded{
-        border-left: 1px dashed $color-orange-light;
-        border-right: 1px dashed $color-orange-light;
+        border-left: 1px dashed $color-principal-blue;
+        border-right: 1px dashed $color-principal-blue;
         display: flex;
         flex: 2;
         justify-content: center;
@@ -676,14 +676,14 @@
       padding-left: 8px;
       padding-right: 8px;
       margin-bottom: 0px;
-      border-right: 1px dashed $color-orange-light;
+      border-right: 1px dashed $color-principal-blue;
     }
 
     .drop{
         display: flex;
         justify-content: center;
         // flex: 2;
-        border-right: 1px dashed $color-orange-light;
+        border-right: 1px dashed $color-principal-blue;
         padding: 15px 10px;
         font-size: 28px;
         i{
@@ -742,7 +742,7 @@
     text-align: center;
     font-size: 18px;
     line-height: 15px;
-    border-bottom: 1px dashed $color-orange-light;
+    border-bottom: 1px dashed $color-principal-blue;
     margin: 20px 0px 0px;
 }
 
