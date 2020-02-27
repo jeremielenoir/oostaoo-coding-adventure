@@ -622,7 +622,7 @@
         font-size: 14px;
         font-family: $font-poppins;
         padding-right: 6px;
-         
+        min-width: 230px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -634,32 +634,18 @@
         border-right: 1px dashed $color-principal-blue;
         display: flex;
         flex: 2;
-        justify-content: center;
         padding: 20px 6px;
         flex: 2px;
-        max-width: 80px;
-        .niveau-rouded,.niveau-rouded-no-active{
-            width:16px;
-            height: 16px;
-            background-color: white;
-            border:1px solid $color-orange-light;
-            border-radius: 50px;
-            display: inline-block;
-            margin-right: 3px;
+        min-width: 80px;
+        
+        img{
+            width: 20px;
+            height: 20px;
+            margin-right: 2.5px;
             margin-left: 3px;
-            margin-top: 6px;
-            position: relative;
-            padding: 2px 2px;
+            // align-items: center;
         }
-    
-        .niveau-rouded::after{
-            content: "";
-            display: block;
-            width: 10px;
-            height: 10px;
-            background-color: $color-orange-light;
-            border-radius: 50px;
-        }
+        
     }
     
     .point{
@@ -686,6 +672,7 @@
         border-right: 1px dashed $color-principal-blue;
         padding: 15px 10px;
         font-size: 28px;
+        min-width: 50px;
         i{
             color: $color-orange-light;
         }

@@ -43,10 +43,10 @@
           </figure>
         </div>
 
-        <a href="" class="search-advanced">
+        <span href="" class="search-advanced" (click)="openSearchAdvenced()">
           Recherche avancée
-          <i class="fas fa-chevron-right icon-arrow-btn"></i>
-        </a>
+          <i class="fas fa-chevron-right icon-arrow-btn" [class.chevron-bottom]="boelanIsSearchAdvenced"></i>
+        </span>
 
         <button mat-flat-button class="trie-cat" [matMenuTriggerFor]="appMenu">
           Trier par
@@ -57,6 +57,34 @@
           </mat-menu>
         </button>
 
+      </div>
+
+      <div *ngIf="boelanIsSearchAdvenced" class="search-advanced-block">
+        <mat-form-field>
+          <mat-label>Toppings</mat-label>
+          <mat-select [formControl]="toppings" multiple>
+            <mat-select-trigger>
+              {{toppings.value ? toppings.value[0] : ''}}
+              <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
+                (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Tous</mat-label>
+          <mat-select [formControl]="toppingsDifficulty" multiple>
+            <mat-select-trigger>
+              {{toppingsDifficulty.value ? toppingsDifficulty.value[0] : ''}}
+              <span *ngIf="toppingsDifficulty.value?.length > 1" class="example-additional-selection">
+                (+{{toppingsDifficulty.value.length - 1}}
+                {{toppingsDifficulty.value?.length === 2 ? 'other' : 'others'}})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let difficul of difficulty" [value]="difficul">{{difficul}}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
 
       <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="allQuestionsCampaign"
@@ -78,28 +106,29 @@
             </div>
             <p class="question-name">{{ item.name }}</p>
             <div class="content-rouded" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
-              <span class="niveau-rouded"></span>
-              <span class="niveau-rouded"></span>
-              <span class="niveau-rouded"></span>
+              <img src="../assets/Coding-game-img/SVG-menu-Dashboard/archive-inclue.svg">
+              <img src="../assets/Coding-game-img/SVG-menu-Dashboard/archive-inclue.svg">
+              <img src="../assets/Coding-game-img/SVG-menu-Dashboard/archive-inclue.svg">
             </div>
 
             <div class="content-rouded" *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
-              <span class="niveau-rouded"></span>
-              <span class="niveau-rouded"></span>
-              <span class="niveau-rouded-no-active"></span>
+              <img src="../assets/Coding-game-img/SVG-menu-Dashboard/archive-inclue.svg">
+              <img src="../assets/Coding-game-img/SVG-menu-Dashboard/archive-inclue.svg">
+              <img src="../assets/Coding-game-img/SVG-menu-Dashboard/archive-non-inclue.svg">
 
             </div>
             <div class="content-rouded" *ngIf="item.level === 'facile'" matTooltip="Difficulté Facile">
-              <span class="niveau-rouded"></span>
-              <span class="niveau-rouded-no-active"></span>
-              <span class="niveau-rouded-no-active"></span>
+              <img src="../assets/Coding-game-img/SVG-menu-Dashboard/archive-inclue.svg">
+              <img src="../assets/Coding-game-img/SVG-menu-Dashboard/archive-non-inclue.svg">
+              <img src="../assets/Coding-game-img/SVG-menu-Dashboard/archive-non-inclue.svg">
 
             </div>
 
             <p class="point">{{ item.points }} points</p>
 
             <div class="drop">
-              <i title="Question à choix multiple" *ngIf='item.type === "one" || item.type === "multiple"' class="fas fa-list-ul drop-icon"></i>
+              <i title="Question à choix multiple" *ngIf='item.type === "one" || item.type === "multiple"'
+                class="fas fa-list-ul drop-icon"></i>
               <i title="Question texte libre" *ngIf='item.type === "free"' class="fas fa-paragraph drop-icon"></i>
             </div>
             <p class="time" matTooltip="Durée(heure:min:sec)">{{ fmtMSS(item.time) }}</p>
