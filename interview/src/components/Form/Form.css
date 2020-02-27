@@ -33,13 +33,13 @@
 }
 
 ::placeholder {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 15px;
 }
 
 .input-container > input {
   flex: 1;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 15px;
   padding: 10px 15px;
   height: 45px;
@@ -68,7 +68,7 @@
 .form-container > p {
   width: 100%;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 15pt;
   color: #7e8082;
 }

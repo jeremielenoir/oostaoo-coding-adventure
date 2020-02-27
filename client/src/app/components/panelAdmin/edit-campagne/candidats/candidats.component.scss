@@ -201,10 +201,11 @@
   padding-left: 32px!important;
 
 }
-.name-candidat{
-   
 
+::ng-deep .mat-sort-header-container {
+  justify-content: center;
 }
+
 td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
   // padding-left: 12px!important;
   // border-left: 1px solid $color-principal-blue !important;
@@ -258,9 +259,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
       align-items: center;
       cursor: pointer;
       position: relative;
-      .selected-text-active{
-         
-      }
+
       .menu-choince.choince-active{
         display: block
       }
