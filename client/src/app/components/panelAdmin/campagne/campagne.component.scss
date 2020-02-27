@@ -3,8 +3,8 @@
 @import "../dashboard-campagne/dashboard-campagne.component.scss";
 
 .plus-icon{
-  font-size: 18px;
-  margin-left: 20px;
+  // font-size: 18px;
+  margin-left: 35px;
 }
 
 ::ng-deep .mat-dialog-container{
@@ -44,6 +44,7 @@
 }
 ::ng-deep .mat-checkbox-inner-container{
   margin-right: 0px!important;
+  margin-top: 7px !important;
 }
 
 .invite-left{
@@ -112,7 +113,7 @@
           border:none;
           padding: 20px 30px;
           display: block;
-          font-size: 18px;
+          // font-size: 18px;
           outline: none;
       }
       .sous-header-form {
@@ -130,6 +131,7 @@
           .checked-block {
             
             margin-top: 5px;
+            margin-left: 10%;
             
           }
           form {
@@ -158,7 +160,7 @@
               // padding: 0 20px 0 10px;
               padding-bottom: 8px;
               padding-top: 8px;
-              font-size: 15px;
+              // font-size: 15px;
               background-color: white;
               border-bottom: 1px solid #de522b!important;
               outline: none;

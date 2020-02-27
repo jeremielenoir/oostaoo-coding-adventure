@@ -42,7 +42,7 @@ export class RouteComponentComponent implements OnInit {
     this.getNotifications().then(notifications => {
       this.notifications = [];
       notifications.forEach(element => {
-        if (element.user.adminId === this.decryptTokenService.userId) {
+        if (element.user.adminId === this.decryptTokenService.userId && element.status === false) {
           this.notifications.push(element);
         }
       });
@@ -50,20 +50,21 @@ export class RouteComponentComponent implements OnInit {
       this.notifications.sort((a, b) => a.status - b.status);
       // console.log(this.notifications);
       this.initNotifNotRead(this.notifications);
+      console.log("les notif", this.notifications);
     });
 
-    setInterval(() => this.getNotifications().then(notifications => {
-      this.notifications = [];
-      notifications.forEach(element => {
-        if (element.user.adminId === this.decryptTokenService.userId) {
-          this.notifications.push(element);
-        }
-      });
-      this.notifications.reverse();
-      this.notifications.sort((a, b) => a.status - b.status);
-      // console.log(this.notifications);
-      this.initNotifNotRead(this.notifications);
-    }), 5000);
+    // setInterval(() => this.getNotifications().then(notifications => {
+    //   this.notifications = [];
+    //   notifications.forEach(element => {
+    //     if (element.user.adminId === this.decryptTokenService.userId) {
+    //       this.notifications.push(element);
+    //     }
+    //   });
+    //   this.notifications.reverse();
+    //   this.notifications.sort((a, b) => a.status - b.status);
+    //   // console.log(this.notifications);
+    //   this.initNotifNotRead(this.notifications);
+    // }), 5000);
 
   }
 
