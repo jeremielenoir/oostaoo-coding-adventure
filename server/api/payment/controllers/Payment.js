@@ -55,6 +55,7 @@ module.exports = {
   create: async (ctx) => {
     try{
       console.log('CONTROLLER CREATE : ctx request body : ', ctx.request.body);
+
       const values = _.omit(ctx.request.body, ['paymentId', 'tests_available']);
 
       // to test datawriting failure and refund service
@@ -62,7 +63,8 @@ module.exports = {
 
       const result = await strapi.services.payment.add(values);
 
-      const {user_id, offer_id, tests_available} = values;
+      const { tests_available } = ctx.request.body;
+      const { user_id, offer_id } = values;
       if(result){
        await strapi.plugins['users-permissions']
        .services.user.edit({id: user_id}, {offer_id: offer_id, tests_available: tests_available});
