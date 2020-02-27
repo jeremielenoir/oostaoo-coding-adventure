@@ -44,7 +44,6 @@ export class StripePaymentComponent implements OnInit {
     // recuperation de l'offre
     //this.offerChoice = this.session.offerChoice;
     this.offerChoice = JSON.parse(localStorage.getItem('offerChoice'));
-    console.log('offerChoice : ', this.offerChoice);
 
     // info utilisateur a recuperer de la bdd
     this.apiClientService.get(API_URI_USER + '/' + this.userToken.userId).subscribe(user => this.userInfo = user);
@@ -89,7 +88,6 @@ export class StripePaymentComponent implements OnInit {
     //const name = this.stripeTest.get('name').value;
     this.stripeLoader = true;
     // username utilisateur
-    console.log('this user info : ', this.userInfo);
     const name = this.userInfo.username;
 
     this.stripeService
@@ -104,12 +102,10 @@ export class StripePaymentComponent implements OnInit {
             email: this.userInfo.email,
             token: result.token
           };
-          console.log('this payload : ', this.payload);
             this.apiClientService.post(API_URI_PAYMENT + '/pay', this.payload)
               .subscribe(res => {
 
                 if(!res.status){
-                  console.log('erreur : ', res.raw.message);
                   this.stripeError = "Votre paiement a échoué";
                   if(this.card){
                     this.card.unmount();
@@ -119,7 +115,6 @@ export class StripePaymentComponent implements OnInit {
                   this.stripeLoader = false;
 
                 }else if(res.status=='succeeded' || 'active'){
-                  console.log('res : : ', res);
                   this.paymentCreationBody = {
                     amount: this.offerChoice.price,
                     offer_id: this.offerChoice.id,
@@ -128,29 +123,32 @@ export class StripePaymentComponent implements OnInit {
                     date_payment: Date.now(),
                     paymentId: res.id
                   }
-                  console.log('this paymentCreationBody : ', this.paymentCreationBody);
+
                     this.apiClientService.post(API_URI_PAYMENT, this.paymentCreationBody)
                     .subscribe(res=>{
-                      console.log('payment create res : ', res);
-                      if(res.refund){
-                         console.log('refund: ', res.refund);
-                         if(this.card){
-                          this.card.unmount();
-                         }
-                        setTimeout(()=>{
-                          this.stripeError = '';
-                          this.card.mount('#card-element');
-                        }, 2000);
 
-                         this.stripeError = "Un problème technique est survenu";
-                         this.stripeLoader = false;
-                        return;
+                      const newToken = res.jwt;
+
+                      if(res.refund){
+                           if(this.card){
+                              this.card.unmount();
+                           }
+                          setTimeout(()=>{
+                              this.stripeError = '';
+                              this.card.mount('#card-element');
+                          }, 2000);
+
+                           this.stripeError = "Un problème technique est survenu";
+                           this.stripeLoader = false;
+                          return;
+
                       }else{
-                        this.stripeSuccess = 'Votre paiement a été effectué';
-                        this.stripeLoader = false;
-                        setTimeout(()=>{
-                          this.router.navigate(['/dashboard/campaigns']);
-                        }, 1200);
+                          localStorage.setItem('currentUser', newToken);
+                          this.stripeSuccess = 'Votre paiement a été effectué';
+                          this.stripeLoader = false;
+                          setTimeout(()=>{
+                            this.router.navigate(['/dashboard/campaigns']);
+                          }, 1200);
                       }
                     })
                 }
@@ -159,7 +157,6 @@ export class StripePaymentComponent implements OnInit {
             // });
         } else if (result.error) {
           // Error creating the token
-          console.log(result.error.message);
           this.stripeLoader = false;
         }
       });

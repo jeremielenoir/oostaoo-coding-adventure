@@ -69,7 +69,15 @@ module.exports = {
        await strapi.plugins['users-permissions']
        .services.user.edit({id: user_id}, {offer_id: offer_id, tests_available: tests_available});
       }
-      return result;
+
+      let user = await strapi.plugins['users-permissions'].services.user.fetch({id: user_id});
+      user = {id: user_id, adminId: user.adminId, offer_id, tests_available};
+
+      const jwt = await strapi.plugins['users-permissions'].services.jwt.issue(
+          _.pick(user.toJSON ? user.toJSON() : user,
+         ['_id', 'id', 'adminId', 'offer_id', 'tests_available']));
+
+      return {result, jwt};
 
     }catch(err){
       console.log(`CREATE CONTROLLER : erreur d'écriture en base : `, err);
