@@ -7,15 +7,12 @@
 
 .image_tuile{
   width: 100px;
+  height: 100px;
 }
 
-.button-3-4{
-  margin-top: 22px !important;
-}
-
-.row-home{
-  margin: 0 100px;
-}
+// .button-3-4{
+//   margin-top: 22px !important;
+// }
 
 .lab-item.mat-card{
   flex: 1;
@@ -37,6 +34,7 @@ box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
     margin-bottom: 20px !important;
     display: flex;
     align-items: center;
+    height: 70px;
   }
 
   .mat-card-title{
