@@ -1,25 +1,25 @@
 /* @import '../../compagne/compagne.component.css'; */
-@import"../../../../../roodeo-variables.scss";
+@import "../../../../../roodeo-variables.scss";
 // Style sans candidat
 // ::ng-deep .ng-star-inserted{
 //    flex: 1;
 //   }
 
-::ng-deep app-candidats{
-  flex:1
+::ng-deep app-candidats {
+  flex: 1;
 }
-.invit-btn-candidat{
+.invit-btn-candidat {
   margin-top: 60px;
 }
-.border1pxdashedgray-candidat{
-  border-radius:5px
+.border1pxdashedgray-candidat {
+  border-radius: 5px;
 }
-.big-content{
+.big-content {
   display: flex;
   flex: 1 0 auto;
   min-height: 100%;
 }
-.sous-content-check-action-candidat{
+.sous-content-check-action-candidat {
   align-items: center;
   position: relative;
   padding-bottom: 6px;
@@ -27,8 +27,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  ;
-  .check-action-candidat{
+  .check-action-candidat {
     // position: absolute;
     cursor: pointer;
     width: 15px;
@@ -37,7 +36,7 @@
     margin-top: 8px;
     opacity: 0;
   }
-  #candidat-check{
+  #candidat-check {
     position: absolute;
     height: 15px;
     width: 15px;
@@ -61,181 +60,181 @@
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-    }
-   
-    .check-action-candidat:checked ~ #candidat-check:after {
-      display: block;
-    }
-    .check-action-candidat:checked ~ #candidat-check{
-      border-color: $color-principal-orange;
-      background-color: $color-principal-orange;
-    }
+  }
+
+  .check-action-candidat:checked ~ #candidat-check:after {
+    display: block;
+  }
+  .check-action-candidat:checked ~ #candidat-check {
+    border-color: $color-principal-orange;
+    background-color: $color-principal-orange;
+  }
 }
 
-
-.content-check-action-candidat{
+.content-check-action-candidat {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  .checkbox-span{
-    margin-bottom: 0px!important;
-    position: relative!important;
-    margin-top:0px!important;
-    height: 15px!important;
-    width: 15px!important;
+  .checkbox-span {
+    margin-bottom: 0px !important;
+    position: relative !important;
+    margin-top: 0px !important;
+    height: 15px !important;
+    width: 15px !important;
   }
-  .checkbox-span{
+  .checkbox-span {
     cursor: pointer;
   }
   .checkbox-span::after {
-    border-color:#fff!important;
-    width: 4px!important;
-    height: 9px!important;
- }
- 
+    border-color: #fff !important;
+    width: 4px !important;
+    height: 9px !important;
+  }
+
   input:checked ~ .checkbox-span {
     border-color: $color-principal-orange;
     background-color: $color-principal-orange;
   }
 }
 
-
-::ng-deep .mat-checkbox-layout{
-  width: 19px!important;
+::ng-deep .mat-checkbox-layout {
+  width: 19px !important;
 }
 
-
-.modall{
+.modall {
   // min-width: 450px;
   width: 600px;
-  .modall-content{
-     padding: 40px;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-     text-align: center;
+  .modall-content {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
-  .content-icon{
+  .content-icon {
     font-size: 60px;
-    color:$color-principal-orange;
+    color: $color-principal-orange;
     margin-bottom: 25px;
   }
 
-  .modal-content-title{
-   color: #7e8082;
-
+  .modal-content-title {
+    color: #7e8082;
   }
-  .content{
+  .content {
     margin-bottom: 12px;
   }
 
-  .modall-footer{
+  .modall-footer {
     display: flex;
     flex-direction: row;
     padding: 20px 40px;
-    .btn-modal{
+    .btn-modal {
       color: white;
       height: 50px;
       padding: 0 10px;
       font-size: 17px;
       transition: background 0.2s;
-      border:none
+      border: none;
     }
 
-    .btn-modal:first-child{
+    .btn-modal:first-child {
       flex: 1;
       margin-right: 10px;
-    background-color: #7e8082;
-    &:hover{
-      background-color: #aaaaaa;
+      background-color: #7e8082;
+      &:hover {
+        background-color: #aaaaaa;
+      }
     }
-    }
- 
-    .btn-modal:last-child{
+
+    .btn-modal:last-child {
       flex: 1;
       margin-right: 10px;
-    background-color:$color-principal-blue;
-    &:hover{
-      background-color: $color-principal-blue-hover;
-    }
+      background-color: $color-principal-blue;
+      &:hover {
+        background-color: $color-principal-blue-hover;
+      }
     }
   }
 }
 
-
-.mat-cell,.mat-header-cell{
-  padding-left: 5px!important;
+.mat-cell,
+.mat-header-cell {
+  padding-left: 5px !important;
   padding-right: 5px;
   // position: relative!important;
   // min-width: 40px!important;
   // max-width: 40px!important;
 }
 
-.mat-checkbox{
+.mat-checkbox {
   position: absolute;
   top: 15px;
   left: 30%;
-  width: 15px!important;
-  height: 15px!important;
+  width: 15px !important;
+  height: 15px !important;
 }
 
-.mat-header-row{
-  background-color: $color-principal-blue!important;
+.mat-header-row {
+  background-color: $color-principal-blue !important;
 }
 
- ::ng-deep .mat-row:hover{
-  background-color: $color-blue-light!important;
+::ng-deep .mat-row:hover {
+  background-color: $color-blue-light !important;
   cursor: pointer;
-  .mat-cell{
-    color:white!important
+  .mat-cell {
+    color: white !important;
   }
-  .mat-checkbox-frame{
-    border-color: white!important;
+  .mat-checkbox-frame {
+    border-color: white !important;
   }
 }
-::ng-deep .mat-sort-header-button{
-  color:white!important;
-  font-size: 18px!important;
-  padding-left: 32px!important;
-
+::ng-deep .mat-sort-header-button {
+  color: white !important;
+  font-size: 18px !important;
+  padding-left: 32px !important;
 }
-.name-candidat{
-   
 
+::ng-deep .mat-sort-header-container {
+  justify-content: center;
 }
-td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
+
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type {
   // padding-left: 12px!important;
   // border-left: 1px solid $color-principal-blue !important;
-  text-align: center!important;
+  text-align: center !important;
 }
-.mat-cell:first-child{
-  text-align: left!important;
+.mat-cell:first-child {
+  text-align: left !important;
 }
- .mat-cell{
-  border-right: 1px solid $color-principal-blue!important;
-  text-align: center!important;
+.mat-cell {
+  border-right: 1px solid $color-principal-blue !important;
+  text-align: center !important;
 }
-.mat-cell:last-child{
-  border-right: none!important;
+.mat-cell:last-child {
+  border-right: none !important;
 }
 // td.mat-cell, td.mat-footer-cell, th.mat-header-cell{
 //   border-width: 1.5px!important;
 //   border-color: $color-principal-blue!important;
 // }
-.tr.mat-footer-row, tr.mat-row{
-  border-bottom: 2px solid $color-principal-blue!important;
+.tr.mat-footer-row,
+tr.mat-row {
+  border-bottom: 2px solid $color-principal-blue !important;
 }
 
-.tr.mat-footer-row, tr.mat-row:last-child{
-  border-bottom: none!important;
+.tr.mat-footer-row,
+tr.mat-row:last-child {
+  border-bottom: none !important;
 }
-.route-component{
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.route-component {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 #editQuestion {
   display: flex;
@@ -247,197 +246,192 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   padding-left: 15px;
   padding-right: 15px;
 
-    .select-choince{
-      border-radius: 5px;
-      height: 48px;
-      padding: 0 13px;
-      border: $border-table;
-      background-color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      position: relative;
-      .selected-text-active{
-         
-      }
-      .menu-choince.choince-active{
-        display: block
-      }
-      .menu-choince{
-        top: 47px;
-        left: 0;
-        right: 0;
-        cursor: pointer;
-        z-index: 1;
-        position: absolute;
-        box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
-        // padding-top: 48px;
-        background-color: #fff;
-        display: none;
-        
-        .menu-list-choince{
-          .selected-button{
-           
-            &:hover{
-              background-color: $color-principal-orange;
-              .icon{
-                color:white
-              }
-            }
-          }
-          button{
-            width: 100%;
-            height: 48px;
-            display: flex;
-            border-top: 1px solid #e7e7e7!important;
-            border: none;
-            background-color: transparent;
-            .icon{  
-              margin-left: 15px;
-            }
-          }
-          button:disabled{
-           
-            font: inherit;
-                span{
-                color: #e7e7e7;
-              }
+  .select-choince {
+    border-radius: 5px;
+    height: 48px;
+    padding: 0 13px;
+    border: $border-table;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
 
-              .icon{
-            
-                opacity: .5;
-              } 
-          }
-          .first-btn{
-            border:none!important
+    .menu-choince.choince-active {
+      display: block;
+    }
+    .menu-choince {
+      top: 47px;
+      left: 0;
+      right: 0;
+      cursor: pointer;
+      z-index: 1;
+      position: absolute;
+      box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
+      // padding-top: 48px;
+      background-color: #fff;
+      display: none;
+
+      .menu-list-choince {
+        .selected-button {
+          &:hover {
+            background-color: $color-principal-orange;
+            .icon {
+              color: white;
+            }
           }
         }
+        button {
+          width: 100%;
+          height: 48px;
+          display: flex;
+          border-top: 1px solid #e7e7e7 !important;
+          border: none;
+          background-color: transparent;
+          .icon {
+            margin-left: 15px;
+          }
+        }
+        button:disabled {
+          font: inherit;
+          span {
+            color: #e7e7e7;
+          }
+
+          .icon {
+            opacity: 0.5;
+          }
+        }
+        .first-btn {
+          border: none !important;
+        }
       }
-      span{
-        color: #20252a;
-        display: inline-block;
-        font-size: 14px;
-        margin-left: 15px;
-      }
-
-      .icon-choince{
-        font-size: 24px;
-        color: $color-principal-orange;
-      }
-
-      .icon-choince-croche{
-       color: #7e8082;
-       margin-left: 15px;
-      }
     }
-
-    .border1pxgray {
-      border: $border-table;
-      background-color:$color-white-background;
-      border-radius: 5px;
-    }
-
-    .border1pxdashedgray {
-      margin: 15px;
-      border: 1px dashed $color-table;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-items: center;
-      padding: 50px;
-      /* height: 50vh; */
-      padding-bottom: 13vh
-    }
-
-    #img-editquestion {
-      background-image: url("../../../../../assets/Coding-game-img/editQuestion.jpg");
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
-      width: 100%;
-      height: 35vh;
-    }
-
-    .diplex-1{
-      display: flex;
-      flex: 1;
-    }
-
-    .btn-question {
-      padding: 0 50px;
-      text-transform: uppercase;
-      height: 50px;
+    span {
+      color: #20252a;
+      display: inline-block;
       font-size: 14px;
-      transition: background-color 200ms;
-       
-      background-color: $color-principal-blue;
-      border-radius: 0!important;
-      display: flex;
-      
+      margin-left: 15px;
     }
 
-    .border1pxdashedgray h1 {
-      text-align: center
+    .icon-choince {
+      font-size: 24px;
+      color: $color-principal-orange;
     }
+
+    .icon-choince-croche {
+      color: #7e8082;
+      margin-left: 15px;
+    }
+  }
+
+  .border1pxgray {
+    border: $border-table;
+    background-color: $color-white-background;
+    border-radius: 5px;
+  }
+
+  .border1pxdashedgray {
+    margin: 15px;
+    border: 1px dashed $color-table;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    padding: 50px;
+    /* height: 50vh; */
+    padding-bottom: 13vh;
+  }
+
+  #img-editquestion {
+    background-image: url("../../../../../assets/Coding-game-img/editQuestion.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    height: 35vh;
+  }
+
+  .diplex-1 {
+    display: flex;
+    flex: 1;
+  }
+
+  .btn-question {
+    padding: 0 50px;
+    text-transform: uppercase;
+    height: 50px;
+    font-size: 14px;
+    transition: background-color 200ms;
+
+    background-color: $color-principal-blue;
+    border-radius: 0 !important;
+    display: flex;
+  }
+
+  .border1pxdashedgray h1 {
+    text-align: center;
+  }
 }
 
 // Style avec candidats
 
- .barre-nav {
+.barre-nav {
   display: flex;
   padding: 10px;
   flex-wrap: wrap;
-    .candidat-custom-select {
-      border: $border-table;
-      background-color:$color-white-background;
-      display: flex;
-      justify-content: center;
-      height: 50px;
-    }
+  .candidat-custom-select {
+    border: $border-table;
+    background-color: $color-white-background;
+    display: flex;
+    justify-content: center;
+    height: 50px;
+  }
 
-    .candidat-finish-custom-select {
-      background-color: $color-black-background;
-      display: flex;
-      justify-content: center;
-      height: 50px;
-    }
+  .candidat-finish-custom-select {
+    background-color: $color-black-background;
+    display: flex;
+    justify-content: center;
+    height: 50px;
+  }
 
-    .candidat-finish-custom-select mat-label {
-      color:$text-color-white;
-    }
+  .candidat-finish-custom-select mat-label {
+    color: $text-color-white;
+  }
 
-    :host .candidat-finish-custom-select ::ng-deep .mat-select-value {
-      color: $text-color-white;
-    }
+  :host .candidat-finish-custom-select ::ng-deep .mat-select-value {
+    color: $text-color-white;
+  }
 
-    .fix-button {
-      margin-top: inherit;
+  .fix-button {
+    margin-top: inherit;
+  }
+  .custom-input-filtre-contenu {
+    width: 50%;
+    position: relative;
+    .icon-search {
+      width: 28px;
+      height: 28px;
+      font-size: 25px;
+      right: 0px;
+      top: 9px;
+      color: $color-principal-orange;
+      position: absolute;
+      padding-left: 3px !important;
+      font-size: 15px !important;
     }
-    .custom-input-filtre-contenu{
-        width: 50%;
-        position: relative;
-        .icon-search{
-          font-size: 25px;
-          right: 0px;
-          top: 9px;
-          color:$color-principal-orange;
-          position: absolute;
-        }
-      .custom-input-filtre {
-       width: 100%;
-        border: 1px solid $color-principal-orange;
-        background: $color-white-background;
-        height: 48px;
-        padding: 10px 23px!important;
-        outline: none;
-        margin-left:18px;
-        border-radius: 5px;
-      }
-
+    .custom-input-filtre {
+      width: 100%;
+      border: 1px solid $color-principal-orange;
+      background: $color-white-background;
+      height: 48px;
+      padding: 10px 23px !important;
+      outline: none;
+      margin-left: 18px;
+      border-radius: 5px;
     }
-    
-
+  }
 }
 .table-container {
   width: 100%;
@@ -446,28 +440,27 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   padding: 10px;
   overflow-y: auto;
   overflow-x: hidden;
-  .sous-table-content{
+  .sous-table-content {
     border-radius: 5px;
-    border:1px solid $color-principal-blue;
+    border: 1px solid $color-principal-blue;
     width: 100%;
     overflow: hidden;
-    
-    &::-webkit-scrollbar{
+
+    &::-webkit-scrollbar {
       width: 8px;
       height: 8px;
     }
     &::-webkit-scrollbar-thumb {
-        background-color: #7f8183;
+      background-color: #7f8183;
     }
-    
-    &::-webkit-scrollbar-thumb:hover{
-        background-color: #67686a;
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #67686a;
     }
   }
 
-  
   &::-webkit-scrollbar-track {
-      background: #e3e3e3;
+    background: #e3e3e3;
   }
 
   table {
@@ -478,22 +471,21 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
     }
 
     .mat-cell:hover {
-      color:$text-color-white;
+      color: $text-color-white;
     }
-
   }
 }
 
-.matcard_style{
+.matcard_style {
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
 }
 
 // SIDENAV
 
 .sidenav-container {
-  background-color: red;;
+  background-color: red;
   position: absolute;
   // background: transparent;
   visibility: hidden;
@@ -505,37 +497,36 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   left: 0;
   // right: 0;
 }
-::ng-deep .mat-sidenav{
+::ng-deep .mat-sidenav {
   width: 50%;
-  
+
   background: $color-background-blue;
-  
 }
-.sidenav-content{
+.sidenav-content {
   width: 100%;
   height: 100%;
   background: $color-background-blue;
   padding: 20px;
   overflow: auto;
-  .name-rapport-detailler{
-    text-transform:uppercase!important;
-    font-weight: 400!important;
+  .name-rapport-detailler {
+    text-transform: uppercase !important;
+    font-weight: 400 !important;
   }
-  .name-techno{
+  .name-techno {
     font-size: 18px;
   }
-  .header-detail{
+  .header-detail {
     border-bottom: 1px solid $color-principal-blue;
     margin-bottom: 18px;
     display: flex;
     justify-content: space-between;
-    .sidenav_campaign_name{
+    .sidenav_campaign_name {
       padding-bottom: 18px;
       font-size: 20px;
-      color:$color-principal-blue;
+      color: $color-principal-blue;
       font-family: $font-poppins;
     }
-    .close-header-detail{
+    .close-header-detail {
       font-size: 22px;
       width: 40px;
       height: 40px;
@@ -549,45 +540,42 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
       cursor: pointer;
     }
   }
-  
 }
 
-
-.sidenav_name{
-  text-align: center; 
+.sidenav_name {
+  text-align: center;
   margin-top: 20px;
 }
 
-.sidenav_candidat_content{
-  display: flex; 
+.sidenav_candidat_content {
+  display: flex;
   flex-direction: column;
 }
 
-.sidenav_candidat_result{
+.sidenav_candidat_result {
   padding-right: 8px;
-  color:$color-principal-blue;
+  color: $color-principal-blue;
   position: relative;
   top: 8px;
   font-size: 19px;
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   // width: 60%;
-  .icon-techno{
-    padding-right:6px;
+  .icon-techno {
+    padding-right: 6px;
     color: $color-principal-orange;
   }
 }
-.sidenav_candidat_text{
+.sidenav_candidat_text {
   margin-right: 40%;
   font-size: 18px;
 }
-.sidenav_candidat_score{
-   
+.sidenav_candidat_score {
   font-size: 1.8em;
   color: $color-principal-orange;
 }
 
-.button-rapport{
+.button-rapport {
   border: 1px solid black;
   border-radius: 0px;
   background: $color-principal-blue;
@@ -598,8 +586,7 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:
   color: white;
 }
 
-// /SIDENAV 
-
+// /SIDENAV
 
 :host ::ng-deep .mat-form-field-underline {
   display: none;
@@ -634,26 +621,21 @@ filter-table {
   }
 }
 
-@media screen and (max-width: 960px){
-  .sous-table-content{
+@media screen and (max-width: 960px) {
+  .sous-table-content {
     overflow-x: auto;
   }
-  .barre-nav{
-    .select-choince{
-      width: 200px!important;
+  .barre-nav {
+    .select-choince {
+      width: 200px !important;
     }
-    .custom-input-filtre-contenu{
-      width: 65%!important;
+    .custom-input-filtre-contenu {
+      width: 65% !important;
     }
-    flex-direction: column!important;
-    .btn-question{
+    flex-direction: column !important;
+    .btn-question {
       margin-top: 8px;
       width: 250px;
-
     }
   }
- 
 }
-
-
-

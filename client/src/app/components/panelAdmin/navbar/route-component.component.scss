@@ -62,22 +62,47 @@
         position: relative;
        
         #notif{
-          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/notifications.svg");
+          background-color: #1d3551;
+          -webkit-mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/notifications.svg");
+          mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/notifications.svg");
+          mask-repeat: no-repeat;
+          // background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/notifications.svg");
+          
         }
         #test{
-          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/Tests.svg");
+          background-color: #1d3551;
+          -webkit-mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/Tests.svg");
+          mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/Tests.svg");
+          // background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/Tests.svg");
+          mask-repeat: no-repeat;
         }
         #compte{
-          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/compte.svg");
+          background-color: #1d3551;
+          -webkit-mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/compte.svg");
+          mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/compte.svg");
+          // background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/compte.svg");
+          mask-repeat: no-repeat;
         }
         #contact{
-          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/contacter.svg");
+          background-color: #1d3551;
+          -webkit-mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/contacter.svg");
+          mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/contacter.svg");
+          // background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/contacter.svg");
+          mask-repeat: no-repeat;
         }
         #new{
-          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/nouveautes.svg");
+          background-color: #1d3551;
+          -webkit-mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/nouveautes.svg");
+          mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/nouveautes.svg");
+          // background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/nouveautes.svg");
+          mask-repeat: no-repeat;
         }
         #help{
-          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/interrogation.svg");
+          background-color: #1d3551;
+          -webkit-mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/interrogation.svg");
+          mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/interrogation.svg");
+          // background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/interrogation.svg");
+          mask-repeat: no-repeat;
         }
         &:hover{
           background: #0d6192;

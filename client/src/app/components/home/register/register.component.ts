@@ -117,7 +117,7 @@ export class RegisterComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
     });
   }
 
@@ -135,7 +135,7 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.openSnackBar('Compte créer', 'Fermer');
+          this.openSnackBar('Le compte a bien été créé', 'Fermer');
           this.router.navigate(['/dashboard/campaigns']);
         },
         error => {

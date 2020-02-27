@@ -208,7 +208,7 @@ export class UtilisateursComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
     });
   }
 
@@ -220,7 +220,7 @@ export class UtilisateursComponent implements OnInit {
       .then(res=>{
         console.log(res);
         this.users = this.users.filter(user=>user.id !== id);
-        this.openSnackBar('Utilisateur supprimé avec succès', 'Fermer');
+        this.openSnackBar("L'utilisateur a bien été supprimé", 'Fermer');
       })
       .then(res=>console.log(res))
       .catch((e)=>console.log('error : ', e))
@@ -281,7 +281,7 @@ export class UtilisateursComponent implements OnInit {
                           // this.UserName = "";
                           // this.PasswordValue = "";
                           // this.selectedRoleName = "";
-        this.openSnackBar('Utilisateur ajouté avec succès', 'Fermer');
+        this.openSnackBar("L'utilisateur a bien été ajouté", 'Fermer');
       })
     .catch(function(res){ console.log(res) })
   }
@@ -291,8 +291,8 @@ export class UtilisateursComponent implements OnInit {
     if (this.editPrenom.value === '' || this.editNom.value === '' || this.editEmail.value === '' || this.editEmail.invalid ||
       this.editPassword.value === "" || this.confirmPassword.value === "" || this.editPassword.value === null ||
       this.editPassword.value !== this.confirmPassword.value || this.editUsername.value === "") {
-      this.openSnackBar('Erreur veuillez remplir tout les champs requis correctement', 'Fermer');
-      return console.log('Erreur veuillez remplir tout les champs requis');
+      this.openSnackBar('Erreur, veuillez correctement remplir tous les champs requis', 'Fermer');
+      return console.log('Erreur, veuillez remplir tout les champs requis');
     } else {
     this.apiClientService
       .put(`${API_URI_USER}/${this.editingId}`,{
@@ -325,7 +325,7 @@ export class UtilisateursComponent implements OnInit {
                           // this.EmailValue = "";
                           // this.UserName = "";
                           // this.selectedRoleName = "";
-        this.openSnackBar('Utilisateur modifié avec succès', 'Fermer');
+        this.openSnackBar("L'utilisateur a bien été modifié", 'Fermer');
       })
     .catch(function(res){ console.log(res) })
     }

@@ -99,7 +99,8 @@
             <p class="point">{{ item.points }} points</p>
 
             <div class="drop">
-              <i class="fas fa-list-ul drop-icon"></i>
+              <i title="Question à choix multiple" *ngIf='item.type === "one" || item.type === "multiple"' class="fas fa-list-ul drop-icon"></i>
+              <i title="Question texte libre" *ngIf='item.type === "free"' class="fas fa-paragraph drop-icon"></i>
             </div>
             <p class="time" matTooltip="Durée(heure:min:sec)">{{ fmtMSS(item.time) }}</p>
           </div>

@@ -46,7 +46,7 @@
             width: 100%;
             height: 100%;
             padding: 0 50px 0 35px;
-            font-size: 15px;
+            font-size: 14px;
             outline: none;
             border: none;
           }
@@ -235,12 +235,14 @@
         word-break: break-word;
         flex-direction: column;
         .element-gestion-permition-content {
-          padding: 30px;
           display: flex;
           align-items: center;
           justify-content: center;
           border-left: 1px solid #ce5637;
           border-bottom: 1px solid #ce5637;
+          padding-top: 34px;
+          padding-bottom: 30px;
+          padding-right: 13px;
 
           .checked-block {
             position: relative;

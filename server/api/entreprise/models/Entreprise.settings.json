@@ -67,10 +67,6 @@
       "default": "",
       "type": "string"
     },
-    "lang": {
-      "default": "",
-      "type": "string"
-    },
     "industrie": {
       "default": "",
       "type": "string"
@@ -79,6 +75,10 @@
       "model": "user",
       "via": "entreprise",
       "plugin": "users-permissions"
+    },
+    "lang": {
+      "default": "",
+      "type": "string"
     }
   }
 }

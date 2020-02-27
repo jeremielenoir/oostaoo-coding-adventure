@@ -89,7 +89,7 @@ export class CandidatsMailComponent implements OnInit {
           console.log('res', res.id);
           const idCandidat = [];
           idCandidat.push(res.id);
-          this.openSnackBar('Candidat invité', 'Fermer');
+          this.openSnackBar('Le candidat a bien été invité', 'Fermer');
           return idCandidat;
         }, err => {
           console.log('log error', err)
@@ -102,7 +102,7 @@ export class CandidatsMailComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
     });
   }
 

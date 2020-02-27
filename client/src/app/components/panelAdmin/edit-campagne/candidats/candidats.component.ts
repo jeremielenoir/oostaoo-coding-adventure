@@ -290,7 +290,7 @@ export class CandidatsComponent implements OnInit {
         for (const technos of this.technologies) {
           getTechnos.push(technos.name);
         }
-        this.displayedColumns = defaultColumns.concat(getTechnos, ['Duree']);
+        this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
 
         console.log('this.displayedColumns', this.displayedColumns);
 
