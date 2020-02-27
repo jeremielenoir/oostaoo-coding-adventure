@@ -10,12 +10,13 @@
 
     <li>
       <a href="" class="text-menu">
-        <span class="content-img" id="notif">
-        </span> <span style="position: absolute;
+        <span class="content-img" id="notif"></span>
+        <span *ngIf=' notifUnread !== 0' style="position: absolute;
         bottom: 10px;
         right: 10px;
         width: 25px;
         height: 25px;
+        border: 1px solid #1d3551;
         background: #e34e26;
         font-size: 12px;
         border-radius: 12px;
@@ -23,6 +24,8 @@
         text-align: center;
         padding: 3px;
         color:#1d3551;">{{notifUnread}}</span>
+
+
       </a>
 
 
