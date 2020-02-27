@@ -48,7 +48,7 @@
                     <input [formControl]="addPrenom" type="" name="prenom" class="champ-form" required id="prenom"/>
                     <div *ngIf=" submittedUser && addPrenom.invalid" class="alert alert-danger">
                       <div *ngIf="addPrenom.errors.required">
-                        Prénom requis.
+                        Prénom requis
                       </div>
                     </div>
                   </div>
@@ -73,7 +73,7 @@
                     <input [formControl]="addNom" type="" name="nom" class="champ-form"/>
                     <div *ngIf=" submittedUser && addNom.invalid" class="alert alert-danger">
                       <div *ngIf="addNom.errors.required">
-                        Nom requis.
+                        Nom requis
                       </div>
                     </div>
                   </div>
@@ -98,10 +98,10 @@
                     <input [formControl]="addEmail" type="" name="email"class="champ-form" id="email"/>
                     <div *ngIf=" submittedUser && addEmail.invalid" class="alert alert-danger">
                       <div *ngIf="addEmail.errors.required">
-                        Email requis.
+                        Email requis
                       </div>
                       <div *ngIf="addEmail.errors.email">
-                        Email valide requis.
+                        Email valide requis
                       </div>
                     </div>
                   </div>
@@ -124,7 +124,7 @@
                     <input [formControl]="addUsername" type="text" name="username"class="champ-form" id="username"/>
                     <div *ngIf=" submittedUser && addUsername.invalid" class="alert alert-danger">
                       <div *ngIf="addUsername.errors.required">
-                        Pseudo requis.
+                        Pseudo requis
                       </div>
                     </div>
                   </div>
@@ -147,7 +147,7 @@
                     <input [formControl]="addPassword" type="password" name="password"class="champ-form" id="password"/>
                     <div *ngIf=" submittedUser && addPassword.invalid" class="alert alert-danger">
                       <div *ngIf="addPassword.errors.required">
-                        Mot de passe requis.
+                        Mot de passe requis
                       </div>
                     </div>
                   </div>
@@ -169,11 +169,11 @@
                     <input [formControl]="confirmPassword" type="password" name="confirmPassword"class="champ-form" id="confirmPassword"/>
                     <div *ngIf=" submittedUser && confirmPassword.invalid" class="alert alert-danger">
                       <div *ngIf="confirmPassword.errors.required">
-                        Confirmation du mot de passe requis.
+                        Confirmation du mot de passe requis
                       </div>
                     </div>
                     <div *ngIf=" submittedUser && addPassword.value !== confirmPassword.value"  class="alert alert-danger">
-                      Les mots de passe ne correspondent pas.
+                      Les mots de passe ne correspondent pas
                     </div>
                   </div>
 
@@ -272,7 +272,7 @@
                       <div *ngIf=" modifiedUser && editPrenom.invalid"
                       class="alert alert-danger">
                         <div *ngIf="editPrenom.errors.required">
-                          Prénom requis.
+                          Prénom requis
                         </div>
                       </div>
                     </div>
@@ -297,7 +297,7 @@
                       <input [formControl]="editNom" type="" class="champ-form"  value="{{editingUser?.nom}}"/>
                       <div *ngIf=" modifiedUser && editNom.invalid" class="alert alert-danger">
                         <div *ngIf="editNom.errors.required">
-                          Nom requis.
+                          Nom requis
                         </div>
                       </div>
                     </div>
@@ -321,10 +321,10 @@
                       <input [formControl]="editEmail" type="" value="{{editingUser?.email}}" class="champ-form"/>
                       <div *ngIf=" modifiedUser && editEmail.invalid" class="alert alert-danger">
                         <div *ngIf="editEmail.errors.required">
-                          Email requis.
+                          Email requis
                         </div>
                         <div *ngIf="editEmail.errors.email">
-                          Email valide requis.
+                          Email valide requis
                         </div>
                       </div>
                     </div>
@@ -347,7 +347,7 @@
                       <input [formControl]="editUsername" type="text" name="username"class="champ-form" id="editUsername"/>
                       <div *ngIf=" modifiedUser && editUsername.invalid" class="alert alert-danger">
                         <div *ngIf="editUsername.errors.required">
-                          Pseudo requis.
+                          Pseudo requis
                         </div>
                       </div>
                     </div>
@@ -369,7 +369,7 @@
                       <input [formControl]="editPassword" type="password" name="password"class="champ-form" id="editPassword"/>
                       <div *ngIf=" modifiedUser && editPassword.invalid" class="alert alert-danger">
                         <div *ngIf="editPassword.errors.required">
-                          Mot de passe requis.
+                          Mot de passe requis
                         </div>
                       </div>
                     </div>
@@ -391,11 +391,11 @@
                       <input [formControl]="confirmPassword" type="password" name="confirmPassword"class="champ-form" id="confirmPassword"/>
                       <div *ngIf=" modifiedUser && confirmPassword.invalid" class="alert alert-danger">
                         <div *ngIf="confirmPassword.errors.required">
-                          Confirmation du mot de passe requis.
+                          Confirmation du mot de passe requis
                         </div>
                       </div>
                       <div *ngIf=" modifiedUser && editPassword.value !== confirmPassword.value"  class="alert alert-danger">
-                        Les mots de passe ne correspondent pas.
+                        Les mots de passe ne correspondent pas
                       </div>
                     </div>
   

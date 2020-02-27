@@ -56,14 +56,14 @@ export class ProfilUtilisateurComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
     });
   }
 
   updateprofil() {
     this.submittedProfil = true;
     if (this.prenom.value === '' || this.nom.value === '' || this.pays.value === '' || this.langue.value === 'value') {
-      this.openSnackBar('Erreur veuillez remplir tout les champs requis correctement', 'Fermer');
+      this.openSnackBar('Erreur veuillez correctement remplir tous les champs requis', 'Fermer');
       return console.log('Erreur veuillez remplir tout les champs requis');
     } else {
     this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
@@ -76,7 +76,7 @@ export class ProfilUtilisateurComponent implements OnInit {
       function: this.fonction.value,
     }).subscribe(
       (res) => {
-        this.openSnackBar('Profil mis à jour', 'Fermer');
+        this.openSnackBar('Le profil a bien été mis à jour', 'Fermer');
        // console.log('res', res);
       },
       err => console.log(err)
@@ -92,7 +92,7 @@ export class ProfilUtilisateurComponent implements OnInit {
     Signature: this.signature.value,
   }).subscribe(
     (res) => {
-      this.openSnackBar('Signature mise à jour', 'Fermer');
+      this.openSnackBar('La signature a bien été mise à jour', 'Fermer');
      // console.log('res', res);
     },
     err => console.log(err)
@@ -103,14 +103,14 @@ export class ProfilUtilisateurComponent implements OnInit {
 updateemail() {
   this.submittedEmail = true;
   if (this.email.value === '' || this.newEmail.value === '' || this.email.invalid || this.newEmail.invalid) {
-    this.openSnackBar('Erreur veuillez remplir tout les champs requis correctement', 'Fermer');
+    this.openSnackBar('Erreur veuillez correctement remplir tous les champs requis', 'Fermer');
     return console.log('Erreur veuillez remplir tout les champs requis');
   } else {
   this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
     Email: this.newEmail.value,
   }).subscribe(
     (res) => {
-      this.openSnackBar('Email mis à jour', 'Fermer');
+      this.openSnackBar("L'email a bien été mis à jour", 'Fermer');
      // console.log('res', res);
     },
     err => console.log(err)
@@ -129,7 +129,7 @@ updatepassword() {
     password: this.newpassword.value,
   }).subscribe(
     (res) => {
-      this.openSnackBar('Mot de passe mis a jour', 'Fermer');
+      this.openSnackBar('Le mot de passe a bien été mis a jour', 'Fermer');
      // console.log('res', res);
     },
     err => console.log(err)

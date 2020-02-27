@@ -152,7 +152,7 @@ export class CampagneComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
     });
   }
 
@@ -194,7 +194,7 @@ export class CampagneComponent implements OnInit {
           pin: true
         }).subscribe(
           (res) => {
-            this.openSnackBar('Campagne épingler', 'Fermer');
+            this.openSnackBar('La campagne a bien été épinglée', 'Fermer');
             this.campaignsFiltered = [];
             this.campaignsArchived = [];
             this.ngOnInit();
@@ -208,7 +208,7 @@ export class CampagneComponent implements OnInit {
           pin: false
         }).subscribe(
           (res) => {
-            this.openSnackBar('Campagne désépingler', 'Fermer');
+            this.openSnackBar('La campagne a bien été désépinglée', 'Fermer');
             this.campaignsFiltered = [];
             this.campaignsArchived = [];
             this.ngOnInit();
@@ -229,7 +229,7 @@ export class CampagneComponent implements OnInit {
           archive: true
         }).subscribe(
           (res) => {
-            this.openSnackBar('Campagne archiver', 'Fermer');
+            this.openSnackBar('La campagne a bien été archivée', 'Fermer');
             this.campaignsFiltered = [];
             this.campaignsArchived = [];
             this.ngOnInit();
@@ -243,7 +243,7 @@ export class CampagneComponent implements OnInit {
           archive: false
         }).subscribe(
           (res) => {
-            this.openSnackBar('Campagne désarchiver', 'Fermer');
+            this.openSnackBar('La campagne a bien été désarchivée', 'Fermer');
             this.campaignsFiltered = [];
             this.campaignsArchived = [];
             this.ngOnInit();

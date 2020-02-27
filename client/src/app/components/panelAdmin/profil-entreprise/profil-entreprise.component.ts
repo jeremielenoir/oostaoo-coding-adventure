@@ -883,7 +883,7 @@ export class ProfilEntrepriseComponent implements OnInit {
         useradmin: this.decryptTokenService.userId
       }).subscribe(
         (res) => {
-          this.openSnackBar('Entreprise ajouter', 'Fermer');
+          this.openSnackBar("L'entreprise a bien été ajoutée", 'Fermer');
           this.ngOnInit();
         },
         err => console.log(err)
@@ -893,7 +893,7 @@ export class ProfilEntrepriseComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
     });
   }
 
@@ -906,7 +906,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       Teaser: this.teaser.value
     }).subscribe(
       (res) => {
-        this.openSnackBar('Entreprise mise à jour', 'Fermer');
+        this.openSnackBar("L'entreprise a bien été mise à jour", 'Fermer');
         // console.log('res', res);
       },
       err => console.log(err)
@@ -935,7 +935,7 @@ export class ProfilEntrepriseComponent implements OnInit {
         Twitter: this.twitter.value,
       }).subscribe(
         (res) => {
-          this.openSnackBar('Entreprise mise à jour', 'Fermer');
+          this.openSnackBar("L'entreprise a bien été mise à jour", 'Fermer');
           this.currentTotal = 0;
           this.ngOnInit();
           // console.log('res', res);

@@ -109,7 +109,7 @@ export class QuestionsComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
     });
   }
 
@@ -123,7 +123,7 @@ export class QuestionsComponent implements OnInit {
       questions: this.updateQuestionsCampaign
     }).subscribe(
       (res) => {
-        this.openSnackBar('Questions éditées', 'Fermer');
+        this.openSnackBar('Les questions ont bien été éditées', 'Fermer');
         console.log(res);
       },
       err => console.log(err)
