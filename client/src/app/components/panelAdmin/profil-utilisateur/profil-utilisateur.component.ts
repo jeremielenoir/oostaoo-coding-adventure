@@ -143,6 +143,8 @@ updatepassword() {
       const datas = await this.apiClientService
         .get(API_URI_USER + '/' + this.decryptTokenService.userId)
         .toPromise();
+        console.log('profil-utilisateur/ get User / datas : ', datas);
+        console.log('profil-utilisateur/ localStorage currentUser : ', localStorage.getItem('currentUser'));
       return this.user = [datas];
     } catch (err) {
       return err;

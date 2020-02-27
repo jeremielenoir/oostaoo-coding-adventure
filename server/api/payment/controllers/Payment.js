@@ -55,16 +55,17 @@ module.exports = {
   create: async (ctx) => {
     try{
       console.log('CONTROLLER CREATE : ctx request body : ', ctx.request.body);
-      const values = _.omit(ctx.request.body, ['paymentId']);
+      const values = _.omit(ctx.request.body, ['paymentId', 'tests_available']);
 
       // to test datawriting failure and refund service
       // values.echec='echec';
 
       const result = await strapi.services.payment.add(values);
-      // console.log('result : ', result);
-      const {user_id, offer_id} = values;
+
+      const {user_id, offer_id, tests_available} = values;
       if(result){
-       await strapi.plugins['users-permissions'].services.user.edit({id: user_id}, {offer_id: offer_id});
+       await strapi.plugins['users-permissions']
+       .services.user.edit({id: user_id}, {offer_id: offer_id, tests_available: tests_available});
       }
       return result;
 

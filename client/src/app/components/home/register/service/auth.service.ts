@@ -19,7 +19,8 @@ export class AuthenticationService {
 
   public get currentUserValue() {
     this.currentUserSubject = new BehaviorSubject(localStorage.getItem('currentUser'));
-    return this.currentUserSubject.value;
+    console.log('currentUserSubject : ', this.currentUserSubject);
+  return this.currentUserSubject.value;
   }
 
   // login

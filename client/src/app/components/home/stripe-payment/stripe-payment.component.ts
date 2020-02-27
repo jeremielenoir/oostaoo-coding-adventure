@@ -123,6 +123,7 @@ export class StripePaymentComponent implements OnInit {
                   this.paymentCreationBody = {
                     amount: this.offerChoice.price,
                     offer_id: this.offerChoice.id,
+                    tests_available: this.offerChoice.tests_stock,
                     user_id: this.userInfo.id,
                     date_payment: Date.now(),
                     paymentId: res.id

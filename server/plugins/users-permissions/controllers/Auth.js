@@ -81,7 +81,9 @@ module.exports = {
         return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.invalid' }] }] : 'Identifier or password invalid.');
       } else {
         ctx.send({
-          jwt: strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user.toJSON ? user.toJSON() : user, ['_id', 'id', 'adminId', 'offer_id', 'tests_available'])),
+          jwt: strapi.plugins['users-permissions'].
+          services.jwt.issue(_.pick(user.toJSON ? user.toJSON() : user,
+           ['_id', 'id', 'adminId', 'offer_id', 'tests_available'])),
           user: _.omit(user.toJSON ? user.toJSON() : user, ['password', 'resetPasswordToken'])
         });
       }
@@ -306,11 +308,16 @@ module.exports = {
       }
 
       // by default, every new registered user has a free offer (id: 14)
-      params.offer_id= 14;
+      // and 0 available tests
+      params.offer_id = 14;
+      params.tests_available = 0;
 
       const user = await strapi.query('user', 'users-permissions').create(params);
 
-      const jwt = strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user.toJSON ? user.toJSON() : user, ['_id', 'id']));
+      const jwt = strapi.plugins['users-permissions'].
+      services.jwt.issue(_.pick(user.toJSON ?
+        user.toJSON() : user, ['_id', 'id', 'adminId', 'offer_id',
+        'tests_available']));
 
       if (settings.email_confirmation) {
         const storeEmail = (await pluginStore.get({
