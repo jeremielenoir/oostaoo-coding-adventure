@@ -265,8 +265,6 @@
 
                 <h2 class="title-edit-panel">
                   Éditez les détails de votre entreprise dans la langue de votre choix
-                  <figure class="img-country"><img src="../../../../assets/country.png" role="img" alt="country" />
-                  </figure>
                 </h2>
 
                 <!-- <div class="sous-edit-panel-left">
@@ -305,7 +303,7 @@
 
                     <select [formControl]="lang" name="lang" class="champ-form-gestion">
 
-                      <option *ngFor="let lang of langlist" value="{{lang.name}}">{{ lang.name }}</option>
+                      <option *ngFor="let lang of langlist" value="{{lang}}">{{ lang }}</option>
 
                     </select>
 
