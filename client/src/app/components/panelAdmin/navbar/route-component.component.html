@@ -1,5 +1,11 @@
-<nav id="nav-menu">
 
+ 
+<nav id="nav-menu">
+  <img style="height: 55px;
+  margin-top: 10px;
+  margin-left: 20px;
+  left: 5px;
+  position: absolute;" src="../../../../assets/logo.png" alt="">
   <ul class="list-menu">
 
     <li>
@@ -25,9 +31,9 @@
           <p>Notifications</p>
         </li>
         <div class="notif-content" *ngFor="let notification of notifications" [className]="notification.status ? 'notif-content-read' : 'notif-content'">
-          <div>
+          <!-- <div>
             <span (click)="deleteNotification(notification.id)" class=""><i [className]="notification.status ? 'fas fa-trash icon-gestion-notif-read' : 'fas fa-trash icon-gestion-notif'"></i></span>
-          </div>
+          </div> -->
             <span (click)="navigateTo(notification.idCampaign, notification.id, notification.status)" style="display: block;">
 
               <h4 class="notif-title">

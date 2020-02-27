@@ -34,7 +34,7 @@
      flex: 1;
   }
   .info-content-header-right-dashboard{
-    flex: 7;
+    flex: 10;
     display: flex;
     padding-right: 15px;
     align-items: center;
@@ -65,9 +65,9 @@
   }
 
   .sidibar-sous-header{
-    border-right: 1px solid #e15028;
-    border-top: 1px solid #e15028;
-    border-left: 1px solid #e15028;
+    border-right: $border-table;
+    border-top: $border-table;
+    border-left: $border-table;
     border-top-right-radius:4px;
     border-top-left-radius:4px;
   }
@@ -119,13 +119,13 @@
         color: #7e8082;
         display: flex;
         overflow: hidden;
-        border-bottom: 1px dashed #e15028;
+        border-bottom: 1px dashed $color-principal-blue;
         flex-direction: row-reverse;
         transition: 1s;
         .list-sidibar-left-content {
           color: #3f526a;
           font-size: 14px;
-          font-weight: 700;
+           
           word-wrap: break-word;
           margin-bottom: 0px;
           padding: 6px 10px;
@@ -136,7 +136,7 @@
             color: #ce5637;
             border: none;
             transition: color 0.2s;
-            font-weight: 700;
+             
             text-decoration: none;
           }
         }
@@ -144,8 +144,8 @@
           min-width: 100px !important;
           display: flex;
           font-size: 14px;
-          border-right: 1px dashed #e15028;
-          font-weight: 700;
+          border-right: 1px dashed $color-principal-blue;
+           
           align-items: center;
           flex-direction: column;
           justify-content: center;
@@ -200,11 +200,10 @@
     background-color: #eaeff3;
     height: 60px;
     .modall-title {
-      color: #1d3551;
+      color: $color-principal-blue;
       margin: 0;
       font-size: 18px;
       text-transform: uppercase;
-      font-weight: 600;
       .icon-modal-header {
         margin-right: 10px;
       }
@@ -225,9 +224,9 @@
     position: relative;
     font-size: 14px;
     transition: background-color 200ms;
-    font-weight: 700;
+     
     text-transform: uppercase;
-    background-color: #1d3551;
+    background-color: $color-principal-blue;
     &:hover {
       background-color: #162c45;
     }

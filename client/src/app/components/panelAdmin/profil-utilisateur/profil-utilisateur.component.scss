@@ -41,11 +41,11 @@
         .btn-submit{
          width: 100%;
          height: 50px;
-         background: #1d3551;
+         background: $color-principal-blue;
          color: white;
          text-transform: uppercase;
          font-size: 14px;
-         font-weight: bold;
+          
          border: 0px ;
          cursor: pointer;
          transition: .3s;

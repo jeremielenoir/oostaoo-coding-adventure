@@ -192,7 +192,7 @@
                   background-color: #162c45;
                   color: #fff;
                   font-size: 14px;
-                  font-weight: 700;
+                   
                   transition: background 0.2s;
                   position: relative;
                   text-transform: uppercase;
@@ -226,8 +226,8 @@
                   padding-right: 2px;
                 }
                 .first-label-param-header {
-                  color: #1d3551 !important;
-                  font-weight: 700;
+                  color: $color-principal-blue !important;
+                   
                 }
               }
             }
@@ -244,7 +244,7 @@
 
               .title-edit-panel {
                 margin-top: 20px;
-                font-weight: 700;
+                 
                 font-size: 18px;
                 cursor: pointer;
 
@@ -267,10 +267,10 @@
                 flex-direction: row;
                 .chart-title {
                   display: inline-block;
-                  color: #1d3551;
+                  color: $color-principal-blue;
                   bottom: 0;
                   line-height: 60px;
-                  font-weight: 700;
+                   
                   font-size: 16px;
                   margin-right: 6px;
                 }
@@ -287,8 +287,8 @@
                 .detail_progresse_mini {
                   position: absolute;
                   .number_progress_mini {
-                    color: #1d3551;
-                    font-weight: 700;
+                    color: $color-principal-blue;
+                     
                     font-size: 16px;
                   }
                 }
@@ -316,7 +316,7 @@
             align-items: center;
             .text_number_progress_responsive {
               font-size: 12px;
-              font-weight: 700;
+               
               display: inline-block;
               display: none;
             }
@@ -382,7 +382,7 @@
       }
       .modal-content-text {
         font-size: 20px;
-        font-weight: 700;
+         
         color: #20252a;
         margin: 10px;
         opacity: 0.5;
@@ -407,7 +407,7 @@
           display: block;
           padding-bottom: 4px;
           font-size: 20px;
-          font-weight: 700;
+           
           margin: 10px;
         }
       }
@@ -446,7 +446,7 @@
     background-color: #2bae91;
     color: #fff;
     font-size: 12px;
-    font-weight: 700;
+     
     text-transform: uppercase;
     padding: 0 38px;
     margin: 15px;
@@ -491,10 +491,10 @@
       }
 
       &:first-child {
-        background-color: #1d3551;
+        background-color: $color-principal-blue;
         color: white;
-        border: 1px solid #1d3551;
-        font-weight: 700;
+        border: 1px solid $color-principal-blue;
+         
         &:first-child:disabled {
           opacity: 0.2;
           cursor: auto;
@@ -515,7 +515,7 @@
   }
 }
 .champ-form-gestion {
-  border: 1px solid #1d3551;
+  border: 1px solid $color-principal-blue;
   width: 100%;
   height: 52px;
   font-size: 15px;
@@ -525,7 +525,7 @@
   outline: none;
   &:active,
   &:focus {
-    border: 1px solid #1d3551 !important;
+    border: 1px solid $color-principal-blue !important;
   }
 }
 .block-form-flex {
@@ -644,9 +644,9 @@
 }
 
 .btn-validate {
-  background-color: #1d3551;
+  background-color: $color-principal-blue;
   color: #fff;
-  font-weight: 700;
+   
   transition: background 0.2s;
   position: relative;
   text-transform: uppercase;
@@ -668,7 +668,7 @@
   height: 100px;
   vertical-align: top;
   margin: 5px;
-  background-color: #1d3551;
+  background-color: $color-principal-blue;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -689,7 +689,7 @@
 
 .upload .text-upload {
   display: block;
-  font-weight: 700;
+   
   color: #fff;
   margin-top: 6px;
   font-size: 12px;

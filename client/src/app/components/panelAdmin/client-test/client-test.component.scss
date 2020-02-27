@@ -171,7 +171,7 @@ p {
       font-weight: 300;
       display: block;
       &.text-gras {
-        font-weight: bold;
+         
       }
       &.block-condition {
         .checkbox-condition {
@@ -186,7 +186,7 @@ p {
           width: 95%;
           .text-link {
             color: $color-principal-blue;
-            font-weight: 700;
+             
             text-decoration: underline;
           }
         }
@@ -203,7 +203,6 @@ p {
       margin: 20px;
       font-size: 18px;
       transition: background 0.2s;
-      font-weight: 600 !important;
       background-color: #7e8082;
       border-radius: 0px;
       &:active {
