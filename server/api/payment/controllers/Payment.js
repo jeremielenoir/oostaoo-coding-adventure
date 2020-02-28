@@ -55,18 +55,29 @@ module.exports = {
   create: async (ctx) => {
     try{
       console.log('CONTROLLER CREATE : ctx request body : ', ctx.request.body);
-      const values = _.omit(ctx.request.body, ['paymentId']);
+
+      const values = _.omit(ctx.request.body, ['paymentId', 'tests_available']);
 
       // to test datawriting failure and refund service
       // values.echec='echec';
 
       const result = await strapi.services.payment.add(values);
-      // console.log('result : ', result);
-      const {user_id, offer_id} = values;
+
+      const { tests_available } = ctx.request.body;
+      const { user_id, offer_id } = values;
       if(result){
-       await strapi.plugins['users-permissions'].services.user.edit({id: user_id}, {offer_id: offer_id});
+       await strapi.plugins['users-permissions']
+       .services.user.edit({id: user_id}, {offer_id: offer_id, tests_available: tests_available});
       }
-      return result;
+
+      let user = await strapi.plugins['users-permissions'].services.user.fetch({id: user_id});
+      user = {id: user_id, adminId: user.adminId, offer_id, tests_available};
+
+      const jwt = await strapi.plugins['users-permissions'].services.jwt.issue(
+          _.pick(user.toJSON ? user.toJSON() : user,
+         ['_id', 'id', 'adminId', 'offer_id', 'tests_available']));
+
+      return {result, jwt};
 
     }catch(err){
       console.log(`CREATE CONTROLLER : erreur d'écriture en base : `, err);

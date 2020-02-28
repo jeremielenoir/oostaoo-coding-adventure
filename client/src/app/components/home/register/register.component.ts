@@ -103,6 +103,8 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          console.log('data : ', data);
+          
           this.router.navigate(['/dashboard/campaigns'])
         },
         error => {

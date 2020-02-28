@@ -2,7 +2,7 @@
 
 <div class="">
 
-  <button (click)="goBack()" mat-flat-button color="primary"  id="go-back">
+  <button *ngIf="subscriptionPage" (click)="goBack()" mat-flat-button color="primary"  id="go-back">
     <i class="material-icons">arrow_back</i> Retour
   </button>
 

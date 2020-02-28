@@ -1,28 +1,13 @@
-
- 
 <nav id="nav-menu">
-  <img style="height: 55px;
-  margin-top: 10px;
-  margin-left: 20px;
-  left: 5px;
-  position: absolute;" src="../../../../assets/logo.png" alt="">
+  <a href="" [routerLink]="['/dashboard/campaigns']" class="logo-link">
+    <img class="logo" src="../../../../assets/logo_ROODEO.svg" alt="">
+  </a>
   <ul class="list-menu">
 
     <li>
       <a href="" class="text-menu">
-        <span class="content-img" id="notif">
-        </span> <span style="position: absolute;
-        bottom: 10px;
-        right: 10px;
-        width: 25px;
-        height: 25px;
-        background: #e34e26;
-        font-size: 12px;
-        border-radius: 12px;
-        margin: auto;
-        text-align: center;
-        padding: 3px;
-        color:#1d3551;">{{notifUnread}}</span>
+        <span class="content-img" id="notif"></span>
+        <span *ngIf=' notifUnread !== 0' class="nbr-notif">{{notifUnread}}</span>
       </a>
 
 
@@ -152,5 +137,5 @@
 
 
   </ul>
-
 </nav>
+

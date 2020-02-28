@@ -7,7 +7,7 @@ import {
   API_URI_QUESTIONS
 } from '../../../../api-client/api-client.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-
+import { FormControl } from '@angular/forms'
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
@@ -22,7 +22,12 @@ export class QuestionsComponent implements OnInit {
   public questionsByCampaign;
   public updateQuestionsCampaign = [];
   public searchText = '';
-  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  public positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  public toppings = new FormControl();
+  public toppingsDifficulty = new FormControl();
+  public toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  public difficulty = ['facile', 'moyen', 'difficile']
+  public boelanIsSearchAdvenced: boolean = false;
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -37,7 +42,7 @@ export class QuestionsComponent implements OnInit {
     }
   }
 
-  constructor(private route: ActivatedRoute, public apiClientService: ApiClientService, private _snackBar: MatSnackBar,) {
+  constructor(private route: ActivatedRoute, public apiClientService: ApiClientService, private _snackBar: MatSnackBar, ) {
     this.route.parent.params.subscribe(params => {
       this.globalId = params.id;
       // console.log('data', this.globalId);
@@ -131,11 +136,17 @@ export class QuestionsComponent implements OnInit {
   }
   fmtMSS(d) {
     d = Number(d);
-    var h = Math.floor(d/3600);
+    var h = Math.floor(d / 3600);
     var m = Math.floor(d % 3600 / 60);
     var s = Math.floor(d % 3600 % 60);
 
     return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
     // return (m - (m %= 60)) / 60 + (9 < m ? ':' : ':0') + m;
   }
+
+  openSearchAdvenced() {
+    this.boelanIsSearchAdvenced = !this.boelanIsSearchAdvenced
+  }
 }
+
+
