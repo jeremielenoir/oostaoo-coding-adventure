@@ -1,0 +1,16 @@
+<fieldset class="rating">
+  <input type="radio" value="5" [checked]="rating===5" />
+  <label title="Très bonne" (click)='onClick(5)'>5 stars</label>
+
+  <input type="radio" value="4" [checked]="rating===4" />
+  <label title="Bonne" (click)='onClick(4)'>4 stars</label>
+
+  <input type="radio" value="3" [checked]="rating===3" />
+  <label title="Moyenne" (click)='onClick(3)'>3 stars</label>
+
+  <input type="radio" value="2" [checked]="rating===2" />
+  <label title="Mauvaise" (click)='onClick(2)'>2 stars</label>
+
+  <input type="radio" value="1" [checked]="rating===1" />
+  <label title="Très mauvaise" (click)='onClick(1)'>1 star</label>
+</fieldset>

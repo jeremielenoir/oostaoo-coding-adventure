@@ -88,6 +88,7 @@ import { StripePaymentComponent } from './components/home/stripe-payment/stripe-
 import { RapportDetailleComponent } from './components/panelAdmin/edit-campagne/candidats/rapport-detaille/rapport-detaille.component';
 // https://www.npmjs.com/package/ngx-stripe
 import { NgxStripeModule } from 'ngx-stripe';
+import { RatingFeedbackComponent } from './components/panelAdmin/client-test/fin-test/rating-feedback/rating-feedback.component';
 
 
 @NgModule({
@@ -148,7 +149,8 @@ import { NgxStripeModule } from 'ngx-stripe';
     RapportDetailleExempleComponent,
     RapportDetailleComponent,
     FonctionnaliteComponent,
-    StripePaymentComponent
+    StripePaymentComponent,
+    RatingFeedbackComponent
   ],
   imports: [
     BrowserModule,
