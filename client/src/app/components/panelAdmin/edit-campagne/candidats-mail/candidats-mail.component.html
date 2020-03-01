@@ -40,5 +40,7 @@
     <button (click)="retourCandidat()">RETOUR AUX CANDIDATS</button>
     <button (click)="show=!show">{{show ? 'OK' : 'Personnaliser cet email'}}</button>
   </div>
+  <div class="alert alert-danger error-nbCandidats" *ngIf="nbCandidatsError">{{ nbCandidatsError }}</div>
+  <div class="alert alert-danger error-noMoreTest" *ngIf="noMoreTestError">{{ noMoreTestError }}</div>
 </div>
 </div>

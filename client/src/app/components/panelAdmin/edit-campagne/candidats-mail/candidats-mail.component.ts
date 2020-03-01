@@ -3,8 +3,11 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from '@angular/
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
-  API_URI_CANDIDATS
+  API_URI_CANDIDATS,
+  API_URI_USER
 } from '../../../../api-client/api-client.service';
+import { DecryptTokenService } from 'src/app/components/home/register/register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-candidats-mail',
@@ -22,12 +25,20 @@ export class CandidatsMailComponent implements OnInit {
   public show = false;
   public htmlContent: any;
 
-  constructor(
+  nbCandidatsError: string = null;
+  noMoreTestError: string = null;
+
+  public offer_id: any;
+  public tests_available: any;
+  public user_id: any;
+
+  constructor(private router: Router,
     @Inject(MAT_DIALOG_DATA) public data,
     public apiClientService: ApiClientService,
+    public decryptTokenService: DecryptTokenService,
     private dialog: MatDialog,
     private _snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<CandidatsMailComponent>
+    public dialogRef: MatDialogRef<CandidatsMailComponent>,
   ) {
     this.candidats = this.data.contact;
     let count = 0;
@@ -38,6 +49,20 @@ export class CandidatsMailComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.user_id = this.decryptTokenService.userId;
+    this.offer_id = this.decryptTokenService.offer_id;
+
+// get the user's tests_available via API instead of localStorage because of
+// decryptTokenService's bug with localStorage updated values
+      this.apiClientService
+        .get(`${API_URI_USER}/${this.user_id}`)
+        .subscribe(datas => {
+          this.tests_available = datas.tests_available;
+          console.log('NGONINIT / this.tests_available: ', this.tests_available);
+        });
+
+
 
     this.apiClientService
       .get(API_URI_CAMPAIGNS + '/' + this.data.globalId)
@@ -106,13 +131,51 @@ export class CandidatsMailComponent implements OnInit {
     });
   }
 
+  goToSubscribe(){
+    this.dialog.closeAll();
+    this.router.navigate(['/subscription']);
+  }
+
   updateCampaignPostCandidats() {
 
-    for (const iterator of this.candidats) {
-      console.log('iterator: ', iterator);
-      this.postCandidat(iterator.name, iterator.value);
+    if(this.tests_available == -1){
+        for (const iterator of this.candidats) {
+          this.postCandidat(iterator.name, iterator.value);
+        }
+
+    }else if (this.offer_id == 14){
+        this.goToSubscribe();
+
+    } else if(this.tests_available == 0){
+      setTimeout(()=>{
+        this.goToSubscribe();
+      }, 1500)
+      this.noMoreTestError = `Vous n'avez plus de test disponible`;
+
+    }else if(this.nbCandidat > this.tests_available ){
+        setTimeout(()=>{
+          this.retourCandidat();
+        }, 1500);
+        this.nbCandidatsError = `Impossible d'inviter ${this.nbCandidat} candidat${this.nbCandidat>1?'s':''}. Il vous reste seulement ${this.tests_available} test${this.tests_available>1?'s':''} disponible${this.tests_available>1?'s':''}`;
+
+    } else {
+      this.tests_available = this.tests_available - this.nbCandidat;
+      this.apiClientService
+        .put(`${API_URI_USER}/${this.user_id}`,{
+          tests_available: this.tests_available
+        })
+        .toPromise()
+        .then(async(res)=>{
+          localStorage.setItem('currentUser', res.newToken);
+          for (const iterator of this.candidats) {
+          this.postCandidat(iterator.name, iterator.value);
+          }
+        },
+        err => console.log(err)
+      );
     }
   }
+
 
   updateCampaign(idCandidat): Promise<any> {
     return this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.data.globalId, {

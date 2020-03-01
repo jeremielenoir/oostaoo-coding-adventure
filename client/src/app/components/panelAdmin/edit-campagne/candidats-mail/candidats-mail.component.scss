@@ -20,11 +20,21 @@
     margin-top: 9px;
 }
 
+.error-nbCandidats{
+  margin-top: 40px;
+  text-align: center;
+}
+
+.error-noMoreTest{
+  margin-top: 40px;
+  text-align: center;
+}
+
 .rond-custom{
     top:-25px!important
 }
 label{
-     
+
     color: $color-principal-blue;
 }
 
@@ -34,7 +44,7 @@ label{
 }
 
 button{
-     
+
     height: 50px;
     font-size: 14px;
     background-color: $color-principal-blue;

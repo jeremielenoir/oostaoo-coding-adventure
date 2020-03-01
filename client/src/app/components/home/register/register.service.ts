@@ -8,6 +8,8 @@ export class DecryptTokenService {
   decodedValue = JSON.parse(window.atob(this.base64Url));
   userId = this.decodedValue.id;
   adminId = this.decodedValue.adminId;
+  offer_id = this.decodedValue.offer_id;
+  tests_available = this.decodedValue.tests_available;
 
   get userIdExporte(): any {
     return { userId: this.userId, userAdmin: this.adminId }
