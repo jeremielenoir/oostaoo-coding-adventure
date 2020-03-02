@@ -136,9 +136,7 @@ export class UtilisateursComponent implements OnInit {
 
     this.getUser().then(datas => {
       this.tests_available = datas.tests_available;
-      console.log('tests_available : ', this.tests_available);
     });
-
     this.adminId = this.decryptTokenService.adminId || this.decryptTokenService.userId;
     this.authenticationService
     .getUsers(this.adminId)

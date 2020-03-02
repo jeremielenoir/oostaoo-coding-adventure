@@ -137,7 +137,6 @@ export class CandidatsMailComponent implements OnInit {
   }
 
   updateCampaignPostCandidats() {
-
     if(this.tests_available == -1){
         for (const iterator of this.candidats) {
           this.postCandidat(iterator.name, iterator.value);
