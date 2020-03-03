@@ -8,6 +8,7 @@
   position: fixed;
   width: 100%;
   z-index: 9999;
+  height: 70px;
   ul,figure{
     margin:0px
   }
@@ -22,7 +23,7 @@
 
   .logo{
     width: 200px; 
-    height:50px;
+    height:46px;
   }
 
   .list-menu{
@@ -163,8 +164,8 @@
         .content-img{
           background-repeat: no-repeat;
           display: block;
-          width: 60px;
-          height: 60px;
+          width: 42px;
+          height: 42px;
         }
         
       }
