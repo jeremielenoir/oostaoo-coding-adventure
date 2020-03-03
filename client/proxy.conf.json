@@ -1,48 +1,48 @@
 {
     "/api": {
-        "target": "http://localhost:80",
+        "target": "http://localhost:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/upload": {
-        "target": "http://localhost:80",
+        "target": "http://localhost:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/connect": {
-        "target": "http://localhost:80",
+        "target": "http://localhost:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/auth": {
-        "target": "http://localhost:80",
+        "target": "http://localhost:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/user": {
-        "target": "http://localhost:80",
+        "target": "http://localhost:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/notifications": {
-        "target": "http://localhost:80",
+        "target": "http://localhost:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/feedback": {
-        "target": "http://localhost:80",
+        "target": "http://localhost:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
