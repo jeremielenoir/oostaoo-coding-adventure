@@ -6,6 +6,9 @@
     padding: 4px 20px 6px 22px;
     
     background-color: white;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
 
     .breadrumb{
         margin-bottom: 0rem !important;
