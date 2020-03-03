@@ -5,6 +5,7 @@ import {
   NgForm,
   Validators
 } from "@angular/forms";
+import { Router } from '@angular/router';
 import { ErrorStateMatcher } from "@angular/material/core";
 import { TooltipPosition, MatSnackBar } from "@angular/material";
 import {} from "@angular/material/snack-bar";
@@ -59,7 +60,7 @@ const CHECKBOX_DATA = [{
   styleUrls: ["./utilisateurs.component.scss"]
 })
 export class UtilisateursComponent implements OnInit {
-  constructor(
+  constructor(private router: Router,
     public apiClientService: ApiClientService,
     public authenticationService: AuthenticationService,
     public decryptTokenService: DecryptTokenService,
@@ -72,6 +73,7 @@ export class UtilisateursComponent implements OnInit {
   public modifiedUser = false;
   public checkbox_list :any[];
   public adminId: number;
+  public tests_available: any;
   public selectedRoleId;
   public selectedRoleName;
   // public PrenomValue = "";
@@ -132,6 +134,9 @@ export class UtilisateursComponent implements OnInit {
 
   ngOnInit() {
 
+    this.getUser().then(datas => {
+      this.tests_available = datas.tests_available;
+    });
     this.adminId = this.decryptTokenService.adminId || this.decryptTokenService.userId;
     this.authenticationService
     .getUsers(this.adminId)
@@ -244,11 +249,19 @@ export class UtilisateursComponent implements OnInit {
     // this.addNom = this.formulaire.nativeElement.nom.value;
     // this.addEmail = this.formulaire.nativeElement.email.value;
     // this.UserName = `${this.PrenomValue}-${this.NomValue}`;
-    if(this.addPrenom.value === "" || this.addNom.value === "" || this.addEmail.value === "" || this.addEmail.invalid || 
+    if(this.addPrenom.value === "" || this.addNom.value === "" || this.addEmail.value === "" || this.addEmail.invalid ||
       this.addPassword.value === "" || this.confirmPassword.value === "" || this.addPassword.value === null ||
       this.addPassword.value !== this.confirmPassword.value || this.addUsername.value === ""){
       return;
     };
+
+    if(this.tests_available !== -1){
+      setTimeout(()=>{
+        this.router.navigate(['/subscription'])
+      }, 1500 );
+      return this.openSnackBar(`Réservé aux formules 'Entreprise'`, 'fermer');
+    }
+
     const userPayload = ({
       prenom: this.addPrenom.value,
       nom: this.addNom.value,
@@ -284,6 +297,17 @@ export class UtilisateursComponent implements OnInit {
         this.openSnackBar("L'utilisateur a bien été ajouté", 'Fermer');
       })
     .catch(function(res){ console.log(res) })
+  }
+
+  async getUser(): Promise<any> {
+    try {
+      const datas = await this.apiClientService
+        .get(API_URI_USER + '/' + this.decryptTokenService.userId)
+        .toPromise();
+      return datas;
+    } catch (err) {
+      return err;
+    }
   }
 
   public updateUser() {

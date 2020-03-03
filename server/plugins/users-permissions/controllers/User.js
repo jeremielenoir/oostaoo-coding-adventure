@@ -135,7 +135,7 @@ module.exports = {
         }
       }
 
-      const user = await strapi.plugins['users-permissions'].services.user.fetch(ctx.params);
+      let user = await strapi.plugins['users-permissions'].services.user.fetch(ctx.params);
 
       if (_.get(ctx.request, 'body.password') === user.password) {
         delete ctx.request.body.password;
@@ -155,11 +155,23 @@ module.exports = {
         }
       }
 
-      const data = await strapi.plugins['users-permissions'].services.user.edit(ctx.params, ctx.request.body) ;
+    let data = await strapi.plugins['users-permissions'].services.user.edit(ctx.params, ctx.request.body) ;
 
-      // Send 200 `ok`
+    let updated_user = {...user, tests_available : ctx.request.body.tests_available};
+    updated_user = _.pick(updated_user, ['_id', 'id', 'adminId', 'tests_available']);
+    const offer_id = user.offer_id.id;
+    updated_user.offer_id = offer_id;
+  
+    let updated_jwt;
+
+      if(Object.keys(ctx.request.body).length == 1
+      && !isNaN(ctx.request.body.tests_available) ){
+         updated_jwt = await strapi.plugins['users-permissions'].services.jwt.issue(updated_user);
+       return ctx.send({newToken: updated_jwt});
+      }
       ctx.send(data);
-    } catch(error) {
+    }catch(error) {
+      console.log('User controller PUT / error : ', error);
       ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: error.message, field: error.field }] }] : error.message);
     }
   },

@@ -7,6 +7,7 @@ import {
 } from "src/app/api-client/api-client.service";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-profil-entreprise",
@@ -24,6 +25,7 @@ export class ProfilEntrepriseComponent implements OnInit {
 
   public currentValue: number;
   public user: any;
+  public tests_available: any;
   public interval: any;
   public shadowcog = false;
   public shadowcogImage = false;
@@ -85,7 +87,7 @@ export class ProfilEntrepriseComponent implements OnInit {
     "Other"
   ];
 
-  constructor(
+  constructor(private router: Router,
     public apiClientService: ApiClientService,
     public decryptTokenService: DecryptTokenService,
     private _snackBar: MatSnackBar,
@@ -97,6 +99,8 @@ export class ProfilEntrepriseComponent implements OnInit {
     this.getUser().then(user => {
       console.log('user getUser=', user);
       console.log('this this user', this.entreprise);
+      this.tests_available = user[0].tests_available;
+
       if ( user[0].entreprise === null) {
         this.isVerifUser = true;
         return console.log('no entreprise lel');
@@ -136,10 +140,17 @@ export class ProfilEntrepriseComponent implements OnInit {
 
   addentreprise() {
     this.submitted = true;
+
     if (this.newEntreprise.value === '' || this.newEmail.value === '' || this.newPhone.value === '' || this.newEmail.invalid) {
       this.openSnackBar('Erreur dans le formulaire merci de vérifier les champs', 'Fermer');
       return console.log('password not updated');
     } else {
+        if(this.tests_available !== -1){
+          setTimeout(()=>{
+            this.router.navigate(['/subscription'])
+          }, 1500 );
+          return this.openSnackBar(`Réservé aux formules 'Entreprise'`, 'fermer');
+        }
       this.apiClientService.post(API_URI_ENTREPRISE, {
         Nom: this.newEntreprise.value,
         Email: this.newEmail.value,
@@ -179,7 +190,7 @@ export class ProfilEntrepriseComponent implements OnInit {
 
   clickchange2() {
     console.log('bonjour' + this.name.value)
-    this.submitted = true;  
+    this.submitted = true;
     if (this.name.value === '' || this.email.value === '' || this.phone.value === '' || this.email.invalid) {
       this.openSnackBar('Erreur dans le formulaire merci de vérifier les champs', 'Fermer');
       return console.log('password not updated');
