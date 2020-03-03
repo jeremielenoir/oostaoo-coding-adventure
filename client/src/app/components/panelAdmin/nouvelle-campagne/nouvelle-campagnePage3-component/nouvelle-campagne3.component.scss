@@ -7,9 +7,11 @@
     flex-direction: column;
     height: 100%;
 }
-.cadreQuestion{
-    padding: 0px 0px 0 !important;
-}
+.cadreQuestion {
+    padding: 125px 15px 10px 15px;
+    margin: 0 auto;
+    width: 100%;
+  }
 
 .custom-buttom,.mat-flat-button {
     // height: 100%;
@@ -251,10 +253,11 @@
 
 @import"../nouvelle-campagne.component.scss";
 
-
-.cadreQuestion{
-    padding: 0px 0px 0 !important;
-}
+.cadreQuestion {
+    padding: 125px 15px 10px 15px;
+    margin: 0 auto;
+    width: 100%;
+  }
 
 .custom-buttom,.mat-flat-button {
     height: 100%;
@@ -493,10 +496,16 @@
 /* DRAG AND DROP */
 
 .block-container {
+    &.left{
+        margin-right: 5px;
+    }
+    &.right{
+        margin-left: 5px;
+    }
     display: flex;
     width: 50%;
     max-width: 100%;
-    margin: 10px 20px 0;
+    margin: 10px 0px 0px 0px;
     vertical-align: top;
     border: $border-table;
     border-radius: 5px;
