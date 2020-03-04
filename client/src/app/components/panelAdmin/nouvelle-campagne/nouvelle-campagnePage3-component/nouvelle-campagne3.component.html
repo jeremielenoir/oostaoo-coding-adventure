@@ -37,10 +37,9 @@
           </figure>
         </div>
 
-        <a href="" class="search-advanced">
-          Recherche avancée
-          <i class="fas fa-chevron-right icon-arrow-btn"></i>
-        </a>
+        <span class="search-advanced" href="" (click)="openSearchAdvenced()"> Recherche avancée
+          <i class="fas fa-chevron-right icon-arrow-btn" [class.chevron-bottom]="boelanIsSearchAdvenced"></i>
+        </span>
 
         <button mat-flat-button class="trie-cat" [matMenuTriggerFor]="appMenu">
           Trier par
@@ -50,14 +49,48 @@
             <button mat-menu-item>Help</button>
           </mat-menu>
         </button>
+
       </div>
+
+      <div *ngIf="boelanIsSearchAdvenced" class="search-advanced-block">
+        <!-- <mat-form-field>
+          <mat-label>TECHNOLOGIE</mat-label>
+          <mat-select [formControl]="toppings" (selectionChange)=filtreTechno($event) multiple>
+            <mat-select-trigger>
+              {{toppings.value ? toppings.value[0] : ''}}
+              <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
+                (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let techno of yourCampaign[0].technologies" [value]="techno.name">
+              {{techno.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        <mat-form-field>
+          <mat-label>DIFFICULTÉ</mat-label>
+          <mat-select [formControl]="toppingsDifficulty" (selectionChange)=filtreDifficuty($event) multiple>
+            <mat-select-trigger>
+              {{toppingsDifficulty.value ? toppingsDifficulty.value[0] : ''}}
+              <span *ngIf="toppingsDifficulty.value?.length > 1" class="example-additional-selection">
+                ,{{toppingsDifficulty.value[1]}}{{toppingsDifficulty.value.length === 2 ? '' : ','}}{{toppingsDifficulty.value[2]}}
+                <!-- {{toppingsDifficulty.value?.length === 2 ? 'other' : 'others'}}) -->
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let difficul of difficulty" [value]="difficul">
+              {{difficul}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
 
       <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="allQuestions" [cdkDropListConnectedTo]="[doneList]"
         class="example-list" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let item of allQuestions | filter: searchText" cdkDrag>
 
           <div class="partie-left-example-box">
-            <p class="question-techno">{{ item.technologies.name}}</p>
+            <p class="question-techno">{{item.technologies.name}}</p>
           </div>
 
           <div class="partie-left-example-box-2">

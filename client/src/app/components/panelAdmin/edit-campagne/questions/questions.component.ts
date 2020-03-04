@@ -182,32 +182,26 @@ export class QuestionsComponent implements OnInit {
 
   filtreTechno(element) {
 
-    console.log('all question', this.allQuestionsCampaign)
+    const valueChecked = [];
 
-    this.allQuestionsCampaign.forEach(question => {
+    element.value.forEach(valueCheck => {
+      if (valueChecked.includes(valueCheck)) {
 
-      element.value.forEach(val => {
-
-        if (question.technologies.name == val) {
-          console.log('good !!!')
+        for (let value of valueChecked) {
+          let newFilter = this.allQuestionsCampaign.filter(element => element.technologies.name == value);
+          this.allQuestionsCampaign = newFilter
         }
 
-      });
 
+      } else {
+        valueChecked.push(valueCheck);
+      }
     });
 
-    // const arrayTechno = [];
 
-    // element.value.forEach(val => {
-    //   let tech = this.allQuestionsCampaign.filter(question => question.technologies.name == val);
-    //   arrayTechno.push(...tech);
-    // });
-
-    // this.allQuestionsCampaign = arrayTechno;
-    // console.log('arrayTechno ------------>', arrayTechno)
+    console.log('allquestion---------->', this.allQuestionsCampaign)
 
   }
-
 
 
 }
