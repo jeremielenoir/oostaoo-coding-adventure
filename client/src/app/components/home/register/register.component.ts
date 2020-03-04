@@ -7,7 +7,7 @@ import { debug } from 'util';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AuthenticationService } from './service/auth.service';
 
 
@@ -42,7 +42,8 @@ export class RegisterComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) {
         this.route.queryParams.subscribe(params => {
         // this.jwt = params['jwt'];
@@ -88,6 +89,15 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogForgetPassword, {
+       width: '700px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
   // on submit
   onSubmit() {
     this.submitted = true;
@@ -104,7 +114,6 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         data => {
           console.log('data : ', data);
-          
           this.router.navigate(['/dashboard/campaigns'])
         },
         error => {
@@ -144,5 +153,48 @@ export class RegisterComponent implements OnInit {
           this.errorRegister = error;
         }
       );
+  }
+}
+
+@Component({
+  selector: 'dialog-forget-password',
+  templateUrl: 'dialog-forget-password.html',
+  styleUrls: ['./dialog-forget-password.scss']
+})
+export class DialogForgetPassword {
+
+  submitted = false;
+  public emailAdress = new FormControl('', [Validators.required, Validators.email]);
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogForgetPassword>
+    ) {}
+
+    resetpassword() {
+      // Request API.
+      this.submitted = true;
+
+      if (this.emailAdress.value !== '' && this.emailAdress.valid) {
+
+      axios
+      .post('/auth/forgot-password', {
+        email: this.emailAdress.value,
+        url:
+          'http://localhost:8080/admin/plugins/users-permissions/auth/reset-password', // A remplacer par le nouveau formulaire de reset /!\
+      })
+      .then(response => {
+        // Handle success.
+        console.log(response);
+        console.log('Your user received an email');
+      })
+      .catch(error => {
+        // Handle error.
+        console.log('An error occurred:', error);
+      });
+      console.log('this email', this.emailAdress.value);
+      }
+    }
+    onNoClick(): void {
+    this.dialogRef.close();
   }
 }

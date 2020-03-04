@@ -222,7 +222,7 @@ module.exports = {
         html: settings.message
       });
     } catch (err) {
-      return ctx.badRequest(null, err);
+      return ctx.badRequest(null, err, 'erreursameres');
     }
 
     // Remove relations data to update user code.
