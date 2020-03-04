@@ -8,6 +8,15 @@
         "policies": []
       }
     },
+
+    {
+      "method": "POST",
+      "path": "/api/questions/populate",
+      "handler": "Question.populate",
+      "config": {
+        "policies": []
+      }
+    },
     {
       "method": "GET",
       "path": "/api/questions/count",

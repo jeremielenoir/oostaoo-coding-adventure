@@ -1,12 +1,42 @@
-'use strict';
+"use strict";
 
 /**
  * Question.js controller
  *
- * @description: A set of functions called "actions" for managing `Question`.
+ * @description: A set of functions called 'actions' for managing `Question`.
  */
-
+const { fetchSpreadSheet } = require("../utils/populate");
 module.exports = {
+  /**
+   * Populate questions from google spreadsheet.
+   *
+   * @return {Object|Array}
+   */
+
+  populate: async ctx => {
+    try {
+      // const ranges = [
+      //   "A1:A149",
+      //   "B1:B149",
+      //   "C1:C149",
+      //   "D1:D149",
+      //   "E1:E149",
+      //   "F1:F149",
+      //   "G1:G149",
+      //   "H1:H149",
+      //   "I1:I149",
+      //   "J1:J149"
+      // ];
+      // const spreadsheetId = "1X3x5HJVyAyg9MZTfhw044wEafHpoInT_L1rU-CnZdjE";
+
+      const {ranges,spreadsheetId} = ctx.request.body
+      const res = await fetchSpreadSheet(spreadsheetId, ranges);
+      //console.log("res", res);
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  },
 
   /**
    * Retrieve question records.
@@ -14,7 +44,7 @@ module.exports = {
    * @return {Object|Array}
    */
 
-  find: async (ctx) => {
+  find: async ctx => {
     if (ctx.query._q) {
       return strapi.services.question.search(ctx.query);
     } else {
@@ -28,7 +58,7 @@ module.exports = {
    * @return {Object}
    */
 
-  findOne: async (ctx) => {
+  findOne: async ctx => {
     return strapi.services.question.fetch(ctx.params);
   },
 
@@ -38,7 +68,7 @@ module.exports = {
    * @return {Number}
    */
 
-  count: async (ctx) => {
+  count: async ctx => {
     return strapi.services.question.count(ctx.query);
   },
 
@@ -48,7 +78,7 @@ module.exports = {
    * @return {Object}
    */
 
-  create: async (ctx) => {
+  create: async ctx => {
     return strapi.services.question.add(ctx.request.body);
   },
 
@@ -59,7 +89,7 @@ module.exports = {
    */
 
   update: async (ctx, next) => {
-    return strapi.services.question.edit(ctx.params, ctx.request.body) ;
+    return strapi.services.question.edit(ctx.params, ctx.request.body);
   },
 
   /**
