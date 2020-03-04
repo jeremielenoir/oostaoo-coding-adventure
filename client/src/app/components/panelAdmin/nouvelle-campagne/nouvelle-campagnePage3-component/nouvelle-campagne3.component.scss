@@ -187,6 +187,7 @@
         font-size: 14px;
         justify-content: center;
         margin-left: 12px;
+        margin-top: -10px;
         i{
             left: 12px;
             top: 5px;
@@ -405,7 +406,7 @@
     justify-content: space-between;
     #div-search {
         display: flex;
-        
+        margin-top: -8px;
         .search-input{
             font-size: 14px;
             background-color: white;
@@ -646,6 +647,31 @@
         padding: 20px 6px;
         flex: 2px;
         min-width: 80px;
+        .archive{
+            width: 40px;
+            height: 18px;
+            margin: 0px 2px;
+            span{
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .archive-inclue{
+           
+            span{
+                background-image: url('/assets/Coding-game-img/SVG-menu-Dashboard/archive-inclue.svg');
+                background-repeat: no-repeat;
+               
+            }
+        }
+        .archive-non-inclue{
+           
+            span{
+                background-image: url('/assets/Coding-game-img/SVG-menu-Dashboard/archive-non-inclue.svg');
+                background-repeat: no-repeat;
+            }
+         }
         
         img{
             width: 20px;

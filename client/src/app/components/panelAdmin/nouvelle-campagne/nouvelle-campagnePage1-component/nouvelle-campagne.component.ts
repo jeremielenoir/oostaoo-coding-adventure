@@ -147,8 +147,9 @@ export class NouvelleCampagnePage1Component implements OnInit {
   }
 
   getTechnoChecked() {
+
     console.log(
-      "this.formCampagne.value.techno: ",
+      "techno: ",
       this.formCampagne.value.techno
     );
     for (const profile of this.profiles) {
@@ -171,7 +172,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
     this.formCampagne.patchValue({
       technoSelectedId: technoDataID
     });
-    console.log("this.formCampagne.value: ", this.formCampagne.value);
+    // console.log("this.formCampagne.value: ", this.formCampagne.value);
   }
 
   compareObjects(o1: any, o2: any): boolean {

@@ -26,9 +26,9 @@ export class QuestionsComponent implements OnInit {
   public toppings = new FormControl();
   public toppingsDifficulty = new FormControl();
   public toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-  public difficulty = ['facile', 'moyen', 'difficile']
+  public difficulty = ['facile', 'moyen', 'expert'];
   public boelanIsSearchAdvenced: boolean = false;
-
+  public saveallQuestionsCampaign = [];
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -50,8 +50,11 @@ export class QuestionsComponent implements OnInit {
   }
 
   ngOnInit() {
+
     Promise.all([this.loadCampaign(), this.loadAllQuestion()]).then(values => {
       const campaigns = values[0];
+      this.yourCampaign = campaigns;
+      console.log('------------------allQuestionsCampaign------------------: ', this.allQuestionsCampaign);
       const questions = values[1]
       console.log('this.loadCampaign', values[0]);
       console.log('oui questions', questions);
@@ -66,7 +69,6 @@ export class QuestionsComponent implements OnInit {
         // console.log('question.technologies.id', question.technologies.id)
         campaigns[0].technologies.forEach(element => {
 
-          console.log('element.tech.id', element.id)
 
           if (question.technologies && question.technologies.id === element.id && !nameQuestionByTechno.includes(question.name)) {
 
@@ -87,6 +89,7 @@ export class QuestionsComponent implements OnInit {
       this.questionsByCampaign = nameQuestionCampaignByTechno;
       console.log('this.questionsByCampaign: ', this.questionsByCampaign);
       this.allQuestionsCampaign = questionByTechnoCampaing;
+      this.saveallQuestionsCampaign = questionByTechnoCampaing;
     });
   }
 
@@ -96,7 +99,6 @@ export class QuestionsComponent implements OnInit {
       .then(response => {
         // console.log('questionsByCampaign : ', this.questionsByCampaign);
         this.yourCampaign = [response];
-        // console.log('this.yourCampaign: ', this.yourCampaign);
         return this.yourCampaign;
       })
       .catch(err => err);
@@ -147,6 +149,65 @@ export class QuestionsComponent implements OnInit {
   openSearchAdvenced() {
     this.boelanIsSearchAdvenced = !this.boelanIsSearchAdvenced
   }
+
+  filtreDifficuty(element) {
+    console.log('-------------this.yourCampaign-------------', this.yourCampaign);
+    let arrayFacile = [];
+    let arrayMoyen = [];
+    let arrayExpert = [];
+    let arrayComplet = [];
+
+    if (element.value.includes('facile')) {
+      arrayFacile = this.saveallQuestionsCampaign.filter(element => element.level == 'facile');
+      arrayComplet.push(...arrayFacile);
+    }
+
+    if (element.value.includes('moyen')) {
+      arrayMoyen = this.saveallQuestionsCampaign.filter(element => element.level == 'moyen');
+      arrayComplet.push(...arrayMoyen);
+    }
+
+    if (element.value.includes('expert')) {
+      arrayExpert = this.saveallQuestionsCampaign.filter(element => element.level == 'expert');
+      arrayComplet.push(...arrayExpert);
+    }
+
+    this.allQuestionsCampaign = arrayComplet;
+
+    if (element.value.length == 0) {
+      this.allQuestionsCampaign = this.saveallQuestionsCampaign
+    }
+
+  }
+
+  filtreTechno(element) {
+
+    console.log('all question', this.allQuestionsCampaign)
+
+    this.allQuestionsCampaign.forEach(question => {
+
+      element.value.forEach(val => {
+
+        if (question.technologies.name == val) {
+          console.log('good !!!')
+        }
+
+      });
+
+    });
+
+    // const arrayTechno = [];
+
+    // element.value.forEach(val => {
+    //   let tech = this.allQuestionsCampaign.filter(question => question.technologies.name == val);
+    //   arrayTechno.push(...tech);
+    // });
+
+    // this.allQuestionsCampaign = arrayTechno;
+    // console.log('arrayTechno ------------>', arrayTechno)
+
+  }
+
+
+
 }
-
-
