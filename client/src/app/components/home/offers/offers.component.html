@@ -1,9 +1,13 @@
-<section id="offers">
 
-<div class="">
+<div class="rowter">
 
-  <button *ngIf="subscriptionPage" (click)="goBack()" mat-flat-button color="primary"  id="go-back">
-    <i class="material-icons">arrow_back</i> Retour
+  <app-route-component (ContentViewDefault)="DefaultViewContent($event)"></app-route-component>
+
+<div id="offers">
+
+  <button *ngIf="subscriptionPage" (click)="goBack()"
+      id="goBack">
+    <i class="material-icons">arrow_back</i>
   </button>
 
     <div class="title-dashed-container">
@@ -35,5 +39,3 @@
         </mat-card>
     </div>
 </div>
-
-</section>
