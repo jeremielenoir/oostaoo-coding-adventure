@@ -33,6 +33,33 @@
       &:hover .dropdownn{
         display: block;
       }
+      &:hover, &:hover a{
+        background: #0d6192;
+      }
+      &:hover{
+        background: #0d6192;
+        #notif{
+          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/notifications.svg");
+        }
+
+        #test{
+          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/tests.svg");
+        }
+
+        #compte{
+          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/compte.svg");
+        }
+        #contact{
+          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/contacter.svg");
+        }
+        #new{
+          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/nouveautes.svg");
+        }
+        #help{
+          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/interrogation.svg");
+        }
+       
+      }
       margin-left: 18px;
 
       .dropdownn{
