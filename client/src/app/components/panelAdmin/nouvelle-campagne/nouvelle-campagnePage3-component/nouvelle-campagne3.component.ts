@@ -7,7 +7,7 @@ import {
   ViewChild,
   ElementRef
 } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, FormControl } from "@angular/forms";
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -21,7 +21,8 @@ import {
   API_URI_QUESTIONS,
   API_URI_CAMPAIGNS
 } from "../../../../api-client/api-client.service";
-import { Router } from "@angular/router"
+import { Router } from "@angular/router";
+
 
 @Component({
   selector: "app-NouvelleCampagnePage3Component",
@@ -38,11 +39,16 @@ export class NouvelleCampagnePage3Component implements OnInit {
   public searchText = "";
   public experience: string;
   public questions: any[];
+  public saveallQuestionsCampaign: any[];
   public allQuestionLevel: any[] = [];
+  public allQuestions: any[] = [];
+
   public activeClassScrollTopDropList = false;
+  public boelanIsSearchAdvenced = false;
+  public toppingsDifficulty = new FormControl();
+  public difficulty = ['facile', 'moyen', 'expert'];
 
   Questions = [];
-  allQuestions = [];
 
   @ViewChild("droplist") public droplist: ElementRef;
 
@@ -72,11 +78,10 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
   ngOnInit() {
     console.log("this.allQuestionLevel : ", this.allQuestionLevel);
+    console.log('this.formCampagne', this.formCampagne)
     this.getAllQuestions();
 
     window.scroll(10, 0);
-
-    this.experience = this.formCampagne.value.experience;
 
     // let body = document.querySelector('body');
 
@@ -86,7 +91,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
   }
   fmtMSS(d) {
     d = Number(d);
-    var h = Math.floor(d/3600);
+    var h = Math.floor(d / 3600);
     var m = Math.floor(d % 3600 / 60);
     var s = Math.floor(d % 3600 % 60);
 
@@ -105,19 +110,13 @@ export class NouvelleCampagnePage3Component implements OnInit {
     // console.log('this.formCampagne.value(): ', this.formCampagne.value);
     this.apiClientService.get(API_URI_QUESTIONS).subscribe(datas => {
       this.questions = datas;
-      console.log('les questions', this.questions);
-
       for (const question of this.questions) {
         if (question.technologies) {
 
-          console.log('question.technologies.id: ', question.technologies);
-          if (
-            this.formCampagne.value.technoSelectedId.includes(
-              question.technologies.id
-            )
+          if (this.formCampagne.value.technoSelectedId.includes(question.technologies.id)
           ) {
             this.allQuestions.push(question);
-            console.log('tableau allQuestion', this.allQuestions);
+            this.saveallQuestionsCampaign = this.allQuestions
           }
 
         }
@@ -194,8 +193,42 @@ export class NouvelleCampagnePage3Component implements OnInit {
         err => console.log(err)
       );
   }
-}
 
+  openSearchAdvenced() {
+    this.boelanIsSearchAdvenced = !this.boelanIsSearchAdvenced
+  }
+
+  filtreDifficuty(element) {
+    console.log('saveallQuestionsCampaign', this.saveallQuestionsCampaign)
+    let test = 1;
+    console.log('---hell word ---', test + 1)
+
+    let results = [];
+
+    if (element.value && element.value.length > 0) {
+      this.allQuestions = this.saveallQuestionsCampaign;
+      element.value.forEach(val => {
+        console.log('value', val)
+        let filterAtrray = this.allQuestions.filter(el => el.level == val);
+        if (filterAtrray && filterAtrray.length > 0) {
+          results = [...results, ...filterAtrray]
+
+        }
+      });
+
+      this.allQuestions = results;
+
+    } else {
+
+      this.allQuestions = this.saveallQuestionsCampaign
+
+    }
+
+
+  }
+
+
+}
 @Component({
   selector: "popup-campaign",
   templateUrl: "popup-campaign.html",

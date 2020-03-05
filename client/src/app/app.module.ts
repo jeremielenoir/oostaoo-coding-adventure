@@ -72,7 +72,7 @@ import { TestComponent } from './components/panelAdmin/client-test/test/test.com
 import { NgxEditorModule } from 'ngx-editor';
 import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
 import { BreadcrumbComponent } from './components/panelAdmin/breadcrumb/breadcrumb.component';
-import { RegisterComponent } from './components/home/register/register.component';
+import { RegisterComponent, DialogForgetPassword } from './components/home/register/register.component';
 // import { DecryptTokenService } from './components/home/register/register.service';
 import { BlockCopyPasteDirective } from './components/panelAdmin/client-test/block-copy-paste.directive';
 import { FinTestComponent } from './components/panelAdmin/client-test/fin-test/fin-test.component';
@@ -96,7 +96,7 @@ import { QuestionComponent } from './components/panelAdmin/question/question.com
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
   //   NouvelleCampagnePage3Component, CandidatsMailComponent],
   entryComponents: [RouteComponentComponent, DistConnecTed, InviteCandidat, CandidatsComponent, PopupCampaign,
-    NouvelleCampagnePage3Component, CandidatsMailComponent,  DialogOverviewDelete, DialogOverviewDuplicate],
+    NouvelleCampagnePage3Component, CandidatsMailComponent,  DialogOverviewDelete, DialogOverviewDuplicate, DialogForgetPassword],
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -142,6 +142,7 @@ import { QuestionComponent } from './components/panelAdmin/question/question.com
     NotFoundComponent,
     BreadcrumbComponent,
     RegisterComponent,
+    DialogForgetPassword,
     BlockCopyPasteDirective,
     FinTestComponent,
     TechnoComponent,

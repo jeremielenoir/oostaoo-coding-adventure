@@ -1,6 +1,6 @@
 <div id="global">
   <app-route-component></app-route-component>
-    <app-breadcrumb [namePage]="'Mon profil'"></app-breadcrumb>
+  <app-breadcrumb [namePage]="'Mon profil'"></app-breadcrumb>
 
   <div class="content">
     <div id="section1" class="border-none">
@@ -15,8 +15,7 @@
           <div class="input-bloc">
             <h3 class="input-title">Prénom *</h3>
             <input name="firstname" [formControl]="prenom" class="input-section1" maxlength="24" type="text" required>
-            <div *ngIf=" submittedProfil && prenom.invalid"
-              class="alert alert-danger">
+            <div *ngIf=" submittedProfil && prenom.invalid" class="alert alert-danger">
               <div *ngIf="prenom.errors.required">
                 Prénom requis.
               </div>
@@ -26,12 +25,11 @@
           <div class="input-bloc">
             <h3 class="input-title" maxlength="64">Nom *</h3>
             <input name="lastname" [formControl]="nom" class="input-section1" type="text" required>
-            <div *ngIf="submittedProfil &&  nom.invalid"
-            class="alert alert-danger">
-            <div *ngIf="nom.errors.required">
-              Nom requis.
+            <div *ngIf="submittedProfil &&  nom.invalid" class="alert alert-danger">
+              <div *ngIf="nom.errors.required">
+                Nom requis.
+              </div>
             </div>
-          </div>
           </div>
         </div>
 
@@ -113,12 +111,11 @@
               <option value="Xhosa">Xhosa</option>
             </select>
 
-            <div *ngIf=" submittedProfil && pays.invalid"
-            class="alert alert-danger">
-            <div *ngIf="pays.errors.required">
-              Veuillez selectionner un pays.
+            <div *ngIf=" submittedProfil && pays.invalid" class="alert alert-danger">
+              <div *ngIf="pays.errors.required">
+                Veuillez selectionner un pays.
+              </div>
             </div>
-          </div>
 
           </div>
 
@@ -130,8 +127,7 @@
             </select>
           </div>
 
-          <div *ngIf=" submittedProfil && langue.invalid"
-            class="alert alert-danger">
+          <div *ngIf=" submittedProfil && langue.invalid" class="alert alert-danger">
             <div *ngIf="langue.errors.required">
               Veuillez selectionner une langue.
             </div>
@@ -156,7 +152,7 @@
         <div class="form-line">
           <div class="input-bloc">
             <h3 class="input-title">Fonction </h3>
-            <select [formControl]="fonction" class="input-section1" name="fonction" >
+            <select [formControl]="fonction" class="input-section1" name="fonction">
               <option value="commercial">Commercial</option>
               <option value="direction">Direction</option>
               <option value="tech">Équipe technique</option>
@@ -166,7 +162,6 @@
             </select>
           </div>
         </div>
-
 
         <div class="form-line">
           <div class="input-bloc">
@@ -214,15 +209,14 @@
           <div class="input-bloc">
             <h3 class="input-title">Email actuel *</h3>
             <input [formControl]="email" name="current" class="input-section1" maxlength="64" type="email" disabled>
-            <div *ngIf=" submittedEmail && email.invalid"
-            class="alert alert-danger">
-            <div *ngIf="email.errors.required">
-              Email requis.
+            <div *ngIf=" submittedEmail && email.invalid" class="alert alert-danger">
+              <div *ngIf="email.errors.required">
+                Email requis.
+              </div>
+              <div *ngIf="email.errors.email">
+                Email valide requis.
+              </div>
             </div>
-            <div *ngIf="email.errors.email">
-              Email valide requis.
-            </div>
-          </div>
           </div>
         </div>
 
@@ -230,15 +224,14 @@
           <div class="input-bloc">
             <h3 class="input-title">Nouvel email *</h3>
             <input [formControl]="newEmail" name="new" class="input-section1" maxlength="64" type="email">
-            <div *ngIf=" submittedEmail && newEmail.invalid"
-            class="alert alert-danger">
-            <div *ngIf="newEmail.errors.required">
-              Nouvel email requis.
+            <div *ngIf=" submittedEmail && newEmail.invalid" class="alert alert-danger">
+              <div *ngIf="newEmail.errors.required">
+                Nouvel email requis.
+              </div>
+              <div *ngIf="newEmail.errors.email">
+                Veuillez saisir un email valide.
+              </div>
             </div>
-            <div *ngIf="newEmail.errors.email">
-             Veuillez saisir un email valide.
-            </div>
-          </div>
           </div>
         </div>
 
@@ -264,12 +257,11 @@
           <div class="input-bloc">
             <h3 class="input-title">Nouveau mot de passe *</h3>
             <input [formControl]="newpassword" name="new" class="input-section1" maxlength="64" type="password">
-            <div *ngIf="submittedPassword && newpassword.invalid"
-            class="alert alert-danger">
-            <div *ngIf="newpassword.errors.required">
-              Veuillez saisir un nouveau mot de passe.
+            <div *ngIf="submittedPassword && newpassword.invalid" class="alert alert-danger">
+              <div *ngIf="newpassword.errors.required">
+                Veuillez saisir un nouveau mot de passe.
+              </div>
             </div>
-          </div>
           </div>
 
         </div>
@@ -279,19 +271,18 @@
             <h3 class="input-title">Confirmer le mot de passe *</h3>
             <input [formControl]="confirmpassword" name="confirm" class="input-section1" maxlength="64" type="password">
 
-              <div *ngIf=" submittedPassword && confirmpassword.invalid"
-              class="alert alert-danger">
+            <div *ngIf=" submittedPassword && confirmpassword.invalid" class="alert alert-danger">
               <div *ngIf="confirmpassword.errors.required">
                 Veuillez remplir le champ.
               </div>
             </div>
 
-            <div *ngIf=" submittedPassword && newpassword.value !== confirmpassword.value"  class="alert alert-danger">
+            <div *ngIf=" submittedPassword && newpassword.value !== confirmpassword.value" class="alert alert-danger">
               Les mots de passe ne correspondent pas.
             </div>
-           
-          
-          
+
+
+
           </div>
         </div>
 

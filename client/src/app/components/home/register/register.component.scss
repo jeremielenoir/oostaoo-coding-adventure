@@ -107,6 +107,15 @@ body{
         }
     }
 
+    .forgotten-password {
+        cursor: pointer;
+        font-size: 14px;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+
     .social-button {
     background-position: 25px 0px;
     // border: $border-table;

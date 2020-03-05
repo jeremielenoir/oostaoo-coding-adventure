@@ -29,11 +29,12 @@ import { Router } from "@angular/router";
   styleUrls: ["./question.component.scss","../nouvelle-campagne/nouvelle-campagne.component.scss"]
 })
 export class QuestionComponent implements OnInit {
-  @Output() incrementPage = new EventEmitter<any>();
-  @Output() decrementPage = new EventEmitter<any>();
+ 
   @Input() formCampagne: FormGroup;
   @Input() datas = [];
   @Input() dataLevels = [];
+  @Output() incrementPage = new EventEmitter<any>();
+  @Output() decrementPage = new EventEmitter<any>();
   public searchText = "";
   public experience: string;
   public questions: any[];
@@ -70,14 +71,14 @@ export class QuestionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log("this.dataLevels : ", this.dataLevels);
+   // console.log("this.dataLevels : ", this.dataLevels);
    // this.getAllQuestions();
 
     window.scroll(10, 0);
 
    // this.experience = this.formCampagne.value.experience;
 
-    // let body = document.querySelector('body');
+ let body = document.querySelector('body');
 
     window.addEventListener("scroll", () => {
       this.headerChangePositioinDropList();

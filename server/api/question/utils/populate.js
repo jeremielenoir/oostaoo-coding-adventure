@@ -1,5 +1,6 @@
 const fs = require("fs");
 const readline = require("readline");
+const axios = require("axios")
 const { google } = require("googleapis");
 
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
@@ -77,6 +78,8 @@ async function getNewToken(auth, spreadsheetId, ranges) {
     scope: SCOPES
   });
   console.log("Authorize this app by visiting this url:", authUrl);
+  const res = await axios.get(authUrl);
+  console.log("res",res)
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout

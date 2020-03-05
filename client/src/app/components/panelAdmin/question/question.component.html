@@ -1,23 +1,24 @@
-<div id="top-bar">
-  <div class="segment3">
+ <!--<div id="top-bar">
+   <div class="segment3">
     <p class="title-segment">Score moyen attendu</p>
     <p id="score">
       33%
     </p>
   </div>
 
-  <div class="segment2">
+<div class="segment2">
 
     <button class="custom-buttom custom-buttom-anul" mat-flat-button [routerLink]="['/dashboard/campaigns']">
       <i class="fas fa-chevron-left icon-arrow-btn"></i>
       Retour
     </button>
-    <button class="custom-buttom" [ngClass]="dataLevels.length > 0 ? 'button-enabled' : 'button-disabled'" [disabled]="dataLevels.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
+    <button class="custom-buttom" [ngClass]="dataLevels.length > 0 ? 'button-enabled' : 'button-disabled'"
+      [disabled]="dataLevels.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
       Enregistrer
     </button>
 
   </div>
-</div>
+</div> -->
 <div class="container-edit-question">
   <div id="content">
     <div class="block-container left">
@@ -26,7 +27,8 @@
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
         </figure>
         <p class="bar-text">Notre collection de questions</p>
-      </div>  
+      </div>
+
       <div class="option-question-help">
         <div id="div-search">
           <input type="text" class="search-input" placeholder="Rechercher" name="search" [(ngModel)]="searchText" />
@@ -35,10 +37,9 @@
           </figure>
         </div>
 
-        <a href="" class="search-advanced">
-          Recherche avancée
-          <i class="fas fa-chevron-right icon-arrow-btn"></i>
-        </a>
+        <span class="search-advanced" href="" (click)="openSearchAdvenced()"> Recherche avancée
+          <i class="fas fa-chevron-right icon-arrow-btn" [class.chevron-bottom]="boelanIsSearchAdvenced"></i>
+        </span>
 
         <button mat-flat-button class="trie-cat" [matMenuTriggerFor]="appMenu">
           Trier par
@@ -48,14 +49,48 @@
             <button mat-menu-item>Help</button>
           </mat-menu>
         </button>
+
       </div>
 
-      <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="datas"
-        [cdkDropListConnectedTo]="[doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div *ngIf="boelanIsSearchAdvenced" class="search-advanced-block">
+        <!-- <mat-form-field>
+          <mat-label>TECHNOLOGIE</mat-label>
+          <mat-select [formControl]="toppings" (selectionChange)=filtreTechno($event) multiple>
+            <mat-select-trigger>
+              {{toppings.value ? toppings.value[0] : ''}}
+              <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
+                (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let techno of yourCampaign[0].technologies" [value]="techno.name">
+              {{techno.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        <mat-form-field>
+          <mat-label>DIFFICULTÉ</mat-label>
+          <mat-select [formControl]="toppingsDifficulty" (selectionChange)=filtreDifficuty($event) multiple>
+            <mat-select-trigger>
+              {{toppingsDifficulty.value ? toppingsDifficulty.value[0] : ''}}
+              <span *ngIf="toppingsDifficulty.value?.length > 1" class="example-additional-selection">
+                ,{{toppingsDifficulty.value[1]}}{{toppingsDifficulty.value.length === 2 ? '' : ','}}{{toppingsDifficulty.value[2]}}
+                <!-- {{toppingsDifficulty.value?.length === 2 ? 'other' : 'others'}}) -->
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let difficul of difficulty" [value]="difficul">
+              {{difficul}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+      <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="datas" [cdkDropListConnectedTo]="[doneList]"
+        class="example-list" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let item of datas | filter: searchText" cdkDrag>
 
           <div class="partie-left-example-box">
-            <p class="question-techno">{{ item.technologies.name}}</p>
+            <p class="question-techno">{{item.technologies.name}}</p>
           </div>
 
           <div class="partie-left-example-box-2">
@@ -65,26 +100,45 @@
 
             <p class="question-name" matTooltip="{{item.name}}">{{ item.name }}</p>
             <div class="content-rouded" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
-              <span class="niveau-rouded"></span>
-              <span class="niveau-rouded"></span>
-              <span class="niveau-rouded"></span>
+              <div class="archive archive-inclue">
+                <span></span>
+              </div>
+              <div class="archive archive-inclue">
+                <span></span>
+              </div>
+              <div class="archive archive-inclue">
+                <span></span>
+              </div>
             </div>
 
             <div class="content-rouded" *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
-              <span class="niveau-rouded"></span>
-              <span class="niveau-rouded"></span>
-              <span class="niveau-rouded-no-active"></span>
+              <div class="archive archive-inclue">
+                <span></span>
+              </div>
+              <div class="archive archive-inclue">
+                <span></span>
+              </div>
+              <div class="archive archive-non-inclue">
+                <span></span>
+              </div>
             </div>
             <div class="content-rouded" *ngIf="item.level === 'facile'" matTooltip="Difficulté Facile">
-              <span class="niveau-rouded"></span>
-              <span class="niveau-rouded-no-active"></span>
-              <span class="niveau-rouded-no-active"></span>
+              <div class="archive archive-inclue">
+                <span></span>
+              </div>
+              <div class="archive archive-non-inclue">
+                <span></span>
+              </div>
+              <div class="archive archive-non-inclue">
+                <span></span>
+              </div>
             </div>
 
             <p class="point">{{item.points}} points</p>
 
             <div class="drop">
-              <i title="Question à choix multiple" *ngIf='item.type === "one" || item.type === "multiple"' class="fas fa-list-ul drop-icon"></i>
+              <i title="Question à choix multiple" *ngIf='item.type === "one" || item.type === "multiple"'
+                class="fas fa-list-ul drop-icon"></i>
               <i title="Question texte libre" *ngIf='item.type === "free"' class="fas fa-paragraph drop-icon"></i>
             </div>
             <p class="time" matTooltip="Durée(heure:min:sec)">{{ fmtMSS(item.time) }}</p>
@@ -127,30 +181,48 @@
             </div>
             <p class="question-name">{{ item.name }}</p>
             <div class="content-rouded" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
-              <span class="niveau-rouded"></span>
-              <span class="niveau-rouded"></span>
-              <span class="niveau-rouded"></span>
+              <div class="archive archive-inclue">
+                <span></span>
+              </div>
+              <div class="archive archive-inclue">
+                <span></span>
+              </div>
+              <div class="archive archive-inclue">
+                <span></span>
+              </div>
             </div>
 
-          <div class="content-rouded" *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
-            <span class="niveau-rouded"></span>
-            <span class="niveau-rouded"></span>
-            <span class="niveau-rouded-no-active"></span>
+            <div class="content-rouded" *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
+              <div class="archive archive-inclue">
+                <span></span>
+              </div>
+              <div class="archive archive-inclue">
+                <span></span>
+              </div>
+              <div class="archive archive-non-inclue">
+                <span></span>
+              </div>
 
-          </div>
-          <div class="content-rouded" *ngIf="item.level === 'facile'" matTooltip="Difficulté Facile">
-            <span class="niveau-rouded"></span>
-            <span class="niveau-rouded-no-active"></span>
-            <span class="niveau-rouded-no-active"></span>
-          </div>
+            </div>
+            <div class="content-rouded" *ngIf="item.level === 'facile'" matTooltip="Difficulté Facile">
+              <div class="archive archive-inclue">
+                <span></span>
+              </div>
+              <div class="archive archive-non-inclue">
+                <span></span>
+              </div>
+              <div class="archive archive-non-inclue">
+                <span></span>
+              </div>
+            </div>
 
-          <p class="point">{{ item.points }} points</p>
-          <div class="drop">
-            <i class="fas fa-list-ul drop-icon"></i>
+            <p class="point">{{ item.points }} points</p>
+            <div class="drop">
+              <i class="fas fa-list-ul drop-icon"></i>
+            </div>
+            <p class="time" matTooltip="Durée(heure:min:sec)">{{  fmtMSS(item.time) }}</p>
           </div>
-          <p class="time" matTooltip="Durée(heure:min:sec)">{{  fmtMSS(item.time) }}</p>
         </div>
       </div>
     </div>
   </div>
-</div>

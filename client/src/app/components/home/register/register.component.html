@@ -41,12 +41,13 @@
           <div *ngIf="f.password.errors.required">Mot de passe requis</div>
         </div>
       </div>
+      <span class="forgotten-password" (click)="openDialog()">Mot de passe oublié ?</span>
       <div class="form-group">
         <button class="btn btn-primary button">Se connecter</button>
       </div>
       <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
     </form>
-
+    
     <!-- <a class="button button--social-login button--github" href="#"><i class="icon fa fa-github"></i>Login With Github</a> -->
   </div>
 
