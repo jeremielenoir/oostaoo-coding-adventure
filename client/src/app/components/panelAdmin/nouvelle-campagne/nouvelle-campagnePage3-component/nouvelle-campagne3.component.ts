@@ -47,6 +47,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
   public boelanIsSearchAdvenced = false;
   public toppingsDifficulty = new FormControl();
   public difficulty = ['facile', 'moyen', 'expert'];
+  
 
   Questions = [];
 
@@ -201,7 +202,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
   filtreDifficuty(element) {
     console.log('saveallQuestionsCampaign', this.saveallQuestionsCampaign)
     let test = 1;
-    console.log('---hell word ---', test + 1)
+    console.log('---hell word ---', test + 1);
 
     let results = [];
 

@@ -7,7 +7,7 @@ import {
   ViewChild,
   ElementRef
 } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, FormControl } from "@angular/forms";
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -38,11 +38,17 @@ export class QuestionComponent implements OnInit {
   public searchText = "";
   public experience: string;
   public questions: any[];
-  
+
+  public toppingsDifficulty = new FormControl();
+  public boelanIsSearchAdvenced: boolean = false;
+  public saveallQuestionsCampaign = [];
+  public yourCampaign;
+  public difficulty = ['facile', 'moyen', 'expert'];
+
   public activeClassScrollTopDropList = false;
-  
+
   Questions = [];
- 
+
 
   @ViewChild("droplist") public droplist: ElementRef;
 
@@ -107,7 +113,7 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-  
+
 
   SendQuestionSelected(id) {
     this.apiClientService
@@ -164,6 +170,63 @@ export class QuestionComponent implements OnInit {
         },
         err => console.log(err)
       );
+  }
+
+  openSearchAdvenced() {
+    this.boelanIsSearchAdvenced = !this.boelanIsSearchAdvenced
+  }
+
+  filtreDifficuty(element) {
+    // console.log('-------------this.yourCampaign-------------', this.yourCampaign);
+    let arrayFacile = [];
+    let arrayMoyen = [];
+    let arrayExpert = [];
+    let arrayComplet = [];
+
+    if (element.value.includes('facile')) {
+      arrayFacile = this.saveallQuestionsCampaign.filter(element => element.level == 'facile');
+      arrayComplet.push(...arrayFacile);
+    }
+
+    if (element.value.includes('moyen')) {
+      arrayMoyen = this.saveallQuestionsCampaign.filter(element => element.level == 'moyen');
+      arrayComplet.push(...arrayMoyen);
+    }
+
+    if (element.value.includes('expert')) {
+      arrayExpert = this.saveallQuestionsCampaign.filter(element => element.level == 'expert');
+      arrayComplet.push(...arrayExpert);
+    }
+
+    this.datas = arrayComplet;
+
+    if (element.value.length == 0) {
+      this.datas = this.saveallQuestionsCampaign
+    }
+
+  }
+
+  filtreTechno(element) {
+
+    const valueChecked = [];
+
+    element.value.forEach(valueCheck => {
+      if (valueChecked.includes(valueCheck)) {
+
+        for (let value of valueChecked) {
+          let newFilter = this.datas.filter(element => element.technologies.name == value);
+          this.datas = newFilter
+        }
+
+
+      } else {
+        valueChecked.push(valueCheck);
+      }
+    });
+
+
+    console.log('allquestion---------->', this.datas)
+
   }
 }
 

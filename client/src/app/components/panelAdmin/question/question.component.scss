@@ -3,11 +3,11 @@
 @import"../nouvelle-campagne/nouvelle-campagne.component.scss";
 
 
-// ::ng-deep app-nouvellecampagnepage3component{
-//     display: flex;
-//     flex-direction: column;
-//     height: 100%;
-// }
+::ng-deep app-nouvellecampagnepage3component{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 .cadreQuestion {
     padding: 125px 15px 10px 15px;
     margin: 0 auto;
@@ -512,7 +512,8 @@
     display: flex;
     width: 50%;
     max-width: 100%;
-    margin: 10px 0px 0px 0px;
+    margin: 10px 15px 0px 15px;
+
     vertical-align: top;
     border: $border-table;
     border-radius: 5px;
@@ -522,7 +523,9 @@
 }
 
 .example-list {
-    flex: 1 1 0px;
+    // padding-bottom: 100%;
+    // flex: 1 1 0px;
+    height: 300px;
     background: $text-color-white!important;
     display: block;
     overflow-y: auto;
