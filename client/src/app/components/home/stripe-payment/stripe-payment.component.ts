@@ -90,6 +90,8 @@ export class StripePaymentComponent implements OnInit {
     // username utilisateur
     const name = this.userInfo.username;
 
+    console.log('this.userInfo : ', this.userInfo);
+
     this.stripeService
       .createToken(this.card, { name })
       .subscribe(result => {
@@ -118,6 +120,7 @@ export class StripePaymentComponent implements OnInit {
                   this.paymentCreationBody = {
                     amount: this.offerChoice.price,
                     offer_id: this.offerChoice.id,
+                    test_already_available: this.userInfo.tests_available,
                     tests_available: this.offerChoice.tests_stock,
                     user_id: this.userInfo.id,
                     date_payment: Date.now(),
