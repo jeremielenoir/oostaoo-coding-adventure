@@ -89,6 +89,7 @@ import { RapportDetailleComponent } from './components/panelAdmin/edit-campagne/
 // https://www.npmjs.com/package/ngx-stripe
 import { NgxStripeModule } from 'ngx-stripe';
 import { RatingFeedbackComponent } from './components/panelAdmin/client-test/fin-test/rating-feedback/rating-feedback.component';
+import { QuestionComponent } from './components/panelAdmin/question/question.component';
 
 
 @NgModule({
@@ -150,7 +151,8 @@ import { RatingFeedbackComponent } from './components/panelAdmin/client-test/fin
     RapportDetailleComponent,
     FonctionnaliteComponent,
     StripePaymentComponent,
-    RatingFeedbackComponent
+    RatingFeedbackComponent,
+    QuestionComponent
   ],
   imports: [
     BrowserModule,

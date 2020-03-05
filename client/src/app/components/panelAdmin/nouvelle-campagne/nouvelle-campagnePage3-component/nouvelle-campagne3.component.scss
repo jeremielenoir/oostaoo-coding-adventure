@@ -1,6 +1,9 @@
-@import"../../../../../roodeo-variables.scss";
+// @import"../../../../../roodeo-variables.scss";
 
-@import"../nouvelle-campagne.component.scss";
+// @import"../nouvelle-campagne.component.scss";
+
+@import"../../question/question.component.scss";
+
 
 ::ng-deep app-nouvellecampagnepage3component{
     display: flex;
