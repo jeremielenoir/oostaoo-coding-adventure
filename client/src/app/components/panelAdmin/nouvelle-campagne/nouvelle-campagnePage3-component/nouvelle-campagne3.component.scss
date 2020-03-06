@@ -56,49 +56,6 @@
     left: -12px;
 }
 
-#top-bar {
-    display: flex;
-    width: 100%;
-    border: $border-table;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    background-color: $color-pricipal-blue-light;
-    display: flex;
-    padding-right: 6%;
-    height: 65px;
-   
-    .segment2{
-        display: flex;
-        align-items: center;
-        margin-top: -1px;
-    }
-    .segment3{
-        flex: 6.5;
-        display: flex;
-        align-items: center;
-        padding-left: 12%;
-        .title-segment{
-            font-size: 17px;
-            font-family: $font-poppins;
-            font-weight: 400;
-            color: $color-principal-blue;
-            margin-bottom: 0px;
-            margin-right: 12px;
-        }
-
-        #score{
-
-            color:$color-orange-light;
-            font-size: 30px;
-            margin-bottom: 0px;
-            margin-top: -5px;
-            font-family: $font-poppins;
-        }
-    }
-}
-
-
 
 #arrow {
     position: absolute;
@@ -152,6 +109,8 @@
 
 
 #content {
+    padding-right: 15px;
+    padding-left: 15px;
     width: 100%;
     flex: 1;
     display: flex;

@@ -18,6 +18,7 @@ import { MatSelectChange } from "@angular/material";
 })
 export class NouvelleCampagnePage1Component implements OnInit {
   @Output() incrementPage = new EventEmitter<any>();
+  @Output() allTechno = new EventEmitter();
   @Input() formCampagne: FormGroup;
   @Input() technoByParent;
   @Input() profilByParent;
@@ -209,9 +210,11 @@ export class NouvelleCampagnePage1Component implements OnInit {
 
   // validation du formulaire et passage à l'étap suivante.
   public onIncrementPage(pDatafromValue: any): void {
+
     this.formValid(pDatafromValue);
     if (AuthFormVerification._sMessageError === "") {
       this.incrementPage.emit(); // Déclenche l'output pour passer à la paga suivante.
+      this.methodAllTechno()
     }
   }
 
@@ -238,5 +241,9 @@ export class NouvelleCampagnePage1Component implements OnInit {
     } else {
       this.errorTechno = "";
     }
+  }
+
+  methodAllTechno() {
+    this.allTechno.emit(this.technosSelect);
   }
 }

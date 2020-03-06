@@ -1,0 +1,20 @@
+@import"../../../../roodeo-variables.scss";
+#top-bar {
+    display: flex;
+    width: 100%;
+    border: $border-table;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: $color-pricipal-blue-light;
+    display: flex;
+    border-bottom: 1px solid #e7e7e7;
+    padding:0px 15px;
+   
+    .segment2{
+        display: flex;
+        align-items: center;
+        margin-top: -1px;
+    }
+    
+}
