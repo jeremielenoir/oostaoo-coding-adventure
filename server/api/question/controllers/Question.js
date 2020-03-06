@@ -76,7 +76,7 @@ module.exports = {
    * @return {Object}
    */
 
-  populate: async (ctx, next) => {
+  populate: async (ctx, _next) => {
     try {
       //  console.log(" ctx.body", ctx.params)
       const { spreadsheetId, ranges } = ctx.request.body;
@@ -84,19 +84,18 @@ module.exports = {
         spreadsheetId,
         ranges
       );
-      console.log("result[0]",result[0])
+
       const arrPromises = [];
       result.forEach(async r => {
         try {
-          console.log("r",r)
           arrPromises.push(strapi.services.question.add(r));
         } catch (error) {
           throw error;
         }
       });
-      const rsults = await Promise.all(arrPromises);
-      console.log("promises", rsults);
-      return result;
+      const results = await Promise.all(arrPromises);
+
+      return results;
     } catch (error) {
       throw error;
     }
