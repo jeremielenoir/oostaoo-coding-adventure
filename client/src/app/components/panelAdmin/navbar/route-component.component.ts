@@ -17,6 +17,7 @@ export class RouteComponentComponent implements OnInit {
   isShowNavTesting = false;
   isShow = false;
   isShow2 = false;
+  public offer_id: any;
   public viewcontentDefaults: boolean;
   public notifications =  [];
   public notifUnread = 0;
@@ -27,6 +28,29 @@ export class RouteComponentComponent implements OnInit {
   //   this.bottomSheet.open(PopupMonOffre);
   // }
   ngOnInit() {
+    this.offer_id = this.decryptTokenService.offer_id;
+    switch(this.offer_id){
+      case 14 :
+      this.offer_id = 'Gratuit';
+      break;
+      case 15 :
+      this.offer_id = '1 TEST';
+      break;
+      case 16 :
+      this.offer_id = '50 TESTS';
+      break;
+      case 17 :
+      this.offer_id = '100 TESTS';
+      break;
+      case 18 :
+      this.offer_id = 'ENTREPRISE';
+      break;
+      case 19 :
+      this.offer_id = 'ENTREPRISE++';
+      break;
+      default:
+      this.offer_id = 'Gratuit';
+    }
 
     let textMenu = document.querySelectorAll('.text-menu');
 
