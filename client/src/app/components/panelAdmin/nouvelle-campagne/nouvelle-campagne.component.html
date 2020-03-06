@@ -7,7 +7,7 @@
         <div *ngSwitchCase="1">
           <app-profile-rechercher (incrementPage)="nextPage()" [formCampagne]="ParentFormCampagne"
             (valueChange)="getTechno($event)" (valueChangeProfil)="getProfil($event)" [technoByParent]="technoFromChild"
-            [profilByParent]="selectProfilFromChild">
+            [profilByParent]="selectProfilFromChild" (allTechno)="recupeAllTechno($event)">
           </app-profile-rechercher>
         </div>
         <div *ngSwitchCase="2">
@@ -17,7 +17,7 @@
         </div>
         <div class="questions-container" *ngSwitchCase="3">
           <app-NouvelleCampagnePage3Component (incrementPage)="nextPage()" (decrementPage)="previousPage()"
-            [formCampagne]="ParentFormCampagne">
+            [formCampagne]="ParentFormCampagne" [techno]="Alltechno">
           </app-NouvelleCampagnePage3Component>
         </div>
       </div>
