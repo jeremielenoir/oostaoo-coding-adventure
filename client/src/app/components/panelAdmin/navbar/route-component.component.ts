@@ -36,7 +36,6 @@ export class RouteComponentComponent implements OnInit {
 
   ngOnInit() {
 
-    // we don't fetch directly the offer_id from the localStorage because of the decryptTokenService bug 
     this.apiClientService.get(API_URI_USER + '/' + this.decryptTokenService.userId)
     .subscribe(user => {
       this.offer_id = user.offer_id.id;

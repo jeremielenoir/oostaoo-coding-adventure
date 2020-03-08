@@ -129,7 +129,6 @@ export class StripePaymentComponent implements OnInit {
 
                     this.apiClientService.post(API_URI_PAYMENT, this.paymentCreationBody)
                     .subscribe(res=>{
-
                       const newToken = res.jwt;
 
                       if(res.refund){
@@ -146,6 +145,7 @@ export class StripePaymentComponent implements OnInit {
                           return;
 
                       }else{
+
                           localStorage.setItem('currentUser', newToken);
                           this.stripeSuccess = 'Votre paiement a été effectué';
                           this.stripeLoader = false;

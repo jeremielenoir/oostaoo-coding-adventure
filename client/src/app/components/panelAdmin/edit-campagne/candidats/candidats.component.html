@@ -18,7 +18,7 @@
 
           <button mat-raised-button color="primary" class="btn-question invit-btn-candidat" mat-button
             (click)="openDialog()">
-            Invitez des candidats
+            Invitez des candidats <span *ngIf='tests_available !== "" '>({{ tests_available }})</span>
           </button>
         </div>
       </div>
@@ -135,7 +135,7 @@
 
         <button mat-raised-button style="border-radius: 5px" color="primary" class="btn-question fix-button" mat-button
           (click)="openDialog()">
-          Invitez des candidats
+          Invitez des candidats <span *ngIf='tests_available !== "" '>({{ tests_available }})</span>
         </button>
 
 

@@ -64,9 +64,14 @@ module.exports = {
       const result = await strapi.services.payment.add(values);
 
       const { user_id, offer_id } = values;
-      const {test_already_available, tests_available} = ctx.request.body;
-      const new_test_available = test_already_available + tests_available;
 
+      const {test_already_available, tests_available} = ctx.request.body;
+      let new_test_available;
+      if(tests_available == -1){
+        new_test_available = tests_available;
+      }else{
+        new_test_available = test_already_available + tests_available;
+      }
       if(result){
        await strapi.plugins['users-permissions']
        .services.user.edit({id: user_id}, {offer_id: offer_id, tests_available: new_test_available});
