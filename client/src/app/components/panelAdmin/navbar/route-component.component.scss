@@ -58,6 +58,9 @@
         #help{
           background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/interrogation.svg");
         }
+        #logout {
+          background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/deconnexion.svg");
+        }
 
       }
       margin-left: 18px;
@@ -163,6 +166,13 @@
           background-color: #1d3551;
           -webkit-mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/interrogation.svg");
           mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/interrogation.svg");
+          // background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/interrogation.svg");
+          mask-repeat: no-repeat;
+        }
+        #logout {
+          background-color: #1d3551;
+          -webkit-mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/deconnexion.svg");
+          mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/deconnexion.svg");
           // background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/interrogation.svg");
           mask-repeat: no-repeat;
         }

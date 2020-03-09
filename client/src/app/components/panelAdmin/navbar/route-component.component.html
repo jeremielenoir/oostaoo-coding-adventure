@@ -15,19 +15,21 @@
         <li>
           <p>Notifications</p>
         </li>
-        <div class="notif-content" *ngFor="let notification of notifications" [className]="notification.status ? 'notif-content-read' : 'notif-content'">
+        <div class="notif-content" *ngFor="let notification of notifications"
+          [className]="notification.status ? 'notif-content-read' : 'notif-content'">
           <!-- <div>
             <span (click)="deleteNotification(notification.id)" class=""><i [className]="notification.status ? 'fas fa-trash icon-gestion-notif-read' : 'fas fa-trash icon-gestion-notif'"></i></span>
           </div> -->
-            <span (click)="navigateTo(notification.idCampaign, notification.id, notification.status)" style="display: block;">
+          <span (click)="navigateTo(notification.idCampaign, notification.id, notification.status)"
+            style="display: block;">
 
-              <h4 class="notif-title">
-                {{notification.title}}
-              </h4>
-              <span class="notif-message">{{notification.Message}}</span>
-              <p class="notif-footer">{{notification.created_at | date:'dd/MM/yyyy'}}</p>
-            </span>
-          </div>
+            <h4 class="notif-title">
+              {{notification.title}}
+            </h4>
+            <span class="notif-message">{{notification.Message}}</span>
+            <p class="notif-footer">{{notification.created_at | date:'dd/MM/yyyy'}}</p>
+          </span>
+        </div>
       </ul>
 
     </li>
@@ -78,9 +80,9 @@
         <li>
           <a href="" [routerLink]="['/dashboard/utilisateurs']">Utilisateurs</a>
         </li>
-        <li>
+        <!-- <li>
           <a href="" (click)="disConnection($event)">Déconnexion</a>
-        </li>
+        </li> -->
 
       </ul>
     </li>
@@ -137,6 +139,18 @@
         </li>
       </ul>
     </li>
+    <li>
+      <a href="" class="text-menu">
+        <span class="content-img" id="logout">
+        </span>
+      </a>
+      <ul class="dropdownn">
+        <li>
+          <p><a href="" (click)="disConnection($event)">Déconnexion</a></p>
+        </li>
+      </ul>
+    </li>
+    <li>
 
 
   </ul>
