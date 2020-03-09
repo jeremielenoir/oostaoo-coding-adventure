@@ -17,7 +17,7 @@ body{
     
     #left-panel{
         position: absolute;
-        background: #54728d;
+        background: $color-blue;
         width: 50%;
         height: 100vh;
        
@@ -41,7 +41,7 @@ body{
     
     #right-panel{
         position: absolute;
-        background: #54728d;
+        background: $color-blue;
         width: 50%;
         height: 100vh;
         z-index: 3;
@@ -49,9 +49,10 @@ body{
         #right-panel-text{
             position: relative;
             width: 50%;
-            margin: 30% auto;
+            margin: 0 auto;
             text-align: center;
             color: white;
+            padding-top: 25%;
         }
         
         #title_right_panel{
@@ -72,7 +73,7 @@ body{
         border-radius: 40px;
         font-size: 18px;
         border: 0px solid white;
-        color: #54728d;
+        color: $color-blue;
          
         text-transform: uppercase;
     }
@@ -83,7 +84,13 @@ body{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin: 25% auto 0%;
+        &.left{
+            margin: 25% 0 0 22%;
+        }
+        &.right{
+            margin: 25% 0 0 25%;
+        }
+        
         width: 50%;
         z-index: 1;
 
@@ -98,7 +105,7 @@ body{
         
         .button{
             height: 40px;
-            background: #54728d;
+            background: $color-blue;
             color: white;
             border: 0px solid white;
             margin: 20px 0;
@@ -117,26 +124,26 @@ body{
     }
 
     .social-button {
-    background-position: 25px 0px;
-    // border: $border-table;
-      box-sizing: border-box;
-      cursor: pointer;
-      height: 50px;
+        background-position: 25px 0px;
+        // border: $border-table;
+        box-sizing: border-box;
+        cursor: pointer;
+        height: 50px;
         line-height: 50px;
-      text-align: left;
-      text-decoration: none;
-      text-transform: uppercase;
-      vertical-align: middle;
+        text-align: left;
+        text-decoration: none;
+        text-transform: uppercase;
+        vertical-align: middle;
         border-radius: 3px;
-      outline: rgb(255, 255, 255) none 0px;
-      padding-left: 50px;
-      transition: all 0.2s cubic-bezier(0.72, 0.01, 0.56, 1) 0s;
+        outline: rgb(255, 255, 255) none 0px;
+        padding-left: 50px;
+        transition: all 0.2s cubic-bezier(0.72, 0.01, 0.56, 1) 0s;
         -webkit-transition: all .3s ease;
-      -moz-transition: all .3s ease;
-      -ms-transition: all .3s ease;
-      -o-transition: all .3s ease;
-      transition: all .3s ease;
-      margin: 10px;
+        -moz-transition: all .3s ease;
+        -ms-transition: all .3s ease;
+        -o-transition: all .3s ease;
+        transition: all .3s ease;
+        margin: 10px;
     }
     
     .social-box{
