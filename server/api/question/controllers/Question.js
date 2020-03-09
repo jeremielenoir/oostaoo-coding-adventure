@@ -100,5 +100,35 @@ module.exports = {
 
   destroy: async (ctx, next) => {
     return strapi.services.question.remove(ctx.params);
+  },
+  /**
+   * populate question from spreadsheet.
+   *
+   * @return {Object}
+   */
+
+  populate: async (ctx, _next) => {
+    try {
+      //  console.log(" ctx.body", ctx.params)
+      const { spreadsheetId, ranges } = ctx.request.body;
+      const result = await strapi.services.question.fetchSpreadsheet(
+        spreadsheetId,
+        ranges
+      );
+
+      const arrPromises = [];
+      result.forEach(async r => {
+        try {
+          arrPromises.push(strapi.services.question.add(r));
+        } catch (error) {
+          throw error;
+        }
+      });
+      const results = await Promise.all(arrPromises);
+
+      return results;
+    } catch (error) {
+      throw error;
+    }
   }
 };

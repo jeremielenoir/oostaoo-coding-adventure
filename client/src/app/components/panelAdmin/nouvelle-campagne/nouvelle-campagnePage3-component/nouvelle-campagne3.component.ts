@@ -36,12 +36,14 @@ export class NouvelleCampagnePage3Component implements OnInit {
   @Output() incrementPage = new EventEmitter<any>();
   @Output() decrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
+  @Input('techno') techno: any
   public searchText = "";
   public experience: string;
   public questions: any[];
   public saveallQuestionsCampaign: any[];
   public allQuestionLevel: any[] = [];
   public allQuestions: any[] = [];
+  public allTechno: any = [];
 
   public activeClassScrollTopDropList = false;
   public boelanIsSearchAdvenced = false;
@@ -78,13 +80,12 @@ export class NouvelleCampagnePage3Component implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('----techno recupe---', this.techno)
     console.log("this.allQuestionLevel : ", this.allQuestionLevel);
     console.log('this.formCampagne', this.formCampagne)
     this.getAllQuestions();
 
     window.scroll(10, 0);
-
-    // let body = document.querySelector('body');
 
     window.addEventListener("scroll", () => {
       this.headerChangePositioinDropList();
@@ -116,6 +117,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
           if (this.formCampagne.value.technoSelectedId.includes(question.technologies.id)
           ) {
+            this.allTechno.push(question.technologies.name)
             this.allQuestions.push(question);
             this.saveallQuestionsCampaign = this.allQuestions
           }
