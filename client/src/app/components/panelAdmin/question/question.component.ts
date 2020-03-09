@@ -20,38 +20,35 @@ import {
   ApiClientService,
   API_URI_QUESTIONS,
   API_URI_CAMPAIGNS
-} from "../../../../api-client/api-client.service";
+} from "../../../api-client/api-client.service";
 import { Router } from "@angular/router";
 
-
 @Component({
-  selector: "app-NouvelleCampagnePage3Component",
-  templateUrl: "./nouvelle-campagne3.component.html",
-  styleUrls: [
-    "./nouvelle-campagne3.component.scss",
-    "../nouvelle-campagne.component.scss"
-  ]
+  selector: "app-question-component",
+  templateUrl: "./question.component.html",
+  styleUrls: ["./question.component.scss","../nouvelle-campagne/nouvelle-campagne.component.scss"]
 })
-export class NouvelleCampagnePage3Component implements OnInit {
+export class QuestionComponent implements OnInit {
+ 
+  @Input() formCampagne: FormGroup;
+  @Input() datas = [];
+  @Input() dataLevels = [];
   @Output() incrementPage = new EventEmitter<any>();
   @Output() decrementPage = new EventEmitter<any>();
-  @Input() formCampagne: FormGroup;
-  @Input('techno') techno: any
   public searchText = "";
   public experience: string;
   public questions: any[];
-  public saveallQuestionsCampaign: any[];
-  public allQuestionLevel: any[] = [];
-  public allQuestions: any[] = [];
-  public allTechno: any = [];
+
+  public toppingsDifficulty = new FormControl();
+  public boelanIsSearchAdvenced: boolean = false;
+  public saveallQuestionsCampaign = [];
+  public yourCampaign;
+  public difficulty = ['facile', 'moyen', 'expert'];
 
   public activeClassScrollTopDropList = false;
-  public boelanIsSearchAdvenced = false;
-  public toppingsDifficulty = new FormControl();
-  public difficulty = ['facile', 'moyen', 'expert'];
-  
 
   Questions = [];
+
 
   @ViewChild("droplist") public droplist: ElementRef;
 
@@ -76,16 +73,18 @@ export class NouvelleCampagnePage3Component implements OnInit {
   constructor(
     public apiClientService: ApiClientService,
     public decryptTokenService: DecryptTokenService,
-    private router: Router,
-  ) { }
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    console.log('----techno recupe---', this.techno)
-    console.log("this.allQuestionLevel : ", this.allQuestionLevel);
-    console.log('this.formCampagne', this.formCampagne)
-    this.getAllQuestions();
+   // console.log("this.dataLevels : ", this.dataLevels);
+   // this.getAllQuestions();
 
     window.scroll(10, 0);
+
+   // this.experience = this.formCampagne.value.experience;
+
+ let body = document.querySelector('body');
 
     window.addEventListener("scroll", () => {
       this.headerChangePositioinDropList();
@@ -94,10 +93,16 @@ export class NouvelleCampagnePage3Component implements OnInit {
   fmtMSS(d) {
     d = Number(d);
     var h = Math.floor(d / 3600);
-    var m = Math.floor(d % 3600 / 60);
-    var s = Math.floor(d % 3600 % 60);
+    var m = Math.floor((d % 3600) / 60);
+    var s = Math.floor((d % 3600) % 60);
 
-    return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
+    return (
+      ("0" + h).slice(-2) +
+      ":" +
+      ("0" + m).slice(-2) +
+      ":" +
+      ("0" + s).slice(-2)
+    );
   }
 
   headerChangePositioinDropList() {
@@ -108,42 +113,12 @@ export class NouvelleCampagnePage3Component implements OnInit {
     }
   }
 
-  getAllQuestions() {
-    // console.log('this.formCampagne.value(): ', this.formCampagne.value);
-    this.apiClientService.get(API_URI_QUESTIONS).subscribe(datas => {
-      this.questions = datas;
-      for (const question of this.questions) {
-        if (question.technologies) {
 
-          if (this.formCampagne.value.technoSelectedId.includes(question.technologies.id)
-          ) {
-            this.allTechno.push(question.technologies.name)
-            this.allQuestions.push(question);
-            this.saveallQuestionsCampaign = this.allQuestions
-          }
-
-        }
-
-      }
-
-      for (const questionLevel of this.allQuestions) {
-        if (questionLevel.level === this.experience) {
-          this.allQuestionLevel.push(questionLevel);
-        }
-      }
-
-      for (const itemQuestionLevel of this.allQuestionLevel) {
-        this.allQuestions = this.allQuestions.filter(
-          element => element !== itemQuestionLevel
-        );
-      }
-    });
-  }
 
   SendQuestionSelected(id) {
     this.apiClientService
       .put(API_URI_CAMPAIGNS + "/" + id, {
-        questions: this.allQuestionLevel
+        questions: this.dataLevels
       })
       .subscribe(
         res => {
@@ -191,7 +166,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
         res => {
           console.log("resultat from post", res);
           this.SendQuestionSelected(res.id);
-          this.router.navigate([`/dashboard/campaigns/${res.id}/candidats`])
+          this.router.navigate([`/dashboard/campaigns/${res.id}/candidats`]);
         },
         err => console.log(err)
       );
@@ -202,46 +177,69 @@ export class NouvelleCampagnePage3Component implements OnInit {
   }
 
   filtreDifficuty(element) {
-    console.log('saveallQuestionsCampaign', this.saveallQuestionsCampaign)
-    let test = 1;
-    console.log('---hell word ---', test + 1);
+    // console.log('-------------this.yourCampaign-------------', this.yourCampaign);
+    let arrayFacile = [];
+    let arrayMoyen = [];
+    let arrayExpert = [];
+    let arrayComplet = [];
 
-    let results = [];
-
-    if (element.value && element.value.length > 0) {
-      this.allQuestions = this.saveallQuestionsCampaign;
-      element.value.forEach(val => {
-        console.log('value', val)
-        let filterAtrray = this.allQuestions.filter(el => el.level == val);
-        if (filterAtrray && filterAtrray.length > 0) {
-          results = [...results, ...filterAtrray]
-
-        }
-      });
-
-      this.allQuestions = results;
-
-    } else {
-
-      this.allQuestions = this.saveallQuestionsCampaign
-
+    if (element.value.includes('facile')) {
+      arrayFacile = this.saveallQuestionsCampaign.filter(element => element.level == 'facile');
+      arrayComplet.push(...arrayFacile);
     }
 
+    if (element.value.includes('moyen')) {
+      arrayMoyen = this.saveallQuestionsCampaign.filter(element => element.level == 'moyen');
+      arrayComplet.push(...arrayMoyen);
+    }
+
+    if (element.value.includes('expert')) {
+      arrayExpert = this.saveallQuestionsCampaign.filter(element => element.level == 'expert');
+      arrayComplet.push(...arrayExpert);
+    }
+
+    this.datas = arrayComplet;
+
+    if (element.value.length == 0) {
+      this.datas = this.saveallQuestionsCampaign
+    }
 
   }
 
+  filtreTechno(element) {
 
-}
-@Component({
-  selector: "popup-campaign",
-  templateUrl: "popup-campaign.html",
-  styleUrls: ["./popup-campaign.css"]
-})
-export class PopupCampaign {
-  constructor(private bottomSheetRef: MatBottomSheetRef<PopupCampaign>) { }
+    const valueChecked = [];
 
-  openLink(event: MouseEvent): void {
-    this.bottomSheetRef.dismiss();
-    event.preventDefault();
+    element.value.forEach(valueCheck => {
+      if (valueChecked.includes(valueCheck)) {
+
+        for (let value of valueChecked) {
+          let newFilter = this.datas.filter(element => element.technologies.name == value);
+          this.datas = newFilter
+        }
+
+
+      } else {
+        valueChecked.push(valueCheck);
+      }
+    });
+
+
+    console.log('allquestion---------->', this.datas)
+
   }
 }
+
+// @Component({
+//   selector: "popup-campaign",
+//   templateUrl: "popup-campaign.html",
+//   styleUrls: ["./popup-campaign.css"]
+// })
+// export class PopupCampaign {
+//   constructor(private bottomSheetRef: MatBottomSheetRef<PopupCampaign>) {}
+
+//   openLink(event: MouseEvent): void {
+//     this.bottomSheetRef.dismiss();
+//     event.preventDefault();
+//   }
+// }
