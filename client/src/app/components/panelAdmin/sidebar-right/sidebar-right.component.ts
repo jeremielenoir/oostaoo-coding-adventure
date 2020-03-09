@@ -22,7 +22,7 @@ export class SidibarRightComponent implements OnInit {
   public candidatbydate: Array<any> = [];
   public candidatByFinish: Array<any> = [];
   public candidatAll: Array<any> = [];
-  public storageRecuperationCheck: any
+  public storageRecuperationCheck: any;
 
   public myArrayCandidat: any[] = [];
   public optionFilter: string[];
