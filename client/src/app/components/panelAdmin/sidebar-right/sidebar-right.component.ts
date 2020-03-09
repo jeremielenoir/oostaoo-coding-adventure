@@ -34,10 +34,10 @@ export class SidibarRightComponent implements OnInit {
     for (const campaign of this.campaignsFromParent) {
       for (const candidat of campaign.candidats) {
         this.myArrayCandidat.push(candidat);
-        console.log("coucou " + this.myArrayCandidat);
+        // console.log("coucou " + this.myArrayCandidat);
         this.candidatbydate = this.myArrayCandidat.sort((a, b) => {
           if (a.test_terminer < b.test_terminer) {
-            console.log("A " + a.test_terminer + " B " + b.test_terminer)
+            // console.log("A " + a.test_terminer + " B " + b.test_terminer)
             return 1;
           } else if (b.test_terminer < a.test_terminer) {
             return -1;
@@ -51,7 +51,7 @@ export class SidibarRightComponent implements OnInit {
     //session storage
 
     if (localStorage.getItem('notification') === undefined || localStorage.getItem('notification') === null) {
-      console.log('cest null ton truc');
+      // console.log('cest null ton truc');
       this.check1.nativeElement.checked = true;
       this.check2.nativeElement.checked = true;
       localStorage.setItem('notification', JSON.stringify(this.allCheckevent()));
@@ -75,7 +75,7 @@ export class SidibarRightComponent implements OnInit {
   //     }
   //     console.log("finished " + finished)
   //   })
-    
+
 
   // }
 

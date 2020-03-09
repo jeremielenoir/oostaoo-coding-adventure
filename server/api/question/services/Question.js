@@ -1,5 +1,5 @@
 /* global Question */
-'use strict';
+"use strict";
 
 /**
  * Question.js service
@@ -8,22 +8,23 @@
  */
 
 // Public dependencies.
-const _ = require('lodash');
+const _ = require("lodash");
 
 // Strapi utilities.
-const utils = require('strapi-hook-bookshelf/lib/utils/');
-
+const utils = require("strapi-hook-bookshelf/lib/utils/");
+const { google } = require("googleapis");
+const keys = require("../../../roodeo.json");
+const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
 module.exports = {
-
   /**
    * Promise to fetch all questions.
    *
    * @return {Promise}
    */
 
-  fetchAll: (params) => {
+  fetchAll: params => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('question', params);
+    const filters = strapi.utils.models.convertParams("question", params);
     // Select field to populate.
     const populate = Question.associations
       .filter(ast => ast.autoPopulate !== false)
@@ -31,9 +32,17 @@ module.exports = {
 
     return Question.query(function(qb) {
       _.forEach(filters.where, (where, key) => {
-        if (_.isArray(where.value) && where.symbol !== 'IN' && where.symbol !== 'NOT IN') {
+        if (
+          _.isArray(where.value) &&
+          where.symbol !== "IN" &&
+          where.symbol !== "NOT IN"
+        ) {
           for (const value in where.value) {
-            qb[value ? 'where' : 'orWhere'](key, where.symbol, where.value[value])
+            qb[value ? "where" : "orWhere"](
+              key,
+              where.symbol,
+              where.value[value]
+            );
           }
         } else {
           qb.where(key, where.symbol, where.value);
@@ -57,13 +66,13 @@ module.exports = {
    * @return {Promise}
    */
 
-  fetch: (params) => {
+  fetch: params => {
     // Select field to populate.
     const populate = Question.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    return Question.forge(_.pick(params, 'id')).fetch({
+    return Question.forge(_.pick(params, "id")).fetch({
       withRelated: populate
     });
   },
@@ -74,15 +83,19 @@ module.exports = {
    * @return {Promise}
    */
 
-  count: (params) => {
+  count: params => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('question', params);
+    const filters = strapi.utils.models.convertParams("question", params);
 
     return Question.query(function(qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value)) {
           for (const value in where.value) {
-            qb[value ? 'where' : 'orWhere'](key, where.symbol, where.value[value]);
+            qb[value ? "where" : "orWhere"](
+              key,
+              where.symbol,
+              where.value[value]
+            );
           }
         } else {
           qb.where(key, where.symbol, where.value);
@@ -97,16 +110,22 @@ module.exports = {
    * @return {Promise}
    */
 
-  add: async (values) => {
+  add: async values => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Question.associations.map(ast => ast.alias));
-    const data = _.omit(values, Question.associations.map(ast => ast.alias));
+    const relations = _.pick(
+      values,
+      Question.associations.map(ast => ast.alias)
+    );
+    const data = _.omit(
+      values,
+      Question.associations.map(ast => ast.alias)
+    );
 
     // Create entry with no-relational data.
     const entry = await Question.forge(data).save();
 
     // Create relational data and return the entry.
-    return Question.updateRelations({ id: entry.id , values: relations });
+    return Question.updateRelations({ id: entry.id, values: relations });
   },
 
   /**
@@ -117,14 +136,22 @@ module.exports = {
 
   edit: async (params, values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Question.associations.map(ast => ast.alias));
-    const data = _.omit(values, Question.associations.map(ast => ast.alias));
+    const relations = _.pick(
+      values,
+      Question.associations.map(ast => ast.alias)
+    );
+    const data = _.omit(
+      values,
+      Question.associations.map(ast => ast.alias)
+    );
 
     // Create entry with no-relational data.
     const entry = await Question.forge(params).save(data);
 
     // Create relational data and return the entry.
-    return Question.updateRelations(Object.assign(params, { values: relations }));
+    return Question.updateRelations(
+      Object.assign(params, { values: relations })
+    );
   },
 
   /**
@@ -133,19 +160,19 @@ module.exports = {
    * @return {Promise}
    */
 
-  remove: async (params) => {
+  remove: async params => {
     params.values = {};
     Question.associations.map(association => {
       switch (association.nature) {
-        case 'oneWay':
-        case 'oneToOne':
-        case 'manyToOne':
-        case 'oneToManyMorph':
+        case "oneWay":
+        case "oneToOne":
+        case "manyToOne":
+        case "oneToManyMorph":
           params.values[association.alias] = null;
           break;
-        case 'oneToMany':
-        case 'manyToMany':
-        case 'manyToManyMorph':
+        case "oneToMany":
+        case "manyToMany":
+        case "manyToManyMorph":
           params.values[association.alias] = [];
           break;
         default:
@@ -163,9 +190,9 @@ module.exports = {
    * @return {Promise}
    */
 
-  search: async (params) => {
+  search: async params => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('question', params);
+    const filters = strapi.utils.models.convertParams("question", params);
     // Select field to populate.
     const populate = Question.associations
       .filter(ast => ast.autoPopulate !== false)
@@ -173,22 +200,52 @@ module.exports = {
 
     const associations = Question.associations.map(x => x.alias);
     const searchText = Object.keys(Question._attributes)
-      .filter(attribute => attribute !== Question.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['string', 'text'].includes(Question._attributes[attribute].type));
+      .filter(
+        attribute =>
+          attribute !== Question.primaryKey && !associations.includes(attribute)
+      )
+      .filter(attribute =>
+        ["string", "text"].includes(Question._attributes[attribute].type)
+      );
 
     const searchNoText = Object.keys(Question._attributes)
-      .filter(attribute => attribute !== Question.primaryKey && !associations.includes(attribute))
-      .filter(attribute => !['string', 'text', 'boolean', 'integer', 'decimal', 'float'].includes(Question._attributes[attribute].type));
+      .filter(
+        attribute =>
+          attribute !== Question.primaryKey && !associations.includes(attribute)
+      )
+      .filter(
+        attribute =>
+          ![
+            "string",
+            "text",
+            "boolean",
+            "integer",
+            "decimal",
+            "float"
+          ].includes(Question._attributes[attribute].type)
+      );
 
     const searchInt = Object.keys(Question._attributes)
-      .filter(attribute => attribute !== Question.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['integer', 'decimal', 'float'].includes(Question._attributes[attribute].type));
+      .filter(
+        attribute =>
+          attribute !== Question.primaryKey && !associations.includes(attribute)
+      )
+      .filter(attribute =>
+        ["integer", "decimal", "float"].includes(
+          Question._attributes[attribute].type
+        )
+      );
 
     const searchBool = Object.keys(Question._attributes)
-      .filter(attribute => attribute !== Question.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['boolean'].includes(Question._attributes[attribute].type));
+      .filter(
+        attribute =>
+          attribute !== Question.primaryKey && !associations.includes(attribute)
+      )
+      .filter(attribute =>
+        ["boolean"].includes(Question._attributes[attribute].type)
+      );
 
-    const query = (params._q || '').replace(/[^a-zA-Z0-9.-\s]+/g, '');
+    const query = (params._q || "").replace(/[^a-zA-Z0-9.-\s]+/g, "");
 
     return Question.query(qb => {
       // Search in columns which are not text value.
@@ -202,25 +259,28 @@ module.exports = {
         });
       }
 
-      if (query === 'true' || query === 'false') {
+      if (query === "true" || query === "false") {
         searchBool.forEach(attribute => {
-          qb.orWhereRaw(`${attribute} = ${_.toNumber(query === 'true')}`);
+          qb.orWhereRaw(`${attribute} = ${_.toNumber(query === "true")}`);
         });
       }
 
       // Search in columns with text using index.
       switch (Question.client) {
-        case 'mysql':
-          qb.orWhereRaw(`MATCH(${searchText.join(',')}) AGAINST(? IN BOOLEAN MODE)`, `*${query}*`);
+        case "mysql":
+          qb.orWhereRaw(
+            `MATCH(${searchText.join(",")}) AGAINST(? IN BOOLEAN MODE)`,
+            `*${query}*`
+          );
           break;
-        case 'pg': {
+        case "pg": {
           const searchQuery = searchText.map(attribute =>
             _.toLower(attribute) === attribute
               ? `to_tsvector(${attribute})`
               : `to_tsvector('${attribute}')`
           );
 
-          qb.orWhereRaw(`${searchQuery.join(' || ')} @@ to_tsquery(?)`, query);
+          qb.orWhereRaw(`${searchQuery.join(" || ")} @@ to_tsquery(?)`, query);
           break;
         }
       }
@@ -239,5 +299,59 @@ module.exports = {
     }).fetchAll({
       withRelated: populate
     });
+  },
+  /**
+   * Promise to fetch spreadsheet questions.
+   *
+   * @return {Promise}
+   */
+
+  fetchSpreadsheet: async (spreadsheetId, ranges) => {
+    try {
+      const client = new google.auth.JWT(
+        keys.client_email,
+        null,
+        keys.private_key,
+        [SCOPES]
+      );
+      await client.authorize();
+      const gsapi = google.sheets({ version: "v4", auth: client });
+
+      const {
+        data: { valueRanges }
+      } = await gsapi.spreadsheets.values.batchGet({
+        spreadsheetId,
+        ranges
+      });
+
+      const data = valueRanges.map(val => val.values);
+      const arr = data[0];
+      const arrValues = [];
+      const arrFields = arr[0];
+      for (var i = 1; i < arr.length; i++) {
+        arrValues.push(arr[i]);
+      }
+      const questions = [];
+      arrValues.forEach(async (val, _index) => {
+        questions.push({
+        //  "id": `${index}_${val[1]}`,
+          [arrFields[1].toLowerCase()]: val[1],
+          [arrFields[2].toLowerCase()]: val[2],
+
+          [arrFields[3].toLowerCase()]: val[3],
+          [arrFields[4].toLowerCase()]: val[4],
+          [arrFields[5].toLowerCase()]: val[5],
+
+          [arrFields[6].toLowerCase()]: val[6],
+          [arrFields[7].toLowerCase()]: val[7],
+          [arrFields[8].toLowerCase()]: val[8],
+          [arrFields[9].toLowerCase()]: val[9]
+        });
+      });
+
+      return questions;
+    } catch (error) {
+      throw error;
+    }
   }
 };

@@ -21,7 +21,7 @@
   }
 
   .logo{
-    width: 200px; 
+    width: 200px;
     height:46px;
   }
 
@@ -58,7 +58,7 @@
         #help{
           background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/interrogation.svg");
         }
-       
+
       }
       margin-left: 18px;
 
@@ -82,7 +82,10 @@
             display: inline-block;
             width: 100%;
             text-transform: uppercase;
-             
+
+            &#ma_formule{
+              font-weight: bold;
+            }
           }
           a{
             color: white;
@@ -93,7 +96,7 @@
             &:hover{
               color:#68b4d3
             }
-          
+
           }
         }
       }
@@ -103,14 +106,14 @@
         height: 80px;
         display: flex;
         position: relative;
-       
+
         #notif{
           background-color: #1d3551;
           -webkit-mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/notifications.svg");
           mask-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/notifications.svg");
           mask-repeat: no-repeat;
           // background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/orange/notifications.svg");
-          
+
         }
 
         .nbr-notif{
@@ -185,7 +188,7 @@
           #help{
             background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/interrogation.svg");
           }
-         
+
         }
         .content-img{
           background-repeat: no-repeat;
@@ -193,14 +196,14 @@
           width: 42px;
           height: 42px;
         }
-        
+
       }
     }
   }
 }
 
 
-// STYLE NOTIF 
+// STYLE NOTIF
 
 .dropdownn-notif{
   width: 350px!important;
@@ -208,7 +211,7 @@
   min-height: 0px;
   max-height: 50%;
   overflow-y: auto;
-  
+
 
 
     .icon-gestion-notif{

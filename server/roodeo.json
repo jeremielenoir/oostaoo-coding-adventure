@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "roodeo",
+  "private_key_id": "bd13e3544cc953a3b223aef12449f4ab24791205",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDfi7ADMnKYx3j7\n20SHgvcHQwm7LN9VH/+qGjniB6U9TZEXCASxvKtZak6iB/zBOfWwa1x9v0pIqJZw\nTTs6mSQEJLFoDi+OwZWMTvPt2wb3qqP/eYfR7JMTYnhKyKvbbC7HFE+8DO0YOVG8\n9n7Y5RGOB2A4pJiDtqELmy+NvPFGJtS4WDmiZyYefv8iWS8/AwN9CH2GREo+iCKl\nESN/xNVLLZvZSZQupWI4YO1zf8hrAKXS5mb/w/HRyqHnLc/onpHouNgC54Zr0qCb\n76Kvq9YzmNtqJF02nYPkoc1wc1lTQMCOVtamzjGl4hHIRSeUPC72a9cqnYSNgW5J\nE8/vSFZXAgMBAAECggEAWuxWCvbZ5Yo8izQEC5oZH7sEmj0GGXmKY4WHRYgWjXif\nKt74CdLTXur+UKkvBOiuJbOFSyAi9qqbhdHj5VGkdIr4HXqnnUjfqtHyJSyRCOs/\nCQpFU/0FVT0X8FLuk7DM1exNAg+/37pwpIsdzNpe6YXWfTN1VR1TI4VbMitHd2BR\nDaz5O88X56egvAlZZch7B5exhtUngPIVi49OYGAwVRcENG6YfXaDYsNdMD6Azwvp\n0DuIpxrnxf63tc11ZLjuyyFQptblFQ7hjKMGNMinKqriJqBP8yCetoR2VjAHyt+e\nL44loFg9vxBvO/xGJU6Gajb3uX6DurhNs1ubJMBJAQKBgQD7YuW/tRWv8fdCxHZD\nNJ8JNYwAhhZfK9SBqQA7TpzU6XC+OB9h8GjabonXlRwhteC9nmET610Tba0ZQJsQ\nW5cUxfkxq41topLuQzaYGlilrH4d1xvStRkULZsNCIgsSsQAfuVDKL9iJctJQoMf\ncLh8P8t2vkNMBz7jVTDgKvWINQKBgQDjpfwXMSgXTM25kM4gI+Fbi9boRUNLDYns\nm9PO10cwHqu4VWIBQ1Ec55Xu9SwrV0TauE+cgSj0M82m4Oo6TjKiSGUHryx/n+A1\nndOY89Z0kWFNO7rg+/rkRoQEEX/wihs96sD4J7h4nIipq8FljLpJ/Gn2PR5Ryjdl\n9kFz6Y2t2wKBgQCjfDzIQT86bpUMcfIrYMRw28cR7CIOgNWyATOqXkS2Xp64xoz6\nR7wZGjxA3LMv5TWke6TMrIuagABL5O0zZS1LEDkwqU3P2CPQGhweLTwrepOGWoe4\nr5gAvGwSvNK6Y2E2pU/6LjzQ2p1rJntZ7he8jkyHC9N+VVP7ykJ/9tA5ZQKBgCfc\nAUbCSaXCweay7xR7k9LmqktjDURP641tP2nhEcrgI+sTsCROeB5agksjzIcOMbUm\nPnJFvzj69RA6I2jwFjeJ+36b8muqP6TDrLAESdGBPws54R/Rnv1nR2g69C7Wz6xI\ntV79/XPI3LjwpN02Bcw8kQUXcH6brJWCx7UW+MKvAoGAVwH5SDKT53aPqoxw+WVQ\nal2pwMxl/ACms1hKVEPaGjwt2tx+QpEKK+0qZJaHz+RtkDySH2ngXck0q/uMDGG5\n5H3/FEDlcNPZJ3uy0fZi2Go2/u9LIyS8wPmv1+5sVxLieIIgh0/WQG4eGIfPXhpu\nHecVCWIa0hrbmQzatBvOieo=\n-----END PRIVATE KEY-----\n",
+  "client_email": "roodeoservice@roodeo.iam.gserviceaccount.com",
+  "client_id": "107923388332099340367",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/roodeoservice%40roodeo.iam.gserviceaccount.com"
+}

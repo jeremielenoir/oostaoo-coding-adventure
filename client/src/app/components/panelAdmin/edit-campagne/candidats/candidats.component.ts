@@ -41,6 +41,7 @@ pdfMake.fonts = {
 })
 export class CandidatsComponent implements OnInit {
   public globalId: string;
+  public tests_available;
   public campaigns;
   public campaign;
   public candidats;
@@ -105,6 +106,19 @@ export class CandidatsComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.tests_available = this.DecryptTokenService.tests_available;
+    if(this.tests_available == -1){
+      this.tests_available = '';
+    }
+    // this.apiClientService.get(API_URI_USER + '/' + this.DecryptTokenService.userId)
+    // .subscribe(user => {
+    //   this.tests_available = user.tests_available;
+    //   if(this.tests_available == -1){
+    //     this.tests_available = '';
+    //   }
+    // });
+
     this.getCampaign().then(datas => {
       this.campaign = datas;
       console.log('depuis candidat', this.candidats)
@@ -491,5 +505,3 @@ export class CandidatsComponent implements OnInit {
   }
 
 }
-
-

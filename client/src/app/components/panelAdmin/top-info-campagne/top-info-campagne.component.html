@@ -1,0 +1,69 @@
+<div id="top-bar">
+
+ <div class="segment1">
+    
+       <div class="chart-block">
+          <div class="chart-circle">
+          </div>
+       </div>
+       
+        <div class="container-langage">
+            <span>2920 pts</span>
+            <span>46-91min</span>
+        </div>
+
+        <div class="state-techno-content">
+            <div class="state-techno">
+              <p class="name-langage" style="color:rgb(242, 187, 19)">
+                Angular 2+
+                <span class="icon-chevron fas fa-chevron-up"></span>
+              </p>
+              
+              <p>240 pts</p>
+            </div>
+            <div class="state-techno">
+              <p class="name-langage" style="color:rgb(181, 119, 224)">
+                JavaScript,HTML,CSS
+                <span class="icon-chevron fas fa-chevron-up"></span>
+              </p>
+              <p>1300 pts</p>
+            </div>
+            <div class="state-techno">
+              <p class="name-langage" style="color:rgb(16, 31, 99);">
+                PHP
+                <span class="icon-chevron fas fa-chevron-up"></span>
+              </p>
+              
+              <p>1100 pts</p>
+            </div>
+            <div class="state-techno" style="color:rgb(104, 186, 96)">
+              <p class="name-langage">
+                Symfony
+                <span class="icon-chevron fas fa-chevron-up"></span>
+              </p>
+             
+              <p>280 pts</p>
+            </div>
+        </div>
+        <div class="score-moyen">
+          <h4 class="title-score"></h4>
+          <div class="score-number-and-diagrame">
+              <strong class="number">32%</strong>
+              <i class="info-icon fas fa-info-circle"></i>
+          </div>
+        </div>
+ </div>
+
+  <div class="segment2">
+
+    <button class="custom-buttom custom-buttom-anul" mat-flat-button [routerLink]="['/dashboard/campaigns']">
+      <i class="fas fa-chevron-left icon-arrow-btn"></i>
+      Retour
+    </button>
+    <button class="custom-buttom" [ngClass]="allQuestionLevel.length > 0 ? 'button-enabled' : 'button-disabled'"
+      [disabled]="allQuestionLevel.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
+      Enregistrer
+    </button>
+
+  </div>
+</div>

@@ -14,6 +14,7 @@ export class NouvelleCampagneComponent implements OnInit {
   public oAuthFormVerification: AuthFormVerification;
   technoFromChild: Array<string>;
   selectProfilFromChild: string;
+  public Alltechno: any[] = []
 
   constructor(private _formBuilder: FormBuilder) {
     this.nNumeorPage = 1;
@@ -59,7 +60,6 @@ export class NouvelleCampagneComponent implements OnInit {
 
   public nextPage(): void {
     this.nNumeorPage++;
-    // console.log(this.ParentFormCampagne.value);
   }
 
   public previousPage(): void {
@@ -69,5 +69,10 @@ export class NouvelleCampagneComponent implements OnInit {
 
   public nouvelleCampagne(p_oDataFormValue: any): void {
     console.log(p_oDataFormValue);
+  }
+
+  public recupeAllTechno(event) {
+    this.Alltechno.push(...event)
+    console.log('this.Alltechno', this.Alltechno)
   }
 }
