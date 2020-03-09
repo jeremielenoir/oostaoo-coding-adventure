@@ -63,6 +63,15 @@ body{
             width: 70%;
             margin: auto;
         }
+        .button{
+            height: 40px;
+            background: #fff;
+            color: $color-blue;
+            border: 0px solid white;
+            margin: 20px 0;
+            width: 100%;
+            text-transform: uppercase;
+        }
     }
     
     #button_right_panel, #button_left_panel{
@@ -145,29 +154,32 @@ body{
         transition: all .3s ease;
         margin: 10px;
     }
-    
-    .social-box{
-        flex-direction: column;
-        justify-self: center;
-        z-index: 5;
-        align-self: center;
-        display: flex;
-        position: absolute;
-        border: $border-table;
-        left: 50%;
-        transform: translateX(-50%);
-        width:23%;
-        background: rgb(255,255,255);
-        // background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(84,114,141,1) 50%, rgba(84,114,141,1) 100%);
-        border-radius: 5px;
-        min-width: 213px;
-        max-width: 350px;
-        
+    .social-block{
+        .social-box{
+            flex-direction: column;
+            align-self: center;
+            z-index: 5;
+            display: flex;
+            position: absolute;
+            border: $border-table;
+            left: 50%;
+            width:23%;
+            
+            background: rgb(255,255,255);
+            // background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(84,114,141,1) 50%, rgba(84,114,141,1) 100%);
+            border-radius: 5px;
+            min-width: 213px;
+            max-width: 350px;
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+            
+            margin: 24% 0 0 0;
 
-        a{
-            text-decoration: none;
-            color: black;
-            contain: content;
+            a{
+                text-decoration: none;
+                color: black;
+                contain: content;
+            }
         }
     }
 

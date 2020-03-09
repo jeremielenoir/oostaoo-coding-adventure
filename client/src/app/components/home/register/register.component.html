@@ -50,13 +50,14 @@
     
     <!-- <a class="button button--social-login button--github" href="#"><i class="icon fa fa-github"></i>Login With Github</a> -->
   </div>
-
- <div class="social-box">
-   
-   <a href="/connect/github" class="social-button" id="github-connect"> <span>Se connecter avec Github</span></a>
-   <a href="/connect/google" class="social-button" id="google-connect"> <span>Se connecter avec Google</span></a>
-   <a href="/connect/facebook" class="social-button" id="facebook-connect"> <span>Se connecter avec Facebook</span></a>
-   <div *ngIf="errorProvider" id="error-provider" class="alert alert-danger">{{ errorProvider }}</div>
+  
+  <div class="social-block">
+      <div class="social-box">
+        <a href="/connect/github" class="social-button" id="github-connect"> <span>Se connecter avec Github</span></a>
+        <a href="/connect/google" class="social-button" id="google-connect"> <span>Se connecter avec Google</span></a>
+        <a href="/connect/facebook" class="social-button" id="facebook-connect"> <span>Se connecter avec Facebook</span></a>
+        <div *ngIf="errorProvider" id="error-provider" class="alert alert-danger">{{ errorProvider }}</div>
+      </div>
   </div>
   <!-- Partie de droite -->
 
@@ -65,13 +66,17 @@
     <div *ngIf="switchPanel" id="right-panel">
       <div id="right-panel-text">
         <h2 id="title_right_panel">Nouveau client</h2>
-        <button id="button_right_panel" (click)="switch()">
+        
+        <!--button id="button_right_panel" (click)="switch()">
           Créer un compte
-        </button>
+        </button-->
         <p id="text_right_panel">
           Évaluez vos candidats en ligne Sourcez, recrutez des développeurs
           passionnés Créez vos propres événements de code
         </p>
+        <div class="form-group">
+          <button class="btn btn-primary button" (click)="switch()">Se connecter</button>
+        </div>
       </div>
     </div>
 
