@@ -7,7 +7,7 @@
 
   <!-- <div *ngIf="!isVerifUser"> -->
     <div *ngIf='entreprise === null' id="content">
-      <div class="">
+      <div class="new-entreprise">
         <div class="all-group-content ajout-entreprise">
           <div class="content-ajout-entreprise">
             <div class="form-entreprise">
@@ -67,7 +67,7 @@
 
   <!-- <div *ngIf="!isVerifUser"> -->
 
-    <div *ngIf='entreprise !== null' id="content">
+    <div *ngIf='entreprise !== null' class="edit-entreprise" id="content">
 
       <div id="shadow-cog" [ngClass]="{'shadow-cog-active': shadowcog == true}">
 
