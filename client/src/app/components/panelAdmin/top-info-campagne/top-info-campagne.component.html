@@ -3,8 +3,13 @@
  <div class="segment1">
     
        <div class="chart-block">
-          <div class="chart-circle">
-          </div>
+        <igx-doughnut-chart height="100%" width="100%">
+            <igx-ring-series
+                [dataSource]="tempo"
+                labelMemberPath="Label"
+                valueMemberPath="Value">
+            </igx-ring-series>
+          </igx-doughnut-chart>
        </div>
        
         <div class="container-langage">
@@ -13,7 +18,7 @@
         </div>
 
         <div class="state-techno-content">
-            <div class="state-techno">
+            <div class="state-techno" matTooltip="Info about the action">
               <p class="name-langage" style="color:rgb(242, 187, 19)">
                 Angular 2+
                 <span class="icon-chevron fas fa-chevron-up"></span>
@@ -55,13 +60,12 @@
  </div>
 
   <div class="segment2">
-
     <button class="custom-buttom custom-buttom-anul" mat-flat-button [routerLink]="['/dashboard/campaigns']">
       <i class="fas fa-chevron-left icon-arrow-btn"></i>
       Retour
     </button>
-    <button class="custom-buttom" [ngClass]="allQuestionLevel.length > 0 ? 'button-enabled' : 'button-disabled'"
-      [disabled]="allQuestionLevel.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
+    <button class="custom-buttom" [ngClass]="allQuestionLevel && allQuestionLevel.length > 0 ? 'button-enabled' : 'button-disabled'"
+      [disabled]="allQuestionLevel && allQuestionLevel.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
       Enregistrer
     </button>
 

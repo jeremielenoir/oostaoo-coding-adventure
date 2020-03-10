@@ -140,61 +140,12 @@ export class NouvelleCampagnePage3Component implements OnInit {
     });
   }
 
-  SendQuestionSelected(id) {
-    this.apiClientService
-      .put(API_URI_CAMPAIGNS + "/" + id, {
-        questions: this.allQuestionLevel
-      })
-      .subscribe(
-        res => {
-          console.log(res);
-        },
-        err => console.log(err)
-      );
-  }
-
   public onDecrementPage(): void {
     this.decrementPage.emit(); // Déclenche l'output
   }
 
   public onIncrementPage(): void {
     this.incrementPage.emit(); // Déclenche l'output
-  }
-
-  postCampagne() {
-    // Confirm true for post
-    let truecp;
-    if (this.formCampagne.value.utilisationCopieColler === "true") {
-      truecp = true;
-    } else {
-      truecp = false;
-    }
-    let envoiRapportSimplifie;
-    if (this.formCampagne.value.envoiRapportSimplifie === "true") {
-      envoiRapportSimplifie = true;
-    } else {
-      envoiRapportSimplifie = false;
-    }
-
-    this.apiClientService
-      .post(API_URI_CAMPAIGNS, {
-        Name: this.formCampagne.value.nomDeCampagne,
-        level: this.formCampagne.value.experience,
-        langs: this.formCampagne.value.langue,
-        copy_paste: truecp,
-        sent_report: envoiRapportSimplifie,
-        profile: this.formCampagne.value.roleSelectedId,
-        technologies: this.formCampagne.value.technoSelectedId,
-        user: this.decryptTokenService.userId
-      })
-      .subscribe(
-        res => {
-          console.log("resultat from post", res);
-          this.SendQuestionSelected(res.id);
-          this.router.navigate([`/dashboard/campaigns/${res.id}/candidats`])
-        },
-        err => console.log(err)
-      );
   }
 
   openSearchAdvenced() {

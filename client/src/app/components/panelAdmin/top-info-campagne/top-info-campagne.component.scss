@@ -12,21 +12,54 @@
   border-bottom: 1px solid #e7e7e7;
   padding: 0px 15px;
 
+  .custom-buttom,.mat-flat-button {
+    // height: 100%;
+    line-height: 0px;
+    background: $color-principal-orange!important;
+    border-radius: 0px !important;
+    font-size: 14px !important;
+    contain: content;
+    padding: 19px 40px !important;
+    color: $text-color-white !important;
+    height: 67.5px;   
+    outline: none;
+  }
+
+  .button-disabled{
+    line-height: 0px;
+    background: grey!important;
+    border-radius: 0px !important;
+    font-size: 14px !important;
+    contain: content;
+    padding: 19px 40px !important;
+    color: $text-color-white !important;
+    height: 67.5px; 
+    outline: none; 
+}
+
+  .custom-buttom-anul{
+    background-color: $color-gray-blue!important;
+    outline: none;
+  }
+
+  .icon-arrow-btn{
+    font-size: 25px;
+    position: relative;
+    left: -12px;
+  }
+
+
+
   .segment1 {
     display: flex;
     flex-direction: row;
     flex: 11;
     .chart-block {
+      width: 100px;
+      height: 100px;
       display: flex;
       align-items: center;
-
-      .chart-circle {
-        width: 50px;
-        height: 50px;
-        border-radius: 200px;
-        background-color: #dddd;
-
-      }
+      border:1px solid red
     }
 
     .container-langage {
