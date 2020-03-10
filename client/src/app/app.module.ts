@@ -92,6 +92,7 @@ import { RatingFeedbackComponent } from './components/panelAdmin/client-test/fin
 import { QuestionComponent } from './components/panelAdmin/question/question.component';
 import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campagne/top-info-campagne.component';
 import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
+import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
 
 
 @NgModule({
@@ -157,7 +158,8 @@ import { MotDePasseOublieComponent } from './components/home/register/mot-de-pas
     RatingFeedbackComponent,
     QuestionComponent,
     TopInfoCampagneComponent,
-    MotDePasseOublieComponent
+    MotDePasseOublieComponent,
+    SubscriptionComponent
   ],
   imports: [
     BrowserModule,

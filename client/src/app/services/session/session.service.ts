@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class SessionService {
-  
+
   offerChoiceAmount: number;
   offerChoice: Offer;
 
