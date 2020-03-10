@@ -91,12 +91,9 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { RatingFeedbackComponent } from './components/panelAdmin/client-test/fin-test/rating-feedback/rating-feedback.component';
 import { QuestionComponent } from './components/panelAdmin/question/question.component';
 import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campagne/top-info-campagne.component';
-<<<<<<< Updated upstream
 import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
 import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
-=======
 import { IgxDoughnutChartModule } from 'igniteui-angular-charts';
->>>>>>> Stashed changes
 
 
 @NgModule({
