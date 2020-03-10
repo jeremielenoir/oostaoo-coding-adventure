@@ -39,9 +39,8 @@
         </span>
       </a>
       <ul class="dropdownn">
-
         <li>
-          <p>Testings</p>
+          <p>Tests d'évaluations</p>
         </li>
         <li>
           <a href="" [routerLink]="['/dashboard/campaigns']">Mes Tests</a>
@@ -72,12 +71,6 @@
           <a href="" [routerLink]="['/dashboard/profil-entreprise']">Profil entreprise</a>
         </li>
         <li>
-          <a href="" [routerLink]="['/dashboard/facturation']">Facturation</a>
-        </li>
-        <li>
-          <a href="" [routerLink]="['/dashboard/protection-des-donnees']">Protection des données</a>
-        </li>
-        <li>
           <a href="" [routerLink]="['/dashboard/utilisateurs']">Utilisateurs</a>
         </li>
         <!-- <li>
@@ -97,24 +90,8 @@
         </li>
       </ul>
     </li> -->
-    <li>
-      <a href="" class="text-menu">
-        <span class="content-img" id="help">
-        </span>
-      </a>
-      <ul class="dropdownn">
-        <li>
-          <p>Besoin d'aides ?</p>
-        </li>
-        <li>
-          <a href="" [routerLink]="">FAQ</a>
-        </li>
-        <li>
-          <a href="" [routerLink]="">Contact</a>
-        </li>
-      </ul>
-    </li>
-    <li>
+    
+    <!--li>
       <a href="" class="text-menu">
         <span class="content-img" id="new">
         </span>
@@ -124,7 +101,7 @@
           <p>Nouveautés</p>
         </li>
       </ul>
-    </li>
+    </li-->
     <li>
       <a href="" class="text-menu">
         <span class="content-img" id="new">
@@ -135,7 +112,30 @@
           <p id="ma_formule">OFFRE {{ offer_id }}</p>
         </li>
         <li>
-          <p><a href="" [routerLink]="['/subscription']">Formules</a></p>
+          <a href="" [routerLink]="['/subscription']">Changer de formule</a>
+        </li>
+        <li>
+          <a href="" [routerLink]="['/dashboard/facturation']">Facturation</a>
+        </li>
+        <li>
+          <a href="" [routerLink]="['/dashboard/protection-des-donnees']">Protection des données</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="" class="text-menu">
+        <span class="content-img" id="help">
+        </span>
+      </a>
+      <ul class="dropdownn">
+        <li>
+          <p>Besoin d'aide ?</p>
+        </li>
+        <li>
+          <a href="" [routerLink]="">FAQ</a>
+        </li>
+        <li>
+          <a href="" [routerLink]="">Contact</a>
         </li>
       </ul>
     </li>
