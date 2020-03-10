@@ -3,7 +3,7 @@
 
   <!-- Panel cote gauche -->
   <div id="left-side">
-    <div *ngIf="!switchPanel" id="left-panel">
+    <!--div *ngIf="!switchPanel" id="left-panel">
       <div id="left-panel-text">
         <h2 id="left">Déjà client ?</h2>
         <button id="button_left_panel" (click)="switch()">Se connecter</button>
@@ -12,7 +12,7 @@
           profil, etc
         </p>
       </div>
-    </div>
+    </div-->
 
     <!-- Formulaire cote gauche -->
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="forms left">
@@ -50,7 +50,7 @@
     
     <!-- <a class="button button--social-login button--github" href="#"><i class="icon fa fa-github"></i>Login With Github</a> -->
   </div>
-  
+
   <div class="social-block">
       <div class="social-box">
         <a href="/connect/github" class="social-button" id="github-connect"> <span>Se connecter avec Github</span></a>
@@ -75,14 +75,14 @@
           passionnés Créez vos propres événements de code
         </p>
         <div class="form-group">
-          <button class="btn btn-primary button" (click)="switch()">Se connecter</button>
+          <button class="btn btn-primary button" (click)="switch()">Créer un compte</button>
         </div>
       </div>
     </div>
 
 
      <!-- Formulaire cote droit -->
-    <form class="forms" [formGroup]="registerForm" (ngSubmit)="register()" id="form_register">
+    <form *ngIf="!switchPanel" class="forms right" [formGroup]="registerForm" (ngSubmit)="register()" id="form_register">
       <h2>Nouveau client ?</h2>
 
     <div class="form-group">

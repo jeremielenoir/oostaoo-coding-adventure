@@ -14,10 +14,12 @@ body{
         width: 50%;
         overflow: hidden;
     }
+    #right-side{
+        background: $color-blue;
+    }
     
     #left-panel{
         position: absolute;
-        background: $color-blue;
         width: 50%;
         height: 100vh;
        
@@ -41,22 +43,25 @@ body{
     
     #right-panel{
         position: absolute;
-        background: $color-blue;
+        //background: $color-blue;
         width: 50%;
         height: 100vh;
         z-index: 3;
     
         #right-panel-text{
+            display: flex;
+            flex-direction: column;
             position: relative;
             width: 50%;
-            margin: 0 auto;
+            margin: 0 0 0 28%;
             text-align: center;
             color: white;
             padding-top: 25%;
+            //min-height: 545px;
         }
         
         #title_right_panel{
-            font-size: 40px;
+            //font-size: 40px;
         }
     
         #text_right_panel{
@@ -95,9 +100,27 @@ body{
         justify-content: center;
         &.left{
             margin: 25% 0 0 22%;
+            .button{
+                height: 40px;
+                background: $color-blue;
+                color: white;
+                border: 0px solid white;
+                margin: 20px 0;
+                width: 100%;
+                text-transform: uppercase;
+            }
         }
         &.right{
             margin: 25% 0 0 25%;
+            .button{
+                height: 40px;
+                background: #fff;
+                color: $color-blue;
+                border: 0px solid white;
+                margin: 20px 0;
+                width: 100%;
+                text-transform: uppercase;
+            }
         }
         
         width: 50%;
@@ -112,15 +135,7 @@ body{
             margin: 10px 0;
         }
         
-        .button{
-            height: 40px;
-            background: $color-blue;
-            color: white;
-            border: 0px solid white;
-            margin: 20px 0;
-            width: 100%;
-            text-transform: uppercase;
-        }
+        
     }
 
     .forgotten-password {
