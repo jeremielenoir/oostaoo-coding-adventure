@@ -354,38 +354,83 @@ module.exports = {
       for (var i = 1; i < arr.length; i++) {
         arrValues.push(arr[i]);
       }
-       
-      let arrTech = [];
-      const technogologies = [...new Set(arrValues.map(val => val[1]))];
 
-      technogologies.forEach(techno => {
-        arrTech.push({ technology: techno });
-      });
+      let arrTech = [];
+
+      const techFieldValues = [...new Set(arrValues.map(val => val[1]))];
+
+      const technologies = await Technologies.fetchAll({});
+      // const filters = strapi.utils.models.convertParams("technologies", {});
+      // const populate = Technologies.associations
+      // .filter(ast => ast.autoPopulate !== false)
+      // .map(ast => ast.alias);
+      // const technologies = await Technologies.query(function(qb) {
+
+      // }).fetchAll({
+      //   withRelated: filters.populate || populate
+      // });
+      console.log("technologies", technologies);
+      if (technologies && technologies.length > 0) {
+        techFieldValues.forEach(val => {
+          technologies.forEach(tech => {
+            console.log("tech name", tech.attributes.name, "val", val);
+            if (
+              val &&
+              tech &&
+              tech.attributes &&
+              tech.attributes.name &&
+              val.toString() === tech.attributes.name.toString()
+            ) {
+              if (
+                arrTech.findIndex(t => t.name.toString() === val.toString()) < 0
+              ) {
+                arrTech.push({ name: val, id: tech.id });
+              }
+            } else {
+              arrTech.push({ name: val });
+
+              if (
+                arrTech.findIndex(t => t.name.toString() === val.toString()) < 0
+              ) {
+                arrTech.push({ name: val });
+              }
+            }
+          });
+        });
+      } else {
+        techFieldValues.forEach(techno => {
+          arrTech.push({ name: techno });
+        });
+      }
+      console.log("arrTech content", arrTech);
       const arrTechPromise = [];
 
       arrTech.forEach(async tech => {
+        console.log("tech", tech);
         arrTechPromise.push(
           new Promise((resolve, reject) => {
-            return strapi.services.technologies
-              .add({ name: tech.technology })
-              .then(techno =>
-                resolve({
-                  technology: tech.technology,
-                  id: techno.id
-                })
-              )
-              .catch(e => reject(e));
+            if (tech && tech.id) {
+              resolve(tech);
+            } else {
+              return strapi.services.technologies
+                .add({ name: tech.name })
+                .then(techno => resolve({ name: tech.name, id: techno.id }))
+                .catch(e => reject(e));
+            }
           })
         );
       });
+
       arrTech = await Promise.all(arrTechPromise);
-      
+      console.log("arrTech", arrTech);
       const questions = [];
       arrValues.forEach((val, _index) => {
-        const tech = arrTech.find(t => t.technology.toString() === val[1]);
-        
+        const tech = arrTech.find(
+          t => t && t.name && t.name.toString() === val[1]
+        );
+
         questions.push({
-          // "id-prefix": `${index}_${val[1]}`,
+          // 'id-prefix': `${index}_${val[1]}`,
           [arrFields[1].toLowerCase()]: tech,
           [arrFields[2].toLowerCase()]: val[2],
 
@@ -399,8 +444,6 @@ module.exports = {
           [arrFields[9].toLowerCase()]: val[9]
         });
       });
-
-     
 
       return questions;
     } catch (error) {
