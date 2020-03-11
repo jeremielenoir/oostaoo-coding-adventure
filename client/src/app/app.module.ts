@@ -94,8 +94,11 @@ import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campa
 import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
 import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
 import { IgxDoughnutChartModule } from 'igniteui-angular-charts';
+<<<<<<< Updated upstream
 import { NgxCaptchaModule } from 'ngx-captcha';
 
+=======
+>>>>>>> Stashed changes
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -181,7 +184,11 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     ScrollToModule.forRoot(),
     NgxStripeModule.forRoot('pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq'),
     IgxDoughnutChartModule,
+<<<<<<< Updated upstream
     NgxCaptchaModule
+=======
+    
+>>>>>>> Stashed changes
   ],
   providers: [
     ApiClientService,

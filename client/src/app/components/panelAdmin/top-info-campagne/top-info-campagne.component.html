@@ -3,52 +3,46 @@
  <div class="segment1">
     
        <div class="chart-block">
+        <!-- <igx-item-legend #legend height="100px" width="100px">
+        </igx-item-legend> -->
         <igx-doughnut-chart height="100%" width="100%">
             <igx-ring-series
-                [dataSource]="tempo"
-                labelMemberPath="Label"
-                valueMemberPath="Value">
+              
+                [dataSource]="technoDonuts"
+                labelMemberPath="label"
+                valueMemberPath="value"
+                title="value"
+              >
             </igx-ring-series>
+          
           </igx-doughnut-chart>
        </div>
        
         <div class="container-langage">
-            <span>2920 pts</span>
-            <span>46-91min</span>
+            <span>Points: <p>{{poinTotal}} pts</p></span>
+            <span>Questions: <p>{{this.yourCampaign[0].questions.length}}</p></span>
+            <span>Durée totale: <p>{{convertSecondsToMinutes(timeAllquestionCampgnDivice)}} à {{convertSecondsToMinutes(timeAllquestionCampagn)}} min</p></span>
+
         </div>
 
         <div class="state-techno-content">
-            <div class="state-techno" matTooltip="Info about the action">
-              <p class="name-langage" style="color:rgb(242, 187, 19)">
-                Angular 2+
-                <span class="icon-chevron fas fa-chevron-up"></span>
-              </p>
+            <div *ngFor="let donut of technoDonuts">
+              <div class="state-techno" matTooltip="Info about the action">
+                <p class="name-langage" style="color:rgb(242, 187, 19)">
+                  {{donut.label}}
+                  <span>({{donut.value}}) pts</span>
+                  <span class="icon-chevron fas fa-chevron-up"></span>
+
+                  <span class="question-time">
+                    14 questions
+                    16 à 31 min
+                  </span>
+                </p>
+                
               
-              <p>240 pts</p>
+              </div>
             </div>
-            <div class="state-techno">
-              <p class="name-langage" style="color:rgb(181, 119, 224)">
-                JavaScript,HTML,CSS
-                <span class="icon-chevron fas fa-chevron-up"></span>
-              </p>
-              <p>1300 pts</p>
-            </div>
-            <div class="state-techno">
-              <p class="name-langage" style="color:rgb(16, 31, 99);">
-                PHP
-                <span class="icon-chevron fas fa-chevron-up"></span>
-              </p>
-              
-              <p>1100 pts</p>
-            </div>
-            <div class="state-techno" style="color:rgb(104, 186, 96)">
-              <p class="name-langage">
-                Symfony
-                <span class="icon-chevron fas fa-chevron-up"></span>
-              </p>
-             
-              <p>280 pts</p>
-            </div>
+        
         </div>
         <div class="score-moyen">
           <h4 class="title-score"></h4>
