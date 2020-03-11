@@ -27,7 +27,7 @@
   .info-title-header-dashboard{
     flex: 11;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: $font-size-home;
     margin-bottom: 0;
     font-family: $font-poppins;
      
@@ -37,7 +37,6 @@
 }
 
 $text-color: #212529;
-$background-color: #f9f9f9;
 html,body{
   background-color: $color-background-blue;
   height: 100%;
@@ -75,7 +74,7 @@ height: 17px;
 width: 17px;
 border: 2px solid #7e8082;
 display: inline-block;
-border-radius: 2px;
+border-radius: $border-radius;
 margin-top: 4px;
 }
 

@@ -9,7 +9,7 @@
 
 ::ng-deep .mat-dialog-container{
   border: $border-table;
-  background: $color-background-blue;
+
 
 
     .mat-button{
@@ -68,7 +68,7 @@
   display: flex;
   flex-direction: column;
   border: $border-table;
-  border-radius: 4px;
+  border-radius: $border-radius;
   overflow: hidden;
   height: 100%;
   box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
@@ -95,7 +95,7 @@
         min-width: 43px;
         .number-test{
           color:$color-principal-blue;
-          font-size: 14px;
+          font-size: $font-size-home;
            
         }
 
@@ -184,7 +184,7 @@
           label {
             margin: 0px;
             color: #7e8082;
-            font-size: 14px;
+            font-size: $font-size-home;
             display: inline-block;
           }
 
@@ -201,14 +201,12 @@
 
   .contenu-techno {
     background-color: white;
-    // border: $border-table-second;
     display: flex;
     flex: 1;
     flex-direction: column;
    
     .no-campaign{
       width: 50%;
-      // border: $border-table-second;
       text-align: center;
       margin: 17% auto 0;
       padding: 10px;
@@ -229,7 +227,7 @@
         text-transform: uppercase;
         padding: 20px 30px;
         display: block;
-        font-size: 14px;
+        font-size: $font-size-home;
       }
     
     }
@@ -313,7 +311,7 @@
             color:$color-principal-blue;
            
           .branche-content-text {
-              font-size: 14px;
+              font-size: $font-size-home;
               margin-bottom: 0px !important;
               display: inline-block;
              flex: 2;
@@ -333,9 +331,6 @@
                 text-transform: uppercase;
                  
                 /* display:none; */
-              }
-              .branche-content-noti-item:hover {
-                background-color: $color-gold;
               }
 
               .branche-content-noti-item:hover span {
@@ -357,7 +352,7 @@
            p{
              margin-bottom: 0px;
              align-self: center;
-             font-size: 14px;
+             font-size: $font-size-home;
            }
          }
        
@@ -402,7 +397,6 @@
             }
             &:hover{
               color: white;
-              background: $color-gold;
             }
           }
         }

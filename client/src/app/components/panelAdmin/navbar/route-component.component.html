@@ -15,19 +15,21 @@
         <li>
           <p>Notifications</p>
         </li>
-        <div class="notif-content" *ngFor="let notification of notifications" [className]="notification.status ? 'notif-content-read' : 'notif-content'">
+        <div class="notif-content" *ngFor="let notification of notifications"
+          [className]="notification.status ? 'notif-content-read' : 'notif-content'">
           <!-- <div>
             <span (click)="deleteNotification(notification.id)" class=""><i [className]="notification.status ? 'fas fa-trash icon-gestion-notif-read' : 'fas fa-trash icon-gestion-notif'"></i></span>
           </div> -->
-            <span (click)="navigateTo(notification.idCampaign, notification.id, notification.status)" style="display: block;">
+          <span (click)="navigateTo(notification.idCampaign, notification.id, notification.status)"
+            style="display: block;">
 
-              <h4 class="notif-title">
-                {{notification.title}}
-              </h4>
-              <span class="notif-message">{{notification.Message}}</span>
-              <p class="notif-footer">{{notification.created_at | date:'dd/MM/yyyy'}}</p>
-            </span>
-          </div>
+            <h4 class="notif-title">
+              {{notification.title}}
+            </h4>
+            <span class="notif-message">{{notification.Message}}</span>
+            <p class="notif-footer">{{notification.created_at | date:'dd/MM/yyyy'}}</p>
+          </span>
+        </div>
       </ul>
 
     </li>
@@ -37,9 +39,8 @@
         </span>
       </a>
       <ul class="dropdownn">
-
         <li>
-          <p>Testings</p>
+          <p>Tests d'évaluations</p>
         </li>
         <li>
           <a href="" [routerLink]="['/dashboard/campaigns']">Mes Tests</a>
@@ -70,17 +71,11 @@
           <a href="" [routerLink]="['/dashboard/profil-entreprise']">Profil entreprise</a>
         </li>
         <li>
-          <a href="" [routerLink]="['/dashboard/facturation']">Facturation</a>
-        </li>
-        <li>
-          <a href="" [routerLink]="['/dashboard/protection-des-donnees']">Protection des données</a>
-        </li>
-        <li>
           <a href="" [routerLink]="['/dashboard/utilisateurs']">Utilisateurs</a>
         </li>
-        <li>
+        <!-- <li>
           <a href="" (click)="disConnection($event)">Déconnexion</a>
-        </li>
+        </li> -->
 
       </ul>
     </li>
@@ -95,6 +90,38 @@
         </li>
       </ul>
     </li> -->
+    
+    <!--li>
+      <a href="" class="text-menu">
+        <span class="content-img" id="new">
+        </span>
+      </a>
+      <ul class="dropdownn">
+        <li>
+          <p>Nouveautés</p>
+        </li>
+      </ul>
+    </li-->
+    <li>
+      <a href="" class="text-menu">
+        <span class="content-img" id="new">
+        </span>
+      </a>
+      <ul class="dropdownn">
+        <li>
+          <p id="ma_formule">OFFRE {{ offer_id }}</p>
+        </li>
+        <li>
+          <a href="" [routerLink]="['/subscription']">Changer de formule</a>
+        </li>
+        <li>
+          <a href="" [routerLink]="['/dashboard/facturation']">Facturation</a>
+        </li>
+        <li>
+          <a href="" [routerLink]="['/dashboard/protection-des-donnees']">Protection des données</a>
+        </li>
+      </ul>
+    </li>
     <li>
       <a href="" class="text-menu">
         <span class="content-img" id="help">
@@ -102,7 +129,7 @@
       </a>
       <ul class="dropdownn">
         <li>
-          <p>Besoin d'aides ?</p>
+          <p>Besoin d'aide ?</p>
         </li>
         <li>
           <a href="" [routerLink]="">FAQ</a>
@@ -114,29 +141,16 @@
     </li>
     <li>
       <a href="" class="text-menu">
-        <span class="content-img" id="new">
+        <span class="content-img" id="logout">
         </span>
       </a>
       <ul class="dropdownn">
         <li>
-          <p>Nouveautés</p>
+          <p><a href="" (click)="disConnection($event)">Déconnexion</a></p>
         </li>
       </ul>
     </li>
     <li>
-      <a href="" class="text-menu">
-        <span class="content-img" id="new">
-        </span>
-      </a>
-      <ul class="dropdownn">
-        <li>
-          <p id="ma_formule">OFFRE {{ offer_id }}</p>
-        </li>
-        <li>
-          <p><a href="" [routerLink]="['/subscription']">Formules</a></p>
-        </li>
-      </ul>
-    </li>
 
 
   </ul>

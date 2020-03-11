@@ -1,46 +1,38 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
+/*Colors*/
 $text-color: #212529;
-$text-color-white: #ffffff;
-$color-white-background:#fff;
-$color-black-background:#212529;
-$color-black-background-seconde:#2b3035;
-$color-gold-background:#f2bb13;
-$color-gray-background:#5f5c5c;
+$color-white: white;
+$color-gray:#55728C;
+$color-orange:#e34e26;
+$color-principal-blue:#1d3552;
+$color-pricipal-blue-light:#e9f1f4;
+$color-background-blue: #c1d5df;
+$color-blue-light:#1f7eab;
+
+/*Responsive*/
 $smallDevice: "screen and (min-width: 200px) and (max-width: 640px)";
 $deviceMaxDesktop: "screen and (max-width: 1024px)";
-$color-pink:#f44336;
-$color-orange-light:#e34e26;
-$color-gray-blue:#4b6780;
+
+/*Font*/
 $font-family-home: "Open Sans", Open Sans;
 $font-poppins:'Poppins', sans-serif;
 $font-size-home: 14px;
-$color-gold: #f2bb13;
-$color-gold-second:#f28730;
-$color-grey: #7e8082;
-$color-blue:rgb(84, 114, 141);
-$color-principal-blue:#1d3551;
-$color-principal-blue-hover:#122740;
-$color-pricipal-blue-light:#eaeff3;
-$color-background-blue: #c1d5e0;
-$color-principal-orange:#ce5637;
-$color-blue-light:#186998;
 
-$logoPath: "src/assets/logo.png";
-$background-color: #f9f9f9;
-$border-table: 1px solid #1d3551;
-$color-table:#e7e7e7;
-$color-border-second:#ccc;
-$border-table-second:1px solid #f0eeee;
+/*Borders*/
+$border-table: 1px solid #1d3552;
 $border-radius: 4px;
+
+/*Path logo*/
+$logoPath: "src/assets/logo.png";
 
 
 ::ng-deep .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element{
-  background-color: #e15028!important;
+  background-color: $color-orange!important;
 }
 
 ::ng-deep .mat-checkbox-checked.mat-accent ::ng-deep .mat-checkbox-background, ::ng-deep .mat-checkbox-indeterminate.mat-accent ::ng-deep.mat-checkbox-background {
-  background-color: #e15028!important;
+  background-color: $color-orange!important;
   // border-radius: 100px!important;
   // position: absolute!important;
   // left: 3.5px!important;

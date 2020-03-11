@@ -1,17 +1,65 @@
 <div id="top-bar">
 
-  <div class="langage-point">
-    point
-  </div>
+ <div class="segment1">
+    
+       <div class="chart-block">
+        <!-- <igx-item-legend #legend height="100px" width="100px">
+        </igx-item-legend> -->
+        <igx-doughnut-chart height="100%" width="100%">
+            <igx-ring-series
+              
+                [dataSource]="technoDonuts"
+                labelMemberPath="label"
+                valueMemberPath="value"
+                title="value"
+              >
+            </igx-ring-series>
+          
+          </igx-doughnut-chart>
+       </div>
+       
+        <div class="container-langage">
+            <span>Points: <p>{{poinTotal}} pts</p></span>
+            <span>Questions: <p>{{this.yourCampaign[0].questions.length}}</p></span>
+            <span>Durée totale: <p>{{convertSecondsToMinutes(timeAllquestionCampgnDivice)}} à {{convertSecondsToMinutes(timeAllquestionCampagn)}} min</p></span>
+
+        </div>
+
+        <div class="state-techno-content">
+            <div *ngFor="let donut of technoDonuts">
+              <div class="state-techno" matTooltip="Info about the action">
+                <p class="name-langage" style="color:rgb(242, 187, 19)">
+                  {{donut.label}}
+                  <span>({{donut.value}}) pts</span>
+                  <span class="icon-chevron fas fa-chevron-up"></span>
+
+                  <span class="question-time">
+                    14 questions
+                    16 à 31 min
+                  </span>
+                </p>
+                
+              
+              </div>
+            </div>
+        
+        </div>
+        <div class="score-moyen">
+          <h4 class="title-score"></h4>
+          <div class="score-number-and-diagrame">
+              <strong class="number">32%</strong>
+              <i class="info-icon fas fa-info-circle"></i>
+          </div>
+        </div>
+ </div>
 
   <div class="segment2">
-
     <button class="custom-buttom custom-buttom-anul" mat-flat-button [routerLink]="['/dashboard/campaigns']">
       <i class="fas fa-chevron-left icon-arrow-btn"></i>
       Retour
     </button>
-    <button class="custom-buttom" [ngClass]="allQuestionLevel.length > 0 ? 'button-enabled' : 'button-disabled'"
-      [disabled]="allQuestionLevel.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
+    <button class="custom-buttom" [ngClass]="allQuestionLevel && allQuestionLevel.length > 0 ? 'button-enabled' : 'button-disabled'"
+      [disabled]="allQuestionLevel && allQuestionLevel.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
       Enregistrer
     </button>
 

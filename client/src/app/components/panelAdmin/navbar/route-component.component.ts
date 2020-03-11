@@ -2,7 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter, Inject, ViewChild } fro
 import { MatBottomSheet, MatBottomSheetRef } from "@angular/material";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ApiClientService, API_URI_NOTIFICATIONS } from 'src/app/api-client/api-client.service';
+import { ApiClientService, API_URI_NOTIFICATIONS, API_URI_USER } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from '../../home/register/register.service';
 
 
@@ -21,36 +21,49 @@ export class RouteComponentComponent implements OnInit {
   public viewcontentDefaults: boolean;
   public notifications =  [];
   public notifUnread = 0;
+
+
   @Output() ContentViewDefault = new EventEmitter<any>();
 
-  constructor(public dialog: MatDialog, private bottomSheet: MatBottomSheet, public apiClientService: ApiClientService,public route: Router, public decryptTokenService: DecryptTokenService) { }
+  constructor(public dialog: MatDialog, private bottomSheet: MatBottomSheet,
+    public apiClientService: ApiClientService,public route: Router,
+    public decryptTokenService: DecryptTokenService) { }
   // openBottomSheet(): void {
   //   this.bottomSheet.open(PopupMonOffre);
   // }
+
+
+
   ngOnInit() {
-    this.offer_id = this.decryptTokenService.offer_id;
-    switch(this.offer_id){
-      case 14 :
-      this.offer_id = 'Gratuit';
-      break;
-      case 15 :
-      this.offer_id = '1 TEST';
-      break;
-      case 16 :
-      this.offer_id = '50 TESTS';
-      break;
-      case 17 :
-      this.offer_id = '100 TESTS';
-      break;
-      case 18 :
-      this.offer_id = 'ENTREPRISE';
-      break;
-      case 19 :
-      this.offer_id = 'ENTREPRISE++';
-      break;
-      default:
-      this.offer_id = 'Gratuit';
-    }
+
+    this.apiClientService.get(API_URI_USER + '/' + this.decryptTokenService.userId)
+    .subscribe(user => {
+      this.offer_id = user.offer_id.id;
+      switch(this.offer_id){
+        case 14 :
+        this.offer_id = 'Gratuit';
+        break;
+        case 15 :
+        this.offer_id = '1 TEST';
+        break;
+        case 16 :
+        this.offer_id = '50 TESTS';
+        break;
+        case 17 :
+        this.offer_id = '100 TESTS';
+        break;
+        case 18 :
+        this.offer_id = 'ENTREPRISE';
+        break;
+        case 19 :
+        this.offer_id = 'ENTREPRISE++';
+        break;
+        default:
+        this.offer_id = 'Gratuit';
+      }
+    });
+
+
 
     let textMenu = document.querySelectorAll('.text-menu');
 

@@ -13,7 +13,7 @@
 }
 
 .questions-container{
-  padding: 100px 0px 10px 0px;
+  padding: 120px 0px 10px 0px;
   height: 100%;
 }
 
@@ -22,7 +22,7 @@
    
   border:$border-table;
   border-radius: $border-radius;
-  background: $color-white-background;
+  background: $color-white;
   
 
   #select {
@@ -42,7 +42,7 @@
       #select span {
         font-size: 20px;
          
-        color: $color-grey;
+        color: $color-gray;
         margin: 20px 0px 0px;
       }
     }
@@ -64,7 +64,7 @@
   background-color: $color-background-blue;
   
   .cadreQuestion {
-    padding: 125px 15px 10px 15px;
+    padding: 115px 15px 10px 15px;
     margin: 0 auto;
     width: 100%;
   }
@@ -76,25 +76,19 @@
 
 #button {
   height: 50px;
-  color: #e15028;
-  border:1px solid #e15028;
+  color: $color-orange;
+  border:1px solid $color-orange;
   border-radius: 100px;
    
   outline: none;
   &:hover{
-    background-color: #e15028;
+    background-color: $color-orange;
     color: white;
   }
 }
 
-#icon {
-  color: $color-gold;
-  margin-right: 10px;
-}
-
 #title {
   height: 110px;
-  border-bottom: $border-table-second;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -134,7 +128,7 @@
 }
 
 .info {
-  color: $color-grey;
+  color: $color-gray;
   margin: 0 15px 0 0px;
 }
 
@@ -145,18 +139,18 @@
   .mat-ripple-element {
   opacity: 0.5 !important;
   /*click effect color change*/
-  background-color: #e15028 !important;
+  background-color: $color-orange !important;
 }
 
 :host ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
-  background-color: #e15028 !important;
+  background-color: $color-orange !important;
   /*inner circle color change*/
 }
 
 :host
   ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked
   .mat-radio-outer-circle {
-  border-color: #e15028 !important;
+  border-color: $color-orange !important;
   /*outer ring color change*/
 }
 
@@ -206,7 +200,7 @@
   #select span {
     font-size: 20px;
      
-    color: $color-grey;
+    color: $color-gray;
     margin: 20px 140px 25px;
 
   
@@ -231,7 +225,7 @@
   #select span {
     font-size: 20px;
      
-    color: $color-grey;
+    color: $color-gray;
  
   }
 }
@@ -247,7 +241,7 @@
   #select span {
     font-size: 20px;
      
-    color: $color-grey;
+    color: $color-gray;
     margin: 20px 140px 25px;
   }
 }

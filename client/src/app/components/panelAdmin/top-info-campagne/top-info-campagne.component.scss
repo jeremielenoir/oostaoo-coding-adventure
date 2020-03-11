@@ -1,20 +1,166 @@
 @import"../../../../roodeo-variables.scss";
+
 #top-bar {
+  display: flex;
+  width: 100%;
+  border: $border-table;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: $color-pricipal-blue-light;
+  display: flex;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 0px 15px;
+
+  .custom-buttom,.mat-flat-button {
+    // height: 100%;
+    line-height: 0px;
+    background: $color-orange!important;
+    border-radius: 0px !important;
+    font-size: 14px !important;
+    contain: content;
+    padding: 19px 40px !important;
+    color: $color-white !important;
+    height: 67.5px;   
+    outline: none;
+  }
+
+  .button-disabled{
+    line-height: 0px;
+    background: grey!important;
+    border-radius: 0px !important;
+    font-size: 14px !important;
+    contain: content;
+    padding: 19px 40px !important;
+    color: $color-white !important;
+    height: 67.5px; 
+    outline: none; 
+}
+
+  .custom-buttom-anul{
+    background-color: $color-gray!important;
+    outline: none;
+  }
+
+  .icon-arrow-btn{
+    font-size: 25px;
+    position: relative;
+    left: -12px;
+  }
+
+
+
+  .segment1 {
     display: flex;
-    width: 100%;
-    border: $border-table;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    background-color: $color-pricipal-blue-light;
-    display: flex;
-    border-bottom: 1px solid #e7e7e7;
-    padding:0px 15px;
-   
-    .segment2{
-        display: flex;
-        align-items: center;
-        margin-top: -1px;
+    flex-direction: row;
+    flex: 11;
+    align-items: center;
+    .chart-block {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
     }
-    
+
+    .container-langage {
+      display: flex;
+      padding: 15px 45px 15px 20px;
+      position: relative;
+      border-right: 1px solid #e7e7e7;
+      flex-direction: column;
+      justify-content: center;
+
+      span {
+        display: block;
+        font-size: 12px;
+        font-weight: bold;
+        p{
+          display: inline-block;
+          margin:0px!important;
+          font-weight: 400!important;
+        }
+      }
+    }
+
+    .state-techno-content {
+      display: flex;
+      padding: 15px;
+      align-items: center;
+
+      .state-techno {
+        color: #7e8082;
+        padding: 0 20px;
+        font-size: 12px;
+
+        &:not(:first-child) {
+          border-left: 1px solid #e7e7e7;
+        }
+
+        p {
+          margin-bottom: 0px !important;
+          margin-top: 0px !important;
+        }
+
+        .name-langage {
+          font-weight: 600;
+          font-size: 12px;
+          margin-bottom: 0px !important;
+          .question-time{
+            color:rgb(126, 128, 130);
+            font-weight: 400;
+            display: block;
+          }
+
+          .icon-chevron {
+            transform: rotate(180deg);
+            margin-left: 10px;
+          }
+        }
+
+
+      }
+    }
+
+    .score-moyen {
+      display: flex;
+      padding: 15px;
+      flex-direction: row;
+      border-left: 1px solid #e7e7e7;
+
+      .title-score {
+        max-width: 100px;
+        color: #7e8082;
+        font-size: 12px;
+        font-weight: 600;
+        padding-right: 15px;
+      }
+      .score-number-and-diagrame{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          .number{
+            color: #f2bb13;
+            font-size: 25px;
+            font-weight: 600;
+          }
+
+          .info-icon{
+             font-size: 18px;
+             color: #7e8082;
+             margin-left: 10px;
+             margin-top: 2px;
+             &:hover{
+                 cursor: pointer;
+             }
+          }
+      }
+    }
+  }
+
+  .segment2 {
+    display: flex;
+    align-items: center;
+    margin-top: -1px;
+  }
+
 }

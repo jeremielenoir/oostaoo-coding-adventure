@@ -18,7 +18,7 @@ export class StripePaymentComponent implements OnInit {
   userInfo: any;
 
   stripeError: string = null;
-  stripeSuccess: string=null;
+  stripeSuccess: string = null;
   stripeLoader = false;
 
   payload: any;
@@ -32,17 +32,17 @@ export class StripePaymentComponent implements OnInit {
   stripeTest: FormGroup;
 
   constructor(private router: Router,
-    private apiClientService: ApiClientService,
-    private fb: FormBuilder,
-    private stripeService: StripeService,
-    private session: SessionService,
-    private userToken: DecryptTokenService
+              private apiClientService: ApiClientService,
+              private fb: FormBuilder,
+              private stripeService: StripeService,
+              private session: SessionService,
+              private userToken: DecryptTokenService
   ) { }
 
   ngOnInit() {
     window.scroll(0,0);
     // recuperation de l'offre
-    //this.offerChoice = this.session.offerChoice;
+    // this.offerChoice = this.session.offerChoice;
     this.offerChoice = JSON.parse(localStorage.getItem('offerChoice'));
 
     // info utilisateur a recuperer de la bdd
@@ -104,19 +104,19 @@ export class StripePaymentComponent implements OnInit {
             email: this.userInfo.email,
             token: result.token
           };
-            this.apiClientService.post(API_URI_PAYMENT + '/pay', this.payload)
+          this.apiClientService.post(API_URI_PAYMENT + '/pay', this.payload)
               .subscribe(res => {
 
-                if(!res.status){
-                  this.stripeError = "Votre paiement a échoué";
-                  if(this.card){
+                if (!res.status) {
+                  this.stripeError = 'Votre paiement a échoué';
+                  if (this.card) {
                     this.card.unmount();
                     this.card.mount('#card-element');
                   }
-                  setTimeout(()=>{this.stripeError = ''}, 2000);
+                  setTimeout(() => {this.stripeError = ''; }, 2000);
                   this.stripeLoader = false;
 
-                }else if(res.status=='succeeded' || 'active'){
+                } else if (res.status === 'succeeded' || 'active') {
                   this.paymentCreationBody = {
                     amount: this.offerChoice.price,
                     offer_id: this.offerChoice.id,
@@ -125,35 +125,35 @@ export class StripePaymentComponent implements OnInit {
                     user_id: this.userInfo.id,
                     date_payment: Date.now(),
                     paymentId: res.id
-                  }
+                  };
 
-                    this.apiClientService.post(API_URI_PAYMENT, this.paymentCreationBody)
-                    .subscribe(res=>{
-
+                  this.apiClientService.post(API_URI_PAYMENT, this.paymentCreationBody)
+                    .subscribe( res => {
                       const newToken = res.jwt;
 
-                      if(res.refund){
-                           if(this.card){
+                      if (res.refund) {
+                           if (this.card) {
                               this.card.unmount();
                            }
-                          setTimeout(()=>{
+                           setTimeout(() => {
                               this.stripeError = '';
                               this.card.mount('#card-element');
                           }, 2000);
 
-                           this.stripeError = "Un problème technique est survenu";
+                           this.stripeError = 'Un problème technique est survenu';
                            this.stripeLoader = false;
-                          return;
+                           return;
 
-                      }else{
+                      } else {
+
                           localStorage.setItem('currentUser', newToken);
                           this.stripeSuccess = 'Votre paiement a été effectué';
                           this.stripeLoader = false;
-                          setTimeout(()=>{
+                          setTimeout(() => {
                             this.router.navigate(['/dashboard/campaigns']);
                           }, 1200);
                       }
-                    })
+                    });
                 }
               });
 

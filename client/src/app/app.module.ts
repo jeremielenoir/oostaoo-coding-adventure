@@ -89,8 +89,16 @@ import { RapportDetailleComponent } from './components/panelAdmin/edit-campagne/
 // https://www.npmjs.com/package/ngx-stripe
 import { NgxStripeModule } from 'ngx-stripe';
 import { RatingFeedbackComponent } from './components/panelAdmin/client-test/fin-test/rating-feedback/rating-feedback.component';
+import { QuestionComponent } from './components/panelAdmin/question/question.component';
 import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campagne/top-info-campagne.component';
+import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
+import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
+import { IgxDoughnutChartModule } from 'igniteui-angular-charts';
+<<<<<<< Updated upstream
+import { NgxCaptchaModule } from 'ngx-captcha';
 
+=======
+>>>>>>> Stashed changes
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -153,7 +161,10 @@ import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campa
     FonctionnaliteComponent,
     StripePaymentComponent,
     RatingFeedbackComponent,
-    TopInfoCampagneComponent
+    QuestionComponent,
+    TopInfoCampagneComponent,
+    MotDePasseOublieComponent,
+    SubscriptionComponent
   ],
   imports: [
     BrowserModule,
@@ -171,7 +182,13 @@ import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campa
     NgxEditorModule,
     OrderModule,
     ScrollToModule.forRoot(),
-    NgxStripeModule.forRoot('pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq')
+    NgxStripeModule.forRoot('pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq'),
+    IgxDoughnutChartModule,
+<<<<<<< Updated upstream
+    NgxCaptchaModule
+=======
+    
+>>>>>>> Stashed changes
   ],
   providers: [
     ApiClientService,

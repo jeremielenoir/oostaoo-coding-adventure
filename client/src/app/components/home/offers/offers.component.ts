@@ -56,7 +56,7 @@ export class OffersComponent implements OnInit {
       //   // version gratuite
       //   this.router.navigate(['/dashboard/campaigns']);
       // } else {
-        if (this.router.url.startsWith('/subscription')) {
+      if (this.router.url.startsWith('/subscription')) {
           // traitement user back
           // this.session.offerChoice = offer;
           localStorage.setItem('offerChoice', JSON.stringify(offer));

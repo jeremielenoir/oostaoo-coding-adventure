@@ -7,7 +7,7 @@
 
 #content {
   background: $color-background-blue;
-  padding-top: 30px;
+  padding-top: 95px;
   margin: 0px auto;
   .icon {
     margin: 5px;
@@ -46,7 +46,7 @@
             width: 100%;
             height: 100%;
             padding: 0 50px 0 35px;
-            font-size: 14px;
+            font-size: $font-size-home;
             outline: none;
             border: none;
           }
@@ -62,7 +62,7 @@
           border: none;
           padding: 0 35px;
           display: flex;
-          font-size: 14px;
+          font-size: $font-size-home;
           transition: background-color 200ms;
           text-align: center;
            
@@ -86,7 +86,7 @@
           border-radius: $border-radius;
           padding: 0 20px;
           display: flex;
-          font-size: 14px;
+          font-size: $font-size-home;
           align-items: center;
           background-color: white;
           .btn-icon-utilisateur {
@@ -210,13 +210,13 @@
 }
 
 .modall > .modall-content {
-  padding: 20px;
+  padding: 30px;
   max-width: 875px;
   flex-wrap: wrap;
   .content-form-last {
     padding: 20px;
     .title-gestion-perm {
-      font-size: 14px;
+      font-size: $font-size-home;
       margin-bottom: 5px;
       text-transform: uppercase;
     }
@@ -268,7 +268,7 @@
           color: #20252a;
           padding: 4px 7px;
           display: flex;
-          font-size: 14px;
+          font-size: $font-size-home;
           align-items: center;
           border-left: 1px solid #ce5637;
           border-bottom: 1px solid #ce5637;
@@ -284,7 +284,7 @@
     flex-wrap: wrap;
     .form-groupe {
       color: #20252a;
-      padding: 20px;
+      padding: 5px 15px;
       font-size: 16px;
       flex-basis: 50%;
       .champ-form {
@@ -293,7 +293,7 @@
         background-color: #e7e9eb;
         font-weight: 400;
         font-size: 13px;
-        border: 1px solid $color-principal-blue;
+        border: $border-table;
         background: #fff;
         outline: none;
         width: 100%;
@@ -323,7 +323,7 @@
             flex: 1 0 auto;
             width: auto;
             display: block;
-            font-size: 14px;
+            font-size: $font-size-home;
             text-transform: uppercase;
             margin-bottom: 0px;
           }
@@ -360,7 +360,7 @@
   width: 17px;
   border: 2px solid #7e8082;
   display: inline-block;
-  border-radius: 2px;
+  border-radius: $border-radius;
   margin-top: 4px;
 }
 
@@ -394,7 +394,7 @@
   height: 50px;
   border: none;
   padding: 0 20px;
-  font-size: 14px;
+  font-size: $font-size-home;
   transition: background-color 200ms;
    
   text-transform: uppercase;

@@ -50,8 +50,8 @@ $text-color-client-test: #333;
     margin-bottom: 0;
     width: 200px;
     height: 50px;
-    border: 1px solid $color-principal-blue;
-    font-size: 14px;
+    border: $border-table;
+    font-size: $font-size-home;
     text-align: center;
     transition: all 0.2s;
     text-transform: uppercase;
@@ -59,7 +59,7 @@ $text-color-client-test: #333;
       background-color: $color-principal-blue;
       color: white;
       &:hover{
-        background-color: $color-principal-blue-hover
+        background-color: $color-principal-blue;
       }
     } @else {
       background: transparent;
@@ -218,7 +218,7 @@ p {
         background-color: $color-principal-blue;
       }
       &:not(:disabled):last-child:hover {
-        background-color: $color-principal-blue-hover;
+        background-color: $color-principal-blue;
       }
     }
   }

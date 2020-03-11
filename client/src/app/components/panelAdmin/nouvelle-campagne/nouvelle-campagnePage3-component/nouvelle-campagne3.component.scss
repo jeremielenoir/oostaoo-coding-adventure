@@ -23,18 +23,6 @@
   .chevron-bottom{
     transform: rotate(90deg);
   }
-.custom-buttom,.mat-flat-button {
-    // height: 100%;
-    line-height: 0px;
-    background: $color-principal-blue!important;
-    border-radius: 0px !important;
-    font-size: 14px !important;
-    contain: content;
-    padding: 15px 40px !important;
-    color: $text-color-white !important;
-    height: 64.5px;   
-    outline: none;
-}
 
 // ::ng-deep .cdk-overlay-pane{
 //     width: 165px;
@@ -44,65 +32,44 @@
     width: 100%!important;
     border-radius: 0px!important;
 }
-.custom-buttom-anul{
-    background-color: $color-gray-blue!important;
-    outline: none;
-   
-}
-
-.icon-arrow-btn{
-    font-size: 25px;
-    position: relative;
-    left: -12px;
-}
-
 
 #arrow {
     position: absolute;
     top: 16px;
     right: -15px;
-    background: $text-color-white;
+    background: $color-white;
     text-align: center;
-    font-size: 14px;
+    font-size: $font-size-home;
     line-height: 28px;
-    border: 1px solid $color-grey;
+    border: 1px solid $color-gray;
     border-radius: 50%;
     width: 30px;
     height: 30px;
 }
 
-#techno {
-    color: $color-gold-second;
-}
-
-.drop-icon {
-    color: $color-gold;
-}
-
-
 .info {
-    color: $color-grey;
+    color: $color-gray;
 }
 
 .button-disabled{
     line-height: 0px;
     background: grey!important;
     border-radius: 0px !important;
-    font-size: 14px !important;
+    font-size: $font-size-home !important;
     contain: content;
     padding: 15px 40px !important;
-    color: $text-color-white !important;
+    color: $color-white !important;
     height: 64.5px; 
     outline: none; 
 }
 .button-enabled{
     line-height: 0px;
-    background: $color-orange-light!important;
+    background: $color-orange!important;
     border-radius: 0px !important;
-    font-size: 14px !important;
+    font-size: $font-size-home !important;
     contain: content;
     padding: 15px 40px !important;
-    color: $text-color-white !important;
+    color: $color-white !important;
     height: 64.5px;  
     outline: none;
 }
@@ -124,22 +91,22 @@
     border-bottom: $border-table;
     padding-left: 18px;
     align-items: center;
-    background: #fff;
+    background: $color-white;
     justify-content: space-between;
     #div-search {
         display: flex;
         
         .search-input{
-            font-size: 14px;
-            background-color: white;
+            font-size: $font-size-home;
+            background-color: $color-white;
             border:none;
-            border-bottom: 1px solid #de522b;
+            border-bottom: 1px solid $color-orange;
             outline: none;
             padding: 6px 6px;
             width: 150px;
             &::placeholder{
                 font-family: $font-poppins;
-                color:$color-orange-light;
+                color:$color-orange;
                 
             }
         }
@@ -151,9 +118,9 @@
         }
     }
     .search-advanced{
-        color:$color-orange-light;
+        color:$color-orange;
         font-family: $font-poppins;
-        font-size: 14px;
+        font-size: $font-size-home;
         justify-content: center;
         margin-left: 12px;
         margin-top: -10px;
@@ -197,20 +164,14 @@
     }
     .bar-text{
         text-transform: uppercase;
-        font-size: 14px;
+        font-size: $font-size-home;
         margin-bottom: 0;
-        font-family: "Poppins", sans-serif;
+        font-family: $font-poppins;
          
         letter-spacing: 1.5px;
         padding-top: 7px;
     }
 }
-
-
-#bar-btn-search {
-    background: $color-gold-background!important;
-}
-
 
 :host ::ng-deep .mat-button-wrapper {
     contain: content;
@@ -234,10 +195,10 @@
     line-height: 0px;
     background: $color-principal-blue!important;
     border-radius: 0px !important;
-    font-size: 14px !important;
+    font-size: $font-size-home !important;
     contain: content;
     padding: 15px 40px !important;
-    color: $text-color-white !important;
+    color: $color-white !important;
     height: 64.5px;   
     outline: none;
 }
@@ -251,9 +212,8 @@
     border-radius: 0px!important;
 }
 .custom-buttom-anul{
-    background-color: $color-gray-blue!important;
+    background-color: $color-gray!important;
     outline: none;
-   
 }
 
 .icon-arrow-btn{
@@ -295,7 +255,7 @@
 
         #score{
 
-            color:$color-orange-light;
+            color:$color-orange;
             font-size: 30px;
             margin-bottom: 0px;
             margin-top: -5px;
@@ -310,48 +270,39 @@
     position: absolute;
     top: 16px;
     right: -15px;
-    background: $text-color-white;
+    background: $color-white;
     text-align: center;
-    font-size: 14px;
+    font-size: $font-size-home;
     line-height: 28px;
-    border: 1px solid $color-grey;
+    border: 1px solid $color-gray;
     border-radius: 50%;
     width: 30px;
     height: 30px;
 }
 
-#techno {
-    color: $color-gold-second;
-}
-
-.drop-icon {
-    color: $color-gold;
-}
-
-
 .info {
-    color: $color-grey;
+    color: $color-gray;
 }
 
 .button-disabled{
     line-height: 0px;
     background: grey!important;
     border-radius: 0px !important;
-    font-size: 14px !important;
+    font-size: f$font-size-home!important;
     contain: content;
     padding: 15px 40px !important;
-    color: $text-color-white !important;
+    color: $color-white !important;
     height: 64.5px; 
     outline: none; 
 }
 .button-enabled{
     line-height: 0px;
-    background: $color-orange-light!important;
+    background: $color-orange!important;
     border-radius: 0px !important;
-    font-size: 14px !important;
+    font-size: $font-size-home !important;
     contain: content;
     padding: 15px 40px !important;
-    color: $text-color-white !important;
+    color: $color-white !important;
     height: 64.5px;  
     outline: none;
 }
@@ -371,22 +322,22 @@
     border-bottom: $border-table;
     padding-left: 18px;
     align-items: center;
-    background: #fff;
+    background: $color-white;
     justify-content: space-between;
     #div-search {
         display: flex;
         margin-top: -8px;
         .search-input{
-            font-size: 14px;
-            background-color: white;
+            font-size: $font-size-home;
+            background-color: $color-white;
             border:none;
-            border-bottom: 1px solid #de522b;
+            border-bottom: 1px solid $color-orange;
             outline: none;
             padding: 6px 6px;
             width: 150px;
             &::placeholder{
                 font-family: $font-poppins;
-                color:$color-orange-light;
+                color:$color-orange;
                 
             }
         }
@@ -398,9 +349,9 @@
         }
     }
     .search-advanced{
-        color:$color-orange-light;
+        color:$color-orange;
         font-family: $font-poppins;
-        font-size: 14px;
+        font-size: $font-size-home;
         justify-content: center;
         margin-left: 12px;
         i{
@@ -426,7 +377,7 @@
 }
 .bar {
     width: 100%;
-    background: #eaeff3;
+    background: $color-pricipal-blue-light;
     height: 70px;
     padding: 7px 12px;
     display: flex;
@@ -443,20 +394,14 @@
     }
     .bar-text{
         text-transform: uppercase;
-        font-size: 14px;
+        font-size: $font-size-home;
         margin-bottom: 0;
-        font-family: "Poppins", sans-serif;
+        font-family: $font-poppins;
          
         letter-spacing: 1.5px;
         padding-top: 7px;
     }
 }
-
-
-#bar-btn-search {
-    background: $color-gold-background!important;
-}
-
 
 :host ::ng-deep .mat-button-wrapper {
     contain: content;
@@ -486,11 +431,11 @@
 
 .example-list {
     flex: 1 1 0px;
-    background: $text-color-white!important;
+    background: $color-white!important;
     display: block;
     overflow-y: auto;
     overflow-x: hidden;
-    scrollbar-color: #7f8183 #e3e3e3;
+    scrollbar-color: #7f8183 $color-pricipal-blue-light;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     
@@ -513,7 +458,7 @@
 
 .example-box {
     padding: 20px 10px;
-    border-bottom: solid 1px $color-border-second;
+    border-bottom: solid 1px $color-white;
     color: $text-color;
     display: flex;
     flex-direction: row;
@@ -521,8 +466,8 @@
     justify-content: space-between;
     box-sizing: border-box;
     cursor: move;
-    background:$color-white-background;
-    font-size: 14px;
+    background:$color-white;
+    font-size: $font-size-home;
 }
 
 :host ::ng-deep .example-box {
@@ -546,8 +491,8 @@
    .question-techno {
     display: block;
     width: 100px;
-    font-size: 14px;
-    color: $color-orange-light;
+    font-size: $font-size-home;
+    color: $color-orange;
     font-family: $font-poppins;
     text-align: center;
     margin-right:5px;
@@ -573,9 +518,9 @@
         display:none;
         padding-top: 15px;
         padding-bottom: 15px;
-        color: white;
+        color: $color-white;
         font-family: $font-poppins;
-        font-size: 14px;
+        font-size: $font-size-home;
     }
     &:hover{
         background-color: $color-blue-light;
@@ -589,7 +534,7 @@
            z-index: 3;
         }
         .question-name,.drop i,.point,.time{
-            color:white;
+            color:$color-white;
         }
         
     }
@@ -598,7 +543,7 @@
         margin-bottom: 0px;
         max-width:240px;
         flex: 4;
-        font-size: 14px;
+        font-size: $font-size-home;
         font-family: $font-poppins;
         padding-right: 6px;
         min-width: 230px;
@@ -654,7 +599,7 @@
     
     .point{
       color: $color-principal-blue;
-      font-size: 14px;
+      font-size: $font-size-home;
       font-family: $font-poppins;
        
       padding-top:20px;
@@ -678,7 +623,7 @@
         font-size: 28px;
         min-width: 50px;
         i{
-            color: $color-orange-light;
+            color: $color-orange;
         }
     }
 
@@ -688,7 +633,7 @@
         justify-content: center;
         align-items: center;
         padding-left: 5px;
-        font-size: 14px;
+        font-size: $font-size-home;
         font-family: $font-poppins;
          
         color:$color-principal-blue
@@ -704,7 +649,7 @@
 
 .cdk-drag-preview {
     box-sizing: border-box;
-    border-radius: 4px;
+    border-radius: $border-radius;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
@@ -728,7 +673,7 @@
     height: 35px;
     padding: 0px 0px;
     transition: .5s;
-    color: $color-orange-light;
+    color: $color-orange;
     font-family: $font-poppins;
     text-align: center;
     font-size: 18px;
@@ -752,8 +697,8 @@
     max-width:95%;
     height:auto;
     padding:10px;
-    background:$color-black-background;
-    color:$text-color-white;
+    background:$text-color;
+    color:$color-white;
     top:40px;
     position:absolute;
     z-index:38;

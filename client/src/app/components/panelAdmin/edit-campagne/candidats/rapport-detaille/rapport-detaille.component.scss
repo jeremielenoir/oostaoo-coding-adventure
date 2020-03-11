@@ -3,8 +3,7 @@
 #content{
     width: 100%;
     height: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 15px 12px 10px ;
     color: $color-principal-blue;
     background: $color-background-blue;
 }
@@ -13,8 +12,9 @@
 #container{
     background: white;
     border: $border-table;
+    border-radius: $border-radius;
     padding: 15px 30px;
-    margin: 20px auto;
+    margin: auto;
     width: 98%;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .header_stats{
-    color: $color-principal-orange;
+    color: $color-orange;
     font-size: 22px;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .question_number{
-    color: $color-principal-orange;
+    color: $color-orange;
 }
 
 .subtitle_h5{
@@ -68,6 +68,6 @@
 }
 
 .separator_red{
-    color: $color-principal-orange;
-    background: $color-principal-orange;
+    color: $color-orange;
+    background: $color-orange;
 }

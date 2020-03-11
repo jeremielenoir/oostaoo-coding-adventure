@@ -1,0 +1,45 @@
+<div id="forgottenPswd">
+  <div class="content">
+
+    <div class="logo">
+      <img src="../../assets/logo_ROODEO.svg" alt="Logo" />
+    </div>
+    <div id="section1">
+      <form action="">
+
+        <div class="form-line">
+          <div class="input-bloc">
+            <h6 class="input-title">Nouveau mot de passe *</h6>
+            <input [formControl]="newPassword" name="new" class="input-section1" maxlength="64" type="password">
+            <div *ngIf="submittedPassword && newPassword.invalid" class="alert alert-danger">
+              <div *ngIf="newPassword.errors.required">
+                Veuillez saisir un nouveau mot de passe.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-line">
+          <div class="input-bloc">
+            <h6 class="input-title">Confirmer le mot de passe *</h6>
+            <input [formControl]="confirmPassword" name="confirm" class="input-section1" maxlength="64" type="password">
+            <div *ngIf=" submittedPassword && confirmPassword.invalid" class="alert alert-danger">
+              <div *ngIf="confirmPassword.errors.required">
+                Veuillez remplir le champ.
+              </div>
+            </div>
+            <div *ngIf=" submittedPassword && newPassword.value !== confirmPassword.value" class="alert alert-danger">
+              Les mots de passe ne correspondent pas.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-line">
+          <div class="input-bloc">
+            <button class="btn-submit" type="submit">Enregistrer</button>
+          </div>
+        </div>
+        
+      </form>
+    </div>
+  </div>

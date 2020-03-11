@@ -26,6 +26,8 @@ import { OffersComponent } from './components/home/offers/offers.component';
 import { StripePaymentComponent } from './components/home/stripe-payment/stripe-payment.component';
 import { RapportDetailleComponent } from './components/panelAdmin/edit-campagne/candidats/rapport-detaille/rapport-detaille.component';
 import { RapportDetailleExempleComponent } from './components/home/rapport-detaille/rapport-detaille.component';
+import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
+import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
 
 const routes: Routes = [
   {
@@ -47,8 +49,12 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
+    path: 'home/register/mot-de-passe-oublie',
+    component: MotDePasseOublieComponent
+  },
+  {
     path: 'subscription',
-    component: OffersComponent,
+    component: SubscriptionComponent,
     canActivate: [AuthGuard]
   },
   {

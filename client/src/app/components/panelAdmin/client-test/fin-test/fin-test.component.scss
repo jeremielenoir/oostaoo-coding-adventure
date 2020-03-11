@@ -146,8 +146,8 @@ body, html {
       height: 50px;
       font-size: large;
       &:hover {
-        border: 1px solid $color-principal-blue-hover;
-        background-color: $color-principal-blue-hover;
+        border: $border-table;
+        background-color: $color-principal-blue;
       }
     }
   }

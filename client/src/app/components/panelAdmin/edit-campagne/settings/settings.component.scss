@@ -1,6 +1,6 @@
 @import"../../../../../roodeo-variables.scss";
 #background {
-    padding-top: 10px;
+    padding-top: 15px;
     padding-left: 20px;
     padding-right:20px;
     height: 100%;
@@ -9,38 +9,34 @@
 
     #content{
         width: 100%;
-        //background: $background-color;
-        border-radius: 6px;
+        border-radius: $border-radius;
         // margin-bottom: 5%;
 
         // #nav{
 
         //     display: flex;
         //     width: 100%;
-        //     border-top: 0.5px solid $color-principal-orange;
-            // border-left: 1px solid $color-table;
-            // border-right: 1px solid $color-table;
+        //     border-top: 0.5px solid $color-orange;
             
             // .link-nav{
             //     width: 50%;
             //     height: 50px;
-            //     background: $color-black-background-seconde;
             //     border-radius: 2px;
-            //     color: $text-color-white;
+            //     color: $color-white;
             //     text-decoration: none;
             //     text-align: center;
             //     line-height: 50px;
-            //     border-left: 0.5px solid $color-principal-orange;
-            //     border-right: 0.5px solid $color-principal-orange;
-            //     border-top: 0.5px solid $color-principal-orange;
+            //     border-left: 0.5px solid $color-orange;
+            //     border-right: 0.5px solid $color-orange;
+            //     border-top: 0.5px solid $color-orange;
             // }
             
             // .active-link{
-            //     background: $color-white-background;
+            //     background: $color-white;
             //     color: $text-color;
-            //     border-left: 0.5px solid $color-principal-orange;
-            //     border-right: 0.5px solid $color-principal-orange;
-            //     border-top: 0.5px solid $color-principal-orange;
+            //     border-left: 0.5px solid $color-orange;
+            //     border-right: 0.5px solid $color-orange;
+            //     border-top: 0.5px solid $color-orange;
             //     /* -webkit-box-shadow: 5px 7px 26px -9px rgba(0,0,0,0.75);
             //     -moz-box-shadow: 5px 7px 26px -9px rgba(0,0,0,0.75);
             //     box-shadow: 5px 7px 26px -9px rgba(0,0,0,0.75); */
@@ -50,9 +46,9 @@
         #formbox{
             width: 100%;
             padding: 3% 8%;
-            background: $color-white-background;
+            background: $color-white;
             border: $border-table;
-            border-radius: 5px;
+            border-radius: $border-radius;
             display: flex;
             justify-content: center;
         }

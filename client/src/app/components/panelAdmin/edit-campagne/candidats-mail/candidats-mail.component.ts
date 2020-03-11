@@ -185,6 +185,9 @@ export class CandidatsMailComponent implements OnInit {
       .then((res) => {
         console.log('CANDIDATS', res);
         this.dialog.closeAll();
+        // to get the new localStorage value of tests_available with DecryptTokenService in nginit cycle
+        window.location.reload();
+
       },
         err => console.log(err)
       );

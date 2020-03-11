@@ -102,10 +102,16 @@
   }
 
 
-
-
+  .edit-entreprise{
+    padding-top: 85px;
+  }
 
   #content {
+    
+
+    .new-entreprise{
+      padding-top: 80px;
+    }
    
     #shadow-cog,
     #shadow-cog-add-images {
@@ -191,7 +197,7 @@
                   text-align: center;
                   background-color: #162c45;
                   color: #fff;
-                  font-size: 14px;
+                  font-size: $font-size-home;
                    
                   transition: background 0.2s;
                   position: relative;
@@ -217,7 +223,7 @@
                 display: flex;
                 align-items: center;
                 label {
-                  font-size: 14px;
+                  font-size: $font-size-home;
                   color: #7e8082;
                   margin-bottom: 20px;
                   padding: 15px 0;
@@ -244,8 +250,8 @@
 
               .title-edit-panel {
                 margin-top: 20px;
-                 
-                font-size: 18px;
+                margin-bottom: 20px;
+                font-size: 26px;
                 cursor: pointer;
 
                 .img-country {
@@ -342,7 +348,7 @@
               .text_number_progress {
                 font-weight: 400;
                 margin-top: -10px;
-                font-size: 14px;
+                font-size: $font-size-home;
               }
             }
           }
@@ -493,7 +499,7 @@
       &:first-child {
         background-color: $color-principal-blue;
         color: white;
-        border: 1px solid $color-principal-blue;
+        border: $border-table;
          
         &:first-child:disabled {
           opacity: 0.2;
@@ -515,17 +521,17 @@
   }
 }
 .champ-form-gestion {
-  border: 1px solid $color-principal-blue;
+  border: $border-table;
   width: 100%;
   height: 52px;
-  font-size: 14px;
+  font-size: $font-size-home;
   text-indent: 1px;
   padding: 10px 15px;
   font-weight: 400;
   outline: none;
   &:active,
   &:focus {
-    border: 1px solid $color-principal-blue !important;
+    border: $border-table !important;
   }
 }
 .block-form-flex {
@@ -591,7 +597,7 @@
   border: 1px solid #122740;
   /* width: 100%; */
   height: 52px;
-  font-size: 14px;
+  font-size: $font-size-home;
   text-indent: 1px;
   padding: 10px 15px;
 }

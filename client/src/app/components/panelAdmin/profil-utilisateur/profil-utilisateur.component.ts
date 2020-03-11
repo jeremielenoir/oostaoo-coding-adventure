@@ -25,6 +25,7 @@ export class ProfilUtilisateurComponent implements OnInit {
   submittedEmail = false;
   prenom = new FormControl('', Validators.required);
   nom = new FormControl('', Validators.required);
+  username = new FormControl('', Validators.required);
   pays = new FormControl('', Validators.required);
   langue = new FormControl('', Validators.required);
   tel = new FormControl('', Validators.required);
@@ -42,6 +43,7 @@ export class ProfilUtilisateurComponent implements OnInit {
       console.log(user);
       this.prenom = new FormControl(user[0].prenom, Validators.required);
       this.nom = new FormControl(user[0].nom, Validators.required);
+      this.username = new FormControl(user[0].username, Validators.required);
       this.pays = new FormControl(user[0].pays, Validators.required);
       this.langue = new FormControl(user[0].langue);
       this.tel = new FormControl(user[0].tel);
@@ -62,13 +64,14 @@ export class ProfilUtilisateurComponent implements OnInit {
 
   updateprofil() {
     this.submittedProfil = true;
-    if (this.prenom.value === '' || this.nom.value === '' || this.pays.value === '' || this.langue.value === 'value') {
+    if (this.prenom.value === '' || this.nom.value === '' || this.username.value === '' || this.pays.value === '' || this.langue.value === 'value') {
       this.openSnackBar('Erreur veuillez correctement remplir tous les champs requis', 'Fermer');
       return console.log('Erreur veuillez remplir tout les champs requis');
     } else {
     this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
       Prenom: this.prenom.value,
       Nom: this.nom.value,
+      Username: this.username.value,
       Pays: this.pays.value,
       Langue: this.langue.value,
       Tel: this.tel.value,
