@@ -4,6 +4,21 @@ body{
     background: white !important;
 }
 #register{
+    .logo-container{
+        position: absolute;
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+        z-index: 10;
+        top: -5px;
+        img{
+            height: 115px;
+            background: #fff;
+            border: 1px solid gray;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    }
     display: flex;
     background: white;
     height: 100vh;
@@ -55,7 +70,7 @@ body{
             flex-direction: column;
             position: relative;
             width: 50%;
-            margin: 0 0 0 28%;
+            margin: 0 0 0 35%;
             text-align: center;
             color: $color-white;
             padding-top: 25%;
@@ -98,7 +113,7 @@ body{
         justify-content: center;
 
         &.left{
-            margin: 25% 0 0 22%;
+            margin: 25% 0 0 15%;
             .button{
                 height: 40px;
                 background: $color-blue-light;
