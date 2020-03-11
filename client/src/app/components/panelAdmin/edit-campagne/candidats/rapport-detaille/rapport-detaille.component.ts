@@ -19,9 +19,12 @@ export class RapportDetailleComponent implements OnInit {
   public techno = [];
   public totalTime = 0;
 
+  public listereponse;
+  public bonnereponse;
+
   constructor(route: ActivatedRoute, public apiClientService: ApiClientService) {
     this.idCandidat = route.snapshot.params.idCandidat;
-    console.log('id candidat')
+    // console.log('id candidat')
   }
 
   ngOnInit() {
@@ -41,16 +44,23 @@ export class RapportDetailleComponent implements OnInit {
   getCandidat() {
     this.apiClientService.get(API_URI_CANDIDATS + '/' + this.idCandidat).subscribe(data => {
       this.candidat = data;
-      console.log('this candid', this.candidat);
+      // console.log('this candid', this.candidat);
       this.rapport = data.raport_candidat.rapport;
-      console.log('this rapport', this.rapport);
+      // console.log('this rapport', this.rapport);
 
 
       this.rapport.forEach(element => {
         this.rapportTechno.push(element.index_question.technologies);
         this.totalTime = this.totalTime + element.index_question.time;
+        this.listereponse = element.index_question.content.split(', ');
+        element.index_question.content = this.listereponse;
+        // console.log('choix question =', this.listereponse);
+        this.bonnereponse = element.index_question.answer_value.split(', ');
+        element.index_question.answer_value = this.bonnereponse;
+        // console.log('choix bonne reponse =', element.index_question.content);
 
       });
+      console.log('this rapport ======>', this.rapport);
 
       this.uniquetechno = this.removeDuplicates(this.rapportTechno);
       this.uniquetechno.forEach(idTechno => {
@@ -62,7 +72,7 @@ export class RapportDetailleComponent implements OnInit {
   getTechno(id) {
     this.apiClientService.get(API_URI_TECHNO + '/' + id).subscribe(data => {
       this.techno.push(data);
-      console.log('this techno', this.techno);
+      // console.log('this techno', this.techno);
     });
   }
 
