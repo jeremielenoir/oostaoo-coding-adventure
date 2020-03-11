@@ -1,4 +1,5 @@
 "use strict";
+const axios = require("axios");
 
 /**
  * Question.js controller
@@ -109,23 +110,28 @@ module.exports = {
 
   populate: async (ctx, _next) => {
     try {
-      //  console.log(" ctx.body", ctx.params)
       const { spreadsheetId, ranges } = ctx.request.body;
       const result = await strapi.services.question.fetchSpreadsheet(
         spreadsheetId,
         ranges
       );
-
+       
       const arrPromises = [];
-      result.forEach(async r => {
-        try {
-          arrPromises.push(strapi.services.question.add(r));
-        } catch (error) {
-          throw error;
-        }
+
+      result.forEach(question => {
+        arrPromises.push(
+          new Promise((resolve, reject) => {
+            return strapi.services.question
+              .add({
+                ...question,
+                technologies: question.technologies
+              })
+              .then(r => resolve(r))
+              .catch(err => reject(err));
+          })
+        );
       });
       const results = await Promise.all(arrPromises);
-
       return results;
     } catch (error) {
       throw error;

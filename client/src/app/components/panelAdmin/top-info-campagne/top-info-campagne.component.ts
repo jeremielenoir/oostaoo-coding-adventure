@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 import { TooltipPosition, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { element } from '@angular/core/src/render3';
 @Component({
   selector: 'app-top-info-campagne',
   templateUrl: './top-info-campagne.component.html',
@@ -21,7 +22,11 @@ export class TopInfoCampagneComponent implements OnInit {
   @Input('yourCampaign') yourCampaign
   public globalId:number;
   public updateQuestionsCampaign:number[] = [];
-  public technoDonuts:any[] = []
+  public technoDonuts:any[] = [];
+  public poinTotal:number;
+  public timeAllquestionCampagn:number = 0;
+  public timeAllquestionCampgnDivice:number = 0;
+
 
   constructor(public apiClientService: ApiClientService,private router: Router, 
     public decryptTokenService: DecryptTokenService,private _snackBar: MatSnackBar,private route: ActivatedRoute) { }
@@ -40,32 +45,62 @@ export class TopInfoCampagneComponent implements OnInit {
     this.technoMethod()
   }
 
+  convertSecondsToMinutes(time){
+    return Math.floor(time / 60);
+  }
+
   technoMethod(){
-    let pointTotal = 0;
+    let pointDepart = 0;
+    let poinTotal = null;
     let points = [];
-    if(this.yourCampaign){
+    let arraytimeAllquestionCampagn = [];
+    let timeQuestionCampagne
+    if(this.yourCampaign && this.yourCampaign.length > 0){
+
+      for(let timequestion of this.yourCampaign[0].questions){
+
+        arraytimeAllquestionCampagn.push(timequestion.time);
+      }
+
       for(let technoElement of this.yourCampaign[0].technologies){
 
         for(let question of this.allQuestionLevel){
-
-          if(technoElement['id'] == question['technologies'].id){
-            console.log('question point',question.point)
-            pointTotal = pointTotal + question['points'];
-            console.log('poinTotal',pointTotal)
-            
-            console.log('name techno',question.technologies.name)
-          }
+          
+            if(technoElement['id'] == question['technologies'].id){
+              pointDepart = pointDepart + question['points'];
+            }
+      }
+     
+      points.push(pointDepart);
+      points  = points.filter(element => element !== 0);
+      if(points && points.length > 0 ){
+        this.poinTotal = points.reduce((accumulator,currenValue) => accumulator + currenValue)
       }
 
-      points.push(pointTotal);
-      pointTotal = 0;
-      console.log('points',points)
-      this.technoDonuts.push({label:technoElement['name'],value:pointTotal})
-        
+    
+
+       for(let time of arraytimeAllquestionCampagn ){
+        timeQuestionCampagne = timeQuestionCampagne + time;
+        this.timeAllquestionCampagn = timeQuestionCampagne;
+        this.timeAllquestionCampgnDivice = timeQuestionCampagne / 2
+       }
+  
+       timeQuestionCampagne = 0
+     
+      this.technoDonuts.push({label:technoElement['name'],value:pointDepart});
+      this.technoDonuts = this.technoDonuts.filter(element => element.value != 0)
+      
+      pointDepart = 0;
+      
     }
 
+    console.log('points',points)
+    console.log('poinTotal',poinTotal)
+    console.log('technoDonuts',this.technoDonuts);
+    console.log('arraytimeAllquestionCampagn ---->',arraytimeAllquestionCampagn)
+
     }
-    console.log('this.technoDonuts ---->',this.technoDonuts)
+    // console.log('this.technoDonuts ---->',this.technoDonuts)
 
   }
   SendQuestionSeleditd(id) {

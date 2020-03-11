@@ -54,12 +54,12 @@
     display: flex;
     flex-direction: row;
     flex: 11;
+    align-items: center;
     .chart-block {
-      width: 100px;
-      height: 100px;
+      width: 60px;
+      height: 60px;
       display: flex;
       align-items: center;
-      border:1px solid red
     }
 
     .container-langage {
@@ -73,6 +73,12 @@
       span {
         display: block;
         font-size: 12px;
+        font-weight: bold;
+        p{
+          display: inline-block;
+          margin:0px!important;
+          font-weight: 400!important;
+        }
       }
     }
 
@@ -99,6 +105,11 @@
           font-weight: 600;
           font-size: 12px;
           margin-bottom: 0px !important;
+          .question-time{
+            color:rgb(126, 128, 130);
+            font-weight: 400;
+            display: block;
+          }
 
           .icon-chevron {
             transform: rotate(180deg);

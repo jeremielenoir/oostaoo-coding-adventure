@@ -15,6 +15,7 @@ const utils = require("strapi-hook-bookshelf/lib/utils/");
 const { google } = require("googleapis");
 const keys = require("../../../roodeo.json");
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
+const axios = require("axios");
 module.exports = {
   /**
    * Promise to fetch all questions.
@@ -306,6 +307,28 @@ module.exports = {
    * @return {Promise}
    */
 
+  checkTechnology: async params => {
+    return Technologies.forge(_.pick(params, "name"))
+      .fetch({})
+      .then(isTechno => {
+        if (isTechno) {
+          return isTechno.id;
+        } else {
+          return strapi.services.technologies
+            .add(params)
+            .then(techno => {
+              return techno.id;
+            })
+            .catch(err => err);
+        }
+      })
+      .catch(err => err);
+  },
+  /**
+   * Promise to fetch spreadsheet questions.
+   *
+   * @return {Promise}
+   */
   fetchSpreadsheet: async (spreadsheetId, ranges) => {
     try {
       const client = new google.auth.JWT(
@@ -331,11 +354,84 @@ module.exports = {
       for (var i = 1; i < arr.length; i++) {
         arrValues.push(arr[i]);
       }
+
+      let arrTech = [];
+
+      const techFieldValues = [...new Set(arrValues.map(val => val[1]))];
+
+      const technologies = await Technologies.fetchAll({});
+      // const filters = strapi.utils.models.convertParams("technologies", {});
+      // const populate = Technologies.associations
+      // .filter(ast => ast.autoPopulate !== false)
+      // .map(ast => ast.alias);
+      // const technologies = await Technologies.query(function(qb) {
+
+      // }).fetchAll({
+      //   withRelated: filters.populate || populate
+      // });
+      console.log("technologies", technologies);
+      if (technologies && technologies.length > 0) {
+        techFieldValues.forEach(val => {
+          technologies.forEach(tech => {
+            console.log("tech name", tech.attributes.name, "val", val);
+            if (
+              val &&
+              tech &&
+              tech.attributes &&
+              tech.attributes.name &&
+              val.toString() === tech.attributes.name.toString()
+            ) {
+              if (
+                arrTech.findIndex(t => t.name.toString() === val.toString()) < 0
+              ) {
+                arrTech.push({ name: val, id: tech.id });
+              }
+            } else {
+              arrTech.push({ name: val });
+
+              if (
+                arrTech.findIndex(t => t.name.toString() === val.toString()) < 0
+              ) {
+                arrTech.push({ name: val });
+              }
+            }
+          });
+        });
+      } else {
+        techFieldValues.forEach(techno => {
+          arrTech.push({ name: techno });
+        });
+      }
+      console.log("arrTech content", arrTech);
+      const arrTechPromise = [];
+
+      arrTech.forEach(async tech => {
+        console.log("tech", tech);
+        arrTechPromise.push(
+          new Promise((resolve, reject) => {
+            if (tech && tech.id) {
+              resolve(tech);
+            } else {
+              return strapi.services.technologies
+                .add({ name: tech.name })
+                .then(techno => resolve({ name: tech.name, id: techno.id }))
+                .catch(e => reject(e));
+            }
+          })
+        );
+      });
+
+      arrTech = await Promise.all(arrTechPromise);
+      console.log("arrTech", arrTech);
       const questions = [];
-      arrValues.forEach(async (val, _index) => {
+      arrValues.forEach((val, _index) => {
+        const tech = arrTech.find(
+          t => t && t.name && t.name.toString() === val[1]
+        );
+
         questions.push({
-        //  "id": `${index}_${val[1]}`,
-          [arrFields[1].toLowerCase()]: val[1],
+          // 'id-prefix': `${index}_${val[1]}`,
+          [arrFields[1].toLowerCase()]: tech,
           [arrFields[2].toLowerCase()]: val[2],
 
           [arrFields[3].toLowerCase()]: val[3],
