@@ -15,6 +15,7 @@ const utils = require("strapi-hook-bookshelf/lib/utils/");
 const { google } = require("googleapis");
 const keys = require("../../../roodeo.json");
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
+const axios = require("axios");
 module.exports = {
   /**
    * Promise to fetch all questions.
@@ -306,6 +307,28 @@ module.exports = {
    * @return {Promise}
    */
 
+  checkTechnology: async params => {
+    return Technologies.forge(_.pick(params, "name"))
+      .fetch({})
+      .then(isTechno => {
+        if (isTechno) {
+          return isTechno.id;
+        } else {
+          return strapi.services.technologies
+            .add(params)
+            .then(techno => {
+              return techno.id;
+            })
+            .catch(err => err);
+        }
+      })
+      .catch(err => err);
+  },
+  /**
+   * Promise to fetch spreadsheet questions.
+   *
+   * @return {Promise}
+   */
   fetchSpreadsheet: async (spreadsheetId, ranges) => {
     try {
       const client = new google.auth.JWT(
@@ -331,11 +354,39 @@ module.exports = {
       for (var i = 1; i < arr.length; i++) {
         arrValues.push(arr[i]);
       }
+       
+      let arrTech = [];
+      const technogologies = [...new Set(arrValues.map(val => val[1]))];
+
+      technogologies.forEach(techno => {
+        arrTech.push({ technology: techno });
+      });
+      const arrTechPromise = [];
+
+      arrTech.forEach(async tech => {
+        arrTechPromise.push(
+          new Promise((resolve, reject) => {
+            return strapi.services.technologies
+              .add({ name: tech.technology })
+              .then(techno =>
+                resolve({
+                  technology: tech.technology,
+                  id: techno.id
+                })
+              )
+              .catch(e => reject(e));
+          })
+        );
+      });
+      arrTech = await Promise.all(arrTechPromise);
+      
       const questions = [];
-      arrValues.forEach(async (val, _index) => {
+      arrValues.forEach((val, _index) => {
+        const tech = arrTech.find(t => t.technology.toString() === val[1]);
+        
         questions.push({
-        //  "id": `${index}_${val[1]}`,
-          [arrFields[1].toLowerCase()]: val[1],
+          // "id-prefix": `${index}_${val[1]}`,
+          [arrFields[1].toLowerCase()]: tech,
           [arrFields[2].toLowerCase()]: val[2],
 
           [arrFields[3].toLowerCase()]: val[3],
@@ -348,6 +399,8 @@ module.exports = {
           [arrFields[9].toLowerCase()]: val[9]
         });
       });
+
+     
 
       return questions;
     } catch (error) {
