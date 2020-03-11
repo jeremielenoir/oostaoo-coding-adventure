@@ -151,6 +151,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    
     this.submittedRegister = true;
 
     // stop if form is invalid
@@ -168,9 +169,11 @@ export class RegisterComponent implements OnInit {
             this.router.navigate(['/dashboard/campaigns']);
           },
           error => {
+            console.log('ERROR', error);
             this.errorRegister = error;
           }
         );
+
     }
 
   }
