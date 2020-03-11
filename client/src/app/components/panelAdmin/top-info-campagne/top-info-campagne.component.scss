@@ -15,12 +15,12 @@
   .custom-buttom,.mat-flat-button {
     // height: 100%;
     line-height: 0px;
-    background: $color-principal-orange!important;
+    background: $color-orange!important;
     border-radius: 0px !important;
     font-size: 14px !important;
     contain: content;
     padding: 19px 40px !important;
-    color: $text-color-white !important;
+    color: $color-white !important;
     height: 67.5px;   
     outline: none;
   }
@@ -32,13 +32,13 @@
     font-size: 14px !important;
     contain: content;
     padding: 19px 40px !important;
-    color: $text-color-white !important;
+    color: $color-white !important;
     height: 67.5px; 
     outline: none; 
 }
 
   .custom-buttom-anul{
-    background-color: $color-gray-blue!important;
+    background-color: $color-gray!important;
     outline: none;
   }
 

@@ -19,14 +19,14 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  border:1px solid $color-blue;
+  border: $border-table;
   -webkit-box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40); 
 box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
   align-items: center;
   height: 310px;
   .mat-card-icon{
     font-size: 60px;
-    color:$color-blue;
+    color:$color-blue-light;
   }
 
   .mat-card-content{
@@ -40,21 +40,26 @@ box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
   .mat-card-title{
     font-family:$font-poppins;
     text-transform: uppercase;
-    color:rgb(31, 54, 98);
+    color: $color-principal-blue;
     text-align: center;
     font-size: 18px!important;
     font-weight: 400;
   }
 
   .lab-item{
-    border:1px solid $color-pink;
+    border:1px solid $color-orange;
     background-color: transparent;
     display: flex;
     align-items: center;
-    color:$color-pink;
+    color:$color-orange;
     border-radius: 100px;
     outline: none;
     font-size: $font-size-home;
+
+    &:hover {
+      color: $color-principal-blue;
+      border: $border-table;
+    }
   }
 }
 
@@ -65,7 +70,7 @@ box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
   background-position: bottom left;
   background-repeat: no-repeat;
   background-size: cover;
-  border-bottom: 1px solid $color-blue;
+  border-bottom: 1px solid $color-blue-light;
   display: flex;
   color: $text-color;
   padding-top: 124px;
@@ -89,7 +94,6 @@ box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
 
   span {
     animation: topToBottom 11s linear infinite 0s;
-    color: #f2bb13;
     opacity: 0;
     overflow: hidden;
     position: absolute;
@@ -141,7 +145,7 @@ box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
 
 #text h1 {
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: $font-poppins;
   font-size: 42px;
    
   
@@ -158,7 +162,7 @@ box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
 }
 
 .custom-email input {
-  background-color: white;
+  background-color: $color-white;
   width: 100%;
 }
 
@@ -166,12 +170,7 @@ box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
   width: 300px;
 }
 
-.mat-focused .placeholder {
-  color: yellow;
-}
-
 mat-error {
-  color: yellow !important;
   margin: 0
 }
 
@@ -179,22 +178,20 @@ mat-error {
   border: 0;
 }
 
-.custom-buttom {
-  border-radius: 0px;
-  background-color: #252e38;
+// .custom-buttom {
+//   border-radius: 0px;
   
-  font-size: 14px;
-  padding: 0px 20px;
-  height: 50px;
-  margin-top: 5px
-}
+//   font-size: $font-size-home;
+//   padding: 0px 20px;
+//   height: 50px;
+//   margin-top: 5px
+// }
 
-.custom-buttom:hover {
-  background-color: #f2bb13
-}
+// .custom-buttom:hover {
+// }
 
 .input-custom {
-  background-color: white;
+  background-color: $color-white;
   padding: 15px;
 }
 

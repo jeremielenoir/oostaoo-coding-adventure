@@ -19,11 +19,11 @@
     .header-notification {
         border-bottom: $border-table;
         padding: 4px 20px 6px 0px;
-        background-color: $background-color;
+        background-color: $color-white;
        
         span {
             display: block;
-            color: $color-grey;
+            color: $color-gray;
             font-size: 12px;
             font-weight: 400;
             transform: translateX(9.3%);

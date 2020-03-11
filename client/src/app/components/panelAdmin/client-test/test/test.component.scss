@@ -54,7 +54,7 @@
         border-right: 1px solid $color-principal-blue;
         .icon-testing {
           margin-right: 15px;
-          color: $color-principal-orange;
+          color: $color-orange;
           display: block;
           font-size: 24px;
         }
@@ -152,7 +152,7 @@
       outline: 0;
       width: 98.8%;
       &:hover {
-        background-color: $color-principal-blue-hover;
+        background-color: $color-principal-blue;
       }
     }
   }

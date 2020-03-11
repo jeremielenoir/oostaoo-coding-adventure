@@ -24,8 +24,8 @@ label{
 
 input{
     height: 50px;
-    font-size: 14px;
-    border:1px solid $color-principal-blue!important;
+    font-size: $font-size-home;
+    border: $border-table!important;
     outline: none;
     border-radius: 0px!important;
 }
@@ -33,7 +33,7 @@ input{
 .button{
      
     height: 50px;
-    font-size: 14px;
+    font-size: $font-size-home;
     background-color: $color-principal-blue;
     border-radius: 0px!important;
     text-transform: uppercase;
@@ -48,12 +48,12 @@ input{
 }
 
 .m-1:hover{
-    background-color:$color-principal-blue-hover;
+    background-color:$color-principal-blue;
     color: white;
 }
 
 .information {
     font-size: 12px;
-    color: $color-grey;
+    color: $color-gray;
     margin-top: 20px;
 }

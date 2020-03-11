@@ -12,7 +12,7 @@
   margin-top: 60px;
 }
 .border1pxdashedgray-candidat {
-  border-radius: 5px;
+  border-radius: $border-radius;
 }
 .big-content {
   display: flex;
@@ -42,7 +42,7 @@
     width: 15px;
     border: 2px solid #7e8082;
     display: inline-block;
-    border-radius: 2px;
+    border-radius: $border-radius;
     margin-top: 4px;
     cursor: pointer;
   }
@@ -55,7 +55,7 @@
     top: 0px;
     width: 4px;
     height: 9px;
-    border: solid #fff;
+    border: solid $color-white;
     border-width: 0 2px 2px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
@@ -66,8 +66,8 @@
     display: block;
   }
   .check-action-candidat:checked ~ #candidat-check {
-    border-color: $color-principal-orange;
-    background-color: $color-principal-orange;
+    border-color: $color-orange;
+    background-color: $color-orange;
   }
 }
 
@@ -93,8 +93,8 @@
   }
 
   input:checked ~ .checkbox-span {
-    border-color: $color-principal-orange;
-    background-color: $color-principal-orange;
+    border-color: $color-orange;
+    background-color: $color-orange;
   }
 }
 
@@ -115,7 +115,7 @@
   }
   .content-icon {
     font-size: 60px;
-    color: $color-principal-orange;
+    color: $color-orange;
     margin-bottom: 25px;
   }
 
@@ -153,7 +153,7 @@
       margin-right: 10px;
       background-color: $color-principal-blue;
       &:hover {
-        background-color: $color-principal-blue-hover;
+        background-color: $color-principal-blue;
       }
     }
   }
@@ -249,7 +249,7 @@ tr.mat-row {
   padding-right: 15px;
 
   .select-choince {
-    border-radius: 5px;
+    border-radius: $border-radius;
     height: 48px;
     padding: 0 13px;
     border: $border-table;
@@ -278,7 +278,7 @@ tr.mat-row {
       .menu-list-choince {
         .selected-button {
           &:hover {
-            background-color: $color-principal-orange;
+            background-color: $color-orange;
             .icon {
               color: white;
             }
@@ -313,13 +313,13 @@ tr.mat-row {
     span {
       color: #20252a;
       display: inline-block;
-      font-size: 14px;
+      font-size: $font-size-home;
       margin-left: 15px;
     }
 
     .icon-choince {
       font-size: 24px;
-      color: $color-principal-orange;
+      color: $color-orange;
     }
 
     .icon-choince-croche {
@@ -330,13 +330,13 @@ tr.mat-row {
 
   .border1pxgray {
     border: $border-table;
-    background-color: $color-white-background;
+    background-color: $color-white;
     border-radius: 5px;
   }
 
   .border1pxdashedgray {
     margin: 15px;
-    border: 1px dashed $color-table;
+    border: 1px dashed $color-white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -364,7 +364,7 @@ tr.mat-row {
     padding: 0 50px;
     text-transform: uppercase;
     height: 50px;
-    font-size: 14px;
+    font-size: $font-size-home;
     transition: background-color 200ms;
 
     background-color: $color-principal-blue;
@@ -385,29 +385,29 @@ tr.mat-row {
   flex-wrap: wrap;
   .candidat-custom-select {
     border: $border-table;
-    background-color: $color-white-background;
+    background-color: $color-white;
     display: flex;
     justify-content: center;
     height: 50px;
   }
 
   .candidat-finish-custom-select {
-    background-color: $color-black-background;
     display: flex;
     justify-content: center;
     height: 50px;
   }
 
   .candidat-finish-custom-select mat-label {
-    color: $text-color-white;
+    color: $color-white;
   }
 
   :host .candidat-finish-custom-select ::ng-deep .mat-select-value {
-    color: $text-color-white;
+    color: $color-white;
   }
 
   .fix-button {
     margin-top: inherit;
+    border-radius: $border-radius;
   }
   .custom-input-filtre-contenu {
     width: 50%;
@@ -418,20 +418,20 @@ tr.mat-row {
       font-size: 25px;
       right: 0px;
       top: 9px;
-      color: $color-principal-orange;
+      color: $color-orange;
       position: absolute;
       padding-left: 3px !important;
       font-size: 15px !important;
     }
     .custom-input-filtre {
       width: 100%;
-      border: 1px solid $color-principal-orange;
-      background: $color-white-background;
+      border: 1px solid $color-orange;
+      background: $color-white;
       height: 48px;
       padding: 10px 23px !important;
       outline: none;
       margin-left: 18px;
-      border-radius: 5px;
+      border-radius: $border-radius;
     }
   }
 }
@@ -443,8 +443,8 @@ tr.mat-row {
   overflow-y: auto;
   overflow-x: hidden;
   .sous-table-content {
-    border-radius: 5px;
-    border: 1px solid $color-principal-blue;
+    border-radius: $border-radius;
+    border: $border-table;
     width: 100%;
     overflow: hidden;
     border-bottom: none;
@@ -469,12 +469,8 @@ tr.mat-row {
   table {
     width: 100%;
 
-    .mat-row:hover {
-      background-color: $color-black-background;
-    }
-
     .mat-cell:hover {
-      color: $text-color-white;
+      color: $color-white;
     }
   }
 }
@@ -567,7 +563,7 @@ tr.mat-row {
   // width: 60%;
   .icon-techno {
     padding-right: 6px;
-    color: $color-principal-orange;
+    color: $color-orange;
   }
 }
 .sidenav_candidat_text {
@@ -576,7 +572,7 @@ tr.mat-row {
 }
 .sidenav_candidat_score {
   font-size: 1.8em;
-  color: $color-principal-orange;
+  color: $color-orange;
 }
 
 .button-rapport {

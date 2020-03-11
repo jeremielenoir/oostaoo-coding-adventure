@@ -26,7 +26,7 @@
 
 #titre-second-section h1 {
   color: #252e38;
-  font-family: "Open Sans", Open Sans;
+  font-family: $font-family-home;
   font-size: 42px;
    
   line-height: 42px;
@@ -35,8 +35,7 @@
 }
 
 #titre-second-section p {
-  color: #f2bb13;
-  font-family: "Open Sans", Open Sans;
+  font-family: $font-family-home;
   font-size: 42px;
    
   line-height: 42px;
@@ -45,16 +44,14 @@
 .separator {
   border-top-style: solid;
   border-top-width: 3px;
-  border-top-color: #f2bb13;
   width: 10%;
   height: 10px;
 }
 
 .custom-buttom {
   border-radius: 0px;
-  background-color: #f2bb13;
-  color: white;
-  font-size: 14px;
+  color: $color-white;
+  font-size: $font-size-home;
   padding: 0px 40px;
   height: 50px;
   margin-top: 5px;
@@ -135,7 +132,6 @@
   }
   #titre-second-section p {
     font-size: 32px;
-    color: #f2bb13;
      
     line-height: 42px;
   }

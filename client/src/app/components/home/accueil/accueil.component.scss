@@ -1,6 +1,6 @@
 @import"../../../../roodeo-variables.scss";
 .title-dashed{
-    color:$color-blue;
+    color:$color-principal-blue;
     text-transform: uppercase;
     font-family: $font-poppins;
     font-size: 18px;
@@ -16,7 +16,7 @@
   .dashed{
     padding:4px;
     display: block;
-    background-color: $background-color;
+    background-color: $color-white;
     border:1px solid rgb(126, 181, 206);
     border-radius: 100px;
     width: 125px;
