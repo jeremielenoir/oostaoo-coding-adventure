@@ -155,7 +155,7 @@ export class RegisterComponent implements OnInit {
     this.submittedRegister = true;
 
     // stop if form is invalid
-    if (this.fr.usernameregister.value === '' || this.fr.emailregister.value === '' || this.fr.emailregister.invalid || this.fr.passwordregister.value === '' || this.fr.confirmpassword.value === '' || this.fr.passwordregister.value !== this.fr.confirmpassword.value || this.fr.recaptcha.value === '') {
+    if (this.fr.emailregister.value === '' || this.fr.emailregister.invalid || this.fr.passwordregister.value === '' || this.fr.confirmpassword.value === '' || this.fr.passwordregister.value !== this.fr.confirmpassword.value || this.fr.recaptcha.value === '') {
       return;
     } else {
 
