@@ -15,11 +15,12 @@ body{
         overflow: hidden;
     }
     #right-side{
-        background: $color-blue;
+        background: $color-blue-light;
     }
     
     #left-panel{
         position: absolute;
+        background: $color-blue-light;
         width: 50%;
         height: 100vh;
        
@@ -28,7 +29,7 @@ body{
             width: 50%;
             margin: 30% auto;
             text-align: center;
-            color: white;
+            color: $color-white;
         }
     
         #title_left_panel{
@@ -43,7 +44,7 @@ body{
     
     #right-panel{
         position: absolute;
-        //background: $color-blue;
+        background: $color-blue-light;
         width: 50%;
         height: 100vh;
         z-index: 3;
@@ -55,13 +56,9 @@ body{
             width: 50%;
             margin: 0 0 0 28%;
             text-align: center;
-            color: white;
+            color: $color-white;
             padding-top: 25%;
             //min-height: 545px;
-        }
-        
-        #title_right_panel{
-            //font-size: 40px;
         }
     
         #text_right_panel{
@@ -71,7 +68,7 @@ body{
         .button{
             height: 40px;
             background: #fff;
-            color: $color-blue;
+            color: $color-blue-light;
             border: 0px solid white;
             margin: 20px 0;
             width: 100%;
@@ -87,7 +84,7 @@ body{
         border-radius: 40px;
         font-size: 18px;
         border: 0px solid white;
-        color: $color-blue;
+        color: $color-blue-light;
          
         text-transform: uppercase;
     }
@@ -102,8 +99,8 @@ body{
             margin: 25% 0 0 22%;
             .button{
                 height: 40px;
-                background: $color-blue;
-                color: white;
+                background: $color-blue-light;
+                color: $color-white;
                 border: 0px solid white;
                 margin: 20px 0;
                 width: 100%;
@@ -111,11 +108,11 @@ body{
             }
         }
         &.right{
-            margin: 25% 0 0 25%;
+            margin: 10% 0 0 25%;
             .button{
                 height: 40px;
                 background: #fff;
-                color: $color-blue;
+                color: $color-blue-light;
                 border: 0px solid white;
                 margin: 20px 0;
                 width: 100%;
@@ -131,16 +128,29 @@ body{
         }
         
         input{
-            height: 40px;
+            height: 30px;
             margin: 10px 0;
+            margin-bottom: 0!important;
         }
         
-        
+        .button{
+            height: 40px;
+            background: $color-blue-light;
+            color: $color-white;
+            border: 0px solid white;
+            margin: 20px 0;
+            width: 100%;
+            text-transform: uppercase;
+        }
+    }
+
+    .errorCaptcha {
+        font-size: 13px;
     }
 
     .forgotten-password {
         cursor: pointer;
-        font-size: 14px;
+        font-size: $font-size-home;
 
         &:hover{
             text-decoration: underline;
@@ -158,7 +168,7 @@ body{
         text-decoration: none;
         text-transform: uppercase;
         vertical-align: middle;
-        border-radius: 3px;
+        border-radius: $border-radius;
         outline: rgb(255, 255, 255) none 0px;
         padding-left: 50px;
         transition: all 0.2s cubic-bezier(0.72, 0.01, 0.56, 1) 0s;
@@ -180,9 +190,9 @@ body{
             left: 50%;
             width:23%;
             
-            background: rgb(255,255,255);
+            background: $color-white;
             // background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(84,114,141,1) 50%, rgba(84,114,141,1) 100%);
-            border-radius: 5px;
+            border-radius: $border-radius;
             min-width: 213px;
             max-width: 350px;
             -webkit-transform: translateX(-50%) translateY(-50%);
@@ -192,7 +202,7 @@ body{
 
             a{
                 text-decoration: none;
-                color: black;
+                color: $text-color;
                 contain: content;
             }
         }
@@ -212,14 +222,14 @@ body{
     }
 
     #github-connect:hover {
-        border-color: rgb(0, 0, 0);
-        background: rgb(0, 0, 0) url('../../../../assets/icones_social/github-brandshover.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+        border-color: $text-color;
+        background: $text-color url('../../../../assets/icones_social/github-brandshover.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
         -webkit-transition: all .8s ease-out;
         -moz-transition: all .3s ease;
         -ms-transition: all .3s ease;
         -o-transition: all .3s ease;
         transition: all .3s ease-out;
-        color: white;
+        color: $color-white;
     }
     #google-connect:hover {
         border-color: rgb(220, 74, 61);
@@ -229,18 +239,18 @@ body{
         -ms-transition: all .3s ease;
         -o-transition: all .3s ease;
         transition: all .3s ease-out;
-        color: white;
+        color: $color-white;
     }
 
     #facebook-connect:hover {
-        border-color: rgb(60, 90, 154);
+        border-color: #3c5a9a;
         background: rgb(60, 90, 154) url('../../../../assets/icones_social/facebook-brandshover.svg') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
         -webkit-transition: all .8s ease-out;
         -moz-transition: all .3s ease;
         -ms-transition: all .3s ease;
         -o-transition: all .3s ease;
         transition: all .3s ease-out;
-        color: white;
+        color: $color-white;
     }
 
     #error-provider {

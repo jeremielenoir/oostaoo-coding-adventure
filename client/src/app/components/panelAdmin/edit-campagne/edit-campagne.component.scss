@@ -11,12 +11,12 @@
     height: 42px;
     background: $color-principal-blue;
     padding-left: 23px;
-    color: $color-white-background;
+    color: $color-white;
     align-items: center;    
     margin-top: 100px;
 
     a{
-        color: $color-white-background;
+        color: $color-white;
         display: block;
         height: 42px;
         line-height: 42px;
@@ -28,15 +28,15 @@
     }
 
     a:hover{
-        border-bottom: 3px solid $color-principal-orange;
+        border-bottom: 3px solid $color-orange;
     }
     .active-link{
-        border-bottom: 3px solid $color-principal-orange;
+        border-bottom: 3px solid $color-orange;
     }
 
 
     .icon{
-        color: $color-principal-orange;
+        color: $color-orange;
     }
 
     #router{

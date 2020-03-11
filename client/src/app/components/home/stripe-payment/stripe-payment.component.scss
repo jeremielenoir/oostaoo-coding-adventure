@@ -1,3 +1,5 @@
+@import "../../../../roodeo-variables.scss";
+
 #stripe-payment {
   background-color: #f9f9f9;
   #form-payment {
@@ -8,7 +10,7 @@
     width: 750px;
     padding: 20px 100px 100px;
     box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-    border-radius: 5px;;
+    border-radius: $border-radius;
   }
 
   .title {
@@ -63,7 +65,7 @@
   padding: 10px 12px;
 
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: $border-radius;
   background-color: white;
 
   box-shadow: 0 1px 3px 0 #e6ebf1;

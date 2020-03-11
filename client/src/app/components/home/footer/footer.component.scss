@@ -8,7 +8,7 @@ $color-dash-text-footer: #f2bb13;
 }
 
 #footer{
-  background-color: rgb(29, 53, 82);
+  background-color: $color-principal-blue;
   height: 250px;
   width: 100%;
   //margin-bottom: 10px;
@@ -27,7 +27,7 @@ $color-dash-text-footer: #f2bb13;
         margin-left: 110px;
         .title-help-network{
           text-transform: uppercase;
-          color: $text-color-white;
+          color: $color-white;
           font-family: $font-poppins;
           font-size: 16px;
           margin-bottom: 20px;
@@ -39,11 +39,11 @@ $color-dash-text-footer: #f2bb13;
     
             a{
               font-size: $font-size-home;
-              color:#4a7f9c;
-              font-family: sans-serif;
+              color: $color-gray;
+              font-family: $font-poppins;
               transition:
               &{
-                color:$text-color-white;
+                color:$color-white;
 
               }
             }
@@ -73,7 +73,7 @@ $color-dash-text-footer: #f2bb13;
           display: flex;
           justify-content: center;
           align-items: center;
-          color:white
+          color: $color-white;
         }
       }
     }
@@ -87,10 +87,5 @@ $color-dash-text-footer: #f2bb13;
 
   #link{
     background-color: #006192;
-  }
-
-
-  .list-network li a span{
-
   }
 }

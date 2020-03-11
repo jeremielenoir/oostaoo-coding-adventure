@@ -20,7 +20,6 @@ export class QuestionsComponent implements OnInit {
   public allQuestions;
   public allQuestionsCampaign;
   public questionsByCampaign;
-  public updateQuestionsCampaign = [];
   public searchText = '';
   public positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   public toppings = new FormControl();
@@ -45,7 +44,7 @@ export class QuestionsComponent implements OnInit {
   constructor(private route: ActivatedRoute, public apiClientService: ApiClientService, private _snackBar: MatSnackBar, ) {
     this.route.parent.params.subscribe(params => {
       this.globalId = params.id;
-      // console.log('data', this.globalId);
+     
     });
   }
 
@@ -56,11 +55,11 @@ export class QuestionsComponent implements OnInit {
       this.yourCampaign = campaigns;
       console.log('------------------allQuestionsCampaign------------------: ', this.allQuestionsCampaign);
       const questions = values[1]
+      console.log('question man -->',questions);
       console.log('this.loadCampaign', values[0]);
-      console.log('oui questions', questions);
       const nameQuestionByTechno = [];
       campaigns[0].questions.forEach(element => {
-        console.log('question campagne', element);
+        // console.log('question campagne', element);
         nameQuestionByTechno.push(element.name);
       });
       const questionByTechnoCampaing = [];
@@ -120,22 +119,6 @@ export class QuestionsComponent implements OnInit {
     });
   }
 
-  SendQuestionSelected() {
-    for (const element of this.questionsByCampaign) {
-      console.log('element: ', element);
-      this.updateQuestionsCampaign.push(element.id);
-    }
-    console.log('this array for update questions: ', this.updateQuestionsCampaign);
-    this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.globalId, {
-      questions: this.updateQuestionsCampaign
-    }).subscribe(
-      (res) => {
-        this.openSnackBar('Les questions ont bien été éditées', 'Fermer');
-        console.log(res);
-      },
-      err => console.log(err)
-    );
-  }
   fmtMSS(d) {
     d = Number(d);
     var h = Math.floor(d / 3600);
@@ -150,35 +133,6 @@ export class QuestionsComponent implements OnInit {
     this.boelanIsSearchAdvenced = !this.boelanIsSearchAdvenced
   }
 
-  filtreDifficuty(element) {
-    console.log('-------------this.yourCampaign-------------', this.yourCampaign);
-    let arrayFacile = [];
-    let arrayMoyen = [];
-    let arrayExpert = [];
-    let arrayComplet = [];
-
-    if (element.value.includes('facile')) {
-      arrayFacile = this.saveallQuestionsCampaign.filter(element => element.level == 'facile');
-      arrayComplet.push(...arrayFacile);
-    }
-
-    if (element.value.includes('moyen')) {
-      arrayMoyen = this.saveallQuestionsCampaign.filter(element => element.level == 'moyen');
-      arrayComplet.push(...arrayMoyen);
-    }
-
-    if (element.value.includes('expert')) {
-      arrayExpert = this.saveallQuestionsCampaign.filter(element => element.level == 'expert');
-      arrayComplet.push(...arrayExpert);
-    }
-
-    this.allQuestionsCampaign = arrayComplet;
-
-    if (element.value.length == 0) {
-      this.allQuestionsCampaign = this.saveallQuestionsCampaign
-    }
-
-  }
 
   filtreTechno(element) {
 

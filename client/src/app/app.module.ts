@@ -92,6 +92,9 @@ import { RatingFeedbackComponent } from './components/panelAdmin/client-test/fin
 import { QuestionComponent } from './components/panelAdmin/question/question.component';
 import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campagne/top-info-campagne.component';
 import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
+import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
+import { IgxDoughnutChartModule } from 'igniteui-angular-charts';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 
 @NgModule({
@@ -157,7 +160,8 @@ import { MotDePasseOublieComponent } from './components/home/register/mot-de-pas
     RatingFeedbackComponent,
     QuestionComponent,
     TopInfoCampagneComponent,
-    MotDePasseOublieComponent
+    MotDePasseOublieComponent,
+    SubscriptionComponent
   ],
   imports: [
     BrowserModule,
@@ -175,7 +179,9 @@ import { MotDePasseOublieComponent } from './components/home/register/mot-de-pas
     NgxEditorModule,
     OrderModule,
     ScrollToModule.forRoot(),
-    NgxStripeModule.forRoot('pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq')
+    NgxStripeModule.forRoot('pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq'),
+    IgxDoughnutChartModule,
+    NgxCaptchaModule
   ],
   providers: [
     ApiClientService,
