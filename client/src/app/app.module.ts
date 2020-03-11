@@ -94,6 +94,7 @@ import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campa
 import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
 import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
 import { IgxDoughnutChartModule } from 'igniteui-angular-charts';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 
 @NgModule({
@@ -179,7 +180,8 @@ import { IgxDoughnutChartModule } from 'igniteui-angular-charts';
     OrderModule,
     ScrollToModule.forRoot(),
     NgxStripeModule.forRoot('pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq'),
-    IgxDoughnutChartModule
+    IgxDoughnutChartModule,
+    NgxCaptchaModule
   ],
   providers: [
     ApiClientService,

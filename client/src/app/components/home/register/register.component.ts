@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, ChangeDetectorRef } from '@angular/core';
 import axios from 'axios';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ApiClientService, API_URI_USER } from 'src/app/api-client/api-client.service';
@@ -28,7 +28,8 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   loginForm: FormGroup;
-  submitted = false;
+  submittedLogin = false;
+  submittedRegister = false;
   loading = false;
   returnUrl: string;
   error = '';
@@ -44,6 +45,7 @@ export class RegisterComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
+    private cdr: ChangeDetectorRef,
   ) {
         this.route.queryParams.subscribe(params => {
         // this.jwt = params['jwt'];
@@ -53,6 +55,14 @@ export class RegisterComponent implements OnInit {
         }, 2000)
     })
    }
+
+   public readonly siteKey = '6LdAf-AUAAAAACX5tqKig64A4zgc-Q7EA44fxE-9';
+   public theme: 'light' | 'dark' = 'light';
+   public size: 'compact' | 'normal' = 'normal';
+   public lang = 'fr';
+   public type: 'image' | 'audio';
+   public useGlobalDomain: boolean = false;
+   public captchaSuccess = false;
 
   ngOnInit() {
     this.jwt = this.route.snapshot.queryParams.jwt;
@@ -66,11 +76,13 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required]
     }),
 
-      this.registerForm = this.formBuilder.group({
-        usernameregister: ['', Validators.required],
-        emailregister: ['', Validators.required],
-        passwordregister: ['', Validators.required]
-      });
+    this.registerForm = this.formBuilder.group({
+      usernameregister: ['', Validators.required],
+      emailregister: ['', [Validators.required,Validators.email]],
+      passwordregister: ['', Validators.required],
+      confirmpassword: ['', Validators.required],
+      recaptcha: ['', Validators.required]
+    });
 
     // logout the person when he opens the app for the first time
     // this.authenticationService.logout();
@@ -79,6 +91,12 @@ export class RegisterComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
 
   }
+
+  handleSuccess(captchaResponse: string): void {
+    this.captchaSuccess = true;
+    this.cdr.detectChanges();
+  }
+
 
   // convenience getter for easy access to form fields
   get f() {
@@ -100,7 +118,7 @@ export class RegisterComponent implements OnInit {
 
   // on submit
   onSubmit() {
-    this.submitted = true;
+    this.submittedLogin = true;
 
     // stop if form is invalid
     if (this.loginForm.invalid) {
@@ -133,26 +151,28 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.submitted = true;
+    this.submittedRegister = true;
 
     // stop if form is invalid
-    if (this.registerForm.invalid) {
+    if (this.fr.usernameregister.value === '' || this.fr.emailregister.value === '' || this.fr.emailregister.invalid || this.fr.passwordregister.value === '' || this.fr.confirmpassword.value === '' || this.fr.passwordregister.value !== this.fr.confirmpassword.value || this.fr.recaptcha.value === '') {
       return;
+    } else {
+
+      this.loading = true;
+
+      this.authenticationService.register(this.fr.usernameregister.value, this.fr.emailregister.value, this.fr.passwordregister.value)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.openSnackBar('Le compte a bien été créé', 'Fermer');
+            this.router.navigate(['/dashboard/campaigns']);
+          },
+          error => {
+            this.errorRegister = error;
+          }
+        );
     }
 
-    this.loading = true;
-
-    this.authenticationService.register(this.fr.usernameregister.value, this.fr.emailregister.value, this.fr.passwordregister.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.openSnackBar('Le compte a bien été créé', 'Fermer');
-          this.router.navigate(['/dashboard/campaigns']);
-        },
-        error => {
-          this.errorRegister = error;
-        }
-      );
   }
 }
 
