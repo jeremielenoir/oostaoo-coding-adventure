@@ -1,12 +1,14 @@
 "use strict";
-const axios = require("axios");
 
 /**
  * Question.js controller
  *
  * @description: A set of functions called 'actions' for managing `Question`.
  */
-const { fetchSpreadSheet } = require("../utils/populate");
+
+const { google } = require("googleapis");
+const keys = require("../../../roodeo.json");
+const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 module.exports = {
   /**
    * Retrieve question records.
@@ -84,25 +86,7 @@ module.exports = {
         spreadsheetId,
         ranges
       );
-
-      const arrPromises = [];
-
-      result.forEach(question => {
-        arrPromises.push(
-          new Promise((resolve, reject) => {
-            return strapi.services.question
-              .add({
-                ...question,
-                technologies: question.technologies
-              })
-              .then(r => resolve(r))
-              .catch(err => reject(err));
-          })
-        );
-      });
-      const results = await Promise.all(arrPromises);
-      return results;
-      
+      return result;
     } catch (error) {
       throw error;
     }

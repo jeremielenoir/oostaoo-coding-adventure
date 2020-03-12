@@ -14,8 +14,8 @@ const _ = require("lodash");
 const utils = require("strapi-hook-bookshelf/lib/utils/");
 const { google } = require("googleapis");
 const keys = require("../../../roodeo.json");
-const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
-const axios = require("axios");
+const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
+
 module.exports = {
   /**
    * Promise to fetch all questions.
@@ -398,7 +398,7 @@ module.exports = {
         );
 
         questions.push({
-          // 'id-prefix': `${index}_${val[1]}`,
+          id: val[0] || null,
           [arrFields[1].toLowerCase()]: tech,
           [arrFields[2].toLowerCase()]: val[2],
 
@@ -413,7 +413,47 @@ module.exports = {
         });
       });
 
-      return questions;
+      const arrPromises = [];
+
+      questions.forEach(question => {
+        arrPromises.push(
+          new Promise((resolve, reject) => {
+            if (question.id) {
+              const id = question.id;
+              delete question.id;
+              return strapi.services.question
+                .edit(
+                  { id },
+                  {
+                    ...question,
+                    technologies: question.technologies
+                  }
+                )
+                .then(r => resolve(r))
+                .catch(err => reject(err));
+            }
+            delete question.id;
+            return strapi.services.question
+              .add({
+                ...question,
+                technologies: question.technologies
+              })
+              .then(r => resolve(r))
+              .catch(err => reject(err));
+          })
+        );
+      });
+      const results = await Promise.all(arrPromises);
+      const ids = results.map(r => [r.id]);
+
+      const updateOptions = {
+        spreadsheetId,
+        range: "Feuille 1!A2",
+        valueInputOption: "USER_ENTERED",
+        resource: { values: ids }
+      };
+      const res = await gsapi.spreadsheets.values.update(updateOptions);
+      return res;
     } catch (error) {
       throw error;
     }
