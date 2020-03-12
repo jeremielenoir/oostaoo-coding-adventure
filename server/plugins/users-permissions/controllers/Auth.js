@@ -101,8 +101,8 @@ module.exports = {
         [user] = await strapi.plugins['users-permissions'].services.providers.connect(provider, ctx.query);
       } catch(error) {
         // redirect user with error message
-        return ctx.response.redirect(`/home/register?error=${error}`);
-        // return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error.message);
+        //return ctx.response.redirect(`/home/register?error=${error}`);
+        return ctx.badRequest(null, (error === 'array') ? (ctx.request.admin ? error[0] : error[1]) : error.message);
       }
 
       if (!user) {
@@ -294,13 +294,13 @@ module.exports = {
 
     const emailTakenMessage = 'Email already taken';
     if (user && user.provider === params.provider) {
-      return ctx.response.redirect(`/home/register?error=${emailTakenMessage}`);
-      // return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.email.taken' }] }] : 'Email is already taken.');
+      //return ctx.response.redirect(`/home/register?error=${emailTakenMessage}`);
+      return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.email.taken' }] }] : 'Email is already taken.');
     }
 
     if (user && user.provider !== params.provider && settings.unique_email) {
-      return ctx.response.redirect(`/home/register?error=${emailTakenMessage}`);
-      // return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.email.taken' }] }] : 'Email is already taken.');
+      //return ctx.response.redirect(`/home/register?error=${emailTakenMessage}`);
+      return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.email.taken' }] }] : 'Email is already taken.');
     }
 
     try {
@@ -362,15 +362,15 @@ module.exports = {
       });
     } catch(err) {
 
-      if(_.includes(err.message, 'username')){
+      /*if(_.includes(err.message, 'username')){
         const usernameTakenMessage = 'Username already taken';
         return ctx.response.redirect(`/home/register?error=${usernameTakenMessage}`);
       }else{
         return ctx.response.redirect(`/home/register?error=${emailTakenMessage}`);
-      }
+      }*/
 
-      // const adminError = _.includes(err.message, 'username') ? 'Auth.form.error.username.taken' : 'Auth.form.error.email.taken';
-      // ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: adminError }] }] : err.message);
+      const adminError = _.includes(err.message, 'username') ? 'Auth.form.error.username.taken' : 'Auth.form.error.email.taken';
+      ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: adminError }] }] : err.message);
     }
   },
 

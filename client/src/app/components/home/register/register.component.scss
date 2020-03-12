@@ -4,6 +4,24 @@ body{
     background: white !important;
 }
 #register{
+    .logo-container{
+        
+        position: absolute;
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+        z-index: 10;
+        top: -5px;
+        img{
+            cursor: pointer;
+            height: 110px;
+            background: #fff;
+            padding: 15px;
+            border-radius: $border-radius;
+            box-shadow: 0 4px 10px -2px #00000080;
+            border: 1px solid #1f7eab;
+        }
+    }
     display: flex;
     background: white;
     height: 100vh;
@@ -55,7 +73,7 @@ body{
             flex-direction: column;
             position: relative;
             width: 50%;
-            margin: 0 0 0 28%;
+            margin: 0 0 0 35%;
             text-align: center;
             color: $color-white;
             padding-top: 25%;
@@ -98,7 +116,7 @@ body{
         justify-content: center;
 
         &.left{
-            margin: 25% 0 0 22%;
+            margin: 25% 0 0 15%;
             .button{
                 height: 40px;
                 background: $color-blue-light;
@@ -110,7 +128,7 @@ body{
             }
         }
         &.right{
-            margin: 5% 0 0 25%;
+            margin: 5% 0 0 35%;
             .button{
                 height: 40px;
                 background: #fff;
@@ -189,6 +207,7 @@ body{
             display: flex;
             position: absolute;
             border: $border-table;
+            //box-shadow: 0 4px 10px -2px #00000080;
             left: 50%;
             width:23%;
             

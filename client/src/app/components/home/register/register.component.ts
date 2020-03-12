@@ -151,10 +151,11 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    
     this.submittedRegister = true;
 
     // stop if form is invalid
-    if (this.fr.usernameregister.value === '' || this.fr.emailregister.value === '' || this.fr.emailregister.invalid || this.fr.passwordregister.value === '' || this.fr.confirmpassword.value === '' || this.fr.passwordregister.value !== this.fr.confirmpassword.value || this.fr.recaptcha.value === '') {
+    if (this.fr.emailregister.value === '' || this.fr.emailregister.invalid || this.fr.passwordregister.value === '' || this.fr.confirmpassword.value === '' || this.fr.passwordregister.value !== this.fr.confirmpassword.value || this.fr.recaptcha.value === '') {
       return;
     } else {
 
@@ -168,52 +169,69 @@ export class RegisterComponent implements OnInit {
             this.router.navigate(['/dashboard/campaigns']);
           },
           error => {
+            console.log('ERROR', error);
             this.errorRegister = error;
           }
         );
+
     }
 
   }
+
+    forgetPassword(email) {
+    this.authenticationService.forgotPassword(email)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.openSnackBar('Le compte a bien été créé', 'Fermer');
+        },
+        error => {
+          this.errorRegister = error;
+        }
+      );
+  }
 }
+
+
 
 @Component({
   selector: 'dialog-forget-password',
   templateUrl: 'dialog-forget-password.html',
   styleUrls: ['./dialog-forget-password.scss']
 })
+
 export class DialogForgetPassword {
 
+  errorRegister = '';
   submitted = false;
   public emailAdress = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(
-    public dialogRef: MatDialogRef<DialogForgetPassword>
+    public dialogRef: MatDialogRef<DialogForgetPassword>,
+    private authenticationService: AuthenticationService,
+    private _snackBar: MatSnackBar,
     ) {}
 
-    resetpassword() {
-      // Request API.
-      this.submitted = true;
-
-      if (this.emailAdress.value !== '' && this.emailAdress.valid) {
-
-      axios
-      .post('/auth/forgot-password', {
-        email: this.emailAdress.value,
-        url:
-          'http://localhost:8080/admin/plugins/users-permissions/auth/reset-password', // A remplacer par le nouveau formulaire de reset /!\
-      })
-      .then(response => {
-        // Handle success.
-        console.log(response);
-        console.log('Your user received an email');
-      })
-      .catch(error => {
-        // Handle error.
-        console.log('An error occurred:', error);
+    openSnackBar(message: string, action) {
+      this._snackBar.open(message, action, {
+        duration: 3000,
       });
-      console.log('this email', this.emailAdress.value);
-      }
     }
+
+    forgetPassword(email) {
+      this.authenticationService.forgotPassword(email)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.dialogRef.close();
+            this.openSnackBar('L\'email de réinitialisation à bien été envoyé', 'Fermer');
+          },
+          error => {
+            this.errorRegister = error;
+          }
+        );
+    }
+
     onNoClick(): void {
     this.dialogRef.close();
   }
