@@ -62,6 +62,19 @@ export class AuthenticationService {
       );
   }
 
+  forgotPassword(email: string) {
+    return this.http.post<any>(`/auth/forgot-password`, {
+      email,
+      url: `http:/${window.location.host}/home/register/mot-de-passe-oublie`
+    })
+      .pipe(
+        map(user => {
+          console.log('FORGOT PASSWORD user: ', user);
+          return user;
+        })
+      );
+  }
+
   // logout
   logout() {
     // remove user from local storage
