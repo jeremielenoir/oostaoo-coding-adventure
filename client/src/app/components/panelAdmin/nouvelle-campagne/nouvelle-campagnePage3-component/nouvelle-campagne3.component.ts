@@ -36,6 +36,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
   @Output() incrementPage = new EventEmitter<any>();
   @Output() decrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
+  
   @Input('techno') techno: any
   public searchText = "";
   public experience: string;
@@ -80,10 +81,10 @@ export class NouvelleCampagnePage3Component implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('----techno recupe---', this.techno)
-    console.log("this.allQuestionLevel : ", this.allQuestionLevel);
-    console.log('this.formCampagne', this.formCampagne)
+    this.experience =  this.formCampagne.value.experience;
     this.getAllQuestions();
+
+    console.log('les question total -->',this.allQuestions)
 
     window.scroll(10, 0);
 
@@ -91,6 +92,11 @@ export class NouvelleCampagnePage3Component implements OnInit {
       this.headerChangePositioinDropList();
     });
   }
+
+  experiencecampagn(){
+
+  }
+
   fmtMSS(d) {
     d = Number(d);
     var h = Math.floor(d / 3600);
@@ -126,11 +132,19 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
       }
 
+      console.log('les data question de allQuestions--->',this.allQuestions)
+
       for (const questionLevel of this.allQuestions) {
         if (questionLevel.level === this.experience) {
+          console.log('all question trie expert --->',questionLevel.level)
           this.allQuestionLevel.push(questionLevel);
         }
       }
+
+      console.log('question lvl -->',this.experience)
+
+      console.log('les data question de allQuestionLevel --->',this.allQuestionLevel)
+
 
       for (const itemQuestionLevel of this.allQuestionLevel) {
         this.allQuestions = this.allQuestions.filter(

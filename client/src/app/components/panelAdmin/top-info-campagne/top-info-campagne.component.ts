@@ -26,6 +26,7 @@ export class TopInfoCampagneComponent implements OnInit {
   public poinTotal:number;
   public timeAllquestionCampagn:number = 0;
   public timeAllquestionCampgnDivice:number = 0;
+  public campagneFull = [];
 
 
   constructor(public apiClientService: ApiClientService,private router: Router, 
@@ -37,12 +38,13 @@ export class TopInfoCampagneComponent implements OnInit {
       this.globalId = params.id;
     });
 
-    console.log('this.yourCampaign',this.yourCampaign)
+   
     
   }
 
   ngOnChanges(){
     this.technoMethod()
+    console.log('allQuestionLevel',this.allQuestionLevel)
   }
 
   convertSecondsToMinutes(time){

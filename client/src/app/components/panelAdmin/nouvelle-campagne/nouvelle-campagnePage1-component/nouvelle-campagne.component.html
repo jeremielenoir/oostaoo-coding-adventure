@@ -52,7 +52,7 @@
           <label for="experience" [ngStyle]="errorExperience ? { color: 'red' } : null">Sélectionnez l'expérience
             requise</label>
           <div class="example-radio-button" [formGroup]="formCampagne">
-            <mat-radio-group formControlName="experience">
+            <mat-radio-group formControlName="experience" >
               <mat-radio-button value="facile" checked>
                 Junior
                 <i class="fas fa-info-circle info"

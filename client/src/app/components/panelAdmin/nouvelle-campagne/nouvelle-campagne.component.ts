@@ -25,7 +25,7 @@ export class NouvelleCampagneComponent implements OnInit {
       techno: this.oAuthFormVerification.getTechnoValidator(),
       technoSelectedId: [],
       experience: [
-        "junior",
+        "facile",
         this.oAuthFormVerification.getExperienceValidator()
       ],
       utilisationCopieColler: "false",
@@ -37,7 +37,7 @@ export class NouvelleCampagneComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(this.ParentFormCampagne.value);
+   
     /*
     this._http.get(`${environment.urlBackEnd}Test22s`)
       .subscribe(

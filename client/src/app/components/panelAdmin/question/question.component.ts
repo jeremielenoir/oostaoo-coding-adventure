@@ -5,7 +5,9 @@ import {
   Output,
   Input,
   ViewChild,
-  ElementRef
+  ElementRef,
+  OnChanges,
+  SimpleChanges
 } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import {
@@ -28,9 +30,9 @@ import { Router } from "@angular/router";
   templateUrl: "./question.component.html",
   styleUrls: ["./question.component.scss","../nouvelle-campagne/nouvelle-campagne.component.scss"]
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent implements OnChanges {
  
-  @Input() formCampagne: FormGroup;
+  @Input('formCampagne') formCampagne: FormGroup;
   @Input() datas = [];
   @Input() dataLevels = [];
   @Output() incrementPage = new EventEmitter<any>();
@@ -77,19 +79,35 @@ export class QuestionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-   // console.log("this.dataLevels : ", this.dataLevels);
-   // this.getAllQuestions();
+
+    this.methoddataLevels();
+    
+   console.log("Hellow wordd --->");
+
+   console.log('techno campagn verif --->',this.datas)
 
     window.scroll(10, 0);
 
-   // this.experience = this.formCampagne.value.experience;
 
- let body = document.querySelector('body');
+    let body = document.querySelector('body');
 
     window.addEventListener("scroll", () => {
       this.headerChangePositioinDropList();
     });
   }
+
+  ngOnChanges(changes: SimpleChanges){
+    console.log("expericence",changes)
+  }
+
+  methoddataLevels(){
+
+    this.datas = this.dataLevels;
+
+    console.log('data ---> trie',this.datas)
+
+  }
+
   fmtMSS(d) {
     d = Number(d);
     var h = Math.floor(d / 3600);
@@ -176,58 +194,28 @@ export class QuestionComponent implements OnInit {
     this.boelanIsSearchAdvenced = !this.boelanIsSearchAdvenced
   }
 
-  filtreDifficuty(element) {
-    // console.log('-------------this.yourCampaign-------------', this.yourCampaign);
-    let arrayFacile = [];
-    let arrayMoyen = [];
-    let arrayExpert = [];
-    let arrayComplet = [];
+  // filtreTechno(element) {
 
-    if (element.value.includes('facile')) {
-      arrayFacile = this.saveallQuestionsCampaign.filter(element => element.level == 'facile');
-      arrayComplet.push(...arrayFacile);
-    }
+  //   const valueChecked = [];
 
-    if (element.value.includes('moyen')) {
-      arrayMoyen = this.saveallQuestionsCampaign.filter(element => element.level == 'moyen');
-      arrayComplet.push(...arrayMoyen);
-    }
+  //   element.value.forEach(valueCheck => {
+  //     if (valueChecked.includes(valueCheck)) {
 
-    if (element.value.includes('expert')) {
-      arrayExpert = this.saveallQuestionsCampaign.filter(element => element.level == 'expert');
-      arrayComplet.push(...arrayExpert);
-    }
-
-    this.datas = arrayComplet;
-
-    if (element.value.length == 0) {
-      this.datas = this.saveallQuestionsCampaign
-    }
-
-  }
-
-  filtreTechno(element) {
-
-    const valueChecked = [];
-
-    element.value.forEach(valueCheck => {
-      if (valueChecked.includes(valueCheck)) {
-
-        for (let value of valueChecked) {
-          let newFilter = this.datas.filter(element => element.technologies.name == value);
-          this.datas = newFilter
-        }
+  //       for (let value of valueChecked) {
+  //         let newFilter = this.datas.filter(element => element.technologies.name == value);
+  //         this.datas = newFilter
+  //       }
 
 
-      } else {
-        valueChecked.push(valueCheck);
-      }
-    });
+  //     } else {
+  //       valueChecked.push(valueCheck);
+  //     }
+  //   });
 
 
-    console.log('allquestion---------->', this.datas)
+  //   console.log('allquestion---------->', this.datas)
 
-  }
+  // }
 }
 
 // @Component({

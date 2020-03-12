@@ -31,69 +31,12 @@ export class NouvelleCampagnePage1Component implements OnInit {
   public profiles: any[];
   public technosSelect: Array<string>;
   public roleSelect: string;
+  public facile = 'facile'
 
   @Output() valueChange = new EventEmitter();
   @Output() valueChangeProfil = new EventEmitter();
 
-  TechnoList: string[] = [
-    "AWS",
-    "Android",
-    "Angular 2+",
-    "AngularJS (1.x)",
-    "Apache Spark",
-    "C",
-    "C#",
-    "C++",
-    "Data Science",
-    "Docker",
-    "Git",
-    "Hadoop Ecosystem",
-    "Java",
-    "Javascript, HTML, CSS",
-    "Mobile iOS/Swift",
-    "Node.js",
-    "PHP",
-    "Python 3",
-    "React",
-    "SQL",
-    "Scala",
-    "Spring Framework",
-    "Symfony",
-    "Windows Administration"
-  ];
 
-  RoleList: string[] = [
-    "Développeur Angular Front-End",
-    "Administrateur base de données (SQL)",
-    "Data Engineer (Hadoop, Spark)",
-    "Data Scientist (Python)",
-    "Développeur .NET C#",
-    "Développeur .NET C# Back-End",
-    "Développeur AngularJS Front-End",
-    "Développeur C",
-    "Développeur C# Full Stack",
-    "Développeur C++",
-    "Développeur Hadoop",
-    "Développeur Java",
-    "Développeur Java Back-End",
-    "Développeur Java Full Stack",
-    "Développeur Java Spring Back-End",
-    "Développeur Mobile Android",
-    "Développeur Mobile iOS (Swift)",
-    "Développeur Node.js",
-    "Développeur PHP",
-    "Développeur PHP Fullstack",
-    "Développeur PHP Symfony",
-    "Développeur Python",
-    "Développeur React Front-End",
-    "Développeur Scala",
-    "Développeur Spark",
-    "Développeur Web (JavaScript, HTML, CSS)",
-    "Expert Git",
-    "Ingénieur DevOps AWS/Docker",
-    "SysAdmin Windows",
-    "Personnalisé"
-  ];
 
   constructor(public apiClientService: ApiClientService) {
     this.oAuthFormVerification = new AuthFormVerification();
@@ -122,6 +65,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
     });
   }
   selected(event: MatSelectChange) {
+    console.log('hellow word')
     for (const iterator of this.profiles) {
       // console.log('iterator profiles: ', iterator);
       const roleData = iterator.name;
@@ -146,6 +90,8 @@ export class NouvelleCampagnePage1Component implements OnInit {
     }
     console.log("this.formCampagne.value: ", this.formCampagne.value);
   }
+
+
 
   getTechnoChecked() {
 
@@ -202,6 +148,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
   }
 
   valueChanged() {
+    
     // You can give any function name
     console.log("this.technosSelect: ", this.technosSelect);
     this.valueChange.emit(this.technosSelect);

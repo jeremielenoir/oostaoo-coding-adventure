@@ -68,8 +68,8 @@
           </mat-select>
         </mat-form-field> -->
         <mat-form-field>
-          <mat-label>DIFFICULTÉ</mat-label>
-          <mat-select [formControl]="toppingsDifficulty" (selectionChange)=filtreDifficuty($event) multiple>
+          <mat-label>DIFFICULTÉ </mat-label>
+          <mat-select [formControl]="toppingsDifficulty" multiple>
             <mat-select-trigger>
               {{toppingsDifficulty.value ? toppingsDifficulty.value[0] : ''}}
               <span *ngIf="toppingsDifficulty.value?.length > 1" class="example-additional-selection">
