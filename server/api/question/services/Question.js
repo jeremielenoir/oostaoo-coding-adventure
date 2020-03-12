@@ -301,29 +301,7 @@ module.exports = {
       withRelated: populate
     });
   },
-  /**
-   * Promise to fetch spreadsheet questions.
-   *
-   * @return {Promise}
-   */
 
-  checkTechnology: async params => {
-    return Technologies.forge(_.pick(params, "name"))
-      .fetch({})
-      .then(isTechno => {
-        if (isTechno) {
-          return isTechno.id;
-        } else {
-          return strapi.services.technologies
-            .add(params)
-            .then(techno => {
-              return techno.id;
-            })
-            .catch(err => err);
-        }
-      })
-      .catch(err => err);
-  },
   /**
    * Promise to fetch spreadsheet questions.
    *
@@ -359,21 +337,11 @@ module.exports = {
 
       const techFieldValues = [...new Set(arrValues.map(val => val[1]))];
 
-      const technologies = await Technologies.fetchAll({});
-      // const filters = strapi.utils.models.convertParams("technologies", {});
-      // const populate = Technologies.associations
-      // .filter(ast => ast.autoPopulate !== false)
-      // .map(ast => ast.alias);
-      // const technologies = await Technologies.query(function(qb) {
+      const techs = await Technologies.fetchAll({});
 
-      // }).fetchAll({
-      //   withRelated: filters.populate || populate
-      // });
-      console.log("technologies", technologies);
-      if (technologies && technologies.length > 0) {
+      if (techs && techs.length > 0) {
         techFieldValues.forEach(val => {
-          technologies.forEach(tech => {
-            console.log("tech name", tech.attributes.name, "val", val);
+          techs.forEach(tech => {
             if (
               val &&
               tech &&
@@ -382,31 +350,31 @@ module.exports = {
               val.toString() === tech.attributes.name.toString()
             ) {
               if (
-                arrTech.findIndex(t => t.name.toString() === val.toString()) < 0
+                arrTech.findIndex(
+                  t => t && t.name.toString() === val.toString()
+                ) < 0
               ) {
                 arrTech.push({ name: val, id: tech.id });
-              }
-            } else {
-              arrTech.push({ name: val });
-
-              if (
-                arrTech.findIndex(t => t.name.toString() === val.toString()) < 0
-              ) {
-                arrTech.push({ name: val });
               }
             }
           });
         });
       } else {
         techFieldValues.forEach(techno => {
-          arrTech.push({ name: techno });
+          arrTech.push({ name: techno, id: null });
         });
       }
-      console.log("arrTech content", arrTech);
+
+      const techVals = arrTech.map(t => t.name);
+
+      const diffTech = _.difference(techFieldValues, techVals);
+
+      if (diffTech && diffTech.length > 0) {
+        diffTech.forEach(tech => arrTech.push({ name: tech, id: null }));
+      }
       const arrTechPromise = [];
 
       arrTech.forEach(async tech => {
-        console.log("tech", tech);
         arrTechPromise.push(
           new Promise((resolve, reject) => {
             if (tech && tech.id) {
@@ -422,7 +390,7 @@ module.exports = {
       });
 
       arrTech = await Promise.all(arrTechPromise);
-      console.log("arrTech", arrTech);
+
       const questions = [];
       arrValues.forEach((val, _index) => {
         const tech = arrTech.find(

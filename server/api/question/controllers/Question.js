@@ -9,37 +9,6 @@ const axios = require("axios");
 const { fetchSpreadSheet } = require("../utils/populate");
 module.exports = {
   /**
-   * Populate questions from google spreadsheet.
-   *
-   * @return {Object|Array}
-   */
-
-  populate: async ctx => {
-    try {
-      // const ranges = [
-      //   "A1:A149",
-      //   "B1:B149",
-      //   "C1:C149",
-      //   "D1:D149",
-      //   "E1:E149",
-      //   "F1:F149",
-      //   "G1:G149",
-      //   "H1:H149",
-      //   "I1:I149",
-      //   "J1:J149"
-      // ];
-      // const spreadsheetId = "1X3x5HJVyAyg9MZTfhw044wEafHpoInT_L1rU-CnZdjE";
-
-      const {ranges,spreadsheetId} = ctx.request.body
-      const res = await fetchSpreadSheet(spreadsheetId, ranges);
-      //console.log("res", res);
-      return res;
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  /**
    * Retrieve question records.
    *
    * @return {Object|Array}
@@ -115,7 +84,7 @@ module.exports = {
         spreadsheetId,
         ranges
       );
-       
+
       const arrPromises = [];
 
       result.forEach(question => {
@@ -133,6 +102,7 @@ module.exports = {
       });
       const results = await Promise.all(arrPromises);
       return results;
+      
     } catch (error) {
       throw error;
     }
