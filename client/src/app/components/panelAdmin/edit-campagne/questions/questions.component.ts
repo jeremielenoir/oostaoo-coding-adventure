@@ -28,6 +28,7 @@ export class QuestionsComponent implements OnInit {
   public difficulty = ['facile', 'moyen', 'expert'];
   public boelanIsSearchAdvenced: boolean = false;
   public saveallQuestionsCampaign = [];
+  public techno = []
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -36,8 +37,6 @@ export class QuestionsComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-      console.log('allQuestionsCampaign: ', this.allQuestionsCampaign);
-      console.log('this questionsByCampaign: ', this.questionsByCampaign);
     }
   }
 
@@ -55,16 +54,19 @@ export class QuestionsComponent implements OnInit {
       this.yourCampaign = campaigns;
       const questions = values[1]
       console.log('question man -->',questions);
-      console.log('this.loadCampaign', values[0]);
+      this.yourCampaign[0].technologies.forEach(element => {
+        this.techno.push(element.name)
+      });
+
+      console.log('dit techno',this.techno)
       const nameQuestionByTechno = [];
       campaigns[0].questions.forEach(element => {
-        // console.log('question campagne', element);
         nameQuestionByTechno.push(element.name);
       });
       const questionByTechnoCampaing = [];
       const nameQuestionCampaignByTechno = [];
       for (let question of questions) {
-        // console.log('question.technologies.id', question.technologies.id)
+       
         campaigns[0].technologies.forEach(element => {
 
 
@@ -80,14 +82,11 @@ export class QuestionsComponent implements OnInit {
 
 
         });
-        // console.log('nameQuestionCampaignByTechno: ', nameQuestionCampaignByTechno);
-        // console.log(this.yourCampaign[0].questions);
-        // console.log('iteName: ', question.name);
+      
       }
       this.questionsByCampaign = nameQuestionCampaignByTechno;
-      console.log('this.questionsByCampaign: ', this.questionsByCampaign);
       this.allQuestionsCampaign = questionByTechnoCampaing;
-      this.saveallQuestionsCampaign = questionByTechnoCampaing;
+
     });
   }
 
@@ -95,7 +94,7 @@ export class QuestionsComponent implements OnInit {
     return this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.globalId)
       .toPromise()
       .then(response => {
-        // console.log('questionsByCampaign : ', this.questionsByCampaign);
+        
         this.yourCampaign = [response];
         return this.yourCampaign;
       })
