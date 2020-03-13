@@ -9,11 +9,7 @@ import { Router } from "@angular/router";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 import { TooltipPosition, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-<<<<<<< Updated upstream
-import { element } from '@angular/core/src/render3';
 import { ToastrService } from 'ngx-toastr';
-=======
->>>>>>> Stashed changes
 @Component({
   selector: 'app-top-info-campagne',
   templateUrl: './top-info-campagne.component.html',
@@ -74,10 +70,7 @@ export class TopInfoCampagneComponent implements OnInit {
     let arraytimeAllquestionCampagn = [];
     let timeQuestionCampagne;
     let deparPointNumberQuestion = 0;
-    let timeDepartQuestion = 0;
-    let timeDepartQuestionDivise = 0;
-    
-    
+    let timeDepartQuestion = 0;    
 
       for(let timequestion of this.allQuestionLevel){
         console.log('timequestion --->',timequestion)
