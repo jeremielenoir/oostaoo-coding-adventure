@@ -30,7 +30,7 @@ import { Router } from "@angular/router";
   templateUrl: "./question.component.html",
   styleUrls: ["./question.component.scss","../nouvelle-campagne/nouvelle-campagne.component.scss"]
 })
-export class QuestionComponent implements OnChanges {
+export class QuestionComponent implements OnInit {
  
   @Input('formCampagne') formCampagne: FormGroup;
   @Input() datas = [];
@@ -82,9 +82,6 @@ export class QuestionComponent implements OnChanges {
 
     this.methoddataLevels();
     
-   console.log("Hellow wordd --->");
-
-   console.log('techno campagn verif --->',this.datas)
 
     window.scroll(10, 0);
 
@@ -96,9 +93,10 @@ export class QuestionComponent implements OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges){
-    console.log("expericence",changes)
-  }
+  // ngOnChanges(changes: SimpleChanges){
+  //   console.log('mdr sa doit parche',this.all)
+  //   console.log("expericence",changes)
+  // }
 
   methoddataLevels(){
 

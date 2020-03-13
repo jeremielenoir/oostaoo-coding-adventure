@@ -19,9 +19,9 @@
        </div>
        
         <div class="container-langage">
-            <!-- <span>Points: <p>{{poinTotal}} pts</p></span>
-            <span>Questions: <p>{{this.yourCampaign[0].questions.length}}</p></span>
-            <span>Durée totale: <p>{{convertSecondsToMinutes(timeAllquestionCampgnDivice)}} à {{convertSecondsToMinutes(timeAllquestionCampagn)}} min</p></span> -->
+            <span>Points: <p>{{poinTotal}} pts</p></span>
+            <span>Questions: <p>{{this.allQuestionLevel.length}}</p></span>
+            <span>Durée totale: <p>{{convertSecondsToMinutes(timeAllquestionCampgnDivice)}} à {{convertSecondsToMinutes(timeAllquestionCampagn)}} min</p></span>
 
         </div>
 
@@ -33,10 +33,10 @@
                   <span>({{donut.value}}) pts</span>
                   <span class="icon-chevron fas fa-chevron-up"></span>
 
-                  <span class="question-time">
-                    14 questions
-                    16 à 31 min
-                  </span>
+                   <span class="question-time">{{donut.question}} questions</span>
+                  <span class="question-time">{{convertSecondsToMinutes(donut.timeQuestionDIvice)}} à {{convertSecondsToMinutes(donut.timeQuestion)}} min</span>
+                    
+                  
                 </p>
                 
               

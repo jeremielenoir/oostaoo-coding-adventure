@@ -45,6 +45,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
   public allQuestionLevel: any[] = [];
   public allQuestions: any[] = [];
   public allTechno: any = [];
+  public finalCampagn = []
 
   public activeClassScrollTopDropList = false;
   public boelanIsSearchAdvenced = false;
@@ -81,16 +82,21 @@ export class NouvelleCampagnePage3Component implements OnInit {
   ) { }
 
   ngOnInit() {
+  
     this.experience =  this.formCampagne.value.experience;
     this.getAllQuestions();
-
-    console.log('les question total -->',this.allQuestions)
 
     window.scroll(10, 0);
 
     window.addEventListener("scroll", () => {
       this.headerChangePositioinDropList();
     });
+
+    console.log('test 1 !!!! new campagne',this.allQuestionLevel);
+  }
+
+  OnChanges(){
+    
   }
 
   experiencecampagn(){
@@ -132,20 +138,15 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
       }
 
-      console.log('les data question de allQuestions--->',this.allQuestions)
-
       for (const questionLevel of this.allQuestions) {
         if (questionLevel.level === this.experience) {
-          console.log('all question trie expert --->',questionLevel.level)
           this.allQuestionLevel.push(questionLevel);
         }
       }
 
-      console.log('question lvl -->',this.experience)
+      this.finalCampagn = [...this.allQuestionLevel]
 
-      console.log('les data question de allQuestionLevel --->',this.allQuestionLevel)
-
-
+    
       for (const itemQuestionLevel of this.allQuestionLevel) {
         this.allQuestions = this.allQuestions.filter(
           element => element !== itemQuestionLevel
@@ -167,9 +168,9 @@ export class NouvelleCampagnePage3Component implements OnInit {
   }
 
   filtreDifficuty(element) {
-    console.log('saveallQuestionsCampaign', this.saveallQuestionsCampaign)
+    
     let test = 1;
-    console.log('---hell word ---', test + 1);
+
 
     let results = [];
 

@@ -53,7 +53,6 @@ export class QuestionsComponent implements OnInit {
     Promise.all([this.loadCampaign(), this.loadAllQuestion()]).then(values => {
       const campaigns = values[0];
       this.yourCampaign = campaigns;
-      console.log('------------------allQuestionsCampaign------------------: ', this.allQuestionsCampaign);
       const questions = values[1]
       console.log('question man -->',questions);
       console.log('this.loadCampaign', values[0]);

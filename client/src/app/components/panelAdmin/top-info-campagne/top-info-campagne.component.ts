@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,OnChanges } from '@angular/core';
+import { Component, OnInit, Input,OnChanges, SimpleChanges } from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {
   ApiClientService,
@@ -9,8 +9,11 @@ import { Router } from "@angular/router";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 import { TooltipPosition, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+<<<<<<< Updated upstream
 import { element } from '@angular/core/src/render3';
 import { ToastrService } from 'ngx-toastr';
+=======
+>>>>>>> Stashed changes
 @Component({
   selector: 'app-top-info-campagne',
   templateUrl: './top-info-campagne.component.html',
@@ -20,14 +23,17 @@ export class TopInfoCampagneComponent implements OnInit {
 
   @Input() formCampagne: FormGroup;
   @Input('allQuestionLevel') allQuestionLevel;
-  @Input('yourCampaign') yourCampaign
+  @Input('yourCampaign') yourCampaign;
+  @Input('techno') techno
   public globalId:number;
   public updateQuestionsCampaign:number[] = [];
   public technoDonuts:any[] = [];
-  public poinTotal:number;
-  public timeAllquestionCampagn:number = 0;
-  public timeAllquestionCampgnDivice:number = 0;
+  public poinTotal: number = 0;
+  public timeAllquestionCampagn = 0;
+  public timeAllquestionCampgnDivice = 0;
   public campagneFull = [];
+
+  test = []
 
 
   constructor(public apiClientService: ApiClientService,private router: Router, 
@@ -35,75 +41,97 @@ export class TopInfoCampagneComponent implements OnInit {
 
   ngOnInit() {
 
+    this.technoMethod();
+
     this.route.parent.params.subscribe(params => {
       this.globalId = params.id;
     });
 
-   
     
+   
   }
 
-  ngOnChanges(){
-    this.technoMethod()
-    console.log('allQuestionLevel',this.allQuestionLevel)
+  ngOnChanges(changes: SimpleChanges){
+
+    this.technoMethod();
+    
+    console.log('all question full',changes.allQuestionLevel.currentValue)
+    
+   
   }
+
 
   convertSecondsToMinutes(time){
     return Math.floor(time / 60);
   }
 
   technoMethod(){
+
     let pointDepart = 0;
     let poinTotal = null;
     let points = [];
+    let timeArraySolo = [];
     let arraytimeAllquestionCampagn = [];
-    let timeQuestionCampagne
-    if(this.yourCampaign && this.yourCampaign.length > 0){
+    let timeQuestionCampagne;
+    let deparPointNumberQuestion = 0;
+    let timeDepartQuestion = 0;
+    let timeDepartQuestionDivise = 0;
+    
+    
 
-      for(let timequestion of this.yourCampaign[0].questions){
-
-        arraytimeAllquestionCampagn.push(timequestion.time);
+      for(let timequestion of this.allQuestionLevel){
+        console.log('timequestion --->',timequestion)
+        arraytimeAllquestionCampagn.push(Number(timequestion.time));
       }
 
-      for(let technoElement of this.yourCampaign[0].technologies){
+      for(let technoElement of this.techno){
 
         for(let question of this.allQuestionLevel){
           
             if(technoElement['id'] == question['technologies'].id){
               pointDepart = pointDepart + question['points'];
+              timeDepartQuestion = timeDepartQuestion + question['time'];
+              deparPointNumberQuestion++
+              
             }
       }
      
       points.push(pointDepart);
+      timeArraySolo.push(timeDepartQuestion)
+     
       points  = points.filter(element => element !== 0);
       if(points && points.length > 0 ){
         this.poinTotal = points.reduce((accumulator,currenValue) => accumulator + currenValue)
       }
 
-    
-
-       for(let time of arraytimeAllquestionCampagn ){
-        timeQuestionCampagne = timeQuestionCampagne + time;
-        this.timeAllquestionCampagn = timeQuestionCampagne;
-        this.timeAllquestionCampgnDivice = timeQuestionCampagne / 2
-       }
-  
-       timeQuestionCampagne = 0
+      
+       timeQuestionCampagne = 0;
+       
      
-      this.technoDonuts.push({label:technoElement['name'],value:pointDepart});
+      this.technoDonuts.push(
+        {
+          label:technoElement['name'],
+          value:pointDepart,
+          question:deparPointNumberQuestion,
+          timeQuestion:timeDepartQuestion,
+          timeQuestionDIvice:timeDepartQuestion / 2
+          
+        }
+        );
       this.technoDonuts = this.technoDonuts.filter(element => element.value != 0)
       
       pointDepart = 0;
+      deparPointNumberQuestion = 0;
+      timeDepartQuestion = 0;
       
     }
 
-    console.log('points',points)
-    console.log('poinTotal',poinTotal)
-    console.log('technoDonuts',this.technoDonuts);
-    console.log('arraytimeAllquestionCampagn ---->',arraytimeAllquestionCampagn)
-
+    if(arraytimeAllquestionCampagn && arraytimeAllquestionCampagn.length > 0){
+      this.timeAllquestionCampagn = arraytimeAllquestionCampagn.reduce((accumulator,currenValue) => accumulator + currenValue);
+      this.timeAllquestionCampgnDivice = this.timeAllquestionCampagn / 2;
     }
-    // console.log('this.technoDonuts ---->',this.technoDonuts)
+
+    // console.log('timeAllquestionCampagn',this.timeAllquestionCampagn);
 
   }
   SendQuestionSeleditd(id) {
