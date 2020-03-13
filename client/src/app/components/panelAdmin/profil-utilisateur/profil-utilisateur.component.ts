@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import {  ApiClientService, API_URI_USER, API_URI_USER_ADMIN} from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { MatSnackBar } from '@angular/material';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profil-utilisateur',
@@ -11,7 +12,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class ProfilUtilisateurComponent implements OnInit {
 
-  constructor(public apiClientService: ApiClientService,  public decryptTokenService: DecryptTokenService, private _snackBar: MatSnackBar) {
+  constructor(public apiClientService: ApiClientService,  public decryptTokenService: DecryptTokenService, private _snackBar: MatSnackBar, private toastr: ToastrService) {
   }
 
   public globalId: any;
@@ -56,6 +57,13 @@ export class ProfilUtilisateurComponent implements OnInit {
     });
   }
 
+  showSuccess(message) {
+    this.toastr.success(message);
+  }
+  showError(message) {
+    this.toastr.info(message);
+  }
+
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
       duration: 3000,
@@ -65,7 +73,7 @@ export class ProfilUtilisateurComponent implements OnInit {
   updateprofil() {
     this.submittedProfil = true;
     if (this.prenom.value === '' || this.nom.value === '' || this.username.value === '' || this.pays.value === '' || this.langue.value === 'value') {
-      this.openSnackBar('Erreur veuillez correctement remplir tous les champs requis', 'Fermer');
+      this.showError('Erreur veuillez correctement remplir tous les champs requis');
       return console.log('Erreur veuillez remplir tout les champs requis');
     } else {
     this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
@@ -79,7 +87,7 @@ export class ProfilUtilisateurComponent implements OnInit {
       function: this.fonction.value,
     }).subscribe(
       (res) => {
-        this.openSnackBar('Le profil a bien été mis à jour', 'Fermer');
+        this.showSuccess('Le profil a bien été mis à jour');
        // console.log('res', res);
       },
       err => console.log(err)
@@ -95,7 +103,7 @@ export class ProfilUtilisateurComponent implements OnInit {
     Signature: this.signature.value,
   }).subscribe(
     (res) => {
-      this.openSnackBar('La signature a bien été mise à jour', 'Fermer');
+      this.showSuccess('La signature a bien été mise à jour');
      // console.log('res', res);
     },
     err => console.log(err)
@@ -106,14 +114,14 @@ export class ProfilUtilisateurComponent implements OnInit {
 updateemail() {
   this.submittedEmail = true;
   if (this.email.value === '' || this.newEmail.value === '' || this.email.invalid || this.newEmail.invalid) {
-    this.openSnackBar('Erreur veuillez correctement remplir tous les champs requis', 'Fermer');
+    this.showError('Erreur veuillez correctement remplir tous les champs requis');
     return console.log('Erreur veuillez remplir tout les champs requis');
   } else {
   this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
     Email: this.newEmail.value,
   }).subscribe(
     (res) => {
-      this.openSnackBar("L'email a bien été mis à jour", 'Fermer');
+      this.showSuccess("L'email a bien été mis à jour");
      // console.log('res', res);
     },
     err => console.log(err)
@@ -126,13 +134,14 @@ updatepassword() {
 
   this.submittedPassword = true;
   if (this.newpassword.value === null || this.newpassword.value === '' || this.newpassword.value !== this.confirmpassword.value) {
+    this.showError("Le mot de passe n'a pas été modifié");
     return console.log("Erreur le mot de passe n'a pas été modifié ");
   } else {
   this.apiClientService.put(API_URI_USER + '/' + this.decryptTokenService.userId, {
     password: this.newpassword.value,
   }).subscribe(
     (res) => {
-      this.openSnackBar('Le mot de passe a bien été mis a jour', 'Fermer');
+      this.showSuccess('Le mot de passe a bien été mis a jour');
      // console.log('res', res);
     },
     err => console.log(err)

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ApiClientService, API_URI_FEEDBACK } from 'src/app/api-client/api-client.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-fin-test',
@@ -13,7 +14,7 @@ export class FinTestComponent implements OnInit {
   isSelected: boolean;
   rating: number;
   public commentaire = new FormControl("");
-  constructor(public apiClientService: ApiClientService, private _snackBar: MatSnackBar) { }
+  constructor(public apiClientService: ApiClientService, private _snackBar: MatSnackBar, private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -24,6 +25,13 @@ export class FinTestComponent implements OnInit {
     });
   }
 
+  showSuccess(message) {
+    this.toastr.success(message);
+  }
+  showError(message) {
+    this.toastr.info(message);
+  }
+
   getRating(rate: number) {
     this.rating = rate;
   }
@@ -31,14 +39,14 @@ export class FinTestComponent implements OnInit {
   sendFeedback() {
     console.log(this.rating)
     if(this.rating === undefined) {
-      return this.openSnackBar("Veuillez mettre une note pour faire votre retour", 'Fermer');
+      return this.showError("Veuillez mettre une note pour faire votre retour");
     }
     this.apiClientService.post(API_URI_FEEDBACK, {
       rating: this.rating,
       commentaires: this.commentaire.value,
     }).subscribe(
       (res) => {
-        this.openSnackBar("Nous vous remercions pour votre retour", 'Fermer');
+        this.showSuccess("Nous vous remercions pour votre retour");
       },
       err => console.log(err)
     );

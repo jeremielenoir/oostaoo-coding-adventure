@@ -8,6 +8,7 @@ import {
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: "app-profil-entreprise",
@@ -91,6 +92,7 @@ export class ProfilEntrepriseComponent implements OnInit {
     public apiClientService: ApiClientService,
     public decryptTokenService: DecryptTokenService,
     private _snackBar: MatSnackBar,
+    private toastr: ToastrService
   ) { }
 
 
@@ -142,14 +144,14 @@ export class ProfilEntrepriseComponent implements OnInit {
     this.submitted = true;
 
     if (this.newEntreprise.value === '' || this.newEmail.value === '' || this.newPhone.value === '' || this.newEmail.invalid) {
-      this.openSnackBar('Erreur dans le formulaire merci de vérifier les champs', 'Fermer');
+      this.showError('Erreur dans le formulaire merci de vérifier les champs');
       return console.log('password not updated');
     } else {
         if(this.tests_available !== -1){
           setTimeout(()=>{
             this.router.navigate(['/subscription'])
           }, 1500 );
-          return this.openSnackBar(`Réservé aux formules 'Entreprise'`, 'fermer');
+          return this.showError(`Réservé aux formules 'Entreprise'`);
         }
       this.apiClientService.post(API_URI_ENTREPRISE, {
         Nom: this.newEntreprise.value,
@@ -158,7 +160,7 @@ export class ProfilEntrepriseComponent implements OnInit {
         useradmin: this.decryptTokenService.userId
       }).subscribe(
         (res) => {
-          this.openSnackBar("L'entreprise a bien été ajoutée", 'Fermer');
+          this.showSuccess("L'entreprise a bien été ajoutée");
           this.ngOnInit();
         },
         err => console.log(err)
@@ -172,6 +174,13 @@ export class ProfilEntrepriseComponent implements OnInit {
     });
   }
 
+  showSuccess(message) {
+    this.toastr.success(message);
+  }
+  showError(message) {
+    this.toastr.info(message);
+  }
+
   clickchange() {
     // console.log('this.user :', this.user);
     this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
@@ -181,7 +190,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       Teaser: this.teaser.value
     }).subscribe(
       (res) => {
-        this.openSnackBar("L'entreprise a bien été mise à jour", 'Fermer');
+        this.showSuccess("L'entreprise a bien été mise à jour");
         // console.log('res', res);
       },
       err => console.log(err)
@@ -192,7 +201,7 @@ export class ProfilEntrepriseComponent implements OnInit {
     console.log('bonjour' + this.name.value)
     this.submitted = true;
     if (this.name.value === '' || this.email.value === '' || this.phone.value === '' || this.email.invalid) {
-      this.openSnackBar('Erreur dans le formulaire merci de vérifier les champs', 'Fermer');
+      this.showError('Erreur dans le formulaire merci de vérifier les champs');
       return console.log('password not updated');
     } else {
       this.apiClientService.put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
@@ -211,7 +220,7 @@ export class ProfilEntrepriseComponent implements OnInit {
         Twitter: this.twitter.value,
       }).subscribe(
         (res) => {
-          this.openSnackBar("L'entreprise a bien été mise à jour", 'Fermer');
+          this.showSuccess("L'entreprise a bien été mise à jour");
           this.currentTotal = 0;
           this.ngOnInit();
           // console.log('res', res);

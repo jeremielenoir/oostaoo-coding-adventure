@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { API_URI_CAMPAIGNS, ApiClientService } from 'src/app/api-client/api-client.service';
 import { MatSnackBar } from '@angular/material';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-general',
@@ -13,7 +14,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class GeneralComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, public apiClientService: ApiClientService, public datepipe: DatePipe, private _snackBar: MatSnackBar,) {
+  constructor(private route: ActivatedRoute, public apiClientService: ApiClientService, public datepipe: DatePipe, private _snackBar: MatSnackBar, private toastr: ToastrService) {
     this.route.parent.parent.params.subscribe(params => {
       this.globalId = params.id;
     });
@@ -60,7 +61,9 @@ export class GeneralComponent implements OnInit {
     return [year, month, day].join('-');
 }
 
-
+showSuccess(message) {
+  this.toastr.success(message);
+}
 
   updateCampaign() {
     this.NewDateExp.setDate(this.NewDateExp.getDate() + this. date.value);
@@ -87,7 +90,7 @@ export class GeneralComponent implements OnInit {
       expiration_date: this.formatDate(this.NewDateExp),
     }).subscribe(
       (res) => {
-        this.openSnackBar('Le test a bien été édité', 'Fermer');
+        this.showSuccess('Le test a bien été édité');
        // console.log('res', res);
       },
       err => console.log(err)

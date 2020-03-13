@@ -95,6 +95,7 @@ import { MotDePasseOublieComponent } from './components/home/register/mot-de-pas
 import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
 import { IgxDoughnutChartModule } from 'igniteui-angular-charts';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -181,7 +182,13 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     ScrollToModule.forRoot(),
     NgxStripeModule.forRoot('pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq'),
     IgxDoughnutChartModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: false,
+      closeButton: true,
+    })
   ],
   providers: [
     ApiClientService,

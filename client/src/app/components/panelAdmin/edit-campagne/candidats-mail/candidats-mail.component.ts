@@ -8,6 +8,7 @@ import {
 } from '../../../../api-client/api-client.service';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-candidats-mail',
@@ -39,6 +40,7 @@ export class CandidatsMailComponent implements OnInit {
     private dialog: MatDialog,
     private _snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<CandidatsMailComponent>,
+    private toastr: ToastrService
   ) {
     this.candidats = this.data.contact;
     let count = 0;
@@ -100,6 +102,10 @@ export class CandidatsMailComponent implements OnInit {
     //   `;
   }
 
+  showSuccess(message) {
+    this.toastr.success(message);
+  }
+
   postCandidat(nom, emailContact): Promise<any> {
     return this.apiClientService.post(API_URI_CANDIDATS, {
       Nom: nom,
@@ -114,7 +120,7 @@ export class CandidatsMailComponent implements OnInit {
           console.log('res', res.id);
           const idCandidat = [];
           idCandidat.push(res.id);
-          this.openSnackBar('Le candidat a bien été invité', 'Fermer');
+          this.showSuccess('Le candidat a bien été invité');
           return idCandidat;
         }, err => {
           console.log('log error', err)

@@ -16,6 +16,7 @@ import {
   API_URI_USER
 } from "src/app/api-client/api-client.service";
 import { AuthenticationService } from './../../home/register/service/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 const CHECKBOX_DATA = [{
   id: 1,
@@ -64,7 +65,8 @@ export class UtilisateursComponent implements OnInit {
     public apiClientService: ApiClientService,
     public authenticationService: AuthenticationService,
     public decryptTokenService: DecryptTokenService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private toastr: ToastrService
     ) {
     this.checkbox_list = CHECKBOX_DATA;
   }
@@ -217,6 +219,13 @@ export class UtilisateursComponent implements OnInit {
     });
   }
 
+  showSuccess(message) {
+    this.toastr.success(message);
+  }
+  showError(message) {
+    this.toastr.info(message);
+  }
+
   public deleteUser(id){
     const token = localStorage.getItem('currentUser');
     this.apiClientService
@@ -225,7 +234,7 @@ export class UtilisateursComponent implements OnInit {
       .then(res=>{
         console.log(res);
         this.users = this.users.filter(user=>user.id !== id);
-        this.openSnackBar("L'utilisateur a bien été supprimé", 'Fermer');
+        this.showSuccess("L'utilisateur a bien été supprimé");
       })
       .then(res=>console.log(res))
       .catch((e)=>console.log('error : ', e))
@@ -259,7 +268,7 @@ export class UtilisateursComponent implements OnInit {
       setTimeout(()=>{
         this.router.navigate(['/subscription'])
       }, 1500 );
-      return this.openSnackBar(`Réservé aux formules 'Entreprise'`, 'fermer');
+      return this.showError(`Réservé aux formules 'Entreprise'`);
     }
 
     const userPayload = ({
@@ -294,7 +303,7 @@ export class UtilisateursComponent implements OnInit {
                           // this.UserName = "";
                           // this.PasswordValue = "";
                           // this.selectedRoleName = "";
-        this.openSnackBar("L'utilisateur a bien été ajouté", 'Fermer');
+        this.showSuccess("L'utilisateur a bien été ajouté");
       })
     .catch(function(res){ console.log(res) })
   }
@@ -315,7 +324,7 @@ export class UtilisateursComponent implements OnInit {
     if (this.editPrenom.value === '' || this.editNom.value === '' || this.editEmail.value === '' || this.editEmail.invalid ||
       this.editPassword.value === "" || this.confirmPassword.value === "" || this.editPassword.value === null ||
       this.editPassword.value !== this.confirmPassword.value || this.editUsername.value === "") {
-      this.openSnackBar('Erreur, veuillez correctement remplir tous les champs requis', 'Fermer');
+        this.showError("Une erreur est survenue");
       return console.log('Erreur, veuillez remplir tout les champs requis');
     } else {
     this.apiClientService
@@ -349,7 +358,7 @@ export class UtilisateursComponent implements OnInit {
                           // this.EmailValue = "";
                           // this.UserName = "";
                           // this.selectedRoleName = "";
-        this.openSnackBar("L'utilisateur a bien été modifié", 'Fermer');
+        this.showSuccess("Le compte a correctement été modifié");
       })
     .catch(function(res){ console.log(res) })
     }
