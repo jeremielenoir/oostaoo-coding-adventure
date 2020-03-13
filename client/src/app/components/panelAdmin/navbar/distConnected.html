@@ -1,11 +1,11 @@
-<h1 mat-dialog-title>Se déconnecter</h1>
+<mat-dialog-content align="center">
+    <h2>Se déconnecter</h2>
+    <br>
+    Êtes vous sûr de vouloir vous déconnecter?
+</mat-dialog-content>
 <br>
-<div mat-dialog-content>
-    êtes vous sûr de vouloir vous déconnecter
-</div>
 <br>
-<br>
-<div mat-dialog-actions>
-    <button class="" mat-button (click)="hideDialog()">Annuler</button>
-    <button class="" mat-button cdkFocusInitial (click)="confirmDisConnection()">Confirmer</button>
-</div>
+<mat-dialog-actions align="center">
+    <button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="hideDialog()">Annuler</button>
+    <button mat-raised-button cdkFocusInitial style="background-color: #1d3552; color: white;" (click)="confirmDisConnection()">Confirmer</button>
+</mat-dialog-actions>

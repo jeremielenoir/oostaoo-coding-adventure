@@ -1,8 +1,17 @@
-<div class="container"  mat-dialog-content>
+<!-- <div class="container"  mat-dialog-content>
     <p>Voulez vous dupliquer cette campagne ?</p>
 </div>
   
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Annulez</button>
     <button mat-button (click)='onClick()' cdkFocusInitial>Confirmer</button>
-</div>
+</div> -->
+<mat-dialog-content align="center">
+  <p>Voulez vous dupliquer cette campagne?</p>
+</mat-dialog-content>
+<br>
+<br>
+<mat-dialog-actions align="center">
+  <button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="onNoClick()">Annuler</button>
+  <button mat-raised-button cdkFocusInitial style="background-color: #1d3552; color: white;" (click)="onClick()">Confirmer</button>
+</mat-dialog-actions>
