@@ -81,7 +81,6 @@
         padding-left: 12%;
         .title-segment{
             font-size: 17px;
-            font-family: $font-poppins;
             font-weight: 400;
             color: $color-principal-blue;
             margin-bottom: 0px;
@@ -93,7 +92,6 @@
             font-size: 30px;
             margin-bottom: 0px;
             margin-top: -5px;
-            font-family: $font-poppins;
         }
     }
 }
@@ -169,7 +167,6 @@
             padding: 6px 6px;
             width: 150px;
             &::placeholder{
-                font-family: $font-poppins;
                 color:$color-orange;
                 
             }
@@ -183,7 +180,6 @@
     }
     .search-advanced{
         color:$color-orange;
-        font-family: $font-poppins;
         font-size: $font-size-home;
         justify-content: center;
         margin-left: 12px;
@@ -230,7 +226,6 @@
         text-transform: uppercase;
         font-size: $font-size-home;
         margin-bottom: 0;
-        font-family: $font-poppins;
          
         letter-spacing: 1.5px;
         padding-top: 7px;
@@ -307,7 +302,6 @@
         padding-left: 12%;
         .title-segment{
             font-size: 17px;
-            font-family: $font-poppins;
             font-weight: 400;
             color: $color-principal-blue;
             margin-bottom: 0px;
@@ -320,7 +314,6 @@
             font-size: 30px;
             margin-bottom: 0px;
             margin-top: -5px;
-            font-family: $font-poppins;
         }
     }
 }
@@ -397,7 +390,6 @@
             padding: 6px 6px;
             width: 150px;
             &::placeholder{
-                font-family: $font-poppins;
                 color:$color-orange;
                 
             }
@@ -411,7 +403,6 @@
     }
     .search-advanced{
         color:$color-orange;
-        font-family: $font-poppins;
         font-size: $font-size-home;
         justify-content: center;
         margin-left: 12px;
@@ -457,7 +448,6 @@
         text-transform: uppercase;
         font-size: $font-size-home;
         margin-bottom: 0;
-        font-family: $font-poppins;
          
         letter-spacing: 1.5px;
         padding-top: 7px;
@@ -557,7 +547,6 @@
     width: 100px;
     font-size: $font-size-home;
     color: $color-orange;
-    font-family: $font-poppins;
     text-align: center;
     margin-right:5px;
     padding: 20px 0px;
@@ -583,7 +572,6 @@
         padding-top: 15px;
         padding-bottom: 15px;
         color: white;
-        font-family: $font-poppins;
         font-size: $font-size-home;
     }
     &:hover{
@@ -608,7 +596,6 @@
         max-width:240px;
         flex: 4;
         font-size: $font-size-home;
-        font-family: $font-poppins;
         padding-right: 6px;
         min-width: 230px;
         white-space: nowrap;
@@ -664,7 +651,6 @@
     .point{
       color: $color-principal-blue;
       font-size: $font-size-home;
-      font-family: $font-poppins;
        
       padding-top:20px;
       padding-bottom: 20px;
@@ -698,7 +684,6 @@
         align-items: center;
         padding-left: 5px;
         font-size: $font-size-home;
-        font-family: $font-poppins;
          
         color:$color-principal-blue
 
@@ -738,7 +723,6 @@
     padding: 0px 0px;
     transition: .5s;
     color: $color-orange;
-    font-family: $font-poppins;
     text-align: center;
     font-size: 18px;
     line-height: 15px;
