@@ -1,5 +1,9 @@
 @import'../../../../roodeo-variables.scss';
 @import"../accueil/accueil.component.scss";
+
+#profilSearch{
+  margin-top: 40px;
+}
 #secondSection {
   padding-top:60px;
   padding-bottom: 40px;
@@ -118,6 +122,13 @@
 .content{
   display: flex;
   flex-direction: row;
+  span{
+    font-size: 64px;
+    float: left;
+  }
+  h4{
+    font-size: 24px;
+  }
 }
 
 /* format mobile */
