@@ -96,6 +96,7 @@ import { SubscriptionComponent } from './components/panelAdmin/subscription/subs
 import { IgxDoughnutChartModule } from 'igniteui-angular-charts';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { ToastrModule } from 'ngx-toastr';
+import { AgWordCloudModule } from 'angular4-word-cloud';
 
 
 @NgModule({
@@ -188,7 +189,8 @@ import { ToastrModule } from 'ngx-toastr';
       positionClass: 'toast-bottom-center',
       preventDuplicates: false,
       closeButton: true,
-    })
+    }),
+    AgWordCloudModule.forRoot()
   ],
   providers: [
     ApiClientService,

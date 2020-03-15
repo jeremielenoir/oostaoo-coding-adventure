@@ -20,7 +20,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss", "node_modules/bootstrap/scss/bootstrap.scss", "node_modules/ngx-toastr/toastr.css"],
-            "scripts": [],
+            "scripts": ["./node_modules/angular4-word-cloud/d3.min.js"],
             "es5BrowserSupport": true
           },
           "configurations": {

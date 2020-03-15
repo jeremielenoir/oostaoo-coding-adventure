@@ -225,6 +225,14 @@ mat-error {
 
 /* CSS format mobile */
 
+@media screen and (max-width: 1280px) {
+ 
+  #home{
+    padding-top: 90px;
+  }
+
+}
+
 @media screen and (max-width: 1024px) {
 
   .row-home{

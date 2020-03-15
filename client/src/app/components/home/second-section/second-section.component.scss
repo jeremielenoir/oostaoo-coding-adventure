@@ -11,7 +11,7 @@
  
 
   .title-dashed:first-child{
-    margin-bottom: 80px;
+    margin-bottom: 40px;
   }
  
 }
@@ -113,6 +113,11 @@
 
 .radial-out:hover:before {
   transform: scale(2);
+}
+
+.content{
+  display: flex;
+  flex-direction: row;
 }
 
 /* format mobile */

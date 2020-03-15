@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AgWordCloudData } from 'angular4-word-cloud';
 
 @Component({
   selector: 'app-second-section',
@@ -6,6 +7,48 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./second-section.component.scss']
 })
 export class SecondSectionComponent implements OnInit {
+
+  // Create Work Cloud Data Array
+    wordData: Array<AgWordCloudData> = [
+      {size: 400, text: 'Développeur Backend Nodejs'},
+      {size: 301, text: 'Devops'},
+      {size: 123, text: 'Expert AWS'},
+      {size: 321, text: 'Développeur React'},
+      {size: 231, text: 'Développeur Angular'},
+      {size: 123, text: 'Développeur Frontend'},
+      {size: 346, text: 'Architecte Logiciel'},
+      {size: 107, text: 'Lead Tech'},
+      {size: 436, text: 'Lead Developer'},
+      {size: 731, text: 'SCRUM MASTER'},
+      {size: 80, text: 'Développeur Vuejs'},
+      {size: 96, text: 'Ingénieur développement JAVA'},
+      {size: 531, text: 'libero'},
+      {size: 109, text: 'nisl'},
+      {size: 972, text: 'odio'},
+      {size: 213, text: 'tincidunt'},
+      {size: 294, text: 'vulputate'},
+      {size: 472, text: 'venenatis'},
+      {size: 297, text: 'malesuada'},
+      {size: 456, text: 'finibus'},
+      {size: 123, text: 'tempor'},
+      {size: 376, text: 'tortor'},
+      {size: 93, text: 'congue'},
+      {size: 123, text: 'possit'},
+  ];
+    // Word Cloud Options
+    options = {
+        settings: {
+            minFontSize: 10,
+            maxFontSize: 100
+        },
+        margin: {
+            top: 10,
+            right: 10,
+            bottom: 10,
+            left: 10
+        },
+        labels: false // false to hide hover labels
+    };
 
   constructor() { }
 

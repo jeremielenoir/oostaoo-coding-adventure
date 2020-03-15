@@ -162,16 +162,43 @@ button.mat-menu-item {
   text-align: center;
 }
 
+@media screen and (max-width: 1280px) {
+ 
+  .link-menu{
+    padding: 20px 15px 20px 15px;
+    font-size: 14px;
+  }
+  #logo{
+    width: 170px;
+  }
+  .mat-toolbar{
+    height: 70px;
+  }
+  .mat-button{
+    line-height: 30px;
+  }
+  
+
+}
+
+@media screen and (max-width: 1140px) {
+ 
+  .link-menu{
+    padding: 20px 13px 20px 13px;
+    font-size: 12px;
+  }
+
+}
 
 
 @media screen and (max-width: 960px) {
  
-.mat-toolbar-row
-{
-  width: 50px;
-  padding: 0px;
-  margin-top: 20px;
-}
+  .mat-toolbar-row
+  {
+    width: 50px;
+    padding: 0px;
+    margin-top: 20px;
+  }
 
 }
 
