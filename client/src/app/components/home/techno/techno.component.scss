@@ -2,8 +2,8 @@
 @import"../accueil/accueil.component.scss";
 
 #techno{
-    padding:70px 0px;
-    margin: 0 100px;
+    padding: 60px 20px 0px 40px;
+    margin: 0 auto;
 
     .title-fonction{
         margin-top:60px;
@@ -102,7 +102,8 @@
         .img-techo{
             width: 65px;
             height: 65px;
-            margin-left: 90px;
+            margin-left: 30px;
+            margin-right: 30px;
             text-align:center;
             display: block;
             margin-bottom: 30px;
