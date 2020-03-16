@@ -3,7 +3,7 @@
 #global{
   width: 100%;
   background: $color-background-blue;
-  height: 99%;
+  height: 100%;
 }
 
 #content {
@@ -231,15 +231,17 @@
   width: 5%;
 }
 
-#shadow-cog-2 {
+#shadow-cog-2, #shadow-cog {
   align-items: flex-end!important;
 }
 
 .modall {
-  height: 90%!important;
+  height: 85%!important;
 
   .modall-header {
-    margin-top: 50px!important;
+    display: flex;
+    height: 50px;
+    align-items: center;
   }
 }
 
