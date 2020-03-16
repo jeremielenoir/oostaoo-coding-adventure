@@ -17,12 +17,14 @@
   .search-advanced{
     cursor: pointer;
   }
-  .icon-arrow-btn{
-    transition: .2s;
-  }
   
   .chevron-bottom{
     transform: rotate(90deg);
+  }
+
+  .preview-btn{
+      position: absolute;
+      right: 16px;
   }
 .custom-buttom,.mat-flat-button {
     // height: 100%;
@@ -33,7 +35,7 @@
     contain: content;
     padding: 15px 40px !important;
     color: $color-white !important;
-    height: 64.5px;   
+    height: 50px;   
     outline: none;
 }
 
@@ -54,7 +56,9 @@
 .icon-arrow-btn{
     font-size: 25px;
     position: relative;
-    left: -12px;
+    left: 15px;
+    top: -1px;
+    transition: .2s;
 }
 
 #top-bar {
@@ -208,8 +212,8 @@
 .bar {
     width: 100%;
     background: #eaeff3;
-    height: 70px;
-    padding: 7px 12px;
+    height: 50px;
+    padding: 5px 12px;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -217,8 +221,8 @@
     -webkit-box-align: center;
     align-items: center;
     .bar-content-img{
-        width: 45px;
-        height: 45px;
+        width: 36px;
+        height: 36px;
         margin-bottom: 0px;
         margin-right: 45px;
     }
@@ -226,7 +230,6 @@
         text-transform: uppercase;
         font-size: $font-size-home;
         margin-bottom: 0;
-         
         letter-spacing: 1.5px;
         padding-top: 7px;
     }
@@ -254,7 +257,7 @@
     contain: content;
     padding: 15px 40px !important;
     color: $color-white !important;
-    height: 64.5px;   
+    height: 50px;   
     outline: none;
 }
 
@@ -270,12 +273,6 @@
     background-color: $color-gray!important;
     outline: none;
    
-}
-
-.icon-arrow-btn{
-    font-size: 25px;
-    position: relative;
-    left: -12px;
 }
 
 #top-bar {
@@ -430,8 +427,8 @@
 .bar {
     width: 100%;
     background: #eaeff3;
-    height: 70px;
-    padding: 7px 12px;
+    height: 50px;
+    padding: 5px 12px;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -439,8 +436,8 @@
     -webkit-box-align: center;
     align-items: center;
     .bar-content-img{
-        width: 45px;
-        height: 45px;
+        width: 36px;
+        height: 36px;
         margin-bottom: 0px;
         margin-right: 45px;
     }
@@ -448,7 +445,6 @@
         text-transform: uppercase;
         font-size: $font-size-home;
         margin-bottom: 0;
-         
         letter-spacing: 1.5px;
         padding-top: 7px;
     }

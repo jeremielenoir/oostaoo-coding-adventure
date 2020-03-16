@@ -26,7 +26,7 @@
         <figure class="bar-content-img">
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
         </figure>
-        <p class="bar-text">Notre collection de questions</p>
+        <p class="bar-text">Questions disponibles</p>
       </div>
 
       <div class="option-question-help">
@@ -154,16 +154,12 @@
         <figure class="bar-content-img">
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
         </figure>
-        <p class="bar-text">Votre Campagne</p>
-      </div>
-
-      <div class="option-question-help preview">
+        <span class="bar-text">Votre Campagne</span>
         <button mat-flat-button class="trie-cat preview-btn">
           Prévisualiser
           <i class="fas fa-chevron-right icon-arrow-btn"></i>
         </button>
       </div>
-
       <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="dataLevels"
         [cdkDropListConnectedTo]="[todoList]" class="example-list" (cdkDropListDropped)="drop($event)" #droplist>
         <p id="drop-text">Glissez/déposez une question ici</p>
