@@ -34,6 +34,13 @@
             "^/":""
         }
     },
+    "/auth/reset-password": {
+        "target": "http://localhost:8080",
+        "secure": false,
+        "pathRewrite":{
+            "^/":""
+        }
+    },
     "/user": {
         "target": "http://localhost:8080",
         "secure": false,
