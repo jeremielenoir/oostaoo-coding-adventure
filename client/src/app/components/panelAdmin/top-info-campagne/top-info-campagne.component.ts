@@ -18,9 +18,9 @@ import { ToastrService } from 'ngx-toastr';
 export class TopInfoCampagneComponent implements OnInit {
 
   @Input() formCampagne: FormGroup;
-  @Input('allQuestionLevel') allQuestionLevel;
-  @Input('yourCampaign') yourCampaign;
-  @Input('techno') techno
+  @Input() allQuestionLevel;
+  @Input() yourCampaign;
+  @Input() techno
   public globalId:number;
   public updateQuestionsCampaign:number[] = [];
   public technoDonuts:any[] = [];
@@ -37,21 +37,17 @@ export class TopInfoCampagneComponent implements OnInit {
 
   ngOnInit() {
 
-    this.technoMethod();
-
     this.route.parent.params.subscribe(params => {
       this.globalId = params.id;
     });
 
-    
-   
   }
 
   ngOnChanges(changes: SimpleChanges){
 
     this.technoMethod();
     
-    console.log('all question full',changes.allQuestionLevel.currentValue)
+    console.log('all question full',changes);
     
    
   }
@@ -72,12 +68,15 @@ export class TopInfoCampagneComponent implements OnInit {
     let deparPointNumberQuestion = 0;
     let timeDepartQuestion = 0;    
 
+    if(this.allQuestionLevel && this.allQuestionLevel.length > 0){
       for(let timequestion of this.allQuestionLevel){
-        console.log('timequestion --->',timequestion)
         arraytimeAllquestionCampagn.push(Number(timequestion.time));
       }
+    }
 
       for(let technoElement of this.techno){
+
+        console.log('les techno demande -->',technoElement)
 
         for(let question of this.allQuestionLevel){
           
@@ -133,7 +132,9 @@ export class TopInfoCampagneComponent implements OnInit {
         questions: this.allQuestionLevel
       })
       .subscribe(
+        
         res => {
+          this.router.navigate([`/dashboard/campaigns/${res.id}/candidats`])
           console.log(res);
         },
         err => console.log(err)
@@ -170,6 +171,11 @@ export class TopInfoCampagneComponent implements OnInit {
   
   postCampagne() {
     // Confirm true for post
+
+    // if(this.yourCampaign[0] == undefined){
+    //   this.SendQuestionSeleditd(this.yourCampaign[0].id);
+    //   return
+    // }
 
     let truecp;
 

@@ -92,7 +92,6 @@ export class NouvelleCampagnePage3Component implements OnInit {
       this.headerChangePositioinDropList();
     });
 
-    console.log('test 1 !!!! new campagne',this.allQuestionLevel);
   }
 
   OnChanges(){

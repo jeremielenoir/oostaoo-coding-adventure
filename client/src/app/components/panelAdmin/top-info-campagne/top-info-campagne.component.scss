@@ -91,6 +91,52 @@
         color: #7e8082;
         padding: 0 20px;
         font-size: 12px;
+        position: relative;
+        &:hover .infoBule-info{
+          display: block;
+        }
+        .infoBule-info{
+          position: absolute;
+          width: 300px;
+          padding: 15px;
+          background-color: $color-principal-blue;
+          color:white;
+          z-index: 3;
+          margin-top: 20px;
+          font-size: 13px;
+          box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+          left: -90px;
+          border-radius: $border-radius;
+          display: none;
+          // overflow: hidden;
+          &::after{
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            top: -6px;
+            left: 50%;
+            margin-left: -8px;
+            border-bottom-color: $color-principal-blue;
+            border-bottom-style: solid;
+            border-bottom-width: 6px;
+          }
+          &::before,&::after{
+            content: "";
+            width: 0;
+            height: 0;
+            position: absolute;
+          }
+          .title-infobule{
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            
+          }
+
+          span{
+            color: white;
+            margin-top: 2px;
+          }
+        }
 
         &:not(:first-child) {
           border-left: 1px solid #e7e7e7;
@@ -105,6 +151,7 @@
           font-weight: 600;
           font-size: 12px;
           margin-bottom: 0px !important;
+          color:$color-principal-blue;
           .question-time{
             color:rgb(126, 128, 130);
             font-weight: 400;
@@ -139,8 +186,15 @@
           flex-direction: row;
           align-items: center;
           .number{
-            color: #f2bb13;
+            color: $color-orange;
             font-size: 25px;
+            font-weight: 600;
+          }
+          span{
+            max-width: 100px;
+            padding-right: 15px;
+            color: #7e8082;
+            font-size: 12px;
             font-weight: 600;
           }
 

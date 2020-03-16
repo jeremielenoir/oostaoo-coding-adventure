@@ -20,25 +20,30 @@
        
         <div class="container-langage">
             <span>Points: <p>{{poinTotal}} pts</p></span>
-            <span>Questions: <p>{{this.allQuestionLevel.length}}</p></span>
+            <span>Questions: <p>{{this.allQuestionLevel ? this.allQuestionLevel.length : ''}}</p></span>
             <span>Durée totale: <p>{{convertSecondsToMinutes(timeAllquestionCampgnDivice)}} à {{convertSecondsToMinutes(timeAllquestionCampagn)}} min</p></span>
 
         </div>
 
         <div class="state-techno-content">
             <div *ngFor="let donut of technoDonuts">
-              <div class="state-techno" matTooltip="Info about the action">
-                <p class="name-langage" style="color:rgb(242, 187, 19)">
+              <div class="state-techno">
+                <p class="name-langage">
                   {{donut.label}}
                   <span>({{donut.value}}) pts</span>
                   <span class="icon-chevron fas fa-chevron-up"></span>
 
                    <span class="question-time">{{donut.question}} questions</span>
-                  <span class="question-time">{{convertSecondsToMinutes(donut.timeQuestionDIvice)}} à {{convertSecondsToMinutes(donut.timeQuestion)}} min</span>
-                    
+                  <span class="question-time">{{convertSecondsToMinutes(donut.timeQuestionDIvice)}} à {{convertSecondsToMinutes(donut.timeQuestion)}} min</span>   
                   
-                </p>
-                
+                </p> 
+
+                <div class="infoBule-info">
+
+                    <h3 class="title-infobule">connaissance du langange</h3>
+                    <span>{{donut.question}} question - {{donut.value}} pt</span>
+
+                </div>
               
               </div>
             </div>
@@ -47,6 +52,7 @@
         <div class="score-moyen">
           <h4 class="title-score"></h4>
           <div class="score-number-and-diagrame">
+              <span>Score moyen attendu</span>
               <strong class="number">32%</strong>
               <i class="info-icon fas fa-info-circle"></i>
           </div>

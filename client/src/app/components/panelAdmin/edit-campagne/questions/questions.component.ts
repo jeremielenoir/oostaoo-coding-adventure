@@ -55,7 +55,7 @@ export class QuestionsComponent implements OnInit {
       const questions = values[1]
       console.log('question man -->',questions);
       this.yourCampaign[0].technologies.forEach(element => {
-        this.techno.push(element.name)
+        this.techno.push(element)
       });
 
       console.log('dit techno',this.techno)
