@@ -38,14 +38,14 @@ export class SecondSectionComponent implements OnInit {
     // Word Cloud Options
     options = {
         settings: {
-            minFontSize: 10,
-            maxFontSize: 100
+            minFontSize: 15,
+            maxFontSize: 90
         },
         margin: {
-            top: 10,
-            right: 10,
-            bottom: 10,
-            left: 10
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0
         },
         labels: false // false to hide hover labels
     };

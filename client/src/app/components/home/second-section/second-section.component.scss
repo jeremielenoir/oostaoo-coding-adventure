@@ -3,6 +3,11 @@
 
 #profilSearch{
   margin-top: 40px;
+  .content{
+    > div{
+      width: 50%;
+    }
+  }
 }
 #secondSection {
   padding: 60px 20px 0px 40px;
