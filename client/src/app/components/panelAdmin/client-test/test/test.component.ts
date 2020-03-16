@@ -245,6 +245,9 @@ export class TestComponent implements OnInit {
     return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
   }
 
+  onReady(){
+    console.log("onReady mark-down")
+  }
   postTimeTest(dureeTest) {
     this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
       duree: dureeTest,
