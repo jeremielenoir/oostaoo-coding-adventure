@@ -8,6 +8,9 @@
     flex-direction: column;
     height: 100%;
 }
+::ng-deep app-question-component{
+    height: 100%;
+}
 .cadreQuestion {
     padding: 125px 15px 10px 15px;
     margin: 0 auto;
@@ -480,8 +483,8 @@
 
 .example-list {
     // padding-bottom: 100%;
-    // flex: 1 1 0px;
-    height: 300px;
+    flex: 1 1 0px;
+    // height: 300px;
     background: $color-white!important;
     display: block;
     overflow-y: auto;
@@ -538,6 +541,7 @@
     min-width: 0;
     align-items: center;
     justify-content: flex-start;
+    min-width: 120px;
     // max-width:250px;
    .question-techno {
     display: block;
