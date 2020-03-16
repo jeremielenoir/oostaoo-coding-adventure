@@ -2,7 +2,9 @@
 
 @import"../nouvelle-campagne/nouvelle-campagne.component.scss";
 
-
+.loading{
+    top: 0;
+}
 ::ng-deep app-nouvellecampagnepage3component{
     display: flex;
     flex-direction: column;
@@ -148,6 +150,7 @@
 
 #content {
     width: 100%;
+    height: 100%;
     flex: 1;
     display: flex;
     position: relative;
@@ -771,5 +774,5 @@
     width: 100%;
     margin: 0;
     // padding-bottom: 25px;
-    height: 100%;
+    height: 83%;
 }

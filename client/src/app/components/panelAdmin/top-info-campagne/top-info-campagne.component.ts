@@ -1,4 +1,6 @@
 import { Component, OnInit, Input,OnChanges, SimpleChanges } from '@angular/core';
+import Chart from 'chart.js';
+// @import"../../../../../node_modules/chart.js/dist/Chart.min.js";
 import {FormGroup} from '@angular/forms';
 import {
   ApiClientService,
@@ -47,7 +49,7 @@ export class TopInfoCampagneComponent implements OnInit {
 
     this.technoMethod();
     
-    console.log('all question full',changes);
+    console.log('all question full',changes.allQuestionLevel);
     
    
   }

@@ -45,7 +45,6 @@ import {
 import {
   NouvelleCampagnePage3Component, PopupCampaign
 } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage3-component/nouvelle-campagne3.component';
-
 import { DashboadCampagneComponent } from './components/panelAdmin/dashboard-campagne/dashboard-campagne.component';
 import { CampagneComponent, DialogOverviewDelete, DialogOverviewDuplicate } from './components/panelAdmin/campagne/campagne.component';
 import { SidibarRightComponent } from './components/panelAdmin/sidebar-right/sidebar-right.component';
@@ -97,7 +96,6 @@ import { IgxDoughnutChartModule } from 'igniteui-angular-charts';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { ToastrModule } from 'ngx-toastr';
 import { AgWordCloudModule } from 'angular4-word-cloud';
-
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,

@@ -1,24 +1,6 @@
- <!--<div id="top-bar">
-   <div class="segment3">
-    <p class="title-segment">Score moyen attendu</p>
-    <p id="score">
-      33%
-    </p>
-  </div>
-
-<div class="segment2">
-
-    <button class="custom-buttom custom-buttom-anul" mat-flat-button [routerLink]="['/dashboard/campaigns']">
-      <i class="fas fa-chevron-left icon-arrow-btn"></i>
-      Retour
-    </button>
-    <button class="custom-buttom" [ngClass]="dataLevels.length > 0 ? 'button-enabled' : 'button-disabled'"
-      [disabled]="dataLevels.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
-      Enregistrer
-    </button>
-
-  </div>
-</div> -->
+<div *ngIf="!booleanCampagnFinishLoading" class="loading">
+  <span class="fa fa-spinner fa-pulse"></span>
+</div>
 <div class="container-edit-question">
   <div id="content">
     <div class="block-container left">

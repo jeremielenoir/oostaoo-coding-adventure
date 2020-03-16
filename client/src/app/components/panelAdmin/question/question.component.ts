@@ -46,7 +46,7 @@ export class QuestionComponent implements OnInit {
   public saveallQuestionsCampaign = [];
   public yourCampaign;
   public difficulty = ['facile', 'moyen', 'expert'];
-
+  public booleanCampagnFinishLoading:boolean
   public activeClassScrollTopDropList = false;
 
   Questions = [];
@@ -55,6 +55,9 @@ export class QuestionComponent implements OnInit {
   @ViewChild("droplist") public droplist: ElementRef;
 
   drop(event: CdkDragDrop<string[]>) {
+
+    console.log('la new data',this.dataLevels)
+  
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -81,22 +84,21 @@ export class QuestionComponent implements OnInit {
   ngOnInit() {
 
     this.methoddataLevels();
-    
 
     window.scroll(10, 0);
 
-
-    let body = document.querySelector('body');
-
+   
     window.addEventListener("scroll", () => {
       this.headerChangePositioinDropList();
     });
   }
 
-  // ngOnChanges(changes: SimpleChanges){
-  //   console.log('mdr sa doit parche',this.all)
-  //   console.log("expericence",changes)
-  // }
+  ngOnChanges(changes: SimpleChanges){
+    if(this.dataLevels && this.dataLevels.length > 0){
+      this.booleanCampagnFinishLoading = true
+    }
+
+  }
 
   methoddataLevels(){
 

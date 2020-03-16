@@ -47,6 +47,7 @@ export class QuestionsComponent implements OnInit {
     });
   }
 
+
   ngOnInit() {
 
     Promise.all([this.loadCampaign(), this.loadAllQuestion()]).then(values => {
