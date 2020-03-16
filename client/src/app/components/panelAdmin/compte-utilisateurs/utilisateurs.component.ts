@@ -18,42 +18,45 @@ import {
 import { AuthenticationService } from './../../home/register/service/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
-const CHECKBOX_DATA = [{
+const CHECKBOX_DATA = [
+  {
+    id: 5,
+    name: "LEVEL 1 - ADMINISTRATEUR",
+    checked: false,
+    matTooltip: "bblabla",
+    isChecked: false,
+    roleId: 2
+  },
+  {
   id: 1,
-  name: "LEVEL 2 ACCOUNTING",
+  name: "LEVEL 2 - UTILISATEUR",
   checked: false,
   matTooltip: "bblabla",
   isChecked: false,
   roleId: 8
-},{
-  id: 2,
-  name: "LEVEL 3 - SALES",
-  checked: false,
-  matTooltip: "bblabla",
-  isChecked: false,
-  roleId: 5
-},{
-  id: 3,
-  name: "LEVEL 4 - RH",
-  checked: false,
-  matTooltip: "bblabla",
-  isChecked: false,
-  roleId: 6
-}, {
-  id: 4,
-  name: "LEVEL 5 - CTO",
-  checked: false,
-  matTooltip: "bblabla",
-  isChecked: false,
-  roleId: 7
-}, {
-  id: 5,
-  name: "LEVEL 6 - ADMINISTRATEUR",
-  checked: false,
-  matTooltip: "bblabla",
-  isChecked: false,
-  roleId: 2
-}]
+ }
+//   id: 2,
+//   name: "LEVEL 3 - SALES",
+//   checked: false,
+//   matTooltip: "bblabla",
+//   isChecked: false,
+//   roleId: 5
+// },{
+//   id: 3,
+//   name: "LEVEL 4 - RH",
+//   checked: false,
+//   matTooltip: "bblabla",
+//   isChecked: false,
+//   roleId: 6
+// }, {
+//   id: 4,
+//   name: "LEVEL 5 - CTO",
+//   checked: false,
+//   matTooltip: "bblabla",
+//   isChecked: false,
+//   roleId: 7
+// }, 
+]
 
 @Component({
   selector: "app-utilisateurs",

@@ -3,6 +3,7 @@
 #global{
   width: 100%;
   background: $color-background-blue;
+  height: 99%;
 }
 
 #content {
@@ -34,6 +35,7 @@
         min-height: 48px;
         form {
           width: 100%;
+          height: 50px;
           .icon-form-group-header-contenu {
             display: inline-block;
             left: 9px;
@@ -106,9 +108,28 @@
         background: #fff;
         width: 100%;
         margin: 0 10px 0px 10px;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: $border-radius;
       }
     }
   }
+}
+
+.table_user tr:last-child td:first-child {
+  border-bottom-left-radius: $border-radius;
+}
+
+.table_user tr:last-child td:last-child {
+  border-bottom-right-radius: $border-radius;
+}
+
+.table_user tr:first-child th:first-child {
+  border-top-left-radius: $border-radius;
+}
+
+.table_user tr:first-child th:last-child{ 
+  border-top-right-radius: $border-radius;
 }
 
 .table-info-user .table-bordore {
@@ -189,7 +210,8 @@
 
 .table_body_cell,
 .table_head_cell {
-  padding: 10px;
+  padding: 6px;
+  height: 50px;
 }
 
 .table_body_cell:nth-child(1),
@@ -210,9 +232,10 @@
 }
 
 .modall > .modall-content {
-  padding: 30px;
+  padding: 10px;
   max-width: 875px;
   flex-wrap: wrap;
+  margin-top: 60px;
   .content-form-last {
     padding: 20px;
     .title-gestion-perm {
