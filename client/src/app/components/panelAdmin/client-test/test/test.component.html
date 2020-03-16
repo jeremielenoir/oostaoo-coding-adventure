@@ -51,7 +51,13 @@
 
       <div class="scroll-auto-testing" appBlockCopyPaste [appActive]="candidat.campaign.copy_paste">
         <div class="content-testing">
-          <span style="display:block;padding:15px;">{{ question.name }}</span>
+         <!-- <span style="display:block;padding:15px;">{{ question.name }}</span>
+
+         
+          <div [innerHTML]="typescriptMarkdown | language : 'typescript' | markdown"></div>
+          -->
+
+           <div markdown [data]="question.name" (ready)="onReady()"></div>
         </div>
       </div>
     </div>

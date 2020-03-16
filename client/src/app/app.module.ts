@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { MarkdownModule } from 'ngx-markdown';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr, 'fr');
@@ -190,7 +190,8 @@ import { AgWordCloudModule } from 'angular4-word-cloud';
       preventDuplicates: false,
       closeButton: true,
     }),
-    AgWordCloudModule.forRoot()
+    AgWordCloudModule.forRoot(),
+    MarkdownModule.forRoot(),
   ],
   providers: [
     ApiClientService,
