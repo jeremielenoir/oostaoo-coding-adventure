@@ -26,17 +26,17 @@
         <figure class="bar-content-img">
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
         </figure>
-        <p class="bar-text">Questions disponibles</p>
+        <span class="bar-text">Questions disponibles</span>
+        
       </div>
 
-      <div class="option-question-help">
-        <div id="div-search">
+      <!--div class="option-question-help">
+        <div id="div-search" >
           <input type="text" class="search-input" placeholder="Rechercher" name="search" [(ngModel)]="searchText" />
           <figure class="icon-search">
             <img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg">
           </figure>
         </div>
-
         <span class="search-advanced" href="" (click)="openSearchAdvenced()"> Recherche avancée
           <i class="fas fa-chevron-right icon-arrow-btn" [class.chevron-bottom]="boelanIsSearchAdvenced"></i>
         </span>
@@ -50,7 +50,7 @@
           </mat-menu>
         </button>
 
-      </div>
+      </div-->
 
       <div *ngIf="boelanIsSearchAdvenced" class="search-advanced-block">
         <!-- <mat-form-field>
