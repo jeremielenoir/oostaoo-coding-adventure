@@ -28,6 +28,7 @@ import { RapportDetailleComponent } from './components/panelAdmin/edit-campagne/
 import { RapportDetailleExempleComponent } from './components/home/rapport-detaille/rapport-detaille.component';
 import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
 import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
+import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
 
 const routes: Routes = [
   {
@@ -86,7 +87,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'candidats/:idCandidat/rapport-detaille', component: RapportDetailleComponent },
-      { path: 'candidats', component: CandidatsComponent},
+      { path: 'candidats', component: CandidatsComponent },
       { path: 'questions', component: QuestionsComponent },
       {
         path: 'settings',
@@ -130,6 +131,10 @@ const routes: Routes = [
     component: NotFoundComponent
   },
   {
+    path: 'dashboard/faq',
+    component: FAQComponent
+  },
+  {
     path: '**',
     redirectTo: 'not-found'
   }
@@ -137,7 +142,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-  RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes),
   ],
   exports: [RouterModule],
   providers: [AuthGuard,

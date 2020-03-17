@@ -96,12 +96,14 @@ import { IgxDoughnutChartModule } from 'igniteui-angular-charts';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { ToastrModule } from 'ngx-toastr';
 import { AgWordCloudModule } from 'angular4-word-cloud';
+import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
+
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
   //   NouvelleCampagnePage3Component, CandidatsMailComponent],
   entryComponents: [RouteComponentComponent, DistConnecTed, InviteCandidat, CandidatsComponent, PopupCampaign,
-    NouvelleCampagnePage3Component, CandidatsMailComponent,  DialogOverviewDelete, DialogOverviewDuplicate, DialogForgetPassword],
+    NouvelleCampagnePage3Component, CandidatsMailComponent, DialogOverviewDelete, DialogOverviewDuplicate, DialogForgetPassword],
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -161,7 +163,8 @@ import { AgWordCloudModule } from 'angular4-word-cloud';
     QuestionComponent,
     TopInfoCampagneComponent,
     MotDePasseOublieComponent,
-    SubscriptionComponent
+    SubscriptionComponent,
+    FAQComponent
   ],
   imports: [
     BrowserModule,
