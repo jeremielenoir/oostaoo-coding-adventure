@@ -452,8 +452,8 @@ module.exports = {
         valueInputOption: "USER_ENTERED",
         resource: { values: ids }
       };
-      const res = await gsapi.spreadsheets.values.update(updateOptions);
-      return res;
+      await gsapi.spreadsheets.values.update(updateOptions);
+      return results;
     } catch (error) {
       throw error;
     }

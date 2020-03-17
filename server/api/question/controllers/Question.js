@@ -81,10 +81,10 @@ module.exports = {
 
   populate: async (ctx, _next) => {
     try {
-      const { spreadsheetId, ranges } = ctx.request.body;
+      const { spreadsheetId, ranges } = ctx.query;
       const result = await strapi.services.question.fetchSpreadsheet(
         spreadsheetId,
-        ranges
+        JSON.parse(ranges)
       );
       return result;
     } catch (error) {

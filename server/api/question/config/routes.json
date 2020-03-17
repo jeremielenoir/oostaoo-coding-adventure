@@ -10,7 +10,7 @@
     },
 
     {
-      "method": "POST",
+      "method": "GET",
       "path": "/api/questions/populate",
       "handler": "Question.populate",
       "config": {
