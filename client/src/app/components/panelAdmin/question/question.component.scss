@@ -39,7 +39,7 @@
     width: 100%;
     background: #eaeff3;
     height: 50px;
-    padding: 5px 12px;
+    padding: 5px 0px 5px 12px;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -58,6 +58,7 @@
         margin-bottom: 0;
         letter-spacing: 1.5px;
         padding-top: 7px;
+        flex: 11;
     }
 }
 

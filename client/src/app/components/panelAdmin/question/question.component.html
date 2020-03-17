@@ -125,6 +125,7 @@
             </div>
             <p class="time" matTooltip="Durée(min:sec)">{{ fmtMSS(item.time) }}</p>
             <p (click)='addquestion(item)' class="plushover" matTooltip="">+</p>
+            <!-- <p class="time" matTooltip="Durée(heure:min:sec)">{{ fmtMSS(item.time) }}</p> -->
 
           </div>
 
@@ -145,8 +146,10 @@
       </div>
       <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="dataLevels"
         [cdkDropListConnectedTo]="[todoList]" class="liste-question" (cdkDropListDropped)="drop($event)" #droplist>
+      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="allQuestionLevel"
+        [cdkDropListConnectedTo]="[todoList]" class="example-list" (cdkDropListDropped)="drop($event)" #droplist>
         <p id="drop-text">Glissez/déposez une question ici</p>
-        <div class=" example-box" *ngFor="let item of dataLevels" cdkDrag>
+        <div class=" example-box" *ngFor="let item of allQuestionLevel" cdkDrag>
 
           <div class="partie-left-example-box">
             <p class="question-techno">

@@ -54,12 +54,10 @@ export class QuestionsComponent implements OnInit {
       const campaigns = values[0];
       this.yourCampaign = campaigns;
       const questions = values[1]
-      console.log('question man -->',questions);
+    
       this.yourCampaign[0].technologies.forEach(element => {
         this.techno.push(element)
       });
-
-      console.log('dit techno',this.techno)
       const nameQuestionByTechno = [];
       campaigns[0].questions.forEach(element => {
         nameQuestionByTechno.push(element.name);
@@ -89,6 +87,11 @@ export class QuestionsComponent implements OnInit {
       this.allQuestionsCampaign = questionByTechnoCampaing;
 
     });
+  }
+
+  chargeYourCampagn(event){
+    console.log('on vien de recupere event',event)
+    // this.yourCampaign = event
   }
 
   loadCampaign(): Promise<any> {

@@ -50,10 +50,14 @@ export class TopInfoCampagneComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges){
 
+    console.log('change man le changement -->',changes.allQuestionLevel)
+
     this.technoMethod();
     
-    
+    console.log('all changement campagn',changes)
+
   }
+
 
 
   convertSecondsToMinutes(time){
@@ -63,7 +67,6 @@ export class TopInfoCampagneComponent implements OnInit {
   technoMethod(){
 
     let pointDepart = 0;
-    let poinTotal = null;
     let points = [];
     let timeArraySolo = [];
     let arraytimeAllquestionCampagn = [];

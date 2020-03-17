@@ -34,9 +34,10 @@ export class QuestionComponent implements OnInit {
  
   @Input('formCampagne') formCampagne: FormGroup;
   @Input() datas = [];
-  @Input() dataLevels = [];
+  @Input() allQuestionLevel = [];
   @Output() incrementPage = new EventEmitter<any>();
   @Output() decrementPage = new EventEmitter<any>();
+  @Output() chargeYourCampagn = new EventEmitter<any>();
   public searchText = "";
   public experience: string;
   public questions: any[];
@@ -48,15 +49,20 @@ export class QuestionComponent implements OnInit {
   public difficulty = ['facile', 'moyen', 'expert'];
   public booleanCampagnFinishLoading:boolean
   public activeClassScrollTopDropList = false;
-
-  Questions = [];
+  public Questions = [];;
 
 
   @ViewChild("droplist") public droplist: ElementRef;
 
   drop(event: CdkDragDrop<string[]>) {
 
-    console.log('la new data',this.dataLevels)
+    console.log('hello word !!!',event)
+    
+
+    this.chargeYourCampagn.emit('salut');
+
+
+    // this.ngOnInit();
   
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -94,27 +100,31 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges){
-    if(this.dataLevels && this.dataLevels.length > 0){
+    console.log('aerorpt man -->',changes.allQuestionLevel)
+    if(this.allQuestionLevel && this.allQuestionLevel.length > 0){
       this.booleanCampagnFinishLoading = true
     }
 
   }
 
   addquestion(question) {
-    this.dataLevels.push(question);
+    this.allQuestionLevel.push(question);
     const index = this.datas.indexOf(question);
     if (index > -1) {
       this.datas.splice(index, 1);
     }
+
     console.log('data tableau =', this.datas);
-    console.log('datalevel tableau =', this.dataLevels);
+    console.log('datalevel tableau =', this.allQuestionLevel);
+    this.chargeYourCampagn.emit('salut');
+   
   }
 
   methoddataLevels(){
 
-    this.datas = this.dataLevels;
+    // this.datas = this.allQuestionLevel;
 
-    console.log('data ---> trie',this.datas)
+    // console.log('data ---> trie',this.datas)
 
   }
 
@@ -145,7 +155,7 @@ export class QuestionComponent implements OnInit {
   SendQuestionSelected(id) {
     this.apiClientService
       .put(API_URI_CAMPAIGNS + "/" + id, {
-        questions: this.dataLevels
+        questions: this.allQuestionLevel
       })
       .subscribe(
         res => {
