@@ -1,7 +1,27 @@
-<div>
+<div class="rowter">
   <app-route-component></app-route-component>
   <app-breadcrumb [namePage]="'FAQ'"></app-breadcrumb>
-  <div>
-    <p>TEST COMPONENT FAQ</p>
-  </div>
+  <section class="roodeo-page-faq">
+    <div class="sous-header">
+      <h3>Questions fréquentes</h3>
+      <mat-icon>live_help</mat-icon>
+    </div>
+    <mat-accordion class="roodeo-fix-accordion" *ngFor="let faq of this.faqs">
+      <mat-expansion-panel
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+      >
+        <mat-expansion-panel-header class="roodeo-fix-header">
+          <mat-panel-title>
+            {{ faq.title }}
+          </mat-panel-title>
+          <mat-panel-description class="roodeo-fix-description">
+            {{ faq.type }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="roodeo-fix-text">{{ faq.description }}</div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
 </div>
