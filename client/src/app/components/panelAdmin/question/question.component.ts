@@ -100,6 +100,16 @@ export class QuestionComponent implements OnInit {
 
   }
 
+  addquestion(question) {
+    this.dataLevels.push(question);
+    const index = this.datas.indexOf(question);
+    if (index > -1) {
+      this.datas.splice(index, 1);
+    }
+    console.log('data tableau =', this.datas);
+    console.log('datalevel tableau =', this.dataLevels);
+  }
+
   methoddataLevels(){
 
     this.datas = this.dataLevels;

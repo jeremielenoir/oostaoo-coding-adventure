@@ -68,7 +68,7 @@
 
 
       <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="datas" [cdkDropListConnectedTo]="[doneList]"
-        class="example-list" (cdkDropListDropped)="drop($event)">
+        class="liste-question" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let item of datas | filter: searchText" cdkDrag>
 
           <div class="partie-left-example-box">
@@ -76,9 +76,9 @@
           </div>
 
           <div class="partie-left-example-box-2">
-            <div class="tooltip-information">
-              {{item.name}}
-            </div>
+            <!-- <div class="tooltip-information">
+               {{item.name}}
+            </div> -->
 
             <p class="question-name" matTooltip="{{item.name}}">{{ item.name }}</p>
             <div class="content-rouded" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
@@ -119,11 +119,12 @@
             <p class="point">{{item.points}} points</p>
 
             <div class="drop">
-              <i title="Question à choix multiple" *ngIf='item.type === "one" || item.type === "multiple"'
+              <i matTooltip="Question à choix multiple" *ngIf='item.type === "one" || item.type === "multiple"'
                 class="fas fa-list-ul drop-icon"></i>
-              <i title="Question texte libre" *ngIf='item.type === "free"' class="fas fa-paragraph drop-icon"></i>
+              <i matTooltip="Question texte libre" *ngIf='item.type === "free"' class="fas fa-paragraph drop-icon"></i>
             </div>
             <p class="time" matTooltip="Durée(min:sec)">{{ fmtMSS(item.time) }}</p>
+            <p (click)='addquestion(item)' class="plushover" matTooltip="">+</p>
 
           </div>
 
@@ -143,7 +144,7 @@
         </button>
       </div>
       <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="dataLevels"
-        [cdkDropListConnectedTo]="[todoList]" class="example-list" (cdkDropListDropped)="drop($event)" #droplist>
+        [cdkDropListConnectedTo]="[todoList]" class="liste-question" (cdkDropListDropped)="drop($event)" #droplist>
         <p id="drop-text">Glissez/déposez une question ici</p>
         <div class=" example-box" *ngFor="let item of dataLevels" cdkDrag>
 
@@ -154,9 +155,9 @@
           </div>
 
           <div class="partie-left-example-box-2">
-            <div class="tooltip-information">
+            <!-- <div class="tooltip-information">
               {{item.name}}
-            </div>
+            </div> -->
             <p class="question-name">{{ item.name }}</p>
             <div class="content-rouded" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
               <div class="archive archive-inclue">
@@ -193,12 +194,15 @@
                 <span></span>
               </div>
             </div>
-
-            <p class="point">{{ item.points }} points</p>
+             <p class="point">{{ item.points }} points</p>
             <div class="drop">
-              <i class="fas fa-list-ul drop-icon"></i>
+              <i matTooltip="Question à choix multiple" *ngIf='item.type === "one" || item.type === "multiple"'
+                class="fas fa-list-ul drop-icon"></i>
+              <i matTooltip="Question texte libre" *ngIf='item.type === "free"' class="fas fa-paragraph drop-icon"></i>
             </div>
-            <p class="time" matTooltip="Durée(heure:min:sec)">{{  fmtMSS(item.time) }}</p>
+            <p class="time" matTooltip="Durée(min:sec)">{{  fmtMSS(item.time) }}</p>
+            <!-- <p class="plushover" matTooltip="">+</p> -->
+           
           </div>
         </div>
       </div>
