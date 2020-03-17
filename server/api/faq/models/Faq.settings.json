@@ -1,0 +1,32 @@
+{
+  "connection": "default",
+  "collectionName": "faqs",
+  "info": {
+    "name": "faq",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "title": {
+      "default": "",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "type": "text"
+    },
+    "type": {
+      "default": "tests",
+      "type": "enumeration",
+      "enum": [
+        "tests",
+        "users",
+        "offers"
+      ]
+    }
+  }
+}
