@@ -3,19 +3,7 @@
  <div class="segment1">
     
        <div class="chart-block">
-        <!-- <igx-item-legend #legend height="100px" width="100px">
-        </igx-item-legend> -->
-        <igx-doughnut-chart height="100%" width="100%">
-            <igx-ring-series
-              
-                [dataSource]="technoDonuts"
-                labelMemberPath="label"
-                valueMemberPath="value"
-                title="value"
-              >
-            </igx-ring-series>
-          
-          </igx-doughnut-chart>
+          <canvas #Chart ></canvas>
        </div>
        
         <div class="container-langage">
@@ -68,7 +56,8 @@
  </div>
 
   <div class="segment2">
-    <button class="custom-buttom custom-buttom-anul" mat-flat-button [routerLink]="['/dashboard/campaigns']">
+    
+    <button *ngIf="!yourCampaign" class="custom-buttom custom-buttom-anul" mat-flat-button [routerLink]="['/dashboard/campaigns']">
       <i class="fas fa-chevron-left icon-arrow-btn"></i>
       Retour
     </button>

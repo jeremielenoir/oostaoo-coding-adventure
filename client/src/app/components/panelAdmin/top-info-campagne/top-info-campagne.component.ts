@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input,OnChanges, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
 import Chart from 'chart.js';
 // @import"../../../../../node_modules/chart.js/dist/Chart.min.js";
 import {FormGroup} from '@angular/forms';
@@ -22,22 +22,25 @@ export class TopInfoCampagneComponent implements OnInit {
   @Input() formCampagne: FormGroup;
   @Input() allQuestionLevel;
   @Input() yourCampaign;
-  @Input() techno
+  @Input() techno;
   public globalId:number;
   public updateQuestionsCampaign:number[] = [];
   public technoDonuts:any[] = [];
+  public elementDonnut: any;
   public poinTotal: number = 0;
   public timeAllquestionCampagn = 0;
   public timeAllquestionCampgnDivice = 0;
   public campagneFull = [];
-
-  test = []
+  public technoLabel = [];
+  public technoPoint = []
+  @ViewChild('Chart') Chart: ElementRef;
 
 
   constructor(public apiClientService: ApiClientService,private router: Router, 
     public decryptTokenService: DecryptTokenService,private _snackBar: MatSnackBar,private route: ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit() {
+
 
     this.route.parent.params.subscribe(params => {
       this.globalId = params.id;
@@ -49,9 +52,7 @@ export class TopInfoCampagneComponent implements OnInit {
 
     this.technoMethod();
     
-    console.log('all question full',changes.allQuestionLevel);
     
-   
   }
 
 
@@ -112,7 +113,7 @@ export class TopInfoCampagneComponent implements OnInit {
           
         }
         );
-      this.technoDonuts = this.technoDonuts.filter(element => element.value != 0)
+      this.technoDonuts = this.technoDonuts.filter(element => element.value != 0);
       
       pointDepart = 0;
       deparPointNumberQuestion = 0;
@@ -125,7 +126,39 @@ export class TopInfoCampagneComponent implements OnInit {
       this.timeAllquestionCampgnDivice = this.timeAllquestionCampagn / 2;
     }
 
-    // console.log('timeAllquestionCampagn',this.timeAllquestionCampagn);
+
+    for(let tech of this.technoDonuts){
+        this.technoLabel.push(tech.label);
+        this.technoPoint.push(tech.value)
+    }
+
+    console.log('les nom des techno',this.technoLabel)
+
+    this.elementDonnut =  this.Chart.nativeElement.getContext('2d');
+
+    let chart = new Chart(this.elementDonnut, {
+      type: 'doughnut',
+  
+      data: {
+          labels: this.technoLabel,
+          datasets: [
+            {
+              label: 'Node js',
+              backgroundColor: ['#ff0000','#ffff00','#33cc33'],
+              borderColor: ['#ff0000','#ffff00','#33cc33'],
+              data: this.technoPoint
+            }
+        ]
+      },
+  
+      // Configuration options go here
+      options: {
+        legend: {
+          display: false
+       },
+      }
+  });
+
 
   }
   SendQuestionSeleditd(id) {
