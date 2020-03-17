@@ -12,10 +12,14 @@ const _ = require("lodash");
 
 // Strapi utilities.
 const utils = require("strapi-hook-bookshelf/lib/utils/");
+const { exec } = require("child_process");
+const shortid = require("shortid");
+const { createReadStream, createWriteStream } = require("fs");
+
 const { google } = require("googleapis");
 const keys = require("../../../roodeo.json");
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
-
+const UPLOAD_DIR = "filescripts";
 module.exports = {
   /**
    * Promise to fetch all questions.
@@ -454,6 +458,59 @@ module.exports = {
       };
       await gsapi.spreadsheets.values.update(updateOptions);
       return results;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Promise to execute algorihtmic questions.
+   *
+   * @return {Promise}
+   */
+  executeScript: async (file, _extension) => {
+    try {
+      //const script = `node ${file}`;
+
+      const storeUpload = async ({ filename, extension }) => {
+        const random = await shortid.generate();
+        const id = `${random}.${extension}`;
+        const path = `${UPLOAD_DIR}/${id}`;
+
+        return new Promise((resolve, reject) =>
+          createReadStream(filename)
+            .pipe(createWriteStream(path))
+            .on("finish", () => resolve({ id, path }))
+            .on("error", error => reject(error))
+        );
+      };
+
+      const processUpload = async upload => {
+        const { name, path } = upload;
+        const extension = name.split(".")[1];
+        const res = await storeUpload({
+          filename: path,
+          extension
+        });
+        return res;
+      };
+      const { path: filetoexecute } = await processUpload(file);
+      const script = `node ${filetoexecute}`;
+      return new Promise((resolve, reject) => {
+        exec(script, (error, stdout, stderr) => {
+          if (error) {
+            reject(error);
+          }
+          if (stderr) {
+            reject(stderr);
+          }
+
+          // (1)
+          console.log(stdout);
+
+          resolve(stdout);
+        });
+      });
     } catch (error) {
       throw error;
     }

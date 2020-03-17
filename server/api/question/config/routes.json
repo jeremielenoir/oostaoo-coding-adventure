@@ -17,6 +17,15 @@
         "policies": []
       }
     },
+
+    {
+      "method": "POST",
+      "path": "/api/questions/execute",
+      "handler": "Question.execute",
+      "config": {
+        "policies": []
+      }
+    },
     {
       "method": "GET",
       "path": "/api/questions/count",
