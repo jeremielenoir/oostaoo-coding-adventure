@@ -180,7 +180,7 @@ export class StripePaymentComponent implements OnInit {
         this.stripeLoader = false;
         setTimeout(() => {
           this.router.navigate(['/dashboard/campaigns']);
-        }, 1200);
+        }, 5000);
       }
 
     } catch (e) {

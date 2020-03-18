@@ -20,7 +20,7 @@
           <div class="form-group">
             <div id="card-element" class="field"></div>
           </div>
-          <button [disabled]="isBuyBtnDisabled()" class="payment-button"
+          <button *ngIf="!stripeSuccess" [disabled]="isBuyBtnDisabled()" class="payment-button"
           type="submit" mat-flat-button color="primary" id="payment"> {{ 'PAYER ' + offerChoice?.price + '€     '}}
             <mat-progress-spinner *ngIf="stripeLoader" style="display: inline-block;"
                 color="primary"
@@ -31,7 +31,9 @@
         </button>
         </form>
         <div style="margin-top: 10px;" class="alert alert-danger error-stripe" *ngIf="stripeError">{{ stripeError }}</div>
-        <div style="margin-top: 10px;" class="alert alert-success success-stripe" *ngIf="stripeSuccess">{{ stripeSuccess }}</div>
+        <div style="margin-top: 10px;" class="alert alert-success success-stripe" *ngIf="stripeSuccess">{{ stripeSuccess }}
+          <br><br><a routerLink="/dashboard/campaigns"><button mat-flat-button color="basic" >Revenir à roodeo</button></a>
+        </div>
         <div class="loader">
         </div>
       </div>
