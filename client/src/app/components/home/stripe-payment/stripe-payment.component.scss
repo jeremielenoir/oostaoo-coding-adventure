@@ -1,61 +1,65 @@
 @import "../../../../roodeo-variables.scss";
 
-#stripe-payment {
-  background-color: #f9f9f9;
-  #form-payment {
-    background-color: #ffffff;
-    margin: auto;
-    margin-top: 45vh;
-    transform: translateY(-50%);
-    width: 750px;
-    padding: 20px 100px 100px;
-    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+.purchase-payment-parent {
+
+  background-color: #c1d5df;
+  width: 100%;
+  height: 100%;
+
+  .purchase-payment {
+
+    background-color: white;
+    padding: 50px;
+    box-shadow: 0 4px 10px -2px #00000080;
+    border: 1px solid #1f7eab;
+    margin-top: 25px;
     border-radius: $border-radius;
-  }
 
-  .title {
-    text-align: center;
-    font-size: 18px;
-    padding: 40px 0;
-  }
+    .left-col {
 
-  button#go-back {
-    margin-top: 30px;
-    margin-bottom: 20px;
-  }
+      border-right: 1px solid rgba(#00000080,0.2);
 
-  button#payment {
-    margin-top: 40px;
-    width: 100%;
-  }
+      .logo {
+        width: 200px;
+      }
 
-  .error-stripe {
-    margin-top: 40px;
-    text-align: center;
-  }
+      .offer-title {
+        font-weight: bold;
+        margin-top: 50px;
+        color: gray;
+      }
 
-  .success-stripe {
-    margin-top: 40px;
-    text-align: center;
-  }
+      .offer-desc {
+        margin-top: 25px;
+      }
 
-  .loader {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(#f9f9f9,0.8);
-    mat-progress-spinner {
-      margin: auto;
-      margin-top: 45vh; /* poussé de la moitié de hauteur de viewport */
-      transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+      .back-to-offers {
+        margin-top: 25px;
+        text-align: right;
+      }
+
     }
+
+    .right-col {
+
+      .card-owner {
+        width: 100%;
+      }
+
+      .payment-button {
+        width: 100%;
+      }
+
+      .loader {
+        margin-top: 25px;
+        text-align: center;
+      }
+
+    }
+
   }
+
 }
-
-
 
 .StripeElement {
   box-sizing: border-box;

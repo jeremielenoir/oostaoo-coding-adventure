@@ -1,26 +1,40 @@
-<section id="stripe-payment">
-  <div id="form-payment">
-    <p><a href="" [routerLink]="['/subscription']">Retour aux offres</a></p>
-
-    <form novalidate (ngSubmit)="buy()" [formGroup]="stripeTest">
-        <h2 class="title">
-          Vous avez opté pour la formule <b>{{ offerChoice?.title }}</b> de <b>{{ offerChoice?.price }} € <span *ngIf="offerChoice?.periodicity === 'monthly'">/mois</span></b>
-        </h2>
-        <!-- <input type="text" formControlName="name" placeholder="Votre nom"> -->
-        <div id="card-element" class="field"></div>
-
-        <button type="submit" mat-flat-button color="primary" id="payment">PAYER {{ offerChoice?.price }} €</button>
-    </form>
-        <div class="alert alert-danger error-stripe" *ngIf="stripeError">{{ stripeError }}</div>
-        <div class="alert alert-success success-stripe" *ngIf="stripeSuccess">{{ stripeSuccess }}</div>
+<div class="purchase-payment-parent">
+  <div class="container purchase-payment">
+    <div class="row align-middle">
+      <div class="left-col col-md-6">
+        <img class="logo" src="../../assets/logo_ROODEO.svg" alt="Logo" />
+        <h5 class="offer-title">{{offerChoice?.title}}</h5>
+        <h3 style="display: inline-block;">{{offerChoice?.price + '€ '}}</h3>
+        <h6 style="display: inline-block; color: gray;">/mois</h6>
+        <p class="offer-desc">
+          {{offerChoice.description}}
+        </p>
+        <a class="back-to-offers" href="" [routerLink]="['/subscription']">Retour aux offres</a>
+      </div>
+      <div class="right-col col-md-6">
+        <h4>Payer par carte bancaire</h4>
+        <form style="margin-top: 25px;" novalidate (ngSubmit)="buy()" [formGroup]="stripeFormGroup">
+          <div class="form-group">
+            <input required [(ngModel)]="cardOwnerName" type="text" class="form-control StripeElement" formControlName="name" placeholder="Titulaire de la carte">
+          </div>
+          <div class="form-group">
+            <div id="card-element" class="field"></div>
+          </div>
+          <button [disabled]="isBuyBtnDisabled()" class="payment-button"
+          type="submit" mat-flat-button color="primary" id="payment"> {{ 'PAYER ' + offerChoice?.price + '€     '}}
+            <mat-progress-spinner *ngIf="stripeLoader" style="display: inline-block;"
+                color="primary"
+                mode="indeterminate"
+                diameter="20"
+                value="50">
+            </mat-progress-spinner>
+        </button>
+        </form>
+        <div style="margin-top: 10px;" class="alert alert-danger error-stripe" *ngIf="stripeError">{{ stripeError }}</div>
+        <div style="margin-top: 10px;" class="alert alert-success success-stripe" *ngIf="stripeSuccess">{{ stripeSuccess }}</div>
+        <div class="loader">
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="loader" *ngIf="stripeLoader">
-    <mat-progress-spinner
-        color="primary"
-        mode="indeterminate"
-        value="50">
-    </mat-progress-spinner>
-  </div>
-
-</section>
+</div>
