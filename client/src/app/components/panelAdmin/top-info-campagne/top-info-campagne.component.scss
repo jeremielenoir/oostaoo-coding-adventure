@@ -117,9 +117,35 @@
 
     .state-techno-content {
       display: flex;
-      padding: 15px;
-      align-items: center;
-
+      // padding: 15px;
+      // align-items: center;
+      min-width: 160px;
+      overflow: auto;
+      scrollbar-color: #7f8183 #e3e3e3;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      &::-webkit-scrollbar{
+        width: 8px;
+        height: 8px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #7f8183;
+        }
+        
+        &::-webkit-scrollbar-thumb:hover{
+            background-color: #67686a;
+        }
+        
+        &::-webkit-scrollbar-track {
+            background: #e3e3e3;
+        }
+    
+      .StatsByTechnology{
+        display: flex;
+        flex: none;
+        padding: 15px;
+        align-items: center;
+      }
       .state-techno {
         color: #7e8082;
         padding: 0 20px;
@@ -163,6 +189,7 @@
 
         .name-langage {
           font-weight: 600;
+          // width: 170px;
           font-size: 12px;
           margin-bottom: 0px !important;
           color:$color-principal-blue;
@@ -211,6 +238,7 @@
             color: #7e8082;
             font-size: 12px;
             font-weight: 600;
+            min-width: 100px;
           }
 
           .info-icon{
@@ -258,4 +286,26 @@
     margin-top: -1px;
   }
 
+}
+
+@media screen and (max-width:800px){
+  // .name-langage{
+  //   min-width: 100px;
+  //     span{
+  //       font-weight: 400!important;   
+
+  //     }
+  // }
+
+  .chart-block{
+    display: none!important;
+  }
+  .container-langage{
+    padding: 15px 15px 15px 4px!important;
+    min-width: 170px;
+  }
+
+  .state-techno{
+    padding:0px 9px!important
+  }
 }

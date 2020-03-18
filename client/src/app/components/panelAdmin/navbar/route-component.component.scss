@@ -285,7 +285,14 @@
   margin: 13px !important;
 }
 
+@media screen and (max-width: 970px) {
+  .list-menu{
+    margin-left: 328px!important;
+  }
+}
+
 @media screen and (max-width:768px){
+ 
   .list-menu li{
     margin-left: 0px!important;
 
