@@ -225,6 +225,60 @@
     border-bottom: 1px dashed $color-principal-blue;
     cursor: move;
 
+
+    .info-hover {
+        display: none;
+        z-index: 10;
+        position: absolute;
+        border: 1px solid $color-principal-blue;
+        border-radius: $border-radius;
+        top: 10px;
+        right: 15px;
+        height: 430px;
+        width: 49%;
+        background: #eaeff3;
+        
+
+        .info-hover-header{
+            width: 100%;
+            height: 50px;
+            background: #eaeff3;
+            border-bottom: 1px solid $color-principal-blue;
+
+            h2{
+                padding: 15px 10px 10px;
+                text-align: center;
+                overflow-x: hidden;
+                white-space: nowrap; 
+                text-overflow: ellipsis;
+                font-size: 16px;
+            }
+        }
+
+        .info-hover-content{
+            background: #eaeff3;
+            padding-top: 10px;
+            padding-left: 10px;
+
+            p{
+                margin: 0px;
+                color: $color-orange;
+
+                span{
+                    color:black;
+                }
+            }
+        }
+
+        .info-hover-enonce{
+            width: 96%;
+            padding: 10px 5px;
+            background: white;
+            color: black;
+            margin: auto;
+            height: 55%;
+        }
+    }
     .ligne-techno{
         width: 17%; 
         min-width: 17%; 
@@ -372,6 +426,9 @@
         -moz-box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
         box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
 
+        .info-hover{
+            display: block;
+        }
         .ligne-plus{
             display:block;
         }

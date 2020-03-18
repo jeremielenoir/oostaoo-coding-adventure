@@ -71,7 +71,25 @@
         class="liste-question" (cdkDropListDropped)="drop($event)">
 
           <div class="ligne-question" *ngFor="let item of datas | filter: searchText" cdkDrag>
+              <div class="info-hover">
+                <div class="info-hover-header"><h2>{{item.name}}</h2></div>
+                <div class="info-hover-content">
+                  <p>Points : <span>{{item.points}}</span></p>
+                  <p>Technologie : <span>{{item.technologies.name}}</span></p>
+                  <p>Compétence évaluée : <span>{{item.theme}}</span></p>
+                  <p>Enoncé:</p>
+                </div>
+                <div class="info-hover-enonce">
+                  <p>{{item.name}}</p>
 
+                  <p>Liste des réponses proposées :</p>
+                  <p>{{item.content}}</p>
+
+                  <p>Réponse attendue :</p>
+                  <p>{{item.answer_value}}</p>
+                </div>
+                
+              </div>
             <div class="ligne-techno" >
             <p class="ligne-techno-text">{{item.technologies.name}}</p>
             </div>
