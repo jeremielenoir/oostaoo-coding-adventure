@@ -58,8 +58,6 @@ export class TopInfoCampagneComponent implements OnInit {
 
   }
 
-
-
   convertSecondsToMinutes(time){
     return Math.floor(time / 60);
   }
@@ -135,8 +133,6 @@ export class TopInfoCampagneComponent implements OnInit {
         this.technoPoint.push(tech.value)
     }
 
-    console.log('les nom des techno',this.technoLabel)
-
     this.elementDonnut =  this.Chart.nativeElement.getContext('2d');
 
     let chart = new Chart(this.elementDonnut, {
@@ -146,9 +142,9 @@ export class TopInfoCampagneComponent implements OnInit {
           labels: this.technoLabel,
           datasets: [
             {
-              label: 'Node js',
-              backgroundColor: ['#ff0000','#ffff00','#33cc33'],
-              borderColor: ['#ff0000','#ffff00','#33cc33'],
+              label: 'diagram',
+              backgroundColor: ['#1d3552','#e34e26','#1f7eab','#c1d5df'],
+              borderColor: ['#1d3552','#e34e26','#1f7eab','#c1d5df'],
               data: this.technoPoint
             }
         ]
@@ -159,6 +155,32 @@ export class TopInfoCampagneComponent implements OnInit {
         legend: {
           display: false
        },
+       
+       tooltips: {
+       
+        callbacks: {
+          title: function(tooltipItem, data) {
+            return data['labels'][tooltipItem[0]['index']];
+          },
+          label: function(tooltipItem, data) {
+            // return data['datasets'][0]['data'][tooltipItem['index']]+' pts';
+          },
+          // afterLabel: function(tooltipItem, data) {
+          //   return ' pts'
+          // }
+        },
+
+        backgroundColor: '#fff',
+        titleFontSize: 13,
+        titleFontColor: '#1d3552',
+        bodyFontColor: '#1d3552',
+        bodyFontSize: 13,
+        displayColors: false,
+        footerMarginTop:'10',
+        titleAlign:'center',
+       
+       },
+    
       }
   });
 
