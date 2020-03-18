@@ -1,0 +1,39 @@
+{
+  "connection": "default",
+  "collectionName": "issues",
+  "info": {
+    "name": "issue",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "ticket_number": {
+      "default": "",
+      "type": "integer"
+    },
+    "title": {
+      "default": "",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "type": "text"
+    },
+    "firstname": {
+      "default": "",
+      "type": "string"
+    },
+    "lastname": {
+      "default": "",
+      "type": "string"
+    },
+    "email": {
+      "default": "",
+      "type": "string"
+    }
+  }
+}

@@ -24,6 +24,7 @@ export const API_URI_OFFER: string = prefix + 'offers';
 export const API_URI_PAYMENT: string = prefix + 'payments';
 export const API_URI_FEEDBACK: string = 'feedbacks';
 export const API_URI_FAQ: string = prefix + 'faqs';
+export const API_URI_ISSUE: string = prefix + 'issues';
 
 
 @Injectable()
