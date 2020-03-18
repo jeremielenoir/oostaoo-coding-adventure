@@ -14,7 +14,8 @@ const _ = require('lodash');
 //const utils = require('strapi-hook-bookshelf/lib/utils/');
 const { exec } = require('child_process');
 const shortid = require('shortid');
-const { createReadStream, createWriteStream, unlink } = require('fs');
+const { createReadStream, createWriteStream, unlink, access } = require('fs');
+const path = require('path');
 
 const { google } = require('googleapis');
 const keys = require('../../../roodeo.json');
@@ -468,7 +469,7 @@ module.exports = {
    *
    * @return {Promise}
    */
-  executeScript: async (file, _extension) => {
+  executeScript: async file => {
     try {
       const storeUpload = async ({ filename, extension }) => {
         const random = await shortid.generate();
@@ -484,8 +485,19 @@ module.exports = {
       };
       const deleteFile = async id => {
         try {
-          await unlink(`${UPLOAD_DIR}/${id}`, async err => {
-            if (err) throw err;
+          // await unlink(`${UPLOAD_DIR}/${id.split('.')[0]}`, async err => {
+          //   if (err) throw err;
+          // });
+          const filepath = `${UPLOAD_DIR}/${id}`;
+
+          access(filepath, async err => {
+            if (err) {
+              console.log(`The file ${filepath} does not exist.`);
+            } else {
+              await unlink(filepath, async err => {
+                if (err) throw err;
+              });
+            }
           });
         } catch (error) {
           throw error;
@@ -502,6 +514,7 @@ module.exports = {
       };
       const { path: filetoexecute, extension, id } = await processUpload(file);
       let script = '';
+      let compiledfile = `${filetoexecute.split('.')[0]}`;
 
       switch (extension) {
         case 'js':
@@ -514,6 +527,10 @@ module.exports = {
         case 'php':
           script = `php ${filetoexecute}`;
           break;
+        case 'cpp':
+        case 'c':
+          script = `gcc ${filetoexecute} -o ${compiledfile} && ./${compiledfile}`;
+          break;
 
         case 'java':
           script = `mv ${filetoexecute} Main.java && javac Main }`;
@@ -525,6 +542,7 @@ module.exports = {
       return new Promise((resolve, _reject) => {
         exec(script, async (error, stdout, stderr) => {
           await deleteFile(id);
+          await deleteFile(id.split('.')[0]);
           // console.log('error', error);
           // console.log('stderr', stderr);
           // console.log('stdout', stdout);

@@ -101,8 +101,8 @@ module.exports = {
     try {
       const file = ctx.request.body.files;
       const result = await strapi.services.question.executeScript(
-        file.files,
-        "js"
+        file.files
+        
       );
       return result;
     } catch (error) {
