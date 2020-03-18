@@ -17,6 +17,7 @@
 #content {
     width: 100%;
     height: 100%;
+    padding-bottom: 20px;
     display: flex;
     position: relative;
 }
@@ -46,6 +47,8 @@
     flex-direction: row;
     -webkit-box-align: center;
     align-items: center;
+    border-bottom: 1px solid $color-principal-blue;
+
     .bar-content-img{
         width: 36px;
         height: 36px;
@@ -196,24 +199,6 @@
      background-color: #67686a;
  }
 
-//  .example-list::-webkit-scrollbar-track {
-//     background: #e3e3e3;
-// }
-
-// .example-box {
-//     padding: 20px 10px;
-//     // border-bottom: solid 1px $color-border-second;
-//     color: $text-color;
-//     display: flex;
-//     flex-direction: row;
-//     align-items: center;
-//     justify-content: space-between;
-//     box-sizing: border-box;
-//     cursor: move;
-//     background:$color-white;
-//     font-size: $font-size-home;
-// }
-
 :host ::ng-deep .example-box {
     padding: 0px 0px;
     padding-right: 0px;
@@ -224,107 +209,69 @@
     justify-content: space-between;
 }
 
-.partie-left-example-box
-{
-    flex: 1;
-    border-right: 1px dashed $color-principal-blue;
+
+
+
+
+//test max //
+
+.ligne-question{
     display: flex;
-    min-width: 0;
-    align-items: center;
-    justify-content: center;
-    min-width: 80px;
-    // max-width:250px;
-   .question-techno {
-    display: block;
-    font-size: $font-size-home;
-    color: $color-orange;
-    text-align: center;
-    padding: 20px 0px;
-    // border-right: 1px dashed $color-orange;
-    }
-}
-.partie-left-example-box-2{
-    flex: 5;
-    display: flex;
-    // justify-content: center;
-    align-items: center;
-    padding-left: 5px;
-    padding-right: 5px;
-    position: relative;
+    flex-direction: row; 
+    align-items: center; 
+    width: 100%; 
+    height: 45px; 
+    font-size: 14px; 
+    border-bottom: 1px dashed $color-principal-blue;
+    cursor: move;
 
-    .plushover{
-        display: none;
-        justify-content: center;
-        // flex: 2;
-        color: white;
-        cursor: pointer;
-        border-left: 1px dashed $color-principal-blue;
-        padding: 0px 10px;
-        font-size: 28px;
-        min-width: 50px;
-        box-shadow: inset -16px -19px 30px 0px $color-principal-blue;
-    }
-
-    .tooltip-information{
-        position: absolute;
-        width: 100%;
-        left: 0px;
-        top: 60px;
-        padding-left: 10px;
-        padding-right: 35px;
-        display:none;
-        padding-top: 15px;
-        padding-bottom: 15px;
-        color: white;
-        font-size: $font-size-home;
-    }
-    &:hover{
-        background-color: $color-blue-light;
-        -webkit-box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
-        -moz-box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
-        box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
-
-        .plushover{
-            display:flex;
-            justify-content: center;
-        }
-
-        .tooltip-information{
-            background-color:$color-blue-light;
-           display: block;
-           z-index: 3;
-        }
-        .question-name,.drop i,.point,.time{
-            color:white;
-        }
-        
-    }
-    .question-name{
-      
-        margin-bottom: 0px;
-        max-width:240px;
-        flex: 4;
-        font-size: $font-size-home;
-        padding-right: 6px;
-        min-width: 230px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: $color-principal-blue;
-    }
-
-    .content-rouded{
-        border-left: 1px dashed $color-principal-blue;
+    .ligne-techno{
+        width: 17%; 
+        min-width: 17%; 
+        max-width: 17%; 
+        height: 100%; 
+        padding: 10px 0px 0px; 
         border-right: 1px dashed $color-principal-blue;
+    
+        .ligne-techno-text{
+            display:flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: $color-orange; 
+            margin: 0px;
+
+        }
+    }
+    
+    .ligne-nom{
+        max-width: 45%; 
+        width: 45%; 
+        min-width: 30%; 
+        height: 100%;
+        padding: 10px 10px 0px;
+        display: flex;border-right: 1px dashed $color-principal-blue;
+    
+        .ligne-nom-text{
+            overflow:hidden; 
+            margin: 0;
+            white-space: nowrap; 
+            text-overflow: ellipsis;
+        }
+    }
+    
+    .ligne-note{
+        width: 12%;
+        min-width: 12%;
+        max-width: 12%;
         display: flex;
-        flex: 2;
-        padding: 13px 6px;
-        flex: 2px;
-        min-width: 80px;
+        height: 100%;
+        padding: 12px 2px 0px 9px;
+        border-right: 1px dashed $color-principal-blue;
+    
         .archive{
-            width: 40px;
+            width: 22px;
             height: 18px;
-            margin: 0px 2px;
+            margin: 0px 0px;
             span{
                 display: block;
                 width: 100%;
@@ -332,7 +279,7 @@
             }
         }
         .archive-inclue{
-           
+                   
             span{
                 background-image: url('/assets/Coding-game-img/SVG-menu-Dashboard/archive-inclue.svg');
                 background-repeat: no-repeat;
@@ -346,65 +293,96 @@
                 background-repeat: no-repeat;
             }
          }
-        
-        img{
-            width: 20px;
-            height: 20px;
-            margin-right: 2.5px;
-            margin-left: 3px;
-            // align-items: center;
-        }
-        
+    
     }
     
-    .point{
-      color: $color-principal-blue;
-      font-size: $font-size-home;
+    
+    
+    
+    
+    .ligne-points{
+        width: 12%; 
+        max-width: 12%; 
+        min-width: 12%; 
+        height: 100%; 
+        padding: 10px 10px 0px; 
+        border-right: 1px dashed $color-principal-blue; 
+        white-space: nowrap;
        
-      padding-top:20px;
-      padding-bottom: 20px;
-      display: flex;
-      flex: 2;
-      justify-content: center;
-      align-items: center;
-      padding-left: 8px;
-      padding-right: 8px;
-      margin-bottom: 0px;
-
+        .ligne-points-text{
+            display:flex; 
+            align-items: center; 
+            justify-content: center;
+        }
     }
-
-    .drop{
-        display: flex;
-        justify-content: center;
-        // flex: 2;
-        border-left: 1px dashed $color-principal-blue;
+    
+    .ligne-type{
+        width: 7%;
+        max-width: 7%; 
+        min-width: 7%; 
+        height: 100%; 
         border-right: 1px dashed $color-principal-blue;
-        padding: 8px 10px;
+    
+    }
+    
+    .ligne-icon{
+        display:flex; 
+        height: 100%; 
+        align-items: center; 
+        justify-content: center; 
+        color: $color-orange; 
         font-size: 28px;
-        min-width: 50px;
-        i{
-            color: $color-orange;
+    }
+    
+    .ligne-temps{
+        width: 12%; 
+        max-width: 12%; 
+        min-width: 12%; 
+        height: 100%; 
+        padding: 10px 3% 0px;
+    
+        .ligne-temps.text{
+            display:flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+    }
+    
+    .ligne-plus{
+        width: 7%; 
+        max-width: 7%; 
+        min-width: 7%; 
+        height: 100%; 
+        padding: 2px 10px 0px; 
+        border-left: 1px dashed $color-principal-blue;
+        display: none;
+        cursor: pointer;
+        box-shadow: inset -16px -19px 30px 0px $color-principal-blue;
+    
+        .ligne-plus-text{
+            text-align: center;
+            font-size: 28px;
+            color: white;
         }
     }
 
-    .time{
-        flex: 1.5;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-left: 5px;
-        font-size: $font-size-home;
-         
-        color:$color-principal-blue
+    &:hover{
+        background-color: $color-blue-light;
+        -webkit-box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
+        -moz-box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
+        box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
 
+        .ligne-plus{
+            display:block;
+        }
+
+        .ligne-techno p, .ligne-nom, .ligne-points, .ligne-type i, .ligne-temps{
+            color: white;
+        }
     }
-    
 }
 
-// :host ::ng-deep .example-box:hover {
-//     box-shadow: 0px 0px 5px $color-gray;
-//     transform: translate(2px, -3px);
-// }
+
 
 .cdk-drag-preview {
     box-sizing: border-box;
@@ -419,10 +397,6 @@
 .cdk-drag-animating {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
-
-// .example-box:last-child {
-//     border: none;
-// }
 
 .liste-question.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
