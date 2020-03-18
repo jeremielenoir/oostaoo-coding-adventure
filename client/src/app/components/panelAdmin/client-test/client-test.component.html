@@ -1,5 +1,5 @@
-<div [ngSwitch]="StatueTestingQuestion">
-  <div *ngSwitchCase="'eval'">
+<div [ngSwitch]="StatueTestingQuestion" style="height: 100%;">
+  <div *ngSwitchCase="'eval'" style="height: 100%;">
     <div id="shadow-cog" [class.shadow-cog-active]="ActiveTest">
       <div class="modall">
         <div class="modall-header">
@@ -116,7 +116,7 @@
     <app-test [candidat]="candidat" [questionCampaign]="questionCampaign" [technoCampaign]="technoCampaign"
       [durationMaxTest]="durationMaxTest" (refresh)="refreshComponent($event)"></app-test>
   </div>
-  <div *ngSwitchCase="'fin'">
+  <div *ngSwitchCase="'fin'" style="height: 100%;">
     <app-fin-test></app-fin-test>
   </div>
 </div>

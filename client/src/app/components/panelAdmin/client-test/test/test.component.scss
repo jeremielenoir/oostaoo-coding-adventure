@@ -20,6 +20,11 @@
   background: $color-principal-blue!important;
 }
 
+::ng-deep .mat-radio-label{
+  white-space: normal!important;
+  align-items: flex-start!important;
+}
+
 
 @mixin structureBlock {
   width: 50%;

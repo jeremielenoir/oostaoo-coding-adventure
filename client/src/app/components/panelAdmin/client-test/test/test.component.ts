@@ -49,22 +49,18 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('this.candidat =', this.candidat);
-    // console.log('questionCampaign: ', this.questionCampaign);
-    // console.log('technoCampaign : ', this.technoCampaign);
+   
     this.sumPointsByNumTechno(this.questionCampaign);
     if (this.sumPointsbyTechno) {
       this.allPointsTechnos = this.sumPointsbyTechno;
     }
-    console.log('this.allPointsTechnos: ', this.allPointsTechnos);
     this.calculTotalPoints(this.allPointsTechnos);
     if (this.totalPoints) {
       this.totalPointsCampaign = this.totalPoints;
     }
-    // console.log('this.totalPointsCampaign: ', this.totalPointsCampaign);
-    // console.log('this.candidat.campaign.copy_paste : ', this.candidat.campaign.copy_paste);
+   
     if (this.candidat.index_question === null) {
-      //   this.index = this.candidat.index_question;
+     
       this.index = 0;
     } else {
       this.index = this.candidat.index_question;
@@ -79,11 +75,8 @@ export class TestComponent implements OnInit {
     console.log('this.question : ', this.question);
     this.timeDanger = this.questionCampaign[0].time - 5;
     this.type = this.questionCampaign[0];
-    // console.log('this.type: ', this.type); // afficher
     this.Countertime();
     this.controleTimeTest();
-    // console.log('techno id', this.technoCampaign);
-    // FIRST QUESTIONS
     if (this.question.content === null) {
       this.responses = [];
     } else {
@@ -109,15 +102,12 @@ export class TestComponent implements OnInit {
   }
 
   Countertime() {
-    // console.log('this.questions : ', this.questions[this.index]);
     this.stopTimeInterval = setInterval(() => {
       if (this.timedefault < this.questions[this.index].time) {
         this.timedefault++;
       } else {
         this.checkTimeDefault = true;
         this.disableRep(this.questions[this.index].time);
-        // console.log('temps FINI');
-        // console.log(this.responseUser);
         this.checkRep();
         this.Activetime = !this.Activetime;
         clearInterval(this.stopTimeInterval);
@@ -131,8 +121,7 @@ export class TestComponent implements OnInit {
       this.arrayGoodRep = this.question.answer_value.split(', ').sort();
       this.checkRep();
     }
-    // this.arrayReponseUser.push(this.responseUser);
-    // console.log('this.arrayReponseUser IN QUESTNEXT: ', this.arrayReponseUser);
+  
     this.Alltime.push(this.timedefault);
     this.Activetime = false;
     if (this.index < this.questions.length - 1) {
@@ -143,50 +132,35 @@ export class TestComponent implements OnInit {
     } else {
       if (this.index === this.questions.length - 1) {
         this.dateFinishTest = new Date().toISOString();
-        // console.log('testdate: ', this.dateFinishTest);
         clearInterval(this.stopTimeInterval);
         for (const nbrtime of this.Alltime) {
-          // console.log('chaque temp passe sur chaque question', nbrtime);
           this.CalculTimeTotal += nbrtime;
         }
-        // console.log('this.SumPointsCandidat : ', this.SumPointsCandidat);
-        // console.log('this.CalculTimeTotal: ', this.CalculTimeTotal);
         this.postTimeTest(this.CalculTimeTotal);
       }
     }
 
     this.question = this.questions[this.index];
-    // console.log('this.question: ', this.question); // afficher
-    // NEXT QUESTIONS
     if (this.question.content !== null) {
       this.responses = this.question.content.split(', ');
     } else {
       this.responses = this.question;
     }
     this.arrayGoodRep = this.question.answer_value.split(', ').sort();
-    // console.log('this.arrayGoodRep: ', this.arrayGoodRep);
-    // console.log('this.responses in QUESTNEXT: ', this.responses);
     for (const techno of this.technoCampaign) {
       if (this.question.technologies === techno.id) {
         this.language = techno.name;
       }
     }
-    // this.arrayGoodRep = this.question.answer_value.split(', ').sort();
-    // console.log('arrayGoodRep: ', this.arrayGoodRep);
     this.timeDanger = this.questions[this.index].time - 5;
-    // console.log('type ', this.question.type);
-    // console.log('COUNTER CHECK: ', this.counterCheck);
     this.responseUser = null;
     this.arrayReponseUser = [];
     this.isDisabled = false;
     this.checkTimeDefault = false;
-    // console.log('Ton score est de: ' + this.counterCheck + ' / ' + this.counterTotal);
-    // console.log('this.questions[this.index].time: ', this.questions[this.index].time);
   }
 
   checkRep() {
     if (this.questions[this.index].type === 'one') {
-      // console.log('typeONE');
       this.arrayReponseUser.push(this.responseUser);
       if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
         console.log('ITS OK !!');
@@ -253,20 +227,16 @@ export class TestComponent implements OnInit {
       duree: dureeTest,
       test_terminer: this.dateFinishTest
     }).toPromise().then(res => {
-      // console.log('succes time send');
       this.apiClientService.get(API_URI_CAMPAIGNS + '/' + res.campaign.id).subscribe(res1 => {
-        // console.log('campaign : ', res1);
         let nbCandidats = res1.NbCandidatFinish;
         if (nbCandidats == null) {
           nbCandidats = 1
         } else {
           nbCandidats = nbCandidats + 1
         }
-        // console.log(nbCandidats);
         this.apiClientService.put(API_URI_CAMPAIGNS + '/' + res.campaign.id, {
           NbCandidatFinish: nbCandidats
         }).subscribe(res2 => {
-          // console.log('campaign : ', res2);
           this.refreshComponent();
           this.sumPointsByNumTechno(this.SumPointsCandidat);
           this.allPointsCandidat = this.sumPointsbyTechno;
@@ -289,20 +259,14 @@ export class TestComponent implements OnInit {
                   techno: pointsTechno.technologies,
                   percentage: getPourcent
                 });
-                // console.log('getPourcent By Techno: ', {
-                //   techno: pointsTechno.technologies,
-                //   percentage: getPourcent
-                // });
               }
             }
           }
-          console.log('objectGetpourcent: ', objectGetpourcent);
-          console.log('this.totalPointsCandidat.total_points: ', this.totalPointsCandidat);
-          console.log('this.totalPointsCampaign.total_points: ', this.totalPointsCampaign);
+         
           const getPourcentTest = Math.round((this.totalPointsCandidat.total_points
             || this.totalPointsCandidat.points) / (this.totalPointsCampaign.total_points || this.totalPointsCampaign.points) * 100);
           console.log('test SUM TOTAL OF THE TEST', getPourcentTest);
-          // console.log('this.allPointsCandidat: ', this.allPointsCandidat);
+        
           const newOBjectToPostCandidat = [
             { allPointsTechnos: this.allPointsTechnos },
             { allPointsCandidat: this.allPointsCandidat },
@@ -358,7 +322,7 @@ export class TestComponent implements OnInit {
       test_pause: this.timedefault,
       date_pause: new Date().toISOString()
     }).toPromise().then(res => {
-      // console.log('pause: ', res);
+     
     });
   }
 
@@ -413,7 +377,6 @@ export class TestComponent implements OnInit {
         }
       }
     }
-    // console.log('arraySumPoints AFTER BOUCLE : ', arraySumPoints);
     return this.sumPointsbyTechno = arraySumPoints;
   }
 
@@ -431,7 +394,7 @@ export class TestComponent implements OnInit {
       this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
         points_candidat: this.SumPointsCandidat
       }).toPromise().then(res1 => {
-        // console.log(res1);
+
       });
     });
   }

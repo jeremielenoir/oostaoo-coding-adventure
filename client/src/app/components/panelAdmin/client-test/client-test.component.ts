@@ -19,6 +19,7 @@ export class ClientTestComponent implements OnInit {
   public durationTotalTest: number;
   public durationMaxTest: number;
 
+
   @ViewChild('btnchecked') btnchecked: ElementRef;
   idCampaign: any;
   questionCampaign = [];
