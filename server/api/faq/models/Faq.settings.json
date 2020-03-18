@@ -24,8 +24,8 @@
       "type": "enumeration",
       "enum": [
         "tests",
-        "users",
-        "offers"
+        "utilisateurs",
+        "formules"
       ]
     }
   }
