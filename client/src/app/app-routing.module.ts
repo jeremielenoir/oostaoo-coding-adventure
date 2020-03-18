@@ -29,6 +29,7 @@ import { RapportDetailleExempleComponent } from './components/home/rapport-detai
 import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
 import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
 import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
+import { ContactSupportComponent } from './components/panelAdmin/contact-support/contact-support.component';
 
 const routes: Routes = [
   {
@@ -124,6 +125,11 @@ const routes: Routes = [
   {
     path: 'dashboard/utilisateurs',
     component: UtilisateursComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'dashboard/contact-support',
+    component: ContactSupportComponent,
     canActivate: [AuthGuard]
   },
   {

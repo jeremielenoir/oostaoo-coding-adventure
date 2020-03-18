@@ -203,9 +203,14 @@
 .table_body,
 .table_body_cell,
 .table_row {
-  border: $border-table;
+  border-right: $border-table;
+  border-bottom: $border-table;
   padding: 5px;
   margin: 5px;
+}
+
+.table_body_cell:nth-child(1) {
+  border-left: $border-table!important;
 }
 
 .table_body_cell,
@@ -233,6 +238,16 @@
 
 #shadow-cog-2, #shadow-cog {
   z-index: 9999;
+
+
+  .modall {
+    border-radius: $border-radius!important;
+  }
+
+  .modall-header {
+    border-top-left-radius: $border-radius!important;
+    border-top-right-radius: $border-radius!important;
+  }
 }
 
 .modall > .modall-content {

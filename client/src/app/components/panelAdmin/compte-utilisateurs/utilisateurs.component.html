@@ -496,7 +496,7 @@
             </tr>
         </thead>
         <tbody class="table_body">
-            <tr class="table_row" *ngFor="let user of  users">
+            <tr class="table_row" *ngFor="let user of  users" (click)="openForm(user)">
                 <td class="table_body_cell">{{user.username}}</td>
                 <td class="table_body_cell">{{user.email}}</td>
                 <td class="table_body_cell">{{user.role.name}}</td>

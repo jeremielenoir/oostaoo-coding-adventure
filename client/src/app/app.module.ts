@@ -97,7 +97,7 @@ import { NgxCaptchaModule } from 'ngx-captcha';
 import { ToastrModule } from 'ngx-toastr';
 import { AgWordCloudModule } from 'angular4-word-cloud';
 import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
-
+import { ContactSupportComponent } from './components/panelAdmin/contact-support/contact-support.component';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -164,7 +164,8 @@ import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
     TopInfoCampagneComponent,
     MotDePasseOublieComponent,
     SubscriptionComponent,
-    FAQComponent
+    FAQComponent,
+    ContactSupportComponent
   ],
   imports: [
     BrowserModule,
