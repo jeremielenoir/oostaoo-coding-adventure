@@ -147,7 +147,7 @@
           <i class="fas fa-chevron-right icon-arrow-btn"></i>
         </button>
       </div>
-      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="dataLevels"
+      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="allQuestionLevel"
         [cdkDropListConnectedTo]="[todoList]" class="liste-question" (cdkDropListDropped)="drop($event)" #droplist>
         <p id="drop-text">Glissez/déposez une question ici</p>
 

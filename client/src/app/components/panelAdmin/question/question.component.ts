@@ -93,7 +93,6 @@ export class QuestionComponent implements OnInit {
 
     window.scroll(10, 0);
 
-   
     window.addEventListener("scroll", () => {
       this.headerChangePositioinDropList();
     });
@@ -113,14 +112,11 @@ export class QuestionComponent implements OnInit {
     if (index > -1) {
       this.datas.splice(index, 1);
     }
-
-    console.log('data tableau =', this.datas);
-    console.log('datalevel tableau =', this.allQuestionLevel);
     this.chargeYourCampagn.emit('salut');
-   
+
   }
 
-  methoddataLevels(){
+  methoddataLevels() {
 
     // this.datas = this.allQuestionLevel;
 
