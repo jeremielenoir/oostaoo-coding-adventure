@@ -98,6 +98,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AgWordCloudModule } from 'angular4-word-cloud';
 import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
 import { ContactSupportComponent } from './components/panelAdmin/contact-support/contact-support.component';
+import { AboutUsComponent } from './components/home/about-us/about-us.component';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -165,7 +166,8 @@ import { ContactSupportComponent } from './components/panelAdmin/contact-support
     MotDePasseOublieComponent,
     SubscriptionComponent,
     FAQComponent,
-    ContactSupportComponent
+    ContactSupportComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 <div #header id="navbar" (scroll)="onWindowScroll()" [className]="shouldShow ? 'remove-index' : 'add-index'">
   <mat-toolbar color="primary">
-    <img id="logo" src="../../assets/logo_ROODEO.svg" alt="Logo" />
+    <img [routerLink]="[ '/home']" id="logo" src="../../assets/logo_ROODEO.svg" alt="Logo" />
 
     <mat-toolbar-row class="super">
       <!--button
@@ -16,17 +16,17 @@
       <span class="menu-spacer"></span>
       <div id="all-list-menu" fxShow="true" fxHide.lt-md>
         
-        <a class="link-menu" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'test-dev'">
+        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'test-dev'">
           Testez les développeurs
         </a>
-        <a class="link-menu" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'profilSearch'">
+        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'profilSearch'">
           Profils recherchés
         </a>
-        <a class="link-menu" href="#" [ngx-scroll-to-offset]='-30' [ngx-scroll-to]="'techno'">
+        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-30' [ngx-scroll-to]="'techno'">
           Technologies
         </a>
-        <a class="link-menu" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'fonctionnalites'">Fonctionnalités</a>
-        <a class="link-menu" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'offers'">Prix</a>
+        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'fonctionnalites'">Fonctionnalités</a>
+        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'offers'">Prix</a>
         <!--a (click)="logout()">Se déconnecter</a-->
         <a (click)="gotToLoginPage()" href="" class="link-menu mat-button">Connexion</a>
 

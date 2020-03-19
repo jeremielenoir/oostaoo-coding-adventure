@@ -30,6 +30,7 @@ import { MotDePasseOublieComponent } from './components/home/register/mot-de-pas
 import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
 import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
 import { ContactSupportComponent } from './components/panelAdmin/contact-support/contact-support.component';
+import { AboutUsComponent } from './components/home/about-us/about-us.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
   },
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  {
+    path: 'about',
+    component: AboutUsComponent
+  },
   {
     path: 'home',
     component: AccueilComponent

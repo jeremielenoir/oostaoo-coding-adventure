@@ -1,0 +1,39 @@
+.global{
+    height: 100%;
+
+}
+
+.entete{
+    min-height:100%;
+    background:linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../../../assets/backgroundAbout.jpg');
+    background-size:cover;
+    width: 100%;
+    text-align: center;
+
+    .entete-content{
+
+        color: white;
+        padding-top: 300px;
+
+        img{
+            padding-bottom: 30px;
+            width: 350px;
+        }
+    }
+}
+
+.content{
+    
+    background: white;
+    padding-top: 20px;
+    text-align: center;
+
+    p{
+        margin: 0px;
+    }
+
+    .team{
+        margin-top: 10px;
+        padding-bottom: 20px;
+    }
+}
