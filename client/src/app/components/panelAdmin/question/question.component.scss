@@ -225,15 +225,22 @@
     border-bottom: 1px dashed $color-principal-blue;
     cursor: move;
 
+    .info-hover-left{
+        right: 15px;
+    }
 
-    .info-hover {
+    .info-hover-right{
+        left: 15px;
+    }
+
+
+    .info-hover-right, .info-hover-left {
         display: none;
         z-index: 10;
         position: absolute;
         border: 1px solid $color-principal-blue;
         border-radius: $border-radius;
         top: 10px;
-        right: 15px;
         height: 430px;
         width: 49%;
         background: #eaeff3;
@@ -426,7 +433,7 @@
         -moz-box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
         box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
 
-        .info-hover{
+        .info-hover-left, .info-hover-right{
             display: block;
         }
         .ligne-plus{
