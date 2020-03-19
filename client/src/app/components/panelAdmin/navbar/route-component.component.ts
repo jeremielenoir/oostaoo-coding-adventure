@@ -21,6 +21,7 @@ export class RouteComponentComponent implements OnInit {
   public viewcontentDefaults: boolean;
   public notifications =  [];
   public notifUnread = 0;
+  public activeMenuB:boolean = false;
 
 
   @Output() ContentViewDefault = new EventEmitter<any>();
@@ -185,6 +186,11 @@ export class RouteComponentComponent implements OnInit {
     this.isShow = !this.isShow;
 
   }
+
+  public activeMenuBurgeur(){
+    console.log('hellow')
+    this.activeMenuB = this.activeMenuB;
+  }
 }
 
 
@@ -210,8 +216,9 @@ export class DistConnecTed {
     this.dialogRef.close();
     this.route.navigate(['/home/register']);
 
-
   }
+
+
 
 }
 

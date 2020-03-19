@@ -1,5 +1,7 @@
 @import "../../../../roodeo-variables.scss";
 
+
+
 #nav-menu{
   background: #c1d5e0;
   box-shadow: 0px 9px 11px -1px rgba(124,151,166,0.69), 0px 9px 11px -1px rgba(68,68,68,0.69);
@@ -25,16 +27,38 @@
     height:46px;
   }
 
+  .menu-burgeur{
+    display: flex;
+    margin-top: 5px;
+    align-items: center;
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    i{
+      color: $color-principal-blue;
+      font-size: 35px;
+
+    }
+  }
+
   .list-menu{
     list-style-type: none;
     display: flex;
     flex-direction: row;
     li{
+      .title-menu-responsive{
+        display: none;
+      }
+      .arrow{
+        display: none;
+      }
       &:hover .dropdownn{
         display: block;
       }
       &:hover, &:hover a{
-        background: #0d6192;
+        
       }
       &:hover{
         background: #0d6192;
@@ -78,6 +102,16 @@
         display: none;
         li{
           width: 92%;
+
+          .circle-icon{
+            font-size: 8px;
+            padding-right: 6px;
+            position: relative;
+            top:-2px;
+            display: none;
+          }
+        
+         
           p{
             color: white;
             margin-bottom:0px !important;
@@ -85,10 +119,7 @@
             display: inline-block;
             width: 100%;
             text-transform: uppercase;
-
-            
               font-weight: bold;
-            
           }
           a{
             color: white;
@@ -222,8 +253,6 @@
   min-height: 250px;
   max-height: 50%;
   overflow-y: auto;
-
-
     .icon-gestion-notif{
        cursor: pointer;
       color: $color-principal-blue;
@@ -286,24 +315,101 @@
 }
 
 @media screen and (max-width: 970px) {
-  .list-menu{
-    margin-left: 328px!important;
-  }
+  // .list-menu{
+  //   margin-left: 328px!important;
+  // }
 }
 
-@media screen and (max-width:768px){
- 
-  .list-menu li{
+@media screen and (max-width:767px){
+  .menu-burgeur{
+    display: block!important;
+  }
+  .circle-icon{
+    display:inline-block!important;
+  }
+  #nav-menu .list-menu{
+    position: fixed;
+    left: 0;
+    top: 70px;
+    width: 280px;
+    height: 100%;
+    background-color: #20252a;;
+    flex-direction: column!important;
+    display: none;
+  }
+
+  #nav-menu .active-menu-bergeur{
+    display: block!important;
+  }
+  
+  .list-menu > li{
     margin-left: 0px!important;
+    text-transform: uppercase;
+    }
 
-    .text-menu{
-      width: 70px!important;
-      height: 70px!important;
-
-      .content-img{
-        width: 40px!important;
-        height: 40px!important;
+    .list-menu  li{
+      &:hover{
+        background-color: transparent!important; 
       }
+    &:hover .content-img{
+      background-color: transparent!important;
+    }
+
+  }
+  .text-menu{
+    height: 52px!important;
+    width: 65px!important;
+    padding: 7px 15px!important;
+    color: white!important;
+    // display: inline-block!important;
+    &:hover{
+      background-color: transparent!important;
     }
   }
+
+  .content-img{
+    width: 56px!important;
+    height: 52px!important;
+  }
+
+  .list-menu-top-header{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+  }
+  .notif-title-arrow{
+    min-width: 180px;
+  }
+  .arrow{
+    display:inline-block!important;
+    color: white;
+    align-items: flex-end;
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+  }
+
+  .dropdownn.dropdownn-notif{
+    display: none!important;
+  }
+
+  .title-menu-responsive{
+    display: block!important;
+    color:#fff
+  }
+
+  .dropdownn{
+    width: auto!important;
+    display: block!important;
+    position: static!important;
+    padding: 6px 15px!important;
+    background: transparent!important;
+  }
+
+  .dropdownn li p{
+    display: none!important;
+  }
+ 
+ 
 }
