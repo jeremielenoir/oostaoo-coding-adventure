@@ -21,7 +21,7 @@
     }
 
     .title {
-      font-size: 24px;
+      font-size: 36px;
     }
 
     #message {
@@ -111,6 +111,10 @@
       padding: 40px 80px;
       border: $border-table;
       border-radius: $border-radius;
+
+      .logoSupport {
+        margin-bottom: 60px;
+      }
     }
   }
 }

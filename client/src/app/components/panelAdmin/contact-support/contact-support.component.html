@@ -39,10 +39,13 @@
 
           <div class="input-bloc">
             <h3 class="input-title" maxlength="64">Email *</h3>
-            <input name="email" [formControl]="email" class="input-section1" type="text" required>
+            <input name="email" [formControl]="email" class="input-section1" type="email" required>
             <div *ngIf="submittedForm && email.invalid" class="alert alert-danger">
               <div *ngIf="email.errors.required">
-                Nom requis.
+                Email requis.
+              </div>
+              <div *ngIf="email.errors.email">
+                Veuillez saisir un email valide.
               </div>
             </div>
           </div>
@@ -84,12 +87,16 @@
 
 
     <div id="section2">
+      <div class="logoSupport">
+        <img src="../../../../assets/logo_ROODEO.svg">
+      </div>
+      <br>
       <div class="section-title">
         <h1 class="title">Nous joindre</h1>
         <br>
         <p>
           Vous pouvez également nous joindre par téléphone, 
-          nous serons ravis de pouvoir vous aider: 01-11-22-33-44
+          nous serons ravis de pouvoir vous aider: <strong>01-11-22-33-44</strong>
         </p>
       </div>
     </div>

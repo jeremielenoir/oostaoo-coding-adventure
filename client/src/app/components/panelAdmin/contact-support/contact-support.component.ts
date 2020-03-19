@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiClientService, API_URI_ISSUE } from 'src/app/api-client/api-client.service';
 import { FormControl, Validators } from '@angular/forms';
 import { DecryptTokenService } from '../../home/register/register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact-support',
@@ -13,7 +14,8 @@ export class ContactSupportComponent implements OnInit {
 
   constructor(public apiClientService: ApiClientService,
     private toastr: ToastrService,
-    public decryptTokenService: DecryptTokenService) { }
+    public decryptTokenService: DecryptTokenService,
+    private router: Router) { }
 
   submittedForm = false;
   prenom = new FormControl('', Validators.required);
@@ -34,7 +36,7 @@ export class ContactSupportComponent implements OnInit {
 
   sendFormular() {
     this.submittedForm = true;
-    if (this.prenom.value === '' || this.nom.value === '' || this.email.value === '' || this.subject.value === '' || this.message.value === '') {
+    if (this.prenom.value === '' || this.nom.value === '' || this.email.value === '' || this.email.invalid || this.subject.value === '' || this.message.value === '') {
       this.showError('Erreur veuillez correctement remplir tous les champs requis');
       return console.log('Erreur veuillez remplir tout les champs requis');
     } else {
@@ -47,6 +49,7 @@ export class ContactSupportComponent implements OnInit {
     }).subscribe(
       (res) => {
         this.showSuccess("Le formulaire a correctement été envoyé à l'équipe de support");
+        this.router.navigate(['/dashboard']);
        // console.log('res', res);
       },
       err => console.log(err)
