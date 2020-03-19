@@ -206,13 +206,19 @@
       <!--Table-->
     </div>
 
-    <div *ngSwitchDefault id="editQuestion">...</div>
+    <div *ngSwitchDefault id="editQuestion">
+      <div class="loading">
+        <span class="fa fa-spinner fa-pulse"></span>
+      </div>
+    </div>
   </div>
 
 
 </div>
 
 <!-- SIDENAV -->
+
+
 
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="over" [(opened)]="opened">

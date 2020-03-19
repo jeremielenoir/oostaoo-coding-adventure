@@ -8,6 +8,11 @@
 ::ng-deep app-candidats {
   flex: 1;
 }
+
+.loading{
+  top: 0!important;
+  left: 0!important;
+}
 .invit-btn-candidat {
   margin-top: 60px;
 }

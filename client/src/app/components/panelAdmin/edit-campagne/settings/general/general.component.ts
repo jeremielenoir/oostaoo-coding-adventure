@@ -34,7 +34,7 @@ export class GeneralComponent implements OnInit {
 
   copypaste: boolean;
   envoiRapportSimplifie: boolean;
-
+  loadingStart:boolean
 
 
   ngOnInit() {
@@ -109,6 +109,7 @@ showSuccess(message) {
       const datas = await this.apiClientService
         .get(API_URI_CAMPAIGNS + '/' + this.globalId)
         .toPromise();
+        this.loadingStart = true;
       return this.campaigns = [datas];
     } catch (err) {
       return err;

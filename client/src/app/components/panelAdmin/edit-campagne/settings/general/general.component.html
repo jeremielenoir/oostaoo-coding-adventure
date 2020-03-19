@@ -1,4 +1,9 @@
-<form action="" *ngFor="let campaign of campaigns">
+<div *ngIf="!loadingStart" class="loading">
+  <span class="fa fa-spinner fa-pulse"></span>
+</div>
+
+<div *ngIf="loadingStart">
+  <form  action="" *ngFor="let campaign of campaigns">
   <div class="formQuestion">
     <label for="nomDeCampagne">
       Nom de la campagne
@@ -89,3 +94,5 @@
     </button>
   </div>
 </form>
+</div>
+
