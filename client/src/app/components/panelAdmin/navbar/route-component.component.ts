@@ -188,8 +188,9 @@ export class RouteComponentComponent implements OnInit {
   }
 
   public activeMenuBurgeur(){
+   
+    this.activeMenuB = !this.activeMenuB; 
     console.log('hellow')
-    this.activeMenuB = this.activeMenuB;
   }
 }
 

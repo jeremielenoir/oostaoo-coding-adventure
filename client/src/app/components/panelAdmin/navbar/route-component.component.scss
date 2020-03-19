@@ -335,11 +335,14 @@
     height: 100%;
     background-color: #20252a;;
     flex-direction: column!important;
-    display: none;
+    // display: none;
+    transition: .5s;
+    transform: translateX(-280px)
   }
 
   #nav-menu .active-menu-bergeur{
-    display: block!important;
+    // display: block!important;
+    transform: translateX(0px)!important
   }
   
   .list-menu > li{
