@@ -30,6 +30,7 @@
 
     .section-title {
       display: flex;
+      align-items: center;
       flex-direction: column;
     }
 
@@ -63,7 +64,7 @@
     .form-line {
       display: flex;
       flex-direction: column;
-      
+
       .input-bloc {
         flex: 1;
         margin: 20px 20px 18px 20px;
@@ -105,6 +106,9 @@
     /* Section 2 */
 
     #section2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       width: 98%;
       margin: 18px auto 0;
       background: white;
@@ -114,20 +118,24 @@
 
       .logoSupport {
         margin-bottom: 60px;
+
+        img {
+          width: 300px;
+        }
       }
     }
   }
 }
 
-@media screen and (max-width: 1024px){
-  #global{
-      display: block;
+@media screen and (max-width: 1024px) {
+  #global {
+    display: block;
   }
-  #section1, #section2 {
-      padding: 10px 10px!important;
+  #section1,
+  #section2 {
+    padding: 10px 10px !important;
   }
-  .content{
-      flex-direction: column;
-
+  .content {
+    flex-direction: column;
   }
 }

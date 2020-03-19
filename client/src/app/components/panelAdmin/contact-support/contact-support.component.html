@@ -61,6 +61,7 @@
               <option>J'ai besoin d'aide pour naviguer sur le site</option>
               <option>J'ai besoin d'informations concernant les forfaits</option>
               <option>J'ai besoin d'informations concernant la création de campagne</option>
+              <option>J'ai un problème sur le site</option>
             </select>
             <div *ngIf="submittedForm && subject.invalid" class="alert alert-danger">
               <div *ngIf="subject.errors.required">
@@ -99,6 +100,9 @@
           nous serons ravis de pouvoir vous aider: <strong>01-11-22-33-44</strong>
         </p>
       </div>
+      <br>
+      <p>Si vous avez des questions d'ordre général vous pouvez à tout moment les poser au bot
+        d'aide en cliquant en bas a droite sur le point d'interrogation </p>
     </div>
 
   </div>
