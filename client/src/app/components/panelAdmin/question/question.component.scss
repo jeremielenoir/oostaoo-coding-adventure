@@ -5,11 +5,11 @@
 .loading{
     top: 0;
 }
-::ng-deep app-nouvellecampagnepage3component{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+// ::ng-deep app-nouvellecampagnepage3component{
+//     display: flex;
+//     flex-direction: column;
+//     height: 100%;
+// }
 ::ng-deep app-question-component{
     height: 100%;
 }
@@ -209,12 +209,6 @@
     justify-content: space-between;
 }
 
-
-
-
-
-//test max //
-
 .ligne-question{
     display: flex;
     flex-direction: row; 
@@ -241,7 +235,7 @@
         border: 1px solid $color-principal-blue;
         border-radius: $border-radius;
         top: 10px;
-        height: 430px;
+        height: 93.5%;
         width: 49%;
         background: #eaeff3;
         
@@ -282,6 +276,7 @@
             padding: 10px 5px;
             background: white;
             color: black;
+            overflow:scroll;
             margin: auto;
             height: 55%;
         }
