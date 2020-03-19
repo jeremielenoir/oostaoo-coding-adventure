@@ -1,5 +1,5 @@
 /* global Question */
-'use strict';
+"use strict";
 
 /**
  * Question.js service
@@ -8,19 +8,18 @@
  */
 
 // Public dependencies.
-const _ = require('lodash');
+const _ = require("lodash");
 
 // Strapi utilities.
 //const utils = require('strapi-hook-bookshelf/lib/utils/');
-const { exec } = require('child_process');
-const shortid = require('shortid');
-const { createReadStream, createWriteStream, unlink, access } = require('fs');
-const path = require('path');
-
-const { google } = require('googleapis');
-const keys = require('../../../roodeo.json');
-const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
-const UPLOAD_DIR = 'filescripts';
+const { exec } = require("child_process");
+const shortid = require("shortid");
+const { createReadStream, createWriteStream, unlink, access } = require("fs");
+const randomstring = require("randomstring");
+const { google } = require("googleapis");
+const keys = require("../../../roodeo.json");
+const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
+const UPLOAD_DIR = "filescripts";
 module.exports = {
   /**
    * Promise to fetch all questions.
@@ -30,7 +29,7 @@ module.exports = {
 
   fetchAll: params => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('question', params);
+    const filters = strapi.utils.models.convertParams("question", params);
     // Select field to populate.
     const populate = Question.associations
       .filter(ast => ast.autoPopulate !== false)
@@ -40,11 +39,11 @@ module.exports = {
       _.forEach(filters.where, (where, key) => {
         if (
           _.isArray(where.value) &&
-          where.symbol !== 'IN' &&
-          where.symbol !== 'NOT IN'
+          where.symbol !== "IN" &&
+          where.symbol !== "NOT IN"
         ) {
           for (const value in where.value) {
-            qb[value ? 'where' : 'orWhere'](
+            qb[value ? "where" : "orWhere"](
               key,
               where.symbol,
               where.value[value]
@@ -78,7 +77,7 @@ module.exports = {
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    return Question.forge(_.pick(params, 'id')).fetch({
+    return Question.forge(_.pick(params, "id")).fetch({
       withRelated: populate
     });
   },
@@ -91,13 +90,13 @@ module.exports = {
 
   count: params => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('question', params);
+    const filters = strapi.utils.models.convertParams("question", params);
 
     return Question.query(function(qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value)) {
           for (const value in where.value) {
-            qb[value ? 'where' : 'orWhere'](
+            qb[value ? "where" : "orWhere"](
               key,
               where.symbol,
               where.value[value]
@@ -170,15 +169,15 @@ module.exports = {
     params.values = {};
     Question.associations.map(association => {
       switch (association.nature) {
-        case 'oneWay':
-        case 'oneToOne':
-        case 'manyToOne':
-        case 'oneToManyMorph':
+        case "oneWay":
+        case "oneToOne":
+        case "manyToOne":
+        case "oneToManyMorph":
           params.values[association.alias] = null;
           break;
-        case 'oneToMany':
-        case 'manyToMany':
-        case 'manyToManyMorph':
+        case "oneToMany":
+        case "manyToMany":
+        case "manyToManyMorph":
           params.values[association.alias] = [];
           break;
         default:
@@ -198,7 +197,7 @@ module.exports = {
 
   search: async params => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('question', params);
+    const filters = strapi.utils.models.convertParams("question", params);
     // Select field to populate.
     const populate = Question.associations
       .filter(ast => ast.autoPopulate !== false)
@@ -211,7 +210,7 @@ module.exports = {
           attribute !== Question.primaryKey && !associations.includes(attribute)
       )
       .filter(attribute =>
-        ['string', 'text'].includes(Question._attributes[attribute].type)
+        ["string", "text"].includes(Question._attributes[attribute].type)
       );
 
     const searchNoText = Object.keys(Question._attributes)
@@ -222,12 +221,12 @@ module.exports = {
       .filter(
         attribute =>
           ![
-            'string',
-            'text',
-            'boolean',
-            'integer',
-            'decimal',
-            'float'
+            "string",
+            "text",
+            "boolean",
+            "integer",
+            "decimal",
+            "float"
           ].includes(Question._attributes[attribute].type)
       );
 
@@ -237,7 +236,7 @@ module.exports = {
           attribute !== Question.primaryKey && !associations.includes(attribute)
       )
       .filter(attribute =>
-        ['integer', 'decimal', 'float'].includes(
+        ["integer", "decimal", "float"].includes(
           Question._attributes[attribute].type
         )
       );
@@ -248,10 +247,10 @@ module.exports = {
           attribute !== Question.primaryKey && !associations.includes(attribute)
       )
       .filter(attribute =>
-        ['boolean'].includes(Question._attributes[attribute].type)
+        ["boolean"].includes(Question._attributes[attribute].type)
       );
 
-    const query = (params._q || '').replace(/[^a-zA-Z0-9.-\s]+/g, '');
+    const query = (params._q || "").replace(/[^a-zA-Z0-9.-\s]+/g, "");
 
     return Question.query(qb => {
       // Search in columns which are not text value.
@@ -265,28 +264,28 @@ module.exports = {
         });
       }
 
-      if (query === 'true' || query === 'false') {
+      if (query === "true" || query === "false") {
         searchBool.forEach(attribute => {
-          qb.orWhereRaw(`${attribute} = ${_.toNumber(query === 'true')}`);
+          qb.orWhereRaw(`${attribute} = ${_.toNumber(query === "true")}`);
         });
       }
 
       // Search in columns with text using index.
       switch (Question.client) {
-        case 'mysql':
+        case "mysql":
           qb.orWhereRaw(
-            `MATCH(${searchText.join(',')}) AGAINST(? IN BOOLEAN MODE)`,
+            `MATCH(${searchText.join(",")}) AGAINST(? IN BOOLEAN MODE)`,
             `*${query}*`
           );
           break;
-        case 'pg': {
+        case "pg": {
           const searchQuery = searchText.map(attribute =>
             _.toLower(attribute) === attribute
               ? `to_tsvector(${attribute})`
               : `to_tsvector('${attribute}')`
           );
 
-          qb.orWhereRaw(`${searchQuery.join(' || ')} @@ to_tsquery(?)`, query);
+          qb.orWhereRaw(`${searchQuery.join(" || ")} @@ to_tsquery(?)`, query);
           break;
         }
       }
@@ -321,7 +320,7 @@ module.exports = {
         [SCOPES]
       );
       await client.authorize();
-      const gsapi = google.sheets({ version: 'v4', auth: client });
+      const gsapi = google.sheets({ version: "v4", auth: client });
 
       const {
         data: { valueRanges }
@@ -453,8 +452,8 @@ module.exports = {
 
       const updateOptions = {
         spreadsheetId,
-        range: 'Feuille 1!A2',
-        valueInputOption: 'USER_ENTERED',
+        range: "Feuille 1!A2",
+        valueInputOption: "USER_ENTERED",
         resource: { values: ids }
       };
       await gsapi.spreadsheets.values.update(updateOptions);
@@ -471,25 +470,45 @@ module.exports = {
    */
   executeScript: async file => {
     try {
+      const generateStrings = (numberOfStrings, stringLength) => {
+        const s = new Set();
+
+        while (s.size < numberOfStrings) {
+          s.add(randomstring.generate(stringLength));
+        }
+        const val = s.values().next();
+
+        return val;
+      };
       const storeUpload = async ({ filename, extension }) => {
         const random = await shortid.generate();
-        const id = `${random}.${extension}`;
-        const path = `${UPLOAD_DIR}/${id}`;
+        let id = ``;
+        let path = ``;
+        const randomname = generateStrings(1, 10).value;
+        const javafilename = `${randomname.charAt(0).toUpperCase() +
+          randomname.slice(1)}`;
 
+        switch (extension) {
+          case "java":
+            id = `${javafilename}.${extension}`;
+            path = `${UPLOAD_DIR}/${javafilename}.${extension}`;
+
+            break;
+          default:
+            id = `${random}.${extension}`;
+            path = `${UPLOAD_DIR}/${id}`;
+            break;
+        }
         return new Promise((resolve, reject) =>
           createReadStream(filename)
             .pipe(createWriteStream(path))
-            .on('finish', () => resolve({ id, path, extension }))
-            .on('error', error => reject(error))
+            .on("finish", () => resolve({ id, path, extension }))
+            .on("error", error => reject(error))
         );
       };
       const deleteFile = async id => {
         try {
-          // await unlink(`${UPLOAD_DIR}/${id.split('.')[0]}`, async err => {
-          //   if (err) throw err;
-          // });
           const filepath = `${UPLOAD_DIR}/${id}`;
-
           access(filepath, async err => {
             if (err) {
               console.log(`The file ${filepath} does not exist.`);
@@ -505,7 +524,7 @@ module.exports = {
       };
       const processUpload = async upload => {
         const { name, path } = upload;
-        const extension = name.split('.')[1];
+        const extension = name.split(".")[1];
         const res = await storeUpload({
           filename: path,
           extension
@@ -513,27 +532,33 @@ module.exports = {
         return res;
       };
       const { path: filetoexecute, extension, id } = await processUpload(file);
-      let script = '';
-      let compiledfile = `${filetoexecute.split('.')[0]}`;
+      let script = "";
+      let compiledfile = `${filetoexecute.split(".")[0]}`;
+      
 
+      const scriptjava = `sed -i s/Main/${
+        compiledfile.split("/")[1]
+      }/g ${filetoexecute}`;
       switch (extension) {
-        case 'js':
+        case "js":
           script = `node ${filetoexecute}`;
           break;
-        case 'py':
+        case "py":
           script = `python3 ${filetoexecute}`;
           break;
 
-        case 'php':
+        case "php":
           script = `php ${filetoexecute}`;
           break;
-        case 'cpp':
-        case 'c':
+        case "cpp":
+        case "c":
           script = `gcc ${filetoexecute} -o ${compiledfile} && ./${compiledfile}`;
           break;
 
-        case 'java':
-          script = `mv ${filetoexecute} Main.java && javac Main }`;
+        case "java":
+          script = `${scriptjava} && javac ${filetoexecute} && cd ${UPLOAD_DIR} && java ${
+            compiledfile.split("/")[1].split(".")[0]
+          } `;
           break;
 
         default:
@@ -542,10 +567,14 @@ module.exports = {
       return new Promise((resolve, _reject) => {
         exec(script, async (error, stdout, stderr) => {
           await deleteFile(id);
-          await deleteFile(id.split('.')[0]);
-          // console.log('error', error);
-          // console.log('stderr', stderr);
-          // console.log('stdout', stdout);
+          await deleteFile(
+            extension.toString() === "java"
+              ? id.split(".")[0] + ".class"
+              : id.split(".")[0]
+          );
+          // console.log("error", error);
+          // console.log("stderr", stderr);
+          // console.log("stdout", stdout);
 
           if (error) {
             resolve(error.message || error);
