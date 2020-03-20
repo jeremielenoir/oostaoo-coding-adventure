@@ -24,7 +24,7 @@ phases:
       - echo Build started on `date`
       - cd ../client && npm run build
       - mkdir ../server/public
-      - export NODE_OPTIONS=--max_old_space_size=4096
+      - export NODE_OPTIONS=--max_old_space_size=8192
       - cp -R ./dist/client/* ../server/public/
     finally:
       - echo This always runs even if the install command fails
