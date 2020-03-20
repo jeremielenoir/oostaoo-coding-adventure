@@ -105,7 +105,15 @@
           </mat-checkbox>
         </div>
       </div>
+
+       <!--algo-->
+
+       <div *ngIf="question.type === 'algo'" class="scroll-auto-testing">
+        je suis le time algo
+      </div>
     </div>
+
+    
     <button class="button" (click)="QuestNext()">
       {{
         index === questions.length - 1

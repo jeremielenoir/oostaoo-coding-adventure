@@ -114,8 +114,7 @@
             top:-2px;
             display: none;
           }
-        
-         
+             
           p{
             color: white;
             margin-bottom:0px !important;
@@ -257,6 +256,24 @@
   min-height: 250px;
   max-height: 50%;
   overflow-y: auto;
+  scrollbar-color: #7f8183 #e3e3e3;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  &::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #7f8183;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover{
+        background-color: #67686a;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: #e3e3e3;
+    }
     .icon-gestion-notif{
        cursor: pointer;
       color: $color-principal-blue;
@@ -295,7 +312,7 @@
 .notif-title{
   padding-top: 10px;
   color: $color-principal-blue;
- font-size: 20px;
+ font-size: 16px;
 }
 
 .notif-message{

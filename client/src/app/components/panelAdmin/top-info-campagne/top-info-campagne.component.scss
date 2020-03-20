@@ -119,27 +119,6 @@
       display: flex;
       // padding: 15px;
       // align-items: center;
-      min-width: 160px;
-      overflow: auto;
-      scrollbar-color: #7f8183 #e3e3e3;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      &::-webkit-scrollbar{
-        width: 8px;
-        height: 8px;
-        }
-        &::-webkit-scrollbar-thumb {
-            background-color: #7f8183;
-        }
-        
-        &::-webkit-scrollbar-thumb:hover{
-            background-color: #67686a;
-        }
-        
-        &::-webkit-scrollbar-track {
-            background: #e3e3e3;
-        }
-    
       .StatsByTechnology{
         display: flex;
         flex: none;
