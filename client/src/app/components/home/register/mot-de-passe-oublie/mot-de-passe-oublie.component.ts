@@ -16,6 +16,7 @@ export class MotDePasseOublieComponent implements OnInit {
   public newPassword = new FormControl('', Validators.required);
   public confirmPassword = new FormControl('', Validators.required);
   private secretCode = this.route.snapshot.queryParams.code;
+  public submittedPassword: string;
 
   constructor(private http: HttpClient,
               private route: ActivatedRoute,

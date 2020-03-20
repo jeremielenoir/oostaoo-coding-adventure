@@ -12,7 +12,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 export class RapportDetailleComponent implements OnInit {
 
   public idCandidat;
-  public candidat: object = null;
+  public candidat: any = null;
   public rapport;
   public rapportTechno = [];
   public uniquetechno;

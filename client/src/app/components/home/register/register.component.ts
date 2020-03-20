@@ -213,6 +213,7 @@ export class DialogForgetPassword {
   errorRegister = '';
   submitted = false;
   public emailAdress = new FormControl('', [Validators.required, Validators.email]);
+  public forgotPassword: string;
 
   constructor(
     public dialogRef: MatDialogRef<DialogForgetPassword>,
