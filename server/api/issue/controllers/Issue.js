@@ -64,7 +64,7 @@ module.exports = {
 
   create: async (ctx) => {
     console.log("ctx.request.body: ", ctx.request.body);
-    let ticket_number = ctx.request.body.Prenom + ctx.request.body.Nom;
+    let ticket_number = ctx.request.body.Nom;
     var cryptoData = crypto
       .createHash("md5")
       .update(ticket_number)
@@ -89,7 +89,6 @@ module.exports = {
     // );
 
     ctx.request.body = {
-      Firstname: ctx.request.body.Prenom,
       Lastname: ctx.request.body.Nom,
       Email: ctx.request.body.email,
       Title: ctx.request.body.Subject,

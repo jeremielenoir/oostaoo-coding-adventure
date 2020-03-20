@@ -23,10 +23,6 @@
       "default": "",
       "type": "text"
     },
-    "firstname": {
-      "default": "",
-      "type": "string"
-    },
     "lastname": {
       "default": "",
       "type": "string"
