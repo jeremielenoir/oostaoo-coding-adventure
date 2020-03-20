@@ -35,7 +35,6 @@ export class TopInfoCampagneComponent implements OnInit {
   public technoPoint = []
   @ViewChild('Chart') Chart: ElementRef;
 
-
   constructor(public apiClientService: ApiClientService,private router: Router, 
     public decryptTokenService: DecryptTokenService,private _snackBar: MatSnackBar,private route: ActivatedRoute, private toastr: ToastrService) { }
 
@@ -277,8 +276,4 @@ export class TopInfoCampagneComponent implements OnInit {
     }
 
   }
-
-
-
-
 }

@@ -51,6 +51,10 @@
       .title-menu-responsive{
         display: none;
       }
+
+      .chevron-down-burgeur{
+        display: none;
+      }
       .arrow{
         display: none;
       }
@@ -327,6 +331,12 @@
   .circle-icon{
     display:inline-block!important;
   }
+  .chevron-down-burgeur{
+    display: block!important;
+    color:white;
+    margin-top: 3px;
+    // margin-left: 9px;
+  }
   #nav-menu .list-menu{
     position: fixed;
     left: 0;
@@ -380,6 +390,7 @@
     border-bottom: 1px solid black;
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
   .notif-title-arrow{
     min-width: 180px;
@@ -399,6 +410,7 @@
 
   .title-menu-responsive{
     display: block!important;
+    min-width: 180px;
     color:#fff
   }
 
