@@ -34,7 +34,8 @@
       "enum": [
         "one",
         "multiple",
-        "free"
+        "free",
+        "algo"
       ]
     },
     "theme": {
@@ -67,8 +68,8 @@
     },
     "campaigns": {
       "collection": "campaign",
-      "dominant": true,
-      "via": "questions"
+      "via": "questions",
+      "dominant": true
     }
   }
 }
