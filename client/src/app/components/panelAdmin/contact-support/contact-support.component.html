@@ -18,16 +18,6 @@
         <div class="form-line">
 
           <div class="input-bloc">
-            <h3 class="input-title">Prénom *</h3>
-            <input name="firstname" [formControl]="prenom" class="input-section1" maxlength="24" type="text" required>
-            <div *ngIf=" submittedForm && prenom.invalid" class="alert alert-danger">
-              <div *ngIf="prenom.errors.required">
-                Prénom requis.
-              </div>
-            </div>
-          </div>
-
-          <div class="input-bloc">
             <h3 class="input-title" maxlength="64">Nom *</h3>
             <input name="lastname" [formControl]="nom" class="input-section1" type="text" required>
             <div *ngIf="submittedForm && nom.invalid" class="alert alert-danger">
@@ -39,7 +29,7 @@
 
           <div class="input-bloc">
             <h3 class="input-title" maxlength="64">Email *</h3>
-            <input name="email" [formControl]="email" class="input-section1" type="email" required>
+            <input name="email" [formControl]="email" class="input-section1" type="text" required>
             <div *ngIf="submittedForm && email.invalid" class="alert alert-danger">
               <div *ngIf="email.errors.required">
                 Email requis.
@@ -56,16 +46,10 @@
 
           <div class="input-bloc">
             <h3 class="input-title" maxlength="64">Sujet*</h3>
-            <select [formControl]="subject" class="input-section1" name="subject" required>
-              <option>---</option>
-              <option>J'ai besoin d'aide pour naviguer sur le site</option>
-              <option>J'ai besoin d'informations concernant les forfaits</option>
-              <option>J'ai besoin d'informations concernant la création de campagne</option>
-              <option>J'ai un problème sur le site</option>
-            </select>
+            <input [formControl]="subject" class="input-section1" name="subject" required>
             <div *ngIf="submittedForm && subject.invalid" class="alert alert-danger">
               <div *ngIf="subject.errors.required">
-                Veuillez sélectionner un sujet.
+                Veuillez saisir l'objet de votre demande.
               </div>
             </div>
           </div>

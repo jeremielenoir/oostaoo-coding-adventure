@@ -18,7 +18,6 @@ export class ContactSupportComponent implements OnInit {
     private router: Router) { }
 
   submittedForm = false;
-  prenom = new FormControl('', Validators.required);
   nom = new FormControl('', Validators.required);
   email = new FormControl('', [Validators.required, Validators.email]);
   subject = new FormControl('', Validators.required);
@@ -36,12 +35,11 @@ export class ContactSupportComponent implements OnInit {
 
   sendFormular() {
     this.submittedForm = true;
-    if (this.prenom.value === '' || this.nom.value === '' || this.email.value === '' || this.email.invalid || this.subject.value === '' || this.message.value === '') {
+    if (this.nom.value === '' || this.email.value === '' || this.email.invalid || this.subject.value === '' || this.message.value === '') {
       this.showError('Erreur veuillez correctement remplir tous les champs requis');
       return console.log('Erreur veuillez remplir tout les champs requis');
     } else {
     this.apiClientService.post(API_URI_ISSUE, {
-      Prenom: this.prenom.value,
       Nom: this.nom.value,
       email: this.email.value,
       Subject: this.subject.value,
