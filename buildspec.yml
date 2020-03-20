@@ -22,7 +22,7 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
-      - cd ../client && npm run build --prod=true
+      - cd ../client && npm run build
       - mkdir ../server/public
       - cp -R ./dist/client/* ../server/public/
     finally:
