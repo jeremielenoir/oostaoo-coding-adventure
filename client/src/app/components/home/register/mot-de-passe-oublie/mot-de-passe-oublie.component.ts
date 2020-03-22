@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
-import axios from 'axios';
 
 @Component({
   selector: 'app-mot-de-passe-oublie',
@@ -30,7 +29,7 @@ export class MotDePasseOublieComponent implements OnInit {
   // Request API.
   resetPassword() {
     console.log('click click');
-    axios
+    /*axios
       .post('http://localhost:8080/auth/reset-password', {
         code: this.secretCode,
         password: 'testtest',
@@ -43,7 +42,7 @@ export class MotDePasseOublieComponent implements OnInit {
       .catch(error => {
         // Handle error.
         console.log('An error occurred:', error);
-      });
+      });*/
     }
 
 // Request API.
