@@ -2,7 +2,8 @@ version: 0.2
 
 env:
   variables:
-    JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
+    JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64",
+    NODE_OPTIONS: "--max_old_space_size=8192"
     
 phases:
   install:
