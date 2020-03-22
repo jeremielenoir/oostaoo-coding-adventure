@@ -51,6 +51,10 @@
       .title-menu-responsive{
         display: none;
       }
+
+      .chevron-down-burgeur{
+        display: none;
+      }
       .arrow{
         display: none;
       }
@@ -110,8 +114,7 @@
             top:-2px;
             display: none;
           }
-        
-         
+             
           p{
             color: white;
             margin-bottom:0px !important;
@@ -253,6 +256,24 @@
   min-height: 250px;
   max-height: 50%;
   overflow-y: auto;
+  scrollbar-color: #7f8183 #e3e3e3;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  &::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #7f8183;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover{
+        background-color: #67686a;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: #e3e3e3;
+    }
     .icon-gestion-notif{
        cursor: pointer;
       color: $color-principal-blue;
@@ -291,7 +312,7 @@
 .notif-title{
   padding-top: 10px;
   color: $color-principal-blue;
- font-size: 20px;
+ font-size: 16px;
 }
 
 .notif-message{
@@ -326,6 +347,12 @@
   }
   .circle-icon{
     display:inline-block!important;
+  }
+  .chevron-down-burgeur{
+    display: block!important;
+    color:white;
+    margin-top: 3px;
+    // margin-left: 9px;
   }
   #nav-menu .list-menu{
     position: fixed;
@@ -380,6 +407,7 @@
     border-bottom: 1px solid black;
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
   .notif-title-arrow{
     min-width: 180px;
@@ -399,6 +427,7 @@
 
   .title-menu-responsive{
     display: block!important;
+    min-width: 180px;
     color:#fff
   }
 

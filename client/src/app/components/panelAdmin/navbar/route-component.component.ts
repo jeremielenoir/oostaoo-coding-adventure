@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Router } from '@angular/router';
 import { ApiClientService, API_URI_NOTIFICATIONS, API_URI_USER } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from '../../home/register/register.service';
+import { element } from 'protractor';
 
 
 
@@ -64,8 +65,8 @@ export class RouteComponentComponent implements OnInit {
       }
     });
 
-
-
+    this.menuBurgeurDropdown()
+    
     let textMenu = document.querySelectorAll('.text-menu');
 
     textMenu.forEach(element => {
@@ -188,10 +189,16 @@ export class RouteComponentComponent implements OnInit {
   }
 
   public activeMenuBurgeur(){
-   
     this.activeMenuB = !this.activeMenuB; 
-    console.log('hellow')
   }
+
+  menuBurgeurDropdown(){
+    let list = document.querySelectorAll('.list-menu li');
+    list.forEach(element => {
+      
+    })
+  }
+
 }
 
 
@@ -219,8 +226,7 @@ export class DistConnecTed {
 
   }
 
-
-
+ 
 }
 
 // @Component({

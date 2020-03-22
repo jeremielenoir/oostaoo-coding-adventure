@@ -21,10 +21,6 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss",
-               "./node_modules/bootstrap/scss/bootstrap.scss",
-              "./node_modules/ngx-toastr/toastr.css",
-               "./node_modules/video.js/dist/video-js.min.css",
-               "./node_modules/videojs-playlist-ui/dist/videojs-playlist-ui.css",
               "./node_modules/prismjs/themes/prism-okaidia.css",
               "./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css",
               "./node_modules/swiper/css/swiper.min.css"

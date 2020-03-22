@@ -65,7 +65,22 @@
               </div>
           </div>
 
+          <div class="form-group">
+            <ngx-recaptcha2 #captchaElem 
+            [siteKey]="siteKey"
+            (success)="handleSuccess($event)"
+            [useGlobalDomain]="false"
+            [size]="size"
+            [hl]="lang"
+            [theme]="theme"
+            formControlName="recaptcha">
+            </ngx-recaptcha2>
+            <div *ngIf="submittedForm && !captchaSuccess" class="alert alert-danger">
+                Validation du captcha nécessaire
+            </div>
+          </div>
         </div>
+
         <button (click)='sendFormular()' class="btn-submit" type="submit">Envoyer</button>
       </form>
     </div>
