@@ -23,9 +23,9 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
+      - export NODE_OPTIONS=--max_old_space_size=8192
       - cd ../client && yarn run build
       - mkdir ../server/public
-      - export NODE_OPTIONS=--max_old_space_size=8192
       - cp -R ./dist/client/* ../server/public/
     finally:
       - echo This always runs even if the install command fails
