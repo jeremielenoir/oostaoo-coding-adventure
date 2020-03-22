@@ -10,7 +10,8 @@ phases:
       nodejs: 10
     commands:
       - echo Entered the install phase...
-      - cd client && npm install
+      - npm install yarn -g
+      - cd client && yarn install
     finally:
       - echo This always runs even if the update or install command fails 
   pre_build:
@@ -22,7 +23,7 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
-      - cd ../client && npm run build --prod=true
+      - cd ../client && yarn run build
       - mkdir ../server/public
       - cp -R ./dist/client/* ../server/public/
     finally:
