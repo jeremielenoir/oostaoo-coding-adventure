@@ -4155,6 +4155,10 @@ loader-runner@^2.3.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"
 
+loader-runner@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-3.1.0.tgz#e9440e5875f2ad2f968489cd2c7b59a4f2847fcb"
+
 loader-utils@1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.2.3.tgz#1ff5dc6911c9f0a062531a4c04b609406108c2c7"
@@ -4624,6 +4628,12 @@ ngx-markdown@^7.0.0:
     "@types/marked" "^0.6.0"
     marked "^0.6.0"
     prismjs "^1.16.0"
+    tslib "^1.9.0"
+
+ngx-monaco-editor@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-monaco-editor/-/ngx-monaco-editor-7.0.0.tgz#3c422502def5c5ff0771a4ff518352d0215de698"
+  dependencies:
     tslib "^1.9.0"
 
 ngx-order-pipe@^2.0.4:

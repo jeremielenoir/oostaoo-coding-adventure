@@ -121,8 +121,7 @@ export class CandidatsComponent implements OnInit {
 
     this.getCampaign().then(datas => {
       this.campaign = datas;
-      console.log('depuis candidat', this.candidats)
-    })
+    });
   }
 
   showChoinceList(e) {
@@ -270,46 +269,52 @@ export class CandidatsComponent implements OnInit {
       .get(apiURL)
       .toPromise()
       .then(res => { // Success
+        
         let userId = res.user.id;
         let userIdConnect = this.DecryptTokenService.userIdExporte['userId'];
         if (userId !== userIdConnect) {
           this.router.navigate(['/dashboard/campaigns']);
           return;
         }
+
         this.campaigns = res;
         this.candidats = res.candidats;
-        this.candidats.forEach(element => {
+
+        this.candidats.forEach( (element: any) => {
           element.status = false;
         });
+
         this.technologies = res.technologies;
-        // console.log('this.technologies: ', this.technologies);
+
         if (this.campaigns.candidats.length > 0) {
           this.ViewCandidats = 'CandidatTrue';
         } else {
           this.ViewCandidats = 'CandidatFalse';
         }
         return this.campaigns;
+
       }, err => {
         this.router.navigate(['/dashboard/campaigns'])
       })
       .then((data) => {
+        
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
         const defaultColumns = ['Checked', 'Candidats', 'Dernière activité', 'Score'];
         const getInfoCandidat = [];
         let dateInvite;
         let percentCandidat;
         let duree;
+        
         // INFOS FOR ADD COLUMN
         const getTechnos = [];
         for (const technos of this.technologies) {
           getTechnos.push(technos.name);
         }
+
         this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
 
-        console.log('this.displayedColumns', this.displayedColumns);
-
         for (const candidat of this.candidats) {
-          // console.log('candidat : ', candidat.points_candidat[2].getpourcentByCandidat);
+          console.log('candidat : ', candidat);
 
           if (candidat.duree !== null) {
             // console.log('candidat : ', candidat);
@@ -342,8 +347,8 @@ export class CandidatsComponent implements OnInit {
             date: candidat.test_ouvert
           });
           // console.log('candidat.points_candidat[2].getpourcentByCandidat: ', candidat.points_candidat[2].getpourcentByCandidat);
-          if (candidat.invitation_date !== candidat.test_terminer) {
-            // console.log('candidat.points_candidat[2].getpourcentByCandidat: ', candidat);
+          /*if (candidat.invitation_date !== candidat.test_terminer) {
+            console.log('candidat.points_candidat', candidat);
             for (const percentTechno of candidat.points_candidat[2].getpourcentByCandidat) {
               // console.log('percentTechno: ', percentTechno);
               for (const techno of getTechnos) {
@@ -362,7 +367,7 @@ export class CandidatsComponent implements OnInit {
                 }
               }
             }
-          }
+          }*/
         }
         return getInfoCandidat;
       }).then((getInfoCandidat) => {

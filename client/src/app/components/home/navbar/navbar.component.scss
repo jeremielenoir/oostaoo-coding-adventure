@@ -50,7 +50,7 @@
   outline: none;
   cursor:pointer;
   width: 200px;
-  margin: -10px 0 0 20px;
+  margin: 10px 0 0 20px;
 
 }
 
@@ -129,9 +129,8 @@ a:hover {
   display: flex;
   flex-direction: row;
   justify-content:space-between;
-  padding-bottom: 12px;
+  padding: 1px 20px 15px 20px;
   align-items: center;
-  padding:20px;
 }
 
 .mat-toolbar-row
