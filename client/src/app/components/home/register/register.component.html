@@ -1,6 +1,6 @@
 <div id="register">
-  <div routerLink="/home/" class="logo-container">
-    <img id="logo" src="../../assets/logo_ROODEO.svg" alt="Logo" />
+  <div class="logo-container">
+    <img id="logo" src="../../assets/logo_ROODEO.svg" alt="Logo" routerLink="/home/"/>
   </div>
   
   <!-- Panel cote gauche -->
@@ -37,7 +37,7 @@
       </div>
       <span class="forgotten-password" (click)="openDialog()">Mot de passe oublié ?</span>
       <div class="form-group">
-        <button class="btn btn-primary button">Se connecter</button>
+        <button class="button">Se connecter</button>
       </div>
       <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
     </form>
@@ -136,7 +136,7 @@
         <p *ngIf="submittedRegister && !captchaSuccess" class="text-danger errorCaptcha">Validation du captcha nécessaire</p>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary button">S'inscrire</button>
+        <button class="button" id="register-button">S'inscrire</button>
       </div>
       <div *ngIf="errorRegister" class="alert alert-danger">{{ errorRegister }}</div>
 
