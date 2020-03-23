@@ -44,6 +44,7 @@
     "ngx-drag-scroll": "^7.1.5",
     "ngx-editor": "^4.1.0",
     "ngx-markdown": "^7.0.0",
+    "ngx-monaco-editor": "^7.0.0",
     "ngx-order-pipe": "^2.0.4",
     "ngx-stripe": "^7.4.4",
     "ngx-toastr": "^10.1.0",
