@@ -41,7 +41,7 @@
 }
 
 .mat-toolbar {
-  height: 80px;
+  height: 100px;
   //background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
   background: #fff;
 }
@@ -102,7 +102,9 @@ a:hover {
 }
 
 .flags_img{
-  margin: 2px;
+  position: relative;
+  top: 10px;
+  left: -5px;
   border: 1px solid black;
   border-radius: 50%;
 }
@@ -129,7 +131,7 @@ a:hover {
   justify-content:space-between;
   padding-bottom: 12px;
   align-items: center;
-  padding: 20px;
+  padding:20px;
 }
 
 .mat-toolbar-row

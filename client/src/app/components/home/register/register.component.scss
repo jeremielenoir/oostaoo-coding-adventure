@@ -5,7 +5,6 @@ body{
 }
 #register{
     .logo-container{
-        
         position: absolute;
         margin: 0 auto;
         width: 100%;
@@ -19,6 +18,7 @@ body{
             padding: 15px;
             border-radius: $border-radius;
             box-shadow: 0 4px 10px -2px #00000080;
+            outline: none;
             border: 1px solid #1f7eab;
         }
     }
@@ -27,6 +27,29 @@ body{
     height: 100vh;
 
     // Style des panel
+
+    .form-group label{
+        display: block;
+    }
+
+    .form-group input{
+        width: 100%;
+        border-radius: $border-radius;
+        border: 1px solid #ced4da;
+
+        height: calc(2.25rem + 2px);
+        padding: .375rem .75rem;
+    }
+
+    #register-button{
+      text-transform: capitalize!important;
+      border-radius: $border-radius;
+      font-weight: 700;
+      cursor: pointer;
+      &:hover{
+          background-color:#fff!important;
+      }
+    }
     
     #left-side, #right-side{
         width: 50%;
@@ -35,6 +58,10 @@ body{
     #right-side{
         background: $color-blue-light;
         overflow-y: auto;
+
+        .form-group{
+            margin-bottom: 18px;
+        }
     }
     
     #left-panel{
@@ -91,7 +118,9 @@ body{
             border: 0px solid white;
             margin: 20px 0;
             width: 100%;
-            text-transform: uppercase;
+            font-weight: 700;
+            border-radius: $border-radius;
+            cursor: pointer;
         }
     }
     
@@ -124,7 +153,10 @@ body{
                 border: 0px solid white;
                 margin: 20px 0;
                 width: 100%;
-                text-transform: uppercase;
+                // text-transform: uppercase;
+                font-weight: 700;
+                border-radius: $border-radius;
+                cursor: pointer;
             }
         }
         &.right{
@@ -159,9 +191,12 @@ body{
             background: $color-blue-light;
             color: $color-white;
             border: 0px solid white;
-            margin: 20px 0;
+            margin: 8px 0;
             width: 100%;
-            text-transform: uppercase;
+            &:hover{
+                background: #1d739b;
+            }
+            // text-transform: uppercase;
         }
     }
 
@@ -172,6 +207,8 @@ body{
     .forgotten-password {
         cursor: pointer;
         font-size: $font-size-home;
+        width: 160px;
+        padding: 9px 0px;
 
         &:hover{
             text-decoration: underline;

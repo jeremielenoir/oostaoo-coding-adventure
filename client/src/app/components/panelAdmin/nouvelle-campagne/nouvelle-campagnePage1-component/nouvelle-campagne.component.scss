@@ -6,6 +6,10 @@
 }
 
 
+.formQuestion{
+    margin-right: 18px!important;
+}
+
 .cadreQuestion {
     padding: 115px 15px 10px 15px;
     margin: 0 auto;
@@ -52,8 +56,13 @@
     width: 100%;
 }
 
+
+
 .spacing{
-    justify-content: space-around;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 18px;
+    padding-right: 18px;
 }
 
 .mat-form-field{
@@ -72,4 +81,16 @@
 .mat-radio-button{
     color:#445770!important
 }
+
+@media screen and (max-width: 960px) {
+    .spacing{
+        flex-direction: column!important;
+    }
+
+    #select{
+        margin:0px!important
+    }
+  }
+
+
 

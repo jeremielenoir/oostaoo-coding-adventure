@@ -31,8 +31,14 @@ import { SubscriptionComponent } from './components/panelAdmin/subscription/subs
 import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
 import { ContactSupportComponent } from './components/panelAdmin/contact-support/contact-support.component';
 import { AboutUsComponent } from './components/home/about-us/about-us.component';
+import { AlgoComponent } from './components/panelAdmin/algo/algo.component';
 
 const routes: Routes = [
+
+  {
+    path: 'algo',
+    component: AlgoComponent
+  },
   {
     path: 'evaluate',
     component: ClientTestComponent

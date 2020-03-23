@@ -9,8 +9,8 @@
         <h2 class="title">NOUVEAU TEST</h2>
       </div>
 
-      <div class="row spacing">
-        <div class="col-md-5 col-offset-1">
+      <div class="spacing">
+    
           <div id="select">
             <div class="champ-group role-champ">
               <label for="role" [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</label>
@@ -24,13 +24,13 @@
               </mat-form-field>
             </div>
           </div>
-        </div>
-        <div class="or-text col-1">
+       
+        <div class="or-text">
           <div id="select">
             <span class="or-text-span">Ou</span>
           </div>
         </div>
-        <div class="col-md-5">
+        
           <div id="select">
             <div class="champ-group">
               <label for="techno" [ngStyle]="errorTechno ? { color: 'red' } : null">Sélectionnez les technologies à
@@ -45,10 +45,10 @@
               </mat-form-field>
             </div>
           </div>
-        </div>
+       
       </div>
-      <div class="row">
-        <div class="col-6 offset-exp">
+     
+        <div class="offset-exp">
           <label for="experience" [ngStyle]="errorExperience ? { color: 'red' } : null">Sélectionnez l'expérience
             requise</label>
           <div class="example-radio-button" [formGroup]="formCampagne">
@@ -73,8 +73,8 @@
             </mat-radio-group>
           </div>
         </div>
-      </div>
-      <div class="row formQuestion finalQuestion">
+    
+      <div class="formQuestion finalQuestion">
         <div class="button">
           <button type="button" id="button" mat-flat-button (click)="onIncrementPage(formCampagne.value)"
             (click)="valueChanged()">

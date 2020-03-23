@@ -139,6 +139,8 @@ export class UtilisateursComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log('this.formulaire',this.formulaire.nativeElement)
+
     this.getUser().then(datas => {
       this.tests_available = datas.tests_available;
     });
@@ -168,11 +170,17 @@ export class UtilisateursComponent implements OnInit {
   }
 
   public param_cog_non_active() {
+;
     this.formulaire.nativeElement.prenom.value = "";
     this.formulaire.nativeElement.nom.value = "";
     this.formulaire.nativeElement.email.value = "";
     this.formulaire.nativeElement.username.value = "";
     this.formulaire.nativeElement.password.value = "";
+    this.formulaire.nativeElement.confirmPassword.value = "";
+
+    for (let value of Object.values(this.checkbox_list)) {
+        value.isChecked = false
+    } 
 
 
     this.shadowcog1 = false;
@@ -244,6 +252,7 @@ export class UtilisateursComponent implements OnInit {
   }
 
   public list_change(id) {
+
     for (let value of Object.values(this.checkbox_list)) {
       if(value.id === id) {
         this.selectedRoleName = value.name;
@@ -253,7 +262,11 @@ export class UtilisateursComponent implements OnInit {
         value.isChecked = false;
       }
     }
+
   }
+
+
+  
 
   public addUser(){
     this.submittedUser = true;

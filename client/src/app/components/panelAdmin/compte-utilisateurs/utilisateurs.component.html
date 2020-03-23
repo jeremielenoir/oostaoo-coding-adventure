@@ -8,7 +8,7 @@
 
 <div id="shadow-cog" [ngClass]="{'shadow-cog-active': shadowcog1 == true}">
 
-<div id="remove"  (click)="param_cog_non_active()"></div>
+<div id="remove" (click)="param_cog_non_active()"></div>
 
 
     <div class="modall">
@@ -46,7 +46,7 @@
                   <div>
 
                     <input [formControl]="addPrenom" type="" name="prenom" class="champ-form" required id="prenom"/>
-                    <div *ngIf=" submittedUser && addPrenom.invalid" class="alert alert-danger">
+                    <div *ngIf=" submittedUser && addPrenom.invalid" class="alert">
                       <div *ngIf="addPrenom.errors.required">
                         Prénom requis
                       </div>
@@ -201,13 +201,10 @@
 
                     <div class="element-gestion-permition-content">
 
-
                       <label class="checked-block" [for]="item.id">
-                        <input type="checkbox" [id]="item.id" class="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.isChecked" (click)="list_change(item.id)"/>
+                        <input name="check" type="checkbox" [id]="item.id" class="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.isChecked" (click)="list_change(item.id)"/>
                         <span class="checkbox-span"></span>
                       </label>
-
-
 
                     </div>
                   </div>
@@ -236,16 +233,8 @@
 
 
       <div class="modall">
-
-          <div class="modall-header">
-
-                  <h3 class="modall-title">
-
-                      Modifier l'utilisateur
-
-                  </h3>
-
-          </div>
+          
+        <div class="modall-header"><h3 class="modall-title">Modifier l'utilisateur</h3></div>
 
           <div class="modall-content">
 

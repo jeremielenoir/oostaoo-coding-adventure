@@ -67,11 +67,12 @@
       </div>
 
 
-      <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="datas" [cdkDropListConnectedTo]="[doneList]"
+      <div cdkDropList #todoList="cdkDropList"  [cdkDropListData]="datas" [cdkDropListConnectedTo]="[doneList]"
         class="liste-question" (cdkDropListDropped)="drop($event)">
 
-          <div class="ligne-question" *ngFor="let item of datas | filter: searchText" cdkDrag>
-              <div class="info-hover-left">
+          <div (cdkDragStarted)="dragStart($event)" (cdkDragEnded)="dragEnd($event)" class="ligne-question" *ngFor="let item of datas | filter: searchText" cdkDrag>
+
+              <div [ngClass]="{'info-hover-left': disablehover === false, 'disable': disablehover === true }" class="">
                 <div class="info-hover-header"><h2>{{item.name}}</h2></div>
                 <div class="info-hover-content">
                   <p>Points : <span>{{item.points}}</span></p>
@@ -88,7 +89,6 @@
                   <p>Réponse attendue :</p>
                   <p>{{item.answer_value}}</p>
                 </div>
-                
               </div>
 
             <div class="ligne-plus"><p class="ligne-plus-text"><i class="fas fa-play"></i></p></div>
@@ -146,6 +146,7 @@
               <i matTooltip="Question à choix multiple" *ngIf='item.type === "one" || item.type === "multiple"'
                 class="fas fa-list-ul ligne-icon"></i>
               <i matTooltip="Question texte libre" *ngIf='item.type === "free"' class="fas fa-paragraph ligne-icon"></i>
+              <i matTooltip="Question algorithmique" *ngIf='item.type === "algo"' class="fas fa-code ligne-icon"></i>
             </div>
 
             <div class="ligne-temps" matTooltip="Durée(min:sec)"><p class="ligne-temps-text">{{ fmtMSS(item.time) }}</p></div>
@@ -172,9 +173,9 @@
         [cdkDropListConnectedTo]="[todoList]" class="liste-question" (cdkDropListDropped)="drop($event)" #droplist>
         <p id="drop-text">Glissez/déposez une question ici</p>
 
-          <div class="ligne-question" *ngFor="let item of allQuestionLevel" cdkDrag>
+          <div class="ligne-question" (cdkDragEnded)="dragEnd($event)" (cdkDragStarted)="dragStart($event)" *ngFor="let item of allQuestionLevel" cdkDrag>
 
-            <div class="info-hover-right">
+            <div [ngClass]="{'info-hover-right': disablehover === false, 'disable': disablehover === true }" class="">
               <div class="info-hover-header"><h2>{{item.name}}</h2></div>
               <div class="info-hover-content">
                 <p>Points : <span>{{item.points}}</span></p>
@@ -249,6 +250,7 @@
               <i matTooltip="Question à choix multiple" *ngIf='item.type === "one" || item.type === "multiple"'
                 class="fas fa-list-ul ligne-icon"></i>
               <i matTooltip="Question texte libre" *ngIf='item.type === "free"' class="fas fa-paragraph ligne-icon"></i>
+              <i matTooltip="Question algorithmique" *ngIf='item.type === "algo"' class="fas fa-code ligne-icon"></i>
             </div>
 
             <div class="ligne-temps" matTooltip="Durée(min:sec)"><p class="ligne-temps-text">{{ fmtMSS(item.time) }}</p></div>
