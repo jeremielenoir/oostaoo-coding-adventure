@@ -49,21 +49,34 @@ export class QuestionComponent implements OnInit {
   public difficulty = ['facile', 'moyen', 'expert'];
   public booleanCampagnFinishLoading:boolean
   public activeClassScrollTopDropList = false;
-  public Questions = [];;
+  public Questions = [];
+
+  public disablehover = false;
+  public enablehover = false;
 
 
   @ViewChild("droplist") public droplist: ElementRef;
 
+
+  dragStart(event: CdkDragDrop<string[]>) {
+    console.log('event start', event);
+    this.disablehover = true ;
+  }
+
+  dragEnd(event: CdkDragDrop<string[]>) {
+    console.log('event finish', event);
+    this.disablehover = false ;
+  }
+
   drop(event: CdkDragDrop<string[]>) {
 
-    console.log('hello word !!!',event)
-    
+    console.log('hello word !!!', event);
 
     this.chargeYourCampagn.emit('salut');
 
 
     // this.ngOnInit();
-  
+
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
