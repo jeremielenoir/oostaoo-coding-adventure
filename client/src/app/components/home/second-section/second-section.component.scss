@@ -9,10 +9,27 @@
     }
   }
 }
-#secondSection {
-  padding: 60px 20px 0px 40px;
-  padding-bottom: 40px;
+.secondSection {
+  padding: 60px 20px 40px 40px;
   margin: 0px auto;
+  border-bottom: $border-table;
+  -webkit-box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40); 
+  box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
+
+  .content{
+    > div{
+      width: 33%;
+      padding: 25px 0px 25px 0px;
+      &.first{
+        padding-left: 0px;
+        padding-right: 35px;
+      }
+      &.last{
+        padding-left: 35px;
+        padding-right: 0px;
+      }
+    }
+  }
 
   .row{
     flex-direction: column;
