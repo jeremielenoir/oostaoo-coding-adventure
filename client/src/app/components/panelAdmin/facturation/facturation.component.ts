@@ -4,8 +4,8 @@ import {MatSort, MatTableDataSource} from '@angular/material';
 import {  ApiClientService, API_URI_USER_ADMIN, API_URI_USER} from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+//import pdfFonts from 'pdfmake/build/vfs_fonts';
+//pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { getFactureDefinition } from './getFactureDefinition';
 
 export interface PeriodicElement {

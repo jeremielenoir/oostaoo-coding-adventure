@@ -106,9 +106,8 @@ import { QuestionComponent } from "./components/panelAdmin/question/question.com
 import { TopInfoCampagneComponent } from "./components/panelAdmin/top-info-campagne/top-info-campagne.component";
 import { MotDePasseOublieComponent } from "./components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component";
 import { SubscriptionComponent } from "./components/panelAdmin/subscription/subscription.component";
-import { IgxDoughnutChartModule } from "igniteui-angular-charts";
+//import { IgxDoughnutChartModule } from "igniteui-angular-charts";
 import { NgxCaptchaModule } from "ngx-captcha";
-import { AgWordCloudModule } from "angular4-word-cloud";
 import { FAQComponent } from "./components/panelAdmin/FAQ/faq.component";
 import { ContactSupportComponent } from "./components/panelAdmin/contact-support/contact-support.component";
 import { AboutUsComponent } from "./components/home/about-us/about-us.component";
@@ -217,13 +216,10 @@ import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.com
     HttpClientModule,
     Ng2SearchPipeModule,
     RoundProgressModule,
-    //NgxEditorModule,
     OrderModule,
     ScrollToModule.forRoot(),
     NgxStripeModule.forRoot("pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq"),
-    IgxDoughnutChartModule,
     NgxCaptchaModule,
-    AgWordCloudModule.forRoot(),
     MarkdownModule.forRoot(),
     MonacoEditorModule.forRoot()
   ],

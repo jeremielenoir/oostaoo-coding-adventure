@@ -1,6 +1,5 @@
 import { Component, OnInit, Input,OnChanges, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
 import Chart from 'chart.js';
-// @import"../../../../../node_modules/chart.js/dist/Chart.min.js";
 import {FormGroup} from '@angular/forms';
 import {
   ApiClientService,
