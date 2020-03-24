@@ -10,7 +10,8 @@
 }
 
 .carousel-item{
-    display: none;
+    //display: none;
+    height: 350px;
     &.active{
         display: block;
     }
@@ -19,6 +20,9 @@
 .navigation-buttons{
     width: 100%;
     text-align: center;
+    a{
+        cursor: pointer;
+    }
 }
 
 .title-heading-block{

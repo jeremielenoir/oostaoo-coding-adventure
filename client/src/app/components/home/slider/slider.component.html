@@ -19,7 +19,7 @@
                 data-ride="carousel"
               >
                 <div class="carousel-inner">
-                  <div class="carousel-item active">
+                  <div class="carousel-item" *ngIf="this.currentIndex == 1" [@slideInOut]>
 
                     <figure class="carousel-img">
                       <img src="../assets/dassault.png" alt="dassault" role="img"/>
@@ -42,7 +42,7 @@
                   </div>
                  
 
-                  <div class="carousel-item">
+                  <div class="carousel-item" *ngIf="this.currentIndex === 2" [@slideInOut]>
 
                       <figure class="carousel-img">
                         <img src="../assets/wonderpush.png" alt="societe-generale" role="img"/>
@@ -66,7 +66,7 @@
                 <div class="navigation-buttons">
                   <a
                     class="btn-carosel carousel-control-prev"
-                    href="#carouselExampleControls2"
+                    (click)="onClickNav()"
                     role="button"
                     data-slide="prev"
                   >
@@ -74,7 +74,7 @@
                   </a>
                   <a
                     class="btn-carosel carousel-control-next"
-                    href="#carouselExampleControls2"
+                    (click)="onClickNav()"
                     role="button"
                     data-slide="next"
                   >
