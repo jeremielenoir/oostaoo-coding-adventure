@@ -28,6 +28,10 @@ body{
 
     // Style des panel
 
+    .invalide-feedback{
+        color:#d03737
+    }
+
     .form-group label{
         display: block;
     }
@@ -36,8 +40,7 @@ body{
         width: 100%;
         border-radius: $border-radius;
         border: 1px solid #ced4da;
-
-        height: calc(2.25rem + 2px);
+        height: 36px!important;
         padding: .375rem .75rem;
     }
 
@@ -112,6 +115,7 @@ body{
             margin: auto;
         }
         .button{
+            font-size: 16px!important;
             height: 40px;
             background: #fff;
             color: $color-blue-light;
@@ -147,6 +151,7 @@ body{
         &.left{
             margin: 25% 0 0 15%;
             .button{
+                font-size: 16px!important;
                 height: 40px;
                 background: $color-blue-light;
                 color: $color-white;
