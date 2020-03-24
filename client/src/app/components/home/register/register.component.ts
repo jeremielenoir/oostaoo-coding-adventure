@@ -8,7 +8,6 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
 import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AuthenticationService } from './service/auth.service';
-import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -45,7 +44,6 @@ export class RegisterComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef,
-    private toastr: ToastrService
   ) {
         this.route.queryParams.subscribe(params => {
         // this.jwt = params['jwt'];
@@ -150,20 +148,12 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  showSuccess(message) {
-    this.toastr.success(message);
-  }
-  showError(message) {
-    this.toastr.info(message);
-  }
-
   register() {
     
     this.submittedRegister = true;
 
     // stop if form is invalid
     if (this.fr.emailregister.value === '' || this.fr.emailregister.invalid || this.fr.passwordregister.value === '' || this.fr.confirmpassword.value === '' || this.fr.passwordregister.value !== this.fr.confirmpassword.value || this.fr.recaptcha.value === '') {
-      this.showError("Une erreur est survenue");;
     } else {
 
       this.loading = true;
@@ -172,7 +162,6 @@ export class RegisterComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            this.showSuccess('Le compte a bien été créé');
             this.router.navigate(['/dashboard/campaigns']);
           },
           error => {
@@ -190,7 +179,6 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.showSuccess('Le compte a bien été créé');
         },
         error => {
           this.errorRegister = error;
@@ -218,7 +206,6 @@ export class DialogForgetPassword {
     public dialogRef: MatDialogRef<DialogForgetPassword>,
     private authenticationService: AuthenticationService,
     private _snackBar: MatSnackBar,
-    private toastr: ToastrService
     ) {}
 
     openSnackBar(message: string, action) {
@@ -227,17 +214,12 @@ export class DialogForgetPassword {
       });
     }
 
-    showSuccess(message) {
-      this.toastr.success(message);
-    }
-
     forgetPassword(email) {
       this.authenticationService.forgotPassword(email)
         .pipe(first())
         .subscribe(
           data => {
             this.dialogRef.close();
-            this.showSuccess('L\'email de réinitialisation à bien été envoyé');
           },
           error => {
             this.errorRegister = error;

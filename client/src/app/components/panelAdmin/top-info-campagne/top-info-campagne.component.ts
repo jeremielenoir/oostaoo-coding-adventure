@@ -11,7 +11,6 @@ import { Router } from "@angular/router";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 import { TooltipPosition, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-top-info-campagne',
   templateUrl: './top-info-campagne.component.html',
@@ -36,7 +35,7 @@ export class TopInfoCampagneComponent implements OnInit {
   @ViewChild('Chart') Chart: ElementRef;
 
   constructor(public apiClientService: ApiClientService,private router: Router, 
-    public decryptTokenService: DecryptTokenService,private _snackBar: MatSnackBar,private route: ActivatedRoute, private toastr: ToastrService) { }
+    public decryptTokenService: DecryptTokenService,private _snackBar: MatSnackBar,private route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -209,16 +208,11 @@ export class TopInfoCampagneComponent implements OnInit {
       questions: this.updateQuestionsCampaign
     }).subscribe(
       (res) => {
-        this.showSuccess('Les questions ont bien été éditées');
         console.log('this.yourCampaign',this.yourCampaign[0])
       },
       err => console.log(err)
     );
     
-  }
-
-  showSuccess(message) {
-    this.toastr.success(message);
   }
 
   openSnackBar(message: string, action) {

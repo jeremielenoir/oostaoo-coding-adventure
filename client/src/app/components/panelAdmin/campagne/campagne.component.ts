@@ -12,7 +12,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from './../../home/register/service/auth.service';
 import { RouterLink } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 
 export interface DialogData {
   confirmed: boolean;
@@ -48,7 +47,6 @@ export class CampagneComponent implements OnInit {
     public decryptTokenService: DecryptTokenService,
     public authenticationService: AuthenticationService,
     private _snackBar: MatSnackBar,
-    private toastr: ToastrService
   ) {
     this.searchHeader = null;
   }
@@ -158,13 +156,6 @@ export class CampagneComponent implements OnInit {
     });
   }
 
-  showSuccess(message) {
-    this.toastr.success(message);
-  }
-  showError(message) {
-    this.toastr.info(message);
-  }
-
   duplicatecampaign(idCampaign) {
     const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
     return this.apiClientService
@@ -203,7 +194,6 @@ export class CampagneComponent implements OnInit {
           pin: true
         }).subscribe(
           (res) => {
-            this.showSuccess('La campagne a bien été épinglée');
             this.campaignsFiltered = [];
             this.campaignsArchived = [];
             this.ngOnInit();
@@ -217,7 +207,6 @@ export class CampagneComponent implements OnInit {
           pin: false
         }).subscribe(
           (res) => {
-            this.showSuccess('La campagne a bien été désépinglée');
             this.campaignsFiltered = [];
             this.campaignsArchived = [];
             this.ngOnInit();
@@ -238,7 +227,6 @@ export class CampagneComponent implements OnInit {
           archive: true
         }).subscribe(
           (res) => {
-            this.showSuccess('La campagne a bien été archivée');
             this.campaignsFiltered = [];
             this.campaignsArchived = [];
             this.ngOnInit();
@@ -252,7 +240,6 @@ export class CampagneComponent implements OnInit {
           archive: false
         }).subscribe(
           (res) => {
-            this.showSuccess('La campagne a bien été désarchivée');
             this.campaignsFiltered = [];
             this.campaignsArchived = [];
             this.ngOnInit();

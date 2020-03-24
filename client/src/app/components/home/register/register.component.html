@@ -133,7 +133,7 @@
         formControlName="recaptcha"
         [ngClass]="{ 'is-invalid': submittedRegister && fr.recaptcha.errors }">
         </ngx-recaptcha2>
-        <p *ngIf="submittedRegister && !captchaSuccess" class="text-danger errorCaptcha">Validation du captcha nécessaire</p>
+        <p *ngIf="submittedRegister && !captchaSuccess" class="invalid-feedback">Validation du captcha nécessaire</p>
       </div>
       <div class="form-group">
         <button class="button" id="register-button">S'inscrire</button>

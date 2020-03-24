@@ -105,12 +105,13 @@ import { MotDePasseOublieComponent } from "./components/home/register/mot-de-pas
 import { SubscriptionComponent } from "./components/panelAdmin/subscription/subscription.component";
 import { IgxDoughnutChartModule } from "igniteui-angular-charts";
 import { NgxCaptchaModule } from "ngx-captcha";
-import { ToastrModule } from "ngx-toastr";
 import { AgWordCloudModule } from "angular4-word-cloud";
 import { FAQComponent } from "./components/panelAdmin/FAQ/faq.component";
 import { ContactSupportComponent } from "./components/panelAdmin/contact-support/contact-support.component";
 import { AboutUsComponent } from "./components/home/about-us/about-us.component";
 import { AlgoComponent } from "./components/panelAdmin/algo/algo.component";
+import { ContactFormularComponent } from './components/panelAdmin/contact-support/contact-formular/contact-formular.component';
+import { ContactJoinUsComponent } from './components/panelAdmin/contact-support/contact-join-us/contact-join-us.component';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -190,7 +191,9 @@ import { AlgoComponent } from "./components/panelAdmin/algo/algo.component";
     FAQComponent,
     ContactSupportComponent,
     AboutUsComponent,
-    AlgoComponent
+    AlgoComponent,
+    ContactFormularComponent,
+    ContactJoinUsComponent
   ],
   imports: [
     BrowserModule,
@@ -211,12 +214,6 @@ import { AlgoComponent } from "./components/panelAdmin/algo/algo.component";
     NgxStripeModule.forRoot("pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq"),
     IgxDoughnutChartModule,
     NgxCaptchaModule,
-    ToastrModule.forRoot({
-      timeOut: 10000,
-      positionClass: "toast-bottom-center",
-      preventDuplicates: false,
-      closeButton: true
-    }),
     AgWordCloudModule.forRoot(),
     MarkdownModule.forRoot(),
     MonacoEditorModule.forRoot()

@@ -32,6 +32,7 @@ import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
 import { ContactSupportComponent } from './components/panelAdmin/contact-support/contact-support.component';
 import { AboutUsComponent } from './components/home/about-us/about-us.component';
 import { AlgoComponent } from './components/panelAdmin/algo/algo.component';
+import { ContactFormularComponent } from './components/panelAdmin/contact-support/contact-formular/contact-formular.component'
 
 const routes: Routes = [
 
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutUsComponent
+  },
+  {
+    path: 'contact',
+    component: ContactFormularComponent
   },
   {
     path: 'home',
