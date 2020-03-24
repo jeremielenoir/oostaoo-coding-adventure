@@ -20,7 +20,7 @@ export class FinTestComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 3000,
+      duration: 6000,
     });
   }
 
@@ -37,6 +37,7 @@ export class FinTestComponent implements OnInit {
       commentaires: this.commentaire.value,
     }).subscribe(
       (res) => {
+        this.openSnackBar("Nous vous remercions pour votre retour", "Fermer")
       },
       err => console.log(err)
     );

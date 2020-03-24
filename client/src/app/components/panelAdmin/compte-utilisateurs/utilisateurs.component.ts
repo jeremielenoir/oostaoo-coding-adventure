@@ -224,7 +224,7 @@ export class UtilisateursComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 3000,
+      duration: 6000,
     });
   }
 
@@ -236,6 +236,7 @@ export class UtilisateursComponent implements OnInit {
       .then(res=>{
         console.log(res);
         this.users = this.users.filter(user=>user.id !== id);
+        this.openSnackBar("L'utilisateur a correctement été supprimé", "Fermer")
       })
       .then(res=>console.log(res))
       .catch((e)=>console.log('error : ', e))
@@ -267,7 +268,7 @@ export class UtilisateursComponent implements OnInit {
     if(this.addPrenom.value === "" || this.addNom.value === "" || this.addEmail.value === "" || this.addEmail.invalid ||
       this.addPassword.value === "" || this.confirmPassword.value === "" || this.addPassword.value === null ||
       this.addPassword.value !== this.confirmPassword.value || this.addUsername.value === ""){
-      return;
+      this.openSnackBar("Une erreur est survenue, veuillez correctement remplir les champs requis", "Fermer");;
     };
 
     if(this.tests_available !== -1){
@@ -308,6 +309,7 @@ export class UtilisateursComponent implements OnInit {
                           // this.UserName = "";
                           // this.PasswordValue = "";
                           // this.selectedRoleName = "";
+                          this.openSnackBar("L'utilisateur a correctement été ajouté", "Fermer");
       })
     .catch(function(res){ console.log(res) })
   }
@@ -328,6 +330,7 @@ export class UtilisateursComponent implements OnInit {
     if (this.editPrenom.value === '' || this.editNom.value === '' || this.editEmail.value === '' || this.editEmail.invalid ||
       this.editPassword.value === "" || this.confirmPassword.value === "" || this.editPassword.value === null ||
       this.editPassword.value !== this.confirmPassword.value || this.editUsername.value === "") {
+        this.openSnackBar("Une erreur est survenue, veuillez correctement remplir les champs requis", "Fermer")
       return console.log('Erreur, veuillez remplir tout les champs requis');
     } else {
     this.apiClientService
@@ -361,6 +364,7 @@ export class UtilisateursComponent implements OnInit {
                           // this.EmailValue = "";
                           // this.UserName = "";
                           // this.selectedRoleName = "";
+                          this.openSnackBar("L'utilisateur a correctement été modifié", "Fermer");
       })
     .catch(function(res){ console.log(res) })
     }
