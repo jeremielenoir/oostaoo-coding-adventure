@@ -5,7 +5,7 @@
   margin-top: 40px;
   .content{
     > div{
-      width: 50%;
+      width: 25%;
     }
   }
 }
@@ -22,10 +22,14 @@
       padding: 25px 0px 25px 0px;
       &.first{
         padding-left: 0px;
-        padding-right: 35px;
+        padding-right: 40px;
+      }
+      &.middle{
+        padding-left: 20px;
+        padding-right: 20px;
       }
       &.last{
-        padding-left: 35px;
+        padding-left: 40px;
         padding-right: 0px;
       }
     }
