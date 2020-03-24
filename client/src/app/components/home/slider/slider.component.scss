@@ -9,6 +9,18 @@
     position: relative;
 }
 
+.carousel-item{
+    display: none;
+    &.active{
+        display: block;
+    }
+}
+
+.navigation-buttons{
+    width: 100%;
+    text-align: center;
+}
+
 .title-heading-block{
     display: flex;
     justify-content: center;
