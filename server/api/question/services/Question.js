@@ -531,10 +531,10 @@ module.exports = {
         });
         return res;
       };
+      console.log("file", file);
       const { path: filetoexecute, extension, id } = await processUpload(file);
       let script = "";
       let compiledfile = `${filetoexecute.split(".")[0]}`;
-      
 
       const scriptjava = `sed -i s/Main/${
         compiledfile.split("/")[1]
@@ -564,7 +564,7 @@ module.exports = {
         default:
           break;
       }
-      return new Promise((resolve, _reject) => {
+      return new Promise((resolve, reject) => {
         exec(script, async (error, stdout, stderr) => {
           await deleteFile(id);
           await deleteFile(
@@ -577,13 +577,13 @@ module.exports = {
           // console.log("stdout", stdout);
 
           if (error) {
-            resolve(error.message || error);
+            reject({ result: error.message || error, success: false });
           }
           if (stderr) {
-            resolve(stderr);
+            reject({ result: stderr, success: false });
           }
 
-          resolve(stdout);
+          resolve({ result: stdout, success: true });
         });
       });
     } catch (error) {
