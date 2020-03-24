@@ -1,31 +1,28 @@
 @import "../../../../roodeo-variables.scss";
 
-.purchase-payment-parent {
-
-  background-color: #c1d5df;
+.bounds {
   width: 100%;
   height: 100%;
+  padding: 50px;
 
-  .purchase-payment {
+  .container {
+    padding: 25px;
 
-    background-color: white;
-    padding: 50px;
-    box-shadow: 0 4px 10px -2px #00000080;
-    border: 1px solid #1f7eab;
-    margin-top: 25px;
-    border-radius: $border-radius;
-
-    .left-col {
-
-      border-right: 1px solid rgba(#00000080,0.1);
+    .sec1 {
+      box-shadow: 0 4px 10px -2px #00000080;
+      border: 1px solid #1f7eab;
+      border-radius: $border-radius;
+      background-color: white;
+      padding: 25px;
+      margin: 10px;
 
       .logo {
-        width: 200px;
+        width: 80px;
       }
 
       .offer-title {
         font-weight: bold;
-        margin-top: 50px;
+        margin-top: 25px;
         color: gray;
       }
 
@@ -37,16 +34,17 @@
         margin-top: 25px;
         text-align: right;
       }
-
     }
 
-    .right-col {
+    .sec2 {
+      box-shadow: 0 4px 10px -2px #00000080;
+      border: 1px solid #1f7eab;
+      border-radius: $border-radius;
+      background-color: white;
+      padding: 25px;
+      margin: 10px;
 
       .card-owner {
-        width: 100%;
-      }
-
-      .payment-button {
         width: 100%;
       }
 
@@ -54,24 +52,17 @@
         margin-top: 25px;
         text-align: center;
       }
-
     }
-
   }
-
 }
 
 .StripeElement {
   box-sizing: border-box;
-
   height: 40px;
-
   padding: 10px 12px;
-
-  border: 1px solid transparent;
+  border: 1px solid rgba($color: #000000, $alpha: 0.28);
   border-radius: $border-radius;
   background-color: white;
-
   box-shadow: 0 1px 3px 0 #e6ebf1;
   -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;

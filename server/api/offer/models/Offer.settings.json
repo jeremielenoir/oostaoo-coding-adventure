@@ -47,6 +47,11 @@
     "periodicity": {
       "default": "",
       "type": "string"
+    },
+    "enabled": {
+      "default": true,
+      "type": "boolean",
+      "required": true
     }
   }
 }

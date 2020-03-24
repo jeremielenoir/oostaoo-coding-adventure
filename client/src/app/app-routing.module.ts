@@ -76,7 +76,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'stripePayment',
+    path: 'payment',
     component: StripePaymentComponent,
     canActivate: [AuthGuard]
   },

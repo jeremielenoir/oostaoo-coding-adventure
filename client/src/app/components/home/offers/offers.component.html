@@ -1,39 +1,26 @@
-
-
-<section id="offers">
-
-  <button *ngIf="subscriptionPage" (click)="goBack()"
-      id="goBack">
-    <i class="material-icons">arrow_back</i>
-    RETOUR
-  </button>
-
+<div class="rowter">
+  <div id="offers">
     <div class="title-dashed-container">
-        <h3 class="title-dashed">
-          NOS FORMULES
-          <span class="dashed"></span>
-        </h3>
+      <h3 class="title-dashed">
+        NOS FORMULES
+        <span class="dashed"></span>
+      </h3>
     </div>
-
     <div class="content">
-        <mat-card class="lab-item" *ngFor="let offer of listOffers" [class.highlight]="offerChoiceAmount === offer.price && subscriptionPage">
-            <mat-card-content>
-                <mat-card-title>{{ offer.title }}</mat-card-title>
-
-                <div [ngSwitch]="offer.periodicity">
-                    <!-- <mat-card-subtitle *ngSwitchCase="'special'">Gratuit</mat-card-subtitle> -->
-                    <mat-card-subtitle *ngSwitchCase="'unique'">{{ offer.price }}€/{{ offer.title }}</mat-card-subtitle>
-                    <mat-card-subtitle *ngSwitchCase="'monthly'">{{ offer.price }}€/mois</mat-card-subtitle>
-                </div>
-
-                <ul>
-                    <li *ngFor="let description of offer.description">{{ description }}</li>
-                </ul>
-                <mat-card-actions>
-                    <button (click)="goToPay(offer)"
-                     mat-raised-button color="warn" class="lab-item lab-item-button">S'abonner</button>
-                </mat-card-actions>
-            </mat-card-content>
-        </mat-card>
+      <mat-card class="lab-item" *ngFor="let offer of listOffers"
+        [class.highlight]="offerChoiceAmount === ('' + offer.price) && isSubPage">
+        <mat-card-content>
+          <mat-card-title>{{ offer.title }}</mat-card-title>
+          <div [ngSwitch]="offer.periodicity">
+            <mat-card-subtitle *ngSwitchCase="'unique'">{{ offer.price }}€/{{ offer.title }}</mat-card-subtitle>
+            <mat-card-subtitle *ngSwitchCase="'monthly'">{{ offer.price }}€/mois</mat-card-subtitle>
+          </div>
+          <div class="offer-desc" [innerHTML]="offer.description"></div>
+          <mat-card-actions>
+            <button (click)="goToPay(offer)" mat-raised-button color="warn"
+              class="lab-item lab-item-button">{{ offer.periodicity === 'monthly' ? 'S\'abonner' : 'Acheter' }}</button>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
     </div>
-</section>
+  </div>
