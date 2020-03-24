@@ -7,7 +7,29 @@
       </h3>
   
       <div class="content">
-  
+        <div class="fonctionnalite-item">
+          <div>
+            <img src="../../assets/1000_questions.svg" />
+            <div>Plus de 1000 questions</div>
+          </div>
+          <div>
+            <img src="../../assets/rapports_detailles.svg" />
+            <div>Rapports détaillés</div>
+          </div>
+          <div>
+            <img src="../../assets/fast_tests.svg" />
+            <div>Fasts tests</div>
+          </div>
+        </div>
+        <carousel [showControls]="false" class="carousel" #carousel>
+          <ng-container *ngFor="let item of items;">
+            <ng-container *carouselItem>
+              <div class="item">
+                <img src="../../assets/{{item.img_url}}" />
+              </div>
+            </ng-container>
+          </ng-container>
+        </carousel>
          
       </div>
   </div>

@@ -106,7 +106,7 @@ module.exports = {
       );
       return result;
     } catch (error) {
-      throw error;
+      return error;
     }
   }
 };

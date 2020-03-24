@@ -33,12 +33,13 @@ import { ContactSupportComponent } from './components/panelAdmin/contact-support
 import { AboutUsComponent } from './components/home/about-us/about-us.component';
 import { AlgoComponent } from './components/panelAdmin/algo/algo.component';
 import { ContactFormularComponent } from './components/panelAdmin/contact-support/contact-formular/contact-formular.component'
+import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.component';
 
 const routes: Routes = [
 
   {
     path: 'algo',
-    component: AlgoComponent
+    component: AlgotestComponent
   },
   {
     path: 'evaluate',

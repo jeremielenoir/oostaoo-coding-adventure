@@ -35,6 +35,9 @@ import {
   RouteComponentComponent,
   DistConnecTed
 } from "./components/panelAdmin/navbar/route-component.component";
+
+import { CarouselComponent, CarouselItemElement } from './components/home/carousel/carousel.component';
+import { CarouselItemDirective } from './components/home/carousel/carousel-item.directive';
 import { AccueilComponent } from "./components/home/accueil/accueil.component";
 
 import { NavMobileAbsoluteDirective } from "./directives/nav-mobile-absolute.directive";
@@ -112,6 +115,7 @@ import { AboutUsComponent } from "./components/home/about-us/about-us.component"
 import { AlgoComponent } from "./components/panelAdmin/algo/algo.component";
 import { ContactFormularComponent } from './components/panelAdmin/contact-support/contact-formular/contact-formular.component';
 import { ContactJoinUsComponent } from './components/panelAdmin/contact-support/contact-join-us/contact-join-us.component';
+import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.component';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -193,7 +197,12 @@ import { ContactJoinUsComponent } from './components/panelAdmin/contact-support/
     AboutUsComponent,
     AlgoComponent,
     ContactFormularComponent,
-    ContactJoinUsComponent
+    ContactJoinUsComponent,
+    AlgotestComponent,
+    AlgoComponent,
+    CarouselComponent, 
+    CarouselItemDirective, 
+    CarouselItemElement
   ],
   imports: [
     BrowserModule,
