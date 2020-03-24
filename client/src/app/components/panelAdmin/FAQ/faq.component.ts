@@ -13,9 +13,10 @@ export class FAQComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiClientService.get(API_URI_FAQ).toPromise().then(faqs =>{
-      console.log('faqs : ', faqs);
+    this.apiClientService.get(API_URI_FAQ).toPromise().then(faqs => {
+      // console.log('faqs : ', faqs);
       this.faqs = faqs;
+      this.faqs[0].open = true;
     });
   }
 }
