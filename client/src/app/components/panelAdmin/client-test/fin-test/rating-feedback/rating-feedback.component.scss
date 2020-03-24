@@ -1,5 +1,7 @@
 @import "../../../../../../roodeo-variables.scss";
-
+fieldset{
+  border: none;
+}
 .rating {
   float:left;
 }
@@ -8,6 +10,7 @@
   position:absolute;
   top:-9999px;
   clip:rect(0,0,0,0);
+  border: none;
 }
 
 .rating:not(:checked) > label {
@@ -23,7 +26,7 @@
 }
 
 .rating:not(:checked) > label:before {
-  content: '★ ';
+  content: '★';
 }
 
 .rating > input:checked ~ label {

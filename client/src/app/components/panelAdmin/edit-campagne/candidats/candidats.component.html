@@ -224,21 +224,19 @@
   <mat-sidenav #sidenav mode="over" [(opened)]="opened">
     <div class="sidenav-content" *ngIf='currentCandidat.Candidats !== "" '>
       <div class="header-detail">
-        <h2 class="sidenav_campaign_name">{{campaign.Name}} </h2>
+        <h2 class="sidenav_campaign_name">{{campaign.Name}}</h2>
         <span class="close-header-detail" (click)="sidnavClose(sidenav)">
           <i class="fa fa-close"></i>
         </span>
       </div>
 
-      <h4 class="name-rapport-detailler">
+      <h4 class="info-candi name-rapport-detailler">
         <i class="far fa-user-circle"></i>
         {{currentCandidat.Candidats}}
       </h4>
-      <p> <i class="far fa-envelope"></i> {{currentCandidat.Email}}</p>
-      <p> <i class="fas fa-poll-h"></i> Pourcentage de bonne réponses : {{currentCandidat.Score}} </p>
-      <p><i class="far fa-clock"></i> Durée du test : {{currentCandidat.Duree}}</p>
-
-      <hr class="sidenav_separator">
+      <p class="info-candi"> <i class="far fa-envelope"></i> {{currentCandidat.Email}}</p>
+      <p class="info-candi"> <i class="fas fa-poll-h"></i> Pourcentage de bonne réponses : {{currentCandidat.Score}} </p>
+      <p class="info-candi"><i class="far fa-clock"></i> Durée du test : {{currentCandidat.Duree}}</p>
 
       <div class="sidenav_candidat_content">
         <div class="sidenav_candidat_result"
@@ -253,14 +251,11 @@
             {{candidatPointTechno.techno}}
           </p>
 
-          <hr class="sidenav_separator">
 
           <p class="sidenav_candidat_score">
             {{candidatPointTechno.percentage}} %
           </p>
         </div>
-
-        <hr class="sidenav_separator">
 
         <div class="sidenav_candidat_result">
           <p class="sidenav_candidat_text">Total :</p>

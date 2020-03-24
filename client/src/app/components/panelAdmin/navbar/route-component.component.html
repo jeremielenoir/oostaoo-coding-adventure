@@ -19,8 +19,9 @@
         <li>
           <p>Notifications</p>
         </li>
-        <div
-          class="notif-content"
+
+        <h3 *ngIf="notifications.length == 0" class="not-notification">Aucun Notifications</h3>
+        <div class="notif-content"
           *ngFor="let notification of notifications"
           [className]="
             notification.status ? 'notif-content-read' : 'notif-content'

@@ -15,6 +15,16 @@
   color: red;
 }
 
+.mat-snack-bar-container {
+  background-color: $color-principal-blue;
+  color: $color-white;
+  display: flex;
+  text-align: center;
+}
+
+.mat-simple-snackbar-action {
+  color: $color-gray;
+}
 
 .loading{
 

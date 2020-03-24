@@ -114,8 +114,10 @@ export class CandidatsMailComponent implements OnInit {
           console.log('res', res.id);
           const idCandidat = [];
           idCandidat.push(res.id);
+          this.openSnackBar("Un mail d'invitation a correctement été envoyé", "Fermer");
           return idCandidat;
         }, err => {
+          this.openSnackBar("Une erreur est survenue", "Fermer");
           console.log('log error', err)
         }
       )
@@ -126,7 +128,7 @@ export class CandidatsMailComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 3000,
+      duration: 6000,
     });
   }
 

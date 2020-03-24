@@ -152,7 +152,7 @@ export class CampagneComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 3000,
+      duration: 6000,
     });
   }
 
@@ -180,6 +180,7 @@ export class CampagneComponent implements OnInit {
             this.campaignsFiltered = [];
             this.campaignsArchived = [];
             this.ngOnInit();
+            this.openSnackBar("La campagne a correctement été dupliquée", "Fermer");
           });
 
       });
@@ -197,6 +198,7 @@ export class CampagneComponent implements OnInit {
             this.campaignsFiltered = [];
             this.campaignsArchived = [];
             this.ngOnInit();
+            this.openSnackBar("La campagne a correctement été épinglée", "Fermer");
             // console.log('res', res);
           },
           err => console.log(err)
@@ -210,6 +212,7 @@ export class CampagneComponent implements OnInit {
             this.campaignsFiltered = [];
             this.campaignsArchived = [];
             this.ngOnInit();
+            this.openSnackBar("La campagne a correctement été désépinglée", "Fermer");
             // console.log('res', res);
           },
           err => console.log(err)
@@ -230,6 +233,7 @@ export class CampagneComponent implements OnInit {
             this.campaignsFiltered = [];
             this.campaignsArchived = [];
             this.ngOnInit();
+            this.openSnackBar("La campagne a correctement été archivée", "Fermer");
             // console.log('res', res);
           },
           err => console.log(err)
@@ -243,6 +247,7 @@ export class CampagneComponent implements OnInit {
             this.campaignsFiltered = [];
             this.campaignsArchived = [];
             this.ngOnInit();
+            this.openSnackBar("La campagne a correctement été désarchivée", "Fermer");
 
           },
           err => console.log(err)
@@ -260,6 +265,7 @@ export class CampagneComponent implements OnInit {
         this.campaignsFiltered = [];
         this.campaignsArchived = [];
         this.ngOnInit();
+        this.openSnackBar("La campagne a correctement été supprimée", "Fermer");
       });
   }
 

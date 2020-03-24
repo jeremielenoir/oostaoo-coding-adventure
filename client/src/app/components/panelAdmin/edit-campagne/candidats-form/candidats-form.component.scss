@@ -2,32 +2,72 @@
 // ::ng-deep .content-modal-question{
        
 // }
+
+.cologne-form{
+    
+    border:none!important;
+    border-radius: 0px!important;
+
+  }
 .form-scroll{
     height: 400px;
     overflow-y: auto;
 }
+
+.card-body:first-child{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 9px;
+    .row-card-body{
+        display: flex;
+        width: 100%;
+    }
+    display: flex;
+}
+.btn-delete-form{
+    margin-top: 25px;
+    background-color: #f44336;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    color: white;
+    padding: 5px 5px;
+    border: 1px solid #e54034;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    outline: none;
+    &:hover{
+        background-color: #e54034;
+        border: 1px solid #f44336;
+    }
+}
 .card-body{
+  
     padding: 0px!important;
     text-align: center;
     
-}
-.card{
-    border:none!important;
-    border-radius: 0px!important;
+    .card-form{
+        margin-right: 9px;
+        width: 50%;
+    }
+    
 }
 
 label{
-     
     font-size: 17px;
     color:$color-principal-blue;
+    display: block;
+    font-weight: 700;
+   
 }
 
 input{
+    width: 100%;
     height: 50px;
     font-size: $font-size-home;
     border: $border-table!important;
     outline: none;
     border-radius: 0px!important;
+    padding: .5rem 1rem;
 }
 
 .button{
