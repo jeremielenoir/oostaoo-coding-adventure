@@ -32,16 +32,6 @@
                 </div>
               </div>
             </div>
-
-            <div class="input-bloc">
-              <h3 class="input-title" maxlength="64">Pseudo *</h3>
-              <input name="username" [formControl]="username" class="input-section1" type="text" required>
-              <div *ngIf="submittedProfil && username.invalid" class="alert alert-danger">
-                <div *ngIf="username.errors.required">
-                  Pseudo requis.
-                </div>
-              </div>
-            </div>
           </div>
 
           <div class="form-line">
