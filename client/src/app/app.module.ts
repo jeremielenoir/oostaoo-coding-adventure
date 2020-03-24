@@ -35,6 +35,9 @@ import {
   RouteComponentComponent,
   DistConnecTed
 } from "./components/panelAdmin/navbar/route-component.component";
+
+import { CarouselComponent, CarouselItemElement } from './components/home/carousel/carousel.component';
+import { CarouselItemDirective } from './components/home/carousel/carousel-item.directive';
 import { AccueilComponent } from "./components/home/accueil/accueil.component";
 
 import { NavMobileAbsoluteDirective } from "./directives/nav-mobile-absolute.directive";
@@ -196,7 +199,10 @@ import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.com
     ContactFormularComponent,
     ContactJoinUsComponent,
     AlgotestComponent,
-    AlgoComponent
+    AlgoComponent,
+    CarouselComponent, 
+    CarouselItemDirective, 
+    CarouselItemElement
   ],
   imports: [
     BrowserModule,
