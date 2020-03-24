@@ -196,7 +196,7 @@ import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.com
     ContactFormularComponent,
     ContactJoinUsComponent,
     AlgotestComponent,
-    AlgotestComponent
+    AlgoComponent
   ],
   imports: [
     BrowserModule,
