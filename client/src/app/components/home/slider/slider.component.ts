@@ -12,7 +12,7 @@ import { trigger, transition, animate, style, state } from '@angular/animations'
       // fade in when created. this could also be written as transition('void => *')
       transition(':enter', [
         style({opacity: 0}),
-        animate(800 )
+        animate(1500 )
       ]),
 
       // fade out when destroyed. this could also be written as transition('void => *')
@@ -28,6 +28,9 @@ export class SliderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    setInterval(() => {
+      this.onClickNav();
+    },8000);
   }
 
   onClickNav() {
