@@ -21,7 +21,7 @@
         <div class="title">
           <h3>Notez l’expérience</h3>
         </div>
-        <p>
+        <p class="fin-para">
           Ce test a été créé sur la plateforme Roodeo. <br />
           Nous cherchons sans cesse à nous améliorer et votre avis nous
           intéresse ! Dites-nous ce que vous avez pensé de ce test (votre retour
@@ -44,6 +44,7 @@
           </div> -->
           <app-rating-feedback (ratingClick)="getRating($event)"></app-rating-feedback>
         </div>
+        <br />
         <mat-form-field class="example-full-width">
           <mat-label>Commentaires (Optionnel)</mat-label>
           <textarea matInput  [formControl]="commentaire" name="commentaires" placeholder="Leave a comment" cdkTextareaAutosize cdkAutosizeMinRows="5"

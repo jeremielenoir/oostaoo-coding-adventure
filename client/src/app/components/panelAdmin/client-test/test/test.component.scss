@@ -6,10 +6,12 @@
 
 ::ng-deep .mat-radio-inner-circle{
   background: $color-principal-blue!important;
+  top:2.3px!important
 }
 
 ::ng-deep .mat-radio-outer-circle{
   border-color:$color-principal-blue!important;
+  top:2.3px!important
 }
 
 ::ng-deep .mat-radio-button{
@@ -150,6 +152,7 @@
       padding: 10px;
       position: relative;
       transition: opacity 0.2s, background 0.2s;
+      font-size: 18px;
        
       background-color: $color-principal-blue;
       border: none;

@@ -23,7 +23,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    border-bottom: 1px solid #ce5637;
+    border-bottom: 1px solid $color-principal-blue;
     padding: 15px;
    
     /* background-color: #f2bb13; */
@@ -39,10 +39,13 @@
       }
 
       .rond-custom {
+        color:$color-principal-blue;
         padding: 10px;
         border-radius: 50px;
-        border: 1px solid $color-orange;
+        border: 1px solid $color-principal-blue;
+        text-align: center;
         height: 30px;
+        width: 30px;
         line-height: 10px;
         position: relative;
         top: -10px;
@@ -50,9 +53,7 @@
         margin-right: 30px;
       }
   }
-  
-
-  
+    
   .content-modal-question {
     padding: 24px;
     width: 100%;

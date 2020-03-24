@@ -37,6 +37,7 @@ $text-color-client-test: #333;
 @mixin structureTitle {
   .title {
     display: flex;
+    margin-bottom: 9px;
     .img {
       width: 50px;
       margin-left: 10px;
@@ -55,6 +56,7 @@ $text-color-client-test: #333;
     text-align: center;
     transition: all 0.2s;
     text-transform: uppercase;
+    cursor: pointer;
     @if $yellow {
       background-color: $color-principal-blue;
       color: white;
@@ -70,6 +72,15 @@ $text-color-client-test: #333;
 
 p {
   font-size: $font-size-home;
+}
+
+
+button{
+  border: none;
+  cursor: pointer;
+}
+.tuto-para{
+  margin-bottom: 18px;
 }
 
 .container-section {
