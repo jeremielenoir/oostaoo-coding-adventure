@@ -11,6 +11,10 @@
 
 // roodeo themes variables
 
+.cdk-overlay-container {
+  z-index: 9999!important;
+}
+
 .invalid-feedback, .alert-danger {
   color: red;
 }
@@ -20,6 +24,7 @@
   color: $color-white;
   display: flex;
   text-align: center;
+  z-index: 99999;
 }
 
 .mat-simple-snackbar-action {

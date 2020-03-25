@@ -485,10 +485,10 @@
             </tr>
         </thead>
         <tbody class="table_body">
-            <tr class="table_row" *ngFor="let user of  users" (click)="openForm(user)">
-                <td class="table_body_cell">{{user.username}}</td>
-                <td class="table_body_cell">{{user.email}}</td>
-                <td class="table_body_cell">{{user.role.name}}</td>
+            <tr class="table_row" *ngFor="let user of  users">
+                <td (click)="openForm(user)" class="table_body_cell">{{user.username}}</td>
+                <td (click)="openForm(user)" class="table_body_cell">{{user.email}}</td>
+                <td (click)="openForm(user)" class="table_body_cell">{{user.role.name}}</td>
                 <td  class="table_body_cell table_icon">
                   <i (click)="openForm(user)" class="fas fa-pencil-alt icon"></i>
                   <i
