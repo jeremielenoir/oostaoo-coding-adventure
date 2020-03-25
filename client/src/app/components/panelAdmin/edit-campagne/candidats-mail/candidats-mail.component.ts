@@ -9,6 +9,7 @@ import {
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { Router } from '@angular/router';
 
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-candidats-mail',
@@ -16,6 +17,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./candidats-mail.component.scss']
 })
 export class CandidatsMailComponent implements OnInit {
+  
+  public Editor = ClassicEditor;
 
   public campaigns: any;
   public candidats: any;
