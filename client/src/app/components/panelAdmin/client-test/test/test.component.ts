@@ -45,11 +45,17 @@ export class TestComponent implements OnInit {
   public totalPointsCandidat;
 
 
+  // Options algo
+  public  filetype:any = 'application/java';
+  public filename:any = 'Main.java';
+  public options: any = { theme: 'vs-white', language: 'java' };
+
+
   constructor(private apiClientService: ApiClientService) {
   }
 
   ngOnInit() {
-   
+
     this.sumPointsByNumTechno(this.questionCampaign);
     if (this.sumPointsbyTechno) {
       this.allPointsTechnos = this.sumPointsbyTechno;
@@ -162,6 +168,7 @@ export class TestComponent implements OnInit {
   checkRep() {
     if (this.questions[this.index].type === 'one') {
       this.arrayReponseUser.push(this.responseUser);
+      console.log(this.arrayReponseUser);
       if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
         console.log('ITS OK !!');
         this.counterCheck++;
