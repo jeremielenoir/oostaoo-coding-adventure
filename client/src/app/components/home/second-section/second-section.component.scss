@@ -19,20 +19,22 @@
   .content{
     > div{
       width: 33%;
-      padding: 25px 0px 25px 0px;
+      padding: 25px 0px 10px 0px;
+      text-align: center;
+      
       .label-profil{
         color: $color-principal-blue;
       }
       &.first{
         padding-left: 0px;
-        padding-right: 50px;
+        padding-right: 40px;
       }
       &.middle{
-        padding-left: 25px;
-        padding-right: 25px;
+        padding-left: 20px;
+        padding-right: 20px;
       }
       &.last{
-        padding-left: 50px;
+        padding-left: 40px;
         padding-right: 0px;
       }
     }
