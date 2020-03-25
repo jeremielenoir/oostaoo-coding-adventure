@@ -25,6 +25,7 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "@ckeditor/ckeditor5-angular": "^1.2.2",
     "@ngx-chart/doughnut": "^0.1.1",
     "@nicky-lenaers/ngx-scroll-to": "^2.0.0",
     "angular-svg-round-progressbar": "^2.0.0",

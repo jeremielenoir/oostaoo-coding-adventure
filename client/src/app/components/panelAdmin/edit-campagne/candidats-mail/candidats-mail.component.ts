@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from '@angular/material';
+import { Component, OnInit, Inject,ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar} from '@angular/material';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -9,12 +9,14 @@ import {
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-candidats-mail',
   templateUrl: './candidats-mail.component.html',
   styleUrls: ['./candidats-mail.component.scss']
 })
 export class CandidatsMailComponent implements OnInit {
+
   public campaigns: any;
   public candidats: any;
   public nbCandidat: number;
@@ -31,7 +33,6 @@ export class CandidatsMailComponent implements OnInit {
   public offer_id: any;
   public tests_available: any;
   public user_id: any;
-
   constructor(private router: Router,
     @Inject(MAT_DIALOG_DATA) public data,
     public apiClientService: ApiClientService,
@@ -47,6 +48,12 @@ export class CandidatsMailComponent implements OnInit {
     }
     this.nbCandidat = count;
   }
+
+  // ngAfterViewChecked(){
+  //   // let editor = this.ckeditor.instance;
+  //   // console.log('ckeditor --->',editor)
+
+  // }
 
   ngOnInit() {
 

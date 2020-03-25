@@ -19,6 +19,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { CountUpModule } from "countup.js-angular2";
 import { DragScrollModule } from "ngx-drag-scroll";
 import { Ng2SearchPipeModule } from "ng2-search-filter";
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 // import components
 import { NavbarComponent } from "./components/home/navbar/navbar.component";
@@ -224,7 +225,8 @@ import { ContactUsComponent } from './components/home/contact-us/contact-us.comp
     NgxStripeModule.forRoot("pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq"),
     NgxCaptchaModule,
     MarkdownModule.forRoot(),
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot(),
+    CKEditorModule
   ],
   providers: [
     ApiClientService,
