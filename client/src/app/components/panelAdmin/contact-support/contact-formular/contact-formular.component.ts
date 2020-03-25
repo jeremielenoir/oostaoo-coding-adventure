@@ -66,7 +66,7 @@ export class ContactFormularComponent implements OnInit {
           this.openSnackBar("Le formulaire a bien été envoyé à l'équipe support", "Fermer")
           const currentUser = this.authenticationService.currentUserValue;
           if (currentUser) {
-            this.router.navigate(['/dashboard']);;
+            this.router.navigate(['/dashboard']);
           }
           else {
             this.router.navigate(['/home']);

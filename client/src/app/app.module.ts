@@ -115,6 +115,7 @@ import { AlgoComponent } from "./components/panelAdmin/algo/algo.component";
 import { ContactFormularComponent } from './components/panelAdmin/contact-support/contact-formular/contact-formular.component';
 import { ContactJoinUsComponent } from './components/panelAdmin/contact-support/contact-join-us/contact-join-us.component';
 import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.component';
+import { ContactUsComponent } from './components/home/contact-us/contact-us.component';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -201,7 +202,7 @@ import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.com
     AlgoComponent,
     CarouselComponent, 
     CarouselItemDirective, 
-    CarouselItemElement
+    CarouselItemElement, ContactUsComponent
   ],
   imports: [
     BrowserModule,
