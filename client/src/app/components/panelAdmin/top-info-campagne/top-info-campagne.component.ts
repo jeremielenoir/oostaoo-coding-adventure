@@ -213,6 +213,12 @@ export class TopInfoCampagneComponent implements OnInit {
     );
     
   }
+
+  openSnackBar(message: string, action) {
+    this._snackBar.open(message, action, {
+      duration: 6000,
+    });
+  }
   
   postCampagne() {
     // Confirm true for post
@@ -254,6 +260,7 @@ export class TopInfoCampagneComponent implements OnInit {
             // console.log("resultat from post", res);
             this.SendQuestionSeleditd(res.id);
             this.router.navigate([`/dashboard/campaigns/${res.id}/candidats`])
+            this.openSnackBar("La campagne a correctement été enregistrée", "Fermer");
           },
           err => console.log(err)
         );
