@@ -15,7 +15,7 @@
       flex-direction: column;
       background: $color-background-blue;
       .sous-header {
-        background: $color-background-blue;
+        background: $color-pricipal-blue-light;
         height: 150px;
         padding: 7px 0px;
         display: flex;
@@ -47,7 +47,7 @@
         border-radius: 4px;
         mat-expansion-panel {
           .roodeo-fix-header {
-            background: $color-principal-blue;
+            background: $color-pricipal-blue-light;
             border-bottom: 1px solid $color-principal-blue;
             // border-left: 1px solid $color-principal-blue;
             // border-right: 1px solid $color-principal-blue;
@@ -57,7 +57,7 @@
               margin-right: 16px;
               align-items: center;
               font-weight: bold;
-              color: $color-white;
+              // color: $color-white;
               .roodeo-faq-question {
                 font-size: 30px;
                 color: $color-orange;
@@ -68,7 +68,7 @@
               display: flex;
               justify-content: flex-end;
               align-items: center;
-              color: $color-white;
+              // color: $color-white;
             }
           }
           .roodeo-fix-text {
