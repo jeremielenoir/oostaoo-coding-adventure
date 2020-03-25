@@ -117,6 +117,7 @@ import { ContactFormularComponent } from './components/panelAdmin/contact-suppor
 import { ContactJoinUsComponent } from './components/panelAdmin/contact-support/contact-join-us/contact-join-us.component';
 import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.component';
 import { ContactUsComponent } from './components/home/contact-us/contact-us.component';
+import { TypeFaqPipe } from './components/panelAdmin/FAQ/faq.pipes';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -205,7 +206,9 @@ import { ContactUsComponent } from './components/home/contact-us/contact-us.comp
     AlgoComponent,
     CarouselComponent,
     CarouselItemDirective,
-    CarouselItemElement, ContactUsComponent
+    CarouselItemElement,
+    ContactUsComponent,
+    TypeFaqPipe
   ],
   imports: [
     BrowserModule,

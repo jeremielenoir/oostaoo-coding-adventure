@@ -158,6 +158,10 @@ const routes: Routes = [
     component: FAQComponent
   },
   {
+    path: 'dashboard/faq/:dynamicParams',
+    component: FAQComponent
+  },
+  {
     path: '**',
     redirectTo: 'not-found'
   }
