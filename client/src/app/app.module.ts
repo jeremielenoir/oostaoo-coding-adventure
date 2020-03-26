@@ -119,7 +119,6 @@ import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.com
 import { ContactUsComponent } from './components/home/contact-us/contact-us.component';
 import { TypeFaqPipe } from './components/panelAdmin/FAQ/faq.pipes';
 import { AboutTeamComponent } from './components/home/about-us/about-team/about-team.component';
-import { FreeComponent } from './components/panelAdmin/client-test/test/free/free.component';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -212,7 +211,6 @@ import { FreeComponent } from './components/panelAdmin/client-test/test/free/fre
     ContactUsComponent,
     TypeFaqPipe,
     AboutTeamComponent,
-    FreeComponent,
   ],
   imports: [
     BrowserModule,
