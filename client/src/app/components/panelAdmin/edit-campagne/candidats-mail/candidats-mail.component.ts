@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject,ViewChild } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar} from '@angular/material';
 import {
   ApiClientService,
@@ -51,12 +51,6 @@ export class CandidatsMailComponent implements OnInit {
     }
     this.nbCandidat = count;
   }
-
-  // ngAfterViewChecked(){
-  //   // let editor = this.ckeditor.instance;
-  //   // console.log('ckeditor --->',editor)
-
-  // }
 
   ngOnInit() {
 

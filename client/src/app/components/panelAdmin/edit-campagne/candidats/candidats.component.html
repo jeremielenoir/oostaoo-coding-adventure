@@ -155,8 +155,8 @@
 
                 <th mat-header-cell *matHeaderCellDef="let dataInfos">
                   <div class="content-check-action-candidat">
-                    <input id="first-check-action" type="checkbox" class="checkbox"
-                      (click)="allcheckedActiveted($event,allChecked,infosCandidats)" />
+                    <input [checked]="allcheckedActivetedBolean" id="first-check-action" type="checkbox" class="checkbox"
+                      (click)="allcheckedActiveted($event)" />
                     <label for="first-check-action" class="checkbox-span"></label>
                   </div>
                 </th>

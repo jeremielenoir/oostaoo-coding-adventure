@@ -50,12 +50,12 @@
           </p>
 
           <p>{{ fmtMSS(question.timeRep) }} / {{ fmtMSS(question.index_question.time) }}</p>
-          <p *ngIf=" question.array_rep_candidat  ==  answervalue ">
+          <p *ngIf="question.array_rep_candidat  ==  answervalue ">
             {{ question.index_question.points }} / {{ question.index_question.points }} pts</p>
           <p *ngIf=" question.array_rep_candidat  !=  answervalue "> 0 /
             {{ question.index_question.points }} pts</p>
         </div>
-        <hr class="separator" size="1">
+        <!-- <hr class="separator" size="1"> -->
        
         <h5 class="subtitle_h5">Question :</h5>
         <p> - {{ question.index_question.name }}</p>

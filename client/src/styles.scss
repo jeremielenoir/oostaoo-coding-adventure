@@ -115,7 +115,7 @@ height: 17px;
 width: 17px;
 border: 2px solid #7e8082;
 display: inline-block;
-border-radius: $border-radius;
+border-radius: ($border-radius - 1);
 margin-top: 4px;
 }
 
