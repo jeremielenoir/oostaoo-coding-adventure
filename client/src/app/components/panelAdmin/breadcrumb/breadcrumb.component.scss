@@ -41,6 +41,9 @@
         border-radius: 4px;
         ul {
             li{
+              text-decoration-line: underline;
+              padding-bottom: 2px;
+              text-transform: uppercase;
                 .roodeo-color-link{
                     // color: $color-white;
                 }
@@ -48,4 +51,8 @@
         }
     }
   }
+}
+
+.cursor-click{
+  cursor: pointer;
 }
