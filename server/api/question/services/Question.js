@@ -536,7 +536,7 @@ module.exports = {
       let script = "";
       let compiledfile = `${filetoexecute.split(".")[0]}`;
 
-      const scriptjava = `sed -i s/Main/${
+      const scriptjava = `sed -i ${''} s/Main/${
         compiledfile.split("/")[1]
       }/g ${filetoexecute}`;
       switch (extension) {
