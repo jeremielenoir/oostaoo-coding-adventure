@@ -45,11 +45,11 @@ export class TestComponent implements OnInit {
   public totalPointsCandidat;
 
 
-  // Options algo
-  public  filetype:any = 'application/java';
-  public filename:any = 'Main.java';
-  public options: any = { theme: 'vs-white', language: 'java' };
-
+  // Input algo
+  public langLower: string;
+  public  filetype: any;
+  public filename: any;
+  public options: any;
 
   constructor(private apiClientService: ApiClientService) {
   }
@@ -91,6 +91,11 @@ export class TestComponent implements OnInit {
     for (const techno of this.technoCampaign) {
       if (this.question.technologies === techno.id) {
         this.language = techno.name;
+        this.langLower = this.language.toLowerCase();
+        this.filetype = `application/${this.langLower}`;
+        this.filename = `Main.${this.langLower}`;
+        this.options = { theme: 'vs-white', language: this.langLower };
+
       }
     }
     this.arrayGoodRep = this.question.answer_value.split(', ').sort();
