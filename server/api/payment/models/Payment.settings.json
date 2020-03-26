@@ -27,6 +27,10 @@
     "offer_id": {
       "model": "offer",
       "via": "payments"
+    },
+    "customeraccount": {
+      "model": "customeraccount",
+      "via": "payments"
     }
   }
 }

@@ -1,0 +1,51 @@
+{
+  "connection": "default",
+  "collectionName": "customer_account",
+  "info": {
+    "name": "customeraccount",
+    "description": "customer account"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "type": {
+      "default": "personal",
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "personal",
+        "profesional"
+      ]
+    },
+    "tests_stock": {
+      "default": 0,
+      "min": -1,
+      "type": "integer",
+      "required": true
+    },
+    "admin": {
+      "model": "user",
+      "via": "owned_customeraccount",
+      "plugin": "users-permissions"
+    },
+    "members": {
+      "collection": "user",
+      "via": "customeraccount",
+      "plugin": "users-permissions"
+    },
+    "offer": {
+      "model": "offer"
+    },
+    "payments": {
+      "collection": "payment",
+      "via": "customeraccount"
+    },
+    "entreprise": {
+      "model": "entreprise",
+      "via": "customeraccount"
+    }
+  }
+}

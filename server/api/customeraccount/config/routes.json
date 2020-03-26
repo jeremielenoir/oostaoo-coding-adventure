@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/customeraccounts",
+      "handler": "Customeraccount.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/customeraccounts/count",
+      "handler": "Customeraccount.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/customeraccounts/:id",
+      "handler": "Customeraccount.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/customeraccounts",
+      "handler": "Customeraccount.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/customeraccounts/:id",
+      "handler": "Customeraccount.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/customeraccounts/:id",
+      "handler": "Customeraccount.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
