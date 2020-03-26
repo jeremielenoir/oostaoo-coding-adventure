@@ -15,7 +15,7 @@ export class FAQComponent implements OnInit {
     this.route.params.subscribe(params => {
       // if (params['edit']) { 
       // }
-      // console.log('params in FAQ : ', params);
+      console.log('params in FAQ : ', params);
       this.filterParams = params.dynamicParams
     });
   }
@@ -25,7 +25,11 @@ export class FAQComponent implements OnInit {
       // console.log('faqs : ', faqs);
       this.faqs = faqs;
       this.faqs[0].open = true;
-      this.listTest = Array.from(new Set(faqs.map(faq => faq.type)));
+      return this.listTest = Array.from(new Set(faqs.map(faq => faq.type)));
+    }).then(listType =>{
+      if(!listType.includes(this.filterParams)){
+        this.filterParams = ''
+      }
     });
   }
 }
