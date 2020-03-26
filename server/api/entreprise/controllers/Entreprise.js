@@ -49,7 +49,9 @@ module.exports = {
    */
 
   create: async (ctx) => {
-    return strapi.services.entreprise.add(ctx.request.body);
+    const entreprise = await strapi.services.entreprise.add(ctx.request.body);
+    await strapi.controllers.entrepriseextension.attachEntrepriseToAccount(ctx, entreprise);
+    return entreprise;
   },
 
   /**

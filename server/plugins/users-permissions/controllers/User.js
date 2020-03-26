@@ -161,7 +161,7 @@ module.exports = {
     updated_user = _.pick(updated_user, ['_id', 'id', 'adminId', 'tests_available']);
     const offer_id = user.offer_id.id;
     updated_user.offer_id = offer_id;
-  
+
     let updated_jwt;
 
       if(Object.keys(ctx.request.body).length == 1
