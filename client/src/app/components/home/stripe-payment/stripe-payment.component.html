@@ -1,28 +1,26 @@
 <div class="bounds">
+  <div class="container" fxLayout="row" fxLayoutAlign="center">
+    <img class="logo" src="../../assets/logo_ROODEO.svg" alt="Logo" />
+  </div>
   <div class="container" fxLayout="row" fxLayoutAlign="center" fxLayout.sm="column">
     <div fxFlex="35" class="sec1" fxFlex.sm="100">
-      <img class="logo" src="../../assets/logo_ROODEO.svg" alt="Logo" />
-      <h1 class="offer-title">{{offerChoice?.title}}</h1>
+      <h3>Votre offre</h3>
+      <h2 class="offer-title">{{offerChoice?.title}}</h2>
       <h2 style="display: inline-block;">{{offerChoice?.price + '€ '}}</h2>
       <h6 style="display: inline-block; color: gray;">/mois</h6>
       <div class="offer-desc" [innerHTML]="offerChoice.description"></div>
       <a class="back-to-offers" mat-raised-button href="" [routerLink]="['/subscription']">Retour aux offres</a>
     </div>
-    <div fxFlex="35" class="sec2" fxFlex.sm="100">
+    <div fxFlex="35" class="sec2" fxFlex.sm="100" fxLayout="column" fxLayoutGap="25px">
       <h3>Payer par carte bancaire</h3>
-      <form style="margin-top: 25px;" fxLayout="column" fxLayoutGap="25px" novalidate (ngSubmit)="buy()"
-        [formGroup]="stripeFormGroup">
-        <input required [(ngModel)]="cardOwnerName" type="text" class="StripeElement" formControlName="name"
-          placeholder="Titulaire de la carte">
-        <div id="card-element" class="field"></div>
-        <button id="payment" type="submit" *ngIf="!stripeSuccess" [disabled]="isBuyBtnDisabled()" mat-raised-button
-          color="primary">{{ 'PAYER ' + offerChoice?.price + '€     '}}
-          <mat-progress-spinner *ngIf="stripeLoader" style="display: inline-block;" color="primary" mode="indeterminate"
-            diameter="20" value="50">
-          </mat-progress-spinner>
-        </button>
-        <a *ngIf="stripeSuccess" mat-raised-button href="" [routerLink]="['/dashboard/campaigns']">Revenir à Roodeo</a>
-      </form>
+      <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+      <button id="payment" type="button" (click)="payNow()" *ngIf="!paied" [disabled]="!complete" mat-raised-button
+        color="primary">{{ 'PAYER ' + offerChoice?.price + '€     '}}
+        <mat-progress-spinner *ngIf="inProgress" style="display: inline-block;" color="default" mode="indeterminate"
+          diameter="20" value="50">
+        </mat-progress-spinner>
+      </button>
+      <a *ngIf="paied" mat-raised-button href="" [routerLink]="['/dashboard/campaigns']">Revenir à Roodeo</a>
       <div class="loader">
       </div>
     </div>

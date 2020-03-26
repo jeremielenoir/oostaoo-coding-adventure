@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Injectable, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ApiClientService, API_URI_USER } from 'src/app/api-client/api-client.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,7 +6,7 @@ import { debug } from 'util';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
-import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatRadioGroup } from '@angular/material';
 import { AuthenticationService } from './service/auth.service';
 
 
@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit {
   errorRegister = '';
   jwt: any;
   errorProvider = '';
+  @ViewChild(MatRadioGroup) radios: MatRadioGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -149,16 +150,27 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    
+
     this.submittedRegister = true;
 
     // stop if form is invalid
-    if (this.fr.emailregister.value === '' || this.fr.emailregister.invalid || this.fr.passwordregister.value === '' || this.fr.confirmpassword.value === '' || this.fr.passwordregister.value !== this.fr.confirmpassword.value || this.fr.recaptcha.value === '') {
+    if (
+      this.fr.emailregister.value === '' ||
+      this.fr.emailregister.invalid ||
+      this.fr.passwordregister.value === '' ||
+      this.fr.confirmpassword.value === '' ||
+      this.fr.passwordregister.value !== this.fr.confirmpassword.value ||
+      this.fr.recaptcha.value === '') {
     } else {
 
       this.loading = true;
 
-      this.authenticationService.register(this.fr.usernameregister.value, this.fr.emailregister.value, this.fr.passwordregister.value)
+      this.authenticationService.register(
+        this.fr.usernameregister.value,
+        this.fr.emailregister.value,
+        this.fr.passwordregister.value,
+        this.radios.value
+        )
         .pipe(first())
         .subscribe(
           data => {

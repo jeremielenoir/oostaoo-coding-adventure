@@ -129,12 +129,5 @@ module.exports = {
   //   .catch(error => error)
   // },
 
-  pay: async (ctx, next) => {
-    const { periodicity } = ctx.request.body.offer;
-    if(periodicity == 'unique'){
-        return strapi.services.payment.charge(ctx.request.body);
-    }else if(periodicity == 'monthly'){
-        return strapi.services.payment.subscribe(ctx.request.body);
-      }
-   }
+
 };

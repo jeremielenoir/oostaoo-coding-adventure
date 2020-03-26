@@ -1,21 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   ApiClientService,
-  API_URI_OFFER,
   API_URI_USER,
   API_URI_PAYMENT
 } from 'src/app/api-client/api-client.service';
 import {
   StripeService,
-  Elements,
-  Element as StripeElement,
   ElementsOptions,
-  TokenResult
+  TokenResult,
+  ElementOptions,
+  StripeCardComponent
 } from 'ngx-stripe';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Offer } from 'src/app/models/offer.model';
-import { SessionService } from 'src/app/services/session/session.service';
 import { DecryptTokenService } from '../register/register.service';
 import { MatSnackBar } from '@angular/material';
 
@@ -25,32 +22,38 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./stripe-payment.component.scss']
 })
 export class StripePaymentComponent implements OnInit {
+
   offerChoice: any;
   userInfo: any;
+  cardInfos: any;
 
-  cardOwnerName = '';
-
-  stripeSuccess = false;
-  stripeLoader = false;
-
-  payload: any;
-  paymentCreationBody: any;
-
-  // stripe var
-  elements: Elements;
-  card: StripeElement;
+  stripeKey = '';
+  inProgress = false;
+  paied = false;
+  complete = false;
+  @ViewChild(StripeCardComponent) card: StripeCardComponent;
+  cardOptions: ElementOptions = {
+    style: {
+      base: {
+        color: '#32325d',
+        '::placeholder': {
+          color: '#aab7c4'
+        }
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
+      }
+    }
+  };
   elementsOptions: ElementsOptions = {
     locale: 'fr'
   };
 
-  stripeFormGroup: FormGroup;
-
   constructor(
     private router: Router,
     private apiClientService: ApiClientService,
-    private fb: FormBuilder,
     private stripeService: StripeService,
-    private session: SessionService,
     private userToken: DecryptTokenService,
     private snackBar: MatSnackBar
   ) {}
@@ -59,139 +62,88 @@ export class StripePaymentComponent implements OnInit {
    */
   ngOnInit() {
     this.offerChoice = JSON.parse(localStorage.getItem('offerChoice'));
-    // info utilisateur a recuperer de la bdd
     this.apiClientService
       .get(API_URI_USER + '/' + this.userToken.userId)
       .subscribe(user => {
         this.userInfo = user;
-        this.cardOwnerName = this.userInfo.username;
       });
-    this.stripeForm();
-  }
-  /**
-   *
-   */
-  isBuyBtnDisabled(): boolean {
-    return this.stripeFormGroup.invalid || this.stripeLoader;
-  }
-  /**
-   *
-   */
-  stripeForm() {
-    this.stripeFormGroup = this.fb.group({
-      name: ['', [Validators.required]]
-    });
-
-    this.stripeService.elements(this.elementsOptions).subscribe(elements => {
-      this.elements = elements;
-      // Only mount the element the first time
-      if (!this.card) {
-        this.card = this.elements.create('card', {
-          style: {
-            base: {
-              color: '#32325d',
-              // fontFamily: ''Helvetica Neue', Helvetica, sans-serif',
-              // fontSmoothing: 'antialiased',
-              // fontSize: '16px',
-              '::placeholder': {
-                color: '#aab7c4'
-              }
-            },
-            invalid: {
-              color: '#fa755a',
-              iconColor: '#fa755a'
-            }
-          }
-        });
-        this.card.mount('#card-element');
+    this.card.on.subscribe(item => {
+      if (item.type === 'change') {
+        if (item.event.error) {
+          this.snackBar.open(item.event.error.message, 'OK');
+        }
+        if (item.event.complete) {
+          this.complete = true;
+          this.cardInfos = item.event.value;
+        }
       }
     });
   }
-
   /**
    *
    */
-  async buy() {
+  keyUpdated() {
+    this.stripeService.changeKey(this.stripeKey);
+  }
+  /**
+   *
+   */
+  async payNow() {
+
     try {
-      // const name = this.stripeTest.get('name').value;
-      this.stripeSuccess = false;
-      this.stripeLoader = true;
-      // username utilisateur
-      const name = this.userInfo.username;
+
+      this.inProgress = true;
 
       const tokenResult: TokenResult = await this.stripeService
-        .createToken(this.card, { name })
+        .createToken(this.card.element, {
+          name: this.userInfo.username,
+          // address_line1: '123 A Place',
+          // address_line2: 'Suite 100',
+          // address_city: 'Irving',
+          // address_state: 'BC',
+          address_zip: this.cardInfos.postalCode,
+          address_country: 'FR'
+        })
         .toPromise();
 
       if (tokenResult.error || !tokenResult.token) {
-        this.stripeLoader = false;
-        this.snackBar.open(tokenResult.error.message, 'OK');
+        this.inProgress = false;
+        if (tokenResult.error) {
+          this.snackBar.open(tokenResult.error.message, 'OK');
+        } else {
+          this.snackBar.open('Un problème technique est survenu', 'OK');
+        }
         return;
       }
-
-      this.payload = {
-        offer: this.offerChoice,
-        email: this.userInfo.email,
-        token: tokenResult.token
-      };
 
       const payResult: any = await this.apiClientService
-        .post(API_URI_PAYMENT + '/pay', this.payload)
+        .post(API_URI_PAYMENT + '/finalize', {
+          offer: this.offerChoice.id,
+          // email: this.userInfo.email,
+          paymentToken: tokenResult.token
+        })
         .toPromise();
 
-      if (
-        !payResult.status ||
-        !(payResult.status === 'succeeded' || 'active')
-      ) {
+      if (!payResult || !payResult.newToken) {
         this.snackBar.open('Votre paiement a échoué', 'OK');
-        if (this.card) {
-          this.card.unmount();
-          this.card.mount('#card-element');
-        }
-        // setTimeout(() => {this.stripeError = ''; }, 2000);
-        this.stripeLoader = false;
+        this.inProgress = false;
         return;
       }
 
-      this.paymentCreationBody = {
-        amount: this.offerChoice.price,
-        offer_id: this.offerChoice.id,
-        test_already_available: this.userInfo.tests_available,
-        tests_available: this.offerChoice.tests_stock,
-        user_id: this.userInfo.id,
-        date_payment: Date.now(),
-        paymentId: payResult.id
-      };
+      localStorage.setItem('currentUser', payResult.newToken);
 
-      const resultPaymentConfirm: any = this.apiClientService
-        .post(API_URI_PAYMENT, this.paymentCreationBody)
-        .toPromise();
+      this.snackBar.open('Votre paiement a été effectué', 'OK');
+      this.inProgress = false;
+      this.paied = true;
 
-      const newToken = resultPaymentConfirm.jwt;
+      // setTimeout(() => {
+      //   this.router.navigate(['/dashboard/campaigns']);
+      // }, 5000);
 
-      if (resultPaymentConfirm.refund) {
-        if (this.card) {
-          this.card.unmount();
-        }
-        setTimeout(() => {
-          // this.stripeError = '';
-          this.card.mount('#card-element');
-        }, 2000);
-
-        this.snackBar.open('Un problème technique est survenu', 'OK');
-        this.stripeLoader = false;
-        return;
-      } else {
-        localStorage.setItem('currentUser', newToken);
-        this.stripeSuccess = true;
-        this.snackBar.open('Votre paiement a été effectué', 'OK');
-        this.stripeLoader = false;
-        // setTimeout(() => {
-        //   this.router.navigate(['/dashboard/campaigns']);
-        // }, 5000);
-      }
     } catch (e) {
-      this.stripeLoader = false;
+      this.inProgress = false;
+      this.snackBar.open('Un problème technique est survenu', 'OK');
+      console.error(e);
       return;
     }
   }
