@@ -92,9 +92,42 @@ export class TestComponent implements OnInit {
       if (this.question.technologies === techno.id) {
         this.language = techno.name;
         this.langLower = this.language.toLowerCase();
-        this.filetype = `application/${this.langLower}`;
-        this.filename = `Main.${this.langLower}`;
-        this.options = { theme: 'vs-white', language: this.langLower };
+
+        if(this.langLower === 'java' || this.langLower === 'java/j2ee' || this.langLower === 'spring' || this.langLower === 'android') {
+        this.filetype = `application/java`;
+        this.filename = `Main.java`;
+        this.options = { theme: 'vs-white', language: 'java' };
+        }
+
+        if(this.langLower === 'kotlin') {
+          this.filetype = `application/kotlin`;
+          this.filename = `Main.kt`;
+          this.options = { theme: 'vs-white', language: 'kotlin' };
+          }
+
+        if(this.langLower === 'c') {
+          this.filetype = `application/c`;
+          this.filename = `Main.c`;
+          this.options = { theme: 'vs-white', language: 'c' };
+        }
+
+        if(this.langLower === 'c++') {
+          this.filetype = `application/cpp`;
+          this.filename = `Main.cpp`;
+          this.options = { theme: 'vs-white', language: 'cpp' };
+        }
+
+        if(this.langLower === 'python') {
+          this.filetype = `application/python`;
+          this.filename = `Main.py`;
+          this.options = { theme: 'vs-white', language: 'python' };
+        }
+
+        if(this.langLower === 'javascript' || this.langLower === 'angular 2+' || this.langLower === 'angularjs' || this.langLower === 'react' || this.langLower === 'vuejs') {
+          this.filetype = `application/javascript`;
+          this.filename = `Main.js`;
+          this.options = { theme: 'vs-white', language: 'javascript' };
+        }
 
       }
     }
