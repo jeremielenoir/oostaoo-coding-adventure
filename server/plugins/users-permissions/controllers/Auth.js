@@ -7,6 +7,7 @@
  */
 
 /* eslint-disable no-useless-escape */
+const authExtension = require('./AuthExtension');
 const crypto = require('crypto');
 const _ = require('lodash');
 
@@ -235,6 +236,7 @@ module.exports = {
   },
 
   register: async (ctx) => {
+
     const pluginStore = await strapi.store({
       environment: '',
       type: 'plugin',
@@ -246,7 +248,10 @@ module.exports = {
     });
 
     if (!settings.allow_register) {
-      return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.advanced.allow_register' }] }] : 'Register action is currently disabled.');
+      return ctx.badRequest(null,
+        ctx.request.admin ?
+          [{ messages: [{ id: 'Auth.advanced.allow_register' }] }] :
+          'Register action is currently disabled.');
     }
 
     const params = _.assign(ctx.request.body, {
@@ -255,70 +260,84 @@ module.exports = {
 
     // Password is required.
     if (!params.password) {
-      return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.password.provide' }] }] : 'Please provide your password.');
+      return ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: 'Auth.form.error.password.provide' }] }] :
+        'Please provide your password.');
+    }
+
+    // Email is required.
+    if (!params.email) {
+      return ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: 'Auth.form.error.email.provide' }] }] :
+        'Please provide your email.');
     }
 
     // Throw an error if the password selected by the user
     // contains more than two times the symbol '$'.
     if (strapi.plugins['users-permissions'].services.user.isHashed(params.password)) {
-      return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.password.format' }] }] : 'Your password cannot contain more than three times the symbol `$`.');
+      return ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: 'Auth.form.error.password.format' }] }] :
+        'Your password cannot contain more than three times the symbol `$`.');
     }
 
-    // Retrieve root role.
-    const root = await strapi.query('role', 'users-permissions').findOne({ type: 'root' }, ['users']);
-    const users = root.users || [];
-
-    // First, check if the user is the first one to register as admin.
-    const hasAdmin = users.length > 0;
-
-    // Check if the user is the first to register
-    const role = hasAdmin === false ? root : await strapi.query('role', 'users-permissions').findOne({ type: settings.default_role }, []);
+    const role = await strapi
+      .query('role', 'users-permissions')
+      .findOne({ type: settings.default_role }, []);
 
     if (!role) {
-      return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.role.notFound' }] }] : 'Impossible to find the root role.');
+      return ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: 'Auth.form.error.role.notFound' }] }] :
+        'Impossible to find the default role.');
     }
 
     // Check if the provided email is valid or not.
-    const isEmail = emailRegExp.test(params.email);
+    const isEmail = emailRegExp.test(params.email.toLowerCase());
 
     if (isEmail) {
       params.email = params.email.toLowerCase();
+    } else {
+      return ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: 'Auth.form.error.email.formatd' }] }] :
+        'Please provide valid email address.');
     }
 
-    params.role = role._id || role.id;
+    params.role = role.id || role._id;
     params.password = await strapi.plugins['users-permissions'].services.user.hashPassword(params);
 
     const user = await strapi.query('user', 'users-permissions').findOne({
       email: params.email
     });
 
-    const emailTakenMessage = 'Email already taken';
     if (user && user.provider === params.provider) {
-      //return ctx.response.redirect(`/home/register?error=${emailTakenMessage}`);
-      return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.email.taken' }] }] : 'Email is already taken.');
+      return ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: 'Auth.form.error.email.taken' }] }] :
+        'Email is already taken.');
     }
 
     if (user && user.provider !== params.provider && settings.unique_email) {
-      //return ctx.response.redirect(`/home/register?error=${emailTakenMessage}`);
-      return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.email.taken' }] }] : 'Email is already taken.');
+      return ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: 'Auth.form.error.email.taken' }] }] :
+        'Email is already taken.');
     }
 
     try {
+
       if (!settings.email_confirmation) {
         params.confirmed = true;
       }
 
       // by default, every new registered user has a free offer (id: 14)
       // and 0 available tests
-      params.offer_id = 14;
-      params.tests_available = 0;
+      // params.offer_id = 14;
+      // params.tests_available = 0;
 
-      const user = await strapi.query('user', 'users-permissions').create(params);
+      let user = await strapi.query('user', 'users-permissions').create(params);
 
-      const jwt = strapi.plugins['users-permissions'].
-      services.jwt.issue(_.pick(user.toJSON ?
-        user.toJSON() : user, ['_id', 'id', 'adminId', 'offer_id',
-        'tests_available']));
+      await authExtension.registerCustomerAccount(ctx, user, params);
+
+      const jwt = strapi.plugins['users-permissions'].services.jwt.issue(
+        _.pick(user.toJSON ? user.toJSON() : user, ['id', '_id'])
+      );
 
       if (settings.email_confirmation) {
         const storeEmail = (await pluginStore.get({
@@ -341,7 +360,9 @@ module.exports = {
           // Send an email to the user.
           await strapi.plugins['email'].services.email.send({
             to: (user.toJSON ? user.toJSON() : user).email,
-            from: (settings.from.email && settings.from.name) ? `"${settings.from.name}" <${settings.from.email}>` : undefined,
+            from: (settings.from.email && settings.from.name) ?
+              `"${settings.from.name}" <${settings.from.email}>` :
+              undefined,
             replyTo: settings.response_email,
             subject: settings.object,
             text: settings.message,
@@ -352,25 +373,20 @@ module.exports = {
         }
       }
 
-      if (!hasAdmin) {
-        strapi.emit('didCreateFirstAdmin');
-      }
-
       ctx.send({
         jwt: !settings.email_confirmation ? jwt : undefined,
         user: _.omit(user.toJSON ? user.toJSON() : user, ['password', 'resetPasswordToken'])
       });
+
     } catch(err) {
 
-      /*if(_.includes(err.message, 'username')){
-        const usernameTakenMessage = 'Username already taken';
-        return ctx.response.redirect(`/home/register?error=${usernameTakenMessage}`);
-      }else{
-        return ctx.response.redirect(`/home/register?error=${emailTakenMessage}`);
-      }*/
+      const adminError = _.includes(err.message, 'username') ?
+        'Auth.form.error.username.taken' :
+        'Auth.form.error.email.taken';
 
-      const adminError = _.includes(err.message, 'username') ? 'Auth.form.error.username.taken' : 'Auth.form.error.email.taken';
-      ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: adminError }] }] : err.message);
+      ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: adminError }] }] :
+        err.message);
     }
   },
 
