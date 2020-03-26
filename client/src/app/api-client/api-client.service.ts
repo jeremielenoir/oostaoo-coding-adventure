@@ -18,11 +18,12 @@ export const API_URI_USER_ADMIN: string = prefix + 'utilisateursadmins';
 export const API_URI_ENTREPRISE: string = prefix + 'entreprises';
 export const API_URI_USER_ENTREPRISE: string = prefix + 'utilsateurentreprises';
 export const API_URI_USER = 'users';
+export const API_URI_ACCOUNT = prefix + 'customeraccounts';
 export const API_URI_USERS_BY_ADMIN = 'usersByAdmin';
-export const API_URI_NOTIFICATIONS: string = 'notifications';
+export const API_URI_NOTIFICATIONS = 'notifications';
 export const API_URI_OFFER: string = prefix + 'offers';
 export const API_URI_PAYMENT: string = prefix + 'payments';
-export const API_URI_FEEDBACK: string = 'feedbacks';
+export const API_URI_FEEDBACK = 'feedbacks';
 export const API_URI_FAQ: string = prefix + 'faqs';
 export const API_URI_ISSUE: string = prefix + 'issues';
 

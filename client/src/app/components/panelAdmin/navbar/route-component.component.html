@@ -6,7 +6,7 @@
     <li>
       <div class="list-menu-top-header">
         <a href="" class="text-menu">
-        
+
           <span class="content-img" id="notif"></span>
           <span *ngIf="notifUnread !== 0" class="nbr-notif">{{
             notifUnread
@@ -91,10 +91,10 @@
         </li>
         <li>
           <a href="" [routerLink]="['/dashboard/profil-utilisateur']">
-            <i class="fas fa-circle circle-icon"></i> Profil utilisateur
+            <i class="fas fa-circle circle-icon"></i>Mon profil
           </a>
         </li>
-        <li>
+        <li *ngIf="isProfesionalAccount">
           <a href="" [routerLink]="['/dashboard/profil-entreprise']">
             <i class="fas fa-circle circle-icon"></i>
             Profil entreprise
@@ -171,11 +171,11 @@
         </li>
         <li>
           <a href="" [routerLink]="['/dashboard/faq']">FAQ</a>
-         
+
         </li>
         <li>
           <a href="" [routerLink]="['/dashboard/contact-support']">Contact</a>
-      
+
         </li>
       </ul>
     </li>

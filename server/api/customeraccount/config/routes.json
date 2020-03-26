@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/customeraccounts",
+      "path": "/api/customeraccounts",
       "handler": "Customeraccount.find",
       "config": {
         "policies": []
@@ -10,7 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/customeraccounts/count",
+      "path": "/api/customeraccounts/count",
       "handler": "Customeraccount.count",
       "config": {
         "policies": []
@@ -18,7 +18,7 @@
     },
     {
       "method": "GET",
-      "path": "/customeraccounts/:id",
+      "path": "/api/customeraccounts/:id",
       "handler": "Customeraccount.findOne",
       "config": {
         "policies": []
@@ -26,7 +26,7 @@
     },
     {
       "method": "POST",
-      "path": "/customeraccounts",
+      "path": "/api/customeraccounts",
       "handler": "Customeraccount.create",
       "config": {
         "policies": []
@@ -34,7 +34,7 @@
     },
     {
       "method": "PUT",
-      "path": "/customeraccounts/:id",
+      "path": "/api/customeraccounts/:id",
       "handler": "Customeraccount.update",
       "config": {
         "policies": []
@@ -42,7 +42,7 @@
     },
     {
       "method": "DELETE",
-      "path": "/customeraccounts/:id",
+      "path": "/api/customeraccounts/:id",
       "handler": "Customeraccount.destroy",
       "config": {
         "policies": []

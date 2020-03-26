@@ -4,6 +4,12 @@
 
   <div class="padding-top">
     <div class="content">
+      <div *ngIf="isOwnerOfPersonalAccount" fxLayout="row" fxLayout="row" fxLayoutAlign="space-between center" class="account-transform">
+        <h4>Basculer vers un compte professionnel</h4>
+        <button (click)="convertToPro()" type="button"  mat-raised-button color="primary">Editer le profil entreprise</button>
+      </div>
+    </div>
+    <div class="content">
       <div id="section1" class="border-none">
 
         <div class="section-title">
