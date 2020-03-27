@@ -485,7 +485,7 @@ module.exports = {
         let id = ``;
         let path = ``;
         const randomname = generateStrings(1, 10).value;
-        const javafilename = `${randomname.charAt(0).toUpperCase() +
+        const javafilename = `Main${randomname.charAt(0).toUpperCase() +
           randomname.slice(1)}`;
 
         switch (extension) {
@@ -531,12 +531,12 @@ module.exports = {
         });
         return res;
       };
-      console.log("file", file);
+
       const { path: filetoexecute, extension, id } = await processUpload(file);
       let script = "";
       let compiledfile = `${filetoexecute.split(".")[0]}`;
 
-      const scriptjava = `sed -i s/Main/${
+      const scriptjava = `sed -i ${''} s/Main/${
         compiledfile.split("/")[1]
       }/g ${filetoexecute}`;
       switch (extension) {

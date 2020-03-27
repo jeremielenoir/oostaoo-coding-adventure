@@ -45,11 +45,17 @@ export class TestComponent implements OnInit {
   public totalPointsCandidat;
 
 
+  // Input algo
+  public langLower: string;
+  public  filetype: any;
+  public filename: any;
+  public options: any;
+
   constructor(private apiClientService: ApiClientService) {
   }
 
   ngOnInit() {
-   
+
     this.sumPointsByNumTechno(this.questionCampaign);
     if (this.sumPointsbyTechno) {
       this.allPointsTechnos = this.sumPointsbyTechno;
@@ -85,6 +91,44 @@ export class TestComponent implements OnInit {
     for (const techno of this.technoCampaign) {
       if (this.question.technologies === techno.id) {
         this.language = techno.name;
+        this.langLower = this.language.toLowerCase();
+
+        if(this.langLower === 'java' || this.langLower === 'java/j2ee' || this.langLower === 'spring' || this.langLower === 'android') {
+        this.filetype = `application/java`;
+        this.filename = `Main.java`;
+        this.options = { theme: 'vs-white', language: 'java' };
+        }
+
+        if(this.langLower === 'kotlin') {
+          this.filetype = `application/kotlin`;
+          this.filename = `Main.kt`;
+          this.options = { theme: 'vs-white', language: 'kotlin' };
+          }
+
+        if(this.langLower === 'c') {
+          this.filetype = `application/c`;
+          this.filename = `Main.c`;
+          this.options = { theme: 'vs-white', language: 'c' };
+        }
+
+        if(this.langLower === 'c++') {
+          this.filetype = `application/cpp`;
+          this.filename = `Main.cpp`;
+          this.options = { theme: 'vs-white', language: 'cpp' };
+        }
+
+        if(this.langLower === 'python') {
+          this.filetype = `application/python`;
+          this.filename = `Main.py`;
+          this.options = { theme: 'vs-white', language: 'python' };
+        }
+
+        if(this.langLower === 'javascript' || this.langLower === 'angular 2+' || this.langLower === 'angularjs' || this.langLower === 'react' || this.langLower === 'vuejs') {
+          this.filetype = `application/javascript`;
+          this.filename = `Main.js`;
+          this.options = { theme: 'vs-white', language: 'javascript' };
+        }
+
       }
     }
     this.arrayGoodRep = this.question.answer_value.split(', ').sort();
@@ -162,6 +206,7 @@ export class TestComponent implements OnInit {
   checkRep() {
     if (this.questions[this.index].type === 'one') {
       this.arrayReponseUser.push(this.responseUser);
+      console.log(this.arrayReponseUser);
       if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
         console.log('ITS OK !!');
         this.counterCheck++;

@@ -91,7 +91,7 @@
                 </div>
               </div>
 
-            <div class="ligne-plus"><p class="ligne-plus-text"><i class="fas fa-play"></i></p></div>
+            <div (click)="openDialogTest()" class="ligne-plus"><p class="ligne-plus-text"><i class="fas fa-play"></i></p></div>
             
             <div class="ligne-techno" >
             <p class="ligne-techno-text">{{item.technologies.name}}</p>
@@ -164,7 +164,7 @@
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
         </figure>
         <span class="bar-text">Votre Campagne</span>
-        <button mat-flat-button class="trie-cat preview-btn">
+        <button (click)="openDialogTest()" mat-flat-button class="trie-cat preview-btn">
           Prévisualiser
           <i class="fas fa-chevron-right icon-arrow-btn"></i>
         </button>

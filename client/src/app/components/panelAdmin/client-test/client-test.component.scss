@@ -3,35 +3,38 @@ $font-family-client-test: Open Sans, Lato, sans-serif;
 $Bg-client-test: #f9f9f9;
 $text-color-client-test: #333;
 
-@mixin structureBlockPrincipal {
-  flex: 1;
-  // height: 500px;
-  display: flex;
-  flex-direction: column;
-  // justify-content: space-between;
-  @media #{$deviceMaxDesktop} {
-    margin: 20px 0 20px 0;
-    width: 90% !important;
-    height: auto !important;
-  }
-}
+// .tutorial {
+// flex: 1;
+// height: 500px;
+// display: flex;
+// flex-direction: column;
+// background-color: white;
+// border: $border-table;
+// border-radius: $border-radius;
+// justify-content: space-between;
+//   @media #{$deviceMaxDesktop} {
+//     margin: 20px 0 20px 0;
+//     width: 90% !important;
+//     height: auto !important;
+//   }
+// }
 
-@mixin structureSousBlockTutoTest {
-  background-color: white;
-  padding: 40px;
-  width: 100%;
-  border: $border-table;
-  border-radius: $border-radius;
-  padding-top: 10px;
-  @media #{$deviceMaxDesktop} {
-    height: auto !important;
-    margin-bottom: 20px;
-  }
-  @include structureTitle();
-}
+// .test {
+//   background-color: white;
+//   padding: 40px;
+//   width: 100%;
+//   border: $border-table;
+//   border-radius: $border-radius;
+//   padding-top: 10px;
+//   @media #{$deviceMaxDesktop} {
+//     height: auto !important;
+//     margin-bottom: 20px;
+//   }
+// @include structureTitle();
+// }
 
 .test {
-  margin-top: 65px!important;
+  margin-top: 46px !important;
 }
 
 @mixin structureTitle {
@@ -60,12 +63,12 @@ $text-color-client-test: #333;
     @if $yellow {
       background-color: $color-principal-blue;
       color: white;
-      &:hover{
+      &:hover {
         background-color: $color-principal-blue;
       }
     } @else {
       background: transparent;
-      color: $color-principal-blue;;
+      color: $color-principal-blue;
     }
   }
 }
@@ -74,12 +77,11 @@ p {
   font-size: $font-size-home;
 }
 
-
-button{
+button {
   border: none;
   cursor: pointer;
 }
-.tuto-para{
+.tuto-para {
   margin-bottom: 18px;
 }
 
@@ -100,26 +102,26 @@ button{
     margin-right: 5%;
     display: flex;
     margin-top: 20px;
-    
+
     @media #{$deviceMaxDesktop} {
       flex-direction: column;
       justify-content: space-around;
       height: 100%;
     }
     .invitation {
-      justify-content: normal!important;
+      justify-content: normal !important;
       margin-right: 9px;
       padding: 40px;
       background: white;
       border: $border-table;
       border-radius: $border-radius;
       padding-top: 10px;
-      @include structureBlockPrincipal();
+      // @include structureBlockPrincipal();
       .test-invit {
         display: flex;
         justify-content: center;
         flex-direction: column;
-        color:$color-principal-blue;
+        color: $color-principal-blue;
         h3 {
           margin-left: 20px;
           margin-top: 20px;
@@ -133,7 +135,6 @@ button{
           align-items: center;
           border-top: 1px dashed #e3e3e3;
           border-bottom: 1px dashed #e3e3e3;
-          
         }
         .image {
           margin: 0px auto;
@@ -150,21 +151,40 @@ button{
       }
       .text {
         padding: 30px 0 80px 0;
-        p{
-          color: $color-principal-blue!important;
+        p {
+          color: $color-principal-blue !important;
         }
       }
     }
 
     .tutorial-test {
-      @include structureBlockPrincipal();
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      // @include structureBlockPrincipal();
       .tutorial {
-        @include structureSousBlockTutoTest();
+        background-color: white;
+        padding: 40px;
+        width: 100%;
+        border: $border-table;
+        border-radius: $border-radius;
+        padding-top: 10px;
+        // @include structureSousBlockTutoTest();
         @include btn-color($yellow: false);
       }
       .test {
-        @include structureSousBlockTutoTest();
+        background-color: white;
+        padding: 40px;
+        width: 100%;
+        border: $border-table;
+        border-radius: $border-radius;
+        padding-top: 10px;
         @include btn-color($yellow: true);
+        @media #{$deviceMaxDesktop} {
+          height: auto !important;
+          margin-bottom: 20px;
+        }
+        // @include structureSousBlockTutoTest();
       }
     }
   }
@@ -184,7 +204,6 @@ button{
       font-weight: 300;
       display: block;
       &.text-gras {
-         
       }
       &.block-condition {
         .checkbox-condition {
@@ -200,7 +219,7 @@ button{
           cursor: pointer;
           .text-link {
             color: $color-principal-blue;
-             
+
             text-decoration: underline;
           }
         }

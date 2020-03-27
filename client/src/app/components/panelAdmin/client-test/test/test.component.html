@@ -82,6 +82,7 @@
               placeholder="Leave a comment" [(ngModel)]="responseUser"></textarea>
           </mat-form-field>
         </div>
+
       </div>
 
       <!--radio-->
@@ -109,7 +110,7 @@
        <!--algo-->
 
        <div *ngIf="question.type === 'algo'" class="scroll-auto-testing">
-        je suis le time algo
+        <app-algo [question]="question" [options]="options" [filename]="filename" [filetype]="filetype" ></app-algo>
       </div>
     </div>
 

@@ -50,7 +50,7 @@
     width: 15px;
     border: 2px solid #7e8082;
     display: inline-block;
-    border-radius: $border-radius;
+    border-radius: ($border-radius - 1);
     margin-top: 4px;
     cursor: pointer;
   }
@@ -59,10 +59,10 @@
     content: "";
     position: absolute;
     display: none;
-    left: 4px;
+    left: 3.2px;
     top: 0px;
-    width: 4px;
-    height: 9px;
+    width: 3px;
+    height: 7px;
     border: solid $color-white;
     border-width: 0 2px 2px 0;
     -webkit-transform: rotate(45deg);
@@ -96,8 +96,9 @@
   }
   .checkbox-span::after {
     border-color: #fff !important;
-    width: 4px !important;
-    height: 9px !important;
+    width: 3px !important;
+    height: 7px !important;
+    left: 3.2px!important;
   }
 
   input:checked ~ .checkbox-span {
@@ -455,7 +456,6 @@ tr.mat-row {
     border: $border-table;
     width: 100%;
     overflow: hidden;
-    border-bottom: none;
 
     &::-webkit-scrollbar {
       width: 8px;

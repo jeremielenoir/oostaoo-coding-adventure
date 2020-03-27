@@ -15,7 +15,6 @@ import { RouterLink } from '@angular/router';
 
 export interface DialogData {
   confirmed: boolean;
-
 }
 
 @Component({
