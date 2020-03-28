@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, transition, animate, style, state } from '@angular/animations';
 
 @Component({
@@ -24,13 +24,19 @@ import { trigger, transition, animate, style, state } from '@angular/animations'
 export class SliderComponent implements OnInit {
 
   currentIndex = 1;
+  intervalId: any;
 
   constructor() { }
 
   ngOnInit() {
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.onClickNav();
     },8000);
+  }
+
+  ngOnDestroy() {
+    console.log('DESTROY');
+    clearInterval(this.intervalId);
   }
 
   onClickNav() {

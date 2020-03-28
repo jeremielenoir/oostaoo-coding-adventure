@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import {CarouselComponent } from '../carousel/carousel.component';
 @Component({
   selector: 'app-fonctionnalite',
@@ -7,6 +7,7 @@ import {CarouselComponent } from '../carousel/carousel.component';
 })
 export class FonctionnaliteComponent implements OnInit {
   @ViewChild('carousel') private carousel : CarouselComponent;
+  intervalId: any;
   items = [
     { title: 'Slide 1', img_url:'slide_1.png' },
     { title: 'Slide 2', img_url:'slide_2.png' },
@@ -17,9 +18,14 @@ export class FonctionnaliteComponent implements OnInit {
 
   ngOnInit() {
     //console.log('CAROUSEL', this.carousel);
-    setInterval( () => {
+    this.intervalId = setInterval( () => {
       this.carousel.next();
     }, 6000);
+  }
+
+  ngOnDestroy() {
+    console.log('DESTROY', this.intervalId);
+    clearInterval(this.intervalId);
   }
 
 }
