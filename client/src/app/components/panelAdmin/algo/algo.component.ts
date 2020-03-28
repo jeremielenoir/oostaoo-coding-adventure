@@ -8,7 +8,7 @@ import {
 @Component({
   selector: "app-algo",
   templateUrl: "./algo.component.html",
-  styleUrls: ["./algo.component.css"]
+  styleUrls: ["./algo.component.scss"]
 })
 export class AlgoComponent {
   @Input() question: any = { content: "", extension: "" };

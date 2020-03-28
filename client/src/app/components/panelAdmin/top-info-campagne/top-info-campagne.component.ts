@@ -207,6 +207,7 @@ export class TopInfoCampagneComponent implements OnInit {
       questions: this.updateQuestionsCampaign
     }).subscribe(
       (res) => {
+        this.openSnackBar("La campagne a correctement été mise à jour", "Fermer");
         console.log('this.yourCampaign',this.yourCampaign[0])
       },
       err => console.log(err)
