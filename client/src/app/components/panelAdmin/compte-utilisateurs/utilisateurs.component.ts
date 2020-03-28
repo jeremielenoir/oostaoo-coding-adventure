@@ -246,6 +246,7 @@ export class UtilisateursComponent implements OnInit {
       .then(res => {
         console.log(res);
         this.users = this.users.filter(user => user.id !== id);
+        this.openSnackBar('L\'utilisateur a correctement été supprimé', 'Fermer');
       })
       .then(res => console.log(res))
       .catch(e => console.log('error : ', e));
@@ -276,6 +277,7 @@ export class UtilisateursComponent implements OnInit {
       this.addPassword.value !== this.confirmPassword.value ||
       this.addUsername.value === ''
     ) {
+      this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
       return;
     }
 
@@ -303,6 +305,7 @@ export class UtilisateursComponent implements OnInit {
         console.log(res);
         this.ngOnInit();
         this.param_cog_non_active();
+        this.openSnackBar('L\'utilisateur a correctement été ajouté', 'Fermer');
       })
       .catch((err) => {
         this._snackBar.open(err, undefined, {duration: 3000});
@@ -358,124 +361,6 @@ export class UtilisateursComponent implements OnInit {
         });
     }
   }
-
-  // public Hundelesubmit() {
-  //   const prenom = this.formulaire.nativeElement.prenom.value;
-  //   const nom = this.formulaire.nativeElement.nom.value;
-  //   const email = this.formulaire.nativeElement.email.value;
-
-  //   if (prenom === '') {
-  //     return this.prenomIsactive;
-  //   }
-
-  //   if (nom === '') {
-  //     this.nomIsactive = true;
-  //   }
-
-  //   if (email === '') {
-  //     this.emailIsactive = true;
-  //   }
-  // }
-
-  // public is_valid_prenom(event) {
-  //   const champValue = event.target.value;
-
-  //   if (champValue.length < 1) {
-  //     this.prenomIsactive = true;
-  //   } else {
-  //     this.prenomIsactive = false;
-  //   }
-  // }
-
-  // public is_valid_nom(event) {
-  //   const champValue = event.target.value;
-
-  //   if (champValue.length < 1) {
-  //     this.nomIsactive = true;
-  //   } else {
-  //     this.nomIsactive = false;
-  //   }
-  // }
-
-  // public is_valid_emaill(event) {
-  //   const verifyMail = /^(([^<>()[\]\\.,;:\s@\']+(\.[^<>()[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-  //   const champValue = event.target.value;
-
-  //   if (champValue.length < 1) {
-  //     this.emailIsactive = true;
-  //     this.Textmail = 'Obligatoire';
-  //   } else {
-  //     if (verifyMail.test(champValue)) {
-  //       this.Textmail = 'Obligatoire';
-  //       this.emailIsactive = false;
-  //     } else {
-  //       this.emailIsactive = true;
-  //       this.Textmail = 'Email invalide';
-  //     }
-  //   }
-  // }
-
-  // // update form
-  // public is_valid_prenom_update(event) {
-  //   const champValue = event.target.value;
-
-  //   this.PrenomValue = '';
-
-  //   console.log(champValue);
-
-  //   if (champValue.length < 1) {
-  //     this.prenomIsactiveUpdate = true;
-  //   } else {
-  //     this.prenomIsactiveUpdate = false;
-  //   }
-  // }
-
-  // public is_valid_nom_update(event) {
-  //   const champValue = event.target.value;
-
-  //   this.NomValue = '';
-
-  //   if (champValue.length < 1) {
-  //     this.nomIsactiveUpdate = true;
-  //   } else {
-  //     this.nomIsactiveUpdate = false;
-  //   }
-  // }
-
-  // public is_valid_email_update(event) {
-  //   const verifyMail = /^(([^<>()[\]\\.,;:\s@\']+(\.[^<>()[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-  //   const champValue = event.target.value;
-
-  //   this.EmailValue = event.target.value;
-
-  //   if (champValue.length < 1) {
-  //     this.emailIsactiveUpdate = true;
-  //     this.Textmail = 'Obligatoire';
-  //   } else {
-  //     if (verifyMail.test(champValue)) {
-  //       this.Textmail = 'Obligatoire';
-  //       this.emailIsactiveUpdate = false;
-  //     } else {
-  //       this.emailIsactiveUpdate = true;
-  //       this.Textmail = 'Email invalide';
-  //     }
-  //   }
-  // }
-
-  /**
-  async getUser(): Promise<any> {
-    try {
-      const datas = await this.apiClientService
-        .get(API_URI_USER_ADMIN + '/' + 1)
-        .toPromise();
-      return (this.user = [datas]);
-    } catch (err) {
-      return err;
-    }
-  }
-*/
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

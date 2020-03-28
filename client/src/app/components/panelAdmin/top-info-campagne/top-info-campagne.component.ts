@@ -1,6 +1,5 @@
 import { Component, OnInit, Input,OnChanges, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
 import Chart from 'chart.js';
-// @import"../../../../../node_modules/chart.js/dist/Chart.min.js";
 import {FormGroup} from '@angular/forms';
 import {
   ApiClientService,
@@ -208,6 +207,7 @@ export class TopInfoCampagneComponent implements OnInit {
       questions: this.updateQuestionsCampaign
     }).subscribe(
       (res) => {
+        this.openSnackBar("La campagne a correctement été mise à jour", "Fermer");
         console.log('this.yourCampaign',this.yourCampaign[0])
       },
       err => console.log(err)
@@ -217,10 +217,9 @@ export class TopInfoCampagneComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 3000,
+      duration: 6000,
     });
   }
-
   
   postCampagne() {
     // Confirm true for post
@@ -262,6 +261,7 @@ export class TopInfoCampagneComponent implements OnInit {
             // console.log("resultat from post", res);
             this.SendQuestionSeleditd(res.id);
             this.router.navigate([`/dashboard/campaigns/${res.id}/candidats`])
+            this.openSnackBar("La campagne a correctement été enregistrée", "Fermer");
           },
           err => console.log(err)
         );

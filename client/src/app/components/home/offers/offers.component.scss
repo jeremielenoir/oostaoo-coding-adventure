@@ -1,19 +1,18 @@
-@import '../../../../roodeo-variables.scss';
-@import '../accueil/accueil.component.scss';
+@import "../../../../roodeo-variables.scss";
+@import "../accueil/accueil.component.scss";
 
 #offers {
   position: relative;
-  -webkit-box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
-  box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
-  padding-top: 110px;
+  -webkit-box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4);
+  box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4);
+  padding-top: 20px;
   border-bottom: $border-table;
-
 }
 
 #goBack {
   position: absolute;
-  top: 160px;
-  left: -25px;
+  top: 148px;
+  left: -24px;
   height: 50px;
 
   background-color: $color-principal-blue;
@@ -52,94 +51,102 @@
   .lab-item.mat-card {
     flex: 1;
     display: flex;
-    margin: 20px 20px;
-    min-width: 300px;
-    max-width: 400px;
-    flex-direction: column;
-    border: $border-table;
-    -webkit-box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4);
-    box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4);
-    align-items: center;
-    height: 400px;
-    .mat-card-icon {
-      font-size: 60px;
-      color: $color-blue-light;
-    }
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 40px 0px;
 
-    .mat-card-content {
-      padding: 5px 10px;
+    .lab-item.mat-card {
+      flex: 1;
       display: flex;
+      margin: 20px 20px;
+      min-width: 300px;
+      max-width: 400px;
       flex-direction: column;
+      border: $border-table;
+      -webkit-box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4);
+      box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4);
       align-items: center;
-
-      ul {
-        color: $color-principal-blue li {
-          list-style: square;
-        }
+      height: 400px;
+      .mat-card-icon {
+        font-size: 60px;
+        color: $color-blue-light;
       }
 
-      .mat-card-title {
-        text-align: center;
-        font-size: 18px;
-        color: $color-principal-blue;
-        border: $border-table;
-        border-radius: 20px;
-        padding: 10px;
-        width: 100%;
-      }
-
-      .mat-card-subtitle {
-        margin: 0px 0px;
-        text-align: center;
-        font-size: 28px;
-        color: $color-principal-blue;
-      }
-
-      .mat-card-actions {
-        position: absolute;
-        bottom: 10px;
-
-        button {
-          padding: 0 50px;
-        }
-      }
-    }
-
-    &.highlight {
-      background: #1f3662;
       .mat-card-content {
-        .mat-card-title,
-        .mat-card-subtitle,
-        .mat-card-icon,
+        padding: 5px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
         ul {
-          color: $color-white;
+          color: $color-principal-blue li {
+            list-style: square;
+          }
         }
-        .offer-desc {
-          color: $color-white;
+
+        .mat-card-title {
+          text-align: center;
+          font-size: 18px;
+          color: $color-principal-blue;
+          border: $border-table;
+          border-radius: 20px;
+          padding: 10px;
+          width: 100%;
+        }
+
+        .mat-card-subtitle {
+          margin: 0px 0px;
+          text-align: center;
+          font-size: 28px;
+          color: $color-principal-blue;
+        }
+
+        .mat-card-actions {
+          position: absolute;
+          bottom: 10px;
+
+          button {
+            padding: 0 50px;
+          }
         }
       }
-      .mat-card-actions button {
-        background: $color-orange;
-        color: $color-white;
+
+      &.highlight {
+        background: #1f3662;
+        .mat-card-content {
+          .mat-card-title,
+          .mat-card-subtitle,
+          .mat-card-icon,
+          ul {
+            color: $color-white;
+          }
+          .offer-desc {
+            color: $color-white;
+          }
+        }
+        .mat-card-actions button {
+          background: $color-orange;
+          color: $color-white;
+        }
       }
     }
-  }
 
-  .lab-item {
-    border: 1px solid $color-orange;
-    background-color: $color-white;
-    border-radius: 15px;
-    outline: none;
-    font-size: $font-size-home;
-    color: $color-principal-blue;
-
-    .lab-item-button {
-      color: $color-orange;
+    .lab-item {
       border: 1px solid $color-orange;
+      background-color: $color-white;
+      border-radius: 15px;
+      outline: none;
+      font-size: $font-size-home;
+      color: $color-principal-blue;
 
-      &:hover {
-        border: $border-table;
-        color: $color-principal-blue;
+      .lab-item-button {
+        color: $color-orange;
+        border: 1px solid $color-orange;
+
+        &:hover {
+          border: $border-table;
+          color: $color-principal-blue;
+        }
       }
     }
   }

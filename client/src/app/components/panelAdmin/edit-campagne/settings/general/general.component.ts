@@ -85,6 +85,7 @@ export class GeneralComponent implements OnInit {
       expiration_date: this.formatDate(this.NewDateExp),
     }).subscribe(
       (res) => {
+        this.openSnackBar("La campagne a correctement été mise à jour", "Fermer")
        // console.log('res', res);
       },
       err => console.log(err)
@@ -93,7 +94,7 @@ export class GeneralComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 3000,
+      duration: 6000,
     });
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar} from '@angular/material';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -9,12 +9,17 @@ import {
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { Router } from '@angular/router';
 
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 @Component({
   selector: 'app-candidats-mail',
   templateUrl: './candidats-mail.component.html',
   styleUrls: ['./candidats-mail.component.scss']
 })
 export class CandidatsMailComponent implements OnInit {
+  
+  public Editor = ClassicEditor;
+
   public campaigns: any;
   public candidats: any;
   public nbCandidat: number;
@@ -31,7 +36,6 @@ export class CandidatsMailComponent implements OnInit {
   public offer_id: any;
   public tests_available: any;
   public user_id: any;
-
   constructor(private router: Router,
     @Inject(MAT_DIALOG_DATA) public data,
     public apiClientService: ApiClientService,
@@ -114,8 +118,10 @@ export class CandidatsMailComponent implements OnInit {
           console.log('res', res.id);
           const idCandidat = [];
           idCandidat.push(res.id);
+          this.openSnackBar("Un mail d'invitation a correctement été envoyé", "Fermer");
           return idCandidat;
         }, err => {
+          this.openSnackBar("Une erreur est survenue", "Fermer");
           console.log('log error', err)
         }
       )
@@ -126,7 +132,7 @@ export class CandidatsMailComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 3000,
+      duration: 6000,
     });
   }
 

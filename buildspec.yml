@@ -3,6 +3,7 @@ version: 0.2
 env:
   variables:
     JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
+    NODE_OPTIONS: "--max_old_space_size=8192"
     
 phases:
   install:
@@ -24,6 +25,7 @@ phases:
       - echo Entered the build phase...
       - echo Build started on `date`
       - export NODE_OPTIONS=--max_old_space_size=8192
+      - echo $NODE_OPTIONS
       - cd ../client && yarn run build
       - mkdir ../server/public
       - cp -R ./dist/client/* ../server/public/

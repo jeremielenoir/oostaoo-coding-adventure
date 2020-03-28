@@ -36,8 +36,12 @@
       border: $border-table;
       border-radius: $border-radius;
 
+      // p:nth-last-child(2) {
+      //   margin-bottom: 40px;
+      // }
+
       .logoSupport {
-        margin-bottom: 60px;
+        margin-bottom: 30px;
 
         img {
           width: 300px;

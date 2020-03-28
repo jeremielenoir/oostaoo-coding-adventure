@@ -5,8 +5,24 @@
 }
 #element_open_trust {
     transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
-    padding: 0px 0px 140px 0px;
+    padding: 0px 0px 60px 0px;
     position: relative;
+}
+
+.carousel-item{
+    //display: none;
+    height: 350px;
+    &.active{
+        display: block;
+    }
+}
+
+.navigation-buttons{
+    width: 100%;
+    text-align: center;
+    a{
+        cursor: pointer;
+    }
 }
 
 .title-heading-block{
@@ -16,7 +32,7 @@
         text-transform: uppercase;
         color:$color-principal-blue;
         font-size:22px;
-        margin-top: 42px;
+        margin-top: 60px;
         margin-bottom: 22px;
         text-align: center;
         letter-spacing: 1px;

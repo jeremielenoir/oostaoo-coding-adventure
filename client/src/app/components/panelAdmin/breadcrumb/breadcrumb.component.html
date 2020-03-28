@@ -1,3 +1,16 @@
 <div class="header-notification">
-  <p class="breadrumb"><a class="first" [routerLink]="['/dashboard/campaigns']">Dashboard</a> <a>{{namePage}}</a></p>
+  <p class="breadrumb">
+    <a class="first" [routerLink]="['/dashboard/campaigns']">Dashboard</a> <a>{{namePage}}</a>
+    <mat-icon class="cursor-click" (click)="showHiddenNavigation()"> {{listNavigation ? showNavigation ? 'keyboard_arrow_up' : 'keyboard_arrow_down': '' }}</mat-icon>
+    <span *ngIf="listNavigation && showNavigation" class="roodeo-fix-navigation">
+      <span class="roodeoo-navigation">
+        <ul>
+          <li class="roodeo-fix-text" *ngFor="let navigation of listNavigation">
+            <a (click)="showNavigation = false" class="roodeo-color-link" [routerLink]="['/dashboard/faq', navigation]">{{navigation}}</a>
+          </li>
+        </ul>
+      </span>
+    </span>
+    
+  </p>
 </div>

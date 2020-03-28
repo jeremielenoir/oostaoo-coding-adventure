@@ -7,7 +7,8 @@ import {
   ViewChild,
   ElementRef,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  Inject
 } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import {
@@ -15,7 +16,7 @@ import {
   moveItemInArray,
   transferArrayItem
 } from "@angular/cdk/drag-drop";
-import { MatBottomSheet, MatBottomSheetRef } from "@angular/material";
+import { MatBottomSheet, MatBottomSheetRef, MatDialog, MatDialogRef, MAT_DIALOG_DATA, } from "@angular/material";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 
 import {
@@ -25,13 +26,17 @@ import {
 } from "../../../api-client/api-client.service";
 import { Router } from "@angular/router";
 
+export interface DialogData {
+  questions;
+}
+
 @Component({
   selector: "app-question-component",
   templateUrl: "./question.component.html",
   styleUrls: ["./question.component.scss","../nouvelle-campagne/nouvelle-campagne.component.scss"]
 })
 export class QuestionComponent implements OnInit {
- 
+
   @Input('formCampagne') formCampagne: FormGroup;
   @Input() datas = [];
   @Input() allQuestionLevel = [];
@@ -97,7 +102,8 @@ export class QuestionComponent implements OnInit {
   constructor(
     public apiClientService: ApiClientService,
     public decryptTokenService: DecryptTokenService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -114,7 +120,7 @@ export class QuestionComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges){
     console.log('aerorpt man -->',changes.allQuestionLevel)
     if(this.allQuestionLevel && this.allQuestionLevel.length > 0){
-      this.booleanCampagnFinishLoading = true
+      this.booleanCampagnFinishLoading = true;
     }
 
   }
@@ -222,6 +228,15 @@ export class QuestionComponent implements OnInit {
     this.boelanIsSearchAdvenced = !this.boelanIsSearchAdvenced
   }
 
+  openDialogTest(idCampaign): void {
+    const dialogRef = this.dialog.open(DialogOverviewTest, {
+      data: {questions: this.allQuestionLevel}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
   // filtreTechno(element) {
 
   //   const valueChecked = [];
@@ -259,3 +274,23 @@ export class QuestionComponent implements OnInit {
 //     event.preventDefault();
 //   }
 // }
+
+@Component({
+  selector: 'dialog-overview-test',
+  templateUrl: 'dialog-overview-test.html',
+})
+export class DialogOverviewTest{
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewTest>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  onClick(): void {
+    console.log(this.data);
+    this.dialogRef.close();
+  }
+
+
+}

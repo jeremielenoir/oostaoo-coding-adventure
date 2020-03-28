@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getResultsDefinition } from '../../panelAdmin/edit-campagne/candidats/getResultsDefinition.js';
 import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from '../../../../assets/pdfmake-font-builds/vfs_fonts';
+//import pdfFonts from '../../../../assets/pdfmake-font-builds/vfs_fonts';
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+//pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 pdfMake.fonts = {
   FontAwesome: {

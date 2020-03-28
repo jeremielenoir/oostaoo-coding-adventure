@@ -3,54 +3,15 @@
     class="demo-one"
     drag-scroll-y-disabled="true"
     scrollbar-hidden="true"
+    #slideMarques
   >
     <img
-      drag-scroll-item
-      src="../../assets/Coding-game-img/Page-accueil/marques/EA.png"
-    />
-    <img
-      drag-scroll-item
-      src="../../assets/Coding-game-img/Page-accueil/marques/SG.PNG"
-    />
-    <img
-      drag-scroll-item
-      src="../../assets/Coding-game-img/Page-accueil/marques/EA.png"
-    />
-    <img
-      drag-scroll-item
-      src="../../assets/Coding-game-img/Page-accueil/marques/SG.PNG"
-    />
-    <img
-      drag-scroll-item
-      src="../../assets/Coding-game-img/Page-accueil/marques/EA.png"
-    />
-    <img
-      drag-scroll-item
-      src="../../assets/Coding-game-img/Page-accueil/marques/SG.PNG"
-    />
-    <img
-      drag-scroll-item
-      src="../../assets/Coding-game-img/Page-accueil/marques/EA.png"
-    />
-    <img
-      drag-scroll-item
-      src="../../assets/Coding-game-img/Page-accueil/marques/SG.PNG"
-    />
-    <img
-      drag-scroll-item
-      src="../../assets/Coding-game-img/Page-accueil/marques/EA.png"
-    />
-    <img
-      drag-scroll-item
-      src="../../assets/Coding-game-img/Page-accueil/marques/SG.PNG"
-    />
-    <img
-      drag-scroll-item
-      src="../../assets/Coding-game-img/Page-accueil/marques/EA.png"
-    />
-    <img
-      drag-scroll-item
-      src="../../assets/Coding-game-img/Page-accueil/marques/SG.PNG"
+      drag-scroll-item *ngFor="let image of srcImages"
+      [src]="'../../assets/Coding-game-img/Page-accueil/marques/' + image.srcImg"
     />
   </drag-scroll>
 </div>
+<!-- <div>
+  <button (click)="moveLeft()">TEST BUTTON LEFT</button>
+  <button (click)="moveRight()">TEST BUTTON RIGTH</button>
+</div> -->

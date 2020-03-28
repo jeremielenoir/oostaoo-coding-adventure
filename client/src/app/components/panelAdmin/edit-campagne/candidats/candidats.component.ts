@@ -13,11 +13,11 @@ import { getResultsDefinition } from './getResultsDefinition';
 import pdfMake from 'pdfmake/build/pdfmake';
 // font build has to be committed otherwise each developers has to build font locally.
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
-import pdfFonts from '../../../../../assets/pdfmake-font-builds/vfs_fonts';
+//import pdfFonts from '../../../../../assets/pdfmake-font-builds/vfs_fonts';
 
 
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+//pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 pdfMake.fonts = {
   FontAwesome: {
@@ -54,6 +54,7 @@ export class CandidatsComponent implements OnInit {
   public idElementExported: any;
   public bolleanAnonymiser: boolean;
   public bolleanDeleteCandidat: boolean;
+  public allcheckedActivetedBolean = false
   datePipe = new DatePipe('fr');
   ViewCandidats;
   isLoading = true;
@@ -92,6 +93,7 @@ export class CandidatsComponent implements OnInit {
   ];
 
   openDialog() {
+    let firstCheckAction = document.querySelector('#first-check-action');
     const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
       data: this.globalId,
       height: '580px'
@@ -99,7 +101,8 @@ export class CandidatsComponent implements OnInit {
 
     inviteCandidatDialog.afterClosed().subscribe((data) => {
       this.getCampaign().then(datas => {
-        console.log('AFTER CLOSE ALL DATAS', datas);
+       
+        console.log('AFTER CLOSE ALL DATAS',this.nbrSelectedElementChecked);
       });
     });
 
@@ -136,7 +139,7 @@ export class CandidatsComponent implements OnInit {
   }
 
 
-  checkedAction(e, check, itemBolean, infosCandidats) {
+  checkedAction(e) {
 
     e.stopPropagation();
     let element = e.target;
@@ -151,19 +154,22 @@ export class CandidatsComponent implements OnInit {
 
     if (this.nbrSelectedElementChecked.length !== this.candidats.length) {
       firstCheckAction['checked'] = false;
+      this.allcheckedActivetedBolean = false
     } else {
       firstCheckAction['checked'] = true;
+      this.allcheckedActivetedBolean = true
     }
 
   }
 
-  allcheckedActiveted(e, allChecked, infosCandidats) {
+  allcheckedActiveted(e) {
 
     this.nbrSelectedElementChecked = [];
     let checkElements = document.querySelectorAll('.check-action-candidat');
     checkElements.forEach(check => {
       if (e.target.checked) {
         check['checked'] = true;
+        this.allcheckedActivetedBolean = true
         this.nbrSelectedElementChecked.push(check['value'])
       } else {
         check['checked'] = false;
@@ -264,6 +270,14 @@ export class CandidatsComponent implements OnInit {
   }
 
   getCampaign(): Promise<any> {
+
+   setTimeout(() => {
+    this.allcheckedActivetedBolean = false;
+    this.nbrSelectedElementChecked = []
+   }, 100);
+
+    console.log('hello famady')
+    
     const apiURL = API_URI_CAMPAIGNS + '/' + this.globalId;
     return this.apiClientService
       .get(apiURL)
@@ -314,7 +328,7 @@ export class CandidatsComponent implements OnInit {
         this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
 
         for (const candidat of this.candidats) {
-          console.log('candidat : ', candidat);
+         
 
           if (candidat.duree !== null) {
             // console.log('candidat : ', candidat);
@@ -380,6 +394,7 @@ export class CandidatsComponent implements OnInit {
       .catch(error => {
         console.log('ERROR', error);
       });
+      
   }
 
 

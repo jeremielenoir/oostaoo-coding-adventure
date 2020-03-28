@@ -32,13 +32,14 @@ import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
 import { ContactSupportComponent } from './components/panelAdmin/contact-support/contact-support.component';
 import { AboutUsComponent } from './components/home/about-us/about-us.component';
 import { AlgoComponent } from './components/panelAdmin/algo/algo.component';
-import { ContactFormularComponent } from './components/panelAdmin/contact-support/contact-formular/contact-formular.component'
+import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.component';
+import { ContactUsComponent } from './components/home/contact-us/contact-us.component';
 
 const routes: Routes = [
 
   {
     path: 'algo',
-    component: AlgoComponent
+    component: AlgotestComponent
   },
   {
     path: 'evaluate',
@@ -52,7 +53,7 @@ const routes: Routes = [
   },
   {
     path: 'contact',
-    component: ContactFormularComponent
+    component: ContactUsComponent
   },
   {
     path: 'home',
@@ -154,6 +155,10 @@ const routes: Routes = [
   },
   {
     path: 'dashboard/faq',
+    component: FAQComponent
+  },
+  {
+    path: 'dashboard/faq/:dynamicParams',
     component: FAQComponent
   },
   {

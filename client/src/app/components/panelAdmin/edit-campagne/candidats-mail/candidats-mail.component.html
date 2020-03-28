@@ -13,27 +13,27 @@
 
   <div >
   <div class="sroll-body">
-    <div class="col-12 form-group">
+    <div class="form-row">
 
       <label>Sujet :</label>
 
-      <input type="" name="" class="form-control" [(ngModel)]="sujet" *ngIf="show" />
-      <p *ngIf="!show">{{sujet}}</p>
-
+      <input class="form-input" type="" name="" class="" [(ngModel)]="sujet" *ngIf="show" />
+      <p *ngIf="!show" class="sujet-title">{{sujet}}</p>
     </div>
     <br />
 
-    <div class="col-12 form-group ">
+    <div [class.message-personaliser-form]="show">
 
       <label>Message :</label>
 
-      <!--app-ngx-editor *ngIf="show" [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="htmlContent">
-      </app-ngx-editor>
-      <div *ngIf="!show" [innerHTML]="htmlContent"></div-->
+      <ckeditor [editor]="Editor" [(ngModel)]="htmlContent" *ngIf="show"></ckeditor>
+      <!-- <app-ngx-editor *ngIf="show" [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="htmlContent">
+      </app-ngx-editor> -->
+      <div *ngIf="!show" [innerHTML]="htmlContent" class="htmlContent"></div>
     </div>
   </div>
 
-  <div class="col-12 block-button">
+  <div class="block-button">
     <button (click)="updateCampaignPostCandidats()">
       ENVOYER EMAIL
     </button>

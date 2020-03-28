@@ -1,4 +1,5 @@
 @import"../../../../../../roodeo-variables.scss";
+// @import"../candidats.component.scss";
 
 #content{
     width: 100%;
@@ -16,6 +17,7 @@
     padding: 15px 30px;
     margin: auto;
     width: 98%;
+    line-height: 40px;
 }
 
 .header_result{
@@ -23,6 +25,9 @@
     justify-content: space-between;
     width: 70%;
     text-align: center;
+    align-items: center;
+    padding-top:9px;
+    padding-bottom: 9px;
 }
 
 .header_stats{
@@ -64,10 +69,15 @@
 }
 
 .separator{
-    border-style:dashed;
+    border:1px solid #ddd;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .separator_red{
-    color: $color-orange;
-    background: $color-orange;
+    border:1px solid #ddd;
+    margin: 9px 0px;
 }

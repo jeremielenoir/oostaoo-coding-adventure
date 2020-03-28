@@ -1,35 +1,49 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, Input } from "@angular/core";
+import { HttpHeaders } from "@angular/common/http";
+import {
+  ApiClientService,
+  EXECUTE_SCRIPT
+} from "src/app/api-client/api-client.service";
 
 @Component({
   selector: "app-algo",
   templateUrl: "./algo.component.html",
-  styleUrls: ["./algo.component.css"]
+  styleUrls: ["./algo.component.scss"]
 })
-export class AlgoComponent implements OnInit {
-  @Input() question = {};
-  editorOptions = { theme: "vs-white", language: "java" };
-  code: string = `
+export class AlgoComponent {
+  @Input() question: any = { content: "", extension: "" };
+  @Input() options: any = {};
+  @Input() filename: any = {};
+  @Input() filetype: any = {};
+  public result: any = false;
+  public loading: boolean = false;
 
-  import java.util.HashMap;
-  
-  public class Main {
-    public static void main(String[] args) {
-  
-      HashMap<String, Integer> map = new HashMap<>();
-  
-      map.put("Ehfall", 34);
-      map.put("Jacky", 34);
-      map.put("lili", 34);
-      map.put("toto", 35);
-      for(Integer i :map.values()){
-        System.out.println(i);
-      }
-  
+  constructor(public apiClientService: ApiClientService) {}
+  async testCode() {
+    try {
+      this.loading = true;
+      const file = new File([this.question.content.toString()], this.filename, {
+        type: this.filetype
+      });
+
+      const formData: FormData = new FormData();
+      formData.append("files", file, file.name);
+
+      this.apiClientService
+        .post(EXECUTE_SCRIPT, formData)
+        .toPromise()
+        .then(data => {
+          console.log("data",data)
+          this.loading = false;
+          this.result = data
+        })
+        .catch(error => {
+          console.log("error",error)
+          this.loading = false;
+          this.result = error
+        });
+    } catch (error) {
+      throw error;
     }
-  }"
-  
-  `;
-  constructor() {}
-
-  ngOnInit() {}
+  }
 }

@@ -1,0 +1,52 @@
+@import "../../../../../roodeo-variables.scss";
+
+#container {
+  width: 100%;
+  height: 100%;
+  background-color: $color-background-blue;
+  padding-top: 40px;
+
+  .content {
+    padding: 10px;
+    display: flex;
+    width: 98%;
+    margin: 0 auto;
+    background: $color-background-blue;
+
+    .title {
+      font-size: 36px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    /* Section 2 */
+
+    #section2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 98%;
+      margin: 18px auto 0;
+      background: white;
+      padding: 40px 50px;
+      border: $border-table;
+      border-radius: $border-radius;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #global {
+    display: block;
+  }
+  #section2 {
+    padding: 10px 10px !important;
+  }
+  .content {
+    flex-direction: column;
+  }
+}

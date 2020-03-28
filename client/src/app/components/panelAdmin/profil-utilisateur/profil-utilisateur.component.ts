@@ -8,7 +8,7 @@ import {
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { Snapper } from 'igniteui-angular-charts';
+// import { Snapper } from 'igniteui-angular-charts';
 
 @Component({
   selector: 'app-profil-utilisateur',
@@ -93,7 +93,7 @@ export class ProfilUtilisateurComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 3000
+      duration: 6000,
     });
   }
 
@@ -105,6 +105,7 @@ export class ProfilUtilisateurComponent implements OnInit {
       this.pays.value === '' ||
       this.langue.value === 'value'
     ) {
+      this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
       return console.log('Erreur veuillez remplir tout les champs requis');
     } else {
       this.apiClientService
@@ -119,6 +120,7 @@ export class ProfilUtilisateurComponent implements OnInit {
         })
         .subscribe(
           res => {
+            this.openSnackBar('Le profil a correctement été mis à jour', 'Fermer');
             // console.log('res', res);
           },
           err => console.log(err)
@@ -143,9 +145,10 @@ export class ProfilUtilisateurComponent implements OnInit {
       })
       .subscribe(
         res => {
+          this.openSnackBar('La signature a correctement été modifiée', 'Fermer');
           // console.log('res', res);
         },
-        err => console.log(err)
+        err => this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer')
       );
     console.log('form signature =', this.signature.value);
   }
@@ -158,6 +161,7 @@ export class ProfilUtilisateurComponent implements OnInit {
       this.email.invalid ||
       this.newEmail.invalid
     ) {
+      this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
       return console.log('Erreur veuillez remplir tout les champs requis');
     } else {
       this.apiClientService
@@ -166,6 +170,7 @@ export class ProfilUtilisateurComponent implements OnInit {
         })
         .subscribe(
           res => {
+            this.openSnackBar('L\'email a correctement été modifié', 'Fermer');
             // console.log('res', res);
           },
           err => console.log(err)
@@ -181,6 +186,7 @@ export class ProfilUtilisateurComponent implements OnInit {
       this.newpassword.value === '' ||
       this.newpassword.value !== this.confirmpassword.value
     ) {
+      this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
       return console.log('Erreur le mot de passe n\'a pas été modifié ');
     } else {
       this.apiClientService
@@ -189,6 +195,7 @@ export class ProfilUtilisateurComponent implements OnInit {
         })
         .subscribe(
           res => {
+            this.openSnackBar('Le mot de passe a correctement été modifié', 'Fermer');
             // console.log('res', res);
           },
           err => console.log(err)

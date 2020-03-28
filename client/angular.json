@@ -32,7 +32,6 @@
               "./node_modules/swiper/css/swiper.min.css"
             ],
             "scripts": [
-              "./node_modules/angular4-word-cloud/d3.min.js",
               "./node_modules/prismjs/prism.js",
               "./node_modules/prismjs/components/prism-css.min.js",
               "./node_modules/prismjs/components/prism-javascript.min.js",

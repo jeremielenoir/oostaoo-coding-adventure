@@ -185,6 +185,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       this.newPhone.value === '' ||
       this.newEmail.invalid
     ) {
+      this.openSnackBar('Une erreur est survenue, veuillez correctement remplir tous les champs requis', 'Fermer');
       return console.log('password not updated');
     } else {
       // if (this.account.tests_stock !== -1) {
@@ -202,6 +203,7 @@ export class ProfilEntrepriseComponent implements OnInit {
         .subscribe(
           res => {
             this.ngOnInit();
+            this.openSnackBar('L\'entreprise a correctement été ajoutée', 'Fermer');
           },
           err => console.log(err)
         );
@@ -210,7 +212,7 @@ export class ProfilEntrepriseComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 3000
+      duration: 6000,
     });
   }
 

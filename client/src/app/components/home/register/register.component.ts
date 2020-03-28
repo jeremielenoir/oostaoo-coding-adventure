@@ -121,7 +121,7 @@ export class RegisterComponent implements OnInit {
 
     // stop if form is invalid
     if (this.loginForm.invalid) {
-      return;
+      this.openSnackBar("Une erreur est survenue, veuillez remplir correctement tous les champs requis", "Fermer");
     }
 
     this.loading = true;
@@ -145,7 +145,7 @@ export class RegisterComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 3000,
+      duration: 6000,
     });
   }
 
@@ -161,6 +161,7 @@ export class RegisterComponent implements OnInit {
       this.fr.confirmpassword.value === '' ||
       this.fr.passwordregister.value !== this.fr.confirmpassword.value ||
       this.fr.recaptcha.value === '') {
+        this.openSnackBar("Une erreur est survenue, veuillez remplir correctement tous les champs requis", "Fermer");
     } else {
 
       this.loading = true;
@@ -222,7 +223,7 @@ export class DialogForgetPassword {
 
     openSnackBar(message: string, action) {
       this._snackBar.open(message, action, {
-        duration: 3000,
+        duration: 6000,
       });
     }
 

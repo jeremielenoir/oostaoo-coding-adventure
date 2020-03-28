@@ -11,10 +11,25 @@
 
 // roodeo themes variables
 
+.cdk-overlay-container {
+  z-index: 9999!important;
+}
+
 .invalid-feedback, .alert-danger {
   color: red;
 }
 
+.mat-snack-bar-container {
+  background-color: $color-principal-blue;
+  color: $color-white;
+  display: flex;
+  text-align: center;
+  z-index: 99999;
+}
+
+.mat-simple-snackbar-action {
+  color: $color-gray;
+}
 
 .loading{
 
@@ -100,7 +115,7 @@ height: 17px;
 width: 17px;
 border: 2px solid #7e8082;
 display: inline-block;
-border-radius: $border-radius;
+border-radius: ($border-radius - 1);
 margin-top: 4px;
 }
 

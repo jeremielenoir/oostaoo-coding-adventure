@@ -19,6 +19,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CountUpModule } from 'countup.js-angular2';
 import { DragScrollModule } from 'ngx-drag-scroll';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 // import components
 import { NavbarComponent } from './components/home/navbar/navbar.component';
@@ -35,6 +36,9 @@ import {
   RouteComponentComponent,
   DistConnecTed
 } from './components/panelAdmin/navbar/route-component.component';
+
+import { CarouselComponent, CarouselItemElement } from './components/home/carousel/carousel.component';
+import { CarouselItemDirective } from './components/home/carousel/carousel-item.directive';
 import { AccueilComponent } from './components/home/accueil/accueil.component';
 
 import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
@@ -103,15 +107,18 @@ import { QuestionComponent } from './components/panelAdmin/question/question.com
 import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campagne/top-info-campagne.component';
 import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
 import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
-import { IgxDoughnutChartModule } from 'igniteui-angular-charts';
+// import { IgxDoughnutChartModule } from "igniteui-angular-charts";
 import { NgxCaptchaModule } from 'ngx-captcha';
-import { AgWordCloudModule } from 'angular4-word-cloud';
 import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
 import { ContactSupportComponent } from './components/panelAdmin/contact-support/contact-support.component';
 import { AboutUsComponent } from './components/home/about-us/about-us.component';
 import { AlgoComponent } from './components/panelAdmin/algo/algo.component';
 import { ContactFormularComponent } from './components/panelAdmin/contact-support/contact-formular/contact-formular.component';
 import { ContactJoinUsComponent } from './components/panelAdmin/contact-support/contact-join-us/contact-join-us.component';
+import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.component';
+import { ContactUsComponent } from './components/home/contact-us/contact-us.component';
+import { TypeFaqPipe } from './components/panelAdmin/FAQ/faq.pipes';
+import { AboutTeamComponent } from './components/home/about-us/about-team/about-team.component';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -126,7 +133,7 @@ import { ContactJoinUsComponent } from './components/panelAdmin/contact-support/
     CandidatsMailComponent,
     DialogOverviewDelete,
     DialogOverviewDuplicate,
-    DialogForgetPassword
+    DialogForgetPassword,
   ],
   declarations: [
     AppComponent,
@@ -193,7 +200,15 @@ import { ContactJoinUsComponent } from './components/panelAdmin/contact-support/
     AboutUsComponent,
     AlgoComponent,
     ContactFormularComponent,
-    ContactJoinUsComponent
+    ContactJoinUsComponent,
+    AlgotestComponent,
+    AlgoComponent,
+    CarouselComponent,
+    CarouselItemDirective,
+    CarouselItemElement,
+    ContactUsComponent,
+    TypeFaqPipe,
+    AboutTeamComponent,
   ],
   imports: [
     BrowserModule,
@@ -208,15 +223,13 @@ import { ContactJoinUsComponent } from './components/panelAdmin/contact-support/
     HttpClientModule,
     Ng2SearchPipeModule,
     RoundProgressModule,
-    // NgxEditorModule,
     OrderModule,
     ScrollToModule.forRoot(),
     NgxStripeModule.forRoot('pk_test_jwK67X7FA3xfM8g4GxegZEVe00xbYkFsPq'),
-    IgxDoughnutChartModule,
     NgxCaptchaModule,
-    AgWordCloudModule.forRoot(),
     MarkdownModule.forRoot(),
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot(),
+    CKEditorModule
   ],
   providers: [
     ApiClientService,

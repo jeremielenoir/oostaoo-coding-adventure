@@ -1,16 +1,24 @@
 <div class="global">
   <app-route-component></app-route-component>
-  <app-breadcrumb [namePage]="'FAQ'"></app-breadcrumb>
+  <app-breadcrumb [namePage]="'FAQ'" [listNavigation]="listTest"></app-breadcrumb>
   <div class="rowter">
     <section class="roodeo-page-faq">
-      <div class="sous-header">
+      <!-- <div class="sous-header">
         <h3 class="roodeo-fix-header">Questions fréquentes</h3>
         <mat-icon>help_outline</mat-icon>
-      </div>
-      <mat-accordion class="roodeo-fix-accordion" *ngFor="let faq of this.faqs">
+      </div> -->
+      <div class="roodeo-box">
+        <span>
+          <h1 class="roodeo-custom-title-box">
+            FAQ {{ this.filterParams ? '> ' + this.filterParams : ''}}
+            <hr *ngIf="this.filterParams" class="roodeo-fix-trait">
+          </h1>
+        </span>
+      <mat-accordion class="roodeo-fix-accordion" *ngFor="let faq of this.faqs | typeFaq : filterParams">
         <mat-expansion-panel
-          (opened)="panelOpenState = true"
-          (closed)="panelOpenState = false"
+        (opened)="panelOpenState = false"
+        [(expanded)]="faq.open"
+        (closed)="panelOpenState = false"
         >
           <mat-expansion-panel-header class="roodeo-fix-header">
             <mat-panel-title class="roodeo-fix-title">
@@ -35,6 +43,7 @@
           </div>
         </mat-expansion-panel>
       </mat-accordion>
+    </div>
     </section>
   </div>
 </div>

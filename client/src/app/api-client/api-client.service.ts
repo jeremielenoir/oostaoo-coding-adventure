@@ -11,7 +11,7 @@ export const API_URI_CAMPAIGNS: string = prefix + 'campaigns';
 export const API_URI_CAMPAIGN: string = prefix + 'campaign/:id';
 export const API_URI_TECHNO: string = prefix + 'technologies';
 export const API_URI_PROFILES: string = prefix + 'profiles';
-export const API_URI_QUESTIONS: string = prefix + 'questions';
+export const API_URI_QUESTIONS: string = prefix + 'questions?_limit=200';
 export const API_URI_CANDIDATS: string = prefix + 'candidats';
 export const API_URI_EMAIL: string = prefix + 'email';
 export const API_URI_USER_ADMIN: string = prefix + 'utilisateursadmins';
@@ -26,6 +26,7 @@ export const API_URI_PAYMENT: string = prefix + 'payments';
 export const API_URI_FEEDBACK = 'feedbacks';
 export const API_URI_FAQ: string = prefix + 'faqs';
 export const API_URI_ISSUE: string = prefix + 'issues';
+export const EXECUTE_SCRIPT: string = prefix + 'questions/execute';
 
 
 @Injectable()

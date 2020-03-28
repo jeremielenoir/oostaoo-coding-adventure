@@ -1,34 +1,33 @@
-<div class="container p-3">
+<div class="p-3">
   <div lass="form-scroll">
-    <div class="row">
-      <div class="col-12">
+    <div class="cologne-form">
         <form [formGroup]="form" (submit)="submit()">
-          <div class="card">
+        
             <div class="card-body" formArrayName="contacts">
-              <div [formGroupName]="i" class="row" *ngFor="let contact of contactFormGroup.controls; let i = index">
-                <div class="form-group col-6">
+              <div [formGroupName]="i" class="row-card-body" *ngFor="let contact of contactFormGroup.controls; let i = index">
+                <div class="card-form">
                   <label>Nom*</label>
-                  <input class="form-control" formControlName="name" type="text" />
+                  <input formControlName="name" type="text" />
                 </div>
 
-                <div class="form-group col-6">
+                <div class="card-form">
                   <label>Email*</label>
-                  <input class="form-control" formControlName="value" type="text" required />
+                  <input formControlName="value" type="text" required />
                 </div>
        
 
-                  <div class="form-group col-12 text-right">
-                    <button class="btn btn-danger" type="button" (click)="removeContact(i)"
+                  <div class="">
+                    <button class="btn-delete-form" type="button" (click)="removeContact(i)"
                       [hidden]="contactList.length === 1">
-                      Supprimer
+                        <i class="fas fa-trash-alt"></i>
                     </button>
                   </div>
 
 
                 </div>
-              </div>
-              <div class="card-body">
-                <button class="button btn m-1" type="button" (click)="addContact()">
+            </div>
+            <div class="card-body">
+                <button mat-raised-button color="primary"  mat-button class="button" type="button" (click)="addContact()">
                   ajouter candidat
                 </button>
                 <button mat-raised-button color="primary" class="button btn-question" mat-button
@@ -41,9 +40,9 @@
                 Les champs indiqués par une * sont obligatoires
               </div>
 
-            </div>
+   
         </form>
-      </div>
+     
     </div>
   </div>
 
