@@ -69,16 +69,17 @@ body{
     
     #left-panel{
         position: absolute;
-        background: $color-blue-light;
+        background: #fff;
         width: 50%;
         height: 100vh;
        
         #left-panel-text{
             position: relative;
             width: 50%;
-            margin: 30% auto;
+            margin: 30% 0 0 15%;
             text-align: center;
-            color: $color-white;
+            //background: $color-blue-light;
+            color: $color-blue-light;
         }
     
         #title_left_panel{
@@ -88,6 +89,20 @@ body{
         #text_left_panel{
             width: 70%;
             margin: auto;
+        }
+
+        .button-left-panel{
+            font-size: 16px!important;
+            height: 40px;
+            background: $color-blue-light;
+            color: $color-white;
+            border: 0px solid white;
+            margin: 20px 0;
+            width: 100%;
+            // text-transform: uppercase;
+            font-weight: 700;
+            border-radius: $border-radius;
+            cursor: pointer;
         }
     }
     
@@ -150,6 +165,7 @@ body{
 
         &.left{
             margin: 25% 0 0 15%;
+            color: $color-principal-blue;
             .button{
                 font-size: 16px!important;
                 height: 40px;

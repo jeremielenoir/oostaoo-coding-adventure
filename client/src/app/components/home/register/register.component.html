@@ -5,19 +5,19 @@
   
   <!-- Panel cote gauche -->
   <div id="left-side">
-    <!--div *ngIf="!switchPanel" id="left-panel">
+    <div *ngIf="!switchPanel" id="left-panel">
       <div id="left-panel-text">
         <h2 id="left">Déjà client ?</h2>
-        <button id="button_left_panel" (click)="switch()">Se connecter</button>
         <p id="text_left_panel">
           Connectez vous à votre compte pour avoir accès a vos campagnes, votre
           profil, etc
         </p>
+        <button class="button-left-panel" (click)="switch()">Se connecter</button>
       </div>
-    </div-->
+    </div>
 
     <!-- Formulaire cote gauche -->
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="forms left">
+    <form *ngIf="switchPanel" [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="forms left">
       <h2>Se connecter ?</h2>
       <div class="form-group">
         <label for="username">Identifiant</label>
