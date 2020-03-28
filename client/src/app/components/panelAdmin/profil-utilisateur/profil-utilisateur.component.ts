@@ -52,9 +52,7 @@ export class ProfilUtilisateurComponent implements OnInit {
   ngOnInit() {
     this.getUser().then(user => {
       this.user = user[0];
-      this.isOwnerOfPersonalAccount =
-        user[0].owned_customeraccount &&
-        user[0].owned_customeraccount.type === 'personal';
+      this.isOwnerOfPersonalAccount = this.user.customeraccount.type === 'personal';
       this.prenom = new FormControl(user[0].prenom, Validators.required);
       this.nom = new FormControl(user[0].nom, Validators.required);
       this.pays = new FormControl(user[0].pays, Validators.required);
@@ -81,7 +79,7 @@ export class ProfilUtilisateurComponent implements OnInit {
       this.accountConvertInProgress = true;
 
       await this.apiClientService
-        .put(API_URI_ACCOUNT + '/' + this.user.owned_customeraccount.id, {
+        .put(API_URI_ACCOUNT + '/' + this.user.customeraccount.id, {
           type: 'profesional'
         }).toPromise();
 
@@ -89,7 +87,7 @@ export class ProfilUtilisateurComponent implements OnInit {
 
     } catch (e) {
       this.accountConvertInProgress = false;
-      this._snackBar.open('Oops ! cette fonctionnalité est indisponible pour le moment', 'OK');
+      this._snackBar.open('Oops ! cette fonctionnalité est indisponible pour le moment', 'OK', {duration: 3000});
     }
   }
 

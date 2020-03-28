@@ -113,13 +113,9 @@
       "collection": "payment",
       "via": "user_id"
     },
-    "owned_customeraccount": {
-      "model": "customeraccount",
-      "via": "admin"
-    },
     "customeraccount": {
       "model": "customeraccount",
-      "via": "members"
+      "via": "users"
     }
   },
   "collectionName": "users-permissions_user"

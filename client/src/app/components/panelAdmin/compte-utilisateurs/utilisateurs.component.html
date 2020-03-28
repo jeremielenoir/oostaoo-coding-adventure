@@ -1,507 +1,322 @@
 <div id="global">
-
-
   <app-route-component></app-route-component>
   <app-breadcrumb [namePage]="'Utilisateurs'"></app-breadcrumb>
-
-<div id="content">
-
-<div id="shadow-cog" [ngClass]="{'shadow-cog-active': shadowcog1 == true}">
-
-<div id="remove" (click)="param_cog_non_active()"></div>
-
-
-    <div class="modall">
-
+  <div id="content">
+    <div id="shadow-cog" [ngClass]="{'shadow-cog-active': shadowcog1 == true}">
+      <div id="remove" (click)="param_cog_non_active()"></div>
+      <div class="modall">
         <div class="modall-header">
-
-                <h3 class="modall-title">
-
-                  Ajouter un utilisateur
-
-                </h3>
-
+          <h3 class="modall-title">
+            Ajouter un utilisateur
+          </h3>
         </div>
-
-
         <div class="modall-content">
-
-           <form (ngSubmit)="addUser()" class="form" method="POST" #form>
-
-              <div class="content-form-first">
-
-                <div class="form-groupe">
-
-                  <div class="top-form-groupe">
-
-                    <div class="title-and-error-span">
-
-                      <label class="libele">prenom</label>
-
-                      <!-- <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactive === true}">Obligatoire</span> -->
-
-                    </div>
-
+          <form (ngSubmit)="addUser()" class="form" method="POST" #form>
+            <div class="content-form-first">
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">prenom</label>
                   </div>
-                  <div>
-
-                    <input [formControl]="addPrenom" type="" name="prenom" class="champ-form" required id="prenom"/>
-                    <div *ngIf=" submittedUser && addPrenom.invalid" class="alert">
-                      <div *ngIf="addPrenom.errors.required">
-                        Prénom requis
-                      </div>
-                    </div>
-                  </div>
-
-
                 </div>
-
-                <div class="form-groupe">
-
-                  <div class="top-form-groupe">
-
-                    <div class="title-and-error-span">
-
-                      <label class="libele">nom</label>
-
-                      <!-- <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactive === true}">Obligatoire</span> -->
-
-                    </div>
-
-                  </div>
-                  <div>
-                    <input [formControl]="addNom" type="" name="nom" class="champ-form"/>
-                    <div *ngIf=" submittedUser && addNom.invalid" class="alert alert-danger">
-                      <div *ngIf="addNom.errors.required">
-                        Nom requis
-                      </div>
+                <div>
+                  <input [formControl]="addPrenom" type="" name="prenom" class="champ-form" required id="prenom" />
+                  <div *ngIf=" submittedUser && addPrenom.invalid" class="alert">
+                    <div *ngIf="addPrenom.errors.required">
+                      Prénom requis
                     </div>
                   </div>
-
-
                 </div>
-
-                <div class="form-groupe">
-
-                  <div class="top-form-groupe">
-
-                    <div class="title-and-error-span">
-
-                      <label class="libele">email</label>
-
-                      <!-- <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactive === true}">{{Textmail}}</span> -->
-
-                    </div>
-
-                  </div>
-                  <div>
-                    <input [formControl]="addEmail" type="" name="email"class="champ-form" id="email"/>
-                    <div *ngIf=" submittedUser && addEmail.invalid" class="alert alert-danger">
-                      <div *ngIf="addEmail.errors.required">
-                        Email requis
-                      </div>
-                      <div *ngIf="addEmail.errors.email">
-                        Email valide requis
-                      </div>
-                    </div>
-                  </div>
-
-
-                </div>
-
-                <div class="form-groupe">
-
-                  <div class="top-form-groupe">
-
-                    <div class="title-and-error-span">
-
-                      <label class="libele">Pseudo</label>
-
-                    </div>
-
-                  </div>
-                  <div>
-                    <input [formControl]="addUsername" type="text" name="username"class="champ-form" id="username"/>
-                    <div *ngIf=" submittedUser && addUsername.invalid" class="alert alert-danger">
-                      <div *ngIf="addUsername.errors.required">
-                        Pseudo requis
-                      </div>
-                    </div>
-                  </div>
-
-
-                </div>
-
-                <div class="form-groupe">
-
-                  <div class="top-form-groupe">
-
-                    <div class="title-and-error-span">
-
-                      <label class="libele">Mot de passe</label>
-
-                    </div>
-
-                  </div>
-                  <div>
-                    <input [formControl]="addPassword" type="password" name="password"class="champ-form" id="password"/>
-                    <div *ngIf=" submittedUser && addPassword.invalid" class="alert alert-danger">
-                      <div *ngIf="addPassword.errors.required">
-                        Mot de passe requis
-                      </div>
-                    </div>
-                  </div>
-
-
-                </div>
-                <div class="form-groupe">
-
-                  <div class="top-form-groupe">
-
-                    <div class="title-and-error-span">
-
-                      <label class="libele">Confirmer le mot de passe</label>
-
-                    </div>
-
-                  </div>
-                  <div>
-                    <input [formControl]="confirmPassword" type="password" name="confirmPassword"class="champ-form" id="confirmPassword"/>
-                    <div *ngIf=" submittedUser && confirmPassword.invalid" class="alert alert-danger">
-                      <div *ngIf="confirmPassword.errors.required">
-                        Confirmation du mot de passe requis
-                      </div>
-                    </div>
-                    <div *ngIf=" submittedUser && addPassword.value !== confirmPassword.value"  class="alert alert-danger">
-                      Les mots de passe ne correspondent pas
-                    </div>
-                  </div>
-
-
-                </div>
-
               </div>
-
-              <div class="content-form-last">
-
-                <h3 class="title-gestion-perm">ROLES</h3>
-
-                <div class="tbl-permition">
-
-                  <!-- one element -->
-                  <div class="element-gestion-permition" *ngFor="let item of checkbox_list">
-
-                    <div class="element-gestion-permition-header" matTooltip="l’utilisateur aura accès à la page facturation et recevra les factures par email."
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">nom</label>
+                  </div>
+                </div>
+                <div>
+                  <input [formControl]="addNom" type="" name="nom" class="champ-form" />
+                  <div *ngIf=" submittedUser && addNom.invalid" class="alert alert-danger">
+                    <div *ngIf="addNom.errors.required">
+                      Nom requis
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">email</label>
+                  </div>
+                </div>
+                <div>
+                  <input [formControl]="addEmail" type="" name="email" class="champ-form" id="email" />
+                  <div *ngIf=" submittedUser && addEmail.invalid" class="alert alert-danger">
+                    <div *ngIf="addEmail.errors.required">
+                      Email requis
+                    </div>
+                    <div *ngIf="addEmail.errors.email">
+                      Email valide requis
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">Pseudo</label>
+                  </div>
+                </div>
+                <div>
+                  <input [formControl]="addUsername" type="text" name="username" class="champ-form" id="username" />
+                  <div *ngIf=" submittedUser && addUsername.invalid" class="alert alert-danger">
+                    <div *ngIf="addUsername.errors.required">
+                      Pseudo requis
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">Mot de passe</label>
+                  </div>
+                </div>
+                <div>
+                  <input [formControl]="addPassword" type="password" name="password" class="champ-form" id="password" />
+                  <div *ngIf=" submittedUser && addPassword.invalid" class="alert alert-danger">
+                    <div *ngIf="addPassword.errors.required">
+                      Mot de passe requis
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">Confirmer le mot de passe</label>
+                  </div>
+                </div>
+                <div>
+                  <input [formControl]="confirmPassword" type="password" name="confirmPassword" class="champ-form"
+                    id="confirmPassword" />
+                  <div *ngIf=" submittedUser && confirmPassword.invalid" class="alert alert-danger">
+                    <div *ngIf="confirmPassword.errors.required">
+                      Confirmation du mot de passe requis
+                    </div>
+                  </div>
+                  <div *ngIf=" submittedUser && addPassword.value !== confirmPassword.value" class="alert alert-danger">
+                    Les mots de passe ne correspondent pas
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content-form-last">
+              <h3 class="title-gestion-perm">ROLES</h3>
+              <div class="tbl-permition">
+                <div class="element-gestion-permition" *ngFor="let item of checkbox_list">
+                  <div class="element-gestion-permition-header"
+                    matTooltip="l’utilisateur aura accès à la page facturation et recevra les factures par email."
                     [matTooltipPosition]="position.value"
                     aria-label="Button that displays a tooltip in various positions">
-
-                      {{item.name}}
-
-                    </div>
-
-                    <div class="element-gestion-permition-content">
-
-                      <label class="checked-block" [for]="item.id">
-                        <input name="check" type="checkbox" [id]="item.id" class="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.isChecked" (click)="list_change(item.id)"/>
-                        <span class="checkbox-span"></span>
-                      </label>
-
-                    </div>
+                    {{item.name}}
                   </div>
-                  
+                  <div class="element-gestion-permition-content">
+                    <label class="checked-block" [for]="item.id">
+                      <input name="check" type="checkbox" [id]="item.id" class="checkbox"
+                        [ngModelOptions]="{standalone: true}" [(ngModel)]="item.isChecked"
+                        (click)="list_change(item.id)" />
+                      <span class="checkbox-span"></span>
+                    </label>
+                  </div>
+                </div>
               </div>
-
               <div class="footer-form-last">
                 <input class="btn-gestion" type="submit" value="AJOUTER" />
               </div>
             </div>
           </form>
-
-
-
         </div>
-
-
+      </div>
     </div>
-
-</div>
-
-<div id="shadow-cog-2" [ngClass]="{'shadow-cog-active': shadowcog2 == true}">
-
-    <div id="remove-2"  (click)="param_cog_non_active_deux()"></div>
-
-
-
+    <div id="shadow-cog-2" [ngClass]="{'shadow-cog-active': shadowcog2 == true}">
+      <div id="remove-2" (click)="param_cog_non_active_deux()"></div>
       <div class="modall">
-          
-        <div class="modall-header"><h3 class="modall-title">Modifier l'utilisateur</h3></div>
-
-          <div class="modall-content">
-
-             <form (ngSubmit)="updateUser()" class="form" method="PUT" #form>
-
-                <div class="content-form-first">
-
-                  <div class="form-groupe">
-
-                    <div class="top-form-groupe">
-
-                      <div class="title-and-error-span">
-
-                          <label class="libele" >prenom</label>
-                          
-                          <!-- <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': prenomIsactiveUpdate === true}">Obligatoire</span> -->
-
-                      </div>
-
-                    </div>
-                    <div>
-
-                      <input [formControl]="editPrenom" type="" value="{{editingUser?.prenom}}" class="champ-form"/>
-                      <div *ngIf=" modifiedUser && editPrenom.invalid"
-                      class="alert alert-danger">
-                        <div *ngIf="editPrenom.errors.required">
-                          Prénom requis
-                        </div>
-                      </div>
-                    </div>
-
-
+        <div class="modall-header">
+          <h3 class="modall-title">Modifier l'utilisateur</h3>
+        </div>
+        <div class="modall-content">
+          <form (ngSubmit)="updateUser()" class="form" method="PUT" #form>
+            <div class="content-form-first">
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">prenom</label>
                   </div>
-
-                  <div class="form-groupe">
-
-                    <div class="top-form-groupe">
-
-                      <div class="title-and-error-span">
-
-                          <label class="libele" >nom</label>
-
-                          <!-- <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': nomIsactiveUpdate === true}">Obligatoire</span> -->
-
-                      </div>
-
-                    </div>
-                    <div>
-                      <input [formControl]="editNom" type="" class="champ-form"  value="{{editingUser?.nom}}"/>
-                      <div *ngIf=" modifiedUser && editNom.invalid" class="alert alert-danger">
-                        <div *ngIf="editNom.errors.required">
-                          Nom requis
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <div class="form-groupe">
-
-                    <div class="top-form-groupe">
-
-                      <div class="title-and-error-span">
-
-                          <label class="libele">email</label>
-
-                          <!-- <span class="title-champ-default" [ngClass]="{'title-champ-default-visible': emailIsactiveUpdate === true}">{{ Textmail }}</span> -->
-
-                      </div>
-
-                    </div>
-                    <div>
-                      <input [formControl]="editEmail" type="" value="{{editingUser?.email}}" class="champ-form"/>
-                      <div *ngIf=" modifiedUser && editEmail.invalid" class="alert alert-danger">
-                        <div *ngIf="editEmail.errors.required">
-                          Email requis
-                        </div>
-                        <div *ngIf="editEmail.errors.email">
-                          Email valide requis
-                        </div>
-                      </div>
-                    </div>
-
-
-                  </div>
-
-                  <div class="form-groupe">
-
-                    <div class="top-form-groupe">
-  
-                      <div class="title-and-error-span">
-  
-                        <label class="libele">Pseudo</label>
-  
-                      </div>
-  
-                    </div>
-                    <div>
-                      <input [formControl]="editUsername" type="text" name="username"class="champ-form" id="editUsername"/>
-                      <div *ngIf=" modifiedUser && editUsername.invalid" class="alert alert-danger">
-                        <div *ngIf="editUsername.errors.required">
-                          Pseudo requis
-                        </div>
-                      </div>
-                    </div>
-  
-  
-                  </div>
-                  <div class="form-groupe">
-
-                    <div class="top-form-groupe">
-  
-                      <div class="title-and-error-span">
-  
-                        <label class="libele">Mot de passe</label>
-  
-                      </div>
-  
-                    </div>
-                    <div>
-                      <input [formControl]="editPassword" type="password" name="password"class="champ-form" id="editPassword"/>
-                      <div *ngIf=" modifiedUser && editPassword.invalid" class="alert alert-danger">
-                        <div *ngIf="editPassword.errors.required">
-                          Mot de passe requis
-                        </div>
-                      </div>
-                    </div>
-  
-  
-                  </div>
-                  <div class="form-groupe">
-  
-                    <div class="top-form-groupe">
-  
-                      <div class="title-and-error-span">
-  
-                        <label class="libele">Confirmer le mot de passe</label>
-  
-                      </div>
-  
-                    </div>
-                    <div>
-                      <input [formControl]="confirmPassword" type="password" name="confirmPassword"class="champ-form" id="confirmPassword"/>
-                      <div *ngIf=" modifiedUser && confirmPassword.invalid" class="alert alert-danger">
-                        <div *ngIf="confirmPassword.errors.required">
-                          Confirmation du mot de passe requis
-                        </div>
-                      </div>
-                      <div *ngIf=" modifiedUser && editPassword.value !== confirmPassword.value"  class="alert alert-danger">
-                        Les mots de passe ne correspondent pas
-                      </div>
-                    </div>
-  
-  
-                  </div>
-
                 </div>
-
-                <div class="content-form-last">
-
-                  <h3 class="title-gestion-perm">ROLES</h3>
-
-                  <div class="tbl-permition">
-
-                    <div class="element-gestion-permition" *ngFor="let item of checkbox_list">
-
-                      <div class="element-gestion-permition-header" matTooltip="l’utilisateur aura accès à la page facturation et recevra les factures par email."
-                      [matTooltipPosition]="position.value"
-                      aria-label="Button that displays a tooltip in various positions">
-  
-                        {{item.name}}
-  
-                      </div>
-  
-                      <div class="element-gestion-permition-content">
-
-
-                        <label class="checked-block" [for]="item.id">
-                          <input type="checkbox" [id]="item.id" class="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.isChecked" (click)="list_change(item.id)" />
-                          <span class="checkbox-span"></span>
-                        </label>
-
-                      </div>
+                <div>
+                  <input [formControl]="editPrenom" type="" value="{{editingUser?.prenom}}" class="champ-form" />
+                  <div *ngIf=" modifiedUser && editPrenom.invalid" class="alert alert-danger">
+                    <div *ngIf="editPrenom.errors.required">
+                      Prénom requis
                     </div>
-
-                </div>
-
-                <div class="footer-form-last">
-                  <button class="btn-gestion" type="submit">Sauvegarder</button>
+                  </div>
                 </div>
               </div>
-            </form>
-
-          </div>
-
-
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">nom</label>
+                  </div>
+                </div>
+                <div>
+                  <input [formControl]="editNom" type="" class="champ-form" value="{{editingUser?.nom}}" />
+                  <div *ngIf=" modifiedUser && editNom.invalid" class="alert alert-danger">
+                    <div *ngIf="editNom.errors.required">
+                      Nom requis
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">email</label>
+                  </div>
+                </div>
+                <div>
+                  <input [formControl]="editEmail" type="" value="{{editingUser?.email}}" class="champ-form" />
+                  <div *ngIf=" modifiedUser && editEmail.invalid" class="alert alert-danger">
+                    <div *ngIf="editEmail.errors.required">
+                      Email requis
+                    </div>
+                    <div *ngIf="editEmail.errors.email">
+                      Email valide requis
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">Pseudo</label>
+                  </div>
+                </div>
+                <div>
+                  <input [formControl]="editUsername" type="text" name="username" class="champ-form"
+                    id="editUsername" />
+                  <div *ngIf=" modifiedUser && editUsername.invalid" class="alert alert-danger">
+                    <div *ngIf="editUsername.errors.required">
+                      Pseudo requis
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">Mot de passe</label>
+                  </div>
+                </div>
+                <div>
+                  <input [formControl]="editPassword" type="password" name="password" class="champ-form"
+                    id="editPassword" />
+                  <div *ngIf=" modifiedUser && editPassword.invalid" class="alert alert-danger">
+                    <div *ngIf="editPassword.errors.required">
+                      Mot de passe requis
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">Confirmer le mot de passe</label>
+                  </div>
+                </div>
+                <div>
+                  <input [formControl]="confirmPassword" type="password" name="confirmPassword" class="champ-form"
+                    id="confirmPassword" />
+                  <div *ngIf=" modifiedUser && confirmPassword.invalid" class="alert alert-danger">
+                    <div *ngIf="confirmPassword.errors.required">
+                      Confirmation du mot de passe requis
+                    </div>
+                  </div>
+                  <div *ngIf=" modifiedUser && editPassword.value !== confirmPassword.value" class="alert alert-danger">
+                    Les mots de passe ne correspondent pas
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content-form-last">
+              <h3 class="title-gestion-perm">ROLES</h3>
+              <div class="tbl-permition">
+                <div class="element-gestion-permition" *ngFor="let item of checkbox_list">
+                  <div class="element-gestion-permition-header"
+                    matTooltip="l’utilisateur aura accès à la page facturation et recevra les factures par email."
+                    [matTooltipPosition]="position.value"
+                    aria-label="Button that displays a tooltip in various positions">
+                    {{item.name}}
+                  </div>
+                  <div class="element-gestion-permition-content">
+                    <label class="checked-block" [for]="item.id">
+                      <input type="checkbox" [id]="item.id" class="checkbox" [ngModelOptions]="{standalone: true}"
+                        [(ngModel)]="item.isChecked" (click)="list_change(item.id)" />
+                      <span class="checkbox-span"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-form-last">
+                <button class="btn-gestion" type="submit">Sauvegarder</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-
-</div>
-
-<div class="component-utilisateurs">
-
-  <header class="header-form">
-
-
-      <div class="champ-utilisateur">
-
-        <form>
-
-
-          <span class="icon-form-group-header-contenu"><i class="fas fa-search"></i></span>
-          <input type="text" name="search" [(ngModel)]="searchText" class="input-champ-utilisateurs" placeholder="Filtrer par titre ou candidat" id="search-header">
-
-
-        </form>
-
-      </div>
-
-      <div class="left-form-utilisateurs">
-
+    </div>
+    <div class="component-utilisateurs">
+      <header class="header-form">
+        <div class="champ-utilisateur">
+          <form>
+            <span class="icon-form-group-header-contenu"><i class="fas fa-search"></i></span>
+            <input type="text" name="search" [(ngModel)]="searchText" class="input-champ-utilisateurs"
+              placeholder="Filtrer par titre ou candidat" id="search-header">
+          </form>
+        </div>
+        <div class="left-form-utilisateurs">
           <div class="nbr-utilisateurs">
-
             <i class="far fa-user btn-icon-utilisateur"></i>
-
-            <span>Utilisateurs 1/3</span>
-
+            <span>Utilisateurs {{users && users.length ? users.length : '*'}}/{{users && users.length ? users.length : '*'}}</span>
           </div>
-
           <button class="btn-header-contenu" (click)="param_cog()">
-              <i class="far fa-plus-square btn-icon"  id="param-cog"></i> Ajouter utilisateur
+            <i class="far fa-plus-square btn-icon" id="param-cog"></i> Ajouter utilisateur
           </button>
-
-      </div>
-
-
-  </header>
-
-  <div class="table-info-user">
-
-      <table class="table_user">
-        <thead class="table_head">
+        </div>
+      </header>
+      <div class="table-info-user">
+        <table class="table_user">
+          <thead class="table_head">
             <tr class="table_row">
-                <th class="table_head_cell">Nom</th>
-                <th class="table_head_cell">Email</th>
-                <th class="table_head_cell">Privileges</th>
-                <th class="table_head_cell"></th>
-
+              <th class="table_head_cell">Nom</th>
+              <th class="table_head_cell">Email</th>
+              <th class="table_head_cell">Privileges</th>
+              <th class="table_head_cell"></th>
             </tr>
-        </thead>
-        <tbody class="table_body">
+          </thead>
+          <tbody class="table_body">
             <tr class="table_row" *ngFor="let user of  users" (click)="openForm(user)">
-                <td class="table_body_cell">{{user.username}}</td>
-                <td class="table_body_cell">{{user.email}}</td>
-                <td class="table_body_cell">{{user.role.name}}</td>
-                <td  class="table_body_cell table_icon">
-                  <i (click)="openForm(user)" class="fas fa-pencil-alt icon"></i>
-                  <i
-                  (click)=deleteUser(user.id)
-                  class="fas fa-trash-alt icon"></i>
-                </td>
+              <td class="table_body_cell">{{user.username}}</td>
+              <td class="table_body_cell">{{user.email}}</td>
+              <td class="table_body_cell">{{user.role.name}}</td>
+              <td class="table_body_cell table_icon">
+                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id" (click)="openForm(user)" class="fas fa-pencil-alt icon"></i>
+                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id" (click)=deleteUser(user.id) class="fas fa-trash-alt icon"></i>
+              </td>
             </tr>
-        </tbody>
-      </table>
-
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-
-</div>
-
-</div>
 </div>

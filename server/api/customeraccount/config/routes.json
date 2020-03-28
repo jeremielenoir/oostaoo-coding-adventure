@@ -18,6 +18,22 @@
     },
     {
       "method": "GET",
+      "path": "/api/customeraccounts/:id/users",
+      "handler": "CustomeraccountExtension.users",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/customeraccounts/:id/users",
+      "handler": "CustomeraccountExtension.addUser",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/api/customeraccounts/:id",
       "handler": "Customeraccount.findOne",
       "config": {

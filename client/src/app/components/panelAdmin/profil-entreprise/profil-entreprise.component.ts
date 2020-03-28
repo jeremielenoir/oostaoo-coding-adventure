@@ -134,9 +134,9 @@ export class ProfilEntrepriseComponent implements OnInit {
   ngOnInit() {
     this.getUser().then(user => {
 
-      this.account = user[0].owned_customeraccount;
+      this.account = user[0].customeraccount;
 
-      if (!this.account) {
+      if (user[0].role.type === 'root') {
         this.router.navigate(['/dashboard/profil-utilisateur']);
       }
 

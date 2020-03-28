@@ -119,7 +119,9 @@ module.exports = {
    */
 
   update: async (ctx) => {
+
     try {
+
       const advancedConfigs = await strapi.store({
         environment: '',
         type: 'plugin',
@@ -128,10 +130,13 @@ module.exports = {
       }).get();
 
       if (advancedConfigs.unique_email && ctx.request.body.email) {
-        const users = await strapi.plugins['users-permissions'].services.user.fetchAll({ email: ctx.request.body.email });
+        const users = await strapi.plugins['users-permissions'].services
+          .user.fetchAll({ email: ctx.request.body.email });
 
         if (users && _.find(users, user => (user.id || user._id).toString() !== (ctx.params.id || ctx.params._id))) {
-          return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.email.taken', field: ['email'] }] }] : 'Email is already taken.');
+          return ctx.badRequest(null, ctx.request.admin ?
+            [{ messages: [{ id: 'Auth.form.error.email.taken', field: ['email'] }] }] :
+            'Email is already taken.');
         }
       }
 
@@ -141,7 +146,8 @@ module.exports = {
         delete ctx.request.body.password;
       }
 
-      if (_.get(ctx.request, 'body.role', '').toString() === '0' && (!_.get(ctx.state, 'user.role') || _.get(ctx.state, 'user.role', '').toString() !== '0')) {
+      if (_.get(ctx.request, 'body.role', '').toString() === '0' &&
+        (!_.get(ctx.state, 'user.role') || _.get(ctx.state, 'user.role', '').toString() !== '0')) {
         delete ctx.request.body.role;
       }
 
@@ -151,23 +157,25 @@ module.exports = {
         });
 
         if (user !== null && (user.id || user._id).toString() !== (ctx.params.id || ctx.params._id)) {
-          return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Auth.form.error.email.taken', field: ['email'] }] }] : 'Email is already taken.');
+          return ctx.badRequest(null, ctx.request.admin ?
+            [{ messages: [{ id: 'Auth.form.error.email.taken', field: ['email'] }] }] :
+            'Email is already taken.');
         }
       }
 
-    let data = await strapi.plugins['users-permissions'].services.user.edit(ctx.params, ctx.request.body) ;
+      let data = await strapi.plugins['users-permissions'].services.user.edit(ctx.params, ctx.request.body) ;
 
-    let updated_user = {...user, tests_available : ctx.request.body.tests_available};
-    updated_user = _.pick(updated_user, ['_id', 'id', 'adminId', 'tests_available']);
-    const offer_id = user.offer_id.id;
-    updated_user.offer_id = offer_id;
+      let updated_user = {...user, tests_available : ctx.request.body.tests_available};
+      updated_user = _.pick(updated_user, ['_id', 'id', 'adminId', 'tests_available']);
+      const offer_id = user.offer_id ? user.offer_id.id : null;
+      updated_user.offer_id = offer_id;
 
-    let updated_jwt;
+      let updated_jwt;
 
       if(Object.keys(ctx.request.body).length == 1
       && !isNaN(ctx.request.body.tests_available) ){
-         updated_jwt = await strapi.plugins['users-permissions'].services.jwt.issue(updated_user);
-       return ctx.send({newToken: updated_jwt});
+        updated_jwt = await strapi.plugins['users-permissions'].services.jwt.issue(updated_user);
+        return ctx.send({newToken: updated_jwt});
       }
       ctx.send(data);
     }catch(error) {

@@ -26,12 +26,7 @@
       "type": "integer",
       "required": true
     },
-    "admin": {
-      "model": "user",
-      "via": "owned_customeraccount",
-      "plugin": "users-permissions"
-    },
-    "members": {
+    "users": {
       "collection": "user",
       "via": "customeraccount",
       "plugin": "users-permissions"
