@@ -291,6 +291,9 @@ export class DialogOverviewTest{
     console.log(this.data);
     this.dialogRef.close();
   }
+  refreshComponent($event): void{
+    console.log('REFRESH COMPONENT');
+  }
 
 
 }
