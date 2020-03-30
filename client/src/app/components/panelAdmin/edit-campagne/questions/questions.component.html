@@ -1,3 +1,4 @@
 <app-top-info-campagne [yourCampaign]="yourCampaign" [allQuestionLevel]="questionsByCampaign" [techno]="techno"></app-top-info-campagne>
- <app-question-component (chargeYourCampagn)="chargeYourCampagn($event)" [datas]="allQuestionsCampaign" [allQuestionLevel]="questionsByCampaign">
+ <app-question-component (chargeYourCampagn)="chargeYourCampagn($event)" [techno]="techno" [datas]="allQuestionsCampaign"
+ [allQuestionLevel]="questionsByCampaign">
 </app-question-component>
