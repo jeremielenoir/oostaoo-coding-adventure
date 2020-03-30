@@ -4,7 +4,7 @@ import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 
-const prefix = 'api/';
+const prefix = '/api/';
 
 
 export const API_URI_CAMPAIGNS: string = prefix + 'campaigns';
