@@ -17,19 +17,22 @@
       <div id="all-list-menu" fxShow="true" fxHide.lt-md>
         
         <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'test-dev'" i18n>
-          Test developers
+          Test the developers
         </a>
         <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'profilSearch'" i18n>
-          Profils recherchés
+          Sought profiles
         </a>
-        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'fonctionnalites'" i18n>Fonctionnalités</a>
-        
+        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'fonctionnalites'" i18n>
+          Features
+        </a>
         <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-30' [ngx-scroll-to]="'techno'" i18n>
           Technologies
         </a>
-        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'offers'" i18n>Prix</a>
+        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'offers'" i18n>
+          Prices
+        </a>
         <!--a (click)="logout()">Se déconnecter</a-->
-        <a (click)="gotToLoginPage()" href="" class="link-menu mat-button" i18n>Connexion</a>
+        <a (click)="gotToLoginPage()" href="" class="link-menu mat-button" i18n>Connection</a>
 
         <div class="align_flags">
             <!-- <button mat-button [matMenuTriggerFor]="menu">  -->
@@ -53,8 +56,8 @@
     <mat-sidenav #sidenav>
       <mat-nav-list>
         <a href="#" mat-list-item i18n>Évaluez et testez les développeurs</a>
-        <a href="#" mat-list-item i18n>Prix</a>
-        <a href="#" mat-list-item i18n>Connexion</a>
+        <a href="#" mat-list-item i18n>Prices</a>
+        <a href="#" mat-list-item i18n>Connection</a>
         <!--a (click)="logout()">Se déconnecter</a-->
         <a href="#" mat-button i18n>30 jours d'evaluation gratuits</a>
       </mat-nav-list>
