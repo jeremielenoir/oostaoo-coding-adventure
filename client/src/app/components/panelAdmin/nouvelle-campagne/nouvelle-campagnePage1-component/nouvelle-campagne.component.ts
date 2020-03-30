@@ -65,7 +65,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
     });
   }
   selected(event: MatSelectChange) {
-    console.log('hellow word')
+
     for (const iterator of this.profiles) {
       // console.log('iterator profiles: ', iterator);
       const roleData = iterator.name;
@@ -81,14 +81,14 @@ export class NouvelleCampagnePage1Component implements OnInit {
           technoDataID.push(item.id);
         });
         this.technosSelect = technoData;
-        console.log("this.technosSelect: ", this.technosSelect);
+       
         this.formCampagne.patchValue({
           techno: technoData,
           technoSelectedId: technoDataID
         });
       }
     }
-    console.log("this.formCampagne.value: ", this.formCampagne.value);
+   
   }
 
 

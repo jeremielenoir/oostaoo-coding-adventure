@@ -47,12 +47,10 @@ export class TopInfoCampagneComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges){
 
-    console.log('change man le changement -->',changes.allQuestionLevel)
-
-    this.technoMethod();
+    if(changes.allQuestionLevel.currentValue){
+      this.technoMethod();
+    }
     
-    console.log('all changement campagn',changes)
-
   }
 
   convertSecondsToMinutes(time){
@@ -73,11 +71,10 @@ export class TopInfoCampagneComponent implements OnInit {
       for(let timequestion of this.allQuestionLevel){
         arraytimeAllquestionCampagn.push(Number(timequestion.time));
       }
+
     }
 
       for(let technoElement of this.techno){
-
-        console.log('les techno demande -->',technoElement)
 
         for(let question of this.allQuestionLevel){
           
@@ -87,7 +84,10 @@ export class TopInfoCampagneComponent implements OnInit {
               deparPointNumberQuestion++
               
             }
-      }
+
+          
+       }
+
      
       points.push(pointDepart);
       timeArraySolo.push(timeDepartQuestion)
