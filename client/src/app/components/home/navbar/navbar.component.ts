@@ -91,5 +91,6 @@ export class NavbarComponent implements OnInit {
 
   setCurrentLanguage(img) {
     this.currentLanguage = img;
+    window.parent.location.href = '/en/';
   }
 }
