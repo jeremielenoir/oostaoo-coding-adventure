@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   public Removeshould = true;
   public IsheaderTrue = false;
   public AddIndex = false;
-  public lang = window.navigator.language ;
+  public lang = 'en-US';
 
   public currentLanguage;
   public otherLanguage = [
