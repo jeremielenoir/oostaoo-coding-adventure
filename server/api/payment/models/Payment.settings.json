@@ -11,10 +11,6 @@
     "comment": ""
   },
   "attributes": {
-    "Amount": {
-      "default": "",
-      "type": "decimal"
-    },
     "user_id": {
       "model": "user",
       "via": "payments",
