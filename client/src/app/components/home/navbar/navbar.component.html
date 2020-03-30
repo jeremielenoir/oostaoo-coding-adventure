@@ -17,19 +17,19 @@
       <div id="all-list-menu" fxShow="true" fxHide.lt-md>
         
         <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'test-dev'" i18n>
-          Testez les développeurs
+          Test developers
         </a>
-        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'profilSearch'">
+        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'profilSearch'" i18n>
           Profils recherchés
         </a>
-        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'fonctionnalites'">Fonctionnalités</a>
+        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'fonctionnalites'" i18n>Fonctionnalités</a>
         
-        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-30' [ngx-scroll-to]="'techno'">
+        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-30' [ngx-scroll-to]="'techno'" i18n>
           Technologies
         </a>
-        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'offers'">Prix</a>
+        <a class="link-menu" [routerLink]="[ '/home']" href="#" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'offers'" i18n>Prix</a>
         <!--a (click)="logout()">Se déconnecter</a-->
-        <a (click)="gotToLoginPage()" href="" class="link-menu mat-button">Connexion</a>
+        <a (click)="gotToLoginPage()" href="" class="link-menu mat-button" i18n>Connexion</a>
 
         <div class="align_flags">
             <!-- <button mat-button [matMenuTriggerFor]="menu">  -->
@@ -52,11 +52,11 @@
   <mat-sidenav-container (click)="showOrHideManually()" fxFlexFill class="fixe-nav">
     <mat-sidenav #sidenav>
       <mat-nav-list>
-        <a href="#" mat-list-item>Évaluez et testez les développeurs</a>
-        <a href="#" mat-list-item>Prix</a>
-        <a href="#" mat-list-item>Connexion</a>
+        <a href="#" mat-list-item i18n>Évaluez et testez les développeurs</a>
+        <a href="#" mat-list-item i18n>Prix</a>
+        <a href="#" mat-list-item i18n>Connexion</a>
         <!--a (click)="logout()">Se déconnecter</a-->
-        <a href="#" mat-button>30 jours d'evaluation gratuits</a>
+        <a href="#" mat-button i18n>30 jours d'evaluation gratuits</a>
       </mat-nav-list>
     </mat-sidenav>
   </mat-sidenav-container>
