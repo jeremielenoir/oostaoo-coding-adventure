@@ -27,6 +27,7 @@ phases:
       - export NODE_OPTIONS=--max_old_space_size=8192
       - echo $NODE_OPTIONS
       - cd ../client && yarn run build
+      - yarn run build-i18n
       - mkdir ../server/public
       - cp -R ./dist/client/* ../server/public/
     finally:
