@@ -24,10 +24,10 @@ export class NavbarComponent implements OnInit {
 
   public currentLanguage;
   public otherLanguage = [
-   {codelang: 'fr-FR',  img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/FR'},
-   {codelang: 'en-US', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/EN'},
-   {codelang: 'es-ES', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/ES'},
-   {codelang: 'ja-JA', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/JP'}
+   {codelang: 'fr-FR',  img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr/'},
+   {codelang: 'en-US', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en/'},
+   {codelang: 'es-ES', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es/'},
+   {codelang: 'jp-JP', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp/'}
   ];
 
   @ViewChild('header') header;
@@ -89,8 +89,8 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  setCurrentLanguage(img) {
-    this.currentLanguage = img;
-    window.parent.location.href = '/en/';
+  setCurrentLanguage(langage) {
+    this.currentLanguage = langage.img;
+    window.parent.location.href = langage.url;
   }
 }

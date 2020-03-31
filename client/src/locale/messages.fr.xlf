@@ -1,17 +1,411 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en" datatype="plaintext" original="ng2.template">
+  <file source-language="fr" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="c78a953787bef282f37b6dd3ddafde5e4a8b1527" datatype="html">
+      <trans-unit id="69450132d480ab4b3dcc6b53ea3c5529cd46a5fb" datatype="html">
         <source>
-          Testez les développeurs
+          Test the developers
         </source>
         <target>
-          Test developpers
+          Tester les dévelopeurs
         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
           <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bf1f85cff8d87358d3b635692d029be27fa46e03" datatype="html">
+        <source>
+          Sought profiles
+        </source>
+        <target>
+          Sought profiles
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="61ed93dba8693c7cedf8aed60e0a48476c4b9b6e" datatype="html">
+        <source>
+          Features
+        </source>
+        <target>
+          Features
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a6fe48bfbf0dc07537c3d0f6b0cb2b75366ea50c" datatype="html">
+        <source>
+          Technologies
+        </source>
+        <target>
+          Technologies
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="90e3e8aa1ad38c0ed1cb8ecaccb04de44280ee62" datatype="html">
+        <source>
+          Prices
+        </source>
+        <target>
+          Prices
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="827fb6485b0596c939c543ba4156f5e4e7acb8d4" datatype="html">
+        <source>Connection</source>
+        <target>Connection</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ed325b525a8a185089034c5d8beda3ab99e7e7ed" datatype="html">
+        <source>Évaluez et testez les développeurs</source>
+        <target>Évaluez et testez les développeurs</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="54f00deeee916877ba52c54363d3951ca3a840a7" datatype="html">
+        <source>Prices</source>
+        <target>Prices</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e1fb9fe2aa7b7a7ea7ace5257ed6a82ec1623340" datatype="html">
+        <source>30 jours d&apos;evaluation gratuits</source>
+        <target>30 jours d&apos;evaluation gratuits</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="392477b8f940cd3dd9a60172c3e6efb473d3b893" datatype="html">
+        <source>Submit your assessment test in 10 minutes</source>
+        <target>Submit your assessment test in 10 minutes</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bb660c4c967218356163594a0e90a1c936608ead" datatype="html">
+        <source>Discover the features</source>
+        <target>Discover the features</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b286a61a302ae4d952690060202a14b0e37e6488" datatype="html">
+        <source>View the results of your candidates</source>
+        <target>View the results of your candidates</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a71bf5496ee8c99508cbcb5854289a1ee06a8812" datatype="html">
+        <source>See detailed reports</source>
+        <target>See detailed reports</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bdd4623a7e82830b7ba49288ac5fea0ac5fcf1d7" datatype="html">
+        <source>Our prices</source>
+        <target>Our prices</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7feceaceb92235441683324f691c9e468fcc1f5c" datatype="html">
+        <source>
+                            Discover our offers
+                        </source>
+                        <target>
+                            Discover our offers
+                        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="28153dc95cc9500736e4a4ac917927dca9d7fca3" datatype="html">
+        <source>Free version</source>
+        <target>Free version</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0c843da7a9f5de2545a4f2de17ca4d80c2a7bcf5" datatype="html">
+        <source>Start with Roodeo</source>
+        <target>Start with Roodeo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/index-page/index-page.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c9b706b762a61f85131b3ff666abb1d11af05a5b" datatype="html">
+        <source>
+          Test the developers
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        </source>
+        <target>
+          Test the developers
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/second-section/second-section.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c7ce1e81cd3fb71d35bffcd92d32290b6fda20cc" datatype="html">
+        <source>
+          Sought profiles
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        </source>
+        <target>
+          Sought profiles
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/second-section/second-section.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c5730a995993766da876bfa42b29a1cdffc0c8e3" datatype="html">
+        <source>Development engineers</source>
+        <target>Development engineers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/second-section/second-section.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d5dc528f8a6131d5446634841e55b356c715b3f2" datatype="html">
+        <source>DevOps</source>
+        <target>DevOps</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/second-section/second-section.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8fbb31800aed0a2488538665c3d2ce1342be0a3d" datatype="html">
+        <source>Project managers</source>
+        <target>Project managers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/second-section/second-section.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7477e1b07f8add1972bd5c43730d50511bec9e6a" datatype="html">
+        <source>Data Scientists</source>
+        <target>Data Scientists</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/second-section/second-section.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0c7f255903e77d61fb2ed40959c63a42ab4b26e0" datatype="html">
+        <source>Developers</source>
+        <target>Developers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/second-section/second-section.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1f3fc66b7bb73c798059e0506281769b03b3c3b4" datatype="html">
+        <source>Backend developers</source>
+        <target>Backend developers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/second-section/second-section.component.html</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="39ebad293a73073db448faa51b32305e2aeb7757" datatype="html">
+        <source>Frontend developers</source>
+        <target>Frontend developers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/second-section/second-section.component.html</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="051182e0c9abb549b754d1ea27a8e675780b9442" datatype="html">
+        <source>Architects</source>
+        <target>Architects</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/second-section/second-section.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9a91783e9c0f790ed49edae730f9156070ed9dd5" datatype="html">
+        <source>Legal</source>
+        <target>Legal</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/footer/footer.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="52d091913ab19e06c3c1d60c858deee3ca585754" datatype="html">
+        <source>Terms of use</source>
+        <target>Terms of use</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/footer/footer.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9fd2be3c440748106841c713367a0349f1c5daef" datatype="html">
+        <source>Conditions of sales</source>
+        <target>Conditions of sales</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/footer/footer.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d0969b2f97e4de7eec3d16c223b42d9fa4af4c5d" datatype="html">
+        <source>Privacy policy</source>
+        <target>Privacy policy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/footer/footer.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="29ea0914c400a51ee31477e6dd57e968c28d2a27" datatype="html">
+        <source>Cookies policy</source>
+        <target>Cookies policy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/footer/footer.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="004b222ff9ef9dd4771b777950ca1d0e4cd4348a" datatype="html">
+        <source>About</source>
+        <target>About</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/footer/footer.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/footer/footer.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6e8d3b518ff70956197265ede2b55f99b201ab76" datatype="html">
+        <source>Contact us</source>
+        <target>Contact us</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/footer/footer.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="faf9459c42030e832bfa5155cd6b26115d78f251" datatype="html">
+        <source>They use</source>
+        <target>They use</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/slider/slider.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6acf3016f26b3d265bb9b5bdee3dff705a85fb70" datatype="html">
+        <source>our platform succesfully</source>
+        <target>our platform succesfully</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/slider/slider.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="34d50e2ab6bd7fba1197f173e5d9aca51c74f391" datatype="html">
+        <source>
+      Technologies
+      <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+    </source>
+    <target>
+      Technologies
+      <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/techno/techno.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2cfe2acb760f4b750da346645f51a5c71e723088" datatype="html">
+        <source>
+            Our concepts?? 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        </source>
+        <target>
+            Our concepts?? 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/offers/offers.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d0336848b0c375a1c25ba369b3481ee383217a4f" datatype="html">
+        <source>Subscribe</source>
+        <target>Subscribe</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/offers/offers.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="25d329b835f47d71d5d3ad702c0f98bbf38df37a" datatype="html">
+        <source>
+        Features
+        <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+      </source>
+      <target>
+        Features
+        <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/fonctionnalite/fonctionnalite.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b8f1553a85f18b17e36b652a5358bbc9d8ee7416" datatype="html">
+        <source>Over 1000 questions</source>
+        <target>Over 1000 questions</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/fonctionnalite/fonctionnalite.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="04793a454904b3f5c927c5fb470f9e91579a5120" datatype="html">
+        <source>Detailed reports</source>
+        <target>Detailed reports</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/fonctionnalite/fonctionnalite.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="89197d608910da093777f84cd9c74395bd34e052" datatype="html">
+        <source>Fasts assessments</source>
+        <target>Fasts assessments</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/fonctionnalite/fonctionnalite.component.html</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
     </body>
