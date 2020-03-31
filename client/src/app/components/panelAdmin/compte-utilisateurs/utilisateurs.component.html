@@ -110,27 +110,31 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="content-form-last">
-              <h3 class="title-gestion-perm">ROLES</h3>
-              <div class="tbl-permition">
-                <div class="element-gestion-permition" *ngFor="let item of checkbox_list">
-                  <div class="element-gestion-permition-header"
-                    matTooltip="l’utilisateur aura accès à la page facturation et recevra les factures par email."
-                    [matTooltipPosition]="position.value"
-                    aria-label="Button that displays a tooltip in various positions">
-                    {{item.name}}
-                  </div>
-                  <div class="element-gestion-permition-content">
-                    <label class="checked-block" [for]="item.id">
-                      <input name="check" type="checkbox" [id]="item.id" class="checkbox"
-                        [ngModelOptions]="{standalone: true}" [(ngModel)]="item.isChecked"
-                        (click)="list_change(item.id)" />
-                      <span class="checkbox-span"></span>
-                    </label>
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">Rôles</label>
                   </div>
                 </div>
+                <div>
+                  <select (change)="roleSetted($event)" [formControl]="userrole" name="userrole" class="select-role">
+                    <option title="{{rol.description}}" *ngFor="let rol of rolesRef" [value]="rol.id">{{ rol.name }}
+                    </option>
+                  </select>
+                  <!-- <div *ngIf=" submittedUser && addPassword.invalid" class="alert alert-danger">
+                    <div *ngIf="addPassword.errors.required">
+                      Mot de passe requis
+                    </div>
+                  </div> -->
+                </div>
               </div>
+            </div>
+            <div class="form-groupe">
+              <div class="top-form-groupe">
+
+              </div>
+            </div>
+            <div class="content-form-last">
               <div class="footer-form-last">
                 <input class="btn-gestion" type="submit" value="AJOUTER" />
               </div>
@@ -247,26 +251,26 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="content-form-last">
-              <h3 class="title-gestion-perm">ROLES</h3>
-              <div class="tbl-permition">
-                <div class="element-gestion-permition" *ngFor="let item of checkbox_list">
-                  <div class="element-gestion-permition-header"
-                    matTooltip="l’utilisateur aura accès à la page facturation et recevra les factures par email."
-                    [matTooltipPosition]="position.value"
-                    aria-label="Button that displays a tooltip in various positions">
-                    {{item.name}}
-                  </div>
-                  <div class="element-gestion-permition-content">
-                    <label class="checked-block" [for]="item.id">
-                      <input type="checkbox" [id]="item.id" class="checkbox" [ngModelOptions]="{standalone: true}"
-                        [(ngModel)]="item.isChecked" (click)="list_change(item.id)" />
-                      <span class="checkbox-span"></span>
-                    </label>
+              <div class="form-groupe">
+                <div class="top-form-groupe">
+                  <div class="title-and-error-span">
+                    <label class="libele">Rôles</label>
                   </div>
                 </div>
+                <div>
+                  <select (change)="roleSetted($event)" [formControl]="editUserrole" name="editUserrole" class="select-role">
+                    <option title="{{rol.description}}" *ngFor="let rol of rolesRef" [value]="rol.id">{{ rol.name }}
+                    </option>
+                  </select>
+                  <!-- <div *ngIf=" submittedUser && addPassword.invalid" class="alert alert-danger">
+                    <div *ngIf="addPassword.errors.required">
+                      Mot de passe requis
+                    </div>
+                  </div> -->
+                </div>
               </div>
+            </div>
+            <div class="content-form-last">
               <div class="footer-form-last">
                 <button class="btn-gestion" type="submit">Sauvegarder</button>
               </div>
@@ -287,7 +291,8 @@
         <div class="left-form-utilisateurs">
           <div class="nbr-utilisateurs">
             <i class="far fa-user btn-icon-utilisateur"></i>
-            <span>Utilisateurs {{users && users.length ? users.length : '*'}}/{{users && users.length ? users.length : '*'}}</span>
+            <span>Utilisateurs
+              {{users && users.length ? users.length : '*'}}/{{users && users.length ? users.length : '*'}}</span>
           </div>
           <button class="btn-header-contenu" (click)="param_cog()">
             <i class="far fa-plus-square btn-icon" id="param-cog"></i> Ajouter utilisateur
@@ -305,13 +310,15 @@
             </tr>
           </thead>
           <tbody class="table_body">
-            <tr class="table_row" *ngFor="let user of  users" (click)="openForm(user)">
+            <tr class="table_row" *ngFor="let user of  users">
               <td class="table_body_cell">{{user.username}}</td>
               <td class="table_body_cell">{{user.email}}</td>
               <td class="table_body_cell">{{user.role.name}}</td>
               <td class="table_body_cell table_icon">
-                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id" (click)="openForm(user)" class="fas fa-pencil-alt icon"></i>
-                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id" (click)=deleteUser(user.id) class="fas fa-trash-alt icon"></i>
+                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id" (click)="openForm(user)"
+                  class="fas fa-pencil-alt icon"></i>
+                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id" (click)=deleteUser(user.id)
+                  class="fas fa-trash-alt icon"></i>
               </td>
             </tr>
           </tbody>

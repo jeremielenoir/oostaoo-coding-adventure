@@ -13,10 +13,10 @@
     </div>
     <div fxFlex="35" class="sec2" fxFlex.sm="100" fxLayout="column" fxLayoutGap="25px">
       <h3>Payer par carte bancaire</h3>
-      <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+      <ngx-stripe-card class="StripeElement" [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
       <button id="payment" type="button" (click)="payNow()" *ngIf="!paied" [disabled]="!complete" mat-raised-button
         color="primary">{{ 'PAYER ' + offerChoice?.price + '€     '}}
-        <mat-progress-spinner *ngIf="inProgress" style="display: inline-block;" color="default" mode="indeterminate"
+        <mat-progress-spinner *ngIf="inProgress" style="display: inline-block;" color="accent" mode="indeterminate"
           diameter="20" value="50">
         </mat-progress-spinner>
       </button>

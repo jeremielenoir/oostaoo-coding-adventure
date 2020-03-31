@@ -20,9 +20,9 @@ module.exports = {
       const paymentToken = ctx.request.body.paymentToken;
 
       let paymentResult;
-      if (offer.get('periodicity') == 'unique') {
+      if (offer.get('periodicity') === 'unique') {
         paymentResult = await paymentServiceExtension.charge(userEmail, paymentToken.id, offer.get('price'));
-      } else if (offer.get('periodicity') == 'monthly') {
+      } else if (offer.get('periodicity') === 'monthly') {
         paymentResult = await paymentServiceExtension.subscribe(userEmail, paymentToken.id, offer.get('plan'));
       } else {
         throw new Error('Pas de paiment requis');
@@ -37,13 +37,14 @@ module.exports = {
       // 2 - add payment row
       const paymentRow = await strapi.services.payment.add({
         amount: offer.get('price'),
-        email: userEmail,
-        offer_id: offer.get('id'),
-        offer_nom: offer.get('title'),
-        user_id: ctx.state.user.id,
-        user: ctx.state.user.username,
-        username: ctx.state.user.username,
-        date_payment: new Date().getTime()
+        user: ctx.state.user.id,
+        offer: offer.get('id'),
+        paied_at: new Date(),
+        stripe_customer_id: paymentResult.customer,
+        stripe_token_id: paymentToken.id,
+        stripe_charge_id: offer.get('periodicity') !== 'monthly' ? paymentResult.id : null,
+        stripe_subscription_id: offer.get('periodicity') === 'monthly' ? paymentResult.id : null,
+        customeraccount: ctx.state.user.customeraccount.id
       });
 
       if (!paymentRow) {
@@ -53,14 +54,13 @@ module.exports = {
       // 3 - update user tests stock
       let new_tests_stock = -1;
       if (parseInt(offer.get('tests_stock')) !== -1) {
-        new_tests_stock = parseInt(offer.get('tests_stock')) + ctx.state.user.tests_available;
+        new_tests_stock = parseInt(offer.get('tests_stock')) + ctx.state.user.customeraccount.tests_stock;
       }
 
-      let user = await strapi.plugins['users-permissions']
-        .services.user.edit(
-          { id: ctx.state.user.id },
-          { offer_id: offer.get('id'), tests_available: new_tests_stock }
-        );
+      let user = await strapi.services.customeraccount.edit(
+        { id: ctx.state.user.customeraccount.id },
+        { offer: offer.get('id'), tests_stock: new_tests_stock }
+      );
 
       // 4 - recreate token based on new offer
       const jwt = await strapi.plugins['users-permissions'].services.jwt.issue(
@@ -69,12 +69,16 @@ module.exports = {
       return { newToken: jwt };
 
     } catch (e) {
-      console.error(e);
       if (paimentDone) { // refund
-        const refund = await paymentServiceExtension.refund(ctx.request.body.paymentToken.id);
+        // const refund =
+        await paymentServiceExtension.refund(ctx.request.body.paymentToken.id);
         console.warn('customer get refund after payment failure', ctx.state.user.id);
-        return { refund: refund };
+        // TODO handle refund
+        // { refund: refund };
       }
+      ctx.status = e.status || 500;
+      ctx.body = {status: 'error', message: {code: 'stripe_paiement', message: e.message}};
+      ctx.app.emit('error', e, ctx);
     }
 
   }

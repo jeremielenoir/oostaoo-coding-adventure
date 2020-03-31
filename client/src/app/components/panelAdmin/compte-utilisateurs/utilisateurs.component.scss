@@ -72,7 +72,7 @@
           font-size: $font-size-home;
           transition: background-color 200ms;
           text-align: center;
-           
+
           align-items: center;
           justify-content: center;
           background-color: $color-principal-blue;
@@ -133,7 +133,7 @@
   border-top-left-radius: $border-radius;
 }
 
-.table_user tr:first-child th:last-child{ 
+.table_user tr:first-child th:last-child{
   border-top-right-radius: $border-radius;
 }
 
@@ -270,9 +270,12 @@
     .tbl-permition {
       display: flex;
       flex-wrap: wrap;
-      border-right: 1px solid #ce5637;
+      // border-right: 1px solid #ce5637;
       // $border: 1px solid #ce5637;
       flex-direction: row;
+
+
+
       .element-gestion-permition {
         flex: 1;
         margin: 0;
@@ -335,6 +338,19 @@
       padding: 5px 15px;
       font-size: 16px;
       flex-basis: 50%;
+
+      .select-role {
+        width: 100%;
+        height: 50px;
+        border: $border-table;
+        background: white;
+        font-size: 16px;
+        padding-left: 15px;
+
+        &:focus{
+            outline: none;
+        }
+    }
       .champ-form {
         padding: 10px 15px;
         margin: 0;
@@ -444,7 +460,7 @@
   padding: 0 20px;
   font-size: $font-size-home;
   transition: background-color 200ms;
-   
+
   text-transform: uppercase;
   background-color:$color-principal-blue;
 }

@@ -282,12 +282,12 @@ module.exports = {
 
     const role = await strapi
       .query('role', 'users-permissions')
-      .findOne({ type: settings.default_role }, []);
+      .findOne({ type: 'account_admin' }, []);
 
     if (!role) {
       return ctx.badRequest(null, ctx.request.admin ?
         [{ messages: [{ id: 'Auth.form.error.role.notFound' }] }] :
-        'Impossible to find the default role.');
+        'Impossible to find the default account role.');
     }
 
     // Check if the provided email is valid or not.

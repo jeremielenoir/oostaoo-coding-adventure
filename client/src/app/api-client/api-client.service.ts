@@ -26,6 +26,7 @@ export const API_URI_PAYMENT: string = prefix + 'payments';
 export const API_URI_FEEDBACK = 'feedbacks';
 export const API_URI_FAQ: string = prefix + 'faqs';
 export const API_URI_ISSUE: string = prefix + 'issues';
+export const API_URI_ROLE: string =  'users-permissions/roles';
 export const EXECUTE_SCRIPT: string = prefix + 'questions/execute';
 
 
@@ -41,7 +42,7 @@ export class ApiClientService {
       errorMessage = `Error: ${error.error.message}`;
     } else {
       // server-side error
-      errorMessage = `Error Code: ${error.status}\n Message: ${error.message}`;
+      errorMessage = error;
     }
     return throwError(errorMessage);
   }

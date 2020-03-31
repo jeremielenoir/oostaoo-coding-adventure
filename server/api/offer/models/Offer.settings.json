@@ -42,7 +42,7 @@
     },
     "payments": {
       "collection": "payment",
-      "via": "offer_id"
+      "via": "offer"
     },
     "periodicity": {
       "default": "",

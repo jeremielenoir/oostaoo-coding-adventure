@@ -6,9 +6,9 @@
         <span class="dashed"></span>
       </h3>
     </div>
-    <div class="content">
+    <div class="content" fxLayout="row" fxLayoutGap="30px">
       <mat-card class="lab-item" *ngFor="let offer of listOffers"
-        [class.highlight]="offerChoiceAmount === ('' + offer.price) && isSubPage">
+        [class.selected-offer]="currentOffer && currentOffer.id === offer.id">
         <mat-card-content>
           <mat-card-title>{{ offer.title }}</mat-card-title>
           <div [ngSwitch]="offer.periodicity">
@@ -17,8 +17,14 @@
           </div>
           <div class="offer-desc" [innerHTML]="offer.description"></div>
           <mat-card-actions>
-            <button (click)="goToPay(offer)" mat-raised-button color="warn"
+            <button *ngIf="!currentUser || (currentUser && !currentOffer)" (click)="goToPay(offer)" mat-raised-button
+              color="warn"
               class="lab-item lab-item-button">{{ offer.periodicity === 'monthly' ? 'S\'abonner' : 'Acheter' }}</button>
+            <button *ngIf="currentOffer && currentOffer.periodicity === 'monthly' && currentOffer.id === offer.id"
+              (click)="unSubscribe()" mat-raised-button color="warn" class="lab-item lab-item-button">Se
+              désabonner</button>
+            <button *ngIf="offer.periodicity === 'monthly' && currentOffer && currentOffer.id !== offer.id"
+              (click)="changeOffer(offer)" mat-raised-button color="warn" class="lab-item lab-item-button">S'abonner</button>
           </mat-card-actions>
         </mat-card-content>
       </mat-card>

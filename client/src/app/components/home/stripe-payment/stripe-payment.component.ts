@@ -130,19 +130,19 @@ export class StripePaymentComponent implements OnInit {
         return;
       }
 
-      localStorage.setItem('currentUser', payResult.newToken);
+      // localStorage.setItem('currentUser', payResult.newToken);
 
       this.snackBar.open('Votre paiement a été effectué', 'OK');
       this.inProgress = false;
       this.paied = true;
 
-      // setTimeout(() => {
-      //   this.router.navigate(['/dashboard/campaigns']);
-      // }, 5000);
+      setTimeout(() => {
+         this.router.navigate(['/dashboard/campaigns']);
+      }, 5000);
 
     } catch (e) {
       this.inProgress = false;
-      this.snackBar.open('Un problème technique est survenu', 'OK');
+      this.snackBar.open(e.message ? e.message : 'Oops ! paiement non disponible pour le moment.', 'OK');
       console.error(e);
       return;
     }

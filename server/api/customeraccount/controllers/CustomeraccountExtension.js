@@ -29,7 +29,7 @@ module.exports = {
 
       const account = ctx.state.user.customeraccount;
 
-      if (ctx.state.user.role.type !== 'authenticated') {
+      if (ctx.state.user.role.type !== 'account_admin') {
         return ctx.forbidden(null, 'Action interdite.');
       }
 
@@ -65,7 +65,7 @@ module.exports = {
         .add(ctx.request.body);
 
       // Send 201 `created`
-      ctx.created(data);
+      ctx.created({data});
 
     } catch(error) {
       console.error(error);

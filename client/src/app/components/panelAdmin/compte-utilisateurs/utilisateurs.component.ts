@@ -13,49 +13,10 @@ import { DecryptTokenService } from 'src/app/components/home/register/register.s
 import {
   ApiClientService,
   API_URI_USER,
-  API_URI_ACCOUNT
+  API_URI_ACCOUNT,
+  API_URI_ROLE
 } from 'src/app/api-client/api-client.service';
 import { AuthenticationService } from './../../home/register/service/auth.service';
-
-const CHECKBOX_DATA = [
-  {
-    id: 5,
-    name: 'LEVEL 1 - ADMINISTRATEUR',
-    checked: false,
-    matTooltip: 'bblabla',
-    isChecked: false,
-    roleId: 2
-  },
-  {
-    id: 1,
-    name: 'LEVEL 2 - UTILISATEUR',
-    checked: false,
-    matTooltip: 'bblabla',
-    isChecked: false,
-    roleId: 8
-  }
-  //   id: 2,
-  //   name: 'LEVEL 3 - SALES',
-  //   checked: false,
-  //   matTooltip: 'bblabla',
-  //   isChecked: false,
-  //   roleId: 5
-  // },{
-  //   id: 3,
-  //   name: 'LEVEL 4 - RH',
-  //   checked: false,
-  //   matTooltip: 'bblabla',
-  //   isChecked: false,
-  //   roleId: 6
-  // }, {
-  //   id: 4,
-  //   name: 'LEVEL 5 - CTO',
-  //   checked: false,
-  //   matTooltip: 'bblabla',
-  //   isChecked: false,
-  //   roleId: 7
-  // },
-];
 
 @Component({
   selector: 'app-utilisateurs',
@@ -67,15 +28,16 @@ export class UtilisateursComponent implements OnInit {
   currentUser: any;
   isCurrentUserIsAccountAdmin = false;
 
+  rolesRef: any[];
+  selectedRole: any;
+
   constructor(
     private router: Router,
     public apiClientService: ApiClientService,
     public authenticationService: AuthenticationService,
     public decryptTokenService: DecryptTokenService,
     private _snackBar: MatSnackBar
-  ) {
-    this.checkbox_list = CHECKBOX_DATA;
-  }
+  ) {}
 
   public submittedUser = false;
   public modifiedUser = false;
@@ -107,6 +69,7 @@ export class UtilisateursComponent implements OnInit {
   confirmPassword = new FormControl('', Validators.required);
   addUsername = new FormControl('', Validators.required);
   editUsername = new FormControl('', Validators.required);
+  editUserrole = new FormControl('', Validators.required);
 
   public nomIsactive = false;
   public prenomIsactive = false;
@@ -141,10 +104,18 @@ export class UtilisateursComponent implements OnInit {
   ngOnInit() {
     console.log('this.formulaire', this.formulaire.nativeElement);
 
+    this.apiClientService.get(API_URI_ROLE + '?startwith=account_')
+      .subscribe(
+        (items) => this.rolesRef = items.roles,
+        (err) => {
+          this._snackBar.open('Ajout d\'utilisateurs non disponible pour le moment', 'Ok', {duration: 3000});
+        }
+      );
+
     this.getUser().then(datas => {
       this.currentUser = datas;
       this.tests_available = datas.tests_available;
-      if (this.currentUser.role.type === 'authenticated') {
+      if (this.currentUser.role.type === 'account_admin') {
         this.isCurrentUserIsAccountAdmin = true;
       }
       this.apiClientService.get(API_URI_ACCOUNT + '/' + datas.id + '/users')
@@ -173,10 +144,9 @@ export class UtilisateursComponent implements OnInit {
     this.formulaire.nativeElement.username.value = '';
     this.formulaire.nativeElement.password.value = '';
     this.formulaire.nativeElement.confirmPassword.value = '';
-
-    for (let value of Object.values(this.checkbox_list)) {
-      value.isChecked = false;
-    }
+    this.formulaire.nativeElement.confirmPassword.value = '';
+    this.formulaire.nativeElement.userrole.value = '';
+    this.selectedRole = undefined;
 
     this.shadowcog1 = false;
 
@@ -209,6 +179,10 @@ export class UtilisateursComponent implements OnInit {
       this.editingUser.username,
       Validators.required
     );
+    this.editUserrole = new FormControl(
+      this.editingUser.role.id,
+      Validators.required
+    );
     this.editingId = user.id;
     console.log('userdfezijhfelf', this.editingUser);
     this.shadowcog2 = true;
@@ -217,7 +191,7 @@ export class UtilisateursComponent implements OnInit {
     // this.formulaire.nativeElement.nom.value = user.nom;
     // this.formulaire.nativeElement.email.value = user.email;
 
-    this.list_change(user.role.id);
+    //this.list_change(user.role.id);
   }
 
   public param_cog_non_active_deux() {
@@ -264,6 +238,14 @@ export class UtilisateursComponent implements OnInit {
     }
   }
 
+  /**
+   *
+   * @param event
+   */
+  roleSetted(event): void {
+    this.selectedRole = event.target.value;
+  }
+
   public addUser() {
     this.submittedUser = true;
     if (
@@ -275,6 +257,7 @@ export class UtilisateursComponent implements OnInit {
       this.confirmPassword.value === '' ||
       this.addPassword.value === null ||
       this.addPassword.value !== this.confirmPassword.value ||
+      isNaN(this.selectedRole) ||
       this.addUsername.value === ''
     ) {
       this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
@@ -293,7 +276,7 @@ export class UtilisateursComponent implements OnInit {
       email: this.addEmail.value,
       username: this.addUsername.value,
       password: this.addPassword.value,
-      role: this.selectedRoleId,
+      role: this.selectedRole,
       adminId: this.adminId
     };
 
@@ -334,6 +317,7 @@ export class UtilisateursComponent implements OnInit {
       this.confirmPassword.value === '' ||
       this.editPassword.value === null ||
       this.editPassword.value !== this.confirmPassword.value ||
+      isNaN(this.selectedRole) ||
       this.editUsername.value === ''
     ) {
       return console.log('Erreur, veuillez remplir tout les champs requis');
@@ -345,7 +329,7 @@ export class UtilisateursComponent implements OnInit {
           email: this.editEmail.value,
           username: this.editUsername.value,
           password: this.editPassword.value,
-          role: this.selectedRoleId
+          role: this.selectedRole
         })
         .toPromise()
         .then(async res => {
@@ -355,6 +339,7 @@ export class UtilisateursComponent implements OnInit {
           this.editNom = new FormControl('', Validators.required);
           this.editEmail = new FormControl('', Validators.required);
           this.editUsername = new FormControl('', Validators.required);
+          this.editUserrole = new FormControl('', Validators.required);
         })
         .catch((err) => {
           console.log(err);

@@ -177,13 +177,18 @@ module.exports = {
     return role;
   },
 
-  getRoles: async () => {
-    const roles = await strapi.query('role', 'users-permissions').find({ sort: 'name' }, []);
+  getRoles: async (startwith) => {
+
+    let roles = await strapi.query('role', 'users-permissions').find({ sort: 'name' }, []);
 
     for (let i = 0; i < roles.length; ++i) {
       roles[i].id = roles[i].id || roles[i]._id;
 
       roles[i].nb_users = await strapi.query('user', 'users-permissions').count(strapi.utils.models.convertParams('user', { role: roles[i].id }));
+    }
+
+    if (startwith) {
+      roles = roles.filter(r => String(r.type).startsWith(startwith));
     }
 
     return roles;

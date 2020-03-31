@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   ApiClientService,
-  API_URI_OFFER
+  API_URI_OFFER,
+  API_URI_USER,
+  API_URI_PAYMENT
 } from 'src/app/api-client/api-client.service';
 import { Offer } from 'src/app/models/offer.model';
 import { SessionService } from 'src/app/services/session/session.service';
+import { DecryptTokenService } from '../register/register.service';
 
 @Component({
   selector: 'app-offers',
@@ -18,11 +21,14 @@ export class OffersComponent implements OnInit {
   offerChoiceAmount: string;
   isSubPage = false;
   listOffers: Offer[] = [];
+  currentUser: any;
+  currentOffer: any;
 
   constructor(
     private router: Router,
     private apiClientService: ApiClientService,
-    private session: SessionService
+    private session: SessionService,
+    private userToken: DecryptTokenService
   ) {}
   /**
    *
@@ -31,8 +37,37 @@ export class OffersComponent implements OnInit {
     // this.offerChoiceAmount = this.session.offerChoiceAmount ? this.session.offerChoiceAmount : null;
     this.offerChoiceAmount = localStorage.getItem('offerChoiceAmount');
     this.isSubPage = this.router.url.startsWith('/subscription');
+
+    if (this.userToken && this.userToken.userId) {
+      this.apiClientService
+        .get(API_URI_USER + '/' + this.userToken.userId)
+        .subscribe(user => {
+          this.currentUser = user;
+          this.currentOffer = this.currentUser.customeraccount.offer;
+        });
+    }
+
     this.apiClientService.get(API_URI_OFFER)
       .subscribe(offers => this.listOffers = offers.filter((o: Offer) => o.enabled));
+  }
+  /**
+   *
+   * @param offer
+   */
+  changeOffer(offer: any): void {
+
+  }
+  /**
+   *
+   */
+  async unSubscribe() {
+    const unsubscribeResult: any = await this.apiClientService
+      .get(API_URI_OFFER + '/' + this.currentOffer.id + '/unsubscribe')
+      .toPromise();
+
+    this.currentOffer = undefined;
+    this.currentUser.customeraccount.tests_stock = 0;
+    this.currentUser.customeraccount.offer = undefined;
   }
   /**
    *
