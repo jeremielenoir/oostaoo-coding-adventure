@@ -11,7 +11,7 @@ import { UtilisateursComponent } from './components/panelAdmin/compte-utilisateu
 import { ProfilEntrepriseComponent } from './components/panelAdmin/profil-entreprise/profil-entreprise.component';
 import { EditCampagneComponent } from './components/panelAdmin/edit-campagne/edit-campagne.component';
 import { CandidatsComponent } from './components/panelAdmin/edit-campagne/candidats/candidats.component';
-import { QuestionsComponent } from './components/panelAdmin/edit-campagne/questions/questions.component';
+import { EditQuestionsComponent } from './components/panelAdmin/edit-campagne/edit-questions/edit-questions.component';
 import { SettingsComponent } from './components/panelAdmin/edit-campagne/settings/settings.component';
 import { GeneralComponent } from './components/panelAdmin/edit-campagne/settings/general/general.component';
 import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne/settings/personnalisation/personnalisation.component';
@@ -31,7 +31,6 @@ import { SubscriptionComponent } from './components/panelAdmin/subscription/subs
 import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
 import { ContactSupportComponent } from './components/panelAdmin/contact-support/contact-support.component';
 import { AboutUsComponent } from './components/home/about-us/about-us.component';
-import { AlgoComponent } from './components/panelAdmin/algo/algo.component';
 import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.component';
 import { ContactUsComponent } from './components/home/contact-us/contact-us.component';
 
@@ -106,7 +105,7 @@ const routes: Routes = [
     children: [
       { path: 'candidats/:idCandidat/rapport-detaille', component: RapportDetailleComponent },
       { path: 'candidats', component: CandidatsComponent },
-      { path: 'questions', component: QuestionsComponent },
+      { path: 'questions', component: EditQuestionsComponent },
       {
         path: 'settings',
         component: SettingsComponent,

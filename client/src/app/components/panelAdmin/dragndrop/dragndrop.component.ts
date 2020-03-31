@@ -32,11 +32,11 @@ export interface DialogData {
 }
 
 @Component({
-  selector: "app-question-component",
-  templateUrl: "./question.component.html",
-  styleUrls: ["./question.component.scss","../nouvelle-campagne/nouvelle-campagne.component.scss"]
+  selector: "app-dragndrop-component",
+  templateUrl: "./dragndrop.component.html",
+  styleUrls: ["./dragndrop.component.scss","../nouvelle-campagne/nouvelle-campagne.component.scss"]
 })
-export class QuestionComponent implements OnInit {
+export class DragNDropComponent implements OnInit {
 
   @Input('formCampagne') formCampagne: FormGroup;
   @Input() datas = [];

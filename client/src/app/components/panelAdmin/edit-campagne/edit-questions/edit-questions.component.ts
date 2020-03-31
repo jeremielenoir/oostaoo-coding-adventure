@@ -9,11 +9,11 @@ import {
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { FormControl } from '@angular/forms'
 @Component({
-  selector: 'app-questions',
-  templateUrl: './questions.component.html',
-  styleUrls: ['./questions.component.scss']
+  selector: 'app-edit-questions',
+  templateUrl: './edit-questions.component.html',
+  styleUrls: ['./edit-questions.component.scss']
 })
-export class QuestionsComponent implements OnInit {
+export class EditQuestionsComponent implements OnInit {
   public globalId;
   public campaing;
   public yourCampaign;
