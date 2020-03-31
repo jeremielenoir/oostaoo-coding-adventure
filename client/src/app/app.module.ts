@@ -93,10 +93,8 @@ import { DecryptTokenService } from './components/home/register/register.service
 import { TechnoComponent } from './components/home/techno/techno.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { OffersComponent } from './components/home/offers/offers.component';
-import {
-  RapportDetailleHomeComponent,
-  RapportDetailleExempleComponent
-} from './components/home/rapport-detaille/rapport-detaille.component';
+import { RapportDetailleHomeComponent, RapportDetailleExempleComponent} from './components/home/rapport-detaille/rapport-detaille.component';
+import {SelectedLanguageService} from './services/selected-language.service'
 import { FonctionnaliteComponent } from './components/home/fonctionnalite/fonctionnalite.component';
 import { StripePaymentComponent } from './components/home/stripe-payment/stripe-payment.component';
 import { RapportDetailleComponent } from './components/panelAdmin/edit-campagne/candidats/rapport-detaille/rapport-detaille.component';
@@ -119,11 +117,15 @@ import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.com
 import { ContactUsComponent } from './components/home/contact-us/contact-us.component';
 import { TypeFaqPipe } from './components/panelAdmin/FAQ/faq.pipes';
 import { AboutTeamComponent } from './components/home/about-us/about-team/about-team.component';
+<<<<<<< Updated upstream
 import { Test2Component } from './components/panelAdmin/client-test/test2/test2.component';
 import { QuestionsTypeComponent } from './components/panelAdmin/questions-type/questions-type.component';
 import { OneTypeComponent } from './components/panelAdmin/questions-type/one-type/one-type.component';
 import { FreeTypeComponent } from './components/panelAdmin/questions-type/free-type/free-type.component';
 import { MultipleTypeComponent } from './components/panelAdmin/questions-type/multiple-type/multiple-type.component';
+=======
+import { from } from 'rxjs';
+>>>>>>> Stashed changes
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -247,7 +249,8 @@ import { MultipleTypeComponent } from './components/panelAdmin/questions-type/mu
     ApiClientService,
     DatePipe,
     DecryptTokenService,
-    CampagneComponent
+    CampagneComponent,
+    SelectedLanguageService
   ],
   bootstrap: [AppComponent]
 })
