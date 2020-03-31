@@ -3,7 +3,8 @@ import {
   OnInit,
   ViewChild,
   HostListener,
-  Inject
+  Inject,
+  LOCALE_ID
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(@Inject(DOCUMENT) document, private router: Router) { }
+  constructor(@Inject(DOCUMENT) document, @Inject(LOCALE_ID) private locale: string, private router: Router) { }
 
   public shouldShow = true;
   public Removeshould = true;
@@ -53,6 +54,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log('locale', this.locale, window.parent.location.href);
+    if(localStorage.getItem('lang') != null){
+      this.lang = localStorage.getItem('lang');
+    }
+
     this.onWindowScroll();
 
     let linkMenu = document.querySelectorAll('#all-list-menu .link-menu');
@@ -90,6 +96,7 @@ export class NavbarComponent implements OnInit {
 
 
   setCurrentLanguage(langage) {
+    localStorage.setItem('lang', langage.codelang);
     this.currentLanguage = langage.img;
     window.parent.location.href = langage.url;
   }
