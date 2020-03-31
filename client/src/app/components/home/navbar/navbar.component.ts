@@ -56,9 +56,9 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
 
     console.log('locale', this.locale, window.parent.location.href);
-    console.log('COOKIE', this.cookieService.check('current_language'));
-    if(this.cookieService.check('current_language')){
-      this.lang = this.cookieService.get('current_language');
+    console.log('COOKIE', this.cookieService.check('currentlanguage'));
+    if(this.cookieService.check('currentlanguage')){
+      this.lang = this.cookieService.get('currentlanguage');
     }
 
     this.onWindowScroll();
@@ -98,6 +98,6 @@ export class NavbarComponent implements OnInit {
     console.log('LANG', langage.codelang);
     this.cookieService.set('currentlanguage', langage.codelang, 30, '/', 'roodeo.com', true, "Lax");
     this.currentLanguage = langage.img;
-    //window.parent.location.href = langage.url;
+    window.parent.location.href = langage.url;
   }
 }
