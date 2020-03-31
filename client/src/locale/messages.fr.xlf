@@ -19,7 +19,7 @@
           Sought profiles
         </source>
         <target>
-          Sought profiles
+          Profils recherchés
         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
