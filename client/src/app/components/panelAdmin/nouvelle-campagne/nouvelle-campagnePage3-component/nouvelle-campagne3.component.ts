@@ -40,7 +40,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
   @Input('techno') techno: any
   public searchText = "";
   public experience: string;
-  public questions: any[];
+  public questions: any[] = [];
   public saveallQuestionsCampaign: any[];
   public allQuestionLevel: any[] = [];
   public allQuestions: any[] = [];
@@ -92,7 +92,8 @@ export class NouvelleCampagnePage3Component implements OnInit {
       this.headerChangePositioinDropList();
     });
 
-  }
+   
+  } 
 
   OnChanges(){
     
@@ -119,39 +120,43 @@ export class NouvelleCampagnePage3Component implements OnInit {
     }
   }
 
-  getAllQuestions() {
-    // console.log('this.formCampagne.value(): ', this.formCampagne.value);
-    this.apiClientService.get(API_URI_QUESTIONS).subscribe(datas => {
-      this.questions = datas;
-      for (const question of this.questions) {
-        if (question.technologies) {
 
-          if (this.formCampagne.value.technoSelectedId.includes(question.technologies.id)
-          ) {
-            this.allTechno.push(question.technologies.name)
-            this.allQuestions.push(question);
-            this.saveallQuestionsCampaign = this.allQuestions
+   getAllQuestions() {
+
+    // console.log('this.formCampagne.value(): ', this.formCampagne.value);
+
+      let url =''
+      this.techno.forEach((tech,index)=>{
+        if(index === 0){
+        url +=`?technologies_in=${tech.id}`
+        }else{
+        url +=`&technologies_in=${tech.id}`
+        }
+      })
+
+         this.apiClientService.get(`${API_URI_QUESTIONS}${url}`).subscribe(datas => {
+          this.questions.push(...datas);
+          console.log('data --->',datas)
+          for (const question of this.questions) {
+            if (question.technologies) {
+                this.allTechno.push(question.technologies.name)
+                this.allQuestions.push(question);
+            }
+
           }
 
-        }
-
-      }
-
-      for (const questionLevel of this.allQuestions) {
-        if (questionLevel.level === this.experience) {
-          this.allQuestionLevel.push(questionLevel);
-        }
-      }
-
-      this.finalCampagn = [...this.allQuestionLevel]
-
+          this.allQuestionLevel = this.allQuestions.filter(questionLevel => (questionLevel.level === this.experience));
+          for(let questionOfLevel of this.allQuestionLevel){
+            this.allQuestions = this.allQuestions.filter(question => question != questionOfLevel)
+          }
+          console.log(' this.allQuestionLevel bien filtre', this.allQuestionLevel)
+  
+        });
+      
     
-      for (const itemQuestionLevel of this.allQuestionLevel) {
-        this.allQuestions = this.allQuestions.filter(
-          element => element !== itemQuestionLevel
-        );
-      }
-    });
+
+   
+   
   }
 
   public onDecrementPage(): void {

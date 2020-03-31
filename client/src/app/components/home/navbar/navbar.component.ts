@@ -3,7 +3,8 @@ import {
   OnInit,
   ViewChild,
   HostListener,
-  Inject
+  Inject,
+  LOCALE_ID
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
@@ -14,20 +15,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(@Inject(DOCUMENT) document, private router: Router) { }
+  constructor(@Inject(DOCUMENT) document, @Inject(LOCALE_ID) private locale: string, private router: Router) { }
 
   public shouldShow = true;
   public Removeshould = true;
   public IsheaderTrue = false;
   public AddIndex = false;
-  public lang = window.navigator.language ;
+  public lang = 'en-US';
 
   public currentLanguage;
   public otherLanguage = [
-   {codelang: 'fr-FR',  img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/FR'},
-   {codelang: 'en-US', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/EN'},
-   {codelang: 'es-ES', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/ES'},
-   {codelang: 'ja-JA', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/JP'}
+   {codelang: 'fr-FR',  img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr/'},
+   {codelang: 'en-US', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en/'},
+   {codelang: 'es-ES', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es/'},
+   {codelang: 'jp-JP', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp/'}
   ];
 
   @ViewChild('header') header;
@@ -52,6 +53,11 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit() {
+
+    console.log('locale', this.locale, window.parent.location.href);
+    if(localStorage.getItem('lang') != null){
+      this.lang = localStorage.getItem('lang');
+    }
 
     this.onWindowScroll();
 
@@ -89,7 +95,9 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  setCurrentLanguage(img) {
-    this.currentLanguage = img;
+  setCurrentLanguage(langage) {
+    localStorage.setItem('lang', langage.codelang);
+    this.currentLanguage = langage.img;
+    window.parent.location.href = langage.url;
   }
 }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="2f8f45be5ce0836293c11ead489cca2166daebef" datatype="html">
+        <source>
+          Test developers
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cb62377beeb5d8f6b4cff749f6032d95f41ba687" datatype="html">
+        <source>
+          Profils recherchés
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="560a5f8202199febb1bd22d2ac1fed94dab40c23" datatype="html">
+        <source>Fonctionnalités</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a6fe48bfbf0dc07537c3d0f6b0cb2b75366ea50c" datatype="html">
+        <source>
+          Technologies
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="21fded46b491c78ba3517620dccc07ea6bb4054e" datatype="html">
+        <source>Prix</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="55a57e6165759f4c48fd86a29d674304066044e9" datatype="html">
+        <source>Connexion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ed325b525a8a185089034c5d8beda3ab99e7e7ed" datatype="html">
+        <source>Évaluez et testez les développeurs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e1fb9fe2aa7b7a7ea7ace5257ed6a82ec1623340" datatype="html">
+        <source>30 jours d&apos;evaluation gratuits</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="def37443e31bd9610626357f6d47e5b47623dfaa" datatype="html">
+        <source>
+          NOS FORMULES
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/offers/offers.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

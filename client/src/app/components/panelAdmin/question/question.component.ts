@@ -25,6 +25,7 @@ import {
   API_URI_CAMPAIGNS
 } from "../../../api-client/api-client.service";
 import { Router } from "@angular/router";
+import { TestComponent } from '../client-test/test/test.component';
 
 export interface DialogData {
   questions;
@@ -40,6 +41,7 @@ export class QuestionComponent implements OnInit {
   @Input('formCampagne') formCampagne: FormGroup;
   @Input() datas = [];
   @Input() allQuestionLevel = [];
+  @Input() techno = [];
   @Output() incrementPage = new EventEmitter<any>();
   @Output() decrementPage = new EventEmitter<any>();
   @Output() chargeYourCampagn = new EventEmitter<any>();
@@ -58,6 +60,7 @@ export class QuestionComponent implements OnInit {
 
   public disablehover = false;
   public enablehover = false;
+  public technoCampaign: Array<any>;
 
 
   @ViewChild("droplist") public droplist: ElementRef;
@@ -228,9 +231,11 @@ export class QuestionComponent implements OnInit {
     this.boelanIsSearchAdvenced = !this.boelanIsSearchAdvenced
   }
 
-  openDialogTest(idCampaign): void {
+  // data: {questions: this.allQuestionLevel}
+  openDialogTest(): void {
     const dialogRef = this.dialog.open(DialogOverviewTest, {
-      data: {questions: this.allQuestionLevel}
+       data: {questions: this.allQuestionLevel, technoCampaign : this.techno},
+       width: '400px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -279,10 +284,22 @@ export class QuestionComponent implements OnInit {
   selector: 'dialog-overview-test',
   templateUrl: 'dialog-overview-test.html',
 })
-export class DialogOverviewTest{
+export class DialogOverviewTest implements OnInit{
+
+  dataPopup;
+  prev = false;
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewTest>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+      if(data){
+        this.dataPopup = data;
+        this.prev =true;
+      }
+    }
+
+  ngOnInit(){
+    console.log('this.dataPopup : ', this.dataPopup);
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -290,6 +307,9 @@ export class DialogOverviewTest{
   onClick(): void {
     console.log(this.data);
     this.dialogRef.close();
+  }
+  refreshComponent($event): void{
+    console.log('REFRESH COMPONENT');
   }
 
 

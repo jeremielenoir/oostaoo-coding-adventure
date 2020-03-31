@@ -99,7 +99,6 @@ export class RouteComponentComponent implements OnInit {
       this.notifications.sort((a, b) => a.status - b.status);
       // console.log(this.notifications);
       this.initNotifNotRead(this.notifications);
-      console.log('les notif', this.notifications);
     });
 
     // setInterval(() => this.getNotifications().then(notifications => {
@@ -119,7 +118,6 @@ export class RouteComponentComponent implements OnInit {
   public disConnection(event) {
     event.preventDefault();
 
-    console.log('Hello WORD !!!');
 
     const dialogRef = this.dialog.open(DistConnecTed, {});
   }
