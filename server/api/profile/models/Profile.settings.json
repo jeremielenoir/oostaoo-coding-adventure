@@ -23,6 +23,18 @@
     "campaigns": {
       "collection": "campaign",
       "via": "profile"
+    },
+    "name_jp": {
+      "default": "",
+      "type": "string"
+    },
+    "name_es": {
+      "default": "",
+      "type": "string"
+    },
+    "name_en": {
+      "default": "",
+      "type": "string"
     }
   }
 }
