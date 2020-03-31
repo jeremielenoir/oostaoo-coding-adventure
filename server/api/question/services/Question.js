@@ -311,8 +311,9 @@ module.exports = {
    *
    * @return {Promise}
    */
-  fetchSpreadsheet: async (spreadsheetId, ranges) => {
+  fetchSpreadsheet: async (spreadsheetId, page, first, last) => {
     try {
+      const ranges = [`${page}!${first}:${last}`];
       const client = new google.auth.JWT(
         keys.client_email,
         null,
@@ -328,15 +329,14 @@ module.exports = {
         spreadsheetId,
         ranges
       });
+      const data = valueRanges.map(val => val.values)[0];
 
-      const data = valueRanges.map(val => val.values);
-      const arr = data[0];
       const arrValues = [];
-      const arrFields = arr[0];
-      for (var i = 1; i < arr.length; i++) {
-        arrValues.push(arr[i]);
-      }
 
+      for (var i = 0; i < data.length; i++) {
+        arrValues.push(data[i]);
+      }
+      console.log("arrValues", arrValues);
       let arrTech = [];
 
       const techFieldValues = [...new Set(arrValues.map(val => val[1]))];
@@ -396,27 +396,37 @@ module.exports = {
       arrTech = await Promise.all(arrTechPromise);
 
       const questions = [];
-      arrValues.forEach((val, _index) => {
+      arrValues.forEach(val => {
         const tech = arrTech.find(
           t => t && t.name && t.name.toString() === val[1]
         );
 
         questions.push({
           id: val[0] || null,
-          [arrFields[1].toLowerCase()]: tech,
-          [arrFields[2].toLowerCase()]: val[2],
-
-          [arrFields[3].toLowerCase()]: val[3],
-          [arrFields[4].toLowerCase()]: val[4],
-          [arrFields[5].toLowerCase()]: val[5],
-
-          [arrFields[6].toLowerCase()]: val[6],
-          [arrFields[7].toLowerCase()]: val[7],
-          [arrFields[8].toLowerCase()]: val[8],
-          [arrFields[9].toLowerCase()]: val[9]
+          technologies: tech,
+          name: val[2],
+          name_en: val[3],
+          name_es: val[4],
+          name_jp: val[5],
+          content: val[6],
+          content_en: val[7],
+          content_es: val[8],
+          content_jp: val[9],
+          answer_value: val[10],
+          answer_value_en: val[11],
+          answer_value_es: val[12],
+          answer_value_jp: val[13],
+          time: val[14],
+          level: val[15],
+          type: val[16],
+          points: val[17],
+          theme: val[18],
+          theme_en: val[19],
+          theme_es: val[20],
+          theme_jp: val[21]
         });
       });
-
+      console.log("questions", questions);
       const arrPromises = [];
 
       questions.forEach(question => {
@@ -452,7 +462,7 @@ module.exports = {
 
       const updateOptions = {
         spreadsheetId,
-        range: "Feuille 1!A2",
+        range: `${page}!${first}`,
         valueInputOption: "USER_ENTERED",
         resource: { values: ids }
       };
@@ -536,7 +546,7 @@ module.exports = {
       let script = "";
       let compiledfile = `${filetoexecute.split(".")[0]}`;
 
-      const scriptjava = `sed -i ${''} s/Main/${
+      const scriptjava = `sed -i ${""} s/Main/${
         compiledfile.split("/")[1]
       }/g ${filetoexecute}`;
       switch (extension) {

@@ -38,14 +38,6 @@
         "algo"
       ]
     },
-    "theme": {
-      "default": "langage",
-      "type": "enumeration",
-      "enum": [
-        "langage",
-        "resolution"
-      ]
-    },
     "time": {
       "default": "",
       "type": "integer"
@@ -103,9 +95,25 @@
       "default": "",
       "type": "text"
     },
-    " answer_value_jp": {
+    "answer_value_jp": {
       "default": "",
       "type": "text"
+    },
+    "theme": {
+      "default": "",
+      "type": "string"
+    },
+    "theme_en": {
+      "default": "",
+      "type": "string"
+    },
+    "theme_es": {
+      "default": "",
+      "type": "string"
+    },
+    "theme_jp": {
+      "default": "",
+      "type": "string"
     }
   }
 }
