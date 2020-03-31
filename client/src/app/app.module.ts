@@ -117,15 +117,12 @@ import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.com
 import { ContactUsComponent } from './components/home/contact-us/contact-us.component';
 import { TypeFaqPipe } from './components/panelAdmin/FAQ/faq.pipes';
 import { AboutTeamComponent } from './components/home/about-us/about-team/about-team.component';
-<<<<<<< Updated upstream
 import { Test2Component } from './components/panelAdmin/client-test/test2/test2.component';
 import { QuestionsTypeComponent } from './components/panelAdmin/questions-type/questions-type.component';
 import { OneTypeComponent } from './components/panelAdmin/questions-type/one-type/one-type.component';
 import { FreeTypeComponent } from './components/panelAdmin/questions-type/free-type/free-type.component';
 import { MultipleTypeComponent } from './components/panelAdmin/questions-type/multiple-type/multiple-type.component';
-=======
 import { from } from 'rxjs';
->>>>>>> Stashed changes
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,

@@ -135,6 +135,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
       })
 
          this.apiClientService.get(`${API_URI_QUESTIONS}${url}`).subscribe(datas => {
+           console.log('data longeur',datas.length)
           this.questions.push(...datas);
           console.log('data --->',datas)
           for (const question of this.questions) {

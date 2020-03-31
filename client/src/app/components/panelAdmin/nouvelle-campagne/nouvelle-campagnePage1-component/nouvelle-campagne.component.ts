@@ -35,7 +35,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
   public roleSelect: string;
   public facile = 'facile';
   public nameLanguage:string = '';
-  public personalise:string = ''
+  
 
   @Output() valueChange = new EventEmitter();
   @Output() valueChangeProfil = new EventEmitter();
@@ -52,11 +52,11 @@ export class NouvelleCampagnePage1Component implements OnInit {
     this.getProfiles();
     this.getTechnos();
     
+    console.log('this.languageStorage.recupLanguageCountry()',this.languageStorage.recupLanguageCountry())
 
     switch(this.languageStorage.recupLanguageCountry()){
       case 'es-ES':
       this.nameLanguage = 'name_es';
-      this.personalise = ''
       break;
       case 'fr-FR':
       this.nameLanguage = 'name';
