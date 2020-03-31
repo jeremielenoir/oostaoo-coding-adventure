@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(@Inject(DOCUMENT) document, @Inject(LOCALE_ID) private locale: string, private router: Router) { }
+  constructor(@Inject(DOCUMENT) document, @Inject(LOCALE_ID) private locale: string, private cookieService: CookieService, private router: Router) { }
 
   public shouldShow = true;
   public Removeshould = true;
@@ -55,8 +56,9 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
 
     console.log('locale', this.locale, window.parent.location.href);
-    if(localStorage.getItem('lang') != null){
-      this.lang = localStorage.getItem('lang');
+    console.log('COOKIE', this.cookieService.check('current_language'));
+    if(this.cookieService.check('current_language')){
+      this.lang = this.cookieService.get('current_language');
     }
 
     this.onWindowScroll();
@@ -93,8 +95,9 @@ export class NavbarComponent implements OnInit {
 
 
   setCurrentLanguage(langage) {
-    localStorage.setItem('lang', langage.codelang);
+    console.log('LANG', langage.codelang);
+    this.cookieService.set('currentlanguage', langage.codelang, 30, '/', 'roodeo.com', true, "Lax");
     this.currentLanguage = langage.img;
-    window.parent.location.href = langage.url;
+    //window.parent.location.href = langage.url;
   }
 }

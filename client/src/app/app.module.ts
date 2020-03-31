@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
+import { CookieService } from 'ngx-cookie-service';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr, 'fr');
@@ -247,7 +248,8 @@ import { from } from 'rxjs';
     DatePipe,
     DecryptTokenService,
     CampagneComponent,
-    SelectedLanguageService
+    SelectedLanguageService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
