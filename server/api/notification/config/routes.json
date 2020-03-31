@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/notifications",
+      "path": "/api/notifications",
       "handler": "Notification.find",
       "config": {
         "policies": []
@@ -10,7 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/notifications/count",
+      "path": "/api/notifications/count",
       "handler": "Notification.count",
       "config": {
         "policies": []
@@ -18,7 +18,7 @@
     },
     {
       "method": "GET",
-      "path": "/notifications/:id",
+      "path": "/api/notifications/:id",
       "handler": "Notification.findOne",
       "config": {
         "policies": []
@@ -26,7 +26,7 @@
     },
     {
       "method": "POST",
-      "path": "/notifications",
+      "path": "/api/notifications",
       "handler": "Notification.create",
       "config": {
         "policies": []
@@ -34,7 +34,7 @@
     },
     {
       "method": "PUT",
-      "path": "/notifications/:id",
+      "path": "/api/notifications/:id",
       "handler": "Notification.update",
       "config": {
         "policies": []
@@ -42,7 +42,7 @@
     },
     {
       "method": "DELETE",
-      "path": "/notifications/:id",
+      "path": "/api/notifications/:id",
       "handler": "Notification.destroy",
       "config": {
         "policies": []

@@ -82,6 +82,30 @@
     "name_en": {
       "default": "",
       "type": "string"
+    },
+    "content_en": {
+      "default": "",
+      "type": "text"
+    },
+    "content_es": {
+      "default": "",
+      "type": "text"
+    },
+    "content_jp": {
+      "default": "",
+      "type": "text"
+    },
+    "answer_value_en": {
+      "default": "",
+      "type": "text"
+    },
+    "answer_value_es": {
+      "default": "",
+      "type": "text"
+    },
+    " answer_value_jp": {
+      "default": "",
+      "type": "text"
     }
   }
 }

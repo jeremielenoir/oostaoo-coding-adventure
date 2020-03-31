@@ -1,7 +1,7 @@
 @import "../../../../../roodeo-variables.scss";
 
 #container {
-  width: 100%;
+  width: 90%;
   height: 100%;
   background-color: $color-background-blue;
   padding-top: 40px;
@@ -9,12 +9,12 @@
   .content {
     padding: 10px;
     display: flex;
-    width: 98%;
+    width: 100%;
     margin: 0 auto;
     background: $color-background-blue;
 
     .title {
-      font-size: 36px;
+      font-size: 24px;
     }
 
     .section-title {
@@ -41,7 +41,6 @@
       // }
 
       .logoSupport {
-        margin-bottom: 30px;
 
         img {
           width: 300px;
