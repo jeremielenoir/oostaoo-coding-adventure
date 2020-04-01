@@ -26,10 +26,10 @@ export class NavbarComponent implements OnInit {
 
   public currentLanguage;
   public otherLanguage = [
-   {codelang: 'fr-FR',  img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr/'},
-   {codelang: 'en-US', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en/'},
-   {codelang: 'es-ES', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es/'},
-   {codelang: 'jp-JP', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp/'}
+   {codelang: 'fr-FR', shortlang:'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr/'},
+   {codelang: 'en-US', shortlang:'en', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en/'},
+   {codelang: 'es-ES', shortlang:'es', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es/'},
+   {codelang: 'jp-JP', shortlang:'jp', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp/'}
   ];
 
   @ViewChild('header') header;
@@ -56,9 +56,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
 
     console.log('locale', this.locale, window.parent.location.href);
-    console.log('COOKIE', this.cookieService.check('currentlanguage'));
+    
+    this.lang = this.locale;
+
     if(this.cookieService.check('currentlanguage')){
-      this.lang = this.cookieService.get('currentlanguage');
+      //this.lang = this.cookieService.get('currentlanguage');
     }
 
     this.onWindowScroll();
@@ -76,7 +78,7 @@ export class NavbarComponent implements OnInit {
     });
 
     this.otherLanguage.forEach( element => {
-      if ( element.codelang === this.lang) {
+      if ( element.codelang === this.lang || element.shortlang === this.lang) {
         this.currentLanguage = element.img;
       }
     });
