@@ -100,6 +100,6 @@ export class NavbarComponent implements OnInit {
     console.log('LANG', langage.codelang);
     this.cookieService.set('currentlanguage', langage.codelang, 30, '/', 'roodeo.com', true, "Lax");
     this.currentLanguage = langage.img;
-    window.parent.location.href = langage.url;
+    window.parent.location.href = '/';
   }
 }
