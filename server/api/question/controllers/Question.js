@@ -91,7 +91,29 @@ module.exports = {
 
       return result;
     } catch (error) {
-      console.log("error", error);
+      throw error;
+    }
+  },
+
+  /**
+   * fillByTechno from spreadsheet.
+   *
+   * @return {Object}
+   */
+
+  fillSpreadsheetByTechno: async (ctx, _next) => {
+    try {
+      const { spreadsheetId, first, last, page, techno } = ctx.query;
+      const result = await strapi.services.question.fillSpreadsheetByTechno(
+        spreadsheetId,
+        page,
+        first,
+        last,
+        techno
+      );
+
+      return result;
+    } catch (error) {
       throw error;
     }
   },

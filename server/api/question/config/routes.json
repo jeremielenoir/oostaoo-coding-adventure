@@ -17,6 +17,14 @@
         "policies": []
       }
     },
+    {
+      "method": "GET",
+      "path": "/api/questions/fill",
+      "handler": "Question.fillSpreadsheetByTechno",
+      "config": {
+        "policies": []
+      }
+    },
 
     {
       "method": "POST",
