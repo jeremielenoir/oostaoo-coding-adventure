@@ -8,6 +8,7 @@ import {
 } from '../../../../api-client/api-client.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { FormControl } from '@angular/forms'
+import { element } from 'protractor';
 @Component({
   selector: 'app-edit-questions',
   templateUrl: './edit-questions.component.html',
@@ -28,7 +29,8 @@ export class EditQuestionsComponent implements OnInit {
   public difficulty = ['facile', 'moyen', 'expert'];
   public boelanIsSearchAdvenced: boolean = false;
   public saveallQuestionsCampaign = [];
-  public techno = []
+  public techno = [];
+  public allTechno = [];
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -50,43 +52,84 @@ export class EditQuestionsComponent implements OnInit {
 
   ngOnInit() {
 
-    Promise.all([this.loadCampaign(), this.loadAllQuestion()]).then(values => {
-      const campaigns = values[0];
-      this.yourCampaign = campaigns;
-      const questions = values[1]
-    
-      this.yourCampaign[0].technologies.forEach(element => {
-        this.techno.push(element)
-      });
-      const nameQuestionByTechno = [];
-      campaigns[0].questions.forEach(element => {
-        nameQuestionByTechno.push(element.name);
-      });
-      const questionByTechnoCampaing = [];
-      const nameQuestionCampaignByTechno = [];
-      for (let question of questions) {
+    // Promise.all([this.loadCampaign()]).then(values => {
+
+    //   const campaigns = values[0];
+    //   this.yourCampaign = campaigns;
+    //   const questions = this.loadAllQuestion();
+    //   console.log('campaigns --->',campaigns);
+    //   this.yourCampaign[0].technologies.forEach(element => {
+    //     this.techno.push(element)
+    //   });
+    //   const nameQuestionByTechno = [];
+    //   campaigns[0].questions.forEach(element => {
+    //     nameQuestionByTechno.push(element.name);
+    //   });
+    //   const questionByTechnoCampaing = [];
+    //   const nameQuestionCampaignByTechno = [];
+    //   for (let question of questions) {
        
-        campaigns[0].technologies.forEach(element => {
+    //     campaigns[0].technologies.forEach(element => {
 
 
-          if (question.technologies && question.technologies.id === element.id && !nameQuestionByTechno.includes(question.name)) {
+    //       if (question.technologies && question.technologies.id === element.id && !nameQuestionByTechno.includes(question.name)) {
 
-            questionByTechnoCampaing.push(question);
+    //         questionByTechnoCampaing.push(question);
 
-          }
-          if (question.technologies && question.technologies.id === element.id && nameQuestionByTechno.includes(question.name)) {
+    //       }
+    //       if (question.technologies && question.technologies.id === element.id && nameQuestionByTechno.includes(question.name)) {
 
-            nameQuestionCampaignByTechno.push(question);
-          }
+    //         nameQuestionCampaignByTechno.push(question);
+    //       }
 
 
-        });
+    //     });
       
-      }
-      this.questionsByCampaign = nameQuestionCampaignByTechno;
-      this.allQuestionsCampaign = questionByTechnoCampaing;
+    //   }
+    //   this.questionsByCampaign = nameQuestionCampaignByTechno;
+    //   this.allQuestionsCampaign = questionByTechnoCampaing;
 
-    });
+    // });
+
+    
+
+    this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.globalId)
+    .subscribe(response => {
+         this.yourCampaign = response;
+         this.yourCampaign.technologies.forEach(element => {
+          this.techno.push(element);
+          });
+
+          const newQuestion = [];
+          this.allTechno = this.techno;
+          this.loadAllQuestion(this.yourCampaign.questions)
+
+        // this.loadAllQuestion();
+        
+        // const allquestionVariable = this.loadAllQuestion();
+        // console.log('bonne solution',allquestionVariable)
+
+        // if(this.techno && this.techno != []){
+        //    console.log('le test pour voir si ce bon',this.loadAllQuestion())
+        // }
+
+        // this.allQuestions = [...this.loadAllQuestion()]
+        const nameQuestionByTechno = [];
+        this.yourCampaign.questions.forEach(element => {
+          nameQuestionByTechno.push(element.name);
+        });
+
+        for(let techno of this.allTechno){
+           for(let question of this.yourCampaign.questions){
+              newQuestion.push({...question,technologies:techno})
+           }
+        }
+
+
+         this.questionsByCampaign = newQuestion;
+         console.log('this.questionsByCampaign',this.questionsByCampaign);
+    })
+
   }
 
   chargeYourCampagn(event){
@@ -94,26 +137,36 @@ export class EditQuestionsComponent implements OnInit {
     // this.yourCampaign = event
   }
 
-  loadCampaign(): Promise<any> {
-    return this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.globalId)
-      .toPromise()
-      .then(response => {
-        
-        this.yourCampaign = [response];
-        return this.yourCampaign;
+  loadAllQuestion(yourCampaignQuestions): any {
+
+    let url =''
+    this.techno.forEach((tech,index)=>{
+      if(index === 0){
+      url +=`?technologies_in=${tech.id}`
+      }else{
+      url +=`&technologies_in=${tech.id}`
+      }
+    })
+
+     this.apiClientService.get(`${API_URI_QUESTIONS}${url}`)
+      .subscribe(response => {
+        this.allQuestions = response;
+        for(let questionLevel of yourCampaignQuestions){
+          this.allQuestionsCampaign = this.allQuestions.filter(question => question != questionLevel)
+        }
+        console.log('yourCampaignQuestions in loadAllQuestionmanZerm',yourCampaignQuestions)
+        console.log('la data est la',this.allQuestions)
+        return response;
+
+        // console.log('le test pour voir si ce bon',this.allQuestions)
+      //   for(let questionOfLevel of this.questionsByCampaign){
+      //   this.allQuestionsCampaign = this.allQuestions.filter(question => question != questionOfLevel);
+      // }
+
+        // return response;
       })
-      .catch(err => err);
   }
 
-  loadAllQuestion(): Promise<any> {
-    return this.apiClientService.get(API_URI_QUESTIONS)
-      .toPromise()
-      .then(response => {
-        console.log('all questions: ', response);
-        return response;
-      })
-      .catch(err => err);
-  }
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
