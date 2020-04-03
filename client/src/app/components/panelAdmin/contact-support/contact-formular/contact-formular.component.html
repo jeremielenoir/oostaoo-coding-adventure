@@ -3,11 +3,11 @@
     <div id="section1" class="border-none">
 
       <div class="section-title">
-        <h1 class="title">Contactez-nous</h1>
+        <h1 class="title" i18n>Contact us</h1>
         <br>
-        <p>
-          Vous avez une question à nous poser? Besoin d'aide?
-          Remplissez ce formulaire et nous vous répondrons dans les plus brefs délais
+        <p i18n>
+          You have a question to ask us? Need a Help?
+          Please fill in this form and we'll answer you as soon as possible
         </p>
       </div>
 
@@ -15,24 +15,24 @@
         <div class="form-line">
 
           <div class="input-bloc">
-            <h3 class="input-title" maxlength="64">Nom *</h3>
+            <h3 class="input-title" maxlength="64" i18n>Name *</h3>
             <input name="lastname" [formControl]="nom" class="input-section1" type="text" required>
             <div *ngIf="submittedForm && nom.invalid" class="invalid-feedback">
-              <div *ngIf="nom.errors.required">
-                Nom requis.
+              <div *ngIf="nom.errors.required" i18>
+                Name required.
               </div>
             </div>
           </div>
 
           <div class="input-bloc">
-            <h3 class="input-title" maxlength="64">Email *</h3>
+            <h3 class="input-title" maxlength="64" i18n>Email *</h3>
             <input name="email" [formControl]="email" class="input-section1" type="text" required>
             <div *ngIf="submittedForm && email.invalid" class="invalid-feedback">
-              <div *ngIf="email.errors.required">
-                Email requis.
+              <div *ngIf="email.errors.required" i18n>
+                Email required.
               </div>
-              <div *ngIf="email.errors.email">
-                Veuillez saisir un email valide.
+              <div *ngIf="email.errors.email" i18n>
+                Please enter a valid email.
               </div>
             </div>
           </div>
@@ -42,22 +42,22 @@
         <div class="form-line">
 
           <div class="input-bloc">
-            <h3 class="input-title" maxlength="64">Sujet*</h3>
+            <h3 class="input-title" maxlength="64" i18n>Subject*</h3>
             <input [formControl]="subject" class="input-section1" name="subject" required>
             <div *ngIf="submittedForm && subject.invalid" class="invalid-feedback">
-              <div *ngIf="subject.errors.required">
-                Veuillez saisir l'objet de votre demande.
+              <div *ngIf="subject.errors.required" i18n>
+                Please enter the subject of your request.
               </div>
             </div>
           </div>
 
           <div class="input-bloc">
-            <h3 class="input-title" maxlength="64">Message *</h3>
+            <h3 class="input-title" maxlength="64" i18n>Message *</h3>
             <textarea class="input-section1 input-section1-textarea" [formControl]="message" name="message"
               id="message"></textarea>
             <div *ngIf="submittedForm && message.invalid" class="invalid-feedback">
-              <div *ngIf="message.errors.required">
-                Veuillez remplir ce champ.
+              <div *ngIf="message.errors.required" i18n>
+                Please fill this field.
               </div>
             </div>
           </div>
@@ -66,11 +66,11 @@
             <ngx-recaptcha2 #captchaElem [siteKey]="siteKey" (success)="handleSuccess($event)" [useGlobalDomain]="false"
               [size]="size" [hl]="lang" [theme]="theme" [formControl]="recaptcha">
             </ngx-recaptcha2>
-            <div *ngIf="submittedForm && !captchaSuccess" class="invalid-feedback">
-              Validation du captcha nécessaire
+            <div *ngIf="submittedForm && !captchaSuccess" class="invalid-feedback" i18n>
+              Validation of captcha required
             </div>
           </div>
-          <button (click)='sendFormular()' class="btn-submit" type="submit">Envoyer</button>
+          <button (click)='sendFormular()' class="btn-submit" type="submit" i18n>Send</button>
         </div>
 
       </form>

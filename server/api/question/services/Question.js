@@ -336,7 +336,6 @@ module.exports = {
       for (var i = 0; i < data.length; i++) {
         arrValues.push(data[i]);
       }
-      console.log("arrValues", arrValues);
       let arrTech = [];
 
       const techFieldValues = [...new Set(arrValues.map(val => val[1]))];
@@ -426,7 +425,7 @@ module.exports = {
           theme_jp: val[21]
         });
       });
-      console.log("questions", questions);
+
       const arrPromises = [];
 
       questions.forEach(question => {
@@ -597,6 +596,80 @@ module.exports = {
         });
       });
     } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Promise to execute algorihtmic questions.
+   *
+   * @return {Promise}
+   */
+
+  fillSpreadsheetByTechno: async (spreadsheetId, page, first, last, techno) => {
+    try {
+      const technology = techno.toString();
+      const ranges = [`${page}!${first}:${last}`];
+      const client = new google.auth.JWT(
+        keys.client_email,
+        null,
+        keys.private_key,
+        [SCOPES]
+      );
+      await client.authorize();
+      const gsapi = google.sheets({ version: "v4", auth: client });
+
+      const {
+        data: { valueRanges }
+      } = await gsapi.spreadsheets.values.batchGet({
+        spreadsheetId,
+        ranges
+      });
+
+      const data = valueRanges.map(val => val.values)[0];
+
+      const arrValues = [];
+      const fields = data[0];
+
+      for (var i = 1; i < data.length; i++) {
+        if (data[i][1].toString() === technology) {
+          arrValues.push(data[i]);
+        }
+      }
+
+      const resourceFields = {
+        spreadsheetId: spreadsheetId,
+
+        resource: {
+          data: [
+            {
+              range: `${technology}!A1:V1`, // Update a row
+              values: [fields]
+            }
+          ],
+          valueInputOption: "USER_ENTERED"
+        }
+      };
+      await gsapi.spreadsheets.values.batchUpdate(resourceFields);
+      const dataCopied = [
+        {
+          range: `${technology}!A2:V${arrValues.length + 1}`, // Update a 2d range
+          majorDimension: "ROWS",
+          values: arrValues
+        }
+      ];
+
+      const resource = {
+        spreadsheetId: spreadsheetId,
+
+        resource: { data: dataCopied, valueInputOption: "USER_ENTERED" }
+      };
+
+      await gsapi.spreadsheets.values.batchUpdate(resource);
+
+      return arrValues;
+    } catch (error) {
+      console.log("error", error);
       throw error;
     }
   }
