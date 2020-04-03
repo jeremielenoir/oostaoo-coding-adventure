@@ -5,6 +5,11 @@
 .loading{
     top: 0;
 }
+
+.cdkDropList{
+    position: relative;
+    display: none;
+}
 // ::ng-deep app-nouvellecampagnepage3component{
 //     display: flex;
 //     flex-direction: column;
@@ -157,6 +162,7 @@
 .block-container {
     &.left{
         margin-right: 5px;
+        position: relative;
     }
     &.right{
         margin-left: 5px;
