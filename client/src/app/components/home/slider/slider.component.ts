@@ -29,14 +29,14 @@ export class SliderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.intervalId = setInterval(() => {
+    /*this.intervalId = setInterval(() => {
       this.onClickNav();
-    },8000);
+    },8000);*/
   }
 
   ngOnDestroy() {
     console.log('DESTROY');
-    clearInterval(this.intervalId);
+    //clearInterval(this.intervalId);
   }
 
   onClickNav() {
