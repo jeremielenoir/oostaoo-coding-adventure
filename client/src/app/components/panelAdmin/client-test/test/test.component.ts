@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, HostListener, Output, EventEmitter, Inject } from '@angular/core';
 import { ApiClientService, API_URI_CANDIDATS, API_URI_CAMPAIGNS, API_URI_NOTIFICATIONS } from '../../../../api-client/api-client.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {SelectedLanguageService} from '../../../../services/selected-language.service';
 
 @Component({
   selector: 'app-test',
@@ -45,6 +46,10 @@ export class TestComponent implements OnInit {
   public totalPoints;
   public totalPointsCampaign;
   public totalPointsCandidat;
+  public dataInfoLanguage = {
+    nameLanguage: '',
+    contentLanguage: ''
+  }
 
 
   // Input algo
@@ -53,9 +58,29 @@ export class TestComponent implements OnInit {
   public filename: any;
   public options: any;
 
-  constructor(private apiClientService: ApiClientService) {}
+  constructor(private apiClientService: ApiClientService,public languageStorage:SelectedLanguageService) {}
 
   ngOnInit() {
+
+    switch(this.languageStorage.recupLanguageCountry()){
+      case 'es-ES':
+        this.dataInfoLanguage.nameLanguage =  'name_es';
+        this.dataInfoLanguage.contentLanguage = 'content_es';
+      break;
+      case 'fr-FR':
+        this.dataInfoLanguage.nameLanguage =  'name_fr';
+        this.dataInfoLanguage.contentLanguage = 'content_fr';
+      break;
+      case 'en-US':
+        this.dataInfoLanguage.nameLanguage =  'name_en';
+        this.dataInfoLanguage.contentLanguage = 'content_en';
+      break;
+      case 'jp-JP':
+        this.dataInfoLanguage.nameLanguage =  'name_jp';
+        this.dataInfoLanguage.contentLanguage = 'content_jp';
+      break;
+    }
+
     if(this.prev){
       this.prev = true;
     }else{
@@ -102,7 +127,7 @@ export class TestComponent implements OnInit {
     if (this.question.content === null) {
       this.responses = [];
     } else {
-      this.responses = this.question.content.split(', ');
+      this.responses = this.question[this.dataInfoLanguage.contentLanguage].split(', ');
     }
     for (const techno of this.technoCampaign) {
       if (this.question.technologies === techno.id) {

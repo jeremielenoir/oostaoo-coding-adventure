@@ -9,8 +9,11 @@
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
         </figure>
         <span class="bar-text">Questions disponibles</span>
-        
       </div>
+      <!-- 
+            <div *ngIf="datas && datas.length > 0" class="loading">
+              <span class="fa fa-spinner fa-pulse"></span>
+      </div> -->
 
       <!--div class="option-question-help">
         <div id="div-search" >
@@ -67,11 +70,12 @@
       </div>
 
 
-      <div cdkDropList #todoList="cdkDropList"  [cdkDropListData]="datas" [cdkDropListConnectedTo]="[doneList]"
+      <div id="cdkDropList" cdkDropList #todoList="cdkDropList"  [cdkDropListData]="datas" [cdkDropListConnectedTo]="[doneList]"
         class="liste-question" (cdkDropListDropped)="drop($event)">
-
+        
           <div (cdkDragStarted)="dragStart($event)" (cdkDragEnded)="dragEnd($event)" class="ligne-question" *ngFor="let item of datas | filter: searchText" cdkDrag>
 
+          
               <div [ngClass]="{'info-hover-left': disablehover === false, 'disable': disablehover === true }" class="">
                 <div class="info-hover-header"><h2>{{item.name}}</h2></div>
                 <div class="info-hover-content">

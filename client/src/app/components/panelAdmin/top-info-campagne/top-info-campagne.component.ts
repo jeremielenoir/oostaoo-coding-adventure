@@ -30,14 +30,13 @@ export class TopInfoCampagneComponent implements OnInit {
   public timeAllquestionCampgnDivice = 0;
   public campagneFull = [];
   public technoLabel = [];
-  public technoPoint = []
+  public technoPoint = [];
   @ViewChild('Chart') Chart: ElementRef;
 
   constructor(public apiClientService: ApiClientService,private router: Router, 
     public decryptTokenService: DecryptTokenService,private _snackBar: MatSnackBar,private route: ActivatedRoute) { }
 
   ngOnInit() {
-
 
     this.route.parent.params.subscribe(params => {
       this.globalId = params.id;
@@ -47,6 +46,8 @@ export class TopInfoCampagneComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges){
 
+      console.log('techno man',this.techno)
+
       this.technoMethod();  
   }
 
@@ -55,7 +56,7 @@ export class TopInfoCampagneComponent implements OnInit {
   }
 
   technoMethod(){
-
+    
     let pointDepart = 0;
     let points = [];
     let timeArraySolo = [];
@@ -72,21 +73,19 @@ export class TopInfoCampagneComponent implements OnInit {
     }
 
       for(let technoElement of this.techno){
-
-        for(let question of this.allQuestionLevel){
           
+        for(let question of this.allQuestionLevel){
+
             if(technoElement['id'] == question['technologies'].id){
               pointDepart = pointDepart + question['points'];
               timeDepartQuestion = timeDepartQuestion + question['time'];
               deparPointNumberQuestion++
               
-            }
-
-          
+            }  
        }
-
-     
+ 
       points.push(pointDepart);
+     
       timeArraySolo.push(timeDepartQuestion)
      
       points  = points.filter(element => element !== 0);
@@ -94,8 +93,7 @@ export class TopInfoCampagneComponent implements OnInit {
         this.poinTotal = points.reduce((accumulator,currenValue) => accumulator + currenValue)
       }
 
-      
-       timeQuestionCampagne = 0;
+      timeQuestionCampagne = 0;
        
      
       this.technoDonuts.push(
