@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiClientService, API_URI_OFFER } from 'src/app/api-client/api-client.service';
 import { Offer } from 'src/app/models/offer.model';
-import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
   selector: 'home-offers',
@@ -16,10 +15,7 @@ export class HomeOffersComponent implements OnInit {
   listOffers: Offer[] = [];
 
 
-  constructor(private router: Router,
-              private apiClientService: ApiClientService,
-              private session: SessionService
-    ) { }
+  constructor(private router: Router) { }
 
     ngOnInit() {
       // recuperation l'offre selectionné
@@ -31,7 +27,7 @@ export class HomeOffersComponent implements OnInit {
       this.subscriptionPage = this.router.url.startsWith('/subscription');
 
       // recuperation offres back
-      this.apiClientService.get(API_URI_OFFER).subscribe( offers => {
+      /*this.apiClientService.get(API_URI_OFFER).subscribe( offers => {
 
         offers = offers.filter(offer=>offer.title!=="Gratuit" && offer.title !== "Expirée");
         offers.forEach(offer => {
@@ -39,7 +35,7 @@ export class HomeOffersComponent implements OnInit {
           this.listOffers.push(offer);
         });
       },
-      );
+      );*/
     }
 
     goBack(){

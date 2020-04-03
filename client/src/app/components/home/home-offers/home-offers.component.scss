@@ -2,6 +2,14 @@
 @import"../accueil/accueil.component.scss";
 
 
+.intro{
+  width: 100%;
+  text-align: center;
+  margin: 20px auto;
+  h2{
+    color: $color-principal-blue;
+  }
+}
 
 #offers{
   position: relative;
