@@ -92,6 +92,7 @@ import { DecryptTokenService } from './components/home/register/register.service
 import { TechnoComponent } from './components/home/techno/techno.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { OffersComponent } from './components/home/offers/offers.component';
+import { HomeOffersComponent } from './components/home/home-offers/home-offers.component';
 import { RapportDetailleHomeComponent, RapportDetailleExempleComponent} from './components/home/rapport-detaille/rapport-detaille.component';
 import {SelectedLanguageService} from './services/selected-language.service'
 import { FonctionnaliteComponent } from './components/home/fonctionnalite/fonctionnalite.component';
@@ -189,6 +190,7 @@ import { from } from 'rxjs';
     FinTestComponent,
     TechnoComponent,
     OffersComponent,
+    HomeOffersComponent,
     RapportDetailleHomeComponent,
     RapportDetailleExempleComponent,
     RapportDetailleComponent,

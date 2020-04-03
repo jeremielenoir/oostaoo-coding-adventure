@@ -1,0 +1,39 @@
+
+
+<section id="offers">
+
+  <button *ngIf="subscriptionPage" (click)="goBack()"
+      id="goBack">
+    <i class="material-icons">arrow_back</i>
+    RETOUR
+  </button>
+
+    <div class="title-dashed-container">
+        <h3 class="title-dashed" i18n>
+            Our concepts?? 
+          <span class="dashed"></span>
+        </h3>
+    </div>
+
+    <div class="content">
+        <mat-card class="lab-item" *ngFor="let offer of listOffers" [class.highlight]="offerChoiceAmount === offer.price && subscriptionPage">
+            <mat-card-content>
+                <mat-card-title>{{ offer.title }}</mat-card-title>
+
+                <div [ngSwitch]="offer.periodicity">
+                    <!-- <mat-card-subtitle *ngSwitchCase="'special'">Gratuit</mat-card-subtitle> -->
+                    <mat-card-subtitle *ngSwitchCase="'unique'">{{ offer.price }}€/{{ offer.title }}</mat-card-subtitle>
+                    <mat-card-subtitle *ngSwitchCase="'monthly'">{{ offer.price }}€/mois</mat-card-subtitle>
+                </div>
+
+                <ul>
+                    <li *ngFor="let description of offer.description">{{ description }}</li>
+                </ul>
+                <mat-card-actions>
+                    <button (click)="goToPay(offer)"
+                     mat-raised-button color="warn" class="lab-item lab-item-button" i18n>Subscribe</button>
+                </mat-card-actions>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</section>
