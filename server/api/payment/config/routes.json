@@ -26,14 +26,6 @@
     },
     {
       "method": "POST",
-      "path": "/api/payments/finalize",
-      "handler": "PaymentExtension.finalize",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "POST",
       "path": "/api/payments",
       "handler": "Payment.create",
       "config": {

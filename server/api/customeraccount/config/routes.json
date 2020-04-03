@@ -2,6 +2,62 @@
   "routes": [
     {
       "method": "GET",
+      "path": "/api/customeraccounts/:id/users",
+      "handler": "Customeraccount.userFind",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/customeraccounts/:idacc/users/:idusr",
+      "handler": "Customeraccount.userUpdate",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/customeraccounts/:id/users",
+      "handler": "Customeraccount.userCreate",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/customeraccounts/:idacc/users/:idusr",
+      "handler": "Customeraccount.userDestroy",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/customeraccounts/:id/offers",
+      "handler": "Customeraccount.offerCreate",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/customeraccounts/:id/offers",
+      "handler": "Customeraccount.offerUpdate",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/customeraccounts/:id/offers",
+      "handler": "Customeraccount.offerDestroy",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/api/customeraccounts",
       "handler": "Customeraccount.find",
       "config": {
@@ -12,22 +68,6 @@
       "method": "GET",
       "path": "/api/customeraccounts/count",
       "handler": "Customeraccount.count",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/api/customeraccounts/:id/users",
-      "handler": "CustomeraccountExtension.users",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "POST",
-      "path": "/api/customeraccounts/:id/users",
-      "handler": "CustomeraccountExtension.addUser",
       "config": {
         "policies": []
       }

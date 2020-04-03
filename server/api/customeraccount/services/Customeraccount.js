@@ -9,6 +9,7 @@
 
 // Public dependencies.
 const _ = require('lodash');
+const stripe = require('stripe')('sk_test_SHGN7PIdottD4WBLCcdSfbwA00kPGubvOC');
 
 // Strapi utilities.
 const utils = require('strapi-hook-bookshelf/lib/utils/');
@@ -239,5 +240,97 @@ module.exports = {
     }).fetchAll({
       withRelated: populate
     });
+  },
+  /**
+   *
+   */
+  refund: async (paymentId) => {
+
+    let refund;
+    const paymentType = paymentId.substring(0, 2);
+    if (paymentType == 'ch') {
+      refund = await stripe.refunds.create({
+        charge: paymentId
+      });
+    } else if (paymentType == 'su') {
+      refund = await stripe.subscriptions.del(paymentId);
+    }
+    return refund;
+  },
+  /**
+   *
+   */
+  charge: async (email, paymentToken, amount) => {
+
+    try {
+
+      // check if user already registred
+      let customer = await stripe.customers.list({email: email, limit: 1});
+
+      if (!customer) {
+        // if not yet create it
+        customer = await stripe.customers.create({
+          email: email,
+          source: paymentToken
+        });
+      }
+
+      // charge the customer
+      return await stripe.charges.create({
+        amount: amount * 100,
+        currency: 'EUR',
+        customer: customer.id
+      });
+
+    } catch (error) {
+      console.log('error : ', error);
+      return error;
+    }
+
+  },
+  /**
+   *
+   */
+  subscribe: async (email, paymentToken, plan) => {
+
+    try {
+
+      // check if user already registred
+      let customer = await stripe.customers.list({email: email, limit: 1});
+
+      if (!customer) {
+        // if not yet create it
+        customer = await stripe.customers.create({
+          email: email,
+          source: paymentToken
+        });
+      }
+
+      // search for active subscription
+      let subscription = await stripe.subscriptions.list({
+        customer: customer.id,
+        status: 'active', // TODO how to handle other status
+        collection_method: 'charge_automatically',
+        limit: 1
+      });
+
+      // prevent user for double subscription
+      // it may be an upgrade/downgrade, but it must be treated by change_offer endpoint
+      if (subscription) {
+        throw new Error('You are already subscribed to an offer');
+      }
+
+      // all fine, then create the subscription
+      return await stripe.subscriptions.create({
+        customer: customer.id,
+        items: [{
+          plan: plan
+        }]
+      });
+
+    } catch (error) {
+      console.log('error : ', error);
+      return error;
+    }
   }
 };

@@ -138,7 +138,7 @@ export class StripePaymentComponent implements OnInit {
 
       setTimeout(() => {
          this.router.navigate(['/dashboard/campaigns']);
-      }, 5000);
+      }, 3000);
 
     } catch (e) {
       this.inProgress = false;

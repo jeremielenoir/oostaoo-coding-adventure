@@ -310,15 +310,17 @@
             </tr>
           </thead>
           <tbody class="table_body">
-            <tr class="table_row" *ngFor="let user of  users">
+            <tr class="table_row" *ngFor="let user of  users" [ngClass]="{'user-disabled': user.blocked}" >
               <td class="table_body_cell">{{user.username}}</td>
               <td class="table_body_cell">{{user.email}}</td>
               <td class="table_body_cell">{{user.role.name}}</td>
               <td class="table_body_cell table_icon">
-                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id" (click)="openForm(user)"
+                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id && !user.blocked" (click)="openForm(user)"
                   class="fas fa-pencil-alt icon"></i>
-                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id" (click)=deleteUser(user.id)
-                  class="fas fa-trash-alt icon"></i>
+                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id && !user.blocked" (click)=deleteUser(user)
+                  class="fas fa-ban icon"></i>
+                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id && user.blocked" (click)=enableUser(user)
+                  class="fas fa-check-circle icon"></i>
               </td>
             </tr>
           </tbody>

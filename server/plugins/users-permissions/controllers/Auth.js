@@ -7,7 +7,6 @@
  */
 
 /* eslint-disable no-useless-escape */
-const authExtension = require('./AuthExtension');
 const crypto = require('crypto');
 const _ = require('lodash');
 
@@ -333,7 +332,12 @@ module.exports = {
 
       let user = await strapi.query('user', 'users-permissions').create(params);
 
-      await authExtension.registerCustomerAccount(ctx, user, params);
+      const account = await strapi.services.customeraccount.add({
+        type: params.accountType || 'personal'
+      });
+
+      await strapi.plugins['users-permissions']
+        .services.user.edit(_.pick(user, ['_id', 'id']), {customeraccount: account.id});
 
       const jwt = strapi.plugins['users-permissions'].services.jwt.issue(
         _.pick(user.toJSON ? user.toJSON() : user, ['id', '_id'])

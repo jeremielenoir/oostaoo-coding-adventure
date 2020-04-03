@@ -119,6 +119,7 @@ import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.com
 import { ContactUsComponent } from './components/home/contact-us/contact-us.component';
 import { TypeFaqPipe } from './components/panelAdmin/FAQ/faq.pipes';
 import { AboutTeamComponent } from './components/home/about-us/about-team/about-team.component';
+import { ConfirmComponent } from './components/home/confirm/confirm.component';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -134,6 +135,8 @@ import { AboutTeamComponent } from './components/home/about-us/about-team/about-
     DialogOverviewDelete,
     DialogOverviewDuplicate,
     DialogForgetPassword,
+    OffersComponent,
+    ConfirmComponent
   ],
   declarations: [
     AppComponent,
@@ -185,6 +188,7 @@ import { AboutTeamComponent } from './components/home/about-us/about-team/about-
     FinTestComponent,
     TechnoComponent,
     OffersComponent,
+    ConfirmComponent,
     RapportDetailleHomeComponent,
     RapportDetailleExempleComponent,
     RapportDetailleComponent,

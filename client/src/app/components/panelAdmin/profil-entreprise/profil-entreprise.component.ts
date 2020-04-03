@@ -188,11 +188,6 @@ export class ProfilEntrepriseComponent implements OnInit {
       this.openSnackBar('Une erreur est survenue, veuillez correctement remplir tous les champs requis', 'Fermer');
       return console.log('password not updated');
     } else {
-      // if (this.account.tests_stock !== -1) {
-      //   setTimeout(() => {
-      //     this.router.navigate(['/subscription']);
-      //   }, 1500);
-      // }
       this.apiClientService
         .post(API_URI_ENTREPRISE, {
           Nom: this.newEntreprise.value,
@@ -264,9 +259,12 @@ export class ProfilEntrepriseComponent implements OnInit {
           res => {
             this.currentTotal = 0;
             this.ngOnInit();
-            // console.log('res', res);
+            this.openSnackBar('Profil entreprise mis à jour aves succès', 'Ok');
           },
-          err => console.log(err)
+          err => {
+            this.openSnackBar( err.message ? err.message :
+              'Oops ! la mise à jour du profil entreprise est indisponible', 'Ok');
+          }
         );
     }
   }

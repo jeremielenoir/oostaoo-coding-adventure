@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { TooltipPosition, MatSnackBar } from '@angular/material';
+import { TooltipPosition, MatSnackBar, MatDialog } from '@angular/material';
 import {} from '@angular/material/snack-bar';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import {
@@ -17,6 +17,7 @@ import {
   API_URI_ROLE
 } from 'src/app/api-client/api-client.service';
 import { AuthenticationService } from './../../home/register/service/auth.service';
+import { ConfirmModel, ConfirmComponent } from '../../home/confirm/confirm.component';
 
 @Component({
   selector: 'app-utilisateurs',
@@ -36,7 +37,8 @@ export class UtilisateursComponent implements OnInit {
     public apiClientService: ApiClientService,
     public authenticationService: AuthenticationService,
     public decryptTokenService: DecryptTokenService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   public submittedUser = false;
@@ -211,19 +213,67 @@ export class UtilisateursComponent implements OnInit {
       duration: 3000
     });
   }
+  /**
+   *
+   */
+  async enableUser(userToEnable) {
 
-  public deleteUser(id) {
-    const token = localStorage.getItem('currentUser');
-    this.apiClientService
-      .delete(`${API_URI_USER}/${id}`)
+    const message = `Souhaitez vous réactiver l'utilisateur <strong>${userToEnable.username}</strong> ?`;
+    const dialogData = new ConfirmModel('Confirmation', message);
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    const doAction = await dialogRef.afterClosed().toPromise();
+
+    if (doAction) {
+      this.apiClientService
+      .put(
+        API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/users/' + userToEnable.id,
+        {blocked: false}
+      )
       .toPromise()
       .then(res => {
         console.log(res);
-        this.users = this.users.filter(user => user.id !== id);
+        userToEnable.blocked = false;
+        this.openSnackBar('L\'utilisateur a correctement été réactivé', 'Fermer');
+      })
+      .catch(e => {
+        this.openSnackBar('Oops ! la réactivation d\'utilisateur est indisponible', 'Fermer')
+      });
+    }
+
+  }
+  /**
+   *
+   * @param userToDelete
+   */
+  async deleteUser(userToDelete) {
+
+    const message = `Souhaitez vous désactiver l'utilisateur <strong>${userToDelete.username}</strong> ?`;
+    const dialogData = new ConfirmModel('Confirmation', message);
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    const doAction = await dialogRef.afterClosed().toPromise();
+
+    if (doAction) {
+      this.apiClientService
+      .delete(API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/users/' + userToDelete.id)
+      .toPromise()
+      .then(res => {
+        console.log(res);
+        userToDelete.blocked = true;
         this.openSnackBar('L\'utilisateur a correctement été supprimé', 'Fermer');
       })
-      .then(res => console.log(res))
-      .catch(e => console.log('error : ', e));
+      .catch(e => {
+        this.openSnackBar('Oops ! la désactivation d\'utilisateur est indisponible', 'Fermer')
+      });
+    }
+
   }
 
   public list_change(id) {

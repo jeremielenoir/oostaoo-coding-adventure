@@ -4,11 +4,13 @@ import {
   ApiClientService,
   API_URI_OFFER,
   API_URI_USER,
-  API_URI_PAYMENT
+  API_URI_ACCOUNT
 } from 'src/app/api-client/api-client.service';
 import { Offer } from 'src/app/models/offer.model';
 import { SessionService } from 'src/app/services/session/session.service';
 import { DecryptTokenService } from '../register/register.service';
+import { MatDialog } from '@angular/material';
+import { ConfirmModel, ConfirmComponent } from '../confirm/confirm.component';
 
 @Component({
   selector: 'app-offers',
@@ -28,7 +30,8 @@ export class OffersComponent implements OnInit {
     private router: Router,
     private apiClientService: ApiClientService,
     private session: SessionService,
-    private userToken: DecryptTokenService
+    private userToken: DecryptTokenService,
+    public dialog: MatDialog
   ) {}
   /**
    *
@@ -54,8 +57,22 @@ export class OffersComponent implements OnInit {
    *
    * @param offer
    */
-  changeOffer(offer: any): void {
+  async changeOffer(offer: any) {
 
+    const message = `Souhaitez vous changer votre offre ?`;
+    const dialogData = new ConfirmModel("Confirmation", message);
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    const doAction = await dialogRef.afterClosed().toPromise();
+
+    if (doAction) {
+      const changeOffer: any = await this.apiClientService
+      .post(API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/changeoffer', {offerId : offer.id})
+      .toPromise();
+    }
   }
   /**
    *

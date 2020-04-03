@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
   errorRegister = '';
   jwt: any;
   errorProvider = '';
-  @ViewChild(MatRadioGroup) radios: MatRadioGroup;
+  @ViewChild(MatRadioGroup) accountType: MatRadioGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -170,7 +170,7 @@ export class RegisterComponent implements OnInit {
         this.fr.usernameregister.value,
         this.fr.emailregister.value,
         this.fr.passwordregister.value,
-        this.radios.value
+        this.accountType.value
         )
         .pipe(first())
         .subscribe(

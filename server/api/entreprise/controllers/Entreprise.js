@@ -49,9 +49,17 @@ module.exports = {
    */
 
   create: async (ctx) => {
+
+    // create entreprise
     const entreprise = await strapi.services.entreprise.add(ctx.request.body);
-    await strapi.controllers.entrepriseextension.attachEntrepriseToAccount(ctx, entreprise);
-    return entreprise;
+
+    // attach it to customer account
+    await strapi.services.customeraccount.edit(
+      {id: ctx.state.user.customeraccount.id},
+      { entreprise: entreprise.id }
+    );
+
+    return { entreprise };
   },
 
   /**
