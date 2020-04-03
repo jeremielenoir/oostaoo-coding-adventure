@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/feedbacks",
+      "path": "/api/feedbacks",
       "handler": "Feedback.find",
       "config": {
         "policies": []
@@ -10,7 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/feedbacks/count",
+      "path": "/api/feedbacks/count",
       "handler": "Feedback.count",
       "config": {
         "policies": []
@@ -18,7 +18,7 @@
     },
     {
       "method": "GET",
-      "path": "/feedbacks/:id",
+      "path": "/api/feedbacks/:id",
       "handler": "Feedback.findOne",
       "config": {
         "policies": []
@@ -26,7 +26,7 @@
     },
     {
       "method": "POST",
-      "path": "/feedbacks",
+      "path": "/api/feedbacks",
       "handler": "Feedback.create",
       "config": {
         "policies": []
@@ -34,7 +34,7 @@
     },
     {
       "method": "PUT",
-      "path": "/feedbacks/:id",
+      "path": "/api/feedbacks/:id",
       "handler": "Feedback.update",
       "config": {
         "policies": []
@@ -42,7 +42,7 @@
     },
     {
       "method": "DELETE",
-      "path": "/feedbacks/:id",
+      "path": "/api/feedbacks/:id",
       "handler": "Feedback.destroy",
       "config": {
         "policies": []

@@ -38,14 +38,6 @@
         "algo"
       ]
     },
-    "theme": {
-      "default": "langage",
-      "type": "enumeration",
-      "enum": [
-        "langage",
-        "resolution"
-      ]
-    },
     "time": {
       "default": "",
       "type": "integer"
@@ -70,6 +62,58 @@
       "collection": "campaign",
       "via": "questions",
       "dominant": true
+    },
+    "name_jp": {
+      "default": "",
+      "type": "string"
+    },
+    "name_es": {
+      "default": "",
+      "type": "string"
+    },
+    "name_en": {
+      "default": "",
+      "type": "string"
+    },
+    "content_en": {
+      "default": "",
+      "type": "text"
+    },
+    "content_es": {
+      "default": "",
+      "type": "text"
+    },
+    "content_jp": {
+      "default": "",
+      "type": "text"
+    },
+    "answer_value_en": {
+      "default": "",
+      "type": "text"
+    },
+    "answer_value_es": {
+      "default": "",
+      "type": "text"
+    },
+    "answer_value_jp": {
+      "default": "",
+      "type": "text"
+    },
+    "theme": {
+      "default": "",
+      "type": "string"
+    },
+    "theme_en": {
+      "default": "",
+      "type": "string"
+    },
+    "theme_es": {
+      "default": "",
+      "type": "string"
+    },
+    "theme_jp": {
+      "default": "",
+      "type": "string"
     }
   }
 }

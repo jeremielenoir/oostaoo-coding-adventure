@@ -20,15 +20,16 @@ export const API_URI_USER_ENTREPRISE: string = prefix + 'utilsateurentreprises';
 export const API_URI_USER = 'users';
 export const API_URI_ACCOUNT = prefix + 'customeraccounts';
 export const API_URI_USERS_BY_ADMIN = 'usersByAdmin';
-export const API_URI_NOTIFICATIONS = 'notifications';
+export const API_URI_NOTIFICATIONS: string = prefix + 'notifications';
 export const API_URI_OFFER: string = prefix + 'offers';
 export const API_URI_PAYMENT: string = prefix + 'payments';
-export const API_URI_FEEDBACK = 'feedbacks';
+export const API_URI_FEEDBACK: string = prefix + 'feedbacks';
 export const API_URI_FAQ: string = prefix + 'faqs';
 export const API_URI_ISSUE: string = prefix + 'issues';
 export const API_URI_ROLE: string =  'users-permissions/roles';
 export const EXECUTE_SCRIPT: string = prefix + 'questions/execute';
 
+//Bp6PnJmoydK5rz6o
 
 @Injectable()
 export class ApiClientService {

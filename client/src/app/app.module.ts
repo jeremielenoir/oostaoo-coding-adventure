@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
+import { CookieService } from 'ngx-cookie-service';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr, 'fr');
@@ -68,7 +69,7 @@ import { CandidatsComponent } from './components/panelAdmin/edit-campagne/candid
 import { InviteCandidat } from './components/panelAdmin/edit-campagne/candidats/invite-candidat.component';
 import { OrderModule } from 'ngx-order-pipe';
 
-import { QuestionsComponent } from './components/panelAdmin/edit-campagne/questions/questions.component';
+import { EditQuestionsComponent } from './components/panelAdmin/edit-campagne/edit-questions/edit-questions.component';
 import { SettingsComponent } from './components/panelAdmin/edit-campagne/settings/settings.component';
 import { CandidatsFormComponent } from './components/panelAdmin/edit-campagne/candidats-form/candidats-form.component';
 import { CandidatsMailComponent } from './components/panelAdmin/edit-campagne/candidats-mail/candidats-mail.component';
@@ -93,17 +94,15 @@ import { DecryptTokenService } from './components/home/register/register.service
 import { TechnoComponent } from './components/home/techno/techno.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { OffersComponent } from './components/home/offers/offers.component';
-import {
-  RapportDetailleHomeComponent,
-  RapportDetailleExempleComponent
-} from './components/home/rapport-detaille/rapport-detaille.component';
+import { RapportDetailleHomeComponent, RapportDetailleExempleComponent} from './components/home/rapport-detaille/rapport-detaille.component';
+import {SelectedLanguageService} from './services/selected-language.service'
 import { FonctionnaliteComponent } from './components/home/fonctionnalite/fonctionnalite.component';
 import { StripePaymentComponent } from './components/home/stripe-payment/stripe-payment.component';
 import { RapportDetailleComponent } from './components/panelAdmin/edit-campagne/candidats/rapport-detaille/rapport-detaille.component';
 // https://www.npmjs.com/package/ngx-stripe
 import { NgxStripeModule } from 'ngx-stripe';
 import { RatingFeedbackComponent } from './components/panelAdmin/client-test/fin-test/rating-feedback/rating-feedback.component';
-import { QuestionComponent } from './components/panelAdmin/question/question.component';
+import { DragNDropComponent, DialogOverviewTest } from './components/panelAdmin/dragndrop/dragndrop.component';
 import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campagne/top-info-campagne.component';
 import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
 import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
@@ -112,13 +111,19 @@ import { NgxCaptchaModule } from 'ngx-captcha';
 import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
 import { ContactSupportComponent } from './components/panelAdmin/contact-support/contact-support.component';
 import { AboutUsComponent } from './components/home/about-us/about-us.component';
-import { AlgoComponent } from './components/panelAdmin/algo/algo.component';
+import { AlgoComponent } from './components/panelAdmin/questions-type/algo-type/algo.component';
 import { ContactFormularComponent } from './components/panelAdmin/contact-support/contact-formular/contact-formular.component';
 import { ContactJoinUsComponent } from './components/panelAdmin/contact-support/contact-join-us/contact-join-us.component';
 import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.component';
 import { ContactUsComponent } from './components/home/contact-us/contact-us.component';
 import { TypeFaqPipe } from './components/panelAdmin/FAQ/faq.pipes';
 import { AboutTeamComponent } from './components/home/about-us/about-team/about-team.component';
+import { Test2Component } from './components/panelAdmin/client-test/test2/test2.component';
+import { QuestionsTypeComponent } from './components/panelAdmin/questions-type/questions-type.component';
+import { OneTypeComponent } from './components/panelAdmin/questions-type/one-type/one-type.component';
+import { FreeTypeComponent } from './components/panelAdmin/questions-type/free-type/free-type.component';
+import { MultipleTypeComponent } from './components/panelAdmin/questions-type/multiple-type/multiple-type.component';
+import { from } from 'rxjs';
 import { ConfirmComponent } from './components/home/confirm/confirm.component';
 
 @NgModule({
@@ -172,7 +177,7 @@ import { ConfirmComponent } from './components/home/confirm/confirm.component';
     EditCampagneComponent,
     CandidatsComponent,
     InviteCandidat,
-    QuestionsComponent,
+    EditQuestionsComponent,
     SettingsComponent,
     CandidatsFormComponent,
     CandidatsMailComponent,
@@ -195,7 +200,8 @@ import { ConfirmComponent } from './components/home/confirm/confirm.component';
     FonctionnaliteComponent,
     StripePaymentComponent,
     RatingFeedbackComponent,
-    QuestionComponent,
+    DragNDropComponent,
+    DialogOverviewTest,
     TopInfoCampagneComponent,
     MotDePasseOublieComponent,
     SubscriptionComponent,
@@ -213,6 +219,11 @@ import { ConfirmComponent } from './components/home/confirm/confirm.component';
     ContactUsComponent,
     TypeFaqPipe,
     AboutTeamComponent,
+    Test2Component,
+    QuestionsTypeComponent,
+    OneTypeComponent,
+    FreeTypeComponent,
+    MultipleTypeComponent,
   ],
   imports: [
     BrowserModule,
@@ -239,7 +250,9 @@ import { ConfirmComponent } from './components/home/confirm/confirm.component';
     ApiClientService,
     DatePipe,
     DecryptTokenService,
-    CampagneComponent
+    CampagneComponent,
+    SelectedLanguageService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

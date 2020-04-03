@@ -81,11 +81,37 @@ module.exports = {
 
   populate: async (ctx, _next) => {
     try {
-      const { spreadsheetId, ranges } = ctx.query;
+      const { spreadsheetId, first, last, page } = ctx.query;
       const result = await strapi.services.question.fetchSpreadsheet(
         spreadsheetId,
-        JSON.parse(ranges)
+        page,
+        first,
+        last
       );
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * fillByTechno from spreadsheet.
+   *
+   * @return {Object}
+   */
+
+  fillSpreadsheetByTechno: async (ctx, _next) => {
+    try {
+      const { spreadsheetId, first, last, page, techno } = ctx.query;
+      const result = await strapi.services.question.fillSpreadsheetByTechno(
+        spreadsheetId,
+        page,
+        first,
+        last,
+        techno
+      );
+
       return result;
     } catch (error) {
       throw error;
@@ -100,10 +126,7 @@ module.exports = {
   execute: async (ctx, _next) => {
     try {
       const file = ctx.request.body.files;
-      const result = await strapi.services.question.executeScript(
-        file.files
-        
-      );
+      const result = await strapi.services.question.executeScript(file.files);
       return result;
     } catch (error) {
       return error;

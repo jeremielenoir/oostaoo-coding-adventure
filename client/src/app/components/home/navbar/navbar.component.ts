@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(@Inject(DOCUMENT) document, @Inject(LOCALE_ID) private locale: string, private router: Router) { }
+  constructor(@Inject(DOCUMENT) document, @Inject(LOCALE_ID) private locale: string, private cookieService: CookieService, private router: Router) { }
 
   public shouldShow = true;
   public Removeshould = true;
@@ -25,10 +26,10 @@ export class NavbarComponent implements OnInit {
 
   public currentLanguage;
   public otherLanguage = [
-   {codelang: 'fr-FR',  img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr/'},
-   {codelang: 'en-US', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en/'},
-   {codelang: 'es-ES', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es/'},
-   {codelang: 'jp-JP', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp/'}
+   {codelang: 'fr-FR', shortlang:'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr/'},
+   {codelang: 'en-US', shortlang:'en', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en/'},
+   {codelang: 'es-ES', shortlang:'es', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es/'},
+   {codelang: 'jp-JP', shortlang:'jp', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp/'}
   ];
 
   @ViewChild('header') header;
@@ -55,8 +56,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
 
     console.log('locale', this.locale, window.parent.location.href);
-    if(localStorage.getItem('lang') != null){
-      this.lang = localStorage.getItem('lang');
+    
+    this.lang = this.locale;
+
+    if(this.cookieService.check('currentlanguage')){
+      //this.lang = this.cookieService.get('currentlanguage');
     }
 
     this.onWindowScroll();
@@ -74,15 +78,12 @@ export class NavbarComponent implements OnInit {
     });
 
     this.otherLanguage.forEach( element => {
-      if ( element.codelang === this.lang) {
+      if ( element.codelang === this.lang || element.shortlang === this.lang) {
         this.currentLanguage = element.img;
       }
     });
   }
 
-  // getLogin() {
-  //   return JSON.parse(localStorage.getItem('token'));
-  // }
 
   gotToLoginPage(){
     this.router.navigate(['/home/register']);
@@ -96,7 +97,8 @@ export class NavbarComponent implements OnInit {
 
 
   setCurrentLanguage(langage) {
-    localStorage.setItem('lang', langage.codelang);
+    console.log('LANG', langage.codelang);
+    this.cookieService.set('currentlanguage', langage.codelang, 30, '/', 'roodeo.com', true, "Lax");
     this.currentLanguage = langage.img;
     window.parent.location.href = langage.url;
   }

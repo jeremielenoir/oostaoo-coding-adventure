@@ -7,6 +7,8 @@ import {
   API_URI_PROFILES
 } from "../../../../api-client/api-client.service";
 import { MatSelectChange } from "@angular/material";
+import {SelectedLanguageService} from '../../../../services/selected-language.service';
+import { LanguagePipe } from 'ngx-markdown';
 
 @Component({
   selector: "app-profile-rechercher",
@@ -31,14 +33,16 @@ export class NouvelleCampagnePage1Component implements OnInit {
   public profiles: any[];
   public technosSelect: Array<string>;
   public roleSelect: string;
-  public facile = 'facile'
+  public facile = 'facile';
+  public nameLanguage:string = '';
+  
 
   @Output() valueChange = new EventEmitter();
   @Output() valueChangeProfil = new EventEmitter();
 
 
 
-  constructor(public apiClientService: ApiClientService) {
+  constructor(public apiClientService: ApiClientService,public languageStorage:SelectedLanguageService) {
     this.oAuthFormVerification = new AuthFormVerification();
   }
 
@@ -47,6 +51,25 @@ export class NouvelleCampagnePage1Component implements OnInit {
     this.roleSelect = this.profilByParent;
     this.getProfiles();
     this.getTechnos();
+    
+    console.log('this.languageStorage.recupLanguageCountry()',this.languageStorage.recupLanguageCountry())
+
+    switch(this.languageStorage.recupLanguageCountry()){
+      case 'es-ES':
+      this.nameLanguage = 'name_es';
+      break;
+      case 'fr-FR':
+      this.nameLanguage = 'name';
+      break;
+      case 'en-US':
+      this.nameLanguage = 'name_en';
+      break;
+      case 'jp-JP':
+      this.nameLanguage = 'name_jp';
+      break;
+    }
+
+    console.log('content this.nameLanguage',this.nameLanguage)
   }
 
   // somme(a, b) {
@@ -67,12 +90,10 @@ export class NouvelleCampagnePage1Component implements OnInit {
   selected(event: MatSelectChange) {
 
     for (const iterator of this.profiles) {
-      // console.log('iterator profiles: ', iterator);
-      const roleData = iterator.name;
+  
+      const roleData = iterator[this.nameLanguage];
       if (event.value === roleData) {
-        this.formCampagne.patchValue({
-          roleSelectedId: { id: iterator.id }
-        });
+        this.formCampagne.patchValue({roleSelectedId: { id: iterator.id } });
         const technoData = [];
         const technoDataID = [];
         iterator.technologies.forEach(item => {
@@ -81,7 +102,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
           technoDataID.push(item.id);
         });
         this.technosSelect = technoData;
-       
+
         this.formCampagne.patchValue({
           techno: technoData,
           technoSelectedId: technoDataID
@@ -91,23 +112,16 @@ export class NouvelleCampagnePage1Component implements OnInit {
    
   }
 
-
-
   getTechnoChecked() {
 
-    console.log(
-      "techno: ",
-      this.formCampagne.value.techno
-    );
     for (const profile of this.profiles) {
-      if (
-        this.profileHasTechnologies(profile, this.formCampagne.value.techno)
-      ) {
-        console.log("profile : ", profile);
-        this.roleSelect = profile.name;
+      console.log('this.profileHasTechnologies -->',this.formCampagne.value.techno)
+      if (this.profileHasTechnologies(profile, this.formCampagne.value.techno)) {
+        this.roleSelect = profile[this.nameLanguage];
         break;
       } else {
-        this.roleSelect = "Personnalisé";
+        // this.roleSelect = "Personnalisé";
+        this.roleSelect = this.profiles[2][this.nameLanguage];
       }
     }
     const technoDataID = [];
@@ -137,9 +151,9 @@ export class NouvelleCampagnePage1Component implements OnInit {
 
     let nbCounterTechno = 0;
     for (const techno of profile.technologies) {
-      // console.log('techno: ', techno);
+      // console.log('technoFromList: ', technoFromList);
       for (const technoFromList of listTechno) {
-        if (techno.name === technoFromList["name"]) {
+        if (techno[this.nameLanguage] === technoFromList["name"]) {
           nbCounterTechno++;
         }
       }
@@ -150,7 +164,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
   valueChanged() {
     
     // You can give any function name
-    console.log("this.technosSelect: ", this.technosSelect);
+    console.log("salut")
     this.valueChange.emit(this.technosSelect);
     this.valueChangeProfil.emit(this.roleSelect);
   }

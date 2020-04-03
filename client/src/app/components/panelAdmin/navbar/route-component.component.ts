@@ -17,7 +17,6 @@ import {
   API_URI_USER
 } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from '../../home/register/register.service';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-route-component',

@@ -47,10 +47,7 @@ export class TopInfoCampagneComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges){
 
-    if(changes.allQuestionLevel.currentValue){
-      this.technoMethod();
-    }
-    
+      this.technoMethod();  
   }
 
   convertSecondsToMinutes(time){

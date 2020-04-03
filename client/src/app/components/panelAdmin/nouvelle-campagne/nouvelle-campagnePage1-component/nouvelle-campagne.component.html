@@ -17,8 +17,8 @@
               <mat-form-field [formGroup]="formCampagne">
                 <mat-select name="role" formControlName="role" [(ngModel)]="roleSelect"
                   (selectionChange)="selected($event)">
-                  <mat-option *ngFor="let role of profiles" [value]="role.name">{{
-                  role.name
+                  <mat-option *ngFor="let role of profiles" [value]="role[nameLanguage]">{{
+                  role[nameLanguage]
                 }}</mat-option>
                 </mat-select>
               </mat-form-field>
