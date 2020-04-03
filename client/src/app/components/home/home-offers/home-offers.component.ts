@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiClientService, API_URI_OFFER } from 'src/app/api-client/api-client.service';
-import { Offer } from 'src/app/models/offer.model';
 
 @Component({
   selector: 'home-offers',
@@ -12,7 +11,6 @@ export class HomeOffersComponent implements OnInit {
   handler: any = null;
   offerChoiceAmount: number = null;
   subscriptionPage = false;
-  listOffers: Offer[] = [];
 
 
   constructor(private router: Router) { }
@@ -42,11 +40,11 @@ export class HomeOffersComponent implements OnInit {
         this.router.navigate(['/dashboard/campaigns']);
     }
 
-    goToPay(offer) {
+    goToPay() {
       // changement d'offre
-      localStorage.setItem('offerChoiceAmount' , offer.price);
+      //localStorage.setItem('offerChoiceAmount' , offer.price);
       // this.session.offerChoiceAmount = offer.price;
-      this.offerChoiceAmount = offer.price;
+      //this.offerChoiceAmount = offer.price;
 
       // if (offer.price === 0 && this.subscriptionPage) {
       //   // version gratuite
@@ -55,7 +53,7 @@ export class HomeOffersComponent implements OnInit {
       if (this.router.url.startsWith('/subscription')) {
           // traitement user back
           // this.session.offerChoice = offer;
-          localStorage.setItem('offerChoice', JSON.stringify(offer));
+          //localStorage.setItem('offerChoice', JSON.stringify(offer));
           this.router.navigate(['/stripePayment']);
         } else {
           this.router.navigate(['/home/register']);
