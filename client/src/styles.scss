@@ -59,7 +59,7 @@
     flex: 1;
       width: 45px;
       height: 45px;
-      margin-bottom: 0px;    
+      margin-bottom: 0px;
     img{
       width:100%;
       height: 100%;
@@ -71,7 +71,7 @@
     font-size: $font-size-home;
     margin-bottom: 0;
     font-family: $font-poppins;
-     
+
     letter-spacing: 1.5px;
     padding-top: 7px;
   }
@@ -200,4 +200,15 @@ input:checked ~ .checkbox-span {
   margin: 0;
   padding: 0;
   font-size: 18px;
+}
+
+.mat-dialog-container {
+  border: $border-table;
+  border-radius: $border-radius;
+}
+
+.mat-dialog-title {
+  border-bottom: $border-table;
+  // background: linear-gradient($color-white, rgba($color: $color-blue-roodeo, $alpha: .7));
+  padding: 5px;
 }

@@ -310,12 +310,12 @@
             </tr>
           </thead>
           <tbody class="table_body">
-            <tr class="table_row" *ngFor="let user of  users" [ngClass]="{'user-disabled': user.blocked}" >
+            <tr class="table_row" *ngFor="let user of  users | search:'username,email':searchText" [ngClass]="{'user-disabled': user.blocked}" >
               <td class="table_body_cell">{{user.username}}</td>
               <td class="table_body_cell">{{user.email}}</td>
               <td class="table_body_cell">{{user.role.name}}</td>
               <td class="table_body_cell table_icon">
-                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id && !user.blocked" (click)="openForm(user)"
+                <i *ngIf="isCurrentUserIsAccountAdmin && !user.blocked" (click)="openForm(user)"
                   class="fas fa-pencil-alt icon"></i>
                 <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id && !user.blocked" (click)=deleteUser(user)
                   class="fas fa-ban icon"></i>

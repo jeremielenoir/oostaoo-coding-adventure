@@ -19,6 +19,7 @@ export const API_URI_ENTREPRISE: string = prefix + 'entreprises';
 export const API_URI_USER_ENTREPRISE: string = prefix + 'utilsateurentreprises';
 export const API_URI_USER = 'users';
 export const API_URI_ACCOUNT = prefix + 'customeraccounts';
+export const API_URI_ADDRESS = prefix + 'addresses';
 export const API_URI_USERS_BY_ADMIN = 'usersByAdmin';
 export const API_URI_NOTIFICATIONS: string = prefix + 'notifications';
 export const API_URI_OFFER: string = prefix + 'offers';

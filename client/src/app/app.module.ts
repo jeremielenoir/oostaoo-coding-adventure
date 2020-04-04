@@ -123,6 +123,8 @@ import { FreeTypeComponent } from './components/panelAdmin/questions-type/free-t
 import { MultipleTypeComponent } from './components/panelAdmin/questions-type/multiple-type/multiple-type.component';
 import { from } from 'rxjs';
 import { ConfirmComponent } from './components/home/confirm/confirm.component';
+import { SearchPipe } from './pipe/search.pipe';
+import { AddressComponent } from './components/address/address.component';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -139,7 +141,8 @@ import { ConfirmComponent } from './components/home/confirm/confirm.component';
     DialogOverviewDuplicate,
     DialogForgetPassword,
     OffersComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    AddressComponent
   ],
   declarations: [
     AppComponent,
@@ -222,6 +225,8 @@ import { ConfirmComponent } from './components/home/confirm/confirm.component';
     OneTypeComponent,
     FreeTypeComponent,
     MultipleTypeComponent,
+    SearchPipe,
+    AddressComponent,
   ],
   imports: [
     BrowserModule,

@@ -89,7 +89,7 @@ export class OffersComponent implements OnInit {
   /**
    *
    */
-  goToPay(offer: Offer) {
+  purchase(offer: Offer) {
     localStorage.setItem('offerChoiceAmount', '' + offer.price);
     this.offerChoiceAmount = '' + offer.price;
     if (this.router.url.startsWith('/subscription')) {

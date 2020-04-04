@@ -163,10 +163,6 @@ export class UtilisateursComponent implements OnInit {
 
   public openForm(user) {
 
-    if (user.id === this.currentUser.id) {
-      return;
-    }
-
     this.editingUser = user;
     this.editPrenom = new FormControl(
       this.editingUser.prenom,
@@ -188,6 +184,8 @@ export class UtilisateursComponent implements OnInit {
     this.editingId = user.id;
     console.log('userdfezijhfelf', this.editingUser);
     this.shadowcog2 = true;
+
+    this.selectedRole = user.role.id;
 
     // this.formulaire.nativeElement.prenom.value = user.prenom;
     // this.formulaire.nativeElement.nom.value = user.nom;

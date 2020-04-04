@@ -41,6 +41,9 @@
     "entreprise": {
       "model": "entreprise",
       "via": "customeraccount"
+    },
+    "billing_address": {
+      "model": "address"
     }
   }
 }

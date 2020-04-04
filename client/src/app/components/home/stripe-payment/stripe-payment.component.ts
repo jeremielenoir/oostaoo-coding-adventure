@@ -12,7 +12,6 @@ import {
   StripeCardComponent
 } from 'ngx-stripe';
 import { Router } from '@angular/router';
-import { Offer } from 'src/app/models/offer.model';
 import { DecryptTokenService } from '../register/register.service';
 import { MatSnackBar } from '@angular/material';
 

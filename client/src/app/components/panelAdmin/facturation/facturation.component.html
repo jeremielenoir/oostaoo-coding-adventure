@@ -1,73 +1,54 @@
-<div id="global">
-
-    <app-route-component></app-route-component>
-    <app-breadcrumb [namePage]="'Facturation'"></app-breadcrumb>
-
-
-    <div id="content">
-
-        <div id="section1">
-            <h2 class="title"><i class="far fa-clock icon"></i> Historique des factures</h2>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Montant</th>
-                        <th>Statut</th>
-                        <th>Numéro de facture</th>
-                        <th>Voir</th>
-                        <th>Télécharger</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let facture of  facture">
-                        <td>{{facture.date | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{facture.montant}} €</td>
-                        <td>{{facture.statut}}</td>
-                        <td>{{facture.numero_facture}}</td>
-                        <td><i (click)="exportPdf()" class="far fa-eye icon icon-button"></i></td>
-                        <td><i (click)="downloadPdf()" class="fa fa-download icon icon-button"
-                                [ngStyle]="{'margin': 'auto'}"></i></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div id="section1-title">
-                <h2> <i class="far fa-credit-card icon "></i> Adresse de facturation</h2>
-            </div>
-
-            <div id="section1-top">
-                <p class="centrage">123 rue de Pompidou</p>
-                <p class="centrage">75009</p>
-                <p class="centrage">Paris</p>
-            </div>
+<app-route-component></app-route-component>
+<app-breadcrumb [namePage]="'Facturation'"></app-breadcrumb>
+<div class="billing-main-content" fxLayout="column" fxLayoutGap="30px">
+  <div class="billing-section" fxLayout="column" fxLayoutGap="20px">
+    <h2 class="section-title"><i class="fa fa-user-circle icon"></i> Tableau de bord</h2>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <div fxFlex="50" class="section-content" fxLayout="column" fxLayoutGap="15px">
+        <h4 class="section-title"> <i class="fa fa-map-marker icon"></i> Adresse de facturation</h4>
+        <app-address [address]="getAddress()"></app-address>
+        <div>
+          <button type="button" mat-flat-button (click)="addOrEditAddress()"
+            color="primary">{{ account && account.billing_address ? 'Editer' : 'Ajouter une adresse'}}</button>
         </div>
-
-        <div id="section2">
-            <div id="section2-title">
-                <h2> <i class="far fa-credit-card icon "></i> Détails de l'abonnement</h2>
-                <a href="">Se désabonner</a>
-            </div>
-
-            <div id="section2-top">
-                <i class="far fa-calendar icon icoheight centrage"></i>
-                <p>Prochaine <br> facturation</p>
-                <p class="centrage">19/05/2019</p>
-                <p class="separation display-phone"> | </p>
-                <i class="fas fa-coins icon icoheight centrage"></i>
-                <p class="centrage">Montant</p>
-                <p class="centrage">418,80 €</p>
-            </div>
-
-            <h2> <i class="far fa-credit-card icon"></i> Carte de crédit</h2>
-            <div id="section2-bottom">
-
-                <p class="centrage-bottom">Numéro de carte : MasterCard ***-9376</p>
-                <p>Expire le : <br> 01/2021</p>
-                <button mat-flat-button class="bouton-modifier">Modifier</button>
-            </div>
-        </div>
+      </div>
+      <div fxFlex="50" class="section-content">
+        <h4 class="section-title"> <i class="fa fa-credit-card icon"></i> Carte de crédit</h4>
+      </div>
     </div>
-
+    <div fxLayout="row" fxLayoutGap="20px">
+      <div fxFlex="50" class="section-content">
+        <h4 class="section-title"> <i class="fa fa-money icon"></i> Prochaine facture</h4>
+      </div>
+      <div fxFlex="50" class="section-content">
+        <h4 class="section-title"> <i class="fa fa-shopping-cart icon"></i> Détails abonnement</h4>
+      </div>
+    </div>
+  </div>
+  <div class="billing-section" fxLayout="column" fxLayoutGap="15px">
+    <h2 class="section-title"><i class="fa fa-clock icon"></i> Historique des factures</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Montant</th>
+          <th>Statut</th>
+          <th>Numéro de facture</th>
+          <th>Voir</th>
+          <th>Télécharger</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let facture of  facture">
+          <td>{{facture.date | date: 'dd/MM/yyyy'}}</td>
+          <td>{{facture.montant}} €</td>
+          <td>{{facture.statut}}</td>
+          <td>{{facture.numero_facture}}</td>
+          <td><i (click)="exportPdf()" class="far fa-eye icon icon-button"></i></td>
+          <td><i (click)="downloadPdf()" class="fa fa-download icon icon-button" [ngStyle]="{'margin': 'auto'}"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

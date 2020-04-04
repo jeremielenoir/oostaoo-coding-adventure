@@ -17,7 +17,7 @@
           </div>
           <div class="offer-desc" [innerHTML]="offer.description"></div>
           <mat-card-actions>
-            <button *ngIf="!currentUser || (currentUser && !currentOffer)" (click)="goToPay(offer)" mat-raised-button
+            <button *ngIf="!currentUser || (currentUser && !currentOffer)" (click)="purchase(offer)" mat-raised-button
               color="warn"
               class="lab-item lab-item-button">{{ offer.periodicity === 'monthly' ? 'S\'abonner' : 'Acheter' }}</button>
             <button *ngIf="currentOffer && currentOffer.periodicity === 'monthly' && currentOffer.id === offer.id"
