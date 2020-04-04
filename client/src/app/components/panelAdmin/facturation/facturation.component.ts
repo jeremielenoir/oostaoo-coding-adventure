@@ -28,6 +28,11 @@ export class FacturationComponent implements OnInit {
   datePipe = new DatePipe("fr");
   account: any;
   user: any;
+  card: any;
+  subscription: any;
+  invoices: any[];
+  nextInvoice: any;
+
   /**
    *
    * @param apiClientService
@@ -61,6 +66,12 @@ export class FacturationComponent implements OnInit {
    */
   getAddress() {
     return this.account ? this.account.billing_address : undefined;
+  }
+  /**
+   *
+   */
+  async addOrEditCard() {
+
   }
   /**
    *

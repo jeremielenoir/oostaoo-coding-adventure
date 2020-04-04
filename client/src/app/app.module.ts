@@ -125,6 +125,7 @@ import { from } from 'rxjs';
 import { ConfirmComponent } from './components/home/confirm/confirm.component';
 import { SearchPipe } from './pipe/search.pipe';
 import { AddressComponent } from './components/address/address.component';
+import { CreditcardComponent } from './components/creditcard/creditcard.component';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -227,6 +228,7 @@ import { AddressComponent } from './components/address/address.component';
     MultipleTypeComponent,
     SearchPipe,
     AddressComponent,
+    CreditcardComponent,
   ],
   imports: [
     BrowserModule,

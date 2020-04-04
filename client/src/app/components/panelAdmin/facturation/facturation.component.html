@@ -5,15 +5,22 @@
     <h2 class="section-title"><i class="fa fa-user-circle icon"></i> Tableau de bord</h2>
     <div fxLayout="row" fxLayoutGap="20px">
       <div fxFlex="50" class="section-content" fxLayout="column" fxLayoutGap="15px">
-        <h4 class="section-title"> <i class="fa fa-map-marker icon"></i> Adresse de facturation</h4>
-        <app-address [address]="getAddress()"></app-address>
-        <div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <h4 class="section-title"> <i class="fa fa-map-marker icon"></i> Adresse de facturation</h4>
           <button type="button" mat-flat-button (click)="addOrEditAddress()"
             color="primary">{{ account && account.billing_address ? 'Editer' : 'Ajouter une adresse'}}</button>
         </div>
+        <app-address [address]="getAddress()"></app-address>
       </div>
       <div fxFlex="50" class="section-content">
-        <h4 class="section-title"> <i class="fa fa-credit-card icon"></i> Carte de crédit</h4>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <h4 class="section-title"> <i class="fa fa-credit-card icon"></i> Carte de crédit</h4>
+          <button *ngIf="card" type="button" mat-flat-button (click)="addOrEditCard()"
+            color="primary">Modifier</button>
+        </div>
+        <div *ngIf="card" fxLayout="row" fxLayoutAlign="center" style="margin: 20px 0 20px 0;">
+          <app-creditcard></app-creditcard>
+        </div>
       </div>
     </div>
     <div fxLayout="row" fxLayoutGap="20px">
