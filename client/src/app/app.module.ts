@@ -123,6 +123,10 @@ import { OneTypeComponent } from './components/panelAdmin/questions-type/one-typ
 import { FreeTypeComponent } from './components/panelAdmin/questions-type/free-type/free-type.component';
 import { MultipleTypeComponent } from './components/panelAdmin/questions-type/multiple-type/multiple-type.component';
 import { from } from 'rxjs';
+import { ConfirmComponent } from './components/home/confirm/confirm.component';
+import { SearchPipe } from './pipe/search.pipe';
+import { AddressComponent } from './components/address/address.component';
+import { CreditcardComponent } from './components/creditcard/creditcard.component';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -138,7 +142,9 @@ import { from } from 'rxjs';
     DialogOverviewDelete,
     DialogOverviewDuplicate,
     DialogForgetPassword,
-    DialogOverviewTest
+    OffersComponent,
+    ConfirmComponent,
+    AddressComponent
   ],
   declarations: [
     AppComponent,
@@ -190,7 +196,11 @@ import { from } from 'rxjs';
     FinTestComponent,
     TechnoComponent,
     OffersComponent,
+<<<<<<< HEAD
     HomeOffersComponent,
+=======
+    ConfirmComponent,
+>>>>>>> 3a977192ef4dd78dc98348a0be29c5a49527b2c5
     RapportDetailleHomeComponent,
     RapportDetailleExempleComponent,
     RapportDetailleComponent,
@@ -221,6 +231,9 @@ import { from } from 'rxjs';
     OneTypeComponent,
     FreeTypeComponent,
     MultipleTypeComponent,
+    SearchPipe,
+    AddressComponent,
+    CreditcardComponent,
   ],
   imports: [
     BrowserModule,

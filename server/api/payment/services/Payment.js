@@ -9,8 +9,6 @@
 
 // Public dependencies.
 const _ = require('lodash');
-const STRIPE_API_KEY = "sk_test_SHGN7PIdottD4WBLCcdSfbwA00kPGubvOC";
-const stripe = require('stripe')(STRIPE_API_KEY);
 
 // Strapi utilities.
 const utils = require('strapi-hook-bookshelf/lib/utils/');
@@ -112,27 +110,6 @@ module.exports = {
 
     // Create relational data and return the entry.
     return Payment.updateRelations({ id: entry.id , values: relations });
-  },
-
-  /**
-   * Promise to edit a/an payment.
-   *
-   * @return {Promise}
-   */
-  refund: async (paymentId) => {
-    console.log('SERVICE REFUND : paymentId : ', paymentId);
-      let refund;
-      const paymentType = paymentId.substring(0, 2);
-      if (paymentType == 'ch'){
-         refund = await stripe.refunds.create({
-          charge: paymentId
-        });
-      }else if (paymentType == 'su'){
-        refund = await stripe.subscriptions.del(paymentId);
-      }
-
-
-    return refund;
   },
 
   edit: async (params, values) => {
@@ -261,53 +238,4 @@ module.exports = {
     });
   },
 
-  charge: async (body) => {
-    let payment;
-    const customer = await stripe.customers.create({
-      email: body.email,
-      source: body.token.id,
-    })
-    try{
-        payment = await stripe.charges.create({
-         amount: body.offer.price*100,
-         currency: 'EUR',
-         customer: customer.id
-     });
-    return payment;
-
-    }catch(error){
-     console.log('error : ', error);
-     return error;
-   }
-    // return await stripe.charges.create({
-    //   source: body.token.id,
-    //   amount: body.amount,
-    //   currency: 'eur',
-    // })
-  },
-
-  subscribe: async (body) => {
-    let payment;
-      const customer = await stripe.customers.create({
-        email: body.email,
-        source: body.token.id,
-      })
-
-         try {
-           payment = await stripe.subscriptions.create({
-             customer: customer.id,
-             items: [{
-             plan: body.offer.plan
-             }]
-          });
-
-          return payment;
-        }catch(error){
-          console.log('error : ', error);
-          return error;
-        }
-  }
 };
-  // subscribe: async (body) => {
-  //   const session = stripe.checkout.sessions.create({})
-  // }

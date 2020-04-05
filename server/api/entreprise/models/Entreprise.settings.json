@@ -79,6 +79,10 @@
     "lang": {
       "default": "",
       "type": "string"
+    },
+    "customeraccount": {
+      "model": "customeraccount",
+      "via": "entreprise"
     }
   }
 }

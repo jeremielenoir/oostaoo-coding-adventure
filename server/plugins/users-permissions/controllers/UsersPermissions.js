@@ -95,7 +95,7 @@ module.exports = {
     const role = await strapi.plugins['users-permissions'].services.userspermissions.getRole(id, plugins);
 
     if (_.isEmpty(role)) {
-      return ctx.badRequest(null, [{ messages: [{ id: `Role don't exist` }] }]);
+      return ctx.badRequest(null, [{ messages: [{ id: 'Role don\'t exist' }] }]);
     }
 
     ctx.send({ role });
@@ -103,7 +103,9 @@ module.exports = {
 
   getRoles: async (ctx) => {
     try {
-      const roles = await strapi.plugins['users-permissions'].services.userspermissions.getRoles();
+
+      let roles = await strapi.plugins['users-permissions'].services.userspermissions
+        .getRoles(ctx.request.query.startwith);
 
       ctx.send({ roles });
     } catch(err) {
@@ -160,7 +162,7 @@ module.exports = {
 
     try {
       await strapi.plugins['users-permissions'].services.userspermissions.updateRole(roleID, ctx.request.body);
-      
+
       strapi.emit('didOpenAccessToFetchContentTypeEntries', ctx.request.body);
 
       ctx.send({ ok: true });

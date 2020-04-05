@@ -111,7 +111,11 @@
     },
     "payments": {
       "collection": "payment",
-      "via": "user_id"
+      "via": "user"
+    },
+    "customeraccount": {
+      "model": "customeraccount",
+      "via": "users"
     }
   },
   "collectionName": "users-permissions_user"

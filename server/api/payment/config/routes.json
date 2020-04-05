@@ -33,14 +33,6 @@
       }
     },
     {
-      "method": "POST",
-      "path": "/api/payments/pay",
-      "handler": "Payment.pay",
-      "config": {
-        "policies": []
-      }
-    },
-    {
       "method": "PUT",
       "path": "/api/payments/:id",
       "handler": "Payment.update",

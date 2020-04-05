@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiClientService, API_URI_OFFER } from 'src/app/api-client/api-client.service';
+import {
+  ApiClientService,
+  API_URI_OFFER,
+  API_URI_USER,
+  API_URI_ACCOUNT
+} from 'src/app/api-client/api-client.service';
 import { Offer } from 'src/app/models/offer.model';
 import { SessionService } from 'src/app/services/session/session.service';
+import { DecryptTokenService } from '../register/register.service';
+import { MatDialog } from '@angular/material';
+import { ConfirmModel, ConfirmComponent } from '../confirm/confirm.component';
 
 @Component({
   selector: 'app-offers',
@@ -10,61 +18,86 @@ import { SessionService } from 'src/app/services/session/session.service';
   styleUrls: ['./offers.component.scss']
 })
 export class OffersComponent implements OnInit {
+
   handler: any = null;
-  offerChoiceAmount: number = null;
-  subscriptionPage = false;
+  offerChoiceAmount: string;
+  isSubPage = false;
   listOffers: Offer[] = [];
+  currentUser: any;
+  currentOffer: any;
 
+  constructor(
+    private router: Router,
+    private apiClientService: ApiClientService,
+    private session: SessionService,
+    private userToken: DecryptTokenService,
+    public dialog: MatDialog
+  ) {}
+  /**
+   *
+   */
+  ngOnInit() {
+    // this.offerChoiceAmount = this.session.offerChoiceAmount ? this.session.offerChoiceAmount : null;
+    this.offerChoiceAmount = localStorage.getItem('offerChoiceAmount');
+    this.isSubPage = this.router.url.startsWith('/subscription');
 
-  constructor(private router: Router,
-              private apiClientService: ApiClientService,
-              private session: SessionService
-    ) { }
-
-    ngOnInit() {
-      // recuperation l'offre selectionné
-      // this.offerChoiceAmount = this.session.offerChoiceAmount ? this.session.offerChoiceAmount : null;
-      this.offerChoiceAmount = +localStorage.getItem('offerChoiceAmount') || null;
-
-
-      // savoir si on est sur la page home ou sur la page abonnement interne (log)
-      this.subscriptionPage = this.router.url.startsWith('/subscription');
-
-      // recuperation offres back
-      this.apiClientService.get(API_URI_OFFER).subscribe( offers => {
-
-        offers = offers.filter(offer=>offer.title!=="Gratuit" && offer.title !== "Expirée");
-        offers.forEach(offer => {
-          offer.description = offer.description.split('$');
-          this.listOffers.push(offer);
+    if (this.userToken && this.userToken.userId) {
+      this.apiClientService
+        .get(API_URI_USER + '/' + this.userToken.userId)
+        .subscribe(user => {
+          this.currentUser = user;
+          this.currentOffer = this.currentUser.customeraccount.offer;
         });
-      },
-      );
     }
 
-    goBack(){
-        this.router.navigate(['/dashboard/campaigns']);
+    this.apiClientService.get(API_URI_OFFER)
+      .subscribe(offers => this.listOffers = offers.filter((o: Offer) => o.enabled));
+  }
+  /**
+   *
+   * @param offer
+   */
+  async changeOffer(offer: any) {
+
+    const message = `Souhaitez vous changer votre offre ?`;
+    const dialogData = new ConfirmModel("Confirmation", message);
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    const doAction = await dialogRef.afterClosed().toPromise();
+
+    if (doAction) {
+      const changeOffer: any = await this.apiClientService
+      .post(API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/changeoffer', {offerId : offer.id})
+      .toPromise();
     }
+  }
+  /**
+   *
+   */
+  async unSubscribe() {
+    const unsubscribeResult: any = await this.apiClientService
+      .get(API_URI_OFFER + '/' + this.currentOffer.id + '/unsubscribe')
+      .toPromise();
 
-    goToPay(offer) {
-      // changement d'offre
-      localStorage.setItem('offerChoiceAmount' , offer.price);
-      // this.session.offerChoiceAmount = offer.price;
-      this.offerChoiceAmount = offer.price;
-
-      // if (offer.price === 0 && this.subscriptionPage) {
-      //   // version gratuite
-      //   this.router.navigate(['/dashboard/campaigns']);
-      // } else {
-      if (this.router.url.startsWith('/subscription')) {
-          // traitement user back
-          // this.session.offerChoice = offer;
-          localStorage.setItem('offerChoice', JSON.stringify(offer));
-          this.router.navigate(['/stripePayment']);
-        } else {
-          this.router.navigate(['/home/register']);
-        }
-      }
-    // }
+    this.currentOffer = undefined;
+    this.currentUser.customeraccount.tests_stock = 0;
+    this.currentUser.customeraccount.offer = undefined;
+  }
+  /**
+   *
+   */
+  purchase(offer: Offer) {
+    localStorage.setItem('offerChoiceAmount', '' + offer.price);
+    this.offerChoiceAmount = '' + offer.price;
+    if (this.router.url.startsWith('/subscription')) {
+      localStorage.setItem('offerChoice', JSON.stringify(offer));
+      this.router.navigate(['/payment']);
+    } else {
+      this.router.navigate(['/home/register']);
+    }
+  }
 
 }

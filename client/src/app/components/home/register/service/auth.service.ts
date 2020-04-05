@@ -42,11 +42,12 @@ export class AuthenticationService {
       );
   }
 
-  register(username: string, email: string, password: string) {
+  register(username: string, email: string, password: string, accountType: string) {
     return this.http.post<any>(`/auth/local/register`, {
       username,
       email,
-      password
+      password,
+      accountType
     })
       .pipe(
         map(user => {
