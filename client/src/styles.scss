@@ -4,6 +4,7 @@
 //@import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
 @import './roodeo-variables.scss';
+@import './roodeo-content.scss';
 /*@import '~ngx-toastr/toastr';
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
@@ -210,5 +211,10 @@ input:checked ~ .checkbox-span {
 .mat-dialog-title {
   border-bottom: $border-table;
   // background: linear-gradient($color-white, rgba($color: $color-blue-roodeo, $alpha: .7));
+  padding: 5px;
+}
+
+.roodeo-group-state-bar {
+  border-bottom: $border-table;
   padding: 5px;
 }

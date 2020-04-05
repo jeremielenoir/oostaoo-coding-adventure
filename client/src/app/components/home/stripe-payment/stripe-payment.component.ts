@@ -13,7 +13,9 @@ import {
 } from 'ngx-stripe';
 import { Router } from '@angular/router';
 import { DecryptTokenService } from '../register/register.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { AddressComponent } from '../../address/address.component';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-stripe-payment',
@@ -25,7 +27,14 @@ export class StripePaymentComponent implements OnInit {
   offerChoice: any;
   userInfo: any;
   cardInfos: any;
+  account: any;
 
+  emailForm: any;
+  cardHolderForm: any;
+  emailForReceipt: string;
+  cardHolder: string;
+
+  messageErrorStripeElement: string;
   stripeKey = '';
   inProgress = false;
   paied = false;
@@ -34,9 +43,14 @@ export class StripePaymentComponent implements OnInit {
   cardOptions: ElementOptions = {
     style: {
       base: {
+        lineHeight: '50px',
+        fontSize: '16px',
+        fontFamily: '"Poppins", sans-serif',
         color: '#32325d',
         '::placeholder': {
-          color: '#aab7c4'
+          color: '#aab7c4',
+          fontSize: '16px',
+          fontFamily: '"Poppins", sans-serif',
         }
       },
       invalid: {
@@ -54,8 +68,19 @@ export class StripePaymentComponent implements OnInit {
     private apiClientService: ApiClientService,
     private stripeService: StripeService,
     private userToken: DecryptTokenService,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder
+  ) {
+
+    this.emailForm = this.formBuilder.group({
+      email: ['', [Validators.required,Validators.email]]
+    });
+
+    this.cardHolderForm = this.formBuilder.group({
+      cardHolder: ['', [Validators.required]]
+    });
+  }
   /**
    *
    */
@@ -65,11 +90,17 @@ export class StripePaymentComponent implements OnInit {
       .get(API_URI_USER + '/' + this.userToken.userId)
       .subscribe(user => {
         this.userInfo = user;
+        this.account = this.userInfo.customeraccount;
+        this.emailForReceipt = this.account.entreprise && this.account.entreprise.email
+          ? this.account.entreprise.email : this.userInfo.email;
+        this.cardHolder = this.account.entreprise && this.account.entreprise.nom
+          ? this.account.entreprise.nom : (this.userInfo.prenom + ' ' + this.userInfo.nom);
       });
     this.card.on.subscribe(item => {
       if (item.type === 'change') {
+        this.messageErrorStripeElement = null;
         if (item.event.error) {
-          this.snackBar.open(item.event.error.message, 'OK');
+          this.messageErrorStripeElement = item.event.error.message;
         }
         if (item.event.complete) {
           this.complete = true;
@@ -77,6 +108,30 @@ export class StripePaymentComponent implements OnInit {
         }
       }
     });
+  }
+  /**
+   *
+   */
+  async addOrEditAddress() {
+    const dialogRef = this.dialog.open(AddressComponent, {
+      data: this.account
+    });
+
+    const newAddress = await dialogRef.afterClosed().toPromise();
+    this.account.billing_address = newAddress;
+  }
+  /**
+   *
+   */
+  canPayNow(): boolean {
+    return this.complete && this.account && this.account.billing_address
+      && this.emailForm.controls.email.valid;
+  }
+  /**
+   *
+   */
+  async editAndSelectEmail() {
+
   }
   /**
    *
@@ -96,10 +151,10 @@ export class StripePaymentComponent implements OnInit {
       const tokenResult: TokenResult = await this.stripeService
         .createToken(this.card.element, {
           name: this.userInfo.username,
-          // address_line1: '123 A Place',
-          // address_line2: 'Suite 100',
-          // address_city: 'Irving',
-          // address_state: 'BC',
+          address_line1: this.account.billing_address.line1,
+          address_line2: this.account.billing_address.line2,
+          address_city: this.account.billing_address.city,
+          address_state: this.account.billing_address.state,
           address_zip: this.cardInfos.postalCode,
           address_country: 'FR'
         })

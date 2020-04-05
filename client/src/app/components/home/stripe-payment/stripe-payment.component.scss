@@ -1,71 +1,25 @@
 @import "../../../../roodeo-variables.scss";
+@import "../../../../roodeo-form.scss";
 
-.bounds {
-  width: 100%;
-  height: 100%;
-  padding: 50px;
+/deep/ #nav-menu {
+  top: 0;
+}
 
-  .container {
-    padding: 25px;
+/deep/ .header-notification {
+  top: 0;
+}
 
-    .sec1 {
-      box-shadow: 0 4px 10px -2px #00000080;
-      border: 1px solid #1f7eab;
-      border-radius: $border-radius;
-      background-color: white;
-      padding: 25px;
-      margin: 10px;
-
-      .logo {
-        width: 80px;
-      }
-
-      .offer-title {
-        font-weight: bold;
-        margin-top: 25px;
-        color: gray;
-      }
-
-      .offer-desc {
-        margin-top: 25px;
-      }
-
-      .back-to-offers {
-        margin-top: 25px;
-        text-align: right;
-      }
-    }
-
-    .sec2 {
-      box-shadow: 0 4px 10px -2px #00000080;
-      border: 1px solid #1f7eab;
-      border-radius: $border-radius;
-      background-color: white;
-      padding: 25px;
-      margin: 10px;
-
-      .card-owner {
-        width: 100%;
-      }
-
-      .loader {
-        margin-top: 25px;
-        text-align: center;
-      }
-    }
-  }
+.loader {
+  margin-top: 25px;
+  text-align: center;
 }
 
 .StripeElement {
-  box-sizing: border-box;
-  height: 40px;
-  padding: 10px 12px;
-  border: 1px solid rgba($color: #000000, $alpha: 0.28);
-  border-radius: $border-radius;
-  background-color: white;
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
+  height: 50px;
+  border: 1px solid #1d3552;
+  background: white;
+  font-size: 16px;
+  padding-left: 15px;
 }
 
 .StripeElement--focus {

@@ -126,6 +126,8 @@ import { ConfirmComponent } from './components/home/confirm/confirm.component';
 import { SearchPipe } from './pipe/search.pipe';
 import { AddressComponent } from './components/address/address.component';
 import { CreditcardComponent } from './components/creditcard/creditcard.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { MatProgressBarModule } from '@angular/material';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -229,6 +231,7 @@ import { CreditcardComponent } from './components/creditcard/creditcard.componen
     SearchPipe,
     AddressComponent,
     CreditcardComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
@@ -249,7 +252,8 @@ import { CreditcardComponent } from './components/creditcard/creditcard.componen
     NgxCaptchaModule,
     MarkdownModule.forRoot(),
     MonacoEditorModule.forRoot(),
-    CKEditorModule
+    CKEditorModule,
+    MatProgressBarModule
   ],
   providers: [
     ApiClientService,
