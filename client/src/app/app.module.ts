@@ -92,6 +92,7 @@ import { DecryptTokenService } from './components/home/register/register.service
 import { TechnoComponent } from './components/home/techno/techno.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { OffersComponent } from './components/home/offers/offers.component';
+import { HomeOffersComponent } from './components/home/home-offers/home-offers.component';
 import { RapportDetailleHomeComponent, RapportDetailleExempleComponent} from './components/home/rapport-detaille/rapport-detaille.component';
 import {SelectedLanguageService} from './services/selected-language.service'
 import { FonctionnaliteComponent } from './components/home/fonctionnalite/fonctionnalite.component';
@@ -197,7 +198,11 @@ import { MatProgressBarModule } from '@angular/material';
     FinTestComponent,
     TechnoComponent,
     OffersComponent,
+<<<<<<< HEAD
+    HomeOffersComponent,
+=======
     ConfirmComponent,
+>>>>>>> 3a977192ef4dd78dc98348a0be29c5a49527b2c5
     RapportDetailleHomeComponent,
     RapportDetailleExempleComponent,
     RapportDetailleComponent,
