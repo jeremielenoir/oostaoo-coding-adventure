@@ -181,22 +181,6 @@
       </ul>
     </li>
     <li>
-      <div class="list-menu-top-header">
-        <a href="" class="text-menu">
-          <span class="content-img" id="logout"> </span>
-        </a>
-        <span class="title-menu-responsive">Déconnexion</span>
-      </div>
-      <ul class="dropdownn">
-        <li>
-          <p><a href="" (click)="disConnection($event)">Déconnexion</a></p>
-        </li>
-
-      
-       
-      </ul>
-    </li>
-    <li>
       <span class="text-menu">
         <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
           <img class="flags_img" src="{{currentLanguage}}" alt="Français">
@@ -212,6 +196,23 @@
       </span>
         
     </li>
+    <li>
+      <div class="list-menu-top-header">
+        <a href="" class="text-menu">
+          <span class="content-img" id="logout"> </span>
+        </a>
+        <span class="title-menu-responsive">Déconnexion</span>
+      </div>
+      <ul class="dropdownn">
+        <li>
+          <p><a href="" (click)="disConnection($event)">Déconnexion</a></p>
+        </li>
+
+      
+       
+      </ul>
+    </li>
+   
   </ul>
 
   <div class="menu-burgeur" (click)="activeMenuBurgeur()">
