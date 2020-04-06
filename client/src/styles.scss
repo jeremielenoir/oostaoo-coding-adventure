@@ -91,6 +91,10 @@ html,body{
   font-family: $font-poppins;
 }
 
+button{
+  cursor: pointer;
+}
+
 a,
 a:hover {
   text-decoration: none;
