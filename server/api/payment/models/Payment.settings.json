@@ -11,18 +11,32 @@
     "comment": ""
   },
   "attributes": {
-    "user_id": {
+    "amount": {
+      "default": "",
+      "type": "decimal"
+    },
+    "user": {
       "model": "user",
       "via": "payments",
       "plugin": "users-permissions"
     },
-    "date_payment": {
-      "default": "",
-      "type": "integer"
-    },
-    "offer_id": {
+    "offer": {
       "model": "offer",
       "via": "payments"
+    },
+    "customeraccount": {
+      "model": "customeraccount",
+      "via": "payments"
+    },
+    "paied_at": {
+      "default": "",
+      "type": "date",
+      "required": true
+    },
+    "stripe_payment_intent": {
+      "default": "",
+      "type": "string",
+      "required": true
     }
   }
 }

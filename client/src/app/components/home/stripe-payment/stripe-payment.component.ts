@@ -1,12 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiClientService, API_URI_OFFER, API_URI_USER, API_URI_PAYMENT } from 'src/app/api-client/api-client.service';
-import { StripeService, Elements, Element as StripeElement, ElementsOptions, TokenResult } from 'ngx-stripe';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  ApiClientService,
+  API_URI_USER,
+  API_URI_PAYMENT,
+  API_URI_ACCOUNT
+} from 'src/app/api-client/api-client.service';
+import {
+  StripeService,
+  ElementsOptions,
+  ElementOptions,
+  StripeCardComponent
+} from 'ngx-stripe';
 import { Router } from '@angular/router';
-import { Offer } from 'src/app/models/offer.model';
-import { SessionService } from 'src/app/services/session/session.service';
 import { DecryptTokenService } from '../register/register.service';
-
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { AddressComponent } from '../../address/address.component';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-stripe-payment',
@@ -17,181 +26,180 @@ export class StripePaymentComponent implements OnInit {
 
   offerChoice: any;
   userInfo: any;
+  cardInfos: any;
+  account: any;
 
-  cardOwnerName = '';
+  emailForm: any;
+  cardHolderForm: any;
+  emailForReceipt: string;
+  cardHolder: string;
 
-  stripeError: string = null;
-  stripeSuccess: string = null;
-  stripeLoader = false;
-
-  payload: any;
-  paymentCreationBody: any;
-
-  // stripe var
-  elements: Elements;
-  card: StripeElement;
+  messageErrorStripeElement: string;
+  stripeKey = '';
+  inProgress = false;
+  paied = false;
+  complete = false;
+  @ViewChild(StripeCardComponent) card: StripeCardComponent;
+  cardOptions: ElementOptions = {
+    style: {
+      base: {
+        lineHeight: '50px',
+        fontSize: '16px',
+        fontFamily: '"Poppins", sans-serif',
+        color: '#32325d',
+        '::placeholder': {
+          color: '#aab7c4',
+          fontSize: '16px',
+          fontFamily: '"Poppins", sans-serif',
+        }
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
+      }
+    }
+  };
   elementsOptions: ElementsOptions = {
     locale: 'fr'
   };
 
-  stripeFormGroup: FormGroup;
+  constructor(
+    private router: Router,
+    private apiClientService: ApiClientService,
+    private stripeService: StripeService,
+    private userToken: DecryptTokenService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder
+  ) {
 
-  constructor(private router: Router,
-              private apiClientService: ApiClientService,
-              private fb: FormBuilder,
-              private stripeService: StripeService,
-              private session: SessionService,
-              private userToken: DecryptTokenService
-  ) { }
+    this.emailForm = this.formBuilder.group({
+      email: ['', [Validators.required,Validators.email]]
+    });
+
+    this.cardHolderForm = this.formBuilder.group({
+      cardHolder: ['', [Validators.required]]
+    });
+  }
   /**
    *
    */
   ngOnInit() {
-    // window.scroll(0, 0);
-    // recuperation de l'offre
-    // this.offerChoice = this.session.offerChoice;
     this.offerChoice = JSON.parse(localStorage.getItem('offerChoice'));
-
-    // info utilisateur a recuperer de la bdd
-    this.apiClientService.get(API_URI_USER + '/' + this.userToken.userId)
-        .subscribe(user => {
-          this.userInfo = user;
-          this.cardOwnerName = this.userInfo.username;
-        });
-
-    this.stripeForm();
+    this.apiClientService
+      .get(API_URI_USER + '/' + this.userToken.userId)
+      .subscribe(user => {
+        this.userInfo = user;
+        this.account = this.userInfo.customeraccount;
+        this.emailForReceipt = this.account.entreprise && this.account.entreprise.email
+          ? this.account.entreprise.email : this.userInfo.email;
+        this.cardHolder = this.account.entreprise && this.account.entreprise.nom
+          ? this.account.entreprise.nom : (this.userInfo.prenom + ' ' + this.userInfo.nom);
+      });
+    this.card.on.subscribe(item => {
+      if (item.type === 'change') {
+        this.messageErrorStripeElement = null;
+        if (item.event.error) {
+          this.messageErrorStripeElement = item.event.error.message;
+        }
+        if (item.event.complete) {
+          this.complete = true;
+          this.cardInfos = item.event.value;
+        }
+      }
+    });
   }
   /**
    *
    */
-  isBuyBtnDisabled(): boolean {
-    return this.stripeFormGroup.invalid || this.stripeLoader;
-  }
-  /**
-   *
-   */
-  stripeForm() {
-
-    this.stripeFormGroup = this.fb.group({
-      name: ['', [Validators.required]]
+  async addOrEditAddress() {
+    const dialogRef = this.dialog.open(AddressComponent, {
+      data: this.account
     });
 
-    this.stripeService.elements(this.elementsOptions)
-      .subscribe(elements => {
-        this.elements = elements;
-        // Only mount the element the first time
-        if (!this.card) {
-          this.card = this.elements.create('card', {
-            style: {
-              base: {
-                color: '#32325d',
-                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                fontSmoothing: 'antialiased',
-                fontSize: '16px',
-                '::placeholder': {
-                  color: '#aab7c4'
-                }
-              },
-              invalid: {
-                color: '#fa755a',
-                iconColor: '#fa755a'
-              }
-            }
-          });
-          this.card.mount('#card-element');
-        }
-      });
+    const newAddress = await dialogRef.afterClosed().toPromise();
+    this.account.billing_address = newAddress;
   }
-
   /**
    *
    */
-  async buy() {
+  canPayNow(): boolean {
+    return this.complete && this.account && this.account.billing_address
+      && this.emailForm.controls.email.valid;
+  }
+  /**
+   *
+   */
+  async editAndSelectEmail() {
+
+  }
+  /**
+   *
+   */
+  keyUpdated() {
+    this.stripeService.changeKey(this.stripeKey);
+  }
+  /**
+   *
+   */
+  async payNow() {
+
     try {
-      // const name = this.stripeTest.get('name').value;
-      this.stripeError = undefined;
-      this.stripeLoader = true;
-      // username utilisateur
-      const name = this.userInfo.username;
 
-      console.log('this.userInfo : ', this.userInfo);
+      this.inProgress = true;
 
-      const tokenResult: TokenResult = await this.stripeService
-        .createToken(this.card, { name }).toPromise();
+      // create card payment method
+      let response1 = await this.stripeService.getInstance()
+        .createPaymentMethod("card", this.card.element);
 
-      if (tokenResult.error || !tokenResult.token) {
-        this.stripeLoader = false;
-        this.stripeError = tokenResult.error.message;
+      // process payment server side
+      let response2 = await this.apiClientService
+        .post(`${API_URI_ACCOUNT}/${this.account.id}/offers`, {
+          offerId: this.offerChoice.id,
+          receiptEmail: this.emailForReceipt,
+          paymentMethod: response1.paymentMethod.id
+        })
+        .toPromise();
+
+      // parse result
+      if (response2.error) {
+        this.snackBar.open(String(response2.error), 'Ok', {duration: 3000});
+        this.inProgress = false;
         return;
-      }
+      } else if (response2.requiresAction) {
 
-      this.payload = {
-        offer: this.offerChoice,
-        email: this.userInfo.email,
-        token: tokenResult.token
-      };
+        let response3 = await this.stripeService.getInstance().handleCardAction(response2.clientSecret);
 
-      const payResult: any = await this.apiClientService
-        .post(API_URI_PAYMENT + '/pay', this.payload).toPromise();
+        if (response3.error) {
+          this.snackBar.open(String(response3.error), 'Ok', {duration: 3000});
+          this.inProgress = false;
+          return;
+        } else if (response3.paymentIntent.status === "requires_confirmation") {
 
-      if (!payResult.status || !(payResult.status === 'succeeded' || 'active')) {
-        this.stripeError = 'Votre paiement a échoué';
-        if (this.card) {
-          this.card.unmount();
-          this.card.mount('#card-element');
+          let response4 = await this.apiClientService
+            .post(`${API_URI_ACCOUNT}/${this.account.id}/offers`, {
+              paymentIntentId: response3.paymentIntent.id
+            })
+            .toPromise();
+
+          if (response4.error) {
+            this.snackBar.open(String(response3.error), 'Ok', {duration: 3000});
+            this.inProgress = false;
+            return;
+          }
         }
-        setTimeout(() => {this.stripeError = ''; }, 2000);
-        this.stripeLoader = false;
-        return;
+
       }
 
-      this.paymentCreationBody = {
-        amount: this.offerChoice.price,
-        offer_id: this.offerChoice.id,
-        test_already_available: this.userInfo.tests_available,
-        tests_available: this.offerChoice.tests_stock,
-        user_id: this.userInfo.id,
-        date_payment: Date.now(),
-        paymentId: payResult.id
-      };
-
-      const resultPaymentConfirm: any = this.apiClientService
-        .post(API_URI_PAYMENT, this.paymentCreationBody).toPromise();
-
-      const newToken = resultPaymentConfirm.jwt;
-
-      if (resultPaymentConfirm.refund) {
-
-        if (this.card) {
-          this.card.unmount();
-        }
-        setTimeout(() => {
-          this.stripeError = '';
-          this.card.mount('#card-element');
-        }, 2000);
-
-        this.stripeError = 'Un problème technique est survenu';
-        this.stripeLoader = false;
-        return;
-
-      } else {
-        localStorage.setItem('currentUser', newToken);
-        this.stripeSuccess = 'Votre paiement a été effectué';
-        this.stripeLoader = false;
-        setTimeout(() => {
-          this.router.navigate(['/dashboard/campaigns']);
-        }, 5000);
-      }
+      this.snackBar.open('Votre achat s\'est terminé avec succès', 'Ok', {duration: 3000});
+      this.inProgress = false;
+      this.paied = true;
 
     } catch (e) {
-      this.stripeLoader = false;
+      this.inProgress = false;
+      this.snackBar.open(e.message ? e.message : 'Oops ! paiement non disponible pour le moment.', 'OK');
+      console.error(e);
       return;
     }
-
   }
-
-  goBack() {
-    this.router.navigate(['/subscription']);
-  }
-
 }

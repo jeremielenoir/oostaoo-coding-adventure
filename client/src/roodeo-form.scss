@@ -1,0 +1,48 @@
+.roodeo-progress-bar {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 106px;
+}
+
+.roodeo-form-unit-row {
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.roodeo-form-unit {
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.roodeo-form-unit-title {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.roodeo-form-unit-input {
+  height: 50px;
+  border: 1px solid #1d3552;
+  background: white;
+  font-size: 16px;
+  padding-left: 15px;
+  margin-bottom: 10px;
+}
+
+.roodeo-form-buttons {
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  padding: 10px;
+}
+
+.roodeo-form-error-message {
+  margin-top: -5px;
+  margin-bottom: 5px;
+  font-size: 10px;
+  color: red;
+}
+
+

@@ -59,6 +59,20 @@
     },
     {
       "method": "GET",
+      "path": "/api/roles",
+      "handler": "UsersPermissions.getRoles",
+      "config": {
+        "policies": [],
+        "description": "Retrieve all role documents",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "Role",
+          "actionType": "find"
+        }
+      }
+    },
+    {
+      "method": "GET",
       "path": "/roles",
       "handler": "UsersPermissions.getRoles",
       "config": {

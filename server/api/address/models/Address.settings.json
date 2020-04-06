@@ -1,0 +1,55 @@
+{
+  "connection": "default",
+  "collectionName": "address",
+  "info": {
+    "name": "address",
+    "description": "address shipping or billing"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "city": {
+      "default": "",
+      "unique": true,
+      "type": "string"
+    },
+    "country": {
+      "default": "",
+      "type": "enumeration",
+      "enum": [
+        "FR",
+        "EN"
+      ]
+    },
+    "line1": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "line2": {
+      "default": "",
+      "type": "string"
+    },
+    "postal_code": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "state": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "default": "",
+      "type": "string"
+    },
+    "customeraccount": {
+      "model": "customeraccount",
+      "via": "billing_address"
+    }
+  }
+}

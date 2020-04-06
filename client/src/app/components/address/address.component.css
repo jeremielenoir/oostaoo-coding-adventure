@@ -1,0 +1,6 @@
+@import "../../../roodeo-form.scss";
+
+.save-form {
+  margin-left: 10px;
+  margin-right: 10px;
+}

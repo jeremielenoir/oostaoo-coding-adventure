@@ -1,0 +1,85 @@
+<div *ngIf="mode === 'show'">
+  <address *ngIf="address">
+    {{address?.line1}}<br>
+    {{address?.line2}}<br>
+    {{address?.postal_code}}, {{address?.city}} {{address?.state}}<br>
+    {{address?.country}}
+  </address>
+  <address style="color: gray;" *ngIf="!address">
+    ligne adresse 1<br>
+    ligne adresse 2<br>
+    Code postale, Ville Province<br>
+    Pays
+  </address>
+</div>
+<div *ngIf="mode === 'edit'">
+  <h1 mat-dialog-title><i class="fa fa-map-marker icon"></i> Adresse</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="addressForm" (ngSubmit)="onSubmit(addressForm.value)">
+      <div class="roodeo-form-unit-row">
+        <div class="roodeo-form-unit" fxFlex="100">
+          <label class="roodeo-form-unit-title" for="line1">
+            Ligne 1
+          </label>
+          <input class="roodeo-form-unit-input" name="line1" id="line1" type="text" formControlName="line1">
+          <div *ngIf="addressForm.controls.line1.invalid && (addressForm.controls.line1.dirty || addressForm.controls.line1.touched)"
+            class="roodeo-form-error-message">
+            <div *ngIf="addressForm.controls.line1.errors.required">Ligne est requise.</div>
+          </div>
+        </div>
+      </div>
+      <div class="roodeo-form-unit-row">
+        <div class="roodeo-form-unit" fxFlex="100">
+          <label class="roodeo-form-unit-title" for="line2">
+            Ligne 2
+          </label>
+          <input class="roodeo-form-unit-input" id="line2" type="text" formControlName="line2">
+        </div>
+      </div>
+      <div class="roodeo-form-unit-row">
+        <div class="roodeo-form-unit" fxFlex="30">
+          <label class="roodeo-form-unit-title" for="postal_code">
+            Code postale
+          </label>
+          <input class="roodeo-form-unit-input" id="postal_code" type="text" formControlName="postal_code">
+          <div *ngIf="addressForm.controls.postal_code.invalid && (addressForm.controls.postal_code.dirty || addressForm.controls.postal_code.touched)"
+            class="roodeo-form-error-message">
+            <div *ngIf="addressForm.controls.postal_code.errors.required">Code postale est requise.</div>
+          </div>
+        </div>
+        <div class="roodeo-form-unit" fxFlex="70">
+          <label class="roodeo-form-unit-title" for="city">
+            Ville
+          </label>
+          <input class="roodeo-form-unit-input" id="city" type="text" formControlName="city">
+          <div *ngIf="addressForm.controls.city.invalid && (addressForm.controls.city.dirty || addressForm.controls.city.touched)"
+            class="roodeo-form-error-message">
+            <div *ngIf="addressForm.controls.city.errors.required">Ville est requise.</div>
+          </div>
+        </div>
+      </div>
+      <div class="roodeo-form-unit-row">
+        <div class="roodeo-form-unit">
+          <label class="roodeo-form-unit-title" for="state">
+            Province
+          </label>
+          <input class="roodeo-form-unit-input" id="state" type="text" formControlName="state">
+        </div>
+        <div class="roodeo-form-unit">
+          <label class="roodeo-form-unit-title" for="country">
+            Pays
+          </label>
+          <input class="roodeo-form-unit-input" id="country" type="text" formControlName="country">
+          <div *ngIf="addressForm.controls.country.invalid && (addressForm.controls.country.dirty || addressForm.controls.country.touched)"
+            class="roodeo-form-error-message">
+            <div *ngIf="addressForm.controls.country.errors.required">Pays est requise.</div>
+          </div>
+        </div>
+      </div>
+      <div class="roodeo-form-buttons">
+        <button [disabled]="addressForm.invalid" class="save-form" class="button" mat-flat-button color="primary" type="submit">Sauvegarder</button>
+        <button  (click)="onCloseModal()" class="save-form" class="button" mat-flat-button color="default" type="button">Annuler</button>
+      </div>
+    </form>
+  </div>
+</div>

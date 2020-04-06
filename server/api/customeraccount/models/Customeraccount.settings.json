@@ -1,0 +1,55 @@
+{
+  "connection": "default",
+  "collectionName": "customer_account",
+  "info": {
+    "name": "customeraccount",
+    "description": "customer account"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "type": {
+      "default": "personal",
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "personal",
+        "profesional"
+      ]
+    },
+    "tests_stock": {
+      "default": 0,
+      "min": -1,
+      "type": "integer",
+      "required": true
+    },
+    "users": {
+      "collection": "user",
+      "via": "customeraccount",
+      "plugin": "users-permissions"
+    },
+    "offer": {
+      "model": "offer"
+    },
+    "payments": {
+      "collection": "payment",
+      "via": "customeraccount"
+    },
+    "entreprise": {
+      "model": "entreprise",
+      "via": "customeraccount"
+    },
+    "stripe_customer_id": {
+      "default": "",
+      "unique": true,
+      "type": "string"
+    },
+    "billing_address": {
+      "model": "address",
+      "via": "customeraccount"
+    }
+  }
+}

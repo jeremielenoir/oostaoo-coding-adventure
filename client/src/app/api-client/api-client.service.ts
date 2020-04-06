@@ -18,6 +18,8 @@ export const API_URI_USER_ADMIN: string = prefix + 'utilisateursadmins';
 export const API_URI_ENTREPRISE: string = prefix + 'entreprises';
 export const API_URI_USER_ENTREPRISE: string = prefix + 'utilsateurentreprises';
 export const API_URI_USER = 'users';
+export const API_URI_ACCOUNT = prefix + 'customeraccounts';
+export const API_URI_ADDRESS = prefix + 'addresses';
 export const API_URI_USERS_BY_ADMIN = 'usersByAdmin';
 export const API_URI_NOTIFICATIONS: string = prefix + 'notifications';
 export const API_URI_OFFER: string = prefix + 'offers';
@@ -25,6 +27,7 @@ export const API_URI_PAYMENT: string = prefix + 'payments';
 export const API_URI_FEEDBACK: string = prefix + 'feedbacks';
 export const API_URI_FAQ: string = prefix + 'faqs';
 export const API_URI_ISSUE: string = prefix + 'issues';
+export const API_URI_ROLE: string =  'users-permissions/roles';
 export const EXECUTE_SCRIPT: string = prefix + 'questions/execute';
 
 //Bp6PnJmoydK5rz6o
@@ -41,7 +44,7 @@ export class ApiClientService {
       errorMessage = `Error: ${error.error.message}`;
     } else {
       // server-side error
-      errorMessage = `Error Code: ${error.status}\n Message: ${error.message}`;
+      errorMessage = error;
     }
     return throwError(errorMessage);
   }

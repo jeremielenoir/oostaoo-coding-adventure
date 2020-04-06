@@ -42,11 +42,20 @@
     },
     "payments": {
       "collection": "payment",
-      "via": "offer_id"
+      "via": "offer"
     },
     "periodicity": {
       "default": "",
       "type": "string"
+    },
+    "enabled": {
+      "default": true,
+      "type": "boolean",
+      "required": true
+    },
+    "undefined": {
+      "collection": "customeraccount",
+      "via": "offer"
     }
   }
 }
