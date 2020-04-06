@@ -3,6 +3,8 @@ import {
   OnInit,
   Output,
   EventEmitter,
+  LOCALE_ID,
+  Inject
 } from '@angular/core';
 import { MatBottomSheet } from '@angular/material';
 import {
@@ -17,6 +19,7 @@ import {
   API_URI_USER
 } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from '../../home/register/register.service';
+import {SelectedLanguageService} from '../../../services/selected-language.service';
 
 @Component({
   selector: 'app-route-component',
@@ -35,6 +38,14 @@ export class RouteComponentComponent implements OnInit {
   public notifications = [];
   public notifUnread = 0;
   public activeMenuB = false;
+  public currentLanguage;
+  public lang = 'en-US';
+  public otherLanguage = [
+    {codelang: 'fr-FR', shortlang:'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr/'},
+    {codelang: 'en-US', shortlang:'en', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en/'},
+    {codelang: 'es-ES', shortlang:'es', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es/'},
+    {codelang: 'jp-JP', shortlang:'jp', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp/'}
+   ];
 
   @Output() ContentViewDefault = new EventEmitter<any>();
 
@@ -42,10 +53,26 @@ export class RouteComponentComponent implements OnInit {
     public dialog: MatDialog,
     public apiClientService: ApiClientService,
     public route: Router,
-    public decryptTokenService: DecryptTokenService
+    @Inject(LOCALE_ID) private locale: string,
+    public decryptTokenService: DecryptTokenService,
+    public SelectedLanguageService:SelectedLanguageService
+    
   ) {}
 
   ngOnInit() {
+
+    this.lang = this.locale;
+
+    if(this.SelectedLanguageService.checkLanguageCountry()){
+      this.lang = this.SelectedLanguageService.getLanguageCountry()
+    }
+
+    this.otherLanguage.forEach( element => {
+      if ( element.codelang === this.lang || element.shortlang === this.lang) {
+        this.currentLanguage = element.img;
+      }
+    });
+
     this.apiClientService
       .get(API_URI_USER + '/' + this.decryptTokenService.userId)
       .subscribe(user => {
@@ -114,6 +141,14 @@ export class RouteComponentComponent implements OnInit {
     // }), 5000);
   }
 
+
+  public setCurrentLanguage(langage) {
+
+    this.SelectedLanguageService.updtateLanguageCountry(langage)
+    
+    this.currentLanguage = langage.img;
+    window.parent.location.href = langage.url;
+  }
   public disConnection(event) {
     event.preventDefault();
 

@@ -52,9 +52,9 @@ export class NouvelleCampagnePage1Component implements OnInit {
     this.getProfiles();
     this.getTechnos();
     
-    console.log('this.languageStorage.recupLanguageCountry()',this.languageStorage.recupLanguageCountry())
+    console.log('this.languageStorage.recupLanguageCountry()',this.languageStorage.getLanguageCountry())
 
-    switch(this.languageStorage.recupLanguageCountry()){
+    switch(this.languageStorage.getLanguageCountry()){
       case 'es-ES':
       this.nameLanguage = 'name_es';
       break;

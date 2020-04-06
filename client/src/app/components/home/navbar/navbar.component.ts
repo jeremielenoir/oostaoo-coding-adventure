@@ -9,6 +9,7 @@ import {
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import {SelectedLanguageService} from '../../../services/selected-language.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,10 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(@Inject(DOCUMENT) document, @Inject(LOCALE_ID) private locale: string, private cookieService: CookieService, private router: Router) { }
+  constructor(@Inject(DOCUMENT) document, @Inject(LOCALE_ID) private locale: string,
+   private cookieService: CookieService, private router: Router,public SelectedLanguageService:SelectedLanguageService) { 
+
+   }
 
   public shouldShow = true;
   public Removeshould = true;
@@ -59,8 +63,8 @@ export class NavbarComponent implements OnInit {
     
     this.lang = this.locale;
 
-    if(this.cookieService.check('currentlanguage')){
-      //this.lang = this.cookieService.get('currentlanguage');
+    if(this.SelectedLanguageService.checkLanguageCountry()){
+      this.lang = this.SelectedLanguageService.getLanguageCountry();
     }
 
     this.onWindowScroll();
@@ -97,8 +101,9 @@ export class NavbarComponent implements OnInit {
 
 
   setCurrentLanguage(langage) {
-    console.log('LANG', langage.codelang);
-    this.cookieService.set('currentlanguage', langage.codelang, 30, '/', 'roodeo.com', true, "Lax");
+
+    this.SelectedLanguageService.updtateLanguageCountry(langage)
+    
     this.currentLanguage = langage.img;
     window.parent.location.href = langage.url;
   }

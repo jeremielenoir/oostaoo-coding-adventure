@@ -27,6 +27,23 @@
     height:46px;
   }
 
+  .flags_menu{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .flags_img{
+      width: 42px;
+      border-radius: 100px;
+      border:1px solid $color-principal-blue
+    }
+  }
+
+  .icon-country{
+    font-size: 20px;
+    color: $color-principal-blue;
+    padding-left: 6px;
+  }
+
   .menu-burgeur{
     display: flex;
     margin-top: 5px;
@@ -213,6 +230,9 @@
         }
         &:hover{
           background: #0d6192;
+          .icon-country{
+            color: white;
+          }
           #notif{
             background-image: url("/assets/Coding-game-img/SVG-menu-Dashboard/Blanc/notifications.svg");
           }
