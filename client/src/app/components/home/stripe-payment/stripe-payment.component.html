@@ -19,6 +19,7 @@
     <div fxFlex="50" class="rdo-content-group">
       <div>
         <h3><i class="fa fa-shopping-cart icon"></i> Votre offre</h3>
+        <button *ngIf="!paied" type="button" mat-stroked-button color="primary">Changer d'offre</button>
       </div>
       <div fxLayout="column" fxLayoutGap="20px">
         <div>
@@ -59,7 +60,7 @@
       <div class="rdo-content-group">
         <div>
           <h3><i class="fa fa-map-marker icon"></i> Adresse de facturation</h3>
-          <button type="button" mat-stroked-button (click)="addOrEditAddress()"
+          <button *ngIf="!paied" type="button" mat-stroked-button (click)="addOrEditAddress()"
             color="primary">{{ account && account.billing_address ? 'Editer' : 'Ajouter une adresse'}}</button>
         </div>
         <div>

@@ -33,20 +33,7 @@
       "type": "date",
       "required": true
     },
-    "stripe_customer_id": {
-      "default": "",
-      "type": "string",
-      "required": true
-    },
-    "stripe_subscription_id": {
-      "default": "",
-      "type": "string"
-    },
-    "stripe_charge_id": {
-      "default": "",
-      "type": "string"
-    },
-    "stripe_token_id": {
+    "stripe_payment_intent": {
       "default": "",
       "type": "string",
       "required": true

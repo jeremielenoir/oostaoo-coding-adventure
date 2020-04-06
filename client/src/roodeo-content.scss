@@ -31,13 +31,14 @@
   margin-bottom: 20px;
 
   & > :nth-child(1) {
+    height: 50px;
     padding: 5px;
     margin-bottom: 10px;
+    place-content: flex-end space-between;
+    align-items: flex-end;
     flex-direction: row;
     box-sizing: border-box;
     display: flex;
-    place-content: stretch space-between;
-    align-items: stretch;
     border-bottom: $border-table;
   }
 

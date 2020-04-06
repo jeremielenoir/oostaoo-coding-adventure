@@ -30,7 +30,7 @@ module.exports = {
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    return Customeraccount.query(function(qb) {
+    return Customeraccount.query(function (qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value) && where.symbol !== 'IN' && where.symbol !== 'NOT IN') {
           for (const value in where.value) {
@@ -79,7 +79,7 @@ module.exports = {
     // Convert `params` object to filters compatible with Bookshelf.
     const filters = strapi.utils.models.convertParams('customeraccount', params);
 
-    return Customeraccount.query(function(qb) {
+    return Customeraccount.query(function (qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value)) {
           for (const value in where.value) {
@@ -107,7 +107,7 @@ module.exports = {
     const entry = await Customeraccount.forge(data).save();
 
     // Create relational data and return the entry.
-    return Customeraccount.updateRelations({ id: entry.id , values: relations });
+    return Customeraccount.updateRelations({ id: entry.id, values: relations });
   },
 
   /**
@@ -265,7 +265,7 @@ module.exports = {
     try {
 
       // check if user already registred
-      let customer = await stripe.customers.list({email: email, limit: 1});
+      let customer = await stripe.customers.list({ email: email, limit: 1 });
 
       if (!customer) {
         // if not yet create it
@@ -296,7 +296,7 @@ module.exports = {
     try {
 
       // check if user already registred
-      let customer = await stripe.customers.list({email: email, limit: 1});
+      let customer = await stripe.customers.list({ email: email, limit: 1 });
 
       if (!customer) {
         // if not yet create it
@@ -331,6 +331,153 @@ module.exports = {
     } catch (error) {
       console.log('error : ', error);
       return error;
+    }
+  },
+  /**
+   *
+   * @param {*} paymentData
+   * @param {*} account
+   */
+  startPaymentIntent: async (paymentData, account, user) => {
+
+    const { offerId, receiptEmail, paymentMethod } = paymentData;
+    const offer = (await strapi.services.offer.fetch({ id: offerId })).toJSON();
+
+    if (!account.stripe_customer_id) {
+
+      // create stripe customer if not exists
+      const customerName = account.entreprise ? account.entreprise.nom : (user.prenom + ' ' + user.nom);
+      const phone = account.entreprise ? account.entreprise.tel : (user.tel ? user.tel : user.mobile);
+      const email = account.entreprise ? account.entreprise.email : user.email;
+
+      let customer = (await stripe.customers.list({email: email, limit: 1})).data[0];
+
+      if (!customer) {
+
+        const customer = await stripe.customers.create({
+          // address: account.billing_address,
+          email: email,
+          name: customerName,
+          payment_method: paymentMethod,
+          phone: phone
+          /*,
+          shipping: {
+            address: account.billing_address,
+            name: customerName,
+            phone: phone
+          }*/
+        });
+
+        account.stripe_customer_id = customer.id;
+        await strapi.services.customeraccount.edit({ id: account.id }, { stripe_customer_id: customer.id });
+
+        console.log(`customer created to stripe ${customer.id} for account ${account.id}`);
+
+      } else {
+        console.log(`customer retrieved from stripe ${customer.id} for account ${account.id}`);
+      }
+
+    }
+
+    const intent = await stripe.paymentIntents.create({
+      customer: account.stripe_customer_id,
+      description: 'buy offer ' + offer.description,
+      amount: offer.price * 100,
+      currency: 'EUR',
+      receipt_email: receiptEmail,
+      payment_method: paymentMethod,
+      confirmation_method: 'manual',
+      confirm: true,
+      use_stripe_sdk: true,
+      metadata: {
+        offer: offer.id,
+        account: account.id,
+        user: user.id
+      }
+    });
+
+    console.log(`intent created to stripe ${intent.id} for account ${account.id}`);
+
+    return intent;
+
+  },
+  /**
+   *
+   */
+  finalizePaymentIntent: async (paymentData) => {
+    const { paymentIntent } = paymentData;
+    const intent = await stripe.paymentIntents.confirm(paymentIntent);
+    console.log(`intent confirmed to stripe ${intent.id}`);
+    return intent;
+  },
+  /**
+   *
+   */
+  onPaymentSucceed: async (intent, account, user) => {
+
+    try {
+
+      const offer = (await strapi.services.offer.fetch({ id: intent.metadata.offer })).toJSON();
+
+      // 2 - add payment row
+      const payment = await strapi.services.payment.add({
+        amount: offer.price,
+        user: user.id,
+        offer: offer.id,
+        paied_at: new Date(),
+        stripe_payment_intent: intent.id,
+        customeraccount: account.id
+      });
+      console.log(`payment created ${payment.id}`);
+
+      // 3 - update user tests stock
+      let new_tests_stock = -1;
+      if (parseInt(offer.tests_stock) !== -1) {
+        new_tests_stock = parseInt(offer.tests_stock) + account.tests_stock;
+      }
+
+      await strapi.services.customeraccount.edit(
+        { id: account.id },
+        { offer: offer.id, tests_stock: new_tests_stock }
+      );
+      console.log(`account ${account.id} updated with new offer: id:${offer.id}, tests_stock:${new_tests_stock}`);
+
+      // temp code until dev fetch offer info from account rather than user
+      await strapi.plugins['users-permissions'].services.user.edit(
+        { id: user.id },
+        { offer_id: offer.id, offer: offer.id, tests_available: new_tests_stock}
+      );
+      console.log(`user ${user.id} updated with new offer: id:${offer.id}, tests_stock:${new_tests_stock}`);
+
+    } catch (e) {
+      console.error('paiement was success but couldn\'t update account with new offer\n' +
+       `account:${account.id}, user:${user.id}`, e);
+    }
+  },
+  /**
+   *
+   */
+  parsePaymentIntent: (intent) => {
+    // Generate a response based on the intent's status
+    switch (intent.status) {
+      case 'requires_action':
+      case 'requires_source_action':
+        // Card requires authentication
+        return {
+          requiresAction: true,
+          clientSecret: intent.client_secret
+        };
+      case 'requires_payment_method':
+      case 'requires_source':
+        // Card was not properly authenticated, suggest a new payment method
+        return {
+          error: 'Votre carte a été rejetée. Merci d\'utiliser un autre moyen de paiement'
+        };
+      case 'succeeded':
+        // Payment is complete, authentication not required
+        // To cancel the payment after capture you will need to issue a Refund (https://stripe.com/docs/api/refunds)
+        console.log('💰 Payment received!');
+        return { done: true, clientSecret: intent.client_secret };
     }
   }
 };

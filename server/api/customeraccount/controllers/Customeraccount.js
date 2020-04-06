@@ -61,7 +61,7 @@ module.exports = {
    */
 
   update: async (ctx, next) => {
-    return strapi.services.customeraccount.edit(ctx.params, ctx.request.body) ;
+    return strapi.services.customeraccount.edit(ctx.params, ctx.request.body);
   },
 
   /**
@@ -78,74 +78,47 @@ module.exports = {
    */
   offerCreate: async (ctx) => {
 
-    let paimentDone = false;
-
     try {
 
-      // 1 - realize payment on stripe
-      const userEmail = ctx.state.user.email;
-      const offer = (await strapi.services.offer.fetch({ id: ctx.request.body.offer })).toJSON();
-      const paymentToken = ctx.request.body.paymentToken;
+      const { paymentMethod, paymentIntent } = ctx.request.body;
 
-      let paymentResult;
-      if (offer.periodicity === 'unique') {
-        paymentResult = await strapi.services.customeraccountextension
-          .charge(userEmail, paymentToken.id, offer.price);
-      } else if (offer.periodicity === 'monthly') {
-        paymentResult = await strapi.services.customeraccountextension
-          .subscribe(userEmail, paymentToken.id, offer.plan);
-      } else {
-        throw new Error('Pas de paiment requis');
+      // 0 - check first that account is not yet subscribed
+      // if it's so, raise error cause it should be updated throw PUT endpoint
+      const account = (await strapi.services.customeraccount.fetch({
+        id: ctx.state.user.customeraccount.id
+      })).toJSON();
+
+      if (account.offer) {
+
+        throw new Error('already subscribed');
       }
 
-      if (!paymentResult.status || !(paymentResult.status === 'succeeded' || 'active')) {
-        throw new Error('Un problème technique est survenu');
+      let intent;
+
+      if (paymentMethod) { // payment process started
+
+        intent = await strapi.services.customeraccount.startPaymentIntent(
+          ctx.request.body, account, ctx.state.user
+        );
+
+      } else if (paymentIntent) { // payment process to finalize
+
+        intent = await strapi.services.customeraccount.finalizePaymentIntent(ctx.request.body);
+
       }
 
-      paimentDone = true;
+      // parse stripe intent response
+      const parsedIntent = strapi.services.customeraccount.parsePaymentIntent(intent);
 
-      // 2 - add payment row
-      const paymentRow = await strapi.services.payment.add({
-        amount: offer.price,
-        user: ctx.state.user.id,
-        offer: offer.id,
-        paied_at: new Date(),
-        stripe_customer_id: paymentResult.customer,
-        stripe_token_id: paymentToken.id,
-        stripe_charge_id: offer.periodicity !== 'monthly' ? paymentResult.id : null,
-        stripe_subscription_id: offer.periodicity === 'monthly' ? paymentResult.id : null,
-        customeraccount: ctx.state.user.customeraccount.id
-      });
+      console.log(`parsed intent for account ${account.id}`, parsedIntent);
 
-      if (!paymentRow) {
-        throw new Error('Un problème technique est survenu');
+      if (parsedIntent.done) {
+        await strapi.services.customeraccount.onPaymentSucceed(intent, account, ctx.state.user);
       }
 
-      // 3 - update user tests stock
-      let new_tests_stock = -1;
-      if (parseInt(offer.tests_stock) !== -1) {
-        new_tests_stock = parseInt(offer.tests_stock) + ctx.state.user.customeraccount.tests_stock;
-      }
-
-      let user = (await strapi.services.customeraccount.edit(
-        { id: ctx.state.user.customeraccount.id },
-        { offer: offer.id, tests_stock: new_tests_stock }
-      )).toJSON();
-
-      // 4 - recreate token based on new offer
-      const jwt = await strapi.plugins['users-permissions'].services.jwt.issue(
-        _.pick(user, ['_id', 'id', 'adminId', 'offer_id', 'tests_available']));
-
-      return { newToken: jwt };
+      ctx.send(parsedIntent);
 
     } catch (e) {
-      if (paimentDone) { // refund
-        // const refund =
-        await strapi.services.customeraccountextension.refund(ctx.request.body.paymentToken.id);
-        console.warn('customer get refund after payment failure', ctx.state.user.id);
-        // TODO handle refund
-        // { refund: refund };
-      }
       ctx.status = e.status || 500;
       ctx.body = { status: 'error', message: { code: 'stripe_paiement', message: e.message } };
       ctx.app.emit('error', e, ctx);
@@ -251,12 +224,12 @@ module.exports = {
     const userIdToEnable = ctx.request.params.idusr;
 
     const userFromDb = await strapi.plugins['users-permissions'].services
-      .user.fetch({id: userIdToEnable});
+      .user.fetch({ id: userIdToEnable });
 
     if (userFromDb.customeraccount.id === accountId) {
 
       return await strapi.plugins['users-permissions'].services
-        .user.edit({id: userIdToEnable}, ctx.request.body);
+        .user.edit({ id: userIdToEnable }, ctx.request.body);
 
     } else {
       ctx.status = 500;
@@ -345,11 +318,11 @@ module.exports = {
     const userToRemoveId = ctx.request.params.idusr;
 
     const userFromDb = await strapi.plugins['users-permissions'].services
-      .user.fetch({id: userToRemoveId});
+      .user.fetch({ id: userToRemoveId });
 
     if (userFromDb.customeraccount.id === accountId) {
       return await strapi.plugins['users-permissions'].services
-        .user.edit({id: userToRemoveId}, {blocked: true});
+        .user.edit({ id: userToRemoveId }, { blocked: true });
 
     } else {
       ctx.status = 500;

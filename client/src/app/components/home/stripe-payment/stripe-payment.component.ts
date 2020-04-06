@@ -2,12 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   ApiClientService,
   API_URI_USER,
-  API_URI_PAYMENT
+  API_URI_PAYMENT,
+  API_URI_ACCOUNT
 } from 'src/app/api-client/api-client.service';
 import {
   StripeService,
   ElementsOptions,
-  TokenResult,
   ElementOptions,
   StripeCardComponent
 } from 'ngx-stripe';
@@ -148,51 +148,52 @@ export class StripePaymentComponent implements OnInit {
 
       this.inProgress = true;
 
-      const tokenResult: TokenResult = await this.stripeService
-        .createToken(this.card.element, {
-          name: this.userInfo.username,
-          address_line1: this.account.billing_address.line1,
-          address_line2: this.account.billing_address.line2,
-          address_city: this.account.billing_address.city,
-          address_state: this.account.billing_address.state,
-          address_zip: this.cardInfos.postalCode,
-          address_country: 'FR'
+      // create card payment method
+      let response1 = await this.stripeService.getInstance()
+        .createPaymentMethod("card", this.card.element);
+
+      // process payment server side
+      let response2 = await this.apiClientService
+        .post(`${API_URI_ACCOUNT}/${this.account.id}/offers`, {
+          offerId: this.offerChoice.id,
+          receiptEmail: this.emailForReceipt,
+          paymentMethod: response1.paymentMethod.id
         })
         .toPromise();
 
-      if (tokenResult.error || !tokenResult.token) {
+      // parse result
+      if (response2.error) {
+        this.snackBar.open(String(response2.error), 'Ok', {duration: 3000});
         this.inProgress = false;
-        if (tokenResult.error) {
-          this.snackBar.open(tokenResult.error.message, 'OK');
-        } else {
-          this.snackBar.open('Un problème technique est survenu', 'OK');
+        return;
+      } else if (response2.requiresAction) {
+
+        let response3 = await this.stripeService.getInstance().handleCardAction(response2.clientSecret);
+
+        if (response3.error) {
+          this.snackBar.open(String(response3.error), 'Ok', {duration: 3000});
+          this.inProgress = false;
+          return;
+        } else if (response3.paymentIntent.status === "requires_confirmation") {
+
+          let response4 = await this.apiClientService
+            .post(`${API_URI_ACCOUNT}/${this.account.id}/offers`, {
+              paymentIntentId: response3.paymentIntent.id
+            })
+            .toPromise();
+
+          if (response4.error) {
+            this.snackBar.open(String(response3.error), 'Ok', {duration: 3000});
+            this.inProgress = false;
+            return;
+          }
         }
-        return;
+
       }
 
-      const payResult: any = await this.apiClientService
-        .post(API_URI_PAYMENT + '/finalize', {
-          offer: this.offerChoice.id,
-          // email: this.userInfo.email,
-          paymentToken: tokenResult.token
-        })
-        .toPromise();
-
-      if (!payResult || !payResult.newToken) {
-        this.snackBar.open('Votre paiement a échoué', 'OK');
-        this.inProgress = false;
-        return;
-      }
-
-      // localStorage.setItem('currentUser', payResult.newToken);
-
-      this.snackBar.open('Votre paiement a été effectué', 'OK');
+      this.snackBar.open('Votre achat s\'est terminé avec succès', 'Ok', {duration: 3000});
       this.inProgress = false;
       this.paied = true;
-
-      setTimeout(() => {
-         this.router.navigate(['/dashboard/campaigns']);
-      }, 3000);
 
     } catch (e) {
       this.inProgress = false;

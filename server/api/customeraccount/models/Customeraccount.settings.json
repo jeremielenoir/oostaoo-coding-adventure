@@ -42,8 +42,14 @@
       "model": "entreprise",
       "via": "customeraccount"
     },
+    "stripe_customer_id": {
+      "default": "",
+      "unique": true,
+      "type": "string"
+    },
     "billing_address": {
-      "model": "address"
+      "model": "address",
+      "via": "customeraccount"
     }
   }
 }

@@ -198,11 +198,8 @@ import { MatProgressBarModule } from '@angular/material';
     FinTestComponent,
     TechnoComponent,
     OffersComponent,
-<<<<<<< HEAD
     HomeOffersComponent,
-=======
     ConfirmComponent,
->>>>>>> 3a977192ef4dd78dc98348a0be29c5a49527b2c5
     RapportDetailleHomeComponent,
     RapportDetailleExempleComponent,
     RapportDetailleComponent,

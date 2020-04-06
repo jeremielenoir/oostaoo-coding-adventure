@@ -46,6 +46,10 @@
     "phone": {
       "default": "",
       "type": "string"
+    },
+    "customeraccount": {
+      "model": "customeraccount",
+      "via": "billing_address"
     }
   }
 }
