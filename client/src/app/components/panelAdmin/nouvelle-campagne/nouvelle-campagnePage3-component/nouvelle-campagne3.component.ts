@@ -148,7 +148,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
           this.allQuestionLevel = this.allQuestions.filter(questionLevel => (questionLevel.level === this.experience));
           for(let questionOfLevel of this.allQuestionLevel){
-            this.allQuestions = this.allQuestions.filter(question => question != questionOfLevel)
+            this.allQuestions = this.allQuestions.filter(question => question !== questionOfLevel)
           }
           console.log(' this.allQuestionLevel bien filtre', this.allQuestionLevel)
   

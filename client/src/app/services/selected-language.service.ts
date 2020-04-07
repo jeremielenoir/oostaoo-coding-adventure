@@ -20,10 +20,14 @@ export class SelectedLanguageService {
   }
 
   updtateLanguageCountry(langage){
-    console.log('LANG', langage.codelang);
+  
    
-    this.cookieService.delete('currentlanguage');
+    if(this.cookieService.check('currentlanguage')){
+      this.cookieService.delete('currentlanguage');
+    }
+
     this.cookieService.set('currentlanguage', langage.codelang);
+    console.log('LANG', langage.codelang);
     // this.cookieService.set('currentlanguage', langage.codelang, 30, '/', 'roodeo.com', true, "Lax");
   }
 

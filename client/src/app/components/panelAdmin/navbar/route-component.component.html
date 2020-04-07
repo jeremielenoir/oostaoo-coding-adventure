@@ -181,22 +181,6 @@
       </ul>
     </li>
     <li>
-      <span class="text-menu">
-        <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
-          <img class="flags_img" src="{{currentLanguage}}" alt="Français">
-          <i class="icon-country fas fa-caret-down"></i>
-          
-        </div>
-        <!-- </button> -->
-        <mat-menu #menu="matMenu">
-          <div *ngFor="let language of otherLanguage">
-            <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage' mat-menu-item><img class="flags_img" src="{{language.img}}" alt=""></button>
-          </div>
-        </mat-menu>
-      </span>
-        
-    </li>
-    <li>
       <div class="list-menu-top-header">
         <a href="" class="text-menu">
           <span class="content-img" id="logout"> </span>
@@ -214,6 +198,21 @@
     </li>
    
   </ul>
+
+  <div class="right-contry">
+
+    <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
+      <img class="flags_img" src="{{currentLanguage}}" alt="Français">
+      <i class="icon-country fas fa-caret-down"></i>
+      
+    </div>
+    <!-- </button> -->
+    <mat-menu #menu="matMenu">
+      <div *ngFor="let language of otherLanguage">
+        <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage'  mat-menu-item><img class="flags_img_selected" src="{{language.img}}" alt=""></button>
+      </div>
+    </mat-menu>
+  </div>
 
   <div class="menu-burgeur" (click)="activeMenuBurgeur()">
 
