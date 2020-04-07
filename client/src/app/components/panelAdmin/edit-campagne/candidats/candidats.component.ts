@@ -296,7 +296,7 @@ export class CandidatsComponent implements OnInit {
                 }
               });
               getpourcentByCandidat.forEach((score) => {
-                scoreByTechObject[score.techno] = score.percentage+"%";
+                scoreByTechObject[score.techno] = score.percentage + "%";
               });
 
               return {
@@ -370,6 +370,7 @@ export class CandidatsComponent implements OnInit {
               percentCandidat = 0 + "%";
             }
           }
+
           getInfoCandidat.push({
             candidat_id: candidat.id,
             Candidats: candidat.Nom,
@@ -378,7 +379,7 @@ export class CandidatsComponent implements OnInit {
             Checked: false,
             "Dernière activité": dateInvite.toLocaleString(),
             Score: percentCandidat,
-            Duree: duree,
+            Durée: duree,
             rapport: candidat.raport_candidat
               ? candidat.raport_candidat.rapport
               : null,
@@ -390,7 +391,7 @@ export class CandidatsComponent implements OnInit {
         return getInfoCandidat;
       })
       .then((getInfoCandidat) => {
-        console.log("getInfoCandidat", getInfoCandidat);
+       // console.log("getInfoCandidat", getInfoCandidat);
         this.infosCandidats = new MatTableDataSource(getInfoCandidat);
         this.infosCandidatsPdf = getInfoCandidat;
         this.infosCandidats.sort = this.sort;
