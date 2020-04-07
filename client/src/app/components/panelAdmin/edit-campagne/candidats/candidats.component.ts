@@ -1,43 +1,46 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { MatDialog, MatTableDataSource, MatSort, MatSidenav } from '@angular/material';
-import { ActivatedRoute, Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
-import { InviteCandidat } from './invite-candidat.component';
-import { DecryptTokenService } from '../../../home/register/register.service';
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import {
+  MatDialog,
+  MatTableDataSource,
+  MatSort,
+  MatSidenav,
+} from "@angular/material";
+import { ActivatedRoute, Router } from "@angular/router";
+import { DatePipe } from "@angular/common";
+import { InviteCandidat } from "./invite-candidat.component";
+import { DecryptTokenService } from "../../../home/register/register.service";
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
-  API_URI_CANDIDATS
-} from '../../../../api-client/api-client.service';
-import { getResultsDefinition } from './getResultsDefinition';
-import pdfMake from 'pdfmake/build/pdfmake';
+  API_URI_CANDIDATS,
+} from "../../../../api-client/api-client.service";
+import { getResultsDefinition } from "./getResultsDefinition";
+import pdfMake from "pdfmake/build/pdfmake";
 // font build has to be committed otherwise each developers has to build font locally.
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
 //import pdfFonts from '../../../../../assets/pdfmake-font-builds/vfs_fonts';
-
-
 
 //pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 pdfMake.fonts = {
   FontAwesome: {
-    normal: 'fontawesome-webfont.ttf',
-    bold: 'fontawesome-webfont.ttf',
-    italics: 'fontawesome-webfont.ttf',
-    bolditalics: 'fontawesome-webfont.ttf'
+    normal: "fontawesome-webfont.ttf",
+    bold: "fontawesome-webfont.ttf",
+    italics: "fontawesome-webfont.ttf",
+    bolditalics: "fontawesome-webfont.ttf",
   },
   Roboto: {
-    normal: 'Roboto-Regular.ttf',
-    bold: 'Roboto-Medium.ttf',
-    italics: 'Roboto-Italic.ttf',
-    bolditalics: 'Roboto-MediumItalic.ttf'
-  }
+    normal: "Roboto-Regular.ttf",
+    bold: "Roboto-Medium.ttf",
+    italics: "Roboto-Italic.ttf",
+    bolditalics: "Roboto-MediumItalic.ttf",
+  },
 };
 
 @Component({
-  selector: 'app-candidats',
-  templateUrl: './candidats.component.html',
-  styleUrls: ['./candidats.component.scss'],
+  selector: "app-candidats",
+  templateUrl: "./candidats.component.html",
+  styleUrls: ["./candidats.component.scss"],
 })
 export class CandidatsComponent implements OnInit {
   public globalId: string;
@@ -45,7 +48,7 @@ export class CandidatsComponent implements OnInit {
   public campaigns;
   public campaign;
   public candidats;
-  public currentCandidat = { Candidats: '' };
+  public currentCandidat = { Candidats: "" };
   public technologies;
   public displayedColumns;
   public infosCandidats;
@@ -54,25 +57,28 @@ export class CandidatsComponent implements OnInit {
   public idElementExported: any;
   public bolleanAnonymiser: boolean;
   public bolleanDeleteCandidat: boolean;
-  public allcheckedActivetedBolean = false
-  datePipe = new DatePipe('fr');
+  public allcheckedActivetedBolean = false;
+  datePipe = new DatePipe("fr");
   ViewCandidats;
   isLoading = true;
-  choinceList: boolean
-  checkedActionBoolean = true
+  choinceList: boolean;
+  checkedActionBoolean = true;
   nbrSelectedElementChecked: any[] = [];
   opened: boolean;
   public checkedBox: boolean = false;
   public DecryptTokenService = new DecryptTokenService();
 
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('allChecked') allChecked: ElementRef;
-  @ViewChild('check') check: ElementRef
+  @ViewChild("allChecked") allChecked: ElementRef;
+  @ViewChild("check") check: ElementRef;
 
-
-
-  constructor(public dialog: MatDialog, private route: ActivatedRoute, public apiClientService: ApiClientService, private router: Router) {
-    this.route.parent.params.subscribe(params => {
+  constructor(
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    public apiClientService: ApiClientService,
+    private router: Router
+  ) {
+    this.route.parent.params.subscribe((params) => {
       this.globalId = params.id;
     });
 
@@ -82,37 +88,34 @@ export class CandidatsComponent implements OnInit {
   }
 
   choices = [
-    { value: 'exporter', viewValue: 'Exporter' },
-    { value: 'anonymiser', viewValue: 'Anonymiser' },
-    { value: 'supprimer', viewValue: 'Supprimer' }
+    { value: "exporter", viewValue: "Exporter" },
+    { value: "anonymiser", viewValue: "Anonymiser" },
+    { value: "supprimer", viewValue: "Supprimer" },
   ];
   choicesTimeTest = [
-    { value: 'attente', viewValue: 'En attente' },
-    { value: 'terminer', viewValue: 'Terminés' },
-    { value: 'expirer', viewValue: 'Expirés' }
+    { value: "attente", viewValue: "En attente" },
+    { value: "terminer", viewValue: "Terminés" },
+    { value: "expirer", viewValue: "Expirés" },
   ];
 
   openDialog() {
-    let firstCheckAction = document.querySelector('#first-check-action');
+    let firstCheckAction = document.querySelector("#first-check-action");
     const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
       data: this.globalId,
-      height: '580px'
+      height: "580px",
     });
 
     inviteCandidatDialog.afterClosed().subscribe((data) => {
-      this.getCampaign().then(datas => {
-       
-        console.log('AFTER CLOSE ALL DATAS',this.nbrSelectedElementChecked);
+      this.getCampaign().then((datas) => {
+        console.log("AFTER CLOSE ALL DATAS", this.nbrSelectedElementChecked);
       });
     });
-
   }
 
   ngOnInit() {
-
     this.tests_available = this.DecryptTokenService.tests_available;
-    if(this.tests_available == -1){
-      this.tests_available = '';
+    if (this.tests_available == -1) {
+      this.tests_available = "";
     }
     // this.apiClientService.get(API_URI_USER + '/' + this.DecryptTokenService.userId)
     // .subscribe(user => {
@@ -122,7 +125,7 @@ export class CandidatsComponent implements OnInit {
     //   }
     // });
 
-    this.getCampaign().then(datas => {
+    this.getCampaign().then((datas) => {
       this.campaign = datas;
     });
   }
@@ -138,12 +141,10 @@ export class CandidatsComponent implements OnInit {
     this.choinceList = false;
   }
 
-
   checkedAction(e) {
-
     e.stopPropagation();
     let element = e.target;
-    let firstCheckAction = document.querySelector('#first-check-action');
+    let firstCheckAction = document.querySelector("#first-check-action");
     if (element.checked) {
       this.nbrSelectedElementChecked.push(element.value);
       this.idElementExported = element.value;
@@ -153,80 +154,71 @@ export class CandidatsComponent implements OnInit {
     }
 
     if (this.nbrSelectedElementChecked.length !== this.candidats.length) {
-      firstCheckAction['checked'] = false;
-      this.allcheckedActivetedBolean = false
+      firstCheckAction["checked"] = false;
+      this.allcheckedActivetedBolean = false;
     } else {
-      firstCheckAction['checked'] = true;
-      this.allcheckedActivetedBolean = true
+      firstCheckAction["checked"] = true;
+      this.allcheckedActivetedBolean = true;
     }
-
   }
 
   allcheckedActiveted(e) {
-
     this.nbrSelectedElementChecked = [];
-    let checkElements = document.querySelectorAll('.check-action-candidat');
-    checkElements.forEach(check => {
+    let checkElements = document.querySelectorAll(".check-action-candidat");
+    checkElements.forEach((check) => {
       if (e.target.checked) {
-        check['checked'] = true;
-        this.allcheckedActivetedBolean = true
-        this.nbrSelectedElementChecked.push(check['value'])
+        check["checked"] = true;
+        this.allcheckedActivetedBolean = true;
+        this.nbrSelectedElementChecked.push(check["value"]);
       } else {
-        check['checked'] = false;
-        let index = this.nbrSelectedElementChecked.indexOf(check['value']);
+        check["checked"] = false;
+        let index = this.nbrSelectedElementChecked.indexOf(check["value"]);
         this.nbrSelectedElementChecked.splice(index, 1);
       }
-    })
+    });
 
-    console.log('this.nbrSelectedElementChecked', this.nbrSelectedElementChecked)
-
-
+    console.log(
+      "this.nbrSelectedElementChecked",
+      this.nbrSelectedElementChecked
+    );
   }
-  activedCheck() {
-
-  }
+  activedCheck() {}
   checkSeveralIdDelete() {
     if (this.nbrSelectedElementChecked.length > 1) {
-      this.nbrSelectedElementChecked.forEach(idDelete => {
-        const urlApi = API_URI_CANDIDATS + '/' + idDelete;
-        this.apiClientService.delete(urlApi).subscribe(response => {
-
+      this.nbrSelectedElementChecked.forEach((idDelete) => {
+        const urlApi = API_URI_CANDIDATS + "/" + idDelete;
+        this.apiClientService.delete(urlApi).subscribe((response) => {
           this.bolleanDeleteCandidat = false;
           this.nbrSelectedElementChecked = [];
           this.checkedBox = false;
-          this.allChecked['checked'] = false;
+          this.allChecked["checked"] = false;
           this.ngOnInit();
-
-        })
-
-      })
+        });
+      });
       return;
     }
   }
   checkSeveralIdAnonymiser() {
-
-    this.nbrSelectedElementChecked.forEach(elementid => {
-      const urlApi = API_URI_CANDIDATS + '/' + elementid;
-      this.apiClientService.put(urlApi, {
-        Nom: '-',
-        email: '-'
-      }).subscribe(response => {
-
-        this.bolleanDeleteCandidat = false;
-        this.nbrSelectedElementChecked = [];
-        this.checkedBox = false;
-        this.allChecked['checked'] = false;
-        this.ngOnInit()
-      })
-
-    })
+    this.nbrSelectedElementChecked.forEach((elementid) => {
+      const urlApi = API_URI_CANDIDATS + "/" + elementid;
+      this.apiClientService
+        .put(urlApi, {
+          Nom: "-",
+          email: "-",
+        })
+        .subscribe((response) => {
+          this.bolleanDeleteCandidat = false;
+          this.nbrSelectedElementChecked = [];
+          this.checkedBox = false;
+          this.allChecked["checked"] = false;
+          this.ngOnInit();
+        });
+    });
     return;
-
   }
 
   exported() {
-
-    this.viewResultsPdf(this.nbrSelectedElementChecked)
+    this.viewResultsPdf(this.nbrSelectedElementChecked);
   }
 
   Anonymiser() {
@@ -236,10 +228,10 @@ export class CandidatsComponent implements OnInit {
     this.bolleanAnonymiser = false;
   }
   deleteCandidat() {
-    this.bolleanDeleteCandidat = true
+    this.bolleanDeleteCandidat = true;
   }
   removeDeleteCandidat() {
-    this.bolleanDeleteCandidat = false
+    this.bolleanDeleteCandidat = false;
   }
   AnonymiserFinal() {
     if (this.nbrSelectedElementChecked.length > 1) {
@@ -247,89 +239,120 @@ export class CandidatsComponent implements OnInit {
       return;
     }
 
-    const urlApi = API_URI_CANDIDATS + '/' + this.idElementExported
-    this.apiClientService.put(urlApi, {
-      Nom: '-',
-      email: '-'
-    }).subscribe(response => {
-      this.bolleanAnonymiser = false;
-      this.nbrSelectedElementChecked = [];
-      this.ngOnInit();
-
-    })
+    const urlApi = API_URI_CANDIDATS + "/" + this.idElementExported;
+    this.apiClientService
+      .put(urlApi, {
+        Nom: "-",
+        email: "-",
+      })
+      .subscribe((response) => {
+        this.bolleanAnonymiser = false;
+        this.nbrSelectedElementChecked = [];
+        this.ngOnInit();
+      });
   }
 
   delteCandidat() {
-    this.checkSeveralIdDelete()
-    const urlApi = API_URI_CANDIDATS + '/' + this.idElementExported
-    this.apiClientService.delete(urlApi).subscribe(response => {
+    this.checkSeveralIdDelete();
+    const urlApi = API_URI_CANDIDATS + "/" + this.idElementExported;
+    this.apiClientService.delete(urlApi).subscribe((response) => {
       this.bolleanDeleteCandidat = false;
       this.nbrSelectedElementChecked = [];
-      this.ngOnInit()
-    })
+      this.ngOnInit();
+    });
   }
 
   getCampaign(): Promise<any> {
+    setTimeout(() => {
+      this.allcheckedActivetedBolean = false;
+      this.nbrSelectedElementChecked = [];
+    }, 100);
 
-   setTimeout(() => {
-    this.allcheckedActivetedBolean = false;
-    this.nbrSelectedElementChecked = []
-   }, 100);
+    console.log("hello famady");
 
-    console.log('hello famady')
-    
-    const apiURL = API_URI_CAMPAIGNS + '/' + this.globalId;
+    const apiURL = API_URI_CAMPAIGNS + "/" + this.globalId;
     return this.apiClientService
       .get(apiURL)
       .toPromise()
-      .then(res => { // Success
-        
-        let userId = res.user.id;
-        let userIdConnect = this.DecryptTokenService.userIdExporte['userId'];
-        if (userId !== userIdConnect) {
-          this.router.navigate(['/dashboard/campaigns']);
-          return;
+      .then(
+        (res) => {
+          let userId = res.user.id;
+          let userIdConnect = this.DecryptTokenService.userIdExporte["userId"];
+          if (userId !== userIdConnect) {
+            this.router.navigate(["/dashboard/campaigns"]);
+            return;
+          }
+
+          this.campaigns = res;
+          let candidats = res.candidats;
+          this.candidats = candidats.map((candidat) => {
+            if (candidat.points_candidat) {
+              let getpourcentByCandidat = [];
+              let points_candidat = candidat.points_candidat;
+              let scoreByTechObject = {};
+              points_candidat.forEach((point) => {
+                if (point["getpourcentByCandidat"]) {
+                  getpourcentByCandidat = point["getpourcentByCandidat"];
+                }
+              });
+              getpourcentByCandidat.forEach((score) => {
+                scoreByTechObject[score.techno] = score.percentage+"%";
+              });
+
+              return {
+                ...candidat,
+                getpourcentByCandidat: scoreByTechObject,
+                status: false,
+              };
+            }
+            return { ...candidat, status: false };
+          });
+
+          // this.candidats = res.candidats;
+
+          // this.candidats.forEach((element: any) => {
+          //   console.log("element", element);
+          //   element.status = false;
+          // });
+
+          console.log("this.candidats================", this.candidats);
+
+          this.technologies = res.technologies;
+
+          if (this.campaigns.candidats.length > 0) {
+            this.ViewCandidats = "CandidatTrue";
+          } else {
+            this.ViewCandidats = "CandidatFalse";
+          }
+          return this.campaigns;
+        },
+        (err) => {
+          this.router.navigate(["/dashboard/campaigns"]);
         }
-
-        this.campaigns = res;
-        this.candidats = res.candidats;
-
-        this.candidats.forEach( (element: any) => {
-          element.status = false;
-        });
-
-        this.technologies = res.technologies;
-
-        if (this.campaigns.candidats.length > 0) {
-          this.ViewCandidats = 'CandidatTrue';
-        } else {
-          this.ViewCandidats = 'CandidatFalse';
-        }
-        return this.campaigns;
-
-      }, err => {
-        this.router.navigate(['/dashboard/campaigns'])
-      })
+      )
       .then((data) => {
-        
+        console.log("data==========", data);
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
-        const defaultColumns = ['Checked', 'Candidats', 'Dernière activité', 'Score'];
+        const defaultColumns = [
+          "Checked",
+          "Candidats",
+          "Dernière activité",
+          "Score",
+        ];
         const getInfoCandidat = [];
         let dateInvite;
         let percentCandidat;
         let duree;
-        
+
         // INFOS FOR ADD COLUMN
         const getTechnos = [];
         for (const technos of this.technologies) {
           getTechnos.push(technos.name);
         }
 
-        this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
+        this.displayedColumns = defaultColumns.concat(getTechnos, ["Durée"]);
 
         for (const candidat of this.candidats) {
-         
-
           if (candidat.duree !== null) {
             // console.log('candidat : ', candidat);
             duree = this.secondsToHms(candidat.duree);
@@ -338,13 +361,13 @@ export class CandidatsComponent implements OnInit {
           }
           if (candidat.invitation_date === candidat.test_terminer) {
             dateInvite = new Date(candidat.invitation_date);
-            percentCandidat = 0 + '%';
+            percentCandidat = 0 + "%";
           } else {
             dateInvite = new Date(candidat.test_terminer);
             // console.log('candidat.points_candidat[5].PourcentTest: ', candidat.points_candidat[5].PourcentTest);
-            percentCandidat = candidat.points_candidat[5].PourcentTest + '%';
+            percentCandidat = candidat.points_candidat[5].PourcentTest + "%";
             if (candidat.points_candidat[5].PourcentTest === null) {
-              percentCandidat = 0 + '%';
+              percentCandidat = 0 + "%";
             }
           }
           getInfoCandidat.push({
@@ -353,82 +376,70 @@ export class CandidatsComponent implements OnInit {
             Email: candidat.email,
             status: candidat.status,
             Checked: false,
-            'Dernière activité': dateInvite.toLocaleString(),
+            "Dernière activité": dateInvite.toLocaleString(),
             Score: percentCandidat,
             Duree: duree,
-            rapport: (candidat.raport_candidat ? candidat.raport_candidat.rapport : null),
+            rapport: candidat.raport_candidat
+              ? candidat.raport_candidat.rapport
+              : null,
             points: candidat.points_candidat,
-            date: candidat.test_ouvert
+            date: candidat.test_ouvert,
+            ...candidat.getpourcentByCandidat,
           });
-          // console.log('candidat.points_candidat[2].getpourcentByCandidat: ', candidat.points_candidat[2].getpourcentByCandidat);
-          /*if (candidat.invitation_date !== candidat.test_terminer) {
-            console.log('candidat.points_candidat', candidat);
-            for (const percentTechno of candidat.points_candidat[2].getpourcentByCandidat) {
-              // console.log('percentTechno: ', percentTechno);
-              for (const techno of getTechnos) {
-                for (const iterator of getInfoCandidat) {
-                  if (percentTechno.techno === techno && candidat.Nom === iterator.Candidats) {
-                    iterator[techno] = percentTechno.percentage + '%';
-                  }
-                }
-              }
-            }
-          } else {
-            for (const techno of getTechnos) {
-              for (const iterator of getInfoCandidat) {
-                if (candidat.Nom === iterator.Candidats) {
-                  iterator[techno] = 0 + '%';
-                }
-              }
-            }
-          }*/
         }
         return getInfoCandidat;
-      }).then((getInfoCandidat) => {
+      })
+      .then((getInfoCandidat) => {
+        console.log("getInfoCandidat", getInfoCandidat);
         this.infosCandidats = new MatTableDataSource(getInfoCandidat);
         this.infosCandidatsPdf = getInfoCandidat;
         this.infosCandidats.sort = this.sort;
         this.isLoading = false;
         return this.campaigns;
       })
-      .catch(error => {
-        console.log('ERROR', error);
+      .catch((error) => {
+        console.log("ERROR", error);
       });
-      
   }
 
-
-
   collectCandidateResults(candidat_id) {
-
     // console.log('%c counterId', 'font-size:24px;color:blue', candidat_id)
 
-    const selectedCandidate = this.candidats.find(unit => unit.id == candidat_id);
+    const selectedCandidate = this.candidats.find(
+      (unit) => unit.id == candidat_id
+    );
     const name = selectedCandidate.Nom;
     const email = selectedCandidate.email;
     const duration = selectedCandidate.duree;
     const rapport = selectedCandidate.raport_candidat.rapport;
-    const date = this.datePipe.transform(selectedCandidate.test_ouvert, 'dd-MM-yy');
+    const date = this.datePipe.transform(
+      selectedCandidate.test_ouvert,
+      "dd-MM-yy"
+    );
     const points = selectedCandidate.points_candidat;
 
     let resultsByLanguage = {};
     let totalPointsCandidat = 0;
     let totalPointsMax = 0;
-    points[1].allPointsCandidat.forEach(techno => {
+    points[1].allPointsCandidat.forEach((techno) => {
       totalPointsCandidat += techno.points;
-      const pointsMaxTechno = points[0].allPointsTechnos
-        .find(tech => tech.technologies === techno.technologies).points;
+      const pointsMaxTechno = points[0].allPointsTechnos.find(
+        (tech) => tech.technologies === techno.technologies
+      ).points;
       totalPointsMax += pointsMaxTechno;
-      const percentage_techno = techno.points / pointsMaxTechno * 100 + ' %';
+      const percentage_techno = (techno.points / pointsMaxTechno) * 100 + " %";
       resultsByLanguage[techno.technologies] = {
         note: techno.points,
-        max: pointsMaxTechno, percentage_techno
+        max: pointsMaxTechno,
+        percentage_techno,
       };
-    })
+    });
 
-    const score = totalPointsCandidat / totalPointsMax * 100 + '%';
-    let languages = '';
-    Object.keys(resultsByLanguage).map(language => { languages = `${languages} ${language}` });
+    const score = (totalPointsCandidat / totalPointsMax) * 100 + "%";
+    let languages = "";
+    Object.keys(resultsByLanguage).map((language) => {
+      languages = `${languages} ${language}`;
+    });
     let questionsRapport = [];
     let totalTestDuration = 0;
     let totalCandidateDuration = 0;
@@ -438,11 +449,12 @@ export class CandidatsComponent implements OnInit {
       totalCandidateDuration += question.timeRep;
       const correct_answer = question.index_question.answer_value;
       const question_max_score = question.index_question.points;
-      const question_candidate_score = candidate_answer ===
-        correct_answer ? question_max_score : 0;
-      const content = question.index_question.content ?
-        question.index_question.content.split(', ') : [];
-      if (content && content[3] === 'Aucune') {
+      const question_candidate_score =
+        candidate_answer === correct_answer ? question_max_score : 0;
+      const content = question.index_question.content
+        ? question.index_question.content.split(", ")
+        : [];
+      if (content && content[3] === "Aucune") {
         content.splice(3, 4, "Aucune des solutions précédentes");
       }
 
@@ -453,7 +465,7 @@ export class CandidatsComponent implements OnInit {
         let secd = mind % 60;
         let seconds = Math.ceil(secd);
         let secondsString = seconds < 10 ? `0${seconds}` : seconds.toString();
-        return `${minutesString}:${secondsString}`
+        return `${minutesString}:${secondsString}`;
       }
 
       let question_time: string = convertToMin(question.index_question.time);
@@ -468,10 +480,10 @@ export class CandidatsComponent implements OnInit {
         question_max_score,
         question_candidate_score,
         question_time,
-        question_timeRep
+        question_timeRep,
       };
       questionsRapport.push(questionsRapportUnit);
-    })
+    });
 
     let heures = Math.floor(totalTestDuration / 60);
     let minutes = totalTestDuration % 60;
@@ -483,29 +495,34 @@ export class CandidatsComponent implements OnInit {
     const totalCandidateTime = `${heures}h${minutesString}`;
 
     return {
-      name, email, duration, score, totalPointsMax,
-      totalPointsCandidat, date, resultsByLanguage,
-      languages, questionsRapport, totalTestTime, totalCandidateTime
-    }
-
-
+      name,
+      email,
+      duration,
+      score,
+      totalPointsMax,
+      totalPointsCandidat,
+      date,
+      resultsByLanguage,
+      languages,
+      questionsRapport,
+      totalTestTime,
+      totalCandidateTime,
+    };
   }
 
   viewResultsPdf(candidat_id) {
-
     const candidateResults = this.collectCandidateResults(candidat_id);
     pdfMake.createPdf(getResultsDefinition(candidateResults)).open();
   }
 
-
   secondsToHms(duree) {
     const h = Math.floor(duree / 3600);
-    const m = Math.floor(duree % 3600 / 60);
-    const s = Math.floor(duree % 3600 % 60);
+    const m = Math.floor((duree % 3600) / 60);
+    const s = Math.floor((duree % 3600) % 60);
 
-    const hour = h > 0 ? h + (h === 1 ? ' heure ' : ' heures, ') : '';
-    const minute = m > 0 ? m + (m === 1 ? ' minute, ' : ' minutes, ') : '';
-    const secondes = s > 0 ? s + (s === 1 ? ' seconde' : ' secondes') : '';
+    const hour = h > 0 ? h + (h === 1 ? " heure " : " heures, ") : "";
+    const minute = m > 0 ? m + (m === 1 ? " minute, " : " minutes, ") : "";
+    const secondes = s > 0 ? s + (s === 1 ? " seconde" : " secondes") : "";
     return hour + minute + secondes;
   }
 
@@ -516,12 +533,9 @@ export class CandidatsComponent implements OnInit {
   menuSidenav(sidenav, candidat) {
     this.currentCandidat = candidat;
     sidenav.toggle();
-
   }
 
   sidnavClose(sidenav) {
-    sidenav.close()
-
+    sidenav.close();
   }
-
 }
