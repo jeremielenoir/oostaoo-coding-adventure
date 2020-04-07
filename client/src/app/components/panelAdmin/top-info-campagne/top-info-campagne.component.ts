@@ -52,11 +52,11 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
     this.route.parent.params.subscribe((params) => {
       this.globalId = params.id;
     });
-    this.technoMethod();
+    // this.technoMethod();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.technoMethod();
+      this.technoMethod();
   }
 
   convertSecondsToMinutes(time) {

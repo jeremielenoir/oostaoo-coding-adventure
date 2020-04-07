@@ -147,7 +147,7 @@ export class RouteComponentComponent implements OnInit {
     this.SelectedLanguageService.updtateLanguageCountry(langage)
     
     this.currentLanguage = langage.img;
-    window.parent.location.href = langage.url;
+    window.parent.location.href = `dashboard/${langage.url}`;
   }
   public disConnection(event) {
     event.preventDefault();
