@@ -23,7 +23,7 @@ export class SelectedLanguageService {
   
    
     if(this.cookieService.check('currentlanguage')){
-      this.cookieService.delete('currentlanguage');
+      this.cookieService.delete('currentlanguage view');
     }
 
     this.cookieService.set('currentlanguage', langage.codelang);

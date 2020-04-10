@@ -4,6 +4,7 @@ import { TooltipPosition, MatSnackBar } from "@angular/material";
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
+<<<<<<< Updated upstream
   API_URI_QUESTIONS,
 } from "../../../../api-client/api-client.service";
 import {
@@ -13,6 +14,13 @@ import {
 } from "@angular/cdk/drag-drop";
 import { FormControl } from "@angular/forms";
 import { element } from "protractor";
+=======
+  API_URI_QUESTIONS
+} from '../../../../api-client/api-client.service';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { FormControl } from '@angular/forms'
+import { element } from 'protractor';
+>>>>>>> Stashed changes
 @Component({
   selector: "app-edit-questions",
   templateUrl: "./edit-questions.component.html",
@@ -85,16 +93,38 @@ export class EditQuestionsComponent implements OnInit {
           this.techno.push(element);
         });
 
+<<<<<<< Updated upstream
         const newQuestion = [];
         this.allTechno = this.techno;
         this.allQuestionsCampaign = this.yourCampaign.questions
         this.loadAllQuestion(this.allQuestionsCampaign);
+=======
+    // Promise.all([this.loadCampaign()]).then(values => {
+
+    //   const campaigns = values[0];
+    //   this.yourCampaign = campaigns;
+    //   const questions = this.loadAllQuestion();
+    //   console.log('campaigns --->',campaigns);
+    //   this.yourCampaign[0].technologies.forEach(element => {
+    //     this.techno.push(element)
+    //   });
+    //   const nameQuestionByTechno = [];
+    //   campaigns[0].questions.forEach(element => {
+    //     nameQuestionByTechno.push(element.name);
+    //   });
+    //   const questionByTechnoCampaing = [];
+    //   const nameQuestionCampaignByTechno = [];
+    //   for (let question of questions) {
+       
+    //     campaigns[0].technologies.forEach(element => {
+>>>>>>> Stashed changes
 
         const nameQuestionByTechno = [];
         this.yourCampaign.questions.forEach((element) => {
           nameQuestionByTechno.push(element.name);
         });
 
+<<<<<<< Updated upstream
         for (let techno of this.allTechno) {
           for (let question of this.allQuestionsCampaign) {
             newQuestion.push({ ...question, technologies: techno });
@@ -118,6 +148,17 @@ export class EditQuestionsComponent implements OnInit {
     });
 
     const newQuestion = [];
+=======
+    //       if (question.technologies && question.technologies.id === element.id && !nameQuestionByTechno.includes(question.name)) {
+
+    //         questionByTechnoCampaing.push(question);
+
+    //       }
+    //       if (question.technologies && question.technologies.id === element.id && nameQuestionByTechno.includes(question.name)) {
+
+    //         nameQuestionCampaignByTechno.push(question);
+    //       }
+>>>>>>> Stashed changes
 
     for (let techno of technos) {
       for (let question of yourCampaign) {
@@ -130,6 +171,7 @@ export class EditQuestionsComponent implements OnInit {
           //   newQuestion.push({ ...question, technologies: techno });
           // }
 
+<<<<<<< Updated upstream
           newQuestion.push({ ...question, technologies: techno });
         }
       }
@@ -139,6 +181,55 @@ export class EditQuestionsComponent implements OnInit {
     this.yourCampaign = yourCampaign;
     this.allTechno = technos;
     // return newQuestion;
+=======
+    //     });
+      
+    //   }
+    //   this.questionsByCampaign = nameQuestionCampaignByTechno;
+    //   this.allQuestionsCampaign = questionByTechnoCampaing;
+
+    // });
+
+    
+
+    this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.globalId)
+    .subscribe(response => {
+         this.yourCampaign = response;
+         this.yourCampaign.technologies.forEach(element => {
+          this.techno.push(element);
+          });
+
+          const newQuestion = [];
+          this.allTechno = this.techno;
+          this.loadAllQuestion(this.yourCampaign.questions)
+
+        // this.loadAllQuestion();
+        
+        // const allquestionVariable = this.loadAllQuestion();
+        // console.log('bonne solution',allquestionVariable)
+
+        // if(this.techno && this.techno != []){
+        //    console.log('le test pour voir si ce bon',this.loadAllQuestion())
+        // }
+
+        // this.allQuestions = [...this.loadAllQuestion()]
+        const nameQuestionByTechno = [];
+        this.yourCampaign.questions.forEach(element => {
+          nameQuestionByTechno.push(element.name);
+        });
+
+        for(let techno of this.allTechno){
+           for(let question of this.yourCampaign.questions){
+              newQuestion.push({...question,technologies:techno})
+           }
+        }
+
+
+         this.questionsByCampaign = newQuestion;
+         console.log('this.questionsByCampaign',this.questionsByCampaign);
+    })
+
+>>>>>>> Stashed changes
   }
   chargeYourCampagn(event) {
     console.log("on vien de recupere event", event);
@@ -147,6 +238,7 @@ export class EditQuestionsComponent implements OnInit {
   }
 
   loadAllQuestion(yourCampaignQuestions): any {
+<<<<<<< Updated upstream
 
     const questionsEditQuestion = [];
     const yourCampaignQuestionsArray = [];
@@ -186,7 +278,37 @@ export class EditQuestionsComponent implements OnInit {
         // console.log('this.allQuestionsCampaign',this.allQuestionsCampaign)
  
       });
+=======
+
+    let url =''
+    this.techno.forEach((tech,index)=>{
+      if(index === 0){
+      url +=`?technologies_in=${tech.id}`
+      }else{
+      url +=`&technologies_in=${tech.id}`
+      }
+    })
+
+     this.apiClientService.get(`${API_URI_QUESTIONS}${url}`)
+      .subscribe(response => {
+        this.allQuestions = response;
+        for(let questionLevel of yourCampaignQuestions){
+          this.allQuestionsCampaign = this.allQuestions.filter(question => question != questionLevel)
+        }
+        console.log('yourCampaignQuestions in loadAllQuestionmanZerm',yourCampaignQuestions)
+        console.log('la data est la',this.allQuestions)
+        return response;
+
+        // console.log('le test pour voir si ce bon',this.allQuestions)
+      //   for(let questionOfLevel of this.questionsByCampaign){
+      //   this.allQuestionsCampaign = this.allQuestions.filter(question => question != questionOfLevel);
+      // }
+
+        // return response;
+      })
+>>>>>>> Stashed changes
   }
+
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {

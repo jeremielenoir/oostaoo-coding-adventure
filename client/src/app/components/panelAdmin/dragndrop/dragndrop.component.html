@@ -71,7 +71,11 @@
 
 
       <div id="cdkDropList" cdkDropList #todoList="cdkDropList"  [cdkDropListData]="datas" [cdkDropListConnectedTo]="[doneList]"
+<<<<<<< Updated upstream
         class="liste-question" (cdkDropListDropped)="drop($event,customfield)">
+=======
+        class="liste-question" (cdkDropListDropped)="drop($event)">
+>>>>>>> Stashed changes
         
           <div (cdkDragStarted)="dragStart($event)" (cdkDragEnded)="dragEnd($event)" class="ligne-question" *ngFor="let item of datas | filter: searchText" cdkDrag>
 
