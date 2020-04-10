@@ -22,9 +22,9 @@ export class SelectedLanguageService {
   updtateLanguageCountry(langage){
   
    
-    if(this.cookieService.check('currentlanguage')){
-      this.cookieService.delete('currentlanguage view');
-    }
+    // if(this.cookieService.check('currentlanguage')){
+    //   this.cookieService.delete('currentlanguage');
+    // }
 
     this.cookieService.set('currentlanguage', langage.codelang);
     console.log('LANG', langage.codelang);

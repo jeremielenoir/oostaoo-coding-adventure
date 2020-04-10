@@ -76,7 +76,9 @@ export class RouteComponentComponent implements OnInit {
     this.apiClientService
       .get(API_URI_USER + '/' + this.decryptTokenService.userId)
       .subscribe(user => {
-        this.isProfesionalAccount = user.customeraccount.type === 'profesional';
+        if(user.customer_account){
+          this.isProfesionalAccount = user.customeraccount.type === 'profesional';
+        }
         this.offer_id = user.offer_id.id;
         switch (this.offer_id) {
           case 14:
@@ -144,10 +146,13 @@ export class RouteComponentComponent implements OnInit {
 
   public setCurrentLanguage(langage) {
 
+    console.log('langage select --->',langage);
+    // console.log('this.local',this.locale)
+
     this.SelectedLanguageService.updtateLanguageCountry(langage)
     
     this.currentLanguage = langage.img;
-    window.parent.location.href = `dashboard/${langage.url}`;
+    this.route.navigate([`/dashboard/campaigns`]);
   }
   public disConnection(event) {
     event.preventDefault();

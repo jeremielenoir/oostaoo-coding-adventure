@@ -46,10 +46,8 @@ export class TestComponent implements OnInit {
   public totalPoints;
   public totalPointsCampaign;
   public totalPointsCandidat;
-  public dataInfoLanguage = {
-    nameLanguage: '',
-    contentLanguage: ''
-  }
+  public dataInfoLanguageName:any = '';
+  public dataInfoLanguageContent:any = ''
 
 
   // Input algo
@@ -62,22 +60,22 @@ export class TestComponent implements OnInit {
 
   ngOnInit() {
 
-    switch(this.languageStorage.recupLanguageCountry()){
+    switch(this.languageStorage.getLanguageCountry()){
       case 'es-ES':
-        this.dataInfoLanguage.nameLanguage =  'name_es';
-        this.dataInfoLanguage.contentLanguage = 'content_es';
+        this.dataInfoLanguageName =  'name_es';
+        this.dataInfoLanguageContent = 'content_es';
       break;
       case 'fr-FR':
-        this.dataInfoLanguage.nameLanguage =  'name_fr';
-        this.dataInfoLanguage.contentLanguage = 'content_fr';
+        this.dataInfoLanguageName =  'name';
+        this.dataInfoLanguageContent = 'content';
       break;
       case 'en-US':
-        this.dataInfoLanguage.nameLanguage =  'name_en';
-        this.dataInfoLanguage.contentLanguage = 'content_en';
+        this.dataInfoLanguageName =  'name_en';
+        this.dataInfoLanguageContent = 'content_en';
       break;
       case 'jp-JP':
-        this.dataInfoLanguage.nameLanguage =  'name_jp';
-        this.dataInfoLanguage.contentLanguage = 'content_jp';
+        this.dataInfoLanguageName =  'name_jp';
+        this.dataInfoLanguageContent = 'content_jp';
       break;
     }
 
@@ -128,7 +126,8 @@ export class TestComponent implements OnInit {
       this.responses = [];
       console.log(' tu est null ')
     } else {
-      this.responses = this.question[this.dataInfoLanguage.contentLanguage].split(', ');
+      console.log(' tu est pas null ',this.dataInfoLanguageContent)
+      this.responses = this.question[this.dataInfoLanguageContent].split(', ');
     }
     for (const techno of this.technoCampaign) {
       if (this.question.technologies === techno.id) {
