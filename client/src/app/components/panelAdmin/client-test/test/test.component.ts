@@ -46,15 +46,10 @@ export class TestComponent implements OnInit {
   public totalPoints;
   public totalPointsCampaign;
   public totalPointsCandidat;
-<<<<<<< Updated upstream
-  public dataInfoLanguageName:any = '';
-  public dataInfoLanguageContent:any = ''
-=======
   public dataInfoLanguage = {
     nameLanguage: '',
     contentLanguage: ''
   }
->>>>>>> Stashed changes
 
 
   // Input algo
@@ -67,24 +62,6 @@ export class TestComponent implements OnInit {
 
   ngOnInit() {
 
-<<<<<<< Updated upstream
-    switch(this.languageStorage.getLanguageCountry()){
-      case 'es-ES':
-        this.dataInfoLanguageName =  'name_es';
-        this.dataInfoLanguageContent = 'content_es';
-      break;
-      case 'fr-FR':
-        this.dataInfoLanguageName =  'name';
-        this.dataInfoLanguageContent = 'content';
-      break;
-      case 'en-US':
-        this.dataInfoLanguageName =  'name_en';
-        this.dataInfoLanguageContent = 'content_en';
-      break;
-      case 'jp-JP':
-        this.dataInfoLanguageName =  'name_jp';
-        this.dataInfoLanguageContent = 'content_jp';
-=======
     switch(this.languageStorage.recupLanguageCountry()){
       case 'es-ES':
         this.dataInfoLanguage.nameLanguage =  'name_es';
@@ -101,7 +78,6 @@ export class TestComponent implements OnInit {
       case 'jp-JP':
         this.dataInfoLanguage.nameLanguage =  'name_jp';
         this.dataInfoLanguage.contentLanguage = 'content_jp';
->>>>>>> Stashed changes
       break;
     }
 
@@ -152,12 +128,7 @@ export class TestComponent implements OnInit {
       this.responses = [];
       console.log(' tu est null ')
     } else {
-<<<<<<< Updated upstream
-      console.log(' tu est pas null ',this.dataInfoLanguageContent)
-      this.responses = this.question[this.dataInfoLanguageContent].split(', ');
-=======
       this.responses = this.question[this.dataInfoLanguage.contentLanguage].split(', ');
->>>>>>> Stashed changes
     }
     for (const techno of this.technoCampaign) {
       if (this.question.technologies === techno.id) {

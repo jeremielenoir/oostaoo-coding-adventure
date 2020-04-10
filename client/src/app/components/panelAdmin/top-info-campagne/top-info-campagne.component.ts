@@ -38,11 +38,7 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
   public campagneFull = [];
   public technoLabel = [];
   public technoPoint = [];
-<<<<<<< Updated upstream
   @ViewChild("Chart") Chart: ElementRef;
-=======
-  @ViewChild('Chart') Chart: ElementRef;
->>>>>>> Stashed changes
 
   constructor(
     public apiClientService: ApiClientService,
@@ -53,39 +49,21 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-<<<<<<< Updated upstream
     this.route.parent.params.subscribe((params) => {
-=======
-
-    this.route.parent.params.subscribe(params => {
->>>>>>> Stashed changes
       this.globalId = params.id;
     });
     // this.technoMethod();
   }
 
-<<<<<<< Updated upstream
   ngOnChanges(changes: SimpleChanges) {
       this.technoMethod();
-=======
-  ngOnChanges(changes: SimpleChanges){
-
-      console.log('techno man',this.techno)
-
-      this.technoMethod();  
->>>>>>> Stashed changes
   }
 
   convertSecondsToMinutes(time) {
     return Math.floor(time / 60);
   }
 
-<<<<<<< Updated upstream
   technoMethod() {
-=======
-  technoMethod(){
-    
->>>>>>> Stashed changes
     let pointDepart = 0;
     let points = [];
     let timeArraySolo = [];
@@ -106,7 +84,6 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
       }
     }
 
-<<<<<<< Updated upstream
     for (let technoElement of this.techno) {
       for (let question of this.allQuestionLevel) {
         if (technoElement["id"] == question["technologies"].id) {
@@ -138,44 +115,6 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
       });
       technoDonuts = technoDonuts.filter((element) => element.value != 0);
 
-=======
-      for(let technoElement of this.techno){
-          
-        for(let question of this.allQuestionLevel){
-
-            if(technoElement['id'] == question['technologies'].id){
-              pointDepart = pointDepart + question['points'];
-              timeDepartQuestion = timeDepartQuestion + question['time'];
-              deparPointNumberQuestion++
-              
-            }  
-       }
- 
-      points.push(pointDepart);
-     
-      timeArraySolo.push(timeDepartQuestion)
-     
-      points  = points.filter(element => element !== 0);
-      if(points && points.length > 0 ){
-        this.poinTotal = points.reduce((accumulator,currenValue) => accumulator + currenValue)
-      }
-
-      timeQuestionCampagne = 0;
-       
-     
-      this.technoDonuts.push(
-        {
-          label:technoElement['name'],
-          value:pointDepart,
-          question:deparPointNumberQuestion,
-          timeQuestion:timeDepartQuestion,
-          timeQuestionDIvice:timeDepartQuestion / 2
-          
-        }
-        );
-      this.technoDonuts = this.technoDonuts.filter(element => element.value != 0);
-      
->>>>>>> Stashed changes
       pointDepart = 0;
       deparPointNumberQuestion = 0;
       timeDepartQuestion = 0;
