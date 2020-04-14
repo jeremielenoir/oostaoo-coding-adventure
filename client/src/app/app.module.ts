@@ -27,7 +27,7 @@ import { SecondSectionComponent } from './components/home/second-section/second-
 import { CounterAnimComponent } from './components/home/counter-anim/counter-anim.component';
 import { FooterComponent } from './components/home/footer/footer.component';
 
-import { MainComponent } from './components/home/main/main.component';
+import { InterviewComponent } from './components/home/interview/interview.component';
 import { SliderComponent } from './components/home/slider/slider.component';
 
 import { SlideMarquesComponent } from './components/home/slide-marques/slide-marques.component';
@@ -90,6 +90,7 @@ import { JwtInterceptor } from './components/home/register/service/jwt.intercept
 import { ErrorInterceptor } from './components/home/register/service/error.interceptor';
 import { DecryptTokenService } from './components/home/register/register.service';
 import { TechnoComponent } from './components/home/techno/techno.component';
+import { ProfilesComponent } from './components/home/profiles/profiles.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { OffersComponent } from './components/home/offers/offers.component';
 import { HomeOffersComponent } from './components/home/home-offers/home-offers.component';
@@ -154,7 +155,7 @@ import { MatProgressBarModule } from '@angular/material';
     IndexPageComponent,
     SecondSectionComponent,
     CounterAnimComponent,
-    MainComponent,
+    InterviewComponent,
     FooterComponent,
     SliderComponent,
     SlideMarquesComponent,
@@ -197,6 +198,7 @@ import { MatProgressBarModule } from '@angular/material';
     BlockCopyPasteDirective,
     FinTestComponent,
     TechnoComponent,
+    ProfilesComponent,
     OffersComponent,
     HomeOffersComponent,
     ConfirmComponent,

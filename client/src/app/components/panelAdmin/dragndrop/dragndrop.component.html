@@ -71,7 +71,7 @@
 
 
       <div id="cdkDropList" cdkDropList #todoList="cdkDropList"  [cdkDropListData]="datas" [cdkDropListConnectedTo]="[doneList]"
-        class="liste-question" (cdkDropListDropped)="drop($event,customfield)">
+        class="liste-question" (cdkDropListDropped)="drop($event)">
         
           <div (cdkDragStarted)="dragStart($event)" (cdkDragEnded)="dragEnd($event)" class="ligne-question" *ngFor="let item of datas | filter: searchText" cdkDrag>
 
