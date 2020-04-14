@@ -74,6 +74,22 @@ module.exports = {
     return strapi.services.customeraccount.remove(ctx.params);
   },
   /**
+   *
+   */
+  offerFind: async (ctx) => {
+
+    const user = ctx.state.user;
+    const account = user.customeraccount;
+    const offer = account.offer;
+
+    if (offer) {
+      return strapi.services.customeraccount.retrieveSubscription(user, account, offer);
+    } else {
+      return strapi.services.customeraccount.retrieveTestsStock(user, account);
+    }
+
+  },
+  /**
    * customeraccount.offer api
    */
   offerCreate: async (ctx) => {
@@ -94,7 +110,6 @@ module.exports = {
       }
 
       let intent;
-
       if (paymentMethod) { // payment process started
 
         intent = await strapi.services.customeraccount.startPaymentIntent(
@@ -110,7 +125,7 @@ module.exports = {
       // parse stripe intent response
       const parsedIntent = strapi.services.customeraccount.parsePaymentIntent(intent);
 
-      console.log(`parsed intent for account ${account.id}`, parsedIntent);
+      strapi.log.info(`parsed intent for account ${account.id}`, parsedIntent);
 
       if (parsedIntent.done) {
         await strapi.services.customeraccount.onPaymentSucceed(intent, account, ctx.state.user);
@@ -118,7 +133,9 @@ module.exports = {
 
       ctx.send(parsedIntent);
 
+
     } catch (e) {
+      strapi.log.error(e);
       ctx.status = e.status || 500;
       ctx.body = { status: 'error', message: { code: 'stripe_paiement', message: e.message } };
       ctx.app.emit('error', e, ctx);

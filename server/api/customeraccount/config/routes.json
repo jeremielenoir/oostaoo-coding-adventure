@@ -33,6 +33,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/api/customeraccounts/:id/offers",
+      "handler": "Customeraccount.offerFind",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "POST",
       "path": "/api/customeraccounts/:id/offers",
       "handler": "Customeraccount.offerCreate",

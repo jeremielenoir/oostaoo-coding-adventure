@@ -2,14 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   ApiClientService,
   API_URI_USER,
-  API_URI_PAYMENT,
   API_URI_ACCOUNT
 } from 'src/app/api-client/api-client.service';
 import {
   StripeService,
   ElementsOptions,
   ElementOptions,
-  StripeCardComponent
+  StripeCardComponent,
+  Address
 } from 'ngx-stripe';
 import { Router } from '@angular/router';
 import { DecryptTokenService } from '../register/register.service';
@@ -150,7 +150,29 @@ export class StripePaymentComponent implements OnInit {
 
       // create card payment method
       let response1 = await this.stripeService.getInstance()
-        .createPaymentMethod("card", this.card.element);
+        .createPaymentMethod("card", this.card.element, {
+          billing_details: {
+            email: this.emailForReceipt,
+            address: {
+              line1: this.account.billing_address.line1,
+              line2: this.account.billing_address.line2,
+              city: this.account.billing_address.city,
+              postal_code: this.account.billing_address.postal_code,
+              state: this.account.billing_address.state,
+              country: 'FR', // this.account.billing_address.country,
+            } as Address
+          },
+          metadata: {
+            'account': this.account.id,
+            'user': this.userInfo.id
+          }
+        });
+
+      if (response1.error) {
+        this.snackBar.open(String(response1.error.message), 'Ok', {duration: 3000});
+        this.inProgress = false;
+        return;
+      }
 
       // process payment server side
       let response2 = await this.apiClientService
@@ -163,9 +185,11 @@ export class StripePaymentComponent implements OnInit {
 
       // parse result
       if (response2.error) {
+
         this.snackBar.open(String(response2.error), 'Ok', {duration: 3000});
         this.inProgress = false;
         return;
+
       } else if (response2.requiresAction) {
 
         let response3 = await this.stripeService.getInstance().handleCardAction(response2.clientSecret);

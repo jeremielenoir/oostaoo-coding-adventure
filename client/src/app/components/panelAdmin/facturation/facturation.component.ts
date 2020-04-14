@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { DatePipe } from "@angular/common";
 import {
   ApiClientService,
-  API_URI_USER
+  API_URI_USER,
+  API_URI_ACCOUNT
 } from "src/app/api-client/api-client.service";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 import pdfMake from "pdfmake/build/pdfmake";
@@ -29,6 +30,8 @@ export class FacturationComponent implements OnInit {
   account: any;
   user: any;
   card: any;
+  sub: any;
+  offer: any;
   subscription: any;
   invoices: any[];
   nextInvoice: any;
@@ -54,11 +57,28 @@ export class FacturationComponent implements OnInit {
         (data) => {
           this.user = data;
           this.account = this.user.customeraccount;
+
+          this.apiClientService
+            .get(API_URI_ACCOUNT + '/' + this.account.id + '/offers')
+            .subscribe(
+              (data) => {
+                const { card, sub, offer } = data;
+                this.card = card;
+                this.sub = sub;
+                this.offer = offer;
+              },
+              (err) => {
+                // TODO handle error
+              }
+            );
+
         },
         (err) => {
           // TODO handle error
         }
       );
+
+
 
   }
   /**

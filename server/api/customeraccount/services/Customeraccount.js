@@ -350,15 +350,22 @@ module.exports = {
       const phone = account.entreprise ? account.entreprise.tel : (user.tel ? user.tel : user.mobile);
       const email = account.entreprise ? account.entreprise.email : user.email;
 
-      let customer = (await stripe.customers.list({email: email, limit: 1})).data[0];
+      let customer = await stripe.customers.list({email: email, limit: 1});
 
-      if (!customer) {
+      if (customer.error) {
 
-        const customer = await stripe.customers.create({
+        strapi.log.error(customer.error);
+        throw new Error(customer.error.message);
+
+      } else if (customer.data.length === 0) {
+
+        customer = await stripe.customers.create({
           // address: account.billing_address,
           email: email,
           name: customerName,
-          payment_method: paymentMethod,
+          invoice_settings: {
+            default_payment_method: paymentMethod
+          },
           phone: phone
           /*,
           shipping: {
@@ -368,35 +375,91 @@ module.exports = {
           }*/
         });
 
+        if (customer.error) {
+          strapi.log.error(customer.error);
+          throw new Error(customer.error.message);
+        }
+
         account.stripe_customer_id = customer.id;
         await strapi.services.customeraccount.edit({ id: account.id }, { stripe_customer_id: customer.id });
 
-        console.log(`customer created to stripe ${customer.id} for account ${account.id}`);
+        strapi.log.info(`customer created to stripe ${customer.id} for account ${account.id}`);
 
       } else {
-        console.log(`customer retrieved from stripe ${customer.id} for account ${account.id}`);
+
+        customer = customer.data[0];
+        strapi.log.info(`customer retrieved from stripe ${customer.id} for account ${account.id}`);
+
       }
 
     }
 
-    const intent = await stripe.paymentIntents.create({
-      customer: account.stripe_customer_id,
-      description: 'buy offer ' + offer.description,
-      amount: offer.price * 100,
-      currency: 'EUR',
-      receipt_email: receiptEmail,
-      payment_method: paymentMethod,
-      confirmation_method: 'manual',
-      confirm: true,
-      use_stripe_sdk: true,
-      metadata: {
-        offer: offer.id,
-        account: account.id,
-        user: user.id
-      }
-    });
+    await stripe.paymentMethods.attach(paymentMethod, {customer: account.stripe_customer_id});
 
-    console.log(`intent created to stripe ${intent.id} for account ${account.id}`);
+    strapi.log.info('payment method attached to customer');
+
+    let subscription;
+    let intent;
+    if (offer.periodicity === 'monthly') {
+
+      subscription = await stripe.subscriptions.create({
+        customer: account.stripe_customer_id,
+        default_payment_method: paymentMethod,
+        items: [{ plan: offer.plan }],
+        expand: ['latest_invoice.payment_intent'],
+        metadata: {
+          offer: offer.id,
+          account: account.id,
+          user: user.id
+        }
+      });
+
+      if (subscription.error) {
+        strapi.log.error(subscription.error);
+        throw new Error(subscription.error.message);
+      }
+
+      const { latest_invoice } = subscription;
+      const { payment_intent } = latest_invoice;
+
+      intent = await stripe.paymentIntents.update(payment_intent.id, {
+        metadata: {
+          offer: offer.id,
+          account: account.id,
+          user: user.id
+        }
+      });
+
+      strapi.log.info(`subscription created to stripe ${subscription.id} for account ${account.id}`);
+      strapi.log.info(`intent created to stripe ${intent.id} for account ${account.id}`);
+
+    } else {
+
+      intent = await stripe.paymentIntents.create({
+        customer: account.stripe_customer_id,
+        description: 'buy offer ' + offer.description,
+        amount: offer.price * 100,
+        currency: 'EUR',
+        receipt_email: receiptEmail,
+        payment_method: paymentMethod,
+        confirmation_method: 'manual',
+        confirm: true,
+        use_stripe_sdk: true,
+        metadata: {
+          offer: offer.id,
+          account: account.id,
+          user: user.id
+        }
+      });
+
+      if (intent.error) {
+        strapi.log.error(intent.error);
+        throw new Error(intent.error.message);
+      }
+
+      strapi.log.info(`intent created to stripe ${intent.id} for account ${account.id}`);
+
+    }
 
     return intent;
 
@@ -479,5 +542,46 @@ module.exports = {
         console.log('💰 Payment received!');
         return { done: true, clientSecret: intent.client_secret };
     }
+  },
+  /**
+   *
+   */
+  retrieveSubscription: async (user, account, offer) => {
+
+    const payments = (await strapi.services.payment.fetchAll({
+      customeraccount: account.id,
+      _sort: 'id:DESC'
+    })).toJSON();
+
+    const { charges } = await stripe.paymentIntents.retrieve(payments[0].stripe_payment_intent);
+    const { card } = await stripe.paymentMethods.retrieve(charges.data[0].payment_method);
+    const sub = await stripe.subscriptions.list({
+      limit: 1,
+      customer: account.stripe_customer_id
+    });
+
+    return {
+      offer: offer,
+      card: {
+        last4: card.last4,
+        exp_month: card.exp_month,
+        exp_year: card.exp_year
+      },
+      sub: {
+        cancel_at_period_end: sub.data[0].cancel_at_period_end,
+        cancel_at: sub.data[0].cancel_at,
+        current_period_start: sub.data[0].current_period_start,
+        current_period_end: sub.data[0].current_period_end,
+        status: sub.data[0].status,
+        created: sub.data[0].created,
+        ended_at: sub.data[0].ended_at
+      }
+    };
+
+  },
+  /**
+   *
+   */
+  retrieveTestsStock: async (user, account) => {
   }
 };
