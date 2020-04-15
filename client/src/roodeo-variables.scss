@@ -10,6 +10,7 @@ $color-pricipal-blue-light:#e9f1f4;
 $color-background-blue: #c1d5df;
 $color-blue-light:#1f7eab;
 $color-blue-roodeo:#c1d5e0;
+$color-background-interview: #f2f7f9;
 
 /*Responsive*/
 $smallDevice: "screen and (min-width: 200px) and (max-width: 640px)";
@@ -25,6 +26,28 @@ $border-radius: 4px;
 
 /*Path logo*/
 $logoPath: "src/assets/logo.png";
+
+
+.title-dashed{
+  color:$color-principal-blue;
+  text-transform: uppercase;
+  font-size: 18px;
+   
+  letter-spacing: 2px;
+  text-indent: 20px;
+}
+
+.dashed{
+  padding:4px;
+  display: block;
+  background-color: $color-white;
+  border:1px solid rgb(126, 181, 206);
+  border-radius: 100px;
+  width: 125px;
+  position: relative;
+  
+  top: 10px;
+}
 
 
 ::ng-deep .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element{
