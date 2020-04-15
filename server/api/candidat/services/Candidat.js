@@ -307,8 +307,67 @@ module.exports = {
    * @return {Promise}
    */
 
-  reportPdf: async (id) => {
+  reportPdf: async (id, data) => {
     try {
+      console.log("candidate", data);
+      const fmtMSS = (d) => {
+        d = Number(d);
+        const h = Math.floor(d / 3600);
+        const m = Math.floor((d % 3600) / 60);
+        const s = Math.floor((d % 3600) % 60);
+
+        return (
+          ("0" + h).slice(-2) +
+          ":" +
+          ("0" + m).slice(-2) +
+          ":" +
+          ("0" + s).slice(-2)
+        );
+        // return (m - (m %= 60)) / 60 + (9 < m ? ':' : ':0') + m;
+      };
+      const removeDuplicates = (rapportTechno) => {
+        const unique = {};
+        rapportTechno.forEach((i) => {
+          if (!unique[i]) {
+            unique[i] = true;
+          }
+        });
+        return Object.keys(unique);
+      };
+      let candidat = null;
+
+      let rapport = null;
+      let rapportTechno = [];
+      let uniquetechno = null;
+      let techno = [];
+      let totalTime = 0;
+
+      let listereponse;
+      let bonnereponse;
+
+      candidat = data.attributes;
+
+      rapport = candidat.raport_candidat.rapport;
+
+      rapport.forEach((element) => {
+        rapportTechno.push(element.index_question.technologies);
+        totalTime = totalTime + element.index_question.time;
+        listereponse = element.index_question.content.split(", ");
+        element.index_question.content = listereponse;
+        // console.log('choix question =',  listereponse);
+        bonnereponse = element.index_question.answer_value.split(", ");
+        element.index_question.answer_value = bonnereponse;
+        // console.log('choix bonne reponse =', element.index_question.content);
+      });
+
+      uniquetechno = removeDuplicates(rapportTechno);
+      uniquetechno.forEach(async (id) => {
+        const tech = await strapi.services.technologies.fetch({ id });
+        techno.push(tech);
+      });
+      
+      const timespent = fmtMSS(candidat.duree) + "/" + fmtMSS(totalTime);
+
       const templatePath = path.join(
         __dirname,
         "../../../report-template/",
@@ -319,22 +378,21 @@ module.exports = {
         "../../../report-template/candidates-report/",
         `${id}.pdf`
       );
-      ejs.renderFile(templatePath, { name: "Fallou Fall" }, (err, data) => {
-        console.log("data", data);
-        console.log("error", err);
-        // const options = {
-        //   height: "11.25in",
-        //   width: "8.5in",
-        //   header: {
-        //     height: "20mm",
-        //   },
-        //   footer: {
-        //     height: "20mm",
-        //   },
-        // };
+      ejs.renderFile(templatePath, { candidat, timespent }, (err, data) => {
+        console.log("error template", err);
+        // console.log("data", data);
+        // console.log("error", err);
+        // // const options = {
+        // //   height: "11.25in",
+        // //   width: "8.5in",
+        // //   header: {
+        // //     height: "20mm",
+        // //   },
+        // //   footer: {
+        // //     height: "20mm",
+        // //   },
+        // // };
         pdf.create(data).toFile(pdfPath, function (err, data) {
-          console.log("pdf", data);
-          console.log("err", err);
           if (err) {
             return err;
           } else {

@@ -145,8 +145,11 @@ module.exports = {
 
   generateReport: async (ctx, _next) => {
     try {
-      // const candidat = await strapi.services.candidat.fetch(ctx.params);
-      const pdf = await strapi.services.candidat.reportPdf(ctx.params.id);
+      const candidate = await strapi.services.candidat.fetch(ctx.params);
+      const pdf = await strapi.services.candidat.reportPdf(
+        ctx.params.id,
+        candidate
+      );
       return pdf;
     } catch (error) {
       throw error;
