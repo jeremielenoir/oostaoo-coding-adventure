@@ -8,24 +8,30 @@ import {
   ElementRef,
   OnChanges,
   SimpleChanges,
-  Inject
+  Inject,
 } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import {
   CdkDragDrop,
   moveItemInArray,
-  transferArrayItem
+  transferArrayItem,
 } from "@angular/cdk/drag-drop";
-import { MatBottomSheet, MatBottomSheetRef, MatDialog, MatDialogRef, MAT_DIALOG_DATA, } from "@angular/material";
+import {
+  MatBottomSheet,
+  MatBottomSheetRef,
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from "@angular/material";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 
 import {
   ApiClientService,
   API_URI_QUESTIONS,
-  API_URI_CAMPAIGNS
+  API_URI_CAMPAIGNS,
 } from "../../../api-client/api-client.service";
 import { Router } from "@angular/router";
-import { TestComponent } from '../client-test/test/test.component';
+import { TestComponent } from "../client-test/test/test.component";
 
 export interface DialogData {
   questions;
@@ -34,11 +40,13 @@ export interface DialogData {
 @Component({
   selector: "app-dragndrop-component",
   templateUrl: "./dragndrop.component.html",
-  styleUrls: ["./dragndrop.component.scss","../nouvelle-campagne/nouvelle-campagne.component.scss"]
+  styleUrls: [
+    "./dragndrop.component.scss",
+    "../nouvelle-campagne/nouvelle-campagne.component.scss",
+  ],
 })
 export class DragNDropComponent implements OnInit {
-
-  @Input('formCampagne') formCampagne: FormGroup;
+  @Input("formCampagne") formCampagne: FormGroup;
   @Input() datas = [];
   @Input() allQuestionLevel = [];
   @Input() techno = [];
@@ -53,8 +61,8 @@ export class DragNDropComponent implements OnInit {
   public boelanIsSearchAdvenced: boolean = false;
   public saveallQuestionsCampaign = [];
   public yourCampaign;
-  public difficulty = ['facile', 'moyen', 'expert'];
-  public booleanCampagnFinishLoading:boolean
+  public difficulty = ["facile", "moyen", "expert"];
+  public booleanCampagnFinishLoading: boolean;
   public activeClassScrollTopDropList = false;
   public Questions = [];
 
@@ -62,29 +70,19 @@ export class DragNDropComponent implements OnInit {
   public enablehover = false;
   public technoCampaign: Array<any>;
 
-
   @ViewChild("droplist") public droplist: ElementRef;
 
-
   dragStart(event: CdkDragDrop<string[]>) {
-    console.log('event start', event);
-    this.disablehover = true ;
+    console.log("event start", event);
+    this.disablehover = true;
   }
 
   dragEnd(event: CdkDragDrop<string[]>) {
-    console.log('event finish', event);
-    this.disablehover = false ;
+    console.log("event finish", event);
+    this.disablehover = false;
   }
 
   drop(event: CdkDragDrop<string[]>) {
-
-    console.log('hello word !!!', event);
-
-    this.chargeYourCampagn.emit('salut');
-
-
-    // this.ngOnInit();
-
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -98,6 +96,11 @@ export class DragNDropComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+      const previous = event.previousContainer.data;
+      const current = event.container.data;
+      const diff = current.filter((p) => !previous.includes(p));
+
+      this.chargeYourCampagn.emit(diff);
       // console.log("all question: ", this.allQuestions);
       // console.log("this Question: ", this.Questions)
     }
@@ -106,11 +109,10 @@ export class DragNDropComponent implements OnInit {
     public apiClientService: ApiClientService,
     public decryptTokenService: DecryptTokenService,
     private router: Router,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
-
     this.methoddataLevels();
 
     window.scroll(10, 0);
@@ -120,12 +122,11 @@ export class DragNDropComponent implements OnInit {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges){
-    console.log('aerorpt man -->',changes.allQuestionLevel)
-    if(this.allQuestionLevel && this.allQuestionLevel.length > 0){
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("aerorpt man -->", changes.allQuestionLevel);
+    if (this.allQuestionLevel && this.allQuestionLevel.length > 0) {
       this.booleanCampagnFinishLoading = true;
     }
-
   }
 
   addquestion(question) {
@@ -134,16 +135,12 @@ export class DragNDropComponent implements OnInit {
     if (index > -1) {
       this.datas.splice(index, 1);
     }
-    this.chargeYourCampagn.emit('salut');
-
+    this.chargeYourCampagn.emit("salut");
   }
 
   methoddataLevels() {
-
     // this.datas = this.allQuestionLevel;
-
     // console.log('data ---> trie',this.datas)
-
   }
 
   fmtMSS(d) {
@@ -152,12 +149,7 @@ export class DragNDropComponent implements OnInit {
     var m = Math.floor((d % 3600) / 60);
     var s = Math.floor((d % 3600) % 60);
 
-    return (
-
-      ("0" + m).slice(-2) +
-      ":" +
-      ("0" + s).slice(-2)
-    );
+    return ("0" + m).slice(-2) + ":" + ("0" + s).slice(-2);
   }
 
   headerChangePositioinDropList() {
@@ -168,18 +160,16 @@ export class DragNDropComponent implements OnInit {
     }
   }
 
-
-
   SendQuestionSelected(id) {
     this.apiClientService
       .put(API_URI_CAMPAIGNS + "/" + id, {
-        questions: this.allQuestionLevel
+        questions: this.allQuestionLevel,
       })
       .subscribe(
-        res => {
+        (res) => {
           console.log(res);
         },
-        err => console.log(err)
+        (err) => console.log(err)
       );
   }
 
@@ -215,31 +205,30 @@ export class DragNDropComponent implements OnInit {
         sent_report: envoiRapportSimplifie,
         profile: this.formCampagne.value.roleSelectedId,
         technologies: this.formCampagne.value.technoSelectedId,
-        user: this.decryptTokenService.userId
+        user: this.decryptTokenService.userId,
       })
       .subscribe(
-        res => {
+        (res) => {
           console.log("resultat from post", res);
           this.SendQuestionSelected(res.id);
           this.router.navigate([`/dashboard/campaigns/${res.id}/candidats`]);
         },
-        err => console.log(err)
+        (err) => console.log(err)
       );
   }
 
   openSearchAdvenced() {
-    this.boelanIsSearchAdvenced = !this.boelanIsSearchAdvenced
+    this.boelanIsSearchAdvenced = !this.boelanIsSearchAdvenced;
   }
 
   // data: {questions: this.allQuestionLevel}
   openDialogTest(): void {
     const dialogRef = this.dialog.open(DialogOverviewTest, {
-       data: {questions: this.allQuestionLevel, technoCampaign : this.techno},
-       width: '400px'
+      data: { questions: this.allQuestionLevel, technoCampaign: this.techno },
+      width: "400px",
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   // filtreTechno(element) {
@@ -254,12 +243,10 @@ export class DragNDropComponent implements OnInit {
   //         this.datas = newFilter
   //       }
 
-
   //     } else {
   //       valueChecked.push(valueCheck);
   //     }
   //   });
-
 
   //   console.log('allquestion---------->', this.datas)
 
@@ -281,24 +268,24 @@ export class DragNDropComponent implements OnInit {
 // }
 
 @Component({
-  selector: 'dialog-overview-test',
-  templateUrl: 'dialog-overview-test.html',
+  selector: "dialog-overview-test",
+  templateUrl: "dialog-overview-test.html",
 })
-export class DialogOverviewTest implements OnInit{
-
+export class DialogOverviewTest implements OnInit {
   dataPopup;
   prev = false;
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewTest>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-      if(data){
-        this.dataPopup = data;
-        this.prev =true;
-      }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {
+    if (data) {
+      this.dataPopup = data;
+      this.prev = true;
     }
+  }
 
-  ngOnInit(){
-    console.log('this.dataPopup : ', this.dataPopup);
+  ngOnInit() {
+    console.log("this.dataPopup : ", this.dataPopup);
   }
 
   onNoClick(): void {
@@ -308,9 +295,7 @@ export class DialogOverviewTest implements OnInit{
     console.log(this.data);
     this.dialogRef.close();
   }
-  refreshComponent($event): void{
-    console.log('REFRESH COMPONENT');
+  refreshComponent($event): void {
+    console.log("REFRESH COMPONENT");
   }
-
-
 }

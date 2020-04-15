@@ -191,10 +191,28 @@
         <li>
           <p><a href="" (click)="disConnection($event)">Déconnexion</a></p>
         </li>
+
+      
+       
       </ul>
     </li>
-    <li></li>
+   
   </ul>
+
+  <div class="right-contry">
+
+    <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
+      <img class="flags_img" src="{{currentLanguage}}" alt="Français">
+      <i class="icon-country fas fa-caret-down"></i>
+      
+    </div>
+    <!-- </button> -->
+    <mat-menu #menu="matMenu">
+      <div *ngFor="let language of otherLanguage">
+        <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage'  mat-menu-item><img class="flags_img_selected" src="{{language.img}}" alt=""></button>
+      </div>
+    </mat-menu>
+  </div>
 
   <div class="menu-burgeur" (click)="activeMenuBurgeur()">
 

@@ -9,8 +9,8 @@ const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
     user: "lenoir.jeremie@oostaoo.com",
-    pass: "marijuana"
-  }
+    pass: "marijuana",
+  },
 });
 
 /**
@@ -26,7 +26,7 @@ module.exports = {
    * @return {Object|Array}
    */
 
-  find: async ctx => {
+  find: async (ctx) => {
     if (ctx.query._q) {
       return strapi.services.candidat.search(ctx.query);
     } else {
@@ -40,7 +40,7 @@ module.exports = {
    * @return {Object}
    */
 
-  findOne: async ctx => {
+  findOne: async (ctx) => {
     return strapi.services.candidat.fetch(ctx.params);
   },
 
@@ -50,7 +50,7 @@ module.exports = {
    * @return {Number}
    */
 
-  count: async ctx => {
+  count: async (ctx) => {
     return strapi.services.candidat.count(ctx.query);
   },
 
@@ -60,7 +60,7 @@ module.exports = {
    * @return {Object}
    */
 
-  create: async ctx => {
+  create: async (ctx) => {
     // console.log(strapi.services.campaign);
     //faire un get campaigns avec ctx.request.body.token? qui est l'id de la campaign?
     var idCampaignNom = ctx.request.body.idCampaign + ctx.request.body.Nom;
@@ -92,11 +92,11 @@ module.exports = {
     ctx.request.body = {
       Nom: ctx.request.body.Nom,
       email: ctx.request.body.email,
-      token: ctx.request.body.idCampaign
+      token: ctx.request.body.idCampaign,
     };
     const depositObj = {
       ...ctx.request.body,
-      token: cryptoData
+      token: cryptoData,
     };
 
     try {
@@ -108,7 +108,7 @@ module.exports = {
         from: "lenoir.jeremie@gmail.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
-        html: postEmail_message
+        html: postEmail_message,
       };
       await transporter.sendMail(options);
       return candidat;
@@ -135,5 +135,21 @@ module.exports = {
 
   destroy: async (ctx, next) => {
     return strapi.services.candidat.remove(ctx.params);
-  }
+  },
+
+  /**
+   * generate pdf candidate report result candidate.
+   *
+   * @return {Object}
+   */
+
+  generateReport: async (ctx, _next) => {
+    try {
+      // const candidat = await strapi.services.candidat.fetch(ctx.params);
+      const pdf = await strapi.services.candidat.reportPdf(ctx.params.id);
+      return pdf;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

@@ -1,0 +1,52 @@
+@import"../../../../roodeo-variables.scss";
+
+#interview{
+    padding: 60px 20px 20px 40px;
+    margin: 0 auto;
+    background-color: $color-pricipal-blue-light;
+
+    .title-dashed{
+        color: $color-principal-blue;
+        text-transform: uppercase;
+        font-size: 18px;
+         
+        letter-spacing: 2px;
+        
+      }
+
+      .dashed{
+        padding:4px;
+        display: block;
+        background-color: $color-white;
+        border:1px solid rgb(126, 181, 206);
+        border-radius: 100px;
+        width: 125px;
+        position: relative;
+        
+        top: 10px;
+      }
+    
+    .content{
+        flex-direction: row;
+        margin: 0px 0px;
+
+        > div{
+            color: $color-principal-blue;
+            padding: 20px 0px 20px 0px;
+            background: #fff;
+            margin: 20px auto;
+            h2,p,h3{
+                margin: 0px auto;
+                width: 85%;
+                text-align: center;
+            }
+        }
+    }
+
+}
+@media screen and (max-width:760px){
+    .list-para{
+        font-size: 12px!important;
+        padding-left: 15px;
+    }
+}

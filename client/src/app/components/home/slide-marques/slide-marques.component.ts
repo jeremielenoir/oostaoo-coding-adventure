@@ -78,7 +78,7 @@ export class SlideMarquesComponent implements OnInit {
   //   console.log('this.srcImages.length - 5 :', this.srcImages.length - 5);
   // }
   loopScroll() {
-    if (this.ds.currIndex === this.srcImages.length - 5) {
+    /*if (this.ds.currIndex === this.srcImages.length - 5) {
       console.log(this.ds.currIndex);
       setTimeout(() => {
         this.ds.moveTo(0);
@@ -88,6 +88,6 @@ export class SlideMarquesComponent implements OnInit {
         this.ds.moveRight();
       }, 3000);
     }
-    setTimeout(() => this.loopScroll(), 3000);
+    setTimeout(() => this.loopScroll(), 3000);*/
   }
 }

@@ -72,6 +72,7 @@ export class UtilisateursComponent implements OnInit {
   addUsername = new FormControl('', Validators.required);
   editUsername = new FormControl('', Validators.required);
   editUserrole = new FormControl('', Validators.required);
+  userrole = new FormControl('', Validators.required);
 
   public nomIsactive = false;
   public prenomIsactive = false;

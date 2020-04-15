@@ -26,6 +26,7 @@ export interface PeriodicElement {
 })
 export class FacturationComponent implements OnInit {
 
+  inProgress = false;
   datePipe = new DatePipe("fr");
   account: any;
   user: any;

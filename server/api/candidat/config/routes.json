@@ -24,6 +24,15 @@
         "policies": []
       }
     },
+
+    {
+      "method": "GET",
+      "path": "/api/candidats-report-pdf/:id",
+      "handler": "Candidat.generateReport",
+      "config": {
+        "policies": []
+      }
+    },
     {
       "method": "POST",
       "path": "/api/candidats",
