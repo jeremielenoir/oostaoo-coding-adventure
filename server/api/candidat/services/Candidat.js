@@ -309,7 +309,6 @@ module.exports = {
 
   reportPdf: async (id, data) => {
     try {
-      console.log("candidate", data);
       const fmtMSS = (d) => {
         d = Number(d);
         const h = Math.floor(d / 3600);
@@ -354,10 +353,8 @@ module.exports = {
         totalTime = totalTime + element.index_question.time;
         listereponse = element.index_question.content.split(", ");
         element.index_question.content = listereponse;
-        // console.log('choix question =',  listereponse);
         bonnereponse = element.index_question.answer_value.split(", ");
         element.index_question.answer_value = bonnereponse;
-        // console.log('choix bonne reponse =', element.index_question.content);
       });
 
       uniquetechno = removeDuplicates(rapportTechno);
@@ -365,7 +362,7 @@ module.exports = {
         const tech = await strapi.services.technologies.fetch({ id });
         techno.push(tech);
       });
-      
+
       const timespent = fmtMSS(candidat.duree) + "/" + fmtMSS(totalTime);
 
       const templatePath = path.join(
@@ -378,28 +375,21 @@ module.exports = {
         "../../../report-template/candidates-report/",
         `${id}.pdf`
       );
-      ejs.renderFile(templatePath, { candidat, timespent }, (err, data) => {
-        console.log("error template", err);
-        // console.log("data", data);
-        // console.log("error", err);
-        // // const options = {
-        // //   height: "11.25in",
-        // //   width: "8.5in",
-        // //   header: {
-        // //     height: "20mm",
-        // //   },
-        // //   footer: {
-        // //     height: "20mm",
-        // //   },
-        // // };
-        pdf.create(data).toFile(pdfPath, function (err, data) {
-          if (err) {
-            return err;
-          } else {
-            return data;
-          }
+
+      const processFile = () =>
+        new Promise((resolve, reject) => {
+          ejs.renderFile(templatePath, { candidat, timespent }, (err, data) => {
+            if (err) reject(err);
+            pdf.create(data).toFile(pdfPath, function (err, data) {
+              if (err) reject(err);
+
+              resolve(data.filename);
+            });
+          });
         });
-      });
+
+      const result = await processFile();
+      return result;
     } catch (error) {
       throw error;
     }

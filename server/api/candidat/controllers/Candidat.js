@@ -3,7 +3,7 @@
 const nodemailer = require("nodemailer");
 
 const crypto = require("crypto");
-
+const { access, unlink, createReadStream } = require("fs");
 // Create reusable transporter object using SMTP transport.
 const transporter = nodemailer.createTransport({
   service: "Gmail",
@@ -144,15 +144,27 @@ module.exports = {
    */
 
   generateReport: async (ctx, _next) => {
+    let pdfPath = "";
     try {
       const candidate = await strapi.services.candidat.fetch(ctx.params);
-      const pdf = await strapi.services.candidat.reportPdf(
+      pdfPath = await strapi.services.candidat.reportPdf(
         ctx.params.id,
         candidate
       );
-      return pdf;
+      ctx.body = createReadStream(pdfPath);
+      ctx.attachment(pdfPath);
     } catch (error) {
       throw error;
+    } finally {
+      access(pdfPath, async (err) => {
+        if (err) {
+          console.log(`The file ${pdfPath} does not exist.`);
+        } else {
+          await unlink(pdfPath, async (err) => {
+            if (err) console.log("err", err);
+          });
+        }
+      });
     }
   },
 };

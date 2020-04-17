@@ -39,6 +39,7 @@
     "core-js": "^2.5.4",
     "countup.js-angular2": "^7.0.0",
     "d3": "^5.15.0",
+    "file-saver": "^2.0.2",
     "font-awesome": "^4.7.0",
     "loader-runner": "^3.1.0",
     "ng2-search-filter": "^0.4.7",

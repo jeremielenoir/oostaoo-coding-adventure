@@ -13,7 +13,10 @@ import {
   ApiClientService,
   API_URI_CAMPAIGNS,
   API_URI_CANDIDATS,
+  API_URI_CANDIDATS_PDF_REPORT,
 } from "../../../../api-client/api-client.service";
+import { HttpClient } from "@angular/common/http";
+import { saveAs } from "file-saver";
 import { getResultsDefinition } from "./getResultsDefinition";
 import pdfMake from "pdfmake/build/pdfmake";
 // font build has to be committed otherwise each developers has to build font locally.
@@ -76,7 +79,8 @@ export class CandidatsComponent implements OnInit {
     public dialog: MatDialog,
     private route: ActivatedRoute,
     public apiClientService: ApiClientService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {
     this.route.parent.params.subscribe((params) => {
       this.globalId = params.id;
@@ -391,7 +395,7 @@ export class CandidatsComponent implements OnInit {
         return getInfoCandidat;
       })
       .then((getInfoCandidat) => {
-       // console.log("getInfoCandidat", getInfoCandidat);
+        // console.log("getInfoCandidat", getInfoCandidat);
         this.infosCandidats = new MatTableDataSource(getInfoCandidat);
         this.infosCandidatsPdf = getInfoCandidat;
         this.infosCandidats.sort = this.sort;
@@ -511,9 +515,16 @@ export class CandidatsComponent implements OnInit {
     };
   }
 
-  viewResultsPdf(candidat_id) {
-    const candidateResults = this.collectCandidateResults(candidat_id);
-    pdfMake.createPdf(getResultsDefinition(candidateResults)).open();
+  viewResultsPdf(candidat) {
+    this.http
+      .get(API_URI_CANDIDATS_PDF_REPORT + candidat.candidat_id, {
+        responseType: "blob",
+      })
+      .toPromise()
+      .then((blob) => {
+        saveAs(blob, `${candidat.Candidats}-tests-result.pdf`);
+      })
+      .catch((err) => console.error("download error = ", err));
   }
 
   secondsToHms(duree) {
