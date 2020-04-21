@@ -6,9 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accueil.component.scss']
 })
 export class AccueilComponent implements OnInit {
-  constructor() { }
+  currentMenuId = "menuRoodeo";
+  currentSection = "home";
+  constructor() {
+    
+   }
 
   ngOnInit() {
+  }
+
+  setCurrentSection(id: string){
+    console.log('ID', id);
+    this.currentSection = id;
   }
 
 }

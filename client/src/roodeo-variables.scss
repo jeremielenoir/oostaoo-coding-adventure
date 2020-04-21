@@ -13,6 +13,9 @@ $color-blue-roodeo:#c1d5e0;
 $color-background-interview: #f2f7f9;
 $color-background-offers: #DAE6EA;
 
+/*Override properties for hover.css*/
+$activeColor: $color-principal-blue !default;
+
 /*Responsive*/
 $smallDevice: "screen and (min-width: 200px) and (max-width: 640px)";
 $deviceMaxDesktop: "screen and (max-width: 1024px)";

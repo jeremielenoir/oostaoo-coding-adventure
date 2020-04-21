@@ -1,14 +1,13 @@
-<app-navbar></app-navbar>
-
+<app-navbar [currentSection]="currentSection"></app-navbar>
 <main>
-  <app-index-page></app-index-page>
-  <app-second-section></app-second-section>
-  <app-techno #techno></app-techno>
+  <app-index-page [scrollPoint]="'home'" (currentSection)="setCurrentSection($event)"></app-index-page>
+  <app-second-section [scrollPoint]="'home'" (currentSection)="setCurrentSection($event)"></app-second-section>
+  <app-techno #techno [scrollPoint]="'techno'" (currentSection)="setCurrentSection($event)"></app-techno>
   <app-profiles></app-profiles>
-  <app-interview></app-interview>
-  <app-fonctionnalite #fonctionnalites></app-fonctionnalite>
+  <app-interview [scrollPoint]="'interview'" (currentSection)="setCurrentSection($event)"></app-interview>
+  <app-fonctionnalite #fonctionnalites [scrollPoint]="'fonctionnalites'" (currentSection)="setCurrentSection($event)"></app-fonctionnalite>
   <app-slider></app-slider>
   <app-slide-marques></app-slide-marques>
-  <home-offers #offers></home-offers>
+  <home-offers #offers [scrollPoint]="'offers'" (currentSection)="setCurrentSection($event)"></home-offers>
   <app-footer></app-footer>
 </main>

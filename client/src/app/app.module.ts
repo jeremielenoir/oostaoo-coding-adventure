@@ -11,7 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { ApiClientService } from './api-client/api-client.service';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -21,6 +20,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 // import components
+import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/home/navbar/navbar.component';
 import { IndexPageComponent } from './components/home/index-page/index-page.component';
 import { SecondSectionComponent } from './components/home/second-section/second-section.component';
@@ -41,6 +41,9 @@ import { CarouselItemDirective } from './components/home/carousel/carousel-item.
 import { AccueilComponent } from './components/home/accueil/accueil.component';
 
 import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
+
+import { ScrollPointDirective } from './directives/scrollpoint.directive';
+
 import { IntegrationBoutonComponent } from './components/panelAdmin/integration-bouton/integration-bouton.component';
 import { NouvelleCampagneComponent } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagne.component';
 import { NouvelleCampagnePage1Component } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component';
@@ -106,7 +109,6 @@ import { DragNDropComponent, DialogOverviewTest } from './components/panelAdmin/
 import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campagne/top-info-campagne.component';
 import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
 import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
-// import { IgxDoughnutChartModule } from "igniteui-angular-charts";
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
 import { ContactSupportComponent } from './components/panelAdmin/contact-support/contact-support.component';
@@ -164,6 +166,7 @@ import { MatProgressBarModule } from '@angular/material';
     // PopupMonOffre,
     AccueilComponent,
     NavMobileAbsoluteDirective,
+    ScrollPointDirective,
     IntegrationBoutonComponent,
     NouvelleCampagneComponent,
     NouvelleCampagnePage1Component,
