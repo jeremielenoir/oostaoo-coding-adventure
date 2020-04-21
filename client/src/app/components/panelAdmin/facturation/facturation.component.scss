@@ -11,6 +11,12 @@
   top: 0;
 }
 
+.rdo-loader {
+  width: 30px;
+  height: 30px;
+  background: center / contain no-repeat url(./../../../../assets/loader.gif);
+}
+
 .billing-main-content {
   width: 100%;
   padding: 125px 20px 20px 20px;

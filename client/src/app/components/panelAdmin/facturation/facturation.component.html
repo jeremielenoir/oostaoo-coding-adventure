@@ -12,6 +12,7 @@
         <button type="button" mat-stroked-button color="primary">Se désabonner</button>
       </div>
       <div>
+        <div *ngIf="!subscription && offer" class="rdo-loader"></div>
         <table class="rdp-content-table" *ngIf="subscription && offer">
           <tr><td>Statut</td><td><i class="rdo-badge-success">{{subscription.status}}</i></td></tr>
           <tr><td>Créé le</td><td>{{(subscription.created*1000) | date: 'dd/MM/yyyy' }}</td></tr>
@@ -33,6 +34,7 @@
             <!-- <button type="button" mat-stroked-button (click)="addOrEditCard()" color="primary">Modifier</button> -->
           </div>
           <div fxLayoutAlign="center center">
+            <div *ngIf="!paymentMethod" class="rdo-loader"></div>
             <app-creditcard [pm]="paymentMethod"></app-creditcard>
           </div>
         </div>
@@ -43,6 +45,7 @@
                 color="primary">{{ account && account.billing_address ? 'Editer' : 'Ajouter une adresse'}}</button>
           </div>
           <div>
+            <div *ngIf="!getAddress()" class="rdo-loader"></div>
             <app-address [address]="getAddress()"></app-address>
           </div>
         </div>
@@ -66,6 +69,7 @@
           <th style="width: 100px;"></th>
         </tr>
       </thead>
+      <div *ngIf="!invoices" class="rdo-loader"></div>
       <tbody>
         <tr *ngFor="let invoice of invoices">
           <td class="rdp-column-align-center">{{(invoice.created*1000) | date: 'dd/MM/yyyy'}}</td>
