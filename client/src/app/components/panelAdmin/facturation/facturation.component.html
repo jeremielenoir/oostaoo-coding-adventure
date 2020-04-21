@@ -21,7 +21,7 @@
             <h4 style="text-transform: uppercase;">{{offer.title}}</h4>
             <div [innerHTML]="offer.description"></div>
           </td></tr>
-          <tr><td>Dernière facture</td><td><i class="rpo-pdf-show fa fa-file-pdf-o" aria-hidden="true"></i></td></tr>
+          <!-- <tr><td>Dernière facture</td><td><i class="rpo-pdf-show fa fa-file-pdf-o" aria-hidden="true"></i></td></tr> -->
         </table>
       </div>
     </div>
@@ -75,8 +75,9 @@
           <td class="rdp-column-align-left">{{invoice.number}}</td>
           <td>
             <div fxLayout="row" fxLayoutAlign="space-around center">
-              <i (click)="exportPdf()" class="fa fa-eye icon icon-button"></i>
-              <i (click)="downloadPdf()" class="fa fa-download icon icon-button"></i>
+              <a href="{{invoice.invoice_pdf}}" target="_blank"><i style="cursor: pointer;" class="fa fa-external-link icon icon-button"></i></a>
+
+              <!-- <i (click)="downloadPdf()" class="fa fa-download icon icon-button"></i> -->
             </div>
           </td>
         </tr>

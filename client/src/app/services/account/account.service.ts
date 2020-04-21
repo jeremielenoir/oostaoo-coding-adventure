@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiClientService, API_URI_ACCOUNT } from '../../api-client/api-client.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { PaymentMethod } from 'ngx-stripe/lib/interfaces/payment-intent';
 import { CustomerAccount } from 'src/app/models/account.model';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
-import { invoices, subscriptions } from 'stripe';
+import { invoices, subscriptions, paymentIntents } from 'stripe';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +21,8 @@ export class AccountService {
   /**
    *
    */
-  private _paymentMethod: BehaviorSubject<PaymentMethod> = new BehaviorSubject(null);
-  public readonly paymentMethod: Observable<PaymentMethod> = this._paymentMethod.asObservable();
+  private _paymentMethod: BehaviorSubject<paymentIntents.IPaymentIntent> = new BehaviorSubject(null);
+  public readonly paymentMethod: Observable<paymentIntents.IPaymentIntent> = this._paymentMethod.asObservable();
   /**
    *
    */

@@ -6,8 +6,7 @@ import { MatDialog } from '@angular/material';
 import { AddressComponent } from '../../address/address.component';
 import { AccountService } from 'src/app/services/account/account.service';
 import { CustomerAccount } from 'src/app/models/account.model';
-import { PaymentMethod } from 'ngx-stripe/lib/interfaces/payment-intent';
-import { invoices, subscriptions } from 'stripe';
+import { invoices, subscriptions, paymentIntents } from 'stripe';
 
 export interface PeriodicElement {
   date: string;
@@ -25,7 +24,7 @@ export interface PeriodicElement {
 export class FacturationComponent implements OnInit {
 
   account: CustomerAccount;
-  paymentMethod: PaymentMethod;
+  paymentMethod: paymentIntents.IPaymentIntent;
   subscription: subscriptions.ISubscription;
   offer: any;
   invoices: invoices.IInvoice[];
