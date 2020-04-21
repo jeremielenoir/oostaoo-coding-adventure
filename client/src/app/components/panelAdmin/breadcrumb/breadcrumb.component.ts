@@ -21,7 +21,7 @@ export class BreadcrumbComponent implements OnInit {
       this.showNavigation = false;
     }
     this.namePage = this.namePage != "" ? " > "+ this.namePage : "";
-    console.log('this.listNavigation : ', this.listNavigation);
+    // console.log('this.listNavigation : ', this.listNavigation);
   }
 
   showHiddenNavigation(){

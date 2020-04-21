@@ -16,7 +16,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     constructor(private authenticationService: AuthenticationService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('REQUEST IN ERROR INTERCEPTOR : ', request);
+        // console.log('REQUEST IN ERROR INTERCEPTOR : ', request);
         return next.handle(request)
             .pipe(
                 catchError(err => {

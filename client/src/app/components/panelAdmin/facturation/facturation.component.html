@@ -8,38 +8,44 @@
   <div fxLayout="row" fxLayoutGap="20px">
     <div fxFlex="50" class="rdo-content-group">
       <div>
-        <h3><i class="fa fa-map-marker icon"></i> Adresse de facturation</h3>
-        <button type="button" mat-stroked-button (click)="addOrEditAddress()"
-            color="primary">{{ account && account.billing_address ? 'Editer' : 'Ajouter une adresse'}}</button>
+        <h3><i class="fa fa-shopping-cart icon"></i> Détails de votre abonnement</h3>
+        <button type="button" mat-stroked-button color="primary">Se désabonner</button>
       </div>
       <div>
-        <app-address [address]="getAddress()"></app-address>
+        <table class="rdp-content-table" *ngIf="subscription && offer">
+          <tr><td>Statut</td><td><i class="rdo-badge-success">{{subscription.status}}</i></td></tr>
+          <tr><td>Créé le</td><td>{{(subscription.created*1000) | date: 'dd/MM/yyyy' }}</td></tr>
+          <tr><td>Période courante</td><td>du {{(subscription.current_period_start*1000) | date: 'dd/MM/yyyy' }} à {{(subscription.current_period_end*1000) | date: 'dd/MM/yyyy' }}</td></tr>
+          <tr><td>Montant</td><td>{{subscription? (subscription.plan.amount/100) + '€/Mois' : ''}}</td></tr>
+          <tr><td valign="top">Détails offre</td><td>
+            <h4 style="text-transform: uppercase;">{{offer.title}}</h4>
+            <div [innerHTML]="offer.description"></div>
+          </td></tr>
+          <tr><td>Dernière facture</td><td><i class="rpo-pdf-show fa fa-file-pdf-o" aria-hidden="true"></i></td></tr>
+        </table>
       </div>
     </div>
-    <div fxFlex="50" class="rdo-content-group">
-      <div>
-        <h3><i class="fa fa-credit-card icon"></i> Carte de crédit</h3>
-        <button type="button" mat-stroked-button (click)="addOrEditCard()" color="primary">Modifier</button>
-      </div>
-      <div fxLayoutAlign="center center">
-        <app-creditcard [card]="card"></app-creditcard>
-      </div>
-    </div>
-  </div>
-  <div fxLayout="row" fxLayoutGap="20px">
-    <div fxFlex="50" class="rdo-content-group">
-      <div>
-        <h3><i class="fa fa-money icon"></i> Prochaine facture</h3>
-      </div>
-      <div>
-
-      </div>
-    </div>
-    <div fxFlex="50" class="rdo-content-group">
-      <div>
-        <h3><i class="fa fa-shopping-cart icon"></i> Détails abonnement</h3>
-      </div>
-      <div>
+    <div fxFlex="50">
+      <div fxLayout="column" fxLayoutGap="20px">
+        <div class="rdo-content-group">
+          <div>
+            <h3><i class="fa fa-credit-card icon"></i> Votre moyen de paiement</h3>
+            <!-- <button type="button" mat-stroked-button (click)="addOrEditCard()" color="primary">Modifier</button> -->
+          </div>
+          <div fxLayoutAlign="center center">
+            <app-creditcard [pm]="paymentMethod"></app-creditcard>
+          </div>
+        </div>
+        <div class="rdo-content-group">
+          <div>
+            <h3><i class="fa fa-map-marker icon"></i> Votre adresse de facturation</h3>
+            <button type="button" mat-stroked-button (click)="addOrEditAddress()"
+                color="primary">{{ account && account.billing_address ? 'Editer' : 'Ajouter une adresse'}}</button>
+          </div>
+          <div>
+            <app-address [address]="getAddress()"></app-address>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -49,32 +55,32 @@
     <h2><i class="fa fa-history icon"></i> Historique des factures</h2>
   </div>
   <div fxLayout="row" fxLayoutGap="20px">
-    <div fxFlex="100" class="rdo-content-group">
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Montant</th>
-              <th>Statut</th>
-              <th>Numéro de facture</th>
-              <th>Voir</th>
-              <th>Télécharger</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let facture of  facture">
-              <td>{{facture.date | date: 'dd/MM/yyyy'}}</td>
-              <td>{{facture.montant}} €</td>
-              <td>{{facture.statut}}</td>
-              <td>{{facture.numero_facture}}</td>
-              <td><i (click)="exportPdf()" class="far fa-eye icon icon-button"></i></td>
-              <td><i (click)="downloadPdf()" class="fa fa-download icon icon-button" [ngStyle]="{'margin': 'auto'}"></i>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <table style="width: 100%;" class="rdp-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Période de facturation</th>
+          <th>Montant</th>
+          <th>Statut</th>
+          <th>Numéro de facture</th>
+          <th style="width: 100px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let invoice of invoices">
+          <td class="rdp-column-align-center">{{(invoice.created*1000) | date: 'dd/MM/yyyy'}}</td>
+          <td class="rdp-column-align-left">du {{(invoice.period_start*1000) | date: 'dd/MM/yyyy' }} à {{(invoice.period_end*1000) | date: 'dd/MM/yyyy' }}</td>
+          <td class="rdp-column-align-center">{{(invoice.amount_paid/100)}} €</td>
+          <td class="rdp-column-align-center"><i style="line-height: 16px; height: 23px;" class="rdo-badge-success">{{invoice.status}}</i></td>
+          <td class="rdp-column-align-left">{{invoice.number}}</td>
+          <td>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+              <i (click)="exportPdf()" class="fa fa-eye icon icon-button"></i>
+              <i (click)="downloadPdf()" class="fa fa-download icon icon-button"></i>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

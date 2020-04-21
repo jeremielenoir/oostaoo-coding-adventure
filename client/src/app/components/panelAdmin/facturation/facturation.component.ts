@@ -1,15 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { DatePipe } from "@angular/common";
-import {
-  ApiClientService,
-  API_URI_USER,
-  API_URI_ACCOUNT
-} from "src/app/api-client/api-client.service";
-import { DecryptTokenService } from "src/app/components/home/register/register.service";
 import pdfMake from "pdfmake/build/pdfmake";
 import { getFactureDefinition } from "./getFactureDefinition";
 import { MatDialog } from '@angular/material';
 import { AddressComponent } from '../../address/address.component';
+import { AccountService } from 'src/app/services/account/account.service';
+import { CustomerAccount } from 'src/app/models/account.model';
+import { PaymentMethod } from 'ngx-stripe/lib/interfaces/payment-intent';
+import { invoices, subscriptions } from 'stripe';
 
 export interface PeriodicElement {
   date: string;
@@ -26,15 +24,14 @@ export interface PeriodicElement {
 })
 export class FacturationComponent implements OnInit {
 
+  account: CustomerAccount;
+  paymentMethod: PaymentMethod;
+  subscription: subscriptions.ISubscription;
+  offer: any;
+  invoices: invoices.IInvoice[];
+
   inProgress = false;
   datePipe = new DatePipe("fr");
-  account: any;
-  user: any;
-  card: any;
-  sub: any;
-  offer: any;
-  subscription: any;
-  invoices: any[];
   nextInvoice: any;
 
   /**
@@ -43,44 +40,28 @@ export class FacturationComponent implements OnInit {
    * @param decryptTokenService
    */
   constructor(
-    private apiClientService: ApiClientService,
-    private decryptTokenService: DecryptTokenService,
+    private accountService: AccountService,
     private dialog: MatDialog
-  ) {}
+  ) {
+    this.accountService.account
+      .subscribe((acc) => this.account = acc);
+    this.accountService.paymentMethod
+      .subscribe((pm) => this.paymentMethod = pm);
+    this.accountService.subscription
+      .subscribe((sub) => this.subscription = sub);
+    this.accountService.offer
+      .subscribe((off) => this.offer = off);
+    this.accountService.invoices
+      .subscribe((inv) => this.invoices = inv);
+  }
   /**
    *
    */
   ngOnInit() {
-
-    this.apiClientService
-      .get(API_URI_USER + "/" + this.decryptTokenService.userId)
-      .subscribe(
-        (data) => {
-          this.user = data;
-          this.account = this.user.customeraccount;
-
-          this.apiClientService
-            .get(API_URI_ACCOUNT + '/' + this.account.id + '/offers')
-            .subscribe(
-              (data) => {
-                const { card, sub, offer } = data;
-                this.card = card;
-                this.sub = sub;
-                this.offer = offer;
-              },
-              (err) => {
-                // TODO handle error
-              }
-            );
-
-        },
-        (err) => {
-          // TODO handle error
-        }
-      );
-
-
-
+    this.accountService.loadPaymentMethod();
+    this.accountService.loadSubscription();
+    this.accountService.loadOffer();
+    this.accountService.loadInvoices();
   }
   /**
    *

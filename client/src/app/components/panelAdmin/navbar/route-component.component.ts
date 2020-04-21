@@ -16,7 +16,8 @@ import { Router } from '@angular/router';
 import {
   ApiClientService,
   API_URI_NOTIFICATIONS,
-  API_URI_USER
+  API_URI_USER,
+  API_URI_ACCOUNT
 } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from '../../home/register/register.service';
 import {SelectedLanguageService} from '../../../services/selected-language.service';
@@ -28,7 +29,11 @@ import {SelectedLanguageService} from '../../../services/selected-language.servi
 })
 export class RouteComponentComponent implements OnInit {
 
-  isProfesionalAccount = false; // customer_account.type
+  user: any;
+  account: any;
+  paymentCard: any;
+  isProfesionalAccount = false;
+
   isShowNavCompte = false;
   isShowNavTesting = false;
   isShow = false;
@@ -48,6 +53,7 @@ export class RouteComponentComponent implements OnInit {
    ];
 
   @Output() ContentViewDefault = new EventEmitter<any>();
+
 
   constructor(
     public dialog: MatDialog,
@@ -76,7 +82,9 @@ export class RouteComponentComponent implements OnInit {
     this.apiClientService
       .get(API_URI_USER + '/' + this.decryptTokenService.userId)
       .subscribe(user => {
-        if(user.customer_account){
+        this.user = user;
+        this.account = user.customeraccount;
+        if(user.customeraccount){
           this.isProfesionalAccount = user.customeraccount.type === 'profesional';
         }
         this.offer_id = user.offer_id.id;
@@ -144,9 +152,11 @@ export class RouteComponentComponent implements OnInit {
     //   this.initNotifNotRead(this.notifications);
     // }), 5000);
   }
-
-
-  public setCurrentLanguage(langage) {
+  /**
+   *
+   * @param langage
+   */
+  setCurrentLanguage(langage) {
 
     console.log('langage select --->',langage);
     // console.log('this.local',this.locale)

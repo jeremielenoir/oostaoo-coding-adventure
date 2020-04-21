@@ -1,0 +1,45 @@
+.rdp-table {
+  & > thead {
+    & > tr {
+      & > th {
+        border-bottom: $border-table;
+        text-align: center;
+        font-weight: bold;
+        color: gray;
+        font-size: .9rem;
+        margin-bottom: 15px;
+        padding: 3px;
+      }
+    }
+  }
+  & > tbody {
+    & > tr:nth-child(even) {
+      background: rgba($color: #000000, $alpha: 0.08);
+    }
+
+    & > tr:nth-child(odd) {
+      background: #FFF
+    }
+    & > tr:hover {
+      background: rgba($color: #cee5fd, $alpha: 0.2) !important;
+    }
+    & > tr {
+      & > td {
+        line-height: 35px;
+        padding: 3px;
+      }
+    }
+  }
+}
+
+.rdp-column-align-right {
+  text-align: right;
+}
+
+.rdp-column-align-center {
+  text-align: center;
+}
+
+.rdp-column-align-left {
+  text-align: left;
+}

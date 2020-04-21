@@ -2,6 +2,30 @@
   "routes": [
     {
       "method": "GET",
+      "path": "/api/customeraccounts/:id/invoices",
+      "handler": "Customeraccount.invoicesFind",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/customeraccounts/:id/payments-methods",
+      "handler": "Customeraccount.pmsFind",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/customeraccounts/:id/subscriptions",
+      "handler": "Customeraccount.subFind",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/api/customeraccounts/:id/users",
       "handler": "Customeraccount.userFind",
       "config": {

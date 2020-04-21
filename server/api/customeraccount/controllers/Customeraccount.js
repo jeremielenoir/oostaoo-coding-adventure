@@ -77,17 +77,8 @@ module.exports = {
    *
    */
   offerFind: async (ctx) => {
-
     const user = ctx.state.user;
-    const account = user.customeraccount;
-    const offer = account.offer;
-
-    if (offer) {
-      return strapi.services.customeraccount.retrieveSubscription(user, account, offer);
-    } else {
-      return strapi.services.customeraccount.retrieveTestsStock(user, account);
-    }
-
+    return strapi.services.offer.fetch({id: user.customeraccount.offer});
   },
   /**
    * customeraccount.offer api
@@ -346,5 +337,95 @@ module.exports = {
       ctx.body = { status: 'error', message: { code: 'error', message: 'fail to remove user' } };
     }
 
+  },
+  /**
+   *
+   */
+  pmsFind: async (ctx) => {
+
+    try {
+
+      const account = ctx.state.user.customeraccount;
+
+      if (ctx.state.user.role.type !== 'account_admin') {
+        return ctx.forbidden(null, 'Action interdite.');
+      }
+
+      const customer = await stripe.customers.retrieve(account.stripe_customer_id,
+        {expand: ['invoice_settings.default_payment_method']});
+
+      ctx.send(customer.invoice_settings.default_payment_method);
+
+    } catch (error) {
+      console.error(error);
+      ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: error.message, field: error.field }] }] :
+        error.message);
+    }
+  },
+  /**
+   *
+   */
+  subFind: async (ctx) => {
+    try {
+
+      const account = ctx.state.user.customeraccount;
+
+      if (ctx.state.user.role.type !== 'account_admin') {
+        return ctx.forbidden(null, 'Action interdite.');
+      }
+
+      const subscriptions = await stripe.subscriptions.list({
+        customer: account.stripe_customer_id,
+        limit: 1
+      });
+
+      if (subscriptions && subscriptions.data[0]) {
+        const subscription = await stripe.subscriptions.retrieve(subscriptions.data[0].id);
+        if (subscription) {
+          ctx.send(subscription);
+        } else {
+          ctx.send({});
+        }
+      } else {
+        ctx.send({});
+      }
+
+    } catch (error) {
+      console.error(error);
+      ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: error.message, field: error.field }] }] :
+        error.message);
+    }
+  },
+  /**
+   *
+   */
+  invoicesFind: async (ctx) => {
+    try {
+
+      const account = ctx.state.user.customeraccount;
+
+      if (ctx.state.user.role.type !== 'account_admin') {
+        return ctx.forbidden(null, 'Action interdite.');
+      }
+
+      const invoices = await stripe.invoices.list({
+        customer: account.stripe_customer_id,
+        limit: 24
+      });
+
+      if (invoices && invoices.data) {
+        ctx.send(invoices.data);
+      } else {
+        ctx.send({});
+      }
+
+    } catch (error) {
+      console.error(error);
+      ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: error.message, field: error.field }] }] :
+        error.message);
+    }
   }
 };

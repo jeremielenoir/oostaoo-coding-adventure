@@ -12,9 +12,9 @@ export class JwtInterceptor implements HttpInterceptor {
     constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('this.authenticationService.currentUserValue : ', localStorage.getItem('currentUser'));
+        // console.log('this.authenticationService.currentUserValue : ', localStorage.getItem('currentUser'));
         const currentUser = localStorage.getItem('currentUser');
-        console.log('currentUser IN JWT INTERCEPTOR', currentUser);
+        // console.log('currentUser IN JWT INTERCEPTOR', currentUser);
         if (currentUser) {
             // clone the incoming request and add JWT token in the cloned request's Authorization Header
             request = request.clone({

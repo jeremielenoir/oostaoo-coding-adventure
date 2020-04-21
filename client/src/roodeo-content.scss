@@ -46,3 +46,28 @@
     padding: 10px 5px 5px 5px;
   }
 }
+
+
+.rdp-content-table {
+  & > tbody {
+    & > tr {
+      margin-bottom: 20px;
+      & > :nth-child(1) {
+        text-align: right;
+        font-weight: bold;
+        padding-right: 25px;
+        color: gray;
+        font-size: .9rem;
+        padding-bottom: 20px;
+      }
+      & > :nth-child(2) {
+        padding-bottom: 20px;
+      }
+    }
+  }
+}
+
+.rpo-pdf-show {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
