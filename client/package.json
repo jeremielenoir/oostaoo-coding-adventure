@@ -56,7 +56,6 @@
     "ngx-order-pipe": "^2.0.4",
     "ngx-stripe": "^7.4.4",
     "ngx-toastr": "^10.1.0",
-    "pdfmake": "^0.1.62",
     "rxjs": "~6.3.3",
     "swiper": "^5.3.6",
     "tslib": "^1.9.0",
