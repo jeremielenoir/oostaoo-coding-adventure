@@ -1,83 +1,152 @@
-
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Roodeo </title>
-    <base href="/" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans"
-      rel="stylesheet"
-    />
-    <!-- <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> -->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body>
-    <div id="content">
-      <div id="container">
-        <div class="header-detail">
-          <h2> 
 
-            <%=candidat.campaign.Name  %>
-          </h2>
-        </div>
-    
-        <div>
-          <h5 class="subtitle_h5">Résultats du test</h5>
-          <p> Nom : <%=candidat.Nom%></p>
-          <p> Email : <%=candidat.email%></p>
-          <p>Langue : <%=candidat.campaign.langs%></p>
-        </div>
-    
-    
-        <hr class="separator" size="1">
-    
-        <div class="header_result">
-    
-          <!-- <div class="progressbar_container">
+<head>
+  <meta charset="utf-8" />
+  <title>Roodeo </title>
+  <base href="/" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+  <!-- <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+</head>
+
+<body>
+  <div id="content">
+    <div id="container">
+      <div class="header-detail">
+        <h2>
+
+          <%=candidat.campaign.Name  %>
+        </h2>
+      </div>
+
+      <div>
+        <h5 class="subtitle_h5">Résultats du test</h5>
+        <p> Nom : <%=candidat.Nom%></p>
+        <p> Email : <%=candidat.email%></p>
+        <p>Langue : <%=candidat.campaign.langs%></p>
+      </div>
+
+
+      <hr class="separator" size="1">
+
+      <div class="header_result">
+
+        <!-- <div class="progressbar_container">
             <round-progress [current]="candidat?.points_candidat[5].PourcentTest" [max]="100" [color]="'#ce5637'"
               [background]="'#c1d5e0'" [radius]="10" [stroke]="3" [semicircle]="false" [rounded]="true" [clockwise]="true"
               [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'" [animationDelay]="100">
             </round-progress>
           </div> -->
-    
-    
-          <div>
-            <p>Score</p>
-            <p class="header_stats">
-              
-              
-            <%=candidat.points_candidat[5].PourcentTest %> %
-            </p>
-            <p>
-              <%=candidat.points_candidat[3].totalPointsCandidat /candidat.points_candidat[4].totalPointsCampaign   %>
-              
-              points </p>
-          </div>
-          <div>
-            <p>Durée</p>
-             <p class="header_stats">
-               
-              <!-- {{ fmtMSS(candidat?.duree) }} / {{ fmtMSS(totalTime) }} -->
-              <%=timespent%>
-            </p> 
-          </div>
-        </div>
-    
-        <hr class="separator" size="1">
-    
+
+
         <div>
-    
-          <!-- <div *ngFor="let question of rapport; let i = index; let tech of techno">
+          <p>Score</p>
+          <p class="header_stats">
+
+            <%=candidat.points_candidat[5].PourcentTest %> %
+          </p>
+          <p>
+            <%=candidat.points_candidat[3].totalPointsCandidat /candidat.points_candidat[4].totalPointsCampaign   %>
+
+            points </p>
+        </div>
+        <div>
+          <p>Durée</p>
+          <p class="header_stats">
+
+            <!-- {{ fmtMSS(candidat?.duree) }} / {{ fmtMSS(totalTime) }} -->
+            <%=timespent%>
+          </p>
+        </div>
+      </div>
+
+      <hr class="separator" size="1">
+
+      <div>
+        <% rapport.forEach(function(question,index){ %>
+        <h3 class="question_number">Question <%= index+1 %></h3>
+        <div class="header_question">
+
+          <% techno.forEach(function(tech){ %>
+
+          <% if(question.index_question.technologies == tech.id){%>
+
+          <p>
+            <span><%=tech.name%></span>
+          </p>
+          <%}%>
+
+          <% }); %>
+
+
+          <p><%= fmtMSS(question.timeRep)%> / <%=fmtMSS(question.index_question.time) %></p>
+
+
+          <% if(question.array_rep_candidat  ==  "answervalue")  {%>
+
+          <p>
+            <%=question.index_question.points %> / <%=question.index_question.points %>
+            pts</p>
+
+          <% } %>
+
+
+
+
+          <% if(question.array_rep_candidat  !=  "answervalue")  {%>
+
+          <p>
+            0 / <%=question.index_question.points %>
+            pts</p>
+
+          <% } %>
+        </div>
+        <h5 class="subtitle_h5">Question :</h5>
+        <p> - <%=question.index_question.name %></p>
+
+        <h5 class="subtitle_h5">Réponse :</h5>
+
+
+        <ul>
+          <%question.index_question.content.forEach(function(reponse){ %>
+          <li>
+            - <%= reponse %>
+          </li>
+          <%});%>
+
+        </ul>
+        <h5 class="subtitle_h5">Résultats :</h5>
+
+        <div *ngIf="question.array_rep_candidat  ==  answervalue">
+          <p> <span class="right_answer">
+              Réponse correcte :</span>{{ question.index_question.theme }}</p>
+          <p>Votre réponse : {{ question.array_rep_candidat }}</p>
+        </div>
+
+        <%if(question.array_rep_candidat =="answervalue")  {%>
+        <div>
+          <p> <span class="right_answer">
+              Réponse correcte :</span><%=question.index_question.theme %></p>
+          <p>Votre réponse : <%=question.array_rep_candidat %></p>
+        </div>
+        <%}%>
+        <%if(question.array_rep_candidat !="answervalue")  {%>
+        <div>
+          <p class="wrong_answer">Mauvaise réponse</p>
+          <p>Votre réponse : <%=question.array_rep_candidat%></p>
+          <p>
+            <%=question.index_question.answer_value.length > 1 ? 'Les réponses correctes sont' : 'La réponse correcte est'  %>
+            : <%= question.index_question.answer_value  %></p>
+        </div>
+        <%}%>
+        
+
+        <% }); %>
+
+        <!-- <div *ngFor="let question of rapport; let i = index; let tech of techno">
            <div *ngFor="let answervalue of question.index_question.answer_value">
     
             <h3 class="question_number">Question {{ i+1 }} </h3>
@@ -122,8 +191,9 @@
             <hr class="separator_red" size="1">
             </div>
           </div> -->
-        </div>
       </div>
     </div>
+  </div>
 </body>
+
 </html>

@@ -322,7 +322,7 @@ module.exports = {
           ":" +
           ("0" + s).slice(-2)
         );
-        // return (m - (m %= 60)) / 60 + (9 < m ? ':' : ':0') + m;
+         
       };
       const removeDuplicates = (rapportTechno) => {
         const unique = {};
@@ -378,7 +378,7 @@ module.exports = {
 
       const processFile = () =>
         new Promise((resolve, reject) => {
-          ejs.renderFile(templatePath, { candidat, timespent }, (err, data) => {
+          ejs.renderFile(templatePath, { candidat, timespent,rapport,techno,fmtMSS}, (err, data) => {
             if (err) reject(err);
             pdf.create(data).toFile(pdfPath, function (err, data) {
               if (err) reject(err);
