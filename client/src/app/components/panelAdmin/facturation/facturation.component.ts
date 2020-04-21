@@ -5,7 +5,7 @@ import {
   API_URI_USER
 } from "src/app/api-client/api-client.service";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
-import pdfMake from "pdfmake/build/pdfmake";
+//import pdfMake from "pdfmake/build/pdfmake";
 import { getFactureDefinition } from "./getFactureDefinition";
 import { MatDialog } from '@angular/material';
 import { AddressComponent } from '../../address/address.component';

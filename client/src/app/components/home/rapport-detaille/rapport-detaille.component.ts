@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getResultsDefinition } from '../../panelAdmin/edit-campagne/candidats/getResultsDefinition.js';
-import pdfMake from 'pdfmake/build/pdfmake';
+//import pdfMake from 'pdfmake/build/pdfmake';
 //import pdfFonts from '../../../../assets/pdfmake-font-builds/vfs_fonts';
 
 //pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-pdfMake.fonts = {
+/*pdfMake.fonts = {
   FontAwesome: {
     normal: 'fontawesome-webfont.ttf',
     bold: 'fontawesome-webfont.ttf',
@@ -19,7 +19,7 @@ pdfMake.fonts = {
     italics: 'Roboto-Italic.ttf',
     bolditalics: 'Roboto-MediumItalic.ttf'
   }
-};
+};*/
 
 @Component({
   selector: 'app-rapport-detaille-home',
@@ -36,7 +36,7 @@ export class RapportDetailleHomeComponent implements OnInit {
   }
 
   viewExemplePdf() {
-    pdfMake.createPdf(getResultsDefinition(
+    /*pdfMake.createPdf(getResultsDefinition(
       {name : 'Exemple',
        email : 'exemple@exemple.com',
       date: '10/01/2020',
@@ -82,7 +82,7 @@ export class RapportDetailleHomeComponent implements OnInit {
     ],
        totalTestTime : 90,
        totalCandidateTime : 40 }
-      )).open();
+      )).open();*/
   }
 
 
