@@ -1,6 +1,9 @@
 import {
   Component,
   OnInit,
+  Input,
+  Output,
+  ElementRef,
   ViewChild,
   HostListener,
   Inject,
@@ -17,10 +20,15 @@ import {SelectedLanguageService} from '../../../services/selected-language.servi
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+
+  @Input() currentSection: string;
+
   constructor(@Inject(DOCUMENT) document, @Inject(LOCALE_ID) private locale: string,
-   private cookieService: CookieService, private router: Router,public SelectedLanguageService:SelectedLanguageService) { 
+   private cookieService: CookieService, private _el: ElementRef, private router: Router,public SelectedLanguageService:SelectedLanguageService) { 
 
    }
+
+  public currentMenuId = "menuRoodeo";
 
   public shouldShow = true;
   public Removeshould = true;
@@ -37,13 +45,14 @@ export class NavbarComponent implements OnInit {
   ];
 
   @ViewChild('header') header;
+  
 
   public showOrHideManually() {
     this.shouldShow = !this.shouldShow;
   }
 
   @HostListener('window:scroll', ['$event'])
-  public onWindowScroll() {
+  public onWindowScroll(event: any) {
     if (window.pageYOffset > 100) {
 
       this.IsheaderTrue = true;
@@ -53,6 +62,7 @@ export class NavbarComponent implements OnInit {
       this.IsheaderTrue = false;
 
     }
+    
 
   }
 
@@ -67,7 +77,7 @@ export class NavbarComponent implements OnInit {
       this.lang = this.SelectedLanguageService.getLanguageCountry();
     }
 
-    this.onWindowScroll();
+    this.onWindowScroll(null);
 
     let linkMenu = document.querySelectorAll('#all-list-menu .link-menu');
 

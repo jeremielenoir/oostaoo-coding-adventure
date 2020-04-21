@@ -71,16 +71,13 @@
 
 #home {
   /*background-image: url(../../../../assets/Coding-game-img/Page-accueil/header.jpg);*/
-  background-position: bottom left;
-  background-repeat: no-repeat;
-  background-size: cover;
   border-bottom: 1px solid $color-blue-light;
   display: flex;
   color: $text-color;
   padding-top: 124px;
   align-content: center;
   justify-content: space-around;
-  padding-bottom: 40px;
+  padding-bottom: 25px;
   box-shadow: 0 4px 10px -2px #00000080;
 
   .row-home{ 

@@ -307,8 +307,64 @@ module.exports = {
    * @return {Promise}
    */
 
-  reportPdf: async (id) => {
+  reportPdf: async (id, data) => {
     try {
+      const fmtMSS = (d) => {
+        d = Number(d);
+        const h = Math.floor(d / 3600);
+        const m = Math.floor((d % 3600) / 60);
+        const s = Math.floor((d % 3600) % 60);
+
+        return (
+          ("0" + h).slice(-2) +
+          ":" +
+          ("0" + m).slice(-2) +
+          ":" +
+          ("0" + s).slice(-2)
+        );
+         
+      };
+      const removeDuplicates = (rapportTechno) => {
+        const unique = {};
+        rapportTechno.forEach((i) => {
+          if (!unique[i]) {
+            unique[i] = true;
+          }
+        });
+        return Object.keys(unique);
+      };
+      let candidat = null;
+
+      let rapport = null;
+      let rapportTechno = [];
+      let uniquetechno = null;
+      let techno = [];
+      let totalTime = 0;
+
+      let listereponse;
+      let bonnereponse;
+
+      candidat = data.attributes;
+
+      rapport = candidat.raport_candidat.rapport;
+
+      rapport.forEach((element) => {
+        rapportTechno.push(element.index_question.technologies);
+        totalTime = totalTime + element.index_question.time;
+        listereponse = element.index_question.content.split(", ");
+        element.index_question.content = listereponse;
+        bonnereponse = element.index_question.answer_value.split(", ");
+        element.index_question.answer_value = bonnereponse;
+      });
+
+      uniquetechno = removeDuplicates(rapportTechno);
+      uniquetechno.forEach(async (id) => {
+        const tech = await strapi.services.technologies.fetch({ id });
+        techno.push(tech);
+      });
+
+      const timespent = fmtMSS(candidat.duree) + "/" + fmtMSS(totalTime);
+
       const templatePath = path.join(
         __dirname,
         "../../../report-template/",
@@ -319,29 +375,21 @@ module.exports = {
         "../../../report-template/candidates-report/",
         `${id}.pdf`
       );
-      ejs.renderFile(templatePath, { name: "Fallou Fall" }, (err, data) => {
-        console.log("data", data);
-        console.log("error", err);
-        // const options = {
-        //   height: "11.25in",
-        //   width: "8.5in",
-        //   header: {
-        //     height: "20mm",
-        //   },
-        //   footer: {
-        //     height: "20mm",
-        //   },
-        // };
-        pdf.create(data).toFile(pdfPath, function (err, data) {
-          console.log("pdf", data);
-          console.log("err", err);
-          if (err) {
-            return err;
-          } else {
-            return data;
-          }
+
+      const processFile = () =>
+        new Promise((resolve, reject) => {
+          ejs.renderFile(templatePath, { candidat, timespent,rapport,techno,fmtMSS}, (err, data) => {
+            if (err) reject(err);
+            pdf.create(data).toFile(pdfPath, function (err, data) {
+              if (err) reject(err);
+
+              resolve(data.filename);
+            });
+          });
         });
-      });
+
+      const result = await processFile();
+      return result;
     } catch (error) {
       throw error;
     }

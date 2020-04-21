@@ -1,7 +1,7 @@
 <section id="offers">
 
   <button *ngIf="subscriptionPage" (click)="goBack()"
-      id="goBack">
+      id="goBack" i18n>
     <i class="material-icons">arrow_back</i>
     RETOUR
   </button>
@@ -12,27 +12,29 @@
           <span class="dashed"></span>
         </h3>
     </div>
-    <div class="intro"><h2>Full features from the free tier, no expensive yearly subscription needed!</h2></div>
+    <div class="intro">
+        <h2 i18n>Full features from the free tier, no expensive yearly subscription needed!</h2>
+    </div>
     <div class="content">
         
         <mat-card class="lab-item">
             <mat-card-content>
-                <mat-card-title>Free</mat-card-title>
+                <mat-card-title i18n>Starter</mat-card-title>
 
                 <div>
                     <!-- <mat-card-subtitle *ngSwitchCase="'special'">Gratuit</mat-card-subtitle> -->
-                    <mat-card-subtitle >FREE</mat-card-subtitle>
+                    <mat-card-subtitle i18n>Free</mat-card-subtitle>
                 </div>
 
                 <ul>
-                    <li>10 monthly applicant assessments</li>
-                    <li>Full library of questions</li>
-                    <li>Premade modules for techs and roles</li>
-                    <li>Custom question editor</li>
-                    <li>Live coding environment</li>
-                    <li>Anti-plagiarism system</li>
-                    <li>API access</li>
-                    <li>Applicant scoring report</li>
+                    <li i18n>10 monthly applicant assessments</li>
+                    <li i18n>Full library of questions</li>
+                    <li i18n>Premade modules for techs and roles</li>
+                    <li i18n>Custom question editor</li>
+                    <li i18n>Live coding environment</li>
+                    <li i18n>Anti-plagiarism system</li>
+                    <li i18n>API access</li>
+                    <li i18n>Applicant scoring report</li>
 
                 </ul>
                 <mat-card-actions>
@@ -44,23 +46,23 @@
 
       <mat-card class="lab-item">
             <mat-card-content>
-                <mat-card-title>Business</mat-card-title>
+                <mat-card-title i18n>Business</mat-card-title>
 
                 <div>
                     <!-- <mat-card-subtitle *ngSwitchCase="'special'">Gratuit</mat-card-subtitle> -->
-                    <mat-card-subtitle >130€ monthly</mat-card-subtitle>
+                    <mat-card-subtitle i18n>130€ monthly</mat-card-subtitle>
                 </div>
 
                 <ul>
-                    <li>100 monthly applicant assessments</li>
-                    <li>Full library of questions</li>
-                    <li>Technical and role question modules</li>
-                    <li>Custom question editor</li>
-                    <li>Live coding environment</li>
-                    <li>Anti-plagiarism system</li>
-                    <li>API access</li>
-                    <li>Applicant scoring report</li>
-                    <li>Email support</li>
+                    <li i18n>100 monthly applicant assessments</li>
+                    <li i18n>Full library of questions</li>
+                    <li i18n>Technical and role question modules</li>
+                    <li i18n>Custom question editor</li>
+                    <li i18n>Live coding environment</li>
+                    <li i18n>Anti-plagiarism system</li>
+                    <li i18n>API access</li>
+                    <li i18n>Applicant scoring report</li>
+                    <li i18n>Email support</li>
 
                 </ul>
                 <mat-card-actions>
@@ -72,23 +74,23 @@
       
         <mat-card class="lab-item">
             <mat-card-content>
-                <mat-card-title>Recruiter</mat-card-title>
+                <mat-card-title i18n>Recruiter</mat-card-title>
 
                 <div>
                     <!-- <mat-card-subtitle *ngSwitchCase="'special'">Gratuit</mat-card-subtitle> -->
-                    <mat-card-subtitle >250 € monthly</mat-card-subtitle>
+                    <mat-card-subtitle i18n>250 € monthly</mat-card-subtitle>
                 </div>
 
                 <ul>
-                    <li>250 monthly applicant assessments</li>
-                    <li>Full library of questions</li>
-                    <li>Technical and role question modules</li>
-                    <li>Custom question editor</li>
-                    <li>Live coding environment</li>
-                    <li>Anti-plagiarism system</li>
-                    <li>API access</li>
-                    <li>Applicant scoring report</li>
-                    <li>Email support</li>
+                    <li i18n>250 monthly applicant assessments</li>
+                    <li i18n>Full library of questions</li>
+                    <li i18n>Technical and role question modules</li>
+                    <li i18n>Custom question editor</li>
+                    <li i18n>Live coding environment</li>
+                    <li i18n>Anti-plagiarism system</li>
+                    <li i18n>API access</li>
+                    <li i18n>Applicant scoring report</li>
+                    <li i18n>Email support</li>
                 </ul>
                 <mat-card-actions>
                     <button (click)="goToPay()"
@@ -99,19 +101,19 @@
       
         <mat-card class="lab-item">
             <mat-card-content>
-                <mat-card-title>Tech interviews</mat-card-title>
+                <mat-card-title i18n>Tech interviews</mat-card-title>
 
                 <div>
                     <!-- <mat-card-subtitle *ngSwitchCase="'special'">Gratuit</mat-card-subtitle> -->
-                    <mat-card-subtitle >Pay as you go</mat-card-subtitle>
+                    <mat-card-subtitle i18n>Pay as you go</mat-card-subtitle>
                 </div>
 
                 <ul>
-                    <li>Save precious time for your in-house tech team</li>
-                    <li>Leverage Roodeo domain experts to run your interviews</li>
-                    <li>Obtain actionable hiring recommendations</li>
-                    <li>Invite for a final interview only the best candidates</li>
-                    <li>From 160€ per interview for junior and senior level positions</li>
+                    <li i18n>Save precious time for your in-house tech team</li>
+                    <li i18n>Leverage Roodeo domain experts to run your interviews</li>
+                    <li i18n>Obtain actionable hiring recommendations</li>
+                    <li i18n>Invite for a final interview only the best candidates</li>
+                    <li i18n>From 160€ per interview for junior and senior level positions</li>
                 </ul>
                 <mat-card-actions>
                     <button (click)="goToPay()"
@@ -122,5 +124,7 @@
       
     </div>
    <!-- TOD0 : add a button or mailto link to "contact us" below -->
-   <div class="intro"><h2>Please contact us for enterprise-level subscriptions and specific integration needs.</h2></div>
+   <div class="intro">
+       <h2 i18n>Please contact us for enterprise-level subscriptions and specific integration needs.</h2>
+    </div>
 </section>

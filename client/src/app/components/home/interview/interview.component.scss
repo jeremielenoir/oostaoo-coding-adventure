@@ -3,42 +3,38 @@
 #interview{
     padding: 60px 20px 20px 40px;
     margin: 0 auto;
-    background-color: $color-pricipal-blue-light;
+    background-color: $color-background-interview;
 
-    .title-dashed{
-        color: $color-principal-blue;
-        text-transform: uppercase;
-        font-size: 18px;
-         
-        letter-spacing: 2px;
-        
-      }
+    -webkit-box-shadow: 0px 2px 10px 5px rgba(0,0,0,0.50); 
+    box-shadow: 0px 2px 10px 5px rgba(0,0,0,0.50);
 
-      .dashed{
-        padding:4px;
-        display: block;
-        background-color: $color-white;
-        border:1px solid rgb(126, 181, 206);
-        border-radius: 100px;
-        width: 125px;
-        position: relative;
-        
-        top: 10px;
-      }
+    
     
     .content{
         flex-direction: row;
-        margin: 0px 0px;
+        margin: 40px 0px;
 
         > div{
             color: $color-principal-blue;
-            padding: 20px 0px 20px 0px;
-            background: #fff;
+            font-size: 15px;
+            padding: 30px 0px 30px 0px;
             margin: 20px auto;
-            h2,p,h3{
+            background: rgb(242,247,249);
+background: linear-gradient(90deg, rgba(242,247,249,1) 4%, rgba(255,255,255,1) 10%, rgba(255,255,255,1) 90%, rgba(242,247,249,1) 96%);
+            h2,h3{
                 margin: 0px auto;
                 width: 85%;
                 text-align: center;
+                font-size: 15px;
+            }
+            p{
+                margin: 0px auto;
+                width: 85%;
+                font-size: 14px;
+            }
+            &.illustration{
+                width: 33%;
+                background: $color-background-interview;
             }
         }
     }
