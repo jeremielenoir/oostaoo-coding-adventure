@@ -56,9 +56,10 @@
 <div class="rdo-panel">
   <div class="rdo-panel-header">
     <h2><i class="fa fa-history icon"></i> Historique des factures</h2>
+    <input [(ngModel)]="searchQuery" type="search" placeholder="Rechercher...">
   </div>
   <div fxLayout="row" fxLayoutGap="20px">
-    <table style="width: 100%;" class="rdp-table">
+    <table style="width: 100%;" cellspacing="0" class="rdp-table">
       <thead>
         <tr>
           <th>Date</th>
@@ -71,7 +72,7 @@
       </thead>
       <div *ngIf="!invoices" class="rdo-loader"></div>
       <tbody>
-        <tr *ngFor="let invoice of invoices">
+        <tr *ngFor="let invoice of invoices | search:'number,amount_paid':searchQuery">
           <td class="rdp-column-align-center">{{(invoice.created*1000) | date: 'dd/MM/yyyy'}}</td>
           <td class="rdp-column-align-left">du {{(invoice.period_start*1000) | date: 'dd/MM/yyyy' }} à {{(invoice.period_end*1000) | date: 'dd/MM/yyyy' }}</td>
           <td class="rdp-column-align-center">{{(invoice.amount_paid/100)}} €</td>

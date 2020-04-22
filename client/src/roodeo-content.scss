@@ -9,6 +9,14 @@
   border-radius: $border-radius;
 }
 
+.rdo-panel-neg {
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+  padding: 30px;
+  margin: 30px;
+}
+
 .rdo-panel-header {
   margin-bottom: 20px;
   flex-direction: row;
@@ -17,11 +25,12 @@
   place-content: stretch space-between;
   align-items: stretch;
 
-  h2 {
+  h2, h3 {
     i {
       color: $color-orange;
     }
   }
+
 }
 
 .rdo-content-group {

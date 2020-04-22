@@ -1,7 +1,8 @@
 .rdo-badge-success {
   padding: 3px 5px;
   background-color: green;
-  color: white;
+  color: white !important;
+  text-transform: initial !important;
   border-radius: $border-radius;
   display: inline-block;
   font-size: 0.8rem;

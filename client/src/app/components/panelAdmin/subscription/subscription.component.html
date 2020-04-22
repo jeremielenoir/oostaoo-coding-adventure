@@ -1,3 +1,39 @@
-<app-route-component></app-route-component>
 
-<app-offers></app-offers>
+<app-route-component></app-route-component>
+<app-breadcrumb [namePage]="'Nos formules'"></app-breadcrumb>
+<mat-progress-bar *ngIf="inProgress" class="roodeo-progress-bar" mode="query"></mat-progress-bar>
+<div class="rdo-panel-neg" style="margin-top: 130px;">
+  <div fxLayout="row-reverse">
+    <div fxFlex="80" class="rdo-sub-offer-desc">
+      <div class="rdo-content-group">
+        <div class="rdo-panel-header">
+          <h3><i class="fa fa-cube"></i> {{selectedOffer?.title}}</h3>
+          <div>
+            <i class="rdo-sub-offer-price">{{selectedOffer?.price + '€/' + (selectedOffer.periodicity === 'monthly' ? 'mois' : 'ponctuel')}}</i>
+            <button *ngIf="!ownedOffer || ownedOffer.id !== selectedOffer.id" type="button" mat-raised-button color="primary">S'abonner</button>
+            <button *ngIf="ownedOffer && ownedOffer.id === selectedOffer.id" type="button" mat-raised-button color="primary">Se désabonner</button>
+          </div>
+        </div>
+        <div>
+
+          <div [innerHTML]="selectedOffer?.description"></div>
+          <h4 style="margin-top: 25px;"><strong>Service 1</strong></h4>
+          <div [innerHTML]="selectedOffer?.description"></div>
+          <h4 style="margin-top: 25px;"><strong>Service 2</strong></h4>
+          <div [innerHTML]="selectedOffer?.description"></div>
+        </div>
+      </div>
+    </div>
+    <div fxFlex="20">
+      <div class="rdo-sub-offer-head" *ngFor="let offer of offers"
+            [ngClass]="{'rdo-sub-offer-head-selected': offer.selected}"
+            (click)="selectOffer(offer)">
+        <h3>{{offer.title}}<i *ngIf="ownedOffer && ownedOffer.id === offer.id"
+          style="margin-left: 10px" class="rdo-badge-success">active</i></h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <app-route-component></app-route-component>
+<app-offers></app-offers> -->
