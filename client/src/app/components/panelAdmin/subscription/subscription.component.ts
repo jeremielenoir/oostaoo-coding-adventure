@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiClientService, API_URI_OFFER } from 'src/app/api-client/api-client.service';
 import { AccountService } from 'src/app/services/account/account.service';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ConfirmModel, ConfirmComponent } from '../../home/confirm/confirm.component';
 
 @Component({
@@ -21,7 +21,8 @@ export class SubscriptionComponent implements OnInit {
   constructor(
     private apiClientService: ApiClientService,
     private accountService: AccountService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
     ) {
       this.accountService.offer
         .subscribe(
@@ -57,15 +58,53 @@ export class SubscriptionComponent implements OnInit {
   /**
    *
    */
-  async cancelSubscription() {
-    const dialogData = new ConfirmModel("Confirmation", `Souhaitez vous annuler votre abonnement ?`);
+  async enableSub() {
+    this.inProgress = true;
+    const dialogData = new ConfirmModel('Confirmation', 'Souhaitez vous réactiver votre abonnement ?');
     const dialogRef = this.dialog.open(ConfirmComponent, {
-      maxWidth: "400px",
+      maxWidth: "80%",
       data: dialogData
     });
     const doAction = await dialogRef.afterClosed().toPromise();
     if (doAction) {
-      this.accountService.cancelSubscription();
+      this.accountService.enableSubscription()
+        .subscribe(
+          (sub) => {
+            this.inProgress = false;
+          },
+          (err) => {
+            this.snackBar.open('Oops ! nous sommes pas en mesure de réactiver votre abonnement pour le moment. Veuillez réessayer plus tard.', 'Ok', {duration: 3500});
+            this.inProgress = false;
+          }
+        );
+    } else {
+      this.inProgress = false;
+    }
+  }
+  /**
+   *
+   */
+  async cancelSubscription() {
+    this.inProgress = true;
+    const dialogData = new ConfirmModel('Confirmation', 'Souhaitez vous annuler votre abonnement ?');
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      maxWidth: "80%",
+      data: dialogData
+    });
+    const doAction = await dialogRef.afterClosed().toPromise();
+    if (doAction) {
+      this.accountService.cancelSubscription()
+        .subscribe(
+          (sub) => {
+            this.inProgress = false;
+          },
+          (err) => {
+            this.snackBar.open('Oops ! nous sommes pas en mesure d\'annuler votre abonnement pour le moment. Veuillez réessayer plus tard.', 'Ok', {duration: 3500});
+            this.inProgress = false;
+          }
+        );
+    } else {
+      this.inProgress = false;
     }
   }
 
