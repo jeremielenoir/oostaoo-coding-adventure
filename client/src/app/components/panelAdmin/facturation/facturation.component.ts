@@ -2,11 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { DatePipe } from "@angular/common";
 import pdfMake from "pdfmake/build/pdfmake";
 import { getFactureDefinition } from "./getFactureDefinition";
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { AddressComponent } from '../../address/address.component';
 import { AccountService } from 'src/app/services/account/account.service';
 import { CustomerAccount } from 'src/app/models/account.model';
 import { invoices, subscriptions, paymentIntents } from 'stripe';
+import { ConfirmModel, ConfirmComponent } from '../../home/confirm/confirm.component';
 
 export interface PeriodicElement {
   date: string;
@@ -41,7 +42,8 @@ export class FacturationComponent implements OnInit {
    */
   constructor(
     private accountService: AccountService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     this.accountService.account
       .subscribe((acc) => this.account = acc);
@@ -86,6 +88,58 @@ export class FacturationComponent implements OnInit {
 
     const newAddress = await dialogRef.afterClosed().toPromise();
     this.account.billing_address = newAddress;
+  }
+  /**
+   *
+   */
+  async enableSub() {
+    this.inProgress = true;
+    const dialogData = new ConfirmModel('Confirmation', 'Souhaitez vous réactiver votre abonnement ?');
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      maxWidth: "80%",
+      data: dialogData
+    });
+    const doAction = await dialogRef.afterClosed().toPromise();
+    if (doAction) {
+      this.accountService.enableSubscription()
+        .subscribe(
+          (sub) => {
+            this.inProgress = false;
+          },
+          (err) => {
+            this.snackBar.open('Oops ! nous sommes pas en mesure de réactiver votre abonnement pour le moment. Veuillez réessayer plus tard.', 'Ok', {duration: 3500});
+            this.inProgress = false;
+          }
+        );
+    } else {
+      this.inProgress = false;
+    }
+  }
+  /**
+   *
+   */
+  async cancelSub() {
+    this.inProgress = true;
+    const dialogData = new ConfirmModel('Confirmation', 'Souhaitez vous annuler votre abonnement ?');
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      maxWidth: "80%",
+      data: dialogData
+    });
+    const doAction = await dialogRef.afterClosed().toPromise();
+    if (doAction) {
+      this.accountService.cancelSubscription()
+        .subscribe(
+          (sub) => {
+            this.inProgress = false;
+          },
+          (err) => {
+            this.snackBar.open('Oops ! nous sommes pas en mesure d\'annuler votre abonnement pour le moment. Veuillez réessayer plus tard.', 'Ok', {duration: 3500});
+            this.inProgress = false;
+          }
+        );
+    } else {
+      this.inProgress = false;
+    }
   }
   /**
    *

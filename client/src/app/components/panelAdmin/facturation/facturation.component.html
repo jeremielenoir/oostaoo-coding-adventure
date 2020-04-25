@@ -9,19 +9,26 @@
     <div fxFlex="50" class="rdo-content-group">
       <div>
         <h3><i class="fa fa-shopping-cart icon"></i> Détails de votre abonnement</h3>
-        <button type="button" mat-stroked-button color="primary">Se désabonner</button>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+          <button [disabled]="inProgress" type="button" [routerLink]="['/subscription']"  mat-stroked-button color="primary">Change d'offre</button>
+          <button *ngIf="subscription && !subscription.cancel_at_period_end" [disabled]="inProgress" type="button" (click)="cancelSub()"  mat-stroked-button color="primary">Se désabonner</button>
+          <button *ngIf="subscription && subscription.cancel_at_period_end" [disabled]="inProgress" type="button" (click)="enableSub()" mat-stroked-button color="primary">Se réabonner</button>
+        </div>
       </div>
       <div>
-        <div *ngIf="!subscription && offer" class="rdo-loader"></div>
-        <table class="rdp-content-table" *ngIf="subscription && offer">
-          <tr><td>Statut</td><td><i class="rdo-badge-success">{{subscription.status}}</i></td></tr>
+        <div *ngIf="!subscription" class="rdo-loader"></div>
+        <table class="rdp-content-table" *ngIf="subscription">
+          <tr><td>Statut</td><td><i [ngClass]="{
+              'rdo-badge-success': !subscription?.cancel_at_period_end,
+              'rdo-badge-warn': subscription?.cancel_at_period_end
+            }">{{subscription.status}}{{subscription?.cancel_at_period_end ?  ', expire le ' + ((subscription.current_period_end*1000) | date: 'dd/MM/yyyy') : '' }}</i></td></tr>
           <tr><td>Créé le</td><td>{{(subscription.created*1000) | date: 'dd/MM/yyyy' }}</td></tr>
           <tr><td>Période courante</td><td>du {{(subscription.current_period_start*1000) | date: 'dd/MM/yyyy' }} à {{(subscription.current_period_end*1000) | date: 'dd/MM/yyyy' }}</td></tr>
           <tr><td>Montant</td><td>{{subscription? (subscription.plan.amount/100) + '€/Mois' : ''}}</td></tr>
-          <tr><td valign="top">Détails offre</td><td>
+          <tr><td valign="top">Détails offre</td><td *ngIf="offer">
             <h4 style="text-transform: uppercase;">{{offer.title}}</h4>
             <div [innerHTML]="offer.description"></div>
-          </td></tr>
+          </td><td *ngIf="!offer">Aucune offre active</td></tr>
           <!-- <tr><td>Dernière facture</td><td><i class="rpo-pdf-show fa fa-file-pdf-o" aria-hidden="true"></i></td></tr> -->
         </table>
       </div>
@@ -41,7 +48,7 @@
         <div class="rdo-content-group">
           <div>
             <h3><i class="fa fa-map-marker icon"></i> Votre adresse de facturation</h3>
-            <button type="button" mat-stroked-button (click)="addOrEditAddress()"
+            <button [disabled]="inProgress" type="button" mat-stroked-button (click)="addOrEditAddress()"
                 color="primary">{{ account && account.billing_address ? 'Editer' : 'Ajouter une adresse'}}</button>
           </div>
           <div>

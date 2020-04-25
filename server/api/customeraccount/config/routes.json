@@ -18,8 +18,24 @@
     },
     {
       "method": "GET",
+      "path": "/api/customeraccounts/:id/subscriptions/:idsub/enable",
+      "handler": "Customeraccount.subEnable",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/api/customeraccounts/:id/subscriptions",
       "handler": "Customeraccount.subFind",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/customeraccounts/:id/subscriptions/:idsub",
+      "handler": "Customeraccount.subDelete",
       "config": {
         "policies": []
       }

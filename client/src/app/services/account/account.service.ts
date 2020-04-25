@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { CustomerAccount } from 'src/app/models/account.model';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { invoices, subscriptions, paymentIntents } from 'stripe';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -79,7 +80,10 @@ export class AccountService {
   loadSubscription() {
     this.httpService.get(`${API_URI_ACCOUNT}/${this.accountId}/subscriptions`)
       .subscribe(
-        (sub) => this._subscription.next(sub),
+        (sub) => {
+          this._subscription.next(sub);
+          this.loadOffer();
+        },
         (err) => {
           // TODO show message fail to load account
         }
@@ -107,6 +111,32 @@ export class AccountService {
         (err) => {
           // TODO show message fail to load account
         }
+      );
+  }
+  /**
+   *
+   */
+  cancelSubscription() {
+    return this.httpService.delete(`${API_URI_ACCOUNT}/${this.accountId}/subscriptions/${this._subscription.value.id}`)
+      .pipe(
+        map(res => {
+          this._subscription.next(res.subscription);
+          this.loadAccount();
+          this.loadOffer();
+        })
+      );
+  }
+  /**
+   *
+   */
+  enableSubscription() {
+    return this.httpService.get(`${API_URI_ACCOUNT}/${this.accountId}/subscriptions/${this._subscription.value.id}/enable`)
+      .pipe(
+        map(res => {
+          this._subscription.next(res.subscription);
+          this.loadAccount();
+          this.loadOffer();
+        })
       );
   }
 }

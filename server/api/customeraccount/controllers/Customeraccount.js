@@ -363,6 +363,75 @@ module.exports = {
         error.message);
     }
   },
+  subEnable: async (ctx) => {
+
+    try {
+
+      const account = ctx.state.user.customeraccount;
+
+      if (ctx.state.user.role.type !== 'account_admin') {
+        return ctx.unauthorized();
+      }
+
+      const subscriptions = await stripe.subscriptions.list({
+        customer: account.stripe_customer_id,
+        limit: 1
+      });
+
+      if (subscriptions && subscriptions.data[0]) {
+        const subscription = await stripe.subscriptions.update(subscriptions.data[0].id, {cancel_at_period_end: false});
+        if (subscription) {
+          ctx.send({subscription});
+        } else {
+          ctx.throw(500, 'failed to enable subscription');
+        }
+      } else {
+        ctx.notFound();
+      }
+
+    } catch (error) {
+      console.error(error);
+      ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: error.message, field: error.field }] }] :
+        error.message);
+    }
+  },
+  /**
+   *
+   */
+  subDelete: async (ctx) => {
+
+    try {
+
+      const account = ctx.state.user.customeraccount;
+
+      if (ctx.state.user.role.type !== 'account_admin') {
+        return ctx.unauthorized();
+      }
+
+      const subscriptions = await stripe.subscriptions.list({
+        customer: account.stripe_customer_id,
+        limit: 1
+      });
+
+      if (subscriptions && subscriptions.data[0]) {
+        const subscription = await stripe.subscriptions.update(subscriptions.data[0].id, {cancel_at_period_end: true});
+        if (subscription) {
+          ctx.send({subscription});
+        } else {
+          ctx.throw(500, 'failed to cancel subscription');
+        }
+      } else {
+        ctx.notFound();
+      }
+
+    } catch (error) {
+      console.error(error);
+      ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: error.message, field: error.field }] }] :
+        error.message);
+    }
+  },
   /**
    *
    */
@@ -383,6 +452,7 @@ module.exports = {
       if (subscriptions && subscriptions.data[0]) {
         const subscription = await stripe.subscriptions.retrieve(subscriptions.data[0].id);
         if (subscription) {
+          await strapi.services.customeraccount.repairAccountOffer(account);
           ctx.send(subscription);
         } else {
           ctx.send({});

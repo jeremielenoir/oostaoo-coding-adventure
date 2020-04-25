@@ -583,5 +583,24 @@ module.exports = {
    *
    */
   retrieveTestsStock: async (user, account) => {
+  },
+  /**
+   *
+   */
+  repairAccountOffer: async (account) => {
+    const subscriptions = await stripe.subscriptions.list({
+      customer: account.stripe_customer_id,
+      limit: 1
+    });
+    if (subscriptions && subscriptions.data[0]) {
+      const subscription = await stripe.subscriptions.retrieve(subscriptions.data[0].id);
+      if (subscription) {
+        // read repair
+        if (subscription.status === 'active' && !account.offer) {
+          const offs = (await strapi.services.offer.fetchAll({ plan: subscription.plan.id })).toJSON();
+          await strapi.services.customeraccount.edit({ id: account.id }, { offer: offs[0].id });
+        }
+      }
+    }
   }
 };
