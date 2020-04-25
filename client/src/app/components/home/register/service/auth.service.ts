@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { API_URI_CAMPAIGNS, ApiClientService, API_URI_USER, API_URI_USERS_BY_ADMIN } from './../../../../api-client/api-client.service';
 
 // authentication service is used to LOGIN and LOGOUT of the application
@@ -12,15 +12,17 @@ import { API_URI_CAMPAIGNS, ApiClientService, API_URI_USER, API_URI_USERS_BY_ADM
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+
   currentUserSubject: BehaviorSubject<any>;
+
   constructor(private http: HttpClient, public apiClientService: ApiClientService) {
-  this.currentUserSubject = new BehaviorSubject(localStorage.getItem('currentUser'));
+    this.currentUserSubject = new BehaviorSubject(localStorage.getItem('currentUser'));
   }
 
   public get currentUserValue() {
     this.currentUserSubject = new BehaviorSubject(localStorage.getItem('currentUser'));
-    console.log('currentUserSubject : ', this.currentUserSubject);
-  return this.currentUserSubject.value;
+    // console.log('currentUserSubject : ', this.currentUserSubject);
+    return this.currentUserSubject.value;
   }
 
   // login
@@ -30,7 +32,7 @@ export class AuthenticationService {
         // the backend service sends an instance of the user
         // user: any (because .post<any>)
         map(user => {
-          console.log('AUTH SERVICE user: ', user);
+          // console.log('AUTH SERVICE user: ', user);
           // login successful if the response has jwt token
           if (user && user.jwt) {
             // store user details and jwt token in the local storage to keep the user logged in between page refreshes

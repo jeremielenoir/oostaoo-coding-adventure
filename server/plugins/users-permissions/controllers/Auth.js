@@ -83,7 +83,7 @@ module.exports = {
         ctx.send({
           jwt: strapi.plugins['users-permissions'].services.jwt.issue(
             _.pick(user.toJSON ? user.toJSON() : user,
-           ['_id', 'id', 'adminId', 'offer_id', 'tests_available'])
+           ['_id', 'id', 'adminId', 'offer_id', 'tests_available', 'customeraccount', 'entreprise'])
          ),
           user: _.omit(user.toJSON ? user.toJSON() : user, ['password', 'resetPasswordToken'])
         });

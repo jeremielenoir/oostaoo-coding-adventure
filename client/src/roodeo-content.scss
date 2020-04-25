@@ -9,6 +9,14 @@
   border-radius: $border-radius;
 }
 
+.rdo-panel-neg {
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+  padding: 30px;
+  margin: 30px;
+}
+
 .rdo-panel-header {
   margin-bottom: 20px;
   flex-direction: row;
@@ -17,11 +25,12 @@
   place-content: stretch space-between;
   align-items: stretch;
 
-  h2 {
+  h2, h3 {
     i {
       color: $color-orange;
     }
   }
+
 }
 
 .rdo-content-group {
@@ -45,4 +54,29 @@
   & > :nth-child(2) {
     padding: 10px 5px 5px 5px;
   }
+}
+
+
+.rdp-content-table {
+  & > tbody {
+    & > tr {
+      margin-bottom: 20px;
+      & > :nth-child(1) {
+        text-align: right;
+        font-weight: bold;
+        padding-right: 25px;
+        color: gray;
+        font-size: .9rem;
+        padding-bottom: 20px;
+      }
+      & > :nth-child(2) {
+        padding-bottom: 20px;
+      }
+    }
+  }
+}
+
+.rpo-pdf-show {
+  font-size: 1.5rem;
+  cursor: pointer;
 }

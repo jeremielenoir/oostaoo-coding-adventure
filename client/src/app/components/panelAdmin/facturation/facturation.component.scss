@@ -1,4 +1,8 @@
 @import "../../../../roodeo-variables.scss";
+@import "../../../../roodeo-content.scss";
+@import "../../../../roodeo-table.scss";
+@import "../../../../roodeo-misc.scss";
+@import "../../../../roodeo-form.scss";
 
 /deep/ #nav-menu {
   top: 0;
@@ -6,6 +10,12 @@
 
 /deep/ .header-notification {
   top: 0;
+}
+
+.rdo-loader {
+  width: 30px;
+  height: 30px;
+  background: center / contain no-repeat url(./../../../../assets/loader.gif);
 }
 
 .billing-main-content {

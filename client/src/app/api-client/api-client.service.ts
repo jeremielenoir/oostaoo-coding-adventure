@@ -97,5 +97,15 @@ export class ApiClientService {
       catchError(this.handleError)
     );
   }
+  /**
+   * Methode put()
+   * @param path
+   * @param payload
+   */
+  patch(path: string, payload: any): Observable<any> {
+    return this.http.patch<any>(path, payload).pipe(
+      catchError(this.handleError)
+    );
+  }
 
 }

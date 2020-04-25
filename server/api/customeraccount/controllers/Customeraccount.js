@@ -74,6 +74,13 @@ module.exports = {
     return strapi.services.customeraccount.remove(ctx.params);
   },
   /**
+   *
+   */
+  offerFind: async (ctx) => {
+    const user = ctx.state.user;
+    return strapi.services.offer.fetch({id: user.customeraccount.offer});
+  },
+  /**
    * customeraccount.offer api
    */
   offerCreate: async (ctx) => {
@@ -94,7 +101,6 @@ module.exports = {
       }
 
       let intent;
-
       if (paymentMethod) { // payment process started
 
         intent = await strapi.services.customeraccount.startPaymentIntent(
@@ -110,7 +116,7 @@ module.exports = {
       // parse stripe intent response
       const parsedIntent = strapi.services.customeraccount.parsePaymentIntent(intent);
 
-      console.log(`parsed intent for account ${account.id}`, parsedIntent);
+      strapi.log.info(`parsed intent for account ${account.id}`, parsedIntent);
 
       if (parsedIntent.done) {
         await strapi.services.customeraccount.onPaymentSucceed(intent, account, ctx.state.user);
@@ -118,7 +124,9 @@ module.exports = {
 
       ctx.send(parsedIntent);
 
+
     } catch (e) {
+      strapi.log.error(e);
       ctx.status = e.status || 500;
       ctx.body = { status: 'error', message: { code: 'stripe_paiement', message: e.message } };
       ctx.app.emit('error', e, ctx);
@@ -329,5 +337,165 @@ module.exports = {
       ctx.body = { status: 'error', message: { code: 'error', message: 'fail to remove user' } };
     }
 
+  },
+  /**
+   *
+   */
+  pmsFind: async (ctx) => {
+
+    try {
+
+      const account = ctx.state.user.customeraccount;
+
+      if (ctx.state.user.role.type !== 'account_admin') {
+        return ctx.forbidden(null, 'Action interdite.');
+      }
+
+      const customer = await stripe.customers.retrieve(account.stripe_customer_id,
+        {expand: ['invoice_settings.default_payment_method']});
+
+      ctx.send(customer.invoice_settings.default_payment_method);
+
+    } catch (error) {
+      console.error(error);
+      ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: error.message, field: error.field }] }] :
+        error.message);
+    }
+  },
+  subEnable: async (ctx) => {
+
+    try {
+
+      const account = ctx.state.user.customeraccount;
+
+      if (ctx.state.user.role.type !== 'account_admin') {
+        return ctx.unauthorized();
+      }
+
+      const subscriptions = await stripe.subscriptions.list({
+        customer: account.stripe_customer_id,
+        limit: 1
+      });
+
+      if (subscriptions && subscriptions.data[0]) {
+        const subscription = await stripe.subscriptions.update(subscriptions.data[0].id, {cancel_at_period_end: false});
+        if (subscription) {
+          ctx.send({subscription});
+        } else {
+          ctx.throw(500, 'failed to enable subscription');
+        }
+      } else {
+        ctx.notFound();
+      }
+
+    } catch (error) {
+      console.error(error);
+      ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: error.message, field: error.field }] }] :
+        error.message);
+    }
+  },
+  /**
+   *
+   */
+  subDelete: async (ctx) => {
+
+    try {
+
+      const account = ctx.state.user.customeraccount;
+
+      if (ctx.state.user.role.type !== 'account_admin') {
+        return ctx.unauthorized();
+      }
+
+      const subscriptions = await stripe.subscriptions.list({
+        customer: account.stripe_customer_id,
+        limit: 1
+      });
+
+      if (subscriptions && subscriptions.data[0]) {
+        const subscription = await stripe.subscriptions.update(subscriptions.data[0].id, {cancel_at_period_end: true});
+        if (subscription) {
+          ctx.send({subscription});
+        } else {
+          ctx.throw(500, 'failed to cancel subscription');
+        }
+      } else {
+        ctx.notFound();
+      }
+
+    } catch (error) {
+      console.error(error);
+      ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: error.message, field: error.field }] }] :
+        error.message);
+    }
+  },
+  /**
+   *
+   */
+  subFind: async (ctx) => {
+    try {
+
+      const account = ctx.state.user.customeraccount;
+
+      if (ctx.state.user.role.type !== 'account_admin') {
+        return ctx.forbidden(null, 'Action interdite.');
+      }
+
+      const subscriptions = await stripe.subscriptions.list({
+        customer: account.stripe_customer_id,
+        limit: 1
+      });
+
+      if (subscriptions && subscriptions.data[0]) {
+        const subscription = await stripe.subscriptions.retrieve(subscriptions.data[0].id);
+        if (subscription) {
+          await strapi.services.customeraccount.repairAccountOffer(account);
+          ctx.send(subscription);
+        } else {
+          ctx.send({});
+        }
+      } else {
+        ctx.send({});
+      }
+
+    } catch (error) {
+      console.error(error);
+      ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: error.message, field: error.field }] }] :
+        error.message);
+    }
+  },
+  /**
+   *
+   */
+  invoicesFind: async (ctx) => {
+    try {
+
+      const account = ctx.state.user.customeraccount;
+
+      if (ctx.state.user.role.type !== 'account_admin') {
+        return ctx.forbidden(null, 'Action interdite.');
+      }
+
+      const invoices = await stripe.invoices.list({
+        customer: account.stripe_customer_id,
+        limit: 24
+      });
+
+      if (invoices && invoices.data) {
+        ctx.send(invoices.data);
+      } else {
+        ctx.send({});
+      }
+
+    } catch (error) {
+      console.error(error);
+      ctx.badRequest(null, ctx.request.admin ?
+        [{ messages: [{ id: error.message, field: error.field }] }] :
+        error.message);
+    }
   }
 };

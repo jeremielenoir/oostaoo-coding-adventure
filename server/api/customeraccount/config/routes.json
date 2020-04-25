@@ -2,6 +2,46 @@
   "routes": [
     {
       "method": "GET",
+      "path": "/api/customeraccounts/:id/invoices",
+      "handler": "Customeraccount.invoicesFind",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/customeraccounts/:id/payments-methods",
+      "handler": "Customeraccount.pmsFind",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/customeraccounts/:id/subscriptions/:idsub/enable",
+      "handler": "Customeraccount.subEnable",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/customeraccounts/:id/subscriptions",
+      "handler": "Customeraccount.subFind",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/customeraccounts/:id/subscriptions/:idsub",
+      "handler": "Customeraccount.subDelete",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/api/customeraccounts/:id/users",
       "handler": "Customeraccount.userFind",
       "config": {
@@ -28,6 +68,14 @@
       "method": "DELETE",
       "path": "/api/customeraccounts/:idacc/users/:idusr",
       "handler": "Customeraccount.userDestroy",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/customeraccounts/:id/offers",
+      "handler": "Customeraccount.offerFind",
       "config": {
         "policies": []
       }

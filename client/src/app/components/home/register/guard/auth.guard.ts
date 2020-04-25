@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
   canActivate(router: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // check if the user is logged in
     const currentUser = this.authenticationService.currentUserValue;
-    console.log('currentUser IN GUARD: ', currentUser);
+    // console.log('currentUser IN GUARD: ', currentUser);
     if (currentUser) {
       return true;
     }
