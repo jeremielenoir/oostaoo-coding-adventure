@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { DatePipe } from "@angular/common";
-import pdfMake from "pdfmake/build/pdfmake";
+//import pdfMake from "pdfmake/build/pdfmake";
 import { getFactureDefinition } from "./getFactureDefinition";
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AddressComponent } from '../../address/address.component';

@@ -2,9 +2,9 @@
 <main>
   <app-index-page [scrollPoint]="'home'" (currentSection)="setCurrentSection($event)"></app-index-page>
   <app-second-section [scrollPoint]="'home'" (currentSection)="setCurrentSection($event)"></app-second-section>
+  <app-interview [scrollPoint]="'interview'" (currentSection)="setCurrentSection($event)"></app-interview>
   <app-techno #techno [scrollPoint]="'techno'" (currentSection)="setCurrentSection($event)"></app-techno>
   <app-profiles></app-profiles>
-  <app-interview [scrollPoint]="'interview'" (currentSection)="setCurrentSection($event)"></app-interview>
   <app-fonctionnalite #fonctionnalites [scrollPoint]="'fonctionnalites'" (currentSection)="setCurrentSection($event)"></app-fonctionnalite>
   <!--app-slider></app-slider-->
   <home-offers #offers [scrollPoint]="'offers'" (currentSection)="setCurrentSection($event)"></home-offers>

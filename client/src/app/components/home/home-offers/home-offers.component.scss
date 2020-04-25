@@ -127,6 +127,11 @@
             button{
                 border-radius: 100px;
                 padding: 0 50px;
+                color: $color-orange;
+                &:hover{
+                  border: $border-table;
+                  color: $color-principal-blue;
+                }
             }
           }
 
@@ -141,8 +146,8 @@
             }
           }
           .mat-card-actions button{
-            background: $color-orange;
-            color: $color-white;
+            border: $border-table;
+            color: $color-principal-blue;
           }
         }
     }
