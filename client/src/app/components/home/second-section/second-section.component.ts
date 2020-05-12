@@ -16,6 +16,7 @@ export class SecondSectionComponent implements OnInit {
   @ViewChild("first") first: ElementRef;
   @ViewChild("second") second: ElementRef;
   @ViewChild("third") third: ElementRef;
+  duration: any = 3000;
 
   constructor(private el: Renderer2, private elementRef: ElementRef) {}
 
@@ -33,10 +34,10 @@ export class SecondSectionComponent implements OnInit {
     //   stagger(animations, 2000)
     //   .start((v) => v.forEach((x, i) => ballStylers[i].set('x', x)));
     // }, 5000);
-    const duration = 1000;
+    const duration = this.duration;
     const firstStyler = styler(this.first.nativeElement);
     tween({
-       to: { x: 900 },
+      to: { x: 900 },
       from: { x: 0 },
       duration,
       ease: easing.backOut,
@@ -58,7 +59,7 @@ export class SecondSectionComponent implements OnInit {
     }).start(secondStyler.set);
     const thirdStyler = styler(this.third.nativeElement);
     tween({
-       to: { x: -200 },
+      to: { x: -200 },
       from: { x: 200 },
       duration,
       ease: easing.backOut,
