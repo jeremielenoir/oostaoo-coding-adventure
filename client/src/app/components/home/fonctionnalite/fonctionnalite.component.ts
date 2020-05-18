@@ -20,7 +20,7 @@ export class FonctionnaliteComponent implements OnInit {
     //console.log('CAROUSEL', this.carousel);
     this.intervalId = setInterval( () => {
       this.carousel.next();
-    }, 6000);
+    }, 5000);
   }
 
   ngOnDestroy() {

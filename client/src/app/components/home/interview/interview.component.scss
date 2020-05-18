@@ -1,5 +1,68 @@
 @import"../../../../roodeo-variables.scss";
 
+
+@keyframes animation{
+    from {left: -120px}
+    25% {left: -90px}
+    50% {left: -60px}
+    75% {left: -30px}
+    to {left: 0px}
+}
+
+@keyframes fadeout{
+    from {opacity: 0}
+    25% {opacity: 0.2}
+    50% {opacity: 0.4}
+    75% {opacity: 0.6}
+    to {opacity: 1}
+}
+
+:host.active-section #interview{
+    .content {
+        .intro{
+            animation-name: fadeout;
+            animation-duration: 500ms;
+            animation-timing-function: linear;
+            position: relative;
+            animation-fill-mode: forwards;
+        }
+        .second{
+            
+            animation-name: fadeout;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            position: relative;
+            animation-delay: 500ms;
+            animation-fill-mode: forwards;
+        }
+        .third{
+            animation-name: fadeout;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            position: relative;
+            animation-delay: 2s;
+            animation-fill-mode: forwards;
+        }
+        .fourth{
+            animation-name: fadeout;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            position: relative;
+            animation-delay: 3s;
+            animation-fill-mode: forwards;
+        }
+        .illustration{
+            animation-name: fadeout;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            position: relative;
+            animation-delay: 4s;
+            animation-fill-mode: forwards;
+        }
+    }
+    
+}
+
 #interview{
     padding: 60px 20px 20px 40px;
     margin: 0 auto;
@@ -15,12 +78,13 @@
         margin: 40px 0px;
 
         > div{
+            opacity: 0;
             color: $color-principal-blue;
             font-size: 15px;
             padding: 30px 0px 30px 0px;
             margin: 20px auto;
-            background: rgb(242,247,249);
-background: linear-gradient(90deg, rgba(242,247,249,1) 4%, rgba(255,255,255,1) 10%, rgba(255,255,255,1) 90%, rgba(242,247,249,1) 96%);
+            //background: rgb(242,247,249);
+            background: linear-gradient(90deg, rgba(242,247,249,1) 4%, rgba(255,255,255,1) 10%, rgba(255,255,255,1) 90%, rgba(242,247,249,1) 96%);
             h2,h3{
                 margin: 0px auto;
                 width: 85%;

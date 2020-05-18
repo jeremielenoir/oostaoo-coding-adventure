@@ -43,6 +43,7 @@
       }
 
       &.first{
+        z-index: 1;
         padding-left: 0px;
         padding-right: 60px;
         .img-text {
@@ -52,6 +53,8 @@
       }
 
       &.middle{
+        z-index: 2;
+        left: -200px;
         padding-left: 30px;
         padding-right: 30px;
         .img-text {
@@ -61,6 +64,8 @@
       }
 
       &.last{
+        z-index: 3;
+        left: -200px;
         padding-left: 60px;
         padding-right: 0px;
         .img-text {
