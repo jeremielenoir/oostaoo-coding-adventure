@@ -47,7 +47,7 @@ phases:
       - cp -R ./client/dist/client/* ./client_built
       # remove all folders except build files
       - rm -rf ./client ./server ./interview
-      - mv -r ./client_built ./
+      - mv ./client_built/* ./
       - rmdir client_built
       # check that the translations folders exist
       - $([ -d "./en" ])
