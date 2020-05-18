@@ -45,16 +45,18 @@ phases:
       - echo Entered the post_build phase...
       - mkdir ./client_built
       - cp -R ./client/dist/client/* ./client_built
-      - rm -rf ./client
-      - mv ./client_built ./client
+      # remove all folders except build files
+      - rm -rf ./client ./server ./interview
+      - mv -r ./client_built ./
+      - rmdir client_built
       # check that the translations folders exist
-      - $([ -d "./client/en" ])
-      - $([ -d "./client/es" ])
-      - $([ -d "./client/fr" ])
-      - $([ -d "./client/jp" ])
+      - $([ -d "./en" ])
+      - $([ -d "./es" ])
+      - $([ -d "./fr" ])
+      - $([ -d "./jp" ])
       - echo "\n ======== Build completed on $(date) ======== \n"
 
 artifacts:
   files:
-    - 'client/**/*'
+    - './**/*'
   name: roodeo-scalable-assets
