@@ -12,6 +12,9 @@ const _ = require('lodash');
 
 // Strapi utilities.
 const utils = require('strapi-hook-bookshelf/lib/utils/');
+const pdf = require("html-pdf");
+const ejs = require("ejs");
+const path = require("path");
 
 module.exports = {
 
@@ -239,5 +242,47 @@ module.exports = {
     }).fetchAll({
       withRelated: populate
     });
-  }
+  },
+
+
+   /**
+   * Promise to facture pdf file.
+   *
+   * @return {Promise}
+   */
+
+  reportBillPdf: async (id, data) => {
+    try {
+      
+console.log("id",id)
+console.log("data",data)
+      const templatePath = path.join(
+        __dirname,
+        "../../../facture-template/",
+        "template.ejs"
+      );
+      const pdfPath = path.join(
+        __dirname,
+        "../../../facture-template/facture-report/",
+        `${id}.pdf`
+      );
+
+      const processFile = () =>
+        new Promise((resolve, reject) => {
+          ejs.renderFile(templatePath, { data}, (err, data) => {
+            if (err) reject(err);
+            pdf.create(data).toFile(pdfPath, function (err, data) {
+              if (err) reject(err);
+
+              resolve(data.filename);
+            });
+          });
+        });
+
+      const result = await processFile();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
