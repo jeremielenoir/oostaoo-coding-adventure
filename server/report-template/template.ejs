@@ -10,16 +10,166 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <style>
+   /* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v9/pxiEyp8kv8JHgFVrJJbecmNE.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v9/pxiEyp8kv8JHgFVrJJnecmNE.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v9/pxiEyp8kv8JHgFVrJJfecg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+    /*Colors*/
+    /*Override properties for hover.css*/
+    /*Responsive*/
+    /*Font*/
+    /*Borders*/
+    /*Path logo*/
+
+    .subtitle_h5 {
+      font-size: 10px;
+    }
+
+    .title-dashed {
+      color: #1d3552;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-indent: 20px;
+    }
+
+    .dashed {
+      padding: 4px;
+      display: block;
+      background-color: white;
+      border: 1px solid #7eb5ce;
+      border-radius: 100px;
+      width: 125px;
+      position: relative;
+      top: 10px;
+    }
+
+    ::ng-deep .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {
+      background-color: #e34e26 !important;
+    }
+
+    ::ng-deep .mat-checkbox-checked.mat-accent ::ng-deep .mat-checkbox-background,
+    ::ng-deep .mat-checkbox-indeterminate.mat-accent ::ng-deep.mat-checkbox-background {
+      background-color: #e34e26 !important;
+    }
+
+    ::ng-deep .mat-checkbox-label {
+      margin: 0px 20px;
+      padding-top: 3px;
+    }
+
+    #content {
+      width: 100%;
+      height: 100%;
+      padding: 15px 12px 10px;
+      color: #1d3552;
+      background: #c1d5df;
+    }
+
+    #container {
+      background: white;
+      border: 1px solid #1d3552;
+      border-radius: 4px;
+      padding: 15px 30px;
+      margin: auto;
+      width: 98%;
+      line-height: 40px;
+    }
+
+    .header_result {
+      display: flex;
+      justify-content: space-between;
+      width: 70%;
+      text-align: center;
+      align-items: center;
+      padding-top: 9px;
+      padding-bottom: 9px;
+    }
+
+    .header_stats {
+      color: #e34e26;
+      font-size: 12px;
+    }
+
+    .progressbar_container {
+      height: 100px;
+      width: 100px;
+    }
+
+    .header_question {
+      width: 70%;
+      display: flex;
+      flex: 1;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .question_number {
+      color: #e34e26;
+    }
+
+    .subtitle_h5 {
+      text-transform: uppercase;
+    }
+
+    #techno:empty {
+      display: none;
+    }
+
+    .right_answer {
+      color: green;
+    }
+
+    .wrong_answer {
+      color: red;
+    }
+
+    .separator {
+      border: 1px solid #ddd;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .separator_red {
+      border: 1px solid #ddd;
+      margin: 9px 0px;
+    }
+  </style>
 </head>
 
 <body>
   <div id="content">
     <div id="container">
       <div class="header-detail">
-        <h2>
-
-          <%=candidat.campaign.Name  %>
-        </h2>
+        <h2><%=candidat.campaign.Name  %> </h2>
       </div>
 
       <div>
@@ -40,6 +190,8 @@
               [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'" [animationDelay]="100">
             </round-progress>
           </div> -->
+
+
 
 
         <div>
@@ -122,8 +274,8 @@
 
         <div *ngIf="question.array_rep_candidat  ==  answervalue">
           <p> <span class="right_answer">
-              Réponse correcte :</span>{{ question.index_question.theme }}</p>
-          <p>Votre réponse : {{ question.array_rep_candidat }}</p>
+              Réponse correcte :</span><%=question.index_question.theme%></p>
+          <p>Votre réponse : <%=question.array_rep_candidat %></p>
         </div>
 
         <%if(question.array_rep_candidat =="answervalue")  {%>
@@ -146,54 +298,11 @@
 
         <% }); %>
 
-        <!-- <div *ngFor="let question of rapport; let i = index; let tech of techno">
-           <div *ngFor="let answervalue of question.index_question.answer_value">
-    
-            <h3 class="question_number">Question {{ i+1 }} </h3>
-            <div class="header_question">
-              <p id="techno" *ngFor="let tech of techno">
-                <span *ngIf="question.index_question.technologies == tech.id"> {{tech.name}} </span>
-              </p>
-    
-              <p>{{ fmtMSS(question.timeRep) }} / {{ fmtMSS(question.index_question.time) }}</p>
-              <p *ngIf="question.array_rep_candidat  ==  answervalue ">
-                {{ question.index_question.points }} / {{ question.index_question.points }} pts</p>
-              <p *ngIf=" question.array_rep_candidat  !=  answervalue "> 0 /
-                {{ question.index_question.points }} pts</p>
-            </div>
-           
-            <h5 class="subtitle_h5">Question :</h5>
-            <p> - {{ question.index_question.name }}</p>
-    
-            <h5 class="subtitle_h5">Réponse :</h5>
-              
-                <ul *ngFor="let reponse of question.index_question.content" >
-                  <li [ngClass]="{'right_answer': question.array_rep_candidat == reponse &&  reponse == answervalue,
-                   'wrong_answer': question.array_rep_candidat == reponse &&  question.array_rep_candidat != answervalue}">
-                    - {{ reponse }}
-                  </li>
-                </ul>
-    
-            
-    
-            <h5 class="subtitle_h5">Résultats :</h5>
-            <div *ngIf="question.array_rep_candidat  ==  answervalue">
-            <p> <span class="right_answer">
-                Réponse correcte :</span>{{ question.index_question.theme }}</p>
-                <p>Votre réponse :  {{ question.array_rep_candidat }}</p>
-            </div>
-            <div *ngIf="question.array_rep_candidat  !=  answervalue">
-              <p class="wrong_answer">Mauvaise réponse</p>
-              <p>Votre réponse :  {{ question.array_rep_candidat }}</p>
-              <p>{{ question.index_question.answer_value.length > 1 ? 'Les réponses correctes sont' : 'La réponse correcte est'  }} : {{ question.index_question.answer_value  }}</p>
-            </div>
-    
-            <hr class="separator_red" size="1">
-            </div>
-          </div> -->
+
       </div>
     </div>
   </div>
+
 </body>
 
 </html>
