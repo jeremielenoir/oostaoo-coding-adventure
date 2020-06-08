@@ -1,6 +1,6 @@
 <div #header id="navbar" [className]="shouldShow ? 'remove-index' : 'add-index'">
   <mat-toolbar color="primary">
-    <img [routerLink]="[ '/home']" id="logo" src="../../assets/logo_ROODEO.svg" alt="Logo" />
+    <img [routerLink]="['/home']" id="logo" src="../../assets/logo_ROODEO.svg" alt="Logo" />
 
     <mat-toolbar-row class="super">
       <!--button
@@ -35,23 +35,31 @@
         <a (click)="gotToLoginPage()" class="link-menu mat-button hvr-fade" i18n>Connection</a>
 
         <div class="align_flags">
-            <!-- <button mat-button [matMenuTriggerFor]="menu">  -->
+         
               <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
               <img  class="flags_img" src="{{currentLanguage}}" alt="Français">
               <i class="fas fa-caret-down arrow"></i>
             </div>
-            <!-- </button> -->
+           
             <mat-menu #menu="matMenu">
               <div *ngFor="let language of otherLanguage">
                 <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage' mat-menu-item><img class="flags_img" src="{{language.img}}" alt=""></button>
               </div>
             </mat-menu>
-      </div>
-      
-      
+        </div>
+
+       
       </div>
     </mat-toolbar-row>
+
+    <div id="icon" #icon (click)="openBurgeur()" [class.open]="activeBurgeur">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </mat-toolbar>
+  
+
   <mat-sidenav-container (click)="showOrHideManually()" fxFlexFill class="fixe-nav">
     <mat-sidenav #sidenav>
       <mat-nav-list>
@@ -64,3 +72,34 @@
     </mat-sidenav>
   </mat-sidenav-container>
 </div>
+
+<nav id="menuBurgeur">
+   <a href="" class="logo-burgeur">
+      <img src="../../assets/logo_ROODEO.svg" alt="" />
+   </a>
+  <ul class="nav-burgeur">
+      <li><a href=""> Test the developers </a></li>
+      <li><a href=""> Technical Interviews  </a></li>
+      <li><a href=""> Technologies  </a></li>
+      <li><a href=""> Features  </a></li>
+      <li style="border:1px solid red;">
+        <a href="">
+          Connection
+        </a>
+        <div class="align_flags">
+         
+          <div class="flags_menu link-menu" [matMenuTriggerFor]="menuBurgeur">
+            <img  class="flags_img" src="{{currentLanguage}}" alt="Français">
+            <i class="fas fa-caret-down arrow"></i>
+          </div>
+        
+          <mat-menu #menuBurgeur="matMenu">
+            <div *ngFor="let language of otherLanguage">
+              <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage' mat-menu-item><img class="flags_img" src="{{language.img}}" alt=""></button>
+            </div>
+          </mat-menu>
+        </div>
+      </li>
+  </ul>
+
+</nav>
