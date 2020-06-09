@@ -275,48 +275,7 @@ button.mat-menu-item {
 
 }
 
-#menuBurgeur{
-  position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 250px;
-    background: #fff;
-    box-shadow: 4px 0 0 rgba(34,34,34,.1);
-    z-index: 150000;
-    // -webkit-transform: translateX(-120%);
-    // -ms-transform: translateX(-120%);
-    // transform: translateX(-120%);
-    -webkit-transition: all 500ms ease-in-out;
-    transition: all 500ms ease-in-out;
-    .logo-burgeur{
-      margin: 18px;
-      width: 150px;
-      height: auto;
-      display: flex;
-      justify-content: center;
-      img{
-        width: 100%;
-        height: 100%;
-      }
-    }
-    .nav-burgeur{
-      padding-top: 40px;
-      li{
-        a{
-          display: block;
-          padding: 14px;
-          font-size: .875em;
-          color: #3D3D3D;
-          line-height: 100%;
-          margin-bottom: 6px;
-          &:hover{
-            background: #dedede;
-          }
-         }
-      }
-    }
-}
+
 
 
 
@@ -331,6 +290,78 @@ button.mat-menu-item {
 
 
 @media screen and (max-width: 960px) {
+  #menuBurgeur.openBurgeur{
+    -webkit-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    transform: translateX(0%);
+  }
+  
+  #menuBurgeur{
+    position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 250px;
+      background: #fff;
+      box-shadow: 4px 0 0 rgba(34,34,34,.1);
+      z-index: 150000;
+      -webkit-transform: translateX(-120%);
+      -ms-transform: translateX(-120%);
+      transform: translateX(-120%);
+      -webkit-transition: all 500ms ease-in-out;
+      transition: all 500ms ease-in-out;
+      .logo-burgeur{
+        margin: 18px;
+        width: 150px;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .nav-burgeur{
+        padding-top: 40px;
+        li{
+          a{
+            display: block;
+            padding: 14px;
+            font-size: .875em;
+            color: #3D3D3D;
+            line-height: 100%;
+            margin-bottom: 6px;
+            &:hover{
+              background: #dedede;
+            }
+           }
+        }
+  
+        .last-list-flags{
+          display: flex;
+          flex-direction: row;
+          margin-top: 29px;
+          margin-left: 9px;
+          span{
+            display: block;
+            text-align: center;
+            margin: 0px 4px;
+            padding-right: 6px;
+            width: 42px;
+            height: 42px;
+            border:1px solid #e34e26;
+            border-radius: 100px;
+            cursor: pointer;
+            img{
+              width: 41px;
+              height: 100%;
+              text-align: center;
+             
+            }
+          }
+        }
+      }
+  }
   #icon{
     display: block!important;
   }
