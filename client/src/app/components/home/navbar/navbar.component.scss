@@ -276,6 +276,10 @@ button.mat-menu-item {
 }
 
 
+#menuBurgeur{
+  display: none;
+}
+
 
 
 
@@ -297,6 +301,7 @@ button.mat-menu-item {
   }
   
   #menuBurgeur{
+    display: block!important;
     position: fixed;
       top: 0;
       left: 0;
