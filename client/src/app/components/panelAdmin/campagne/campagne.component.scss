@@ -248,6 +248,10 @@
   }
   
 
+  [hidden] {  //override display flex of .contenu-techno-content for included archive
+    display: none !important;
+  }
+
     .content-scroll {
       overflow-y: auto;
       flex: 1 1 0px;
