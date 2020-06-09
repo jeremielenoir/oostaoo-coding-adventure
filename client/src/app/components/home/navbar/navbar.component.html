@@ -34,6 +34,7 @@
         <!--a (click)="logout()">Se déconnecter</a-->
         <a (click)="gotToLoginPage()" class="link-menu mat-button hvr-fade" i18n>Connection</a>
 
+
         <div class="align_flags">
          
               <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
@@ -73,7 +74,7 @@
   </mat-sidenav-container>
 </div>
 
-<nav id="menuBurgeur">
+<nav id="menuBurgeur" [class.openBurgeur]="activeBurgeur">
    <a href="" class="logo-burgeur">
       <img src="../../assets/logo_ROODEO.svg" alt="" />
    </a>
@@ -82,24 +83,16 @@
       <li><a href=""> Technical Interviews  </a></li>
       <li><a href=""> Technologies  </a></li>
       <li><a href=""> Features  </a></li>
-      <li style="border:1px solid red;">
-        <a href="">
-          Connection
-        </a>
-        <div class="align_flags">
-         
-          <div class="flags_menu link-menu" [matMenuTriggerFor]="menuBurgeur">
-            <img  class="flags_img" src="{{currentLanguage}}" alt="Français">
-            <i class="fas fa-caret-down arrow"></i>
-          </div>
-        
-          <mat-menu #menuBurgeur="matMenu">
-            <div *ngFor="let language of otherLanguage">
-              <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage' mat-menu-item><img class="flags_img" src="{{language.img}}" alt=""></button>
-            </div>
-          </mat-menu>
-        </div>
+      <li><a href=""> Connection </a> </li>
+      <li class="last-list-flags">
+          <span *ngFor="let otherLanguageSingle of otherLanguage">
+            <img src="{{otherLanguageSingle.img}}" alt=""/>
+          </span>
+          
       </li>
+
   </ul>
 
+
 </nav>
+
