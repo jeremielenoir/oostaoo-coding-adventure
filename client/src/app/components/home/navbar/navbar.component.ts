@@ -35,6 +35,7 @@ export class NavbarComponent implements OnInit {
   public IsheaderTrue = false;
   public AddIndex = false;
   public lang = 'en-US';
+  public activeBurgeur = false
 
   public currentLanguage;
   public otherLanguage = [
@@ -45,7 +46,6 @@ export class NavbarComponent implements OnInit {
   ];
 
   @ViewChild('header') header;
-  
 
   public showOrHideManually() {
     this.shouldShow = !this.shouldShow;
@@ -116,5 +116,9 @@ export class NavbarComponent implements OnInit {
     
     this.currentLanguage = langage.img;
     window.parent.location.href = langage.url;
+  }
+
+  openBurgeur(){
+    this.activeBurgeur = !this.activeBurgeur;
   }
 }

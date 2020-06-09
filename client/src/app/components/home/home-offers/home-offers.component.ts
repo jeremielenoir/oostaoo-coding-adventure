@@ -36,6 +36,10 @@ export class HomeOffersComponent implements OnInit {
       );*/
     }
 
+    scrollToTop(){
+      window.scrollTo(0, 0);
+    }
+
     goBack(){
         this.router.navigate(['/dashboard/campaigns']);
     }

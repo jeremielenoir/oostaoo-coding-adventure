@@ -67,9 +67,13 @@ export class NouvelleCampagnePage1Component implements OnInit {
       case 'jp-JP':
       this.nameLanguage = 'name_jp';
       break;
+      default:
+      this.nameLanguage = 'name_en';
+
     }
 
-    console.log('content this.nameLanguage',this.nameLanguage)
+    console.log('content this.nameLanguage',this.nameLanguage);
+    
   }
 
   // somme(a, b) {
@@ -78,7 +82,8 @@ export class NouvelleCampagnePage1Component implements OnInit {
 
   getProfiles() {
     this.apiClientService.get(API_URI_PROFILES).subscribe(datas => {
-      return (this.profiles = datas);
+      (this.profiles = datas);
+       return console.log('profiles=', this.profiles);
     });
   }
 

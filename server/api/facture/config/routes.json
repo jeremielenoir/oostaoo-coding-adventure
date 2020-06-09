@@ -8,6 +8,8 @@
         "policies": []
       }
     },
+
+   
     {
       "method": "GET",
       "path": "/api/factures/count",
@@ -44,6 +46,13 @@
       "method": "DELETE",
       "path": "/api/factures/:id",
       "handler": "Facture.destroy",
+      "config": {
+        "policies": []
+      }
+    }, {
+      "method": "GET",
+      "path": "/api/facture-report-pdf/:id",
+      "handler": "Facture.generateBillPdf",
       "config": {
         "policies": []
       }
