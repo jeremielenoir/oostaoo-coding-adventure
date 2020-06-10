@@ -30,6 +30,7 @@ export const API_URI_FAQ: string = prefix + 'faqs';
 export const API_URI_ISSUE: string = prefix + 'issues';
 export const API_URI_ROLE: string =  'users-permissions/roles';
 export const EXECUTE_SCRIPT: string = prefix + 'questions/execute';
+export const API_POPULATE_QUESTIONS_SPREADSHEET: string = prefix + 'questions/populate/';
 
 //Bp6PnJmoydK5rz6o
 

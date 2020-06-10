@@ -132,6 +132,7 @@ import { AddressComponent } from './components/address/address.component';
 import { CreditcardComponent } from './components/creditcard/creditcard.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { MatProgressBarModule } from '@angular/material';
+import { QuestionsComponent } from './components/questions/questions.component';
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -239,6 +240,7 @@ import { MatProgressBarModule } from '@angular/material';
     AddressComponent,
     CreditcardComponent,
     ContactComponent,
+    QuestionsComponent,
   ],
   imports: [
     BrowserModule,

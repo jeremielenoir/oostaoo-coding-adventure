@@ -13,13 +13,28 @@
 .secondSection {
   padding: 40px 20px 40px 40px;
   margin: 0px auto;
+
   /*border-bottom: $border-table;
   -webkit-box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40); 
   box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);*/
 
-  .content{
-    margin: 0 40px;
+  .row-content{
+    display: flex;
+    flex-direction: row;
+  }
 
+  .content-left{
+    flex: 2;
+    img{
+      width: 100%;
+    }
+  }
+
+  .content{
+    flex:1;
+    display: flex;
+    align-items: center;
+    // margin: 0 40px;
     .img-text{
       position: absolute;
       width: 100%;
@@ -29,14 +44,16 @@
       color: $color-principal-blue;
     }
 
-    
-
-
-    > div{
-      width: 33%;
-      padding: 25px 0px 10px 0px;
+    div{
+      width: 395px;
+      height: 399px;
       text-align: center;
-      position: relative;
+      position: absolute;
+      
+      img{
+        width: 395px;
+        height: 399px;
+      }
       
       .label-profil{
         color: $color-principal-blue;
@@ -45,7 +62,7 @@
       &.first{
         z-index: 1;
         padding-left: 0px;
-        padding-right: 60px;
+        // padding-right: 60px;
         .img-text {
           padding-right: 60px;
         }
@@ -54,9 +71,9 @@
 
       &.middle{
         z-index: 2;
-        left: -200px;
-        padding-left: 30px;
-        padding-right: 30px;
+        // left: -200px;
+        // padding-left: 30px;
+        // padding-right: 30px;
         .img-text {
           padding-left: 30px;
           padding-right: 30px;
@@ -65,9 +82,9 @@
 
       &.last{
         z-index: 3;
-        left: -200px;
-        padding-left: 60px;
-        padding-right: 0px;
+        // left: -200px;
+        // padding-left: 60px;
+        // padding-right: 0px;
         .img-text {
           padding-left: 60px;
         }
