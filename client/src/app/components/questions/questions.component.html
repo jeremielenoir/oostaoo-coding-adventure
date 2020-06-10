@@ -1,6 +1,15 @@
 <div >
- <form   [formGroup]="populateForm" (ngSubmit)="onSubmit()" class="forms left">
+
+ <form    [formGroup]="populateForm" (ngSubmit)="onSubmit()" class="forms left">
+      
+
+
+
+  <h2 *ngIf="submittedPopulate" style="text-align:center"> Enregistrement question(s) encours ...</h2>
+<h2 *ngIf="!submittedPopulate && results && !errors" style="color:green;text-align:center"> {{results.length}} question(s) enregistrée(s)</h2>
+      <div *ngIf="!submittedPopulate">
        <h2>Ajout question(s)</h2>
+       <h2 *ngIf="errors" style="color:red;text-align:center">{{errors}}</h2>
       <div class="form-group">
         <label for="spreadsheetId">spreadsheetId</label>
         <input type="text" formControlName="spreadsheetId"
@@ -38,6 +47,7 @@
      
       <button class="button">Enregistrer</button>
      
-      <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+      
+      </div>
     </form>
     </div>
