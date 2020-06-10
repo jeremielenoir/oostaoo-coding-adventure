@@ -1,0 +1,43 @@
+<div >
+ <form   [formGroup]="populateForm" (ngSubmit)="onSubmit()" class="forms left">
+       <h2>Ajout question(s)</h2>
+      <div class="form-group">
+        <label for="spreadsheetId">spreadsheetId</label>
+        <input type="text" formControlName="spreadsheetId"
+          [ngClass]="{ 'is-invalid': submittedPopulate && pctrl.spreadsheetId.errors }" />
+        <div *ngIf="submittedPopulate && pctrl.spreadsheetId.errors" class="invalid-feedback">
+          <div *ngIf="pctrl.spreadsheetId.errors.required">champ requis</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="page">Technologie</label>
+        <input type="text" formControlName="page"
+          [ngClass]="{ 'is-invalid': submittedPopulate && pctrl.page.errors }" />
+        <div *ngIf="submittedPopulate && pctrl.page.errors" class="invalid-feedback">
+          <div *ngIf="pctrl.page.errors.required">champ requis</div>
+        </div>
+      </div>
+
+       <div class="form-group">
+        <label for="first">Début</label>
+        <input type="text" formControlName="first"
+          [ngClass]="{ 'is-invalid': submittedPopulate && pctrl.first.errors }" />
+        <div *ngIf="submittedPopulate && pctrl.first.errors" class="invalid-feedback">
+          <div *ngIf="pctrl.first.errors.required">champ requis</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="last">Fin</label>
+        <input type="text" formControlName="last"
+          [ngClass]="{ 'is-invalid': submittedPopulate && pctrl.last.errors }" />
+        <div *ngIf="submittedPopulate && pctrl.last.errors" class="invalid-feedback">
+          <div *ngIf="pctrl.last.errors.required">champ requis</div>
+        </div>
+      </div>
+     
+      <button class="button">Enregistrer</button>
+     
+      <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+    </form>
+    </div>
