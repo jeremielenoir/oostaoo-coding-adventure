@@ -11,6 +11,8 @@ import { API_POPULATE_QUESTIONS_SPREADSHEET } from "../../api-client/api-client.
 export class QuestionsComponent implements OnInit {
   populateForm: FormGroup;
   submittedPopulate = false;
+  errors = null;
+  results = null
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
 
   ngOnInit() {
@@ -36,9 +38,18 @@ export class QuestionsComponent implements OnInit {
     this.http
       .get(query)
       .toPromise()
-      .then((result) => {
-        console.log("result", result);
+      .then((results ) => {
+        console.log("results",results)
+        this.errors = null;
+        this.results = results
+        this.submittedPopulate = false;
+        this.populateForm.reset();
+         
       })
-      .catch((err) => console.error("populate error = ", err));
+      .catch((err) => {
+        this.results = null
+        this.errors = err.message || err;
+        this.submittedPopulate = false;
+      });
   }
 }
