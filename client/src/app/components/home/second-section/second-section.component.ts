@@ -16,7 +16,9 @@ export class SecondSectionComponent implements OnInit {
   @ViewChild("first") first: ElementRef;
   @ViewChild("second") second: ElementRef;
   @ViewChild("third") third: ElementRef;
-  duration: any = 3000;
+  durationFirst: any = 3000;
+  durationSecond: any = 10000;
+  durationThird: any = 15000;
 
   constructor(private el: Renderer2, private elementRef: ElementRef) {}
 
@@ -34,37 +36,39 @@ export class SecondSectionComponent implements OnInit {
     //   stagger(animations, 2000)
     //   .start((v) => v.forEach((x, i) => ballStylers[i].set('x', x)));
     // }, 5000);
-    const duration = this.duration;
+    const duration = this.durationFirst;
+    const durationSecond = this.durationSecond;
+    const durationThird = this.durationThird;
     const firstStyler = styler(this.first.nativeElement);
     tween({
-      to: { x: 900 },
+      to: { x: -430 },
       from: { x: 0 },
-      duration,
+      duration:3000,
       ease: easing.backOut,
       flip: Infinity,
-      // elapsed: 500,
+      elapsed: 5000,
       // loop: 5,
       // yoyo: 5
     }).start(firstStyler.set);
     const secondStyler = styler(this.second.nativeElement);
     tween({
-      to: { x: -200 },
-      from: { x: 200 },
-      duration,
+      to: { x: -430 },
+      from: { x: 0 },
+      duration:3000,
       ease: easing.backOut,
       flip: Infinity,
-      // elapsed: 500,
+      elapsed: 9000,
       // loop: 5,
       // yoyo: 5
     }).start(secondStyler.set);
     const thirdStyler = styler(this.third.nativeElement);
     tween({
-      to: { x: -200 },
-      from: { x: 200 },
-      duration,
+      to: { x: -430 },
+      from: { x: 0 },
+      duration:3000,
       ease: easing.backOut,
       flip: Infinity,
-      // elapsed: 500,
+      elapsed: 12000,
       // loop: 5,
       // yoyo: 5
     }).start(thirdStyler.set);
