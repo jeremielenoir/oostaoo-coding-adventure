@@ -176,14 +176,39 @@
     outline: none;
     font-size: $font-size-home;
     color: $color-principal-blue;
+  }
 
-    &:hover {
-      background-color: #d2f4c9;
-      border-color: #9bcc8f;
+  .lab-item.starter {
+    background-color: #D2F4C9;
+    border: 1px solid #9BCC8F!important;
 
-      .mat-card-title {
-        border-color: #9bcc8f !important;
-      }
+    .mat-card-title {
+      background-color: white!important;
+      border: 1px solid #9BCC8F!important;
+    }
+  }
+
+  .lab-item.business {
+    border: 1px solid #9CD2DB!important;
+
+    .mat-card-title {
+      border: 1px solid #9CD2DB!important;
+    }
+  }
+
+  .lab-item.recruiter {
+    border: 1px solid #66BECC!important;
+
+    .mat-card-title {
+      border: 1px solid #66BECC!important;
+    }
+  }
+
+  .lab-item.tech {
+    border: 1px solid #4CABC1!important;
+
+    .mat-card-title {
+      border: 1px solid #4CABC1!important;
     }
   }
 }
