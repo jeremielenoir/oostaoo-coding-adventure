@@ -204,6 +204,7 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
       console.log("element: ", element);
       this.updateQuestionsCampaign.push(element.id);
     }
+    console.log("this.updateQuestionsCampaign",this.updateQuestionsCampaign)
     this.apiClientService
       .put(API_URI_CAMPAIGNS + "/" + this.globalId, {
         questions: this.updateQuestionsCampaign,
