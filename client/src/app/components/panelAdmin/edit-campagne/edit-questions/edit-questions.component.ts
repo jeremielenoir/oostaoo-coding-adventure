@@ -87,7 +87,7 @@ export class EditQuestionsComponent implements OnInit {
 
         const newQuestion = [];
         this.allTechno = this.techno;
-        this.allQuestionsCampaign = this.yourCampaign.questions
+        this.allQuestionsCampaign = this.yourCampaign.questions;
         this.loadAllQuestion(this.allQuestionsCampaign);
 
         // const nameQuestionByTechno = [];
@@ -106,6 +106,7 @@ export class EditQuestionsComponent implements OnInit {
   }
 
   populateQuestions(yourCampaign) {
+    
     let technos = this.techno;
 
     yourCampaign.forEach((element) => {
@@ -137,8 +138,18 @@ export class EditQuestionsComponent implements OnInit {
     }
 
     this.questionsEditQuestion = newQuestion;
+
     this.yourCampaign = yourCampaign;
     this.allTechno = technos;
+   
+    // this.allQuestions = this.yourCampaign.filter(
+    //   (q1) =>
+    //     this.allQuestions.findIndex(
+    //       (q2) => q2.id.toString() === q1.id.toString()
+    //     ) < 0
+    // );
+    console.log("this.yourCampaign", this.yourCampaign);
+    console.log("allQuestions", this.allQuestions);
     // return newQuestion;
   }
   chargeYourCampagn(event) {
@@ -148,9 +159,6 @@ export class EditQuestionsComponent implements OnInit {
   }
 
   loadAllQuestion(yourCampaignQuestions): any {
-    const questionsEditQuestion = [];
-    const yourCampaignQuestionsArray = [];
-console.log("yourCampaignQuestions",yourCampaignQuestions)
     let url = "";
     this.techno.forEach((tech, index) => {
       if (index === 0) {
@@ -163,18 +171,6 @@ console.log("yourCampaignQuestions",yourCampaignQuestions)
     this.apiClientService
       .get(`${API_URI_QUESTIONS}${url}`)
       .subscribe((response) => {
-       // this.allQuestions = response;
-
-        // for (let questionLevel of yourCampaignQuestions) {
-        //   this.allQuestions.filter((question) => {
-        //     if (question !== questionLevel) {
-        //       questionsEditQuestion.push(question);
-        //     }
-        //     if (questionLevel == question) {
-        //       yourCampaignQuestionsArray.push(question);
-        //     }
-        //   });
-        // }
         this.allQuestionsCampaign = response.filter(
           (q1) =>
             yourCampaignQuestions.findIndex(
@@ -184,23 +180,17 @@ console.log("yourCampaignQuestions",yourCampaignQuestions)
 
         this.allQuestions = response.filter(
           (q1) =>
-          this.allQuestionsCampaign.findIndex(
+            this.allQuestionsCampaign.findIndex(
               (q2) => q2.id.toString() === q1.id.toString()
             ) < 0
         );
-      
+
         this.questionsEditQuestion = response.filter(
           (q1) =>
             yourCampaignQuestions.findIndex(
               (q2) => q2.id.toString() === q1.id.toString()
             ) >= 0
         );
-        console.log("this.questionsEditQuestion",this.questionsEditQuestion)
-        //  this.questionsEditQuestion = questionsEditQuestion;
-        // this.allQuestionsCampaign = yourCampaignQuestionsArray
-
-        // console.log('cest lui le fautif',this.questionsEditQuestion)
-        // console.log('this.allQuestionsCampaign',this.allQuestionsCampaign)
       });
   }
 

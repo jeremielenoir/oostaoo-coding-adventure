@@ -135,7 +135,7 @@ export class DragNDropComponent implements OnInit {
     if (index > -1) {
       this.datas.splice(index, 1);
     }
-    this.chargeYourCampagn.emit("salut");
+    this.chargeYourCampagn.emit([...this.allQuestionLevel,question]);
   }
 
   methoddataLevels() {
