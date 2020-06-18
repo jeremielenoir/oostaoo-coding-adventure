@@ -59,7 +59,7 @@ export class TestComponent implements OnInit {
   constructor(private apiClientService: ApiClientService,public languageStorage:SelectedLanguageService) {}
 
   ngOnInit() {
-
+console.log("this.languageStorage.getLanguageCountry()",this.languageStorage.getLanguageCountry())
     switch(this.languageStorage.getLanguageCountry()){
       case 'es-ES':
         this.dataInfoLanguageName =  'name_es';
@@ -78,7 +78,10 @@ export class TestComponent implements OnInit {
         this.dataInfoLanguageContent = 'content_jp';
       break;
     }
-
+    // this.dataInfoLanguageName =  'name';
+    // this.dataInfoLanguageContent = 'content';
+//     console.log("  this.dataInfoLanguageName =  'name';",this.dataInfoLanguageName)
+// console.log("this.dataInfoLanguageContent=====init",this.dataInfoLanguageContent)
     if(this.prev){
       this.prev = true;
     }else{
@@ -122,6 +125,7 @@ export class TestComponent implements OnInit {
     if(!this.prev){
       this.controleTimeTest();
     }
+    console.log("this.dataInfoLanguageContent]",this.dataInfoLanguageContent)
     if (this.question[this.dataInfoLanguageContent] === null) {
       this.responses = [];
       console.log(' tu est null ')
