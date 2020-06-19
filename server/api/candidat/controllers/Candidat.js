@@ -8,8 +8,8 @@ const { access, unlink, createReadStream } = require("fs");
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
-    user: "lenoir.jeremie@oostaoo.com",
-    pass: "marijuana",
+    user: "chagnon.maxime@oostaoo.com",
+    pass: "oostaoo123",
   },
 });
 
@@ -109,7 +109,7 @@ module.exports = {
     //  console.log("candidat",candidat)
       const options = {
         to: ctx.request.body.email,
-        from: "lenoir.jeremie@gmail.com",
+        from: "chagnon.maxime@oostaoo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
         html: postEmail_message,
