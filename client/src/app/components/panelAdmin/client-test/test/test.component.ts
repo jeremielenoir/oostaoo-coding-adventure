@@ -77,7 +77,11 @@ console.log("this.languageStorage.getLanguageCountry()",this.languageStorage.get
         this.dataInfoLanguageName =  'name_jp';
         this.dataInfoLanguageContent = 'content_jp';
       break;
+      default:
+        this.dataInfoLanguageContent = 'content';
+        this.dataInfoLanguageName =  'name';
     }
+  
     // this.dataInfoLanguageName =  'name';
     // this.dataInfoLanguageContent = 'content';
 //     console.log("  this.dataInfoLanguageName =  'name';",this.dataInfoLanguageName)
@@ -230,7 +234,8 @@ console.log("this.languageStorage.getLanguageCountry()",this.languageStorage.get
     }
 
     this.question = this.questions[this.index];
-    if (this.question[this.dataInfoLanguageContent] !== null) {
+    console.log("this.dataInfoLanguageContent",this.dataInfoLanguageContent)
+    if (this.question[this.dataInfoLanguageContent]) {
       this.responses = this.question[this.dataInfoLanguageContent].split(', ');
     } else {
       this.responses = this.question;

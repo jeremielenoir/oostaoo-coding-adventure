@@ -61,7 +61,7 @@ module.exports = {
    */
 
   create: async (ctx) => {
-    console.log("ctx.request.body",ctx.request.body)
+    console.log("ctx.request.body", ctx.request.body);
     // console.log(strapi.services.campaign);
     //faire un get campaigns avec ctx.request.body.token? qui est l'id de la campaign?
     var idCampaignNom = ctx.request.body.idCampaign + ctx.request.body.Nom;
@@ -89,7 +89,7 @@ module.exports = {
       nameCandidats,
       getNom
     );
-
+    const campaign = ctx.request.body.idCampaign;
     ctx.request.body = {
       Nom: ctx.request.body.Nom,
       email: ctx.request.body.email,
@@ -97,16 +97,16 @@ module.exports = {
     };
     const depositObj = {
       ...ctx.request.body,
-      campaign:ctx.request.body.idCampaign,
+      campaign,
       token: cryptoData,
     };
 
     try {
-      // console.log('ctx.request.body dans TRY: ', ctx.request.body);
-      // console.log(email_title);
-      console.log("postEmail_message",postEmail_message)
+      console.log("ctx.request.body dans TRY: ", ctx.request.body);
+      console.log("depositObj", depositObj);
+      console.log("postEmail_message", postEmail_message);
       let candidat = await strapi.services.candidat.add(depositObj);
-    //  console.log("candidat",candidat)
+      //  console.log("candidat",candidat)
       const options = {
         to: ctx.request.body.email,
         from: "chagnon.maxime@oostaoo.com",
@@ -114,11 +114,11 @@ module.exports = {
         subject: email_title,
         html: postEmail_message,
       };
-    //  await transporter.sendMail(options);
+      await transporter.sendMail(options);
       return candidat;
     } catch (e) {
-      console.log("error add candidate",e);
-      return null;
+      console.log("error add candidate", e);
+      throw error;
     }
   },
 
