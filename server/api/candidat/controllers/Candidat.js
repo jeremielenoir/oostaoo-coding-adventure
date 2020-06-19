@@ -8,8 +8,8 @@ const { access, unlink, createReadStream } = require("fs");
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
-    user: "lenoir.jeremie@oostaoo.com",
-    pass: "marijuana",
+    user: "chagnon.maxime@oostaoo.com",
+    pass: "oostaoo123",
   },
 });
 
@@ -61,6 +61,7 @@ module.exports = {
    */
 
   create: async (ctx) => {
+    console.log("ctx.request.body", ctx.request.body);
     // console.log(strapi.services.campaign);
     //faire un get campaigns avec ctx.request.body.token? qui est l'id de la campaign?
     var idCampaignNom = ctx.request.body.idCampaign + ctx.request.body.Nom;
@@ -88,7 +89,7 @@ module.exports = {
       nameCandidats,
       getNom
     );
-
+    const campaign = ctx.request.body.idCampaign;
     ctx.request.body = {
       Nom: ctx.request.body.Nom,
       email: ctx.request.body.email,
@@ -96,16 +97,19 @@ module.exports = {
     };
     const depositObj = {
       ...ctx.request.body,
+      campaign,
       token: cryptoData,
     };
 
     try {
-      // console.log('ctx.request.body dans TRY: ', ctx.request.body);
-      // console.log(email_title);
+      console.log("ctx.request.body dans TRY: ", ctx.request.body);
+      console.log("depositObj", depositObj);
+      console.log("postEmail_message", postEmail_message);
       let candidat = await strapi.services.candidat.add(depositObj);
+      //  console.log("candidat",candidat)
       const options = {
         to: ctx.request.body.email,
-        from: "lenoir.jeremie@gmail.com",
+        from: "chagnon.maxime@oostaoo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
         html: postEmail_message,
@@ -113,7 +117,8 @@ module.exports = {
       await transporter.sendMail(options);
       return candidat;
     } catch (e) {
-      return null;
+      console.log("error add candidate", e);
+      throw error;
     }
   },
 

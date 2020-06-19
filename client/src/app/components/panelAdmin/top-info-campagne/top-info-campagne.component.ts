@@ -56,7 +56,8 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-      this.technoMethod();
+    console.log("changes", changes);
+    this.technoMethod();
   }
 
   convertSecondsToMinutes(time) {
@@ -85,11 +86,13 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
     }
 
     for (let technoElement of this.techno) {
-      for (let question of this.allQuestionLevel) {
-        if (technoElement["id"] == question["technologies"].id) {
-          pointDepart = pointDepart + question["points"];
-          timeDepartQuestion = timeDepartQuestion + question["time"];
-          deparPointNumberQuestion++;
+      if (this.allQuestionLevel && this.allQuestionLevel.length) {
+        for (let question of this.allQuestionLevel) {
+          if (technoElement["id"] == question["technologies"].id) {
+            pointDepart = pointDepart + question["points"];
+            timeDepartQuestion = timeDepartQuestion + question["time"];
+            deparPointNumberQuestion++;
+          }
         }
       }
 
@@ -204,6 +207,7 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
       console.log("element: ", element);
       this.updateQuestionsCampaign.push(element.id);
     }
+    console.log("this.updateQuestionsCampaign", this.updateQuestionsCampaign);
     this.apiClientService
       .put(API_URI_CAMPAIGNS + "/" + this.globalId, {
         questions: this.updateQuestionsCampaign,

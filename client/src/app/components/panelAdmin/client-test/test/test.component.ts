@@ -59,7 +59,7 @@ export class TestComponent implements OnInit {
   constructor(private apiClientService: ApiClientService,public languageStorage:SelectedLanguageService) {}
 
   ngOnInit() {
-
+console.log("this.languageStorage.getLanguageCountry()",this.languageStorage.getLanguageCountry())
     switch(this.languageStorage.getLanguageCountry()){
       case 'es-ES':
         this.dataInfoLanguageName =  'name_es';
@@ -77,8 +77,15 @@ export class TestComponent implements OnInit {
         this.dataInfoLanguageName =  'name_jp';
         this.dataInfoLanguageContent = 'content_jp';
       break;
+      default:
+        this.dataInfoLanguageContent = 'content';
+        this.dataInfoLanguageName =  'name';
     }
-
+  
+    // this.dataInfoLanguageName =  'name';
+    // this.dataInfoLanguageContent = 'content';
+//     console.log("  this.dataInfoLanguageName =  'name';",this.dataInfoLanguageName)
+// console.log("this.dataInfoLanguageContent=====init",this.dataInfoLanguageContent)
     if(this.prev){
       this.prev = true;
     }else{
@@ -122,6 +129,7 @@ export class TestComponent implements OnInit {
     if(!this.prev){
       this.controleTimeTest();
     }
+    console.log("this.dataInfoLanguageContent]",this.dataInfoLanguageContent)
     if (this.question[this.dataInfoLanguageContent] === null) {
       this.responses = [];
       console.log(' tu est null ')
@@ -226,7 +234,8 @@ export class TestComponent implements OnInit {
     }
 
     this.question = this.questions[this.index];
-    if (this.question[this.dataInfoLanguageContent] !== null) {
+    console.log("this.dataInfoLanguageContent",this.dataInfoLanguageContent)
+    if (this.question[this.dataInfoLanguageContent]) {
       this.responses = this.question[this.dataInfoLanguageContent].split(', ');
     } else {
       this.responses = this.question;
