@@ -322,7 +322,6 @@ module.exports = {
           ":" +
           ("0" + s).slice(-2)
         );
-         
       };
       const removeDuplicates = (rapportTechno) => {
         const unique = {};
@@ -364,7 +363,29 @@ module.exports = {
       });
 
       const timespent = fmtMSS(candidat.duree) + "/" + fmtMSS(totalTime);
+      console.log("candidat", candidat);
+      const percentArray = candidat.points_candidat[2][
+        "getpourcentByCandidat"
+      ].map((a) => a.percentage);
 
+      const sumPercent = percentArray.reduce((a, b) => parseFloat(a + b));
+
+      const scorePercent = (sumPercent / percentArray.length).toFixed(2);
+
+      const pointsCampaignArray = candidat.points_candidat[0][
+        "allPointsTechnos"
+      ].map((a) => a.points);
+
+      const totalPointsCampaign = pointsCampaignArray.reduce((a, b) =>
+        parseFloat(a + b)
+      );
+      const pointsCandidatArray = candidat.points_candidat[1][
+        "allPointsCandidat"
+      ].map((a) => a.points);
+
+      const totalPointsCandidat = pointsCandidatArray.reduce((a, b) =>
+        parseFloat(a + b)
+      );
       const templatePath = path.join(
         __dirname,
         "../../../report-template/",
@@ -375,17 +396,30 @@ module.exports = {
         "../../../report-template/candidates-report/",
         `${id}.pdf`
       );
-
+      console.log("candidat.raport_candidat", candidat.raport_candidat);
       const processFile = () =>
         new Promise((resolve, reject) => {
-          ejs.renderFile(templatePath, { candidat, timespent,rapport,techno,fmtMSS}, (err, data) => {
-            if (err) reject(err);
-            pdf.create(data).toFile(pdfPath, function (err, data) {
+          ejs.renderFile(
+            templatePath,
+            {
+              candidat,
+              timespent,
+              rapport,
+              techno,
+              scorePercent,
+              totalPointsCandidat,
+              totalPointsCampaign,
+              fmtMSS,
+            },
+            (err, data) => {
               if (err) reject(err);
+              pdf.create(data).toFile(pdfPath, function (err, data) {
+                if (err) reject(err);
 
-              resolve(data.filename);
-            });
-          });
+                resolve(data.filename);
+              });
+            }
+          );
         });
 
       const result = await processFile();

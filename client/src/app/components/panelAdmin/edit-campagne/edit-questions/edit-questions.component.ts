@@ -87,33 +87,35 @@ export class EditQuestionsComponent implements OnInit {
 
         const newQuestion = [];
         this.allTechno = this.techno;
-        this.allQuestionsCampaign = this.yourCampaign.questions
+        this.allQuestionsCampaign = this.yourCampaign.questions;
         this.loadAllQuestion(this.allQuestionsCampaign);
 
-        const nameQuestionByTechno = [];
-        this.yourCampaign.questions.forEach((element) => {
-          nameQuestionByTechno.push(element.name);
-        });
+        // const nameQuestionByTechno = [];
+        // this.yourCampaign.questions.forEach((element) => {
+        //   nameQuestionByTechno.push(element.name);
+        // });
 
-        for (let techno of this.allTechno) {
-          for (let question of this.allQuestionsCampaign) {
-            newQuestion.push({ ...question, technologies: techno });
-          }
-        }
+        // for (let techno of this.allTechno) {
+        //   for (let question of this.allQuestionsCampaign) {
+        //     newQuestion.push({ ...question, technologies: techno });
+        //   }
+        // }
 
-        this.allQuestionsCampaign = newQuestion;
+        // this.allQuestionsCampaign = newQuestion;
       });
   }
 
   populateQuestions(yourCampaign) {
+    
     let technos = this.techno;
-  
+
     yourCampaign.forEach((element) => {
       const technoIndex = technos.findIndex(
-        (t) => t && t.id && t.id.toString() === element.technologies.id.toString());
+        (t) =>
+          t && t.id && t.id.toString() === element.technologies.id.toString()
+      );
       if (technoIndex < 0) {
         technos.push(element.technologies);
-        
       }
     });
 
@@ -136,8 +138,18 @@ export class EditQuestionsComponent implements OnInit {
     }
 
     this.questionsEditQuestion = newQuestion;
+
     this.yourCampaign = yourCampaign;
     this.allTechno = technos;
+   
+    // this.allQuestions = this.yourCampaign.filter(
+    //   (q1) =>
+    //     this.allQuestions.findIndex(
+    //       (q2) => q2.id.toString() === q1.id.toString()
+    //     ) < 0
+    // );
+    console.log("this.yourCampaign", this.yourCampaign);
+    console.log("allQuestions", this.allQuestions);
     // return newQuestion;
   }
   chargeYourCampagn(event) {
@@ -147,10 +159,6 @@ export class EditQuestionsComponent implements OnInit {
   }
 
   loadAllQuestion(yourCampaignQuestions): any {
-
-    const questionsEditQuestion = [];
-    const yourCampaignQuestionsArray = [];
-
     let url = "";
     this.techno.forEach((tech, index) => {
       if (index === 0) {
@@ -163,31 +171,28 @@ export class EditQuestionsComponent implements OnInit {
     this.apiClientService
       .get(`${API_URI_QUESTIONS}${url}`)
       .subscribe((response) => {
-        this.allQuestions = response;
+        this.allQuestionsCampaign = response.filter(
+          (q1) =>
+            yourCampaignQuestions.findIndex(
+              (q2) => q2.id.toString() === q1.id.toString()
+            ) < 0
+        );
 
-        for (let questionLevel of yourCampaignQuestions) {
-          
-         this.allQuestions.filter(question => {
-            if(question !== questionLevel){
-              questionsEditQuestion.push(question)
-            }
-            if(questionLevel == question){
-              yourCampaignQuestionsArray.push(question) 
-             }
-          });
+        this.allQuestions = response.filter(
+          (q1) =>
+            this.allQuestionsCampaign.findIndex(
+              (q2) => q2.id.toString() === q1.id.toString()
+            ) < 0
+        );
 
-        }
-
-        this.questionsEditQuestion = questionsEditQuestion;
-        // this.allQuestionsCampaign = yourCampaignQuestionsArray
-
-        
-        // console.log('cest lui le fautif',this.questionsEditQuestion)
-        // console.log('this.allQuestionsCampaign',this.allQuestionsCampaign)
- 
+        this.questionsEditQuestion = response.filter(
+          (q1) =>
+            yourCampaignQuestions.findIndex(
+              (q2) => q2.id.toString() === q1.id.toString()
+            ) >= 0
+        );
       });
   }
-
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
@@ -216,21 +221,19 @@ export class EditQuestionsComponent implements OnInit {
   }
 
   filtreTechno(element) {
-  //   const valueChecked = [];
-
-  //   element.value.forEach((valueCheck) => {
-  //     if (valueChecked.includes(valueCheck)) {
-  //       for (let value of valueChecked) {
-  //         let newFilter = this.allQuestionsCampaign.filter(
-  //           (element) => element.technologies.name == value
-  //         );
-  //         this.allQuestionsCampaign = newFilter;
-  //       }
-  //     } else {
-  //       valueChecked.push(valueCheck);
-  //     }
-  //   });
-
-  //   console.log("allquestion---------->", this.allQuestionsCampaign);
+    //   const valueChecked = [];
+    //   element.value.forEach((valueCheck) => {
+    //     if (valueChecked.includes(valueCheck)) {
+    //       for (let value of valueChecked) {
+    //         let newFilter = this.allQuestionsCampaign.filter(
+    //           (element) => element.technologies.name == value
+    //         );
+    //         this.allQuestionsCampaign = newFilter;
+    //       }
+    //     } else {
+    //       valueChecked.push(valueCheck);
+    //     }
+    //   });
+    //   console.log("allquestion---------->", this.allQuestionsCampaign);
   }
 }
