@@ -304,7 +304,10 @@ export class CandidatsComponent implements OnInit {
               });
 
               const percentArray =
-                points_candidat && points_candidat.length
+                points_candidat &&
+                points_candidat.length &&
+                points_candidat[2] &&
+                points_candidat[2]["getpourcentByCandidat"]
                   ? points_candidat[2]["getpourcentByCandidat"].map(
                       (a) => a.percentage
                     )
@@ -315,7 +318,7 @@ export class CandidatsComponent implements OnInit {
                   ? percentArray.reduce((a, b) => parseFloat(a + b))
                   : 0;
 
-              const Score = (sumPercent / percentArray.length).toFixed(2)+ "%";
+              const Score = (sumPercent / percentArray.length).toFixed(2) + "%";
               return {
                 ...candidat,
                 Score,
@@ -384,7 +387,12 @@ export class CandidatsComponent implements OnInit {
             dateInvite = new Date(candidat.test_terminer);
             // console.log('candidat.points_candidat[5].PourcentTest: ', candidat.points_candidat[5].PourcentTest);
             percentCandidat = candidat.points_candidat[5].PourcentTest + "%";
-            if (candidat.points_candidat[5].PourcentTest === null) {
+            if (
+              !candidat.points_candidat ||
+              !candidat.points_candidat[5] ||
+              !candidat.points_candidat[5].PourcentTest ||
+              candidat.points_candidat[5].PourcentTest === null
+            ) {
               percentCandidat = 0 + "%";
             }
           }
@@ -396,8 +404,8 @@ export class CandidatsComponent implements OnInit {
             status: candidat.status,
             Checked: false,
             "Dernière activité": dateInvite.toLocaleString(),
-           // Score: percentCandidat,
-           Score: candidat.Score,
+            // Score: percentCandidat,
+            Score: candidat.Score,
             Durée: duree,
             rapport: candidat.raport_candidat
               ? candidat.raport_candidat.rapport
