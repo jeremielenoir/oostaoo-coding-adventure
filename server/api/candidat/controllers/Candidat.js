@@ -61,7 +61,7 @@ module.exports = {
    */
 
   create: async (ctx) => {
-    console.log("ctx.request.body", ctx.request.body);
+    // console.log("ctx.request.body", ctx.request.body);
     // console.log(strapi.services.campaign);
     //faire un get campaigns avec ctx.request.body.token? qui est l'id de la campaign?
     var idCampaignNom = ctx.request.body.idCampaign + ctx.request.body.Nom;
@@ -74,7 +74,7 @@ module.exports = {
     // console.log("cryptoData: ", cryptoData);
     // console.log('ctx.request.body: ', ctx.request.body);
     let getEmail_message = ctx.request.body.email_content;
-    console.log("getEmail_message: ", getEmail_message);
+    //   console.log("getEmail_message: ", getEmail_message);
     let email_title = ctx.request.body.email_title;
     let getEmail_message_crypto = getEmail_message.replace(
       "...",
@@ -82,9 +82,9 @@ module.exports = {
     );
     // console.log('postEmail_message: ', postEmail_message);
     let getNom = ctx.request.body.Nom;
-    console.log("nom: ", getNom);
+    //console.log("nom: ", getNom);
     let nameCandidats = ctx.request.body.name_candidats.join();
-    console.log("nameCandidats: ", nameCandidats);
+    // console.log("nameCandidats: ", nameCandidats);
     let postEmail_message = getEmail_message_crypto.replace(
       nameCandidats,
       getNom
@@ -102,9 +102,9 @@ module.exports = {
     };
 
     try {
-      console.log("ctx.request.body dans TRY: ", ctx.request.body);
-      console.log("depositObj", depositObj);
-      console.log("postEmail_message", postEmail_message);
+      // console.log("ctx.request.body dans TRY: ", ctx.request.body);
+      // console.log("depositObj", depositObj);
+      // console.log("postEmail_message", postEmail_message);
       let candidat = await strapi.services.candidat.add(depositObj);
       //  console.log("candidat",candidat)
       const options = {

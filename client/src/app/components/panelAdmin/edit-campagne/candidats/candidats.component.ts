@@ -303,8 +303,22 @@ export class CandidatsComponent implements OnInit {
                 scoreByTechObject[score.techno] = score.percentage + "%";
               });
 
+              const percentArray =
+                points_candidat && points_candidat.length
+                  ? points_candidat[2]["getpourcentByCandidat"].map(
+                      (a) => a.percentage
+                    )
+                  : [];
+
+              const sumPercent =
+                percentArray && percentArray.length
+                  ? percentArray.reduce((a, b) => parseFloat(a + b))
+                  : 0;
+
+              const Score = (sumPercent / percentArray.length).toFixed(2)+ "%";
               return {
                 ...candidat,
+                Score,
                 getpourcentByCandidat: scoreByTechObject,
                 status: false,
               };
@@ -382,7 +396,8 @@ export class CandidatsComponent implements OnInit {
             status: candidat.status,
             Checked: false,
             "Dernière activité": dateInvite.toLocaleString(),
-            Score: percentCandidat,
+           // Score: percentCandidat,
+           Score: candidat.Score,
             Durée: duree,
             rapport: candidat.raport_candidat
               ? candidat.raport_candidat.rapport

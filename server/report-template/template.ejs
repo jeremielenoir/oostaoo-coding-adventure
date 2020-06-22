@@ -48,7 +48,7 @@
     /*Borders*/
     /*Path logo*/
 
-    *{
+    * {
       margin: none;
       padding: none;
       box-sizing: border-box;
@@ -183,16 +183,14 @@
           </div> -->
 
 
-
-
         <div style="display: inline-block;">
           <p>Score</p>
           <p class="header_stats">
 
-            <%=candidat.points_candidat[5].PourcentTest %> %
+            <%=scorePercent %> %
           </p>
           <p>
-            <%=candidat.points_candidat[3].totalPointsCandidat /candidat.points_candidat[4].totalPointsCampaign   %>
+            <%=totalPointsCandidat%> / <%=totalPointsCampaign   %>
 
             points </p>
         </div>
