@@ -32,6 +32,7 @@ import {
 } from "../../../api-client/api-client.service";
 import { Router } from "@angular/router";
 import { TestComponent } from "../client-test/test/test.component";
+import { SelectedLanguageService } from 'src/app/services/selected-language.service';
 
 export interface DialogData {
   questions;
@@ -69,7 +70,10 @@ export class DragNDropComponent implements OnInit {
   public disablehover = false;
   public enablehover = false;
   public technoCampaign: Array<any>;
-
+  public name_i18n:any = '';
+  public content_i18n:any = ''
+  public theme_i18n:any = ''
+  public answer_value_i18n:any = ''
   @ViewChild("droplist") public droplist: ElementRef;
 
   dragStart(event: CdkDragDrop<string[]>) {
@@ -108,11 +112,48 @@ export class DragNDropComponent implements OnInit {
   constructor(
     public apiClientService: ApiClientService,
     public decryptTokenService: DecryptTokenService,
+    public languageStorage:SelectedLanguageService,
     private router: Router,
     public dialog: MatDialog
   ) {}
 
   ngOnInit() {
+
+    switch(this.languageStorage.getLanguageCountry()){
+      case 'es-ES':
+        this.name_i18n =  'name_es';
+        this.content_i18n = 'content_es';
+        this.answer_value_i18n ='answer_value_es';
+        this.theme_i18n ='theme_es'
+      break;
+      case 'fr-FR':
+        this.name_i18n =  'name';
+        this.content_i18n = 'content';
+        this.answer_value_i18n ='answer_value';
+        this.theme_i18n ='theme'
+      break;
+      case 'en-US':
+        this.name_i18n =  'name_en';
+        this.content_i18n = 'content_en';
+        this.answer_value_i18n ='answer_value_en';
+        this.theme_i18n ='theme_en'
+      break;
+      case 'jp-JP':
+        this.name_i18n =  'name_jp';
+        this.content_i18n = 'content_jp';
+        this.answer_value_i18n ='answer_value_jp';
+        this.theme_i18n ='theme_jp'
+      break;
+      default:
+        this.content_i18n = 'content';
+        this.name_i18n =  'name';
+        this.answer_value_i18n ='answer_value';
+        this.theme_i18n ='theme'
+    }
+     
+
+    console.log("this.content_i18n ",this.content_i18n )
+    console.log("this.name_i18n ",this.name_i18n )
     this.methoddataLevels();
 
     window.scroll(10, 0);

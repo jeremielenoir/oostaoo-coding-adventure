@@ -117,7 +117,7 @@ module.exports = {
       await transporter.sendMail(options);
       return candidat;
     } catch (e) {
-      console.log("error add candidate", e);
+    //  console.log("error add candidate", e);
       throw error;
     }
   },

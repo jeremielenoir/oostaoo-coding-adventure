@@ -77,21 +77,21 @@
 
           
               <div [ngClass]="{'info-hover-left': disablehover === false, 'disable': disablehover === true }" class="">
-                <div class="info-hover-header"><h2>{{item.name}}</h2></div>
+                <div class="info-hover-header"><h2>{{item[name_i18n]}}</h2></div>
                 <div class="info-hover-content">
                   <p>Points : <span>{{item.points}}</span></p>
                   <p>Technologie : <span>{{item.technologies.name}}</span></p>
-                  <p>Compétence évaluée : <span>{{item.theme}}</span></p>
+                  <p>Compétence évaluée : <span>{{item[theme_i18n]}}</span></p>
                   <p>Enoncé:</p>
                 </div>
                 <div class="info-hover-enonce">
-                  <p>{{item.name}}</p>
+                  <p>{{item[name_i18n]}}</p>
 
                   <p>Liste des réponses proposées :</p>
-                  <p>{{item.content}}</p>
+                  <p>{{item[content_i18n]}}</p>
 
                   <p>Réponse attendue :</p>
-                  <p>{{item.answer_value}}</p>
+                  <p>{{item[answer_value_i18n]}}</p>
                 </div>
               </div>
 
@@ -102,7 +102,7 @@
             </div>
 
             <div class="ligne-nom" matTooltip="{{item.name}}" >
-              <p class="ligne-nom-text">{{item.name}}</p>
+              <p class="ligne-nom-text">{{item[name_i18n]}}</p>
             </div>
 
             <div class="ligne-note" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
@@ -180,21 +180,21 @@
           <div class="ligne-question" (cdkDragEnded)="dragEnd($event)" (cdkDragStarted)="dragStart($event)" *ngFor="let item of allQuestionLevel" cdkDrag>
 
             <div [ngClass]="{'info-hover-right': disablehover === false, 'disable': disablehover === true }" class="">
-              <div class="info-hover-header"><h2>{{item.name}}</h2></div>
+              <div class="info-hover-header"><h2>{{item[name_i18n]}}</h2></div>
               <div class="info-hover-content">
                 <p>Points : <span>{{item.points}}</span></p>
                 <p>Technologie : <span>{{item.technologies.name}}</span></p>
-                <p>Compétence évaluée : <span>{{item.theme}}</span></p>
+                <p>Compétence évaluée : <span>{{item[theme_i18n]}}</span></p>
                 <p>Enoncé:</p>
               </div>
               <div class="info-hover-enonce">
-                <p>{{item.name}}</p>
+                <p>{{item[name_i18n]}}</p>
 
                 <p>Liste des réponses proposées :</p>
                 <p>{{item.content}}</p>
 
                 <p>Réponse attendue :</p>
-                <p>{{item.answer_value}}</p>
+                <p>{{item[answer_value_i18n]}}</p>
               </div>
             </div>
 
@@ -205,8 +205,8 @@
             <p class="ligne-techno-text">{{item.technologies.name}}</p>
             </div>
 
-            <div class="ligne-nom" matTooltip="{{item.name}}" >
-              <p class="ligne-nom-text">{{item.name}}</p>
+            <div class="ligne-nom" matTooltip="{{item[name_i18n]}}" >
+              <p class="ligne-nom-text">{{item[name_i18n]}}</p>
             </div>
 
             <div class="ligne-note" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
