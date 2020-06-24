@@ -1,4 +1,5 @@
 <app-top-info-campagne  [formCampagne]="formCampagne" [allQuestionLevel]="allQuestionLevel" [techno]="techno"></app-top-info-campagne>
 
-<app-dragndrop-component [datas]="allQuestions" [allQuestionLevel]="allQuestionLevel">
+<app-dragndrop-component (chargeYourCampagn)="chargeYourCampagn($event)" [allQuestionLevel]="allQuestionLevel" [datas]="allQuestions" >
 </app-dragndrop-component>
+ 

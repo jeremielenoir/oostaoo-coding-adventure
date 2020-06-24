@@ -159,7 +159,44 @@ export class NouvelleCampagnePage3Component implements OnInit {
    
    
   }
+  populateQuestions(yourCampaign) {
+    
+    let technos = this.techno;
 
+    yourCampaign.forEach((element) => {
+      const technoIndex = technos.findIndex(
+        (t) =>
+          t && t.id && t.id.toString() === element.technologies.id.toString()
+      );
+      if (technoIndex < 0) {
+        technos.push(element.technologies);
+      }
+    });
+
+    const newQuestion = [];
+
+    for (let techno of technos) {
+      for (let question of yourCampaign) {
+        if (techno.id.toString() === question.technologies.id.toString()) {
+          
+
+          newQuestion.push({ ...question, technologies: techno });
+        }
+      }
+    }
+
+  /*   this.questionsEditQuestion = newQuestion;
+
+    this.yourCampaign = yourCampaign; */
+    this.allQuestions = yourCampaign;
+    this.allTechno = technos;
+    
+  }
+  chargeYourCampagn(event) {
+   
+ 
+  this.allQuestionLevel= this.allQuestionLevel.filter(q1=>this.allQuestions.findIndex(q2=>q1.id.toString()===q2.id.toString())<0)
+  }
   public onDecrementPage(): void {
     this.decrementPage.emit(); // Déclenche l'output
   }
