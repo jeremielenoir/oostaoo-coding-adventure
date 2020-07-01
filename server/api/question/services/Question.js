@@ -20,6 +20,8 @@ const { google } = require("googleapis");
 const keys = require("../../../roodeo.json");
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 const UPLOAD_DIR = "filescripts";
+
+const encoding = require("encoding-japanese");
 module.exports = {
   /**
    * Promise to fetch all questions.
@@ -27,15 +29,15 @@ module.exports = {
    * @return {Promise}
    */
 
-  fetchAll: params => {
+  fetchAll: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
     const filters = strapi.utils.models.convertParams("question", params);
     // Select field to populate.
     const populate = Question.associations
-      .filter(ast => ast.autoPopulate !== false)
-      .map(ast => ast.alias);
+      .filter((ast) => ast.autoPopulate !== false)
+      .map((ast) => ast.alias);
 
-    return Question.query(function(qb) {
+    return Question.query(function (qb) {
       _.forEach(filters.where, (where, key) => {
         if (
           _.isArray(where.value) &&
@@ -61,7 +63,7 @@ module.exports = {
       qb.offset(filters.start);
       qb.limit(filters.limit);
     }).fetchAll({
-      withRelated: filters.populate || populate
+      withRelated: filters.populate || populate,
     });
   },
 
@@ -71,14 +73,14 @@ module.exports = {
    * @return {Promise}
    */
 
-  fetch: params => {
+  fetch: (params) => {
     // Select field to populate.
     const populate = Question.associations
-      .filter(ast => ast.autoPopulate !== false)
-      .map(ast => ast.alias);
+      .filter((ast) => ast.autoPopulate !== false)
+      .map((ast) => ast.alias);
 
     return Question.forge(_.pick(params, "id")).fetch({
-      withRelated: populate
+      withRelated: populate,
     });
   },
 
@@ -88,11 +90,11 @@ module.exports = {
    * @return {Promise}
    */
 
-  count: params => {
+  count: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
     const filters = strapi.utils.models.convertParams("question", params);
 
-    return Question.query(function(qb) {
+    return Question.query(function (qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value)) {
           for (const value in where.value) {
@@ -115,15 +117,15 @@ module.exports = {
    * @return {Promise}
    */
 
-  add: async values => {
+  add: async (values) => {
     // Extract values related to relational data.
     const relations = _.pick(
       values,
-      Question.associations.map(ast => ast.alias)
+      Question.associations.map((ast) => ast.alias)
     );
     const data = _.omit(
       values,
-      Question.associations.map(ast => ast.alias)
+      Question.associations.map((ast) => ast.alias)
     );
 
     // Create entry with no-relational data.
@@ -143,11 +145,11 @@ module.exports = {
     // Extract values related to relational data.
     const relations = _.pick(
       values,
-      Question.associations.map(ast => ast.alias)
+      Question.associations.map((ast) => ast.alias)
     );
     const data = _.omit(
       values,
-      Question.associations.map(ast => ast.alias)
+      Question.associations.map((ast) => ast.alias)
     );
 
     // Create entry with no-relational data.
@@ -165,9 +167,9 @@ module.exports = {
    * @return {Promise}
    */
 
-  remove: async params => {
+  remove: async (params) => {
     params.values = {};
-    Question.associations.map(association => {
+    Question.associations.map((association) => {
       switch (association.nature) {
         case "oneWay":
         case "oneToOne":
@@ -195,47 +197,47 @@ module.exports = {
    * @return {Promise}
    */
 
-  search: async params => {
+  search: async (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
     const filters = strapi.utils.models.convertParams("question", params);
     // Select field to populate.
     const populate = Question.associations
-      .filter(ast => ast.autoPopulate !== false)
-      .map(ast => ast.alias);
+      .filter((ast) => ast.autoPopulate !== false)
+      .map((ast) => ast.alias);
 
-    const associations = Question.associations.map(x => x.alias);
+    const associations = Question.associations.map((x) => x.alias);
     const searchText = Object.keys(Question._attributes)
       .filter(
-        attribute =>
+        (attribute) =>
           attribute !== Question.primaryKey && !associations.includes(attribute)
       )
-      .filter(attribute =>
+      .filter((attribute) =>
         ["string", "text"].includes(Question._attributes[attribute].type)
       );
 
     const searchNoText = Object.keys(Question._attributes)
       .filter(
-        attribute =>
+        (attribute) =>
           attribute !== Question.primaryKey && !associations.includes(attribute)
       )
       .filter(
-        attribute =>
+        (attribute) =>
           ![
             "string",
             "text",
             "boolean",
             "integer",
             "decimal",
-            "float"
+            "float",
           ].includes(Question._attributes[attribute].type)
       );
 
     const searchInt = Object.keys(Question._attributes)
       .filter(
-        attribute =>
+        (attribute) =>
           attribute !== Question.primaryKey && !associations.includes(attribute)
       )
-      .filter(attribute =>
+      .filter((attribute) =>
         ["integer", "decimal", "float"].includes(
           Question._attributes[attribute].type
         )
@@ -243,29 +245,29 @@ module.exports = {
 
     const searchBool = Object.keys(Question._attributes)
       .filter(
-        attribute =>
+        (attribute) =>
           attribute !== Question.primaryKey && !associations.includes(attribute)
       )
-      .filter(attribute =>
+      .filter((attribute) =>
         ["boolean"].includes(Question._attributes[attribute].type)
       );
 
     const query = (params._q || "").replace(/[^a-zA-Z0-9.-\s]+/g, "");
 
-    return Question.query(qb => {
+    return Question.query((qb) => {
       // Search in columns which are not text value.
-      searchNoText.forEach(attribute => {
+      searchNoText.forEach((attribute) => {
         qb.orWhereRaw(`LOWER(${attribute}) LIKE '%${_.toLower(query)}%'`);
       });
 
       if (!_.isNaN(_.toNumber(query))) {
-        searchInt.forEach(attribute => {
+        searchInt.forEach((attribute) => {
           qb.orWhereRaw(`${attribute} = ${_.toNumber(query)}`);
         });
       }
 
       if (query === "true" || query === "false") {
-        searchBool.forEach(attribute => {
+        searchBool.forEach((attribute) => {
           qb.orWhereRaw(`${attribute} = ${_.toNumber(query === "true")}`);
         });
       }
@@ -279,7 +281,7 @@ module.exports = {
           );
           break;
         case "pg": {
-          const searchQuery = searchText.map(attribute =>
+          const searchQuery = searchText.map((attribute) =>
             _.toLower(attribute) === attribute
               ? `to_tsvector(${attribute})`
               : `to_tsvector('${attribute}')`
@@ -302,8 +304,59 @@ module.exports = {
         qb.limit(_.toNumber(filters.limit));
       }
     }).fetchAll({
-      withRelated: populate
+      withRelated: populate,
     });
+  },
+
+  /**
+   * Promise to add separator to spreadsheet questions.
+   *
+   * @return {Promise}
+   */
+
+  addSeparatorSpreadSheet: async (spreadsheetId, page, first, last) => {
+    try {
+      const ranges = [`${page}!${first}:${last}`];
+      const client = new google.auth.JWT(
+        keys.client_email,
+        null,
+        keys.private_key,
+        [SCOPES]
+      );
+      await client.authorize();
+      const gsapi = google.sheets({ version: "v4", auth: client });
+
+      const {
+        data: { valueRanges },
+      } = await gsapi.spreadsheets.values.batchGet({
+        spreadsheetId,
+        ranges,
+      });
+
+      const data = valueRanges.map((val) => val.values)[0];
+      console.log("data", data);
+      const newData = data.map((e) => {
+        const tab = e[0].split(", ");
+       // console.log("tab", tab);
+
+        return tab.join(" ; ");
+      });
+     // console.log("newData", newData);
+
+      // return newData;
+      const values = newData.map((e) => [e]);
+      const updateOptions = {
+        spreadsheetId,
+        range: `${page}!${first}`,
+        valueInputOption: "USER_ENTERED",
+        resource: { values },
+      };
+      await gsapi.spreadsheets.values.update(updateOptions);
+      return "ok";
+    } catch (error) {
+      console.log("error", error);
+      throw error;
+    }
   },
 
   /**
@@ -324,12 +377,12 @@ module.exports = {
       const gsapi = google.sheets({ version: "v4", auth: client });
 
       const {
-        data: { valueRanges }
+        data: { valueRanges },
       } = await gsapi.spreadsheets.values.batchGet({
         spreadsheetId,
-        ranges
+        ranges,
       });
-      const data = valueRanges.map(val => val.values)[0];
+      const data = valueRanges.map((val) => val.values)[0];
 
       const arrValues = [];
 
@@ -338,13 +391,13 @@ module.exports = {
       }
       let arrTech = [];
 
-      const techFieldValues = [...new Set(arrValues.map(val => val[1]))];
+      const techFieldValues = [...new Set(arrValues.map((val) => val[1]))];
 
       const techs = await Technologies.fetchAll({});
 
       if (techs && techs.length > 0) {
-        techFieldValues.forEach(val => {
-          techs.forEach(tech => {
+        techFieldValues.forEach((val) => {
+          techs.forEach((tech) => {
             if (
               val &&
               tech &&
@@ -354,7 +407,7 @@ module.exports = {
             ) {
               if (
                 arrTech.findIndex(
-                  t => t && t.name.toString() === val.toString()
+                  (t) => t && t.name.toString() === val.toString()
                 ) < 0
               ) {
                 arrTech.push({ name: val, id: tech.id });
@@ -363,21 +416,21 @@ module.exports = {
           });
         });
       } else {
-        techFieldValues.forEach(techno => {
+        techFieldValues.forEach((techno) => {
           arrTech.push({ name: techno, id: null });
         });
       }
 
-      const techVals = arrTech.map(t => t.name);
+      const techVals = arrTech.map((t) => t.name);
 
       const diffTech = _.difference(techFieldValues, techVals);
 
       if (diffTech && diffTech.length > 0) {
-        diffTech.forEach(tech => arrTech.push({ name: tech, id: null }));
+        diffTech.forEach((tech) => arrTech.push({ name: tech, id: null }));
       }
       const arrTechPromise = [];
 
-      arrTech.forEach(async tech => {
+      arrTech.forEach(async (tech) => {
         arrTechPromise.push(
           new Promise((resolve, reject) => {
             if (tech && tech.id) {
@@ -385,8 +438,8 @@ module.exports = {
             } else {
               return strapi.services.technologies
                 .add({ name: tech.name })
-                .then(techno => resolve({ name: tech.name, id: techno.id }))
-                .catch(e => reject(e));
+                .then((techno) => resolve({ name: tech.name, id: techno.id }))
+                .catch((e) => reject(e));
             }
           })
         );
@@ -395,18 +448,29 @@ module.exports = {
       arrTech = await Promise.all(arrTechPromise);
 
       const questions = [];
-      arrValues.forEach(val => {
+      arrValues.forEach((val) => {
         const tech = arrTech.find(
-          t => t && t.name && t.name.toString() === val[1]
+          (t) => t && t.name && t.name.toString() === val[1]
         );
 
+        // const utf8Array = new Uint8Array(val[5]);
+        //EUC-JP
+        //utf-general-ci
+        const name_jp = encoding.convert(val[5], {
+          from: "UTF8",
+
+          to: "EUC-JP",
+          type: "string", // Specify 'string' type. (Return as string)
+        });
+
+        console.log("name_jp", name_jp);
         questions.push({
           id: val[0] || null,
           technologies: tech,
           name: val[2],
           name_en: val[3],
           name_es: val[4],
-          name_jp: val[5],
+          name_jp,
           content: val[6],
           content_en: val[7],
           content_es: val[8],
@@ -422,13 +486,13 @@ module.exports = {
           theme: val[18],
           theme_en: val[19],
           theme_es: val[20],
-          theme_jp: val[21]
+          theme_jp: val[21],
         });
       });
 
       const arrPromises = [];
 
-      questions.forEach(question => {
+      questions.forEach((question) => {
         arrPromises.push(
           new Promise((resolve, reject) => {
             if (question.id) {
@@ -439,31 +503,31 @@ module.exports = {
                   { id },
                   {
                     ...question,
-                    technologies: question.technologies
+                    technologies: question.technologies,
                   }
                 )
-                .then(r => resolve(r))
-                .catch(err => reject(err));
+                .then((r) => resolve(r))
+                .catch((err) => reject(err));
             }
             delete question.id;
             return strapi.services.question
               .add({
                 ...question,
-                technologies: question.technologies
+                technologies: question.technologies,
               })
-              .then(r => resolve(r))
-              .catch(err => reject(err));
+              .then((r) => resolve(r))
+              .catch((err) => reject(err));
           })
         );
       });
       const results = await Promise.all(arrPromises);
-      const ids = results.map(r => [r.id]);
+      const ids = results.map((r) => [r.id]);
 
       const updateOptions = {
         spreadsheetId,
         range: `${page}!${first}`,
         valueInputOption: "USER_ENTERED",
-        resource: { values: ids }
+        resource: { values: ids },
       };
       await gsapi.spreadsheets.values.update(updateOptions);
       return results;
@@ -477,7 +541,7 @@ module.exports = {
    *
    * @return {Promise}
    */
-  executeScript: async file => {
+  executeScript: async (file) => {
     try {
       const generateStrings = (numberOfStrings, stringLength) => {
         const s = new Set();
@@ -494,8 +558,9 @@ module.exports = {
         let id = ``;
         let path = ``;
         const randomname = generateStrings(1, 10).value;
-        const javafilename = `Main${randomname.charAt(0).toUpperCase() +
-          randomname.slice(1)}`;
+        const javafilename = `Main${
+          randomname.charAt(0).toUpperCase() + randomname.slice(1)
+        }`;
 
         switch (extension) {
           case "java":
@@ -512,17 +577,17 @@ module.exports = {
           createReadStream(filename)
             .pipe(createWriteStream(path))
             .on("finish", () => resolve({ id, path, extension }))
-            .on("error", error => reject(error))
+            .on("error", (error) => reject(error))
         );
       };
-      const deleteFile = async id => {
+      const deleteFile = async (id) => {
         try {
           const filepath = `${UPLOAD_DIR}/${id}`;
-          access(filepath, async err => {
+          access(filepath, async (err) => {
             if (err) {
               console.log(`The file ${filepath} does not exist.`);
             } else {
-              await unlink(filepath, async err => {
+              await unlink(filepath, async (err) => {
                 if (err) throw err;
               });
             }
@@ -531,12 +596,12 @@ module.exports = {
           throw error;
         }
       };
-      const processUpload = async upload => {
+      const processUpload = async (upload) => {
         const { name, path } = upload;
         const extension = name.split(".")[1];
         const res = await storeUpload({
           filename: path,
-          extension
+          extension,
         });
         return res;
       };
@@ -620,13 +685,13 @@ module.exports = {
       const gsapi = google.sheets({ version: "v4", auth: client });
 
       const {
-        data: { valueRanges }
+        data: { valueRanges },
       } = await gsapi.spreadsheets.values.batchGet({
         spreadsheetId,
-        ranges
+        ranges,
       });
 
-      const data = valueRanges.map(val => val.values)[0];
+      const data = valueRanges.map((val) => val.values)[0];
 
       const arrValues = [];
       const fields = data[0];
@@ -644,25 +709,25 @@ module.exports = {
           data: [
             {
               range: `${technology}!A1:V1`, // Update a row
-              values: [fields]
-            }
+              values: [fields],
+            },
           ],
-          valueInputOption: "USER_ENTERED"
-        }
+          valueInputOption: "USER_ENTERED",
+        },
       };
       await gsapi.spreadsheets.values.batchUpdate(resourceFields);
       const dataCopied = [
         {
           range: `${technology}!A2:V${arrValues.length + 1}`, // Update a 2d range
           majorDimension: "ROWS",
-          values: arrValues
-        }
+          values: arrValues,
+        },
       ];
 
       const resource = {
         spreadsheetId: spreadsheetId,
 
-        resource: { data: dataCopied, valueInputOption: "USER_ENTERED" }
+        resource: { data: dataCopied, valueInputOption: "USER_ENTERED" },
       };
 
       await gsapi.spreadsheets.values.batchUpdate(resource);
@@ -672,5 +737,5 @@ module.exports = {
       console.log("error", error);
       throw error;
     }
-  }
+  },
 };

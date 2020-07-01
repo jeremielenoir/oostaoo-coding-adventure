@@ -95,6 +95,29 @@ module.exports = {
     }
   },
 
+
+  /**
+   * populate question from spreadsheet.
+   *
+   * @return {Object}
+   */
+
+  separator: async (ctx, _next) => {
+    try {
+      const { spreadsheetId, first, last, page } = ctx.query;
+      const result = await strapi.services.question.addSeparatorSpreadSheet(
+        spreadsheetId,
+        page,
+        first,
+        last
+      );
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   /**
    * fillByTechno from spreadsheet.
    *

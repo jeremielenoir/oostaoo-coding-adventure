@@ -17,6 +17,15 @@
         "policies": []
       }
     },
+
+    {
+      "method": "GET",
+      "path": "/api/questions/separator",
+      "handler": "Question.separator",
+      "config": {
+        "policies": []
+      }
+    },
     {
       "method": "GET",
       "path": "/api/questions/fill",
