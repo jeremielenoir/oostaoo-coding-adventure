@@ -21,7 +21,7 @@ const keys = require("../../../roodeo.json");
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 const UPLOAD_DIR = "filescripts";
 
-const encoding = require("encoding-japanese");
+//const encoding = require("encoding-japanese");
 module.exports = {
   /**
    * Promise to fetch all questions.
@@ -456,21 +456,21 @@ module.exports = {
         // const utf8Array = new Uint8Array(val[5]);
         //EUC-JP
         //utf-general-ci
-        const name_jp = encoding.convert(val[5], {
+        /* const name_jp = encoding.convert(val[5], {
           from: "UTF8",
 
           to: "EUC-JP",
           type: "string", // Specify 'string' type. (Return as string)
         });
 
-        console.log("name_jp", name_jp);
+        console.log("name_jp", name_jp); */
         questions.push({
           id: val[0] || null,
           technologies: tech,
           name: val[2],
           name_en: val[3],
           name_es: val[4],
-          name_jp,
+          name_jp:val[5],
           content: val[6],
           content_en: val[7],
           content_es: val[8],
