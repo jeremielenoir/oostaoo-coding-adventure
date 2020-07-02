@@ -164,7 +164,7 @@ export class RouteComponentComponent implements OnInit {
     this.SelectedLanguageService.updtateLanguageCountry(langage)
 
     this.currentLanguage = langage.img;
-    this.route.navigate([`/dashboard/campaigns`]);
+    //this.route.navigate([`/dashboard/campaigns`]);
   }
   public disConnection(event) {
     event.preventDefault();

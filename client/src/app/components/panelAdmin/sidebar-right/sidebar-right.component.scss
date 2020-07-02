@@ -38,6 +38,7 @@
     display: flex;
     padding-right: 15px;
     align-items: center;
+   // text-align: center;
   }
  
 }
@@ -117,14 +118,14 @@
      
       .list-sidibar {
         color: #7e8082;
-        display: flex;
+       // display: flex;
         overflow: hidden;
         border-bottom: 1px dashed $color-principal-blue;
         flex-direction: row-reverse;
         transition: 1s;
         .list-sidibar-left-content {
           color: #3f526a;
-          font-size: $font-size-home;
+          font-size: 10px;
            
           word-wrap: break-word;
           margin-bottom: 0px;
@@ -133,7 +134,7 @@
           flex: initial;
 
           a {
-            color: #ce5637;
+            //color: #ce5637;
             border: none;
             transition: color 0.2s;
              

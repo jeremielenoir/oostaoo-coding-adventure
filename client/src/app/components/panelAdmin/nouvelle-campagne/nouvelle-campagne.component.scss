@@ -165,17 +165,17 @@
 }
 
 :host ::ng-deep .mat-form-field-flex {
-  display: inline-flex;
+  /* display: inline-flex;
   align-items: baseline;
   box-sizing: border-box;
   width: 98%;
-  border: $border-table;
+  //border: $border-table;
   height: 60px;
   padding: 0px 10px 10px;
   margin-top: 15px;
   margin-left:5px;
   margin-right: 5px;
-  border:1px solid #445770!important
+  border:1px solid #445770!important */
 }
 
 :host ::ng-deep .mat-form-field-underline {

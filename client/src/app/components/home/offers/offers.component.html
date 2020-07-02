@@ -1,7 +1,7 @@
 <div class="rowter">
   <div id="offers">
     <div class="title-dashed-container">
-      <h3 class="title-dashed">
+      <h3 class="title-dashed" i18n>
         NOS FORMULES
         <span class="dashed"></span>
       </h3>
@@ -21,10 +21,10 @@
               color="warn"
               class="lab-item lab-item-button">{{ offer.periodicity === 'monthly' ? 'S\'abonner' : 'Acheter' }}</button>
             <button *ngIf="currentOffer && currentOffer.periodicity === 'monthly' && currentOffer.id === offer.id"
-              (click)="unSubscribe()" mat-raised-button color="warn" class="lab-item lab-item-button">Se
+              (click)="unSubscribe()" mat-raised-button color="warn" class="lab-item lab-item-button" i18n>Se
               désabonner</button>
             <button *ngIf="offer.periodicity === 'monthly' && currentOffer && currentOffer.id !== offer.id"
-              (click)="changeOffer(offer)" mat-raised-button color="warn" class="lab-item lab-item-button">S'abonner</button>
+              (click)="changeOffer(offer)" mat-raised-button color="warn" class="lab-item lab-item-button" i18n>S'abonner</button>
           </mat-card-actions>
         </mat-card-content>
       </mat-card>

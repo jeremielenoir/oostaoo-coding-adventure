@@ -18,7 +18,7 @@ import { CountUpModule } from 'countup.js-angular2';
 import { DragScrollModule } from 'ngx-drag-scroll';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
+import { TimeagoModule, TimeagoIntl, TimeagoFormatter, TimeagoCustomFormatter } from 'ngx-timeago';
 // import components
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/home/navbar/navbar.component';
@@ -133,6 +133,11 @@ import { CreditcardComponent } from './components/creditcard/creditcard.componen
 import { ContactComponent } from './components/contact/contact.component';
 import { MatProgressBarModule } from '@angular/material';
 import { QuestionsComponent } from './components/questions/questions.component';
+import { TimeagoComponent } from './components/timeago/timeago.component';
+
+export class MyIntl extends TimeagoIntl {
+   
+  }
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -241,6 +246,7 @@ import { QuestionsComponent } from './components/questions/questions.component';
     CreditcardComponent,
     ContactComponent,
     QuestionsComponent,
+    TimeagoComponent,
   ],
   imports: [
     BrowserModule,
@@ -261,6 +267,11 @@ import { QuestionsComponent } from './components/questions/questions.component';
     NgxCaptchaModule,
     MarkdownModule.forRoot(),
     MonacoEditorModule.forRoot(),
+    TimeagoModule.forRoot({
+      intl: { provide: TimeagoIntl, useClass: MyIntl },
+      formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
+    }),
+   
     CKEditorModule,
     MatProgressBarModule
   ],

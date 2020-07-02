@@ -47,7 +47,8 @@ export class TestComponent implements OnInit {
   public totalPointsCampaign;
   public totalPointsCandidat;
   public dataInfoLanguageName:any = '';
-  public dataInfoLanguageContent:any = ''
+  public dataInfoLanguageContent:any = '';
+  public separator :any=", "
 
 
   // Input algo
@@ -59,7 +60,7 @@ export class TestComponent implements OnInit {
   constructor(private apiClientService: ApiClientService,public languageStorage:SelectedLanguageService) {}
 
   ngOnInit() {
-console.log("this.languageStorage.getLanguageCountry()",this.languageStorage.getLanguageCountry())
+//console.log("this.languageStorage.getLanguageCountry()",this.languageStorage.getLanguageCountry())
     switch(this.languageStorage.getLanguageCountry()){
       case 'es-ES':
         this.dataInfoLanguageName =  'name_es';
@@ -135,7 +136,7 @@ console.log("this.languageStorage.getLanguageCountry()",this.languageStorage.get
       console.log(' tu est null ')
     } else {
       console.log(' tu est pas null ',this.dataInfoLanguageContent)
-      this.responses = this.question[this.dataInfoLanguageContent].split(', ');
+      this.responses = this.question[this.dataInfoLanguageContent].split(this.separator);
     }
     for (const techno of this.technoCampaign) {
       if (this.question.technologies === techno.id) {
@@ -180,7 +181,7 @@ console.log("this.languageStorage.getLanguageCountry()",this.languageStorage.get
 
       }
     }
-    this.arrayGoodRep = this.question.answer_value.split(', ').sort();
+    this.arrayGoodRep = this.question.answer_value.split(this.separator).sort();
   }
 
   checkCheckBoxvalue(event) {
@@ -211,7 +212,7 @@ console.log("this.languageStorage.getLanguageCountry()",this.languageStorage.get
   public QuestNext() {
     this.counterTotal++; // counter total questions
     if (this.checkTimeDefault === false) {
-      this.arrayGoodRep = this.question.answer_value.split(', ').sort();
+      this.arrayGoodRep = this.question.answer_value.split(this.separator).sort();
       this.checkRep();
     }
   
@@ -236,11 +237,11 @@ console.log("this.languageStorage.getLanguageCountry()",this.languageStorage.get
     this.question = this.questions[this.index];
     console.log("this.dataInfoLanguageContent",this.dataInfoLanguageContent)
     if (this.question[this.dataInfoLanguageContent]) {
-      this.responses = this.question[this.dataInfoLanguageContent].split(', ');
+      this.responses = this.question[this.dataInfoLanguageContent].split(this.separator);
     } else {
       this.responses = this.question;
     }
-    this.arrayGoodRep = this.question.answer_value.split(', ').sort();
+    this.arrayGoodRep = this.question.answer_value.split(this.separator).sort();
     for (const techno of this.technoCampaign) {
       if (this.question.technologies === techno.id) {
         this.language = techno.name;

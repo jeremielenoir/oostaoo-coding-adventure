@@ -3,38 +3,38 @@
     <div id="shadow-cog" [class.shadow-cog-active]="ActiveTest">
       <div class="modall">
         <div class="modall-header">
-          <h3 class="modall-title">
+          <h3 class="modall-title" i18n>
             <i class="fa fa-user icon"></i>
             Vous êtes sur le point de démarrer votre test
           </h3>
         </div>
 
         <div class="modall-content">
-          <p class=" claire-text">
+          <p class=" claire-text" i18n>
             Une fois que vous aurez cliqué sur le bouton "Commencer", vous ne
             pourrez plus interrompre l'enchainement des questions. Une fois
             qu'une réponse est soumise, vous ne pourrez plus revenir à la
             question précédente.
           </p>
-          <p class="claire-text text-gras">
+          <p class="claire-text text-gras" i18n>
             Les solutions qui prennent en considération un maximum de cas
             d'utilisation sont privilégiées par le système de notation.
           </p>
 
-          <p class="claire-text">
+          <p class="claire-text" i18n>
             Nous vous rappelons qu'il est interdit de tricher. Notre système
             détecte les tentatives de triche, et préviendra le recruteur le cas
             échéant.
           </p>
 
-          <p class=" claire-text">Bonne chance !</p>
+          <p class=" claire-text" i18n>Bonne chance !</p>
 
           <label class="block-condition claire-text">
             <span class="checkbox-condition"><input type="checkbox" (change)="hundelechecked($event)" /></span>
 
-            <p class="text-condition">
+            <p class="text-condition" i18n>
               J'ai lu et j'accepte les
-              <a href="" class="text-link">conditions d'utilisation </a> et la
+              <a href="" class="text-link" i18n>conditions d'utilisation </a> et la
               politique de confidentialité. Je comprends que la politique de
               confidentialité qui s'applique est celle de l'entreprise qui m'a
               invité à passer ce test.
@@ -43,8 +43,8 @@
         </div>
 
         <div class="modall-footer">
-          <button class="btn" (click)="NohundleActiveTest()">Annuler</button>
-          <button class=" btn btn-valide" disabled="disabled" #btnchecked (click)="HundleStatueTestingQuestion()">
+          <button class="btn" (click)="NohundleActiveTest()" i18n>Annuler</button>
+          <button class=" btn btn-valide" disabled="disabled" #btnchecked (click)="HundleStatueTestingQuestion()" i18n>
             Commencer
           </button>
         </div>
@@ -56,18 +56,18 @@
         <div class="invitation">
           <div class="test-invit">
             <div class="image"></div>
-            <h3>Bonjour, vous avez été invité(e) à passer un test.</h3>
+            <h3 i18n>Bonjour, vous avez été invité(e) à passer un test.</h3>
           </div>
 
           <div class="text">
-            <p>
+            <p i18n>
               Vous devrez effectuer cette évaluation sans l’aide d’une tierce
               personne. Cependant, vous pouvez (et nous le conseillons vivement)
               vous servir de toutes les ressources à votre disposition
               (Internet, livres, etc.). Vous pouvez également utiliser votre
               environnement de développement préféré pour préparer vos réponses.
             </p>
-            <p>
+            <p i18n>
               Un tutoriel et une aide sont à votre disposition pour vous
               permettre de vous familiariser avec l'application dans les
               meilleures conditions.
@@ -79,21 +79,21 @@
           <div class="tutorial">
             <div class="title">
               <div class="img"></div>
-              <h3>Tutoriel</h3>
+              <h3 i18n>Tutoriel</h3>
             </div>
-            <p class="tuto-para">
+            <p class="tuto-para" i18n>
               Voici un tutoriel qui vous permet de découvrir votre environnement
               d’évaluation en vous familiarisant avec les fonctionnalités de
               l’application en toute tranquillité. Le résultat de ce tutoriel ne
               fait pas partie de l’évaluation. Vous avez la possibilité de
               recommencer ce tutoriel autant de fois que vous le souhaitez.
             </p>
-            <button class="btn-compo">Démarrer le tutoriel</button>
+            <button class="btn-compo" i18n>Démarrer le tutoriel</button>
           </div>
           <div class="test">
             <div class="title">
               <div class="img"></div>
-              <h3>Test</h3>
+              <h3 i18n>Test</h3>
             </div>
 
             <p class="tuto-para">
@@ -103,7 +103,7 @@
               {{ durationMaxTest }} minutes. Merci de prévoir
               {{ durationMaxTest }} minutes consécutives pour faire ce test.
             </p>
-            <button class="btn-compo" (click)="hundleActiveTest()">
+            <button class="btn-compo" (click)="hundleActiveTest()" i18n>
               Démarrer le test
             </button>
           </div>

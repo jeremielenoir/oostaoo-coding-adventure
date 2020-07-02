@@ -1,13 +1,13 @@
 <div id="shadow-cog" [class.shadow-cog-active]="Activetime">
   <div class="modall">
     <div class="modall-header">
-      <h3 class="modall-title">
+      <h3 class="modall-title" i18n>
         Timeout
       </h3>
     </div>
 
     <div class="modall-content">
-      <p>
+      <p i18n>
         Le temps imparti pour la question est écoulé. Votre réponse actuelle a
         été soumise. Cliquez sur OK quand vous êtes prêt(e) à passer à la
         question suivante.
@@ -15,7 +15,7 @@
     </div>
 
     <div class="modall-footer">
-      <button class="btn" (click)="QuestNext()">OK</button>
+      <button class="btn" (click)="QuestNext()" i18n>OK</button>
     </div>
   </div>
 </div>
@@ -34,7 +34,7 @@
         <div class="testing-timer">
           <span class="testing-timer-icon"><i class="far fa-clock"></i></span>
 
-          <span class="testing-timer-text">
+          <span class="testing-timer-text" i18n>
             Temps écoulé :
             <strong [class.active-time-danger]="timedefault >= timeDanger">{{
                 timedefault === 600

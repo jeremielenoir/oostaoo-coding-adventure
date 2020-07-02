@@ -124,13 +124,7 @@ export class EditQuestionsComponent implements OnInit {
     for (let techno of technos) {
       for (let question of yourCampaign) {
         if (techno.id.toString() === question.technologies.id.toString()) {
-          // if (
-          //   newQuestion.findIndex(
-          //     (q) => q && q.id.toString() === question.id.toString()
-          //   ) < 0
-          // ) {
-          //   newQuestion.push({ ...question, technologies: techno });
-          // }
+          
 
           newQuestion.push({ ...question, technologies: techno });
         }
@@ -141,24 +135,15 @@ export class EditQuestionsComponent implements OnInit {
 
     this.yourCampaign = yourCampaign;
     this.allTechno = technos;
-   
-    // this.allQuestions = this.yourCampaign.filter(
-    //   (q1) =>
-    //     this.allQuestions.findIndex(
-    //       (q2) => q2.id.toString() === q1.id.toString()
-    //     ) < 0
-    // );
-    console.log("this.yourCampaign", this.yourCampaign);
-    console.log("allQuestions", this.allQuestions);
-    // return newQuestion;
+    
   }
   chargeYourCampagn(event) {
-    console.log("on vien de recupere event", event);
-    // this.yourCampaign = event;
+   /*  console.log("on vien de recupere event", event);
+    // this.yourCampaign = event; */
     this.populateQuestions(event);
   }
 
-  loadAllQuestion(yourCampaignQuestions): any {
+  loadAllQuestion(yourCampaignQuestions): any {''
     let url = "";
     this.techno.forEach((tech, index) => {
       if (index === 0) {

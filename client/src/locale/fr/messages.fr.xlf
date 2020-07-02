@@ -55,7 +55,7 @@
           Prices
         </source>
         <target>
-          Prices
+          Prix
         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/navbar/navbar.component.html</context>

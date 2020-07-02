@@ -81,11 +81,11 @@
                 <div class="info-hover-content">
                   <p>Points : <span>{{item.points}}</span></p>
                   <p>Technologie : <span>{{item.technologies.name}}</span></p>
-                  <p>Compétence évaluée : <span>{{item[theme_i18n]}}</span></p>
+                  <p>Compétence évaluée : <span [innerHtml]>{{item[theme_i18n]}}</span></p>
                   <p>Enoncé:</p>
                 </div>
                 <div class="info-hover-enonce">
-                  <p>{{item[name_i18n]}}</p>
+                  <p [innerHtml]>{{item[name_i18n]}}</p>
 
                   <p>Liste des réponses proposées :</p>
                   <p>{{item[content_i18n]}}</p>

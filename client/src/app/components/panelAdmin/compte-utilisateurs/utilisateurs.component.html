@@ -16,13 +16,13 @@
               <div class="form-groupe">
                 <div class="top-form-groupe">
                   <div class="title-and-error-span">
-                    <label class="libele">prenom</label>
+                    <label class="libele" i18n>prenom</label>
                   </div>
                 </div>
                 <div>
                   <input [formControl]="addPrenom" type="" name="prenom" class="champ-form" required id="prenom" />
                   <div *ngIf=" submittedUser && addPrenom.invalid" class="alert">
-                    <div *ngIf="addPrenom.errors.required">
+                    <div *ngIf="addPrenom.errors.required" i18n>
                       Prénom requis
                     </div>
                   </div>
@@ -31,13 +31,13 @@
               <div class="form-groupe">
                 <div class="top-form-groupe">
                   <div class="title-and-error-span">
-                    <label class="libele">nom</label>
+                    <label class="libele" i18n>nom</label>
                   </div>
                 </div>
                 <div>
                   <input [formControl]="addNom" type="" name="nom" class="champ-form" />
                   <div *ngIf=" submittedUser && addNom.invalid" class="alert alert-danger">
-                    <div *ngIf="addNom.errors.required">
+                    <div *ngIf="addNom.errors.required" i18n>
                       Nom requis
                     </div>
                   </div>
@@ -46,16 +46,16 @@
               <div class="form-groupe">
                 <div class="top-form-groupe">
                   <div class="title-and-error-span">
-                    <label class="libele">email</label>
+                    <label class="libele" i18n>email</label>
                   </div>
                 </div>
                 <div>
                   <input [formControl]="addEmail" type="" name="email" class="champ-form" id="email" />
                   <div *ngIf=" submittedUser && addEmail.invalid" class="alert alert-danger">
-                    <div *ngIf="addEmail.errors.required">
+                    <div *ngIf="addEmail.errors.required" i18n>
                       Email requis
                     </div>
-                    <div *ngIf="addEmail.errors.email">
+                    <div *ngIf="addEmail.errors.email" i18n>
                       Email valide requis
                     </div>
                   </div>
@@ -64,13 +64,13 @@
               <div class="form-groupe">
                 <div class="top-form-groupe">
                   <div class="title-and-error-span">
-                    <label class="libele">Pseudo</label>
+                    <label class="libele" i18n>Pseudo</label>
                   </div>
                 </div>
                 <div>
                   <input [formControl]="addUsername" type="text" name="username" class="champ-form" id="username" />
                   <div *ngIf=" submittedUser && addUsername.invalid" class="alert alert-danger">
-                    <div *ngIf="addUsername.errors.required">
+                    <div *ngIf="addUsername.errors.required" i18n>
                       Pseudo requis
                     </div>
                   </div>
@@ -79,13 +79,13 @@
               <div class="form-groupe">
                 <div class="top-form-groupe">
                   <div class="title-and-error-span">
-                    <label class="libele">Mot de passe</label>
+                    <label class="libele" i18n>Mot de passe</label>
                   </div>
                 </div>
                 <div>
                   <input [formControl]="addPassword" type="password" name="password" class="champ-form" id="password" />
                   <div *ngIf=" submittedUser && addPassword.invalid" class="alert alert-danger">
-                    <div *ngIf="addPassword.errors.required">
+                    <div *ngIf="addPassword.errors.required" i18n>
                       Mot de passe requis
                     </div>
                   </div>
@@ -94,18 +94,18 @@
               <div class="form-groupe">
                 <div class="top-form-groupe">
                   <div class="title-and-error-span">
-                    <label class="libele">Confirmer le mot de passe</label>
+                    <label class="libele" i18n>Confirmer le mot de passe</label>
                   </div>
                 </div>
                 <div>
                   <input [formControl]="confirmPassword" type="password" name="confirmPassword" class="champ-form"
                     id="confirmPassword" />
                   <div *ngIf=" submittedUser && confirmPassword.invalid" class="alert alert-danger">
-                    <div *ngIf="confirmPassword.errors.required">
+                    <div *ngIf="confirmPassword.errors.required" i18n>
                       Confirmation du mot de passe requis
                     </div>
                   </div>
-                  <div *ngIf=" submittedUser && addPassword.value !== confirmPassword.value" class="alert alert-danger">
+                  <div *ngIf=" submittedUser && addPassword.value !== confirmPassword.value" class="alert alert-danger" i18n>
                     Les mots de passe ne correspondent pas
                   </div>
                 </div>
@@ -113,7 +113,7 @@
               <div class="form-groupe">
                 <div class="top-form-groupe">
                   <div class="title-and-error-span">
-                    <label class="libele">Rôles</label>
+                    <label class="libele" i18n>Rôles</label>
                   </div>
                 </div>
                 <div>

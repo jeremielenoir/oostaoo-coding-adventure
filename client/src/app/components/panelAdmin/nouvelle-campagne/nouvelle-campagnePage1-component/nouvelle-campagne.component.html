@@ -12,30 +12,35 @@
       <div class="spacing">
     
           <div id="select">
-            <div class="champ-group role-champ">
-              <label for="role" [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</label>
-              <mat-form-field [formGroup]="formCampagne">
-                <mat-select name="role" formControlName="role" [(ngModel)]="roleSelect"
+           
+             <!-- <label for="role" [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</label>-->
+              <mat-form-field [formGroup]="formCampagne" appearance="fill" >
+                <mat-label [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</mat-label>
+                <mat-select name="role" class="mat-primary" formControlName="role" [(ngModel)]="roleSelect"
                   (selectionChange)="selected($event)">
                   <mat-option *ngFor="let role of profiles" [value]="role[nameLanguage]">{{
                   role[nameLanguage]
                 }}</mat-option>
                 </mat-select>
               </mat-form-field>
-            </div>
+             
           </div>
        
         <div class="or-text">
           <div id="select">
-            <span class="or-text-span">Ou</span>
+            <span class="or-text-span" i18n>Ou</span>
           </div>
         </div>
         
           <div id="select">
             <div class="champ-group">
-              <label for="techno" [ngStyle]="errorTechno ? { color: 'red' } : null">Sélectionnez les technologies à
-                tester</label>
-              <mat-form-field [formGroup]="formCampagne">
+              <!--<label for="techno" [ngStyle]="errorTechno ? { color: 'red' } : null" i18n>Sélectionnez les technologies à
+                tester</label>-->
+
+                
+              <mat-form-field [formGroup]="formCampagne" appearance="fill">
+                <mat-label for="techno" [ngStyle]="errorTechno ? { color: 'red' } : null" i18n>Sélectionnez les technologies à
+                  tester</mat-label>
                 <mat-select multiple name="techno" formControlName="techno" [compareWith]="compareObjects"
                   [(ngModel)]="technosSelect" (selectionChange)="getTechnoChecked()">
                   <mat-option *ngFor="let techno of technos" [value]="techno">{{
@@ -77,7 +82,7 @@
       <div class="formQuestion finalQuestion">
         <div class="button">
           <button type="button" id="button" mat-flat-button (click)="onIncrementPage(formCampagne.value)"
-            (click)="valueChanged()">
+            (click)="valueChanged()" i18n>
             Étapes suivante : Paramètres
           </button>
         </div>

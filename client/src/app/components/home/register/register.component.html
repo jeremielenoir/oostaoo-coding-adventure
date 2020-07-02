@@ -7,36 +7,36 @@
   <div id="left-side">
     <div *ngIf="!switchPanel" id="left-panel">
       <div id="left-panel-text">
-        <h2 id="left">Déjà client ?</h2>
-        <p id="text_left_panel">
+        <h2 id="left" i18n>Déjà client ?</h2>
+        <p id="text_left_panel" i18n>
           Connectez vous à votre compte pour avoir accès a vos campagnes, votre
           profil, etc
         </p>
-        <button class="button-left-panel" (click)="switch()">Se connecter</button>
+        <button class="button-left-panel" (click)="switch()" i18n>Se connecter</button>
       </div>
     </div>
 
     <!-- Formulaire cote gauche -->
     <form *ngIf="switchPanel" [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="forms left">
-      <h2>Se connecter ?</h2>
+      <h2 i18n>Se connecter ?</h2>
       <div class="form-group">
-        <label for="username">Identifiant</label>
+        <label for="username" i18n>Identifiant</label>
         <input type="text" formControlName="username"
           [ngClass]="{ 'is-invalid': submittedLogin && f.username.errors }" />
         <div *ngIf="submittedLogin && f.username.errors" class="invalid-feedback">
-          <div *ngIf="f.username.errors.required">Identifiant requis</div>
+          <div *ngIf="f.username.errors.required" i18n>Identifiant requis</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="password">Mot de passe</label>
+        <label for="password" i18n>Mot de passe</label>
         <input type="password" formControlName="password"
           [ngClass]="{ 'is-invalid': submittedLogin && f.password.errors }" />
         <div *ngIf="submittedLogin && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors.required">Mot de passe requis</div>
+          <div *ngIf="f.password.errors.required" i18n>Mot de passe requis</div>
         </div>
       </div>
-      <span class="forgotten-password" (click)="openDialog()">Mot de passe oublié ?</span>
-      <button class="button">Se connecter</button>
+      <span class="forgotten-password" (click)="openDialog()" i18n>Mot de passe oublié ?</span>
+      <button class="button" i18n>Se connecter</button>
      
       <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
     </form>
@@ -46,9 +46,9 @@
 
   <div class="social-block">
     <div class="social-box">
-      <a href="/connect/github" class="social-button" id="github-connect"> <span>Se connecter avec Github</span></a>
-      <a href="/connect/google" class="social-button" id="google-connect"> <span>Se connecter avec Google</span></a>
-      <a href="/connect/facebook" class="social-button" id="facebook-connect"> <span>Se connecter avec
+      <a href="/connect/github" class="social-button" id="github-connect"> <span i18n>Se connecter avec Github</span></a>
+      <a href="/connect/google" class="social-button" id="google-connect"> <span i18n>Se connecter avec Google</span></a>
+      <a href="/connect/facebook" class="social-button" id="facebook-connect"> <span i18n>Se connecter avec
           Facebook</span></a>
       <div *ngIf="errorProvider" id="error-provider" class="alert alert-danger">{{ errorProvider }}</div>
     </div>
@@ -59,17 +59,17 @@
   <div id="right-side">
     <div *ngIf="switchPanel" id="right-panel">
       <div id="right-panel-text">
-        <h2 id="title_right_panel">Nouveau client</h2>
+        <h2 id="title_right_panel" i18n>Nouveau client</h2>
 
         <!--button id="button_right_panel" (click)="switch()">
           Créer un compte
         </button-->
-        <p id="text_right_panel">
+        <p id="text_right_panel" i18n>
           Évaluez vos candidats en ligne Sourcez, recrutez des développeurs
           passionnés Créez vos propres événements de code
         </p>
         <div class="form-group">
-          <button class="btn btn-primary button" (click)="switch()">Créer un compte</button>
+          <button class="btn btn-primary button" (click)="switch()" i18n>Créer un compte</button>
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@
     <!-- Formulaire cote droit -->
     <form *ngIf="!switchPanel" class="forms right" [formGroup]="registerForm" (ngSubmit)="register()"
       id="form_register">
-      <h2>Nouveau client ?</h2>
+      <h2 i18n>Nouveau client ?</h2>
 
       <!--div class="form-group">
         <label for="usernameregister"> Pseudo :</label>
@@ -90,7 +90,7 @@
       </div-->
 
       <div class="form-group">
-        <label style="margin-bottom: 5px;" for="acountregister">Compte :</label>
+        <label style="margin-bottom: 5px;" for="acountregister" i18n>Compte :</label>
         <mat-radio-group color="default" aria-label="Select an account type">
           <mat-radio-button checked="true" value="personal">Personnel</mat-radio-button>
           <mat-radio-button style="margin-left: 16px;" value="profesional">Professionnel</mat-radio-button>
@@ -98,33 +98,33 @@
       </div>
 
       <div class="form-group">
-        <label for="emailregister">Email :</label>
+        <label for="emailregister" i18n>Email :</label>
         <input formControlName="emailregister" class="input-section1 form-control" maxlength="64" type="email"
           [ngClass]="{ 'is-invalid': submittedRegister && fr.emailregister.errors }" />
         <div *ngIf="submittedRegister && fr.emailregister.errors" class="invalid-feedback">
-          <div *ngIf="fr.emailregister.errors.required">Email requis</div>
-          <div *ngIf="fr.emailregister.errors.email">Email valide requis.</div>
+          <div *ngIf="fr.emailregister.errors.required" i18n>Email requis</div>
+          <div *ngIf="fr.emailregister.errors.email" i18n>Email valide requis.</div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="passwordregister"> Mot de passe :</label>
+        <label for="passwordregister" i18n> Mot de passe :</label>
         <input formControlName="passwordregister" class="input-section1 form-control" maxlength="64" type="password"
           [ngClass]="{ 'is-invalid': submittedRegister && fr.passwordregister.errors }" />
         <div *ngIf="submittedRegister && fr.passwordregister.errors" class="invalid-feedback">
-          <div *ngIf="fr.passwordregister.errors.required">Mot de passe requis</div>
+          <div *ngIf="fr.passwordregister.errors.required" i18n>Mot de passe requis</div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="confirmpassword"> Confirmation du mot de passe :</label>
+        <label for="confirmpassword" i18n> Confirmation du mot de passe :</label>
         <input formControlName="confirmpassword" class="input-section1 form-control" maxlength="64" type="password"
           [ngClass]="{ 'is-invalid': submittedRegister && fr.confirmpassword.errors }" />
         <div *ngIf=" submittedRegister && fr.confirmpassword.errors" class="invalid-feedback">
-          <div *ngIf="fr.confirmpassword.errors.required">Confirmation du mot de passe requise</div>
+          <div *ngIf="fr.confirmpassword.errors.required" i18n>Confirmation du mot de passe requise</div>
         </div>
         <div *ngIf=" submittedRegister && fr.confirmpassword.value !== fr.passwordregister.value"
-          class="invalid-feedback">
+          class="invalid-feedback" i18n>
           Les mots de passe ne correspondent pas.
         </div>
       </div>
@@ -140,10 +140,10 @@
         formControlName="recaptcha"
         [ngClass]="{ 'is-invalid': submittedRegister && fr.recaptcha.errors }">
         </ngx-recaptcha2>
-        <p *ngIf="submittedRegister && !captchaSuccess" class="invalid-feedback">Validation du captcha nécessaire</p>
+        <p *ngIf="submittedRegister && !captchaSuccess" class="invalid-feedback" i18n>Validation du captcha nécessaire</p>
       </div>
       <div class="form-group">
-        <button class="button" id="register-button">S'inscrire</button>
+        <button class="button" id="register-button" i18n>S'inscrire</button>
       </div>
       <div *ngIf="errorRegister" class="alert alert-danger">{{ errorRegister }}</div>
 

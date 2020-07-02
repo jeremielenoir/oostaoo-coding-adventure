@@ -16,6 +16,9 @@
       outline: none;
     }
 }
+.buttonItemSelect {
+ width: 80%;
+}
 // .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element{
 //   color:#e15028!important;
 // }
@@ -60,10 +63,33 @@
 .termine-left-many{
   margin-left: 1px;
 }
-.button-matMenu{
-  outline: none;
+.icon{
+  color: $color-orange;
 }
+.button-matMenu{
+ // outline: none;
 
+ 
+
+ .iconStyle{
+  color: $color-orange;
+  width: 20px;
+  font-size: 20px;
+  margin-left: 10px;
+   
+ }
+}
+.addIconText{
+  font-size: 13px;margin-left: 10px;color: gray;
+}
+.addCampaignContainer{
+  background-color:$color-orange;
+  margin-left: 15px;
+  .addIcon{
+    color: white;
+  }
+  
+}
 .contenu-view-content-left {
   display: flex;
   flex-direction: column;
@@ -96,6 +122,7 @@
         .number-test{
           color:$color-principal-blue;
           font-size: $font-size-home;
+          
            
         }
 
@@ -440,6 +467,7 @@
   .branche-content-list-end{
     width: 100px!important;
   }
+  
   .test-right-header{
     width: 100%;
     flex-direction: column!important;
@@ -449,6 +477,7 @@
     justify-content: space-between!important;
     .number-test{
       padding-left: 6px!important;
+      font-weight: bold;
     }
   }
   .sous-header-two{

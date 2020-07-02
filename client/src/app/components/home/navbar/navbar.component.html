@@ -64,11 +64,13 @@
   <mat-sidenav-container (click)="showOrHideManually()" fxFlexFill class="fixe-nav">
     <mat-sidenav #sidenav>
       <mat-nav-list>
-        <a href="#" mat-list-item i18n>Évaluez et testez les développeurs</a>
+        <a href="#" mat-list-item i18n>
+          Evaluate and test developers</a>
         <a href="#" mat-list-item i18n>Prices</a>
         <a href="#" mat-list-item i18n>Connection</a>
         <!--a (click)="logout()">Se déconnecter</a-->
-        <a href="#" mat-button i18n>30 jours d'evaluation gratuits</a>
+        <a href="#" mat-button i18n>
+          30 days free evaluation</a>
       </mat-nav-list>
     </mat-sidenav>
   </mat-sidenav-container>
@@ -79,11 +81,11 @@
       <img src="../../assets/logo_ROODEO.svg" alt="" />
    </a>
   <ul class="nav-burgeur">
-      <li><a href=""> Test the developers </a></li>
-      <li><a href=""> Technical Interviews  </a></li>
-      <li><a href=""> Technologies  </a></li>
-      <li><a href=""> Features  </a></li>
-      <li><a href=""> Connection </a> </li>
+      <li><a href="" i18n> Test the developers </a></li>
+      <li><a href="" i18n> Technical Interviews  </a></li>
+      <li><a href="" i18n> Technologies  </a></li>
+      <li><a href="" i18n> Features  </a></li>
+      <li><a href="" i18n> Connection </a> </li>
       <li class="last-list-flags">
           <span *ngFor="let otherLanguageSingle of otherLanguage">
             <img src="{{otherLanguageSingle.img}}" alt=""/>
