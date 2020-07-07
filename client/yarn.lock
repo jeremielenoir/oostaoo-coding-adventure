@@ -661,6 +661,11 @@ acorn@^6.0.5:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.1.tgz#531e58ba3f51b9dacb9a6646ca4debf5b14ca474"
   integrity sha512-ZVA9k326Nwrj3Cj9jlh3wGFutC2ZornPNARZwsNYqQYgN0EsV2d53w5RN/co65Ohn4sUAUtb1rSUAOD6XN9idA==
 
+acorn@^7.3.1:
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.3.1.tgz#85010754db53c3fbaf3b9ea3e083aa5c5d147ffd"
+  integrity sha512-tLc0wSnatxAQHVHUapaHdz72pi9KUyHjq5KyHjGg9Y8Ifdc79pTh2XvI6I1/chZbnM7QtNKzh66ooDogPZSleA==
+
 adm-zip@^0.4.9:
   version "0.4.14"
   resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.4.14.tgz#2cf312bcc9f8875df835b0f6040bd89be0a727a9"
@@ -5041,6 +5046,13 @@ ngx-stripe@^7.4.4:
   version "7.4.4"
   resolved "https://registry.yarnpkg.com/ngx-stripe/-/ngx-stripe-7.4.4.tgz#e69aa2c07c1b64e8d68e9dcf8db1a7aa87b27027"
   integrity sha512-uLuTjtYDIkeBYuzMyjiU36a0ZAAeA5Qi8lZBE+JtQvtQMBpbzluO82GvyKRtMJ08VaP4T6oswPoiGPeigaLr1g==
+  dependencies:
+    tslib "^1.9.0"
+
+ngx-timeago@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/ngx-timeago/-/ngx-timeago-1.0.4.tgz#351514242c1ad637f8d76693a1dba720cc699285"
+  integrity sha512-/UkF2ETQBRdJ2k3xFoI8uNXNqrzWll2gZB17Ear1pvKyQ0bJczYY4qPa5IzSqurLLTmNxOK447+RMxeuXX+mrQ==
   dependencies:
     tslib "^1.9.0"
 
