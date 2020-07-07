@@ -5,7 +5,7 @@ import {
   ElementRef,
   ViewChild,
 } from "@angular/core";
-import { tween, styler, everyFrame, spring, stagger, easing } from "popmotion";
+import { tween, styler, everyFrame, spring, stagger, easing, chain, timeline } from "popmotion";
 
 @Component({
   selector: "app-second-section",
@@ -40,37 +40,54 @@ export class SecondSectionComponent implements OnInit {
     const durationSecond = this.durationSecond;
     const durationThird = this.durationThird;
     const firstStyler = styler(this.first.nativeElement);
-    tween({
-      to: { x: -430 },
-      from: { x: 0 },
-      duration:3000,
-      ease: easing.backOut,
-      flip: Infinity,
-      elapsed: 5000,
-      // loop: 5,
-      // yoyo: 5
-    }).start(firstStyler.set);
     const secondStyler = styler(this.second.nativeElement);
-    tween({
-      to: { x: -430 },
-      from: { x: 0 },
-      duration:3000,
-      ease: easing.backOut,
-      flip: Infinity,
-      elapsed: 9000,
-      // loop: 5,
-      // yoyo: 5
-    }).start(secondStyler.set);
     const thirdStyler = styler(this.third.nativeElement);
-    tween({
-      to: { x: -430 },
-      from: { x: 0 },
-      duration:3000,
-      ease: easing.backOut,
-      flip: Infinity,
-      elapsed: 12000,
-      // loop: 5,
-      // yoyo: 5
-    }).start(thirdStyler.set);
+    
+    
+
+    const setStylers = (v) => {
+      //console.log(v);
+      if (v.first !== undefined){
+        firstStyler.set(v.first);
+      }
+      if (v.second !== undefined){
+        secondStyler.set(v.second);
+      }
+      if (v.third !== undefined){
+        thirdStyler.set(v.third);
+      }
+    };
+
+    timeline([
+      {
+        track: 'first',
+        duration: 5000,
+        from: { x: -430 },
+        to: { x: 0 }
+      },
+      {
+        track: 'second',
+        duration: 5000,
+        from: { x: -430 },
+        to: { x: 0 }
+      },
+      {
+        track: 'third',
+        duration: 5000,
+        from: { x: -430 },
+        to: { x: 0 }
+      }
+    ],{
+      loop: Infinity
+    }).start(setStylers);
+
+
+    
+
+   
+
+    
+
+    
   }
 }
