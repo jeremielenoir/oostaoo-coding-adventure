@@ -84,131 +84,101 @@ export class SecondSectionComponent implements OnInit {
     };
 
     timeline([
-     [ {
-        track: 'first',
-        duration: 3000,
-        from: { x: -430 },
-        to: { x: 0 },
-        
-      },  
-      {
-        track:"image1",
-        duration:5000,
-        from:{
-         // x:0,
-          opacity:0},
-        to:{x:600,opacity:1}
-      },
-
-      {
-        track:"image2",
-        duration:5000,
-        from:{x:0,opacity:0},
-        to:{x:0,opacity:0}
-      },
-      {
-        track:"image3",
-        duration:5000,
-        from:{x:0,opacity:0},
-        to:{x:0,opacity:0}
-      }
-
-      ],
-    
+      5000,
       [
         {
-          track:"image1",
-          duration:8000,
-          from:{x:0,opacity:0.03},
-          to:{x:0,opacity:0}
-        },
-        {
           track: 'first',
-          duration: 3000,
+          duration: 2000,
           from: { x: 0 },
           to: { x: -430 },
-          
-        }, 
-        {
-          track: 'second',
-          duration: 5000,
-          from: { x: -430 },
-          to: { x: 0 }
         },
         {
-          track:"image2",
-          duration:5000,
-          from:{
-          //  x:0,
-            opacity:0},
-          to:{x:600,opacity:1}
-        },
-
-
-        {
-          track:"image1",
-          duration:5000,
-          from:{x:0,opacity:0},
-          to:{x:0,opacity:0}
-        },
-        {
-          track:"image3",
-         duration:5000,
-          from:{x:0,opacity:0},
-          to:{x:0,opacity:0}
+          track: 'image1',
+          duration: 1000,
+          from: { opacity: 1 },
+          to: { opacity: 0 }
         }
-      ],[
-        {
-          track:"image2",
-          duration:8000,
-          from:{x:0,opacity:0.03},
-          to:{x:0,opacity:0}
-        },
+      ],
+      '-500',
+      [
         {
           track: 'second',
-          duration: 5000,
-          from: { x: 0 },
-          to: { x: -430 }
+          duration: 2000,
+          from: { x: -430 },
+          to: { x: 0 },
         },
+        {
+          track: 'image2',
+          duration: 2000,
+          from: { opacity: 0 },
+          to: { opacity: 1 }
+        }
+      ],
+      '+5000',
+      [
+        {
+          track: 'second',
+          duration: 2000,
+          from: { x: 0 },
+          to: { x: -430 },
+        },
+        {
+          track: 'image2',
+          duration: 1000,
+          from: { opacity: 1 },
+          to: { opacity: 0 }
+        }
+      ],
+      '-500',
+      [
         {
           track: 'third',
-          duration: 5000,
+          duration: 2000,
           from: { x: -430 },
-          to: { x: 0 }
+          to: { x: 0 },
         },
         {
-          track:"image3",
-          duration:5000,
-          from:{
-           // x:0,
-            opacity:0},
-          to:{x:600,opacity:1}
-        },
-
-        {
-          track:"image2",
-        duration:5000,
-          from:{x:0,opacity:0},
-          to:{x:0,opacity:0}
-        },
-        {
-          track:"image1",
-          duration:5000,
-          from:{x:0,opacity:0},
-          to:{x:0,opacity:0}
+          track: 'image3',
+          duration: 2000,
+          from: { opacity: 0 },
+          to: { opacity: 1 }
         }
-      ]
-    
-
-     
-     
-   
-
-     
-   
-       
-    ],{
-      loop: Infinity
+      ],
+      '+5000',
+      [
+        {
+          track: 'third',
+          duration: 2000,
+          from: { x: 0 },
+          to: { x: -430 },
+        },
+        {
+          track: 'image3',
+          duration: 1000,
+          from: { opacity: 1 },
+          to: { opacity: 0 }
+        }
+      ],
+      '-500',
+      [
+        {
+          track: 'first',
+          duration: 2000,
+          from: { x: -430 },
+          to: { x: 0 },
+        },
+        {
+          track: 'image1',
+          duration: 2000,
+          from: { opacity: 0 },
+          to: { opacity: 1 }
+        }
+      ]     
+    ],
+    {
+      loop: Infinity,
+      //flip: Infinity,
+      //ease: easing.easeIn
     }).start(setStylers);
 
 
