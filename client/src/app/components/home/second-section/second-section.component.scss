@@ -31,6 +31,7 @@
     }
     #content-left-image-2, #content-left-image-3{
       position: absolute;
+      opacity: 0;
       left: 0;
     }
   }
@@ -45,7 +46,7 @@
       width: 100%;
       top: 23%;
       left: 0px;
-      font-size: 14px;
+      font-size: 16px;
       color: $color-principal-blue;
     }
 
@@ -67,31 +68,37 @@
       &.first{
         z-index: 1;
         padding-left: 0px;
+        
         // padding-right: 60px;
         .img-text {
+          top: 13%;
           padding-right: 60px;
+          
+          left: 38px;
         }
         
       }
 
       &.middle{
-        z-index: 2;
+        z-index: 1;
         // left: -200px;
         // padding-left: 30px;
         // padding-right: 30px;
         .img-text {
+          top: 13%;
           padding-left: 30px;
           padding-right: 30px;
         }
       }
 
       &.last{
-        z-index: 3;
+        z-index: 2;
         // left: -200px;
         // padding-left: 60px;
         // padding-right: 0px;
         .img-text {
-          padding-left: 60px;
+          top: 13%;
+          padding-left: 30px;
         }
       }
     }
