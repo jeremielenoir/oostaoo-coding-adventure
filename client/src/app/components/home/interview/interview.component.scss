@@ -17,7 +17,7 @@
     to {opacity: 1}
 }
 
-:host.active-section #interview{
+:host.active-section-test #interview{
     .content {
         .intro{
             animation-name: fadeout;
@@ -78,7 +78,7 @@
         margin: 40px 0px;
 
         > div{
-            opacity: 0;
+            //opacity: 0;
             color: $color-principal-blue;
             font-size: 15px;
             padding: 30px 0px 30px 0px;
