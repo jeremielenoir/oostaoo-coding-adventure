@@ -86,12 +86,11 @@ export class SecondSectionComponent implements OnInit {
     timeline([
      [ {
         track: 'first',
-      duration: 5000,
+        duration: 3000,
         from: { x: -430 },
         to: { x: 0 },
         
-      }, 
-
+      },  
       {
         track:"image1",
         duration:5000,
@@ -118,6 +117,13 @@ export class SecondSectionComponent implements OnInit {
     
       [
         {
+          track: 'first',
+          duration: 3000,
+          from: { x: 0 },
+          to: { x: -430 },
+          
+        }, 
+        {
           track: 'second',
           duration: 5000,
           from: { x: -430 },
@@ -135,7 +141,7 @@ export class SecondSectionComponent implements OnInit {
 
         {
           track:"image1",
-        duration:5000,
+          duration:5000,
           from:{x:0,opacity:0},
           to:{x:0,opacity:0}
         },
@@ -146,6 +152,12 @@ export class SecondSectionComponent implements OnInit {
           to:{x:0,opacity:0}
         }
       ],[
+        {
+          track: 'second',
+          duration: 5000,
+          from: { x: 0 },
+          to: { x: -430 }
+        },
         {
           track: 'third',
           duration: 5000,
