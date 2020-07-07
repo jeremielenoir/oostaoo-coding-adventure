@@ -25,8 +25,13 @@
 
   .content-left{
     flex: 2;
+    position: relative;
     img{
       width: 100%;
+    }
+    #content-left-image-2, #content-left-image-3{
+      position: absolute;
+      left: 0;
     }
   }
 
