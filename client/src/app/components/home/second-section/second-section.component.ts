@@ -181,13 +181,6 @@ export class SecondSectionComponent implements OnInit {
       //ease: easing.easeIn
     }).start(setStylers);
 
-
-    
-
-   
-
-    
-
     
   }
 }
