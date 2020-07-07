@@ -117,6 +117,12 @@ export class SecondSectionComponent implements OnInit {
     
       [
         {
+          track:"image1",
+          duration:8000,
+          from:{x:0,opacity:0.03},
+          to:{x:0,opacity:0}
+        },
+        {
           track: 'first',
           duration: 3000,
           from: { x: 0 },
@@ -152,6 +158,12 @@ export class SecondSectionComponent implements OnInit {
           to:{x:0,opacity:0}
         }
       ],[
+        {
+          track:"image2",
+          duration:8000,
+          from:{x:0,opacity:0.03},
+          to:{x:0,opacity:0}
+        },
         {
           track: 'second',
           duration: 5000,
