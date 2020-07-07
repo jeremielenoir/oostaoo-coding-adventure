@@ -8,6 +8,9 @@
 .image_tuile{
   width: 100px;
   height: 100px;
+  &.interview{
+    width: 200px;
+  }
 }
 
 .mat-grid-tile{
