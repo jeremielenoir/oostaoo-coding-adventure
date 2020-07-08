@@ -39,6 +39,14 @@
   display: flex;
   border-bottom: 1px solid #e7e7e7;
   padding: 0px 15px;
+   
+  .chartjs-render-monitor {
+    animation: chartjs-render-animation 0.001s;
+    margin-top: 5px;
+}
+  
+  
+  
 
   .custom-buttom,.mat-flat-button {
     // height: 100%;
@@ -51,6 +59,14 @@
     color: $color-white !important;
     height: 67.5px;   
     outline: none;
+//
+    height: 50px;
+    width: 179.98px;;
+  margin-left: 5px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+
+
   }
 
   .button-disabled{
@@ -68,6 +84,11 @@
   .custom-buttom-anul{
     background-color: $color-gray!important;
     outline: none;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
   }
 
   .icon-arrow-btn{
