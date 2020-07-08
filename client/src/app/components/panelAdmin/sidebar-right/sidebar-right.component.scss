@@ -6,7 +6,7 @@
   min-width: 100%!important
 }
 .info-content-img-header{
-  min-width: 100px;
+  margin-left: 15px;
 }
 .list-sidibar-right-MinSize{
   border-right:none!important;
@@ -38,6 +38,9 @@
     display: flex;
     padding-right: 15px;
     align-items: center;
+    h3{
+      margin-left: 10px;
+    }
    // text-align: center;
   }
  
@@ -125,7 +128,7 @@
         transition: 1s;
         .list-sidibar-left-content {
           color: #3f526a;
-          font-size: 10px;
+          font-size: 12px;
            
           word-wrap: break-word;
           margin-bottom: 0px;
@@ -134,7 +137,7 @@
           flex: initial;
 
           a {
-            //color: #ce5637;
+            color: #ce5637;
             border: none;
             transition: color 0.2s;
              

@@ -7,8 +7,15 @@
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
         </figure>
 
-        <h3 class="info-title-header-dashboard" style="margin-left: 20px;" i18n >TESTS D’ÉVALUATIONS</h3>
-
+        <h3 class="info-title-header-dashboard" i18n >Tests d'evaluations</h3>
+        <div class="container-add-campaign">
+          <button mat-mini-fab    [routerLink]="['/dashboard/campaigns/new']"  class="addCampaignContainer" i18n>
+         
+          <mat-icon  class="addIcon">add</mat-icon>
+         
+        </button>  
+        <span i18n class="addIconText">Nouveau test</span>
+      </div>
       </div>
       <div class="sous-header-two">
 
@@ -17,14 +24,7 @@
         </div>
         <div class="test-right-header">
 
-          <div style="margin-top: 5px;margin-bottom: 5px;margin-left: 15px;"  >
-          <button mat-mini-fab    [routerLink]="['/dashboard/campaigns/new']"  class="addCampaignContainer" i18n>
-           
-            <mat-icon  class="addIcon">add</mat-icon>
-           
-          </button>  
-          <span i18n class="addIconText">Nouveau</span>
-        </div>
+          
           <div class="sous-header-form">
 
             <div class="form-group-header form-group-header-2">

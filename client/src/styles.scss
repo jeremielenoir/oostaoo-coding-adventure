@@ -58,15 +58,15 @@ $activeColor: #54728d !default;
 .sous-header-one{
   display: flex;
   background: #eaeff3;
-  height: 60px;
+  height: 54px;
   padding: 7px 0px;
   display: flex;
   flex-direction: row;
   align-items: center;
   .info-content-img-header-dashboard{
-    flex: 1;
-      width: 45px;
-      height: 45px;
+      flex: 1;
+      width: 36px;
+      height: 36px;
       margin-bottom: 0px;
     img{
       width:100%;
@@ -74,14 +74,15 @@ $activeColor: #54728d !default;
     }
   }
   .info-title-header-dashboard{
-    flex: 11;
-    text-transform: uppercase;
-    font-size: $font-size-home;
+    flex: 8;
+    //text-transform: uppercase;
+    font-size: 14px;
     margin-bottom: 0;
     font-family: $font-poppins;
-
+    //margin-left: 10px;
     letter-spacing: 1.5px;
-    padding-top: 7px;
+    padding-top: 3px;
+    color: #1d3552;
   }
 }
 
