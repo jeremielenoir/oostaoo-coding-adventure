@@ -1,0 +1,10 @@
+.interview {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  flex: 1;
+  background-image: url("https://static.codingame.com/work/assets/coverpage_background.3b92277c.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 40px;
+}

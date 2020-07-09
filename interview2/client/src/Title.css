@@ -1,0 +1,17 @@
+
+.title{
+    max-width: 40%;
+    padding: 2px 20px;
+    margin: auto;
+    border-radius: 2px;
+    background-color: white;
+}
+
+.title > h4{
+  font-size: 22px;
+  font-weight: 400;
+  text-align: center;
+}
+
+
+
