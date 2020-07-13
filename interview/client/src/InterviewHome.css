@@ -1,0 +1,7 @@
+.interviewHome {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: space-around;
+    justify-content: center;
+  }

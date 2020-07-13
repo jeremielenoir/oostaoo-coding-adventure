@@ -6,5 +6,6 @@
   background-image: url("https://static.codingame.com/work/assets/coverpage_background.3b92277c.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 40px;
+  box-sizing: border-box;
+  padding-top: 40px;
 }

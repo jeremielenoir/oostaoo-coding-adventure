@@ -25,8 +25,7 @@ const Form = () => {
     <div className="form-container">
       {copied ? <div className="form-copy">Copié</div> : null}
       <h4>
-        Partagez cette url avec les participants pour qu'ils puissent rejoindre
-        l'interview
+     Sélectionnez les candidats
       </h4>
       <div className="input-container">
         <input
@@ -38,7 +37,7 @@ const Form = () => {
         />
         <div onClick={copy}>COPIER</div>
       </div>
-      <div className="form-button">LANCER L'INTERVIEW</div>
+      <div className="form-button">INVITER</div>
       <p>
         Vous bénéficiez du module interview de manière illimité jusqu'au
         19/07/2019. Après quoi, vous aurez un quota de 3 heures par mois.
