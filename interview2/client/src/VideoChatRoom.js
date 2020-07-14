@@ -105,7 +105,7 @@ const PartnerVideo = styled.video`
   if (receivingCall) {
     incomingCall = (
       <div className='incomingCall'>
-        <h1>{caller} is calling you</h1>
+        <h3>{caller} is calling you</h3>
         <button onClick={acceptCall}>Accept</button>
       </div>
     )
@@ -167,14 +167,16 @@ const PartnerVideo = styled.video`
                          </div>
                     </div>
                     <div className="mainVideo">
-                        <PartnerVideo 
+                       {
+                       callAccepted && <PartnerVideo 
                             ref={partnerVideo}
                             className="partnerVideo"
                             autoPlay
                             playsInline
                             muted
                              />
-                            {incomingCall}
+                       }
+                            {!callAccepted ? incomingCall : null}
                              
                          <UserVideo
                           playsInline 
