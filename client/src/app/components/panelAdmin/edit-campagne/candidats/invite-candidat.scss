@@ -14,6 +14,19 @@
 .modal-candidat{
   max-width: 720px!important;
   width: 720px;
+
+
+  .close-invite-dialog{
+    float:right;
+    color:red;
+    margin-top:0px;
+    cursor: pointer;
+
+    span{
+      color: red;
+
+    }
+  }
 }
 
 .modal-candidat {

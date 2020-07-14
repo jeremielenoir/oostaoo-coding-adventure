@@ -28,7 +28,11 @@ export class InviteCandidat {
   ]);
   name_candidat = new FormControl('', [Validators.required]);
 
+  close(){
+    this.dialogRef.close()
+  }
   ngOnInit() {
+   
     // will log the entire data object
     // console.log('params id', this.data); // show id pass in params router
     this.apiClientService
