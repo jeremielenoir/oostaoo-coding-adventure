@@ -51,12 +51,12 @@
     text-align: center;
     font-size: 2rem;
 }
-.hisVideo{
+.partnerVideo{
 height: 100%;
 position: relative;
 }
 
-.myVideo{
+.userVideo{
     border-radius: 5px;
     position: absolute;
     bottom: 45px;

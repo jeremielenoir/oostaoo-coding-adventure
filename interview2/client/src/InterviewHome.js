@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import './InterviewHome.css';
 import Title from './Title';
 import Candidats from './Candidats';

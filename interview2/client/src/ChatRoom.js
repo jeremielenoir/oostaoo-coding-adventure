@@ -5,6 +5,7 @@ import { InterviewContext } from './context/InterviewContext';
 import Message from './Message';
 
 export default (props) => {
+  
     const inputRef = useRef(null);
     const [message, setMessage] = useState("");
     const { selectedCandidates } = useContext(InterviewContext);
@@ -44,7 +45,7 @@ export default (props) => {
       }, []);
     
     const candidate = selectedCandidates[0];
-    console.log('candidate : ', candidate);
+
     return (
         <div className="chatRoom">
 

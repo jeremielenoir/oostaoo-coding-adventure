@@ -6,20 +6,17 @@ export const InterviewContext = React.createContext();
 
 const InterviewContextProvider = ({children})=> {
 
-  const [userCandidates, setUserCandidates] = useState([]);
+  const [firmCandidates, setFirmCandidates] = useState([]);
   const [selectedCandidates, setSelectedCandidates] = useState([]);
 
   useEffect(()=>{
-    const fetchUserCandidates = async () => {
+    const fetchFirmCandidates = async () => {
       const response = await fetch ('/candidates/4');
-      const userCandidates = await response.json();
-
-       setUserCandidates(userCandidates);
-       console.log('this.state.userCandidates : ', userCandidates);
+      const firmCandidates = await response.json();
+       setFirmCandidates(firmCandidates);
        return;
-       
     }
-    fetchUserCandidates(); 
+    fetchFirmCandidates(); 
   }, [])
   
   const name = 'Maximus';
@@ -34,11 +31,8 @@ const InterviewContextProvider = ({children})=> {
     return;
   };
 
-  const unselectCandidate = (id) => {
-    
-  }
 
-  const value = { name, userCandidates, selectedCandidates, selectCandidate, unselectCandidate }
+  const value = { name, firmCandidates, selectedCandidates, selectCandidate }
         return (
             <InterviewContext.Provider value={value}>
               {children }

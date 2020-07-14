@@ -8,7 +8,7 @@ export default({redirect}) => {
   
 
 
-  const { userCandidates, selectCandidate, unselectCandidate, selectedCandidates } = useContext(InterviewContext);
+  const { firmCandidates, selectCandidate, selectedCandidates } = useContext(InterviewContext);
   
   const goToChatRoom = () => {
     if(selectedCandidates.length > 0){
@@ -18,7 +18,7 @@ export default({redirect}) => {
   }
 
   const putInSelectedCandidates = (id) => {
-    const candidateToSelect = userCandidates.find(cand=>cand.id == id);
+    const candidateToSelect = firmCandidates.find(cand=>cand.id == id);
     selectCandidate(candidateToSelect);
   }
 
@@ -27,12 +27,11 @@ export default({redirect}) => {
       <div className="form-button"
       onClick={()=>{goToChatRoom()}}
       >LANCER L'INTERVIEW</div>
-        {userCandidates && userCandidates.map(c=>
+        {firmCandidates && firmCandidates.map(c=>
         <Candidat 
            key={c.id} 
            id={c.id} 
            selectCandidate={putInSelectedCandidates} 
-           unselectCandidate={unselectCandidate}
            selectedCandidates={selectedCandidates}
            prenom={c.prenom} nom={c.nom} 
            email={c.email} />)

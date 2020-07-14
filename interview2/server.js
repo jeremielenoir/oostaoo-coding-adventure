@@ -13,13 +13,35 @@ server.listen(PORT, ()=>{
 
 
 /*  chat socket io */
-const socketio = require('socket.io');
-const io = socketio(server);
+const socket = require('socket.io');
+const io = socket(server);
+
+const users = {};
+
+io.on('connection', socket => {
+  if (!users[socket.id]) {
+      users[socket.id] = socket.id;
+  }
+  socket.emit("yourID", socket.id);
+  io.sockets.emit("allUsers", users);
+  socket.on('disconnect', () => {
+      delete users[socket.id];
+  })
+
+  socket.on("callUser", (data) => {
+      io.to(data.userToCall).emit('hey', {signal: data.signalData, from: data.from});
+  })
+
+  socket.on("acceptCall", (data) => {
+      io.to(data.to).emit('callAccepted', data.signal);
+  })
+});
 
 
-const messages = [];
 
-io.on('connection', (socket)=>{
+/*io.on('connection', (socket)=>{
+
+  const messages = [];
 
   socket.on('newMessage', (message) => {
     if(messages.length == 16){
@@ -31,11 +53,12 @@ io.on('connection', (socket)=>{
     io.emit("FromAPI", messages);
   })
 
-  /*socket.on('disconnect', ()=>{
+  socket.on('disconnect', ()=>{
     io.emit('candidateDisconnected');
   })
-  */
-})
+ })
+
+ */
 
 
 
@@ -43,27 +66,28 @@ io.on('connection', (socket)=>{
 app.use(bp.json());
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-const users = [
+
+const firms = [
   {id: 4, candidatesId: [24, 51, 76]}, 
   {id: 79, candidatesId: [87, 149, 563]}
 ];
 
 const candidates = [
     {
-    id:51, userId: 4, email: "lalou.zacharie@oostaoo.com", nom: 'Brown', prenom: 'James'
+    id:51, firmId: 4, email: "lalou.zacharie@oostaoo.com", nom: 'Brown', prenom: 'James'
     },
     {
-    id:24, userId: 4, email: 'hamdoun.ismael@oostaoo.com', nom: 'Maz', prenom: 'Isma'
+    id:24, firmId: 4, email: 'hamdoun.ismael@oostaoo.com', nom: 'Maz', prenom: 'Isma'
     },
     {
-    id:76, userId: 4, email: 'famady@oostaoo.com', nom: 'Trankillouche', prenom: "Famadouche"
+    id:76, firmId: 4, email: 'famady@oostaoo.com', nom: 'Trankillouche', prenom: "Famadouche"
     }
 ]
 
-app.get('/candidates/:userId', async (req, res) => {
-  const userId = req.params.userId;
-  let userCandidates = candidates.filter(c=>c.userId == userId);
-  res.send(JSON.stringify(userCandidates));
+app.get('/candidates/:firmId', async (req, res) => {
+  const firmId = req.params.firmId;
+  let firmCandidates = candidates.filter(c=>c.firmId == firmId);
+  res.send(JSON.stringify(firmCandidates));
 })
 
 
