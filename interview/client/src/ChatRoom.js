@@ -44,7 +44,6 @@ export default (props) => {
       }, []);
     
     const candidate = selectedCandidates[0];
-    console.log('candidate : ', candidate);
     return (
         <div className="chatRoom">
 
@@ -60,7 +59,6 @@ export default (props) => {
                   <button 
                   className='option' 
                   onClick={()=>{
-                    console.log('on lance la room vidéo');
                     props.history.push('/videoChatRoom');                }}>
                     Chat Vidéo
                   </button>

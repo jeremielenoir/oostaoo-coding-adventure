@@ -56,6 +56,11 @@ height: 100%;
 position: relative;
 }
 
+.incomingCall{
+    width: 200px;
+    height: 200px;
+    border: 2px solid gold;
+}
 .userVideo{
     border-radius: 5px;
     position: absolute;

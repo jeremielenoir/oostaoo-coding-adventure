@@ -7,20 +7,7 @@ import Message from './Message';
 import styled from "styled-components";
 
 
-const UserVideo = styled.video`
-  min-width: 200px;
-  min-height: 170px;
-  width: 20%;
-  height: 23%;
-  position: absolute;
-  bottom: 45px;
-  right: 25px;
-`;
 
-const PartnerVideo = styled.video`
-  width: 100%;
-  height: 100%;
-`;
 
 export default (props) => {
     
@@ -40,7 +27,7 @@ export default (props) => {
   function callPeer(id) {
 
     console.log('callpeer / mon id : ', yourID, ' / id a appeller : ', id)
-    
+
     const peer = new Peer({
       initiator: true,
       trickle: false,
@@ -81,6 +68,48 @@ export default (props) => {
 
   }
 
+  
+  function acceptCall() {
+    setCallAccepted(true);
+    const peer = new Peer({
+      initiator: false,
+      trickle: false,
+      stream: stream,
+    });
+    peer.on("signal", data => {
+      socket.current.emit("acceptCall", { signal: data, to: caller })
+    })
+
+    peer.on("stream", stream => {
+      partnerVideo.current.srcObject = stream;
+    });
+
+    peer.signal(callerSignal);
+  }
+
+  const UserVideo = styled.video`
+  min-width: 200px;
+  min-height: 170px;
+  width: 20%;
+  height: 23%;
+  position: absolute;
+  bottom: 45px;
+  right: 25px;
+`;
+
+const PartnerVideo = styled.video`
+  width: 100%;
+  height: 100%;
+`;
+  let incomingCall;
+  if (receivingCall) {
+    incomingCall = (
+      <div className='incomingCall'>
+        <h1>{caller} is calling you</h1>
+        <button onClick={acceptCall}>Accept</button>
+      </div>
+    )
+  }
 
   useEffect(() => {
     socket.current = io.connect("/");
@@ -104,8 +133,7 @@ export default (props) => {
       setCallerSignal(data.signal);
     })
   }, []);
-
-
+  
     return (
         <div className="chatRoom">
 
@@ -146,6 +174,7 @@ export default (props) => {
                             playsInline
                             muted
                              />
+                            {incomingCall}
                              
                          <UserVideo
                           playsInline 
