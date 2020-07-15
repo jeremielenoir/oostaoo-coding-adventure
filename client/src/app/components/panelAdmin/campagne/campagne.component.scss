@@ -1,5 +1,4 @@
 @import "../../../../roodeo-variables.scss";
-@import "../sidebar-right/sidebar-right.component.scss";
 @import "../dashboard-campagne/dashboard-campagne.component.scss";
 
 .plus-icon{
@@ -47,7 +46,7 @@
 }
 ::ng-deep .mat-checkbox-inner-container{
   margin-right: 0px!important;
-  margin-top: 7px !important;
+  //margin-top: 7px !important;
 }
 
 .container-add-campaign{
@@ -130,10 +129,9 @@
         justify-content: center;
         min-width: 43px;
         .number-test{
-          color:$color-principal-blue;
-          font-size: $font-size-home;
-          
-           
+          color: $color-principal-blue;
+          font-size: 14px; 
+          font-weight: bold;
         }
 
       }
@@ -174,9 +172,10 @@
           min-width: 170px;
           
           .checked-block {
-            
-            margin-top: 5px;
-            margin-left: 10%;
+            font-size: 14px;
+            color: $color-principal-blue;
+            /*margin-top: 5px;
+            margin-left: 10%;*/
             
           }
           form {
@@ -220,7 +219,7 @@
         }
         .form-group-header-2 {
           flex: 2!important;
-          margin-left: 20px;
+          //margin-left: 20px;
           label {
             margin: 0px;
             color: #7e8082;

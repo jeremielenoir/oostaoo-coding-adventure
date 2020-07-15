@@ -56,7 +56,8 @@ import { DashboadCampagneComponent } from './components/panelAdmin/dashboard-cam
 import {
   CampagneComponent,
   DialogOverviewDelete,
-  DialogOverviewDuplicate
+  DialogOverviewDuplicate,
+  CampaignsArchivedPipe
 } from './components/panelAdmin/campagne/campagne.component';
 import { SidibarRightComponent } from './components/panelAdmin/sidebar-right/sidebar-right.component';
 import { DatePipe } from '@angular/common';
@@ -247,6 +248,7 @@ export class MyIntl extends TimeagoIntl {
     ContactComponent,
     QuestionsComponent,
     TimeagoComponent,
+    CampaignsArchivedPipe
   ],
   imports: [
     BrowserModule,
@@ -281,7 +283,8 @@ export class MyIntl extends TimeagoIntl {
     DecryptTokenService,
     CampagneComponent,
     SelectedLanguageService,
-    CookieService
+    CookieService,
+    CampaignsArchivedPipe
   ],
   bootstrap: [AppComponent]
 })

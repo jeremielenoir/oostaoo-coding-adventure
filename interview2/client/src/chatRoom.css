@@ -53,14 +53,41 @@
 }
 .partnerVideo{
 height: 100%;
+width: 100%;
 position: relative;
 }
 
-.incomingCall{
-    width: 200px;
-    height: 200px;
-    border: 2px solid gold;
+.userVideoDiv{
+    min-width: 200px;
+  min-height: 170px;
+  width: 20%;
+  height: 23%;
+  position: absolute;
+  bottom: 45px;
+  right: 25px;
 }
+
+.partnerVideoDiv{
+    width: 100%;
+    height: 100%;
+}
+
+.incomingCall{
+    min-width: 400px;
+    min-height: 300px;
+    margin: auto;
+    border: 2px solid gold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: no-wrap;
+}
+
+.incomingCall > h3 {
+    text-align: center;
+}
+
 .userVideo{
     border-radius: 5px;
     position: absolute;
