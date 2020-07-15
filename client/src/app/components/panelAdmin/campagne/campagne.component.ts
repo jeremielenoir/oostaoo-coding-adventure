@@ -14,6 +14,7 @@ import { AuthenticationService } from './../../home/register/service/auth.servic
 import { RouterLink } from '@angular/router';
 
 export interface DialogData {
+  campaign: any;
   confirmed: boolean;
 }
 
@@ -74,7 +75,7 @@ export class CampagneComponent implements OnInit {
   }
 
 
-  includeArchivedCampaigns(element) {
+  includeArchivedCampaigns() {
       this.showArchives = !this.showArchives;
   }
 
@@ -88,7 +89,7 @@ export class CampagneComponent implements OnInit {
   openDialogDuplicate(campaign): void {
     const dialogRef = this.dialog.open(DialogOverviewDuplicate, {
       width: '250px',
-      data: { campaign:campaign, confirmed: this.confirmed },
+      data: { campaign: campaign, confirmed: this.confirmed },
       disableClose: true,
     });
 

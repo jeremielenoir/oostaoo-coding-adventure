@@ -76,11 +76,12 @@ $activeColor: #54728d !default;
   .info-title-header-dashboard{
     flex: 8;
     //text-transform: uppercase;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: bold;
     margin-bottom: 0;
     font-family: $font-poppins;
     //margin-left: 10px;
-    letter-spacing: 1.5px;
+    //letter-spacing: 1.5px;
     padding-top: 3px;
     color: #1d3552;
   }
