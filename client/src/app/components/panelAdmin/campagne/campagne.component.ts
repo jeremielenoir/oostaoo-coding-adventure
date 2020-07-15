@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, Inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, Inject, Pipe, PipeTransform } from '@angular/core';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -17,28 +17,33 @@ export interface DialogData {
   confirmed: boolean;
 }
 
+@Pipe({ name: 'campaignsArchived' })
+export class CampaignsArchivedPipe implements PipeTransform {
+  transform(campaigns: any[], archived?: boolean) {
+    return campaigns.filter(campaign => !campaign.archive || campaign.archive == archived);
+  }
+}
+
 @Component({
   selector: 'app-campagne',
   templateUrl: './campagne.component.html',
   styleUrls: ['./campagne.component.scss'],
 })
 
-
 export class CampagneComponent implements OnInit {
-  public campaigns = [];
-  public campaignsFiltered = [];
-  public campaignsArchived = [];
-  public searchHeader: string;
-  public confirmed: boolean;
+  
   @Output() campaignsChild = new EventEmitter<any>();
   @Output() emitIsactiveNoCountryside = new EventEmitter();
+  
+  public campaigns = [];
+  public searchHeader: string;
+  public confirmed: boolean;
   public IsactiveNoCountryside = false;
   public searchText = '';
   public result: any;
-  public myVar = false;
+  public showArchives = false;
   public test: any;
-
-
+  public nbShowCampaigns: number;
 
   constructor(
     public apiClientService: ApiClientService,
@@ -46,6 +51,7 @@ export class CampagneComponent implements OnInit {
     public decryptTokenService: DecryptTokenService,
     public authenticationService: AuthenticationService,
     private _snackBar: MatSnackBar,
+    private campaignsArchived: CampaignsArchivedPipe
   ) {
     this.searchHeader = null;
   }
@@ -56,25 +62,9 @@ export class CampagneComponent implements OnInit {
     this.authenticationService
       .getCampaignsUser(adminId)
       .then(resultat => {
-        // console.log('resultat = ', resultat);
         this.campaigns = resultat;
-        for (const campaign of this.campaigns) {
-          if (campaign.archive === false) {
-            this.campaignsFiltered.push(campaign);
-            // console.log('camp filter', this.campaignsFilter);
-          } else if (campaign.archive === true) {
-            this.campaignsArchived.push(campaign);
-            // console.log('campaign archive', this.campaignsArchive);
-          }
-        }
-
-
         this.IsactiveNoCountryside = true;
-        // setTimeout(() => {
-        //   this.IsactiveNoCountryside = true;
-        // }, 2000)
         this.emitIsactiveNoCountryside.emit(this.IsactiveNoCountryside);
-        // console.log('CONNECTED GET CAMPAING: ', resultat);
         this.giveCampaigns();
       });
   }
@@ -85,17 +75,7 @@ export class CampagneComponent implements OnInit {
 
 
   includeArchivedCampaigns(element) {
-
-    console.log('element', element.checked)
-
-    if (element.checked) {
-      this.myVar = !this.myVar;
-    } else {
-      this.myVar = !this.myVar;
-    }
-
-
-
+      this.showArchives = !this.showArchives;
   }
 
   openDialog(idCampaign) {
@@ -105,46 +85,36 @@ export class CampagneComponent implements OnInit {
     });
   }
 
-  openDialogDuplicate(idCampaign): void {
+  openDialogDuplicate(campaign): void {
     const dialogRef = this.dialog.open(DialogOverviewDuplicate, {
       width: '250px',
-
-      data: { idCampaign, confirmed: this.confirmed },
+      data: { campaign:campaign, confirmed: this.confirmed },
       disableClose: true,
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log('res', result);
-      console.log('idcamp', idCampaign);
       this.confirmed = result;
-      console.log('result=', result);
       if (result === false) {
         return;
       } else {
-        this.duplicatecampaign(idCampaign);
+        this.duplicatecampaign(campaign);
       }
     });
   }
 
-  openDialogDelete(idCampaign): void {
+  openDialogDelete(campaign): void {
     const dialogRef = this.dialog.open(DialogOverviewDelete, {
       width: '250px',
-
-      data: { idCampaign, confirmed: this.confirmed },
+      data: { campaign: campaign, confirmed: this.confirmed },
       disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log('res', result);
-      console.log('idcamp', idCampaign);
       this.confirmed = result;
-      console.log('result=', result);
       if (result === false) {
         return;
       } else {
-        this.deletecampaign(idCampaign);
+        this.deletecampaign(campaign);
       }
     });
   }
@@ -155,8 +125,8 @@ export class CampagneComponent implements OnInit {
     });
   }
 
-  duplicatecampaign(idCampaign) {
-    const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
+  duplicatecampaign(campaign) {
+    const apiURL = API_URI_CAMPAIGNS + '/' + campaign.id;
     return this.apiClientService
       .get(apiURL)
       .toPromise()
@@ -175,10 +145,9 @@ export class CampagneComponent implements OnInit {
             sent_report: this.result.sent_report,
             technologies: this.result.technologies,
             user: this.result.user,
-          }).subscribe((resultat) => {
-            this.campaignsFiltered = [];
-            this.campaignsArchived = [];
-            this.ngOnInit();
+          }).subscribe((duplicateCampaign) => {
+            this.campaigns.push(duplicateCampaign);
+            this.campaigns = [...this.campaigns];
             this.openSnackBar("La campagne a correctement été dupliquée", "Fermer");
           });
 
@@ -186,19 +155,17 @@ export class CampagneComponent implements OnInit {
   }
 
 
-  pincampaign(idCampaign, pinCampaign) {
-    const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
-    if (pinCampaign === false) {
+  pincampaign(campaign) {
+    const apiURL = API_URI_CAMPAIGNS + '/' + campaign.id;
+    if (campaign.pin === false) {
       return this.apiClientService
         .put(apiURL, {
           pin: true
         }).subscribe(
           (res) => {
-            this.campaignsFiltered = [];
-            this.campaignsArchived = [];
-            this.ngOnInit();
+            campaign.pin = true;
+            this.campaigns = [...this.campaigns];
             this.openSnackBar("La campagne a correctement été épinglée", "Fermer");
-            // console.log('res', res);
           },
           err => console.log(err)
         );
@@ -208,30 +175,32 @@ export class CampagneComponent implements OnInit {
           pin: false
         }).subscribe(
           (res) => {
-            this.campaignsFiltered = [];
-            this.campaignsArchived = [];
-            this.ngOnInit();
+            campaign.pin = false;
+            this.campaigns = [...this.campaigns];
             this.openSnackBar("La campagne a correctement été désépinglée", "Fermer");
-            // console.log('res', res);
           },
           err => console.log(err)
         );
     }
   }
 
-  archivecampaign(idCampaign, archiveCampaign) {
+  trackByFn(index, campaign) {
+    //console.log(index, campaign);
+    return campaign.id;
+  }
 
-    const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
+  archivecampaign(campaign) {
 
-    if (archiveCampaign === false) {
+    const apiURL = API_URI_CAMPAIGNS + '/' + campaign.id;
+
+    if (campaign.archive === false) {
       return this.apiClientService
         .put(apiURL, {
           archive: true
         }).subscribe(
           (res) => {
-            this.campaignsFiltered = [];
-            this.campaignsArchived = [];
-            this.ngOnInit();
+            campaign.archive = true;
+            this.campaigns = [...this.campaigns];
             this.openSnackBar("La campagne a correctement été archivée", "Fermer");
             // console.log('res', res);
           },
@@ -243,27 +212,26 @@ export class CampagneComponent implements OnInit {
           archive: false
         }).subscribe(
           (res) => {
-            this.campaignsFiltered = [];
-            this.campaignsArchived = [];
-            this.ngOnInit();
+            campaign.archive = false;
+            this.campaigns = [...this.campaigns];
             this.openSnackBar("La campagne a correctement été désarchivée", "Fermer");
-
           },
           err => console.log(err)
         );
     }
   }
 
-  deletecampaign(idCampaign) {
-    const apiURL = API_URI_CAMPAIGNS + '/' + idCampaign;
+  deletecampaign(campaign) {
+    const apiURL = API_URI_CAMPAIGNS + '/' + campaign.id;
 
     return this.apiClientService
       .delete(apiURL)
       .toPromise()
       .then(res => { // Success
-        this.campaignsFiltered = [];
-        this.campaignsArchived = [];
-        this.ngOnInit();
+        let found = this.campaigns.findIndex(element => element.id == campaign.id);
+        console.log('FOUND', found);
+        this.campaigns.splice(found,1);
+        this.campaigns = [...this.campaigns];
         this.openSnackBar("La campagne a correctement été supprimée", "Fermer");
       });
   }
