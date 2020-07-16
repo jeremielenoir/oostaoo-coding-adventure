@@ -50,10 +50,13 @@
 }
 
 .container-add-campaign{
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-right: 15px;
-  color: $color-principal-blue;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    color: #fff;
+    background: #0c6192;
+    border-radius: 19px;
+    padding-right: 15px;
 }
 
 .invite-left{
@@ -88,12 +91,13 @@
 .addIconText{
   font-size: 14px;
   margin-left: 10px;
-  color: $color-principal-blue;
+  color: #fff;
   cursor: pointer;
+  
 }
 .addCampaignContainer{
   background-color: #0c6192;
-  margin-left: 5px;
+  //margin-left: 5px;
   .addIcon{
     color: white;
   }
@@ -298,7 +302,7 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: thin;
       .contenu-techno-content {
-        height: 60px;
+        height: 50px;
         display: flex;
         flex-direction: row;
         transition: height 500ms, opacity 500ms;
@@ -306,6 +310,16 @@
         scrollbar-color: #7f8183 #e3e3e3;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: thin;
+        .mat-icon-button{
+          width: 50px;
+          height: 50px;
+          border-radius: 0px;
+          &:hover{
+            //opacity: 0.6;
+            background: #0c6192;
+            color: #fff;
+          }
+        }
       
         .contenu-branche {
          flex: 11;
@@ -350,7 +364,8 @@
             display: flex;
             flex: 3;
             align-items: center;
-            padding-left: 19px;
+            padding-left: 20px;
+            padding-right: 10px;
             color:$color-principal-blue;
            
           .branche-content-text {
@@ -385,7 +400,8 @@
 
          .branche-content-list-end {
            width: 160px;
-           border-left:1px dashed $color-principal-blue;
+           border-left: 1px dashed $color-principal-blue;
+           border-right: 1px dashed $color-principal-blue;
            display: flex;
            flex-direction: column;
            justify-content: center;
@@ -413,8 +429,8 @@
           cursor: pointer;
           min-width: 40px;
           img{
-            width: 30px;
-            height: 30px;
+            width: 25px;
+            height: 25px;
           }
         }
 

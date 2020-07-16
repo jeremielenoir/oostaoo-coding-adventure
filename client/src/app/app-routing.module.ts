@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
 import { AccueilComponent } from "./components/home/accueil/accueil.component";
+import { MainLayoutComponent } from "./main-layout.component";
 import { NouvelleCampagneComponent } from "./components/panelAdmin/nouvelle-campagne/nouvelle-campagne.component";
 import { DashboadCampagneComponent } from "./components/panelAdmin/dashboard-campagne/dashboard-campagne.component";
 import { ProfilUtilisateurComponent } from "./components/panelAdmin/profil-utilisateur/profil-utilisateur.component";
@@ -36,11 +37,15 @@ import { ContactUsComponent } from "./components/home/contact-us/contact-us.comp
 import { QuestionsComponent } from "./components/questions/questions.component";
 
 const routes: Routes = [
+  { path: "", redirectTo: "/home", pathMatch: "full" },
+  {
+    path: "home",
+    component: AccueilComponent,
+  },
   {
     path: "questions",
     component: QuestionsComponent,
   },
-
   {
     path: "algo",
     component: AlgotestComponent,
@@ -49,8 +54,6 @@ const routes: Routes = [
     path: "evaluate",
     component: ClientTestComponent,
   },
-
-  { path: "", redirectTo: "/home", pathMatch: "full" },
   {
     path: "about",
     component: AboutUsComponent,
@@ -58,10 +61,6 @@ const routes: Routes = [
   {
     path: "contact",
     component: ContactUsComponent,
-  },
-  {
-    path: "home",
-    component: AccueilComponent,
   },
   {
     path: "home/rapport_exemple",
@@ -93,67 +92,72 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "dashboard/campaigns",
-    component: DashboadCampagneComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "dashboard/campaigns/new",
-    component: NouvelleCampagneComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "dashboard/campaigns/:id",
-    component: EditCampagneComponent,
-    canActivate: [AuthGuard],
+    path: 'dashboard',
+    component: MainLayoutComponent,
     children: [
       {
-        path: "candidats/:idCandidat/rapport-detaille",
-        component: RapportDetailleComponent,
+        path: "campaigns",
+        component: DashboadCampagneComponent,
+        canActivate: [AuthGuard],
       },
-      { path: "candidats", component: CandidatsComponent },
-      { path: "questions", component: EditQuestionsComponent },
       {
-        path: "settings",
-        component: SettingsComponent,
+        path: "campaigns/new",
+        component: NouvelleCampagneComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "campaigns/:id",
+        component: EditCampagneComponent,
+        canActivate: [AuthGuard],
         children: [
-          { path: "", pathMatch: "full", redirectTo: "general" },
-          { path: "general", component: GeneralComponent },
-          { path: "personnalisation", component: PersonnalisationComponent },
+          {
+            path: "candidats/:idCandidat/rapport-detaille",
+            component: RapportDetailleComponent,
+          },
+          { path: "candidats", component: CandidatsComponent },
+          { path: "questions", component: EditQuestionsComponent },
+          {
+            path: "settings",
+            component: SettingsComponent,
+            children: [
+              { path: "", pathMatch: "full", redirectTo: "general" },
+              { path: "general", component: GeneralComponent },
+              { path: "personnalisation", component: PersonnalisationComponent },
+            ],
+          },
         ],
       },
-    ],
-  },
-
-  {
-    path: "dashboard/profil-utilisateur",
-    component: ProfilUtilisateurComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "dashboard/profil-entreprise",
-    component: ProfilEntrepriseComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "dashboard/facturation",
-    component: FacturationComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "dashboard/protection-des-donnees",
-    component: ProtectionDeDonneesComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "dashboard/utilisateurs",
-    component: UtilisateursComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "dashboard/contact-support",
-    component: ContactSupportComponent,
-    canActivate: [AuthGuard],
+      {
+        path: "profil-utilisateur",
+        component: ProfilUtilisateurComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "profil-entreprise",
+        component: ProfilEntrepriseComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "facturation",
+        component: FacturationComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "protection-des-donnees",
+        component: ProtectionDeDonneesComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "utilisateurs",
+        component: UtilisateursComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "contact-support",
+        component: ContactSupportComponent,
+        canActivate: [AuthGuard],
+      }
+    ]
   },
   {
     path: "not-found",

@@ -21,6 +21,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TimeagoModule, TimeagoIntl, TimeagoFormatter, TimeagoCustomFormatter } from 'ngx-timeago';
 // import components
 import { AppComponent } from './app.component';
+import { MainLayoutComponent } from './main-layout.component';
 import { NavbarComponent } from './components/home/navbar/navbar.component';
 import { IndexPageComponent } from './components/home/index-page/index-page.component';
 import { SecondSectionComponent } from './components/home/second-section/second-section.component';
@@ -160,6 +161,7 @@ export class MyIntl extends TimeagoIntl {
   ],
   declarations: [
     AppComponent,
+    MainLayoutComponent,
     NavbarComponent,
     IndexPageComponent,
     SecondSectionComponent,
