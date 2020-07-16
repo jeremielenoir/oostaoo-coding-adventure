@@ -1,0 +1,35 @@
+{
+  "connection": "default",
+  "collectionName": "interviews",
+  "info": {
+    "name": "interview",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "interview_date": {
+      "default": "",
+      "type": "date"
+    },
+    "campaign": {
+      "model": "campaign",
+      "via": "interviews"
+    },
+    "candidat": {
+      "model": "candidat",
+      "via": "interviews"
+    },
+    "entreprise": {
+      "model": "entreprise",
+      "via": "interviews"
+    },
+    "interviewer_comment": {
+      "default": "",
+      "type": "text"
+    }
+  }
+}

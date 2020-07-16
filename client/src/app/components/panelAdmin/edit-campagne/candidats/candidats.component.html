@@ -133,8 +133,7 @@
           </div>
         </div>
 
-        <button mat-raised-button color="primary" class="btn-question fix-button" mat-button
-          (click)="openDialog()">
+        <button mat-raised-button color="primary" class="btn-question fix-button" mat-button (click)="openDialog()">
           Invitez des candidats <span *ngIf='tests_available !== "" '>({{ tests_available }})</span>
         </button>
 
@@ -149,14 +148,18 @@
             <!-- Item Column -->
 
             <ng-container *ngFor="let column of displayedColumns; let i = index;" [matColumnDef]="column">
+              <div *ngIf="column === 'Interview'">
+                Interview
+              </div>
+              <div *ngIf="column === 'Details'"></div>
 
               <!-- CHANGE COLUMN FOR CHECKBOX -->
               <div *ngIf="column === 'Checked'">
 
                 <th mat-header-cell *matHeaderCellDef="let dataInfos">
                   <div class="content-check-action-candidat">
-                    <input [checked]="allcheckedActivetedBolean" id="first-check-action" type="checkbox" class="checkbox"
-                      (click)="allcheckedActiveted($event)" />
+                    <input [checked]="allcheckedActivetedBolean" id="first-check-action" type="checkbox"
+                      class="checkbox" (click)="allcheckedActiveted($event)" />
                     <label for="first-check-action" class="checkbox-span"></label>
                   </div>
                 </th>
@@ -169,7 +172,9 @@
                   </div>
                 </td>
               </div>
+
               <div class="color-text">
+
                 <div *ngIf="column === 'Candidats'">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     {{ column }}
@@ -180,35 +185,55 @@
                   </td>
                 </div>
 
-
-                 <div *ngIf="column != 'Candidats' && column!='Dernière activité' && column != 'Durée' && column != 'Score'">
+                <div *ngIf="column =='Details' ">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     {{ column }}
                   </th>
-                  <td mat-cell *matCellDef="let dataInfos" >
-                  {{dataInfos[column]}}
+                  <td mat-cell *matCellDef="let dataInfos">
+                   
+                    <span (click)="menuSidenav(sidenav, dataInfos)" class="fa fa-info-circle" aria-hidden="true" style="color:orangered"></span>
                   </td>
                 </div>
-               
+                <div *ngIf="column =='Interview' ">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{ column }}
+                  </th>
+                  <td mat-cell *matCellDef="let dataInfos">
+                   
+                    <span class="fa fa-video-camera" aria-hidden="true" style="color:orangered"></span>
+
+                  </td>
+                </div>
+
+                <div
+                  *ngIf="column != 'Candidats' && column!='Dernière activité'  && column!='Interview'  && column!='Dernière activité' && column != 'Durée' && column != 'Score'">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{ column }}
+                  </th>
+                  <td mat-cell *matCellDef="let dataInfos">
+                    {{dataInfos[column]}}
+                  </td>
+                </div>
+
 
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                   {{ column }}
                 </th>
 
-                 
-                 <td mat-cell *matCellDef="let dataInfos">
-                  {{ dataInfos[column] }}
-                </td> 
 
+                <td mat-cell *matCellDef="let dataInfos">
+                  {{ dataInfos[column] }}
+                </td>
+
+                
               </div>
 
-               
+
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns; let dataInfos"
-              (click)="menuSidenav(sidenav, dataInfos)">
-
+            <tr mat-row *matRowDef="let row; columns: displayedColumns; let dataInfos">
+              <!--  (click)="menuSidenav(sidenav, dataInfos)"  -->
             </tr>
           </table>
         </div>
@@ -250,7 +275,8 @@
         {{currentCandidat.Candidats}}
       </h4>
       <p class="info-candi"> <i class="far fa-envelope"></i> {{currentCandidat.Email}}</p>
-      <p class="info-candi"> <i class="fas fa-poll-h"></i> Pourcentage de bonne réponses : {{currentCandidat.Score}} </p>
+      <p class="info-candi"> <i class="fas fa-poll-h"></i> Pourcentage de bonne réponses : {{currentCandidat.Score}}
+      </p>
       <p class="info-candi"><i class="far fa-clock"></i> Durée du test : {{currentCandidat.Duree}}</p>
 
       <div class="sidenav_candidat_content">
@@ -273,7 +299,7 @@
         </div>
 
         <div class="sidenav_candidat_result">
-          <p class="sidenav_candidat_text">Total :</p>
+          <p class="sidenav_candidat_text" i18n>Total :</p>
           <p class="sidenav_candidat_score">{{currentCandidat.Score}} </p>
         </div>
       </div>
@@ -283,11 +309,11 @@
       <div>
         <button class="button-rapport"
           [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats', currentCandidat.candidat_id,'rapport-detaille']"
-          mat-button>
+          mat-button i18n>
           <i class="far fa-eye"></i>
           Voir le rapport détaillé
         </button>
-        <button class="button-rapport" (click)="viewResultsPdf(currentCandidat)" mat-button> <i
+        <button class="button-rapport" (click)="viewResultsPdf(currentCandidat)" mat-button i18n> <i
             class="far fa-file-pdf"></i> Télécharger le PDF</button>
       </div>
     </div>
