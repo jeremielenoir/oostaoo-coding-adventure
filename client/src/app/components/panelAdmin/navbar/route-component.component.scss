@@ -14,10 +14,17 @@
 
 
 #nav-menu{
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  padding: 0px 15px;
+  .wrapper{
+    
+  
   background: #fff;
   box-shadow: 0px 9px 11px -1px rgba(124,151,166,0.69), 0px 9px 11px -1px rgba(68,68,68,0.69);
   display: flex;
-  position: fixed;
+  
   width: 100%;
   z-index: 9999;
   height: 70px;
@@ -288,6 +295,7 @@
 
       }
     }
+  }
   }
 }
 
