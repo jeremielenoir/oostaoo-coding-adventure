@@ -49,7 +49,6 @@ export default (props) => {
       stream: stream,
     });
 
-    console.log('peer : ', peer)
 
     peer.on("signal", data => {
       socket.current.emit("callUser", { userToCall: id, signalData: data, from: yourID })
@@ -124,7 +123,9 @@ const PartnerVideo = styled.video`
       setYourID(id);
     })
     socket.current.on("allUsers", (users) => {
+      
       setUsers(users);
+      console.log('users : ', users);
     })
 
     socket.current.on("hey", (data) => {
@@ -151,7 +152,6 @@ const PartnerVideo = styled.video`
                          <h1>Active users</h1>
                          <div className="users">
                              <ul>
-                                 {console.log('users : ', users)}
                                  {users && Object.keys(users).map(
                                      key => {
                                          if (key === yourID){
@@ -180,8 +180,8 @@ const PartnerVideo = styled.video`
                              
                          <UserVideo
                           playsInline 
-                          muted 
                           ref={userVideo} 
+                          muted
                           autoPlay />
                     </div>
                 </div>
