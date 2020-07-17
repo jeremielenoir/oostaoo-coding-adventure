@@ -65,6 +65,7 @@ position: relative;
   position: absolute;
   bottom: 45px;
   right: 25px;
+  z-index: 1000;
 }
 
 .partnerVideoDiv{

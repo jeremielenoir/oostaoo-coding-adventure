@@ -35,9 +35,7 @@ export default (props) => {
 
         iceServers: [
             {
-                urls: "stun:numb.viagenie.ca",
-                username: "sultan1640@gmail.com",
-                credential: "98376683"
+                urls: "stun:stun.stunprotocol.org",
             },
             {
                 urls: "turn:numb.viagenie.ca",
