@@ -32,13 +32,16 @@
             </div>
 
             <div class="form-group-header">
-              <form>
-                <div id="div-search">
-                  <input type="text" class="champ-header-contenu" placeholder="Rechercher" name="search"
+              
+                <div class="search-container">
+                  <mat-form-field appearance="fill" [floatLabel]="true">
+                    <mat-label><mat-icon>search</mat-icon>&nbsp;Rechercher</mat-label>
+                    <input matInput type="search" class="champ-header-contenu" placeholder="Filtrer par nom" name="search"
                     [(ngModel)]="searchText" id="search-header"/>
-                  <figure class="icon-form-group-header-contenu">
+                  </mat-form-field>
+                  <!--figure class="icon-form-group-header-contenu">
                     <img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg">
-                  </figure>
+                  </figure-->
                 </div>
                 <!-- <input type="text" name="search" [(ngModel)]="searchText" class="champ-header-contenu"
                   placeholder="Rechercher" id="search-header" />
@@ -46,7 +49,7 @@
                 <figure class="icon-form-group-header-contenu">
                   <img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg">
                 </figure> -->
-              </form>
+              
             </div>
           </div>
 

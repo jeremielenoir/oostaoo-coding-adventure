@@ -272,7 +272,7 @@ export class CandidatsComponent implements OnInit {
       this.nbrSelectedElementChecked = [];
     }, 100);
 
-    console.log("hello famady");
+    //console.log("hello famady");
 
     const apiURL = API_URI_CAMPAIGNS + "/" + this.globalId;
     return this.apiClientService
@@ -336,7 +336,7 @@ export class CandidatsComponent implements OnInit {
           //   element.status = false;
           // });
 
-          console.log("this.candidats================", this.candidats);
+         // console.log("this.candidats================", this.candidats);
 
           this.technologies = res.technologies;
 
@@ -355,10 +355,13 @@ export class CandidatsComponent implements OnInit {
         console.log("data==========", data);
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
         const defaultColumns = [
+          "Details",
+          "Interview",
           "Checked",
           "Candidats",
           "Dernière activité",
           "Score",
+         
         ];
         const getInfoCandidat = [];
         let dateInvite;
@@ -411,8 +414,10 @@ export class CandidatsComponent implements OnInit {
               ? candidat.raport_candidat.rapport
               : null,
             points: candidat.points_candidat,
+            Interview:"https://spwrtc.osc-fr1.scalingo.io/",
             date: candidat.test_ouvert,
             ...candidat.getpourcentByCandidat,
+           
           });
         }
         return getInfoCandidat;
