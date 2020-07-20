@@ -18,6 +18,28 @@ import {
 import { HttpClient } from "@angular/common/http";
 import { saveAs } from "file-saver";
 import { getResultsDefinition } from "./getResultsDefinition";
+import { InterviewDialogComponent } from '../../campagne/interview-dialog/interview-dialog.component';
+//import pdfMake from "pdfmake/build/pdfmake";
+// font build has to be committed otherwise each developers has to build font locally.
+// import pdfFonts from 'pdfmake/build/vfs_fonts';
+//import pdfFonts from '../../../../../assets/pdfmake-font-builds/vfs_fonts';
+
+//pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+/*pdfMake.fonts = {
+  FontAwesome: {
+    normal: "fontawesome-webfont.ttf",
+    bold: "fontawesome-webfont.ttf",
+    italics: "fontawesome-webfont.ttf",
+    bolditalics: "fontawesome-webfont.ttf",
+  },
+  Roboto: {
+    normal: "Roboto-Regular.ttf",
+    bold: "Roboto-Medium.ttf",
+    italics: "Roboto-Italic.ttf",
+    bolditalics: "Roboto-MediumItalic.ttf",
+  },
+};*/
 
 @Component({
   selector: "app-candidats",
@@ -94,7 +116,12 @@ export class CandidatsComponent implements OnInit {
       });
     });
   }
-
+  openInterviewDialog(data){
+    this.dialog.open(InterviewDialogComponent, {
+      data,
+      height: '580px'
+    });
+  }
   ngOnInit() {
     this.tests_available = this.DecryptTokenService.tests_available;
     if (this.tests_available == -1) {
