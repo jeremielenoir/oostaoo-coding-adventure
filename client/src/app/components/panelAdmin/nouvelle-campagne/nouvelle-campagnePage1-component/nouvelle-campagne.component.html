@@ -6,12 +6,12 @@
         <figure class="block-img">
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg" alt="" />
         </figure>
-        <h2 class="title">NOUVEAU TEST</h2>
+        <h2 class="title" i18n>Nouveau test d'evaluation : profil recherché</h2>
       </div>
-
+      <div class="campaign-param-container">
       <div class="spacing">
     
-          <div id="select">
+          <div class="select">
            
              <!-- <label for="role" [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</label>-->
               <mat-form-field [formGroup]="formCampagne" appearance="fill" >
@@ -27,12 +27,12 @@
           </div>
        
         <div class="or-text">
-          <div id="select">
+          <div class="select">
             <span class="or-text-span" i18n>Ou</span>
           </div>
         </div>
         
-          <div id="select">
+          <div class="select">
             <div class="champ-group">
               <!--<label for="techno" [ngStyle]="errorTechno ? { color: 'red' } : null" i18n>Sélectionnez les technologies à
                 tester</label>-->
@@ -87,6 +87,7 @@
           </button>
         </div>
 
+      </div>
       </div>
     </div>
   </div>

@@ -1,4 +1,41 @@
 @import"../../../../../roodeo-variables.scss";
+
+
+.header-new-campagne {
+    border-bottom: $border-table;
+    background: #eaeff3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px;
+    border-radius: 4px 4px 0px 0px;
+    .block-img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 0px;
+      margin-right: 18px;
+    }
+  
+    .title {
+      margin-bottom: 0px;
+      font-size: 16px;
+      color: $color-principal-blue;
+      //text-transform: uppercase;
+    }
+  }
+
+  .campaign-param-container{
+    padding: 10px 60px;
+    .campaign-param{
+        label{
+            font-weight: 800;
+        }
+    }
+  }
+  
+  
+
+
 #new-campaign {
     min-height: 60vh;
     // width: 50%;

@@ -1,17 +1,23 @@
 <div class="cadreQuestion">
 <div class="new-campaign">
-  <div class="col-md-12">
-  
-    <div class="row">
-        <div class="col-md-12 formQuestion">
+    <div class="header-new-campagne">
+      <figure class="block-img">
+        <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg" alt="" />
+      </figure>
+      <h2 class="title" i18n>Nouveau test d'evaluation : paramètres</h2>
+    </div>
+
+    <div class="campaign-param-container">
+    <div class="campaign-param">
+        <div class="formQuestion">
             <label
               for="nomDeCampagne"
               [ngStyle]="errorNomCampgane ? { color: 'red' } : null"
-            >
+            i18n>
               Nom de la campagne
             </label>
           </div>
-      <div class="col-md-12">
+      <div class="campaign-param">
         <mat-form-field [formGroup]="formCampagne" class="fullWidth">
           <input
             formControlName="nomDeCampagne"
@@ -24,11 +30,10 @@
         </mat-form-field>
       </div>
     </div>
-  </div>
 
-  <div class="col-md-12">
-    <div class="row">
-      <div class="col-md-12 cog-test">
+  
+    <div class="campaign-param">
+      <div class=" cog-test">
         <label
           for="nomDeCampagne"
           [ngStyle]="errorNomCampgane ? { color: 'red' } : null"
@@ -38,7 +43,7 @@
         </label>
       </div>
 
-      <div class="col-md-12 cog-test">
+      <div class="cog-test">
           <div class="example-radio-button">
             <mat-radio-group [(ngModel)]="selectedLangue">
               <mat-radio-button value="FR">
@@ -56,9 +61,9 @@
             </mat-radio-group>
           </div>
       </div>
-      <div class="col-md-12 cog-test">
-          <div class="row">
-            <div class="col-md-12">
+      <div class="cog-test">
+          <div class="campaign-param">
+            <div class="">
               <label
                 for="utilisationCopieColler"
                 [ngStyle]="errorNomCampgane ? { color: 'red' } : null"
@@ -80,9 +85,9 @@
           </div>
       </div>
     
-      <div class="col-md-12 cog-test">
-          <div class="row">
-            <div class="col-md-12">
+      <div class="cog-test">
+          <div class="">
+            <div class="campaign-param">
               <label
                 for="envoiRapportSimplifie"
                  [ngStyle]="errorNomCampgane ? { color: 'red' } : null"
@@ -105,10 +110,8 @@
       </div>
 
     </div>
-   
-  </div>
 
-  <div class="col-md-12 formQuestion finalQuestion">
+    <div class=" formQuestion finalQuestion">
       <div class="buttons">
         <div class="singleButton">
           <button
@@ -134,5 +137,9 @@
         </div>
       </div>
     </div>
+   
+  </div>
+
+  
 </div>
 </div>

@@ -27,12 +27,12 @@
   margin: auto;
   
 
-  #select {
+  .select {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 50px 0px 30px 0px;
+    
     width: 40%;
     label{
       display: block!important;
@@ -67,7 +67,7 @@
   background-color: $color-background-blue;
   
   .cadreQuestion {
-    padding: 115px 15px 10px 15px;
+    padding: 100px 15px 10px 15px;
     margin: 0 auto;
     width: 100%;
   }
