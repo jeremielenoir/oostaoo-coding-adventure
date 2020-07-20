@@ -73,7 +73,7 @@
       <div *ngFor="let campaign of campaigns | campaignsArchived:showArchives | orderBy:'pin':true | filter: searchText; trackBy: trackByFn;" class="contenu-techno-content">
 
         <figure class="branche-content-list-start" (click)="openDialog(campaign.id)">
-          <img src="../assets/Coding-game-img/SVG-menu-Dashboard/perso-plein.svg">
+          <img class="hvr-grow" src="../assets/Coding-game-img/SVG-menu-Dashboard/perso-plein.svg">
         </figure>
 
         <div class="contenu-branche">
