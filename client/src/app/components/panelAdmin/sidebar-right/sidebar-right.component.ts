@@ -6,9 +6,9 @@ import { element } from '@angular/core/src/render3';
   templateUrl: './sidebar-right.component.html',
   styleUrls: ['./sidebar-right.component.scss']
 })
-export class SidibarRightComponent implements OnInit {
+export class SidebarRightComponent implements OnInit {
   @Input() campaignsFromParent;
-  @Output() IsBoaleanSmallSidibarOutput = new EventEmitter<boolean>()
+  @Output() IsBoaleanSmallSidebarOutput = new EventEmitter<boolean>()
 
   @ViewChild('option') option: ElementRef;
   @ViewChild('check1') check1: ElementRef;
@@ -18,7 +18,7 @@ export class SidibarRightComponent implements OnInit {
   public Isactive = false;
   public isActiveNotiFinish = false;
   public isActiveNotifInvite = false;
-  public IsBoaleanSmallSidibar: boolean;
+  public IsBoaleanSmallSidebar: boolean;
   public candidatbydate: Array<any> = [];
   public candidatByFinish: Array<any> = [];
   public candidatAll: Array<any> = [];
@@ -33,11 +33,11 @@ export class SidibarRightComponent implements OnInit {
 
     for (const campaign of this.campaignsFromParent) {
       for (const candidat of campaign.candidats) {
+        
         this.myArrayCandidat.push(candidat);
-        // console.log("coucou " + this.myArrayCandidat);
+        
         this.candidatbydate = this.myArrayCandidat.sort((a, b) => {
           if (a.test_terminer < b.test_terminer) {
-            // console.log("A " + a.test_terminer + " B " + b.test_terminer)
             return 1;
           } else if (b.test_terminer < a.test_terminer) {
             return -1;
@@ -63,27 +63,12 @@ export class SidibarRightComponent implements OnInit {
     }
 
     this.saveCheckValue();
-    // this.finishedTest();
-
+    
   }
 
-  // public finishedTest() {
-  //   this.myArrayCandidat.forEach(finished => {
-  //     if(finished.duree !== null) {
-  //       this.candidatByFinish.push(finished);
-  //       console.log("candidatfinish " + this.candidatByFinish);
-  //     }
-  //     console.log("finished " + finished)
-  //   })
-
-
-  // }
-
-
-  public sidibar_small_modele() {
-    console.log('Hellow word');
-    this.IsBoaleanSmallSidibar = !this.IsBoaleanSmallSidibar;
-    this.IsBoaleanSmallSidibarOutput.emit(this.IsBoaleanSmallSidibar);
+  public sidebar_small_modele() {
+    this.IsBoaleanSmallSidebar = !this.IsBoaleanSmallSidebar;
+    this.IsBoaleanSmallSidebarOutput.emit(this.IsBoaleanSmallSidebar);
   }
 
   public allCheckevent() {
@@ -110,8 +95,6 @@ export class SidibarRightComponent implements OnInit {
   }
 
   public saveCheckValue() {
-
-    console.log('salut les gens')
 
     if (!this.check1.nativeElement.checked && !this.check2.nativeElement.checked) {
 
@@ -148,8 +131,7 @@ export class SidibarRightComponent implements OnInit {
         this.isActiveNotiFinish = true;
         this.isActiveNotifInvite = false;
 
-        console.log('salut')
-
+        
       }
 
     }

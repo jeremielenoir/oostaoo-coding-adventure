@@ -1,12 +1,4 @@
 <div [ngSwitch]="ViewCandidats" (click)="menuChoince($event)" class="big-content">
-  <!-- <mat-card
-    *ngIf="isLoading2"
-    style="display: flex; justify-content: center; align-items: center"
-  >
-    <mat-progress-spinner color="primary" mode="indeterminate">
-    </mat-progress-spinner>
-  </mat-card> -->
-
   <div class="route-component">
     <div *ngSwitchCase="'CandidatFalse'" id="editQuestion">
       <div class="border1pxgray">

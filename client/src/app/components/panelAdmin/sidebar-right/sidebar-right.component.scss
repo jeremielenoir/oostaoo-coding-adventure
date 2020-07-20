@@ -8,15 +8,20 @@
 .info-content-img-header{
   margin-left: 15px;
 }
-.list-sidibar-right-MinSize{
+.list-sidebar-right-MinSize{
   border-right:none!important;
 }
-.sidibar.sidibar-small{
+.sidebar.sidebar-small{
   width: 120px!important;
   flex: 0;
 }
+.timeago-container{
+  color: #ce5637;
+  font-size: 9px;
+  margin-top: 5px;
+}
 
-.icon-right-sidibar{
+.icon-right-sidebar{
   color:#ce5637;
   font-size: 25px;
   padding-top: 4px;
@@ -24,7 +29,7 @@
   flex: initial;
 }
 
-.list-sidibar.test{
+.list-sidebar.test{
  transform: translateX(300px)!important
 }
 
@@ -47,7 +52,7 @@
 }
 
 
-.sidibar {
+.sidebar {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -68,7 +73,7 @@
       cursor: pointer;
   }
 
-  .sidibar-sous-header{
+  .sidebar-sous-header{
     border-right: $border-table;
     border-top: $border-table;
     border-left: $border-table;
@@ -76,29 +81,29 @@
     border-top-left-radius:4px;
   }
 
-  .sidibar-content {
+  .sidebar-content {
     border: $border-table;
     border-bottom-right-radius:4px;
     border-bottom-left-radius:4px;
     display: flex;
     overflow: hidden;
     flex: 1;
-    .list-sidibar-left::-webkit-scrollbar{
+    .list-sidebar-left::-webkit-scrollbar{
       width: 8px;
       height: 8px;
       }
-      .list-sidibar-left::-webkit-scrollbar-thumb {
+      .list-sidebar-left::-webkit-scrollbar-thumb {
           background-color: #7f8183;
       }
       
-      .list-sidibar-left::-webkit-scrollbar-thumb:hover{
+      .list-sidebar-left::-webkit-scrollbar-thumb:hover{
           background-color: #67686a;
       }
       
-      .list-sidibar-left::-webkit-scrollbar-track {
+      .list-sidebar-left::-webkit-scrollbar-track {
           background: #e3e3e3;
       }
-    .list-sidibar-left { 
+    .list-sidebar-left { 
       display: flex;
       font-size: $font-size-home;
       overflow-y: auto;
@@ -114,19 +119,19 @@
         color:#dedbdb
       }
 
-      .list-sidibar-MinSize{
+      .list-sidebar-MinSize{
         padding-bottom: 12px!important;
         padding-top: 12px!important;
       }
      
-      .list-sidibar {
+      .list-sidebar {
         color: #7e8082;
        // display: flex;
         overflow: hidden;
         border-bottom: 1px dashed $color-principal-blue;
         flex-direction: row-reverse;
         transition: 1s;
-        .list-sidibar-left-content {
+        .list-sidebar-left-content {
           color: #3f526a;
           font-size: 12px;
            
@@ -144,7 +149,7 @@
             text-decoration: none;
           }
         }
-        .list-sidibar-right {
+        .list-sidebar-right {
           min-width: 105px !important;
           display: flex;
           font-size: $font-size-home;
@@ -156,13 +161,13 @@
           color:#3f526a
         }
 
-        .list-sidibar-right-bottom {
+        .list-sidebar-right-bottom {
           margin-bottom: 0px !important;
           text-align: center;
         }
       }
 
-      .list-sidibar.active-list-bar{
+      .list-sidebar.active-list-bar{
         transition:height 1s ease;
         height:100px
       }
@@ -269,7 +274,7 @@
 
 
 @media (min-width: 300px) and (max-width: 1024px) {
-  .sidibar {
+  .sidebar {
     margin-left: inherit;
   
   }

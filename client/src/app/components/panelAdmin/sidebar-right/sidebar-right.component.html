@@ -31,181 +31,65 @@
   </div>
 </div>
 
-<div class="sidibar" [class.sidibar-small]="IsBoaleanSmallSidibar">
+<div class="sidebar" [class.sidebar-small]="IsBoaleanSmallSidebar">
 
-  <span (click)="sidibar_small_modele()" class="arrow">
+  <span (click)="sidebar_small_modele()" class="arrow">
 
   </span>
 
-  <div class="sous-header-one sidibar-sous-header">
+  <div class="sous-header-one sidebar-sous-header">
 
     <figure class="info-content-img-header info-content-img-header-dashboard"
-      [class.info-content-img-header-dashboard-MinSize]="IsBoaleanSmallSidibar">
+      [class.info-content-img-header-dashboard-MinSize]="IsBoaleanSmallSidebar">
       <img src="../assets/Coding-game-img/SVG-menu-Dashboard/Notifications.svg">
     </figure>
 
     <div class="info-content-header-right-dashboard">
-      <h3 *ngIf="!IsBoaleanSmallSidibar" class="info-title-header-dashboard" i18n>
+      <h3 *ngIf="!IsBoaleanSmallSidebar" class="info-title-header-dashboard" i18n>
         Historique
       </h3>
-<!--
-      <span *ngIf="!IsBoaleanSmallSidibar" class="icon-right-sidibar" id="param-cog" (click)="param_cog()">
-        <i class="fas fa-cog"></i>
-      </span>
-      -->
     </div>
 
   </div>
 
-  <div class="sidibar-content">
-    <div class="list-sidibar-left">
+  <div class="sidebar-content">
+    <div class="list-sidebar-left">
 
       <h2 *ngIf="candidatbydate.length === 0 " class="no-tofication" i18n>Aucune notication</h2>
 
       <div *ngFor="let candidat of candidatbydate">
 
-        <div *ngIf="candidat.duree !== null" class="list-sidibar">
-          <div *ngIf="!IsBoaleanSmallSidibar" class=" list-sidibar-left-content">
+        <div *ngIf="candidat.duree !== null" class="list-sidebar">
+          <div *ngIf="!IsBoaleanSmallSidebar" class=" list-sidebar-left-content">
             <a [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">
               {{ candidat.Nom }}
             </a>
             &lt; <a [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{ candidat.email }}</a>
-            &gt; a terminé l'évaluation technique de
+            &gt; <span i18n>a terminé l'évaluation technique de </span>
             <span *ngFor="let campaing of campaignsFromParent"><a *ngIf=' campaing.id === candidat.campaign'
                 [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{campaing.Name}}</a></span>
-
+                <div *ngIf="candidat.invitation_date"   class="timeago-container" >
+                  <app-timeago date="{{candidat.test_terminer}}"></app-timeago>
+                </div>
           </div>
-          <!--  <p class="list-sidibar-right list-sidibar-right-bottom"
-            [class.list-sidibar-right-MinSize]="IsBoaleanSmallSidibar">
-            {{
-              candidat.test_terminer | date: "short":"undefined":"fr-FR"
-            }}
-          </p>-->
+          
         </div>
-        <div *ngIf="candidat.duree === null || candidat.duree !== null" class="list-sidibar">
-          <div *ngIf="!IsBoaleanSmallSidibar" class="list-sidibar-left-content">
+        <div *ngIf="candidat.duree === null || candidat.duree !== null" class="list-sidebar">
+          <div *ngIf="!IsBoaleanSmallSidebar" class="list-sidebar-left-content">
             <a [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{ candidat.Nom }}
             </a>
 
             &lt; <a [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{ candidat.email }}</a> &gt;
-            a été invité(e) à
+            <span i18n>a été invité(e) à </span>
             <span *ngFor="let campaing of campaignsFromParent"><a *ngIf=' campaing.id === candidat.campaign'
-                [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{campaing.Name}}</a></span><br/>
-                <span *ngIf="candidat.invitation_date"   style="color: tomato;font-size: 9px;margin-top: 5px;" >
-                <app-timeago date="{{candidat.invitation_date}}"></app-timeago>
-                </span>
+                [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{campaing.Name}}</a></span>
+                <div *ngIf="candidat.invitation_date" class="timeago-container">
+                  <app-timeago date="{{candidat.invitation_date}}"></app-timeago>
+                </div>
 
           </div>
-        
- <!-- 
-          <p class="list-sidibar-right list-sidibar-right-bottom"
-            [class.list-sidibar-right-MinSize]="IsBoaleanSmallSidibar">
-            {{
-                candidat.invitation_date | date: "short":"undefined":"fr-FR"
-          }}
-          </p>
-        -->
         </div>
       </div>
-
-
-      <!-- <div *ngFor="let campaing of campaignsFromParent">
-
-        <div *ngFor="let candidat of candidatbydate">
-
-          <div *ngIf="candidat.campaign === campaing.id">
-
-            <div *ngIf="!isActiveNotiFinish && !isActiveNotifInvite">
-
-
-              <div *ngIf="candidat.invitation_date !== candidat.test_terminer"
-                [class.list-sidibar-MinSize]="IsBoaleanSmallSidibar" class="list-sidibar">
-                <p *ngIf="!IsBoaleanSmallSidibar" class=" list-sidibar-left-content">
-                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">
-                    {{ candidat.Nom }}
-                  </a>
-                  &lt;<a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.email }}</a>
-                  &gt; a terminé l'évaluation technique de '
-                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{
-                    campaing.Name
-                  }}</a>'
-                </p>
-                <p class="list-sidibar-right list-sidibar-right-bottom"
-                  [class.list-sidibar-right-MinSize]="IsBoaleanSmallSidibar">
-                  {{
-                    candidat.test_terminer | date: "short":"undefined":"fr-FR"
-                  }}
-                </p>
-              </div>
-
-              <div class="list-sidibar" [class.list-sidibar-MinSize]="IsBoaleanSmallSidibar">
-                <p *ngIf="!IsBoaleanSmallSidibar" class="list-sidibar-left-content">
-                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.Nom }}
-                  </a>
-                  &lt;<a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.email }}</a>
-                  &gt;a été invité(e) à '
-                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{
-                      campaing.Name
-                    }}</a>'
-                </p>
-                <p class="list-sidibar-right list-sidibar-right-bottom"
-                  [class.list-sidibar-right-MinSize]="IsBoaleanSmallSidibar">
-                  {{
-                      candidat.invitation_date | date: "short":"undefined":"fr-FR"
-                }}
-                </p>
-              </div>
-
-            </div>
-
-            <div *ngIf="isActiveNotiFinish">
-
-              <div *ngIf="candidat.invitation_date !== candidat.test_terminer" class="list-sidibar"
-                [class.list-sidibar-MinSize]="IsBoaleanSmallSidibar">
-                <p *ngIf="!IsBoaleanSmallSidibar" class=" list-sidibar-left-content">
-                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.Nom }}
-                  </a>
-                  &lt;<a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.email }}</a>
-                  &gt; a terminé l'évaluation technique de '
-                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{
-                      campaing.Name
-                    }}</a>'
-                </p>
-                <p [class.list-sidibar-right-MinSize]="IsBoaleanSmallSidibar"
-                  class="list-sidibar-right list-sidibar-right-bottom">
-                  {{
-                      candidat.test_terminer | date: "short":"undefined":"fr-FR"
-                    }}
-                </p>
-              </div>
-
-            </div>
-
-
-            <div *ngIf="isActiveNotifInvite">
-              <div class="list-sidibar" [class.list-sidibar-MinSize]="IsBoaleanSmallSidibar">
-                <p *ngIf="!IsBoaleanSmallSidibar" class="list-sidibar-left-content">
-                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.Nom }}
-                  </a>
-                  &lt;<a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{ candidat.email }}</a>
-                  &gt;a été invité(e) à '
-                  <a [routerLink]="['/dashboard/campaigns',campaing.id, 'candidats']">{{
-                        campaing.Name
-                      }}</a>'
-                </p>
-                <p [class.list-sidibar-right-MinSize]="IsBoaleanSmallSidibar"
-                  class="list-sidibar-right list-sidibar-right-bottom">
-                  {{
-                        candidat.invitation_date | date: "short":"undefined":"fr-FR"
-                  }}
-                </p>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </div>

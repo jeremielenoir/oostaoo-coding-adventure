@@ -35,6 +35,14 @@
   line-height: 21px !important;
 }
 
+.mat-menu-panel{
+  min-width: 160px;
+  font-size: 14px;
+  .mat-icon{
+    color: $color-orange;
+  }
+}
+
 
 
 // .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element{
@@ -100,10 +108,10 @@
  
 
  .iconStyle{
-  color: $color-orange;
+  /*color: $color-orange;
   width: 20px;
   font-size: 20px;
-  margin-left: 10px;
+  margin-left: 10px;*/
    
  }
 }

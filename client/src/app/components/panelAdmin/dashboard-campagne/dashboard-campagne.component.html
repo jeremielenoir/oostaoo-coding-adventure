@@ -8,7 +8,7 @@
     <div class="contenu-view-content">
       <app-campagne (emitIsactiveNoCountryside)="display($event)" (campaignsChild)="getCampaignsFromChild($event)"
         class="app-campagne" [class.app-campagneMaxSize]="IsBooaleanDashboardMaxSize"></app-campagne>
-      <app-sidebar-right (IsBoaleanSmallSidibarOutput)="IsBoaleanSmallSidibarOutputClbk($event)" *ngIf="campaigns"
+      <app-sidebar-right (IsBoaleanSmallSidebarOutput)="IsBoaleanSmallSidebarOutputClbk($event)" *ngIf="campaigns"
         [campaignsFromParent]="campaigns" class="app-sidbar"></app-sidebar-right>
     </div>
   </section>

@@ -30,7 +30,7 @@ export class DashboadCampagneComponent implements OnInit {
     //console.log(this.notifications);
   }
 
-  IsBoaleanSmallSidibarOutputClbk(event) {
+  IsBoaleanSmallSidebarOutputClbk(event) {
 
     this.IsBooaleanDashboardMaxSize = event;
 

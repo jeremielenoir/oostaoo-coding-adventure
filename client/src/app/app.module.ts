@@ -60,7 +60,7 @@ import {
   DialogOverviewDuplicate,
   CampaignsArchivedPipe
 } from './components/panelAdmin/campagne/campagne.component';
-import { SidibarRightComponent } from './components/panelAdmin/sidebar-right/sidebar-right.component';
+import { SidebarRightComponent } from './components/panelAdmin/sidebar-right/sidebar-right.component';
 import { DatePipe } from '@angular/common';
 import { ProfilUtilisateurComponent } from './components/panelAdmin/profil-utilisateur/profil-utilisateur.component';
 import { ProtectionDeDonneesComponent } from './components/panelAdmin/protection-de-donnees/protection-de-donnees.component';
@@ -186,7 +186,7 @@ export class MyIntl extends TimeagoIntl {
     CampagneComponent,
     DialogOverviewDelete,
     DialogOverviewDuplicate,
-    SidibarRightComponent,
+    SidebarRightComponent,
     ProfilUtilisateurComponent,
     FacturationComponent,
     ProtectionDeDonneesComponent,

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewEncapsulation } from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { AuthFormVerification } from "src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator";
 import { RouterLink } from '@angular/router';
@@ -6,7 +6,8 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: "app-nouvelle-campagne",
   templateUrl: "./nouvelle-campagne.component.html",
-  styleUrls: ["./nouvelle-campagne.component.scss"]
+  styleUrls: ["./nouvelle-campagne.component.scss"],
+  encapsulation: ViewEncapsulation.None
 })
 export class NouvelleCampagneComponent implements OnInit {
   nNumeorPage: number;
