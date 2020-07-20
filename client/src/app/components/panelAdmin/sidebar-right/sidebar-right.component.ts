@@ -48,6 +48,8 @@ export class SidebarRightComponent implements OnInit {
       }
     }
 
+    console.log('candidat sorted', this.candidatbydate);
+
     //session storage
 
     if (localStorage.getItem('notification') === undefined || localStorage.getItem('notification') === null) {
@@ -61,6 +63,8 @@ export class SidebarRightComponent implements OnInit {
       this.check1.nativeElement.checked = this.storageRecuperationCheck.valueCheckeventFirst;
       this.check2.nativeElement.checked = this.storageRecuperationCheck.valueCheckeventLast;
     }
+
+
 
     this.saveCheckValue();
     

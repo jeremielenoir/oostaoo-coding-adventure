@@ -48,7 +48,7 @@ export class ClientTestComponent implements OnInit {
 
   hundleActiveTest() {
     this.ActiveTest = true;
-    // console.log('state', this.ActiveTest);
+    //console.log('state', this.ActiveTest);
   }
 
   NohundleActiveTest() {
@@ -64,13 +64,15 @@ export class ClientTestComponent implements OnInit {
       for (const candidat of res) {
           this.candidat = candidat;
           console.log('candidat this.candidat', this.candidat);
-          if (candidat.invitation_date !== candidat.test_terminer) {
+          
+          if (candidat.test_terminer !== '0000-00-00 00:00:00') {
             this.StatueTestingQuestion = 'fin';
+            return this.router.navigate(['/home']);
           }
+          
           this.idCampaign = candidat.campaign.id;
-          // console.log('test', this.idCampaign)
           this.postOpenTimeTest(this.dateOpenTest, candidat.id);
-          // console.log('this.idCampaign : ', this.idCampaign);
+          
           this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.idCampaign).toPromise().then(res1 => {
             this.nbQuestion = res1.questions.length;
             let secondTime = 0;
@@ -84,13 +86,13 @@ export class ClientTestComponent implements OnInit {
             // console.log('this.questionCampaign: ', this.questionCampaign);
             // console.log('this.technoCampaign: ', this.technoCampaign);
           });
-          return this.router.navigate(['/evaluate'], {
+          /*return this.router.navigate(['/evaluate'], {
             queryParams: {
               id: this.idParam
             }
-          });
+          });*/
       }
-      return this.router.navigate(['/home']);
+      //
     });
   }
 

@@ -40,11 +40,11 @@
       "type": "integer"
     },
     "test_terminer": {
-      "default": "",
+      "default": "null",
       "type": "date"
     },
     "test_ouvert": {
-      "default": "",
+      "default": "null",
       "type": "date"
     },
     "index_question": {
@@ -52,7 +52,7 @@
       "type": "integer"
     },
     "test_pause": {
-      "default": "",
+      "default": "null",
       "type": "integer"
     },
     "date_pause": {

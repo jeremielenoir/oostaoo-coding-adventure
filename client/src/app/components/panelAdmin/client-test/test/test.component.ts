@@ -83,13 +83,10 @@ export class TestComponent implements OnInit {
         this.dataInfoLanguageName =  'name';
     }
   
-    // this.dataInfoLanguageName =  'name';
-    // this.dataInfoLanguageContent = 'content';
-//     console.log("  this.dataInfoLanguageName =  'name';",this.dataInfoLanguageName)
-// console.log("this.dataInfoLanguageContent=====init",this.dataInfoLanguageContent)
-    if(this.prev){
+    
+    if (this.prev){
       this.prev = true;
-    }else{
+    } else{
       this.prev = false;
     }
       this.sumPointsByNumTechno(this.questionCampaign);
@@ -97,40 +94,42 @@ export class TestComponent implements OnInit {
       this.allPointsTechnos = this.sumPointsbyTechno;
     }
     this.calculTotalPoints(this.allPointsTechnos);
-    if (this.totalPoints) {
-      this.totalPointsCampaign = this.totalPoints;
-    }
-    if(this.candidat){
-      if (this.candidat.index_question === null) {
-     
-        this.index = 0;
-      } else {
-        this.index = this.candidat.index_question;
+      if (this.totalPoints) {
+        this.totalPointsCampaign = this.totalPoints;
       }
-      if (this.candidat.test_pause === null) {
-        this.timedefault = 0;
-      } else {
-        this.timedefault = this.candidat.test_pause;
-      }
-    }else{
-      this.candidat = {
-        campaign : {
-          copy_paste : false
+      if(this.candidat){
+        if (this.candidat.index_question === null) {
+      
+          this.index = 0;
+        } else {
+          this.index = this.candidat.index_question;
         }
+        if (this.candidat.test_pause === null) {
+          this.timedefault = 0;
+        } else {
+          this.timedefault = this.candidat.test_pause;
+        }
+      }else{
+        this.candidat = {
+          campaign : {
+            copy_paste : false
+          }
+        }
+        this.index = 0;
       }
-      this.index = 0;
-    }
 
     this.questions = this.questionCampaign;
     this.question = this.questionCampaign[this.index];
-    console.log('this.question : ', this.question);
+    console.log('this.question : ', this.questionCampaign);
+
     this.timeDanger = this.questionCampaign[0].time - 5;
     this.type = this.questionCampaign[0];
     this.Countertime();
     if(!this.prev){
       this.controleTimeTest();
     }
-    console.log("this.dataInfoLanguageContent]",this.dataInfoLanguageContent)
+    
+    
     if (this.question[this.dataInfoLanguageContent] === null) {
       this.responses = [];
       console.log(' tu est null ')

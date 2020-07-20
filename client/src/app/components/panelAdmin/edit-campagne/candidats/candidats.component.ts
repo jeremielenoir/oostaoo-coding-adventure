@@ -100,13 +100,7 @@ export class CandidatsComponent implements OnInit {
     if (this.tests_available == -1) {
       this.tests_available = "";
     }
-    // this.apiClientService.get(API_URI_USER + '/' + this.DecryptTokenService.userId)
-    // .subscribe(user => {
-    //   this.tests_available = user.tests_available;
-    //   if(this.tests_available == -1){
-    //     this.tests_available = '';
-    //   }
-    // });
+    
 
     this.getCampaign().then((datas) => {
       this.campaign = datas;
@@ -308,15 +302,7 @@ export class CandidatsComponent implements OnInit {
             return { ...candidat, status: false };
           });
 
-          // this.candidats = res.candidats;
-
-          // this.candidats.forEach((element: any) => {
-          //   console.log("element", element);
-          //   element.status = false;
-          // });
-
-         // console.log("this.candidats================", this.candidats);
-
+          
           this.technologies = res.technologies;
 
           if (this.campaigns.candidats.length > 0) {
@@ -362,13 +348,14 @@ export class CandidatsComponent implements OnInit {
           } else {
             duree = 0;
           }
-          if (candidat.invitation_date === candidat.test_terminer) {
+          console.log('CANDIDAT TERMINER', candidat.test_terminer);
+          if (candidat.test_terminer === '0000-00-00 00:00:00') {
             dateInvite = new Date(candidat.invitation_date);
             percentCandidat = 0 + "%";
           } else {
             dateInvite = new Date(candidat.test_terminer);
             // console.log('candidat.points_candidat[5].PourcentTest: ', candidat.points_candidat[5].PourcentTest);
-            percentCandidat = candidat.points_candidat[5].PourcentTest + "%";
+            
             if (
               !candidat.points_candidat ||
               !candidat.points_candidat[5] ||
@@ -376,6 +363,8 @@ export class CandidatsComponent implements OnInit {
               candidat.points_candidat[5].PourcentTest === null
             ) {
               percentCandidat = 0 + "%";
+            }else{
+              percentCandidat = candidat.points_candidat[5].PourcentTest + "%";
             }
           }
 
