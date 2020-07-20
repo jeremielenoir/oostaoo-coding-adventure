@@ -11,7 +11,7 @@ server.listen(PORT, ()=>{
   console.log(`listening at port ${PORT}`);
 })
 
-
+console.log('works');
 /*  chat socket io */
 const socket = require('socket.io');
 const io = socket(server);
