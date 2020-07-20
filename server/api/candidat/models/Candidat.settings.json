@@ -66,6 +66,10 @@
     "points_candidat": {
       "default": "",
       "type": "json"
+    },
+    "interview": {
+      "model": "interview",
+      "via": "candidats"
     }
   }
 }

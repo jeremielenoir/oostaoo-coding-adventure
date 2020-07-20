@@ -15,21 +15,23 @@
       "default": "",
       "type": "date"
     },
-    "campaign": {
-      "model": "campaign",
-      "via": "interviews"
-    },
-    "candidat": {
-      "model": "candidat",
-      "via": "interviews"
-    },
-    "entreprise": {
-      "model": "entreprise",
-      "via": "interviews"
-    },
     "interviewer_comment": {
       "default": "",
       "type": "text"
+    },
+    "candidats": {
+      "collection": "candidat",
+      "via": "interview"
+    },
+    "users": {
+      "collection": "user",
+      "via": "interviews",
+      "dominant": true,
+      "plugin": "users-permissions"
+    },
+    "interview_link": {
+      "default": "",
+      "type": "string"
     }
   }
 }

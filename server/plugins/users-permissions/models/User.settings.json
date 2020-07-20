@@ -116,6 +116,10 @@
     "customeraccount": {
       "model": "customeraccount",
       "via": "users"
+    },
+    "interviews": {
+      "collection": "interview",
+      "via": "users"
     }
   },
   "collectionName": "users-permissions_user"
