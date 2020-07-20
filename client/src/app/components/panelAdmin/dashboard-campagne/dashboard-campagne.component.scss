@@ -49,6 +49,7 @@
             flex: 1;
             height: 100%;
             flex-direction: row;
+            overflow-x: hidden;
             .app-campagne{
                 min-height: 400px;
                 flex: 2;
