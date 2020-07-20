@@ -18,6 +18,25 @@
 .buttonItemSelect {
  width: 80%;
 }
+
+.search-container{
+  font-size: 14px;
+  .mat-form-field{
+    width: 210px;
+  }
+  .mat-form-field-flex{
+    height: 51px !important;
+  }
+}
+
+.mat-checkbox-label{
+  font-size: 14px;
+  margin-left: 0px !important;
+  line-height: 21px !important;
+}
+
+
+
 // .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element{
 //   color:#e15028!important;
 // }
@@ -96,7 +115,7 @@
   
 }
 .addCampaignContainer{
-  background-color: #0c6192;
+  background-color: #0c6192 !important;
   //margin-left: 5px;
   .addIcon{
     color: white;
@@ -168,12 +187,12 @@
         align-items: center;
         background-color: white;
         padding-left: 5px;
-        padding-right: 5px;
-        flex: 8;
+        //padding-right: 5px;
+        flex: 10;
         .form-group-header {
-          flex: 3;
-          height: 46px;
-          min-width: 170px;
+          //flex: 3;
+          height: 50px;
+          //min-width: 170px;
           
           .checked-block {
             font-size: 14px;

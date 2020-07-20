@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, Inject, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, Inject, Pipe, PipeTransform, ViewEncapsulation } from '@angular/core';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -25,10 +25,13 @@ export class CampaignsArchivedPipe implements PipeTransform {
   }
 }
 
+
+
 @Component({
   selector: 'app-campagne',
   templateUrl: './campagne.component.html',
   styleUrls: ['./campagne.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class CampagneComponent implements OnInit {
