@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { element } from '@angular/core/src/render3';
 
 @Component({
@@ -6,7 +6,7 @@ import { element } from '@angular/core/src/render3';
   templateUrl: './sidebar-right.component.html',
   styleUrls: ['./sidebar-right.component.scss']
 })
-export class SidebarRightComponent implements OnInit {
+export class SidebarRightComponent implements OnInit, OnChanges{
   @Input() campaignsFromParent;
   @Output() IsBoaleanSmallSidebarOutput = new EventEmitter<boolean>()
 
@@ -29,8 +29,13 @@ export class SidebarRightComponent implements OnInit {
   public testCheck: any;
   constructor() { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.ngOnInit();
+  }
+
   ngOnInit() {
 
+    this.myArrayCandidat = [];
     for (const campaign of this.campaignsFromParent) {
       for (const candidat of campaign.candidats) {
         

@@ -25,7 +25,7 @@ export class DashboadCampagneComponent implements OnInit {
   }
 
   getCampaignsFromChild(campaigns) {
-    this.campaigns = campaigns;
+    this.campaigns = [...campaigns];
 
     //console.log(this.notifications);
   }
