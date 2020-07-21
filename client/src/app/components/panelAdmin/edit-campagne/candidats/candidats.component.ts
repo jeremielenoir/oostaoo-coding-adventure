@@ -18,7 +18,7 @@ import {
 import { HttpClient } from "@angular/common/http";
 import { saveAs } from "file-saver";
 import { getResultsDefinition } from "./getResultsDefinition";
-import { InterviewDialogComponent } from '../../campagne/interview-dialog/interview-dialog.component';
+import { InterviewDialogComponent } from './interview-dialog/interview-dialog.component';
 //import pdfMake from "pdfmake/build/pdfmake";
 // font build has to be committed otherwise each developers has to build font locally.
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -117,6 +117,7 @@ export class CandidatsComponent implements OnInit {
     });
   }
   openInterviewDialog(data){
+    console.log("data candidat",data)
     this.dialog.open(InterviewDialogComponent, {
       data,
       height: '580px'

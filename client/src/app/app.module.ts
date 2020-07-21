@@ -136,6 +136,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { MatProgressBarModule } from '@angular/material';
 import { QuestionsComponent } from './components/questions/questions.component';
 import { TimeagoComponent } from './components/timeago/timeago.component';
+import { InterviewDialogComponent } from './components/panelAdmin/edit-campagne/candidats/interview-dialog/interview-dialog.component';
 
 export class MyIntl extends TimeagoIntl {
    
@@ -154,6 +155,7 @@ export class MyIntl extends TimeagoIntl {
     CandidatsMailComponent,
     DialogOverviewDelete,
     DialogOverviewDuplicate,
+    InterviewDialogComponent,
     DialogForgetPassword,
     OffersComponent,
     ConfirmComponent,
@@ -173,6 +175,7 @@ export class MyIntl extends TimeagoIntl {
     RouteComponentComponent,
     DistConnecTed,
     // PopupMonOffre,
+    InterviewDialogComponent,
     AccueilComponent,
     NavMobileAbsoluteDirective,
     ScrollPointDirective,

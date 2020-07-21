@@ -6,7 +6,7 @@
  * @description: A set of functions called "actions" for managing `Interview`.
  */
 const nodemailer = require("nodemailer");
-
+const crypto = require("crypto");
 // Create reusable transporter object using SMTP transport.
 const transporter = nodemailer.createTransport({
   service: "Gmail",
@@ -58,47 +58,44 @@ module.exports = {
 
   create: async (ctx) => {
     try {
-      const result = await strapi.services.interview.add(ctx.request.body);
+      const {
+        interview_date,
+        candidats,
+        user,
+        email_title,
+        email_content,
+      } = ctx.request.body;
 
-      const candidatOption = {
-        to: result.candidat.email,
+      const interview = await strapi.services.candidat.add({
+        candidats,
+        user,
+        interview_date,
+      });
+
+      const cryptoData = crypto
+        .createHash("md5")
+        .update(interview.id)
+        .digest("hex");
+
+      let getEmail_message_crypto = email_content.replace(
+        "...",
+        "?id=" + cryptoData //or iplocal replace localhost
+      );
+
+      
+ 
+      const options = {
+        to: [candidats.email, user.email],
         from: "chagnon.maxime@oostaoo.com",
         replyTo: "no-reply@strapi.io",
-        subject: "Entretien vidéoconférence",
-        html: `
-        <h1>Bonjour ${result.name}</h1>
-
-        <p>C'est avec un réel plaisir que nous vous convions à un entretien vidéo conférence le ${result.interview_date} suite aux résultats de vos tests</p>
-
-        <p>
-        <a href='https://app.slack.com/${result.id}'>Lien vidéoconférence</a>
-        </p>
-        `,
+        subject: email_title,
+        html: getEmail_message_crypto,
       };
-
-      const interviewersOption = {
-        to: result.interviewers.map((e) => e.email),
-        from: "chagnon.maxime@oostaoo.com",
-        replyTo: "no-reply@strapi.io",
-        subject: "Entretien vidéoconférence",
-        html: `
-        <h1>Bonjour </h1>
-
-        <p>C'est avec un réel plaisir que nous vous convions à un entretien vidéo conférence le ${result.interview_date} avec ${result.candidat.name}suite aux résultats favorables aux tests</p>
-
-        <p>
-        <a href='https://app.slack.com/${result.id}'>Lien vidéoconférence</a>
-        </p>
-        `,
-      };
-
-      await Promise.all([
-        transporter.sendMail(candidatOption),
-        transporter.sendMail(interviewersOption),
-      ]);
-      return result;
-    } catch (error) {
-      throw error;
+      await transporter.sendMail(options);
+      return interview;
+    } catch (e) {
+        console.log("error create interview", e);
+      throw e;
     }
   },
 
