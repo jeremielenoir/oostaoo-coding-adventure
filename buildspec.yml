@@ -36,6 +36,8 @@ phases:
       - yarn run build-i18n:jp
       - mkdir ../server/public
       - mkdir ../server/interview
+      - mkdir ../interview-server
+      - cp -R ../interview/server/* ../interview-server
       - cp -R ./dist/client/* ../server/public/
       - cd ../interview/client && npm run build
       - cp -R ./build/* ../../server/interview
@@ -48,6 +50,7 @@ phases:
 
 artifacts:
   files:
+    - 'interview-server/*'
     - 'server/**/*'
     - 'scripts/**/*'
     - 'appspec.yml'
