@@ -36,22 +36,25 @@ export class SidebarRightComponent implements OnInit, OnChanges{
   ngOnInit() {
 
     this.myArrayCandidat = [];
-    for (const campaign of this.campaignsFromParent) {
-      for (const candidat of campaign.candidats) {
-        
-        this.myArrayCandidat.push(candidat);
-        
-        this.candidatbydate = this.myArrayCandidat.sort((a, b) => {
-          if (a.test_terminer < b.test_terminer) {
-            return 1;
-          } else if (b.test_terminer < a.test_terminer) {
-            return -1;
-          } else {
-            return 0;
-          }
-        });
+    if(this.campaignsFromParent){
+      for (const campaign of this.campaignsFromParent) {
+        for (const candidat of campaign.candidats) {
+          
+          this.myArrayCandidat.push(candidat);
+          
+          this.candidatbydate = this.myArrayCandidat.sort((a, b) => {
+            if (a.test_terminer < b.test_terminer) {
+              return 1;
+            } else if (b.test_terminer < a.test_terminer) {
+              return -1;
+            } else {
+              return 0;
+            }
+          });
+        }
       }
     }
+    
 
     console.log('candidat sorted', this.candidatbydate);
 

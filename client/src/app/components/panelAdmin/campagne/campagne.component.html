@@ -9,12 +9,13 @@
 
         <h3 class="info-title-header-dashboard" i18n>Tests d'evaluations</h3>
         <div class="container-add-campaign hvr-grow" [routerLink]="['/dashboard/campaigns/new']">
-          <button mat-mini-fab  class="addCampaignContainer" i18n>
-            <mat-icon  class="addIcon">add</mat-icon>
+          <button mat-mini-fab class="addCampaignContainer" i18n>
+            <mat-icon class="addIcon">add</mat-icon>
           </button>  
-          <span i18n class="addIconText" [routerLink]="['/dashboard/campaigns/new']">Nouveau test</span>
+          <span i18n class="addIconText">Nouveau test</span>
         </div>
       </div>
+
       <div class="sous-header-two">
 
         <div class="block-btn-test">
@@ -26,7 +27,7 @@
 
             <div class="form-group-header form-group-header-2">
 
-              <mat-checkbox class="checked-block" (click)="includeArchivedCampaigns()">
+              <mat-checkbox [color]="'accent'" class="checked-block" (click)="includeArchivedCampaigns()">
                 <span i18n>Inclure archives</span>
               </mat-checkbox>
             </div>
@@ -34,7 +35,7 @@
             <div class="form-group-header">
               
                 <div class="search-container">
-                  <mat-form-field appearance="fill" [floatLabel]="true">
+                  <mat-form-field appearance="fill" [floatLabel]="true" [color]="'accent'">
                     <mat-label><mat-icon>search</mat-icon>&nbsp;Rechercher</mat-label>
                     <input matInput type="search" class="champ-header-contenu" placeholder="Filtrer par nom" name="search"
                     [(ngModel)]="searchText" id="search-header"/>

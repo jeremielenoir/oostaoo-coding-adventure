@@ -11,10 +11,10 @@
       <div class="campaign-param-container">
       <div class="spacing">
     
-          <div class="select">
+          <div class="select roodeo-dark-theme">
            
              <!-- <label for="role" [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</label>-->
-              <mat-form-field [formGroup]="formCampagne" appearance="fill" >
+              <mat-form-field [formGroup]="formCampagne" appearance="outline" [color]="'accent'">
                 <mat-label [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</mat-label>
                 <mat-select name="role" class="mat-primary" formControlName="role" [(ngModel)]="roleSelect"
                   (selectionChange)="selected($event)">
@@ -38,7 +38,7 @@
                 tester</label>-->
 
                 
-              <mat-form-field [formGroup]="formCampagne" appearance="fill">
+              <mat-form-field [formGroup]="formCampagne" appearance="outline" [color]="'accent'">
                 <mat-label for="techno" [ngStyle]="errorTechno ? { color: 'red' } : null" i18n>Sélectionnez les technologies à
                   tester</mat-label>
                 <mat-select multiple name="techno" formControlName="techno" [compareWith]="compareObjects"
@@ -80,13 +80,12 @@
         </div>
     
       <div class="formQuestion finalQuestion">
-        <div class="button">
-          <button type="button" id="button" mat-flat-button (click)="onIncrementPage(formCampagne.value)"
-            (click)="valueChanged()" i18n>
-            Étapes suivante : Paramètres
+        <div class="container-next hvr-grow" (click)="onIncrementPage(formCampagne.value)">
+          <span i18n class="button-text">Etape suivante : paramètres</span>
+          <button mat-mini-fab class="next-button" i18n>
+            <mat-icon class="addIcon">keyboard_arrow_right</mat-icon>
           </button>
         </div>
-
       </div>
       </div>
     </div>

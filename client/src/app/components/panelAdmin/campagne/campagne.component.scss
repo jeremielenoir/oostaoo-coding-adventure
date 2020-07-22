@@ -2,19 +2,9 @@
 @import "../dashboard-campagne/dashboard-campagne.component.scss";
 
 .plus-icon{
-  // font-size: 18px;
   margin-left: 20px;
 }
 
-::ng-deep .mat-dialog-container{
-  border: $border-table;
-
-
-
-    .mat-button{
-      outline: none;
-    }
-}
 .buttonItemSelect {
  width: 80%;
 }
@@ -44,47 +34,19 @@
 }
 
 
-
-// .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element{
-//   color:#e15028!important;
-// }
-
-// ::ng-deep .mat-checkbox-frame{
-//   width: 20px!important;
-//   height: 20px!important;
-//   border-radius: 50px!important;
-// }
-
-// ::ng-deep .mat-checkbox .mat-checkbox-ripple{
-//   left: calc(50% - 18px)!important;
-//   top: calc(50% - 18px)!important;
-// }
-
-// ::ng-deep .mat-checkbox-checkmark{
-//   display: none!important;
-// }
-// ::ng-deep .mat-checkbox-background{
-//   border-radius: 50!important;
-//   transition: none!important;
-// }
-
-::ng-deep .mat-checkbox-layout{
-  margin-bottom: .5px!important;
-}
-::ng-deep .mat-checkbox-inner-container{
-  margin-right: 0px!important;
-  //margin-top: 7px !important;
-}
-
 .container-add-campaign{
     margin-top: 5px;
     margin-bottom: 5px;
     margin-right: 10px;
     color: #fff;
-    background: #0c6192;
+    background: mat-color($roodeo-app-primary, 800);
     border-radius: 19px;
     padding-right: 15px;
     cursor: pointer;
+    &:focus{
+      border: 0px solid #fff;
+      outline: -webkit-focus-ring-color auto 0px;
+    }
 }
 
 .invite-left{
@@ -103,19 +65,7 @@
 .icon{
   color: $color-orange;
 }
-.button-matMenu{
- // outline: none;
 
- 
-
- .iconStyle{
-  /*color: $color-orange;
-  width: 20px;
-  font-size: 20px;
-  margin-left: 10px;*/
-   
- }
-}
 .addIconText{
   font-size: 14px;
   margin-left: 10px;
@@ -125,7 +75,6 @@
 }
 .addCampaignContainer{
   background-color: #0c6192 !important;
-  //margin-left: 5px;
   .addIcon{
     color: white;
   }
@@ -149,7 +98,6 @@
       flex-direction: row;
       border-top: $border-table;
       border-bottom: $border-table;
-      // padding: 0px 12px;
       align-items: center;
       background: #fff;
 
@@ -188,7 +136,6 @@
           border:none;
           padding: 20px 30px;
           display: block;
-          // font-size: 18px;
           outline: none;
       }
       .sous-header-form {
@@ -196,19 +143,13 @@
         align-items: center;
         background-color: white;
         padding-left: 5px;
-        //padding-right: 5px;
         flex: 10;
         .form-group-header {
-          //flex: 3;
           height: 50px;
-          //min-width: 170px;
           
           .checked-block {
             font-size: 14px;
             color: $color-principal-blue;
-            /*margin-top: 5px;
-            margin-left: 10%;*/
-            
           }
           form {
             height: 100%;
@@ -217,12 +158,9 @@
             margin-top:5px;
             .icon-form-group-header-contenu {
               display: inline-block;
-              // padding-left: 10px;
               color: #de522b;
               font-size: 24px;
-              // top: -5px;
               right: 22px;
-              // position: absolute;
               width: 28px;
               height: 28px;
               img{
@@ -233,12 +171,7 @@
             .champ-header-contenu {
               width: 90%;
               height: 73%;
-              // padding: 0 20px 0 10px;
-             // padding-bottom: 8px;
-            //  padding-top: 8px;
-              // font-size: 14px;
               background-color: white;
-              //border-bottom: 1px solid #de522b!important;
               outline: none;
               border: none;
             }
@@ -251,7 +184,6 @@
         }
         .form-group-header-2 {
           flex: 2!important;
-          //margin-left: 20px;
           label {
             margin: 0px;
             color: #7e8082;
@@ -343,7 +275,6 @@
           height: 50px;
           border-radius: 0px;
           &:hover{
-            //opacity: 0.6;
             background: #0c6192;
             color: #fff;
           }
@@ -396,7 +327,7 @@
             padding-right: 10px;
             color:$color-principal-blue;
            
-          .branche-content-text {
+            .branche-content-text {
               font-size: $font-size-home;
               margin-bottom: 0px !important;
               display: inline-block;

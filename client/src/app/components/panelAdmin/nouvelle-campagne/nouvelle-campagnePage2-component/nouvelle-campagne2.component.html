@@ -8,18 +8,15 @@
     </div>
 
     <div class="campaign-param-container">
-    <div class="campaign-param">
-        <div class="formQuestion">
-            <label
-              for="nomDeCampagne"
-              [ngStyle]="errorNomCampgane ? { color: 'red' } : null"
-            i18n>
-              Nom de la campagne
-            </label>
-          </div>
+    
+        
       <div class="campaign-param">
-        <mat-form-field [formGroup]="formCampagne" class="fullWidth">
-          <input
+
+        <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" [formGroup]="formCampagne" class="fullWidth">
+          <mat-label>Nom du test d'evaluation</mat-label>
+          <input 
+            placeholder="Nom du test d'evaluation"
+            type="text"
             formControlName="nomDeCampagne"
             matInput
             value="{{ formCampagne.value.role }} - {{
@@ -29,7 +26,6 @@
           />
         </mat-form-field>
       </div>
-    </div>
 
   
     <div class="campaign-param">
@@ -41,26 +37,24 @@
           En quelle langue les questions doivent-elles être posées à vos
           candidats ?
         </label>
+        <div class="example-radio-button">
+          <mat-radio-group [(ngModel)]="selectedLangue">
+            <mat-radio-button value="FR">
+              FR
+            </mat-radio-button>
+            <mat-radio-button value="EN">
+              EN
+            </mat-radio-button>
+            <mat-radio-button value="ES">
+              ES
+            </mat-radio-button>
+            <mat-radio-button value="JP">
+              JP
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
       </div>
 
-      <div class="cog-test">
-          <div class="example-radio-button">
-            <mat-radio-group [(ngModel)]="selectedLangue">
-              <mat-radio-button value="FR">
-                FR
-              </mat-radio-button>
-              <mat-radio-button value="EN">
-                EN
-              </mat-radio-button>
-              <mat-radio-button value="ES">
-                ES
-              </mat-radio-button>
-              <mat-radio-button value="JP">
-                JP
-              </mat-radio-button>
-            </mat-radio-group>
-          </div>
-      </div>
       <div class="cog-test">
           <div class="campaign-param">
             <div class="">

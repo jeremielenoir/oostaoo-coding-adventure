@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+@import '~@angular/material/theming';
 
 /*Colors*/
 $text-color: #212529;
@@ -48,24 +49,80 @@ $logoPath: "src/assets/logo.png";
   border:1px solid rgb(126, 181, 206);
   border-radius: 100px;
   width: 125px;
-  position: relative;
-  
+  position: relative; 
   top: 10px;
 }
 
+$mat-roodeo-primary: (
+  50: #e1f4f9,
+  100: #b3e2ef,
+  200: #84d0e5,
+  300: #5bbddb,
+  400: #40afd6,
+  500: #2ba2d1,
+  600: #2495C4,
+  700: #1a82b1,
+  800: #19719e,
+  900: #0e537c,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text
+  )
+);
 
-::ng-deep .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element{
-  background-color: $color-orange!important;
-}
+$mat-roodeo-accent: (
+  50: #fae9e8,
+  100: #fdcdbf,
+  200: #fcad96,
+  300: #fc8d6c,
+  400: #fc734c,
+  500: #fc5c2f,
+  600: #f1562b,
+  700: #e34f26,
+  800: #d54923,
+  900: #bb3d1b,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text
+  )
+);
 
-::ng-deep .mat-checkbox-checked.mat-accent ::ng-deep .mat-checkbox-background, ::ng-deep .mat-checkbox-indeterminate.mat-accent ::ng-deep.mat-checkbox-background {
-  background-color: $color-orange!important;
-  // border-radius: 100px!important;
-  // position: absolute!important;
-  // left: 3.5px!important;
-  // top: 3.5px!important;
-}
-::ng-deep .mat-checkbox-label{
-  margin: 0px 20px;
-  padding-top: 3px;
-}
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$roodeo-app-primary: mat-palette($mat-roodeo-primary);
+$roodeo-app-primary-dark: mat-palette($mat-roodeo-primary, 800, 700, 900);
+$roodeo-app-accent:  mat-palette($mat-roodeo-accent);
+
+// The warn palette is optional (defaults to red).
+$roodeo-app-warn:  mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as `color` or `typography`.
+$roodeo-app-theme: mat-light-theme(
+    $roodeo-app-primary,
+    $roodeo-app-accent,
+    $roodeo-app-warn
+);
+
+$roodeo-app-theme-dark: mat-light-theme(
+    $roodeo-app-primary-dark,
+    $roodeo-app-accent,
+    $roodeo-app-warn
+);

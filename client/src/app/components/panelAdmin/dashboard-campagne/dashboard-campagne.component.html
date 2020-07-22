@@ -8,8 +8,7 @@
     <div class="contenu-view-content">
       <app-campagne (emitIsactiveNoCountryside)="display($event)" (campaignsChild)="getCampaignsFromChild($event)"
         class="app-campagne" [class.app-campagneMaxSize]="IsBooaleanDashboardMaxSize"></app-campagne>
-      <app-sidebar-right (IsBoaleanSmallSidibarOutput)="IsBoaleanSmallSidibarOutputClbk($event)"
-        [campaignsFromParent]="campaigns" class="app-sidbar"></app-sidebar-right>
+      <app-sidebar-right [campaignsFromParent]="campaigns" class="app-sidbar"></app-sidebar-right>
     </div>
   </section>
 </div>

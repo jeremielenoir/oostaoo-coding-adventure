@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
+import { Component, OnInit, EventEmitter, Output, Input, ViewEncapsulation } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { AuthFormVerification } from "src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator";
 import {
@@ -16,7 +16,8 @@ import { LanguagePipe } from 'ngx-markdown';
   styleUrls: [
     "./nouvelle-campagne.component.scss",
     "../nouvelle-campagne.component.scss"
-  ]
+  ],
+  //encapsulation: ViewEncapsulation.None
 })
 export class NouvelleCampagnePage1Component implements OnInit {
   @Output() incrementPage = new EventEmitter<any>();
@@ -167,16 +168,13 @@ export class NouvelleCampagnePage1Component implements OnInit {
   }
 
   valueChanged() {
-    
-    // You can give any function name
-    console.log("salut")
     this.valueChange.emit(this.technosSelect);
     this.valueChangeProfil.emit(this.roleSelect);
   }
 
   // validation du formulaire et passage à l'étap suivante.
   public onIncrementPage(pDatafromValue: any): void {
-
+    this.valueChanged();
     this.formValid(pDatafromValue);
     if (AuthFormVerification._sMessageError === "") {
       this.incrementPage.emit(); // Déclenche l'output pour passer à la paga suivante.
