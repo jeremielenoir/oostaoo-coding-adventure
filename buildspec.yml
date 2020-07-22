@@ -13,8 +13,6 @@ phases:
       - echo Entered the install phase...
       - npm install yarn -g
       - cd client && yarn install
-      - echo Trouver ou nous sommes
-      - ls -l
       - cd ../interview/client && npm install
     finally:
       - echo This always runs even if the update or install command fails 
@@ -35,8 +33,8 @@ phases:
       #- yarn run build-i18n:es
       #- yarn run build-i18n:fr
       #- yarn run build-i18n:jp
-      - mkdir ../server/public
-      - mkdir ../server/interview
+      - mkdir ../../server/public
+      - mkdir ../../server/interview
       - cp -R ./dist/client/* ../server/public/
       - cd ../interview/client && npm run build
       - cp -R ./build/* ../../server/interview
