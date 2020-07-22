@@ -15,7 +15,7 @@ phases:
       - cd client && yarn install
       - echo Trouver ou nous sommes
       - ls -l
-      - cd ../Interview/client && npm install
+      - cd ../interview/client && npm install
     finally:
       - echo This always runs even if the update or install command fails 
   pre_build:
@@ -38,7 +38,7 @@ phases:
       - mkdir ../server/public
       - mkdir ../server/interview
       - cp -R ./dist/client/* ../server/public/
-      - cd ../Interview/client && npm run build
+      - cd ../interview/client && npm run build
       - cp -R ./build/* ../../server/interview
     finally:
       - echo This always runs even if the install command fails
