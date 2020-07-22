@@ -29,7 +29,7 @@ phases:
       - export NODE_OPTIONS=--max_old_space_size=8192
       - echo $NODE_OPTIONS
       - cd ./client 
-      #- yarn run build
+      - yarn run build
       
       #- yarn run build-i18n:en
       #- yarn run build-i18n:es
@@ -38,7 +38,6 @@ phases:
       
       - mkdir ../server/public
       - mkdir ../server/interview
-      - cd ../server && ls -l
       - cp -R ./dist/client/* ../server/public/
       - cd ../interview/client && npm run build
       - cp -R ./build/* ../../server/interview
