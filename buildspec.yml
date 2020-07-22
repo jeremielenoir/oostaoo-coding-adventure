@@ -1,10 +1,8 @@
 version: 0.2
-
 env:
   variables:
     JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
     NODE_OPTIONS: "--max_old_space_size=8192"
-    
 phases:
   install:
     runtime-versions:
@@ -30,14 +28,14 @@ phases:
       - echo $NODE_OPTIONS
       - cd ./client 
       - yarn run build
-      
-      #- yarn run build-i18n:en
-      #- yarn run build-i18n:es
-      #- yarn run build-i18n:fr
-      #- yarn run build-i18n:jp
-      
+      - yarn run build-i18n:en
+      - yarn run build-i18n:es
+      - yarn run build-i18n:fr
+      - yarn run build-i18n:jp
       - mkdir ../server/public
       - mkdir ../server/interview
+      - mkdir ../interview-server
+      - cp -R ../interview/server/* ../interview-server
       - cp -R ./dist/client/* ../server/public/
       - cd ../interview/client && npm run build
       - cp -R ./build/* ../../server/interview
@@ -47,10 +45,11 @@ phases:
     commands:
       - echo Entered the post_build phase...
       - echo Build completed on `date`
-
 artifacts:
   files:
+    - 'interview-server/*'
     - 'server/**/*'
     - 'scripts/**/*'
     - 'appspec.yml'
   name: roodeo
+
