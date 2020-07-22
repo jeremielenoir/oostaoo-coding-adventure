@@ -99,8 +99,8 @@ import { ProfilesComponent } from './components/home/profiles/profiles.component
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { OffersComponent } from './components/home/offers/offers.component';
 import { HomeOffersComponent } from './components/home/home-offers/home-offers.component';
-import { RapportDetailleHomeComponent, RapportDetailleExempleComponent} from './components/home/rapport-detaille/rapport-detaille.component';
-import {SelectedLanguageService} from './services/selected-language.service'
+import { RapportDetailleHomeComponent, RapportDetailleExempleComponent } from './components/home/rapport-detaille/rapport-detaille.component';
+import { SelectedLanguageService } from './services/selected-language.service'
 import { FonctionnaliteComponent } from './components/home/fonctionnalite/fonctionnalite.component';
 import { StripePaymentComponent } from './components/home/stripe-payment/stripe-payment.component';
 import { RapportDetailleComponent } from './components/panelAdmin/edit-campagne/candidats/rapport-detaille/rapport-detaille.component';
@@ -133,14 +133,14 @@ import { SearchPipe } from './pipe/search.pipe';
 import { AddressComponent } from './components/address/address.component';
 import { CreditcardComponent } from './components/creditcard/creditcard.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { MatProgressBarModule } from '@angular/material';
+import { MatProgressBarModule, MatNativeDateModule, MatDatepickerModule } from '@angular/material';
 import { QuestionsComponent } from './components/questions/questions.component';
 import { TimeagoComponent } from './components/timeago/timeago.component';
 import { InterviewDialogComponent } from './components/panelAdmin/edit-campagne/candidats/interview-dialog/interview-dialog.component';
 
 export class MyIntl extends TimeagoIntl {
-   
-  }
+
+}
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -274,11 +274,15 @@ export class MyIntl extends TimeagoIntl {
     NgxCaptchaModule,
     MarkdownModule.forRoot(),
     MonacoEditorModule.forRoot(),
+
+    MatDatepickerModule, 
+    MatNativeDateModule,
+    
     TimeagoModule.forRoot({
       intl: { provide: TimeagoIntl, useClass: MyIntl },
       formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
     }),
-   
+
     CKEditorModule,
     MatProgressBarModule
   ],
@@ -293,4 +297,4 @@ export class MyIntl extends TimeagoIntl {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

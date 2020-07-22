@@ -1,14 +1,28 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ApiClientService, API_URI_INTERVIEWS, API_URI_USER } from 'src/app/api-client/api-client.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import * as moment from "moment"
+
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import * as _moment from 'moment';
+//@ts-ignore 
+import { default as _rollupMoment } from 'moment';
+
+const moment = _rollupMoment || _moment;
 @Component({
   selector: 'app-interview-dialog',
   templateUrl: './interview-dialog.component.html',
-  styleUrls: ['./interview-dialog.component.scss']
+  styleUrls: ['./interview-dialog.component.scss'],
+  providers: [
+    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
+    // `MatMomentDateModule` in your applications root module. We provide it at the component level
+    // here, due to limitations of our example generation script.
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+  ],
 })
 export class InterviewDialogComponent implements OnInit {
 
@@ -19,6 +33,8 @@ export class InterviewDialogComponent implements OnInit {
   public htmlContent: any;
   public subject: string;
   public Editor = ClassicEditor;
+  public interview_link: string = "https://spwrtc.osc-fr1.scalingo.io/"
+  public currentDate: any = new Date().toISOString()
   errors = null;
   results = null;
   public show: any = true;
@@ -42,12 +58,13 @@ export class InterviewDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("interview data", this.data)
     if (this.userToken && this.userToken.userId) {
       this.apiClientService
         .get(API_URI_USER + '/' + this.userToken.userId)
         .subscribe(user => {
           this.currentUser = user;
-          console.log("user", user)
+
 
         });
     }
@@ -55,28 +72,39 @@ export class InterviewDialogComponent implements OnInit {
     this.htmlContent = `
     <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.data.Candidats},</span><br>
     </div><div><span style="background-color: transparent; font-size: 1rem;"><br></span></div>
-    <div>Votre candidature a retenu notre attention suitre aux résultats des tests techniques.</div><div>Dans le cadre de notre processus
+    <div>Votre candidature a retenu notre attention suite aux résultats des tests techniques.</div><div>Dans le cadre de notre processus
     de recrutement,nous avons le plaisir de vous inviter à passer un entretien vidéo conférence</div>
    <div>
-    <a href="http://${window.location.host}/evaluate/..." target="_blank" style="font-size: 1rem;">
-    http://${window.location.host}/evaluate/...</a></div>
+    <a href="${this.interview_link}" target="_blank" style="font-size: 1rem;">
+   ${this.interview_link}</a></div>
     <div><br></div><div><br></div>
     <div>Bonne chance !</div><div>Cordialement </div>
  `;
-    if (this.data && this.data.interview && this.data.interview.id) {
-      const apiURL = API_URI_INTERVIEWS + "/" + this.data.interview.id;
+    if (this.data && this.data.Interview && this.data.Interview.id) {
+      const apiURL = API_URI_INTERVIEWS + "/" + this.data.Interview.id;
+
       return this.apiClientService
         .get(apiURL)
         .toPromise()
         .then((res) => {
+
           if (res) {
             this.interview = res;
+            this.interview_link = res.interview_link;
+            //res.interview_date
             this.populateForm = this.formBuilder.group({
-              interview_date: [this.interview.interview_date, Validators.required],
+              interview_date: [
+                //     moment(new Date(this.interview.interview_date)).format("YYYY/MM/DD HH:mm:ss")
+                // moment(new Date(this.interview.interview_date)),
+                moment(this.interview.interview_date)
+                , Validators.required],
               email: [this.interview.candidats[0].email, Validators.required],
               name: [this.interview.candidats[0].Nom, Validators.required],
+              interview_link: [this.interview.interview_link, Validators.required],
+              htmlContent: [this.interview.email_content, Validators.required],
 
             });
+            console.log("his.populateForm ", this.populateForm)
           }
 
         }
@@ -90,6 +118,7 @@ export class InterviewDialogComponent implements OnInit {
         email: [this.data.Email, Validators.required],
         name: [this.data.Candidats, Validators.required],
         htmlContent: [this.htmlContent, Validators.required],
+        interview_link: [this.interview_link, Validators.required]
 
       });
 
@@ -98,8 +127,8 @@ export class InterviewDialogComponent implements OnInit {
 
 
   save() {
-    if (this.data && this.data.interview && this.data.interview.id) {
-      const id = this.data.interview.id
+    if (this.data && this.data.Interview && this.data.Interview.id) {
+      const id = this.data.Interview.id
       const apiURL = API_URI_INTERVIEWS + "/" + id;
 
       const data: any = {
@@ -107,14 +136,15 @@ export class InterviewDialogComponent implements OnInit {
         interview_date: this.pctrl.interview_date.value,
         candidats: [{ id: this.data.candidat_id }],
         user: { id: this.userToken.userId, email: this.currentUser.email },
-        /*  email_title: this.subject,
-         email_content: this.htmlContent, */
+        interview_link: this.interview_link,
+        email_title: this.subject,
+        email_content: this.pctrl.htmlContent.value,
 
       }
       return this.apiClientService
         .put(apiURL, data)
         .toPromise()
-        .then((res) => {
+        .then(() => {
           this.close()
 
         }
@@ -129,11 +159,12 @@ export class InterviewDialogComponent implements OnInit {
         user: { id: this.userToken.userId, email: this.currentUser.email },
         email_title: this.subject,
         email_content: this.htmlContent,
+        interview_link: this.interview_link
       }
       return this.apiClientService
         .post(apiURL, data)
         .toPromise()
-        .then((res) => {
+        .then(() => {
           this.close()
 
         }

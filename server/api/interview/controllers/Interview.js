@@ -64,37 +64,49 @@ module.exports = {
         user,
         email_title,
         email_content,
+        interview_link,
       } = ctx.request.body;
 
-      const interview = await strapi.services.candidat.add({
+      const interview = await strapi.services.interview.add({
         candidats,
-        user,
+        users: [{ id: user.id }],
         interview_date,
       });
 
+      const interview_id = interview.attributes.id;
       const cryptoData = crypto
         .createHash("md5")
-        .update(interview.id)
+        .update(interview_id.toString())
         .digest("hex");
-
-      let getEmail_message_crypto = email_content.replace(
-        "...",
-        "?id=" + cryptoData //or iplocal replace localhost
+      const link = `${interview_link}?id=${cryptoData}`;
+      const getEmail_message_crypto = email_content.replace(
+        interview_link,
+        link //or iplocal replace localhost
       );
 
-      
- 
       const options = {
-        to: [candidats.email, user.email],
+        to: [candidats.email, user.email, "diop.amadou@oostaoo.com"],
         from: "chagnon.maxime@oostaoo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
         html: getEmail_message_crypto,
       };
-      await transporter.sendMail(options);
-      return interview;
+
+      const [_, updated] = await Promise.all([
+        transporter.sendMail(options),
+        strapi.services.interview.edit(
+          {
+            id: interview.attributes.id,
+            email_content: getEmail_message_crypto,
+          },
+          {
+            interview_link: link,
+          }
+        ),
+      ]);
+      return updated;
     } catch (e) {
-        console.log("error create interview", e);
+      console.log("error creating interview", e);
       throw e;
     }
   },
@@ -106,7 +118,49 @@ module.exports = {
    */
 
   update: async (ctx, next) => {
-    return strapi.services.interview.edit(ctx.params, ctx.request.body);
+    try {
+      console.log("ctx.request.body",ctx.request.body)
+      const {
+        interview_date,
+        candidats,
+        user,
+        email_title,
+        email_content,
+        interview_link,
+      } = ctx.request.body;
+      const cryptoData = crypto
+        .createHash("md5")
+        .update(ctx.params.id.toString().toString())
+        .digest("hex");
+      const link = `${interview_link}?id=${cryptoData}`;
+      const getEmail_message_crypto = email_content.replace(
+        interview_link,
+        link //or iplocal replace localhost
+      );
+
+      const options = {
+        to: [candidats.email, user.email, "diop.amadou@oostaoo.com","hamdoun.ismael@oostaoo.com"],
+        from: "chagnon.maxime@oostaoo.com",
+        replyTo: "no-reply@strapi.io",
+        subject: email_title,
+        html: getEmail_message_crypto,
+      };
+      const updatedData = {
+        /*   candidats,
+        users: [{ id: user.id }], */
+        interview_date,
+        interview_link: link,
+        email_content: getEmail_message_crypto,
+      };
+      const [_, updated] = await Promise.all([
+        transporter.sendMail(options),
+        strapi.services.interview.edit(ctx.params, updatedData),
+      ]);
+
+      return updated;
+    } catch (error) {
+      throw error;
+    }
   },
 
   /**
