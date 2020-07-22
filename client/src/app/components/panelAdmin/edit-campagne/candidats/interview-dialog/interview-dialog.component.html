@@ -1,63 +1,53 @@
 <div class="loading" *ngIf="!populateForm"></div>
 <div class="modal-candidat" *ngIf="populateForm">
+  
   <div class="close-invite-dialog">
     <span (click)="close()"> <i class="fa fa-times" aria-hidden="true"></i></span>
   </div>
-  <header class="header-question">
 
-    <span class="rond-custom">1</span>
+  <header class="header-question">
     <div class="info-campaign-candidats">
       <h2 i18n>Création Entretien Vidéo</h2>
-
-
     </div>
   </header>
 
   <div class="content-modal-question">
     <div class="cologne-form">
       <form [formGroup]="populateForm">
+        
         <span class="card-form">{{populateForm.controls['name'].value}} {{populateForm.controls['email'].value}}</span>
         <div class="card-body">
-
-          <!--    <mat-form-field class="card-form">
-            <mat-label>Date Entretien</mat-label>
-            <input matInput type="datetime-local" [value]="populateForm.controls['interview_date'].value" formControlName="interview_date" name="interview_date">
-          </mat-form-field> -->
-
-          <mat-form-field class="card-form">
+          <!--mat-form-field class="card-form">
             <mat-label>Date Entretien</mat-label>
             <input type="datetime-local" formControlName="interview_date" matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <!-- <mat-datepicker touchUi="true" #picker></mat-datepicker> -->
+          </mat-form-field-->
+
+          <mat-form-field appearance="outline" [color]="'accent'">
+            <mat-label i18n>Choisir une date pour l'entretien</mat-label>
+            <input formControlName="interview_date" matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-          <!-- <div class="card-form">
-            <label>Nom*</label>
-            <input formControlName="name" type="text" />
-          </div>
-
-          <div class="card-form">
-            <label>Email*</label>
-            <input formControlName="email" type="text" required />
-          </div> -->
-
-
+          
         </div>
 
         <div [class.message-personaliser-form]="show">
 
-          <label>Message :</label>
+          <label i18n>Message :</label>
 
           <ckeditor [editor]="Editor" formControlName="htmlContent" *ngIf="show"></ckeditor>
           <div *ngIf="!show" [innerHTML]="htmlContent" class="htmlContent"></div>
         </div>
 
 
-        <div class="block-button">
-          <button (click)="save()" type="submit">
-            ENVOYER EMAIL
+        <div class="block-button roodeo-dark-theme">
+          <button mat-raised-button [color]="'primary'" (click)="save()" i18n>
+            Envoyer email
           </button>
 
         </div>
+        
       </form>
     </div>
 

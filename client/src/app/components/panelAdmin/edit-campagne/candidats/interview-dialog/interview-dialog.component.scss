@@ -1,3 +1,18 @@
-@import"../invite-candidat.scss";
-@import"../../candidats-form/candidats-form.component.scss";
- 
+@import"../../../../../../roodeo-variables.scss";
+@import '~@angular/material/theming';
+
+.close-invite-dialog{
+    float:right;
+    color: mat-color($mat-red);
+    margin-top:0px;
+    cursor: pointer;
+
+    span{
+      color: mat-color($mat-red);
+
+    }
+  }
+
+  .block-button{
+      margin-top: 10px;
+  }
