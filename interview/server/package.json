@@ -11,7 +11,7 @@
   "scripts": {
     "build": "webpack-cli --mode development",
     "build-prod": "webpack --mode production",
-    "start": "npx nodemon server.js"
+    "start": "npx nodemon index.js"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
