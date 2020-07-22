@@ -32,6 +32,10 @@
     "interview_link": {
       "default": "",
       "type": "string"
+    },
+    "email_content": {
+      "default": "",
+      "type": "text"
     }
   }
 }

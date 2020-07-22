@@ -19,6 +19,16 @@
 .info-candi{
   padding:9px 5px;
 }
+span.fa.fa-info-circle.interviewIcon{
+  color: $color-orange;
+}
+span.interviewIcon.ng-star-inserted{
+  color: $color-orange;
+  font-size: 12px;
+}
+button.mat-sort-header-button{
+  font-size: 13px;
+}
 .border1pxdashedgray-candidat {
   border-radius: $border-radius;
 }
@@ -217,9 +227,11 @@ th.mat-header-cell:first-of-type {
   // padding-left: 12px!important;
   // border-left: 1px solid $color-principal-blue !important;
   text-align: center !important;
+  font-size: 13px;
 }
 .mat-cell:first-child {
   text-align: left !important;
+  font-size: 12px !important;
 }
 .mat-cell {
   border-right: 1px solid $color-principal-blue !important;

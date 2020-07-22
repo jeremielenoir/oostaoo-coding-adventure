@@ -3,6 +3,8 @@ os: linux
 files:
   - source: ./server
     destination: /home/ec2-user/roodeo
+  - source: ./interview-server
+    destination: /home/ec2-user/interview-roodeo
 hooks:
   BeforeInstall:
     - location: scripts/install_node_modules.sh

@@ -140,10 +140,8 @@
             <!-- Item Column -->
 
             <ng-container *ngFor="let column of displayedColumns; let i = index;" [matColumnDef]="column">
-              <div *ngIf="column === 'Interview'">
-                Interview
-              </div>
-              <div *ngIf="column === 'Details'"></div>
+
+
 
               <!-- CHANGE COLUMN FOR CHECKBOX -->
               <div *ngIf="column === 'Checked'">
@@ -164,6 +162,10 @@
                   </div>
                 </td>
               </div>
+              <div *ngIf="column === 'Details'"></div>
+              <div *ngIf="column === 'Interview'">
+                Interview
+              </div>
 
               <div class="color-text">
 
@@ -182,8 +184,9 @@
                     {{ column }}
                   </th>
                   <td mat-cell *matCellDef="let dataInfos">
-                   
-                    <span (click)="menuSidenav(sidenav, dataInfos)" class="fa fa-info-circle" aria-hidden="true" style="color:orangered"></span>
+
+                    <span (click)="menuSidenav(sidenav, dataInfos)" class="fa fa-info-circle interviewIcon"
+                      aria-hidden="true"></span>
                   </td>
                 </div>
                 <div *ngIf="column =='Interview' ">
@@ -191,9 +194,11 @@
                     {{ column }}
                   </th>
                   <td mat-cell *matCellDef="let dataInfos">
-                   
-                    <span class="fa fa-video-camera" aria-hidden="true" style="color:orangered"></span>
 
+                    <span *ngIf="!dataInfos.Interview.id" (click)="openInterviewDialog(dataInfos)"
+                      class="fa fa-video-camera interviewIcon" aria-hidden="true"></span>
+                    <span *ngIf="dataInfos.Interview.interview_date" (click)="openInterviewDialog(dataInfos)"
+                      class="interviewIcon">{{dataInfos.Interview.interview_date}}</span>
                   </td>
                 </div>
 
@@ -217,7 +222,7 @@
                   {{ dataInfos[column] }}
                 </td>
 
-                
+
               </div>
 
 
