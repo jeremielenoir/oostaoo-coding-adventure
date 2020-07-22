@@ -13,6 +13,8 @@ phases:
       - echo Entered the install phase...
       - npm install yarn -g
       - cd client && yarn install
+      - echo Trouver ou nous sommes
+      - echo ls
       - cd ../Interview/client && npm install
     finally:
       - echo This always runs even if the update or install command fails 
