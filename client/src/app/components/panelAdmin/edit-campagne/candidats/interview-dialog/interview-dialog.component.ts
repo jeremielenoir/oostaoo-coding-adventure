@@ -94,9 +94,8 @@ export class InterviewDialogComponent implements OnInit {
             //res.interview_date
             this.populateForm = this.formBuilder.group({
               interview_date: [
-                //     moment(new Date(this.interview.interview_date)).format("YYYY/MM/DD HH:mm:ss")
-                // moment(new Date(this.interview.interview_date)),
-                moment(this.interview.interview_date)
+                new Date(this.interview.interview_date)
+                // moment(this.interview.interview_date).format("yyyy-MM-ddThh:mm")
                 , Validators.required],
               email: [this.interview.candidats[0].email, Validators.required],
               name: [this.interview.candidats[0].Nom, Validators.required],

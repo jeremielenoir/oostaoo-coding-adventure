@@ -411,7 +411,7 @@ export class CandidatsComponent implements OnInit {
               ? candidat.raport_candidat.rapport
               : null,
             points: candidat.points_candidat,
-            Interview: { ...candidat.interview, interview_date: moment(candidat.interview.interview_date).lang("fr").format("dddd, MMMM Do YYYY, HH:mm") },
+            Interview: { ...candidat.interview, interview_date:candidat.interview.interview_date ? moment(candidat.interview.interview_date).lang("fr").format("dddd, MMMM Do YYYY, HH:mm"):null },
             date: candidat.test_ouvert,
             ...candidat.getpourcentByCandidat,
 
