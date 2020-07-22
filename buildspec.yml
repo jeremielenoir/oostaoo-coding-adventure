@@ -13,6 +13,7 @@ phases:
       - echo Entered the install phase...
       - npm install yarn -g
       - cd client && yarn install
+      - cd ../Interview/client && npm install
     finally:
       - echo This always runs even if the update or install command fails 
   pre_build:
@@ -26,7 +27,7 @@ phases:
       - echo Build started on `date`
       - export NODE_OPTIONS=--max_old_space_size=8192
       - echo $NODE_OPTIONS
-      - cd ../client && yarn run build
+      #- cd ../client && yarn run build
       
       #- yarn run build-i18n:en
       #- yarn run build-i18n:es
@@ -35,6 +36,8 @@ phases:
       - mkdir ../server/public
       - mkdir ../server/interview
       - cp -R ./dist/client/* ../server/public/
+      - echo Trouver l'erreur
+      - echo ls
       - cd ../Interview/client && npm run build
       - cp -R ./build/* ../../server/interview
     finally:
