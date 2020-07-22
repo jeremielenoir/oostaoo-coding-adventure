@@ -10,7 +10,7 @@
     <div class="campaign-param-container">
     
         
-      <div class="campaign-param">
+      <div class="campaign-param roodeo-dark-theme first">
 
         <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" [formGroup]="formCampagne" class="fullWidth">
           <mat-label>Nom du test d'evaluation</mat-label>
@@ -29,7 +29,7 @@
 
   
     <div class="campaign-param">
-      <div class=" cog-test">
+      <div class="cog-test first">
         <label
           for="nomDeCampagne"
           [ngStyle]="errorNomCampgane ? { color: 'red' } : null"
@@ -37,7 +37,7 @@
           En quelle langue les questions doivent-elles être posées à vos
           candidats ?
         </label>
-        <div class="example-radio-button">
+        <div class="container-radio-button">
           <mat-radio-group [(ngModel)]="selectedLangue">
             <mat-radio-button value="FR">
               FR
@@ -65,7 +65,7 @@
               Voulez-vous empêcher l'utilisation du copier/coller pendant le test ?
               
               </label>
-              <div class="example-radio-button" [formGroup]="formCampagne">
+              <div class="container-radio-button" [formGroup]="formCampagne">
                 <mat-radio-group formControlName="utilisationCopieColler">
                   <mat-radio-button value="true">
                     Oui
@@ -89,7 +89,7 @@
                 Souhaitez-vous envoyer le rapport simplifié au candidat à l'issue de
                 son test ?
               </label>
-              <div class="example-radio-button" [formGroup]="formCampagne">
+              <div class="container-radio-button" [formGroup]="formCampagne">
                 <mat-radio-group formControlName="envoiRapportSimplifie">
                   <mat-radio-button value="true">
                     Oui

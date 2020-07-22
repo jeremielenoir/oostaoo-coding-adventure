@@ -1,5 +1,11 @@
 @import"../../../../../roodeo-variables.scss";
 
+//material first ever
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
+
 
 .header-new-campagne {
     border-bottom: $border-table;
@@ -26,11 +32,18 @@
 
   .campaign-param-container{
     padding: 10px 60px;
+    color: $primary-text;
     .campaign-param{
+        &.first{
+            margin-top: 10px;
+        }
         label{
             font-weight: 800;
         }
     }
+  }
+  .container-radio-button{
+      margin-top: 10px;
   }
   
   
@@ -114,45 +127,12 @@
     width: 30%;
 }
 
-
-
-// :host ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
-//     // background-color: $color-gold!important;
-//     /*inner circle color change*/
-// }
-
-// :host ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-//     border-color: $color-gold!important;
-//     /*outer ring color change*/
-// }
-
-:host ::ng-deep .mat-radio-button {
-    margin-right: 8px!important
-}
-
-
-
-:host ::ng-deep .mat-form-field-flex {
-    /*display: inline-flex;
-    align-items: baseline;
-    box-sizing: border-box;
-    width: 100%;
-    border: 1px solid $color-white;
-    height: 60px;
-    padding: 0px 10px 10px;
-    margin-top: 15px;
-    margin-left: 11px!important;*/
-
-}
-
-
-:host ::ng-deep .mat-button-wrapper {
-    padding: 20px;
-}
-
 .cog-test{
     margin-top: 30px;
-    margin-left: 10px;
+    
+    &.first{
+        margin-top: 0px;
+    }
 }
 
 @media screen and (min-width:768px) and (max-width:959px) {

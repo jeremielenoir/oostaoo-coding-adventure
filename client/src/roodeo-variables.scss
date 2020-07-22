@@ -103,6 +103,27 @@ $mat-roodeo-accent: (
   )
 );
 
+@function mat-roodeo-theme-foreground($color) {
+  @return (
+      base:              $color,
+      divider:           $black-12-opacity,
+      dividers:          $black-12-opacity,
+      disabled:          rgba($color, 0.38),
+      disabled-button:   rgba($color, 0.38),
+      disabled-text:     rgba($color, 0.38),
+      hint-text:         rgba($color, 0.38),
+      secondary-text:    rgba($color, 0.54),
+      icon:              rgba($color, 0.54),
+      icons:             rgba($color, 0.54),
+      text:              rgba($color, 0.87),
+      slider-off:        rgba($color, 0.26),
+      slider-off-active: rgba($color, 0.38),
+      slider-min: rgba($color, 0.38)
+  );
+};
+
+
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
@@ -126,3 +147,8 @@ $roodeo-app-theme-dark: mat-light-theme(
     $roodeo-app-accent,
     $roodeo-app-warn
 );
+
+$roodeo-foreground: mat-roodeo-theme-foreground($color-principal-blue);
+
+$primary-text: mat-color($roodeo-foreground, base);
+
