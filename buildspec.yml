@@ -37,8 +37,8 @@ phases:
       #- yarn run build-i18n:jp
       
       - mkdir ../server/public
-      - ls -l
       - mkdir ../server/interview
+      - cd ../server && ls -l
       - cp -R ./dist/client/* ../server/public/
       - cd ../interview/client && npm run build
       - cp -R ./build/* ../../server/interview
