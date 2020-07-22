@@ -197,7 +197,7 @@
 
                     <span *ngIf="!dataInfos.Interview.id" (click)="openInterviewDialog(dataInfos)"
                       class="fa fa-video-camera interviewIcon" aria-hidden="true"></span>
-                    <span *ngIf="dataInfos.Interview" (click)="openInterviewDialog(dataInfos)"
+                    <span *ngIf="dataInfos.Interview.interview_date" (click)="openInterviewDialog(dataInfos)"
                       class="interviewIcon">{{dataInfos.Interview.interview_date}}</span>
                   </td>
                 </div>
