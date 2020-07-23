@@ -18,6 +18,29 @@ import {
 import { HttpClient } from "@angular/common/http";
 import { saveAs } from "file-saver";
 import { getResultsDefinition } from "./getResultsDefinition";
+import { InterviewDialogComponent } from './interview-dialog/interview-dialog.component';
+import * as moment from "moment"
+//import pdfMake from "pdfmake/build/pdfmake";
+// font build has to be committed otherwise each developers has to build font locally.
+// import pdfFonts from 'pdfmake/build/vfs_fonts';
+//import pdfFonts from '../../../../../assets/pdfmake-font-builds/vfs_fonts';
+
+//pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+/*pdfMake.fonts = {
+  FontAwesome: {
+    normal: "fontawesome-webfont.ttf",
+    bold: "fontawesome-webfont.ttf",
+    italics: "fontawesome-webfont.ttf",
+    bolditalics: "fontawesome-webfont.ttf",
+  },
+  Roboto: {
+    normal: "Roboto-Regular.ttf",
+    bold: "Roboto-Medium.ttf",
+    italics: "Roboto-Italic.ttf",
+    bolditalics: "Roboto-MediumItalic.ttf",
+  },
+};*/
 
 @Component({
   selector: "app-candidats",
@@ -94,13 +117,19 @@ export class CandidatsComponent implements OnInit {
       });
     });
   }
-
+  openInterviewDialog(data) {
+    //console.log("data candidat ====toto", data)
+    this.dialog.open(InterviewDialogComponent, {
+      data,
+      height: '580px'
+    });
+  }
   ngOnInit() {
     this.tests_available = this.DecryptTokenService.tests_available;
     if (this.tests_available == -1) {
       this.tests_available = "";
     }
-    
+
 
     this.getCampaign().then((datas) => {
       this.campaign = datas;
@@ -159,7 +188,7 @@ export class CandidatsComponent implements OnInit {
       this.nbrSelectedElementChecked
     );
   }
-  activedCheck() {}
+  activedCheck() { }
   checkSeveralIdDelete() {
     if (this.nbrSelectedElementChecked.length > 1) {
       this.nbrSelectedElementChecked.forEach((idDelete) => {
@@ -278,12 +307,12 @@ export class CandidatsComponent implements OnInit {
 
               const percentArray =
                 points_candidat &&
-                points_candidat.length &&
-                points_candidat[2] &&
-                points_candidat[2]["getpourcentByCandidat"]
+                  points_candidat.length &&
+                  points_candidat[2] &&
+                  points_candidat[2]["getpourcentByCandidat"]
                   ? points_candidat[2]["getpourcentByCandidat"].map(
-                      (a) => a.percentage
-                    )
+                    (a) => a.percentage
+                  )
                   : [];
 
               const sumPercent =
@@ -302,7 +331,7 @@ export class CandidatsComponent implements OnInit {
             return { ...candidat, status: false };
           });
 
-          
+
           this.technologies = res.technologies;
 
           if (this.campaigns.candidats.length > 0) {
@@ -326,7 +355,7 @@ export class CandidatsComponent implements OnInit {
           "Candidats",
           "Dernière activité",
           "Score",
-         
+
         ];
         const getInfoCandidat = [];
         let dateInvite;
@@ -348,14 +377,14 @@ export class CandidatsComponent implements OnInit {
           } else {
             duree = 0;
           }
-          console.log('CANDIDAT TERMINER', candidat.test_terminer);
+          //   console.log('CANDIDAT TERMINER', candidat.test_terminer);
           if (candidat.test_terminer === '0000-00-00 00:00:00') {
             dateInvite = new Date(candidat.invitation_date);
             percentCandidat = 0 + "%";
           } else {
             dateInvite = new Date(candidat.test_terminer);
             // console.log('candidat.points_candidat[5].PourcentTest: ', candidat.points_candidat[5].PourcentTest);
-            
+
             if (
               !candidat.points_candidat ||
               !candidat.points_candidat[5] ||
@@ -363,11 +392,11 @@ export class CandidatsComponent implements OnInit {
               candidat.points_candidat[5].PourcentTest === null
             ) {
               percentCandidat = 0 + "%";
-            }else{
+            } else {
               percentCandidat = candidat.points_candidat[5].PourcentTest + "%";
             }
           }
-
+          //console.log("candidat ===============",candidat)
           getInfoCandidat.push({
             candidat_id: candidat.id,
             Candidats: candidat.Nom,
@@ -382,10 +411,10 @@ export class CandidatsComponent implements OnInit {
               ? candidat.raport_candidat.rapport
               : null,
             points: candidat.points_candidat,
-            Interview:"https://spwrtc.osc-fr1.scalingo.io/",
+            Interview: { ...candidat.interview, interview_date:candidat.interview.interview_date ? moment(candidat.interview.interview_date).lang("fr").format("dddd, MMMM Do YYYY, HH:mm"):null },
             date: candidat.test_ouvert,
             ...candidat.getpourcentByCandidat,
-           
+
           });
         }
         return getInfoCandidat;

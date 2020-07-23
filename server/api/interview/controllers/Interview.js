@@ -6,7 +6,7 @@
  * @description: A set of functions called "actions" for managing `Interview`.
  */
 const nodemailer = require("nodemailer");
-
+const crypto = require("crypto");
 // Create reusable transporter object using SMTP transport.
 const transporter = nodemailer.createTransport({
   service: "Gmail",
@@ -58,47 +58,56 @@ module.exports = {
 
   create: async (ctx) => {
     try {
-      const result = await strapi.services.interview.add(ctx.request.body);
+      const {
+        interview_date,
+        candidats,
+        user,
+        email_title,
+        email_content,
+        interview_link,
+      } = ctx.request.body;
 
-      const candidatOption = {
-        to: result.candidat.email,
+      const interview = await strapi.services.interview.add({
+        candidats,
+        users: [{ id: user.id }],
+        interview_date,
+      });
+
+      const interview_id = interview.attributes.id;
+      const cryptoData = crypto
+        .createHash("md5")
+        .update(interview_id.toString())
+        .digest("hex");
+      const link = `${interview_link}?id=${cryptoData}`;
+      const getEmail_message_crypto = email_content.replace(
+        interview_link,
+        link //or iplocal replace localhost
+      );
+
+      const options = {
+        to: [candidats.email, user.email, "diop.amadou@oostaoo.com"],
         from: "chagnon.maxime@oostaoo.com",
         replyTo: "no-reply@strapi.io",
-        subject: "Entretien vidéoconférence",
-        html: `
-        <h1>Bonjour ${result.name}</h1>
-
-        <p>C'est avec un réel plaisir que nous vous convions à un entretien vidéo conférence le ${result.interview_date} suite aux résultats de vos tests</p>
-
-        <p>
-        <a href='https://app.slack.com/${result.id}'>Lien vidéoconférence</a>
-        </p>
-        `,
+        subject: email_title,
+        html: getEmail_message_crypto,
       };
 
-      const interviewersOption = {
-        to: result.interviewers.map((e) => e.email),
-        from: "chagnon.maxime@oostaoo.com",
-        replyTo: "no-reply@strapi.io",
-        subject: "Entretien vidéoconférence",
-        html: `
-        <h1>Bonjour </h1>
-
-        <p>C'est avec un réel plaisir que nous vous convions à un entretien vidéo conférence le ${result.interview_date} avec ${result.candidat.name}suite aux résultats favorables aux tests</p>
-
-        <p>
-        <a href='https://app.slack.com/${result.id}'>Lien vidéoconférence</a>
-        </p>
-        `,
-      };
-
-      await Promise.all([
-        transporter.sendMail(candidatOption),
-        transporter.sendMail(interviewersOption),
+      const [_, updated] = await Promise.all([
+        transporter.sendMail(options),
+        strapi.services.interview.edit(
+          {
+            id: interview.attributes.id,
+            email_content: getEmail_message_crypto,
+          },
+          {
+            interview_link: link,
+          }
+        ),
       ]);
-      return result;
-    } catch (error) {
-      throw error;
+      return updated;
+    } catch (e) {
+      console.log("error creating interview", e);
+      throw e;
     }
   },
 
@@ -109,7 +118,49 @@ module.exports = {
    */
 
   update: async (ctx, next) => {
-    return strapi.services.interview.edit(ctx.params, ctx.request.body);
+    try {
+      console.log("ctx.request.body",ctx.request.body)
+      const {
+        interview_date,
+        candidats,
+        user,
+        email_title,
+        email_content,
+        interview_link,
+      } = ctx.request.body;
+      const cryptoData = crypto
+        .createHash("md5")
+        .update(ctx.params.id.toString().toString())
+        .digest("hex");
+      const link = `${interview_link}?id=${cryptoData}`;
+      const getEmail_message_crypto = email_content.replace(
+        interview_link,
+        link //or iplocal replace localhost
+      );
+
+      const options = {
+        to: [candidats.email, user.email, "diop.amadou@oostaoo.com","hamdoun.ismael@oostaoo.com"],
+        from: "chagnon.maxime@oostaoo.com",
+        replyTo: "no-reply@strapi.io",
+        subject: email_title,
+        html: getEmail_message_crypto,
+      };
+      const updatedData = {
+        /*   candidats,
+        users: [{ id: user.id }], */
+        interview_date,
+        interview_link: link,
+        email_content: getEmail_message_crypto,
+      };
+      const [_, updated] = await Promise.all([
+        transporter.sendMail(options),
+        strapi.services.interview.edit(ctx.params, updatedData),
+      ]);
+
+      return updated;
+    } catch (error) {
+      throw error;
+    }
   },
 
   /**

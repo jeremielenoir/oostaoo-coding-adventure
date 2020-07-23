@@ -39,7 +39,6 @@ export class QuestionsComponent implements OnInit {
       .get(query)
       .toPromise()
       .then((results ) => {
-        console.log("results",results)
         this.errors = null;
         this.results = results
         this.submittedPopulate = false;

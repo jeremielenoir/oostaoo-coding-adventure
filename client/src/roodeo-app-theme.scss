@@ -12,8 +12,11 @@
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($roodeo-app-theme);
+
+
+
+@include angular-material-theme(map-merge($roodeo-app-theme, (foreground: $roodeo-foreground)));
 
 .roodeo-dark-theme{
-    @include angular-material-theme($roodeo-app-theme-dark);
+    @include angular-material-theme(map-merge($roodeo-app-theme-dark, (foreground: $roodeo-foreground)));
 }
