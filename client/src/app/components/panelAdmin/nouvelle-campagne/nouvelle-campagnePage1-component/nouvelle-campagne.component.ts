@@ -6,7 +6,7 @@ import {
   API_URI_TECHNO,
   API_URI_PROFILES
 } from "../../../../api-client/api-client.service";
-import { MatSelectChange } from "@angular/material";
+import { MatSelectChange, TooltipPosition } from "@angular/material";
 import {SelectedLanguageService} from '../../../../services/selected-language.service';
 import { LanguagePipe } from 'ngx-markdown';
 

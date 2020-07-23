@@ -5,7 +5,9 @@
     margin-left: 16px;
 }
 
-
+.finalQuestion {
+    margin-bottom: 30px;
+  }
 
 .header-new-campagne {
     border-bottom: $border-table;
@@ -30,6 +32,52 @@
     }
   }
 
+  .container-next{
+    float: right;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #fff;
+    background: mat-color($roodeo-app-primary, 800);
+    border-radius: 19px;
+    cursor: pointer;
+  
+    .next-button{
+      background-color: #0c6192 !important;
+      position: relative;
+      right: -1px;
+    }
+    .button-text{
+      font-size: 14px;
+      margin-right: 10px;
+      margin-left: 20px;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+
+  .container-previous{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #fff;
+    background: mat-color($roodeo-app-primary, 800);
+    border-radius: 19px;
+    cursor: pointer;
+  
+    .next-button{
+      background-color: #0c6192 !important;
+      position: relative;
+      right: -1px;
+    }
+    .button-text{
+      font-size: 14px;
+      margin-left: 10px;
+      margin-right: 20px;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+  
+
   .campaign-param-container{
     padding: 10px 60px;
     color: $primary-text;
@@ -37,9 +85,7 @@
         &.first{
             margin-top: 10px;
         }
-        label{
-            font-weight: 800;
-        }
+        
     }
   }
   .container-radio-button{
@@ -96,17 +142,6 @@
      
 }
 
-#radio {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-}
-
-#radio p {
-    margin-bottom: 10px;
-     
-}
 
 .button {
     display: flex;
