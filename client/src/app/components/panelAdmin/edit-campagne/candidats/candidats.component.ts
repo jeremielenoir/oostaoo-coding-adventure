@@ -349,9 +349,10 @@ export class CandidatsComponent implements OnInit {
         console.log("data==========", data);
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
         const defaultColumns = [
+          "Checked",
           "Details",
           "Interview",
-          "Checked",
+         
           "Candidats",
           "Dernière activité",
           "Score",

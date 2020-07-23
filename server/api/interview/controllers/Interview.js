@@ -85,7 +85,6 @@ module.exports = {
       );
       const to = [candidats[0].email, user.email];
 
-      console.log("to", to);
       const options = {
         to,
         from: "chagnon.maxime@oostaoo.com",
@@ -108,7 +107,6 @@ module.exports = {
       ]);
       return updated;
     } catch (e) {
-      console.log("error creating interview", e);
       throw e;
     }
   },
@@ -121,7 +119,7 @@ module.exports = {
 
   update: async (ctx, next) => {
     try {
-      console.log("ctx.request.body", ctx.request.body);
+      //console.log("ctx.request.body", ctx.request.body);
       const {
         interview_date,
         candidats,
@@ -141,7 +139,6 @@ module.exports = {
       );
       const to = [candidats[0].email, user.email];
 
-      console.log("to", to);
       const options = {
         to,
         from: "chagnon.maxime@oostaoo.com",
