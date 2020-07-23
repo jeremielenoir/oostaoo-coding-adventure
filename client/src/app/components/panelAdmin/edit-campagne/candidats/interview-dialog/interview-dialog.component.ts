@@ -56,28 +56,19 @@ export class InterviewDialogComponent implements OnInit {
   }
 
   get pctrl() {
+
+    if (!this.populateForm || !this.populateForm.controls) {
+      return null
+    }
     return this.populateForm.controls;
   }
-  getTimeStops(inter, start, end) {
-    const startTime = moment(start, 'HH:mm');
-    const endTime = moment(end, 'HH:mm');
 
-    if (endTime.isBefore(startTime)) {
-      endTime.add(1, 'day');
-    }
-
-    const timeStops = [];
-
-    while (startTime <= endTime) {
-      timeStops.push(new moment(startTime).format('HH:mm'));
-      startTime.add(inter, 'minutes');
-    }
-    return timeStops;
-
+  onValueChanges(): void {
+    this.populateForm.valueChanges.subscribe(val => {
+      console.log("value changed", val);
+    })
   }
   ngOnInit() {
-
-
     for (let hour = 0; hour < 24; hour++) {
       this.times.push(moment({ hour }).format('HH:mm'));
       this.times.push(
@@ -116,19 +107,15 @@ export class InterviewDialogComponent implements OnInit {
 
 
         });
-    }
+    };
+
+
+    const date = this.pctrl && this.pctrl.interview_date && this.pctrl.interview_date.value && this.pctrl.time && this.pctrl.time.value ?
+
+      ` à la date du ${moment(this.pctrl.interview_date.value).format('MM/DD/YYYY')}   ${this.pctrl.time.value}`
+      : ''
     this.subject = `Entretien video conférence`
-    this.htmlContent = `
-    <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.data.Candidats},</span><br>
-    </div><div><span style="background-color: transparent; font-size: 1rem;"><br></span></div>
-    <div>Votre candidature a retenu notre attention suite aux résultats des tests techniques.</div><div>Dans le cadre de notre processus
-    de recrutement,nous avons le plaisir de vous inviter à passer un entretien vidéo conférence</div>
-   <div>
-    <a href="${this.interview_link}" target="_blank" style="font-size: 1rem;">
-   ${this.interview_link}</a></div>
-    <div><br></div><div><br></div>
-    <div>Bonne chance !</div><div>Cordialement </div>
- `;
+
     if (this.data && this.data.Interview && this.data.Interview.id) {
       const apiURL = API_URI_INTERVIEWS + "/" + this.data.Interview.id;
 
@@ -153,7 +140,7 @@ export class InterviewDialogComponent implements OnInit {
               time: [moment(this.interview.interview_date).format("HH:mm"), Validators.required],
 
             });
-            console.log("his.populateForm ", this.populateForm)
+
           }
 
         }
@@ -162,8 +149,24 @@ export class InterviewDialogComponent implements OnInit {
 
     }
     else {
+
+
+      this.htmlContent = `
+      <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.data.Candidats},</span><br>
+      </div><div><span style="background-color: transparent; font-size: 1rem;"><br></span></div>
+      <div>Votre candidature a retenu notre attention suite aux résultats des tests techniques.</div><div>Dans le cadre de notre processus
+      de recrutement,nous avons le plaisir de vous inviter à passer un entretien vidéo conférence 
+     <<entretien_date>>
+      </div>
+     <div>
+      <a href="${this.interview_link}" target="_blank" style="font-size: 1rem;">
+     lien de la vidéoconférence</a></div>
+      <div><br></div><div><br></div>
+      <div>Bonne chance !</div><div>Cordialement </div>
+   `;
       this.populateForm = this.formBuilder.group({
         interview_date: ['', Validators.required],
+        time: ['', Validators.required],
         email: [this.data.Email, Validators.required],
         name: [this.data.Candidats, Validators.required],
         htmlContent: [this.htmlContent, Validators.required],
@@ -172,10 +175,19 @@ export class InterviewDialogComponent implements OnInit {
       });
 
     }
-  }
 
+
+    this.onValueChanges()
+  }
+  get interview_date() { return this.populateForm.get('interview_date'); }
+  get time() { return this.populateForm.get('time'); }
 
   save() {
+    const date = this.pctrl && this.pctrl.interview_date && this.pctrl.interview_date.value && this.pctrl.time && this.pctrl.time.value ?
+
+      ` à la date du ${moment(this.pctrl.interview_date.value).format('DD/MM/YYYY')}   ${this.pctrl.time.value}`
+      : ''
+    const email_content = this.pctrl.htmlContent.value.toString().replace('<<entretien_date>>', date)
     if (this.data && this.data.Interview && this.data.Interview.id) {
       this.loading = true;
       const id = this.data.Interview.id
@@ -186,15 +198,17 @@ export class InterviewDialogComponent implements OnInit {
       interview_date.set({
         hour,
         minute
-      })
+      });
+
+
       const data: any = {
         id,
         interview_date,
-        candidats: [{ id: this.data.candidat_id }],
+        candidats: [{ id: this.data.candidat_id, email: this.pctrl.email.value }],
         user: { id: this.userToken.userId, email: this.currentUser.email },
         interview_link: this.interview_link,
         email_title: this.subject,
-        email_content: this.pctrl.htmlContent.value,
+        email_content,
 
       }
       return this.apiClientService
@@ -222,10 +236,10 @@ export class InterviewDialogComponent implements OnInit {
       this.loading = true;
       const data: any = {
         interview_date,
-        candidats: [{ id: this.data.candidat_id, email: this.data.Email }],
+        candidats: [{ id: this.data.candidat_id, email: this.pctrl.email.value }],
         user: { id: this.userToken.userId, email: this.currentUser.email },
         email_title: this.subject,
-        email_content: this.htmlContent,
+        email_content,
         interview_link: this.interview_link
       }
       return this.apiClientService

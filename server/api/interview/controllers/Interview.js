@@ -83,9 +83,11 @@ module.exports = {
         interview_link,
         link //or iplocal replace localhost
       );
+      const to = [candidats[0].email, user.email];
 
+      console.log("to", to);
       const options = {
-        to: [candidats.email, user.email, "diop.amadou@oostaoo.com"],
+        to,
         from: "chagnon.maxime@oostaoo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
@@ -119,7 +121,7 @@ module.exports = {
 
   update: async (ctx, next) => {
     try {
-      console.log("ctx.request.body",ctx.request.body)
+      console.log("ctx.request.body", ctx.request.body);
       const {
         interview_date,
         candidats,
@@ -137,9 +139,11 @@ module.exports = {
         interview_link,
         link //or iplocal replace localhost
       );
+      const to = [candidats[0].email, user.email];
 
+      console.log("to", to);
       const options = {
-        to: [candidats.email, user.email, "diop.amadou@oostaoo.com","hamdoun.ismael@oostaoo.com"],
+        to,
         from: "chagnon.maxime@oostaoo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,

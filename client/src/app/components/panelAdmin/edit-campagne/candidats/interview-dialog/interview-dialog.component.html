@@ -30,6 +30,8 @@
             <input formControlName="interview_date" matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="interview_date.invalid && (interview_date.dirty || interview_date.touched)">champs requis
+            </mat-error>
           </mat-form-field>
 
         </div>
@@ -41,6 +43,7 @@
                 {{ opt }}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="time.invalid && (time.dirty || time.touched)">champs requis</mat-error>
           </mat-form-field>
         </div>
 
@@ -52,7 +55,7 @@
 
 
         <div class="block-button roodeo-dark-theme">
-          <button mat-raised-button [color]="'primary'" (click)="save()" i18n>
+          <button mat-raised-button [color]="'primary'" [disabled]="!populateForm.valid" (click)="save()" i18n>
             Envoyer email
           </button>
 
