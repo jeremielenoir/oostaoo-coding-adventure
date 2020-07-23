@@ -15,21 +15,28 @@
   </header>
 
   <div class="content-modal-question">
+
+
     <div class="cologne-form">
       <form [formGroup]="populateForm">
 
+        <div class="block-button roodeo-dark-theme" *ngIf="data && data.Interview && data.Interview.id">
+          <button mat-raised-button [color]="'accent'" [disabled]="!populateForm.valid" (click)="remove()" i18n>
+            Annuler l'entretien
+          </button>
 
+        </div>
         <div class="candidat-presentation">
-          entretien avec : <span>{{populateForm.controls['name'].value}} </span><br />
-          adresse email : <span>{{populateForm.controls['email'].value}}</span>
+          <span i18n>entretien avec</span> : <span>{{populateForm.controls['name'].value}} </span><br />
+          <span i18n>adresse email </span>: <span>{{populateForm.controls['email'].value}}</span>
         </div>
 
         <div class="card-body">
           <mat-form-field appearance="outline" [color]="'accent'">
             <mat-label i18n>Choisir une date pour l'entretien</mat-label>
-            <input formControlName="interview_date" matInput [matDatepicker]="picker">
+            <input formControlName="interview_date" matInput [matDatepicker]="picker" start="currentDate" >
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker #picker ></mat-datepicker>
             <mat-error *ngIf="interview_date.invalid && (interview_date.dirty || interview_date.touched)">champs requis
             </mat-error>
           </mat-form-field>
@@ -43,7 +50,7 @@
                 {{ opt }}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="time.invalid && (time.dirty || time.touched)">champs requis</mat-error>
+            <mat-error *ngIf="time.invalid && (time.dirty || time.touched)" i18n>champs requis</mat-error>
           </mat-form-field>
         </div>
 

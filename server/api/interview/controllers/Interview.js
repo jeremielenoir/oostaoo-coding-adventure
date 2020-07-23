@@ -171,6 +171,28 @@ module.exports = {
    */
 
   destroy: async (ctx, next) => {
-    return strapi.services.interview.remove(ctx.params);
+    try {
+      const interview = await strapi.services.interview.fetch(ctx.params)
+
+      if (!interview) {
+        throw new Error("interview not found");
+      }
+     /*  const options = {
+        to,
+        from: "chagnon.maxime@oostaoo.com",
+        replyTo: "no-reply@strapi.io",
+        subject: email_title,
+        html: getEmail_message_crypto,
+      }; */
+
+      /*  transporter.sendMail(options),
+    await  strapi.services.interview.remove(ctx.params); */
+
+      console.log("interview", interview.attributes.candidats);
+
+      return true;
+    } catch (error) {
+      throw error;
+    }
   },
 };

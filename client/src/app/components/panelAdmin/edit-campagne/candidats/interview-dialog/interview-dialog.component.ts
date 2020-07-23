@@ -5,11 +5,14 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
-import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+
+
 import * as _moment from 'moment';
 //@ts-ignore 
 import { default as _rollupMoment } from 'moment';
+import { SelectedLanguageService } from 'src/app/services/selected-language.service';
 
 const moment = _rollupMoment || _moment;
 @Component({
@@ -21,6 +24,21 @@ const moment = _rollupMoment || _moment;
     // `MatMomentDateModule` in your applications root module. We provide it at the component level
     // here, due to limitations of our example generation script.
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+
+
+
+
+    { provide: MAT_DATE_LOCALE, useValue: 'ja-JP' },
+
+    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
+    // `MatMomentDateModule` in your applications root module. We provide it at the component level
+    // here, due to limitations of our example generation script.
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ],
 })
@@ -35,7 +53,7 @@ export class InterviewDialogComponent implements OnInit {
   public Editor = ClassicEditor;
   public interview_link: string = "https://spwrtc.osc-fr1.scalingo.io/"
   public loading: Boolean = false;
-  public currentDate: any = new Date().toISOString()
+  public currentDate: any = new Date()
   errors = null;
   results = null;
   public show: any = true;
@@ -47,7 +65,21 @@ export class InterviewDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<InterviewDialogComponent>,
     public apiClientService: ApiClientService,
     private userToken: DecryptTokenService,
-  ) { }
+    private _adapter: DateAdapter<any>,
+    public languageService: SelectedLanguageService
+  ) {
+    const lang = this.languageService.getLanguageCountry();
+
+    switch (lang) {
+      case 'es-ES': this._adapter.setLocale('es'); break;
+      case 'fr-FR': this._adapter.setLocale('fr'); break;
+      case 'en-US': this._adapter.setLocale('en'); break;
+      case 'jp-JP': this._adapter.setLocale('ja-JP'); break;
+      default: this._adapter.setLocale('fr'); break;
+    };
+  }
+
+
 
 
 
@@ -256,6 +288,30 @@ export class InterviewDialogComponent implements OnInit {
 
     }
 
+  }
+
+
+  remove() {
+    if (this.data && this.data.Interview && this.data.Interview.id) {
+      const id = this.data.Interview.id
+      const apiURL = API_URI_INTERVIEWS + "/" + id;
+      if (window.confirm()) {
+        return this.apiClientService
+          .delete(apiURL)
+          .toPromise()
+          .then(() => {
+            this.close()
+
+          }
+          ).catch(e => {
+            this.loading = false;
+            console.log("error deleting interview", e)
+          })
+      }
+    }
+
+
+    return
   }
 
 }
