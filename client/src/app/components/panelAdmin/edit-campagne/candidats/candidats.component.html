@@ -23,7 +23,7 @@
 
         <div class="modall">
           <div class="modall-header">
-            <h3 class="modall-title">
+            <h3 class="modall-title" i18n>
               Options des événements
             </h3>
           </div>
@@ -185,7 +185,7 @@
                   </th>
                   <td mat-cell *matCellDef="let dataInfos">
 
-                    <span (click)="menuSidenav(sidenav, dataInfos)" class="fa fa-info-circle interviewIcon"
+                    <span (click)="menuSidenav(sidenav, dataInfos)" class="fa fa-info-circle interview-icon"
                       aria-hidden="true"></span>
                   </td>
                 </div>
@@ -196,9 +196,9 @@
                   <td mat-cell *matCellDef="let dataInfos">
 
                     <span *ngIf="!dataInfos.Interview.id" (click)="openInterviewDialog(dataInfos)"
-                      class="fa fa-video-camera interviewIcon" aria-hidden="true"></span>
+                      class="fa fa-video-camera interview-icon" aria-hidden="true"></span>
                     <span *ngIf="dataInfos.Interview.interview_date" (click)="openInterviewDialog(dataInfos)"
-                      class="interviewIcon">{{dataInfos.Interview.interview_date}}</span>
+                      class="interview-icon">{{dataInfos.Interview.interview_date}}</span>
                   </td>
                 </div>
 

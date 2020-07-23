@@ -1,41 +1,51 @@
-<div class="loading" *ngIf="!populateForm"></div>
-<div class="modal-candidat" *ngIf="populateForm">
-  
+<div class="loading-container" *ngIf="!populateForm||loading">
+  <mat-progress-bar mode="indeterminate">
+  </mat-progress-bar>
+</div>
+<div class="modal-candidat" *ngIf="populateForm && !loading">
+
   <div class="close-invite-dialog">
     <span (click)="close()"> <i class="fa fa-times" aria-hidden="true"></i></span>
   </div>
 
   <header class="header-question">
     <div class="info-campaign-candidats">
-      <h2 i18n>Création Entretien Vidéo</h2>
+      <h2 i18n>Planification entretien vidéo</h2>
     </div>
   </header>
 
   <div class="content-modal-question">
     <div class="cologne-form">
       <form [formGroup]="populateForm">
-        
-        <span class="card-form">{{populateForm.controls['name'].value}} {{populateForm.controls['email'].value}}</span>
-        <div class="card-body">
-          <!--mat-form-field class="card-form">
-            <mat-label>Date Entretien</mat-label>
-            <input type="datetime-local" formControlName="interview_date" matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          </mat-form-field-->
 
+
+        <div class="candidat-presentation">
+          entretien avec : <span>{{populateForm.controls['name'].value}} </span><br />
+          adresse email : <span>{{populateForm.controls['email'].value}}</span>
+        </div>
+
+        <div class="card-body">
           <mat-form-field appearance="outline" [color]="'accent'">
             <mat-label i18n>Choisir une date pour l'entretien</mat-label>
             <input formControlName="interview_date" matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-          
+
+        </div>
+        <div class="card-body">
+          <mat-form-field appearance="outline" [color]="'accent'">
+            <mat-label i18n>Choisir l'heure pour l'entretien</mat-label>
+            <mat-select formControlName="time">
+              <mat-option *ngFor="let opt of times" [value]="opt">
+                {{ opt }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
 
         <div [class.message-personaliser-form]="show">
-
           <label i18n>Message :</label>
-
           <ckeditor [editor]="Editor" formControlName="htmlContent" *ngIf="show"></ckeditor>
           <div *ngIf="!show" [innerHTML]="htmlContent" class="htmlContent"></div>
         </div>
@@ -47,7 +57,7 @@
           </button>
 
         </div>
-        
+
       </form>
     </div>
 

@@ -34,11 +34,13 @@ export class InterviewDialogComponent implements OnInit {
   public subject: string;
   public Editor = ClassicEditor;
   public interview_link: string = "https://spwrtc.osc-fr1.scalingo.io/"
+  public loading: Boolean = false;
   public currentDate: any = new Date().toISOString()
   errors = null;
   results = null;
   public show: any = true;
   currentUser: any;
+  public times: any = []
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
@@ -56,9 +58,56 @@ export class InterviewDialogComponent implements OnInit {
   get pctrl() {
     return this.populateForm.controls;
   }
+  getTimeStops(inter, start, end) {
+    const startTime = moment(start, 'HH:mm');
+    const endTime = moment(end, 'HH:mm');
 
+    if (endTime.isBefore(startTime)) {
+      endTime.add(1, 'day');
+    }
+
+    const timeStops = [];
+
+    while (startTime <= endTime) {
+      timeStops.push(new moment(startTime).format('HH:mm'));
+      startTime.add(inter, 'minutes');
+    }
+    return timeStops;
+
+  }
   ngOnInit() {
-    console.log("interview data", this.data)
+
+
+    for (let hour = 0; hour < 24; hour++) {
+      this.times.push(moment({ hour }).format('HH:mm'));
+      this.times.push(
+        moment({
+          hour,
+          minute: 30
+        }).format('HH:mm')
+      );
+    }
+    this.times = this.times.sort((a, b) => {
+      moment(new Date(a)).isBefore(moment(new Date(b)));
+      const currentDate = new Date()
+      const [hourA, mmA] = a.split(":")
+      let firstDate = moment(currentDate).set({
+        hour: hourA,
+        minute: mmA
+      })
+
+      const [hourB, mmB] = b.split(":")
+      let secondDate = moment(currentDate).set({
+        hour: hourB,
+        minute: mmB
+      });
+      const result = firstDate.diff(secondDate);
+
+      return result
+    })
+
+
+
     if (this.userToken && this.userToken.userId) {
       this.apiClientService
         .get(API_URI_USER + '/' + this.userToken.userId)
@@ -101,6 +150,7 @@ export class InterviewDialogComponent implements OnInit {
               name: [this.interview.candidats[0].Nom, Validators.required],
               interview_link: [this.interview.interview_link, Validators.required],
               htmlContent: [this.interview.email_content, Validators.required],
+              time: [moment(this.interview.interview_date).format("HH:mm"), Validators.required],
 
             });
             console.log("his.populateForm ", this.populateForm)
@@ -127,12 +177,19 @@ export class InterviewDialogComponent implements OnInit {
 
   save() {
     if (this.data && this.data.Interview && this.data.Interview.id) {
+      this.loading = true;
       const id = this.data.Interview.id
       const apiURL = API_URI_INTERVIEWS + "/" + id;
 
+      let interview_date = moment(this.pctrl.interview_date.value);
+      const [hour, minute] = this.pctrl.time.value.split(":");
+      interview_date.set({
+        hour,
+        minute
+      })
       const data: any = {
         id,
-        interview_date: this.pctrl.interview_date.value,
+        interview_date,
         candidats: [{ id: this.data.candidat_id }],
         user: { id: this.userToken.userId, email: this.currentUser.email },
         interview_link: this.interview_link,
@@ -144,16 +201,27 @@ export class InterviewDialogComponent implements OnInit {
         .put(apiURL, data)
         .toPromise()
         .then(() => {
+
           this.close()
 
         }
-        ).catch(e => console.log("error updating interview", e))
+        ).catch(e => {
+
+          this.loading = false;
+          console.log("error updating interview", e)
+        })
     } else {
 
       const apiURL = API_URI_INTERVIEWS;
-
+      let interview_date = moment(this.pctrl.interview_date.value);
+      const [hour, minute] = this.pctrl.time.value.split(":");
+      interview_date.set({
+        hour,
+        minute
+      })
+      this.loading = true;
       const data: any = {
-        interview_date: this.pctrl.interview_date.value,
+        interview_date,
         candidats: [{ id: this.data.candidat_id, email: this.data.Email }],
         user: { id: this.userToken.userId, email: this.currentUser.email },
         email_title: this.subject,
@@ -167,7 +235,10 @@ export class InterviewDialogComponent implements OnInit {
           this.close()
 
         }
-        ).catch(e => console.log("error creating interview", e))
+        ).catch(e => {
+          this.loading = false;
+          console.log("error creating interview", e)
+        })
 
     }
 
