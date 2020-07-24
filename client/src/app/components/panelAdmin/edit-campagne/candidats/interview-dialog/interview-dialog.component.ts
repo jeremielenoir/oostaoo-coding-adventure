@@ -294,10 +294,41 @@ export class InterviewDialogComponent implements OnInit {
   remove() {
     if (this.data && this.data.Interview && this.data.Interview.id) {
       const id = this.data.Interview.id
-      const apiURL = API_URI_INTERVIEWS + "/" + id;
+
+
+      const apiURL = API_URI_INTERVIEWS + "-cancel";
       if (window.confirm()) {
+        let interview_date = moment(this.pctrl.interview_date.value);
+        const [hour, minute] = this.pctrl.time.value.split(":");
+        interview_date.set({
+          hour,
+          minute
+        });
+        const date = this.pctrl && this.pctrl.interview_date && this.pctrl.interview_date.value && this.pctrl.time && this.pctrl.time.value ?
+
+          ` à la date du ${moment(this.pctrl.interview_date.value).format('DD/MM/YYYY')}   ${this.pctrl.time.value}`
+          : ''
+        const email_content = `
+        <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.data.Candidats},</span><br>
+        </div><div><span style="background-color: transparent; font-size: 1rem;"><br></span></div>
+        <div>Votre entretien vidéo , ${date}, a été annulé</div> 
+       <div>
+        
+        <div><br></div><div><br></div>
+        <div>Bonne chance !</div><div>Cordialement </div>
+     `;
+        const data: any = {
+          id,
+          interview_date,
+          candidats: [{ id: this.data.candidat_id, email: this.pctrl.email.value }],
+          user: { id: this.userToken.userId, email: this.currentUser.email },
+          interview_link: this.interview_link,
+          email_title: `Annulation Entretien vidéo du ${date}`,
+          email_content,
+
+        }
         return this.apiClientService
-          .delete(apiURL)
+          .post(apiURL,data)
           .toPromise()
           .then(() => {
             this.close()

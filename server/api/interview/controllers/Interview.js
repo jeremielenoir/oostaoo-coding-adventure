@@ -7,6 +7,7 @@
  */
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const _ = require("lodash");
 // Create reusable transporter object using SMTP transport.
 const transporter = nodemailer.createTransport({
   service: "Gmail",
@@ -93,18 +94,17 @@ module.exports = {
         html: getEmail_message_crypto,
       };
 
-      const [_, updated] = await Promise.all([
-        transporter.sendMail(options),
-        strapi.services.interview.edit(
-          {
-            id: interview.attributes.id,
-            email_content: getEmail_message_crypto,
-          },
-          {
-            interview_link: link,
-          }
-        ),
-      ]);
+      await transporter.sendMail(options);
+      const updated = await strapi.services.interview.edit(
+        {
+          id: interview.attributes.id,
+          email_content: getEmail_message_crypto,
+        },
+        {
+          interview_link: link,
+        }
+      );
+
       return updated;
     } catch (e) {
       throw e;
@@ -153,10 +153,12 @@ module.exports = {
         interview_link: link,
         email_content: getEmail_message_crypto,
       };
-      const [_, updated] = await Promise.all([
-        transporter.sendMail(options),
-        strapi.services.interview.edit(ctx.params, updatedData),
-      ]);
+
+      await transporter.sendMail(options);
+      const updated = await strapi.services.interview.edit(
+        ctx.params,
+        updatedData
+      );
 
       return updated;
     } catch (error) {
@@ -171,24 +173,40 @@ module.exports = {
    */
 
   destroy: async (ctx, next) => {
+    return strapi.services.interview.remove(ctx.params);
+  },
+  cancel: async (ctx, next) => {
     try {
-      const interview = await strapi.services.interview.fetch(ctx.params)
+      const {
+       // interview_date,
+        candidats,
+        user,
+        email_title,
+        email_content,
+        id,
+      } = ctx.request.body;
+      const interview = await strapi.services.interview.fetch({id})
 
       if (!interview) {
         throw new Error("interview not found");
       }
-     /*  const options = {
+
+      const to = [
+        candidats[0].email,
+        user.email,
+        'diop.amadou@oostaoo.com'
+         
+      ];
+
+      const options = {
         to,
         from: "chagnon.maxime@oostaoo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
-        html: getEmail_message_crypto,
-      }; */
-
-      /*  transporter.sendMail(options),
-    await  strapi.services.interview.remove(ctx.params); */
-
-      console.log("interview", interview.attributes.candidats);
+        html: email_content,
+      };
+      await strapi.services.interview.remove({ id: interview.attributes.id });
+      await transporter.sendMail(options);
 
       return true;
     } catch (error) {

@@ -32,6 +32,15 @@
         "policies": []
       }
     },
+
+    {
+      "method": "POST",
+      "path": "/api/interviews-cancel",
+      "handler": "Interview.cancel",
+      "config": {
+        "policies": []
+      }
+    },
     {
       "method": "PUT",
       "path": "/api/interviews/:id",
