@@ -33,7 +33,7 @@ phases:
       - yarn run build-i18n:fr
       - yarn run build-i18n:jp
       - mkdir ../server/public
-      - mkdir ../server/interview
+      - mkdir ../server/interview-roodeo
       - mkdir ../interview-server
       - cp -R ../interview/server/* ../interview-server
       - cp -R ./dist/client/* ../server/public/
