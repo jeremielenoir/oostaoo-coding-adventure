@@ -3,17 +3,13 @@ import { ApiClientService, API_URI_INTERVIEWS, API_URI_USER } from 'src/app/api-
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-
-
 import * as _moment from 'moment';
 //@ts-ignore 
 import { default as _rollupMoment } from 'moment';
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
-
 const moment = _rollupMoment || _moment;
 @Component({
   selector: 'app-interview-dialog',
@@ -293,11 +289,13 @@ export class InterviewDialogComponent implements OnInit {
 
   remove() {
     if (this.data && this.data.Interview && this.data.Interview.id) {
+     
       const id = this.data.Interview.id
 
 
       const apiURL = API_URI_INTERVIEWS + "-cancel";
       if (window.confirm()) {
+        this.loading = true;
         let interview_date = moment(this.pctrl.interview_date.value);
         const [hour, minute] = this.pctrl.time.value.split(":");
         interview_date.set({
@@ -331,6 +329,7 @@ export class InterviewDialogComponent implements OnInit {
           .post(apiURL,data)
           .toPromise()
           .then(() => {
+          this.loading = false
             this.close()
 
           }
