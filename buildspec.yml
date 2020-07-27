@@ -28,17 +28,14 @@ phases:
       - echo $NODE_OPTIONS
       - cd ./client 
       - yarn run build
-      - yarn run build-i18n:en
-      - yarn run build-i18n:es
       - yarn run build-i18n:fr
-      - yarn run build-i18n:jp
       - mkdir ../server/public
       - mkdir ../interview-client
       - mkdir ../interview-server
       - cp -R ../interview/server/* ../interview-server
       - cp -R ./dist/client/* ../server/public/
       - cd ../interview/client && npm run build
-      - cp -R ./build/* ../interview-client
+      - cp -R ./build/* ../../interview-client
     finally:
       - echo This always runs even if the install command fails
   post_build:
