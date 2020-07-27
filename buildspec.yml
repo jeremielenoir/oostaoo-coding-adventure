@@ -11,7 +11,7 @@ phases:
       - echo Entered the install phase...
       - npm install yarn -g
       - cd client && yarn install
-      - cd ../interview/client && npm install
+      - cd ../interview/client && yarn install
       - cd ../..
     finally:
       - echo This always runs even if the update or install command fails 
@@ -34,7 +34,7 @@ phases:
       - mkdir ../interview-server
       - cp -R ../interview/server/* ../interview-server
       - cp -R ./dist/client/* ../server/public/
-      - cd ../interview/client && npm run build
+      - cd ../interview/client && yarn run build
       - cp -R ./build/* ../../interview-client
     finally:
       - echo This always runs even if the install command fails
