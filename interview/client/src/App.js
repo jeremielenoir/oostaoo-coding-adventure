@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-//import CreateRoom from "./routes/CreateRoom";
+import { BrowserRouter, Route } from "react-router-dom";
 import Room from "./routes/Room";
 import './App.css';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -28,10 +27,7 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <Switch>
-            {/*<Route path="/" exact component={CreateRoom} />*/}
           <Route path="/rooms/:interviewID" component={Room} />
-          </Switch>
         </BrowserRouter> 
       </ThemeProvider>
     </div>
