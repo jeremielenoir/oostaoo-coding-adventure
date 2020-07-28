@@ -1,5 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import io from "socket.io-client";
+import * as CryptoJS from 'crypto-js';
+import jwt from 'jsonwebtoken';
+
 
 const Room = (props) => {
     const userVideo = useRef();
@@ -8,8 +11,13 @@ const Room = (props) => {
     const socketRef = useRef();
     const otherUser = useRef();
     const userStream = useRef();
-    const interviewID = props.match.params.interviewID
-    console.log(interviewID)
+
+    
+    var key = 'roodeo';
+    const infosHash = props.match.params.interviewID;
+    var decrypted = jwt.verify(infosHash, key);
+    const { interview_id, candidat: {email}} = decrypted;  
+    
 
     useEffect(() => {
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
