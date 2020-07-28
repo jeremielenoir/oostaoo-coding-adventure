@@ -75,16 +75,24 @@ module.exports = {
       });
 
       const interview_id = interview.attributes.id;
+      const encodedData = {
+        interview_id: interview_id.toString(),
+        candidat: {
+          email: candidats[0].email,
+          name: candidats[0].name,
+        },
+      };
       const cryptoData = crypto
         .createHash("md5")
-        .update(interview_id.toString())
+        .update(JSON.stringify(encodedData))
         .digest("hex");
-      const link = `${interview_link}?id=${cryptoData}`;
-      const getEmail_message_crypto = email_content.replace(
-        interview_link,
-        link //or iplocal replace localhost
-      );
-      const to = [candidats[0].email, user.email];
+
+      const link = `${interview_link}${cryptoData}`;
+
+      const expression = /((?:(http|https|Http|Https|rtsp|Rtsp):\/\/(?:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,64}(?:\:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,25})?\@)?)?((?:(?:[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}\.)+(?:(?:aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(?:biz|b[abdefghijmnorstvwyz])|(?:cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(?:edu|e[cegrstu])|f[ijkmor]|(?:gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(?:info|int|i[delmnoqrst])|(?:jobs|j[emop])|k[eghimnrwyz]|l[abcikrstuvy]|(?:mil|mobi|museum|m[acdghklmnopqrstuvwxyz])|(?:name|net|n[acefgilopruz])|(?:org|om)|(?:pro|p[aefghklmnrstwy])|qa|r[eouw]|s[abcdeghijklmnortuvyz]|(?:tel|travel|t[cdfghjklmnoprtvwz])|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]))|(?:(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])))(?:\:\d{1,5})?)(\/(?:(?:[a-zA-Z0-9\;\/\?\:\@\&\=\#\~\-\.\+\!\*\'\(\)\,\_])|(?:\%[a-fA-F0-9]{2}))*)?(?:\b|$)/gi;
+      const regex = new RegExp(expression);
+      const getEmail_message_crypto = email_content.replace(regex, link);
+      const to = [candidats[0].email, user.email, "diop.amadou@oostaoo.com"];
 
       const options = {
         to,
@@ -128,16 +136,25 @@ module.exports = {
         email_content,
         interview_link,
       } = ctx.request.body;
+
+      const encodedData = {
+        interview_id: ctx.params.id,
+        candidat: {
+          email: candidats[0].email,
+          name: candidats[0].name,
+        },
+      };
       const cryptoData = crypto
         .createHash("md5")
-        .update(ctx.params.id.toString().toString())
+        .update(JSON.stringify(encodedData))
         .digest("hex");
-      const link = `${interview_link}?id=${cryptoData}`;
-      const getEmail_message_crypto = email_content.replace(
-        interview_link,
-        link //or iplocal replace localhost
-      );
-      const to = [candidats[0].email, user.email];
+      const link = `${interview_link}${cryptoData}`;
+
+      const expression = /((?:(http|https|Http|Https|rtsp|Rtsp):\/\/(?:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,64}(?:\:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,25})?\@)?)?((?:(?:[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}\.)+(?:(?:aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(?:biz|b[abdefghijmnorstvwyz])|(?:cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(?:edu|e[cegrstu])|f[ijkmor]|(?:gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(?:info|int|i[delmnoqrst])|(?:jobs|j[emop])|k[eghimnrwyz]|l[abcikrstuvy]|(?:mil|mobi|museum|m[acdghklmnopqrstuvwxyz])|(?:name|net|n[acefgilopruz])|(?:org|om)|(?:pro|p[aefghklmnrstwy])|qa|r[eouw]|s[abcdeghijklmnortuvyz]|(?:tel|travel|t[cdfghjklmnoprtvwz])|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]))|(?:(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])))(?:\:\d{1,5})?)(\/(?:(?:[a-zA-Z0-9\;\/\?\:\@\&\=\#\~\-\.\+\!\*\'\(\)\,\_])|(?:\%[a-fA-F0-9]{2}))*)?(?:\b|$)/gi;
+      const regex = new RegExp(expression);
+      const getEmail_message_crypto = email_content.replace(regex, link);
+
+      const to = [candidats[0].email, user.email, "diop.amadou@oostaoo.com"];
 
       const options = {
         to,
@@ -178,25 +195,20 @@ module.exports = {
   cancel: async (ctx, next) => {
     try {
       const {
-       // interview_date,
+        // interview_date,
         candidats,
         user,
         email_title,
         email_content,
         id,
       } = ctx.request.body;
-      const interview = await strapi.services.interview.fetch({id})
+      const interview = await strapi.services.interview.fetch({ id });
 
       if (!interview) {
         throw new Error("interview not found");
       }
 
-      const to = [
-        candidats[0].email,
-        user.email,
-        'diop.amadou@oostaoo.com'
-         
-      ];
+      const to = [candidats[0].email, user.email];
 
       const options = {
         to,
