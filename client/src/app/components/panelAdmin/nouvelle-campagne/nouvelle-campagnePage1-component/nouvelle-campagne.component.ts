@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input, ViewEncapsulation } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { AuthFormVerification } from "src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator";
+import { FormCampagneValidator } from "src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator";
 import {
   ApiClientService,
   API_URI_TECHNO,
@@ -25,7 +25,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
   @Input() formCampagne: FormGroup;
   @Input() technoByParent;
   @Input() profilByParent;
-  public oAuthFormVerification: AuthFormVerification;
+  public oFormCampagneValidator: FormCampagneValidator;
   public errorExperience: string;
   public errorRole: string;
   public errorTechno: string;
@@ -44,7 +44,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
 
 
   constructor(public apiClientService: ApiClientService,public languageStorage:SelectedLanguageService) {
-    this.oAuthFormVerification = new AuthFormVerification();
+    this.oFormCampagneValidator = new FormCampagneValidator();
   }
 
   ngOnInit() {
@@ -90,6 +90,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
 
   getTechnos() {
     this.apiClientService.get(API_URI_TECHNO).subscribe(datas => {
+      console.log('TECHNOS', datas);
       return (this.technos = datas);
     });
   }
@@ -176,32 +177,32 @@ export class NouvelleCampagnePage1Component implements OnInit {
   public onIncrementPage(pDatafromValue: any): void {
     this.valueChanged();
     this.formValid(pDatafromValue);
-    if (AuthFormVerification._sMessageError === "") {
+    if (FormCampagneValidator._sMessageError === "") {
       this.incrementPage.emit(); // Déclenche l'output pour passer à la paga suivante.
       this.methodAllTechno()
     }
   }
 
   public formValid(pDatafromValue: any): void {
-    AuthFormVerification.startVerificationFrom();
+    FormCampagneValidator.startVerificationFrom();
 
     if (
-      AuthFormVerification.validateExprience(pDatafromValue.experience) ===
+      FormCampagneValidator.validateExprience(pDatafromValue.experience) ===
       false
     ) {
-      this.errorExperience = AuthFormVerification._sMessageError;
+      this.errorExperience = FormCampagneValidator._sMessageError;
     } else {
       this.errorExperience = "";
     }
 
-    if (AuthFormVerification.validateRole(pDatafromValue.role) === false) {
-      this.errorRole = AuthFormVerification._sMessageError;
+    if (FormCampagneValidator.validateRole(pDatafromValue.role) === false) {
+      this.errorRole = FormCampagneValidator._sMessageError;
     } else {
       this.errorRole = "";
     }
 
-    if (AuthFormVerification.validateTechno(pDatafromValue.techno) === false) {
-      this.errorTechno = AuthFormVerification._sMessageError;
+    if (FormCampagneValidator.validateTechno(pDatafromValue.techno) === false) {
+      this.errorTechno = FormCampagneValidator._sMessageError;
     } else {
       this.errorTechno = "";
     }

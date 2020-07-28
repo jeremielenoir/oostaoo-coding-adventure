@@ -1,6 +1,6 @@
 import { FormControl, Validators } from '@angular/forms';
 
-export class AuthFormVerification {
+export class FormCampagneValidator {
 
     private static sMessageError = '';
     private roleValidator: FormControl;

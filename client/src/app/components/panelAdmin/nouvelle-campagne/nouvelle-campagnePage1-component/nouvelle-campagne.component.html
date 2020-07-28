@@ -43,9 +43,7 @@
                   tester</mat-label>
                 <mat-select multiple name="techno" formControlName="techno" [compareWith]="compareObjects"
                   [(ngModel)]="technosSelect" (selectionChange)="getTechnoChecked()">
-                  <mat-option *ngFor="let techno of technos" [value]="techno">{{
-                  techno.name
-                }}</mat-option>
+                  <mat-option *ngFor="let techno of technos" [value]="techno">{{techno.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>

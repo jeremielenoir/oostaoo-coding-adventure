@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { FormParamsValidator } from "src/app/components/panelAdmin/nouvelle-campagne/formParamsValidator";
 import {
   ApiClientService,
   API_URI_CAMPAIGNS
@@ -20,8 +21,12 @@ export class NouvelleCampagnePage2Component implements OnInit {
   @Output() decrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
   public errorNomCampgane = false;
+  public oFormParamsValidator: FormParamsValidator;
+  public errorName: string;
 
-  constructor(public apiClientService: ApiClientService) {}
+  constructor(public apiClientService: ApiClientService) {
+    this.oFormParamsValidator = new FormParamsValidator();
+  }
 
   ngOnInit() {
     this.formCampagne.patchValue({
@@ -40,11 +45,25 @@ export class NouvelleCampagnePage2Component implements OnInit {
     });
   }
 
+  public formValid(pDatafromValue: any): void {
+    FormParamsValidator.startVerificationFrom();
+
+    if (FormParamsValidator.validateName(pDatafromValue.nomDeCampagne) === false) {
+      this.errorName = FormParamsValidator._sMessageError;
+    } else {
+      this.errorName = "";
+    }
+  }
+
   public onDecrementPage(): void {
     this.decrementPage.emit(); // Déclenche l'output
   }
 
-  public onIncrementPage(): void {
-    this.incrementPage.emit(); // Déclenche l'output
+  public onIncrementPage(pDatafromValue): void {
+
+    this.formValid(pDatafromValue);
+    if (FormParamsValidator._sMessageError === "") {
+      this.incrementPage.emit(); // Déclenche l'output pour passer à la paga suivante.
+    }
   }
 }

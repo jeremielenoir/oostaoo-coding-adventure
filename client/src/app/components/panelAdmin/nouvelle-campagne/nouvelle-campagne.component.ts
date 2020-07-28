@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation } from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
-import { AuthFormVerification } from "src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator";
+import { FormCampagneValidator } from "src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator";
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -12,22 +12,22 @@ import { RouterLink } from '@angular/router';
 export class NouvelleCampagneComponent implements OnInit {
   nNumeorPage: number;
   ParentFormCampagne: FormGroup;
-  public oAuthFormVerification: AuthFormVerification;
+  public oFormCampagneValidator: FormCampagneValidator;
   technoFromChild: Array<string>;
   selectProfilFromChild: string;
   public Alltechno: any[] = []
 
   constructor(private _formBuilder: FormBuilder) {
     this.nNumeorPage = 1;
-    this.oAuthFormVerification = new AuthFormVerification();
+    this.oFormCampagneValidator = new FormCampagneValidator();
     this.ParentFormCampagne = this._formBuilder.group({
-      role: this.oAuthFormVerification.getRoleValidator(),
+      role: this.oFormCampagneValidator.getRoleValidator(),
       roleSelectedId: { id: "" },
-      techno: this.oAuthFormVerification.getTechnoValidator(),
+      techno: this.oFormCampagneValidator.getTechnoValidator(),
       technoSelectedId: [],
       experience: [
         "facile",
-        this.oAuthFormVerification.getExperienceValidator()
+        this.oFormCampagneValidator.getExperienceValidator()
       ],
       utilisationCopieColler: "false",
       envoiRapportSimplifie: "false",

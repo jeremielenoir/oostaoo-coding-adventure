@@ -13,7 +13,7 @@
       <div class="campaign-param roodeo-dark-theme first">
 
         <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" [formGroup]="formCampagne" class="fullWidth">
-          <mat-label>Nom du test d'evaluation</mat-label>
+          <mat-label [ngStyle]="errorName ? { color: 'red' } : null">Nom du test d'evaluation</mat-label>
           <input 
             placeholder="Nom du test d'evaluation"
             type="text"
@@ -40,16 +40,16 @@
         <div class="container-radio-button">
           <mat-radio-group [(ngModel)]="selectedLangue">
             <mat-radio-button value="FR">
-              FR
+              <span class="flag-icon flag-icon-fr flag-icon-squared"></span>
             </mat-radio-button>
             <mat-radio-button value="EN">
-              EN
+              <span class="flag-icon flag-icon-gb flag-icon-squared"></span>
             </mat-radio-button>
             <mat-radio-button value="ES">
-              ES
+              <span class="flag-icon flag-icon-es flag-icon-squared"></span>
             </mat-radio-button>
             <mat-radio-button value="JP">
-              JP
+              <span class="flag-icon flag-icon-jp"></span>
             </mat-radio-button>
           </mat-radio-group>
         </div>
@@ -106,7 +106,7 @@
         <span i18n class="button-text">Etape précédente : paramètres</span>
       </div>
 
-      <div class="container-next hvr-grow" (click)="onIncrementPage()" (click)="postData()">
+      <div class="container-next hvr-grow" (click)="onIncrementPage(formCampagne.value)" (click)="postData()">
         <span i18n class="button-text">Etape suivante : choix des questions</span>
         <button mat-mini-fab class="next-button" i18n>
           <mat-icon class="addIcon">keyboard_arrow_right</mat-icon>
