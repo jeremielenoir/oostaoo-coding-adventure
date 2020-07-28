@@ -22,10 +22,10 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "crypto-js": "^4.0.0",
     "ejs": "^3.0.2",
     "googleapis": "^47.0.0",
     "html-pdf": "^2.2.0",
+    "jsonwebtoken": "^8.5.1",
     "knex": "latest",
     "lodash": "^4.17.14",
     "mysql": "2.16.0",
