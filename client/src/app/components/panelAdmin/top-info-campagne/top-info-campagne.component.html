@@ -8,8 +8,8 @@
        
         <div class="container-langage">
             <span>Points: <p>{{poinTotal}} pts</p></span>
-            <span>Questions: <p>{{this.allQuestionLevel ? this.allQuestionLevel.length : ''}}</p></span>
-            <span>Durée totale: <p>{{convertSecondsToMinutes(timeAllquestionCampgnDivice)}} à {{convertSecondsToMinutes(timeAllquestionCampagn)}} min</p></span>
+            <span>Questions: <p>{{this.questions ? this.questions.length : ''}}</p></span>
+            <span>Durée totale: <p>{{convertSecondsToMinutes(timeAllquestionCampgnDevice)}} à {{convertSecondsToMinutes(timeAllquestionCampagn)}} min</p></span>
 
         </div>
 
@@ -23,7 +23,7 @@
                   <span class="icon-chevron fas fa-chevron-up"></span>
 
                    <span class="question-time">{{donut.question}} questions</span>
-                  <span class="question-time">{{convertSecondsToMinutes(donut.timeQuestionDIvice)}} à {{convertSecondsToMinutes(donut.timeQuestion)}} min</span>   
+                  <span class="question-time">{{convertSecondsToMinutes(donut.timeQuestion / 2)}} à {{convertSecondsToMinutes(donut.timeQuestion)}} min</span>   
                   
                 </p> 
 
@@ -58,8 +58,8 @@
 
   <div class="segment2">
 
-    <div class="container-previous hvr-grow" (click)="onDecrementPage()">
-      <button *ngIf="!yourCampaign" mat-mini-fab class="next-button" i18n>
+    <div *ngIf="!yourCampaign" class="container-previous hvr-grow" (click)="onDecrementPage()">
+      <button  mat-mini-fab class="next-button" i18n>
         <mat-icon class="addIcon">keyboard_arrow_left</mat-icon>
       </button>
       <span i18n class="button-text">Paramètres</span>
@@ -67,7 +67,7 @@
 
     <div class="container-next hvr-grow" (click)="postCampagne()">
       <span i18n class="button-text">Enregistrer</span>
-      <button *ngIf="!yourCampaign" mat-mini-fab class="next-button" i18n>
+      <button mat-mini-fab class="next-button" i18n>
         <mat-icon class="addIcon">save</mat-icon>
       </button>
     </div>
@@ -78,8 +78,8 @@
       <i class="fas fa-chevron-left icon-arrow-btn"></i>
       Retour
     </button-->
-    <!--button class="custom-buttom" [ngClass]="allQuestionLevel && allQuestionLevel.length > 0 ? 'button-enabled' : 'button-disabled'"
-      [disabled]="allQuestionLevel && allQuestionLevel.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
+    <!--button class="custom-buttom" [ngClass]="questions && questions.length > 0 ? 'button-enabled' : 'button-disabled'"
+      [disabled]="questions && questions.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
       Enregistrer
     </button-->
 

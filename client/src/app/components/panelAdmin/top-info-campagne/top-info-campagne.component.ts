@@ -30,11 +30,13 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./top-info-campagne.component.scss"],
 })
 export class TopInfoCampagneComponent implements OnInit, OnChanges {
+
   @Input() formCampagne: FormGroup;
-  @Input() allQuestionLevel;
+  @Input() questions;
   @Input() yourCampaign;
-  @Input() techno;
+  @Input() technologies;
   @Output() decrementPage = new EventEmitter<any>();
+  @ViewChild("Chart") Chart: ElementRef;
 
   public globalId: number;
   public updateQuestionsCampaign: number[] = [];
@@ -42,11 +44,11 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
   public elementDonnut: any;
   public poinTotal: number = 0;
   public timeAllquestionCampagn = 0;
-  public timeAllquestionCampgnDivice = 0;
+  public timeAllquestionCampgnDevice = 0;
   public campagneFull = [];
   public technoLabel = [];
   public technoPoint = [];
-  @ViewChild("Chart") Chart: ElementRef;
+  
 
   constructor(
     public apiClientService: ApiClientService,
@@ -73,82 +75,45 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
     return Math.floor(time / 60);
   }
 
-  technoMethod() {
-    let pointDepart = 0;
-    let points = [];
-    let timeArraySolo = [];
-    let arraytimeAllquestionCampagn = [];
-    let timeQuestionCampagne;
-    let deparPointNumberQuestion = 0;
-    let timeDepartQuestion = 0;
-    let technoDonuts = [];
-    let poinTotal = 0;
-    let timeAllquestionCampagn = 0;
-    let timeAllquestionCampgnDivice = 0;
-    let technoLabel = [];
-    let technoPoint = [];
+  public technoMethod(): void{
 
-    if (this.allQuestionLevel && this.allQuestionLevel.length > 0) {
-      for (let timequestion of this.allQuestionLevel) {
-        arraytimeAllquestionCampagn.push(Number(timequestion.time));
+    let summaries: IHash = {};
+    let totalPoint = 0;
+    let totalTime = 0;
+
+    for (let technologie of this.technologies) {
+      summaries[technologie.id] = {
+        label: technologie.name,
+        value: 0,
+        question: 0,
+        timeQuestion: 0,
+        timeQuestionDIvice: 0
       }
     }
-    console.log('TECHNO ELEMENT', this.techno);
-    for (let technoElement of this.techno) {
-      if (this.allQuestionLevel && this.allQuestionLevel.length) {
-        for (let question of this.allQuestionLevel) {
-          if (technoElement["id"] == question["technologies"].id) {
-            pointDepart = pointDepart + question["points"];
-            timeDepartQuestion = timeDepartQuestion + question["time"];
-            deparPointNumberQuestion++;
-          }
-        }
+
+    if (this.questions && this.questions.length > 0) {
+      for (let question of this.questions) {
+            totalPoint += question["points"];
+            totalTime += Number(question.time);
+            summaries[question["technologies"].id].value += question["points"];
+            summaries[question["technologies"].id].question ++;
+            summaries[question["technologies"].id].timeQuestion += Number(question.time);
       }
-
-      points.push(pointDepart);
-
-      timeArraySolo.push(timeDepartQuestion);
-
-      points = points.filter((element) => element !== 0);
-      if (points && points.length > 0) {
-        poinTotal = points.reduce(
-          (accumulator, currenValue) => accumulator + currenValue
-        );
-      }
-
-      timeQuestionCampagne = 0;
-
-      technoDonuts.push({
-        label: technoElement["name"],
-        value: pointDepart,
-        question: deparPointNumberQuestion,
-        timeQuestion: timeDepartQuestion,
-        timeQuestionDIvice: timeDepartQuestion / 2,
-      });
-      technoDonuts = technoDonuts.filter((element) => element.value != 0);
-
-      pointDepart = 0;
-      deparPointNumberQuestion = 0;
-      timeDepartQuestion = 0;
     }
 
-    if (arraytimeAllquestionCampagn && arraytimeAllquestionCampagn.length > 0) {
-      timeAllquestionCampagn = arraytimeAllquestionCampagn.reduce(
-        (accumulator, currenValue) => accumulator + currenValue
-      );
-      timeAllquestionCampgnDivice = timeAllquestionCampagn / 2;
-    }
-
-    for (let tech of technoDonuts) {
-      technoLabel.push(tech.label);
-      technoPoint.push(tech.value);
-    }
-    this.technoDonuts = technoDonuts;
-    this.poinTotal = poinTotal;
-    this.timeAllquestionCampagn = timeAllquestionCampagn;
-    this.timeAllquestionCampgnDivice = timeAllquestionCampgnDivice;
-    this.technoLabel = technoLabel;
-    this.technoPoint = technoPoint;
+    this.technoDonuts = [...Object.values(summaries)];
+    this.poinTotal = totalPoint;
+    this.timeAllquestionCampagn = totalTime;
+    this.timeAllquestionCampgnDevice = totalTime / 2;
+    
+    //donut chart
+    this.technoLabel = [];
+    this.technoPoint = [];
+    Object.values(summaries).forEach((value) => {
+      this.technoLabel.push(value.label);
+      this.technoPoint.push(value.value);
+    });
+    
     this.elementDonnut = this.Chart.nativeElement.getContext("2d");
 
     let chart = new Chart(this.elementDonnut, {
@@ -196,12 +161,141 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
         },
       },
     });
+
   }
+
+  /*technoMethod2() {
+
+    let nbPoints = 0;
+    let points = [];
+    let timeArraySolo = [];
+    let arraytimeAllquestionCampagn = [];
+    let timeQuestionCampagne = 0;
+    let deparPointNumberQuestion = 0;
+    let nbTime = 0;
+    let technoDonuts = [];
+    let poinTotal = 0;
+    let timeAllquestionCampagn = 0;
+    let timeAllquestionCampgnDevice = 0;
+    let technoLabel = [];
+    let technoPoint = [];
+
+    if (this.questions && this.questions.length > 0) {
+      for (let question of this.questions) {
+        arraytimeAllquestionCampagn.push(Number(question.time));
+      }
+    }
+
+
+    for (let technologie of this.technologies) {
+      if (this.questions && this.questions.length) {
+        for (let question of this.questions) {
+          if (technologie["id"] == question["technologies"].id) {
+            nbPoints = nbPoints + question["points"];
+            nbTime = nbTime + question["time"];
+            deparPointNumberQuestion++;
+          }
+        }
+      }
+
+      points.push(nbPoints);
+
+      timeArraySolo.push(nbTime);
+
+      points = points.filter((element) => element !== 0);
+      if (points && points.length > 0) {
+        poinTotal = points.reduce(
+          (accumulator, currenValue) => accumulator + currenValue
+        );
+      }
+
+      timeQuestionCampagne = 0;
+
+      technoDonuts.push({
+        label: technologie["name"],
+        value: nbPoints,
+        question: deparPointNumberQuestion,
+        timeQuestion: nbTime,
+        timeQuestionDIvice: nbTime / 2,
+      });
+      technoDonuts = technoDonuts.filter((element) => element.value != 0);
+
+      nbPoints = 0;
+      deparPointNumberQuestion = 0;
+      nbTime = 0;
+    }
+
+    if (arraytimeAllquestionCampagn && arraytimeAllquestionCampagn.length > 0) {
+      timeAllquestionCampagn = arraytimeAllquestionCampagn.reduce(
+        (accumulator, currenValue) => accumulator + currenValue
+      );
+      timeAllquestionCampgnDevice = timeAllquestionCampagn / 2;
+    }
+
+    for (let tech of technoDonuts) {
+      technoLabel.push(tech.label);
+      technoPoint.push(tech.value);
+    }
+    this.technoDonuts = technoDonuts;
+    this.poinTotal = poinTotal;
+    this.timeAllquestionCampagn = timeAllquestionCampagn;
+    this.timeAllquestionCampgnDevice = timeAllquestionCampgnDevice;
+    this.technoLabel = technoLabel;
+    this.technoPoint = technoPoint;
+
+    this.elementDonnut = this.Chart.nativeElement.getContext("2d");
+
+    let chart = new Chart(this.elementDonnut, {
+      type: "doughnut",
+
+      data: {
+        labels: this.technoLabel,
+        datasets: [
+          {
+            label: "diagram",
+            backgroundColor: ["#1d3552", "#e34e26", "#1f7eab", "#c1d5df"],
+            borderColor: ["#1d3552", "#e34e26", "#1f7eab", "#c1d5df"],
+            data: this.technoPoint,
+          },
+        ],
+      },
+
+      // Configuration options go here
+      options: {
+        legend: {
+          display: false,
+        },
+
+        tooltips: {
+          callbacks: {
+            title: function (tooltipItem, data) {
+              return data["labels"][tooltipItem[0]["index"]];
+            },
+            label: function (tooltipItem, data) {
+              // return data['datasets'][0]['data'][tooltipItem['index']]+' pts';
+            },
+            // afterLabel: function(tooltipItem, data) {
+            //   return ' pts'
+            // }
+          },
+
+          backgroundColor: "#fff",
+          titleFontSize: 13,
+          titleFontColor: "#1d3552",
+          bodyFontColor: "#1d3552",
+          bodyFontSize: 13,
+          displayColors: false,
+          footerMarginTop: "10",
+          titleAlign: "center",
+        },
+      },
+    });
+  }*/
 
   SendQuestionSeleditd(id) {
     this.apiClientService
       .put(API_URI_CAMPAIGNS + "/" + id, {
-        questions: this.allQuestionLevel,
+        questions: this.questions,
       })
       .subscribe(
         (res) => {
@@ -213,7 +307,7 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
   }
 
   editQuestionSelected() {
-    for (const element of this.allQuestionLevel) {
+    for (const element of this.questions) {
       console.log("element: ", element);
       this.updateQuestionsCampaign.push(element.id);
     }
@@ -290,3 +384,9 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
     }
   }
 }
+
+export interface IHash {
+  [details: string] : any;
+}
+
+
