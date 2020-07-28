@@ -7,9 +7,27 @@ const io = socket(server);
 
 const rooms = {};
 
+/* pour plus tard
+var room = io.sockets.in('some super awesome room');
+room.on('join', function() {
+  console.log("Someone joined the room.");
+});
+room.on('leave', function() {
+  console.log("Someone left the room.");
+});
+
+socket.join('some super awesome room');
+socket.broadcast.to('some super awesome room').emit('join');
+
+setTimeout(function() {
+  socket.leave('some super awesome room');
+  io.sockets.in('some super awesome room').emit('leave');
+}, 10 * 1000);
+*/
+
 io.on("connection", socket => {
     socket.on("join room", roomID => {
-        console.log(socket)
+        console.log(socket);
         if (rooms[roomID]) {
             rooms[roomID].push(socket.id);
         } else {

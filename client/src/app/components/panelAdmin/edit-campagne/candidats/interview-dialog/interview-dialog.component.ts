@@ -47,7 +47,7 @@ export class InterviewDialogComponent implements OnInit {
   public htmlContent: any;
   public subject: string;
   public Editor = ClassicEditor;
-  public interview_link: string = "https://spwrtc.osc-fr1.scalingo.io/"
+  public interview_link: string = "https://interview.oostaoo.com/"
   public loading: Boolean = false;
   public currentDate: any = new Date()
   errors = null;
