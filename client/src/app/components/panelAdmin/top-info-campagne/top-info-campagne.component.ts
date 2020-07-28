@@ -6,6 +6,8 @@ import {
   SimpleChanges,
   ElementRef,
   ViewChild,
+  EventEmitter, 
+  Output
 } from "@angular/core";
 import Chart from "chart.js";
 import { FormGroup } from "@angular/forms";
@@ -28,6 +30,8 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
   @Input() allQuestionLevel;
   @Input() yourCampaign;
   @Input() techno;
+  @Output() decrementPage = new EventEmitter<any>();
+
   public globalId: number;
   public updateQuestionsCampaign: number[] = [];
   public technoDonuts: any[] = [];
@@ -230,14 +234,13 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
     });
   }
 
+  public onDecrementPage(): void {
+    console.log('DECREMENT PAGE');
+    this.decrementPage.emit(); // Déclenche l'output
+  }
+
   postCampagne() {
-    // Confirm true for post
-
-    // if(this.yourCampaign[0] == undefined){
-    //   this.SendQuestionSeleditd(this.yourCampaign[0].id);
-    //   return
-    // }
-
+    
     let truecp;
 
     if (this.formCampagne && this.formCampagne.value.utilisationCopieColler) {

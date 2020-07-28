@@ -57,15 +57,31 @@
  </div>
 
   <div class="segment2">
+
+    <div class="container-previous hvr-grow" (click)="onDecrementPage()">
+      <button *ngIf="!yourCampaign" mat-mini-fab class="next-button" i18n>
+        <mat-icon class="addIcon">keyboard_arrow_left</mat-icon>
+      </button>
+      <span i18n class="button-text">Paramètres</span>
+    </div>
+
+    <div class="container-next hvr-grow" (click)="postCampagne()">
+      <span i18n class="button-text">Enregistrer</span>
+      <button *ngIf="!yourCampaign" mat-mini-fab class="next-button" i18n>
+        <mat-icon class="addIcon">save</mat-icon>
+      </button>
+    </div>
+
     
-    <button *ngIf="!yourCampaign" class="custom-buttom custom-buttom-anul" mat-flat-button [routerLink]="['/dashboard/campaigns']">
+    
+    <!--button *ngIf="!yourCampaign" class="custom-buttom custom-buttom-anul" mat-flat-button [routerLink]="['/dashboard/campaigns']">
       <i class="fas fa-chevron-left icon-arrow-btn"></i>
       Retour
-    </button>
-    <button class="custom-buttom" [ngClass]="allQuestionLevel && allQuestionLevel.length > 0 ? 'button-enabled' : 'button-disabled'"
+    </button-->
+    <!--button class="custom-buttom" [ngClass]="allQuestionLevel && allQuestionLevel.length > 0 ? 'button-enabled' : 'button-disabled'"
       [disabled]="allQuestionLevel && allQuestionLevel.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
       Enregistrer
-    </button>
+    </button-->
 
   </div>
 </div>

@@ -10,6 +10,29 @@
 .questions-container{
   padding: 70px 0px 10px 0px;
   height: 100%;
+  overflow: hidden;
+}
+
+.container-previous{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #fff;
+  background: mat-color($roodeo-app-primary, 800);
+  border-radius: 19px;
+  cursor: pointer;
+
+  .next-button{
+    background-color: #0c6192 !important;
+    position: relative;
+    right: -1px;
+  }
+  .button-text{
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 20px;
+    color: #fff;
+    cursor: pointer;
+  }
 }
 
 .new-campaign {
