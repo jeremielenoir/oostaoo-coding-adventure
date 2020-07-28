@@ -46,6 +46,8 @@
     ]
   },
   "devDependencies": {
+    "crypto-js": "^4.0.0",
+    "jsonwebtoken": "^8.5.1",
     "react-script": "^2.0.5",
     "react-scripts": "^3.4.1"
   }
