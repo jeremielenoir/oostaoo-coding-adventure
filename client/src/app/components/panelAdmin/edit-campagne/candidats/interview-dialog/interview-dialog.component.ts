@@ -154,7 +154,7 @@ export class InterviewDialogComponent implements OnInit {
 
           if (res) {
             this.interview = res;
-          //  this.interview_link = res.interview_link;
+            //  this.interview_link = res.interview_link;
             //res.interview_date
             this.populateForm = this.formBuilder.group({
               interview_date: [
@@ -215,7 +215,7 @@ export class InterviewDialogComponent implements OnInit {
 
       ` à la date du ${moment(this.pctrl.interview_date.value).format('DD/MM/YYYY')}   ${this.pctrl.time.value}`
       : ''
-    const email_content = this.pctrl.htmlContent.value.toString().replace('<<entretien_date>>', date)
+
     if (this.data && this.data.Interview && this.data.Interview.id) {
       this.loading = true;
       const id = this.data.Interview.id
@@ -228,7 +228,8 @@ export class InterviewDialogComponent implements OnInit {
         minute
       });
 
-
+      const old_date = ` à la date du ${moment(this.interview.interview_date).format('DD/MM/YYYY')}   ${moment(this.interview.interview_date).format("HH:mm")}`
+      const email_content = this.pctrl.htmlContent.value.toString().replace(old_date, date)
       const data: any = {
         id,
         interview_date,
@@ -261,6 +262,7 @@ export class InterviewDialogComponent implements OnInit {
         hour,
         minute
       })
+      const email_content = this.pctrl.htmlContent.value.toString().replace('<<entretien_date>>', date)
       this.loading = true;
       const data: any = {
         interview_date,
@@ -289,7 +291,7 @@ export class InterviewDialogComponent implements OnInit {
 
   remove() {
     if (this.data && this.data.Interview && this.data.Interview.id) {
-     
+
       const id = this.data.Interview.id
 
 
@@ -326,10 +328,10 @@ export class InterviewDialogComponent implements OnInit {
 
         }
         return this.apiClientService
-          .post(apiURL,data)
+          .post(apiURL, data)
           .toPromise()
           .then(() => {
-          this.loading = false
+            this.loading = false
             this.close()
 
           }
