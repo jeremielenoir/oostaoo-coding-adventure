@@ -1,10 +1,5 @@
 @import"../../../../roodeo-variables.scss";
 
-// ::ng-deep app-nouvelle-campagne{
-//     display: flex;
-//     flex-direction: column;
-//     height: 100%
-// }
 .form-etape{
   height: 100%;
   form{
@@ -13,7 +8,7 @@
 }
 
 .questions-container{
-  padding: 100px 0px 10px 0px;
+  padding: 70px 0px 10px 0px;
   height: 100%;
 }
 
@@ -55,7 +50,6 @@
     //margin-left: 10px;
     margin-right: 3px;
   }
-
   
 }
 
