@@ -155,6 +155,8 @@
 
     .state-techno-content {
       display: flex;
+      width: 50%;
+      overflow-x: auto;
       // padding: 15px;
       // align-items: center;
       .StatsByTechnology{

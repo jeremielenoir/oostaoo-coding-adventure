@@ -9,17 +9,21 @@ import {
   EventEmitter, 
   Output
 } from "@angular/core";
-import Chart from "chart.js";
-import { FormGroup } from "@angular/forms";
+
 import {
   ApiClientService,
   API_URI_QUESTIONS,
   API_URI_CAMPAIGNS,
 } from "../../../api-client/api-client.service";
+
+import Chart from "chart.js";
+import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 import { TooltipPosition, MatSnackBar } from "@angular/material";
 import { ActivatedRoute } from "@angular/router";
+
+
 @Component({
   selector: "app-top-info-campagne",
   templateUrl: "./top-info-campagne.component.html",
@@ -52,19 +56,20 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
     private route: ActivatedRoute
   ) {}
 
+
   ngOnInit() {
     this.route.parent.params.subscribe((params) => {
       this.globalId = params.id;
     });
-    // this.technoMethod();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log("changes", changes);
     this.technoMethod();
+    console.log('TECHNO DONUTS', this.technoDonuts);
   }
 
-  convertSecondsToMinutes(time) {
+  convertSecondsToMinutes( time) {
     return Math.floor(time / 60);
   }
 
@@ -88,7 +93,7 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
         arraytimeAllquestionCampagn.push(Number(timequestion.time));
       }
     }
-
+    console.log('TECHNO ELEMENT', this.techno);
     for (let technoElement of this.techno) {
       if (this.allQuestionLevel && this.allQuestionLevel.length) {
         for (let question of this.allQuestionLevel) {
@@ -192,6 +197,7 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
       },
     });
   }
+
   SendQuestionSeleditd(id) {
     this.apiClientService
       .put(API_URI_CAMPAIGNS + "/" + id, {

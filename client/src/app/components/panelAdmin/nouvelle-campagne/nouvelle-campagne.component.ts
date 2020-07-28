@@ -73,7 +73,7 @@ export class NouvelleCampagneComponent implements OnInit {
   }
 
   public recupeAllTechno(event) {
-    this.Alltechno.push(...event)
-    console.log('this.Alltechno', this.Alltechno)
+    this.Alltechno = [...event];
+    console.log('this.Alltechno', this.Alltechno);
   }
 }
