@@ -26,24 +26,14 @@ const theme = createMuiTheme({
 function App() {
   return (
     <div className="App">
-<<<<<<< HEAD
-      <BrowserRouter>
-        <Switch>
-          {/*<Route path="/" exact component={CreateRoom} />*/}
-          <Route path="/rooms/:interviewID" component={Room} />
-        </Switch>
-      </BrowserRouter>
-=======
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Switch>
-            <Route path="/" exact component={CreateRoom} />
-            <Route path="/room/:roomID" component={Room} />
+            {/*<Route path="/" exact component={CreateRoom} />*/}
+          <Route path="/rooms/:interviewID" component={Room} />
           </Switch>
         </BrowserRouter> 
       </ThemeProvider>
-      
->>>>>>> 55f54cf5b165504b704a759458f6526aaa1ef12e
     </div>
   );
 }
