@@ -47,7 +47,7 @@ export class InterviewDialogComponent implements OnInit {
   public htmlContent: any;
   public subject: string;
   public Editor = ClassicEditor;
-  public interview_link: string = "https://interview.oostaoo.com/"
+  public interview_link: string = "https://interview.oostaoo.com/rooms/"
   public loading: Boolean = false;
   public currentDate: any = new Date()
   errors = null;
@@ -154,7 +154,7 @@ export class InterviewDialogComponent implements OnInit {
 
           if (res) {
             this.interview = res;
-            this.interview_link = res.interview_link;
+          //  this.interview_link = res.interview_link;
             //res.interview_date
             this.populateForm = this.formBuilder.group({
               interview_date: [
@@ -187,7 +187,7 @@ export class InterviewDialogComponent implements OnInit {
      <<entretien_date>>
       </div>
      <div>
-      <a href="${this.interview_link}" target="_blank" style="font-size: 1rem;">
+      <a href="${this.interview_link}"  target="_blank" style="font-size: 1rem;">
      lien de la vidéoconférence</a></div>
       <div><br></div><div><br></div>
       <div>Bonne chance !</div><div>Cordialement </div>
