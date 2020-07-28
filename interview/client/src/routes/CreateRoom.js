@@ -1,5 +1,7 @@
 /*import React from "react";
 import { v1 as uuid } from "uuid";
+import { Button } from '@material-ui/core';
+
 
 const CreateRoom = (props) => {
     function create() {
@@ -8,7 +10,9 @@ const CreateRoom = (props) => {
     }
 
     return (
-        <button onClick={create}>Create Room</button>
+        
+            <Button color="primary" variant="contained" onClick={create}>Create Room</Button>
+        
     );
 }
 

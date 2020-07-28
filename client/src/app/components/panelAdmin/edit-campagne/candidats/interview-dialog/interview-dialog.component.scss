@@ -19,9 +19,12 @@
 
 
   .loading-container{
-    width: 500px;
-    max-height: 30px;
+    width: "100%";
+    
   }
   .candidat-presentation{
     text-align: center;
+  }
+  .cancel-button.mat-raised-button.mat-accent.ng-star-inserted{
+    margin-left: 10px;
   }
