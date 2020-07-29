@@ -1,8 +1,13 @@
 import React, { useRef, useEffect } from "react";
 import io from "socket.io-client";
-import * as CryptoJS from 'crypto-js';
-import jwt from 'jsonwebtoken';
 
+import { decrypteHash } from './room-service'
+
+import Button from '@material-ui/core/Button';
+import PresentToAllIcon from '@material-ui/icons/PresentToAll';
+import PhoneForwardedIcon from '@material-ui/icons/PhoneForwarded';
+
+import LogoRoodeo from '../assets/logo_ROODEO.svg';
 
 const Room = (props) => {
     const userVideo = useRef();
@@ -12,16 +17,10 @@ const Room = (props) => {
     const otherUser = useRef();
     const userStream = useRef();
 
-    
-    var key = 'roodeo';
-    const infosHash = props.match.params.interviewID;
-    var decrypted = jwt.verify(infosHash, key);
-    const { interview_id, candidat: {email}} = decrypted;  
-    
-
     useEffect(() => {
+        decrypteHash(props.match.params.interviewID);
+
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
-            
             console.log(stream);
             userVideo.current.srcObject = stream;
             userStream.current = stream;
@@ -132,11 +131,34 @@ const Room = (props) => {
     };
 
     return (
-        <div>
-            <video autoPlay ref={userVideo} />
-            <video autoPlay ref={partnerVideo} />
+        <div className="home-interview">
+            <div className="nav">
+                <img src={LogoRoodeo} alt="React Logo" />
+                <div className="email">mmm</div>
+            </div>
+            
+            <div className="main">
+                <video className="video" autoPlay ref={userVideo} />
+                {/*<video autoPlay ref={partnerVideo} />*/}
+                <div className="options">
+                    <h1>Prêt à participer ?</h1>
+                    <p>Pas d'autre participant</p>
+                    <Button variant="contained" color='primary'>
+                        <p>Participer à la réunion</p>
+                    </Button>
+                    <Button variant="contained">
+                        <PresentToAllIcon color='primary'></PresentToAllIcon>
+                        <p className="text-color">Présenter</p>
+                    </Button>
+                    <p>Autres Options</p>
+                    <p className="telephone">
+                        <PhoneForwardedIcon></PhoneForwardedIcon>
+                        participer par téléphone pour le son
+                    </p>
+                </div>
+            </div>
         </div>
-    );
+    )
 };
 
 export default Room;
