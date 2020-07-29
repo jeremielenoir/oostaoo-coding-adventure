@@ -48,7 +48,7 @@ export class TestComponent implements OnInit {
   public totalPointsCandidat;
   public dataInfoLanguageName:any = '';
   public dataInfoLanguageContent:any = '';
-  public separator :any=", "
+  public separator :any="☼"
 
 
   // Input algo
