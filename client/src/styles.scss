@@ -10,6 +10,10 @@
 
 $activeColor: #54728d !default;
 
+swiper > .swiper.s-wrapper {
+  z-index: 0;
+}
+
 .link-active{
   @extend .hvr-underline-reveal:hover;
 }

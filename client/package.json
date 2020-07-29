@@ -58,6 +58,7 @@
     "ngx-monaco-editor": "^7.0.0",
     "ngx-order-pipe": "^2.0.4",
     "ngx-stripe": "^7.4.4",
+    "ngx-swiper-wrapper": "8.0.2",
     "ngx-timeago": "^1.0.4",
     "ngx-toastr": "^10.1.0",
     "popmotion": "^8.7.1",

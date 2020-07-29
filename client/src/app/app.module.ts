@@ -19,6 +19,10 @@ import { DragScrollModule } from 'ngx-drag-scroll';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TimeagoModule, TimeagoIntl, TimeagoFormatter, TimeagoCustomFormatter } from 'ngx-timeago';
+import { SwiperModule } from 'ngx-swiper-wrapper';
+import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+
 // import components
 import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './main-layout.component';
@@ -141,6 +145,11 @@ import { InterviewDialogComponent } from './components/panelAdmin/edit-campagne/
 export class MyIntl extends TimeagoIntl {
 
 }
+
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto'
+};
 
 @NgModule({
   // [RouteComponentComponent, PopupMonOffre, InviteCandidat, CandidatsComponent, PopupCampaign,
@@ -284,7 +293,8 @@ export class MyIntl extends TimeagoIntl {
     }),
 
     CKEditorModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    SwiperModule
   ],
   providers: [
     ApiClientService,
@@ -293,7 +303,11 @@ export class MyIntl extends TimeagoIntl {
     CampagneComponent,
     SelectedLanguageService,
     CookieService,
-    CampaignsArchivedPipe
+    CampaignsArchivedPipe,
+    {
+      provide: SWIPER_CONFIG,
+      useValue: DEFAULT_SWIPER_CONFIG
+    }
   ],
   bootstrap: [AppComponent]
 })

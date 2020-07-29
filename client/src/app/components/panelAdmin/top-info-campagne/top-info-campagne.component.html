@@ -13,30 +13,47 @@
 
         </div>
 
+        <div *ngIf="technoDonuts.length > 3" class="swiper-previous">
+          <button mat-mini-fab color="primary" [disabled]="this.componentRef.isAtFirst" aria-label="Example icon button with a menu icon" (click)="prevSlide()">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </button>
+        </div>
+
         <div class="state-techno-content">
+          
           <div class="StatsByTechnology">
-            <div *ngFor="let donut of technoDonuts">
-              <div class="state-techno">
-                <p class="name-langage">
-                  {{donut.label}}
-                  <span>({{donut.value}}) pts</span>
-                  <span class="icon-chevron fas fa-chevron-up"></span>
+            
+            <swiper [config]="config" class="swiper-roodeo" (indexChange)="onChangeIndex($event)">
+              <div *ngFor="let donut of technoDonuts">
+                <div class="state-techno">
+                  <p class="name-langage">
+                    {{donut.label}}
+                    <span>({{donut.value}}) pts</span>
+                    <span class="icon-chevron fas fa-chevron-up"></span>
 
-                   <span class="question-time">{{donut.question}} questions</span>
-                  <span class="question-time">{{convertSecondsToMinutes(donut.timeQuestion / 2)}} à {{convertSecondsToMinutes(donut.timeQuestion)}} min</span>   
-                  
-                </p> 
+                    <span class="question-time">{{donut.question}} questions</span>
+                    <span class="question-time">{{convertSecondsToMinutes(donut.timeQuestion / 2)}} à {{convertSecondsToMinutes(donut.timeQuestion)}} min</span>   
+                    
+                  </p> 
 
-                <div class="infoBule-info">
+                  <div class="infoBule-info">
 
-                    <h3 class="title-infobule">connaissance du langange</h3>
-                    <span>{{donut.question}} question - {{donut.value}} pt</span>
+                      <h3 class="title-infobule">connaissance du langange</h3>
+                      <span>{{donut.question}} question - {{donut.value}} pt</span>
 
+                  </div>
+                
                 </div>
-              
               </div>
-            </div>
+            </swiper>
+            
           </div>
+          
+        </div>
+        <div *ngIf="technoDonuts.length > 3" class="swiper-next">
+          <button mat-mini-fab [disabled]="this.componentRef.isAtLast" color="primary" aria-label="Example icon button with a menu icon" (click)="nextSlide()">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </button>
         </div>
         <div class="score-moyen">
           <h4 class="title-score"></h4>

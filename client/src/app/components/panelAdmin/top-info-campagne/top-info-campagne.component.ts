@@ -22,6 +22,7 @@ import { Router } from "@angular/router";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 import { TooltipPosition, MatSnackBar } from "@angular/material";
 import { ActivatedRoute } from "@angular/router";
+import { SwiperComponent, SwiperConfigInterface} from "ngx-swiper-wrapper";
 
 
 @Component({
@@ -48,6 +49,34 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
   public campagneFull = [];
   public technoLabel = [];
   public technoPoint = [];
+
+  public config: SwiperConfigInterface = {
+      a11y: true,
+      direction: 'horizontal',
+      slidesPerView: 3,
+      slideToClickedSlide: true,
+      mousewheel: true,
+      scrollbar: false,
+      watchSlidesProgress: true,
+      navigation: false,
+      keyboard: true,
+      pagination: false,
+      centeredSlides: false,
+      loop: false,
+      roundLengths: true,
+      slidesOffsetBefore: 0,
+      slidesOffsetAfter: 0,
+      spaceBetween: 0,
+      width: 550
+      /*breakpoints: {
+          // when window width is >= 320px
+          320: {
+              slidesPerView: 1
+          }
+      }*/
+  };
+
+  @ViewChild(SwiperComponent) componentRef: SwiperComponent;
   
 
   constructor(
@@ -73,6 +102,21 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
 
   convertSecondsToMinutes( time) {
     return Math.floor(time / 60);
+  }
+
+  public onChangeIndex($event){
+    console.log('test');
+  }
+
+  public nextSlide(){
+    this.componentRef.directiveRef.nextSlide();
+    
+    console.log(this.componentRef.isAtLast);
+  }
+
+  public prevSlide(){
+    this.componentRef.directiveRef.prevSlide();
+    console.log(this.componentRef.isAtFirst);
   }
 
   public technoMethod(): void{
