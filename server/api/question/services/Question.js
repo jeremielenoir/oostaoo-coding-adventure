@@ -314,8 +314,18 @@ module.exports = {
    * @return {Promise}
    */
 
-  addSeparatorSpreadSheet: async (spreadsheetId, page, first, last) => {
+  addSeparatorSpreadSheet: async (spreadsheetId, ppage, first, last) => {
     try {
+      let page = "";
+
+      if (ppage.length === 3 && ppage.startsWith("C")) {
+        page = "C++";
+      } else if (ppage.length === 10 && ppage.startsWith("Angular")) {
+        page = "Angular 2+";
+      } else {
+        page = ppage;
+      }
+
       const ranges = [`${page}!${first}:${last}`];
       const client = new google.auth.JWT(
         keys.client_email,
@@ -334,14 +344,16 @@ module.exports = {
       });
 
       const data = valueRanges.map((val) => val.values)[0];
-      console.log("data", data);
+      /*   console.log("data", data); */
       const newData = data.map((e) => {
-        const tab = e[0].split(", ");
-       // console.log("tab", tab);
+        if (e && e[0]) {
+          const tab = e[0].split(", ");
+          // console.log("tab", tab);
 
-        return tab.join(" ; ");
+          return tab.join("☼");
+        }
       });
-     // console.log("newData", newData);
+      // console.log("newData", newData);
 
       // return newData;
       const values = newData.map((e) => [e]);
@@ -364,8 +376,17 @@ module.exports = {
    *
    * @return {Promise}
    */
-  fetchSpreadsheet: async (spreadsheetId, page, first, last) => {
+  fetchSpreadsheet: async (spreadsheetId, ppage, first, last) => {
     try {
+      let page = "";
+
+      if (ppage.length === 3 && ppage.startsWith("C")) {
+        page = "C++";
+      } else if (ppage.length === 10 && ppage.startsWith("Angular")) {
+        page = "Angular 2+";
+      } else {
+        page = ppage;
+      }
       const ranges = [`${page}!${first}:${last}`];
       const client = new google.auth.JWT(
         keys.client_email,
@@ -470,7 +491,7 @@ module.exports = {
           name: val[2],
           name_en: val[3],
           name_es: val[4],
-          name_jp:val[5],
+          name_jp: val[5],
           content: val[6],
           content_en: val[7],
           content_es: val[8],
@@ -734,7 +755,6 @@ module.exports = {
 
       return arrValues;
     } catch (error) {
-      console.log("error", error);
       throw error;
     }
   },
