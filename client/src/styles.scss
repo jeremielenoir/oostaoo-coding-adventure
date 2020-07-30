@@ -90,7 +90,7 @@ swiper > .swiper.s-wrapper {
     //margin-left: 10px;
     //letter-spacing: 1.5px;
     padding-top: 3px;
-    color: #1d3552;
+    color: $primary-text;
   }
 }
 
@@ -125,7 +125,7 @@ ul li {
   opacity: 0;
 }
 .checked-block input:checked ~ .checkbox-span {
-border-color: $color-principal-blue;
+  border-color: $color-principal-blue;
 }
 
 .checkbox-span {

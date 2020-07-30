@@ -11,7 +11,7 @@
         <!--button mat-raised-button [color]="'primary'" class="hvr-grow">
           <mat-icon>add</mat-icon>Nouveau test
         </button-->
-        <div class="container-add-campaign hvr-grow" [routerLink]="['/dashboard/campaigns/new']">
+        <div *ngIf="campaigns.length > 0" class="container-add-campaign hvr-grow" [routerLink]="['/dashboard/campaigns/new']">
           <button mat-mini-fab class="addCampaignContainer" i18n>
             <mat-icon class="addIcon">add</mat-icon>
           </button>  
@@ -69,8 +69,12 @@
 
       <div class="no-campaign" *ngIf="campaigns.length === 0">
         <p i18n> Vous n'avez pas encore de tests, cliquer sur le bouton en dessous pour en créer un.</p>
-        <div class="button btn-test" [routerLink]="['/dashboard/campaigns/new']" i18n>
-          Nouveau Test <i class="fas fa-plus plus-icon"></i>
+        <br/>
+        <div class="container-add-campaign hvr-grow" [routerLink]="['/dashboard/campaigns/new']">
+          <button mat-mini-fab class="addCampaignContainer" i18n>
+            <mat-icon class="addIcon">add</mat-icon>
+          </button>  
+          <span i18n class="addIconText">Nouveau test</span>
         </div>
       </div>
 
