@@ -5,12 +5,62 @@
     margin: 10px 0 10px 0;
 }
 
+.fullWidth {
+    width: 100%;
+  }
+
+  .flag-icon-jp{
+    border: 1px solid #cee5fd;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
+.container-radio-button{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: $primary-text;
+}
+
+.container-next{
+    
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #fff;
+    background: mat-color($roodeo-app-primary, 800);
+    border-radius: 19px;
+    cursor: pointer;
+  
+    .next-button{
+      background-color: #0c6192 !important;
+      position: relative;
+      right: -1px;
+    }
+    .button-text{
+      font-size: 14px;
+      margin-right: 10px;
+      margin-left: 20px;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
 
 .loading{
     
     height: 100%;
 }
-
+.campaign-param-container{
+    padding: 10px 60px;
+    color: $primary-text;
+    .campaign-param{
+        &.first{
+            margin-top: 10px;
+        }
+        
+    }
+  }
+  
 #bloc-chrono {
     display: flex;
     justify-content: space-between;
@@ -39,9 +89,9 @@
 }
 
 #button-container {
-    display: flex;
-    justify-content: space-between;
+    
     width: 100%;
+    text-align: right;
     
     .button {
         height: 50px;

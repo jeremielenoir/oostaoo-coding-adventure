@@ -18,6 +18,7 @@ export class GeneralComponent implements OnInit {
       this.globalId = params.id;
     });
   }
+
   public globalId: any;
   public campaigns: any;
 
@@ -42,11 +43,9 @@ export class GeneralComponent implements OnInit {
       this.lang = new FormControl(camp[0].langs);
       this.copypasteControl = new FormControl(camp[0].copy_paste);
       this.rapportControl = new FormControl(camp[0].sent_report);
-      // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
-      // console.log('campaign langue = ', camp[0]);
       this.dateExp = camp[0].expiration_date.slice(0, 10);
       this.NewDateExp = new Date(this.dateExp);
-      // console.log(' date =', this. date.value);
+      
     });
   }
 
@@ -62,21 +61,18 @@ export class GeneralComponent implements OnInit {
 
   updateCampaign() {
     this.NewDateExp.setDate(this.NewDateExp.getDate() + this. date.value);
-    // console.log('date exp: ', this.campaigns[0].expiration_date.slice(0, 10));
-    // console.log('new date', this.formatDate(this.NewDateExp));
-
-    if (this.copypasteControl.value === 'true') {
+    
+    if (this.copypasteControl.value) {
       this.copypaste = true;
     } else {
       this.copypaste = false;
     }
-    if (this.rapportControl.value === 'true') {
+    if (this.rapportControl.value) {
       this.envoiRapportSimplifie = true;
     } else {
       this.envoiRapportSimplifie = false;
     }
-    // console.log('form =', this.name.value, this.lang.value, this.copypaste, this.envoiRapportSimplifie );
-
+    
     this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.globalId, {
       Name: this.name.value,
       langs: this.lang.value,
@@ -86,7 +82,7 @@ export class GeneralComponent implements OnInit {
     }).subscribe(
       (res) => {
         this.openSnackBar("La campagne a correctement été mise à jour", "Fermer")
-       // console.log('res', res);
+       
       },
       err => console.log(err)
     );

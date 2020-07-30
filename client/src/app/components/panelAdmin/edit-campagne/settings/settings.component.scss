@@ -1,21 +1,24 @@
 @import"../../../../../roodeo-variables.scss";
 .settings-container {
+    
     width: 100%;
     background: $color-background-blue;
 
     .content{
+        
         width: 100%;
         border-radius: $border-radius;
         max-width: 1080px;
         margin: auto;
+        
         .formbox{
             width: 100%;
-            padding: 10px 0px;
+            padding: 20px 60px;
             background: $color-white;
             border: $border-table;
             border-radius: $border-radius;
-            display: flex;
-            justify-content: center;
+            color: $primary-text;
+            
         }
         
     }
