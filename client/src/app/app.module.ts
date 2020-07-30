@@ -164,6 +164,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     CandidatsMailComponent,
     DialogOverviewDelete,
     DialogOverviewDuplicate,
+    DialogOverviewTest,
     InterviewDialogComponent,
     DialogForgetPassword,
     OffersComponent,

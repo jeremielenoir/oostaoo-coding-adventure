@@ -150,9 +150,6 @@ export class DragNDropComponent implements OnInit {
         this.theme_i18n ='theme'
     }
      
-
-    console.log("this.content_i18n ",this.content_i18n )
-    console.log("this.name_i18n ",this.name_i18n )
     this.methoddataLevels();
 
     window.scroll(10, 0);
@@ -179,8 +176,7 @@ export class DragNDropComponent implements OnInit {
   }
 
   methoddataLevels() {
-    // this.notSelectedQuestions = this.selectedQuestions;
-    // console.log('data ---> trie',this.notSelectedQuestions)
+    
   }
 
   fmtMSS(d) {
@@ -265,47 +261,15 @@ export class DragNDropComponent implements OnInit {
   openDialogTest(): void {
     const dialogRef = this.dialog.open(DialogOverviewTest, {
       data: { questions: this.selectedQuestions, technoCampaign: this.techno },
-      width: "400px",
+      /*width: '400px',
+      height: '400px'*/
     });
 
     dialogRef.afterClosed().subscribe((result) => {});
   }
 
-  // filtreTechno(element) {
-
-  //   const valueChecked = [];
-
-  //   element.value.forEach(valueCheck => {
-  //     if (valueChecked.includes(valueCheck)) {
-
-  //       for (let value of valueChecked) {
-  //         let newFilter = this.notSelectedQuestions.filter(element => element.technologies.name == value);
-  //         this.notSelectedQuestions = newFilter
-  //       }
-
-  //     } else {
-  //       valueChecked.push(valueCheck);
-  //     }
-  //   });
-
-  //   console.log('allquestion---------->', this.notSelectedQuestions)
-
-  // }
 }
 
-// @Component({
-//   selector: "popup-campaign",
-//   templateUrl: "popup-campaign.html",
-//   styleUrls: ["./popup-campaign.css"]
-// })
-// export class PopupCampaign {
-//   constructor(private bottomSheetRef: MatBottomSheetRef<PopupCampaign>) {}
-
-//   openLink(event: MouseEvent): void {
-//     this.bottomSheetRef.dismiss();
-//     event.preventDefault();
-//   }
-// }
 
 @Component({
   selector: "dialog-overview-test",

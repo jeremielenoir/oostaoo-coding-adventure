@@ -1,51 +1,16 @@
 @import"../../../../../roodeo-variables.scss";
-#background {
-    padding-top: 15px;
-    padding-left: 20px;
-    padding-right:20px;
-    height: 100%;
+.settings-container {
     width: 100%;
     background: $color-background-blue;
 
-    #content{
+    .content{
         width: 100%;
         border-radius: $border-radius;
-        // margin-bottom: 5%;
-
-        // #nav{
-
-        //     display: flex;
-        //     width: 100%;
-        //     border-top: 0.5px solid $color-orange;
-            
-            // .link-nav{
-            //     width: 50%;
-            //     height: 50px;
-            //     border-radius: 2px;
-            //     color: $color-white;
-            //     text-decoration: none;
-            //     text-align: center;
-            //     line-height: 50px;
-            //     border-left: 0.5px solid $color-orange;
-            //     border-right: 0.5px solid $color-orange;
-            //     border-top: 0.5px solid $color-orange;
-            // }
-            
-            // .active-link{
-            //     background: $color-white;
-            //     color: $text-color;
-            //     border-left: 0.5px solid $color-orange;
-            //     border-right: 0.5px solid $color-orange;
-            //     border-top: 0.5px solid $color-orange;
-            //     /* -webkit-box-shadow: 5px 7px 26px -9px rgba(0,0,0,0.75);
-            //     -moz-box-shadow: 5px 7px 26px -9px rgba(0,0,0,0.75);
-            //     box-shadow: 5px 7px 26px -9px rgba(0,0,0,0.75); */
-            // }
-        // }
-        
-        #formbox{
+        max-width: 1080px;
+        margin: auto;
+        .formbox{
             width: 100%;
-            padding: 3% 8%;
+            padding: 10px 0px;
             background: $color-white;
             border: $border-table;
             border-radius: $border-radius;
