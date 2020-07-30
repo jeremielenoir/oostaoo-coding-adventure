@@ -1,15 +1,14 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import io from "socket.io-client";
-
-import { decrypteHash } from './room-service'
-
 import Button from '@material-ui/core/Button';
 import PresentToAllIcon from '@material-ui/icons/PresentToAll';
 import PhoneForwardedIcon from '@material-ui/icons/PhoneForwarded';
-
 import LogoRoodeo from '../assets/logo_ROODEO.svg';
+import { InterviewContext } from '../context/InterviewContext';
 
 const Room = (props) => {
+
+    const { email, decryptHash, interviewId } = useContext(InterviewContext);
     const userVideo = useRef();
     const partnerVideo = useRef();
     const peerRef = useRef();
@@ -18,8 +17,7 @@ const Room = (props) => {
     const userStream = useRef();
 
     useEffect(() => {
-        decrypteHash(props.match.params.interviewID);
-
+        decryptHash(props.match.params.hash);
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
             console.log(stream);
             userVideo.current.srcObject = stream;
@@ -134,7 +132,7 @@ const Room = (props) => {
         <div className="home-interview">
             <div className="nav">
                 <img src={LogoRoodeo} alt="React Logo" />
-                <div className="email">mmm</div>
+                <div className="email">{ email }</div>
             </div>
             
             <div className="main">
