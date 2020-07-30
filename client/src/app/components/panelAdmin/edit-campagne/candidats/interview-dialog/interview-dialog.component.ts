@@ -91,11 +91,11 @@ export class InterviewDialogComponent implements OnInit {
     return this.populateForm.controls;
   }
 
-  onValueChanges(): void {
-    this.populateForm.valueChanges.subscribe(val => {
-      console.log("value changed", val);
-    })
-  }
+  /*  onValueChanges(): void {
+     this.populateForm.valueChanges.subscribe(val => {
+       console.log("value changed", val);
+     })
+   } */
   ngOnInit() {
     for (let hour = 0; hour < 24; hour++) {
       this.times.push(moment({ hour }).format('HH:mm'));
@@ -204,8 +204,8 @@ export class InterviewDialogComponent implements OnInit {
 
     }
 
-
-    this.onValueChanges()
+    /* 
+        this.onValueChanges() */
   }
   get interview_date() { return this.populateForm.get('interview_date'); }
   get time() { return this.populateForm.get('time'); }
@@ -233,8 +233,8 @@ export class InterviewDialogComponent implements OnInit {
       const data: any = {
         id,
         interview_date,
-        candidats: [{ id: this.data.candidat_id, email: this.pctrl.email.value }],
-        user: { id: this.userToken.userId, email: this.currentUser.email },
+        candidats: [{ id: this.data.candidat_id, email: this.pctrl.email.value, name: this.pctrl.name.value }],
+        user: {...this.currentUser, id: this.userToken.userId },
         interview_link: this.interview_link,
         email_title: this.subject,
         email_content,
@@ -266,8 +266,8 @@ export class InterviewDialogComponent implements OnInit {
       this.loading = true;
       const data: any = {
         interview_date,
-        candidats: [{ id: this.data.candidat_id, email: this.pctrl.email.value }],
-        user: { id: this.userToken.userId, email: this.currentUser.email },
+        candidats: [{ id: this.data.candidat_id, email: this.pctrl.email.value, name: this.pctrl.name.value }],
+        user: {...this.currentUser, id: this.userToken.userId },
         email_title: this.subject,
         email_content,
         interview_link: this.interview_link

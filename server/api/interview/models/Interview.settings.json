@@ -36,6 +36,10 @@
     "email_content": {
       "default": "",
       "type": "text"
+    },
+    "interview_state": {
+      "default": "",
+      "type": "string"
     }
   }
 }
