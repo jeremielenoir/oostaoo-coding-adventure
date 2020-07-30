@@ -9,6 +9,9 @@ const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const _ = require("lodash");
 const jwt = require("jsonwebtoken");
+const ical = require("ical-generator");
+const moment = require("moment-timezone");
+
 // Create reusable transporter object using SMTP transport.
 const transporter = nodemailer.createTransport({
   service: "Gmail",
@@ -77,7 +80,8 @@ module.exports = {
 
       const interview_id = interview.attributes.id;
       const encodedData = {
-        interview_id: interview_id.toString(),
+        interview_id,
+        interview_date,
         candidat: {
           email: candidats[0].email,
           name: candidats[0].name,
@@ -96,13 +100,27 @@ module.exports = {
       const regex = new RegExp(expression);
       const getEmail_message_crypto = email_content.replace(regex, link);
       const to = [candidats[0].email, user.email];
+      const organizer = `${user.prenom} ${user.nom} <${user.email}>`;
+      const icalEvent = ical({
+        domain: "roodeo.com",
 
+        events: [
+          {
+            start: moment(interview_date),
+            end: moment(interview_date).add(1, "hour"),
+            timestamp: moment(),
+            summary: email_title,
+            organizer,
+          },
+        ],
+      }).toString();
       const options = {
         to,
         from: "chagnon.maxime@oostaoo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
         html: getEmail_message_crypto,
+        icalEvent,
       };
 
       await transporter.sendMail(options);
@@ -140,20 +158,19 @@ module.exports = {
         interview_link,
       } = ctx.request.body;
 
+      if (!ctx.params.id) {
+        throw new Error("Unknown user");
+      }
+
       const encodedData = {
+        interview_date,
         interview_id: ctx.params.id,
         candidat: {
           email: candidats[0].email,
           name: candidats[0].name,
         },
       };
-      /* const cryptoData = crypto
-        .createHash("md5")
-        .update(JSON.stringify(encodedData))
-        .digest("hex"); */
 
-      //const cryptoData = sha256(JSON.stringify(encodedData));
-      // const cryptoData = AES.encrypt("toto",'roodeo');
       const cryptoData = await jwt.sign(JSON.stringify(encodedData), "roodeo");
 
       const link = `${interview_link}${cryptoData}`;
@@ -163,13 +180,27 @@ module.exports = {
       const getEmail_message_crypto = email_content.replace(regex, link);
 
       const to = [candidats[0].email, user.email];
+      const organizer = `${user.prenom} ${user.nom} <${user.email}>`;
+      const icalEvent = ical({
+        domain: "roodeo.com",
 
+        events: [
+          {
+            start: moment(interview_date),
+            end: moment(interview_date).add(1, "hour"),
+            timestamp: moment(),
+            summary: email_title,
+            organizer,
+          },
+        ],
+      }).toString();
       const options = {
         to,
         from: "chagnon.maxime@oostaoo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
         html: getEmail_message_crypto,
+        icalEvent,
       };
       const updatedData = {
         /*   candidats,
