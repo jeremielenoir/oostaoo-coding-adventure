@@ -4,8 +4,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 //import HomeInterview from "./routes/HomeInterview";
 import Room from "./routes/Room";
 
-import InterviewProvider from './context/InterviewContext';
-
 import './App.css';
 
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -32,12 +30,9 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <InterviewProvider>
           <BrowserRouter>
-              {/* <Route exact path="/room" component={HomeInterview} />   */}
               <Route path="/rooms/:hash" component={Room} />
           </BrowserRouter> 
-        </InterviewProvider>
       </ThemeProvider>
     </div>
   );

@@ -1,14 +1,13 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import io from "socket.io-client";
 import Button from '@material-ui/core/Button';
 import PresentToAllIcon from '@material-ui/icons/PresentToAll';
 import PhoneForwardedIcon from '@material-ui/icons/PhoneForwarded';
 import LogoRoodeo from '../assets/logo_ROODEO.svg';
-import { InterviewContext } from '../context/InterviewContext';
+import { decryptHash } from '../services/decryptService';
 
 const Room = (props) => {
 
-    const { email, decryptHash, interviewId } = useContext(InterviewContext);
     const [ meetingConfirmation, setMeetingConfirmation ] = useState(false);
     const userVideo = useRef();
     const partnerVideo = useRef();
@@ -16,9 +15,19 @@ const Room = (props) => {
     const socketRef = useRef();
     const otherUser = useRef();
     const userStream = useRef();
+    const  [nom, setNom] = useState('');
+    const [email, setEmail] = useState('');
+    const [interviewId, setInterviewId] = useState('');
 
     useEffect(() => {
-        decryptHash(props.match.params.hash);
+    
+        decryptHash(props.match.params.hash)
+        .then((res)=>{
+            console.log('res email : ', res.email);
+            setInterviewId(res.interview_id);
+            setEmail(res.email);
+            if(res.nom){setNom(res.nom)};
+            });
 
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
 
