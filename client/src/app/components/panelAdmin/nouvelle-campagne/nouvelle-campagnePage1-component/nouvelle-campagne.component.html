@@ -3,9 +3,10 @@
     <div>
 
       <div class="header-new-campagne">
-        <figure class="block-img">
+        <!--figure class="block-img">
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg" alt="" />
-        </figure>
+        </figure-->
+        <mat-icon class="static">person_pin</mat-icon>
         <h2 class="title" i18n>Nouveau test d'evaluation : profil recherché</h2>
       </div>
       <div class="campaign-param-container">
@@ -53,7 +54,7 @@
      
         <div class="offset-exp">
           <label for="experience" [ngStyle]="errorExperience ? { color: 'red' } : null">Sélectionnez l'expérience requise</label>&nbsp;
-          <i class="fas fa-info-circle info" title="Questions et challenges de code pour des développeurs de 3 à 5 ans d'expérience."></i>
+          <mat-icon class="info-icon" color="primary" [matTooltipPosition]="'right'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Questions et challenges de code pour des développeurs de 3 à 5 ans d'expérience.">info</mat-icon>
           <div [formGroup]="formCampagne" class="experience-container">
             <mat-radio-group formControlName="experience" >
               <mat-radio-button value="facile" checked>

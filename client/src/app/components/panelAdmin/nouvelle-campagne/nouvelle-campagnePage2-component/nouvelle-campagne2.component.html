@@ -1,9 +1,7 @@
 <div class="cadreQuestion">
 <div class="new-campaign">
     <div class="header-new-campagne">
-      <figure class="block-img">
-        <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg" alt="" />
-      </figure>
+      <mat-icon class="static">rule</mat-icon>
       <h2 class="title" i18n>Nouveau test d'evaluation : paramètres</h2>
     </div>
 
@@ -103,7 +101,7 @@
         <button mat-mini-fab class="next-button" i18n>
           <mat-icon class="addIcon">keyboard_arrow_left</mat-icon>
         </button>
-        <span i18n class="button-text">Etape précédente : paramètres</span>
+        <span i18n class="button-text">Etape précédente : profil recherché</span>
       </div>
 
       <div class="container-next hvr-grow" (click)="onIncrementPage(formCampagne.value)" (click)="postData()">
@@ -114,30 +112,7 @@
       </div>
 
       
-      <!--div class="buttons">
-        <div class="singleButton">
-          <button
-            type="button"
-            id="button"
-            mat-flat-button
-            (click)="onDecrementPage()"
-          >
-            Étape précédente : Profil recherché
-          </button>
-        </div>
-        <div class="singleButton">
-          <button
-            type="button"
-            id="button"
-            mat-flat-button
-            (click)="onIncrementPage()"
-            (click)="postData()"
-          >
-            
-            Étape suivante : Choix des questions
-          </button>
-        </div>
-      </div-->
+      
     </div>
    
   </div>

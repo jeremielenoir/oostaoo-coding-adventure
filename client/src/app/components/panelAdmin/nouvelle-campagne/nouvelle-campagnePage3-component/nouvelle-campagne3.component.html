@@ -1,5 +1,8 @@
-<app-top-info-campagne (decrementPage)="onDecrementPage()"  [formCampagne]="formCampagne" [questions]="allQuestionLevel" [technologies]="techno"></app-top-info-campagne>
+<app-top-info-campagne (decrementPage)="onDecrementPage()"  [formCampagne]="formCampagne" [questions]="selectedQuestions" [technologies]="techno"></app-top-info-campagne>
 
-<app-dragndrop-component (chargeYourCampagn)="chargeYourCampagn($event)" [allQuestionLevel]="allQuestionLevel" [datas]="allQuestions" >
+<app-dragndrop-component 
+    (chargeYourCampagn)="chargeYourCampagn($event)" 
+    [selectedQuestions]="selectedQuestions" 
+    [notSelectedQuestions]="notSelectedQuestions" >
 </app-dragndrop-component>
  

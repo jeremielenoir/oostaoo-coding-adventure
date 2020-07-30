@@ -2,23 +2,14 @@
 
 @import"../nouvelle-campagne/nouvelle-campagne.component.scss";
 
-.loading{
-    //top: 0;
-}
 
-
-// ::ng-deep app-nouvellecampagnepage3component{
-//     display: flex;
-//     flex-direction: column;
-//     height: 100%;
-// }
 ::ng-deep app-edit-question-component{
     height: 100%;
 }
 
 #content {
     width: 100%;
-    height: 100%;
+    height: 95%;
     padding-bottom: 20px;
     display: flex;
     position: relative;
@@ -38,11 +29,16 @@
 }
 
 
+
+.color-primary-dark{
+    background: mat-color($roodeo-app-primary, 800);
+}
+
 .bar {
     width: 100%;
     background: #eaeff3;
-    height: 50px;
-    padding: 5px 0px 5px 12px;
+    height: 55px;
+    padding: 5px 15px 5px 12px;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -51,108 +47,39 @@
     align-items: center;
     border-bottom: 1px solid $color-principal-blue;
 
+    .mat-icon.static{
+        font-size: 40px;
+        margin-right: 30px;
+        line-height: 40px;
+        color: mat-color($roodeo-app-accent, 800);
+        margin-top: -11px;
+    }
+
     .bar-content-img{
         width: 36px;
         height: 36px;
         margin-bottom: 0px;
-        margin-right: 45px;
+        margin-right: 20px;
     }
     .bar-text{
-        text-transform: uppercase;
-        font-size: $font-size-home;
+        color: $color-principal-blue;
+        font-size: 16px;
         margin-bottom: 0;
-        letter-spacing: 1.5px;
         padding-top: 7px;
         flex: 11;
+        font-family: $font-poppins;
     }
 }
-
-/* Button recherche avancé */
-
-//  ::ng-deep .mat-menu-panel{
-//     width: 100%!important;
-//     border-radius: 0px!important;
-// }
-
-// .custom-buttom-anul{
-//     background-color: $color-gray!important;
-//     outline: none;
-   
-// }
-
-// .icon-arrow-btn{
-//     font-size: 25px;
-//     position: relative;
-//     left: 15px;
-//     top: -1px;
-//     transition: .2s;
-// }
-
-// .option-question-help{
-//     display: flex;
-//     flex-direction: row;
-//     border-top: $border-table;
-//     border-bottom: $border-table;
-//     padding-left: 18px;
-//     align-items: center;
-//     background: #fff;
-//     justify-content: space-between;
-//     #div-search {
-//         display: flex;
-//         margin-top: -8px;
-//         .search-input{
-//             font-size: $font-size-home;
-//             background-color: white;
-//             border:none;
-//             border-bottom: 1px solid #de522b;
-//             outline: none;
-//             padding: 6px 6px;
-//             width: 150px;
-//             &::placeholder{
-//                 color:$color-orange;
-                
-//             }
-//         }
-//         .icon-search{
-//             // display: inline-block;
-//             width: 25px;
-//             height: 25px;
-//             font-size: 27px;
-//         }
-//     }
-//     .search-advanced{
-//         color:$color-orange;
-//         font-size: $font-size-home;
-//         justify-content: center;
-//         margin-left: 12px;
-//         i{
-//             left: 12px;
-//             top: 5px;
-//         }
-//     }
-
-//     .trie-cat{
-//         i{
-//             left: 21px;
-//         }
-//     }
-// }
-
-
-/* Fin button recherche avancé */
 
 .preview-btn{
     position: absolute;
     right: 16px;
     background-color: $color-principal-blue!important;
     letter-spacing: 1px;
-   
+    
 }
 
-:host ::ng-deep .mat-button-wrapper {
-    contain: content;
-    font-family: $font-poppins!important;
-}
+
 
 /* DRAG AND DROP */
 
@@ -166,14 +93,15 @@
     display: flex;
     width: 50%;
     max-width: 100%;
-    margin: 10px 0px 0px 0px;
+    margin: 15px 0px 0px 0px;
 
     vertical-align: top;
     border: $border-table;
     border-radius: $border-radius;
     overflow: hidden;
     flex-direction: column;
-   flex: 1;
+    flex: 1;
+    box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4), -3px -4px 8px -2px rgba(124, 151, 166, 0.69);
 }
 
 .liste-question {
@@ -300,7 +228,7 @@
             display:flex; 
             align-items: center; 
             justify-content: center; 
-            color: $color-orange; 
+            color: $color-principal-blue; 
             margin: 0px;
 
         }
@@ -521,6 +449,6 @@
     width: 100%;
     margin: 0;
     // padding-bottom: 25px;
-    height: 90%;
+    height: 95%;
 }
 

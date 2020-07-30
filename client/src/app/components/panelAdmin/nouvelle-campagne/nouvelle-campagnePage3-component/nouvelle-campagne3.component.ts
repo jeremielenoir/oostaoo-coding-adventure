@@ -28,23 +28,23 @@ import { Router } from "@angular/router";
   selector: "app-NouvelleCampagnePage3Component",
   templateUrl: "./nouvelle-campagne3.component.html",
   styleUrls: [
-    "./nouvelle-campagne3.component.scss",
-    "../nouvelle-campagne.component.scss"
+    "./nouvelle-campagne3.component.scss"
   ]
 })
 export class NouvelleCampagnePage3Component implements OnInit {
+  
   @Output() incrementPage = new EventEmitter<any>();
   @Output() decrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
-  
   @Input('techno') techno: any
+  
   public searchText = "";
   public experience: string;
   public questions: any[] = [];
   public saveallQuestionsCampaign: any[];
-  public allQuestionLevel: any[] = [];
+  public selectedQuestions: any[] = [];
+  public notSelectedQuestions: any[] = [];
   public allQuestions: any[] = [];
-  public allTechno: any = [];
   public finalCampagn = []
 
   public activeClassScrollTopDropList = false;
@@ -52,8 +52,6 @@ export class NouvelleCampagnePage3Component implements OnInit {
   public toppingsDifficulty = new FormControl();
   public difficulty = ['facile', 'moyen', 'expert'];
   
-
-  Questions = [];
 
   @ViewChild("droplist") public droplist: ElementRef;
 
@@ -71,8 +69,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-      // console.log("all question: ", this.allQuestions);
-      // console.log("this Question: ", this.Questions)
+      
     }
   }
   constructor(
@@ -83,25 +80,11 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
   ngOnInit() {
   
-    this.experience =  this.formCampagne.value.experience;
+    this.experience = this.formCampagne.value.experience;
     this.getAllQuestions();
-
-    window.scroll(10, 0);
-
-    window.addEventListener("scroll", () => {
-      this.headerChangePositioinDropList();
-    });
-
    
   } 
 
-  OnChanges(){
-    
-  }
-
-  experiencecampagn(){
-
-  }
 
   fmtMSS(d) {
     d = Number(d);
@@ -123,9 +106,8 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
    getAllQuestions() {
 
-    // console.log('this.formCampagne.value(): ', this.formCampagne.value);
+      let url ='';
 
-      let url =''
       this.techno.forEach((tech,index)=>{
         if(index === 0){
         url +=`?technologies_in=${tech.id}`
@@ -134,69 +116,32 @@ export class NouvelleCampagnePage3Component implements OnInit {
         }
       })
 
-         this.apiClientService.get(`${API_URI_QUESTIONS}${url}`).subscribe(datas => {
-           console.log('data longeur',datas.length)
-          this.questions.push(...datas);
-          console.log('data --->',datas)
-          for (const question of this.questions) {
-            if (question.technologies) {
-                this.allTechno.push(question.technologies.name)
-                this.allQuestions.push(question);
-            }
-
+      this.apiClientService.get(`${API_URI_QUESTIONS}${url}`).subscribe(datas => {
+        
+        this.questions = [...datas];
+        
+        for (const question of this.questions) {
+          if (question.technologies) {
+              this.allQuestions.push(question);
           }
 
-          this.allQuestionLevel = this.allQuestions.filter(questionLevel => (questionLevel.level === this.experience));
-          for(let questionOfLevel of this.allQuestionLevel){
-            this.allQuestions = this.allQuestions.filter(question => question !== questionOfLevel)
-          }
-          console.log(' this.allQuestionLevel bien filtre', this.allQuestionLevel)
-  
-        });
-      
-    
-
-   
-   
-  }
-  populateQuestions(yourCampaign) {
-    
-    let technos = this.techno;
-
-    yourCampaign.forEach((element) => {
-      const technoIndex = technos.findIndex(
-        (t) =>
-          t && t.id && t.id.toString() === element.technologies.id.toString()
-      );
-      if (technoIndex < 0) {
-        technos.push(element.technologies);
-      }
-    });
-
-    const newQuestion = [];
-
-    for (let techno of technos) {
-      for (let question of yourCampaign) {
-        if (techno.id.toString() === question.technologies.id.toString()) {
-          
-
-          newQuestion.push({ ...question, technologies: techno });
         }
-      }
-    }
 
-  /*   this.questionsEditQuestion = newQuestion;
+        this.selectedQuestions = this.allQuestions.filter(questionLevel => (questionLevel.level === this.experience));
+        this.notSelectedQuestions = [...this.allQuestions];
+        
+        for(let questionOfLevel of this.selectedQuestions){
+          this.notSelectedQuestions = this.notSelectedQuestions.filter(question => question !== questionOfLevel);
+        }
 
-    this.yourCampaign = yourCampaign; */
-    this.allQuestions = yourCampaign;
-    this.allTechno = technos;
-    
+      });
+      
   }
+
   chargeYourCampagn(event) {
-   
- 
-  this.allQuestionLevel= this.allQuestionLevel.filter(q1=>this.allQuestions.findIndex(q2=>q1.id.toString()===q2.id.toString())<0)
+    this.selectedQuestions= this.selectedQuestions.filter(q1=>this.notSelectedQuestions.findIndex(q2=>q1.id.toString()===q2.id.toString())<0)
   }
+
   public onDecrementPage(): void {
     this.decrementPage.emit(); // Déclenche l'output
   }
@@ -212,7 +157,6 @@ export class NouvelleCampagnePage3Component implements OnInit {
   filtreDifficuty(element) {
     
     let test = 1;
-
 
     let results = [];
 

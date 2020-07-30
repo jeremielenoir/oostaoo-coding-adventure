@@ -5,13 +5,14 @@
   <div id="content">
     <div class="block-container left">
       <div class="bar">
-        <figure class="bar-content-img">
+        <!--figure class="bar-content-img">
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
-        </figure>
-        <span class="bar-text">Questions disponibles</span>
+        </figure-->
+        <mat-icon class="static">playlist_add</mat-icon>
+        <span class="bar-text">Questions disponibles ({{this.notSelectedQuestions.length}})</span>
       </div>
       <!-- 
-            <div *ngIf="datas && datas.length > 0" class="loading">
+            <div *ngIf="notSelectedQuestions && notSelectedQuestions.length > 0" class="loading">
               <span class="fa fa-spinner fa-pulse"></span>
       </div> -->
 
@@ -70,10 +71,10 @@
       </div>
 
 
-      <div id="cdkDropList" cdkDropList #todoList="cdkDropList"  [cdkDropListData]="datas" [cdkDropListConnectedTo]="[doneList]"
+      <div id="cdkDropList" cdkDropList #todoList="cdkDropList"  [cdkDropListData]="notSelectedQuestions" [cdkDropListConnectedTo]="[doneList]"
         class="liste-question" (cdkDropListDropped)="drop($event)">
         
-          <div (cdkDragStarted)="dragStart($event)" (cdkDragEnded)="dragEnd($event)" class="ligne-question" *ngFor="let item of datas | filter: searchText" cdkDrag>
+          <div (cdkDragStarted)="dragStart($event)" (cdkDragEnded)="dragEnd($event)" class="ligne-question" *ngFor="let item of notSelectedQuestions | filter: searchText" cdkDrag>
 
           
               <div [ngClass]="{'info-hover-left': disablehover === false, 'disable': disablehover === true }" class="">
@@ -164,20 +165,37 @@
 
     <div class="block-container right">
       <div class="bar">
-        <figure class="bar-content-img">
+        <!--figure class="bar-content-img">
           <img src="../assets/Coding-game-img/SVG-menu-Dashboard/mes-tests.svg">
-        </figure>
-        <span class="bar-text">Votre Campagne</span>
-        <button (click)="openDialogTest()" mat-flat-button class="trie-cat preview-btn">
+        </figure-->
+        <mat-icon class="static">grading</mat-icon>
+        <span class="bar-text">Votre test d'évaluation ({{this.selectedQuestions.length}})</span>
+
+        <button class="hvr-grow color-primary-dark" mat-mini-fab (click)="openDialogTest()" [matTooltipPosition]="'left'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Prévisualiser le test" color="primary" aria-label="Example icon button with a menu icon">
+          <mat-icon>play_circle_outlined</mat-icon>
+        </button>
+        <!--button mat-mini-fab matTooltip="Actions" color="primary" aria-label="Example icon button with a menu icon">
+          <mat-icon>menu</mat-icon>
+        </button-->
+        
+        
+        <!--div class="container-previous hvr-grow" (click)="openDialogTest()">
+          <button  mat-mini-fab class="next-button" i18n>
+            <mat-icon class="addIcon">remove_red_eye</mat-icon>
+          </button>
+          <span i18n class="button-text">Prévisualiser</span>
+        </div-->
+        
+        <!--button (click)="openDialogTest()" mat-flat-button class="trie-cat preview-btn">
           Prévisualiser
           <i class="fas fa-chevron-right icon-arrow-btn"></i>
-        </button>
+        </button-->
       </div>
-      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="allQuestionLevel"
+      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="selectedQuestions"
         [cdkDropListConnectedTo]="[todoList]" class="liste-question" (cdkDropListDropped)="drop($event)" #droplist>
         <p id="drop-text">Glissez/déposez une question ici</p>
 
-          <div class="ligne-question" (cdkDragEnded)="dragEnd($event)" (cdkDragStarted)="dragStart($event)" *ngFor="let item of allQuestionLevel" cdkDrag>
+          <div class="ligne-question" (cdkDragEnded)="dragEnd($event)" (cdkDragStarted)="dragStart($event)" *ngFor="let item of selectedQuestions" cdkDrag>
 
             <div [ngClass]="{'info-hover-right': disablehover === false, 'disable': disablehover === true }" class="">
               <div class="info-hover-header"><h2>{{item[name_i18n]}}</h2></div>

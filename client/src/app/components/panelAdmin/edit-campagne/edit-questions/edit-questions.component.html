@@ -1,4 +1,7 @@
 <app-top-info-campagne [yourCampaign]="yourCampaign" [questions]="allQuestions" [technologies]="allTechno"></app-top-info-campagne>
- <app-dragndrop-component (chargeYourCampagn)="chargeYourCampagn($event)" [techno]="allTechno" [datas]="allQuestionsCampaign"
- [allQuestionLevel]="allQuestions">
+ <app-dragndrop-component 
+ (chargeYourCampagn)="chargeYourCampagn($event)" 
+ [techno]="allTechno" 
+ [notSelectedQuestions]="allQuestionsCampaign"
+ [selectedQuestions]="allQuestions">
 </app-dragndrop-component>

@@ -42,14 +42,13 @@ export interface DialogData {
   selector: "app-dragndrop-component",
   templateUrl: "./dragndrop.component.html",
   styleUrls: [
-    "./dragndrop.component.scss",
-    "../nouvelle-campagne/nouvelle-campagne.component.scss",
+    "./dragndrop.component.scss"
   ],
 })
 export class DragNDropComponent implements OnInit {
   @Input("formCampagne") formCampagne: FormGroup;
-  @Input() datas = [];
-  @Input() allQuestionLevel = [];
+  @Input() notSelectedQuestions = [];
+  @Input() selectedQuestions = [];
   @Input() techno = [];
   @Output() incrementPage = new EventEmitter<any>();
   @Output() decrementPage = new EventEmitter<any>();
@@ -164,24 +163,24 @@ export class DragNDropComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("aerorpt man -->", changes.allQuestionLevel);
-    if (this.allQuestionLevel && this.allQuestionLevel.length > 0) {
+    console.log("aerorpt man -->", changes.selectedQuestions);
+    if (this.selectedQuestions && this.selectedQuestions.length > 0) {
       this.booleanCampagnFinishLoading = true;
     }
   }
 
   addquestion(question) {
-    this.allQuestionLevel.push(question);
-    const index = this.datas.indexOf(question);
+    this.selectedQuestions.push(question);
+    const index = this.notSelectedQuestions.indexOf(question);
     if (index > -1) {
-      this.datas.splice(index, 1);
+      this.notSelectedQuestions.splice(index, 1);
     }
-    this.chargeYourCampagn.emit([...this.allQuestionLevel,question]);
+    this.chargeYourCampagn.emit([...this.selectedQuestions,question]);
   }
 
   methoddataLevels() {
-    // this.datas = this.allQuestionLevel;
-    // console.log('data ---> trie',this.datas)
+    // this.notSelectedQuestions = this.selectedQuestions;
+    // console.log('data ---> trie',this.notSelectedQuestions)
   }
 
   fmtMSS(d) {
@@ -204,7 +203,7 @@ export class DragNDropComponent implements OnInit {
   SendQuestionSelected(id) {
     this.apiClientService
       .put(API_URI_CAMPAIGNS + "/" + id, {
-        questions: this.allQuestionLevel,
+        questions: this.selectedQuestions,
       })
       .subscribe(
         (res) => {
@@ -262,10 +261,10 @@ export class DragNDropComponent implements OnInit {
     this.boelanIsSearchAdvenced = !this.boelanIsSearchAdvenced;
   }
 
-  // data: {questions: this.allQuestionLevel}
+  // data: {questions: this.selectedQuestions}
   openDialogTest(): void {
     const dialogRef = this.dialog.open(DialogOverviewTest, {
-      data: { questions: this.allQuestionLevel, technoCampaign: this.techno },
+      data: { questions: this.selectedQuestions, technoCampaign: this.techno },
       width: "400px",
     });
 
@@ -280,8 +279,8 @@ export class DragNDropComponent implements OnInit {
   //     if (valueChecked.includes(valueCheck)) {
 
   //       for (let value of valueChecked) {
-  //         let newFilter = this.datas.filter(element => element.technologies.name == value);
-  //         this.datas = newFilter
+  //         let newFilter = this.notSelectedQuestions.filter(element => element.technologies.name == value);
+  //         this.notSelectedQuestions = newFilter
   //       }
 
   //     } else {
@@ -289,7 +288,7 @@ export class DragNDropComponent implements OnInit {
   //     }
   //   });
 
-  //   console.log('allquestion---------->', this.datas)
+  //   console.log('allquestion---------->', this.notSelectedQuestions)
 
   // }
 }

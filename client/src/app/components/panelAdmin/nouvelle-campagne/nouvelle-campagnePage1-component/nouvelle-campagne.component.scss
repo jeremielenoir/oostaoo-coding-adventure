@@ -5,6 +5,16 @@
   box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40), -3px -4px 8px -2px rgba(124, 151, 166, 0.69);
 }
 
+.mat-icon.static{
+  font-size: 52px;
+  margin-right: 20px;
+  line-height: 52px;
+  margin-top: 0px;
+  height: 46px;
+  width: 46px;
+  color: mat-color($roodeo-app-accent, 800);
+}
+
 
 .cadreQuestion {
   padding: 115px 15px 10px 15px;
@@ -47,7 +57,9 @@
   margin-bottom: 30px;
   text-align: right;
 }
-
+.mat-icon.info-icon{
+  color: mat-color($roodeo-app-primary, 800);
+}
 .container-next{
   margin-top: 5px;
   margin-bottom: 5px;
