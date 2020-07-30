@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import io from "socket.io-client";
 import Button from '@material-ui/core/Button';
 import PresentToAllIcon from '@material-ui/icons/PresentToAll';
@@ -9,6 +9,7 @@ import { InterviewContext } from '../context/InterviewContext';
 const Room = (props) => {
 
     const { email, decryptHash, interviewId } = useContext(InterviewContext);
+    const [ meetingConfirmation, setMeetingConfirmation ] = useState(false);
     const userVideo = useRef();
     const partnerVideo = useRef();
     const peerRef = useRef();
@@ -18,8 +19,9 @@ const Room = (props) => {
 
     useEffect(() => {
         decryptHash(props.match.params.hash);
+
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
-            console.log(stream);
+
             userVideo.current.srcObject = stream;
             userStream.current = stream;
 
@@ -128,12 +130,18 @@ const Room = (props) => {
         partnerVideo.current.srcObject = e.streams[0];
     };
 
+    function confirmMeeting(){
+        setMeetingConfirmation(true);
+    }
+
     return (
         <div className="home-interview">
             <div className="nav">
                 <img src={LogoRoodeo} alt="React Logo" />
                 <div className="email">{ email }</div>
             </div>
+
+            { meetingConfirmation ? 
             
             <div className="main">
                 <video className="video" autoPlay ref={userVideo} />
@@ -141,7 +149,32 @@ const Room = (props) => {
                 <div className="options">
                     <h1>Prêt à participer ?</h1>
                     <p>Pas d'autre participant</p>
-                    <Button variant="contained" color='primary'>
+                    <Button 
+                     variant="contained" 
+                     color='primary'
+                     onClick={()=>console.log('yé')}>
+                        <p>Déconnecter</p>
+                    </Button>
+                    <p>Autres Options</p>
+                    <p className="telephone">
+                        <PhoneForwardedIcon></PhoneForwardedIcon>
+                        participer par téléphone pour le son
+                    </p>
+                </div>
+            </div>
+
+                :
+            
+                <div className="main">
+                <video className="video" autoPlay ref={userVideo} />
+                {/*<video autoPlay ref={partnerVideo} />*/}
+                <div className="options">
+                    <h1>Prêt à participer ?</h1>
+                    <p>Pas d'autre participant</p>
+                    <Button 
+                     variant="contained" 
+                     color='primary'
+                     onClick={()=>setMeetingConfirmation(true)}>
                         <p>Participer à la réunion</p>
                     </Button>
                     <Button variant="contained">
@@ -155,6 +188,8 @@ const Room = (props) => {
                     </p>
                 </div>
             </div>
+
+              }
         </div>
     )
 };
