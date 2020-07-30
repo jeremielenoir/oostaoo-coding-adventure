@@ -30,10 +30,9 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
-            {/* <Route exact path="/room" component={HomeInterview} />   */}
-            <Route path="/rooms/:interviewID" component={Room} />
-        </BrowserRouter> 
+          <BrowserRouter>
+              <Route path="/rooms/:hash" component={Room} />
+          </BrowserRouter> 
       </ThemeProvider>
     </div>
   );
