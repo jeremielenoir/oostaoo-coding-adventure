@@ -1,7 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
+
+//import HomeInterview from "./routes/HomeInterview";
 import Room from "./routes/Room";
+
 import './App.css';
+
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -27,7 +31,8 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <Route path="/rooms/:interviewID" component={Room} />
+            {/* <Route exact path="/room" component={HomeInterview} />   */}
+            <Route path="/rooms/:interviewID" component={Room} />
         </BrowserRouter> 
       </ThemeProvider>
     </div>
