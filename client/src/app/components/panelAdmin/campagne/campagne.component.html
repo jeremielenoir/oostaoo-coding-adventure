@@ -96,7 +96,7 @@
 
             </a>
 
-            <div class="branche-content-list-end">
+            <div class="branche-content-list-end" [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats']">
 
               <p class="invite-left" [ngClass]="{'invite-left-many':campaign.candidats.length > 1}" i18n>
                 {{ campaign.candidats.length }}

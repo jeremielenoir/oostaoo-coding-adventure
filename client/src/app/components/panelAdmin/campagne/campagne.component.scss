@@ -366,6 +366,10 @@
            justify-content: center;
            align-content: center;
            padding: 9px 15px;
+           &:focus{
+              border: 0px solid #fff;
+              outline: -webkit-focus-ring-color auto 0px;
+            }
           
            p{
              margin-bottom: 0px;
