@@ -10,9 +10,10 @@ import InterviewStarted from "../pages/InterviewStarted";
 const Room = (props) => {
 
     const [meetingConfirmation, setMeetingConfirmation ] = useState(true);
-    const [nom, setNom] = useState('Jay');
+    const  [nom, setNom] = useState('');
     const [email, setEmail] = useState('');
     const [interviewId, setInterviewId] = useState('');
+    const [date, setDate] = useState(null);
 
     const userVideo = useRef();
     const partnerVideo = useRef();
@@ -20,14 +21,16 @@ const Room = (props) => {
     const socketRef = useRef();
     const otherUser = useRef();
     const userStream = useRef();
-    
+
     useEffect(() => {
     
         decryptHash(props.match.params.hash)
         .then((res)=>{
-            console.log('res  : ', res);
             setInterviewId(res.interview_id);
             setEmail(res.email);
+            setDate(res.interview_date);
+            console.log('res : ', res);
+            console.log('date : ', date);
             if(res.nom){setNom(res.nom)};
             });
 
