@@ -4,8 +4,8 @@ import io from "socket.io-client";
 import LogoRoodeo from '../assets/logo_ROODEO.svg';
 import { decryptHash } from '../services/decryptService';
 
-import HomeInterview from "../pages/HomeInterview";
-import InterviewStarted from "../pages/InterviewStart";
+import InterviewHome from "../pages/InterviewHome";
+import InterviewStarted from "../pages/InterviewStarted";
 
 const Room = (props) => {
 
@@ -149,16 +149,14 @@ const Room = (props) => {
         <div className="home-interview">
             <div className="nav">
                 <img src={LogoRoodeo} alt="React Logo" />
-        <div className="email">{email}</div>
+                <div className="email">{email}</div>
             </div>
-
             { meetingConfirmation ? 
-                <HomeInterview userVideo={userVideo} confirmMeeting={confirmMeeting}/>
+                <InterviewHome userVideo={userVideo} confirmMeeting={confirmMeeting}/>
             :
-                <InterviewStarted />
+                <InterviewStarted userVideo={userVideo} partnerVideo={partnerVideo}/>
             }
         </div>
     )
 };
-
 export default Room;
