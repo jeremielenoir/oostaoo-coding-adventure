@@ -50,29 +50,7 @@ svg{
   margin-right: 10px;
 }
 
-/* InterviewStarted */
-.Interview-started{
-  display: flex;
-}
-.chat-text{
-  width: 40vw;
-}
-.chat-video{
-  width: 60vw;
-}
-.partner-video {
-  width: 60vw;
-  min-width: 800px;
-  height: 70vh;
-  background-color: #000;
-  border-radius: 15px;
-}
-.user-video {
-  width: 15vw;
-  height: 20vh;
-  background-color: #000;
-  border-radius: 5px;
-}
+
 
 @media screen and (max-width: 992px) {
 

@@ -1,0 +1,50 @@
+.Interview-started{
+    display: flex;
+  }
+  .chat-text{
+    width: 40vw;
+    padding: 40px 20px; 
+    display: flex;
+    flex-direction: column;
+  }
+
+  .messagesList{
+    flex: 6;
+  }
+
+  .message{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10%;
+  }
+
+  .messageText{
+  }
+
+  .messageDate{
+      font-style: italic;
+      justify-content: flex-end;
+  }
+  .messageWriting{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .chat-video{
+    width: 60vw;
+  }
+  .partner-video {
+    width: 60vw;
+    min-width: 800px;
+    height: 70vh;
+    background-color: #000;
+    border-radius: 15px;
+  }
+  .user-video {
+    width: 15vw;
+    height: 20vh;
+    background-color: #000;
+    border-radius: 5px;
+  }

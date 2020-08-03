@@ -4,7 +4,7 @@ const app = express();
 const server = http.createServer(app);
 const socket = require("socket.io");
 const io = socket(server);
-
+const moment = require('moment');
 const rooms = {};
 
 /* pour plus tard
@@ -25,7 +25,25 @@ setTimeout(function() {
 }, 10 * 1000);
 */
 
+
+var messages = [];
+
+
 io.on("connection", socket => {
+
+
+    io.emit('FromApi', messages);
+
+    socket.on('newMessage', (message) => {
+    if(messages.length == 16){
+      messages.shift();
+    }
+    message = {text: message, date: moment().format('HH:mm')};
+    messages.push(message);
+    console.log('messages : ', messages);
+    io.emit("FromAPI", messages);
+    })
+
     socket.on("join room", roomID => {
         console.log(socket);
         if (rooms[roomID]) {
