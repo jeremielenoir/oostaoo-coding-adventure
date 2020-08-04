@@ -1,50 +1,104 @@
-.Interview-started{
+.interview-started{
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 90vh;
   }
+
+  /* TEXT */
   .chat-text{
-    width: 40vw;
-    padding: 40px 20px; 
+    width: 35vw;
+    height: 75vh;
+    border: 2px solid #000;
+    margin: 80px 50px 0 30px;
+    
     display: flex;
     flex-direction: column;
+    
   }
-
   .messagesList{
+    padding-top: 20px;
     flex: 6;
+    align-content: flex-end;
   }
 
-  .message{
-    display: flex;
-    justify-content: space-between;
-    margin-left: 10%;
-  }
-
-  .messageText{
-  }
-
-  .messageDate{
-      font-style: italic;
-      justify-content: flex-end;
-  }
   .messageWriting{
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-content: flex-end;
   }
 
+  .message{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10%;
+  }
+  
+  .messageDate{
+    font-style: italic;
+    justify-content: flex-end;
+  }
+  /* input chatText */
+  .MuiInputBase-root{ 
+    width: 550px;
+  }
+
+  /* VIDEO */
   .chat-video{
+    position: absolute;
+    top: 18%;
+    right: 1%;
     width: 60vw;
+    height: 75vh;
   }
   .partner-video {
+   
     width: 60vw;
-    min-width: 800px;
     height: 70vh;
     background-color: #000;
-    border-radius: 15px;
+    border-radius: 10px;
   }
   .user-video {
+    position: absolute;
+    top: 63%;
+    right: 1%;
     width: 15vw;
     height: 20vh;
     background-color: #000;
     border-radius: 5px;
+  }
+  
+  @media screen and (max-width: 1240px) {
+    .interview-started{
+      height: 1500px;
+      width: 100vw;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .chat-text{
+      position: absolute;
+      top: 85%;
+      width: 100vw;
+      margin: 0;
+      height: 40vh;
+    }
+    .chat-video{
+      position: absolute;
+      top: 15%;
+      left: 0%;
+      width: 100vw;
+    }
+    .partner-video {
+      width: 100vw;
+    }
+    .user-video {
+      position: absolute;
+      top: 63%;
+      right: 2%;
+      width: 24vw;
+      height: 20vh;
+    }
   }

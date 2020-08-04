@@ -1,6 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react';
 import socketIOClient from "socket.io-client";
 
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import MicOffIcon from '@material-ui/icons/MicOff';
+
+
 import './InterviewStarted.css';
 import Message from './Message';
 
@@ -37,7 +42,7 @@ const InterviewStarted = (props) => {
       }
 
     return (
-        <div className="Interview-started">
+        <div className="interview-started">
 
             <div className="chat-text">
                
@@ -53,14 +58,21 @@ const InterviewStarted = (props) => {
 
                 <div className="messageWriting">
                       <form className="messageForm">
-                        <input 
-                          type="text"
-                          id="message"
-                          size="50"
-                          value={message}
-                          ref={inputRef}
-                          onChange={(e)=>onChangeMessage(e)} />
-                        <button onClick={e=>sendMessage(e)}>Envoyer</button>
+                          <TextField
+                            required
+                            id="message"
+                            label="Message"
+                            value={message}
+                            ref={inputRef}
+                            onChange={(e)=>onChangeMessage(e)}
+                            variant="outlined"
+                          />
+                          <Button 
+                            variant="contained" 
+                            color="primary"
+                            onClick={e=>sendMessage(e)}>
+                            Envoyer
+                          </Button>
                       </form>
                 </div>
 
@@ -69,8 +81,9 @@ const InterviewStarted = (props) => {
             </div>
 
             <div className="chat-video">
-                <video className="partner-video" autoPlay ref={partnerVideo} /> 
-                <video className="user-video" autoPlay ref={userVideo} />   
+                <video controls className="partner-video" autoPlay ref={partnerVideo} /> 
+                <video controls className="user-video" autoPlay ref={userVideo} />   
+                <MicOffIcon/>
             </div>
         </div>
     )

@@ -12,6 +12,7 @@
 }
 .nav img {
   padding-top: 40px;
+  min-width: 300px;
 }
 
 /* InterviewHome */
