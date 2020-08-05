@@ -17,6 +17,9 @@
     
   }
   .messagesList{
+
+      box-sizing: content-box;
+  
     padding-top: 20px;
     flex: 6;
     align-content: flex-end;
@@ -42,7 +45,7 @@
   }
   /* input chatText */
   .MuiInputBase-root{ 
-    width: 550px;
+    width: 400px;
   }
 
   /* VIDEO */

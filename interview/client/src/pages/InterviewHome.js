@@ -8,7 +8,7 @@ const InterviewHome = (props) => {
     const {userVideo, confirmMeeting} = props
     return (
         <div className="main">
-            <video controls className="home-video" autoPlay ref={userVideo} />
+            <video muted controls className="home-video" autoPlay ref={userVideo} />
             <div className="options">
                 <h1>Prêt à participer ?</h1>
                 <p>Pas d'autre participant</p>

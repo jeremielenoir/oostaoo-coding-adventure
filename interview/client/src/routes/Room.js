@@ -141,7 +141,10 @@ const Room = (props) => {
     }
 
     function handleTrackEvent(e) {
-        partnerVideo.current.srcObject = e.streams[0];
+        if (partnerVideo) { // This is a quick fix to prevent bug during the loading homepage partner 
+                            // ( might need further investigation ) 
+            partnerVideo.current.srcObject = e.streams[0]; 
+        }
     };
 
     function confirmMeeting(){

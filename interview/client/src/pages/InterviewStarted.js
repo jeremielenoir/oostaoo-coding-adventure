@@ -19,7 +19,7 @@ const InterviewStarted = (props) => {
 
 
     const [ messages, setMessages ] = useState({response: false,
-        endpoint: "http://localhost:8000"});
+        endpoint: "http://localhost:8000"}); //Ngrok adress
 
     const {endpoint} = messages;
     const socket = socketIOClient(endpoint);
@@ -82,7 +82,7 @@ const InterviewStarted = (props) => {
 
             <div className="chat-video">
                 <video controls className="partner-video" autoPlay ref={partnerVideo} /> 
-                <video controls className="user-video" autoPlay ref={userVideo} />   
+                <video muted controls className="user-video" autoPlay ref={userVideo} />   
                 <MicOffIcon/>
             </div>
         </div>
