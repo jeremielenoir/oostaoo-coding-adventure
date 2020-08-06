@@ -82,7 +82,7 @@ const InterviewStarted = (props) => {
 
             <div className="chat-video">
                 <video controls className="partner-video" autoPlay ref={partnerVideo} /> 
-                <video muted controls className="user-video" autoPlay ref={userVideo} />   
+                <video muted className="user-video" autoPlay ref={userVideo} />   
                 <MicOffIcon/>
             </div>
         </div>
