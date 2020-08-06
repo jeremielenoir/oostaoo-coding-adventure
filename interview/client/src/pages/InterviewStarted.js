@@ -11,8 +11,8 @@ import Message from './Message';
 
 
 
-const InterviewStarted = (props) => {
-    const {userVideo, partnerVideo} = props;
+const InterviewStarted = ({userVideo, partnerVideo, micToggle}) => {
+
     const inputRef = useRef();
     
     const [message, setMessage] = useState("");
@@ -83,7 +83,8 @@ const InterviewStarted = (props) => {
             <div className="chat-video">
                 <video controls className="partner-video" autoPlay ref={partnerVideo} /> 
                 <video muted className="user-video" autoPlay ref={userVideo} />   
-                <MicOffIcon/>
+                <MicOffIcon
+                onClick={()=>{micToggle()}}/>
             </div>
         </div>
     )
