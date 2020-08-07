@@ -54,7 +54,8 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn }) => {
                 
 
                 <div className="messageWriting">
-                      <form className="messageForm">
+                      <form className="messageForm"
+                        onSubmit={e=>sendMessage(e)}>
                           <TextField
                             required
                             id="message"
