@@ -4,19 +4,16 @@ import socketIOClient from "socket.io-client";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MicOffIcon from '@material-ui/icons/MicOff';
-
-
+import MicIcon from '@material-ui/icons/Mic';
 import './InterviewStarted.css';
 import Message from './Message';
 
 
 
-const InterviewStarted = ({userVideo, partnerVideo, micToggle}) => {
+const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn }) => {
 
     const inputRef = useRef();
-    
     const [message, setMessage] = useState("");
-
 
     const [ messages, setMessages ] = useState({response: false,
         endpoint: "http://localhost:8000"}); //Ngrok adress
@@ -75,16 +72,20 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle}) => {
                           </Button>
                       </form>
                 </div>
-
-
-
             </div>
 
             <div className="chat-video">
-                <video controls className="partner-video" autoPlay ref={partnerVideo} /> 
-                <video muted className="user-video" autoPlay ref={userVideo} />   
-                <MicOffIcon
-                onClick={()=>{micToggle()}}/>
+                <div className="partner-video">
+                    <video controls  autoPlay ref={partnerVideo} />
+                    { micOn ? <MicOffIcon className="mic" color="primary" onClick={()=>micToggle()} />
+                    : <MicIcon className="mic" color="primary" 
+                     onClick={()=>micToggle()} /> }
+                </div> 
+                
+                <div className="user-video" >
+                    <video muted autoPlay ref={userVideo} />
+                </div>   
+                 
             </div>
         </div>
     )

@@ -14,8 +14,7 @@ const Room = (props) => {
     const [email, setEmail] = useState('');
     const [interviewId, setInterviewId] = useState('');
     const [date, setDate] = useState(null);
-    const [micOn, setMicOn] = useState(true);
-
+    const [ micOn, setMicOn ] = useState(true);
     const userVideo = useRef();
     const partnerVideo = useRef();
     const peerRef = useRef();
@@ -35,7 +34,7 @@ const Room = (props) => {
             if(res.nom){setNom(res.nom)};
             });
 
-        navigator.mediaDevices.getUserMedia({ audio: micOn, video: true }).then(stream => {
+        navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
 
             userVideo.current.srcObject = stream;
             userStream.current = stream;
@@ -59,10 +58,12 @@ const Room = (props) => {
             socketRef.current.on("ice-candidate", handleNewICECandidateMsg);
         });
 
-    }, [meetingConfirmation, micOn]);
+    }, [meetingConfirmation]);
 
    function micToggle(){
-        setMicOn(!micOn);
+       console.log('userstream.current : ', userStream.current);
+         userStream.current.getAudioTracks()[0].enabled = !(userStream.current.getAudioTracks()[0].enabled);
+         setMicOn(!micOn);
    }
 
     function callUser(userID) {
@@ -165,7 +166,7 @@ const Room = (props) => {
             { meetingConfirmation ? 
                 <InterviewHome userVideo={userVideo} confirmMeeting={confirmMeeting}/>
             :
-                <InterviewStarted userVideo={userVideo} partnerVideo={partnerVideo} micToggle={micToggle} />
+                <InterviewStarted userVideo={userVideo} partnerVideo={partnerVideo} micToggle={micToggle} micOn={micOn} setMicOn={setMicOn} />
             }
         </div>
     )

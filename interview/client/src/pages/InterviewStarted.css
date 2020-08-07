@@ -16,10 +16,10 @@
     flex-direction: column;
     
   }
+
   .messagesList{
 
-      box-sizing: content-box;
-  
+    box-sizing: content-box;  
     padding-top: 20px;
     flex: 6;
     align-content: flex-end;
@@ -62,6 +62,7 @@
     height: 70vh;
     background-color: #000;
     border-radius: 10px;
+    position: relative;
   }
   .user-video {
     position: absolute;
@@ -71,8 +72,17 @@
     height: 20vh;
     background-color: #000;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
+  .mic{
+    position: absolute;
+    bottom: 12px;
+    left: 49%;
+  }
+
   @media screen and (max-width: 1240px) {
     .interview-started{
       height: 1500px;
