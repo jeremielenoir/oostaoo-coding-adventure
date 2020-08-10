@@ -9,34 +9,42 @@
   flex: 1;
 }
 
-.loading{
+.loading {
   //top: 0!important;
   //left: 0!important;
 }
-.invit-btn-candidat {
-  margin-top: 60px;
+
+.info-candidat {
+  padding: 9px 5px;
 }
-.info-candi{
-  padding:9px 5px;
-}
-span.fa.fa-info-circle.interview-icon{
+
+span.fa.fa-info-circle.interview-icon {
   color: $color-orange;
 }
-span.interview-icon.ng-star-inserted{
+
+span.interview-icon.ng-star-inserted {
   color: $color-orange;
   font-size: 12px;
 }
-button.mat-sort-header-button{
+
+button.mat-sort-header-button {
   font-size: 13px;
 }
+
 .border1pxdashedgray-candidat {
   border-radius: $border-radius;
 }
+
 .big-content {
   display: flex;
   flex: 1 0 auto;
   min-height: 100%;
 }
+
+::ng-deep #first-check-action .mat-checkbox-frame {
+  border-color: white !important;
+}
+
 .sous-content-check-action-candidat {
   align-items: center;
   position: relative;
@@ -45,48 +53,50 @@ button.mat-sort-header-button{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  .check-action-candidat {
-    // position: absolute;
-    cursor: pointer;
-    width: 15px;
-    height: 13.5px;
-    z-index: 2;
-    margin-top: 8px;
-    opacity: 0;
-  }
-  #candidat-check {
-    position: absolute;
-    height: 15px;
-    width: 15px;
-    border: 2px solid #7e8082;
-    display: inline-block;
-    border-radius: ($border-radius - 1);
-    margin-top: 4px;
-    cursor: pointer;
-  }
 
-  #candidat-check::after {
-    content: "";
-    position: absolute;
-    display: none;
-    left: 3.2px;
-    top: 0px;
-    width: 3px;
-    height: 7px;
-    border: solid $color-white;
-    border-width: 0 2px 2px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
+  // Below is old css for input checkboxes without Material Angular
+  // .check-action-candidat {
+  //   position: absolute;
+  //   cursor: pointer;
+  //   width: 15px;
+  //   height: 13.5px;
+  //   z-index: 2;
+  //   margin-top: 8px;
+  //   opacity: 0;
+  // }
+  // #candidat-check {
+  //   position: absolute;
+  //   height: 15px;
+  //   width: 15px;
+  //   border: 2px solid #FFF;
+  //   display: inline-block;
+  //   border-radius: ($border-radius - 1);
+  //   margin-top: 4px;
+  //   cursor: pointer;
+  // }
 
-  .check-action-candidat:checked ~ #candidat-check:after {
-    display: block;
-  }
-  .check-action-candidat:checked ~ #candidat-check {
-    border-color: $color-orange;
-    background-color: $color-orange;
-  }
+  // #candidat-check::after {
+  //   content: "";
+  //   position: absolute;
+  //   display: none;
+  //   left: 3.2px;
+  //   top: 0px;
+  //   width: 3px;
+  //   height: 7px;
+  //   border: solid $color-white;
+  //   border-width: 0 2px 2px 0;
+  //   -webkit-transform: rotate(45deg);
+  //   -ms-transform: rotate(45deg);
+  //   transform: rotate(45deg);
+  // }
+
+  // .check-action-candidat:checked ~ #candidat-check:after {
+  //   display: block;
+  // }
+  // .check-action-candidat:checked ~ #candidat-check {
+  //   border-color: $color-orange;
+  //   background-color: $color-orange;
+  // }
 }
 
 .content-check-action-candidat {
@@ -108,7 +118,7 @@ button.mat-sort-header-button{
     border-color: #fff !important;
     width: 3px !important;
     height: 7px !important;
-    left: 3.2px!important;
+    left: 3.2px !important;
   }
 
   input:checked ~ .checkbox-span {
@@ -188,13 +198,13 @@ button.mat-sort-header-button{
   // max-width: 40px!important;
 }
 
-.mat-checkbox {
-  position: absolute;
-  top: 15px;
-  left: 30%;
-  width: 15px !important;
-  height: 15px !important;
-}
+// .mat-checkbox {
+//   position: absolute;
+//   top: 15px;
+//   left: 30%;
+//   width: 15px !important;
+//   height: 15px !important;
+// }
 
 .mat-header-row {
   background-color: $color-principal-blue !important;
@@ -215,7 +225,6 @@ button.mat-sort-header-button{
   font-size: 18px !important;
   padding-left: 32px !important;
 }
-
 
 ::ng-deep .mat-sort-header-container {
   justify-content: center;
@@ -266,9 +275,10 @@ tr.mat-row {
   width: 100%;
   background: $color-background-blue;
   padding-top: 17px;
-  
-  
-  .select-choince {
+  padding-left: 15px;
+  padding-right: 15px;
+
+  .select-choice {
     border-radius: $border-radius;
     height: 48px;
     padding: 0 13px;
@@ -280,10 +290,10 @@ tr.mat-row {
     cursor: pointer;
     position: relative;
 
-    .menu-choince.choince-active {
+    .menu-choice.choice-active {
       display: block;
     }
-    .menu-choince {
+    .menu-choice {
       top: 47px;
       left: 0;
       right: 0;
@@ -295,7 +305,7 @@ tr.mat-row {
       background-color: #fff;
       display: none;
 
-      .menu-list-choince {
+      .menu-list-choice {
         .selected-button {
           &:hover {
             background-color: $color-orange;
@@ -337,12 +347,12 @@ tr.mat-row {
       margin-left: 15px;
     }
 
-    .icon-choince {
+    .icon-choice {
       font-size: 24px;
       color: $color-orange;
     }
 
-    .icon-choince-croche {
+    .icon-choice-croche {
       color: #7e8082;
       margin-left: 15px;
     }
@@ -400,7 +410,7 @@ tr.mat-row {
 
 // Style avec candidats
 
-.barre-nav {
+.tool-bar {
   display: flex;
   padding: 10px;
   flex-wrap: wrap;
@@ -430,7 +440,7 @@ tr.mat-row {
     margin-top: inherit;
     border-radius: $border-radius;
   }
-  .custom-input-filtre-contenu {
+  .custom-input-filter {
     width: 50%;
     position: relative;
     .icon-search {
@@ -444,7 +454,7 @@ tr.mat-row {
       padding-left: 3px !important;
       font-size: 15px !important;
     }
-    .custom-input-filtre {
+    .custom-input-filter-bg {
       width: 100%;
       border: 1px solid $color-orange;
       background: $color-white;
@@ -504,7 +514,6 @@ tr.mat-row {
 // SIDENAV
 
 .sidenav-container {
- 
   position: absolute;
   // background: transparent;
   visibility: hidden;
@@ -518,14 +527,12 @@ tr.mat-row {
 }
 ::ng-deep .mat-sidenav {
   width: 50%;
-
-  
 }
 
 .sidenav-content {
   width: 100%;
   height: 100%;
- 
+
   padding: 115px 20px 0px;
   overflow: auto;
   .name-rapport-detailler {
@@ -644,11 +651,11 @@ filter-table {
   .sous-table-content {
     overflow-x: auto;
   }
-  .barre-nav {
-    .select-choince {
+  .tool-bar {
+    .select-choice {
       width: 200px !important;
     }
-    .custom-input-filtre-contenu {
+    .custom-input-filter {
       width: 65% !important;
     }
     flex-direction: column !important;

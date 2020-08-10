@@ -1,4 +1,4 @@
-<div [ngSwitch]="ViewCandidats" (click)="menuChoince($event)" class="big-content">
+<div [ngSwitch]="ViewCandidats" (click)="menuChoice($event)" class="big-content">
   <div class="route-component">
     <div *ngSwitchCase="'CandidatFalse'" id="editQuestion">
       <div class="border1pxgray">
@@ -8,9 +8,8 @@
             Votre campagne est prête. Il est temps d'inviter quelques candidats !
           </h1>
 
-          <button mat-raised-button color="primary" class="btn-question invit-btn-candidat" mat-button
-            (click)="openDialog()">
-            Invitez des candidats <span *ngIf='tests_available !== "" '>({{ tests_available }})</span>
+          <button mat-raised-button color="primary" class="invit-btn-candidat" (click)="openDialog()">
+            Invitez des candidats <span *ngIf='tests_available !== "" '>({{ tests_available }} tests)</span>
           </button>
         </div>
       </div>
@@ -75,90 +74,73 @@
           </div>
         </div>
       </div>
-      <div class="barre-nav">
+
+      <!-- Tool bar -->
+      <div class="tool-bar">
         <div class="diplex-1">
-          <div class="select-choince" (click)="showChoinceList($event)">
-
-            <i class="fas fa-hand-pointer icon-choince"></i>
-
-            <span class="" [class.selected-text-active]="nbrSelectedElementChecked.length > 0">
-              {{nbrSelectedElementChecked.length }}
-              sélectionné{{nbrSelectedElementChecked.length > 1 ? 's' : ''}}</span>
-
-            <i class="fas fa-caret-down icon-choince-croche"></i>
-
-            <ul class="menu-choince" (click)="showChoinceList($event)" [class.choince-active]="choinceList">
-
-              <li class="menu-list-choince">
-                <button (click)="exported()" class="first-btn"
-                  [class.selected-button]="nbrSelectedElementChecked.length > 0"
-                  [disabled]="nbrSelectedElementChecked.length == 0">
-                  <i class="fas fa-file-export icon-choince icon"></i>
-                  <span>Exporter</span>
-                </button>
-              </li>
-              <li class="menu-list-choince">
-                <button (click)="Anonymiser()" [class.selected-button]="nbrSelectedElementChecked.length > 0"
-                  [disabled]="nbrSelectedElementChecked.length == 0">
-                  <i class="fas fa-user-secret icon-choince icon"></i>
-                  <span>Anonymiser</span>
-                </button>
-              </li>
-              <li class="menu-list-choince">
-                <button (click)="deleteCandidat()" [class.selected-button]="nbrSelectedElementChecked.length > 0"
-                  [disabled]="nbrSelectedElementChecked.length == 0">
-                  <i class="fas fa-trash-alt icon-choince icon"></i>
-                  <span>Supprimer</span>
-                </button>
-              </li>
-
-            </ul>
-
-          </div>
-
-          <div class="custom-input-filtre-contenu">
+          <!-- Menu -->
+          <button mat-raised-button color="primary" [matMenuTriggerFor]="menu"
+            aria-label="Example icon-button with a menu">
+            <mat-icon color="accent">touch_app</mat-icon>
+            {{candidatsSelected.length }} sélectionné{{candidatsSelected.length > 1 ? 's' : ''}}
+          </button>
+          <mat-menu color="primary" #menu="matMenu">
+            <button (click)="exported()" mat-menu-item [disabled]="candidatsSelected.length == 0">
+              <mat-icon [color]="candidatsSelected.length == 0 ? 'none' : 'accent'">exit_to_app</mat-icon>
+              <span>Exporter</span>
+            </button>
+            <button (click)="Anonymiser()" mat-menu-item [disabled]="candidatsSelected.length == 0">
+              <mat-icon [color]="candidatsSelected.length == 0 ? 'none' : 'accent'">visibility_off</mat-icon>
+              <span>Anonymiser</span>
+            </button>
+            <button (click)="deleteCandidat()" mat-menu-item [disabled]="candidatsSelected.length == 0">
+              <mat-icon [color]="candidatsSelected.length === 0 ? 'none' : 'accent'">delete_forever</mat-icon>
+              <span>Supprimer</span>
+            </button>
+          </mat-menu>
+          <!-- Filter -->
+          <mat-card-content class="custom-input-filter">
+            <input matInput class="custom-input-filter-bg" placeholder="Filtrer..."
+              (keyup)="applyFilter($event.target.value)">
             <figure class="icon-search">
               <img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg">
             </figure>
-            <input class="custom-input-filtre" matInput (keyup)="applyFilter($event.target.value)"
-              placeholder="Filter" />
-          </div>
+          </mat-card-content>
         </div>
-
-        <button mat-raised-button color="primary" class="btn-question fix-button" mat-button (click)="openDialog()">
+        <!-- Btn Invite -->
+        <button mat-raised-button color="primary" (click)="openDialog()">
           Invitez des candidats <span *ngIf='tests_available !== "" '>({{ tests_available }})</span>
         </button>
-
-
       </div>
-      <!--Table-->
 
+      <!-- Table -->
       <div class="table-container">
 
         <div class="sous-table-content">
           <table mat-table [dataSource]="infosCandidats" matSort>
             <!-- Item Column -->
-
             <ng-container *ngFor="let column of displayedColumns; let i = index;" [matColumnDef]="column">
-
-
-
               <!-- CHANGE COLUMN FOR CHECKBOX -->
               <div *ngIf="column === 'Checked'">
-
+                <!-- >>> TODO : FIX CHECK ALL <<< -->
                 <th mat-header-cell *matHeaderCellDef="let dataInfos">
                   <div class="content-check-action-candidat">
-                    <input [checked]="allcheckedActivetedBolean" id="first-check-action" type="checkbox"
-                      class="checkbox" (click)="allcheckedActiveted($event)" />
-                    <label for="first-check-action" class="checkbox-span"></label>
+                    <mat-checkbox id="first-check-action" (click)="allcheckedActiveted($event)">
+                    </mat-checkbox>
+                    <!-- <input [checked]="allcheckedActivetedBolean" id="first-check-action" type="checkbox"
+                      class="checkbox" (click)="allcheckedActiveted($event)" /> 
+                    <label for="first-check-action" class="checkbox-span"></label> -->
                   </div>
                 </th>
+                <!-- >>> TODO : FIX CHECK ONE <<< -->
                 <td mat-cell *matCellDef="let dataInfos">
                   <div class="sous-content-check-action-candidat">
-
-                    <input type="checkbox" class="check-action-candidat" (click)="checkedAction($event)"
+                    <mat-checkbox class="check-action-candidat" (click)="checkedAction($event)"
+                      value="{{dataInfos.candidat_id}}">
+                    </mat-checkbox>
+                    <!-- <input type="checkbox" class="check-action-candidat" (click)="checkedAction($event)"
                       value="{{dataInfos.candidat_id}}" />
-                    <label id="candidat-check" (click)="activedCheck()"></label>
+                    <label id="candidat-check" (click)="activedCheck()"></label> -->
                   </div>
                 </td>
               </div>
@@ -253,10 +235,8 @@
 
 </div>
 
+
 <!-- SIDENAV -->
-
-
-
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="over" [(opened)]="opened">
     <div class="sidenav-content" *ngIf='currentCandidat.Candidats !== "" '>
@@ -267,14 +247,14 @@
         </span>
       </div>
 
-      <h4 class="info-candi name-rapport-detailler">
+      <h4 class="info-candidat name-rapport-detailler">
         <i class="far fa-user-circle"></i>
         {{currentCandidat.Candidats}}
       </h4>
-      <p class="info-candi"> <i class="far fa-envelope"></i> {{currentCandidat.Email}}</p>
-      <p class="info-candi"> <i class="fas fa-poll-h"></i> Pourcentage de bonne réponses : {{currentCandidat.Score}}
+      <p class="info-candidat"> <i class="far fa-envelope"></i> {{currentCandidat.Email}}</p>
+      <p class="info-candidat"> <i class="fas fa-poll-h"></i> Pourcentage de bonne réponses : {{currentCandidat.Score}}
       </p>
-      <p class="info-candi"><i class="far fa-clock"></i> Durée du test : {{currentCandidat.Duree}}</p>
+      <p class="info-candidat"><i class="far fa-clock"></i> Durée du test : {{currentCandidat.Duree}}</p>
 
       <div class="sidenav_candidat_content">
         <div class="sidenav_candidat_result"

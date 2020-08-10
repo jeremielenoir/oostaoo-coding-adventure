@@ -18,8 +18,8 @@ import {
 import { HttpClient } from "@angular/common/http";
 import { saveAs } from "file-saver";
 import { getResultsDefinition } from "./getResultsDefinition";
-import { InterviewDialogComponent } from './interview-dialog/interview-dialog.component';
-import * as moment from "moment"
+import { InterviewDialogComponent } from "./interview-dialog/interview-dialog.component";
+import * as moment from "moment";
 //import pdfMake from "pdfmake/build/pdfmake";
 // font build has to be committed otherwise each developers has to build font locally.
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -66,9 +66,9 @@ export class CandidatsComponent implements OnInit {
   datePipe = new DatePipe("fr");
   ViewCandidats;
   isLoading = true;
-  choinceList: boolean;
+  choiceList: boolean;
   checkedActionBoolean = true;
-  nbrSelectedElementChecked: any[] = [];
+  candidatsSelected: any[] = [];
   opened: boolean;
   public checkedBox: boolean = false;
   public DecryptTokenService = new DecryptTokenService();
@@ -113,53 +113,54 @@ export class CandidatsComponent implements OnInit {
 
     inviteCandidatDialog.afterClosed().subscribe((data) => {
       this.getCampaign().then((datas) => {
-        console.log("AFTER CLOSE ALL DATAS", this.nbrSelectedElementChecked);
+        console.log("AFTER CLOSE ALL DATAS", this.candidatsSelected);
       });
     });
   }
+
   openInterviewDialog(data) {
-    //console.log("data candidat ====toto", data)
     this.dialog.open(InterviewDialogComponent, {
       data,
-      height: '580px'
+      height: "580px",
     });
   }
+
   ngOnInit() {
     this.tests_available = this.DecryptTokenService.tests_available;
     if (this.tests_available == -1) {
       this.tests_available = "";
     }
 
-
     this.getCampaign().then((datas) => {
       this.campaign = datas;
     });
   }
 
-  showChoinceList(e) {
+  showChoiceList(e) {
     if (e) {
       e.stopPropagation();
     }
-    this.choinceList = !this.choinceList;
+    this.choiceList = !this.choiceList;
   }
 
-  menuChoince(event) {
-    this.choinceList = false;
+  menuChoice(event) {
+    this.choiceList = false;
   }
 
+  // TODO : fix this function
   checkedAction(e) {
     e.stopPropagation();
     let element = e.target;
     let firstCheckAction = document.querySelector("#first-check-action");
     if (element.checked) {
-      this.nbrSelectedElementChecked.push(element.value);
+      this.candidatsSelected.push(element.value);
       this.idElementExported = element.value;
     } else {
-      let index = this.nbrSelectedElementChecked.indexOf(element.value);
-      this.nbrSelectedElementChecked.splice(index, 1);
+      let index = this.candidatsSelected.indexOf(element.value);
+      this.candidatsSelected.splice(index, 1);
     }
 
-    if (this.nbrSelectedElementChecked.length !== this.candidats.length) {
+    if (this.candidatsSelected.length !== this.candidats.length) {
       firstCheckAction["checked"] = false;
       this.allcheckedActivetedBolean = false;
     } else {
@@ -168,34 +169,35 @@ export class CandidatsComponent implements OnInit {
     }
   }
 
+  // TODO : fix this function
   allcheckedActiveted(e) {
-    this.nbrSelectedElementChecked = [];
+    this.candidatsSelected = [];
     let checkElements = document.querySelectorAll(".check-action-candidat");
     checkElements.forEach((check) => {
       if (e.target.checked) {
         check["checked"] = true;
         this.allcheckedActivetedBolean = true;
-        this.nbrSelectedElementChecked.push(check["value"]);
+        this.candidatsSelected.push(check["value"]);
       } else {
         check["checked"] = false;
-        let index = this.nbrSelectedElementChecked.indexOf(check["value"]);
-        this.nbrSelectedElementChecked.splice(index, 1);
+        let index = this.candidatsSelected.indexOf(check["value"]);
+        this.candidatsSelected.splice(index, 1);
       }
     });
 
     console.log(
-      "this.nbrSelectedElementChecked",
-      this.nbrSelectedElementChecked
+      "this.candidatsSelected",
+      this.candidatsSelected
     );
   }
   activedCheck() { }
   checkSeveralIdDelete() {
-    if (this.nbrSelectedElementChecked.length > 1) {
-      this.nbrSelectedElementChecked.forEach((idDelete) => {
+    if (this.candidatsSelected.length > 1) {
+      this.candidatsSelected.forEach((idDelete) => {
         const urlApi = API_URI_CANDIDATS + "/" + idDelete;
         this.apiClientService.delete(urlApi).subscribe((response) => {
           this.bolleanDeleteCandidat = false;
-          this.nbrSelectedElementChecked = [];
+          this.candidatsSelected = [];
           this.checkedBox = false;
           this.allChecked["checked"] = false;
           this.ngOnInit();
@@ -205,7 +207,7 @@ export class CandidatsComponent implements OnInit {
     }
   }
   checkSeveralIdAnonymiser() {
-    this.nbrSelectedElementChecked.forEach((elementid) => {
+    this.candidatsSelected.forEach((elementid) => {
       const urlApi = API_URI_CANDIDATS + "/" + elementid;
       this.apiClientService
         .put(urlApi, {
@@ -214,7 +216,7 @@ export class CandidatsComponent implements OnInit {
         })
         .subscribe((response) => {
           this.bolleanDeleteCandidat = false;
-          this.nbrSelectedElementChecked = [];
+          this.candidatsSelected = [];
           this.checkedBox = false;
           this.allChecked["checked"] = false;
           this.ngOnInit();
@@ -224,7 +226,7 @@ export class CandidatsComponent implements OnInit {
   }
 
   exported() {
-    this.viewResultsPdf(this.nbrSelectedElementChecked);
+    this.viewResultsPdf(this.candidatsSelected);
   }
 
   Anonymiser() {
@@ -240,7 +242,7 @@ export class CandidatsComponent implements OnInit {
     this.bolleanDeleteCandidat = false;
   }
   AnonymiserFinal() {
-    if (this.nbrSelectedElementChecked.length > 1) {
+    if (this.candidatsSelected.length > 1) {
       this.checkSeveralIdAnonymiser();
       return;
     }
@@ -253,7 +255,7 @@ export class CandidatsComponent implements OnInit {
       })
       .subscribe((response) => {
         this.bolleanAnonymiser = false;
-        this.nbrSelectedElementChecked = [];
+        this.candidatsSelected = [];
         this.ngOnInit();
       });
   }
@@ -263,7 +265,7 @@ export class CandidatsComponent implements OnInit {
     const urlApi = API_URI_CANDIDATS + "/" + this.idElementExported;
     this.apiClientService.delete(urlApi).subscribe((response) => {
       this.bolleanDeleteCandidat = false;
-      this.nbrSelectedElementChecked = [];
+      this.candidatsSelected = [];
       this.ngOnInit();
     });
   }
@@ -271,7 +273,7 @@ export class CandidatsComponent implements OnInit {
   getCampaign(): Promise<any> {
     setTimeout(() => {
       this.allcheckedActivetedBolean = false;
-      this.nbrSelectedElementChecked = [];
+      this.candidatsSelected = [];
     }, 100);
 
     //console.log("hello famady");
@@ -331,7 +333,6 @@ export class CandidatsComponent implements OnInit {
             return { ...candidat, status: false };
           });
 
-
           this.technologies = res.technologies;
 
           if (this.campaigns.candidats.length > 0) {
@@ -356,7 +357,6 @@ export class CandidatsComponent implements OnInit {
           "Candidats",
           "Dernière activité",
           "Score",
-
         ];
         const getInfoCandidat = [];
         let dateInvite;
@@ -379,7 +379,7 @@ export class CandidatsComponent implements OnInit {
             duree = 0;
           }
           //   console.log('CANDIDAT TERMINER', candidat.test_terminer);
-          if (candidat.test_terminer === '0000-00-00 00:00:00') {
+          if (candidat.test_terminer === "0000-00-00 00:00:00") {
             dateInvite = new Date(candidat.invitation_date);
             percentCandidat = 0 + "%";
           } else {
@@ -412,10 +412,19 @@ export class CandidatsComponent implements OnInit {
               ? candidat.raport_candidat.rapport
               : null,
             points: candidat.points_candidat,
-            Interview: { ...candidat.interview, interview_date: candidat && candidat.interview && candidat.interview.interview_date ? moment(candidat.interview.interview_date).lang("fr").format("dddd, MMMM Do YYYY, HH:mm") : null },
+            Interview: {
+              ...candidat.interview,
+              interview_date:
+                candidat &&
+                  candidat.interview &&
+                  candidat.interview.interview_date
+                  ? moment(candidat.interview.interview_date)
+                    .lang("fr")
+                    .format("dddd, MMMM Do YYYY, HH:mm")
+                  : null,
+            },
             date: candidat.test_ouvert,
             ...candidat.getpourcentByCandidat,
-
           });
         }
         return getInfoCandidat;
