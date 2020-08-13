@@ -80,10 +80,10 @@
               <div [ngClass]="{'info-hover-left': disablehover === false, 'disable': disablehover === true }" class="">
                 <div class="info-hover-header"><h2>{{item[name_i18n]}}</h2></div>
                 <div class="info-hover-content">
-                  <p>Points : <span>{{item.points}}</span></p>
-                  <p>Technologie : <span>{{item.technologies.name}}</span></p>
-                  <p>Compétence évaluée : <span [innerHtml]>{{item[theme_i18n]}}</span></p>
-                  <p>Enoncé:</p>
+                  <p i18n>Points : <span>{{item.points}}</span></p>
+                  <p i18n>Technologie : <span>{{item.technologies.name}}</span></p>
+                  <p i18n>Compétence évaluée : <span [innerHtml]>{{item[theme_i18n]}}</span></p>
+                  <p i18n>Enoncé : </p>
                 </div>
                 <div class="info-hover-enonce">
                   <p [innerHtml]>{{item[name_i18n]}}</p>

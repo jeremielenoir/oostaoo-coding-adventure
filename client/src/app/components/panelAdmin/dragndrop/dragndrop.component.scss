@@ -176,10 +176,13 @@
         
 
         .info-hover-header{
+            color: $primary-text;
             width: 100%;
             height: 50px;
             background: #eaeff3;
             border-bottom: 1px solid $color-principal-blue;
+            border-top-left-radius: $border-radius;
+            border-top-right-radius: $border-radius;
 
             h2{
                 padding: 15px 10px 10px;
@@ -197,23 +200,23 @@
             padding-left: 10px;
 
             p{
-                margin: 0px;
+                margin: 2px 0px;
                 color: $color-orange;
 
                 span{
-                    color:black;
+                    color: $primary-text;
                 }
             }
         }
 
         .info-hover-enonce{
-            width: 96%;
+            margin: 0px 10px;
             padding: 10px 5px;
             background: white;
-            color: black;
+            color: $primary-text;
             overflow:scroll;
-            margin: auto;
             height: 55%;
+            border-radius: $border-radius;
         }
     }
     .ligne-techno{
@@ -240,7 +243,10 @@
         min-width: 25%; 
         height: 100%;
         padding: 10px 10px 0px;
-        display: flex;border-right: 1px dashed $color-principal-blue;
+        display: flex;
+        border-right: 1px dashed $color-principal-blue;
+        color: $primary-text;
+
     
         .ligne-nom-text{
             overflow:hidden; 
@@ -259,7 +265,7 @@
         height: 100%;
         padding: 12px 2px 0px 9px;
         border-right: 1px dashed $color-principal-blue;
-    
+        color: $primary-text;
         .archive{
             width: 22px;
             height: 18px;
@@ -300,7 +306,7 @@
         padding: 10px 10px 0px; 
         border-right: 1px dashed $color-principal-blue; 
         white-space: nowrap;
-       
+        color: $primary-text;
         .ligne-points-text{
             display:flex; 
             align-items: center; 
@@ -332,7 +338,7 @@
         min-width: 12%; 
         height: 100%; 
         padding: 10px 3% 0px;
-    
+        color: $primary-text;
         .ligne-temps.text{
             display:flex; 
             align-items: center; 

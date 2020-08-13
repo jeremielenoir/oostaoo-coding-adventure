@@ -173,10 +173,12 @@ swiper > .swiper.s-wrapper {
         display: block;
         font-size: 12px;
         font-weight: bold;
+        color: $primary-text;
         p{
           display: inline-block;
           margin:0px!important;
           font-weight: 400!important;
+          color: rgb(126, 128, 130);
         }
       }
     }
