@@ -112,6 +112,7 @@ import { RapportDetailleComponent } from './components/panelAdmin/edit-campagne/
 import { NgxStripeModule } from 'ngx-stripe';
 import { RatingFeedbackComponent } from './components/panelAdmin/client-test/fin-test/rating-feedback/rating-feedback.component';
 import { DragNDropComponent, DialogOverviewTest } from './components/panelAdmin/dragndrop/dragndrop.component';
+import { ResponseFormatedComponent } from './components/panelAdmin/dragndrop/response-formated.component';
 import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campagne/top-info-campagne.component';
 import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
 import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
@@ -234,6 +235,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     StripePaymentComponent,
     RatingFeedbackComponent,
     DragNDropComponent,
+    ResponseFormatedComponent,
     DialogOverviewTest,
     TopInfoCampagneComponent,
     MotDePasseOublieComponent,

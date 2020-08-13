@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 
 
 const prefix = '/api/';
-
+export const QUESTION_SEPARATOR: string = '&#x263C;';
 
 export const API_URI_CAMPAIGNS: string = prefix + 'campaigns';
 export const API_URI_CAMPAIGN: string = prefix + 'campaign/:id';
@@ -36,7 +36,6 @@ export const API_POPULATE_QUESTIONS_SPREADSHEET: string = prefix + 'questions/po
 //Bp6PnJmoydK5rz6o
 
 @Injectable()
-
 export class ApiClientService {
 
   constructor(private http: HttpClient) { }

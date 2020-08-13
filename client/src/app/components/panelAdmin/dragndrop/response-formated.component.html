@@ -1,0 +1,13 @@
+<div class="info-hover-enonce">
+    <p [innerHtml]>{{question['name' + currentLanguage]}}</p>
+
+    <p class="label-list" i18n>Liste des réponses proposées :</p>
+    <div>
+        <p *ngFor="let response of showedResponses">- {{response}}</p>
+    </div>
+
+    <p class="label-list" i18n>Réponse(s) attendue(s) :</p>
+    <div>
+        <p *ngFor="let response of trueResponses">- {{response}}</p>
+    </div>
+  </div>

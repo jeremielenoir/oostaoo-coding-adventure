@@ -346,11 +346,11 @@ module.exports = {
       const data = valueRanges.map((val) => val.values)[0];
       /*   console.log("data", data); */
       const newData = data.map((e) => {
-        if (e && e[0]) {
-          const tab = e[0].split(", ");
+        if (e && e[6]) {
+          const tab = e[6].split("☼");
           // console.log("tab", tab);
 
-          return tab.join("☼");
+          return tab.join("&#x263C;");
         }
       });
       // console.log("newData", newData);
@@ -394,6 +394,7 @@ module.exports = {
         keys.private_key,
         [SCOPES]
       );
+      console.log('RANGES', ranges);
       await client.authorize();
       const gsapi = google.sheets({ version: "v4", auth: client });
 
@@ -404,7 +405,7 @@ module.exports = {
         ranges,
       });
       const data = valueRanges.map((val) => val.values)[0];
-
+      console.log('GET SPREADSHEET DATAS');
       const arrValues = [];
 
       for (var i = 0; i < data.length; i++) {
@@ -449,6 +450,8 @@ module.exports = {
       if (diffTech && diffTech.length > 0) {
         diffTech.forEach((tech) => arrTech.push({ name: tech, id: null }));
       }
+
+
       const arrTechPromise = [];
 
       arrTech.forEach(async (tech) => {
@@ -528,31 +531,42 @@ module.exports = {
                   }
                 )
                 .then((r) => resolve(r))
-                .catch((err) => reject(err));
+                .catch((err) => {
+                  console.log('ERREUR', err);
+                  reject(err);
+                });
             }
+            
             delete question.id;
+            
             return strapi.services.question
               .add({
                 ...question,
                 technologies: question.technologies,
               })
               .then((r) => resolve(r))
-              .catch((err) => reject(err));
+              .catch((err) => {
+                console.log('ERROR ADD', err);
+                reject(err);
+              });
           })
         );
       });
+
       const results = await Promise.all(arrPromises);
       const ids = results.map((r) => [r.id]);
 
       const updateOptions = {
         spreadsheetId,
-        range: `${page}!${first}`,
+        range: `${page}!A${first}:A${last}`,
         valueInputOption: "USER_ENTERED",
         resource: { values: ids },
       };
+      
       await gsapi.spreadsheets.values.update(updateOptions);
       return results;
     } catch (error) {
+      console.log('ERROR', error);
       throw error;
     }
   },

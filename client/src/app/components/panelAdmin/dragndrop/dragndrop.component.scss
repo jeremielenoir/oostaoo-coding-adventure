@@ -115,6 +115,7 @@
     scrollbar-color: #7f8183 #e3e3e3;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
+    height: 100%;
     
 }
 .liste-question::-webkit-scrollbar{
@@ -173,7 +174,7 @@
         height: 93.5%;
         width: 48%;
         background: #eaeff3;
-        
+        overflow: scroll;
 
         .info-hover-header{
             color: $primary-text;
@@ -209,15 +210,7 @@
             }
         }
 
-        .info-hover-enonce{
-            margin: 0px 10px;
-            padding: 10px 5px;
-            background: white;
-            color: $primary-text;
-            overflow:scroll;
-            height: 55%;
-            border-radius: $border-radius;
-        }
+        
     }
     .ligne-techno{
         width: 17%; 

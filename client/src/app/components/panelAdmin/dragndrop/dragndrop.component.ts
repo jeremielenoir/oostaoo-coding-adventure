@@ -35,7 +35,7 @@ import { TestComponent } from "../client-test/test/test.component";
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
 
 export interface DialogData {
-  questions;
+  questions: any;
 }
 
 @Component({
@@ -111,7 +111,7 @@ export class DragNDropComponent implements OnInit {
   constructor(
     public apiClientService: ApiClientService,
     public decryptTokenService: DecryptTokenService,
-    public languageStorage:SelectedLanguageService,
+    public languageStorage: SelectedLanguageService,
     private router: Router,
     public dialog: MatDialog
   ) {}
@@ -160,7 +160,6 @@ export class DragNDropComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("aerorpt man -->", changes.selectedQuestions);
     if (this.selectedQuestions && this.selectedQuestions.length > 0) {
       this.booleanCampagnFinishLoading = true;
     }
@@ -179,7 +178,7 @@ export class DragNDropComponent implements OnInit {
     
   }
 
-  fmtMSS(d) {
+  fmtMSS(d: number) {
     d = Number(d);
     // var h = Math.floor(d / 3600);
     var m = Math.floor((d % 3600) / 60);
