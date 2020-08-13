@@ -96,7 +96,13 @@
                 </div>
               </div>
 
-            <div (click)="openDialogTest()" class="ligne-plus"><p class="ligne-plus-text"><i class="fas fa-play"></i></p></div>
+            <div (click)="openDialogTest()" class="ligne-plus">
+              <p class="ligne-plus-text">
+                <button mat-mini-fab [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Prévisualiser la question" [color]="'accent'" aria-label="Example icon button with a menu icon">
+                  <mat-icon>play_circle_outlined</mat-icon>
+                </button>
+              </p>
+            </div>
             
             <div class="ligne-techno" >
             <p class="ligne-techno-text">{{item.technologies.name}}</p>
@@ -156,7 +162,13 @@
 
             <div class="ligne-temps" matTooltip="Durée(min:sec)"><p class="ligne-temps-text">{{ fmtMSS(item.time) }}</p></div>
 
-            <div (click)='addquestion(item)' class="ligne-plus"><p class="ligne-plus-text">+</p></div>
+            <div (click)='addquestion(item)' class="ligne-plus">
+              <p class="ligne-plus-text">
+                <button mat-mini-fab [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Ajouter la question au test" [color]="'accent'" aria-label="Ajouter la question au test">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </p>
+            </div>
 
           </div>
 
@@ -217,7 +229,13 @@
             </div>
 
 
-            <div class="ligne-plus"><p class="ligne-plus-text"><i class="fas fa-play"></i></p></div>
+            <div class="ligne-plus">
+              <p class="ligne-plus-text">
+                <button mat-mini-fab [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Prévisualiser la question" [color]="'accent'" aria-label="Example icon button with a menu icon">
+                  <mat-icon>play_circle_outlined</mat-icon>
+                </button>
+              </p>
+            </div>
             
             <div class="ligne-techno" >
             <p class="ligne-techno-text">{{item.technologies.name}}</p>

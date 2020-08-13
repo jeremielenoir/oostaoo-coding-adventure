@@ -226,6 +226,7 @@
         height: 100%; 
         padding: 10px 0px 0px; 
         border-right: 1px dashed $color-principal-blue;
+        border-left: 1px dashed $color-principal-blue;
     
         .ligne-techno-text{
             display:flex; 
@@ -351,25 +352,19 @@
         max-width: 7%; 
         min-width: 7%; 
         height: 100%; 
-        padding: 2px 10px 0px; 
+        padding: 2px 3px; 
         border-left: 1px dashed $color-principal-blue;
         display: none;
-        cursor: pointer;
-        box-shadow: inset -16px -19px 30px 0px $color-principal-blue;
-    
+        
+        
         .ligne-plus-text{
-            text-align: center;
-            font-size: 28px;
-            color: white;
+            
         }
     }
 
     &:hover{
         background-color: $color-blue-light;
-        -webkit-box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
-        -moz-box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
-        box-shadow: inset -1px -4px 7px -3px rgba(0,0,0,5);
-
+        
         .info-hover-left, .info-hover-right{
             display: block;
         }
