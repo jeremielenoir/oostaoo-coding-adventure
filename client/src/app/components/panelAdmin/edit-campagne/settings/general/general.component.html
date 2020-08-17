@@ -1,8 +1,7 @@
-<div *ngIf="!loadingStart" class="loading">
-  <span class="fa fa-spinner fa-pulse"></span>
+<div *ngIf="!isLoaded" class="loader-container">
+  <mat-spinner [strokeWidth]="20"></mat-spinner>
 </div>
-
-<div *ngIf="loadingStart">
+<div *ngIf="isLoaded">
   <form  action="" *ngFor="let campaign of campaigns">
   
   <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullWidth">

@@ -1,12 +1,13 @@
-<div *ngIf="!booleanCampagnFinishLoading" class="loading">
-  <span class="fa fa-spinner fa-pulse"></span>
-</div>
-<div *ngIf="booleanCampagnFinishLoading" class="container-edit-question">
+<div class="container-edit-question">
   <div id="content">
     <div class="block-container left">
       <div class="bar">
         <mat-icon class="static">playlist_add</mat-icon>
-        <span class="bar-text">Questions disponibles ({{this.notSelectedQuestions.length}})</span>
+        <span class="bar-text">Questions disponibles ({{this.notSelectedQuestions ? this.notSelectedQuestions.length : 0}})</span>
+      </div>
+
+      <div *ngIf="!isLoaded" class="loader-container">
+        <mat-spinner [strokeWidth]="20"></mat-spinner>
       </div>
      
 
@@ -46,9 +47,9 @@
                 <app-response-formated [question]="item"></app-response-formated>
               </div>
 
-            <div (click)="openDialogTest()" class="ligne-plus">
+            <div (click)="openDialogTest()" class="ligne-plus" >
               <p class="ligne-plus-text">
-                <button mat-mini-fab [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Prévisualiser la question" [color]="'accent'" aria-label="Example icon button with a menu icon">
+                <button (mouseover)="disablehover = true" (mouseout)="disablehover = false" mat-mini-fab [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Prévisualiser la question" [color]="'accent'" aria-label="Example icon button with a menu icon">
                   <mat-icon>play_circle_outlined</mat-icon>
                 </button>
               </p>
@@ -114,7 +115,7 @@
 
             <div (click)='addquestion(item)' class="ligne-plus">
               <p class="ligne-plus-text">
-                <button mat-mini-fab [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Ajouter la question au test" [color]="'accent'" aria-label="Ajouter la question au test">
+                <button (mouseover)="disablehover = true" (mouseout)="disablehover = false" mat-mini-fab [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Ajouter la question au test" [color]="'accent'" aria-label="Ajouter la question au test">
                   <mat-icon>add</mat-icon>
                 </button>
               </p>
@@ -129,20 +130,25 @@
       <div class="bar">
         
         <mat-icon class="static">grading</mat-icon>
-        <span class="bar-text">Votre test d'évaluation ({{this.selectedQuestions.length}})</span>
+        <span class="bar-text">Votre test d'évaluation ({{this.selectedQuestions ? this.selectedQuestions.length : 0}})</span>
 
         <button class="hvr-grow color-primary-dark" mat-mini-fab (click)="openDialogTest()" [matTooltipPosition]="'left'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Prévisualiser le test" color="primary" aria-label="Example icon button with a menu icon">
           <mat-icon>play_circle_outlined</mat-icon>
         </button>
         
       </div>
+
+      <div *ngIf="!isLoaded" class="loader-container">
+        <mat-spinner [strokeWidth]="20"></mat-spinner>
+      </div>
+
       <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="selectedQuestions"
         [cdkDropListConnectedTo]="[todoList]" class="liste-question" (cdkDropListDropped)="drop($event)" #droplist>
         <p id="drop-text">Glissez/déposez une question ici</p>
 
           <div class="ligne-question" (cdkDragEnded)="dragEnd($event)" (cdkDragStarted)="dragStart($event)" *ngFor="let item of selectedQuestions" cdkDrag>
 
-            <div [ngClass]="{'info-hover-right': disablehover === false, 'disable': disablehover === true }" class="">
+            <div #info [ngClass]="{'info-hover-right': disablehover === false, 'disable': disablehover === true }" class="">
               <div class="info-hover-header"><h2>{{item[name_i18n]}}</h2></div>
               <div class="info-hover-content">
                 <p>Points : <span>{{item.points}}</span></p>
@@ -154,7 +160,7 @@
             </div>
 
 
-            <div class="ligne-plus">
+            <div class="ligne-plus" (mouseover)="disablehover = true" (mouseout)="disablehover = false">
               <p class="ligne-plus-text">
                 <button mat-mini-fab [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Prévisualiser la question" [color]="'accent'" aria-label="Example icon button with a menu icon">
                   <mat-icon>play_circle_outlined</mat-icon>
@@ -162,7 +168,7 @@
               </p>
             </div>
             
-            <div class="ligne-techno" >
+            <div class="ligne-techno">
             <p class="ligne-techno-text">{{item.technologies.name}}</p>
             </div>
 

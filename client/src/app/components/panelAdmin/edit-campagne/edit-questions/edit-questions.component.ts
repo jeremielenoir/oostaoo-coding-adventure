@@ -77,7 +77,8 @@ export class EditQuestionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiClientService
+    
+      this.apiClientService
       .get(API_URI_CAMPAIGNS + "/" + this.globalId)
       .subscribe((response) => {
         this.yourCampaign = response;
@@ -89,20 +90,9 @@ export class EditQuestionsComponent implements OnInit {
         this.allTechno = this.techno;
         this.allQuestionsCampaign = this.yourCampaign.questions;
         this.loadAllQuestion(this.allQuestionsCampaign);
-
-        // const nameQuestionByTechno = [];
-        // this.yourCampaign.questions.forEach((element) => {
-        //   nameQuestionByTechno.push(element.name);
-        // });
-
-        // for (let techno of this.allTechno) {
-        //   for (let question of this.allQuestionsCampaign) {
-        //     newQuestion.push({ ...question, technologies: techno });
-        //   }
-        // }
-
-        // this.allQuestionsCampaign = newQuestion;
       });
+    
+    
   }
 
   populateQuestions(yourCampaign) {

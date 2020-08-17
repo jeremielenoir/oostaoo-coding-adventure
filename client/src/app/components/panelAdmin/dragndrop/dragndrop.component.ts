@@ -45,10 +45,10 @@ export interface DialogData {
     "./dragndrop.component.scss"
   ],
 })
-export class DragNDropComponent implements OnInit {
+export class DragNDropComponent implements OnInit, OnChanges {
   @Input("formCampagne") formCampagne: FormGroup;
-  @Input() notSelectedQuestions = [];
-  @Input() selectedQuestions = [];
+  @Input() notSelectedQuestions: Array<any>;
+  @Input() selectedQuestions: Array<any>;
   @Input() techno = [];
   @Output() incrementPage = new EventEmitter<any>();
   @Output() decrementPage = new EventEmitter<any>();
@@ -62,7 +62,7 @@ export class DragNDropComponent implements OnInit {
   public saveallQuestionsCampaign = [];
   public yourCampaign;
   public difficulty = ["facile", "moyen", "expert"];
-  public booleanCampagnFinishLoading: boolean;
+  public isLoaded: boolean;
   public activeClassScrollTopDropList = false;
   public Questions = [];
 
@@ -161,12 +161,19 @@ export class DragNDropComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.selectedQuestions && this.selectedQuestions.length > 0) {
-      this.booleanCampagnFinishLoading = true;
+      this.isLoaded = true;
     }
   }
 
+  log(info: HTMLElement){
+    console.log('INFO', info.classList.add('machin'));
+  }
+
   addquestion(question) {
-    this.selectedQuestions.push(question);
+    this.selectedQuestions.unshift(question);
+    //this.selectedQuestions = [question, ...this.selectedQuestions];
+    console.log([question, ...this.selectedQuestions]);
+
     const index = this.notSelectedQuestions.indexOf(question);
     if (index > -1) {
       this.notSelectedQuestions.splice(index, 1);

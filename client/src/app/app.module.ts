@@ -85,6 +85,8 @@ import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne
 import { ClientTestComponent } from './components/panelAdmin/client-test/client-test.component';
 import { TestComponent } from './components/panelAdmin/client-test/test/test.component';
 
+
+
 // import { NgxEditorModule } from 'ngx-editor';
 import { NotFoundComponent } from './components/panelAdmin/not-found/not-found.component';
 import { BreadcrumbComponent } from './components/panelAdmin/breadcrumb/breadcrumb.component';

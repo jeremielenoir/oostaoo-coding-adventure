@@ -238,3 +238,12 @@ input:checked ~ .checkbox-span {
   border-bottom: $border-table;
   padding: 5px;
 }
+
+.loader-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  padding: 5px;
+}

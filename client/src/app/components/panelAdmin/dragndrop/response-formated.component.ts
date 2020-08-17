@@ -15,6 +15,22 @@ export class ResponseFormatedComponent implements OnInit, OnChanges {
   trueResponses: Array<string>;
   
   public currentLanguage: string;
+  public testMarkdown: string = `## Markdown __rulez__!
+  ---
+  
+  ### Syntax highlight
+  \`\`\`javascript
+  const language = 'typescript';
+  \`\`\`
+  
+  ### Lists
+  1. Ordered list
+  2. Another bullet point
+    - Unordered list
+    - Another unordered bullet point
+  
+  ### Blockquote
+  > Blockquote to the max`;
 
   constructor(public languageStorage: SelectedLanguageService) {
     this.currentLanguage = this.languageStorage.getLanguageCountry() == 'fr-FR' ? '' : '_' + this.languageStorage.getLanguageCountry();
@@ -25,11 +41,15 @@ export class ResponseFormatedComponent implements OnInit, OnChanges {
     
   }
 
+  onReady(){
+    console.log("onReady mark-down")
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (this.question['content' + this.currentLanguage]) {
       
       this.showedResponses = [...this.question['content' + this.currentLanguage].split(QUESTION_SEPARATOR)];
-      console.log('QUESTION', this.showedResponses);
+      console.log('QUESTION', this.question);
     }
       
     if (this.question['answer_value' + this.currentLanguage]) {

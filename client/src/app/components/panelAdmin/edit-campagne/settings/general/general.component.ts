@@ -34,19 +34,22 @@ export class GeneralComponent implements OnInit {
 
   copypaste: boolean;
   envoiRapportSimplifie: boolean;
-  loadingStart:boolean
+  isLoaded: boolean = false;
 
 
   ngOnInit() {
-    this.getCampaign().then(camp => {
-      this.name = new FormControl(camp[0].Name);
-      this.lang = new FormControl(camp[0].langs);
-      this.copypasteControl = new FormControl(camp[0].copy_paste);
-      this.rapportControl = new FormControl(camp[0].sent_report);
-      this.dateExp = camp[0].expiration_date.slice(0, 10);
-      this.NewDateExp = new Date(this.dateExp);
-      
-    });
+    
+      this.getCampaign().then(camp => {
+        this.name = new FormControl(camp[0].Name);
+        this.lang = new FormControl(camp[0].langs);
+        this.copypasteControl = new FormControl(camp[0].copy_paste);
+        this.rapportControl = new FormControl(camp[0].sent_report);
+        this.dateExp = camp[0].expiration_date.slice(0, 10);
+        this.NewDateExp = new Date(this.dateExp);
+        
+      });
+  
+    
   }
 
   formatDate(date: string | number | Date) {
@@ -100,7 +103,7 @@ export class GeneralComponent implements OnInit {
       const datas = await this.apiClientService
         .get(API_URI_CAMPAIGNS + '/' + this.globalId)
         .toPromise();
-        this.loadingStart = true;
+        this.isLoaded = true;
       return this.campaigns = [datas];
     } catch (err) {
       return err;

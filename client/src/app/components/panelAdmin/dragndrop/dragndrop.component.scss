@@ -7,6 +7,10 @@
     height: 100%;
 }
 
+.loader-container{
+    background: #fff;
+}
+
 #content {
     width: 100%;
     height: 95%;
@@ -154,6 +158,7 @@
     font-size: 14px; 
     border-bottom: 1px dashed $color-principal-blue;
     cursor: move;
+    //transition: .5s all;
 
     .info-hover-left{
         right: 15px;
@@ -166,6 +171,9 @@
 
     .info-hover-right, .info-hover-left {
         display: none;
+        &.machin{
+            
+        }
         z-index: 2;
         position: absolute;
         border: 1px solid $color-principal-blue;
@@ -174,7 +182,7 @@
         height: 93.5%;
         width: 48%;
         background: #eaeff3;
-        overflow: scroll;
+        
 
         .info-hover-header{
             color: $primary-text;
@@ -359,7 +367,9 @@
         background-color: $color-blue-light;
         
         .info-hover-left, .info-hover-right{
-            display: block;
+            display: flex;
+            flex-direction: column;
+            transition-delay: 1s;
         }
         .ligne-plus{
             display:block;

@@ -48,6 +48,7 @@ export class CampagneComponent implements OnInit {
   public showArchives = false;
   public test: any;
   public nbShowCampaigns: number;
+  public isLoaded = false;
 
   constructor(
     public apiClientService: ApiClientService,
@@ -63,14 +64,18 @@ export class CampagneComponent implements OnInit {
   ngOnInit() {
 
     const adminId = this.decryptTokenService.adminId || this.decryptTokenService.userId;
+    
     this.authenticationService
-      .getCampaignsUser(adminId)
-      .then(resultat => {
-        this.campaigns = resultat;
-        this.IsactiveNoCountryside = true;
-        this.emitIsactiveNoCountryside.emit(this.IsactiveNoCountryside);
-        this.giveCampaigns();
-      });
+    .getCampaignsUser(adminId)
+    .then(resultat => {
+      this.campaigns = resultat;
+      this.IsactiveNoCountryside = true;
+      this.emitIsactiveNoCountryside.emit(this.IsactiveNoCountryside);
+      this.giveCampaigns();
+      this.isLoaded = true;
+    });
+    
+    
   }
 
   customComparator(itemA) {

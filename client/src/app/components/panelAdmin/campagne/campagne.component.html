@@ -66,8 +66,11 @@
   <div class=" contenu-techno">
 
     <div class="content-scroll">
-
-      <div class="no-campaign" *ngIf="campaigns.length === 0">
+      <div *ngIf="!isLoaded" class="loader-container">
+        <mat-spinner [strokeWidth]="20"></mat-spinner>
+      </div>
+      
+      <div class="no-campaign" *ngIf="isLoaded && campaigns.length === 0">
         <p i18n> Vous n'avez pas encore de tests, cliquer sur le bouton en dessous pour en créer un.</p>
         <br/>
         <div class="container-add-campaign hvr-grow" [routerLink]="['/dashboard/campaigns/new']">
