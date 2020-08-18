@@ -93,7 +93,9 @@ export class TestComponent implements OnInit {
     if (this.sumPointsbyTechno) {
       this.allPointsTechnos = this.sumPointsbyTechno;
     }
+
     this.calculTotalPoints(this.allPointsTechnos);
+    
       if (this.totalPoints) {
         this.totalPointsCampaign = this.totalPoints;
       }

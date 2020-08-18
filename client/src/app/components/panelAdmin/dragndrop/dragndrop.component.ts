@@ -264,9 +264,9 @@ export class DragNDropComponent implements OnInit, OnChanges {
   }
 
   // data: {questions: this.selectedQuestions}
-  openDialogTest(): void {
+  openDialogTest(question?: any): void {
     const dialogRef = this.dialog.open(DialogOverviewTest, {
-      data: { questions: this.selectedQuestions, technoCampaign: this.techno },
+      data: { questions: question ? [question] : this.selectedQuestions, technoCampaign: this.techno },
       /*width: '400px',
       height: '400px'*/
     });

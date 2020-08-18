@@ -47,7 +47,7 @@
                 <app-response-formated [question]="item"></app-response-formated>
               </div>
 
-            <div (click)="openDialogTest()" class="ligne-plus" >
+            <div (click)="openDialogTest(item)" class="ligne-plus" >
               <p class="ligne-plus-text">
                 <button (mouseover)="disablehover = true" (mouseout)="disablehover = false" mat-mini-fab [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Prévisualiser la question" [color]="'accent'" aria-label="Example icon button with a menu icon">
                   <mat-icon>play_circle_outlined</mat-icon>
@@ -160,7 +160,7 @@
             </div>
 
 
-            <div class="ligne-plus" (mouseover)="disablehover = true" (mouseout)="disablehover = false">
+            <div class="ligne-plus" (click)="openDialogTest(item)" (mouseover)="disablehover = true" (mouseout)="disablehover = false">
               <p class="ligne-plus-text">
                 <button mat-mini-fab [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Prévisualiser la question" [color]="'accent'" aria-label="Example icon button with a menu icon">
                   <mat-icon>play_circle_outlined</mat-icon>

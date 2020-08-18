@@ -266,9 +266,8 @@ tr.mat-row {
   width: 100%;
   background: $color-background-blue;
   padding-top: 17px;
-  padding-left: 15px;
-  padding-right: 15px;
-
+  
+  
   .select-choince {
     border-radius: $border-radius;
     height: 48px;
@@ -353,6 +352,7 @@ tr.mat-row {
     border: $border-table;
     background-color: $color-white;
     border-radius: 5px;
+    box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4), -3px -4px 8px -2px rgba(124, 151, 166, 0.69);
   }
 
   .border1pxdashedgray {
@@ -362,9 +362,9 @@ tr.mat-row {
     flex-direction: column;
     align-items: center;
     justify-items: center;
-    padding: 50px;
-    /* height: 50vh; */
-    padding-bottom: 13vh;
+    
+    //padding: 50px;
+    
   }
 
   #img-editquestion {

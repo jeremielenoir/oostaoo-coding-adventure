@@ -33,18 +33,11 @@
 
         <div class="testing-timer">
           <span class="testing-timer-icon"><i class="far fa-clock"></i></span>
-
           <span class="testing-timer-text" i18n>
             Temps écoulé :
-            <strong [class.active-time-danger]="timedefault >= timeDanger">{{
-                timedefault === 600
-                  ? fmtMSS(timedefault)
-                  : "0" + fmtMSS(timedefault)
-              }}/{{
-                question.time === 600
-                  ? fmtMSS(question.time)
-                  : "0" + fmtMSS(question.time)
-              }}</strong>
+          </span>
+          <span class="time-elapsed" [class.active-time-danger]="timedefault >= timeDanger">
+            {{ fmtMSS(timedefault) }}/{{ fmtMSS(question.time) }}
           </span>
         </div>
       </header>

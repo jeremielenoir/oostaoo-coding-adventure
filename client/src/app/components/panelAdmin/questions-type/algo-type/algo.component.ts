@@ -17,6 +17,7 @@ export class AlgoComponent {
   @Input() filetype: any = {};
   public result: any = false;
   public loading: boolean = false;
+  editorOptions = {theme: 'vs-dark', language: 'javascript'};
 
   constructor(public apiClientService: ApiClientService) {}
   async testCode() {
