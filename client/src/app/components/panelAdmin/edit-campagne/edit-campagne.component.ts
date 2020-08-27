@@ -13,7 +13,6 @@ export class EditCampagneComponent implements OnInit {
   constructor(private route: ActivatedRoute) {
     this.route.params.subscribe((params) => {
       this.globalId = params.id;
-      console.log('globalID: ', this.globalId, params);
     });
   }
 

@@ -60,21 +60,18 @@ export class CandidatsComponent implements OnInit {
   public infosCandidatsPdf;
   public questions;
   public idElementExported: any;
-  public bolleanAnonymiser: boolean;
-  public bolleanDeleteCandidat: boolean;
-  public allcheckedActivetedBolean = false;
+  public anonymizing: boolean;
+  public deletingCandidats: boolean;
+  public allCandidatsSelected = false;
   datePipe = new DatePipe("fr");
   ViewCandidats;
   isLoading = true;
   choiceList: boolean;
   checkedActionBoolean = true;
-  candidatsSelected: any[] = [];
   opened: boolean;
-  public checkedBox: boolean = false;
   public DecryptTokenService = new DecryptTokenService();
 
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild("allChecked") allChecked: ElementRef;
   @ViewChild("check") check: ElementRef;
 
   constructor(
@@ -105,7 +102,6 @@ export class CandidatsComponent implements OnInit {
   ];
 
   openDialog() {
-    let firstCheckAction = document.querySelector("#first-check-action");
     const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
       data: this.globalId,
       height: "580px",
@@ -113,7 +109,7 @@ export class CandidatsComponent implements OnInit {
 
     inviteCandidatDialog.afterClosed().subscribe((data) => {
       this.getCampaign().then((datas) => {
-        console.log("AFTER CLOSE ALL DATAS", this.candidatsSelected);
+        console.log("AFTER CLOSE ALL DATAS", datas);
       });
     });
   }
@@ -147,67 +143,43 @@ export class CandidatsComponent implements OnInit {
     this.choiceList = false;
   }
 
-  // TODO : fix this function
-  checkedAction(e) {
-    e.stopPropagation();
-    let element = e.target;
-    let firstCheckAction = document.querySelector("#first-check-action");
-    if (element.checked) {
-      this.candidatsSelected.push(element.value);
-      this.idElementExported = element.value;
-    } else {
-      let index = this.candidatsSelected.indexOf(element.value);
-      this.candidatsSelected.splice(index, 1);
-    }
 
-    if (this.candidatsSelected.length !== this.candidats.length) {
-      firstCheckAction["checked"] = false;
-      this.allcheckedActivetedBolean = false;
-    } else {
-      firstCheckAction["checked"] = true;
-      this.allcheckedActivetedBolean = true;
-    }
-  }
-
-  // TODO : fix this function
-  allcheckedActiveted(e) {
-    this.candidatsSelected = [];
-    let checkElements = document.querySelectorAll(".check-action-candidat");
-    checkElements.forEach((check) => {
-      if (e.target.checked) {
-        check["checked"] = true;
-        this.allcheckedActivetedBolean = true;
-        this.candidatsSelected.push(check["value"]);
-      } else {
-        check["checked"] = false;
-        let index = this.candidatsSelected.indexOf(check["value"]);
-        this.candidatsSelected.splice(index, 1);
-      }
-    });
-
-    console.log(
-      "this.candidatsSelected",
-      this.candidatsSelected
-    );
-  }
-  activedCheck() { }
-  checkSeveralIdDelete() {
-    if (this.candidatsSelected.length > 1) {
-      this.candidatsSelected.forEach((idDelete) => {
-        const urlApi = API_URI_CANDIDATS + "/" + idDelete;
-        this.apiClientService.delete(urlApi).subscribe((response) => {
-          this.bolleanDeleteCandidat = false;
-          this.candidatsSelected = [];
-          this.checkedBox = false;
-          this.allChecked["checked"] = false;
-          this.ngOnInit();
-        });
-      });
+  selectAllCandidats(checked: boolean) {
+    this.allCandidatsSelected = checked;
+    if (!this.infosCandidats) {
       return;
     }
+    this.infosCandidats.data.forEach(c => {
+      c.selected = checked;
+    });
   }
-  checkSeveralIdAnonymiser() {
-    this.candidatsSelected.forEach((elementid) => {
+  someCandidatsSelected(): boolean {
+    return !this.infosCandidats ? false : this.getCandidatsSelected().length > 0 && !this.allCandidatsSelected;
+  }
+  updateAllCandidatsSelected() {
+    this.allCandidatsSelected = this.infosCandidats.data.every(c => c.selected);
+  }
+  getCandidatsSelected() {
+    return this.infosCandidats.data.filter(c => c.selected).map(c => c.candidat_id.toString());
+  }
+  getCandidatStatusSelected(id: number) {
+    if (!this.infosCandidats) {
+      return false;
+    }
+    const found = this.infosCandidats.data.find(c => c.candidat_id === id);
+    return found ? found.selected : false;
+  }
+
+
+  exported() {
+    this.viewResultsPdf(this.getCandidatsSelected());
+  }
+
+  setAnonymizing(bool) {
+    this.anonymizing = bool;
+  }
+  anonymize() {
+    this.getCandidatsSelected().forEach((elementid) => {
       const urlApi = API_URI_CANDIDATS + "/" + elementid;
       this.apiClientService
         .put(urlApi, {
@@ -215,68 +187,30 @@ export class CandidatsComponent implements OnInit {
           email: "-",
         })
         .subscribe((response) => {
-          this.bolleanDeleteCandidat = false;
-          this.candidatsSelected = [];
-          this.checkedBox = false;
-          this.allChecked["checked"] = false;
+          this.setAnonymizing(false);
           this.ngOnInit();
         });
     });
-    return;
   }
 
-  exported() {
-    this.viewResultsPdf(this.candidatsSelected);
+  setDeletingCandidats(bool) {
+    this.deletingCandidats = bool;
   }
-
-  Anonymiser() {
-    this.bolleanAnonymiser = true;
-  }
-  removeAnonymiser() {
-    this.bolleanAnonymiser = false;
-  }
-  deleteCandidat() {
-    this.bolleanDeleteCandidat = true;
-  }
-  removeDeleteCandidat() {
-    this.bolleanDeleteCandidat = false;
-  }
-  AnonymiserFinal() {
-    if (this.candidatsSelected.length > 1) {
-      this.checkSeveralIdAnonymiser();
-      return;
-    }
-
-    const urlApi = API_URI_CANDIDATS + "/" + this.idElementExported;
-    this.apiClientService
-      .put(urlApi, {
-        Nom: "-",
-        email: "-",
-      })
-      .subscribe((response) => {
-        this.bolleanAnonymiser = false;
-        this.candidatsSelected = [];
+  deleteCandidats() {
+    this.getCandidatsSelected().forEach((idDelete) => {
+      const urlApi = API_URI_CANDIDATS + "/" + idDelete;
+      this.apiClientService.delete(urlApi).subscribe((response) => {
+        this.setDeletingCandidats(false);
+        this.selectAllCandidats(false);
         this.ngOnInit();
       });
-  }
-
-  delteCandidat() {
-    this.checkSeveralIdDelete();
-    const urlApi = API_URI_CANDIDATS + "/" + this.idElementExported;
-    this.apiClientService.delete(urlApi).subscribe((response) => {
-      this.bolleanDeleteCandidat = false;
-      this.candidatsSelected = [];
-      this.ngOnInit();
     });
   }
 
   getCampaign(): Promise<any> {
-    setTimeout(() => {
-      this.allcheckedActivetedBolean = false;
-      this.candidatsSelected = [];
-    }, 100);
-
-    //console.log("hello famady");
+    // setTimeout(() => {
+    //   this.selectAllCandidats(false);
+    // }, 100);
 
     const apiURL = API_URI_CAMPAIGNS + "/" + this.globalId;
     return this.apiClientService
@@ -347,7 +281,6 @@ export class CandidatsComponent implements OnInit {
         }
       )
       .then((data) => {
-        console.log("data==========", data);
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
         const defaultColumns = [
           "Checked",
@@ -403,7 +336,7 @@ export class CandidatsComponent implements OnInit {
             Candidats: candidat.Nom,
             Email: candidat.email,
             status: candidat.status,
-            Checked: false,
+            selected: this.getCandidatStatusSelected(candidat.id),
             "Dernière activité": dateInvite.toLocaleString(),
             // Score: percentCandidat,
             Score: candidat.Score,

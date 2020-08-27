@@ -9,7 +9,7 @@
           </h1>
 
           <button mat-raised-button color="primary" class="invit-btn-candidat" (click)="openDialog()">
-            Invitez des candidats <span *ngIf='tests_available !== "" '>({{ tests_available }} tests)</span>
+            Invitez des candidats <span *ngIf='tests_available !== "" '>({{ tests_available }} tests disponibles)</span>
           </button>
         </div>
       </div>
@@ -17,8 +17,8 @@
 
     <div *ngSwitchCase="'CandidatTrue'" id="editQuestion">
 
-      <div id="shadow-cog" [class.shadow-cog-active]="bolleanAnonymiser">
-        <div id="remove" (click)="removeAnonymiser()"></div>
+      <div id="shadow-cog" [class.shadow-cog-active]="anonymizing">
+        <div id="remove" (click)="setAnonymizing(false)"></div>
 
         <div class="modall">
           <div class="modall-header">
@@ -42,13 +42,13 @@
 
           </div>
           <div class="modall-footer">
-            <button class="btn-modal" (click)="removeAnonymiser()">Annuler</button>
-            <button class="btn-modal" (click)="AnonymiserFinal()">Anonymiser ce candidat</button>
+            <button class="btn-modal" (click)="setAnonymizing(false)">Annuler</button>
+            <button class="btn-modal" (click)="anonymize()">Anonymiser ce candidat</button>
           </div>
         </div>
       </div>
-      <div id="shadow-cog" [class.shadow-cog-active]="bolleanDeleteCandidat">
-        <div id="remove" (click)="removeDeleteCandidat()"></div>
+      <div id="shadow-cog" [class.shadow-cog-active]="deletingCandidats">
+        <div id="remove" (click)="setDeletingCandidats(false)"></div>
 
         <div class="modall">
           <div class="modall-header">
@@ -69,8 +69,8 @@
 
           </div>
           <div class="modall-footer">
-            <button class="btn-modal" (click)="removeDeleteCandidat()">Annuler</button>
-            <button class="btn-modal" (click)="delteCandidat()">Supprimer ce candidat</button>
+            <button class="btn-modal" (click)="setDeletingCandidats(false)">Annuler</button>
+            <button class="btn-modal" (click)="deleteCandidats()">Supprimer ce candidat</button>
           </div>
         </div>
       </div>
@@ -82,19 +82,20 @@
           <button mat-raised-button color="primary" [matMenuTriggerFor]="menu"
             aria-label="Example icon-button with a menu">
             <mat-icon color="accent">touch_app</mat-icon>
-            {{candidatsSelected.length }} sélectionné{{candidatsSelected.length > 1 ? 's' : ''}}
+            {{getCandidatsSelected().length }} sélectionné{{getCandidatsSelected().length > 1 ? 's' : ''}}
+            <mat-icon>keyboard_arrow_down</mat-icon>
           </button>
           <mat-menu color="primary" #menu="matMenu">
-            <button (click)="exported()" mat-menu-item [disabled]="candidatsSelected.length == 0">
-              <mat-icon [color]="candidatsSelected.length == 0 ? 'none' : 'accent'">exit_to_app</mat-icon>
+            <button (click)="exported()" mat-menu-item [disabled]="getCandidatsSelected().length == 0">
+              <mat-icon [color]="getCandidatsSelected().length == 0 ? 'none' : 'accent'">exit_to_app</mat-icon>
               <span>Exporter</span>
             </button>
-            <button (click)="Anonymiser()" mat-menu-item [disabled]="candidatsSelected.length == 0">
-              <mat-icon [color]="candidatsSelected.length == 0 ? 'none' : 'accent'">visibility_off</mat-icon>
+            <button (click)="setAnonymizing(true)" mat-menu-item [disabled]="getCandidatsSelected().length == 0">
+              <mat-icon [color]="getCandidatsSelected().length == 0 ? 'none' : 'accent'">visibility_off</mat-icon>
               <span>Anonymiser</span>
             </button>
-            <button (click)="deleteCandidat()" mat-menu-item [disabled]="candidatsSelected.length == 0">
-              <mat-icon [color]="candidatsSelected.length === 0 ? 'none' : 'accent'">delete_forever</mat-icon>
+            <button (click)="setDeletingCandidats(true)" mat-menu-item [disabled]="getCandidatsSelected().length == 0">
+              <mat-icon [color]="getCandidatsSelected().length === 0 ? 'none' : 'accent'">delete_forever</mat-icon>
               <span>Supprimer</span>
             </button>
           </mat-menu>
@@ -118,39 +119,33 @@
 
         <div class="sous-table-content">
           <table mat-table [dataSource]="infosCandidats" matSort>
+
             <!-- Item Column -->
             <ng-container *ngFor="let column of displayedColumns; let i = index;" [matColumnDef]="column">
               <!-- CHANGE COLUMN FOR CHECKBOX -->
               <div *ngIf="column === 'Checked'">
-                <!-- >>> TODO : FIX CHECK ALL <<< -->
                 <th mat-header-cell *matHeaderCellDef="let dataInfos">
                   <div class="content-check-action-candidat">
-                    <mat-checkbox id="first-check-action" (click)="allcheckedActiveted($event)">
+                    <mat-checkbox id="first-check-action" (change)="selectAllCandidats($event.checked)"
+                      [(ngModel)]="allCandidatsSelected" [indeterminate]="someCandidatsSelected()">
                     </mat-checkbox>
-                    <!-- <input [checked]="allcheckedActivetedBolean" id="first-check-action" type="checkbox"
-                      class="checkbox" (click)="allcheckedActiveted($event)" /> 
-                    <label for="first-check-action" class="checkbox-span"></label> -->
                   </div>
                 </th>
-                <!-- >>> TODO : FIX CHECK ONE <<< -->
                 <td mat-cell *matCellDef="let dataInfos">
                   <div class="sous-content-check-action-candidat">
-                    <mat-checkbox class="check-action-candidat" (click)="checkedAction($event)"
-                      value="{{dataInfos.candidat_id}}">
+                    <mat-checkbox [(ngModel)]="dataInfos.selected" (ngModelChange)="updateAllCandidatsSelected()">
                     </mat-checkbox>
-                    <!-- <input type="checkbox" class="check-action-candidat" (click)="checkedAction($event)"
-                      value="{{dataInfos.candidat_id}}" />
-                    <label id="candidat-check" (click)="activedCheck()"></label> -->
                   </div>
                 </td>
               </div>
+
               <div *ngIf="column === 'Details'"></div>
+
               <div *ngIf="column === 'Interview'">
                 Interview
               </div>
 
               <div class="color-text">
-
                 <div *ngIf="column === 'Candidats'">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     {{ column }}
@@ -160,7 +155,6 @@
                     {{ dataInfos.Email }}
                   </td>
                 </div>
-
                 <div *ngIf="column =='Details' ">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     {{ column }}
@@ -203,7 +197,6 @@
                 <td mat-cell *matCellDef="let dataInfos">
                   {{ dataInfos[column] }}
                 </td>
-
 
               </div>
 
