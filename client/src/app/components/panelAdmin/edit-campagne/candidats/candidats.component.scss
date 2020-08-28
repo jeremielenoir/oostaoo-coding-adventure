@@ -5,6 +5,15 @@
 //    flex: 1;
 //   }
 
+.flex {
+  display: flex;
+}
+
+.flex1 {
+  display: flex;
+  flex: 1;
+}
+
 ::ng-deep app-candidats {
   flex: 1;
 }
@@ -42,7 +51,7 @@ button.mat-sort-header-button {
 }
 
 ::ng-deep #first-check-action .mat-checkbox-frame {
-  border-color: white !important;
+  border-color: $color-white !important;
 }
 
 .sous-content-check-action-candidat {
@@ -53,82 +62,47 @@ button.mat-sort-header-button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  // Below is old css for input checkboxes without Material Angular
-  // .check-action-candidat {
-  //   position: absolute;
-  //   cursor: pointer;
-  //   width: 15px;
-  //   height: 13.5px;
-  //   z-index: 2;
-  //   margin-top: 8px;
-  //   opacity: 0;
-  // }
-  // #candidat-check {
-  //   position: absolute;
-  //   height: 15px;
-  //   width: 15px;
-  //   border: 2px solid #FFF;
-  //   display: inline-block;
-  //   border-radius: ($border-radius - 1);
-  //   margin-top: 4px;
-  //   cursor: pointer;
-  // }
-
-  // #candidat-check::after {
-  //   content: "";
-  //   position: absolute;
-  //   display: none;
-  //   left: 3.2px;
-  //   top: 0px;
-  //   width: 3px;
-  //   height: 7px;
-  //   border: solid $color-white;
-  //   border-width: 0 2px 2px 0;
-  //   -webkit-transform: rotate(45deg);
-  //   -ms-transform: rotate(45deg);
-  //   transform: rotate(45deg);
-  // }
-
-  // .check-action-candidat:checked ~ #candidat-check:after {
-  //   display: block;
-  // }
-  // .check-action-candidat:checked ~ #candidat-check {
-  //   border-color: $color-orange;
-  //   background-color: $color-orange;
-  // }
-}
-
-.content-check-action-candidat {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .checkbox-span {
-    margin-bottom: 0px !important;
-    position: relative !important;
-    margin-top: 0px !important;
-    height: 15px !important;
-    width: 15px !important;
-  }
-  .checkbox-span {
-    cursor: pointer;
-  }
-  .checkbox-span::after {
-    border-color: #fff !important;
-    width: 3px !important;
-    height: 7px !important;
-    left: 3.2px !important;
-  }
-
-  input:checked ~ .checkbox-span {
-    border-color: $color-orange;
-    background-color: $color-orange;
-  }
 }
 
 ::ng-deep .mat-checkbox-layout {
   width: 19px !important;
+}
+
+::ng-deep .mat-checkbox-inner-container {
+  margin-right: auto !important;
+}
+
+.fullwidth {
+  width: 100%;
+}
+
+
+.roodeo-background-primary {
+  background: mat-color($roodeo-app-primary, 800);
+}
+
+.roodeo-button {
+  background: mat-color($roodeo-app-primary, 800);
+  color: $color-white;
+  border-radius: 19px;
+  height: fit-content;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 20px;
+  cursor: pointer;
+
+  .text{
+    font-size: 14px;
+    color: $color-white;
+    cursor: pointer;
+  }
+
+  .icon{
+    position: relative;
+    background: mat-color($roodeo-app-primary, 800) !important;
+    color: $color-white;
+    margin-left:10px;
+  }
 }
 
 .modall {
@@ -160,7 +134,7 @@ button.mat-sort-header-button {
     flex-direction: row;
     padding: 20px 40px;
     .btn-modal {
-      color: white;
+      color: $color-white;
       height: 50px;
       padding: 0 10px;
       font-size: 17px;
@@ -193,18 +167,7 @@ button.mat-sort-header-button {
   padding-left: 5px !important;
   padding-right: 5px;
   border-bottom-style: none;
-  // position: relative!important;
-  // min-width: 40px!important;
-  // max-width: 40px!important;
 }
-
-// .mat-checkbox {
-//   position: absolute;
-//   top: 15px;
-//   left: 30%;
-//   width: 15px !important;
-//   height: 15px !important;
-// }
 
 .mat-header-row {
   background-color: $color-principal-blue !important;
@@ -214,14 +177,14 @@ button.mat-sort-header-button {
   background-color: $color-blue-light !important;
   cursor: pointer;
   .mat-cell {
-    color: white !important;
+    color: $color-white !important;
   }
   .mat-checkbox-frame {
-    border-color: white !important;
+    border-color: $color-white !important;
   }
 }
 ::ng-deep .mat-sort-header-button {
-  color: white !important;
+  color: $color-white !important;
   font-size: 18px !important;
   padding-left: 32px !important;
 }
@@ -274,16 +237,16 @@ tr.mat-row {
   flex-direction: column;
   width: 100%;
   background: $color-background-blue;
-  padding-top: 17px;
-  padding-left: 15px;
-  padding-right: 15px;
+  // WIP SL padding-top: 17px;
+  // padding-left: 15px;
+  // padding-right: 15px;
 
   .select-choice {
     border-radius: $border-radius;
     height: 48px;
     padding: 0 13px;
     border: $border-table;
-    background-color: white;
+    background-color: $color-white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -310,7 +273,7 @@ tr.mat-row {
           &:hover {
             background-color: $color-orange;
             .icon {
-              color: white;
+              color: $color-white;
             }
           }
         }
@@ -386,18 +349,12 @@ tr.mat-row {
     height: 35vh;
   }
 
-  .diplex-1 {
-    display: flex;
-    flex: 1;
-  }
-
   .btn-question {
     padding: 0 50px;
     text-transform: uppercase;
     height: 50px;
     font-size: $font-size-home;
     transition: background-color 200ms;
-
     background-color: $color-principal-blue;
     border-radius: 0 !important;
     display: flex;
@@ -412,7 +369,7 @@ tr.mat-row {
 
 .tool-bar {
   display: flex;
-  padding: 10px;
+  // WIP SL padding: 10px;
   flex-wrap: wrap;
   .candidat-custom-select {
     border: $border-table;
@@ -440,37 +397,38 @@ tr.mat-row {
     margin-top: inherit;
     border-radius: $border-radius;
   }
+
   .custom-input-filter {
     width: 50%;
-    position: relative;
-    .icon-search {
-      width: 28px;
-      height: 28px;
-      font-size: 25px;
-      right: 0px;
-      top: 9px;
-      color: $color-orange;
-      position: absolute;
-      padding-left: 3px !important;
-      font-size: 15px !important;
-    }
-    .custom-input-filter-bg {
-      width: 100%;
-      border: 1px solid $color-orange;
-      background: $color-white;
-      height: 48px;
-      padding: 10px 23px !important;
-      outline: none;
-      margin-left: 18px;
-      border-radius: $border-radius;
-    }
+    margin-left: 18px;
+    // .icon-search {
+    //   position:absolute;
+    //   top: 8px;
+    //   right: 0;
+    //   width: 28px;
+    //   height: 28px;
+    //   font-size: 25px;
+    //   color: $color-orange;
+    //   padding-left: 3px !important;
+    //   font-size: 15px !important;
+    // }
+    // WIP SL  .custom-input-filter-bg {
+    // width: 100%;
+    //   border: 1px solid $color-orange;
+    //   background: $color-white;
+    //   height: 48px;
+    //   padding: 10px 23px !important;
+    //   outline: none;
+    //   margin-left: 18px;
+    //   border-radius: $border-radius;
+    // }
   }
 }
 .table-container {
   width: 100%;
   margin-top: 20px;
   display: flex;
-  padding: 10px;
+  // WIP SL padding: 10px;
   overflow-y: auto;
   overflow-x: hidden;
   .sous-table-content {
@@ -561,7 +519,7 @@ tr.mat-row {
       display: flex;
       justify-content: center;
       align-items: center;
-      color: white;
+      color: $color-white;
       background-color: $color-principal-blue;
       cursor: pointer;
     }
@@ -609,7 +567,7 @@ tr.mat-row {
   height: 50px;
   margin: 60px 20px 20px 20px;
   outline: 0;
-  color: white;
+  color: $color-white;
 }
 
 // /SIDENAV

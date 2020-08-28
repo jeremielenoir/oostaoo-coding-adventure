@@ -1,48 +1,53 @@
 <div class="p-3">
   <div lass="form-scroll">
     <div class="cologne-form">
-        <form [formGroup]="form" (submit)="submit()">
-        
-            <div class="card-body" formArrayName="contacts">
-              <div [formGroupName]="i" class="row-card-body" *ngFor="let contact of contactFormGroup.controls; let i = index">
-                <div class="card-form">
-                  <label>Nom*</label>
-                  <input formControlName="name" type="text" />
-                </div>
+      <form [formGroup]="form" (submit)="submit()">
 
-                <div class="card-form">
-                  <label>Email*</label>
-                  <input formControlName="value" type="text" required />
-                </div>
-       
+        <div class="card-body" formArrayName="contacts">
+          <div [formGroupName]="i" class="row-card-body"
+            *ngFor="let contact of contactFormGroup.controls; let i = index">
+            <div class="card-form">
+              <label>Nom*</label>
+              <input formControlName="name" type="text" />
+            </div>
 
-                  <div class="">
-                    <button class="btn-delete-form" type="button" (click)="removeContact(i)"
+            <div class="card-form">
+              <label>Email*</label>
+              <input formControlName="value" type="text" required />
+            </div>
+
+            <button mat-raised-button color="warn" class="btn-delete-form" (click)="removeContact(i)"
+              [disabled]="contactList.length === 1">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+            <!-- WIP SL <button class="btn-delete-form" type="button" (click)="removeContact(i)"
                       [hidden]="contactList.length === 1">
                         <i class="fas fa-trash-alt"></i>
-                    </button>
-                  </div>
+                    </button> -->
 
 
-                </div>
-            </div>
-            <div class="card-body">
-                <button mat-raised-button color="primary"  mat-button class="button" type="button" (click)="addContact()">
-                  ajouter candidat
-                </button>
-                <button mat-raised-button color="primary" class="button btn-question" mat-button
-                  [disabled]="!form.valid" type="submit" (click)="openDialog()">
-                  Prochaine étape : configuration d’email
-                </button>
 
-              </div>
-              <div class="information">
-                Les champs indiqués par une * sont obligatoires
-              </div>
+          </div>
+        </div>
+        <div class="block-button">
+          <button mat-raised-button color="primary" class="button" type="button" (click)="addContact()">
+            <!-- WIP SL <button mat-raised-button color="primary" mat-button class="button" type="button" (click)="addContact()"> -->
+            ajouter un autre candidat
+          </button>
+          <button mat-raised-button color="primary" class="button btn-question" [disabled]="!form.valid" type="submit"
+            (click)="openDialog()">
+            <!-- WIP SL <button mat-raised-button color="primary" class="button btn-question" mat-button [disabled]="!form.valid"
+            type="submit" (click)="openDialog()"> -->
+            Prochaine étape : configuration d’email
+          </button>
+        </div>
+        <div class="information">
+          Les champs indiqués par une * sont obligatoires
+        </div>
 
-   
-        </form>
-     
+
+      </form>
+
     </div>
   </div>
 

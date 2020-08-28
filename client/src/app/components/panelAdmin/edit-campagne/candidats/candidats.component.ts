@@ -507,6 +507,7 @@ export class CandidatsComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
+    this.selectAllCandidats(false);
     this.infosCandidats.filter = filterValue.trim().toLowerCase();
   }
 

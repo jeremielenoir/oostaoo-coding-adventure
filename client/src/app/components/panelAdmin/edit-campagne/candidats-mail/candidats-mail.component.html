@@ -11,36 +11,38 @@
   </header>
   <div class="content-modal-question"></div>
 
-  <div >
-  <div class="sroll-body">
-    <div class="form-row">
+  <div>
+    <div class="sroll-body">
+      <div class="form-row">
 
-      <label>Sujet :</label>
+        <label>Sujet :</label>
 
-      <input class="form-input" type="" name="" class="" [(ngModel)]="sujet" *ngIf="show" />
-      <p *ngIf="!show" class="sujet-title">{{sujet}}</p>
-    </div>
-    <br />
+        <input class="form-input" type="" name="" class="" [(ngModel)]="sujet" *ngIf="show" />
+        <p *ngIf="!show" class="sujet-title">{{sujet}}</p>
+      </div>
+      <br />
 
-    <div [class.message-personaliser-form]="show">
+      <div [class.message-personaliser-form]="show">
 
-      <label>Message :</label>
+        <label>Message :</label>
 
-      <ckeditor [editor]="Editor" [(ngModel)]="htmlContent" *ngIf="show"></ckeditor>
-      <!-- <app-ngx-editor *ngIf="show" [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="htmlContent">
+        <ckeditor [editor]="Editor" [(ngModel)]="htmlContent" *ngIf="show"></ckeditor>
+        <!-- <app-ngx-editor *ngIf="show" [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="htmlContent">
       </app-ngx-editor> -->
-      <div *ngIf="!show" [innerHTML]="htmlContent" class="htmlContent"></div>
+        <div *ngIf="!show" [innerHTML]="htmlContent" class="htmlContent"></div>
+      </div>
     </div>
-  </div>
 
-  <div class="block-button">
-    <button (click)="updateCampaignPostCandidats()">
-      ENVOYER EMAIL
-    </button>
-    <button (click)="retourCandidat()">RETOUR AUX CANDIDATS</button>
-    <button (click)="show=!show">{{show ? 'OK' : 'Personnaliser cet email'}}</button>
+    <div class="block-button">
+      <button mat-raised-button color="primary" (click)="retourCandidat()" [disabled]="show">RETOUR AUX
+        CANDIDATS</button>
+      <button mat-raised-button color="primary"
+        (click)="show=!show">{{show ? 'OK' : 'Personnaliser cet email'}}</button>
+      <button mat-raised-button color="primary" (click)="updateCampaignPostCandidats()" [disabled]="show">
+        ENVOYER EMAIL
+      </button>
+    </div>
+    <div class="alert alert-danger error-nbCandidats" *ngIf="nbCandidatsError">{{ nbCandidatsError }}</div>
+    <div class="alert alert-danger error-noMoreTest" *ngIf="noMoreTestError">{{ noMoreTestError }}</div>
   </div>
-  <div class="alert alert-danger error-nbCandidats" *ngIf="nbCandidatsError">{{ nbCandidatsError }}</div>
-  <div class="alert alert-danger error-noMoreTest" *ngIf="noMoreTestError">{{ noMoreTestError }}</div>
-</div>
 </div>

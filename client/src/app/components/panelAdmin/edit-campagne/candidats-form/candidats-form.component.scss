@@ -26,22 +26,21 @@
 }
 .btn-delete-form{
     margin-top: 25px;
-    background-color: #f44336;
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-    color: white;
     padding: 5px 5px;
-    border: 1px solid #e54034;
     height: 50px;
     width: 50px;
-    cursor: pointer;
-    outline: none;
-    &:hover{
-        background-color: #e54034;
-        border: 1px solid #f44336;
-    }
+    // WIP SL background-color: #f44336;
+    // box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    // color: white;
+    // border: 1px solid #e54034;
+    // cursor: pointer;
+    // outline: none;
+    // &:hover{
+    //     background-color: #e54034;
+    //     border: 1px solid #f44336;
+    // }
 }
 .card-body{
-  
     padding: 0px!important;
     text-align: center;
     
@@ -49,7 +48,26 @@
         margin-right: 9px;
         width: 50%;
     }
-    
+}
+
+.block-button{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 20px;
+   
+    button{
+        height: 50px;
+        padding: 9px 30px;
+        margin-bottom: 25px;
+        font-size: $font-size-home;
+        text-transform: uppercase;
+        // WIP SL background-color: $color-principal-blue;
+        // border-radius: 0px!important;
+        // color: white;
+        // border: $border-table;
+        // cursor: pointer;
+    }
 }
 
 label{
@@ -71,14 +89,13 @@ input{
 }
 
 .button{
-     
+    margin: 10px;
     height: 50px;
     font-size: $font-size-home;
-    background-color: $color-principal-blue;
-    border-radius: 0px!important;
     text-transform: uppercase;
-    color: white;
-    margin: 10px;
+    // WIP SL background-color: $color-principal-blue;
+    // border-radius: 0px!important;
+    // color: white;
 }
 
 .m-1{

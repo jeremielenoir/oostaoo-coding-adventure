@@ -88,6 +88,7 @@ input{
 .rond-custom{
     top:-25px!important
 }
+
 label{
 
     color: $color-principal-blue;
@@ -101,19 +102,18 @@ label{
    
     button{
         height: 50px;
-        font-size: $font-size-home;
-        background-color: $color-principal-blue;
-        border-radius: 0px!important;
-        text-transform: uppercase;
-        color: white;
         padding: 9px 30px;
-        border: $border-table;
         margin-bottom: 25px;
-        cursor: pointer;
+        font-size: $font-size-home;
+        text-transform: uppercase;
+        // WIP SL background-color: $color-principal-blue;
+        // border-radius: 0px!important;
+        // border: $border-table;
+        // color: white;
+        // cursor: pointer;
     }
-}
 
-
-button:hover{
-    background-color:$color-principal-blue!important;
+    // WIP SL button:hover{
+    //     background-color:$color-principal-blue!important;
+    // }
 }

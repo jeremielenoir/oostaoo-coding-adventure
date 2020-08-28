@@ -9,7 +9,8 @@
           </h1>
 
           <button mat-raised-button color="primary" class="invit-btn-candidat" (click)="openDialog()">
-            Invitez des candidats <span *ngIf='tests_available !== "" '>({{ tests_available }} tests disponibles)</span>
+            Invitez des candidats <span *ngIf='tests_available !== "" '>({{ tests_available }} test(s)
+              disponible(s))</span>
           </button>
         </div>
       </div>
@@ -33,13 +34,10 @@
             <h4 class="modal-content-title">Anonymiser</h4>
             <p class="content">
               Dans le cadre de la protection des données personnelles, vous êtes sur le point de procéder à
-              l'anonymisation
-              de ce/cette candidat(e) : ses données personnelles seront supprimées.
+              l'anonymisation de ce/cette candidat(e) : ses données personnelles seront supprimées.
               Cependant, ses résultats et son rapport d'évaluation resteront visibles dans votre liste candidats de
-              manière
-              anonyme pour vous permettre de comparer son score aux candidats ultérieurs.
+              manière anonyme pour vous permettre de comparer son score aux candidats ultérieurs.
             </p>
-
           </div>
           <div class="modall-footer">
             <button class="btn-modal" (click)="setAnonymizing(false)">Annuler</button>
@@ -77,9 +75,9 @@
 
       <!-- Tool bar -->
       <div class="tool-bar">
-        <div class="diplex-1">
+        <div class="flex1">
           <!-- Menu -->
-          <button mat-raised-button color="primary" [matMenuTriggerFor]="menu"
+          <button mat-raised-button color="primary" class="roodeo-background-primary" [matMenuTriggerFor]="menu"
             aria-label="Example icon-button with a menu">
             <mat-icon color="accent">touch_app</mat-icon>
             {{getCandidatsSelected().length }} sélectionné{{getCandidatsSelected().length > 1 ? 's' : ''}}
@@ -100,18 +98,31 @@
             </button>
           </mat-menu>
           <!-- Filter -->
-          <mat-card-content class="custom-input-filter">
-            <input matInput class="custom-input-filter-bg" placeholder="Filtrer..."
+          <!-- <mat-card-content class="custom-input-filter"> -->
+          <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="custom-input-filter">
+            <mat-label>Rechercher</mat-label>
+            <input matInput class="custom-input-filter-bg" placeholder="Votre recherche" type="text"
+              (keyup)="applyFilter($event.target.value)" />
+            <mat-icon matSuffix><img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg"></mat-icon>
+          </mat-form-field>
+          <!-- <input matInput class="custom-input-filter-bg" placeholder="Filtrer..."
               (keyup)="applyFilter($event.target.value)">
             <figure class="icon-search">
               <img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg">
-            </figure>
-          </mat-card-content>
+            </figure> -->
+          <!-- </mat-card-content> -->
         </div>
         <!-- Btn Invite -->
-        <button mat-raised-button color="primary" (click)="openDialog()">
+        <div class="roodeo-button hvr-grow" (click)="openDialog()">
+          <span class="text" i18n>Invitez des candidats </span><span class="text" *ngIf='tests_available !== "" '
+            i18n>({{ tests_available }})</span>
+          <button mat-mini-fab class="icon">
+            <mat-icon>mail_outline</mat-icon>
+          </button>
+        </div>
+        <!-- WIP SL <button mat-raised-button color="primary" (click)="openDialog()">
           Invitez des candidats <span *ngIf='tests_available !== "" '>({{ tests_available }})</span>
-        </button>
+        </button> -->
       </div>
 
       <!-- Table -->
@@ -125,7 +136,8 @@
               <!-- CHANGE COLUMN FOR CHECKBOX -->
               <div *ngIf="column === 'Checked'">
                 <th mat-header-cell *matHeaderCellDef="let dataInfos">
-                  <div class="content-check-action-candidat">
+                  <div>
+                    <!-- WIP SL <div class="content-check-action-candidat"> -->
                     <mat-checkbox id="first-check-action" (change)="selectAllCandidats($event.checked)"
                       [(ngModel)]="allCandidatsSelected" [indeterminate]="someCandidatsSelected()">
                     </mat-checkbox>
