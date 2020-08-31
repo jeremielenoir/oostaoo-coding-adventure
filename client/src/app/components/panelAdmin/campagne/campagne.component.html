@@ -8,15 +8,12 @@
         </figure>
 
         <h3 class="info-title-header-dashboard" i18n>Tests d'evaluations</h3>
-        <!--button mat-raised-button [color]="'primary'" class="hvr-grow">
-          <mat-icon>add</mat-icon>Nouveau test
-        </button-->
-        <div *ngIf="campaigns.length > 0" class="container-add-campaign hvr-grow" [routerLink]="['/dashboard/campaigns/new']">
-          <button mat-mini-fab class="addCampaignContainer" i18n>
-            <mat-icon class="addIcon">add</mat-icon>
-          </button>  
-          <span i18n class="addIconText">Nouveau test</span>
-        </div>
+
+        <app-base-button *ngIf="campaigns.length > 0" iconName="add" class="container-add-campaign"
+          (click)="postCampagne()" [routerLink]="['/dashboard/campaigns/new']">
+          Nouveau test
+        </app-base-button>
+
       </div>
 
       <div class="sous-header-two">
@@ -25,7 +22,7 @@
           <span class="number-test">{{ (campaigns | campaignsArchived:showArchives)?.length }}</span>
         </div>
 
-        <div class="test-right-header">  
+        <div class="test-right-header">
           <div class="sous-header-form">
 
             <div class="form-group-header form-group-header-2">
@@ -36,24 +33,26 @@
             </div>
 
             <div class="form-group-header">
-              
-                <div class="search-container">
-                  <mat-form-field appearance="fill" [floatLabel]="true" [color]="'accent'">
-                    <mat-label><mat-icon>search</mat-icon>&nbsp;Rechercher</mat-label>
-                    <input matInput type="search" class="champ-header-contenu" placeholder="Filtrer par nom" name="search"
-                    [(ngModel)]="searchText" id="search-header"/>
-                  </mat-form-field>
-                  <!--figure class="icon-form-group-header-contenu">
+
+              <div class="search-container">
+                <mat-form-field appearance="fill" [floatLabel]="true" [color]="'accent'">
+                  <mat-label>
+                    <mat-icon>search</mat-icon>&nbsp;Rechercher
+                  </mat-label>
+                  <input matInput type="search" class="champ-header-contenu" placeholder="Filtrer par nom" name="search"
+                    [(ngModel)]="searchText" id="search-header" />
+                </mat-form-field>
+                <!--figure class="icon-form-group-header-contenu">
                     <img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg">
                   </figure-->
-                </div>
-                <!-- <input type="text" name="search" [(ngModel)]="searchText" class="champ-header-contenu"
+              </div>
+              <!-- <input type="text" name="search" [(ngModel)]="searchText" class="champ-header-contenu"
                   placeholder="Rechercher" id="search-header" />
 
                 <figure class="icon-form-group-header-contenu">
                   <img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg">
                 </figure> -->
-              
+
             </div>
           </div>
 
@@ -69,19 +68,21 @@
       <div *ngIf="!isLoaded" class="loader-container">
         <mat-spinner [strokeWidth]="20"></mat-spinner>
       </div>
-      
+
       <div class="no-campaign" *ngIf="isLoaded && campaigns.length === 0">
         <p i18n> Vous n'avez pas encore de tests, cliquer sur le bouton en dessous pour en créer un.</p>
-        <br/>
+        <br />
         <div class="container-add-campaign hvr-grow" [routerLink]="['/dashboard/campaigns/new']">
           <button mat-mini-fab class="addCampaignContainer" i18n>
             <mat-icon class="addIcon">add</mat-icon>
-          </button>  
+          </button>
           <span i18n class="addIconText">Nouveau test</span>
         </div>
       </div>
 
-      <div *ngFor="let campaign of campaigns | campaignsArchived:showArchives | orderBy:'pin':true | filter: searchText; trackBy: trackByFn;" class="contenu-techno-content">
+      <div
+        *ngFor="let campaign of campaigns | campaignsArchived:showArchives | orderBy:'pin':true | filter: searchText; trackBy: trackByFn;"
+        class="contenu-techno-content">
 
         <figure class="branche-content-list-start" (click)="openDialog(campaign.id)">
           <img class="hvr-grow" src="../assets/Coding-game-img/SVG-menu-Dashboard/perso-plein.svg">
@@ -110,46 +111,46 @@
               </p>
 
             </div>
- 
+
           </div>
         </div>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon button with a vertical three dot icon">
-        <mat-icon>more_vert</mat-icon>
-      </button>
+        <button mat-icon-button [matMenuTriggerFor]="menu"
+          aria-label="Example icon button with a vertical three dot icon">
+          <mat-icon>more_vert</mat-icon>
+        </button>
         <mat-menu #menu="matMenu" class="button-matMenu">
 
-         
+
           <button (click)="openDialogDuplicate(campaign)" mat-menu-item>
             <mat-icon class="icon">file_copy</mat-icon>
             <span class="iconStyle" i18n>Dupliquer</span>
           </button>
 
-          <button *ngIf="campaign.pin === true"
-            (click)="pincampaign(campaign)" mat-menu-item>
-            <mat-icon class="icon" >bookmark</mat-icon>
+          <button *ngIf="campaign.pin === true" (click)="pincampaign(campaign)" mat-menu-item>
+            <mat-icon class="icon">bookmark</mat-icon>
             <span class="iconStyle" i18n>Désépingler</span>
           </button>
 
           <button *ngIf="campaign.pin === false" (click)="pincampaign(campaign)" mat-menu-item>
-            <mat-icon  class="icon">bookmark</mat-icon>
+            <mat-icon class="icon">bookmark</mat-icon>
             <span class="iconStyle" i18n>Epingler</span>
           </button>
 
           <button *ngIf="campaign.archive === true" (click)="archivecampaign(campaign)" mat-menu-item>
-            <mat-icon class="icon" >unarchive</mat-icon>
+            <mat-icon class="icon">unarchive</mat-icon>
             <span class="iconStyle" i18n>Désarchiver</span>
           </button>
 
           <button *ngIf="campaign.archive === false" (click)="archivecampaign(campaign)" mat-menu-item>
-            <mat-icon class="icon" >archive</mat-icon>
+            <mat-icon class="icon">archive</mat-icon>
             <span class="iconStyle" i18n>Archiver</span>
           </button>
 
           <button (click)="openDialogDelete(campaign)" mat-menu-item>
-            <mat-icon  class="icon">delete</mat-icon>
+            <mat-icon class="icon">delete</mat-icon>
             <span class="iconStyle" i18n>Supprimer</span>
           </button>
-       
+
         </mat-menu>
       </div>
 

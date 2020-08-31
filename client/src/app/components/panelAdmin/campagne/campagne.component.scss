@@ -37,18 +37,7 @@
 
 
 .container-add-campaign{
-    margin-top: 5px;
-    margin-bottom: 5px;
     margin-right: 10px;
-    color: #fff;
-    background: mat-color($roodeo-app-primary, 800);
-    border-radius: 19px;
-    padding-right: 15px;
-    cursor: pointer;
-    &:focus{
-      border: 0px solid #fff;
-      outline: -webkit-focus-ring-color auto 0px;
-    }
 }
 
 .invite-left{

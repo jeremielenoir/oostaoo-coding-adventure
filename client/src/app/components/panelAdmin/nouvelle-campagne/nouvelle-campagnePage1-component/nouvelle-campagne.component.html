@@ -10,37 +10,38 @@
         <h2 class="title" i18n>Nouveau test d'evaluation : profil recherché</h2>
       </div>
       <div class="campaign-param-container">
-      <div class="spacing">
-    
+        <div class="spacing">
+
           <div class="select roodeo-dark-theme">
-           
-             <!-- <label for="role" [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</label>-->
-              <mat-form-field [formGroup]="formCampagne" appearance="outline" [color]="'accent'">
-                <mat-label [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</mat-label>
-                <mat-select name="role" class="mat-primary" formControlName="role" [(ngModel)]="roleSelect"
-                  (selectionChange)="selected($event)">
-                  <mat-option *ngFor="let role of profiles" [value]="role[nameLanguage]">{{
+
+            <!-- <label for="role" [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</label>-->
+            <mat-form-field [formGroup]="formCampagne" appearance="outline" [color]="'accent'">
+              <mat-label [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</mat-label>
+              <mat-select name="role" class="mat-primary" formControlName="role" [(ngModel)]="roleSelect"
+                (selectionChange)="selected($event)">
+                <mat-option *ngFor="let role of profiles" [value]="role[nameLanguage]">{{
                   role[nameLanguage]
                 }}</mat-option>
-                </mat-select>
-              </mat-form-field>
-             
+              </mat-select>
+            </mat-form-field>
+
           </div>
-       
-        <div class="or-text">
-          <div class="select">
-            <span class="or-text-span" i18n>Ou</span>
+
+          <div class="or-text">
+            <div class="select">
+              <span class="or-text-span" i18n>Ou</span>
+            </div>
           </div>
-        </div>
-        
+
           <div class="select">
             <div class="champ-group">
               <!--<label for="techno" [ngStyle]="errorTechno ? { color: 'red' } : null" i18n>Sélectionnez les technologies à
                 tester</label>-->
 
-                
+
               <mat-form-field [formGroup]="formCampagne" appearance="outline" [color]="'accent'">
-                <mat-label for="techno" [ngStyle]="errorTechno ? { color: 'red' } : null" i18n>Sélectionnez les technologies à
+                <mat-label for="techno" [ngStyle]="errorTechno ? { color: 'red' } : null" i18n>Sélectionnez les
+                  technologies à
                   tester</mat-label>
                 <mat-select multiple name="techno" formControlName="techno" [compareWith]="compareObjects"
                   [(ngModel)]="technosSelect" (selectionChange)="getTechnoChecked()">
@@ -49,14 +50,18 @@
               </mat-form-field>
             </div>
           </div>
-       
-      </div>
-     
+
+        </div>
+
         <div class="offset-exp">
-          <label for="experience" [ngStyle]="errorExperience ? { color: 'red' } : null">Sélectionnez l'expérience requise</label>&nbsp;
-          <mat-icon class="info-icon" color="primary" [matTooltipPosition]="'right'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Questions et challenges de code pour des développeurs de 3 à 5 ans d'expérience.">info</mat-icon>
+          <label for="experience" [ngStyle]="errorExperience ? { color: 'red' } : null">Sélectionnez l'expérience
+            requise</label>&nbsp;
+          <mat-icon class="info-icon" color="primary" [matTooltipPosition]="'right'"
+            [matTooltipClass]="'roodeo-tooltip'"
+            matTooltip="Questions et challenges de code pour des développeurs de 3 à 5 ans d'expérience.">info
+          </mat-icon>
           <div [formGroup]="formCampagne" class="experience-container">
-            <mat-radio-group formControlName="experience" >
+            <mat-radio-group formControlName="experience">
               <mat-radio-button value="facile" checked>
                 Junior
                 <!--i class="fas fa-info-circle info"
@@ -75,15 +80,12 @@
             </mat-radio-group>
           </div>
         </div>
-    
-      <div class="formQuestion finalQuestion">
-        <div class="container-next hvr-grow" (click)="onIncrementPage(formCampagne.value)">
-          <span i18n class="button-text">Etape suivante : paramètres</span>
-          <button mat-mini-fab class="next-button" i18n>
-            <mat-icon class="addIcon">keyboard_arrow_right</mat-icon>
-          </button>
+
+        <div class="formQuestion finalQuestion">
+          <app-base-button iconName="keyboard_arrow_right" (click)="onIncrementPage(formCampagne.value)">
+            Etape suivante : paramètres
+          </app-base-button>
         </div>
-      </div>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from '@angular/material';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -17,7 +17,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   styleUrls: ['./candidats-mail.component.scss']
 })
 export class CandidatsMailComponent implements OnInit {
-  
+
   public Editor = ClassicEditor;
 
   public campaigns: any;
@@ -27,7 +27,7 @@ export class CandidatsMailComponent implements OnInit {
   public sujet: string;
   public name: string[] = [];
   public contenu: string;
-  public show = false;
+  public edeting = false;
   public htmlContent: any;
 
   nbCandidatsError: string = null;
@@ -57,14 +57,14 @@ export class CandidatsMailComponent implements OnInit {
     this.user_id = this.decryptTokenService.userId;
     this.offer_id = this.decryptTokenService.offer_id;
 
-// get the user's tests_available via API instead of localStorage because of
-// decryptTokenService's bug with localStorage updated values
-      this.apiClientService
-        .get(`${API_URI_USER}/${this.user_id}`)
-        .subscribe(datas => {
-          this.tests_available = datas.tests_available;
-          console.log('NGONINIT / this.tests_available: ', this.tests_available);
-        });
+    // get the user's tests_available via API instead of localStorage because of
+    // decryptTokenService's bug with localStorage updated values
+    this.apiClientService
+      .get(`${API_URI_USER}/${this.user_id}`)
+      .subscribe(datas => {
+        this.tests_available = datas.tests_available;
+        console.log('NGONINIT / this.tests_available: ', this.tests_available);
+      });
 
 
 
@@ -82,10 +82,10 @@ export class CandidatsMailComponent implements OnInit {
     this.sujet = 'Évaluation technique';
 
     this.htmlContent = `
-       <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.name},</span><br>
-       </div><div><span style="background-color: transparent; font-size: 1rem;"><br></span></div>
+       <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.name},</span>
+       </div><br />
        <div>Votre candidature a retenu notre attention.</div><div>Dans le cadre de notre processus
-       de recrutement,nous avons le plaisir de vous inviter à passer une évaluation technique.</div>
+       de recrutement, nous avons le plaisir de vous inviter à passer une évaluation technique.</div>
        <div>Vous pourrez choisir le moment le plus approprié pour vous pour passer ce test.</div>
        <div>Quand vous serez prêt(e), cliquez sur le lien ci-dessous pour accéder à la page d’accueil de votre session :&nbsp;
        <a href="http://${window.location.host}/evaluate/..." target="_blank" style="font-size: 1rem;">
@@ -136,47 +136,47 @@ export class CandidatsMailComponent implements OnInit {
     });
   }
 
-  goToSubscribe(){
+  goToSubscribe() {
     this.dialog.closeAll();
     this.router.navigate(['/subscription']);
   }
 
   updateCampaignPostCandidats() {
-    if(this.tests_available == -1){
-        for (const iterator of this.candidats) {
-          this.postCandidat(iterator.name, iterator.value);
-        }
+    if (this.tests_available == -1) {
+      for (const iterator of this.candidats) {
+        this.postCandidat(iterator.name, iterator.value);
+      }
 
-    }else if (this.offer_id == 14){
-        this.goToSubscribe();
+    } else if (this.offer_id == 14) {
+      this.goToSubscribe();
 
-    } else if(this.tests_available == 0){
-      setTimeout(()=>{
+    } else if (this.tests_available == 0) {
+      setTimeout(() => {
         this.goToSubscribe();
       }, 1500)
       this.noMoreTestError = `Vous n'avez plus de test disponible`;
 
-    }else if(this.nbCandidat > this.tests_available ){
-        setTimeout(()=>{
-          this.retourCandidat();
-        }, 1500);
-        this.nbCandidatsError = `Impossible d'inviter ${this.nbCandidat} candidat${this.nbCandidat>1?'s':''}. Il vous reste seulement ${this.tests_available} test${this.tests_available>1?'s':''} disponible${this.tests_available>1?'s':''}`;
+    } else if (this.nbCandidat > this.tests_available) {
+      setTimeout(() => {
+        this.retourCandidat();
+      }, 1500);
+      this.nbCandidatsError = `Impossible d'inviter ${this.nbCandidat} candidat${this.nbCandidat > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`;
 
     } else {
       this.tests_available = this.tests_available - this.nbCandidat;
       this.apiClientService
-        .put(`${API_URI_USER}/${this.user_id}`,{
+        .put(`${API_URI_USER}/${this.user_id}`, {
           tests_available: this.tests_available
         })
         .toPromise()
-        .then(async(res)=>{
+        .then(async (res) => {
           localStorage.setItem('currentUser', res.newToken);
           for (const iterator of this.candidats) {
-          this.postCandidat(iterator.name, iterator.value);
+            this.postCandidat(iterator.name, iterator.value);
           }
         },
-        err => console.log(err)
-      );
+          err => console.log(err)
+        );
     }
   }
 

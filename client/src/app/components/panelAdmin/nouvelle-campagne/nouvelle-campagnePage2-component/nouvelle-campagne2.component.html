@@ -1,65 +1,56 @@
 <div class="cadreQuestion">
-<div class="new-campaign">
+  <div class="new-campaign">
     <div class="header-new-campagne">
       <mat-icon class="static">rule</mat-icon>
       <h2 class="title" i18n>Nouveau test d'evaluation : paramètres</h2>
     </div>
 
     <div class="campaign-param-container">
-    
-        
+
+
       <div class="campaign-param roodeo-dark-theme first">
 
-        <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" [formGroup]="formCampagne" class="fullWidth">
+        <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" [formGroup]="formCampagne"
+          class="fullWidth">
           <mat-label [ngStyle]="errorName ? { color: 'red' } : null">Nom du test d'evaluation</mat-label>
-          <input 
-            placeholder="Nom du test d'evaluation"
-            type="text"
-            formControlName="nomDeCampagne"
-            matInput
-            value="{{ formCampagne.value.role }} - {{
+          <input placeholder="Nom du test d'evaluation" type="text" formControlName="nomDeCampagne" matInput value="{{ formCampagne.value.role }} - {{
               formCampagne.value.experience
-            }}"
-            name="nomDeCampagne"
-          />
+            }}" name="nomDeCampagne" />
         </mat-form-field>
       </div>
 
-  
-    <div class="campaign-param">
-      <div class="cog-test first">
-        <label
-          for="nomDeCampagne"
-          [ngStyle]="errorNomCampgane ? { color: 'red' } : null"
-        >
-          En quelle langue les questions doivent-elles être posées à vos
-          candidats ?
-        </label>
-        <div class="container-radio-button">
-          <mat-radio-group [(ngModel)]="selectedLangue">
-            <mat-radio-button value="FR">
-              <span class="flag-icon flag-icon-fr flag-icon-squared"></span>
-            </mat-radio-button>
-            <mat-radio-button value="EN">
-              <span class="flag-icon flag-icon-gb flag-icon-squared"></span>
-            </mat-radio-button>
-            <mat-radio-button value="ES">
-              <span class="flag-icon flag-icon-es flag-icon-squared"></span>
-            </mat-radio-button>
-            <mat-radio-button value="JP">
-              <span class="flag-icon flag-icon-jp"></span>
-            </mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </div>
 
-      <div class="cog-test">
+      <div class="campaign-param">
+        <div class="cog-test first">
+          <label for="nomDeCampagne" [ngStyle]="errorNomCampgane ? { color: 'red' } : null">
+            En quelle langue les questions doivent-elles être posées à vos
+            candidats ?
+          </label>
+          <div class="container-radio-button">
+            <mat-radio-group [(ngModel)]="selectedLangue">
+              <mat-radio-button value="FR">
+                <span class="flag-icon flag-icon-fr flag-icon-squared"></span>
+              </mat-radio-button>
+              <mat-radio-button value="EN">
+                <span class="flag-icon flag-icon-gb flag-icon-squared"></span>
+              </mat-radio-button>
+              <mat-radio-button value="ES">
+                <span class="flag-icon flag-icon-es flag-icon-squared"></span>
+              </mat-radio-button>
+              <mat-radio-button value="JP">
+                <span class="flag-icon flag-icon-jp"></span>
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+
+        <div class="cog-test">
           <div class="campaign-param">
-              <div class="container-radio-button" [formGroup]="formCampagne">
-                <mat-slide-toggle formControlName="utilisationCopieColler" i18n>
-                  Empêcher l'utilisation du copier/coller pendant le test ?
-                </mat-slide-toggle>
-                <!--mat-radio-group formControlName="utilisationCopieColler">
+            <div class="container-radio-button" [formGroup]="formCampagne">
+              <mat-slide-toggle formControlName="utilisationCopieColler" i18n>
+                Empêcher l'utilisation du copier/coller pendant le test ?
+              </mat-slide-toggle>
+              <!--mat-radio-group formControlName="utilisationCopieColler">
                   <mat-radio-button value="true">
                     Oui
                   </mat-radio-button>
@@ -67,14 +58,14 @@
                     Non
                   </mat-radio-button>
                 </mat-radio-group-->
-              </div>
+            </div>
           </div>
-      </div>
-    
-      <div class="cog-test">
+        </div>
+
+        <div class="cog-test">
           <div class="">
             <div class="campaign-param">
-              
+
               <div class="container-radio-button" [formGroup]="formCampagne">
 
                 <mat-slide-toggle formControlName="envoiRapportSimplifie" i18n>
@@ -91,32 +82,19 @@
               </div>
             </div>
           </div>
+        </div>
+
+      </div>
+
+      <div class=" formQuestion finalQuestion">
+        <app-base-button iconName="keyboard_arrow_left" iconPosition="left" (click)="onDecrementPage()">
+          Etape précédente : profil recherché
+        </app-base-button>
+        <app-base-button iconName="keyboard_arrow_right" (click)="onIncrementPage(formCampagne.value)">
+          Etape suivante : choix des questions
+        </app-base-button>
       </div>
 
     </div>
-
-    <div class=" formQuestion finalQuestion">
-
-      <div class="container-previous hvr-grow" (click)="onDecrementPage()">
-        <button mat-mini-fab class="next-button" i18n>
-          <mat-icon class="addIcon">keyboard_arrow_left</mat-icon>
-        </button>
-        <span i18n class="button-text">Etape précédente : profil recherché</span>
-      </div>
-
-      <div class="container-next hvr-grow" (click)="onIncrementPage(formCampagne.value)" (click)="postData()">
-        <span i18n class="button-text">Etape suivante : choix des questions</span>
-        <button mat-mini-fab class="next-button" i18n>
-          <mat-icon class="addIcon">keyboard_arrow_right</mat-icon>
-        </button>
-      </div>
-
-      
-      
-    </div>
-   
   </div>
-
-  
-</div>
 </div>

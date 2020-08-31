@@ -9,13 +9,10 @@
           </h1>
 
           <!-- Btn Invite -->
-          <div class="roodeo-button hvr-grow" (click)="openDialog()">
-            <span class="text" i18n>Invitez des candidats </span><span class="text" *ngIf='tests_available !== "" '
+          <app-base-button iconName="group_add" (click)="openDialog()">
+            <span class="text" i18n>Invitez des candidats </span><span class="text" *ngIf='tests_available !==""'
               i18n>({{ tests_available }})</span>
-            <button mat-mini-fab class="icon">
-              <mat-icon>mail_outline</mat-icon>
-            </button>
-          </div>
+          </app-base-button>
         </div>
       </div>
     </div>
@@ -104,19 +101,15 @@
           <!-- Filter -->
           <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="custom-input-filter">
             <mat-label>Rechercher</mat-label>
-            <input matInput class="custom-input-filter-bg" placeholder="Votre recherche" type="text"
-              (keyup)="applyFilter($event.target.value)" />
+            <input matInput placeholder="Votre recherche" type="text" (keyup)="applyFilter($event.target.value)" />
             <mat-icon color="accent" matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
         <!-- Btn Invite -->
-        <div class="roodeo-button hvr-grow" (click)="openDialog()">
-          <span class="text" i18n>Invitez des candidats </span><span class="text" *ngIf='tests_available !== "" '
+        <app-base-button iconName="group_add" (click)="openDialog()">
+          <span class="text" i18n>Invitez des candidats </span><span class="text" *ngIf='tests_available !==""'
             i18n>({{ tests_available }})</span>
-          <button mat-mini-fab class="icon">
-            <mat-icon>mail_outline</mat-icon>
-          </button>
-        </div>
+        </app-base-button>
       </div>
 
       <!-- Table -->

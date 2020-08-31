@@ -97,23 +97,5 @@ label{
 .block-button{
     display: flex;
     justify-content: space-around;
-    align-items: center;
     padding-top: 20px;
-   
-    button{
-        height: 50px;
-        padding: 9px 30px;
-        margin-bottom: 25px;
-        font-size: $font-size-home;
-        text-transform: uppercase;
-        // WIP SL background-color: $color-principal-blue;
-        // border-radius: 0px!important;
-        // border: $border-table;
-        // color: white;
-        // cursor: pointer;
-    }
-
-    // WIP SL button:hover{
-    //     background-color:$color-principal-blue!important;
-    // }
 }

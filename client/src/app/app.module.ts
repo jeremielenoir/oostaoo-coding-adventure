@@ -31,6 +31,7 @@ import { IndexPageComponent } from './components/home/index-page/index-page.comp
 import { SecondSectionComponent } from './components/home/second-section/second-section.component';
 import { CounterAnimComponent } from './components/home/counter-anim/counter-anim.component';
 import { FooterComponent } from './components/home/footer/footer.component';
+import { BaseButton } from './components/common/ui/buttons/base-button.component';
 
 import { InterviewComponent } from './components/home/interview/interview.component';
 import { SliderComponent } from './components/home/slider/slider.component';
@@ -183,6 +184,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     CounterAnimComponent,
     InterviewComponent,
     FooterComponent,
+    BaseButton,
     SliderComponent,
     SlideMarquesComponent,
     RouteComponentComponent,
@@ -289,9 +291,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MarkdownModule.forRoot(),
     MonacoEditorModule.forRoot(),
 
-    MatDatepickerModule, 
+    MatDatepickerModule,
     MatNativeDateModule,
-    
+
     TimeagoModule.forRoot({
       intl: { provide: TimeagoIntl, useClass: MyIntl },
       formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },

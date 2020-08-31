@@ -1,0 +1,36 @@
+@import '../../../../../roodeo-variables.scss';
+
+.roodeo-button {
+  background-color: mat-color($roodeo-app-primary, 800);
+  color: $color-white;
+  border-radius: 19px;
+  height: fit-content;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+
+  .text {
+    font-size: 14px;
+    color: $color-white;
+    cursor: pointer;
+  }
+  .text-left {
+    margin-left: 20px;
+  }
+  .text-right {
+    margin-right: 20px;
+  }
+  
+  .icon {
+    position: relative;
+    background-color: #0c6192 !important;
+    color: $color-white;
+    cursor: pointer;
+  }
+  .icon-left {
+    margin-right:10px;
+  }
+  .icon-right {
+    margin-left:10px;
+  }
+}
