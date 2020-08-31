@@ -37,8 +37,13 @@
 
 
 #top-bar {
-
   box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4), -3px -4px 8px -2px rgba(124, 151, 166, 0.69);
+  display: flex;
+  width: 100%;
+  border: $border-table;
+  background-color: $color-pricipal-blue-light;
+  padding: 0px 15px;
+  border-radius: 5px;
 
   .swiper-pagination{
     display: none;
@@ -46,22 +51,15 @@
   .swiper-button-prev{
     background-image: none !important;
   }
-  display: flex;
-  width: 100%;
-  border: $border-table;
-  background-color: $color-pricipal-blue-light;
-  display: flex;
-  padding: 0px 15px;
-  border-radius: 5px;
    
   .chartjs-render-monitor {
     animation: chartjs-render-animation 0.001s;
     margin-top: 5px;
-}
+  }
 
-swiper > .swiper.s-wrapper {
-  z-index: 0;
-}
+  swiper > .swiper.s-wrapper {
+    z-index: 0;
+  }
   
   .custom-buttom,.mat-flat-button {
     // height: 100%;
@@ -74,14 +72,12 @@ swiper > .swiper.s-wrapper {
     color: $color-white !important;
     height: 67.5px;   
     outline: none;
-//
+    //
     height: 50px;
     width: 179.98px;;
-  margin-left: 5px;
-  margin-top: 15px;
-  margin-bottom: 10px;
-
-
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-bottom: 10px;
   }
 
   .button-disabled{
@@ -94,30 +90,30 @@ swiper > .swiper.s-wrapper {
     color: $color-white !important;
     height: 67.5px; 
     outline: none; 
-}
-
-.container-next{
-  margin-left: 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  color: #fff;
-  background: mat-color($roodeo-app-accent, 800);
-  border-radius: 19px;
-  cursor: pointer;
-
-  .next-button{
-    background-color: mat-color($roodeo-app-accent, 800) !important;
-    position: relative;
-    right: -1px;
   }
-  .button-text{
-    font-size: 14px;
-    margin-right: 10px;
-    margin-left: 20px;
+
+  .container-next{
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     color: #fff;
+    background: mat-color($roodeo-app-accent, 800);
+    border-radius: 19px;
     cursor: pointer;
+
+    .next-button{
+      background-color: mat-color($roodeo-app-accent, 800) !important;
+      position: relative;
+      right: -1px;
+    }
+    .button-text{
+      font-size: 14px;
+      margin-right: 10px;
+      margin-left: 20px;
+      color: #fff;
+      cursor: pointer;
+    }
   }
-}
 
   .custom-buttom-anul{
     background-color: $color-gray!important;

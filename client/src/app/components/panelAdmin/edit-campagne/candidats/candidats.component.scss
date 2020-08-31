@@ -18,6 +18,7 @@
   flex: 1;
 }
 
+
 .loading {
   //top: 0!important;
   //left: 0!important;
@@ -36,12 +37,15 @@ span.interview-icon.ng-star-inserted {
   font-size: 12px;
 }
 
-button.mat-sort-header-button {
-  font-size: 13px;
-}
-
 .border1pxdashedgray-candidat {
   border-radius: $border-radius;
+}
+
+
+
+::ng-deep .mat-form-field-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .big-content {
@@ -55,13 +59,9 @@ button.mat-sort-header-button {
 }
 
 .sous-content-check-action-candidat {
-  align-items: center;
-  position: relative;
-  padding-bottom: 6px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 ::ng-deep .mat-checkbox-layout {
@@ -70,39 +70,6 @@ button.mat-sort-header-button {
 
 ::ng-deep .mat-checkbox-inner-container {
   margin-right: auto !important;
-}
-
-.fullwidth {
-  width: 100%;
-}
-
-
-.roodeo-background-primary {
-  background: mat-color($roodeo-app-primary, 800);
-}
-
-.roodeo-button {
-  background: mat-color($roodeo-app-primary, 800);
-  color: $color-white;
-  border-radius: 19px;
-  height: fit-content;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding-left: 20px;
-  cursor: pointer;
-
-  .text{
-    font-size: 14px;
-    color: $color-white;
-    cursor: pointer;
-  }
-
-  .icon{
-    position: relative;
-    background: mat-color($roodeo-app-primary, 800) !important;
-    color: $color-white;
-    margin-left:10px;
-  }
 }
 
 .modall {
@@ -174,8 +141,8 @@ button.mat-sort-header-button {
 }
 
 ::ng-deep .mat-row:hover {
-  background-color: $color-blue-light !important;
-  cursor: pointer;
+  background: mat-color($roodeo-app-primary, 800) !important;
+  //  WIP SL cursor: pointer;
   .mat-cell {
     color: $color-white !important;
   }
@@ -183,9 +150,10 @@ button.mat-sort-header-button {
     border-color: $color-white !important;
   }
 }
+
 ::ng-deep .mat-sort-header-button {
   color: $color-white !important;
-  font-size: 18px !important;
+  font-size: 14px !important;
   padding-left: 32px !important;
 }
 
@@ -212,114 +180,26 @@ th.mat-header-cell:first-of-type {
 .mat-cell:last-child {
   border-right: none !important;
 }
-// td.mat-cell, td.mat-footer-cell, th.mat-header-cell{
-//   border-width: 1.5px!important;
-//   border-color: $color-principal-blue!important;
-// }
+
 .tr.mat-footer-row,
 tr.mat-row {
   border-bottom: 2px solid $color-principal-blue !important;
 }
 
-// .tr.mat-footer-row,
-// tr.mat-row:last-child {
-//   border-bottom: none !important;
-// }
+
 .route-component {
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   width: 100%;
 }
+
 #editQuestion {
   display: flex;
   flex: 1;
   flex-direction: column;
   width: 100%;
   background: $color-background-blue;
-  // WIP SL padding-top: 17px;
-  // padding-left: 15px;
-  // padding-right: 15px;
-
-  .select-choice {
-    border-radius: $border-radius;
-    height: 48px;
-    padding: 0 13px;
-    border: $border-table;
-    background-color: $color-white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
-
-    .menu-choice.choice-active {
-      display: block;
-    }
-    .menu-choice {
-      top: 47px;
-      left: 0;
-      right: 0;
-      cursor: pointer;
-      z-index: 1;
-      position: absolute;
-      box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
-      // padding-top: 48px;
-      background-color: #fff;
-      display: none;
-
-      .menu-list-choice {
-        .selected-button {
-          &:hover {
-            background-color: $color-orange;
-            .icon {
-              color: $color-white;
-            }
-          }
-        }
-        button {
-          width: 100%;
-          height: 48px;
-          display: flex;
-          border-top: 1px solid #e7e7e7 !important;
-          border: none;
-          background-color: transparent;
-          .icon {
-            margin-left: 15px;
-          }
-        }
-        button:disabled {
-          font: inherit;
-          span {
-            color: #e7e7e7;
-          }
-
-          .icon {
-            opacity: 0.5;
-          }
-        }
-        .first-btn {
-          border: none !important;
-        }
-      }
-    }
-    span {
-      color: #20252a;
-      display: inline-block;
-      font-size: $font-size-home;
-      margin-left: 15px;
-    }
-
-    .icon-choice {
-      font-size: 24px;
-      color: $color-orange;
-    }
-
-    .icon-choice-croche {
-      color: #7e8082;
-      margin-left: 15px;
-    }
-  }
 
   .border1pxgray {
     border: $border-table;
@@ -335,9 +215,6 @@ tr.mat-row {
     flex-direction: column;
     align-items: center;
     justify-items: center;
-    
-    //padding: 50px;
-    
   }
 
   #img-editquestion {
@@ -349,28 +226,51 @@ tr.mat-row {
     height: 35vh;
   }
 
-  .btn-question {
-    padding: 0 50px;
-    text-transform: uppercase;
-    height: 50px;
-    font-size: $font-size-home;
-    transition: background-color 200ms;
-    background-color: $color-principal-blue;
-    border-radius: 0 !important;
-    display: flex;
-  }
-
   .border1pxdashedgray h1 {
     text-align: center;
   }
 }
 
 // Style avec candidats
+.roodeo-background-primary {
+  background: mat-color($roodeo-app-primary, 800);
+}
+
+.roodeo-button {
+  background: mat-color($roodeo-app-primary, 800);
+  color: $color-white;
+  border-radius: 19px;
+  height: fit-content;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 20px;
+  cursor: pointer;
+
+  .text{
+    font-size: 14px;
+    color: $color-white;
+    cursor: pointer;
+  }
+
+  .icon{
+    position: relative;
+    background: mat-color($roodeo-app-primary, 800) !important;
+    color: $color-white;
+    margin-left:10px;
+  }
+}
 
 .tool-bar {
   display: flex;
-  // WIP SL padding: 10px;
   flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4), -3px -4px 8px -2px rgba(124, 151, 166, 0.69);
+  border: $border-table;
+  background-color: $color-pricipal-blue-light;
+  border-radius: 5px;
+  padding: 15px;
+  color: $color-principal-blue;
+
   .candidat-custom-select {
     border: $border-table;
     background-color: $color-white;

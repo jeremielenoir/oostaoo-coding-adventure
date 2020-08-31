@@ -1,4 +1,4 @@
-<div [ngSwitch]="ViewCandidats" (click)="menuChoice($event)" class="big-content">
+<div [ngSwitch]="ViewCandidats" (click)="menuChoice($event)" class="big-content roodeo-dark-theme">
   <div class="route-component">
     <div *ngSwitchCase="'CandidatFalse'" id="editQuestion">
       <div class="border1pxgray">
@@ -8,10 +8,14 @@
             Votre campagne est prête. Il est temps d'inviter quelques candidats !
           </h1>
 
-          <button mat-raised-button color="primary" class="invit-btn-candidat" (click)="openDialog()">
-            Invitez des candidats <span *ngIf='tests_available !== "" '>({{ tests_available }} test(s)
-              disponible(s))</span>
-          </button>
+          <!-- Btn Invite -->
+          <div class="roodeo-button hvr-grow" (click)="openDialog()">
+            <span class="text" i18n>Invitez des candidats </span><span class="text" *ngIf='tests_available !== "" '
+              i18n>({{ tests_available }})</span>
+            <button mat-mini-fab class="icon">
+              <mat-icon>mail_outline</mat-icon>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -98,19 +102,12 @@
             </button>
           </mat-menu>
           <!-- Filter -->
-          <!-- <mat-card-content class="custom-input-filter"> -->
           <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="custom-input-filter">
             <mat-label>Rechercher</mat-label>
             <input matInput class="custom-input-filter-bg" placeholder="Votre recherche" type="text"
               (keyup)="applyFilter($event.target.value)" />
-            <mat-icon matSuffix><img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg"></mat-icon>
+            <mat-icon color="accent" matSuffix>search</mat-icon>
           </mat-form-field>
-          <!-- <input matInput class="custom-input-filter-bg" placeholder="Filtrer..."
-              (keyup)="applyFilter($event.target.value)">
-            <figure class="icon-search">
-              <img src="../assets/Coding-game-img/SVG-menu-Dashboard/loupe.svg">
-            </figure> -->
-          <!-- </mat-card-content> -->
         </div>
         <!-- Btn Invite -->
         <div class="roodeo-button hvr-grow" (click)="openDialog()">
@@ -120,9 +117,6 @@
             <mat-icon>mail_outline</mat-icon>
           </button>
         </div>
-        <!-- WIP SL <button mat-raised-button color="primary" (click)="openDialog()">
-          Invitez des candidats <span *ngIf='tests_available !== "" '>({{ tests_available }})</span>
-        </button> -->
       </div>
 
       <!-- Table -->
@@ -137,7 +131,6 @@
               <div *ngIf="column === 'Checked'">
                 <th mat-header-cell *matHeaderCellDef="let dataInfos">
                   <div>
-                    <!-- WIP SL <div class="content-check-action-candidat"> -->
                     <mat-checkbox id="first-check-action" (change)="selectAllCandidats($event.checked)"
                       [(ngModel)]="allCandidatsSelected" [indeterminate]="someCandidatsSelected()">
                     </mat-checkbox>
@@ -172,9 +165,10 @@
                     {{ column }}
                   </th>
                   <td mat-cell *matCellDef="let dataInfos">
-
-                    <span (click)="menuSidenav(sidenav, dataInfos)" class="fa fa-info-circle interview-icon"
-                      aria-hidden="true"></span>
+                    <mat-icon color="accent" class="v-align-middle pointer" (click)="menuSidenav(sidenav, dataInfos)"
+                      aria-hidden="true">
+                      info
+                    </mat-icon>
                   </td>
                 </div>
                 <div *ngIf="column =='Interview' ">
@@ -182,20 +176,23 @@
                     {{ column }}
                   </th>
                   <td mat-cell *matCellDef="let dataInfos">
-
-                    <span *ngIf="!dataInfos.Interview.id" (click)="openInterviewDialog(dataInfos)"
-                      class="fa fa-video-camera interview-icon" aria-hidden="true"></span>
-                    <span *ngIf="dataInfos.Interview.interview_date" (click)="openInterviewDialog(dataInfos)"
-                      class="interview-icon">{{dataInfos.Interview.interview_date}}</span>
+                    <mat-icon *ngIf="!dataInfos.Interview.id" color="accent" class="v-align-middle pointer"
+                      aria-hidden="true" (click)="openInterviewDialog(dataInfos)">
+                      videocam
+                    </mat-icon>
+                    <span *ngIf="dataInfos.Interview.interview_date" color="accent" class="v-align-middle pointer"
+                      aria-hidden="true" (click)="openInterviewDialog(dataInfos)">
+                      {{dataInfos.Interview.interview_date}}
+                    </span>
                   </td>
                 </div>
 
-                <div
-                  *ngIf="column != 'Candidats' && column!='Dernière activité'  && column!='Interview'  && column!='Dernière activité' && column != 'Durée' && column != 'Score'">
+                <div *ngIf=" column !='Candidats' && column!='Dernière activité' && column!='Interview' &&
+                      column!='Dernière activité' && column !='Durée' && column !='Score'">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     {{ column }}
                   </th>
-                  <td mat-cell *matCellDef="let dataInfos">
+                  <td mat-cell *matCellDef=" let dataInfos">
                     {{dataInfos[column]}}
                   </td>
                 </div>

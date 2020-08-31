@@ -311,7 +311,7 @@ export class CandidatsComponent implements OnInit {
           } else {
             duree = 0;
           }
-          //   console.log('CANDIDAT TERMINER', candidat.test_terminer);
+          // console.log('CANDIDAT TERMINER', candidat.test_terminer);
           if (candidat.test_terminer === "0000-00-00 00:00:00") {
             dateInvite = new Date(candidat.invitation_date);
             percentCandidat = 0 + "%";
