@@ -6,8 +6,10 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
     styleUrls: ["./base-button.component.scss"],
 })
 export class BaseButton implements OnInit {
+    @Input() color: string = 'primary';
     @Input() iconName: string = 'info';
     @Input() iconPosition: string = 'right';
+    @Input() disabled: boolean = false;
 
     constructor() { }
 

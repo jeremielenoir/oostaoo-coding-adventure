@@ -79,12 +79,8 @@
 
   <div class="segment2">
     <app-base-button *ngIf="!yourCampaign" iconName="keyboard_arrow_left" iconPosition="left" class="margin-r-10"
-      (click)="postCampagne()">
-      Paramètres
-    </app-base-button>
-    <app-base-button iconName="save" (click)="postCampagne()">
-      Enregistrer
-    </app-base-button>
+      (click)="postCampagne()">Paramètres</app-base-button>
+    <app-base-button iconName="save" color="accent" (click)="postCampagne()">Enregistrer</app-base-button>
 
     <!--button *ngIf="!yourCampaign" class="custom-buttom custom-buttom-anul" mat-flat-button [routerLink]="['/dashboard/campaigns']">
       <i class="fas fa-chevron-left icon-arrow-btn"></i>

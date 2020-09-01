@@ -1,11 +1,13 @@
-<div class="roodeo-button hvr-grow">
-    <button mat-mini-fab *ngIf='iconPosition == "left"' class="icon icon-left" disabled={{disabled}}>
+<div [class]="'roodeo-button hvr-grow ' + color">
+    <button mat-mini-fab *ngIf='iconPosition == "left"' [ngClass]="'icon icon-left icon-' + color"
+        disabled={{disabled}}>
         <mat-icon>{{iconName}}</mat-icon>
     </button>
     <span [class]="iconPosition == 'left' ? 'text text-right' : 'text text-left'">
         <ng-content></ng-content>
     </span>
-    <button mat-mini-fab *ngIf='iconPosition == "right"' class="icon icon-right" disabled={{disabled}}>
+    <button mat-mini-fab *ngIf='iconPosition == "right"' [ngClass]="'icon icon-right icon-' + color"
+        disabled={{disabled}}>
         <mat-icon>{{iconName}}</mat-icon>
     </button>
 </div>

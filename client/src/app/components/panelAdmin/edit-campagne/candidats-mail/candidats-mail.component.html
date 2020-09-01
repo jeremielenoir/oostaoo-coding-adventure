@@ -39,12 +39,10 @@
         (click)="retourCandidat()">
         Retour
       </app-base-button>
-      <app-base-button iconName="edit" (click)="editing=!editing">
-        {{editing ? 'OK' : 'Personnaliser cet email'}}
+      <app-base-button iconName="edit" (click)="editing=!editing">{{editing ? 'OK' : 'Personnaliser cet email'}}
       </app-base-button>
       <app-base-button *ngIf="!editing" iconName="send" disabled="editing" (click)="updateCampaignPostCandidats()">
-        Envoyer {{ nbCandidat > 1 ? "les emails" : "l'email" }}
-      </app-base-button>
+        Envoyer {{ nbCandidat > 1 ? "les emails" : "l'email" }}</app-base-button>
     </div>
     <div class="alert alert-danger error-nbCandidats" *ngIf="nbCandidatsError">{{ nbCandidatsError }}</div>
     <div class="alert alert-danger error-noMoreTest" *ngIf="noMoreTestError">{{ noMoreTestError }}</div>

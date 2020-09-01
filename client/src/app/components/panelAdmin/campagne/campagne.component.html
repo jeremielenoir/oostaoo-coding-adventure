@@ -10,9 +10,7 @@
         <h3 class="info-title-header-dashboard" i18n>Tests d'evaluations</h3>
 
         <app-base-button *ngIf="campaigns.length > 0" iconName="add" class="container-add-campaign"
-          (click)="postCampagne()" [routerLink]="['/dashboard/campaigns/new']">
-          Nouveau test
-        </app-base-button>
+          (click)="postCampagne()" [routerLink]="['/dashboard/campaigns/new']">Nouveau test</app-base-button>
 
       </div>
 
@@ -72,12 +70,14 @@
       <div class="no-campaign" *ngIf="isLoaded && campaigns.length === 0">
         <p i18n> Vous n'avez pas encore de tests, cliquer sur le bouton en dessous pour en créer un.</p>
         <br />
-        <div class="container-add-campaign hvr-grow" [routerLink]="['/dashboard/campaigns/new']">
+        <app-base-button iconName="add" class="container-add-campaign" [routerLink]="['/dashboard/campaigns/new']">
+          Nouveau test</app-base-button>
+        <!-- WIP SL <div class="container-add-campaign hvr-grow" [routerLink]="['/dashboard/campaigns/new']">
           <button mat-mini-fab class="addCampaignContainer" i18n>
             <mat-icon class="addIcon">add</mat-icon>
           </button>
           <span i18n class="addIconText">Nouveau test</span>
-        </div>
+        </div> -->
       </div>
 
       <div

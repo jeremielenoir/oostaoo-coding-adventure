@@ -235,30 +235,6 @@ tr.mat-row {
   background: mat-color($roodeo-app-primary, 800);
 }
 
-.roodeo-button {
-  background: mat-color($roodeo-app-primary, 800);
-  color: $color-white;
-  border-radius: 19px;
-  height: fit-content;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding-left: 20px;
-  cursor: pointer;
-
-  .text{
-    font-size: 14px;
-    color: $color-white;
-    cursor: pointer;
-  }
-
-  .icon{
-    position: relative;
-    background: mat-color($roodeo-app-primary, 800) !important;
-    color: $color-white;
-    margin-left:10px;
-  }
-}
-
 .tool-bar {
   display: flex;
   flex-wrap: wrap;
