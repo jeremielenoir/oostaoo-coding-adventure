@@ -10,8 +10,13 @@ export class BaseButton implements OnInit {
     @Input() iconName: string = 'info';
     @Input() iconPosition: string = 'right';
     @Input() disabled: boolean = false;
+    @Output() clickEvent = new EventEmitter<null>();
 
     constructor() { }
 
     ngOnInit() { }
+
+    click() {
+        this.clickEvent.emit(null);
+    }
 }

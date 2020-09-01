@@ -11,7 +11,7 @@
       <div class="campaign-param roodeo-dark-theme first">
 
         <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" [formGroup]="formCampagne"
-          class="fullWidth">
+          class="fullwidth">
           <mat-label [ngStyle]="errorName ? { color: 'red' } : null">Nom du test d'evaluation</mat-label>
           <input placeholder="Nom du test d'evaluation" type="text" formControlName="nomDeCampagne" matInput value="{{ formCampagne.value.role }} - {{
               formCampagne.value.experience
@@ -87,9 +87,11 @@
       </div>
 
       <div class=" formQuestion finalQuestion">
-        <app-base-button iconName="keyboard_arrow_left" iconPosition="left" (click)="onDecrementPage()">Etape précédente
+        <app-base-button iconName="keyboard_arrow_left" iconPosition="left" (clickEvent)="onDecrementPage()">Etape
+          précédente
           : profil recherché</app-base-button>
-        <app-base-button iconName="keyboard_arrow_right" (click)="onIncrementPage(formCampagne.value)">Etape suivante :
+        <app-base-button iconName="keyboard_arrow_right" (clickEvent)="onIncrementPage(formCampagne.value)">Etape
+          suivante :
           choix des questions</app-base-button>
       </div>
 

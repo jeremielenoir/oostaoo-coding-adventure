@@ -181,9 +181,9 @@ export class InterviewDialogComponent implements OnInit {
 
       this.htmlContent = `
       <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.data.Candidats},</span><br>
-      </div><div><span style="background-color: transparent; font-size: 1rem;"><br></span></div>
+      </div><br /><br />
       <div>Votre candidature a retenu notre attention suite aux résultats des tests techniques.</div><div>Dans le cadre de notre processus
-      de recrutement,nous avons le plaisir de vous inviter à passer un entretien vidéo conférence 
+      de recrutement, nous avons le plaisir de vous inviter à passer un entretien vidéo conférence 
      <<entretien_date>>
       </div>
      <div>
@@ -234,7 +234,7 @@ export class InterviewDialogComponent implements OnInit {
         id,
         interview_date,
         candidats: [{ id: this.data.candidat_id, email: this.pctrl.email.value, name: this.pctrl.name.value }],
-        user: {...this.currentUser, id: this.userToken.userId },
+        user: { ...this.currentUser, id: this.userToken.userId },
         interview_link: this.interview_link,
         email_title: this.subject,
         email_content,
@@ -267,7 +267,7 @@ export class InterviewDialogComponent implements OnInit {
       const data: any = {
         interview_date,
         candidats: [{ id: this.data.candidat_id, email: this.pctrl.email.value, name: this.pctrl.name.value }],
-        user: {...this.currentUser, id: this.userToken.userId },
+        user: { ...this.currentUser, id: this.userToken.userId },
         email_title: this.subject,
         email_content,
         interview_link: this.interview_link

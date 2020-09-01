@@ -27,11 +27,8 @@ export class CandidatsMailComponent implements OnInit {
   public sujet: string;
   public name: string[] = [];
   public contenu: string;
-  public edeting = false;
+  public editing = false;
   public htmlContent: any;
-
-  nbCandidatsError: string = null;
-  noMoreTestError: string = null;
 
   public offer_id: any;
   public tests_available: any;
@@ -63,7 +60,10 @@ export class CandidatsMailComponent implements OnInit {
       .get(`${API_URI_USER}/${this.user_id}`)
       .subscribe(datas => {
         this.tests_available = datas.tests_available;
-        console.log('NGONINIT / this.tests_available: ', this.tests_available);
+        this.tests_available = 0; // WIP SL
+        console.log('NGONINIT candidats-mail / this.tests_available: ', this.tests_available);
+        console.log("4. tests_available =", this.tests_available); // WIP SL
+        // this.tests_available = 999; // WIP SL
       });
 
 
@@ -83,7 +83,7 @@ export class CandidatsMailComponent implements OnInit {
 
     this.htmlContent = `
        <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.name},</span>
-       </div><br />
+       </div><br /><br />
        <div>Votre candidature a retenu notre attention.</div><div>Dans le cadre de notre processus
        de recrutement, nous avons le plaisir de vous inviter à passer une évaluation technique.</div>
        <div>Vous pourrez choisir le moment le plus approprié pour vous pour passer ce test.</div>
@@ -154,16 +154,15 @@ export class CandidatsMailComponent implements OnInit {
       setTimeout(() => {
         this.goToSubscribe();
       }, 1500)
-      this.noMoreTestError = `Vous n'avez plus de test disponible`;
-
+      this.openSnackBar(`Vous n'avez plus de test disponible`, "Fermer");
     } else if (this.nbCandidat > this.tests_available) {
       setTimeout(() => {
         this.retourCandidat();
       }, 1500);
-      this.nbCandidatsError = `Impossible d'inviter ${this.nbCandidat} candidat${this.nbCandidat > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`;
-
+      this.openSnackBar(`Impossible d'inviter ${this.nbCandidat} candidat${this.nbCandidat > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`, "Fermer");
     } else {
       this.tests_available = this.tests_available - this.nbCandidat;
+      console.log("4. (bis) tests_available =", this.tests_available); // WIP SL
       this.apiClientService
         .put(`${API_URI_USER}/${this.user_id}`, {
           tests_available: this.tests_available

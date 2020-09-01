@@ -20,6 +20,8 @@ export class DecryptTokenService {
       this.adminId = this.decodedValue.adminId;
       this.offer_id = this.decodedValue.offer_id;
       this.tests_available = this.decodedValue.tests_available;
+      this.tests_available = 0; // WIP SL
+      console.log("1. tests_available =", this.tests_available); // WIP SL
     }
   }
 

@@ -1,30 +1,25 @@
 <div id="top-bar">
-
   <div class="segment1">
-
+    <!-- Chart -->
     <div class="chart-block">
       <canvas #Chart></canvas>
     </div>
-
+    <!-- Infos -->
     <div class="container-langage">
       <span>Points : <p>{{poinTotal}} pts</p></span>
       <span>Questions : <p>{{this.questions ? this.questions.length : ''}}</p></span>
       <span>Durée totale : <p>{{convertSecondsToMinutes(timeAllquestionCampgnDevice)}} à
           {{convertSecondsToMinutes(timeAllquestionCampagn)}} min</p></span>
-
     </div>
-
+    <!-- Technos -->
     <div *ngIf="technoDonuts.length > 3" class="swiper-previous">
       <button mat-mini-fab color="primary" [disabled]="this.componentRef.isAtFirst"
         aria-label="Example icon button with a menu icon" (click)="prevSlide()">
         <mat-icon>keyboard_arrow_left</mat-icon>
       </button>
     </div>
-
     <div class="state-techno-content">
-
       <div class="StatsByTechnology">
-
         <swiper [config]="config" class="swiper-roodeo" (indexChange)="onChangeIndex($event)">
           <div *ngFor="let donut of technoDonuts">
             <div class="state-techno">
@@ -32,26 +27,18 @@
                 {{donut.label}}
                 <span>({{donut.value}}) pts</span>
                 <span class="icon-chevron fas fa-chevron-up"></span>
-
                 <span class="question-time">{{donut.question}} questions</span>
                 <span class="question-time">{{convertSecondsToMinutes(donut.timeQuestion / 2)}} à
                   {{convertSecondsToMinutes(donut.timeQuestion)}} min</span>
-
               </p>
-
               <div class="infoBule-info">
-
                 <h3 class="title-infobule">connaissance du langange</h3>
                 <span>{{donut.question}} question - {{donut.value}} pt</span>
-
               </div>
-
             </div>
           </div>
         </swiper>
-
       </div>
-
     </div>
     <div *ngIf="technoDonuts.length > 3" class="swiper-next">
       <button mat-mini-fab [disabled]="this.componentRef.isAtLast" color="primary"
@@ -59,6 +46,7 @@
         <mat-icon>keyboard_arrow_right</mat-icon>
       </button>
     </div>
+    <!-- Score -->
     <div class="score-moyen">
       <h4 class="title-score"></h4>
       <div class="score-number-and-diagrame">
@@ -66,30 +54,18 @@
         <strong class="number">32%</strong>
         <i class="info-icon fas fa-info-circle"></i>
         <div class="infoBuleScore">
-
           <span>
             Estimation du score moyen que peuvent obtenir vos candidats, basé sur une analyse
             de données issues de campagnes comparables sur la plateforme.
           </span>
-
         </div>
       </div>
     </div>
   </div>
-
+  <!-- Buttons -->
   <div class="segment2">
     <app-base-button *ngIf="!yourCampaign" iconName="keyboard_arrow_left" iconPosition="left" class="margin-r-10"
-      (click)="postCampagne()">Paramètres</app-base-button>
-    <app-base-button iconName="save" color="accent" (click)="postCampagne()">Enregistrer</app-base-button>
-
-    <!--button *ngIf="!yourCampaign" class="custom-buttom custom-buttom-anul" mat-flat-button [routerLink]="['/dashboard/campaigns']">
-      <i class="fas fa-chevron-left icon-arrow-btn"></i>
-      Retour
-    </button-->
-    <!--button class="custom-buttom" [ngClass]="questions && questions.length > 0 ? 'button-enabled' : 'button-disabled'"
-      [disabled]="questions && questions.length > 0 ? 'false' : 'true'" mat-flat-button (click)="postCampagne()">
-      Enregistrer
-    </button-->
-
+      [routerLink]="['/dashboard/campaigns']">Paramètres</app-base-button>
+    <app-base-button iconName="save" color="accent" (clickEvent)="postCampagne()">Enregistrer</app-base-button>
   </div>
 </div>

@@ -8,7 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { TooltipPosition, MatSnackBar, MatDialog } from '@angular/material';
-import {} from '@angular/material/snack-bar';
+import { } from '@angular/material/snack-bar';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import {
   ApiClientService,
@@ -39,13 +39,13 @@ export class UtilisateursComponent implements OnInit {
     public decryptTokenService: DecryptTokenService,
     private _snackBar: MatSnackBar,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   public submittedUser = false;
   public modifiedUser = false;
   public checkbox_list: any[];
   public adminId: number;
-  public tests_available: any;
+  public tests_available: any; // WIP SL
   public selectedRoleId;
   public selectedRoleName;
   // public PrenomValue = '';
@@ -111,13 +111,15 @@ export class UtilisateursComponent implements OnInit {
       .subscribe(
         (items) => this.rolesRef = items.roles,
         (err) => {
-          this._snackBar.open('Ajout d\'utilisateurs non disponible pour le moment', 'Ok', {duration: 3000});
+          this._snackBar.open('Ajout d\'utilisateurs non disponible pour le moment', 'Ok', { duration: 3000 });
         }
       );
 
     this.getUser().then(datas => {
       this.currentUser = datas;
       this.tests_available = datas.tests_available;
+      this.tests_available = 0; // WIP SL
+      console.log("2. tests_available =", this.tests_available); // WIP SL
       if (this.currentUser.role.type === 'account_admin') {
         this.isCurrentUserIsAccountAdmin = true;
       }
@@ -228,19 +230,19 @@ export class UtilisateursComponent implements OnInit {
 
     if (doAction) {
       this.apiClientService
-      .put(
-        API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/users/' + userToEnable.id,
-        {blocked: false}
-      )
-      .toPromise()
-      .then(res => {
-        console.log(res);
-        userToEnable.blocked = false;
-        this.openSnackBar('L\'utilisateur a correctement été réactivé', 'Fermer');
-      })
-      .catch(e => {
-        this.openSnackBar('Oops ! la réactivation d\'utilisateur est indisponible', 'Fermer')
-      });
+        .put(
+          API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/users/' + userToEnable.id,
+          { blocked: false }
+        )
+        .toPromise()
+        .then(res => {
+          console.log(res);
+          userToEnable.blocked = false;
+          this.openSnackBar('L\'utilisateur a correctement été réactivé', 'Fermer');
+        })
+        .catch(e => {
+          this.openSnackBar('Oops ! la réactivation d\'utilisateur est indisponible', 'Fermer')
+        });
     }
 
   }
@@ -261,16 +263,16 @@ export class UtilisateursComponent implements OnInit {
 
     if (doAction) {
       this.apiClientService
-      .delete(API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/users/' + userToDelete.id)
-      .toPromise()
-      .then(res => {
-        console.log(res);
-        userToDelete.blocked = true;
-        this.openSnackBar('L\'utilisateur a correctement été supprimé', 'Fermer');
-      })
-      .catch(e => {
-        this.openSnackBar('Oops ! la désactivation d\'utilisateur est indisponible', 'Fermer')
-      });
+        .delete(API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/users/' + userToDelete.id)
+        .toPromise()
+        .then(res => {
+          console.log(res);
+          userToDelete.blocked = true;
+          this.openSnackBar('L\'utilisateur a correctement été supprimé', 'Fermer');
+        })
+        .catch(e => {
+          this.openSnackBar('Oops ! la désactivation d\'utilisateur est indisponible', 'Fermer')
+        });
     }
 
   }
@@ -340,7 +342,7 @@ export class UtilisateursComponent implements OnInit {
         this.openSnackBar('L\'utilisateur a correctement été ajouté', 'Fermer');
       })
       .catch((err) => {
-        this._snackBar.open(err, undefined, {duration: 3000});
+        this._snackBar.open(err, undefined, { duration: 3000 });
       });
   }
 

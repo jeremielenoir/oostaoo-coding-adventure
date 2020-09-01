@@ -1,46 +1,46 @@
 @import '../../../../../roodeo-variables.scss';
 
-.roodeo-button {
+.icon-left {
+  padding: 0 16px 0 0;
+}
+.icon-right {
+  padding: 0 0 0 16px;
+}
+
+.roodeo-button-icon-left, .roodeo-button-icon-right {
   color: $color-white;
   border-radius: 19px;
   height: fit-content;
   margin-top: 5px;
   margin-bottom: 5px;
-  cursor: pointer;
 
-  // text
   .text {
     font-size: 14px;
     color: $color-white;
-    cursor: pointer;
   }
-  .text-left {
-    margin-left: 20px;
-  }
-  .text-right {
-    margin-right: 20px;
-  }
-  // icon
   .icon {
     color: $color-white;
-    cursor: pointer;
   }
-  .icon-left {
+  .icon-primary {
+    background-color: #0c6192 !important;
+  }
+  .icon-accent {
+    background-color: mat-color($roodeo-app-accent, 800);
+  }
+}
+
+.roodeo-button-icon-left {
+  padding: 0 16px 0 0;
+
+  .icon {
     margin-right:10px;
   }
-  .icon-right {
+}
+
+.roodeo-button-icon-right {
+  padding: 0 0 0 16px;
+
+  .icon {
     margin-left:10px;
   }
-}
-
-// colors
-.primary {
-  background-color: mat-color($roodeo-app-primary, 800);
-}
-.icon-primary {
-  background-color: #0c6192 !important;
-}
-
-.accent, .icon-accent {
-  background-color: mat-color($roodeo-app-accent, 800);
 }

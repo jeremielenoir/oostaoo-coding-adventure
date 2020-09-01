@@ -1,14 +1,14 @@
 <div *ngIf="!isLoaded" class="loader-container">
   <mat-spinner [strokeWidth]="20"></mat-spinner>
 </div>
-<div *ngIf="isLoaded">
-  <form action="" *ngFor="let campaign of campaigns">
 
-    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullWidth">
+<div *ngIf="isLoaded">
+  <!-- Form -->
+  <form action="" *ngFor="let campaign of campaigns">
+    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
       <mat-label [ngStyle]="errorName ? { color: 'red' } : null">Nom du test d'evaluation</mat-label>
       <input placeholder="Nom du test d'evaluation" type="text" [formControl]="name" matInput name="nomDeCampagne" />
     </mat-form-field>
-
     <div>
       <label for="nomDeCampagne" [ngStyle]="errorNomCampgane ? { color: 'red' } : null">
         En quelle langue les questions doivent-elles être posées à vos
@@ -31,42 +31,24 @@
         </mat-radio-group>
       </div>
     </div>
-
     <div class="container-radio-button">
       <mat-slide-toggle [formControl]="copypasteControl" i18n>
         Empêcher l'utilisation du copier/coller pendant le test ?
       </mat-slide-toggle>
     </div>
-
     <div class="container-radio-button">
-
       <mat-slide-toggle [formControl]="rapportControl" i18n>
         Envoyer le rapport simplifié au candidat à l'issue de son test ?
       </mat-slide-toggle>
-
     </div>
-
-
-    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullWidth">
+    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
       <mat-label [ngStyle]="errorName ? { color: 'red' } : null">Nombre de jours au bout desquels une invitation expire
       </mat-label>
       <input id="date" type="number" matInput name="DayBeforeExp" [formControl]='date' />
     </mat-form-field>
-
-
-
-
+    <!-- Button -->
     <div id="button-container">
-      <app-base-button iconName="save" (click)="updateCampaign()">Enregistrer</app-base-button>
-
-      <!--button
-      (click)="updateCampaign()"
-      type="button"
-      class="button"
-      mat-flat-button
-    >
-      Enregistrer
-    </button-->
+      <app-base-button iconName="save" (clickEvent)="updateCampaign()">Enregistrer</app-base-button>
     </div>
   </form>
 </div>
