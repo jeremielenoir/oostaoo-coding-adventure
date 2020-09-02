@@ -123,7 +123,7 @@ export class CandidatsComponent implements OnInit {
 
   ngOnInit() {
     this.tests_available = this.DecryptTokenService.tests_available;
-    this.tests_available = 0; // WIP SL
+    // this.tests_available = 0; // WIP SL
     // WIP SL this.tests_available = 666; // WIP SL
     console.log("3. tests_available =", this.tests_available); // WIP SL
     if (this.tests_available == -1) {

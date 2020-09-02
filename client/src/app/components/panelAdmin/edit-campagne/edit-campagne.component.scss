@@ -7,6 +7,7 @@
 }
 #nav{
     position: fixed;
+    z-index: 1;
     padding: 0 15px;
     left: 0px;
     width: 100%;
@@ -55,6 +56,6 @@
 }
 
 .content{
-    padding-top: 125px;
+    margin-top: 125px;
     height: 100%;
 }

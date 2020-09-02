@@ -60,7 +60,7 @@ export class CandidatsMailComponent implements OnInit {
       .get(`${API_URI_USER}/${this.user_id}`)
       .subscribe(datas => {
         this.tests_available = datas.tests_available;
-        this.tests_available = 0; // WIP SL
+        // this.tests_available = 0; // WIP SL
         console.log('NGONINIT candidats-mail / this.tests_available: ', this.tests_available);
         console.log("4. tests_available =", this.tests_available); // WIP SL
         // this.tests_available = 999; // WIP SL

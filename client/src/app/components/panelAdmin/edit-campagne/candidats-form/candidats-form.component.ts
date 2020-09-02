@@ -57,7 +57,7 @@ export class CandidatsFormComponent implements OnInit {
   }
   // method triggered when form is submitted
   submit() {
-    console.log('this.form.value.contacts: ', this.form.value.contacts);
+    console.log('CandidatsFormComponent submit() > this.form.value.contacts: ', this.form.value.contacts);
   }
 
   openDialog() {

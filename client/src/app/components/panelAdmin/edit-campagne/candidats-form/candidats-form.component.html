@@ -1,35 +1,33 @@
 <div class="p-3">
   <div lass="form-scroll">
-    <div class="cologne-form">
-      <form [formGroup]="form" (submit)="submit()">
-        <div class="card-body" formArrayName="contacts">
-          <div [formGroupName]="i" class="row" *ngFor="let contact of contactFormGroup.controls; let i = index">
+    <form class="cologne-form" [formGroup]="form" (submit)="submit()">
+      <div class="card-body" formArrayName="contacts">
+        <div [formGroupName]="i" class="row" *ngFor="let contact of contactFormGroup.controls; let i = index">
 
-            <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
-              <mat-label>Nom*</mat-label>
-              <input formControlName="name" matInput placeholder="John Smith" type="text" />
-            </mat-form-field>
+          <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
+            <mat-label>Nom*</mat-label>
+            <input formControlName="name" matInput placeholder="John Smith" type="text" />
+          </mat-form-field>
 
-            <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
-              <mat-label>Email*</mat-label>
-              <input formControlName="value" matInput placeholder="john.smith@email.com" type="email" />
-            </mat-form-field>
+          <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
+            <mat-label>Email*</mat-label>
+            <input formControlName="value" matInput placeholder="john.smith@email.com" type="email" />
+          </mat-form-field>
 
-            <button mat-fab color="warn" (click)="removeContact(i)" [disabled]="contactList.length === 1">
-              <mat-icon>delete</mat-icon>
-            </button>
+          <button mat-mini-fab color="warn" (click)="removeContact(i)" [disabled]="contactList.length === 1">
+            <mat-icon>delete</mat-icon>
+          </button>
 
-          </div>
         </div>
-        <div class="block-button">
-          <app-base-button iconName="person_add" (clickEvent)="addContact()">Ajouter un autre candidat</app-base-button>
-          <app-base-button iconName="mail_outline" (clickEvent)="openDialog()">Prochaine étape : configurer l'email
-          </app-base-button>
-        </div>
-        <div class="information">
-          Les champs indiqués par une * sont obligatoires
-        </div>
-      </form>
-    </div>
+      </div>
+      <div class="block-button">
+        <app-base-button iconName="person_add" (clickEvent)="addContact()">Ajouter un autre candidat</app-base-button>
+        <app-base-button iconName="mail_outline" (clickEvent)="openDialog()">Prochaine étape : configurer l'email
+        </app-base-button>
+      </div>
+      <div class="information">
+        Les champs indiqués par une * sont obligatoires
+      </div>
+    </form>
   </div>
 </div>
