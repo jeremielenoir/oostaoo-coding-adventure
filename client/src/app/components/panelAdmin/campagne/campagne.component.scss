@@ -35,7 +35,6 @@
   }
 }
 
-
 .container-add-campaign{
     margin-right: 10px;
 }
@@ -49,10 +48,10 @@
 .termine-left{
   margin-left: -5px;
 }
-
 .termine-left-many{
   margin-left: 1px;
 }
+
 .icon{
   color: $color-orange;
 }
@@ -64,13 +63,14 @@
   cursor: pointer;
   
 }
+
 .addCampaignContainer{
   background-color: #0c6192 !important;
   .addIcon{
     color: white;
   }
-  
 }
+
 .contenu-view-content-left {
   display: flex;
   flex-direction: column;
@@ -81,9 +81,9 @@
   box-shadow: 3px 4px 8px -2px rgba(0,0,0,0.40);
 
   .header-form{
-       
     display: flex;
     flex-direction: column;
+
     .sous-header-two{
       display: flex;
       flex-direction: row;
@@ -99,14 +99,13 @@
         align-items: center;
         justify-content: center;
         min-width: 43px;
+
         .number-test{
           color: $color-principal-blue;
           font-size: 14px; 
           font-weight: bold;
         }
-
       }
-    
     }
 
     .img-plus{
@@ -114,11 +113,10 @@
       width: 20px;
       height: 20px;
     }
+
     .test-right-header{
       display: flex;
       flex: 11;
-
-      
 
       .btn-test{
           flex: 2;
@@ -129,12 +127,14 @@
           display: block;
           outline: none;
       }
+
       .sous-header-form {
         display: flex;
         align-items: center;
         background-color: white;
         padding-left: 5px;
         flex: 10;
+
         .form-group-header {
           height: 50px;
           
@@ -142,11 +142,13 @@
             font-size: 14px;
             color: $color-principal-blue;
           }
+
           form {
             height: 100%;
             width: 100%;
             position: relative;
             margin-top:5px;
+
             .icon-form-group-header-contenu {
               display: inline-block;
               color: #de522b;
@@ -166,7 +168,6 @@
               outline: none;
               border: none;
             }
-
             .champ-header-contenu::placeholder{
                
               color:#de522b;
@@ -225,26 +226,26 @@
       }
     
     }
-  .content-scroll::-webkit-scrollbar{
-      width: 8px;
-      height: 8px;
-  }
-  .content-scroll::-webkit-scrollbar-thumb {
-      background-color: #7f8183;
-   }
-  
-   .content-scroll::-webkit-scrollbar-thumb:hover{
-       background-color: #67686a;
-   }
-  
-   .content-scroll::-webkit-scrollbar-track {
-      background: #e3e3e3;
-  }
-  
+    .content-scroll::-webkit-scrollbar{
+        width: 8px;
+        height: 8px;
+    }
+    .content-scroll::-webkit-scrollbar-thumb {
+        background-color: #7f8183;
+    }
+    
+    .content-scroll::-webkit-scrollbar-thumb:hover{
+        background-color: #67686a;
+    }
+    
+    .content-scroll::-webkit-scrollbar-track {
+        background: #e3e3e3;
+    }
+    
 
-  [hidden] {  //override display flex of .contenu-techno-content for included archive
-    display: none !important;
-  }
+    [hidden] {  //override display flex of .contenu-techno-content for included archive
+      display: none !important;
+    }
 
     .content-scroll {
       overflow-y: auto;
@@ -368,10 +369,7 @@
              font-size: $font-size-home;
            }
          }
-       
         }
-
-
 
         .branche-content-list-start{
           display: flex;
@@ -387,8 +385,6 @@
             height: 25px;
           }
         }
-
-       
 
         .popup{
           display: none;

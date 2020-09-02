@@ -28,6 +28,11 @@
     }
 }
 
+::ng-deep .row .mat-form-field-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 .btn-delete-form{
     margin-top: 25px;
     padding: 5px 5px;
