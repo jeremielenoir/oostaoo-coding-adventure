@@ -65,7 +65,10 @@
 
         .form-line{
             display: flex;
-
+            justify-content: space-around;
+            .fullwidth{
+                width: 45%;
+            }
             .input-bloc{
                 flex: 1;
                 margin: 20px 20px 18px 20px;

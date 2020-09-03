@@ -16,9 +16,10 @@
           <h2 class="title">Profil</h2>
         </div>
 
+
         <form action="">
           <div class="form-line">
-            <div class="input-bloc">
+            <!-- <div class="input-bloc">
               <h3 class="input-title">Prénom *</h3>
               <input name="firstname" [formControl]="prenom" class="input-section1" maxlength="24" type="text" required>
               <div *ngIf=" submittedProfil && prenom.invalid" class="alert alert-danger">
@@ -26,9 +27,14 @@
                   Prénom requis.
                 </div>
               </div>
-            </div>
+            </div> -->
+            <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" [formGroup]="formUtilisateur"
+            class="fullwidth">
+            <mat-label i18n>Prénom *</mat-label>
+            <input type="text" formControlName="firstName" matInput value="" name="firstName" />
+          </mat-form-field>
 
-            <div class="input-bloc">
+            <!-- <div class="input-bloc">
               <h3 class="input-title" maxlength="64">Nom *</h3>
               <input name="lastname" [formControl]="nom" class="input-section1" type="text" required>
               <div *ngIf="submittedProfil && nom.invalid" class="alert alert-danger">
@@ -36,7 +42,12 @@
                   Nom requis.
                 </div>
               </div>
-            </div>
+            </div> -->
+            <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" [formGroup]="formUtilisateur"
+            class="fullwidth">
+            <mat-label i18n>Nom *</mat-label>
+            <input type="text" formControlName="lastName" matInput value="" name="lastName" />
+          </mat-form-field>
           </div>
 
           <div class="form-line">
@@ -142,16 +153,29 @@
 
 
           <div class="form-line">
-            <div class="input-bloc">
+
+            <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" [formGroup]="formUtilisateur"
+            class="fullwidth">
+            <mat-label i18n> N° de téléphone </mat-label>
+            <input  type="text" formControlName="phone" matInput value="" name="phone" />
+          </mat-form-field>
+
+            <!-- <div class="input-bloc">
               <h3 class="input-title">N° de téléphone</h3>
               <input [formControl]="tel" name="phone" class="input-section1" maxlength="32" type="tel">
-            </div>
+            </div> -->
 
-            <div class="input-bloc">
+            <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" [formGroup]="formUtilisateur"
+            class="fullwidth">
+            <mat-label i18n> N° mobile </mat-label>
+            <input  type="text" formControlName="telephone" matInput value="" name="telephone" />
+          </mat-form-field>
+
+            <!-- <div class="input-bloc">
               <h3 class="input-title">N° de portable</h3>
               <input [formControl]="mobile" name="mobile" class="input-section1" maxlength="32" type="tel">
-            </div>
-          </div>
+            </div> -->
+          </div> 
 
 
 
@@ -167,6 +191,15 @@
                 <option value="other">Autre</option>
               </select>
             </div>
+            <!-- <mat-form-field [formGroup]="formUtilisateur" appearance="outline" [color]="'accent'">
+              <mat-label>Fonction</mat-label>
+              <mat-select name="office" class="mat-primary" formControlName="office" [(ngModel)]="roleSelect"
+                (selectionChange)="selected($event)">
+                <mat-option *ngFor="let role of profiles" [value]="role[nameLanguage]">{{
+                  role[nameLanguage]
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field> -->
           </div>
 
           <div class="form-line">
