@@ -45,7 +45,7 @@ export class UtilisateursComponent implements OnInit {
   public modifiedUser = false;
   public checkbox_list: any[];
   public adminId: number;
-  public tests_available: any; // WIP SL
+  public tests_available: any;
   public selectedRoleId;
   public selectedRoleName;
   // public PrenomValue = '';
@@ -118,8 +118,6 @@ export class UtilisateursComponent implements OnInit {
     this.getUser().then(datas => {
       this.currentUser = datas;
       this.tests_available = datas.tests_available;
-      // this.tests_available = 0; // WIP SL
-      console.log("2. tests_available =", this.tests_available); // WIP SL
       if (this.currentUser.role.type === 'account_admin') {
         this.isCurrentUserIsAccountAdmin = true;
       }

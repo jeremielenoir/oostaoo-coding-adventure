@@ -117,7 +117,7 @@ export class CandidatsComponent implements OnInit {
   openInterviewDialog(data) {
     this.dialog.open(InterviewDialogComponent, {
       data,
-      height: "580px",
+      height: "auto",
     });
   }
 

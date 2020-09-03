@@ -158,7 +158,7 @@
                 </th>
                 <td mat-cell *matCellDef="let dataInfos" class="pointer" (click)="menuSidenav(sidenav, dataInfos)">
                   <mat-icon color="accent" class="v-align-middle" aria-hidden="true">
-                    info
+                    assessment
                   </mat-icon>
                 </td>
               </div>
@@ -270,15 +270,14 @@
         </div>
       </div>
 
-      <div>
-        <button class="button-rapport"
-          [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats', currentCandidat.candidat_id,'rapport-detaille']"
-          mat-button i18n>
-          <i class="far fa-eye"></i>
+      <div class="margin-top-md">
+        <app-base-button iconName="remove_red_eye" class="margin-right-md"
+          [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats', currentCandidat.candidat_id,'rapport-detaille']">
           Voir le rapport détaillé
-        </button>
-        <button class="button-rapport" (click)="viewResultsPdf(currentCandidat)" mat-button i18n> <i
-            class="far fa-file-pdf"></i> Télécharger le PDF</button>
+        </app-base-button>
+        <app-base-button iconName="picture_as_pdf" (clickEvent)="viewResultsPdf(currentCandidat)">
+          Télécharger le PDF
+        </app-base-button>
       </div>
     </div>
   </mat-sidenav>

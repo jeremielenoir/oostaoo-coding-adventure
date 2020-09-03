@@ -1,6 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 @import '~@angular/material/theming';
 
+
+/* Gutter <- for now, used only sometimes for margin : usage should be extended to all padding and margin  */
+$gutter: 5px;
+$gutter-xs: $gutter;
+$gutter-sm: $gutter * 2;
+$gutter-md: $gutter * 4;
+$gutter-lg: $gutter * 6;
+$gutter-xl: $gutter * 8;
+
 /*Colors*/
 $text-color: #212529;
 $color-white: white;
