@@ -17,9 +17,10 @@
     <div class="header_result">
 
       <div class="progressbar_container">
-        <round-progress [current]="candidat?.points_candidat[5].PourcentTest" [max]="100" [color]="'#ce5637'"
-          [background]="'#c1d5e0'" [radius]="10" [stroke]="3" [semicircle]="false" [rounded]="true" [clockwise]="true"
-          [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'" [animationDelay]="100">
+        <round-progress [current]="candidat?.points_candidat ? candidat?.points_candidat[5].PourcentTest : 0"
+          [max]="100" [color]="'#ce5637'" [background]="'#c1d5e0'" [radius]="10" [stroke]="3" [semicircle]="false"
+          [rounded]="true" [clockwise]="true" [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'"
+          [animationDelay]="100">
         </round-progress>
       </div>
 
@@ -27,7 +28,7 @@
       <div>
         <p>Score</p>
         <p class="header_stats">{{scorePercent}}%</p>
-        <p>{{totalPointsCandidat +" /"}}  {{totalPointsCampaign}}
+        <p>{{totalPointsCandidat +" /"}} {{totalPointsCampaign}}
           points </p>
       </div>
       <div>
@@ -41,49 +42,51 @@
     <div>
 
       <div *ngFor="let question of rapport; let i = index; let tech of techno">
-       <div *ngFor="let answervalue of question.index_question.answer_value">
+        <div *ngFor="let answervalue of question.index_question.answer_value">
 
-        <h3 class="question_number">Question {{ i+1 }} </h3>
-        <div class="header_question">
-          <p id="techno" *ngFor="let tech of techno">
-            <span *ngIf="question.index_question.technologies == tech.id"> {{tech.name}} </span>
-          </p>
+          <h3 class="question_number">Question {{ i+1 }} </h3>
+          <div class="header_question">
+            <p id="techno" *ngFor="let tech of techno">
+              <span *ngIf="question.index_question.technologies == tech.id"> {{tech.name}} </span>
+            </p>
 
-          <p>{{ fmtMSS(question.timeRep) }} / {{ fmtMSS(question.index_question.time) }}</p>
-          <p *ngIf="question.array_rep_candidat  ==  answervalue ">
-            {{ question.index_question.points }} / {{ question.index_question.points }} pts</p>
-          <p *ngIf=" question.array_rep_candidat  !=  answervalue "> 0 /
-            {{ question.index_question.points }} pts</p>
-        </div>
-        <!-- <hr class="separator" size="1"> -->
-       
-        <h5 class="subtitle_h5">Question :</h5>
-        <p> - {{ question.index_question.name }}</p>
+            <p>{{ fmtMSS(question.timeRep) }} / {{ fmtMSS(question.index_question.time) }}</p>
+            <p *ngIf="question.array_rep_candidat  ==  answervalue ">
+              {{ question.index_question.points }} / {{ question.index_question.points }} pts</p>
+            <p *ngIf=" question.array_rep_candidat  !=  answervalue "> 0 /
+              {{ question.index_question.points }} pts</p>
+          </div>
+          <!-- <hr class="separator" size="1"> -->
 
-        <h5 class="subtitle_h5">Réponse :</h5>
-          
-            <ul *ngFor="let reponse of question.index_question.content" >
-              <li [ngClass]="{'right_answer': question.array_rep_candidat == reponse &&  reponse == answervalue,
+          <h5 class="subtitle_h5">Question :</h5>
+          <p> - {{ question.index_question.name }}</p>
+
+          <h5 class="subtitle_h5">Réponse :</h5>
+
+          <ul *ngFor="let reponse of question.index_question.content">
+            <li [ngClass]="{'right_answer': question.array_rep_candidat == reponse &&  reponse == answervalue,
                'wrong_answer': question.array_rep_candidat == reponse &&  question.array_rep_candidat != answervalue}">
-                - {{ reponse }}
-              </li>
-            </ul>
+              - {{ reponse }}
+            </li>
+          </ul>
 
-        <!-- <p> - {{ question.array_rep_candidat }}</p> -->
+          <!-- <p> - {{ question.array_rep_candidat }}</p> -->
 
-        <h5 class="subtitle_h5">Résultats :</h5>
-        <div *ngIf="question.array_rep_candidat  ==  answervalue">
-        <p> <span class="right_answer">
-            Réponse correcte :</span>{{ question.index_question.theme }}</p>
-            <p>Votre réponse :  {{ question.array_rep_candidat }}</p>
-        </div>
-        <div *ngIf="question.array_rep_candidat  !=  answervalue">
-          <p class="wrong_answer">Mauvaise réponse</p>
-          <p>Votre réponse :  {{ question.array_rep_candidat }}</p>
-          <p>{{ question.index_question.answer_value.length > 1 ? 'Les réponses correctes sont' : 'La réponse correcte est'  }} : {{ question.index_question.answer_value  }}</p>
-        </div>
+          <h5 class="subtitle_h5">Résultats :</h5>
+          <div *ngIf="question.array_rep_candidat  ==  answervalue">
+            <p> <span class="right_answer">
+                Réponse correcte :</span>{{ question.index_question.theme }}</p>
+            <p>Votre réponse : {{ question.array_rep_candidat }}</p>
+          </div>
+          <div *ngIf="question.array_rep_candidat  !=  answervalue">
+            <p class="wrong_answer">Mauvaise réponse</p>
+            <p>Votre réponse : {{ question.array_rep_candidat }}</p>
+            <p>
+              {{ question.index_question.answer_value.length > 1 ? 'Les réponses correctes sont' : 'La réponse correcte est'  }}
+              : {{ question.index_question.answer_value  }}</p>
+          </div>
 
-        <hr class="separator_red" size="1">
+          <hr class="separator_red" size="1">
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+<!-- MAIN COMPONENT -->
 <div [ngSwitch]="ViewCandidats" (click)="menuChoice($event)" class="big-content roodeo-dark-theme">
   <div class="route-component">
     <div *ngSwitchCase="'CandidatFalse'" id="editQuestion">
@@ -7,7 +8,6 @@
           <h1>
             Votre campagne est prête. Il est temps d'inviter quelques candidats !
           </h1>
-
           <!-- Btn Invite -->
           <app-base-button iconName="group_add" (clickEvent)="openDialog()"><span class="text" i18n>Invitez des
               candidats
@@ -16,22 +16,17 @@
         </div>
       </div>
     </div>
-
     <div *ngSwitchCase="'CandidatTrue'" id="editQuestion">
-
       <div id="shadow-cog" [class.shadow-cog-active]="anonymizing">
         <div id="remove" (click)="setAnonymizing(false)"></div>
-
         <div class="modall">
           <div class="modall-header">
             <h3 class="modall-title" i18n>
               Options des événements
             </h3>
           </div>
-
           <div class="modall-content">
             <i class="fas fa-user-secret content-icon"></i>
-
             <h4 class="modal-content-title">Anonymiser</h4>
             <p class="content">
               Dans le cadre de la protection des données personnelles, vous êtes sur le point de procéder à
@@ -48,24 +43,20 @@
       </div>
       <div id="shadow-cog" [class.shadow-cog-active]="deletingCandidats">
         <div id="remove" (click)="setDeletingCandidats(false)"></div>
-
         <div class="modall">
           <div class="modall-header">
             <h3 class="modall-title">
               Supprimer le candidat
             </h3>
           </div>
-
           <div class="modall-content">
             <i class="fas fa-close content-icon"></i>
-
             <h4 class="modal-content-title">Supprimer</h4>
             <p class="content">
               Attention, vous êtes sur le point de supprimer ce/cette candidat(e) de votre liste.
               Dans le cadre de la protection des données personnelles, ses données seront anonymisées et vous ne pourrez
               plus accéder à ses résultats.
             </p>
-
           </div>
           <div class="modall-footer">
             <button class="btn-modal" (click)="setDeletingCandidats(false)">Annuler</button>
@@ -106,17 +97,12 @@
           </mat-form-field>
         </div>
         <!-- Btn Invite -->
-        <app-base-button iconName="group_add" (clickEvent)="openDialog()"><span class="text" i18n>Invitez
-            des
-            candidats
+        <app-base-button iconName="group_add" (clickEvent)="openDialog()"><span class="text" i18n>Invitez des candidats
           </span><span class="text" *ngIf='tests_available !==""' i18n>({{ tests_available }})</span></app-base-button>
       </div>
-
       <!-- Table -->
       <div class="table-container">
-
         <table mat-table [dataSource]="infosCandidats" matSort class="table-content">
-
           <!-- Item Column -->
           <ng-container *ngFor="let column of displayedColumns; let i = index;" [matColumnDef]="column">
             <!-- CHANGE COLUMN FOR CHECKBOX -->
@@ -135,13 +121,10 @@
                 </div>
               </td>
             </div>
-
             <div *ngIf="column === 'Details'"></div>
-
             <div *ngIf="column === 'Interview'">
               Interview
             </div>
-
             <div class="color-text">
               <div *ngIf="column === 'Candidats'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -176,7 +159,6 @@
                   </span>
                 </td>
               </div>
-
               <div *ngIf=" column !='Candidats' && column!='Dernière activité' && column!='Interview' &&
                       column!='Dernière activité' && column !='Durée' && column !='Score'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -186,46 +168,34 @@
                   {{dataInfos[column]}}
                 </td>
               </div>
-
-
               <th mat-header-cell *matHeaderCellDef mat-sort-header>
                 {{ column }}
               </th>
-
-
               <td mat-cell *matCellDef="let dataInfos">
                 {{ dataInfos[column] }}
               </td>
-
             </div>
-
-
           </ng-container>
-
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns; let dataInfos">
             <!--  (click)="menuSidenav(sidenav, dataInfos)"  -->
           </tr>
         </table>
-
         <mat-card *ngIf="isLoading" class="matcard_style">
           <mat-progress-spinner color="primary" mode="indeterminate">
           </mat-progress-spinner>
         </mat-card>
       </div>
-      <!--Table-->
+      <!--End Table-->
     </div>
-
     <!--div *ngSwitchDefault id="editQuestion">
       <div class="loading">
         <span class="fa fa-spinner fa-pulse"></span>
       </div>
     </div-->
   </div>
-
-
 </div>
-
+<!-- END MAIN COMPONENT -->
 
 <!-- SIDENAV -->
 <mat-sidenav-container class="sidenav-container">
@@ -237,7 +207,6 @@
           <i class="fa fa-close"></i>
         </span>
       </div>
-
       <h4 class="info-candidat name-rapport-detailler">
         <i class="far fa-user-circle"></i>
         {{currentCandidat.Candidats}}
@@ -246,7 +215,6 @@
       <p class="info-candidat"><i class="fas fa-poll-h"></i> Pourcentage de bonne réponses : {{currentCandidat.Score}}
       </p>
       <p class="info-candidat"><i class="far fa-clock"></i> Durée du test : {{currentCandidat.Duree}}</p>
-
       <div class="sidenav_candidat_content" *ngIf="currentCandidat.points">
         <div class="sidenav_candidat_result"
           *ngFor="let candidatPointTechno of currentCandidat.points[2].getpourcentByCandidat">
@@ -263,13 +231,11 @@
             {{candidatPointTechno.percentage}} %
           </p>
         </div>
-
         <div class="sidenav_candidat_result">
           <p class="sidenav_candidat_text" i18n>Total :</p>
           <p class="sidenav_candidat_score">{{currentCandidat.Score}} </p>
         </div>
       </div>
-
       <div class="margin-top-md">
         <app-base-button iconName="remove_red_eye" class="margin-right-md"
           [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats', currentCandidat.candidat_id,'rapport-detaille']">
@@ -281,6 +247,5 @@
       </div>
     </div>
   </mat-sidenav>
-
-
 </mat-sidenav-container>
+<!-- END SIDENAV -->
