@@ -60,6 +60,13 @@ module.exports = {
    * @return {Object}
    */
 
+   /** 
+    * 
+    UPDATE wp_options SET option_value = replace(option_value, 'http://feller-service.svprodlab.ovh/', 'http://ec2-15-236-205-29.eu-west-3.compute.amazonaws.com') WHERE option_name = 'home' OR option_name = 'siteurl';
+    UPDATE wp_posts SET guid = replace(guid, 'http://feller-service.svprodlab.ovh/','http://ec2-15-236-205-29.eu-west-3.compute.amazonaws.com');
+    UPDATE wp_posts SET post_content = replace(post_content, 'http://feller-service.svprodlab.ovh', 'http://ec2-15-236-205-29.eu-west-3.compute.amazonaws.com');
+    */
+
   create: async (ctx) => {
     // console.log("ctx.request.body", ctx.request.body);
     // console.log(strapi.services.campaign);
