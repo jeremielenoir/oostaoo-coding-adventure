@@ -5,15 +5,6 @@
 //    flex: 1;
 //   }
 
-.flex {
-  display: flex;
-}
-
-.flex1 {
-  display: flex;
-  flex: 1;
-}
-
 ::ng-deep app-candidats {
   flex: 1;
 }
@@ -374,17 +365,25 @@ tr.mat-row {
       color: $color-principal-blue;
     }
     .close-header-detail {
-      font-size: 22px;
-      width: 40px;
-      height: 40px;
-      display: inline-block;
-      border-radius: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: $color-white;
-      background-color: $color-principal-blue;
+      color: mat-color($roodeo-app-warn); // WIP SL
+      margin-top: 0px;
       cursor: pointer;
+
+      span{
+        color: mat-color($roodeo-app-warn); // WIP SL
+      }
+      // font-size: 22px;
+      // width: 40px;
+      // height: 40px;
+      // display: inline-block;
+      // border-radius: 50px;
+      // display: flex;
+      // justify-content: center;
+      // align-items: center;
+      // color: mat-color($roodeo-app-warn); // WIP SL
+      // WIP SL color: $color-white;
+      // WIP SL background-color: $color-principal-blue;
+      // cursor: pointer;
     }
   }
 }
@@ -420,17 +419,6 @@ tr.mat-row {
 .sidenav_candidat_score {
   font-size: 1.8em;
   color: $color-orange;
-}
-
-.button-rapport {
-  border: 1px solid black;
-  border-radius: 0px;
-  background: $color-principal-blue;
-  width: 40%;
-  height: 50px;
-  margin: 60px 20px 20px 20px;
-  outline: 0;
-  color: $color-white;
 }
 
 // /SIDENAV

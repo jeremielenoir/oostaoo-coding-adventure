@@ -21,12 +21,7 @@ const moment = _rollupMoment || _moment;
     // here, due to limitations of our example generation script.
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-
-
-
-
     { provide: MAT_DATE_LOCALE, useValue: 'ja-JP' },
-
     // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
     // `MatMomentDateModule` in your applications root module. We provide it at the component level
     // here, due to limitations of our example generation script.
@@ -39,8 +34,6 @@ const moment = _rollupMoment || _moment;
   ],
 })
 export class InterviewDialogComponent implements OnInit {
-
-
   public interview: any;
   populateForm: FormGroup;
   submittedForm = false;
@@ -74,10 +67,6 @@ export class InterviewDialogComponent implements OnInit {
       default: this._adapter.setLocale('fr'); break;
     };
   }
-
-
-
-
 
   close() {
     this.dialogRef.close()
@@ -177,21 +166,19 @@ export class InterviewDialogComponent implements OnInit {
 
     }
     else {
-
-
       this.htmlContent = `
-      <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.data.Candidats},</span><br>
-      </div><br /><br />
-      <div>Votre candidature a retenu notre attention suite aux résultats des tests techniques.</div><div>Dans le cadre de notre processus
-      de recrutement, nous avons le plaisir de vous inviter à passer un entretien vidéo conférence 
-     <<entretien_date>>
-      </div>
-     <div>
-      <a href="${this.interview_link}"  target="_blank" style="font-size: 1rem;">
-     lien de la vidéoconférence</a></div>
-      <div><br></div><div><br></div>
-      <div>Bonne chance !</div><div>Cordialement </div>
-   `;
+          <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.data.Candidats},</span><br>
+          </div><br /><br />
+          <div>Votre candidature a retenu notre attention suite aux résultats des tests techniques.</div><div>Dans le cadre de notre processus
+          de recrutement, nous avons le plaisir de vous inviter à passer un entretien vidéo conférence 
+        <<entretien_date>>
+          </div>
+        <div>
+          <a href="${this.interview_link}"  target="_blank" style="font-size: 1rem;">
+        lien de la vidéoconférence</a></div>
+          <div><br></div><div><br></div>
+          <div>Bonne chance !</div><div>Cordialement </div>
+      `;
       this.populateForm = this.formBuilder.group({
         interview_date: ['', Validators.required],
         time: ['', Validators.required],
@@ -201,7 +188,6 @@ export class InterviewDialogComponent implements OnInit {
         interview_link: [this.interview_link, Validators.required]
 
       });
-
     }
 
     /* 
@@ -254,7 +240,6 @@ export class InterviewDialogComponent implements OnInit {
           console.log("error updating interview", e)
         })
     } else {
-
       const apiURL = API_URI_INTERVIEWS;
       let interview_date = moment(this.pctrl.interview_date.value);
       const [hour, minute] = this.pctrl.time.value.split(":");
@@ -277,23 +262,19 @@ export class InterviewDialogComponent implements OnInit {
         .toPromise()
         .then(() => {
           this.close()
-
         }
         ).catch(e => {
           this.loading = false;
           console.log("error creating interview", e)
         })
-
     }
-
   }
 
 
   remove() {
     if (this.data && this.data.Interview && this.data.Interview.id) {
 
-      const id = this.data.Interview.id
-
+      const id = this.data.Interview.id;
 
       const apiURL = API_URI_INTERVIEWS + "-cancel";
       if (window.confirm()) {
@@ -309,14 +290,14 @@ export class InterviewDialogComponent implements OnInit {
           ` à la date du ${moment(this.pctrl.interview_date.value).format('DD/MM/YYYY')}   ${this.pctrl.time.value}`
           : ''
         const email_content = `
-        <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.data.Candidats},</span><br>
-        </div><div><span style="background-color: transparent; font-size: 1rem;"><br></span></div>
-        <div>Votre entretien vidéo , ${date}, a été annulé</div> 
-       <div>
-        
-        <div><br></div><div><br></div>
-        <div>Bonne chance !</div><div>Cordialement </div>
-     `;
+            <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.data.Candidats},</span><br>
+            </div><div><span style="background-color: transparent; font-size: 1rem;"><br></span></div>
+            <div>Votre entretien vidéo , ${date}, a été annulé</div> 
+          <div>
+            
+            <div><br></div><div><br></div>
+            <div>Bonne chance !</div><div>Cordialement </div>
+        `;
         const data: any = {
           id,
           interview_date,
@@ -341,9 +322,6 @@ export class InterviewDialogComponent implements OnInit {
           })
       }
     }
-
-
     return
   }
-
 }

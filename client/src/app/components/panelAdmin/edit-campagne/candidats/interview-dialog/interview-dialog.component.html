@@ -1,40 +1,34 @@
 <div class="modal-candidat">
-
   <div class="close-invite-dialog">
     <span (click)="close()"> <i class="fa fa-times" aria-hidden="true"></i></span>
   </div>
-
   <header class="header-question">
     <div class="info-campaign-candidats">
       <h2 i18n>Planification entretien vidéo</h2>
     </div>
   </header>
-
   <div class="content-modal-question">
-
     <div class="loading-container" *ngIf="!populateForm||loading">
       <mat-progress-bar mode="indeterminate">
       </mat-progress-bar>
     </div>
     <div class="cologne-form" *ngIf="populateForm">
       <form [formGroup]="populateForm">
-
-
         <div class="candidat-presentation">
-          <span i18n>entretien avec</span> : <span>{{populateForm.controls['name'].value}} </span><br />
-          <span i18n>adresse email </span>: <span>{{populateForm.controls['email'].value}}</span>
+          <span i18n>entretien avec</span> : <span>{{populateForm.controls['name'].value}}</span>
+          <br />
+          <span i18n>adresse email</span> : <span>{{populateForm.controls['email'].value}}</span>
         </div>
-
         <div class="card-body">
           <mat-form-field appearance="outline" [color]="'accent'">
             <mat-label i18n>Choisir une date pour l'entretien</mat-label>
-            <input formControlName="interview_date" matInput [matDatepicker]="picker" [min]="currentDate">
+            <input formControlName="interview_date" matInput [matDatepicker]="picker" [min]="currentDate"
+              placeholder="jj/mm/aaaa">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="interview_date.invalid && (interview_date.dirty || interview_date.touched)">champs requis
             </mat-error>
           </mat-form-field>
-
         </div>
         <div class="card-body">
           <mat-form-field appearance="outline" [color]="'accent'">
@@ -47,28 +41,21 @@
             <mat-error *ngIf="time.invalid && (time.dirty || time.touched)" i18n>champs requis</mat-error>
           </mat-form-field>
         </div>
-
         <div [class.message-personaliser-form]="show">
           <label i18n>Message :</label>
           <ckeditor [editor]="Editor" formControlName="htmlContent" *ngIf="show"></ckeditor>
           <div *ngIf="!show" [innerHTML]="htmlContent" class="htmlContent"></div>
         </div>
-
-
         <div class="block-button roodeo-dark-theme">
           <button mat-raised-button [color]="'primary'" [disabled]="!populateForm.valid||loading" (click)="save()" i18n>
             Envoyer email
           </button>
-          <button [disabled]="!populateForm.valid||loading" class="cancel-button"
-            *ngIf="data && data.Interview && data.Interview.id" mat-raised-button [color]="'accent'"
-            [disabled]="!populateForm.valid" (click)="remove()" i18n>
+          <button [disabled]="loading" class="cancel-button" *ngIf="data && data.Interview && data.Interview.id"
+            mat-raised-button [color]="'accent'" [disabled]="!populateForm.valid" (click)="remove()" i18n>
             Annuler l'entretien
           </button>
         </div>
-
       </form>
     </div>
-
-
   </div>
 </div>

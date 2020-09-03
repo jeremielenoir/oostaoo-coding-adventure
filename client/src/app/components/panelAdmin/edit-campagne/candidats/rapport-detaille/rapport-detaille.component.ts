@@ -52,11 +52,14 @@ export class RapportDetailleComponent implements OnInit {
     this.apiClientService
       .get(API_URI_CANDIDATS + "/" + this.idCandidat)
       .subscribe((data) => {
-        
+
         this.candidat = data;
-        const percentArray = data.points_candidat[2][
-          "getpourcentByCandidat"
-        ].map((a) => a.percentage);
+
+        if (!data.points_candidat) {
+          return;
+        }
+
+        const percentArray = data.points_candidat[2]["getpourcentByCandidat"].map((a) => a.percentage);
 
         const sumPercent = percentArray.reduce((a, b) => parseFloat(a + b));
 
