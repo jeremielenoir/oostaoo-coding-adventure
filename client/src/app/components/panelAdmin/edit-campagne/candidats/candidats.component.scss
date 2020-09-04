@@ -289,12 +289,14 @@ tr.mat-row {
   display: flex;
   overflow-y: auto;
   overflow-x: hidden;
+  box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4), -3px -4px 8px -2px rgba(124, 151, 166, 0.69);
   
   .table-content {
     border-radius: $border-radius;
     border: $border-table;
     width: 100%;
     overflow: hidden;
+    
 
     &::-webkit-scrollbar {
       width: 8px;
