@@ -28,8 +28,7 @@
                 </div>
               </div>
             </div> -->
-            <mat-form-field [color]="'accent'" appearance="outline"  [formGroup]="formUtilisateur"
-            class="fullwidth">
+            <mat-form-field [color]="'accent'" appearance="outline"  [formGroup]="formUtilisateur" [floatLabel]="true" class="fullwidth">
             <mat-label i18n>Prénom *</mat-label>
             <input type="text" formControlName="firstName" matInput value="" name="firstName" />
           </mat-form-field>
@@ -403,7 +402,8 @@
             <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateur"
             class="fullwidth100">
             <mat-label i18n>Nouveau mot de passe *</mat-label>
-            <input  type="password" formControlName="newPassword" matInput value="" name="newPassword" />
+            <input [type]="hide ? 'password' : 'text'" formControlName="newPassword" matInput name="newPassword" />
+            <mat-hint *ngIf="formUser.newPassword.errors.minlength" class="error-red">Password must be at least 6 characters</mat-hint>
           </mat-form-field>
           </div>
 
@@ -424,7 +424,9 @@
             <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateur"
             class="fullwidth100">
             <mat-label i18n>Confirmer le mot de passe *</mat-label>
-            <input  type="password" formControlName="confirmPassword" matInput value="" name="confirmPassword" />
+            <input  [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" matInput name="confirmPassword" />
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-hint *ngIf="formUser.confirmPassword.errors.mustMatch" class="error-red">Passwords must match</mat-hint>
           </mat-form-field>
           </div>
 

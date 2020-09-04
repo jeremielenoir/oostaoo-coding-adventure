@@ -8,6 +8,7 @@ import {
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 import { MatSnackBar } from "@angular/material";
 import { Router } from "@angular/router";
+import { MustMatch } from './must-match.validator';
 // import { Snapper } from 'igniteui-angular-charts';
 
 @Component({
@@ -18,27 +19,9 @@ import { Router } from "@angular/router";
 export class ProfilUtilisateurComponent implements OnInit {
   formUtilisateur: FormGroup;
 
-  constructor(
-    public apiClientService: ApiClientService, public decryptTokenService: DecryptTokenService, private router: Router,
-    private _snackBar: MatSnackBar, private formBuilder: FormBuilder ) {
-      this.formUtilisateur = this.formBuilder.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        country: ['', Validators.required],
-        language: ['', Validators.required],
-        phone: [''],
-        telephone: [''],
-        office: [''],
-        signature: [''],
-        email: ['', [Validators.required, Validators.email]],
-        newEmail: ['', [Validators.required, Validators.email]],
-        newPassword: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
-    }, {
-        // validator: MustMatch('password', 'confirmPassword')
-    });
-    }
-
+  constructor( public apiClientService: ApiClientService, public decryptTokenService: DecryptTokenService, private router: Router,
+    private _snackBar: MatSnackBar, private formBuilder: FormBuilder ){ }
+  hide = true;
   isOwnerOfPersonalAccount = false;
   accountConvertInProgress = false;
 
@@ -61,11 +44,28 @@ export class ProfilUtilisateurComponent implements OnInit {
   signature = new FormControl("", Validators.required);
   email = new FormControl("", [Validators.required, Validators.email]);
   newEmail = new FormControl("", [Validators.required, Validators.email]);
-  password = new FormControl("", Validators.required);
-  newpassword = new FormControl("", Validators.required);
+  password = new FormControl("", [Validators.required, Validators.minLength(6)]);
+  newpassword = new FormControl("", [Validators.required, Validators.minLength(6)]);
   confirmpassword = new FormControl("", Validators.required);
 
   ngOnInit() {
+    this.formUtilisateur = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      country: ['', Validators.required],
+      language: ['', Validators.required],
+      phone: [''],
+      telephone: [''],
+      office: [''],
+      signature: [''],
+      email: ['', [Validators.required, Validators.email]],
+      newEmail: ['', [Validators.required, Validators.email]],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+  }, {
+      validator: MustMatch('newPassword', 'confirmPassword')
+  });
+  
     this.getUser().then((user) => {
       this.user = user[0];
       this.isOwnerOfPersonalAccount =
@@ -86,6 +86,9 @@ export class ProfilUtilisateurComponent implements OnInit {
       // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
     });
   }
+
+   // convenience getter for easy access to form fields
+   get formUser() { return this.formUtilisateur.controls; }
 
   /**
    *
