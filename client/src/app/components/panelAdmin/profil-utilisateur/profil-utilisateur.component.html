@@ -403,7 +403,8 @@
             class="fullwidth100">
             <mat-label i18n>Nouveau mot de passe *</mat-label>
             <input [type]="hide ? 'password' : 'text'" formControlName="newPassword" matInput name="newPassword" />
-            <mat-hint *ngIf="formUser.newPassword.errors.minlength" class="error-red">Password must be at least 6 characters</mat-hint>
+            <mat-hint *ngIf="formUtilisateur.get('newPassword').errors?.minlength" class="error-red" i18n>
+              Le mot de passe doit être au moins de 6 caractères</mat-hint>
           </mat-form-field>
           </div>
 
@@ -426,7 +427,7 @@
             <mat-label i18n>Confirmer le mot de passe *</mat-label>
             <input  [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" matInput name="confirmPassword" />
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            <mat-hint *ngIf="formUser.confirmPassword.errors.mustMatch" class="error-red">Passwords must match</mat-hint>
+            <mat-hint *ngIf="formUtilisateur.get('confirmPassword').errors?.mustMatch" class="error-red" i18n>Les mots de passe doivent correspondre</mat-hint>
           </mat-form-field>
           </div>
 

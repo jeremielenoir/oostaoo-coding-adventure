@@ -61,7 +61,7 @@ export class ProfilUtilisateurComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       newEmail: ['', [Validators.required, Validators.email]],
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+      confirmPassword: ['', Validators.required]
   }, {
       validator: MustMatch('newPassword', 'confirmPassword')
   });
@@ -86,9 +86,6 @@ export class ProfilUtilisateurComponent implements OnInit {
       // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
     });
   }
-
-   // convenience getter for easy access to form fields
-   get formUser() { return this.formUtilisateur.controls; }
 
   /**
    *
