@@ -16,9 +16,10 @@
           <h2 class="title">Profil</h2>
         </div>
 
+
         <form action="">
-          <div class="form-line">
-            <div class="input-bloc">
+          <div class="form-line fix-top">
+            <!-- <div class="input-bloc">
               <h3 class="input-title">Prénom *</h3>
               <input name="firstname" [formControl]="prenom" class="input-section1" maxlength="24" type="text" required>
               <div *ngIf=" submittedProfil && prenom.invalid" class="alert alert-danger">
@@ -26,9 +27,13 @@
                   Prénom requis.
                 </div>
               </div>
-            </div>
+            </div> -->
+            <mat-form-field [color]="'accent'" appearance="outline"  [formGroup]="formUtilisateur" [floatLabel]="true" class="fullwidth">
+            <mat-label i18n>Prénom *</mat-label>
+            <input type="text" formControlName="firstName" matInput value="" name="firstName" />
+          </mat-form-field>
 
-            <div class="input-bloc">
+            <!-- <div class="input-bloc">
               <h3 class="input-title" maxlength="64">Nom *</h3>
               <input name="lastname" [formControl]="nom" class="input-section1" type="text" required>
               <div *ngIf="submittedProfil && nom.invalid" class="alert alert-danger">
@@ -36,11 +41,16 @@
                   Nom requis.
                 </div>
               </div>
-            </div>
+            </div> -->
+            <mat-form-field [color]="'accent'" appearance="outline"  [formGroup]="formUtilisateur"
+            class="fullwidth">
+            <mat-label i18n>Nom *</mat-label>
+            <input type="text" formControlName="lastName" matInput value="" name="lastName" />
+          </mat-form-field>
           </div>
 
           <div class="form-line">
-            <div class="input-bloc">
+            <!-- <div class="input-bloc">
               <h3 class="input-title">Pays *</h3>
               <select [formControl]="pays" class="input-section1" name="pays" required>
                 <option value="Afrikanns">Afrikanns</option>
@@ -116,47 +126,143 @@
                 <option value="Welsh">Welsh</option>
                 <option value="Xhosa">Xhosa</option>
               </select>
-
               <div *ngIf=" submittedProfil && pays.invalid" class="alert alert-danger">
                 <div *ngIf="pays.errors.required">
                   Veuillez selectionner un pays.
                 </div>
               </div>
+            </div> -->
 
-            </div>
+            <mat-form-field  [formGroup]="formUtilisateur" appearance="outline" [color]="'accent'" class="fullwidth">
+              <mat-label i18n>Pays *</mat-label>
+              <mat-select name="country" class="mat-primary" formControlName="country">
+                <mat-option value="Afrikanns">Afrikanns</mat-option>
+                <mat-option value="Albanian">Albanian</mat-option>
+                <mat-option value="Arabic">Arabic</mat-option>
+                <mat-option value="Armenian">Armenian</mat-option>
+                <mat-option value="Basque">Basque</mat-option>
+                <mat-option value="Bengali">Bengali</mat-option>
+                <mat-option value="Bulgarian">Bulgarian</mat-option>
+                <mat-option value="Catalan">Catalan</mat-option>
+                <mat-option value="Cambodian">Cambodian</mat-option>
+                <mat-option value="Chinese (Mandarin)">Chinese (Mandarin)</mat-option>
+                <mat-option value="Croation">Croation</mat-option>
+                <mat-option value="Czech">Czech</mat-option>
+                <mat-option value="Danish">Danish</mat-option>
+                <mat-option value="Dutch">Dutch</mat-option>
+                <mat-option value="English">English</mat-option>
+                <mat-option value="Estonian">Estonian</mat-option>
+                <mat-option value="Fiji">Fiji</mat-option>
+                <mat-option value="Finnish">Finnish</mat-option>
+                <mat-option value="France">France</mat-option>
+                <mat-option value="Georgian">Georgian</mat-option>
+                <mat-option value="German">German</mat-option>
+                <mat-option value="Greek">Greek</mat-option>
+                <mat-option value="Gujarati">Gujarati</mat-option>
+                <mat-option value="Hebrew">Hebrew</mat-option>
+                <mat-option value="Hindi">Hindi</mat-option>
+                <mat-option value="Hungarian">Hungarian</mat-option>
+                <mat-option value="Icelandic">Icelandic</mat-option>
+                <mat-option value="Indonesian">Indonesian</mat-option>
+                <mat-option value="Irish">Irish</mat-option>
+                <mat-option value="Italian">Italian</mat-option>
+                <mat-option value="Japanese">Japanese</mat-option>
+                <mat-option value="Javanese">Javanese</mat-option>
+                <mat-option value="Korean">Korean</mat-option>
+                <mat-option value="Latin">Latin</mat-option>
+                <mat-option value="Latvian">Latvian</mat-option>
+                <mat-option value="Lithuanian">Lithuanian</mat-option>
+                <mat-option value="Macedonian">Macedonian</mat-option>
+                <mat-option value="Malay">Malay</mat-option>
+                <mat-option value="Malayalam">Malayalam</mat-option>
+                <mat-option value="Maltese">Maltese</mat-option>
+                <mat-option value="Maori">Maori</mat-option>
+                <mat-option value="Marathi">Marathi</mat-option>
+                <mat-option value="Mongolian">Mongolian</mat-option>
+                <mat-option value="Nepali">Nepali</mat-option>
+                <mat-option value="Norwegian">Norwegian</mat-option>
+                <mat-option value="Persian">Persian</mat-option>
+                <mat-option value="Polish">Polish</mat-option>
+                <mat-option value="Portuguese">Portuguese</mat-option>
+                <mat-option value="Punjabi">Punjabi</mat-option>
+                <mat-option value="Quechua">Quechua</mat-option>
+                <mat-option value="Romanian">Romanian</mat-option>
+                <mat-option value="Russian">Russian</mat-option>
+                <mat-option value="Samoan">Samoan</mat-option>
+                <mat-option value="Serbian">Serbian</mat-option>
+                <mat-option value="Slovak">Slovak</mat-option>
+                <mat-option value="Slovenian">Slovenian</mat-option>
+                <mat-option value="Spanish">Spanish</mat-option>
+                <mat-option value="Swahili">Swahili</mat-option>
+                <mat-option value="Swedish ">Swedish </mat-option>
+                <mat-option value="Tamil">Tamil</mat-option>
+                <mat-option value="Tatar">Tatar</mat-option>
+                <mat-option value="Telugu">Telugu</mat-option>
+                <mat-option value="Thai">Thai</mat-option>
+                <mat-option value="Tibetan">Tibetan</mat-option>
+                <mat-option value="Tonga">Tonga</mat-option>
+                <mat-option value="Turkish">Turkish</mat-option>
+                <mat-option value="Ukranian">Ukranian</mat-option>
+                <mat-option value="Urdu">Urdu</mat-option>
+                <mat-option value="Uzbek">Uzbek</mat-option>
+                <mat-option value="Vietnamese">Vietnamese</mat-option>
+                <mat-option value="Welsh">Welsh</mat-option>
+                <mat-option value="Xhosa">Xhosa</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-            <div class="input-bloc">
+            <!-- <div class="input-bloc">
               <h3 class="input-title">Langue *</h3>
               <select [formControl]="langue" class="input-section1" name="langue" required>
                 <option value="Anglais">Anglais</option>
                 <option value="Francais">Français</option>
               </select>
-            </div>
-
-            <div *ngIf=" submittedProfil && langue.invalid" class="alert alert-danger">
+            </div> -->
+             <!-- <div *ngIf=" submittedProfil && langue.invalid" class="alert alert-danger">
               <div *ngIf="langue.errors.required">
                 Veuillez selectionner une langue.
               </div>
-            </div>
+            </div> -->
+
+            <mat-form-field [formGroup]="formUtilisateur" appearance="outline" [color]="'accent'" class="fullwidth">
+              <mat-label i18n>Langue *</mat-label>
+              <mat-select name="language" class="mat-primary" formControlName="language">
+                <mat-option value="Anglais">Anglais</mat-option>
+                <mat-option value="Francais">Français</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
 
 
           <div class="form-line">
-            <div class="input-bloc">
+
+            <mat-form-field [color]="'accent'" appearance="outline"  [formGroup]="formUtilisateur"
+            class="fullwidth">
+            <mat-label i18n> N° de téléphone </mat-label>
+            <input  type="text" formControlName="phone" matInput value="" name="phone" />
+          </mat-form-field>
+
+            <!-- <div class="input-bloc">
               <h3 class="input-title">N° de téléphone</h3>
               <input [formControl]="tel" name="phone" class="input-section1" maxlength="32" type="tel">
-            </div>
+            </div> -->
 
-            <div class="input-bloc">
+            <mat-form-field [color]="'accent'" appearance="outline"  [formGroup]="formUtilisateur"
+            class="fullwidth">
+            <mat-label i18n> N° mobile </mat-label>
+            <input  type="text" formControlName="telephone" matInput value="" name="telephone" />
+          </mat-form-field>
+
+            <!-- <div class="input-bloc">
               <h3 class="input-title">N° de portable</h3>
               <input [formControl]="mobile" name="mobile" class="input-section1" maxlength="32" type="tel">
-            </div>
-          </div>
+            </div> -->
+          </div> 
 
 
 
           <div class="form-line">
-            <div class="input-bloc">
+            <!-- <div class="input-bloc">
               <h3 class="input-title">Fonction </h3>
               <select [formControl]="fonction" class="input-section1" name="fonction">
                 <option value="commercial">Commercial</option>
@@ -166,7 +272,18 @@
                 <option value="rh">Ressources humaines</option>
                 <option value="other">Autre</option>
               </select>
-            </div>
+            </div> -->
+            <mat-form-field [formGroup]="formUtilisateur" appearance="outline" [color]="'accent'" class="fullwidth100">
+              <mat-label i18n>Fonction</mat-label>
+              <mat-select name="office" class="mat-primary" formControlName="office">
+                <mat-option value="commercial">Commercial</mat-option>
+                <mat-option value="direction">Direction</mat-option>
+                <mat-option value="tech">Équipe technique</mat-option>
+                <mat-option value="marketing">Marketing/Communication</mat-option>
+                <mat-option value="rh">Ressources humaines</mat-option>
+                <mat-option value="other">Autre</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
 
           <div class="form-line">
@@ -189,9 +306,12 @@
         <form action="">
           <div class="form-line">
             <div class="input-bloc">
-
-              <textarea class="input-section1 input-section1-textarea" [formControl]="signature" name="signature"
-                id="signature"></textarea>
+              <mat-form-field [formGroup]="formUtilisateur" appearance="outline" [color]="'accent'" class="fullwidth100">
+                <mat-label i18n>Signature</mat-label>
+                <textarea matTextareaAutosize matAutosizeMinRows="16" matAutosizeMaxRows="20" formControlName="signature" matInput></textarea>
+              </mat-form-field>
+              <!-- <textarea class="input-section1 input-section1-textarea" [formControl]="signature" name="signature"
+                id="signature"></textarea> -->
               <button (click)='updatesignature()' class="btn-submit" type="submit">Enregistrer</button>
             </div>
           </div>
@@ -211,8 +331,8 @@
 
         <form action="">
 
-          <div class="form-line">
-            <div class="input-bloc">
+          <div class="form-line fix-top">
+            <!-- <div class="input-bloc">
               <h3 class="input-title">Email actuel *</h3>
               <input [formControl]="email" name="current" class="input-section1" maxlength="64" type="email" disabled>
               <div *ngIf=" submittedEmail && email.invalid" class="alert alert-danger">
@@ -223,11 +343,16 @@
                   Email valide requis.
                 </div>
               </div>
-            </div>
+            </div> -->
+            <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateur"
+            class="fullwidth100">
+            <mat-label i18n> Email actuel * </mat-label>
+            <input  type="email" formControlName="email" matInput value="" name="email" disabled />
+          </mat-form-field>
           </div>
 
           <div class="form-line">
-            <div class="input-bloc">
+            <!-- <div class="input-bloc">
               <h3 class="input-title">Nouvel email *</h3>
               <input [formControl]="newEmail" name="new" class="input-section1" maxlength="64" type="email">
               <div *ngIf=" submittedEmail && newEmail.invalid" class="alert alert-danger">
@@ -238,7 +363,12 @@
                   Veuillez saisir un email valide.
                 </div>
               </div>
-            </div>
+            </div> -->
+            <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateur"
+            class="fullwidth100">
+            <mat-label i18n> Nouvel email * </mat-label>
+            <input  type="email" formControlName="newEmail" matInput value="" name="newEmail" />
+          </mat-form-field>
           </div>
 
           <div class="form-line">
@@ -259,8 +389,8 @@
 
         <form action="">
 
-          <div class="form-line">
-            <div class="input-bloc">
+          <div class="form-line fix-top">
+            <!-- <div class="input-bloc">
               <h3 class="input-title">Nouveau mot de passe *</h3>
               <input [formControl]="newpassword" name="new" class="input-section1" maxlength="64" type="password">
               <div *ngIf="submittedPassword && newpassword.invalid" class="alert alert-danger">
@@ -268,29 +398,37 @@
                   Veuillez saisir un nouveau mot de passe.
                 </div>
               </div>
-            </div>
-
+            </div> -->
+            <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateur"
+            class="fullwidth100">
+            <mat-label i18n>Nouveau mot de passe *</mat-label>
+            <input [type]="hide ? 'password' : 'text'" formControlName="newPassword" matInput name="newPassword" />
+            <mat-hint *ngIf="formUtilisateur.get('newPassword').errors?.minlength" class="error-red" i18n>
+              Le mot de passe doit être au moins de 6 caractères</mat-hint>
+          </mat-form-field>
           </div>
 
           <div class="form-line">
-            <div class="input-bloc">
+            <!-- <div class="input-bloc">
               <h3 class="input-title">Confirmer le mot de passe *</h3>
               <input [formControl]="confirmpassword" name="confirm" class="input-section1" maxlength="64"
                 type="password">
-
               <div *ngIf=" submittedPassword && confirmpassword.invalid" class="alert alert-danger">
                 <div *ngIf="confirmpassword.errors.required">
                   Veuillez remplir le champ.
                 </div>
               </div>
-
               <div *ngIf=" submittedPassword && newpassword.value !== confirmpassword.value" class="alert alert-danger">
                 Les mots de passe ne correspondent pas.
               </div>
-
-
-
-            </div>
+            </div> -->
+            <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateur"
+            class="fullwidth100">
+            <mat-label i18n>Confirmer le mot de passe *</mat-label>
+            <input  [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" matInput name="confirmPassword" />
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-hint *ngIf="formUtilisateur.get('confirmPassword').errors?.mustMatch" class="error-red" i18n>Les mots de passe doivent correspondre</mat-hint>
+          </mat-form-field>
           </div>
 
 

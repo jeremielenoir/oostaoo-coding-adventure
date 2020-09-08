@@ -65,8 +65,20 @@
 
         .form-line{
             display: flex;
-
+            justify-content: space-around;
+            &.fix-top{
+                margin-top: 10px;
+            }
+            .fullwidth{
+                width: 45%;
+            }
+            .fullwidth100{
+                width: 95%;
+            }
             .input-bloc{
+                .fullwidth100{
+                    width: 100%;
+                }
                 flex: 1;
                 margin: 20px 20px 18px 20px;
 
@@ -161,3 +173,6 @@
 }
 
 
+.error-red{
+    color: red;
+}
