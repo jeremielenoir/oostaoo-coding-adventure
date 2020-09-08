@@ -1,39 +1,38 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { API_URI_CAMPAIGNS, ApiClientService, API_URI_CANDIDATS } from '../../../api-client/api-client.service';
+import { Component, ElementRef, OnInit, ViewChild  } from "@angular/core";
+import { ActivatedRoute, Router  } from "@angular/router";
+import { API_URI_CAMPAIGNS,  API_URI_CANDIDATS, ApiClientService} from "../../../api-client/api-client.service";
 
 @Component({
-  selector: 'app-client-test',
-  templateUrl: './client-test.component.html',
-  styleUrls: ['./client-test.component.scss']
+  selector: "app-client-test",
+  styleUrls: ["./client-test.component.scss"],
+  templateUrl: "./client-test.component.html",
 })
 
 export class ClientTestComponent implements OnInit {
   public idParam: string;
   public checkedBoolean: boolean;
   public ActiveTest: boolean;
-  public StatueTestingQuestion = 'eval';
+  public StatueTestingQuestion = "eval";
   public candidat: string;
   public dateOpenTest: any;
   public nbQuestion: number;
   public durationTotalTest: number;
   public durationMaxTest: number;
 
-
-  @ViewChild('btnchecked') btnchecked: ElementRef;
-  idCampaign: any;
-  questionCampaign = [];
-  technoCampaign = [];
+  @ViewChild("btnchecked") public btnchecked: ElementRef;
+  public idCampaign: any;
+  public questionCampaign = [];
+  public technoCampaign = [];
 
   constructor(private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router) {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.idParam = params.id;
     });
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.dateOpenTest = new Date().toISOString();
-    console.log('this.idParam : ', this.idParam);
+    console.log("this.idParam : ", this.idParam);
     this.getCandidats();
   }
 
@@ -46,34 +45,31 @@ export class ClientTestComponent implements OnInit {
     }
   }
 
-  hundleActiveTest() {
+  public hundleActiveTest() {
     this.ActiveTest = true;
-    //console.log('state', this.ActiveTest);
+    //console.log("state", this.ActiveTest);
   }
 
-  NohundleActiveTest() {
+  public NohundleActiveTest() {
     this.ActiveTest = false;
   }
 
-  HundleStatueTestingQuestion() {
-    this.StatueTestingQuestion = 'testing';
+  public HundleStatueTestingQuestion() {
+    this.StatueTestingQuestion = "testing";
   }
 
-  getCandidats() {
-    this.apiClientService.get(`${API_URI_CANDIDATS}?token=${this.idParam}`).toPromise().then(res => {
+  public getCandidats() {
+    this.apiClientService.get(`${API_URI_CANDIDATS}?token=${this.idParam}`).toPromise().then((res) => {
       for (const candidat of res) {
           this.candidat = candidat;
-          console.log('candidat this.candidat', this.candidat);
-          
-          if (candidat.test_terminer !== '0000-00-00 00:00:00') {
-            this.StatueTestingQuestion = 'fin';
-            return this.router.navigate(['/home']);
+          console.log("candidat this.candidat", this.candidat);
+          if (candidat.test_terminer !== "0000-00-00 00:00:00") {
+            this.StatueTestingQuestion = "fin";
+            return this.router.navigate(["/home"]);
           }
-          
           this.idCampaign = candidat.campaign.id;
           this.postOpenTimeTest(this.dateOpenTest, candidat.id);
-          
-          this.apiClientService.get(API_URI_CAMPAIGNS + '/' + this.idCampaign).toPromise().then(res1 => {
+          this.apiClientService.get(API_URI_CAMPAIGNS + "/" + this.idCampaign).toPromise().then((res1) => {
             this.nbQuestion = res1.questions.length;
             let secondTime = 0;
             for (const question of res1.questions) {
@@ -83,10 +79,10 @@ export class ClientTestComponent implements OnInit {
             this.durationMaxTest = this.durationTotalTest + 10;
             this.questionCampaign = [...res1.questions];
             this.technoCampaign = [...res1.technologies];
-            // console.log('this.questionCampaign: ', this.questionCampaign);
-            // console.log('this.technoCampaign: ', this.technoCampaign);
+            // console.log("this.questionCampaign: ", this.questionCampaign);
+            // console.log("this.technoCampaign: ", this.technoCampaign);
           });
-          /*return this.router.navigate(['/evaluate'], {
+          /*return this.router.navigate(["/evaluate"], {
             queryParams: {
               id: this.idParam
             }
@@ -96,14 +92,14 @@ export class ClientTestComponent implements OnInit {
     });
   }
 
-  postOpenTimeTest(dateOpen, candidat): Promise<any> {
-    return this.apiClientService.put(API_URI_CANDIDATS + '/' + candidat, {
-      test_ouvert: dateOpen
-    }).toPromise().then(res => {
-      console.log('candidat', res);
+  public postOpenTimeTest(dateOpen, candidat): Promise<any> {
+    return this.apiClientService.put(API_URI_CANDIDATS + "/" + candidat, {
+      test_ouvert: dateOpen,
+    }).toPromise().then((res) => {
+      console.log("candidat", res);
     });
   }
-  refreshComponent(event) {
+  public refreshComponent(event) {
     this.StatueTestingQuestion = event;
   }
 }

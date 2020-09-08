@@ -1,12 +1,17 @@
-import { Component, OnInit, Input, HostListener, Output, EventEmitter, Inject } from '@angular/core';
-import { ApiClientService, API_URI_CANDIDATS, API_URI_CAMPAIGNS, API_URI_NOTIFICATIONS } from '../../../../api-client/api-client.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import {SelectedLanguageService} from '../../../../services/selected-language.service';
+import { Component, EventEmitter, HostListener,  Inject, Input, OnInit, Output  } from "@angular/core";
+import {
+  API_URI_CAMPAIGNS,
+  API_URI_CANDIDATS,
+  API_URI_NOTIFICATIONS,
+  ApiClientService,
+} from "../../../../api-client/api-client.service";
+
+import {SelectedLanguageService} from "../../../../services/selected-language.service";
 
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.scss']
+  selector: "app-test",
+  styleUrls: ["./test.component.scss"],
+  templateUrl: "./test.component.html",
 })
 export class TestComponent implements OnInit {
   public questions: any;
@@ -23,21 +28,21 @@ export class TestComponent implements OnInit {
   @Input() public technoCampaign: any;
   @Input() public candidat: any;
   @Input() public durationMaxTest: number;
-  @Input() public prev: boolean;
+  @Input() public preview: boolean;
   public language: string;
   public dateFinishTest: any;
-  public responses: Array<string>;
+  public responses: [];
   public responseUser: string;
   public counterCheck = 0; // counter good response
   public counterTotal = 0;
-  public arrayReponseUser: Array<string> = [];
-  public arrayGoodRep: Array<string> = [];
-  isDisabled: boolean;
-  @Output() refresh = new EventEmitter();
-  dataForParent: string;
+  public arrayReponseUser = [];
+  public arrayGoodRep = [];
+  public isDisabled: boolean;
+  @Output() public refresh = new EventEmitter();
+  public dataForParent: string;
   public checkTimeDefault = false;
   public jsonRapport = {
-    rapport: []
+    rapport: [],
   };
   public sumPointsbyTechno = [];
   public SumPointsCandidat = [];
@@ -46,10 +51,9 @@ export class TestComponent implements OnInit {
   public totalPoints;
   public totalPointsCampaign;
   public totalPointsCandidat;
-  public dataInfoLanguageName:any = '';
-  public dataInfoLanguageContent:any = '';
-  public separator :any="☼"
-
+  public dataInfoLanguageName = "name";
+  public dataInfoLanguageContent = "content";
+  public separator = "☼";
 
   // Input algo
   public langLower: string;
@@ -57,86 +61,79 @@ export class TestComponent implements OnInit {
   public filename: any;
   public options: any;
 
-  constructor(private apiClientService: ApiClientService,public languageStorage:SelectedLanguageService) {}
+  constructor(private apiClientService: ApiClientService, public languageStorage: SelectedLanguageService) {}
 
-  ngOnInit() {
-//console.log("this.languageStorage.getLanguageCountry()",this.languageStorage.getLanguageCountry())
-    switch(this.languageStorage.getLanguageCountry()){
-      case 'es-ES':
-        this.dataInfoLanguageName =  'name_es';
-        this.dataInfoLanguageContent = 'content_es';
-      break;
-      case 'fr-FR':
-        this.dataInfoLanguageName =  'name';
-        this.dataInfoLanguageContent = 'content';
-      break;
-      case 'en-US':
-        this.dataInfoLanguageName =  'name_en';
-        this.dataInfoLanguageContent = 'content_en';
-      break;
-      case 'jp-JP':
-        this.dataInfoLanguageName =  'name_jp';
-        this.dataInfoLanguageContent = 'content_jp';
-      break;
+  public ngOnInit() {
+    switch (this.languageStorage.getLanguageCountry()) {
+      case "es-ES":
+        this.dataInfoLanguageName =  "name_es";
+        this.dataInfoLanguageContent = "content_es";
+        break;
+      case "fr-FR":
+        this.dataInfoLanguageName =  "name";
+        this.dataInfoLanguageContent = "content";
+        break;
+      case "en-US":
+        this.dataInfoLanguageName =  "name_en";
+        this.dataInfoLanguageContent = "content_en";
+        break;
+      case "jp-JP":
+        this.dataInfoLanguageName =  "name_jp";
+        this.dataInfoLanguageContent = "content_jp";
+        break;
       default:
-        this.dataInfoLanguageContent = 'content';
-        this.dataInfoLanguageName =  'name';
+        this.dataInfoLanguageContent = "content";
+        this.dataInfoLanguageName =  "name";
     }
-  
-    
-    if (this.prev){
-      this.prev = true;
-    } else{
-      this.prev = false;
-    }
-      this.sumPointsByNumTechno(this.questionCampaign);
+
+    this.sumPointsByNumTechno(this.questionCampaign);
+
     if (this.sumPointsbyTechno) {
       this.allPointsTechnos = this.sumPointsbyTechno;
     }
 
     this.calculTotalPoints(this.allPointsTechnos);
-    
-      if (this.totalPoints) {
-        this.totalPointsCampaign = this.totalPoints;
-      }
-      if(this.candidat){
-        if (this.candidat.index_question === null) {
-      
-          this.index = 0;
-        } else {
-          this.index = this.candidat.index_question;
-        }
-        if (this.candidat.test_pause === null) {
-          this.timedefault = 0;
-        } else {
-          this.timedefault = this.candidat.test_pause;
-        }
-      }else{
-        this.candidat = {
-          campaign : {
-            copy_paste : false
-          }
-        }
+
+    if (this.totalPoints) {
+      this.totalPointsCampaign = this.totalPoints;
+    }
+
+    if (this.candidat) {
+      if (this.candidat.index_question === null) {
         this.index = 0;
+      } else {
+        this.index = this.candidat.index_question;
       }
+      if (this.candidat.test_pause === null) {
+        this.timedefault = 0;
+      } else {
+        this.timedefault = this.candidat.test_pause;
+      }
+    } else {
+      this.candidat = {
+        campaign : {
+          copy_paste : false,
+        },
+      };
+      this.index = 0;
+    }
 
     this.questions = this.questionCampaign;
     this.question = this.questionCampaign[this.index];
-    console.log('this.question : ', this.questionCampaign);
-
     this.timeDanger = this.questionCampaign[0].time - 5;
     this.type = this.questionCampaign[0];
+
     this.Countertime();
-    if(!this.prev){
+    if (!this.preview) {
       this.controleTimeTest();
+      
     }
-    
-    
+
     if (this.question[this.dataInfoLanguageContent] === null) {
       this.responses = [];
-      console.log(' tu est null ')
+      console.log(" tu est null ");
     } else {
-      console.log(' tu est pas null ',this.dataInfoLanguageContent)
+      console.log(" tu est pas null ", this.dataInfoLanguageContent);
       this.responses = this.question[this.dataInfoLanguageContent].split(this.separator);
     }
     for (const techno of this.technoCampaign) {
@@ -144,40 +141,48 @@ export class TestComponent implements OnInit {
         this.language = techno.name;
         this.langLower = this.language.toLowerCase();
 
-        if(this.langLower === 'java' || this.langLower === 'java/j2ee' || this.langLower === 'spring' || this.langLower === 'android') {
-        this.filetype = `application/java`;
-        this.filename = `Main.java`;
-        this.options = { theme: 'vs-white', language: 'java' };
+        if (this.langLower === "java" ||
+            this.langLower === "java/j2ee" ||
+            this.langLower === "spring" ||
+            this.langLower === "android") {
+
+          this.filetype = `application/java`;
+          this.filename = `Main.java`;
+          this.options = { theme: "vs-white", language: "java" };
         }
 
-        if(this.langLower === 'kotlin') {
+        if (this.langLower === "kotlin") {
           this.filetype = `application/kotlin`;
           this.filename = `Main.kt`;
-          this.options = { theme: 'vs-white', language: 'kotlin' };
+          this.options = { theme: "vs-white", language: "kotlin" };
           }
 
-        if(this.langLower === 'c') {
+        if (this.langLower === "c") {
           this.filetype = `application/c`;
           this.filename = `Main.c`;
-          this.options = { theme: 'vs-white', language: 'c' };
+          this.options = { theme: "vs-white", language: "c" };
         }
 
-        if(this.langLower === 'c++') {
+        if (this.langLower === "c++") {
           this.filetype = `application/cpp`;
           this.filename = `Main.cpp`;
-          this.options = { theme: 'vs-white', language: 'cpp' };
+          this.options = { theme: "vs-white", language: "cpp" };
         }
 
-        if(this.langLower === 'python') {
+        if (this.langLower === "python") {
           this.filetype = `application/python`;
           this.filename = `Main.py`;
-          this.options = { theme: 'vs-white', language: 'python' };
+          this.options = { theme: "vs-white", language: "python" };
         }
 
-        if(this.langLower === 'javascript' || this.langLower === 'angular 2+' || this.langLower === 'angularjs' || this.langLower === 'react' || this.langLower === 'vuejs') {
+        if (this.langLower === "javascript" ||
+        this.langLower === "angular 2+" ||
+        this.langLower === "angularjs" ||
+        this.langLower === "react" ||
+        this.langLower === "vuejs") {
           this.filetype = `application/javascript`;
           this.filename = `Main.js`;
-          this.options = { theme: 'vs-white', language: 'javascript' };
+          this.options = { theme: "vs-white", language: "javascript" };
         }
 
       }
@@ -185,7 +190,7 @@ export class TestComponent implements OnInit {
     this.arrayGoodRep = this.question.answer_value.split(this.separator).sort();
   }
 
-  checkCheckBoxvalue(event) {
+  public checkCheckBoxvalue(event) {
     if (event.source.checked) {
       this.arrayReponseUser.push(event.source.value);
     } else {
@@ -196,7 +201,7 @@ export class TestComponent implements OnInit {
     }
   }
 
-  Countertime() {
+  public Countertime() {
     this.stopTimeInterval = setInterval(() => {
       if (this.timedefault < this.questions[this.index].time) {
         this.timedefault++;
@@ -216,7 +221,7 @@ export class TestComponent implements OnInit {
       this.arrayGoodRep = this.question.answer_value.split(this.separator).sort();
       this.checkRep();
     }
-  
+
     this.Alltime.push(this.timedefault);
     this.Activetime = false;
     if (this.index < this.questions.length - 1) {
@@ -236,7 +241,7 @@ export class TestComponent implements OnInit {
     }
 
     this.question = this.questions[this.index];
-    console.log("this.dataInfoLanguageContent",this.dataInfoLanguageContent)
+    console.log("this.dataInfoLanguageContent", this.dataInfoLanguageContent);
     if (this.question[this.dataInfoLanguageContent]) {
       this.responses = this.question[this.dataInfoLanguageContent].split(this.separator);
     } else {
@@ -255,53 +260,52 @@ export class TestComponent implements OnInit {
     this.checkTimeDefault = false;
   }
 
-  checkRep() {
-    if (this.questions[this.index].type === 'one') {
+  public checkRep() {
+    if (this.questions[this.index].type === "one") {
       this.arrayReponseUser.push(this.responseUser);
       console.log(this.arrayReponseUser);
       if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
-        console.log('ITS OK !!');
+        console.log("ITS OK !!");
         this.counterCheck++;
         this.sumPointsByRepCandidat(this.questions[this.index].technologies, this.questions[this.index].points);
       } else {
         this.sumPointsByRepCandidat(this.questions[this.index].technologies, 0);
-        console.log('NOT OK !!');
+        console.log("NOT OK !!");
       }
     }
-    if (this.questions[this.index].type === 'free') {
-      // console.log('typeFREE');
+    if (this.questions[this.index].type === "free") {
+      // console.log("typeFREE");
       if (this.responseUser === null || this.responseUser === undefined) {
         this.arrayReponseUser.push(this.responseUser);
       } else {
         this.arrayReponseUser.push(this.responseUser.toLowerCase().trim());
       }
-      // console.log('this.arrayReponseUser IN FREE: ', this.arrayReponseUser);
-      if (this.arrayReponseUser.every(reps => this.arrayGoodRep.includes(reps))) {
-        console.log('item ok !');
+      // console.log("this.arrayReponseUser IN FREE: ", this.arrayReponseUser);
+      if (this.arrayReponseUser.every((reps) => this.arrayGoodRep.includes(reps))) {
+        console.log("item ok !");
         this.counterCheck++;
         this.sumPointsByRepCandidat(this.questions[this.index].technologies, this.questions[this.index].points);
       } else {
         this.sumPointsByRepCandidat(this.questions[this.index].technologies, 0);
-        console.log('item not ok !');
+        console.log("item not ok !");
       }
     }
-    if (this.questions[this.index].type === 'multiple') {
-      // console.log('typeMULTIPLE');
+    if (this.questions[this.index].type === "multiple") {
+      // console.log("typeMULTIPLE");
       if (this.arrayGoodRep.sort().toString() === this.arrayReponseUser.sort().toString()) {
-        console.log('ITS OK !!');
+        console.log("ITS OK !!");
         this.counterCheck++;
         this.sumPointsByRepCandidat(this.questions[this.index].technologies, this.questions[this.index].points);
       } else {
         this.sumPointsByRepCandidat(this.questions[this.index].technologies, 0);
-        console.log('NOT OK !!');
+        console.log("NOT OK !!");
       }
     }
     this.postRapportCandidat();
-    // console.log(' this.arrayReponseUser : ', this.arrayReponseUser);
+    // console.log(" this.arrayReponseUser : ", this.arrayReponseUser);
   }
 
-
-  disableRep(timeQuestion) {
+  public disableRep( timeQuestion: number) {
     if (timeQuestion === this.timedefault) {
       this.isDisabled = true;
     }
@@ -309,31 +313,32 @@ export class TestComponent implements OnInit {
 
   public fmtMSS(d) {
     d = Number(d);
-    var h = Math.floor(d/3600);
-    var m = Math.floor(d % 3600 / 60);
-    var s = Math.floor(d % 3600 % 60);
+    const h = Math.floor(d / 3600);
+    const m = Math.floor(d % 3600 / 60);
+    const s = Math.floor(d % 3600 % 60);
 
-    return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
+    return ("0" + h).slice(-2) + ":" + ("0" + m).slice(-2) + ":" + ("0" + s).slice(-2);
   }
 
-  onReady(){
-    console.log("onReady mark-down")
+  public onReady() {
+    console.log("onReady mark-down");
   }
-  postTimeTest(dureeTest) {
-    this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
+
+  public postTimeTest( dureeTest: any) {
+    this.apiClientService.put(API_URI_CANDIDATS + "/" + this.candidat.id, {
       duree: dureeTest,
-      test_terminer: this.dateFinishTest
-    }).toPromise().then(res => {
-      this.apiClientService.get(API_URI_CAMPAIGNS + '/' + res.campaign.id).subscribe(res1 => {
+      test_terminer: this.dateFinishTest,
+    }).toPromise().then((res) => {
+      this.apiClientService.get(API_URI_CAMPAIGNS + "/" + res.campaign.id).subscribe((res1) => {
         let nbCandidats = res1.NbCandidatFinish;
         if (nbCandidats == null) {
-          nbCandidats = 1
+          nbCandidats = 1;
         } else {
-          nbCandidats = nbCandidats + 1
+          nbCandidats = nbCandidats + 1;
         }
-        this.apiClientService.put(API_URI_CAMPAIGNS + '/' + res.campaign.id, {
-          NbCandidatFinish: nbCandidats
-        }).subscribe(res2 => {
+        this.apiClientService.put(API_URI_CAMPAIGNS + "/" + res.campaign.id, {
+          NbCandidatFinish: nbCandidats,
+        }).subscribe((res2) => {
           this.refreshComponent();
           this.sumPointsByNumTechno(this.SumPointsCandidat);
           this.allPointsCandidat = this.sumPointsbyTechno;
@@ -341,7 +346,7 @@ export class TestComponent implements OnInit {
           if (this.totalPoints) {
             this.totalPointsCandidat = this.totalPoints;
           }
-          console.log('this.totalPointsCandidat: ', this.totalPointsCandidat);
+          console.log("this.totalPointsCandidat: ", this.totalPointsCandidat);
           let getPourcent;
           const objectGetpourcent = [];
           for (const pointsTechno of this.allPointsTechnos) {
@@ -353,37 +358,38 @@ export class TestComponent implements OnInit {
                   getPourcent = Math.round(pointsCandidat.points / pointsTechno.points * 100);
                 }
                 objectGetpourcent.push({
+                  percentage: getPourcent,
                   techno: pointsTechno.technologies,
-                  percentage: getPourcent
                 });
               }
             }
           }
-         
-          const getPourcentTest = Math.round((this.totalPointsCandidat.total_points
-            || this.totalPointsCandidat.points) / (this.totalPointsCampaign.total_points || this.totalPointsCampaign.points) * 100);
-          console.log('test SUM TOTAL OF THE TEST', getPourcentTest);
-        
+
+          const getPourcentTest = Math.round((this.totalPointsCandidat.total_points ||
+             this.totalPointsCandidat.points) / (this.totalPointsCampaign.total_points ||
+               this.totalPointsCampaign.points) * 100);
+          console.log("test SUM TOTAL OF THE TEST", getPourcentTest);
+
           const newOBjectToPostCandidat = [
             { allPointsTechnos: this.allPointsTechnos },
             { allPointsCandidat: this.allPointsCandidat },
             { getpourcentByCandidat: objectGetpourcent },
             { totalPointsCandidat: this.totalPointsCandidat.total_points || this.totalPointsCandidat.points },
             { totalPointsCampaign: this.totalPointsCampaign.total_points || this.totalPointsCampaign.points },
-            { PourcentTest: getPourcentTest }
+            { PourcentTest: getPourcentTest },
           ];
-          this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
-            points_candidat: newOBjectToPostCandidat
+          this.apiClientService.put(API_URI_CANDIDATS + "/" + this.candidat.id, {
+            points_candidat: newOBjectToPostCandidat,
           }).toPromise();
           this.apiClientService.post(API_URI_NOTIFICATIONS, {
-            title: "Un candidat viens de finir le test \"" + res.campaign.Name + "\"",
-            message: "Le rapport d'évaluation de \"" + this.candidat.Nom + "\" est disponible.",
+            idCampaign: res.campaign.id,
+            message: "Le rapport d\"évaluation de \"" + this.candidat.Nom + "\" est disponible.",
             status: false,
+            title: "Un candidat viens de finir le test \"" + res.campaign.Name + "\"",
             user: res.campaign.user,
-            idCampaign: res.campaign.id
-          }).toPromise().then(resolve => {
+          }).toPromise().then((resolve) => {
             console.log("SUCCESS POST NOTIF ", resolve);
-          }).catch(reject => {
+          }).catch((reject) => {
             console.log("ERROR POST NOTIF ", reject);
           });
         });
@@ -391,7 +397,7 @@ export class TestComponent implements OnInit {
     });
   }
 
-  controleTimeTest() {
+  public controleTimeTest() {
     let dateNow;
     let dateServeur;
     let dateDiff;
@@ -413,62 +419,59 @@ export class TestComponent implements OnInit {
     }
   }
 
-  postPauseTest() {
-    this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
+  public postPauseTest() {
+    this.apiClientService.put(API_URI_CANDIDATS + "/" + this.candidat.id, {
+      date_pause: new Date().toISOString(),
       index_question: this.index,
       test_pause: this.timedefault,
-      date_pause: new Date().toISOString()
-    }).toPromise().then(res => {
-     
-    });
+    }).toPromise().then();
   }
 
-
-  postRapportCandidat() {
+  public postRapportCandidat() {
     const myReps = this.arrayReponseUser;
     const myTime = this.timedefault;
     const myQuestion = this.question;
-    this.apiClientService.get(API_URI_CANDIDATS + '/' + this.candidat.id).toPromise().then(res => {
+    this.apiClientService.get(API_URI_CANDIDATS + "/" + this.candidat.id).toPromise().then(res => {
       if (res.raport_candidat !== null) {
         this.jsonRapport = res.raport_candidat;
       }
       this.jsonRapport.rapport.push({
-        index_question: myQuestion, // JSON to PDF and rapport candidat
         array_rep_candidat: myReps,
-        timeRep: myTime
+        index_question: myQuestion, // JSON to PDF and rapport candidat
+        timeRep: myTime,
       });
-      // console.log('this.jsonRapport : ', this.jsonRapport);
-      this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
-        raport_candidat: this.jsonRapport
-      }).toPromise().then(res1 => {
+      // console.log("this.jsonRapport : ", this.jsonRapport);
+      this.apiClientService.put(API_URI_CANDIDATS + "/" + this.candidat.id, {
+        raport_candidat: this.jsonRapport,
+      }).toPromise().then((res1) => {
         // console.log(res1);
       });
     });
   }
 
-  sumPointsByNumTechno(array) {
-    console.log('array : ', array);
+  public sumPointsByNumTechno(array) {
+
     const sumPoints = {};
-    array.forEach(element => {
-      // console.log( 'element from ARRAY SUMPOINTS : ', element);
+    array.forEach((element) => {
+      // console.log( "element from ARRAY SUMPOINTS : ", element);
       if (sumPoints.hasOwnProperty(element.technologies)) {
         sumPoints[element.technologies] = sumPoints[element.technologies] + element.points;
-        // console.log('sumPoints[element.technologies]: ', sumPoints[element.technologies]);
+        // console.log("sumPoints[element.technologies]: ", sumPoints[element.technologies]);
       } else {
         sumPoints[element.technologies] = element.points;
-        // console.log('sumPoints[element.technologies] = element.points: ', sumPoints[element.technologies]);
+        // console.log("sumPoints[element.technologies] = element.points: ", sumPoints[element.technologies]);
       }
     });
     const arraySumPoints = [];
-    console.log('sumPoints : ', sumPoints);
+    console.log("sumPoints : ", sumPoints);
     for (const [key, value] of Object.entries(sumPoints)) {
       arraySumPoints.push({
+        points: value,
         technologies: key,
-        points: value
       });
     }
-    // console.log('arraySumPoints : ', arraySumPoints);
-    console.log('this.technoCampaign : ', this.technoCampaign);
+    // console.log("arraySumPoints : ", arraySumPoints);
+    console.log("this.technoCampaign : ", this.technoCampaign);
     for (const techno of this.technoCampaign) {
       for (const technoArray of arraySumPoints) {
         if (techno.id === Number(technoArray.technologies)) {
@@ -479,45 +482,43 @@ export class TestComponent implements OnInit {
     return this.sumPointsbyTechno = arraySumPoints;
   }
 
-  sumPointsByRepCandidat(techno, point) {
-    // console.log('techno : ', techno);
-    // console.log('point : ', point);
-    this.apiClientService.get(API_URI_CANDIDATS + '/' + this.candidat.id).toPromise().then(res => {
+  public sumPointsByRepCandidat(techno, point) {
+    // console.log("techno : ", techno);
+    // console.log("point : ", point);
+    this.apiClientService.get(API_URI_CANDIDATS + "/" + this.candidat.id).toPromise().then((res) => {
       if (res.points_candidat !== null) {
         this.SumPointsCandidat = res.points_candidat;
       }
       this.SumPointsCandidat.push({
+        points: point,
         technologies: techno,
-        points: point
       });
-      this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
-        points_candidat: this.SumPointsCandidat
-      }).toPromise().then(res1 => {
-
-      });
+      this.apiClientService.put(API_URI_CANDIDATS + "/" + this.candidat.id, {
+        points_candidat: this.SumPointsCandidat,
+      }).toPromise().then();
     });
   }
 
-  calculTotalPoints(array) {
-    // console.log('CALCUL TOTAL POINTS : ', array);
-    if (typeof array !== 'undefined' && array.length > 0) {
+  public calculTotalPoints(array) {
+    // console.log("CALCUL TOTAL POINTS : ", array);
+    if (typeof array !== "undefined" && array.length > 0) {
       this.totalPoints = array.reduce((a, b) => ({ total_points: a.points + b.points }));
     }
   }
 
-  refreshComponent() {
-    this.refresh.emit(this.dataForParent = 'fin');
+  public refreshComponent() {
+    this.refresh.emit(this.dataForParent = "fin");
   }
 
-  @HostListener('window:beforeunload', ['$event'])
+  @HostListener("window:beforeunload", ["$event"])
   // work only if Press F5 or cancel close window
-  beforeunloadHandler($event) {
-    $event.returnValue = 'Are you sure?';
+  public beforeunloadHandler($event) {
+    $event.returnValue = "Are you sure?";
     this.postPauseTest();
     this.controleTimeTest();
   }
-  @HostListener('window:unload', ['$event'])
-  sendData() {
+  @HostListener("window:unload", ["$event"])
+  public sendData() {
     this.postPauseTest();
   }
 }
