@@ -9,6 +9,7 @@ export class BaseButton implements OnInit {
     @Input() color: string = 'primary';
     @Input() iconName: string = 'info';
     @Input() iconPosition: string = 'right';
+    @Input() title: string = "";
     @Input() disabled: boolean = false;
     @Output() clickEvent = new EventEmitter<null>();
 

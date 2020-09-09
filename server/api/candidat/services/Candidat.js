@@ -396,7 +396,7 @@ module.exports = {
         "../../../report-template/candidates-report/",
         `${id}.pdf`
       );
-   
+
       const processFile = () =>
         new Promise((resolve, reject) => {
           ejs.renderFile(
