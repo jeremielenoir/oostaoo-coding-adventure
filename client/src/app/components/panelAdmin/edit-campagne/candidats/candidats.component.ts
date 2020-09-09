@@ -69,7 +69,7 @@ export class CandidatsComponent implements OnInit {
   choiceList: boolean;
   checkedActionBoolean = true;
   opened: boolean;
-  public DecryptTokenService = new DecryptTokenService();
+  public decryptTokenService = new DecryptTokenService();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild("check") check: ElementRef;
@@ -122,7 +122,7 @@ export class CandidatsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tests_available = this.DecryptTokenService.tests_available;
+    this.tests_available = this.decryptTokenService.tests_available;
     if (this.tests_available == -1) {
       this.tests_available = "";
     }
@@ -218,7 +218,7 @@ export class CandidatsComponent implements OnInit {
       .then(
         (res) => {
           let userId = res.user.id;
-          let userIdConnect = this.DecryptTokenService.userIdExporte["userId"];
+          let userIdConnect = this.decryptTokenService.userIdExporte["userId"];
           if (userId !== userIdConnect) {
             this.router.navigate(["/dashboard/campaigns"]);
             return;

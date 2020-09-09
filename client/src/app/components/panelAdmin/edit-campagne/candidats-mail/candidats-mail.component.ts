@@ -22,7 +22,6 @@ export class CandidatsMailComponent implements OnInit {
 
   public campaigns: any;
   public candidats: any;
-  public nbCandidat: number;
 
   public sujet: string;
   public name: string[] = [];
@@ -42,11 +41,6 @@ export class CandidatsMailComponent implements OnInit {
     public dialogRef: MatDialogRef<CandidatsMailComponent>,
   ) {
     this.candidats = this.data.contact;
-    let count = 0;
-    for (const iterator of this.data.contact) {
-      count++;
-    }
-    this.nbCandidat = count;
   }
 
   ngOnInit() {
@@ -62,8 +56,6 @@ export class CandidatsMailComponent implements OnInit {
         this.tests_available = datas.tests_available;
         console.log('NGONINIT candidats-mail / this.tests_available: ', this.tests_available);
       });
-
-
 
     this.apiClientService
       .get(API_URI_CAMPAIGNS + '/' + this.data.globalId)
@@ -119,7 +111,7 @@ export class CandidatsMailComponent implements OnInit {
           return idCandidat;
         }, err => {
           this.openSnackBar("Une erreur est survenue", "Fermer");
-          console.log('log error', err)
+          console.log('log error', err);
         }
       )
       .then(idCandidat => {
@@ -139,26 +131,26 @@ export class CandidatsMailComponent implements OnInit {
   }
 
   updateCampaignPostCandidats() {
+    let nbCandidats = this.candidats.length;
     if (this.tests_available == -1) {
       for (const iterator of this.candidats) {
         this.postCandidat(iterator.name, iterator.value);
       }
-
     } else if (this.offer_id == 14) {
       this.goToSubscribe();
-
     } else if (this.tests_available == 0) {
       setTimeout(() => {
         this.goToSubscribe();
       }, 1500)
       this.openSnackBar(`Vous n'avez plus de test disponible`, "Fermer");
-    } else if (this.nbCandidat > this.tests_available) {
+    } else if (nbCandidats > this.tests_available) {
+      // this case should never happens has we have limited the number of candidats added to the number of tests_available
       setTimeout(() => {
         this.retourCandidat();
       }, 1500);
-      this.openSnackBar(`Impossible d'inviter ${this.nbCandidat} candidat${this.nbCandidat > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`, "Fermer");
+      this.openSnackBar(`Impossible d'inviter ${nbCandidats} candidat${nbCandidats > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`, "Fermer");
     } else {
-      this.tests_available = this.tests_available - this.nbCandidat;
+      this.tests_available = this.tests_available - nbCandidats;
       this.apiClientService
         .put(`${API_URI_USER}/${this.user_id}`, {
           tests_available: this.tests_available
