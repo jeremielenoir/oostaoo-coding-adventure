@@ -7,7 +7,10 @@
     </div>
 
     <div class="modall-content">
-      <p i18n>
+      <p *ngIf="preview" i18n>
+        Le temps imparti pour la question est écoulé. Cliquez sur OK pour voir le résultat de la réponse.
+      </p>
+      <p *ngIf="!preview" i18n>
         Le temps imparti pour la question est écoulé. Votre réponse actuelle a
         été soumise. Cliquez sur OK quand vous êtes prêt(e) à passer à la
         question suivante.
@@ -15,7 +18,8 @@
     </div>
 
     <div class="modall-footer">
-      <button class="btn" (click)="QuestNext()" i18n>OK</button>
+      <button *ngIf="!preview" class="btn" (click)="questNext()" i18n>OK</button>
+      <button *ngIf="preview" class="btn" (click)="viewResult()" i18n>OK</button>
     </div>
   </div>
 </div>
@@ -102,14 +106,14 @@
     </div>
 
     
-    <button *ngIf="!preview" class="button" (click)="QuestNext()">
+    <button *ngIf="!preview" class="button" (click)="questNext()">
       {{
         index === questions.length - 1
           ? "Soumettre le test"
           : "Question suivante"
       }}
     </button>
-    <button *ngIf="preview" class="button" (click)="QuestNext()">
+    <button *ngIf="preview" class="button" (click)="questNext()">
       Valider la réponse
     </button>
   </div>

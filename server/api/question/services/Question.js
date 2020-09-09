@@ -511,6 +511,10 @@ module.exports = {
           theme_en: val[19],
           theme_es: val[20],
           theme_jp: val[21],
+          titre: val[22],
+          titre_en: val[23],
+          titre_es: val[24],
+          titre_jp: val[25],
         });
       });
 

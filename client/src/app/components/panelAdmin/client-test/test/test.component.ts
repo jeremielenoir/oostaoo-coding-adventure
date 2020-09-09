@@ -215,12 +215,17 @@ export class TestComponent implements OnInit {
     }, 1000);
   }
 
-  public QuestNext() {
+  public viewResult(){
+    console.log('VIEW RESULT');
+  }
+
+  public questNext() {
     this.counterTotal++; // counter total questions
     if (this.checkTimeDefault === false) {
       this.arrayGoodRep = this.question.answer_value.split(this.separator).sort();
       this.checkRep();
     }
+
 
     this.Alltime.push(this.timedefault);
     this.Activetime = false;
@@ -412,7 +417,7 @@ export class TestComponent implements OnInit {
       timePauseDiff = this.candidat.test_pause + diffSeconds;
       if (this.question.time < timePauseDiff) {
         this.checkTimeDefault = true;
-        this.QuestNext();
+        this.questNext();
       } else {
         this.timedefault = timePauseDiff;
       }

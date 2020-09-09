@@ -114,6 +114,22 @@
     "theme_jp": {
       "default": "",
       "type": "string"
+    },
+    "titre": {
+      "default": "",
+      "type": "string"
+    },
+    "titre_en": {
+      "default": "",
+      "type": "string"
+    },
+    "titre_es": {
+      "default": "",
+      "type": "string"
+    },
+    "titre_jp": {
+      "default": "",
+      "type": "string"
     }
   }
 }
