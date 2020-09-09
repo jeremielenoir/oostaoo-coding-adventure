@@ -367,25 +367,13 @@ tr.mat-row {
       color: $color-principal-blue;
     }
     .close-header-detail {
-      color: mat-color($roodeo-app-warn); // WIP SL
+      color: mat-color($roodeo-app-warn);
       margin-top: 0px;
       cursor: pointer;
 
       span{
-        color: mat-color($roodeo-app-warn); // WIP SL
+        color: mat-color($roodeo-app-warn);
       }
-      // font-size: 22px;
-      // width: 40px;
-      // height: 40px;
-      // display: inline-block;
-      // border-radius: 50px;
-      // display: flex;
-      // justify-content: center;
-      // align-items: center;
-      // color: mat-color($roodeo-app-warn); // WIP SL
-      // WIP SL color: $color-white;
-      // WIP SL background-color: $color-principal-blue;
-      // cursor: pointer;
     }
   }
 }

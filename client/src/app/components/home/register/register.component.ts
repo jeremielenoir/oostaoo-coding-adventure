@@ -46,22 +46,22 @@ export class RegisterComponent implements OnInit {
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef,
   ) {
-        this.route.queryParams.subscribe(params => {
-        // this.jwt = params['jwt'];
-        this.errorProvider = params['error'];
-        setTimeout(() => {
-          this.errorProvider = null;
-        }, 2000)
+    this.route.queryParams.subscribe(params => {
+      // this.jwt = params['jwt'];
+      this.errorProvider = params['error'];
+      setTimeout(() => {
+        this.errorProvider = null;
+      }, 2000)
     })
-   }
+  }
 
-   public readonly siteKey = '6LdAf-AUAAAAACX5tqKig64A4zgc-Q7EA44fxE-9';
-   public theme: 'light' | 'dark' = 'light';
-   public size: 'compact' | 'normal' = 'normal';
-   public lang = 'fr';
-   public type: 'image' | 'audio';
-   public useGlobalDomain: boolean = false;
-   public captchaSuccess = false;
+  public readonly siteKey = '6LdAf-AUAAAAACX5tqKig64A4zgc-Q7EA44fxE-9';
+  public theme: 'light' | 'dark' = 'light';
+  public size: 'compact' | 'normal' = 'normal';
+  public lang = 'fr';
+  public type: 'image' | 'audio';
+  public useGlobalDomain: boolean = false;
+  public captchaSuccess = false;
 
   ngOnInit() {
     this.jwt = this.route.snapshot.queryParams.jwt;
@@ -75,13 +75,13 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required]
     }),
 
-    this.registerForm = this.formBuilder.group({
-      usernameregister: ['', Validators.required],
-      emailregister: ['', [Validators.required,Validators.email]],
-      passwordregister: ['', Validators.required],
-      confirmpassword: ['', Validators.required],
-      recaptcha: ['', Validators.required]
-    });
+      this.registerForm = this.formBuilder.group({
+        usernameregister: ['', Validators.required],
+        emailregister: ['', [Validators.required, Validators.email]],
+        passwordregister: ['', Validators.required],
+        confirmpassword: ['', Validators.required],
+        recaptcha: ['', Validators.required]
+      });
 
     // logout the person when he opens the app for the first time
     // this.authenticationService.logout();
@@ -108,7 +108,7 @@ export class RegisterComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogForgetPassword, {
-       width: '700px',
+      width: '700px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -161,7 +161,7 @@ export class RegisterComponent implements OnInit {
       this.fr.confirmpassword.value === '' ||
       this.fr.passwordregister.value !== this.fr.confirmpassword.value ||
       this.fr.recaptcha.value === '') {
-        this.openSnackBar("Une erreur est survenue, veuillez remplir correctement tous les champs requis", "Fermer");
+      this.openSnackBar("Une erreur est survenue, veuillez remplir correctement tous les champs requis", "Fermer");
     } else {
 
       this.loading = true;
@@ -171,7 +171,7 @@ export class RegisterComponent implements OnInit {
         this.fr.emailregister.value,
         this.fr.passwordregister.value,
         this.accountType.value
-        )
+      )
         .pipe(first())
         .subscribe(
           data => {
@@ -187,7 +187,7 @@ export class RegisterComponent implements OnInit {
 
   }
 
-    forgetPassword(email) {
+  forgetPassword(email) {
     this.authenticationService.forgotPassword(email)
       .pipe(first())
       .subscribe(
@@ -219,28 +219,28 @@ export class DialogForgetPassword {
     public dialogRef: MatDialogRef<DialogForgetPassword>,
     private authenticationService: AuthenticationService,
     private _snackBar: MatSnackBar,
-    ) {}
+  ) { }
 
-    openSnackBar(message: string, action) {
-      this._snackBar.open(message, action, {
-        duration: 6000,
-      });
-    }
+  openSnackBar(message: string, action) {
+    this._snackBar.open(message, action, {
+      duration: 6000,
+    });
+  }
 
-    forgetPassword(email) {
-      this.authenticationService.forgotPassword(email)
-        .pipe(first())
-        .subscribe(
-          data => {
-            this.dialogRef.close();
-          },
-          error => {
-            this.errorRegister = error;
-          }
-        );
-    }
+  forgetPassword(email) {
+    this.authenticationService.forgotPassword(email)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.dialogRef.close();
+        },
+        error => {
+          this.errorRegister = error;
+        }
+      );
+  }
 
-    onNoClick(): void {
+  onNoClick(): void {
     this.dialogRef.close();
   }
 }

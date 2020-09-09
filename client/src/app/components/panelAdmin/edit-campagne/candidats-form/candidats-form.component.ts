@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { CandidatsMailComponent } from '../candidats-mail/candidats-mail.component';
+import { DecryptTokenService } from "../../../home/register/register.service";
 
 @Component({
   selector: 'app-candidats-form',
@@ -16,12 +17,13 @@ export class CandidatsFormComponent implements OnInit {
     return this.form.get('contacts') as FormArray;
   }
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) { }
+  constructor(private fb: FormBuilder, public dialog: MatDialog, private _snackBar: MatSnackBar,) { }
+  @Input() globalId: string;
   public form: FormGroup;
   public contactList: FormArray;
-  @Input() globalId: string;
   public campaigns: any;
   candidatId: any;
+  private decryptTokenService = new DecryptTokenService();
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -33,7 +35,6 @@ export class CandidatsFormComponent implements OnInit {
   // contact formgroup
   createContact(): FormGroup {
     return this.fb.group({
-      type: ['email', Validators.compose([Validators.required])],
       name: [null, Validators.compose([Validators.required])],
       value: [null, Validators.compose([
         Validators.required,
@@ -42,7 +43,11 @@ export class CandidatsFormComponent implements OnInit {
   }
   // add a contact form group
   addContact() {
-    this.contactList.push(this.createContact());
+    if (this.contactList.length < this.decryptTokenService.tests_available) {
+      this.contactList.push(this.createContact());
+    } else {
+      this.openSnackBar("Limite de test disponibles atteinte", "Fermer");
+    }
   }
   // remove contact from group
   removeContact(index) {
@@ -55,12 +60,25 @@ export class CandidatsFormComponent implements OnInit {
     const formGroup = this.contactList.controls[index] as FormGroup;
     return formGroup;
   }
-  // method triggered when form is submitted
+
+  validate(): boolean {
+    // TODO : try to refacto with angular getError function ?
+    return !this.form.controls["contacts"]["controls"].map(control => {
+      return control.controls.name.errors === null && control.controls.value.errors === null;
+    }).includes(false);
+  }
+
   submit() {
     console.log('CandidatsFormComponent submit() > this.form.value.contacts: ', this.form.value.contacts);
   }
 
-  openDialog() {
+  openSnackBar(message: string, action) {
+    this._snackBar.open(message, action, {
+      duration: 6000,
+    });
+  }
+
+  openDialogMail() {
     this.dialog.open(CandidatsMailComponent, {
       data: {
         globalId: this.globalId,
