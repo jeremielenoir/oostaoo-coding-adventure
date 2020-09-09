@@ -6,7 +6,7 @@
     <div class="info-campaign-candidats">
       <h2>Configuration de l'email</h2>
       <p *ngFor="let campaign of campaigns">{{ campaign.Name }}</p>
-      <p>Vous avez sélectionné <strong>{{nbCandidat}}</strong> destinataire(s)</p>
+      <p>Vous avez sélectionné <strong>{{candidats.length}}</strong> destinataire(s)</p>
     </div>
   </header>
   <div class="content-modal-question"></div>
@@ -32,7 +32,7 @@
         {{editing ? 'OK' : 'Personnaliser cet email'}}
       </app-base-button>
       <app-base-button iconName="send" [disabled]="editing" (clickEvent)="updateCampaignPostCandidats()">
-        Envoyer {{ nbCandidat > 1 ? "les emails" : "l'email" }}</app-base-button>
+        Envoyer {{ candidats.length > 1 ? "les emails" : "l'email" }}</app-base-button>
     </div>
   </div>
 </div>
