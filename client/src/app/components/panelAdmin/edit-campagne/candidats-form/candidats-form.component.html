@@ -1,4 +1,11 @@
-<div class="p-3">
+<div class="p-3" *ngIf="status === 'form'">
+  <header class="header-question">
+    <span class="rond-custom">1</span>
+    <div class="info-campaign-candidats">
+      <h2 i18n>Entrez le nom et l'email des candidats</h2>
+      <p *ngFor="let campaign of campaigns">Campagne: {{ campaign.Name }}</p>
+    </div>
+  </header>
   <div lass="form-scroll">
     <form class="cologne-form" [formGroup]="form" (submit)="submit()">
       <div class="card-body" formArrayName="contacts">
@@ -18,7 +25,7 @@
       </div>
       <div class="block-button">
         <app-base-button iconName="person_add" (clickEvent)="addContact()">Ajouter un autre candidat</app-base-button>
-        <app-base-button iconName="mail_outline" [disabled]="!validate()" (clickEvent)="openDialogMail()">Prochaine
+        <app-base-button iconName="mail_outline" [disabled]="!validate()" (clickEvent)="switchTo('email')">Prochaine
           étape : configurer l'email
         </app-base-button>
       </div>
@@ -26,5 +33,44 @@
         Les champs indiqués par une * sont obligatoires
       </div>
     </form>
+  </div>
+</div>
+
+<div class="modal-candidat" *ngIf="status === 'email'">
+  <header class="header-question">
+    <span class="rond-custom">
+      <p>2</p>
+    </span>
+    <div class="info-campaign-candidats">
+      <h2>Configuration de l'email</h2>
+      <p *ngFor="let campaign of campaigns">{{ campaign.Name }}</p>
+      <p>Vous avez sélectionné <strong>{{candidats.length}}</strong> destinataire(s)</p>
+    </div>
+  </header>
+  <div class="content-modal-question"></div>
+  <div>
+    <div class="sroll-body">
+      <div class="form-row">
+        <label>Sujet :</label>
+        <input *ngIf="editing" class="form-input" type="" name="" class="" [(ngModel)]="sujet" />
+        <p *ngIf="!editing" class="sujet-title">{{sujet}}</p>
+      </div>
+      <div [class.message-personaliser-form]="editing">
+        <label>Message :</label>
+        <ckeditor *ngIf="editing" [editor]="Editor" [(ngModel)]="htmlContent"></ckeditor>
+        <div *ngIf="!editing" [innerHTML]="htmlContent" class="htmlContent"></div>
+      </div>
+    </div>
+    <div class="block-button">
+      <app-base-button iconName="keyboard_arrow_left" iconPosition="left" [disabled]="editing"
+        (clickEvent)="switchTo('form')">
+        Retour
+      </app-base-button>
+      <app-base-button [iconName]="editing ? 'done' : 'edit'" (clickEvent)="editing=!editing">
+        {{editing ? 'OK' : 'Personnaliser cet email'}}
+      </app-base-button>
+      <app-base-button iconName="send" [disabled]="editing" (clickEvent)="updateCampaignPostCandidats()">
+        Envoyer {{candidats.length > 1 ? "les emails" : "l'email"}}</app-base-button>
+    </div>
   </div>
 </div>
