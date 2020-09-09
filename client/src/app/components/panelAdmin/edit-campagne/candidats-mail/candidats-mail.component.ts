@@ -24,7 +24,6 @@ export class CandidatsMailComponent implements OnInit {
   public candidats: any;
 
   public sujet: string;
-  // public name: string[] = []; // WIP SL 
   public namePlaceholder: string = "[nom du candidat]";
   public contenu: string;
   public editing = false;
