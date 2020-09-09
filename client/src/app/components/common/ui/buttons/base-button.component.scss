@@ -7,6 +7,18 @@
   padding: 0 0 0 16px;
 }
 
+.full-width {
+  width: 100%;
+  &.roodeo-button-icon-left, &.roodeo-button-icon-right {
+    .icon{
+      position: absolute;
+      right: 0px;
+      top:-1px;
+    }
+    
+  }
+}
+
 .roodeo-button-icon-left, .roodeo-button-icon-right {
   color: $color-white;
   border-radius: 19px;

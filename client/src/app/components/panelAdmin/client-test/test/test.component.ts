@@ -4,6 +4,7 @@ import {
   API_URI_CANDIDATS,
   API_URI_NOTIFICATIONS,
   ApiClientService,
+  QUESTION_SEPARATOR,
 } from "../../../../api-client/api-client.service";
 
 import {SelectedLanguageService} from "../../../../services/selected-language.service";
@@ -53,7 +54,7 @@ export class TestComponent implements OnInit {
   public totalPointsCandidat;
   public dataInfoLanguageName = "name";
   public dataInfoLanguageContent = "content";
-  public separator = "☼";
+  public separator = QUESTION_SEPARATOR;
 
   // Input algo
   public langLower: string;
@@ -64,6 +65,7 @@ export class TestComponent implements OnInit {
   constructor(private apiClientService: ApiClientService, public languageStorage: SelectedLanguageService) {}
 
   public ngOnInit() {
+
     switch (this.languageStorage.getLanguageCountry()) {
       case "es-ES":
         this.dataInfoLanguageName =  "name_es";
@@ -126,7 +128,6 @@ export class TestComponent implements OnInit {
     this.Countertime();
     if (!this.preview) {
       this.controleTimeTest();
-      
     }
 
     if (this.question[this.dataInfoLanguageContent] === null) {
@@ -137,7 +138,9 @@ export class TestComponent implements OnInit {
       this.responses = this.question[this.dataInfoLanguageContent].split(this.separator);
     }
     for (const techno of this.technoCampaign) {
-      if (this.question.technologies === techno.id) {
+      console.log('compare', this.question.technologies, techno.id);
+      if (this.question.technologies.id === techno.id) {
+
         this.language = techno.name;
         this.langLower = this.language.toLowerCase();
 

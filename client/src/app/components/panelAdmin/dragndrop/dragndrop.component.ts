@@ -75,6 +75,7 @@ export class DragNDropComponent implements OnInit, OnChanges {
   public nameI18n = "";
   public contentI18n = "";
   public themeI18n = "";
+  public titreI18n = "";
   public answerValueI18n = "";
   @ViewChild("droplist") public droplist: ElementRef;
 
@@ -128,30 +129,35 @@ export class DragNDropComponent implements OnInit, OnChanges {
         this.contentI18n = "content_es";
         this.answerValueI18n = "answer_value_es";
         this.themeI18n = "theme_es";
+        this.titreI18n = "titre_es";
         break;
       case "fr-FR":
         this.nameI18n =  "name";
         this.contentI18n = "content";
         this.answerValueI18n = "answer_value";
         this.themeI18n = "theme";
+        this.titreI18n = "titre_fr";
         break;
       case "en-US":
         this.nameI18n =  "name_en";
         this.contentI18n = "content_en";
         this.answerValueI18n = "answer_value_en";
         this.themeI18n = "theme_en";
+        this.titreI18n = "titre_en";
         break;
       case "jp-JP":
         this.nameI18n =  "name_jp";
         this.contentI18n = "content_jp";
         this.answerValueI18n = "answer_value_jp";
         this.themeI18n = "theme_jp";
+        this.titreI18n = "titre_jp";
         break;
       default:
         this.contentI18n = "content";
         this.nameI18n =  "name";
         this.answerValueI18n = "answer_value";
         this.themeI18n = "theme";
+        this.titreI18n = "titre";
     }
 
     // this.methoddataLevels();
@@ -267,8 +273,13 @@ export class DragNDropComponent implements OnInit, OnChanges {
   public openDialogTest(question?: any): void {
     const dialogRef = this.dialog.open(DialogOverviewTest, {
       data: { questions: question ? [question] : this.selectedQuestions, technoCampaign: this.techno },
-      /*width: "400px",
-      height: "400px"*/
+      height: "90vh",
+      maxHeight: "90vh",
+      maxWidth: "90vw",
+      panelClass: "dialog-test",
+      width: "90vw",
+      /*height: "100%",
+      width: "100%",*/
     });
 
     dialogRef.afterClosed().subscribe();

@@ -1,17 +1,19 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 
 @Component({
-    selector: 'app-base-button',
-    templateUrl: "./base-button.component.html",
+    selector: "app-base-button",
     styleUrls: ["./base-button.component.scss"],
+    templateUrl: "./base-button.component.html",
 })
 export class BaseButton implements OnInit {
-    @Input() color: string = 'primary';
-    @Input() iconName: string = 'info';
-    @Input() iconPosition: string = 'right';
-    @Input() title: string = "";
-    @Input() disabled: boolean = false;
-    @Output() clickEvent = new EventEmitter<null>();
+    @Input() public color: string = "primary";
+    @Input() public iconName: string = "info";
+    @Input() public iconPosition: string = "right";
+    @Input() public title: string = "";
+    @Input() public disabled: boolean = false;
+    @Input() public fullWidth: boolean = false;
+    @Output() public clickEvent = new EventEmitter<null>();
+    @Input() public hoverClass = "hvr-grow";
 
     constructor() { }
 

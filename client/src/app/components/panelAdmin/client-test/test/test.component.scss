@@ -4,7 +4,7 @@
   padding: 0px 15px!important;
 }
 
-::ng-deep .mat-radio-inner-circle{
+/*::ng-deep .mat-radio-inner-circle{
   background: $color-principal-blue!important;
   top:2.3px!important
 }
@@ -25,7 +25,7 @@
 ::ng-deep .mat-radio-label{
   white-space: normal!important;
   align-items: flex-start!important;
-}
+}*/
 
 
 @mixin structureBlock {
@@ -116,11 +116,20 @@
         min-height: 410px;
       }
       .example-radio-group {
+        border: 1px solid $color-background-blue;
         display: flex;
         flex-direction: column;
-        margin: 15px 0;
+        margin: 0px 0;
+        border-radius: $border-radius;
+        
+        //padding: 20px;
         .example-radio-button {
-          margin: 5px;
+          //margin: 15px 0px;
+          padding: 20px 20px;
+          border-bottom: 1px solid $color-background-blue;
+          &:last-child{
+            border-bottom: 0px solid $color-background-blue;
+          }
         }
       }
     }
