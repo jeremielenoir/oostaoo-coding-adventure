@@ -203,7 +203,7 @@ export class RouteComponentComponent implements OnInit {
         this.initNotifNotRead(this.notifications);
       })
       .catch(error => {
-        alert(error);
+        console.log(error);
       });
   }
 

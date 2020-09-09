@@ -1,62 +1,66 @@
 import {
   Component,
-  OnInit,
-  EventEmitter,
-  Output,
-  Input,
-  ViewChild,
   ElementRef,
-  OnChanges,
-  SimpleChanges,
+  EventEmitter,
   Inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
 } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormControl, FormGroup  } from "@angular/forms";
+
 import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
 } from "@angular/cdk/drag-drop";
+
 import {
+  MAT_DIALOG_DATA,
   MatBottomSheet,
   MatBottomSheetRef,
   MatDialog,
   MatDialogRef,
-  MAT_DIALOG_DATA,
 } from "@angular/material";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 
 import {
-  ApiClientService,
-  API_URI_QUESTIONS,
   API_URI_CAMPAIGNS,
+  API_URI_QUESTIONS,
+  ApiClientService,
 } from "../../../api-client/api-client.service";
+
 import { Router } from "@angular/router";
 import { TestComponent } from "../client-test/test/test.component";
-import { SelectedLanguageService } from 'src/app/services/selected-language.service';
 
-export interface DialogData {
+import { SelectedLanguageService } from "src/app/services/selected-language.service";
+
+export interface IDialogData {
   questions: any;
 }
 
 @Component({
   selector: "app-dragndrop-component",
-  templateUrl: "./dragndrop.component.html",
   styleUrls: [
-    "./dragndrop.component.scss"
+    "./dragndrop.component.scss",
   ],
+  templateUrl: "./dragndrop.component.html",
 })
 export class DragNDropComponent implements OnInit, OnChanges {
-  @Input("formCampagne") formCampagne: FormGroup;
-  @Input() notSelectedQuestions: Array<any>;
-  @Input() selectedQuestions: Array<any>;
-  @Input() techno = [];
-  @Output() incrementPage = new EventEmitter<any>();
-  @Output() decrementPage = new EventEmitter<any>();
-  @Output() chargeYourCampagn = new EventEmitter<any>();
+  @Input("formCampagne") public formCampagne: FormGroup;
+  @Input() public notSelectedQuestions = [];
+  @Input() public selectedQuestions = [];
+  @Input() public techno = [];
+  @Output() public incrementPage = new EventEmitter<any>();
+  @Output() public decrementPage = new EventEmitter<any>();
+  @Output() public chargeYourCampagn = new EventEmitter<any>();
   public searchText = "";
   public experience: string;
   public questions: any[];
-
+  
   public toppingsDifficulty = new FormControl();
   public boelanIsSearchAdvenced: boolean = false;
   public saveallQuestionsCampaign = [];
@@ -65,39 +69,46 @@ export class DragNDropComponent implements OnInit, OnChanges {
   public isLoaded: boolean;
   public activeClassScrollTopDropList = false;
   public Questions = [];
-
   public disablehover = false;
   public enablehover = false;
-  public technoCampaign: Array<any>;
-  public name_i18n:any = '';
-  public content_i18n:any = ''
-  public theme_i18n:any = ''
-  public answer_value_i18n:any = ''
+  public technoCampaign = [];
+  public nameI18n = "";
+  public contentI18n = "";
+  public themeI18n = "";
+  public answerValueI18n = "";
   @ViewChild("droplist") public droplist: ElementRef;
 
-  dragStart(event: CdkDragDrop<string[]>) {
+  constructor(
+    public apiClientService: ApiClientService,
+    public decryptTokenService: DecryptTokenService,
+    public languageStorage: SelectedLanguageService,
+    private router: Router,
+    public dialog: MatDialog,
+  ) {}
+
+  public dragStart(event: CdkDragDrop<string[]>) {
     console.log("event start", event);
     this.disablehover = true;
   }
 
-  dragEnd(event: CdkDragDrop<string[]>) {
+  public dragEnd(event: CdkDragDrop<string[]>) {
     console.log("event finish", event);
     this.disablehover = false;
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  public drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
         event.previousIndex,
-        event.currentIndex
+        event.currentIndex,
       );
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex
+        event.currentIndex,
       );
       const previous = event.previousContainer.data;
       const current = event.container.data;
@@ -108,49 +119,42 @@ export class DragNDropComponent implements OnInit, OnChanges {
       // console.log("this Question: ", this.Questions)
     }
   }
-  constructor(
-    public apiClientService: ApiClientService,
-    public decryptTokenService: DecryptTokenService,
-    public languageStorage: SelectedLanguageService,
-    private router: Router,
-    public dialog: MatDialog
-  ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
 
-    switch(this.languageStorage.getLanguageCountry()){
-      case 'es-ES':
-        this.name_i18n =  'name_es';
-        this.content_i18n = 'content_es';
-        this.answer_value_i18n ='answer_value_es';
-        this.theme_i18n ='theme_es'
-      break;
-      case 'fr-FR':
-        this.name_i18n =  'name';
-        this.content_i18n = 'content';
-        this.answer_value_i18n ='answer_value';
-        this.theme_i18n ='theme'
-      break;
-      case 'en-US':
-        this.name_i18n =  'name_en';
-        this.content_i18n = 'content_en';
-        this.answer_value_i18n ='answer_value_en';
-        this.theme_i18n ='theme_en'
-      break;
-      case 'jp-JP':
-        this.name_i18n =  'name_jp';
-        this.content_i18n = 'content_jp';
-        this.answer_value_i18n ='answer_value_jp';
-        this.theme_i18n ='theme_jp'
-      break;
+    switch (this.languageStorage.getLanguageCountry()) {
+      case "es-ES":
+        this.nameI18n =  "name_es";
+        this.contentI18n = "content_es";
+        this.answerValueI18n = "answer_value_es";
+        this.themeI18n = "theme_es";
+        break;
+      case "fr-FR":
+        this.nameI18n =  "name";
+        this.contentI18n = "content";
+        this.answerValueI18n = "answer_value";
+        this.themeI18n = "theme";
+        break;
+      case "en-US":
+        this.nameI18n =  "name_en";
+        this.contentI18n = "content_en";
+        this.answerValueI18n = "answer_value_en";
+        this.themeI18n = "theme_en";
+        break;
+      case "jp-JP":
+        this.nameI18n =  "name_jp";
+        this.contentI18n = "content_jp";
+        this.answerValueI18n = "answer_value_jp";
+        this.themeI18n = "theme_jp";
+        break;
       default:
-        this.content_i18n = 'content';
-        this.name_i18n =  'name';
-        this.answer_value_i18n ='answer_value';
-        this.theme_i18n ='theme'
+        this.contentI18n = "content";
+        this.nameI18n =  "name";
+        this.answerValueI18n = "answer_value";
+        this.themeI18n = "theme";
     }
-     
-    this.methoddataLevels();
+
+    // this.methoddataLevels();
 
     window.scroll(10, 0);
 
@@ -159,42 +163,38 @@ export class DragNDropComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(changes: SimpleChanges) {
     if (this.selectedQuestions && this.selectedQuestions.length > 0) {
       this.isLoaded = true;
     }
   }
 
-  log(info: HTMLElement){
-    console.log('INFO', info.classList.add('machin'));
+  public log(info: HTMLElement) {
+    console.log("INFO", info.classList.add("machin"));
   }
 
-  addquestion(question) {
+  public addquestion(question) {
     this.selectedQuestions.unshift(question);
-    //this.selectedQuestions = [question, ...this.selectedQuestions];
+    // this.selectedQuestions = [question, ...this.selectedQuestions];
     console.log([question, ...this.selectedQuestions]);
 
     const index = this.notSelectedQuestions.indexOf(question);
     if (index > -1) {
       this.notSelectedQuestions.splice(index, 1);
     }
-    this.chargeYourCampagn.emit([...this.selectedQuestions,question]);
+    this.chargeYourCampagn.emit([...this.selectedQuestions, question]);
   }
 
-  methoddataLevels() {
-    
-  }
-
-  fmtMSS(d: number) {
+  public fmtMSS(d: number) {
     d = Number(d);
     // var h = Math.floor(d / 3600);
-    var m = Math.floor((d % 3600) / 60);
-    var s = Math.floor((d % 3600) % 60);
+    const m = Math.floor((d % 3600) / 60);
+    const s = Math.floor((d % 3600) % 60);
 
     return ("0" + m).slice(-2) + ":" + ("0" + s).slice(-2);
   }
 
-  headerChangePositioinDropList() {
+  public headerChangePositioinDropList() {
     if (window.pageYOffset > 160) {
       this.activeClassScrollTopDropList = true;
     } else {
@@ -202,7 +202,7 @@ export class DragNDropComponent implements OnInit, OnChanges {
     }
   }
 
-  SendQuestionSelected(id) {
+  public SendQuestionSelected(id) {
     this.apiClientService
       .put(API_URI_CAMPAIGNS + "/" + id, {
         questions: this.selectedQuestions,
@@ -216,14 +216,14 @@ export class DragNDropComponent implements OnInit, OnChanges {
   }
 
   public onDecrementPage(): void {
-    this.decrementPage.emit(); // Déclenche l'output
+    this.decrementPage.emit(); // Déclenche l"output
   }
 
   public onIncrementPage(): void {
-    this.incrementPage.emit(); // Déclenche l'output
+    this.incrementPage.emit(); // Déclenche l"output
   }
 
-  postCampagne() {
+  public postCampagne() {
     // Confirm true for post
     let truecp;
     if (this.formCampagne.value.utilisationCopieColler === "true") {
@@ -241,11 +241,11 @@ export class DragNDropComponent implements OnInit, OnChanges {
     this.apiClientService
       .post(API_URI_CAMPAIGNS, {
         Name: this.formCampagne.value.nomDeCampagne,
-        level: this.formCampagne.value.experience,
-        langs: this.formCampagne.value.langue,
         copy_paste: truecp,
-        sent_report: envoiRapportSimplifie,
+        langs: this.formCampagne.value.langue,
+        level: this.formCampagne.value.experience,
         profile: this.formCampagne.value.roleSelectedId,
+        sent_report: envoiRapportSimplifie,
         technologies: this.formCampagne.value.technoSelectedId,
         user: this.decryptTokenService.userId,
       })
@@ -259,23 +259,22 @@ export class DragNDropComponent implements OnInit, OnChanges {
       );
   }
 
-  openSearchAdvenced() {
+  public openSearchAdvenced() {
     this.boelanIsSearchAdvenced = !this.boelanIsSearchAdvenced;
   }
 
   // data: {questions: this.selectedQuestions}
-  openDialogTest(question?: any): void {
+  public openDialogTest(question?: any): void {
     const dialogRef = this.dialog.open(DialogOverviewTest, {
       data: { questions: question ? [question] : this.selectedQuestions, technoCampaign: this.techno },
-      /*width: '400px',
-      height: '400px'*/
+      /*width: "400px",
+      height: "400px"*/
     });
 
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe();
   }
 
 }
-
 
 @Component({
   selector: "dialog-overview-test",
@@ -286,7 +285,7 @@ export class DialogOverviewTest implements OnInit {
   prev = false;
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewTest>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: IDialogData
   ) {
     if (data) {
       this.dataPopup = data;

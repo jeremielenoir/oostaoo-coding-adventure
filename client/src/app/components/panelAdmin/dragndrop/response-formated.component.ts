@@ -33,7 +33,7 @@ export class ResponseFormatedComponent implements OnInit, OnChanges {
   > Blockquote to the max`;
 
   constructor(public languageStorage: SelectedLanguageService) {
-    this.currentLanguage = this.languageStorage.getLanguageCountry() == 'fr-FR' ? '' : '_' + this.languageStorage.getLanguageCountry();
+    this.currentLanguage = this.languageStorage.getLanguageCountry() !== '' ? this.languageStorage.getLanguageCountry() == 'fr-FR' ? '' : '_' + this.languageStorage.getLanguageCountry() : '';
     console.log('LANGUAGE', this.languageStorage.getLanguageCountry());
   }
 
@@ -46,10 +46,11 @@ export class ResponseFormatedComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log(this.currentLanguage);
     if (this.question['content' + this.currentLanguage]) {
       
       this.showedResponses = [...this.question['content' + this.currentLanguage].split(QUESTION_SEPARATOR)];
-      console.log('QUESTION', this.question);
+      
     }
       
     if (this.question['answer_value' + this.currentLanguage]) {

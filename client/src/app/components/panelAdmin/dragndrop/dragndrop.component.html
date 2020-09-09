@@ -36,11 +36,11 @@
 
           
               <div [ngClass]="{'info-hover-left': disablehover === false, 'disable': disablehover === true }" class="">
-                <div class="info-hover-header"><h2>{{item[name_i18n]}}</h2></div>
+                <div class="info-hover-header"><h2>{{item[nameI18n]}}</h2></div>
                 <div class="info-hover-content">
                   <p i18n>Points : <span>{{item.points}}</span></p>
                   <p i18n>Technologie : <span>{{item.technologies.name}}</span></p>
-                  <p i18n>Compétence évaluée : <span [innerHtml]>{{item[theme_i18n]}}</span></p>
+                  <p i18n>Compétence évaluée : <span [innerHtml]>{{item[themeI18n]}}</span></p>
                   <p i18n>Enoncé : </p>
                 </div>
                 
@@ -60,7 +60,7 @@
             </div>
 
             <div class="ligne-nom" matTooltip="{{item.name}}" >
-              <p class="ligne-nom-text">{{item[name_i18n]}}</p>
+              <p class="ligne-nom-text">{{item[nameI18n]}}</p>
             </div>
 
             <div class="ligne-note" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
@@ -149,11 +149,11 @@
           <div class="ligne-question" (cdkDragEnded)="dragEnd($event)" (cdkDragStarted)="dragStart($event)" *ngFor="let item of selectedQuestions" cdkDrag>
 
             <div #info [ngClass]="{'info-hover-right': disablehover === false, 'disable': disablehover === true }" class="">
-              <div class="info-hover-header"><h2>{{item[name_i18n]}}</h2></div>
+              <div class="info-hover-header"><h2>{{item[nameI18n]}}</h2></div>
               <div class="info-hover-content">
                 <p>Points : <span>{{item.points}}</span></p>
                 <p>Technologie : <span>{{item.technologies.name}}</span></p>
-                <p>Compétence évaluée : <span>{{item[theme_i18n]}}</span></p>
+                <p>Compétence évaluée : <span>{{item[themeI18n]}}</span></p>
                 <p>Enoncé:</p>
               </div>
               <app-response-formated [question]="item"></app-response-formated>
@@ -172,8 +172,8 @@
             <p class="ligne-techno-text">{{item.technologies.name}}</p>
             </div>
 
-            <div class="ligne-nom" matTooltip="{{item[name_i18n]}}" >
-              <p class="ligne-nom-text">{{item[name_i18n]}}</p>
+            <div class="ligne-nom" matTooltip="{{item[nameI18n]}}" >
+              <p class="ligne-nom-text">{{item[nameI18n]}}</p>
             </div>
 
             <div class="ligne-note" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">

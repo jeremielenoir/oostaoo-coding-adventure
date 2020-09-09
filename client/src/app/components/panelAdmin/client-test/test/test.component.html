@@ -102,12 +102,15 @@
     </div>
 
     
-    <button class="button" (click)="QuestNext()">
+    <button *ngIf="!preview" class="button" (click)="QuestNext()">
       {{
         index === questions.length - 1
           ? "Soumettre le test"
           : "Question suivante"
       }}
+    </button>
+    <button *ngIf="preview" class="button" (click)="QuestNext()">
+      Valider la réponse
     </button>
   </div>
 </div>

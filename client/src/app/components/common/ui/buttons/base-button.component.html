@@ -1,6 +1,6 @@
 <button mat-flat-button color="{{color}}"
     [ngClass]="{ 'roodeo-button-icon-left': iconPosition == 'left', 'roodeo-button-icon-right': iconPosition == 'right', 'hvr-grow': disabled == false }"
-    disabled={{disabled}} (click)='click()'>
+    title={{title}} (click)='click()' disabled={{disabled}}>
     <button mat-mini-fab *ngIf='iconPosition == "left"'
         [ngClass]="{ 'icon': true, 'icon-primary': color == 'primary' && disabled == false, 'icon-accent': color == 'accent' && disabled == false }"
         disabled={{disabled}}>

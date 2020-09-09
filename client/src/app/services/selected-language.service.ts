@@ -11,7 +11,6 @@ export class SelectedLanguageService {
   getLanguageCountry(){
 
     const cookies: any = this.cookieService.get('currentlanguage');
-
     return cookies;
   }
 

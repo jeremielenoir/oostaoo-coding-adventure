@@ -22,10 +22,10 @@ export class CandidatsMailComponent implements OnInit {
 
   public campaigns: any;
   public candidats: any;
-  public nbCandidat: number;
 
   public sujet: string;
-  public name: string[] = [];
+  // public name: string[] = []; // WIP SL 
+  public namePlaceholder: string = "[nom du candidat]";
   public contenu: string;
   public editing = false;
   public htmlContent: any;
@@ -42,11 +42,6 @@ export class CandidatsMailComponent implements OnInit {
     public dialogRef: MatDialogRef<CandidatsMailComponent>,
   ) {
     this.candidats = this.data.contact;
-    let count = 0;
-    for (const iterator of this.data.contact) {
-      count++;
-    }
-    this.nbCandidat = count;
   }
 
   ngOnInit() {
@@ -60,10 +55,9 @@ export class CandidatsMailComponent implements OnInit {
       .get(`${API_URI_USER}/${this.user_id}`)
       .subscribe(datas => {
         this.tests_available = datas.tests_available;
+        //this.tests_available = 30; // WIP SL
         console.log('NGONINIT candidats-mail / this.tests_available: ', this.tests_available);
       });
-
-
 
     this.apiClientService
       .get(API_URI_CAMPAIGNS + '/' + this.data.globalId)
@@ -71,15 +65,11 @@ export class CandidatsMailComponent implements OnInit {
         this.campaigns = [datas];
       });
 
-    for (const candidat of this.candidats) {
-
-      this.name.push(candidat.name);
-
-    }
     this.sujet = 'Évaluation technique';
 
-    this.htmlContent = `
-       <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.name},</span>
+    // this.htmlContent = `
+    //    <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.name},</span>
+    this.htmlContent = `<div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.namePlaceholder},</span>
        </div><br /><br />
        <div>Votre candidature a retenu notre attention.</div><div>Dans le cadre de notre processus
        de recrutement, nous avons le plaisir de vous inviter à passer une évaluation technique.</div>
@@ -101,14 +91,14 @@ export class CandidatsMailComponent implements OnInit {
     //   `;
   }
 
-  postCandidat(nom, emailContact): Promise<any> {
+  postCandidat(name, emailContact): Promise<any> {
     return this.apiClientService.post(API_URI_CANDIDATS, {
-      Nom: nom,
+      name,
       email: emailContact,
-      idCampaign: this.data.globalId,
-      email_title: this.sujet,
-      email_content: this.htmlContent,
-      name_candidats: this.name
+      campaignId: this.data.globalId,
+      emailTitle: this.sujet,
+      emailContent: this.htmlContent,
+      namePlaceholder: this.namePlaceholder
     }).toPromise()
       .then(
         res => {
@@ -117,13 +107,13 @@ export class CandidatsMailComponent implements OnInit {
           idCandidat.push(res.id);
           this.openSnackBar("Un mail d'invitation a correctement été envoyé", "Fermer");
           return idCandidat;
-        }, err => {
-          this.openSnackBar("Une erreur est survenue", "Fermer");
-          console.log('log error', err)
         }
       )
       .then(idCandidat => {
         this.updateCampaign(idCandidat);
+      }).catch(err => {
+        this.openSnackBar("Une erreur est survenue", "Fermer");
+        console.log('log error', err);
       });
   }
 
@@ -139,26 +129,27 @@ export class CandidatsMailComponent implements OnInit {
   }
 
   updateCampaignPostCandidats() {
+    let nbCandidats = this.candidats.length;
     if (this.tests_available == -1) {
       for (const iterator of this.candidats) {
         this.postCandidat(iterator.name, iterator.value);
       }
-
     } else if (this.offer_id == 14) {
       this.goToSubscribe();
-
     } else if (this.tests_available == 0) {
       setTimeout(() => {
         this.goToSubscribe();
       }, 1500)
       this.openSnackBar(`Vous n'avez plus de test disponible`, "Fermer");
-    } else if (this.nbCandidat > this.tests_available) {
+    } else if (nbCandidats > this.tests_available) {
+      // Note : this case should never happens has we have limited the number of candidats added to the number of tests_available
       setTimeout(() => {
         this.retourCandidat();
       }, 1500);
-      this.openSnackBar(`Impossible d'inviter ${this.nbCandidat} candidat${this.nbCandidat > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`, "Fermer");
+      this.openSnackBar(`Impossible d'inviter ${nbCandidats} candidat${nbCandidats > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`, "Fermer");
     } else {
-      this.tests_available = this.tests_available - this.nbCandidat;
+      this.tests_available = this.tests_available - nbCandidats;
+      //this.tests_available = 40; // WIP SL
       this.apiClientService
         .put(`${API_URI_USER}/${this.user_id}`, {
           tests_available: this.tests_available
@@ -169,7 +160,7 @@ export class CandidatsMailComponent implements OnInit {
           for (const iterator of this.candidats) {
             this.postCandidat(iterator.name, iterator.value);
           }
-        },
+        }).catch(
           err => console.log(err)
         );
     }
@@ -188,7 +179,7 @@ export class CandidatsMailComponent implements OnInit {
         // to get the new localStorage value of tests_available with DecryptTokenService in nginit cycle
         window.location.reload();
 
-      },
+      }).catch(
         err => console.log(err)
       );
   }

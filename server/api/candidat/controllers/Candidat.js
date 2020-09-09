@@ -8,8 +8,8 @@ const { access, unlink, createReadStream } = require("fs");
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
-    user: "chagnon.maxime@oostaoo.com",
-    pass: "oostaoo123",
+    user: "assessment@roodeo.com",
+    pass: "Oostaoo2020",
   },
 });
 
@@ -60,72 +60,52 @@ module.exports = {
    * @return {Object}
    */
 
-   /** 
-    * 
-    UPDATE wp_options SET option_value = replace(option_value, 'http://feller-service.svprodlab.ovh/', 'http://ec2-15-236-205-29.eu-west-3.compute.amazonaws.com') WHERE option_name = 'home' OR option_name = 'siteurl';
-    UPDATE wp_posts SET guid = replace(guid, 'http://feller-service.svprodlab.ovh/','http://ec2-15-236-205-29.eu-west-3.compute.amazonaws.com');
-    UPDATE wp_posts SET post_content = replace(post_content, 'http://feller-service.svprodlab.ovh', 'http://ec2-15-236-205-29.eu-west-3.compute.amazonaws.com');
-    */
+  /** 
+   * 
+   UPDATE wp_options SET option_value = replace(option_value, 'http://feller-service.svprodlab.ovh/', 'http://ec2-15-236-205-29.eu-west-3.compute.amazonaws.com') WHERE option_name = 'home' OR option_name = 'siteurl';
+   UPDATE wp_posts SET guid = replace(guid, 'http://feller-service.svprodlab.ovh/','http://ec2-15-236-205-29.eu-west-3.compute.amazonaws.com');
+   UPDATE wp_posts SET post_content = replace(post_content, 'http://feller-service.svprodlab.ovh', 'http://ec2-15-236-205-29.eu-west-3.compute.amazonaws.com');
+   */
 
   create: async (ctx) => {
-    // console.log("ctx.request.body", ctx.request.body);
-    // console.log(strapi.services.campaign);
-    //faire un get campaigns avec ctx.request.body.token? qui est l'id de la campaign?
-    var idCampaignNom = ctx.request.body.idCampaign + ctx.request.body.Nom;
-    // console.log('ctx.request.body.token: ', ctx.request.body.token);
-    // console.log("idCampaignNom: ", idCampaignNom);
+    // faire un get campaigns avec ctx.request.body.token? qui est l'id de la campaign?
+    const { id, campaignId, email, emailContent, emailTitle, name, namePlaceholder } = ctx.request.body;
+
     var cryptoData = crypto
       .createHash("md5")
-      .update(idCampaignNom)
+      .update(id + name)
       .digest("hex");
-    // console.log("cryptoData: ", cryptoData);
-    // console.log('ctx.request.body: ', ctx.request.body);
-    let getEmail_message = ctx.request.body.email_content;
-    //   console.log("getEmail_message: ", getEmail_message);
-    let email_title = ctx.request.body.email_title;
-    let getEmail_message_crypto = getEmail_message.replace(
+
+    let emailContentFormatted = emailContent.replace(
       "...",
       "?id=" + cryptoData //or iplocal replace localhost
+    ).replace(
+      namePlaceholder,
+      name
     );
-    // console.log('postEmail_message: ', postEmail_message);
-    let getNom = ctx.request.body.Nom;
-    //console.log("nom: ", getNom);
-    let nameCandidats = ctx.request.body.name_candidats.join();
-    // console.log("nameCandidats: ", nameCandidats);
-    let postEmail_message = getEmail_message_crypto.replace(
-      nameCandidats,
-      getNom
-    );
-    const campaign = ctx.request.body.idCampaign;
-    ctx.request.body = {
-      Nom: ctx.request.body.Nom,
-      email: ctx.request.body.email,
-      token: ctx.request.body.idCampaign,
-    };
+
     const depositObj = {
-      ...ctx.request.body,
-      campaign,
+      Nom: name,
+      email,
+      campaign: campaignId,
       token: cryptoData,
+      email_title: emailTitle,
+      email_content: emailContentFormatted
     };
 
     try {
-      // console.log("ctx.request.body dans TRY: ", ctx.request.body);
-      // console.log("depositObj", depositObj);
-      // console.log("postEmail_message", postEmail_message);
       let candidat = await strapi.services.candidat.add(depositObj);
-      //  console.log("candidat",candidat)
       const options = {
-        to: ctx.request.body.email,
-        from: "chagnon.maxime@oostaoo.com",
+        to: email,
+        from: "assessment@roodeo.com",
         replyTo: "no-reply@strapi.io",
-        subject: email_title,
-        html: postEmail_message,
+        subject: emailTitle,
+        html: emailContentFormatted,
       };
       await transporter.sendMail(options);
       return candidat;
     } catch (e) {
-    //  console.log("error add candidate", e);
-      throw error;
+      throw e;
     }
   },
 
