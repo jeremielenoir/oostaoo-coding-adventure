@@ -32,7 +32,7 @@
         {{editing ? 'OK' : 'Personnaliser cet email'}}
       </app-base-button>
       <app-base-button iconName="send" [disabled]="editing" (clickEvent)="updateCampaignPostCandidats()">
-        Envoyer {{ candidats.length > 1 ? "les emails" : "l'email" }}</app-base-button>
+        Envoyer {{candidats.length > 1 ? "les emails" : "l'email"}}</app-base-button>
     </div>
   </div>
 </div>
