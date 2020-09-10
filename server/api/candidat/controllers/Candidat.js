@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
     user: "assessment@roodeo.com",
-    pass: "Oostaoo2020",
+    pass: "Oostaoo@2020",
   },
 });
 
@@ -89,8 +89,6 @@ module.exports = {
       email,
       campaign: campaignId,
       token: cryptoData,
-      email_title: emailTitle,
-      email_content: emailContentFormatted
     };
 
     try {
