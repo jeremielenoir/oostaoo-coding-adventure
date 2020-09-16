@@ -7,8 +7,8 @@
   "main": "./server.js",
   "scripts": {
     "setup": "cd admin && npm run setup",
-    "start": "node server.js",
-    "debug": "node --inspect server.js",
+    "start": "nodemon server.js",
+    "debug": "nodemon --inspect server.js",
     "strapi": "node_modules/strapi/bin/strapi.js",
     "lint": "node_modules/.bin/eslint api/**/*.js config/**/*.js plugins/**/*.js",
     "postinstall": "node node_modules/strapi/lib/utils/post-install.js"
@@ -32,6 +32,7 @@
     "moment-timezone": "^0.5.31",
     "mysql": "2.16.0",
     "ngrok": "^3.2.7",
+    "nodemon": "^2.0.4",
     "randomstring": "^1.1.5",
     "shortid": "^2.2.15",
     "strapi": "3.0.0-alpha.25.2",
