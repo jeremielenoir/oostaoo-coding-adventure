@@ -22,12 +22,13 @@
         <div class="modall">
           <div class="modall-header">
             <h3 class="modall-title" i18n>
-              Options des événements
+              {{getCandidatsSelected().length > 1 ? 'les candidats' : 'le candidat'}}
             </h3>
           </div>
           <div class="modall-content">
             <i class="fas fa-user-secret content-icon"></i>
-            <h4 class="modal-content-title">Anonymiser</h4>
+            <h4 class="modal-content-title">Anonymiser
+              {{getCandidatsSelected().length > 1 ? 'les candidats' : 'le candidat'}}</h4>
             <p class="content">
               Dans le cadre de la protection des données personnelles, vous êtes sur le point de procéder à
               l'anonymisation de ce/cette candidat(e) : ses données personnelles seront supprimées.
@@ -36,8 +37,13 @@
             </p>
           </div>
           <div class="modall-footer">
-            <button class="btn-modal" (click)="setAnonymizing(false)">Annuler</button>
-            <button class="btn-modal" (click)="anonymize()">Anonymiser ce candidat</button>
+            <app-base-button iconName="close" iconPosition="left" (clickEvent)="setAnonymizing(false)">
+              <span class="text" i18n>Annuler</span>
+            </app-base-button>
+            <app-base-button iconName="check" (clickEvent)="anonymize()">
+              <span class="text" i18n>Anonymiser
+                {{getCandidatsSelected().length > 1 ? 'les candidats' : 'le candidat'}}</span>
+            </app-base-button>
           </div>
         </div>
       </div>
@@ -46,12 +52,13 @@
         <div class="modall">
           <div class="modall-header">
             <h3 class="modall-title">
-              Supprimer le candidat
+              Supprimer {{getCandidatsSelected().length > 1 ? 'les candidats' : 'le candidat'}}
             </h3>
           </div>
           <div class="modall-content">
             <i class="fas fa-close content-icon"></i>
-            <h4 class="modal-content-title">Supprimer</h4>
+            <h4 class="modal-content-title">Supprimer
+              {{getCandidatsSelected().length > 1 ? 'les candidats' : 'le candidat'}}</h4>
             <p class="content">
               Attention, vous êtes sur le point de supprimer ce/cette candidat(e) de votre liste.
               Dans le cadre de la protection des données personnelles, ses données seront anonymisées et vous ne pourrez
@@ -59,8 +66,13 @@
             </p>
           </div>
           <div class="modall-footer">
-            <button class="btn-modal" (click)="setDeletingCandidats(false)">Annuler</button>
-            <button class="btn-modal" (click)="deleteCandidats()">Supprimer ce candidat</button>
+            <app-base-button iconName="close" iconPosition="left" (clickEvent)="setDeletingCandidats(false)">
+              <span class="text" i18n>Annuler</span>
+            </app-base-button>
+            <app-base-button iconName="check" (clickEvent)="deleteCandidats()">
+              <span class="text" i18n>Supprimer
+                {{getCandidatsSelected().length > 1 ? 'les candidats' : 'le candidat'}}</span>
+            </app-base-button>
           </div>
         </div>
       </div>

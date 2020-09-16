@@ -27,10 +27,8 @@ export class CandidatsFormComponent implements OnInit {
   }
 
   constructor(private fb: FormBuilder, public dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router,
-    // WIP SL @Inject(MAT_DIALOG_DATA) public data,
     public apiClientService: ApiClientService,
     public dialogRef: MatDialogRef<CandidatsMailComponent>,) {
-    // WIP SL this.candidats = this.data.contact;
   }
   @Input() globalId: string;
   @Input() status: string = "form";
@@ -54,16 +52,6 @@ export class CandidatsFormComponent implements OnInit {
   public offer_id: any;
   public tests_available: any;
   public user_id: any;
-  /* WIP SL constructor(private router: Router,
-    @Inject(MAT_DIALOG_DATA) public data,
-    public apiClientService: ApiClientService,
-    public decryptTokenService: DecryptTokenService,
-    private dialog: MatDialog,
-    private _snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<CandidatsMailComponent>,
-  ) {
-    this.candidats = this.data.contact;
-  }*/
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -72,7 +60,6 @@ export class CandidatsFormComponent implements OnInit {
     // set contactlist to this field
     this.contactList = this.form.get('contacts') as FormArray;
 
-    // WIP SL from ngOnInit mail component :
     this.user_id = this.decryptTokenService.userId;
     this.offer_id = this.decryptTokenService.offer_id;
 
@@ -82,7 +69,6 @@ export class CandidatsFormComponent implements OnInit {
       .get(`${API_URI_USER}/${this.user_id}`)
       .subscribe(datas => {
         this.tests_available = datas.tests_available;
-        //this.tests_available = 30; // WIP SL
         console.log('NGONINIT candidats-mail / this.tests_available: ', this.tests_available);
       });
 
@@ -176,7 +162,6 @@ export class CandidatsFormComponent implements OnInit {
       this.openSnackBar(`Impossible d'inviter ${nbCandidats} candidat${nbCandidats > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`, "Fermer");
     } else {
       this.tests_available = this.tests_available - nbCandidats;
-      //this.tests_available = 40; // WIP SL
       this.apiClientService
         .put(`${API_URI_USER}/${this.user_id}`, {
           tests_available: this.tests_available
@@ -218,14 +203,6 @@ export class CandidatsFormComponent implements OnInit {
     console.log(this.candidats);
   }
 
-
-  /*  WIP SL ngOnInit() {
-    this.form = this.fb.group({
-      contacts: this.fb.array([this.createContact()])
-    });
-    // set contactlist to this field
-    this.contactList = this.form.get('contacts') as FormArray;
-  } */
   // contact formgroup
   createContact(): FormGroup {
     return this.fb.group({

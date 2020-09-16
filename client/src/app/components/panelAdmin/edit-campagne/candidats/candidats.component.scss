@@ -41,6 +41,10 @@ span.interview-icon.ng-star-inserted {
 .modall {
   // min-width: 450px;
   width: 600px;
+  border: solid 1px black;
+  overflow: hidden;
+  border-radius: 4px;
+
   .modall-content {
     padding: 40px;
     display: flex;
@@ -64,7 +68,7 @@ span.interview-icon.ng-star-inserted {
 
   .modall-footer {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
     padding: 20px 40px;
     .btn-modal {
       color: $color-white;
