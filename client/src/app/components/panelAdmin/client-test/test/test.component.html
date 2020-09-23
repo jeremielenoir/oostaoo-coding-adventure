@@ -105,26 +105,12 @@
       </div>
     </div>
 
-    <<<<<<< HEAD <app-base-button *ngIf="preview" [fullWidth]="true" [hoverClass]="''" (clickEvent)="questNext()"
+    <app-base-button *ngIf="preview" [fullWidth]="true" [hoverClass]="''" (clickEvent)="questNext()"
       iconName="play_arrow">Valider la réponse</app-base-button>
-      <app-base-button *ngIf="!preview" [fullWidth]="true" iconName="play_arrow" (clickEvent)="questNext()">{{
+    <app-base-button *ngIf="!preview" [fullWidth]="true" iconName="play_arrow" (clickEvent)="questNext()">{{
       index === questions.length - 1
         ? "Soumettre le test"
         : "Question suivante"
     }}</app-base-button>
-
-      =======
-
-      <button *ngIf="!preview" class="button" (click)="QuestNext()">
-        {{
-        index === questions.length - 1
-          ? "Soumettre le test"
-          : "Question suivante"
-      }}
-      </button>
-      <button *ngIf="preview" class="button" (click)="QuestNext()">
-        Valider la réponse
-      </button>
-      >>>>>>> refacto popups invite form and config email + lifting modals supprimer and anonymiser
   </div>
 </div>

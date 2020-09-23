@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener,  Inject, Input, OnInit, Output  } from "@angular/core";
+import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output } from "@angular/core";
 import {
   API_URI_CAMPAIGNS,
   API_URI_CANDIDATS,
@@ -7,7 +7,7 @@ import {
   QUESTION_SEPARATOR,
 } from "../../../../api-client/api-client.service";
 
-import {SelectedLanguageService} from "../../../../services/selected-language.service";
+import { SelectedLanguageService } from "../../../../services/selected-language.service";
 
 @Component({
   selector: "app-test",
@@ -58,34 +58,34 @@ export class TestComponent implements OnInit {
 
   // Input algo
   public langLower: string;
-  public  filetype: any;
+  public filetype: any;
   public filename: any;
   public options: any;
 
-  constructor(private apiClientService: ApiClientService, public languageStorage: SelectedLanguageService) {}
+  constructor(private apiClientService: ApiClientService, public languageStorage: SelectedLanguageService) { }
 
   public ngOnInit() {
 
     switch (this.languageStorage.getLanguageCountry()) {
       case "es-ES":
-        this.dataInfoLanguageName =  "name_es";
+        this.dataInfoLanguageName = "name_es";
         this.dataInfoLanguageContent = "content_es";
         break;
       case "fr-FR":
-        this.dataInfoLanguageName =  "name";
+        this.dataInfoLanguageName = "name";
         this.dataInfoLanguageContent = "content";
         break;
       case "en-US":
-        this.dataInfoLanguageName =  "name_en";
+        this.dataInfoLanguageName = "name_en";
         this.dataInfoLanguageContent = "content_en";
         break;
       case "jp-JP":
-        this.dataInfoLanguageName =  "name_jp";
+        this.dataInfoLanguageName = "name_jp";
         this.dataInfoLanguageContent = "content_jp";
         break;
       default:
         this.dataInfoLanguageContent = "content";
-        this.dataInfoLanguageName =  "name";
+        this.dataInfoLanguageName = "name";
     }
 
     this.sumPointsByNumTechno(this.questionCampaign);
@@ -113,8 +113,8 @@ export class TestComponent implements OnInit {
       }
     } else {
       this.candidat = {
-        campaign : {
-          copy_paste : false,
+        campaign: {
+          copy_paste: false,
         },
       };
       this.index = 0;
@@ -145,9 +145,9 @@ export class TestComponent implements OnInit {
         this.langLower = this.language.toLowerCase();
 
         if (this.langLower === "java" ||
-            this.langLower === "java/j2ee" ||
-            this.langLower === "spring" ||
-            this.langLower === "android") {
+          this.langLower === "java/j2ee" ||
+          this.langLower === "spring" ||
+          this.langLower === "android") {
 
           this.filetype = `application/java`;
           this.filename = `Main.java`;
@@ -158,7 +158,7 @@ export class TestComponent implements OnInit {
           this.filetype = `application/kotlin`;
           this.filename = `Main.kt`;
           this.options = { theme: "vs-white", language: "kotlin" };
-          }
+        }
 
         if (this.langLower === "c") {
           this.filetype = `application/c`;
@@ -179,10 +179,10 @@ export class TestComponent implements OnInit {
         }
 
         if (this.langLower === "javascript" ||
-        this.langLower === "angular 2+" ||
-        this.langLower === "angularjs" ||
-        this.langLower === "react" ||
-        this.langLower === "vuejs") {
+          this.langLower === "angular 2+" ||
+          this.langLower === "angularjs" ||
+          this.langLower === "react" ||
+          this.langLower === "vuejs") {
           this.filetype = `application/javascript`;
           this.filename = `Main.js`;
           this.options = { theme: "vs-white", language: "javascript" };
@@ -218,7 +218,7 @@ export class TestComponent implements OnInit {
     }, 1000);
   }
 
-  public viewResult(){
+  public viewResult() {
     console.log('VIEW RESULT');
   }
 
@@ -313,7 +313,7 @@ export class TestComponent implements OnInit {
     // console.log(" this.arrayReponseUser : ", this.arrayReponseUser);
   }
 
-  public disableRep( timeQuestion: number) {
+  public disableRep(timeQuestion: number) {
     if (timeQuestion === this.timedefault) {
       this.isDisabled = true;
     }
@@ -332,7 +332,7 @@ export class TestComponent implements OnInit {
     console.log("onReady mark-down");
   }
 
-  public postTimeTest( dureeTest: any) {
+  public postTimeTest(dureeTest: any) {
     this.apiClientService.put(API_URI_CANDIDATS + "/" + this.candidat.id, {
       duree: dureeTest,
       test_terminer: this.dateFinishTest,
@@ -374,14 +374,14 @@ export class TestComponent implements OnInit {
           }
 
           const getPourcentTest = Math.round((this.totalPointsCandidat.total_points ||
-             this.totalPointsCandidat.points) / (this.totalPointsCampaign.total_points ||
-               this.totalPointsCampaign.points) * 100);
+            this.totalPointsCandidat.points) / (this.totalPointsCampaign.total_points ||
+              this.totalPointsCampaign.points) * 100);
           console.log("test SUM TOTAL OF THE TEST", getPourcentTest);
 
           const newOBjectToPostCandidat = [
             { allPointsTechnos: this.allPointsTechnos },
             { allPointsCandidat: this.allPointsCandidat },
-            { getpourcentByCandidat: objectGetpourcent },
+            { getPourcentByCandidat: objectGetpourcent },
             { totalPointsCandidat: this.totalPointsCandidat.total_points || this.totalPointsCandidat.points },
             { totalPointsCampaign: this.totalPointsCampaign.total_points || this.totalPointsCampaign.points },
             { PourcentTest: getPourcentTest },

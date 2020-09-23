@@ -135,10 +135,6 @@
                 </div>
               </td>
             </div>
-            <div *ngIf="column === 'Details'"></div>
-            <div *ngIf="column === 'Interview'">
-              Interview
-            </div>
             <div class="color-text">
               <div *ngIf="column === 'Candidats'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -149,12 +145,15 @@
                   {{ dataInfos.Email }}
                 </td>
               </div>
-              <div *ngIf="column =='Details' ">
+              <div *ngIf="column =='Rapport' ">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                   {{ column }}
                 </th>
                 <td mat-cell *matCellDef="let dataInfos" class="pointer" (click)="menuSidenav(sidenav, dataInfos)">
-                  <mat-icon color="accent" class="v-align-middle" aria-hidden="true">
+                  <span *ngIf="dataInfos.rapport === null" class="v-align-middle">
+                    à venir
+                  </span>
+                  <mat-icon *ngIf="dataInfos.rapport !== null" color="accent" class="v-align-middle" aria-hidden="true">
                     assessment
                   </mat-icon>
                 </td>
@@ -231,7 +230,7 @@
       <p class="info-candidat"><i class="far fa-clock"></i> Durée du test : {{currentCandidat.Duree}}</p>
       <div class="sidenav_candidat_content" *ngIf="currentCandidat.points">
         <div class="sidenav_candidat_result"
-          *ngFor="let candidatPointTechno of currentCandidat.points[2].getpourcentByCandidat">
+          *ngFor="let candidatPointTechno of currentCandidat.points[2].getPourcentByCandidat">
           <p class="sidenav_candidat_result">
             <span class="icon-techno" *ngIf="candidatPointTechno.techno === 'React'">
               <i class="fab fa-react"></i>

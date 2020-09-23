@@ -237,7 +237,7 @@ export class CandidatsComponent implements OnInit {
                 }
               });
               getpourcentByCandidat.forEach((score) => {
-                scoreByTechObject[score.techno] = score.percentage + "%";
+                scoreByTechObject[score.techno] = score.percentage.toFixed(2) + "%";
               });
 
               const percentArray =
@@ -283,7 +283,7 @@ export class CandidatsComponent implements OnInit {
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
         const defaultColumns = [
           "Checked",
-          "Details",
+          "Rapport",
           "Interview",
 
           "Candidats",
