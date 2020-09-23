@@ -37,7 +37,9 @@
     </div>
   </div>
 </div>
-
+<div *ngIf="status === 'loading'" class="loader-container">
+  <mat-spinner [strokeWidth]="20"></mat-spinner>
+</div>
 <div *ngIf="status === 'email'">
   <header class="header-modal">
     <span class="rond-custom">

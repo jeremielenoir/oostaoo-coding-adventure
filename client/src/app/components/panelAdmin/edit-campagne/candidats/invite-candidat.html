@@ -2,5 +2,7 @@
   <div class="close-invite-dialog">
     <span (click)="close()"> <i class="fa fa-times" aria-hidden="true"></i></span>
   </div>
-  <app-candidats-form *ngFor="let campaign of campaigns" [globalId]="campaign.id"></app-candidats-form>
+  <app-candidats-form *ngFor="let campaign of campaigns" [globalId]="campaign.id"
+    [tests_available]="data.tests_available">
+  </app-candidats-form>
 </div>

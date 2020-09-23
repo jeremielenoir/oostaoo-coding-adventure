@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
@@ -21,17 +21,10 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export class CandidatsFormComponent implements OnInit {
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 
-  // returns all form groups under contacts
-  get contactFormGroup() {
-    return this.form.get('contacts') as FormArray;
-  }
-
-  constructor(private fb: FormBuilder, public dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router,
-    public apiClientService: ApiClientService,
-    public dialogRef: MatDialogRef<CandidatsMailComponent>,) {
-  }
   @Input() globalId: string;
   @Input() status: string = "form";
+  @Input() tests_available: number;
+  @Output() onUpdateTestsAvailableWIP = new EventEmitter<any>();
   public form: FormGroup;
   public contactList: FormArray;
   public campaigns: any;
@@ -50,27 +43,26 @@ export class CandidatsFormComponent implements OnInit {
   public htmlContent: any;
 
   public offer_id: any;
-  public tests_available: any;
   public user_id: any;
+
+  constructor(private fb: FormBuilder, public dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router,
+    public apiClientService: ApiClientService,
+    public dialogRef: MatDialogRef<CandidatsMailComponent>,) {
+    this.onUpdateTestsAvailableWIP = new EventEmitter();
+  }
+  // returns all form groups under contacts
+  get contactFormGroup() {
+    return this.form.get('contacts') as FormArray;
+  }
 
   ngOnInit() {
     this.form = this.fb.group({
       contacts: this.fb.array([this.createContact()])
     });
-    // set contactlist to this field
     this.contactList = this.form.get('contacts') as FormArray;
 
     this.user_id = this.decryptTokenService.userId;
     this.offer_id = this.decryptTokenService.offer_id;
-
-    // get the user's tests_available via API instead of localStorage because of
-    // decryptTokenService's bug with localStorage updated values
-    this.apiClientService
-      .get(`${API_URI_USER}/${this.user_id}`)
-      .subscribe(datas => {
-        this.tests_available = datas.tests_available;
-        console.log('NGONINIT candidats-mail / this.tests_available: ', this.tests_available);
-      });
 
     this.apiClientService
       .get(API_URI_CAMPAIGNS + '/' + this.globalId)
@@ -80,8 +72,6 @@ export class CandidatsFormComponent implements OnInit {
 
     this.sujet = 'Évaluation technique';
 
-    // this.htmlContent = `
-    //    <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.name},</span>
     this.htmlContent = `<div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.namePlaceholder},</span>
        </div><br /><br />
        <div>Votre candidature a retenu notre attention.</div><div>Dans le cadre de notre processus
@@ -93,18 +83,10 @@ export class CandidatsFormComponent implements OnInit {
        <div><br></div><div><br></div>
        <div>Bonne chance !</div><div>Cordialement </div>
     `;
-
-    // this.sujet = this.campaigns[0].email_title;
-
-    // this.contenu = `
-
-    // Bonjour ${this.name}
-
-    //     ${this.campaigns[0].email_content}
-    //   `;
   }
 
   postCandidat(name, emailContact): Promise<any> {
+    this.switchTo('loading');
     return this.apiClientService.post(API_URI_CANDIDATS, {
       name,
       email: emailContact,
@@ -186,17 +168,14 @@ export class CandidatsFormComponent implements OnInit {
     }).toPromise()
       .then((res) => {
         console.log('CANDIDATS', res);
-        this.dialog.closeAll();
-        // to get the new localStorage value of tests_available with DecryptTokenService in nginit cycle
-        window.location.reload();
-
+        this.dialogRef.close(this.tests_available);
       }).catch(
         err => console.log(err)
       );
   }
 
   retourCandidat() {
-    this.dialogRef.close();
+    this.dialogRef.close(this.tests_available);
   }
 
   showCandidats() {
@@ -214,7 +193,7 @@ export class CandidatsFormComponent implements OnInit {
   }
   // add a contact form group
   addContact() {
-    if (this.contactList.length < this.decryptTokenService.tests_available) {
+    if (this.contactList.length < this.tests_available) {
       this.contactList.push(this.createContact());
     } else {
       this.openSnackBar("Limite de test disponibles atteinte", "Fermer");
