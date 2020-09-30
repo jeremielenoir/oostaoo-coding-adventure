@@ -37,10 +37,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="status === 'loading'" class="loader-container">
-  <mat-spinner [strokeWidth]="20"></mat-spinner>
-  <p class="margin-top-md" i18n>Envoi en cours...</p>
-</div>
+
 <div *ngIf="status === 'email'">
   <header class="header-modal">
     <span class="rond-custom">
@@ -52,17 +49,20 @@
       <p>Vous avez sélectionné <strong>{{candidats.length}}</strong> destinataire(s)</p>
     </div>
   </header>
-  <!-- <div class="content-modal-form"></div>
-  <div> -->
   <div class="content-modal-email">
     <div class="scroll-body">
       <div class="email-subject">
-        <label>Sujet :</label>
-        <input *ngIf="editing" class="form-input" type="" name="" class="" [(ngModel)]="sujet" />
+        <label *ngIf="!editing">Sujet :</label>
+        <!-- WIP SL <input *ngIf="editing" class="form-input" type="" name="" class="" [(ngModel)]="sujet" /> -->
+        <mat-form-field *ngIf="editing" class="email-subject-input" [color]="'accent'" appearance="outline"
+          [floatLabel]="true">
+          <mat-label>Sujet</mat-label>
+          <input matInput placeholder="sujet" type="text" name="" [(ngModel)]="sujet" />
+        </mat-form-field>
         <p *ngIf="!editing" class="content">{{sujet}}</p>
       </div>
       <div [class.message-personaliser-form]="editing">
-        <label>Message :</label>
+        <label *ngIf="!editing">Message :</label>
         <ckeditor *ngIf="editing" [editor]="Editor" [(ngModel)]="htmlContent"></ckeditor>
         <div *ngIf="!editing" [innerHTML]="htmlContent" class="htmlContent"></div>
       </div>
@@ -79,4 +79,9 @@
         Envoyer {{candidats.length > 1 ? "les emails" : "l'email"}}</app-base-button>
     </div>
   </div>
+</div>
+
+<div *ngIf="status === 'loading'" class="loader-container">
+  <mat-spinner [strokeWidth]="20"></mat-spinner>
+  <p class="margin-top-md" i18n>Envoi en cours...</p>
 </div>
