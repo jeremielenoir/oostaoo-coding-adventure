@@ -59,7 +59,7 @@ export class RapportDetailleComponent implements OnInit {
           return;
         }
 
-        const percentArray = data.points_candidat[2]["getpourcentByCandidat"].map((a) => a.percentage);
+        const percentArray = data.points_candidat[2]["getPourcentByCandidat"].map((a) => a.percentage);
 
         const sumPercent = percentArray.reduce((a, b) => parseFloat(a + b));
 

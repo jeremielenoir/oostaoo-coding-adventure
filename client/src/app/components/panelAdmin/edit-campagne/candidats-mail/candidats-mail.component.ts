@@ -54,7 +54,6 @@ export class CandidatsMailComponent implements OnInit {
       .get(`${API_URI_USER}/${this.user_id}`)
       .subscribe(datas => {
         this.tests_available = datas.tests_available;
-        //this.tests_available = 30; // WIP SL
         console.log('NGONINIT candidats-mail / this.tests_available: ', this.tests_available);
       });
 
@@ -148,7 +147,6 @@ export class CandidatsMailComponent implements OnInit {
       this.openSnackBar(`Impossible d'inviter ${nbCandidats} candidat${nbCandidats > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`, "Fermer");
     } else {
       this.tests_available = this.tests_available - nbCandidats;
-      //this.tests_available = 40; // WIP SL
       this.apiClientService
         .put(`${API_URI_USER}/${this.user_id}`, {
           tests_available: this.tests_available

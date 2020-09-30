@@ -365,7 +365,7 @@ module.exports = {
       const timespent = fmtMSS(candidat.duree) + "/" + fmtMSS(totalTime);
       console.log("candidat", candidat);
       const percentArray = candidat.points_candidat[2][
-        "getpourcentByCandidat"
+        "getPourcentByCandidat"
       ].map((a) => a.percentage);
 
       const sumPercent = percentArray.reduce((a, b) => parseFloat(a + b));

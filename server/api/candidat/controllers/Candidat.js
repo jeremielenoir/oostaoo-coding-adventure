@@ -88,7 +88,7 @@ module.exports = {
       Nom: name,
       email,
       campaign: campaignId,
-      token: cryptoData
+      token: cryptoData,
     };
 
     try {

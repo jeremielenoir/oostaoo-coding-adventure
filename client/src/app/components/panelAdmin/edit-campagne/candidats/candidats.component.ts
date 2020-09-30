@@ -101,13 +101,24 @@ export class CandidatsComponent implements OnInit {
     { value: "expirer", viewValue: "Expirés" },
   ];
 
+  ngOnInit() {
+    this.tests_available = this.decryptTokenService.tests_available;
+    if (this.tests_available == -1) {
+      this.tests_available = "";
+    }
+    this.getCampaign().then((datas) => {
+      this.campaign = datas;
+    });
+  }
+
   openDialog() {
-    const inviteCandidatDialog = this.dialog.open(InviteCandidat, {
-      data: this.globalId,
+    const dialogRef = this.dialog.open(InviteCandidat, {
+      data: { globalId: this.globalId, tests_available: this.tests_available },
       height: "580px",
     });
 
-    inviteCandidatDialog.afterClosed().subscribe((data) => {
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) this.tests_available = data;
       this.getCampaign().then((datas) => {
         console.log("AFTER CLOSE ALL DATAS", datas);
       });
@@ -121,16 +132,6 @@ export class CandidatsComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.tests_available = this.decryptTokenService.tests_available;
-    if (this.tests_available == -1) {
-      this.tests_available = "";
-    }
-    this.getCampaign().then((datas) => {
-      this.campaign = datas;
-    });
-  }
-
   showChoiceList(e) {
     if (e) {
       e.stopPropagation();
@@ -141,7 +142,6 @@ export class CandidatsComponent implements OnInit {
   menuChoice(event) {
     this.choiceList = false;
   }
-
 
   selectAllCandidats(checked: boolean) {
     this.allCandidatsSelected = checked;
@@ -237,7 +237,7 @@ export class CandidatsComponent implements OnInit {
                 }
               });
               getpourcentByCandidat.forEach((score) => {
-                scoreByTechObject[score.techno] = score.percentage + "%";
+                scoreByTechObject[score.techno] = score.percentage.toFixed(2) + "%";
               });
 
               const percentArray =
@@ -283,7 +283,7 @@ export class CandidatsComponent implements OnInit {
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
         const defaultColumns = [
           "Checked",
-          "Details",
+          "Rapport",
           "Interview",
 
           "Candidats",

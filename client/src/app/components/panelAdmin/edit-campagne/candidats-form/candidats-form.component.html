@@ -1,30 +1,82 @@
-<div class="p-3">
-  <div lass="form-scroll">
-    <form class="cologne-form" [formGroup]="form" (submit)="submit()">
-      <div class="card-body" formArrayName="contacts">
-        <div [formGroupName]="i" class="row" *ngFor="let contact of contactFormGroup.controls; let i = index">
-          <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
-            <mat-label>Nom*</mat-label>
-            <input formControlName="name" matInput placeholder="John Smith" type="text" />
-          </mat-form-field>
-          <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
-            <mat-label>Email*</mat-label>
-            <input formControlName="value" matInput placeholder="john.smith@email.com" type="email" />
-          </mat-form-field>
-          <button mat-mini-fab color="warn" (click)="removeContact(i)" [disabled]="contactList.length === 1">
-            <mat-icon>delete</mat-icon>
-          </button>
+<div class="p-3" *ngIf="status === 'form'">
+  <header class="header-modal">
+    <span class="rond-custom">1</span>
+    <div class="info-campaign-candidats">
+      <h2 i18n>Entrez le nom et l'email des candidats</h2>
+      <p *ngFor="let campaign of campaigns">Campagne: {{ campaign.Name }}</p>
+    </div>
+  </header>
+  <div class="content-modal-form">
+    <div lass="form-scroll">
+      <form class="cologne-form" [formGroup]="form" (submit)="submit()">
+        <div class="card-body" formArrayName="contacts">
+          <div [formGroupName]="i" class="row" *ngFor="let contact of contactFormGroup.controls; let i = index">
+            <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
+              <mat-label>Nom*</mat-label>
+              <input formControlName="name" matInput placeholder="John Smith" type="text" />
+            </mat-form-field>
+            <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
+              <mat-label>Email*</mat-label>
+              <input formControlName="value" matInput placeholder="john.smith@email.com" type="email" />
+            </mat-form-field>
+            <button mat-mini-fab color="warn" (click)="removeContact(i)" [disabled]="contactList.length === 1">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </div>
+        <div class="block-button">
+          <app-base-button iconName="person_add" (clickEvent)="addContact()">Ajouter un autre candidat</app-base-button>
+          <app-base-button iconName="mail_outline" [disabled]="!validate()" (clickEvent)="switchTo('email')">Prochaine
+            étape : configurer l'email
+          </app-base-button>
+        </div>
+        <div class="information">
+          Les champs indiqués par une * sont obligatoires
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div *ngIf="status === 'loading'" class="loader-container">
+  <mat-spinner [strokeWidth]="20"></mat-spinner>
+  <p class="margin-top-md" i18n>Envoi en cours...</p>
+</div>
+<div *ngIf="status === 'email'">
+  <header class="header-modal">
+    <span class="rond-custom">
+      <p>2</p>
+    </span>
+    <div class="info-campaign-candidats">
+      <h2>Configuration de l'email</h2>
+      <p *ngFor="let campaign of campaigns">{{ campaign.Name }}</p>
+      <p>Vous avez sélectionné <strong>{{candidats.length}}</strong> destinataire(s)</p>
+    </div>
+  </header>
+  <!-- <div class="content-modal-form"></div>
+  <div> -->
+  <div class="content-modal-email">
+    <div class="scroll-body">
+      <div class="email-subject">
+        <label>Sujet :</label>
+        <input *ngIf="editing" class="form-input" type="" name="" class="" [(ngModel)]="sujet" />
+        <p *ngIf="!editing" class="content">{{sujet}}</p>
       </div>
-      <div class="block-button">
-        <app-base-button iconName="person_add" (clickEvent)="addContact()">Ajouter un autre candidat</app-base-button>
-        <app-base-button iconName="mail_outline" [disabled]="!validate()" (clickEvent)="openDialogMail()">Prochaine
-          étape : configurer l'email
-        </app-base-button>
+      <div [class.message-personaliser-form]="editing">
+        <label>Message :</label>
+        <ckeditor *ngIf="editing" [editor]="Editor" [(ngModel)]="htmlContent"></ckeditor>
+        <div *ngIf="!editing" [innerHTML]="htmlContent" class="htmlContent"></div>
       </div>
-      <div class="information">
-        Les champs indiqués par une * sont obligatoires
-      </div>
-    </form>
+    </div>
+    <div class="block-button">
+      <app-base-button iconName="keyboard_arrow_left" iconPosition="left" [disabled]="editing"
+        (clickEvent)="switchTo('form')">
+        Retour
+      </app-base-button>
+      <app-base-button [iconName]="editing ? 'done' : 'edit'" (clickEvent)="editing=!editing">
+        {{editing ? 'OK' : 'Personnaliser cet email'}}
+      </app-base-button>
+      <app-base-button iconName="send" [disabled]="editing" (clickEvent)="updateCampaignPostCandidats()">
+        Envoyer {{candidats.length > 1 ? "les emails" : "l'email"}}</app-base-button>
+    </div>
   </div>
 </div>
