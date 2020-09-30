@@ -39,6 +39,7 @@
 </div>
 <div *ngIf="status === 'loading'" class="loader-container">
   <mat-spinner [strokeWidth]="20"></mat-spinner>
+  <p class="margin-top-md" i18n>Envoi en cours...</p>
 </div>
 <div *ngIf="status === 'email'">
   <header class="header-modal">
