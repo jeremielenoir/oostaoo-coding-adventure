@@ -381,7 +381,7 @@ export class TestComponent implements OnInit {
           const newOBjectToPostCandidat = [
             { allPointsTechnos: this.allPointsTechnos },
             { allPointsCandidat: this.allPointsCandidat },
-            { getPourcentByCandidat: objectGetpourcent },
+            { getpourcentByCandidat: objectGetpourcent },
             { totalPointsCandidat: this.totalPointsCandidat.total_points || this.totalPointsCandidat.points },
             { totalPointsCampaign: this.totalPointsCampaign.total_points || this.totalPointsCampaign.points },
             { PourcentTest: getPourcentTest },
