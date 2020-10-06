@@ -1,28 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import {
   FormControl,
   Validators,
   FormGroup,
   FormBuilder,
-} from '@angular/forms';
+} from "@angular/forms";
 import {
   ApiClientService,
   API_URI_USER,
   API_URI_ACCOUNT,
-} from 'src/app/api-client/api-client.service';
-import { DecryptTokenService } from 'src/app/components/home/register/register.service';
-import { MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
-import { MustMatch } from './must-match.validator';
+} from "src/app/api-client/api-client.service";
+import { DecryptTokenService } from "src/app/components/home/register/register.service";
+import { MatSnackBar } from "@angular/material";
+import { Router } from "@angular/router";
+import { MustMatch } from "./must-match.validator";
 // import { Snapper } from 'igniteui-angular-charts';
 
 @Component({
-  selector: 'app-profil-utilisateur',
-  templateUrl: './profil-utilisateur.component.html',
-  styleUrls: ['./profil-utilisateur.component.scss'],
+  selector: "app-profil-utilisateur",
+  templateUrl: "./profil-utilisateur.component.html",
+  styleUrls: ["./profil-utilisateur.component.scss"],
 })
 export class ProfilUtilisateurComponent implements OnInit {
-  formUtilisateur: FormGroup;
+  formUtilisateurProfil: FormGroup;
+  formUtilisateurSignature: FormGroup;
+  formUtilisateurEmail: FormGroup;
+  formUtilisateurPassword: FormGroup;
 
   constructor(
     public apiClientService: ApiClientService,
@@ -30,7 +33,7 @@ export class ProfilUtilisateurComponent implements OnInit {
     private router: Router,
     private _snackBar: MatSnackBar,
     private formBuilder: FormBuilder
-  ) { }
+  ) {}
   hide = true;
   isOwnerOfPersonalAccount = false;
   accountConvertInProgress = false;
@@ -41,68 +44,50 @@ export class ProfilUtilisateurComponent implements OnInit {
   dateExp: string | number | Date;
   NewDateExp: Date;
 
-  submittedPassword = false;
-  submittedProfil = false;
-  submittedEmail = false;
-  prenom = new FormControl('', Validators.required);
-  nom = new FormControl('', Validators.required);
-  pays = new FormControl('', Validators.required);
-  langue = new FormControl('', Validators.required);
-  tel = new FormControl('', Validators.required);
-  mobile = new FormControl('', Validators.required);
-  fonction = new FormControl('', Validators.required);
-  signature = new FormControl('', Validators.required);
-  email = new FormControl('', [Validators.required, Validators.email]);
-  newEmail = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [
-    Validators.required,
-    Validators.minLength(6),
-  ]);
-  newpassword = new FormControl('', [
-    Validators.required,
-    Validators.minLength(6),
-  ]);
-  confirmpassword = new FormControl('', Validators.required);
-
   ngOnInit() {
-    this.formUtilisateur = this.formBuilder.group(
+    this.formUtilisateurProfil = this.formBuilder.group({
+      firstName: ["", Validators.required],
+      lastName: ["", Validators.required],
+      country: ["", Validators.required],
+      language: ["", Validators.required],
+      phone: [""],
+      telephone: [""],
+      office: [""],
+    });
+    this.formUtilisateurSignature = this.formBuilder.group({
+      signature: [""],
+    });
+    this.formUtilisateurEmail = this.formBuilder.group({
+      email: [{ value: null, disabled: true }],
+      newEmail: ["", [Validators.required, Validators.email]],
+    });
+    this.formUtilisateurPassword = this.formBuilder.group(
       {
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        country: ['', Validators.required],
-        language: ['', Validators.required],
-        phone: [''],
-        telephone: [''],
-        office: [''],
-        signature: [''],
-        email: ['', [Validators.required, Validators.email]],
-        newEmail: ['', [Validators.required, Validators.email]],
-        newPassword: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', Validators.required],
+        newPassword: ["", [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ["", Validators.required],
       },
       {
-        validator: MustMatch('newPassword', 'confirmPassword'),
+        validator: MustMatch("newPassword", "confirmPassword"),
       }
     );
+    // this.formUtilisateur.controls['email'].disable()
 
     this.getUser().then((user) => {
-      this.user = user[0];
-      this.isOwnerOfPersonalAccount =
-        this.user.customeraccount.type === 'personal';
-      this.prenom = new FormControl(user[0].prenom, Validators.required);
-      this.nom = new FormControl(user[0].nom, Validators.required);
-      this.pays = new FormControl(user[0].pays, Validators.required);
-      this.langue = new FormControl(user[0].langue);
-      this.tel = new FormControl(user[0].tel);
-      this.mobile = new FormControl(user[0].mobile);
-      this.fonction = new FormControl(user[0].function, Validators.required);
-      this.signature = new FormControl(user[0].signature);
-      this.email = new FormControl(user[0].email, [
-        Validators.required,
-        Validators.email,
-      ]);
-      this.password = new FormControl(user[0].password, Validators.required);
-      // console.log('form before =', this.name.value, this.lang.value, this.copypasteControl.value, this.rapportControl.value);
+      if (user.length > 0) {
+        this.user = user[0];
+        console.log("THIS USER : ", this.user);
+        this.isOwnerOfPersonalAccount =
+        this.user.customeraccount.type === "personal";
+        this.formUtilisateurProfil.controls["firstName"].setValue(this.user.prenom);
+        this.formUtilisateurProfil.controls["lastName"].setValue(this.user.nom);
+        this.formUtilisateurProfil.controls["country"].setValue(this.user.pays);
+        this.formUtilisateurProfil.controls["language"].setValue(this.user.langue);
+        this.formUtilisateurProfil.controls["phone"].setValue(this.user.tel);
+        this.formUtilisateurProfil.controls["telephone"].setValue(this.user.mobile);
+        this.formUtilisateurProfil.controls["office"].setValue(this.user.function);
+        this.formUtilisateurSignature.controls["signature"].setValue(this.user.signature);
+        this.formUtilisateurEmail.controls["email"].setValue(this.user.email);
+      }
     });
   }
 
@@ -112,19 +97,13 @@ export class ProfilUtilisateurComponent implements OnInit {
   async convertToPro() {
     try {
       this.accountConvertInProgress = true;
-
-      await this.apiClientService
-        .put(API_URI_ACCOUNT + '/' + this.user.customeraccount.id, {
-          type: 'profesional',
-        })
-        .toPromise();
-
-      this.router.navigate(['/dashboard/profil-entreprise']);
+      await this.apiClientService.put(API_URI_ACCOUNT + "/" + this.user.customeraccount.id, {
+          type: "profesional",
+        }).toPromise();
+        this.router.navigate(["/dashboard/profil-entreprise"]);
     } catch (e) {
       this.accountConvertInProgress = false;
-      this._snackBar.open(
-        'Oops ! cette fonctionnalité est indisponible pour le moment',
-        'OK',
+      this._snackBar.open("Oops ! cette fonctionnalité est indisponible pour le moment","OK",
         { duration: 3000 }
       );
     }
@@ -137,144 +116,80 @@ export class ProfilUtilisateurComponent implements OnInit {
   }
 
   updateprofil() {
-    this.submittedProfil = true;
-    if (
-      this.prenom.value === '' ||
-      this.nom.value === '' ||
-      this.pays.value === '' ||
-      this.langue.value === 'value'
-    ) {
-      this.openSnackBar(
-        'Une erreur est survenue, veuillez correctement remplir les champs requis',
-        'Fermer'
-      );
-      return console.log('Erreur veuillez remplir tout les champs requis');
+    if (this.formUtilisateurProfil.invalid) {
+      this.openSnackBar( "Une erreur est survenue, veuillez correctement remplir les champs requis", "Fermer");
     } else {
-      this.apiClientService
-        .put(API_URI_USER + '/' + this.decryptTokenService.userId, {
-          Prenom: this.prenom.value,
-          Nom: this.nom.value,
-          Pays: this.pays.value,
-          Langue: this.langue.value,
-          Tel: this.tel.value,
-          mobile: this.mobile.value,
-          function: this.fonction.value,
+      this.apiClientService.put(API_URI_USER + "/" + this.decryptTokenService.userId, {
+          Prenom: this.formUtilisateurProfil.controls["firstName"].value,
+          Nom: this.formUtilisateurProfil.controls["lastName"].value,
+          Pays: this.formUtilisateurProfil.controls["country"].value,
+          Langue: this.formUtilisateurProfil.controls["language"].value,
+          Tel: this.formUtilisateurProfil.controls["phone"].value,
+          mobile: this.formUtilisateurProfil.controls["telephone"].value,
+          function: this.formUtilisateurProfil.controls["office"].value,
         })
-        .subscribe(
-          (res) => {
-            this.openSnackBar(
-              'Le profil a correctement été mis à jour',
-              'Fermer'
-            );
-            // console.log('res', res);
+        .subscribe((res) => {
+            this.openSnackBar("Le profil a correctement été mis à jour", "Fermer");
+            console.log('res', res);
           },
-          (err) => console.log(err)
-        );
-      console.log(
-        'form profil =',
-        this.prenom.value,
-        this.nom.value,
-        this.pays.value,
-        this.langue.value,
-        this.tel.value,
-        this.mobile.value,
-        this.fonction.value
-      );
+          (err) => console.log(err));
     }
   }
 
   updatesignature() {
-    this.apiClientService
-      .put(API_URI_USER + '/' + this.decryptTokenService.userId, {
-        Signature: this.signature.value,
-      })
-      .subscribe(
-        (res) => {
-          this.openSnackBar(
-            'La signature a correctement été modifiée',
-            'Fermer'
-          );
-          // console.log('res', res);
-        },
-        (err) =>
-          this.openSnackBar(
-            'Une erreur est survenue, veuillez correctement remplir les champs requis',
-            'Fermer'
-          )
-      );
-    console.log('form signature =', this.signature.value);
+    if (this.formUtilisateurSignature.invalid) {
+      this.openSnackBar( "Une erreur est survenue, veuillez correctement remplir les champs requis", "Fermer");
+    } else{
+      this.apiClientService.put(API_URI_USER + "/" + this.decryptTokenService.userId, {
+          Signature: this.formUtilisateurSignature.controls["signature"].value,
+        }).subscribe((res) => {
+            this.openSnackBar("La signature a correctement été modifiée", "Fermer");
+            // console.log('res', res);
+          },
+          (err) => console.log(err));
+    }
   }
 
   updateemail() {
     this.submittedEmail = true;
-    if (
-      this.email.value === '' ||
-      this.newEmail.value === '' ||
-      this.email.invalid ||
-      this.newEmail.invalid
-    ) {
-      this.openSnackBar(
-        'Une erreur est survenue, veuillez correctement remplir les champs requis',
-        'Fermer'
-      );
-      return console.log('Erreur veuillez remplir tout les champs requis');
+    if (this.formUtilisateurEmail.invalid) {
+      this.openSnackBar( "Une erreur est survenue, veuillez correctement remplir les champs requis", "Fermer");
     } else {
-      this.apiClientService
-        .put(API_URI_USER + '/' + this.decryptTokenService.userId, {
-          Email: this.newEmail.value,
-        })
-        .subscribe(
+      this.apiClientService.put(API_URI_USER + "/" + this.decryptTokenService.userId, {
+          Email: this.formUtilisateurEmail.controls["newEmail"].value,
+        }).subscribe(
           (res) => {
-            this.openSnackBar('L\'email a correctement été modifié', 'Fermer');
+            this.openSnackBar("L'email a correctement été modifié", "Fermer");
             // console.log('res', res);
           },
           (err) => console.log(err)
         );
-      console.log('form email =', this.newEmail.value);
     }
   }
 
   updatepassword() {
     this.submittedPassword = true;
-    if (
-      this.newpassword.value === null ||
-      this.newpassword.value === '' ||
-      this.newpassword.value !== this.confirmpassword.value
-    ) {
-      this.openSnackBar(
-        'Une erreur est survenue, veuillez correctement remplir les champs requis',
-        'Fermer'
-      );
-      return console.log('Erreur le mot de passe n\'a pas été modifié ');
+    if (this.formUtilisateurPassword.invalid) {
+      this.openSnackBar("Une erreur est survenue, veuillez correctement remplir les champs requis", "Fermer");
     } else {
-      this.apiClientService
-        .put(API_URI_USER + '/' + this.decryptTokenService.userId, {
-          password: this.newpassword.value,
+      this.apiClientService.put(API_URI_USER + "/" + this.decryptTokenService.userId, {
+          password: this.formUtilisateurPassword.controls["confirmPassword"].value,
         })
         .subscribe(
           (res) => {
-            this.openSnackBar(
-              'Le mot de passe a correctement été modifié',
-              'Fermer'
-            );
+            this.openSnackBar("Le mot de passe a correctement été modifié","Fermer");
             // console.log('res', res);
           },
           (err) => console.log(err)
         );
-      console.log('form password =', this.newpassword.value);
     }
   }
 
   async getUser(): Promise<any> {
     try {
-      const datas = await this.apiClientService
-        .get(API_URI_USER + '/' + this.decryptTokenService.userId)
-        .toPromise();
-      console.log('profil-utilisateur/ get User / datas : ', datas);
-      console.log(
-        'profil-utilisateur/ localStorage currentUser : ',
-        localStorage.getItem('currentUser')
-      );
+      const datas = await this.apiClientService.get(API_URI_USER + "/" + this.decryptTokenService.userId).toPromise();
+      console.log("profil-utilisateur/ get User / datas : ", datas);
+      console.log("profil-utilisateur/ localStorage currentUser : ",localStorage.getItem("currentUser"));
       return (this.user = [datas]);
     } catch (err) {
       return err;
