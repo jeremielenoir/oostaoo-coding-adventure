@@ -130,7 +130,6 @@ export class ProfilUtilisateurComponent implements OnInit {
         })
         .subscribe((res) => {
             this.openSnackBar("Le profil a correctement été mis à jour", "Fermer");
-            console.log('res', res);
           },
           (err) => console.log(err));
     }
@@ -161,6 +160,7 @@ export class ProfilUtilisateurComponent implements OnInit {
           (res) => {
             this.openSnackBar("L'email a correctement été modifié", "Fermer");
             // console.log('res', res);
+            this.formUtilisateurEmail.controls["email"].setValue(res.email);
           },
           (err) => console.log(err)
         );
