@@ -180,8 +180,8 @@ export class ProfilUtilisateurComponent implements OnInit {
           (res) => {
             this.openSnackBar("Le mot de passe a correctement été modifié","Fermer");
             // console.log('res', res);
-            this.formUtilisateurPassword.get("newPassword").reset()
-            this.formUtilisateurPassword.get("confirmPassword").reset()
+            this.formUtilisateurPassword.get("newPassword").reset();
+            this.formUtilisateurPassword.get("confirmPassword").reset();
           },
           (err) => console.log(err)
         );
