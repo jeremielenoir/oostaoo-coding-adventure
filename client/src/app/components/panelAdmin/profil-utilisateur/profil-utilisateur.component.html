@@ -1,7 +1,24 @@
 <div id="global">
-  <!--app-breadcrumb [namePage]="'Mon profil'"></app-breadcrumb-->
+  <!-- <app-breadcrumb [namePage]="'Mon profil'"></app-breadcrumb> -->
 
   <div class="padding-top">
+    <div class="breadrumb">
+      <div [routerLink]="['/dashboard/profil-utilisateur']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
+        <p>Mon profil
+          <mat-icon class="fix-right hvr-icon">person_outline</mat-icon>
+        </p>
+      </div>
+      <div *ngIf="this.user.customeraccount.type === 'profesional'"  [routerLink]="['/dashboard/profil-entreprise']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
+        <p>Mon entreprise 
+          <mat-icon class="fix-right hvr-icon">domain</mat-icon>
+        </p>
+      </div>
+      <div [routerLink]="['/dashboard/utilisateurs']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
+        <p>utilisateurs
+          <mat-icon class="fix-right hvr-icon">groups</mat-icon>
+        </p>
+      </div>
+    </div>
     <div class="content">
       <div *ngIf="isOwnerOfPersonalAccount" fxLayout="row" fxLayout="row" fxLayoutAlign="space-between center"
         class="account-transform">
