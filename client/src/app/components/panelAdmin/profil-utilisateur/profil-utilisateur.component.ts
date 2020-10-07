@@ -150,7 +150,6 @@ export class ProfilUtilisateurComponent implements OnInit {
   }
 
   updateemail() {
-    this.submittedEmail = true;
     if (this.formUtilisateurEmail.invalid) {
       this.openSnackBar( "Une erreur est survenue, veuillez correctement remplir les champs requis", "Fermer");
     } else {
@@ -169,7 +168,6 @@ export class ProfilUtilisateurComponent implements OnInit {
   }
 
   updatepassword() {
-    this.submittedPassword = true;
     if (this.formUtilisateurPassword.invalid) {
       this.openSnackBar("Une erreur est survenue, veuillez correctement remplir les champs requis", "Fermer");
     } else {
