@@ -8,7 +8,7 @@
           <mat-icon class="fix-right hvr-icon">person_outline</mat-icon>
         </p>
       </div>
-      <div *ngIf="this.user.customeraccount.type === 'profesional'"  [routerLink]="['/dashboard/profil-entreprise']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
+      <div *ngIf="this.user?.customeraccount.type === 'profesional'"  [routerLink]="['/dashboard/profil-entreprise']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
         <p>Mon entreprise 
           <mat-icon class="fix-right hvr-icon">domain</mat-icon>
         </p>
