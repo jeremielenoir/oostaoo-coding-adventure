@@ -340,8 +340,8 @@ module.exports = {
       let techno = [];
       let totalTime = 0;
 
-      let listereponse;
-      let bonnereponse;
+      let questionAnswers;
+      let rightAnswers;
 
       candidat = data.attributes;
 
@@ -350,10 +350,12 @@ module.exports = {
       rapport.forEach((element) => {
         rapportTechno.push(element.index_question.technologies);
         totalTime = totalTime + element.index_question.time;
-        listereponse = element.index_question.content.split(", ");
-        element.index_question.content = listereponse;
-        bonnereponse = element.index_question.answer_value.split(", ");
-        element.index_question.answer_value = bonnereponse;
+        questionAnswers = element.index_question.content.length === 0 ? [] : element.index_question.content.split("&#x263C;");
+        element.index_question.content = questionAnswers;
+        rightAnswers = element.index_question.answer_value.split("&#x263C;");
+        element.index_question.answer_value = rightAnswers;
+        // TODO : see 'TODO #1' note on client side in 'rapport-detaille.component.ts'
+        element.index_question.is_right_answer = element.array_rep_candidat.every((val) => rightAnswers.map(v => v.toLowerCase()).includes(val.toLowerCase())) && (questionAnswers.length === 0 ? true : element.array_rep_candidat.length === rightAnswers.length);
       });
 
       uniquetechno = removeDuplicates(rapportTechno);
@@ -363,9 +365,9 @@ module.exports = {
       });
 
       const timespent = fmtMSS(candidat.duree) + "/" + fmtMSS(totalTime);
-      console.log("candidat", candidat);
+
       const percentArray = candidat.points_candidat[2][
-        "getPourcentByCandidat"
+        "getpourcentByCandidat"
       ].map((a) => a.percentage);
 
       const sumPercent = percentArray.reduce((a, b) => parseFloat(a + b));

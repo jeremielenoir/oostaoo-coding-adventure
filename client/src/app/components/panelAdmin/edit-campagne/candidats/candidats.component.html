@@ -231,7 +231,7 @@
       <p class="info-candidat"><i class="far fa-clock"></i> Durée du test : {{currentCandidat.Duree}}</p>
       <div class="sidenav_candidat_content" *ngIf="currentCandidat.points">
         <div class="sidenav_candidat_result"
-          *ngFor="let candidatPointTechno of currentCandidat.points[2].getPourcentByCandidat">
+          *ngFor="let candidatPointTechno of currentCandidat.points[2].getpourcentByCandidat">
           <p class="sidenav_candidat_result">
             <span class="icon-techno" *ngIf="candidatPointTechno.techno === 'React'">
               <i class="fab fa-react"></i>

@@ -234,9 +234,6 @@
 
           <% } %>
 
-
-
-
           <% if(question.array_rep_candidat  !=  "answervalue")  {%>
 
           <p>
@@ -245,42 +242,60 @@
 
           <% } %>
         </div>
-        <h5 class="subtitle_h5">Question :</h5>
-        <p> - <%=question.index_question.name %></p>
 
-        <h5 class="subtitle_h5">Réponse :</h5>
+        <h5 class="subtitle_h5">Question : %></h5>
+        <p><%=question.index_question.name %></p>
 
+
+        <%if(question.index_question.content.length > 0)  {%>
+
+        <h5 class="subtitle_h5">Réponses :</h5>
 
         <ul>
           <%question.index_question.content.forEach(function(reponse){ %>
+
+          <% if( question.array_rep_candidat.includes(reponse) && question.index_question.answer_value.includes(reponse) ) { %>
+          <li class="right_answer">
+            <% } else if ( question.array_rep_candidat.includes(reponse) &&
+              !question.index_question.answer_value.includes(reponse) ) { %>
+          <li class="wrong_answer">
+            <% } else { %>
           <li>
-            - <%= reponse %>
+            <% } %>
+            <%= reponse %>
           </li>
+
           <%});%>
-
         </ul>
-        <h5 class="subtitle_h5">Résultats :</h5>
+        <% } %>
+        <h5 class="subtitle_h5">Résultat :</h5>
 
-        <!-- <div *ngIf="question.array_rep_candidat  ==  answervalue">
-          <p> <span class="right_answer">
-              Réponse correcte :</span><question.index_question.theme%></p>
-          <p>Votre réponse : <question.array_rep_candidat</p>
-        </div> -->
-
-        <%if(question.array_rep_candidat =="answervalue")  {%>
+        <% if(question.index_question.is_right_answer === true)  {%>
         <div>
-          <p> <span class="right_answer">
-              Réponse correcte :</span><%=question.index_question.theme %></p>
+          <p> <span class="right_answer">Réponse correcte : </span><%=question.index_question.theme %></p>
+          <% if ( question.index_question.content.length === 0 ) { %>
           <p>Votre réponse : <%=question.array_rep_candidat %></p>
+          <% } %>
         </div>
         <%}%>
-        <%if(question.array_rep_candidat !="answervalue")  {%>
+        <%if(question.index_question.is_right_answer === false)  {%>
         <div>
           <p class="wrong_answer">Mauvaise réponse</p>
-          <p>Votre réponse : <%=question.array_rep_candidat%></p>
+          <% if (question.index_question.content.length === 0 ) { %>
+          <p>Votre réponse :
+            <%= question.array_rep_candidat.join(", ") %>
+          </p>
+          <%}%>
+          <% if (question.index_question.content.length > 0 ) { %>
           <p>
-            <%=question.index_question.answer_value.length > 1 ? 'Les réponses correctes sont' : 'La réponse correcte est'  %>
-            : <%= question.index_question.answer_value  %></p>
+            <%= question.index_question.answer_value.length > 1 ? 'Les réponses correctes sont' : 'La réponse correcte est'  %>
+            : </p>
+          <ul>
+            <%question.index_question.answer_value.forEach(function(reponse){ %>
+            <li><%= question.index_question.answer_value.length > 1 ? '-' : '' %> <%= reponse %></li>
+            <%});%>
+          </ul>
+          <% } %>
         </div>
         <%}%>
         

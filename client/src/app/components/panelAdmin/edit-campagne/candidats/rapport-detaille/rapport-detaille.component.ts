@@ -23,15 +23,12 @@ export class RapportDetailleComponent implements OnInit {
   public scorePercent: any = 0;
   public totalPointsCandidat: any = 0;
   public totalPointsCampaign: any = 0;
-  public listereponse;
-  public bonnereponse;
 
   constructor(
     route: ActivatedRoute,
     public apiClientService: ApiClientService
   ) {
     this.idCandidat = route.snapshot.params.idCandidat;
-    // console.log('id candidat')
   }
 
   ngOnInit() {
@@ -59,7 +56,7 @@ export class RapportDetailleComponent implements OnInit {
           return;
         }
 
-        const percentArray = data.points_candidat[2]["getPourcentByCandidat"].map((a) => a.percentage);
+        const percentArray = data.points_candidat[2]["getpourcentByCandidat"].map((a) => a.percentage);
 
         const sumPercent = percentArray.reduce((a, b) => parseFloat(a + b));
 
@@ -80,21 +77,22 @@ export class RapportDetailleComponent implements OnInit {
           parseFloat(a + b)
         );
 
-        // console.log('this candid', this.candidat);
         this.rapport = data.raport_candidat.rapport;
-        // console.log('this rapport', this.rapport);
 
-        this.rapport.forEach((element) => {
-          this.rapportTechno.push(element.index_question.technologies);
-          this.totalTime = this.totalTime + element.index_question.time;
-          this.listereponse = element.index_question.content.split(", ");
-          element.index_question.content = this.listereponse;
-          // console.log('choix question =', this.listereponse);
-          this.bonnereponse = element.index_question.answer_value.split(", ");
-          element.index_question.answer_value = this.bonnereponse;
-          // console.log('choix bonne reponse =', element.index_question.content);
+        this.rapport.forEach(question => {
+          // Format datas
+          question.index_question.content = question.index_question.content.length === 0 ? [] : question.index_question.content.split("&#x263C;");
+          question.index_question.answer_value = question.index_question.answer_value.split("&#x263C;");
+          // Extract data
+          this.rapportTechno.push(question.index_question.technologies);
+          this.totalTime = this.totalTime + question.index_question.time;
+          // Compute if candidat answered well
+          const candidatAnswers = question.array_rep_candidat.map(val => val.toLowerCase());
+          const rightAnswers = question.index_question.answer_value.map(val => val.toLowerCase());
+          const questionAnswers = question.index_question.content;
+          // TODO #1 : this should be compute server side to avoid duplicate computing when PDF is generated ( source of potentials erros and duplicate maintenance ) WIP SL
+          question.is_right_answer = candidatAnswers.every((val) => rightAnswers.includes(val.toLowerCase())) && (questionAnswers.length === 0 ? true : candidatAnswers.length === rightAnswers.length);
         });
-        //  console.log("this rapport ======>", this.rapport);
 
         this.uniquetechno = this.removeDuplicates(this.rapportTechno);
         this.uniquetechno.forEach((idTechno) => {
@@ -106,7 +104,6 @@ export class RapportDetailleComponent implements OnInit {
   getTechno(id) {
     this.apiClientService.get(API_URI_TECHNO + "/" + id).subscribe((data) => {
       this.techno.push(data);
-      // console.log('this techno', this.techno);
     });
   }
 
@@ -123,6 +120,5 @@ export class RapportDetailleComponent implements OnInit {
       ":" +
       ("0" + s).slice(-2)
     );
-    // return (m - (m %= 60)) / 60 + (9 < m ? ':' : ':0') + m;
   }
 }

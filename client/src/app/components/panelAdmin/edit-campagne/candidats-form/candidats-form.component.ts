@@ -95,16 +95,13 @@ export class CandidatsFormComponent implements OnInit {
       emailContent: this.htmlContent,
       namePlaceholder: this.namePlaceholder
     }).toPromise()
-      .then(
-        res => {
-          console.log('res', res.id);
-          const idCandidat = [];
-          idCandidat.push(res.id);
-          this.openSnackBar("Un mail d'invitation a correctement été envoyé", "Fermer");
-          return idCandidat;
-        }
-      )
-      .then(idCandidat => {
+      .then(res => {
+        console.log('res', res.id);
+        const idCandidat = [];
+        idCandidat.push(res.id);
+        this.openSnackBar("Un mail d'invitation a correctement été envoyé", "Fermer");
+        return idCandidat;
+      }).then(idCandidat => {
         this.updateCampaign(idCandidat);
       }).catch(err => {
         this.openSnackBar("Une erreur est survenue", "Fermer");

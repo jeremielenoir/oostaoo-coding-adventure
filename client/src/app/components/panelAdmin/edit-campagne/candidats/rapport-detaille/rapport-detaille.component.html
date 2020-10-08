@@ -24,7 +24,6 @@
         </round-progress>
       </div>
 
-
       <div>
         <p>Score</p>
         <p class="header_stats">{{scorePercent}}%</p>
@@ -42,52 +41,60 @@
     <div>
 
       <div *ngFor="let question of rapport; let i = index; let tech of techno">
-        <div *ngFor="let answervalue of question.index_question.answer_value">
 
-          <h3 class="question_number">Question {{ i+1 }} </h3>
-          <div class="header_question">
-            <p id="techno" *ngFor="let tech of techno">
-              <span *ngIf="question.index_question.technologies == tech.id"> {{tech.name}} </span>
-            </p>
+        <h3 class="question_number">Question {{ i+1 }} </h3>
+        <div class="header_question">
+          <p id="techno" *ngFor="let tech of techno">
+            <span *ngIf="question.index_question.technologies == tech.id"> {{tech.name}} </span>
+          </p>
 
-            <p>{{ fmtMSS(question.timeRep) }} / {{ fmtMSS(question.index_question.time) }}</p>
-            <p *ngIf="question.array_rep_candidat  ==  answervalue ">
+          <p>{{ fmtMSS(question.timeRep) }} / {{ fmtMSS(question.index_question.time) }}</p>
+          <ng-container *ngIf="question.is_right_answer; else zero">
+            <p>
               {{ question.index_question.points }} / {{ question.index_question.points }} pts</p>
-            <p *ngIf=" question.array_rep_candidat  !=  answervalue "> 0 /
+          </ng-container>
+          <ng-template #zero>
+            <p *ngIf=" question.array_rep_candidat  !=  question.index_question.answer_value "> 0 /
               {{ question.index_question.points }} pts</p>
-          </div>
-          <!-- <hr class="separator" size="1"> -->
+          </ng-template>
+        </div>
 
-          <h5 class="subtitle_h5">Question :</h5>
-          <p> - {{ question.index_question.name }}</p>
+        <h5 class="subtitle_h5">Question :</h5>
+        <p>{{ question.index_question.name }}</p>
 
-          <h5 class="subtitle_h5">Réponse :</h5>
-
+        <ng-container *ngIf="question.index_question.content.length > 0">
+          <h5 class="subtitle_h5">Réponses :</h5>
           <ul *ngFor="let reponse of question.index_question.content">
-            <li [ngClass]="{'right_answer': question.array_rep_candidat == reponse &&  reponse == answervalue,
-               'wrong_answer': question.array_rep_candidat == reponse &&  question.array_rep_candidat != answervalue}">
-              - {{ reponse }}
+            <li
+              [ngClass]="{'right_answer': question.array_rep_candidat.includes(reponse) && question.index_question.answer_value.includes(reponse),
+                          'wrong_answer': question.array_rep_candidat.includes(reponse) &&  !question.index_question.answer_value.includes(reponse)}">
+              <mat-checkbox [checked]="question.array_rep_candidat.includes(reponse)" disabled="true">
+              </mat-checkbox> {{ reponse }}
             </li>
           </ul>
+        </ng-container>
 
-          <!-- <p> - {{ question.array_rep_candidat }}</p> -->
+        <h5 class="subtitle_h5">Résultat :</h5>
+        <ng-container *ngIf="question.is_right_answer; else wrong">
+          <p><span class="right_answer">
+              Réponse correcte : </span>{{ question.index_question.theme }}</p>
+          <p *ngIf="question.index_question.content.length === 0">Votre réponse :
+            {{ question.array_rep_candidat.join(", ") }}</p>
+        </ng-container>
+        <ng-template #wrong>
+          <p class="wrong_answer">Mauvaise réponse</p>
+          <p *ngIf="question.index_question.content.length === 0">Votre réponse :
+            {{ question.array_rep_candidat.join(", ") }}
+          </p>
+          <p>
+            {{ question.index_question.answer_value.length > 1 ? 'Les réponses correctes sont' : 'La réponse correcte est'  }}
+            :</p>
+          <ul #qcm *ngFor="let answer of question.index_question.answer_value">
+            <li>{{ question.index_question.answer_value.length > 1 ? '-' : '' }} {{ answer }}</li>
+          </ul>
+        </ng-template>
 
-          <h5 class="subtitle_h5">Résultats :</h5>
-          <div *ngIf="question.array_rep_candidat  ==  answervalue">
-            <p> <span class="right_answer">
-                Réponse correcte :</span>{{ question.index_question.theme }}</p>
-            <p>Votre réponse : {{ question.array_rep_candidat }}</p>
-          </div>
-          <div *ngIf="question.array_rep_candidat  !=  answervalue">
-            <p class="wrong_answer">Mauvaise réponse</p>
-            <p>Votre réponse : {{ question.array_rep_candidat }}</p>
-            <p>
-              {{ question.index_question.answer_value.length > 1 ? 'Les réponses correctes sont' : 'La réponse correcte est'  }}
-              : {{ question.index_question.answer_value  }}</p>
-          </div>
-
-          <hr class="separator_red" size="1">
-        </div>
+        <hr *ngIf="rapport.length - 1 > i" class="separator_red" size="1">
       </div>
     </div>
   </div>
