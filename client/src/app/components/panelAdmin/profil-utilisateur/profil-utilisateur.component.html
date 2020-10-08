@@ -4,23 +4,27 @@
   <div class="padding-top">
     <div class="breadrumb">
       <div [routerLink]="['/dashboard/profil-utilisateur']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
-        <p>Mon profil
-          <mat-icon class="fix-right hvr-icon">person_outline</mat-icon>
+        <p>
+        <mat-icon class="fix-right hvr-icon">person_outline</mat-icon>
+        Mon profil
         </p>
       </div>
       <div *ngIf="this.user?.customeraccount.type === 'profesional'"  [routerLink]="['/dashboard/profil-entreprise']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
-        <p>Mon entreprise 
-          <mat-icon class="fix-right hvr-icon">domain</mat-icon>
+        <p>
+        <mat-icon class="fix-right hvr-icon">domain</mat-icon>
+        Mon entreprise 
         </p>
       </div>
       <div [routerLink]="['/dashboard/utilisateurs']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
-        <p>utilisateurs
-          <mat-icon class="fix-right hvr-icon">groups</mat-icon>
+        <p>
+        <mat-icon class="fix-right hvr-icon">groups</mat-icon>
+        utilisateurs
         </p>
       </div>
     </div>
+    <div class="fix-contents">
     <div class="content">
-      <div *ngIf="isOwnerOfPersonalAccount" fxLayout="row" fxLayout="row" fxLayoutAlign="space-between center"
+      <div *ngIf="isOwnerOfPersonalAccount"  fxLayout="row" fxLayout="row" fxLayoutAlign="space-between center"
         class="account-transform">
         <h4>Basculer vers un compte professionnel</h4>
         <button (click)="convertToPro()" type="button" mat-raised-button color="primary">Editer le profil
@@ -261,6 +265,6 @@
         </form>
       </div>
     </div>
-
+    </div>
   </div>
 </div>

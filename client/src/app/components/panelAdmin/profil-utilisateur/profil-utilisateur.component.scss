@@ -13,7 +13,7 @@
         display: flex;
         width: 98%;
         margin: 0 auto;
-        background: $color-background-blue;
+        // background: $color-background-blue;
         // .border-none{
         //    border-right:none
         // }
@@ -178,37 +178,39 @@
 
 .breadrumb{
     display: flex;
+    background: #eaeff3;
     .navigation {
         padding: 10px;
-        border-top: 1px solid  #ffffff00;
         border-left: 1px solid  #ffffff00;
         border-right: 1px solid  #ffffff00;
         &:hover{
-            border-top: 1px solid  #1d3552;
             border-left: 1px solid  #1d3552;
             border-right: 1px solid  #1d3552;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
             cursor: pointer;
         }
         p{
             display: flex;
             justify-content: center;
             align-items: flex-start;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 0;
+            font-family: "Poppins", sans-serif;
+            padding-top: 3px;
+            color: #1d3552;
             .fix-right{
-                margin-left: 10px;
+                margin-right: 10px;
+                color: #e34e26;
             }
         }
     }
-    border-bottom: 1px solid #1d3552
+    border: 1px solid #1d3552;
+    border-radius: 5px;
 }
 
 .router-link-active{
-    border-top: 1px solid  #1d3552 !important;
     border-left: 1px solid  #1d3552 !important;
     border-right: 1px solid  #1d3552 !important;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
     cursor: pointer;
     -webkit-box-shadow: 0px 10px 10px -1px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 10px 10px -1px rgba(0, 0, 0, 0.75);
