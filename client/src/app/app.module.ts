@@ -84,7 +84,7 @@ import { CandidatsMailComponent } from './components/panelAdmin/edit-campagne/ca
 import { GeneralComponent } from './components/panelAdmin/edit-campagne/settings/general/general.component';
 import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne/settings/personnalisation/personnalisation.component';
 import { ClientTestComponent } from './components/panelAdmin/client-test/client-test.component';
-import { TestComponent } from './components/panelAdmin/client-test/test/test.component';
+import { TestComponent, DialogTimeoutComponent } from './components/panelAdmin/client-test/test/test.component';
 
 
 
@@ -114,7 +114,7 @@ import { RapportDetailleComponent } from './components/panelAdmin/edit-campagne/
 // https://www.npmjs.com/package/ngx-stripe
 import { NgxStripeModule } from 'ngx-stripe';
 import { RatingFeedbackComponent } from './components/panelAdmin/client-test/fin-test/rating-feedback/rating-feedback.component';
-import { DragNDropComponent, DialogOverviewTest } from './components/panelAdmin/dragndrop/dragndrop.component';
+import { DragNDropComponent, DialogOverviewTestComponent } from './components/panelAdmin/dragndrop/dragndrop.component';
 import { ResponseFormatedComponent } from './components/panelAdmin/dragndrop/response-formated.component';
 import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campagne/top-info-campagne.component';
 import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
@@ -168,7 +168,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     CandidatsMailComponent,
     DialogOverviewDelete,
     DialogOverviewDuplicate,
-    DialogOverviewTest,
+    DialogOverviewTestComponent,
+    DialogTimeoutComponent,
     InterviewDialogComponent,
     DialogForgetPassword,
     OffersComponent,
@@ -240,7 +241,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     RatingFeedbackComponent,
     DragNDropComponent,
     ResponseFormatedComponent,
-    DialogOverviewTest,
+    DialogOverviewTestComponent,
+    DialogTimeoutComponent,
     TopInfoCampagneComponent,
     MotDePasseOublieComponent,
     SubscriptionComponent,

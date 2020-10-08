@@ -1,28 +1,3 @@
-<div id="shadow-cog" [class.shadow-cog-active]="Activetime">
-  <div class="modall">
-    <div class="modall-header">
-      <h3 class="modall-title" i18n>
-        Timeout
-      </h3>
-    </div>
-
-    <div class="modall-content">
-      <p *ngIf="preview" i18n>
-        Le temps imparti pour la question est écoulé. Cliquez sur OK pour voir le résultat de la réponse.
-      </p>
-      <p *ngIf="!preview" i18n>
-        Le temps imparti pour la question est écoulé. Votre réponse actuelle a
-        été soumise. Cliquez sur OK quand vous êtes prêt(e) à passer à la
-        question suivante.
-      </p>
-    </div>
-
-    <div class="modall-footer">
-      <button *ngIf="!preview" class="btn" (click)="questNext()" i18n>OK</button>
-      <button *ngIf="preview" class="btn" (click)="viewResult()" i18n>OK</button>
-    </div>
-  </div>
-</div>
 
 <div class="block-testing" *ngIf="questions != undefined">
   <div class="testing-left">
@@ -57,7 +32,10 @@
     <div class="cube-testing cube-testing-right">
       <header class="header-cube-testing">
         <div class="f030">
-          <i class="fas fa-code icon-testing"></i>
+          <i *ngIf="question.type === 'algo'" class="fas fa-code icon-testing"></i>
+          <i *ngIf="question.type === 'free'" class="fas fa-edit icon-testing"></i>
+          <i *ngIf="question.type === 'one'" class="fas fa-check-circle icon-testing"></i>
+          <i *ngIf="question.type === 'multiple'" class="fas fa-check-square icon-testing"></i>
 
           <span class="title-testing" i18n>Réponse</span>
         </div>
