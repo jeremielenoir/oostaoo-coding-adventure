@@ -9,7 +9,11 @@ import {
 
 import { SelectedLanguageService } from '../../../../services/selected-language.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { IDialogData, DialogOverviewTestComponent } from '../../dragndrop/dragndrop.component';
+import {  DialogOverviewTestComponent } from '../../dragndrop/dragndrop.component';
+
+export interface IDialogData {
+  preview: boolean;
+}
 
 @Component({
   selector: 'app-dialog-timeout',
