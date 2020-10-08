@@ -83,8 +83,15 @@
       </div>
     </div>
 
-    <app-base-button *ngIf="preview" [fullWidth]="true" [hoverClass]="''" (clickEvent)="questNext()"
+    <app-base-button *ngIf="preview && questions.length == 1" [fullWidth]="true" [hoverClass]="''" (clickEvent)="questNext()"
       iconName="play_arrow">Valider la réponse</app-base-button>
+    
+    <app-base-button *ngIf="preview && questions.length != 1 && index === questions.length - 1" [fullWidth]="true" [hoverClass]="''" (clickEvent)="questNext()"
+      iconName="play_arrow">Voir le résultat du test</app-base-button>
+
+    <app-base-button *ngIf="preview && questions.length != 1 && index !== questions.length - 1" [fullWidth]="true" [hoverClass]="''" (clickEvent)="questNext()"
+      iconName="play_arrow">Question suivante</app-base-button>
+
     <app-base-button *ngIf="!preview" [fullWidth]="true" iconName="play_arrow" (clickEvent)="questNext()">{{
       index === questions.length - 1
         ? "Soumettre le test"

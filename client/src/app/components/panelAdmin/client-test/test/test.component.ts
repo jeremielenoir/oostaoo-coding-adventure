@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import {
   API_URI_CAMPAIGNS,
   API_URI_CANDIDATS,
@@ -49,7 +49,7 @@ export class DialogTimeoutComponent implements OnInit {
   styleUrls: ['./test.component.scss'],
   templateUrl: './test.component.html',
 })
-export class TestComponent implements OnInit {
+export class TestComponent implements OnInit, OnDestroy {
   public questions: any;
   public index = 0;
   public question: any;
@@ -98,6 +98,10 @@ export class TestComponent implements OnInit {
   public options: any;
 
   constructor(private apiClientService: ApiClientService, public languageStorage: SelectedLanguageService, public dialog: MatDialog) { }
+  ngOnDestroy(): void {
+    clearInterval(this.stopTimeInterval);
+    //throw new Error("Method not implemented.");
+  }
 
   public ngOnInit() {
 
