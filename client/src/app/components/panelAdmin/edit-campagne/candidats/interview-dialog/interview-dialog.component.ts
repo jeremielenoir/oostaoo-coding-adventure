@@ -45,13 +45,17 @@ export class InterviewDialogComponent implements OnInit {
   public interview_link: string = "https://interview.oostaoo.com/rooms/"
   public loading: Boolean = false;
   public show: any = true;
+  public status: string;
+  public STATUS_CREATE = "CREATE";
+  public STATUS_VIEW = "VIEW";
+  public STATUS_UPDATE = "UPDATE";
   public subject: string;
-  public times: any = []
+  public times: any = [];
   currentUser: any;
   errors = null;
   populateForm: FormGroup;
-  submittedForm = false;
   results = null;
+  submittedForm = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -94,6 +98,10 @@ export class InterviewDialogComponent implements OnInit {
 
   formatCandidatName(name) {
     return name === "-" ? "" : " " + name;
+  }
+
+  setStatus(status) {
+    this.status = status;
   }
 
   /*  onValueChanges(): void {
@@ -199,6 +207,7 @@ export class InterviewDialogComponent implements OnInit {
       });
     }
 
+    this.status = this.data && this.data.Interview && this.data.Interview.id ? this.STATUS_VIEW : this.STATUS_CREATE;
     /* 
         this.onValueChanges() */
   }
@@ -208,7 +217,7 @@ export class InterviewDialogComponent implements OnInit {
   save() {
     const date = this.formInterviewDate;
 
-    if (this.data && this.data.Interview && this.data.Interview.id) {
+    if (this.status === this.STATUS_UPDATE) {
       this.loading = true;
       const id = this.data.Interview.id
       const apiURL = API_URI_INTERVIEWS + "/" + id;
@@ -243,7 +252,7 @@ export class InterviewDialogComponent implements OnInit {
           this.loading = false;
           throw new Error(`Error updating interview :\n${e}`);
         })
-    } else {
+    } else if (this.status === this.STATUS_CREATE) {
       const apiURL = API_URI_INTERVIEWS;
       let interview_date = moment(this.pctrl.interview_date.value);
       const [hour, minute] = this.pctrl.time.value.split(":");

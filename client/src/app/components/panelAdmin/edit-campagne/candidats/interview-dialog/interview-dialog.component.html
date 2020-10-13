@@ -23,8 +23,8 @@
           <mat-form-field appearance="outline" [color]="'accent'">
             <mat-label i18n>Choisir une date pour l'entretien</mat-label>
             <input formControlName="interview_date" matInput [matDatepicker]="picker" [min]="currentDate"
-              placeholder="jj/mm/aaaa">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              placeholder="jj/mm/aaaa" [readonly]="status === STATUS_VIEW">
+            <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="status === STATUS_VIEW"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="interview_date.invalid && (interview_date.dirty || interview_date.touched)">champs requis
             </mat-error>
@@ -33,7 +33,7 @@
         <div class="card-body">
           <mat-form-field appearance="outline" [color]="'accent'">
             <mat-label i18n>Choisir l'heure pour l'entretien</mat-label>
-            <mat-select formControlName="time">
+            <mat-select formControlName="time" [disabled]="status === STATUS_VIEW">
               <mat-option *ngFor="let opt of times" [value]="opt">
                 {{ opt }}
               </mat-option>
@@ -41,17 +41,23 @@
             <mat-error *ngIf="time.invalid && (time.dirty || time.touched)" i18n>champs requis</mat-error>
           </mat-form-field>
         </div>
-        <div [class.message-personaliser-form]="show">
+        <div *ngIf="status === STATUS_CREATE || status === STATUS_UPDATE" [class.message-personaliser-form]="show">
+          <!-- WIP SL check if '[this class.message...' is useless ? -->
           <label i18n>Message :</label>
-          <ckeditor [editor]="Editor" formControlName="htmlContent" *ngIf="show"></ckeditor>
-          <div *ngIf="!show" [innerHTML]="htmlContent" class="htmlContent"></div>
+          <ckeditor [editor]="Editor" formControlName="htmlContent"></ckeditor>
+          <div [innerHTML]="htmlContent" class="htmlContent"></div>
         </div>
         <div class="block-button roodeo-dark-theme">
-          <app-base-button iconName="send" [disabled]="!populateForm.valid || loading" (click)="save()" i18n>
+          <app-base-button *ngIf="status === STATUS_CREATE || status === STATUS_UPDATE" iconName="send"
+            [disabled]="!populateForm.valid || loading" (click)="save()" i18n>
             Envoyer email
           </app-base-button>
           <!-- <app-base-button iconName="cancel" [disabled]="loading" [disabled]="!populateForm.valid"         WIP SL : double disabled -->
-          <app-base-button iconName="cancel" [disabled]="loading" *ngIf="data && data.Interview && data.Interview.id"
+          <app-base-button *ngIf="status === STATUS_VIEW" iconName="edit" [disabled]="loading"
+            (click)="setStatus(STATUS_UPDATE)" i18n>
+            Re-plannifier l'entretien
+          </app-base-button>
+          <app-base-button *ngIf="status === STATUS_VIEW" iconName="cancel" color="accent" [disabled]="loading"
             (click)="remove()" i18n>
             Annuler l'entretien
           </app-base-button>

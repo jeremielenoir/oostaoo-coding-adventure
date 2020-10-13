@@ -129,6 +129,7 @@ export class CandidatsComponent implements OnInit {
     this.dialog.open(InterviewDialogComponent, {
       data,
       height: "auto",
+      minWidth: 550,
     });
   }
 
