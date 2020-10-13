@@ -14,10 +14,10 @@
     </div>
     <div class="cologne-form" *ngIf="populateForm">
       <form [formGroup]="populateForm">
-        <div class="candidat-presentation">
-          <span i18n>entretien avec</span> : <span>{{populateForm.controls['name'].value}}</span>
+        <div class="candidat-presentation margin-bottom-xs">
+          <span i18n>Entretien avec</span> : <span>{{populateForm.controls['name'].value}}</span>
           <br />
-          <span i18n>adresse email</span> : <span>{{populateForm.controls['email'].value}}</span>
+          <span i18n>Email</span> : <span>{{populateForm.controls['email'].value}}</span>
         </div>
         <div class="card-body">
           <mat-form-field appearance="outline" [color]="'accent'">
@@ -47,13 +47,14 @@
           <div *ngIf="!show" [innerHTML]="htmlContent" class="htmlContent"></div>
         </div>
         <div class="block-button roodeo-dark-theme">
-          <button mat-raised-button [color]="'primary'" [disabled]="!populateForm.valid||loading" (click)="save()" i18n>
+          <app-base-button iconName="send" [disabled]="!populateForm.valid || loading" (click)="save()" i18n>
             Envoyer email
-          </button>
-          <button [disabled]="loading" class="cancel-button" *ngIf="data && data.Interview && data.Interview.id"
-            mat-raised-button [color]="'accent'" [disabled]="!populateForm.valid" (click)="remove()" i18n>
+          </app-base-button>
+          <!-- <app-base-button iconName="cancel" [disabled]="loading" [disabled]="!populateForm.valid"         WIP SL : double disabled -->
+          <app-base-button iconName="cancel" [disabled]="loading" *ngIf="data && data.Interview && data.Interview.id"
+            (click)="remove()" i18n>
             Annuler l'entretien
-          </button>
+          </app-base-button>
         </div>
       </form>
     </div>
