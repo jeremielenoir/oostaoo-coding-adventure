@@ -254,12 +254,14 @@ export class InterviewDialogComponent implements OnInit {
         })
     } else if (this.status === this.STATUS_CREATE) {
       const apiURL = API_URI_INTERVIEWS;
+
       let interview_date = moment(this.pctrl.interview_date.value);
       const [hour, minute] = this.pctrl.time.value.split(":");
       interview_date.set({
         hour,
         minute
       })
+
       const email_content = this.pctrl.htmlContent.value.toString().replace('<<entretien_date>>', date)
       this.loading = true;
       const data: any = {
@@ -270,6 +272,7 @@ export class InterviewDialogComponent implements OnInit {
         email_content,
         interview_link: this.interview_link
       }
+
       return this.apiClientService
         .post(apiURL, data)
         .toPromise()
@@ -291,7 +294,7 @@ export class InterviewDialogComponent implements OnInit {
     const id = this.data.Interview.id;
     const apiURL = API_URI_INTERVIEWS + "-cancel";
 
-    if (window.confirm()) {
+    if (window.confirm("Voulez-vous annuler cet entretien ?")) {
       this.loading = true;
       let interview_date = moment(this.pctrl.interview_date.value);
       const [hour, minute] = this.pctrl.time.value.split(":");

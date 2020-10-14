@@ -16,8 +16,8 @@ const moment = require("moment-timezone");
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
-    user: "chagnon.maxime@oostaoo.com",
-    pass: "oostaoo123",
+    user: "assessment@roodeo.com",
+    pass: "Oostaoo@2020",
   },
 });
 module.exports = {
@@ -116,7 +116,7 @@ module.exports = {
       }).toString();
       const options = {
         to,
-        from: "chagnon.maxime@oostaoo.com",
+        from: "assessment@roodeo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
         html: getEmail_message_crypto,
@@ -196,7 +196,7 @@ module.exports = {
       }).toString();
       const options = {
         to,
-        from: "chagnon.maxime@oostaoo.com",
+        from: "assessment@roodeo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
         html: getEmail_message_crypto,
@@ -241,17 +241,18 @@ module.exports = {
         email_content,
         id,
       } = ctx.request.body;
+
       const interview = await strapi.services.interview.fetch({ id });
 
       if (!interview) {
-        throw new Error("interview not found");
+        throw new Error("Interview not found");
       }
 
       const to = [candidats[0].email, user.email];
 
       const options = {
         to,
-        from: "chagnon.maxime@oostaoo.com",
+        from: "assessment@roodeo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
         html: email_content,
