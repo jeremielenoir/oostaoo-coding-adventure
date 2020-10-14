@@ -21,7 +21,7 @@
         </div>
         <div class="card-body">
           <mat-form-field appearance="outline" [color]="'accent'">
-            <mat-label i18n>Choisir une date pour l'entretien</mat-label>
+            <mat-label i18n>Choisir une date</mat-label>
             <input formControlName="interview_date" matInput [matDatepicker]="picker" [min]="currentDate"
               placeholder="jj/mm/aaaa" [readonly]="status === STATUS_VIEW">
             <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="status === STATUS_VIEW"></mat-datepicker-toggle>
@@ -32,7 +32,7 @@
         </div>
         <div class="card-body">
           <mat-form-field appearance="outline" [color]="'accent'">
-            <mat-label i18n>Choisir l'heure pour l'entretien</mat-label>
+            <mat-label i18n>Choisir l'heure</mat-label>
             <mat-select formControlName="time" [disabled]="status === STATUS_VIEW">
               <mat-option *ngFor="let opt of times" [value]="opt">
                 {{ opt }}
@@ -41,13 +41,16 @@
             <mat-error *ngIf="time.invalid && (time.dirty || time.touched)" i18n>champs requis</mat-error>
           </mat-form-field>
         </div>
-        <div *ngIf="status === STATUS_CREATE || status === STATUS_UPDATE" [class.message-personaliser-form]="show">
-          <!-- WIP SL check if '[this class.message...' is useless ? -->
+        <div *ngIf="status === STATUS_CREATE || status === STATUS_UPDATE">
           <label i18n>Message :</label>
           <ckeditor [editor]="Editor" formControlName="htmlContent"></ckeditor>
-          <div [innerHTML]="htmlContent" class="htmlContent"></div>
+          <!-- <div [innerHTML]="htmlContent" class="htmlContent"></div> -->
         </div>
         <div class="block-button roodeo-dark-theme">
+          <app-base-button *ngIf="status === STATUS_UPDATE" iconName="keyboard_arrow_left" iconPosition="left"
+            (clickEvent)="setStatus(STATUS_VIEW)">
+            Retour
+          </app-base-button>
           <app-base-button *ngIf="status === STATUS_CREATE || status === STATUS_UPDATE" iconName="send"
             [disabled]="!populateForm.valid || loading" (click)="save()" i18n>
             Envoyer email

@@ -148,7 +148,6 @@ module.exports = {
 
   update: async (ctx, next) => {
     try {
-      //console.log("ctx.request.body", ctx.request.body);
       const {
         interview_date,
         candidats,
@@ -159,7 +158,7 @@ module.exports = {
       } = ctx.request.body;
 
       if (!ctx.params.id) {
-        throw new Error("Unknown user");
+        throw new Error("Missing user 'id' parameter");
       }
 
       const encodedData = {
@@ -183,7 +182,6 @@ module.exports = {
       const organizer = `${user.prenom} ${user.nom} <${user.email}>`;
       const icalEvent = ical({
         domain: "roodeo.com",
-
         events: [
           {
             start: moment(interview_date),
@@ -215,7 +213,6 @@ module.exports = {
         ctx.params,
         updatedData
       );
-
       return updated;
     } catch (error) {
       throw error;

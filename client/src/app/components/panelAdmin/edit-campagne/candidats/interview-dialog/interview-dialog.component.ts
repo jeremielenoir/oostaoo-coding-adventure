@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA, MatInput, MatSelect } from '@angular/material';
+import { Validators, FormGroup, FormBuilder, } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -52,6 +52,59 @@ export class InterviewDialogComponent implements OnInit {
   public subject: string;
   public times: any = [];
   currentUser: any;
+  HTML_CONTENT_CREATE = `
+        <div>
+          <span style="background-color: transparent; font-size: 1rem;">Bonjour${this.formatCandidatName(this.data.Candidats)},</span>
+          <br />
+          <br />
+        </div>
+        <div>
+          Votre candidature a retenu notre attention suite aux résultats des tests techniques.
+        </div>
+        <div>
+          Dans le cadre de notre processus de recrutement, nous avons le plaisir de vous inviter à passer un entretien vidéo conférence [date de l'entretien].
+        </div>
+        <div>
+          <a href="${this.interview_link}"  target="_blank" style="font-size: 1rem;">lien de la vidéoconférence</a>
+          <br />
+          <br />
+        </div>
+        <div>
+          Bonne chance !
+          <br />
+          Cordialement
+        </div>
+      `;
+  HTML_CONTENT_UPDATE = `
+            <div>
+              <span style="background-color: transparent; font-size: 1rem;">Bonjour${this.formatCandidatName(this.data.Candidats)},</span>
+              <br />
+              <br />
+            </div>
+            <div>
+              Votre entretien vidéo du [date] a été déplacé [nouvelle date].
+              <br />
+              <br />
+            </div>
+            <div>
+              Cordialement
+            </div>
+        `;
+  HTML_CONTENT_CANCEL = `
+            <div>
+              <span style="background-color: transparent; font-size: 1rem;">Bonjour${this.formatCandidatName(this.data.Candidats)},</span>
+              <br />
+              <br />
+            </div>
+            <div>
+              Votre entretien vidéo, [date], a été annulé.
+              <br />
+              <br />
+            </div>
+            <div>
+              Cordialement
+            </div>
+        `;
   errors = null;
   populateForm: FormGroup;
   results = null;
@@ -93,7 +146,7 @@ export class InterviewDialogComponent implements OnInit {
   get time() { return this.populateForm.get('time'); }
 
   get formInterviewDate() {
-    return this.pctrl && this.pctrl.interview_date && this.pctrl.interview_date.value && this.pctrl.time && this.pctrl.time.value ? ` à la date du ${moment(this.pctrl.interview_date.value).format('DD/MM/YYYY')}   ${this.pctrl.time.value}` : ''
+    return this.pctrl && this.pctrl.interview_date && this.pctrl.interview_date.value && this.pctrl.time && this.pctrl.time.value ? ` à la date du ${moment(this.pctrl.interview_date.value).format('DD/MM/YYYY')} à ${this.pctrl.time.value}` : ''
   }
 
   formatCandidatName(name) {
@@ -102,15 +155,32 @@ export class InterviewDialogComponent implements OnInit {
 
   setStatus(status) {
     this.status = status;
+    if (status === this.STATUS_UPDATE) {
+      this.pctrl['interview_date'].reset('');
+      this.pctrl['time'].reset();
+    } else {
+      this.pctrl['interview_date'].reset(this.interview.interview_date);
+      this.pctrl['time'].reset(moment(this.interview.interview_date).format("HH:mm"));
+    }
   }
 
-  /*  onValueChanges(): void {
+  /* onValueChanges(): void {
      this.populateForm.valueChanges.subscribe(val => {
        console.log("value changed", val);
      })
    } */
 
   ngOnInit() {
+    // Get current user infos
+    if (this.userToken && this.userToken.userId) {
+      this.apiClientService
+        .get(API_URI_USER + '/' + this.userToken.userId)
+        .subscribe(user => {
+          this.currentUser = user;
+        });
+    };
+
+    // Compute times for Select hour
     for (let hour = 0; hour < 24; hour++) {
       this.times.push(moment({ hour }).format('HH:mm'));
       this.times.push(
@@ -120,7 +190,6 @@ export class InterviewDialogComponent implements OnInit {
         }).format('HH:mm')
       );
     }
-
     this.times = this.times.sort((a, b) => {
       moment(new Date(a)).isBefore(moment(new Date(b)));
       const currentDate = new Date()
@@ -135,22 +204,27 @@ export class InterviewDialogComponent implements OnInit {
         minute: mmB
       });
       const result = firstDate.diff(secondDate);
-      return result
+      return result;
     })
 
-    if (this.userToken && this.userToken.userId) {
-      this.apiClientService
-        .get(API_URI_USER + '/' + this.userToken.userId)
-        .subscribe(user => {
-          this.currentUser = user;
-        });
-    };
+    // Set form datas
+    this.subject = `Entretien video conférence`;
+    this.status = this.data && this.data.Interview && this.data.Interview.id ? this.STATUS_VIEW : this.STATUS_CREATE;
 
-    this.subject = `Entretien video conférence`
+    if (this.status === this.STATUS_CREATE) {
+      this.htmlContent = this.HTML_CONTENT_CREATE;
+      this.populateForm = this.formBuilder.group({
+        interview_date: ['', Validators.required],
+        time: ['', Validators.required],
+        email: [this.data.Email, Validators.required],
+        name: [this.data.Candidats, Validators.required],
+        htmlContent: [this.htmlContent, Validators.required],
+        interview_link: [this.interview_link, Validators.required]
+      });
 
-    if (this.data && this.data.Interview && this.data.Interview.id) {
+    } else if (this.status === this.STATUS_VIEW) {
+      this.htmlContent = this.HTML_CONTENT_UPDATE;
       const apiURL = API_URI_INTERVIEWS + "/" + this.data.Interview.id;
-
       this.apiClientService
         .get(apiURL)
         .toPromise()
@@ -166,50 +240,18 @@ export class InterviewDialogComponent implements OnInit {
               email: [this.interview.candidats[0].email, Validators.required],
               name: [this.interview.candidats[0].Nom, Validators.required],
               interview_link: [this.interview.interview_link, Validators.required],
-              htmlContent: [this.interview.email_content, Validators.required],
+              htmlContent: [this.htmlContent.replace("[date]", moment(this.interview.interview_date).format('DD/MM/YYYY')), Validators.required], // WIP SL
               time: [moment(this.interview.interview_date).format("HH:mm"), Validators.required],
             });
           }
         })
         .catch(e => {
           console.log("Error fetching interview", e)
-          throw new Error(`Error fetiching interview :\n${e}`);
+          throw new Error(`Error fetching interview :\n${e}`);
         })
-    } else {
-      this.htmlContent = `
-        <div>
-          <span style="background-color: transparent; font-size: 1rem;">Bonjour${this.formatCandidatName(this.data.Candidats)},</span>
-          <br />
-        </div>
-        <div>
-          Votre candidature a retenu notre attention suite aux résultats des tests techniques.
-        </div>
-        <div>
-          Dans le cadre de notre processus de recrutement, nous avons le plaisir de vous inviter à passer un entretien vidéo conférence <<entretien_date>>
-        </div>
-        <div>
-          <a href="${this.interview_link}"  target="_blank" style="font-size: 1rem;">lien de la vidéoconférence</a>
-          <br />
-        </div>
-        <div>
-          Bonne chance !
-          <br />
-          Cordialement
-        </div>
-      `;
-      this.populateForm = this.formBuilder.group({
-        interview_date: ['', Validators.required],
-        time: ['', Validators.required],
-        email: [this.data.Email, Validators.required],
-        name: [this.data.Candidats, Validators.required],
-        htmlContent: [this.htmlContent, Validators.required],
-        interview_link: [this.interview_link, Validators.required]
-      });
     }
 
-    this.status = this.data && this.data.Interview && this.data.Interview.id ? this.STATUS_VIEW : this.STATUS_CREATE;
-    /* 
-        this.onValueChanges() */
+    /* this.onValueChanges() */
   }
 
 
@@ -219,7 +261,7 @@ export class InterviewDialogComponent implements OnInit {
 
     if (this.status === this.STATUS_UPDATE) {
       this.loading = true;
-      const id = this.data.Interview.id
+      const id = this.data.Interview.id;
       const apiURL = API_URI_INTERVIEWS + "/" + id;
 
       let interview_date = moment(this.pctrl.interview_date.value);
@@ -229,8 +271,7 @@ export class InterviewDialogComponent implements OnInit {
         minute
       });
 
-      const old_date = ` à la date du ${moment(this.interview.interview_date).format('DD/MM/YYYY')}   ${moment(this.interview.interview_date).format("HH:mm")}`
-      const email_content = this.pctrl.htmlContent.value.toString().replace(old_date, date)
+      const email_content = this.pctrl.htmlContent.value.toString().replace("[nouvelle date]", date);
       const data: any = {
         id,
         interview_date,
@@ -239,14 +280,13 @@ export class InterviewDialogComponent implements OnInit {
         interview_link: this.interview_link,
         email_title: this.subject,
         email_content,
-
       }
 
       return this.apiClientService
         .put(apiURL, data)
         .toPromise()
         .then(() => {
-          this.close()
+          this.close();
         }
         ).catch(e => {
           this.loading = false;
@@ -262,7 +302,7 @@ export class InterviewDialogComponent implements OnInit {
         minute
       })
 
-      const email_content = this.pctrl.htmlContent.value.toString().replace('<<entretien_date>>', date)
+      const email_content = this.pctrl.htmlContent.value.toString().replace("[date de l'entretien]", date)
       this.loading = true;
       const data: any = {
         interview_date,
@@ -277,7 +317,7 @@ export class InterviewDialogComponent implements OnInit {
         .post(apiURL, data)
         .toPromise()
         .then(() => {
-          this.close()
+          this.close();
         }
         ).catch(e => {
           this.loading = false;
@@ -294,7 +334,7 @@ export class InterviewDialogComponent implements OnInit {
     const id = this.data.Interview.id;
     const apiURL = API_URI_INTERVIEWS + "-cancel";
 
-    if (window.confirm("Voulez-vous annuler cet entretien ?")) {
+    if (window.confirm("Voulez-vous annuler cet entretien ? ( le candidat sera prévenu automatiquement par email )")) {
       this.loading = true;
       let interview_date = moment(this.pctrl.interview_date.value);
       const [hour, minute] = this.pctrl.time.value.split(":");
@@ -302,22 +342,9 @@ export class InterviewDialogComponent implements OnInit {
         hour,
         minute
       });
+
       const date = this.formInterviewDate;
-      const email_content = `
-            <div>
-              <span style="background-color: transparent; font-size: 1rem;">Bonjour${this.formatCandidatName(this.data.Candidats)},</span>
-              <br />
-            </div>
-            <div>
-              Votre entretien vidéo , ${date}, a été annulé
-              <br />
-            </div>
-            <div>
-              Bonne chance !
-              <br />
-              Cordialement
-            </div>
-        `;
+      const email_content = this.HTML_CONTENT_CANCEL.replace("[date]", date);
       const data: any = {
         id,
         interview_date,
@@ -326,15 +353,14 @@ export class InterviewDialogComponent implements OnInit {
         interview_link: this.interview_link,
         email_title: `Annulation Entretien vidéo du ${date}`,
         email_content,
-
       }
+
       return this.apiClientService
         .post(apiURL, data)
         .toPromise()
         .then(() => {
-          this.loading = false
-          this.close()
-
+          this.loading = false;
+          this.close();
         }
         ).catch(e => {
           this.loading = false;
