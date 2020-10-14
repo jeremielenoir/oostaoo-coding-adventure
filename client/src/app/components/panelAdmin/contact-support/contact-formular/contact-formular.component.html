@@ -15,18 +15,27 @@
         <div class="form-line">
 
           <div class="input-bloc">
-            <h3 class="input-title" maxlength="64" i18n>Name *</h3>
-            <input name="lastname" [formControl]="nom" class="input-section1" type="text" required>
+              <mat-form-field [color]="'accent'" appearance="outline">
+                  <mat-label i18n>Name</mat-label>
+                  <input type="text" [formControl]="nom" matInput value="" name="lastname" required/>
+              </mat-form-field>
             <div *ngIf="submittedForm && nom.invalid" class="invalid-feedback">
               <div *ngIf="nom.errors.required" i18>
                 Name required.
               </div>
             </div>
           </div>
+<!-- 
+          <mat-form-field [color]="'accent'" appearance="outline"  [formGroup]="formUtilisateur" >
+            <mat-label i18n>Name</mat-label>
+            <input type="text" [formControl]="nom" matInput value="" name="lastname" required/>
+          </mat-form-field> -->
 
           <div class="input-bloc">
-            <h3 class="input-title" maxlength="64" i18n>Email *</h3>
-            <input name="email" [formControl]="email" class="input-section1" type="text" required>
+              <mat-form-field [color]="'accent'" appearance="outline">
+                  <mat-label i18n>E-mail</mat-label>
+                  <input type="text" [formControl]="email" matInput value="" name="email" required/>
+              </mat-form-field>
             <div *ngIf="submittedForm && email.invalid" class="invalid-feedback">
               <div *ngIf="email.errors.required" i18n>
                 Email required.
@@ -42,8 +51,10 @@
         <div class="form-line">
 
           <div class="input-bloc">
-            <h3 class="input-title" maxlength="64" i18n>Subject*</h3>
-            <input [formControl]="subject" class="input-section1" name="subject" required>
+              <mat-form-field [color]="'accent'" appearance="outline">
+                <mat-label i18n>Subject</mat-label>
+                <input type="text" [formControl]="subject" matInput value="" name="subject" required/>
+              </mat-form-field>
             <div *ngIf="submittedForm && subject.invalid" class="invalid-feedback">
               <div *ngIf="subject.errors.required" i18n>
                 Please enter the subject of your request.
@@ -52,9 +63,10 @@
           </div>
 
           <div class="input-bloc">
-            <h3 class="input-title" maxlength="64" i18n>Message *</h3>
-            <textarea class="input-section1 input-section1-textarea" [formControl]="message" name="message"
-              id="message"></textarea>
+              <mat-form-field [color]="'accent'" appearance="outline">
+                <mat-label i18n>Message</mat-label>
+                <textarea type="text" matInput value="" [formControl]="message" name="message" required></textarea>
+              </mat-form-field>  
             <div *ngIf="submittedForm && message.invalid" class="invalid-feedback">
               <div *ngIf="message.errors.required" i18n>
                 Please fill this field.
@@ -70,7 +82,7 @@
               Validation of captcha required
             </div>
           </div>
-          <button (click)='sendFormular()' class="btn-submit" type="submit" i18n>Send</button>
+          <app-base-button class="btn-send" iconName="send" (click)='sendFormular()'>Send</app-base-button>
         </div>
 
       </form>

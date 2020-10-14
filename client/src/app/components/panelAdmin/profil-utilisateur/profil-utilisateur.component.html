@@ -42,7 +42,7 @@
                 </div>
               </div>
             </div> -->
-            <mat-form-field [color]="'accent'" appearance="outline"  [formGroup]="formUtilisateur"
+          <mat-form-field [color]="'accent'" appearance="outline"  [formGroup]="formUtilisateur"
             class="fullwidth">
             <mat-label i18n>Nom *</mat-label>
             <input type="text" formControlName="lastName" matInput value="" name="lastName" />
@@ -288,7 +288,7 @@
 
           <div class="form-line">
             <div class="input-bloc">
-              <button (click)='updateprofil()' class="btn-submit" type="submit">Enregistrer</button>
+              <app-base-button (click)='updateprofil()' iconName="save">Enregister</app-base-button>
             </div>
           </div>
         </form>
@@ -305,15 +305,15 @@
 
         <form action="">
           <div class="form-line">
-            <div class="input-bloc">
               <mat-form-field [formGroup]="formUtilisateur" appearance="outline" [color]="'accent'" class="fullwidth100">
                 <mat-label i18n>Signature</mat-label>
                 <textarea matTextareaAutosize matAutosizeMinRows="16" matAutosizeMaxRows="20" formControlName="signature" matInput></textarea>
               </mat-form-field>
               <!-- <textarea class="input-section1 input-section1-textarea" [formControl]="signature" name="signature"
                 id="signature"></textarea> -->
-              <button (click)='updatesignature()' class="btn-submit" type="submit">Enregistrer</button>
-            </div>
+              <div class="input-bloc">
+                  <app-base-button (click)='updatesignature()' iconName="save">Enregister</app-base-button>
+              </div>
           </div>
         </form>
       </div>
@@ -345,10 +345,10 @@
               </div>
             </div> -->
             <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateur"
-            class="fullwidth100">
-            <mat-label i18n> Email actuel * </mat-label>
-            <input  type="email" formControlName="email" matInput value="" name="email" disabled />
-          </mat-form-field>
+              class="fullwidth100">
+              <mat-label i18n> Email actuel * </mat-label>
+              <input  type="email" formControlName="email" matInput value="" name="email" disabled />
+            </mat-form-field>
           </div>
 
           <div class="form-line">
@@ -373,7 +373,7 @@
 
           <div class="form-line">
             <div class="input-bloc">
-              <button (click)='updateemail()' class="btn-submit" type="submit">Enregistrer</button>
+              <app-base-button (click)='updateemail()' iconName="save">Enregister</app-base-button>
             </div>
           </div>
         </form>
@@ -434,7 +434,7 @@
 
           <div class="form-line">
             <div class="input-bloc">
-              <button (click)="updatepassword()" class="btn-submit" type="submit">Enregistrer</button>
+              <app-base-button (click)="updatepassword()" iconName="save">Enregister</app-base-button>
             </div>
           </div>
         </form>

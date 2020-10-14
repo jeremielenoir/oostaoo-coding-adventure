@@ -68,6 +68,10 @@
         flex: 1;
         margin: 5px 20px 5px 20px;
 
+        mat-form-field {
+          width: 100%;
+        }
+
         .input-section1 {
           width: 100%;
           height: 50px;
@@ -105,6 +109,13 @@
       border: $border-table;
       border-radius: $border-radius;
     }
+  }
+}
+
+.btn-send {
+  width: 100%;
+  .mat-flat-button {
+    width: 100% !important;
   }
 }
 
