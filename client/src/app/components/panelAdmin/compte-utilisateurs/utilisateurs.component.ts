@@ -117,6 +117,7 @@ export class UtilisateursComponent implements OnInit {
 
     this.getUser().then(datas => {
       this.currentUser = datas;
+      console.log('THIS CURRENT USER : ', this.currentUser);
       this.tests_available = datas.tests_available;
       if (this.currentUser.role.type === 'account_admin') {
         this.isCurrentUserIsAccountAdmin = true;

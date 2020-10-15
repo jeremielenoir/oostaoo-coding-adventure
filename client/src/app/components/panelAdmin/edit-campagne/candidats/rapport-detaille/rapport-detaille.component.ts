@@ -23,15 +23,12 @@ export class RapportDetailleComponent implements OnInit {
   public scorePercent: any = 0;
   public totalPointsCandidat: any = 0;
   public totalPointsCampaign: any = 0;
-  // WIP SL public listereponse;
-  // WIP SL public bonnereponse;
 
   constructor(
     route: ActivatedRoute,
     public apiClientService: ApiClientService
   ) {
     this.idCandidat = route.snapshot.params.idCandidat;
-    // console.log('id candidat')
   }
 
   ngOnInit() {
@@ -93,7 +90,7 @@ export class RapportDetailleComponent implements OnInit {
           const candidatAnswers = question.array_rep_candidat.map(val => val.toLowerCase());
           const rightAnswers = question.index_question.answer_value.map(val => val.toLowerCase());
           const questionAnswers = question.index_question.content;
-          // WIP SL 
+          // TODO #1 : this should be compute server side to avoid duplicate computing when PDF is generated ( source of potentials erros and duplicate maintenance )
           question.is_right_answer = candidatAnswers.every((val) => rightAnswers.includes(val.toLowerCase())) && (questionAnswers.length === 0 ? true : candidatAnswers.length === rightAnswers.length);
         });
 

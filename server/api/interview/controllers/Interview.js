@@ -16,8 +16,8 @@ const moment = require("moment-timezone");
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
-    user: "chagnon.maxime@oostaoo.com",
-    pass: "oostaoo123",
+    user: "assessment@roodeo.com",
+    pass: "Oostaoo@2020",
   },
 });
 module.exports = {
@@ -116,7 +116,7 @@ module.exports = {
       }).toString();
       const options = {
         to,
-        from: "chagnon.maxime@oostaoo.com",
+        from: "assessment@roodeo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
         html: getEmail_message_crypto,
@@ -148,7 +148,6 @@ module.exports = {
 
   update: async (ctx, next) => {
     try {
-      //console.log("ctx.request.body", ctx.request.body);
       const {
         interview_date,
         candidats,
@@ -159,7 +158,7 @@ module.exports = {
       } = ctx.request.body;
 
       if (!ctx.params.id) {
-        throw new Error("Unknown user");
+        throw new Error("Missing user 'id' parameter");
       }
 
       const encodedData = {
@@ -183,7 +182,6 @@ module.exports = {
       const organizer = `${user.prenom} ${user.nom} <${user.email}>`;
       const icalEvent = ical({
         domain: "roodeo.com",
-
         events: [
           {
             start: moment(interview_date),
@@ -196,7 +194,7 @@ module.exports = {
       }).toString();
       const options = {
         to,
-        from: "chagnon.maxime@oostaoo.com",
+        from: "assessment@roodeo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
         html: getEmail_message_crypto,
@@ -215,7 +213,6 @@ module.exports = {
         ctx.params,
         updatedData
       );
-
       return updated;
     } catch (error) {
       throw error;
@@ -241,17 +238,18 @@ module.exports = {
         email_content,
         id,
       } = ctx.request.body;
+
       const interview = await strapi.services.interview.fetch({ id });
 
       if (!interview) {
-        throw new Error("interview not found");
+        throw new Error("Interview not found");
       }
 
       const to = [candidats[0].email, user.email];
 
       const options = {
         to,
-        from: "chagnon.maxime@oostaoo.com",
+        from: "assessment@roodeo.com",
         replyTo: "no-reply@strapi.io",
         subject: email_title,
         html: email_content,

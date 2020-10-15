@@ -1,6 +1,27 @@
 <div id="global">
   <!--app-breadcrumb [namePage]="'Utilisateurs'"></app-breadcrumb-->
+
   <div id="content">
+    <div class="breadrumb">
+      <div [routerLink]="['/dashboard/profil-utilisateur']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
+        <p>
+        <mat-icon class="fix-right hvr-icon">person_outline</mat-icon>
+        Mon profil
+        </p>
+      </div>
+      <div *ngIf="this.currentUser?.customeraccount.type === 'profesional'" [routerLink]="['/dashboard/profil-entreprise']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
+        <p>
+        <mat-icon class="fix-right hvr-icon">domain</mat-icon>
+        Mon entreprise 
+        </p>
+      </div>
+      <div [routerLink]="['/dashboard/utilisateurs']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
+        <p>
+        <mat-icon class="fix-right hvr-icon">groups</mat-icon>
+        utilisateurs
+        </p>
+      </div>
+    </div>
     <div id="shadow-cog" [ngClass]="{'shadow-cog-active': shadowcog1 == true}">
       <div id="remove" (click)="param_cog_non_active()"></div>
       <div class="modall">
