@@ -2,7 +2,7 @@
   <!-- <app-breadcrumb [namePage]="'Mon profil'"></app-breadcrumb> -->
 
   <div class="padding-top">
-    <div class="breadrumb">
+    <!-- <div class="breadrumb">
       <div [routerLink]="['/dashboard/profil-utilisateur']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
         <p>
         <mat-icon class="fix-right hvr-icon">person_outline</mat-icon>
@@ -12,7 +12,7 @@
       <div *ngIf="this.user?.customeraccount.type === 'profesional'"  [routerLink]="['/dashboard/profil-entreprise']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
         <p>
         <mat-icon class="fix-right hvr-icon">domain</mat-icon>
-        Mon entreprise 
+        Mon entreprise
         </p>
       </div>
       <div [routerLink]="['/dashboard/utilisateurs']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
@@ -21,6 +21,9 @@
         utilisateurs
         </p>
       </div>
+    </div> -->
+    <div *ngIf="dataRoute">
+      <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
     </div>
     <div class="fix-contents">
     <div class="content">
@@ -191,6 +194,10 @@
                 <textarea matTextareaAutosize matAutosizeMinRows="16" matAutosizeMaxRows="20"
                   formControlName="signature" matInput></textarea>
               </mat-form-field>
+            </div>
+          </div>
+          <div class="form-line">
+            <div class="input-bloc">
               <button (click)='updatesignature()' class="btn-submit" type="submit">Enregistrer</button>
             </div>
           </div>
@@ -255,6 +262,7 @@
                 de passe doivent correspondre</mat-hint>
             </mat-form-field>
           </div>
+
 
           <div class="form-line">
             <div class="input-bloc">

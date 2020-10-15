@@ -1,15 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  FormControl,
-  Validators,
-  FormGroup,
-  FormBuilder,
-} from "@angular/forms";
-import {
-  ApiClientService,
-  API_URI_USER,
-  API_URI_ACCOUNT,
-} from "src/app/api-client/api-client.service";
+import { FormControl, Validators, FormGroup, FormBuilder } from "@angular/forms";
+import { ApiClientService, API_URI_USER, API_URI_ACCOUNT } from "src/app/api-client/api-client.service";
 import { DecryptTokenService } from "src/app/components/home/register/register.service";
 import { MatSnackBar } from "@angular/material";
 import { Router } from "@angular/router";
@@ -27,13 +18,8 @@ export class ProfilUtilisateurComponent implements OnInit {
   formUtilisateurEmail: FormGroup;
   formUtilisateurPassword: FormGroup;
 
-  constructor(
-    public apiClientService: ApiClientService,
-    public decryptTokenService: DecryptTokenService,
-    private router: Router,
-    private _snackBar: MatSnackBar,
-    private formBuilder: FormBuilder
-  ) {}
+  constructor( public apiClientService: ApiClientService, public decryptTokenService: DecryptTokenService, private router: Router,
+    private _snackBar: MatSnackBar, private formBuilder: FormBuilder) {}
   hide = true;
   isOwnerOfPersonalAccount = false;
   accountConvertInProgress = false;
@@ -43,6 +29,8 @@ export class ProfilUtilisateurComponent implements OnInit {
 
   dateExp: string | number | Date;
   NewDateExp: Date;
+
+  dataRoute: any;
 
   ngOnInit() {
     this.formUtilisateurProfil = this.formBuilder.group({
@@ -76,6 +64,12 @@ export class ProfilUtilisateurComponent implements OnInit {
       if (user.length > 0) {
         this.user = user[0];
         console.log("THIS USER : ", this.user);
+        // declaration nav route
+        this.dataRoute = [
+          { routerLink : "/dashboard/profil-utilisateur", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "person_outline", name: "Mon profil" },
+          { routerLink : "/dashboard/profil-entreprise", condition: this.user.customeraccount.type === 'profesional', classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "domain", name: "Mon entreprise" },
+          { routerLink : "/dashboard/utilisateurs", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "groups", name: "utilisateurs" }
+        ];
         this.isOwnerOfPersonalAccount =
         this.user.customeraccount.type === "personal";
         this.formUtilisateurProfil.controls["firstName"].setValue(this.user.prenom);

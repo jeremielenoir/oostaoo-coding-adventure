@@ -78,7 +78,7 @@
       border: $border-table;
       border-radius: $border-radius;
       padding: 20px;
-    
+
       .form-entreprise{
         width: 50%;
         min-width: 400px;
@@ -88,12 +88,12 @@
           margin-top: 10px;
         }
       }
-      
+
       .text-entreprise{
         width: 50%;
         padding: 0 20px;
         min-width: 400px;
-      
+
           h2{
             margin-bottom: 35px;
           }
@@ -107,12 +107,12 @@
   }
 
   #content {
-    
+
 
     .new-entreprise{
       padding-top: 80px;
     }
-   
+
     #shadow-cog,
     #shadow-cog-add-images {
       position: fixed;
@@ -198,7 +198,7 @@
                   background-color: #162c45;
                   color: #fff;
                   font-size: $font-size-home;
-                   
+
                   transition: background 0.2s;
                   position: relative;
                   text-transform: uppercase;
@@ -233,7 +233,7 @@
                 }
                 .first-label-param-header {
                   color: $color-principal-blue !important;
-                   
+
                 }
               }
             }
@@ -276,7 +276,7 @@
                   color: $color-principal-blue;
                   bottom: 0;
                   line-height: 60px;
-                   
+
                   font-size: 16px;
                   margin-right: 6px;
                 }
@@ -294,7 +294,7 @@
                   position: absolute;
                   .number_progress_mini {
                     color: $color-principal-blue;
-                     
+
                     font-size: 16px;
                   }
                 }
@@ -322,7 +322,7 @@
             align-items: center;
             .text_number_progress_responsive {
               font-size: 12px;
-               
+
               display: inline-block;
               display: none;
             }
@@ -388,7 +388,7 @@
       }
       .modal-content-text {
         font-size: 20px;
-         
+
         color: #20252a;
         margin: 10px;
         opacity: 0.5;
@@ -413,7 +413,7 @@
           display: block;
           padding-bottom: 4px;
           font-size: 20px;
-           
+
           margin: 10px;
         }
       }
@@ -452,7 +452,7 @@
     background-color: #2bae91;
     color: #fff;
     font-size: 12px;
-     
+
     text-transform: uppercase;
     padding: 0 38px;
     margin: 15px;
@@ -500,7 +500,7 @@
         background-color: $color-principal-blue;
         color: white;
         border: $border-table;
-         
+
         &:first-child:disabled {
           opacity: 0.2;
           cursor: auto;
@@ -652,7 +652,7 @@
 .btn-validate {
   background-color: $color-principal-blue;
   color: #fff;
-   
+
   transition: background 0.2s;
   position: relative;
   text-transform: uppercase;
@@ -695,7 +695,7 @@
 
 .upload .text-upload {
   display: block;
-   
+
   color: #fff;
   margin-top: 6px;
   font-size: 12px;
@@ -710,7 +710,7 @@
 
 
 @media (max-width: 1024px) {
- 
+
   .all-group-content {
     flex-direction: column-reverse!important;
   }
@@ -772,54 +772,11 @@
 
 
 @media (max-width: 767px) {
- 
+
 }
 
 @media (max-width: 450px) {
   .btn-gestion:last-child {
     margin-left: 0px !important;
   }
-}
-
-//BREADRUM
-
-.breadrumb{
-    display: flex;
-    background: #eaeff3;
-    .navigation {
-        padding: 10px;
-        border-left: 1px solid  #ffffff00;
-        border-right: 1px solid  #ffffff00;
-        &:hover{
-            border-left: 1px solid  #1d3552;
-            border-right: 1px solid  #1d3552;
-            cursor: pointer;
-        }
-        p{
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 0;
-            font-family: "Poppins", sans-serif;
-            padding-top: 3px;
-            color: #1d3552;
-            .fix-right{
-                margin-right: 10px;
-                color: #e34e26;
-            }
-        }
-    }
-    border: 1px solid #1d3552;
-    border-radius: 5px;
-}
-
-.router-link-active{
-    // border-left: 1px solid  #1d3552 !important;
-    // border-right: 1px solid  #1d3552 !important;
-    cursor: pointer;
-    -webkit-box-shadow: 0px 10px 10px -1px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 10px 10px -1px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 10px 10px -1px rgba(0, 0, 0, 0.75);
 }

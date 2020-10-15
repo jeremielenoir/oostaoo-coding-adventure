@@ -104,6 +104,8 @@ export class UtilisateursComponent implements OnInit {
 
   @ViewChild('form') formulaire;
 
+  dataRoute: any;
+
   ngOnInit() {
     console.log('this.formulaire', this.formulaire.nativeElement);
 
@@ -118,6 +120,12 @@ export class UtilisateursComponent implements OnInit {
     this.getUser().then(datas => {
       this.currentUser = datas;
       console.log('THIS CURRENT USER : ', this.currentUser);
+      // declaration nav route
+      this.dataRoute = [
+        { routerLink : "/dashboard/profil-utilisateur", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "person_outline", name: "Mon profil" },
+        { routerLink : "/dashboard/profil-entreprise", condition: this.currentUser.customeraccount.type === 'profesional', classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "domain", name: "Mon entreprise" },
+        { routerLink : "/dashboard/utilisateurs", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "groups", name: "utilisateurs" }
+      ];
       this.tests_available = datas.tests_available;
       if (this.currentUser.role.type === 'account_admin') {
         this.isCurrentUserIsAccountAdmin = true;
