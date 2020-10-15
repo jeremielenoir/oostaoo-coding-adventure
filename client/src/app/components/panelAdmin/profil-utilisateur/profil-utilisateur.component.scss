@@ -76,10 +76,7 @@
                 width: 95%;
             }
             .input-bloc{
-                .fullwidth100{
-                    width: 100%;
-                }
-                flex: 1;
+
                 margin: 20px 20px 18px 20px;
 
                 .input-section1{
@@ -96,7 +93,7 @@
                 }
 
                 .input-section1-textarea{
-                    height:250px!important;
+                    height:250px !important;
                     padding-top: 9px;
                     resize: none;
                 }
@@ -133,6 +130,15 @@
             padding: 40px 80px;
             border: $border-table;
             border-radius: $border-radius;
+            
+            .form-line {
+                display: flex;
+                flex-direction: column;
+                app-base-button {
+                    display: flex;
+                    justify-content: center;
+                }
+            }
         }
 
         /* Section 3 */

@@ -29,18 +29,19 @@
             <h3 class="modall-title" i18n>
               Add a user
             </h3>
-        </div>
+            <button (click)="param_cog()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </button>
+          </div>
         <div class="modall-content">
           <form (ngSubmit)="addUser()" class="form" method="POST" #form>
             <div class="content-form-first">
               <div class="form-groupe">
-                <div class="top-form-groupe">
-                  <div class="title-and-error-span">
-                    <label class="libele" i18n>prenom</label>
-                  </div>
-                </div>
                 <div>
-                  <input [formControl]="addPrenom" type="" name="prenom" class="champ-form" required id="prenom" />
+                  <mat-form-field [color]="'accent'" appearance="outline" >
+                    <mat-label i18n>Prénom</mat-label>
+                      <input type="text" [formControl]="addPrenom" matInput value="" name="prenom" required/>
+                  </mat-form-field>
                   <div *ngIf=" submittedUser && addPrenom.invalid" class="alert">
                     <div *ngIf="addPrenom.errors.required" i18n>
                       Prénom requis
@@ -49,13 +50,11 @@
                 </div>
               </div>
               <div class="form-groupe">
-                <div class="top-form-groupe">
-                  <div class="title-and-error-span">
-                    <label class="libele" i18n>nom</label>
-                  </div>
-                </div>
                 <div>
-                  <input [formControl]="addNom" type="" name="nom" class="champ-form" />
+                  <mat-form-field [color]="'accent'" appearance="outline" >
+                    <mat-label i18n>Nom</mat-label>
+                      <input type="text" [formControl]="addNom" matInput value="" name="nom" required/>
+                  </mat-form-field>
                   <div *ngIf=" submittedUser && addNom.invalid" class="alert alert-danger">
                     <div *ngIf="addNom.errors.required" i18n>
                       Nom requis
@@ -64,13 +63,11 @@
                 </div>
               </div>
               <div class="form-groupe">
-                <div class="top-form-groupe">
-                  <div class="title-and-error-span">
-                    <label class="libele" i18n>email</label>
-                  </div>
-                </div>
                 <div>
-                  <input [formControl]="addEmail" type="" name="email" class="champ-form" id="email" />
+                  <mat-form-field [color]="'accent'" appearance="outline" >
+                      <mat-label i18n>E-mail</mat-label>
+                      <input type="email" [formControl]="addEmail" matInput value="" name="email" required />
+                  </mat-form-field>
                   <div *ngIf=" submittedUser && addEmail.invalid" class="alert alert-danger">
                     <div *ngIf="addEmail.errors.required" i18n>
                       Email requis
@@ -82,13 +79,11 @@
                 </div>
               </div>
               <div class="form-groupe">
-                <div class="top-form-groupe">
-                  <div class="title-and-error-span">
-                    <label class="libele" i18n>Pseudo</label>
-                  </div>
-                </div>
                 <div>
-                  <input [formControl]="addUsername" type="text" name="username" class="champ-form" id="username" />
+                  <mat-form-field [color]="'accent'" appearance="outline" >
+                      <mat-label i18n>Pseudo</mat-label>
+                      <input type="text" [formControl]="addUsername" matInput value="" name="username" required />
+                  </mat-form-field>
                   <div *ngIf=" submittedUser && addUsername.invalid" class="alert alert-danger">
                     <div *ngIf="addUsername.errors.required" i18n>
                       Pseudo requis
@@ -97,13 +92,11 @@
                 </div>
               </div>
               <div class="form-groupe">
-                <div class="top-form-groupe">
-                  <div class="title-and-error-span">
-                    <label class="libele" i18n>Mot de passe</label>
-                  </div>
-                </div>
                 <div>
-                  <input [formControl]="addPassword" type="password" name="password" class="champ-form" id="password" />
+                  <mat-form-field [color]="'accent'" appearance="outline" >
+                    <mat-label i18n>Mot de passe</mat-label>
+                    <input [formControl]="addPassword" type="password" name="password" matInput value="" required />
+                  </mat-form-field>
                   <div *ngIf=" submittedUser && addPassword.invalid" class="alert alert-danger">
                     <div *ngIf="addPassword.errors.required" i18n>
                       Mot de passe requis
@@ -112,14 +105,11 @@
                 </div>
               </div>
               <div class="form-groupe">
-                <div class="top-form-groupe">
-                  <div class="title-and-error-span">
-                    <label class="libele" i18n>Confirmer le mot de passe</label>
-                  </div>
-                </div>
                 <div>
-                  <input [formControl]="confirmPassword" type="password" name="confirmPassword" class="champ-form"
-                    id="confirmPassword" />
+                    <mat-form-field [color]="'accent'" appearance="outline" >
+                      <mat-label i18n>Confirmation du mot de passe</mat-label>
+                      <input [formControl]="confirmPassword" type="password" name="confirmPassword" matInput value="" required />
+                    </mat-form-field>
                   <div *ngIf=" submittedUser && confirmPassword.invalid" class="alert alert-danger">
                     <div *ngIf="confirmPassword.errors.required" i18n>
                       Confirmation du mot de passe requis
@@ -131,16 +121,15 @@
                 </div>
               </div>
               <div class="form-groupe">
-                <div class="top-form-groupe">
-                  <div class="title-and-error-span">
-                    <label class="libele" i18n>Rôles</label>
-                  </div>
-                </div>
                 <div>
-                  <select (change)="roleSetted($event)" [formControl]="userrole" name="userrole" class="select-role">
-                    <option title="{{rol.description}}" *ngFor="let rol of rolesRef" [value]="rol.id">{{ rol.name }}
-                    </option>
-                  </select>
+                    <mat-form-field appearance="outline" [color]="'accent'">
+                      <mat-label i18n>Role</mat-label>
+                      <mat-select (change)="roleSetted($event)" [formControl]="userrole" name="userrole" >
+                        <mat-option title="{{rol.description}}" *ngFor="let rol of rolesRef" [value]="rol.id">
+                          {{ rol.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                   <!-- <div *ngIf=" submittedUser && addPassword.invalid" class="alert alert-danger">
                     <div *ngIf="addPassword.errors.required">
                       Mot de passe requis
@@ -156,7 +145,7 @@
             </div>
             <div class="content-form-last">
               <div class="footer-form-last">
-                <input class="btn-gestion" type="submit" value="AJOUTER" />
+                <app-base-button type="submit" iconName="add" >AJOUTER</app-base-button>
               </div>
             </div>
           </form>

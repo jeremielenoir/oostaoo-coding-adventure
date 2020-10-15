@@ -257,6 +257,13 @@
   .modall-header {
     border-top-left-radius: $border-radius!important;
     border-top-right-radius: $border-radius!important;
+    position: relative;
+    button {
+      background-color: transparent;
+      border: none;
+      position: absolute;
+      right: 10px;
+    }
   }
 }
 
@@ -343,6 +350,10 @@
       padding: 5px 15px;
       font-size: 16px;
       flex-basis: 50%;
+
+      mat-form-field {
+        width: 100%;
+      }
 
       .select-role {
         width: 100%;
@@ -454,6 +465,8 @@
 
 .footer-form-last {
   padding-top: 30px;
+  display: flex;
+  justify-content: center;
 }
 
 .btn-gestion {
