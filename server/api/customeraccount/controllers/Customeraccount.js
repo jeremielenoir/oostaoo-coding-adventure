@@ -77,8 +77,15 @@ module.exports = {
    *
    */
   offerFind: async (ctx) => {
+   try {
+  
     const user = ctx.state.user;
+    console.log("user",user)
     return strapi.services.offer.fetch({id: user.customeraccount.offer});
+   } catch (error) {
+     console.log("error",error)
+     throw error
+   }
   },
   /**
    * customeraccount.offer api
@@ -253,7 +260,9 @@ module.exports = {
     let users = [];
     let account = ctx.state.user.customeraccount;
 
-    const results = await strapi.plugins['users-permissions']
+    const results = 
+    //await strapi.plugins['users-permissions']
+    await strapi
       .services.user.fetchAll({ customeraccount: account.id });
 
     results
@@ -439,18 +448,26 @@ module.exports = {
     try {
 
       const account = ctx.state.user.customeraccount;
-
+//console.log("account",account)
       if (ctx.state.user.role.type !== 'account_admin') {
         return ctx.forbidden(null, 'Action interdite.');
       }
 
-      const subscriptions = await stripe.subscriptions.list({
-        customer: account.stripe_customer_id,
+      let subscriptionParams = {
+       // customer: account.stripe_customer_id,
         limit: 1
-      });
+      }
 
+      if (account.stripe_customer_id){
+        subscriptionParams.customer =account.stripe_customer_id
+      }
+      console.log("subscriptionParams",subscriptionParams)
+      const subscriptions = await stripe.subscriptions.list(subscriptionParams);
+console.log("subscriptions",subscriptions)
       if (subscriptions && subscriptions.data[0]) {
         const subscription = await stripe.subscriptions.retrieve(subscriptions.data[0].id);
+
+        console.log("result retrieve",subscription)
         if (subscription) {
           await strapi.services.customeraccount.repairAccountOffer(account);
           ctx.send(subscription);
