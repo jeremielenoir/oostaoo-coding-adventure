@@ -1,5 +1,8 @@
 <!--app-breadcrumb [namePage]="'Contact Support'"></app-breadcrumb-->
 <div id="container">
+    <div style="padding-top: 67px;" *ngIf="dataRoute">
+      <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
+  </div>
   <div class="content">
     <app-contact-formular></app-contact-formular>
     <app-contact-join-us></app-contact-join-us>

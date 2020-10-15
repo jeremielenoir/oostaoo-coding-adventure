@@ -18,6 +18,8 @@ export class SubscriptionComponent implements OnInit {
   ownedOffer: any;
   inProgress = false;
 
+  dataRoute: any;
+
   constructor(
     private apiClientService: ApiClientService,
     private accountService: AccountService,
@@ -34,6 +36,11 @@ export class SubscriptionComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.dataRoute = [
+      { routerLink : "/subscription", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "credit_card", name: "Abonnement" },
+      { routerLink : "/dashboard/facturation", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "list_alt", name: "Facturation" },
+      { routerLink : "/dashboard/protection-des-donnees", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "admin_panel_settings", name: "Confidentialité" }
+    ];
     this.apiClientService.get(API_URI_OFFER)
       .subscribe(
         (off) => {

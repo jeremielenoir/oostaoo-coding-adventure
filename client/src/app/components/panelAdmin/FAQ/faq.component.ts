@@ -10,10 +10,11 @@ export class FAQComponent implements OnInit {
   panelOpenState = false;
   faqs: any;
   listTest : Array<String>;
-  filterParams
+  filterParams: any;
+  dataRoute: any;
   constructor(public apiClientService: ApiClientService, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
-      // if (params['edit']) { 
+      // if (params['edit']) {
       // }
       console.log('params in FAQ : ', params);
       this.filterParams = params.dynamicParams
@@ -21,6 +22,11 @@ export class FAQComponent implements OnInit {
   }
 
   ngOnInit() {
+    // declaration nav route
+    this.dataRoute = [
+      { routerLink : "/dashboard/faq", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "contact_support", name: "FAQ" },
+      { routerLink : "/dashboard/contact-support", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "place", name: "Contact" }
+    ];
     this.apiClientService.get(API_URI_FAQ).toPromise().then(faqs => {
       // console.log('faqs : ', faqs);
       this.faqs = faqs;

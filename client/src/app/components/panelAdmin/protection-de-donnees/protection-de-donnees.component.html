@@ -2,19 +2,21 @@
 <!--app-breadcrumb [namePage]="'Protection des données'"></app-breadcrumb-->
 
 <div id="content">
- 
+  <div *ngIf="dataRoute">
+    <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
+  </div>
   <div id="section1">
     <h2 class="title"> <i class="fas fa-shield-alt icon"></i> Protection des données</h2>
-  
+
     <p>Le RGPD exige que les rôles de responsable de traitement et de sous-traitant soient clairement établis. Pour la plupart des traitements, Roodeo agit en tant que sous-traitant et vous, le client, agissez en tant que responsable de traitement, notamment pour toutes les données personnelles des candidats.</p>
 
     <p>Les documents ci-après (Conditions d’utilisation, Conditions de vente, DPA, Politique de confidentialité) forment la base contractuelle de notre relation et détaillent nos rôles respectifs. Dans tous les cas les deux parties s’engagent à respecter la législation relative à la protection des données.</p>
-  
+
     <button mat-flat-button class="section1-button">Conditions d'utilisation</button>
     <button mat-flat-button class="section1-button">Conditions de vente</button>
     <button mat-flat-button class="section1-button">DPA</button>
     <button mat-flat-button class="section1-button">Politique de confidentialité</button>
-  
+
   <p>Email de votre Data Privacy Officer <i class="fas fa-info-circle icon-info"></i></p>
   <input matInput placeholder="Email" id="section1-input" value="{{this.email}}" disabled >
   <button mat-flat-button class="save">Enregistrer</button>
@@ -54,7 +56,7 @@
     </div>
 
     <div id="section3-right">
-        
+
       <div class="section3-right-input">
         <p>URL de votre politique de confidentialité :</p>
         <input matInput placeholder="" class="section3-input">

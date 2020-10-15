@@ -1,6 +1,10 @@
-<!--app-breadcrumb [namePage]="'Nos formules'"></app-breadcrumb-->
+<!-- <app-breadcrumb [namePage]="'Nos formules'"></app-breadcrumb> -->
+<app-route-component></app-route-component>
 <mat-progress-bar *ngIf="inProgress" class="roodeo-progress-bar" mode="query"></mat-progress-bar>
-<div class="rdo-panel" style="margin-top: 130px;">
+  <div style="margin-top: 102px; margin-left: 15px; margin-right: 15px;" *ngIf="dataRoute">
+      <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
+  </div>
+<div class="rdo-panel">
   <div class="rdo-panel-header">
     <h2><i class="fa fa-cubes icon"></i> Nos offres</h2>
   </div>

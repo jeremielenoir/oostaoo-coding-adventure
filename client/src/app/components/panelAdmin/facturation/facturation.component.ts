@@ -35,6 +35,8 @@ export class FacturationComponent implements OnInit {
   nextInvoice: any;
   searchQuery: '';
 
+  dataRoute: any;
+
   /**
    *
    * @param apiClientService
@@ -60,6 +62,12 @@ export class FacturationComponent implements OnInit {
    *
    */
   ngOnInit() {
+    // declaration nav route
+    this.dataRoute = [
+      { routerLink : "/subscription", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "credit_card", name: "Abonnement" },
+      { routerLink : "/dashboard/facturation", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "list_alt", name: "Facturation" },
+      { routerLink : "/dashboard/protection-des-donnees", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "admin_panel_settings", name: "Confidentialité" }
+    ];
     this.accountService.loadPaymentMethod();
     this.accountService.loadSubscription();
     this.accountService.loadOffer();

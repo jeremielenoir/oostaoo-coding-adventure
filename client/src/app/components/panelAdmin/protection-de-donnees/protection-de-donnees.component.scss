@@ -6,17 +6,17 @@
     #content {
         background: $color-background-blue;
         width: 100%;
-        padding: 97px 10px 0px;
+        padding: 87px 0px 0px;
 
         .icon {
             color: $color-orange;
             margin-right: 10px;
         }
-        
+
         .icon-info {
             color: $color-orange;
         }
-        
+
         .title {
             margin-bottom: 25px;
         }
@@ -32,7 +32,7 @@
 
         #section1 {
             width: 98%;
-            margin: 18px auto 0;
+            margin: 49px auto 0;
             background: white;
             padding: 40px;
             border: $border-table;
@@ -42,16 +42,16 @@
                 margin: 15px 0px;
                 width: 85%;
             }
-            
+
             .section1-button {
                 background: $color-gray !important;
                 color: white;
-                 
+
                 margin: 20px 15px 20px 0px;
                 width: 20%;
                 min-width: 200px;
             }
-            
+
             #section1 p {
                 margin-bottom: 10px;
             }
@@ -72,36 +72,36 @@
             #section2-left {
                 width: 46%;
                 margin-right: 79px;
-            
+
                 #section2-left p {
                     margin: 15px 0px;
                     width: 85%;
                 }
-            
+
             }
 
             #section2-right {
                 display: flex;
                 flex-wrap: wrap;
                 width: 46%;
-            
+
                 #section2-input-left {
                     margin-right: 15px;
                 }
-            
+
                 .section2-input {
                     width: 100%;
                     margin-top: 10px;
                     font-size: 18px;
                 }
-                
+
                 .never {
                     margin-top: 5px;
                     margin-bottom: 15px;
                     font-size: 10px;
                     color: darkgray;
                 }
-                
+
                 #section2-button {
                     margin-top: 50px;
                 }
@@ -124,7 +124,7 @@
             #section3-left {
                 width: 46%;
                 margin-right: 29px;
-            
+
                 #section3-left p {
                     margin: 15px 0px;
                     width: 85%;
@@ -136,16 +136,16 @@
                 display: flex;
                 flex-wrap: wrap;
             }
-            
+
             .section3-right-input {
                 width: 80%;
             }
-            
+
             .section3-input {
                 width: 100%;
                 margin-top: 10px;
             }
-            
+
             #section3-button {
                 margin-top: 50px;
             }
@@ -170,7 +170,7 @@
                 text-align: center;
                 border: $border-table;
                 border-radius: $border-radius;
-            
+
                 .section4-left-button {
                     color: white;
                     background: $color-principal-blue !important;
@@ -186,7 +186,7 @@
                 padding: 40px;
                 text-align: center;
                 border: $border-table;
-            
+
                 .section4-right-button {
                     color: white;
                     background: red !important;
@@ -225,7 +225,7 @@
             width: 100%;
         }
     }
- 
+
     #section2-right {
         width: 100%;
     }

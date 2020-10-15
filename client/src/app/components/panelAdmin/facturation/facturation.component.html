@@ -1,6 +1,9 @@
 <!--app-breadcrumb [namePage]="'Facturation'"></app-breadcrumb-->
 <mat-progress-bar *ngIf="inProgress" class="roodeo-progress-bar" mode="query"></mat-progress-bar>
-<div class="rdo-panel" style="margin-top: 130px;">
+  <div style="margin-top: 87px;" *ngIf="dataRoute">
+      <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
+  </div>
+<div class="rdo-panel">
   <div class="rdo-panel-header">
     <h2><i class="fa fa-tachometer icon"></i> Tableau de bord facturation</h2>
   </div>
