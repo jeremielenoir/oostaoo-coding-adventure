@@ -113,7 +113,7 @@ swiper > .swiper.s-wrapper {
 }
 
 .mat-snack-bar-container {
-  background-color: $color-principal-blue;
+  background-color: $color-principal-blue !important;
   color: $color-white;
   display: flex;
   text-align: center;

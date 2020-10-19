@@ -172,6 +172,7 @@ export class EditQuestionsComponent implements OnInit {
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
       duration: 6000,
+      panelClass: ['mat-snack-bar-container']
     });
   }
 

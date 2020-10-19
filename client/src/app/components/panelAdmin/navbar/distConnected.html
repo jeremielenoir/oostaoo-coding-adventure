@@ -6,6 +6,13 @@
 <br>
 <br>
 <mat-dialog-actions align="center">
-    <button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="hideDialog()">Annuler</button>
-    <button mat-raised-button cdkFocusInitial style="background-color: #1d3552; color: white;" (click)="confirmDisConnection()">Confirmer</button>
+    <app-base-button iconName="close" iconPosition="right" (clickEvent)="hideDialog()" style="margin-right: 10px;">
+        <span class="text" i18n>Annuler</span>
+    </app-base-button>
+
+    <app-base-button iconName="power_settings_new" iconPosition="right" (clickEvent)="confirmDisConnection()" style="margin-left: 10px;">
+        <span class="text" i18n>Confirmer</span>
+    </app-base-button>
+    <!-- <button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="hideDialog()">Annuler</button>
+    <button mat-raised-button cdkFocusInitial style="background-color: #1d3552; color: white;" (click)="confirmDisConnection()">Confirmer</button> -->
 </mat-dialog-actions>

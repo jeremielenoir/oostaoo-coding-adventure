@@ -146,6 +146,7 @@ export class RegisterComponent implements OnInit {
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
       duration: 6000,
+      panelClass: ['mat-snack-bar-container']
     });
   }
 
@@ -224,6 +225,7 @@ export class DialogForgetPassword {
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
       duration: 6000,
+      panelClass: ['mat-snack-bar-container']
     });
   }
 

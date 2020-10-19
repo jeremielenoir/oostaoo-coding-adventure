@@ -218,7 +218,8 @@ export class UtilisateursComponent implements OnInit {
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
-      duration: 3000
+      duration: 3000,
+      panelClass: ['mat-snack-bar-container']
     });
   }
   /**

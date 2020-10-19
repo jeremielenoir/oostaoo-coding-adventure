@@ -90,7 +90,8 @@ export class CampagneComponent implements OnInit {
   openDialog(idCampaign) {
     this.dialog.open(InviteCandidat, {
       data: idCampaign,
-      height: '580px'
+      height: '580px',
+      panelClass: ['mat-snack-bar-container']
     });
   }
 
@@ -131,6 +132,7 @@ export class CampagneComponent implements OnInit {
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
       duration: 6000,
+      panelClass: ['mat-snack-bar-container']
     });
   }
 
