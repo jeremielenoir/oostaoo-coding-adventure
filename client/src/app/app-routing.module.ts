@@ -35,6 +35,7 @@ import { AboutUsComponent } from "./components/home/about-us/about-us.component"
 import { AlgotestComponent } from "./components/panelAdmin/algotest/algotest.component";
 import { ContactUsComponent } from "./components/home/contact-us/contact-us.component";
 import { QuestionsComponent } from "./components/questions/questions.component";
+import { CreditcardComponent } from './components/creditcard/creditcard.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },

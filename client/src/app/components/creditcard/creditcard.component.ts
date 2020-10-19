@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PaymentMethod } from 'ngx-stripe/lib/interfaces/payment-intent';
+import { PaymentMethod } from '@stripe/stripe-js';
+//import { PaymentMethod } from 'ngx-stripe/lib/interfaces/payment-intent';
 
 @Component({
   selector: 'app-creditcard',
@@ -8,7 +9,7 @@ import { PaymentMethod } from 'ngx-stripe/lib/interfaces/payment-intent';
 })
 export class CreditcardComponent implements OnInit {
 
-  @Input() pm: PaymentMethod;
+ @Input() pm: PaymentMethod;
 
   constructor() { }
 

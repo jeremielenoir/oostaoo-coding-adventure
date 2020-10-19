@@ -6,16 +6,17 @@ import {
 } from 'src/app/api-client/api-client.service';
 import {
   StripeService,
-  ElementsOptions,
-  ElementOptions,
+  //ElementsOptions,
+  //ElementOptions,
   StripeCardComponent,
-  Address
+  //Address
 } from 'ngx-stripe';
 import { Router } from '@angular/router';
 import { DecryptTokenService } from '../register/register.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { AddressComponent } from '../../address/address.component';
 import { FormBuilder, Validators } from '@angular/forms';
+import { CreatePaymentMethodCardData } from '@stripe/stripe-js';
 
 @Component({
   selector: 'app-stripe-payment',
@@ -40,7 +41,7 @@ export class StripePaymentComponent implements OnInit {
   paied = false;
   complete = false;
   @ViewChild(StripeCardComponent) card: StripeCardComponent;
-  cardOptions: ElementOptions = {
+  cardOptions = {
     style: {
       base: {
         lineHeight: '50px',
@@ -59,7 +60,7 @@ export class StripePaymentComponent implements OnInit {
       }
     }
   };
-  elementsOptions: ElementsOptions = {
+  elementsOptions = {
     locale: 'fr'
   };
 
@@ -74,7 +75,7 @@ export class StripePaymentComponent implements OnInit {
   ) {
 
     this.emailForm = this.formBuilder.group({
-      email: ['', [Validators.required,Validators.email]]
+      email: ['', [Validators.required, Validators.email]]
     });
 
     this.cardHolderForm = this.formBuilder.group({
@@ -96,7 +97,7 @@ export class StripePaymentComponent implements OnInit {
         this.cardHolder = this.account.entreprise && this.account.entreprise.nom
           ? this.account.entreprise.nom : (this.userInfo.prenom + ' ' + this.userInfo.nom);
       });
-    this.card.on.subscribe(item => {
+    /* this.card.on.subscribe(item => {
       if (item.type === 'change') {
         this.messageErrorStripeElement = null;
         if (item.event.error) {
@@ -107,7 +108,21 @@ export class StripePaymentComponent implements OnInit {
           this.cardInfos = item.event.value;
         }
       }
-    });
+    }); */
+
+
+   /*  this.card.su(item => {
+      if (item.type === 'change') {
+        this.messageErrorStripeElement = null;
+        if (item.event.error) {
+          this.messageErrorStripeElement = item.event.error.message;
+        }
+        if (item.event.complete) {
+          this.complete = true;
+          this.cardInfos = item.event.value;
+        }
+      }
+    }); */
   }
   /**
    *
@@ -147,29 +162,38 @@ export class StripePaymentComponent implements OnInit {
     try {
 
       this.inProgress = true;
-
+      /*  "card", this.card.element, {
+         
+         metadata: {
+           'account': this.account.id,
+           'user': this.userInfo.id
+         }
+       } */
       // create card payment method
+const paymentData:CreatePaymentMethodCardData = {
+  type:"card",
+  card:this.card.element,
+  metadata: {
+    'account': this.account.id,
+    'user': this.userInfo.id
+  },
+  billing_details:{
+    email: this.emailForReceipt,
+    address: {
+      line1: this.account.billing_address.line1,
+      line2: this.account.billing_address.line2,
+      city: this.account.billing_address.city,
+      postal_code: this.account.billing_address.postal_code,
+      state: this.account.billing_address.state,
+      country: 'FR', // this.account.billing_address.country,
+    } 
+  }
+}
       let response1 = await this.stripeService.getInstance()
-        .createPaymentMethod("card", this.card.element, {
-          billing_details: {
-            email: this.emailForReceipt,
-            address: {
-              line1: this.account.billing_address.line1,
-              line2: this.account.billing_address.line2,
-              city: this.account.billing_address.city,
-              postal_code: this.account.billing_address.postal_code,
-              state: this.account.billing_address.state,
-              country: 'FR', // this.account.billing_address.country,
-            } as Address
-          },
-          metadata: {
-            'account': this.account.id,
-            'user': this.userInfo.id
-          }
-        });
+        .createPaymentMethod(paymentData);
 
       if (response1.error) {
-        this.snackBar.open(String(response1.error.message), 'Ok', {duration: 3000});
+        this.snackBar.open(String(response1.error.message), 'Ok', { duration: 3000 });
         this.inProgress = false;
         return;
       }
@@ -186,7 +210,7 @@ export class StripePaymentComponent implements OnInit {
       // parse result
       if (response2.error) {
 
-        this.snackBar.open(String(response2.error), 'Ok', {duration: 3000});
+        this.snackBar.open(String(response2.error), 'Ok', { duration: 3000 });
         this.inProgress = false;
         return;
 
@@ -195,7 +219,7 @@ export class StripePaymentComponent implements OnInit {
         let response3 = await this.stripeService.getInstance().handleCardAction(response2.clientSecret);
 
         if (response3.error) {
-          this.snackBar.open(String(response3.error), 'Ok', {duration: 3000});
+          this.snackBar.open(String(response3.error), 'Ok', { duration: 3000 });
           this.inProgress = false;
           return;
         } else if (response3.paymentIntent.status === "requires_confirmation") {
@@ -207,7 +231,7 @@ export class StripePaymentComponent implements OnInit {
             .toPromise();
 
           if (response4.error) {
-            this.snackBar.open(String(response3.error), 'Ok', {duration: 3000});
+            this.snackBar.open(String(response3.error), 'Ok', { duration: 3000 });
             this.inProgress = false;
             return;
           }
@@ -215,7 +239,7 @@ export class StripePaymentComponent implements OnInit {
 
       }
 
-      this.snackBar.open('Votre achat s\'est terminé avec succès', 'Ok', {duration: 3000});
+      this.snackBar.open('Votre achat s\'est terminé avec succès', 'Ok', { duration: 3000 });
       this.inProgress = false;
       this.paied = true;
 

@@ -35,6 +35,9 @@ export class SubscriptionComponent implements OnInit {
         .subscribe((sub) => this.subscription = sub);
     }
 
+    goToPayment(){
+      
+    }
   ngOnInit() {
     this.dataRoute = [
       { routerLink : "/subscription", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "credit_card", name: "Abonnement" },
@@ -51,7 +54,7 @@ export class SubscriptionComponent implements OnInit {
           this.accountService.loadSubscription();
         },
         (err) => {
-
+console.log("error fetching offers",err)
         }
       );
   }
