@@ -13,9 +13,11 @@ export class DecryptTokenService {
 
   constructor() {
     this.ca = localStorage.getItem('currentUser');
+    
     if (this.ca) {
       this.base64Url = this.ca.split('.')[1];
       this.decodedValue = JSON.parse(window.atob(this.base64Url));
+      console.log("cadecodedValue===========",this.decodedValue)
       this.userId = this.decodedValue.id;
       this.adminId = this.decodedValue.adminId;
       this.offer_id = this.decodedValue.offer_id;

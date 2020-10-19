@@ -98,6 +98,7 @@ export class AccountService {
         (off) => this._offer.next(off),
         (err) => {
           // TODO show message fail to load account
+          console.log("err load offer",err)
         }
       );
   }

@@ -7,7 +7,9 @@ import { PaymentMethod } from '@stripe/stripe-js';
   styleUrls: ['./creditcard.component.css']
 })
 export class CreditcardComponent implements OnInit {
+
  @Input() pm: PaymentMethod;
+
   constructor() { }
   ngOnInit() {
   }

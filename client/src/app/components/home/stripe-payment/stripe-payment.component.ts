@@ -102,6 +102,8 @@ export class StripePaymentComponent implements OnInit {
         }
       }
     }); */
+
+
    /*  this.card.su(item => {
       if (item.type === 'change') {
         this.messageErrorStripeElement = null;
@@ -150,6 +152,7 @@ export class StripePaymentComponent implements OnInit {
     try {
       this.inProgress = true;
       /*  "card", this.card.element, {
+         
          metadata: {
            'account': this.account.id,
            'user': this.userInfo.id
@@ -172,7 +175,7 @@ const paymentData:CreatePaymentMethodCardData = {
       postal_code: this.account.billing_address.postal_code,
       state: this.account.billing_address.state,
       country: 'FR', // this.account.billing_address.country,
-    }
+    } 
   }
 }
       let response1 = await this.stripeService.getInstance()

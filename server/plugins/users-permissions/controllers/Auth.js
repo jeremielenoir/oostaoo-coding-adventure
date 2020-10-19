@@ -9,7 +9,7 @@
 /* eslint-disable no-useless-escape */
 const crypto = require('crypto');
 const _ = require('lodash');
-
+const stripe = require('stripe')('sk_test_SHGN7PIdottD4WBLCcdSfbwA00kPGubvOC');
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 module.exports = {
@@ -332,12 +332,22 @@ module.exports = {
 
       let user = await strapi.query('user', 'users-permissions').create(params);
 
+      /*
+
+
+add offer
+      */
+
+      const offer = await strapi.services.offer.fetch({title:"Gratuit"})
+     
       const account = await strapi.services.customeraccount.add({
-        type: params.accountType || 'personal'
+        type: params.accountType || 'personal',
+        offer:{id:offer.attributes.id}
       });
+      console.log("customer account",account.attributes)
 
       await strapi.plugins['users-permissions']
-        .services.user.edit(_.pick(user, ['_id', 'id']), {customeraccount: account.id});
+        .services.user.edit(_.pick(user, ['_id', 'id']), {customeraccount: account.attributes.id});
 
       const jwt = strapi.plugins['users-permissions'].services.jwt.issue(
         _.pick(user.toJSON ? user.toJSON() : user, ['id', '_id'])
