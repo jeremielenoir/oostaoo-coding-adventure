@@ -40,6 +40,9 @@
                 margin-right: 8px;
                 font-size: 18px;
               }
+              &:focus {
+                outline:0;
+              }
           }
           div:hover{
               border-bottom: 3px solid $color-orange;
