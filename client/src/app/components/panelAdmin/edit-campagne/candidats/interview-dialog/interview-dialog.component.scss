@@ -16,6 +16,11 @@
   border-bottom: 1px solid #1d3552;
 }
 
+.error-date-time {
+  color: mat-color($roodeo-app-accent);
+  font-size: small;
+}
+
 .block-button{
     margin-top: 10px;
     display: flex;
@@ -24,7 +29,6 @@
 
 .loading-container{
   width: "100%";
-  
 }
 
 .cancel-button.mat-raised-button.mat-accent.ng-star-inserted{

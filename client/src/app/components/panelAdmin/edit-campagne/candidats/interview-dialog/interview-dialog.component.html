@@ -21,6 +21,8 @@
             <span i18n>Email</span> : <span>{{populateForm.controls['email'].value}}</span>
           </div>
           <div>
+            <div *ngIf="populateForm.hasError('badTime')" class="error-date-time">Le moment choisi est déjà
+              passé.</div>
             <mat-form-field appearance="outline" [color]="'accent'">
               <mat-label i18n>Choisir une date</mat-label>
               <input type="text" name="interview_date" formControlName="interview_date" matInput

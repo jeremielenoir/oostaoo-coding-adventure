@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatInput, MatSelect } from '@angular/material';
-import { Validators, FormGroup, FormBuilder, } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder, AbstractControl, } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -130,10 +130,6 @@ export class InterviewDialogComponent implements OnInit {
     };
   }
 
-  close() {
-    this.dialogRef.close()
-  }
-
   get pctrl() {
     if (!this.populateForm || !this.populateForm.controls) {
       return null
@@ -164,11 +160,23 @@ export class InterviewDialogComponent implements OnInit {
     }
   }
 
-  /* onValueChanges(): void {
-     this.populateForm.valueChanges.subscribe(val => {
-       console.log("value changed", val);
-     })
-   } */
+  close() {
+    this.dialogRef.close()
+  }
+
+  validateTime(group: FormGroup): any {
+    if (group && group.get("interview_date").dirty && group.get("time").dirty) {
+      let toBeValidated = group.get("interview_date").value.clone();
+      let selectedTime = group.get("time").value;
+      toBeValidated.add(selectedTime);
+      let now = moment();
+      if (toBeValidated.isBefore(now)) {
+        return { badTime: true };
+      }
+    }
+
+    return null;
+  }
 
   ngOnInit() {
     // Get current user infos
@@ -220,7 +228,7 @@ export class InterviewDialogComponent implements OnInit {
         name: [this.data.Candidats, Validators.required],
         htmlContent: [this.htmlContent, Validators.required],
         interview_link: [this.interview_link, Validators.required]
-      });
+      }, { validator: this.validateTime });
 
     } else if (this.status === this.STATUS_VIEW) {
       this.htmlContent = this.HTML_CONTENT_UPDATE;
@@ -242,7 +250,7 @@ export class InterviewDialogComponent implements OnInit {
               interview_link: [this.interview.interview_link, Validators.required],
               htmlContent: [this.htmlContent.replace("[date]", moment(this.interview.interview_date).format('DD/MM/YYYY')), Validators.required],
               time: [moment(this.interview.interview_date).format("HH:mm"), Validators.required],
-            });
+            }, { validator: this.validateTime });
           }
         })
         .catch(e => {
@@ -250,8 +258,6 @@ export class InterviewDialogComponent implements OnInit {
           throw new Error(`Error fetching interview :\n${e}`);
         })
     }
-
-    /* this.onValueChanges() */
   }
 
 
