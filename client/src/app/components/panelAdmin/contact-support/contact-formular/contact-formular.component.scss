@@ -110,6 +110,11 @@
       border-radius: $border-radius;
     }
   }
+
+  app-base-button {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .btn-send {
