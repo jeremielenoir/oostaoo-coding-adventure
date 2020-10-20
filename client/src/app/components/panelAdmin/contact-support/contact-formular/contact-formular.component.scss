@@ -11,6 +11,7 @@
     padding: 10px;
     display: flex;
     width: 98%;
+    height: 100%;
     margin: 0 auto;
     background: $color-background-blue;
 
@@ -114,6 +115,7 @@
   app-base-button {
     display: flex;
     justify-content: center;
+    margin-top: 16px;
   }
 }
 
