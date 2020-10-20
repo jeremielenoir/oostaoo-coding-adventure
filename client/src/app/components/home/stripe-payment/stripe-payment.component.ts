@@ -36,7 +36,7 @@ export class StripePaymentComponent implements OnInit {
   inProgress = false;
   paied = false;
   complete = false;
-  @ViewChild(StripeCardComponent) card: StripeCardComponent;
+  @ViewChild(StripeCardComponent) card: any;
   cardOptions = {
     style: {
       base: {
@@ -152,7 +152,7 @@ export class StripePaymentComponent implements OnInit {
     try {
       this.inProgress = true;
       /*  "card", this.card.element, {
-         
+
          metadata: {
            'account': this.account.id,
            'user': this.userInfo.id
@@ -175,7 +175,7 @@ const paymentData:CreatePaymentMethodCardData = {
       postal_code: this.account.billing_address.postal_code,
       state: this.account.billing_address.state,
       country: 'FR', // this.account.billing_address.country,
-    } 
+    }
   }
 }
       let response1 = await this.stripeService.getInstance()
