@@ -55,7 +55,6 @@
             [disabled]="!populateForm.valid || loading" (click)="save()" i18n>
             Envoyer email
           </app-base-button>
-          <!-- <app-base-button iconName="cancel" [disabled]="loading" [disabled]="!populateForm.valid"         WIP SL : double disabled -->
           <app-base-button *ngIf="status === STATUS_VIEW" iconName="edit" [disabled]="loading"
             (click)="setStatus(STATUS_UPDATE)" i18n>
             Re-plannifier l'entretien

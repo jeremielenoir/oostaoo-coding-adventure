@@ -240,7 +240,7 @@ export class InterviewDialogComponent implements OnInit {
               email: [this.interview.candidats[0].email, Validators.required],
               name: [this.interview.candidats[0].Nom, Validators.required],
               interview_link: [this.interview.interview_link, Validators.required],
-              htmlContent: [this.htmlContent.replace("[date]", moment(this.interview.interview_date).format('DD/MM/YYYY')), Validators.required], // WIP SL
+              htmlContent: [this.htmlContent.replace("[date]", moment(this.interview.interview_date).format('DD/MM/YYYY')), Validators.required],
               time: [moment(this.interview.interview_date).format("HH:mm"), Validators.required],
             });
           }
