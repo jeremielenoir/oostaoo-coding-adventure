@@ -19,8 +19,8 @@
 
   <p>Email de votre Data Privacy Officer <i class="fas fa-info-circle icon-info"></i></p>
   <input matInput placeholder="Email" id="section1-input" value="{{this.email}}" disabled >
-  <button mat-flat-button class="save">Enregistrer</button>
-  </div>
+  <app-base-button iconName="save" class="save">Sauvegarder</app-base-button>
+</div>
 
   <div id="section2">
 
@@ -43,7 +43,9 @@
           <p class="never">0 signifie jamais</p>
         </div>
 
-        <button mat-flat-button  id="section2-button" class="save">Enregistrer</button>
+        <!-- <button mat-flat-button  id="section2-button" class="save">Enregistrer</button> -->
+        <app-base-button iconName="save">Sauvegarder</app-base-button>
+
     </div>
 
   </div>
@@ -61,7 +63,7 @@
         <p>URL de votre politique de confidentialité :</p>
         <input matInput placeholder="" class="section3-input">
       </div>
-        <button mat-flat-button id="section3-button" class="save">Enregistrer</button>
+      <app-base-button iconName="save">Sauvegarder</app-base-button>
     </div>
   </div>
 
