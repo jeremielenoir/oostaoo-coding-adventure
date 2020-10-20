@@ -1,75 +1,68 @@
 <div class="modal-candidat">
-  <div class="close-invite-dialog">
-    <span (click)="close()"> <i class="fa fa-times" aria-hidden="true"></i></span>
-  </div>
-  <header class="header-modal padding-bottom-xs margin-bottom-sm">
-    <div class="info-campaign-candidats">
-      <h2 i18n>Planification entretien vidéo</h2>
-    </div>
-  </header>
-  <div class="content-modal-question">
-    <div class="loading-container" *ngIf="!populateForm||loading">
-      <mat-progress-bar mode="indeterminate">
-      </mat-progress-bar>
-    </div>
-    <div class="cologne-form" *ngIf="populateForm">
-      <form [formGroup]="populateForm">
-        <div class="card-body">
-          <div class="margin-bottom-md">
-            <span i18n>Nom</span> : <span>{{populateForm.controls['name'].value}}</span>
-            <br />
-            <span i18n>Email</span> : <span>{{populateForm.controls['email'].value}}</span>
-          </div>
-          <div>
-            <div *ngIf="populateForm.hasError('badTime')" class="error-date-time">Le moment choisi est déjà
-              passé.</div>
-            <mat-form-field appearance="outline" [color]="'accent'">
-              <mat-label i18n>Choisir une date</mat-label>
-              <input type="text" name="interview_date" formControlName="interview_date" matInput
-                [matDatepicker]="picker" [min]="currentDate" placeholder="jj/mm/aaaa"
-                [readonly]="status === STATUS_VIEW">
-              <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="status === STATUS_VIEW">
-              </mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-              <mat-error *ngIf="interview_date.invalid && (interview_date.dirty || interview_date.touched)">champs
-                requis
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline" [color]="'accent'" class="margin-left-md">
-              <mat-label i18n>Choisir l'heure</mat-label>
-              <mat-select formControlName="time" [disabled]="status === STATUS_VIEW">
-                <mat-option *ngFor="let opt of times" [value]="opt">
-                  {{ opt }}
-                </mat-option>
-              </mat-select>
-              <mat-error *ngIf="time.invalid && (time.dirty || time.touched)" i18n>champs requis</mat-error>
-            </mat-form-field>
-          </div>
+  <form [formGroup]="populateForm" *ngIf="populateForm">
+    <div class="content-modal-question">
+      <div class="close-invite-dialog">
+        <span (click)="close()"> <i class="fa fa-times" aria-hidden="true"></i></span>
+      </div>
+      <header class="header-modal padding-bottom-xs margin-bottom-sm">
+        <h2 i18n>Planification entretien vidéo</h2>
+      </header>
+      <div class="loading-container" *ngIf="!populateForm||loading">
+        <mat-progress-bar mode="indeterminate">
+        </mat-progress-bar>
+      </div>
+      <div class="card-body">
+        <span i18n>Nom</span> : <span>{{populateForm.controls['name'].value}}</span>
+        <br />
+        <span i18n>Email</span> : <span>{{populateForm.controls['email'].value}}</span>
+        <div class="margin-top-md">
+          <div *ngIf="populateForm.hasError('badTime')" class="error-date-time">Le moment choisi est déjà
+            passé.</div>
+          <mat-form-field class="margin-right-md" appearance="outline" [color]="'accent'">
+            <mat-label i18n>Choisir une date</mat-label>
+            <input type="text" name="interview_date" formControlName="interview_date" matInput [matDatepicker]="picker"
+              [min]="currentDate" placeholder="jj/mm/aaaa" [readonly]="status === STATUS_VIEW">
+            <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="status === STATUS_VIEW">
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="interview_date.invalid && (interview_date.dirty || interview_date.touched)">champs
+              requis
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" [color]="'accent'">
+            <mat-label i18n>Choisir l'heure</mat-label>
+            <mat-select formControlName="time" [disabled]="status === STATUS_VIEW">
+              <mat-option *ngFor="let opt of times" [value]="opt">
+                {{ opt }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="time.invalid && (time.dirty || time.touched)" i18n>champs requis</mat-error>
+          </mat-form-field>
         </div>
         <div *ngIf="status === STATUS_CREATE || status === STATUS_UPDATE">
           <div class="margin-bottom-xs" i18n>Message :</div>
           <ckeditor [editor]="Editor" formControlName="htmlContent"></ckeditor>
           <!-- <div [innerHTML]="htmlContent" class="htmlContent"></div> -->
         </div>
-        <div class="block-button roodeo-dark-theme">
-          <app-base-button *ngIf="status === STATUS_UPDATE" iconName="keyboard_arrow_left" iconPosition="left"
-            (clickEvent)="setStatus(STATUS_VIEW)">
-            Retour
-          </app-base-button>
-          <app-base-button *ngIf="status === STATUS_CREATE || status === STATUS_UPDATE" iconName="send"
-            [disabled]="!populateForm.valid || loading" (click)="save()" i18n>
-            Envoyer email
-          </app-base-button>
-          <app-base-button *ngIf="status === STATUS_VIEW" iconName="edit" [disabled]="loading"
-            (click)="setStatus(STATUS_UPDATE)" i18n>
-            Re-plannifier l'entretien
-          </app-base-button>
-          <app-base-button *ngIf="status === STATUS_VIEW" iconName="cancel" color="accent" [disabled]="loading"
-            (click)="remove()" i18n>
-            Annuler l'entretien
-          </app-base-button>
-        </div>
-      </form>
+      </div>
+      <div class="block-button margin-top-lg roodeo-dark-theme">
+        <app-base-button *ngIf="status === STATUS_UPDATE" iconName="keyboard_arrow_left" iconPosition="left"
+          (clickEvent)="setStatus(STATUS_VIEW)">
+          Retour
+        </app-base-button>
+        <app-base-button *ngIf="status === STATUS_CREATE || status === STATUS_UPDATE" iconName="send"
+          [disabled]="!populateForm.valid || loading" (click)="save()" i18n>
+          Envoyer email
+        </app-base-button>
+        <app-base-button *ngIf="status === STATUS_VIEW" iconName="edit" [disabled]="loading"
+          (click)="setStatus(STATUS_UPDATE)" i18n>
+          Re-plannifier l'entretien
+        </app-base-button>
+        <app-base-button *ngIf="status === STATUS_VIEW" iconName="cancel" color="accent" [disabled]="loading"
+          (click)="remove()" i18n>
+          Annuler l'entretien
+        </app-base-button>
+      </div>
     </div>
-  </div>
+  </form>
 </div>

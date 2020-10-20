@@ -16,20 +16,26 @@
   border-bottom: 1px solid #1d3552;
 }
 
-.error-date-time {
-  color: mat-color($roodeo-app-accent);
-  font-size: small;
+.card-body, .header-modal {
+  padding: 2 * $gutter  4 * $gutter;
 }
 
+
 .block-button{
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-around;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .loading-container{
   width: "100%";
 }
+
+.error-date-time {
+  color: mat-color($roodeo-app-accent);
+  font-size: small;
+}
+
 
 .cancel-button.mat-raised-button.mat-accent.ng-star-inserted{
   margin-left: 10px;

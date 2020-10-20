@@ -1,4 +1,19 @@
-
+// All directions
+.margin-xs {
+  margin: $gutter-xs;
+}
+.margin-sm {
+  margin: $gutter-sm;
+}
+.margin-md {
+  margin: $gutter-md;
+}
+.margin-lg {
+  margin: $gutter-lg;
+}
+.margin-xl {
+  margin: $gutter-xl;
+}
 
 // Left
 .margin-left-xs {
