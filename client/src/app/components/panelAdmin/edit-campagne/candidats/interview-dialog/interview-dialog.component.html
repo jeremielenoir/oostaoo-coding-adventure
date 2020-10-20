@@ -2,7 +2,7 @@
   <div class="close-invite-dialog">
     <span (click)="close()"> <i class="fa fa-times" aria-hidden="true"></i></span>
   </div>
-  <header class="header-modal">
+  <header class="header-modal padding-bottom-xs margin-bottom-sm">
     <div class="info-campaign-candidats">
       <h2 i18n>Planification entretien vidéo</h2>
     </div>
@@ -14,35 +14,38 @@
     </div>
     <div class="cologne-form" *ngIf="populateForm">
       <form [formGroup]="populateForm">
-        <div class="candidat-presentation margin-bottom-xs">
-          <span i18n>Entretien avec</span> : <span>{{populateForm.controls['name'].value}}</span>
-          <br />
-          <span i18n>Email</span> : <span>{{populateForm.controls['email'].value}}</span>
-        </div>
         <div class="card-body">
-          <mat-form-field appearance="outline" [color]="'accent'">
-            <mat-label i18n>Choisir une date</mat-label>
-            <input formControlName="interview_date" matInput [matDatepicker]="picker" [min]="currentDate"
-              placeholder="jj/mm/aaaa" [readonly]="status === STATUS_VIEW">
-            <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="status === STATUS_VIEW"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="interview_date.invalid && (interview_date.dirty || interview_date.touched)">champs requis
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="card-body">
-          <mat-form-field appearance="outline" [color]="'accent'">
-            <mat-label i18n>Choisir l'heure</mat-label>
-            <mat-select formControlName="time" [disabled]="status === STATUS_VIEW">
-              <mat-option *ngFor="let opt of times" [value]="opt">
-                {{ opt }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="time.invalid && (time.dirty || time.touched)" i18n>champs requis</mat-error>
-          </mat-form-field>
+          <div class="margin-bottom-md">
+            <span i18n>Nom</span> : <span>{{populateForm.controls['name'].value}}</span>
+            <br />
+            <span i18n>Email</span> : <span>{{populateForm.controls['email'].value}}</span>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" [color]="'accent'">
+              <mat-label i18n>Choisir une date</mat-label>
+              <input type="text" name="interview_date" formControlName="interview_date" matInput
+                [matDatepicker]="picker" [min]="currentDate" placeholder="jj/mm/aaaa"
+                [readonly]="status === STATUS_VIEW">
+              <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="status === STATUS_VIEW">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="interview_date.invalid && (interview_date.dirty || interview_date.touched)">champs
+                requis
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" [color]="'accent'" class="margin-left-md">
+              <mat-label i18n>Choisir l'heure</mat-label>
+              <mat-select formControlName="time" [disabled]="status === STATUS_VIEW">
+                <mat-option *ngFor="let opt of times" [value]="opt">
+                  {{ opt }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="time.invalid && (time.dirty || time.touched)" i18n>champs requis</mat-error>
+            </mat-form-field>
+          </div>
         </div>
         <div *ngIf="status === STATUS_CREATE || status === STATUS_UPDATE">
-          <label i18n>Message :</label>
+          <div class="margin-bottom-xs" i18n>Message :</div>
           <ckeditor [editor]="Editor" formControlName="htmlContent"></ckeditor>
           <!-- <div [innerHTML]="htmlContent" class="htmlContent"></div> -->
         </div>

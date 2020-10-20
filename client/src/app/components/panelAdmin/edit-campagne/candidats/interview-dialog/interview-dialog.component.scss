@@ -2,30 +2,31 @@
 @import '~@angular/material/theming';
 
 .close-invite-dialog{
-    float:right;
+  float:right;
+  color: mat-color($roodeo-app-warn);
+  margin-top:0px;
+  cursor: pointer;
+
+  span{
     color: mat-color($roodeo-app-warn);
-    margin-top:0px;
-    cursor: pointer;
+  }
+}
 
-    span{
-      color: mat-color($roodeo-app-warn);
-    }
-  }
+.header-modal {
+  border-bottom: 1px solid #1d3552;
+}
 
-  .block-button{
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-around;
-  }
+.block-button{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
 
+.loading-container{
+  width: "100%";
+  
+}
 
-  .loading-container{
-    width: "100%";
-    
-  }
-  .candidat-presentation{
-    text-align: center;
-  }
-  .cancel-button.mat-raised-button.mat-accent.ng-star-inserted{
-    margin-left: 10px;
-  }
+.cancel-button.mat-raised-button.mat-accent.ng-star-inserted{
+  margin-left: 10px;
+}
