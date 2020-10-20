@@ -1,7 +1,6 @@
 @import "../../../../roodeo-variables.scss";
 .global {
   background: $color-background-blue;
-  height: 100%;
   .rowter {
     background-color: $color-background-blue;
     font-family: $font-poppins;
@@ -14,6 +13,7 @@
       align-items: center;
       flex-direction: column;
       background: $color-background-blue;
+      padding-bottom: 20px;
       .roodeo-box{
         display: flex;
         flex-direction: column;

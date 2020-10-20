@@ -1,6 +1,8 @@
-<div id="nav" *ngIf="dataRoute" >
-  <div class="wrapper" *ngFor="let data of dataRoute" >
-    <div *ngIf="data.condition"  [routerLink]="[data.routerLink]" class="{{ data.classAnimParent ? data.classAnimParent : '' }}" routerLinkActive="active-link">
-      <mat-icon *ngIf="data.icon"  class="{{ data.classAnimIcone ? data.classAnimIcone : '' }} notranslate material-icons"> {{ data.icon }} </mat-icon> {{ data.name ? data.name : 'noName' }}</div>
+<div class="fix-nav">
+  <div id="nav" *ngIf="dataRoute" >
+    <div class="wrapper" *ngFor="let data of dataRoute" >
+      <div *ngIf="data.condition"  [routerLink]="[data.routerLink]" class="{{ data.classAnimParent ? data.classAnimParent : '' }}" routerLinkActive="active-link">
+        <mat-icon *ngIf="data.icon"  class="{{ data.classAnimIcone ? data.classAnimIcone : '' }} notranslate material-icons"> {{ data.icon }} </mat-icon> {{ data.name ? data.name : 'noName' }}</div>
+    </div>
   </div>
 </div>

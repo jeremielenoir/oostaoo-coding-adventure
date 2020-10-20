@@ -141,7 +141,7 @@ export class ProfilEntrepriseComponent implements OnInit {
       this.dataRoute = [
         { routerLink : "/dashboard/profil-utilisateur", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "person_outline", name: "Mon profil" },
         { routerLink : "/dashboard/profil-entreprise", condition: this.account.type === 'profesional', classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "domain", name: "Mon entreprise" },
-        { routerLink : "/dashboard/utilisateurs", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "groups", name: "utilisateurs" }
+        { routerLink : "/dashboard/utilisateurs", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "groups", name: "Utilisateurs" }
       ];
 
       if (user[0].role.type === 'root') {
