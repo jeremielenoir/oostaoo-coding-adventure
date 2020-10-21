@@ -213,7 +213,7 @@
 
 <!-- SIDENAV -->
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav mode="over" [(opened)]="opened">
+  <mat-sidenav #sidenav mode="over" [(opened)]="opened" [autoFocus]="false">
     <div class="sidenav-content" *ngIf='currentCandidat.Candidats !== "" '>
       <div class="header-detail">
         <h2 class="sidenav_campaign_name">{{campaign.Name}}</h2>
