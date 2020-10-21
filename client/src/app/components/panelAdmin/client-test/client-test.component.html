@@ -20,7 +20,6 @@
             Les solutions qui prennent en considération un maximum de cas
             d'utilisation sont privilégiées par le système de notation.
           </p>
-
           <p class="claire-text" i18n>
             Nous vous rappelons qu'il est interdit de tricher. Notre système
             détecte les tentatives de triche, et préviendra le recruteur le cas
@@ -42,11 +41,14 @@
           </label>
         </div>
 
-        <div class="modall-footer">
-          <button class="btn" (click)="NohundleActiveTest()" i18n>Annuler</button>
-          <button class=" btn btn-valide" disabled="disabled" #btnchecked (click)="HundleStatueTestingQuestion()" i18n>
+        <div class="modal-footer">
+          <app-base-button iconName="cancel" iconPosition="left" color="accent" (clickEvent)="noHandleActiveTest()"
+            i18n>
+            Annuler
+          </app-base-button>
+          <app-base-button iconName="keyboard_arrow_right" (clickEvent)="handleStatusTestingQuestion()" i18n>
             Commencer
-          </button>
+          </app-base-button>
         </div>
       </div>
     </div>
@@ -88,14 +90,15 @@
               fait pas partie de l’évaluation. Vous avez la possibilité de
               recommencer ce tutoriel autant de fois que vous le souhaitez.
             </p>
-            <button class="btn-compo" i18n>Démarrer le tutoriel</button>
+            <app-base-button iconName="keyboard_arrow_right" i18n>
+              Démarrer le tutoriel
+            </app-base-button>
           </div>
           <div class="test">
             <div class="title">
               <div class="img"></div>
               <h3 i18n>Test</h3>
             </div>
-
             <p class="tuto-para">
               Ce test est composé de {{ nbQuestion }} questions. Chaque question
               est chronométrée. La durée totale est estimée à
@@ -103,9 +106,9 @@
               {{ durationMaxTest }} minutes. Merci de prévoir
               {{ durationMaxTest }} minutes consécutives pour faire ce test.
             </p>
-            <button class="btn-compo" (click)="hundleActiveTest()" i18n>
+            <app-base-button iconName="keyboard_arrow_right" (clickEvent)="hundleActiveTest()" i18n>
               Démarrer le test
-            </button>
+            </app-base-button>
           </div>
         </div>
       </div>

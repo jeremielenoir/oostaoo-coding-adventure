@@ -7,9 +7,9 @@
   <!-- <div *ngIf="!isVerifUser"> -->
   <div *ngIf='entreprise === null' id="content">
     <div class="new-entreprise">
-    <div *ngIf="dataRoute">
-      <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
-    </div>
+      <div *ngIf="dataRoute">
+        <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
+      </div>
       <div class="all-group-content ajout-entreprise">
         <div class="content-ajout-entreprise">
           <div class="form-entreprise">
@@ -127,7 +127,7 @@
 
           </div>
 
-          <div class="modall-footer" #btnValideParent>
+          <div class="modal-footer" #btnValideParent>
             <button mat-button class="modal-btn-footer" (click)="uploadLogo()" disabled="disabled"
               id="btn-valide">valider</button>
             <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()">annuler</button>
@@ -208,7 +208,7 @@
           </div>
 
 
-          <div class="modall-footer" #btnValideParentAddImage>
+          <div class="modal-footer" #btnValideParentAddImage>
 
             <button mat-button class="modal-btn-footer" (click)='uploadImage()' disabled="disabled"
               id="btn-valide-deuxx">valider</button>

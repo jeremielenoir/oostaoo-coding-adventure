@@ -226,8 +226,9 @@ button {
       }
     }
   }
-  .modall-footer {
+  .modal-footer {
     display: flex;
+    justify-content: space-around;
     padding: 0 20px 20px 20px;
     .btn {
       flex: 1;

@@ -47,12 +47,12 @@
         <br />
         <mat-form-field class="example-full-width">
           <mat-label i18n>Commentaires (Optionnel)</mat-label>
-          <textarea matInput  [formControl]="commentaire" name="commentaires" placeholder="Leave a comment" cdkTextareaAutosize cdkAutosizeMinRows="5"
-            cdkAutosizeMaxRows="10"></textarea>
+          <textarea matInput [formControl]="commentaire" name="commentaires" placeholder="Leave a comment"
+            cdkTextareaAutosize cdkAutosizeMinRows="5" cdkAutosizeMaxRows="10"></textarea>
         </mat-form-field>
-        <button mat-flat-button class="oos-custom-feedback" (click)="sendFeedback()" i18n>
+        <app-base-button iconName="keyboard_arrow_right" (clickEvent)="sendFeedback()" i18n>
           Envoyer votre avis
-        </button>
+        </app-base-button>
       </div>
     </div>
   </div>

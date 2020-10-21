@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild  } from "@angular/core";
-import { ActivatedRoute, Router  } from "@angular/router";
-import { API_URI_CAMPAIGNS,  API_URI_CANDIDATS, ApiClientService} from "../../../api-client/api-client.service";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { API_URI_CAMPAIGNS, API_URI_CANDIDATS, ApiClientService } from "../../../api-client/api-client.service";
 
 @Component({
   selector: "app-client-test",
@@ -50,43 +50,43 @@ export class ClientTestComponent implements OnInit {
     //console.log("state", this.ActiveTest);
   }
 
-  public NohundleActiveTest() {
+  public noHandleActiveTest() {
     this.ActiveTest = false;
   }
 
-  public HundleStatueTestingQuestion() {
+  public handleStatusTestingQuestion() {
     this.StatueTestingQuestion = "testing";
   }
 
   public getCandidats() {
     this.apiClientService.get(`${API_URI_CANDIDATS}?token=${this.idParam}`).toPromise().then((res) => {
       for (const candidat of res) {
-          this.candidat = candidat;
-          console.log("candidat this.candidat", this.candidat);
-          if (candidat.test_terminer !== "0000-00-00 00:00:00") {
-            this.StatueTestingQuestion = "fin";
-            return this.router.navigate(["/home"]);
+        this.candidat = candidat;
+        console.log("candidat this.candidat", this.candidat);
+        if (candidat.test_terminer !== "0000-00-00 00:00:00") {
+          this.StatueTestingQuestion = "fin";
+          return this.router.navigate(["/home"]);
+        }
+        this.idCampaign = candidat.campaign.id;
+        this.postOpenTimeTest(this.dateOpenTest, candidat.id);
+        this.apiClientService.get(API_URI_CAMPAIGNS + "/" + this.idCampaign).toPromise().then((res1) => {
+          this.nbQuestion = res1.questions.length;
+          let secondTime = 0;
+          for (const question of res1.questions) {
+            secondTime = secondTime + question.time;
           }
-          this.idCampaign = candidat.campaign.id;
-          this.postOpenTimeTest(this.dateOpenTest, candidat.id);
-          this.apiClientService.get(API_URI_CAMPAIGNS + "/" + this.idCampaign).toPromise().then((res1) => {
-            this.nbQuestion = res1.questions.length;
-            let secondTime = 0;
-            for (const question of res1.questions) {
-              secondTime = secondTime + question.time;
-            }
-            this.durationTotalTest = Math.floor(secondTime / 60);
-            this.durationMaxTest = this.durationTotalTest + 10;
-            this.questionCampaign = [...res1.questions];
-            this.technoCampaign = [...res1.technologies];
-            // console.log("this.questionCampaign: ", this.questionCampaign);
-            // console.log("this.technoCampaign: ", this.technoCampaign);
-          });
-          /*return this.router.navigate(["/evaluate"], {
-            queryParams: {
-              id: this.idParam
-            }
-          });*/
+          this.durationTotalTest = Math.floor(secondTime / 60);
+          this.durationMaxTest = this.durationTotalTest + 10;
+          this.questionCampaign = [...res1.questions];
+          this.technoCampaign = [...res1.technologies];
+          // console.log("this.questionCampaign: ", this.questionCampaign);
+          // console.log("this.technoCampaign: ", this.technoCampaign);
+        });
+        /*return this.router.navigate(["/evaluate"], {
+          queryParams: {
+            id: this.idParam
+          }
+        });*/
       }
       //
     });

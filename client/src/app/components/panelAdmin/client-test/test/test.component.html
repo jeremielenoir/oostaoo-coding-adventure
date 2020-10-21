@@ -68,7 +68,6 @@
 
       <div *ngIf="question.type === 'multiple'" class="content-testing content-testing-seconde">
         <div *ngFor="let response of responses">
-          <!-- WIP SL : class TEST -->
           <mat-checkbox class="TEST" [disabled]="isDisabled" (change)="checkCheckBoxvalue($event)" [value]="response"
             appBlockCopyPaste [appActive]="candidat.campaign.copy_paste && !prev">
             {{ response }}
