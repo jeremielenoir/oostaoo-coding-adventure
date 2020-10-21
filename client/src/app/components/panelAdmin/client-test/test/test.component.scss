@@ -91,16 +91,12 @@
       &.content-testing-seconde {
         min-height: 410px;
       }
-      .example-radio-group {
-        border: 1px solid $color-background-blue;
+      .answer-radio-group {
         display: flex;
         flex-direction: column;
-        margin: 0px 0;
         border-radius: $border-radius;
-        
-        //padding: 20px;
-        .example-radio-button {
-          //margin: 15px 0px;
+        border: 1px solid $color-background-blue;
+        .answer-radio-button {
           padding: 20px 20px;
           border-bottom: 1px solid $color-background-blue;
           &:last-child{
@@ -109,6 +105,19 @@
         }
       }
     }
+  }
+}
+
+::ng-deep .answer-checkbox-group {
+  border-radius: $border-radius;
+  border: 1px solid $color-background-blue;
+}
+
+::ng-deep .answer-checkbox {
+  padding: 20px 20px;
+  border-bottom: 1px solid $color-background-blue;
+  &:last-child{
+    border-bottom: 0px solid $color-background-blue;
   }
 }
 
@@ -196,7 +205,7 @@
   justify-content: space-around;
 }
 
-::ng-deep .mat-checkbox-label {
+::ng-deep .mat-checkbox-label, ::ng-deep .mat-radio-label-content {
   white-space: normal;
 }
 
