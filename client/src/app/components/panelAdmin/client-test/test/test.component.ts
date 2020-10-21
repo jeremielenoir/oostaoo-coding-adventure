@@ -9,7 +9,7 @@ import {
 
 import { SelectedLanguageService } from '../../../../services/selected-language.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import {  DialogOverviewTestComponent } from '../../dragndrop/dragndrop.component';
+import { DialogOverviewTestComponent } from '../../dragndrop/dragndrop.component';
 
 export interface IDialogData {
   preview: boolean;
@@ -240,9 +240,8 @@ export class TestComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(DialogTimeoutComponent, {
       data: { preview: preview },
       height: 'auto',
-      width: '50%'
-      /*height: '100%',
-      width: '100%',*/
+      width: '50%',
+      autoFocus: false,
     });
 
     dialogRef.afterClosed().subscribe();

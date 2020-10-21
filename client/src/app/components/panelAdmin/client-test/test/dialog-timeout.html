@@ -9,8 +9,8 @@
         question suivante.
     </p>
 </mat-dialog-content>
-<mat-dialog-actions>
-    <app-base-button iconName="close" iconPosition="right" *ngIf="!data.preview"  (clickEvent)="questNext()">
+<mat-dialog-actions class="block-button">
+    <app-base-button iconName="close" iconPosition="right" *ngIf="!data.preview" (clickEvent)="questNext()">
         <span class="text" i18n>OK</span>
     </app-base-button>
 

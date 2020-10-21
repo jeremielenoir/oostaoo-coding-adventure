@@ -4,30 +4,6 @@
   padding: 0px 15px!important;
 }
 
-/*::ng-deep .mat-radio-inner-circle{
-  background: $color-principal-blue!important;
-  top:2.3px!important
-}
-
-::ng-deep .mat-radio-outer-circle{
-  border-color:$color-principal-blue!important;
-  top:2.3px!important
-}
-
-::ng-deep .mat-radio-button{
-  border-color:$color-principal-blue!important;
-}
-
-::ng-deep .mat-ripple-element,::ng-deep .mat-radio-persistent-ripple{
-  background: $color-principal-blue!important;
-}
-
-::ng-deep .mat-radio-label{
-  white-space: normal!important;
-  align-items: flex-start!important;
-}*/
-
-
 @mixin structureBlock {
   width: 50%;
   @media #{$smallDevice} {
@@ -213,6 +189,15 @@
       }
     }
   }
+}
+
+::ng-deep .block-button {
+  display: flex;
+  justify-content: space-around;
+}
+
+::ng-deep .mat-checkbox-label {
+  white-space: normal;
 }
 
 .active-time-danger {
