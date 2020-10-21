@@ -156,15 +156,15 @@
 
 /*--modal css--*/
 
-.modall {
-  .modall-header {
+.modal {
+  .modal-header {
     background-color: $color-orange;
     color: white;
-    .modall-title {
+    .modal-title {
       color: white;
     }
   }
-  .modall-content {
+  .modal-content {
     padding: 20px;
     max-width: 875px;
     p {

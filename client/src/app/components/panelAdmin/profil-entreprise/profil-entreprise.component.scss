@@ -358,16 +358,16 @@
   }
 }
 
-.modall {
+.modal {
   min-width: 320px;
   min-height: 460px;
   width: calc(100vw - 120px);
   background-color: #fff;
   height: calc(100% - 180px);
-  .modall-header {
+  .modal-header {
     height: 90px;
   }
-  .modall-content {
+  .modal-content {
     color: #20252a;
     align-items: center;
     justify-content: center;
@@ -441,7 +441,7 @@
       display: none;
     }
   }
-  .modall-content.modall-content-active {
+  .modal-content.modal-content-active {
     background: #c6c6c6;
   }
   .btn-modal-content {

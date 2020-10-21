@@ -190,8 +190,8 @@
   cursor: pointer;
   z-index: 100;
   display: none;
-  .modall,
-  .shadow-cog-active > .modall {
+  .modal,
+  .shadow-cog-active > .modal {
     border: none;
     background: rgb(255, 255, 255);
     outline: none;
@@ -202,13 +202,13 @@
     width: 550px;
     height: auto;
   }
-  .modall-header {
+  .modal-header {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #eaeff3;
     height: 60px;
-    .modall-title {
+    .modal-title {
       color: $color-principal-blue;
       margin: 0;
       font-size: 18px;
@@ -218,7 +218,7 @@
       }
     }
   }
-  .modall > .modall-content form {
+  .modal > .modal-content form {
     padding: 30px;
   
   }

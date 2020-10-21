@@ -19,13 +19,13 @@
     <div *ngSwitchCase="'CandidatTrue'" id="editQuestion">
       <div id="shadow-cog" [class.shadow-cog-active]="anonymizing">
         <div id="remove" (click)="setAnonymizing(false)"></div>
-        <div class="modall">
-          <div class="modall-header">
-            <h3 class="modall-title" i18n>
+        <div class="modal">
+          <div class="modal-header">
+            <h3 class="modal-title" i18n>
               {{getCandidatsSelected().length > 1 ? 'les candidats' : 'le candidat'}}
             </h3>
           </div>
-          <div class="modall-content">
+          <div class="modal-content">
             <i class="fas fa-user-secret content-icon"></i>
             <h4 class="modal-content-title">Anonymiser
               {{getCandidatsSelected().length > 1 ? 'les candidats' : 'le candidat'}}</h4>
@@ -49,13 +49,13 @@
       </div>
       <div id="shadow-cog" [class.shadow-cog-active]="deletingCandidats">
         <div id="remove" (click)="setDeletingCandidats(false)"></div>
-        <div class="modall">
-          <div class="modall-header">
-            <h3 class="modall-title">
+        <div class="modal">
+          <div class="modal-header">
+            <h3 class="modal-title">
               Supprimer {{getCandidatsSelected().length > 1 ? 'les candidats' : 'le candidat'}}
             </h3>
           </div>
-          <div class="modall-content">
+          <div class="modal-content">
             <i class="fas fa-close content-icon"></i>
             <h4 class="modal-content-title">Supprimer
               {{getCandidatsSelected().length > 1 ? 'les candidats' : 'le candidat'}}</h4>

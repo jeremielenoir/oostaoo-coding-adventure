@@ -216,8 +216,8 @@ swiper > .swiper.s-wrapper {
   height: 100%;
 }
 
-.modall,
-#shadow-cog.shadow-cog-active > .modall {
+.modal,
+#shadow-cog.shadow-cog-active > .modal {
   background: rgb(255, 255, 255);
   outline: none;
   padding: 0px;
@@ -226,7 +226,7 @@ swiper > .swiper.s-wrapper {
   height: auto;
 }
 
-.modall > .modall-header {
+.modal > .modal-header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -234,7 +234,7 @@ swiper > .swiper.s-wrapper {
   height: 50px;
 }
 
-.modall > .modall-header > .modall-title {
+.modal > .modal-header > .modal-title {
   color: $color-principal-blue;
   margin: 0;
   padding: 0;

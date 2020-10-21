@@ -1,9 +1,9 @@
 <div id="shadow-cog" [ngClass]="{ 'shadow-cog-active': Isactive == true }">
   <div id="remove" (click)="param_cog_non_active()"></div>
 
-  <div class="modall">
-    <div class="modall-header">
-      <h3 class="modall-title" i18n>
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title" i18n>
         <span class="icon-modal-header">
           <i class="fas fa-cog icon-header"></i>
         </span>
@@ -11,7 +11,7 @@
       </h3>
     </div>
 
-    <div class="modall-content">
+    <div class="modal-content">
       <form (submit)="hundeleSubmit()">
         <label class="checked-block" for="check-1">
           <span class="check-label" i18n>Invitation de candidat</span>
@@ -68,11 +68,11 @@
             &gt; <span i18n>a terminé l'évaluation technique de </span>
             <span *ngFor="let campaing of campaignsFromParent"><a *ngIf=' campaing.id === candidat.campaign'
                 [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{campaing.Name}}</a></span>
-                <div *ngIf="candidat.invitation_date"   class="timeago-container" >
-                  <app-timeago date="{{candidat.test_terminer}}"></app-timeago>
-                </div>
+            <div *ngIf="candidat.invitation_date" class="timeago-container">
+              <app-timeago date="{{candidat.test_terminer}}"></app-timeago>
+            </div>
           </div>
-          
+
         </div>
 
         <div *ngIf="candidat.duree === null && candidat.test_ouvert === '0000-00-00 00:00:00'" class="list-sidebar">
@@ -84,9 +84,9 @@
             <span i18n>a été invité(e) à </span>
             <span *ngFor="let campaing of campaignsFromParent"><a *ngIf=' campaing.id === candidat.campaign'
                 [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{campaing.Name}}</a></span>
-                <div *ngIf="candidat.invitation_date" class="timeago-container">
-                  <app-timeago date="{{candidat.invitation_date}}"></app-timeago>
-                </div>
+            <div *ngIf="candidat.invitation_date" class="timeago-container">
+              <app-timeago date="{{candidat.invitation_date}}"></app-timeago>
+            </div>
 
           </div>
         </div>
@@ -100,9 +100,9 @@
             <span i18n>a commencé le test </span>
             <span *ngFor="let campaing of campaignsFromParent"><a *ngIf=' campaing.id === candidat.campaign'
                 [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{campaing.Name}}</a></span>
-                <div *ngIf="candidat.invitation_date" class="timeago-container">
-                  <app-timeago date="{{candidat.invitation_date}}"></app-timeago>
-                </div>
+            <div *ngIf="candidat.invitation_date" class="timeago-container">
+              <app-timeago date="{{candidat.invitation_date}}"></app-timeago>
+            </div>
 
           </div>
         </div>

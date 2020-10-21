@@ -198,7 +198,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
   handleFetch(props) {
     const apiUrl = props.match.params.env ? `${props.match.params.slug}/${props.match.params.env}` : props.match.params.slug;
 
-    switch(props.match.params.slug) {
+    switch (props.match.params.slug) {
       case 'languages':
         return this.props.languagesFetch();
       case 'databases':
@@ -245,7 +245,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
       ? this.props.home.addDatabaseSection.sections[1].items[0].value
       : this.props.home.modifiedData[this.props.home.dbNameTarget];
     const target = { name: 'database.defaultConnection', value };
-    this.handleChange({target});
+    this.handleChange({ target });
     this.setState({ toggleDefaultConnection: !this.state.toggleDefaultConnection });
   }
 
@@ -347,7 +347,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
 
       return (
         <div className={`col-md-6`} key={item.name}>
-          <div className={styles.modalLanguageLabel}>
+          <div className={styles.modalanguageLabel}>
             <FormattedMessage id={`settings-manager.${item.name}`} />
           </div>
           <Select
@@ -475,7 +475,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
 
     return (
       <span className={`${styles.flagContainer} flag-icon-background flag-icon-${flag}`} style={spanStyle}>
-        <FormattedMessage id="settings-manager.selectValue" defaultMessage='{language}' values={{ language: props.value.label}} className={styles.marginLeft} />
+        <FormattedMessage id="settings-manager.selectValue" defaultMessage='{language}' values={{ language: props.value.label }} className={styles.marginLeft} />
       </span>
     );
   }
