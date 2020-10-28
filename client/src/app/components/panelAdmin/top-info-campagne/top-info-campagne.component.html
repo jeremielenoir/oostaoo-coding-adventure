@@ -65,7 +65,7 @@
   <!-- Buttons -->
   <div class="segment2">
     <app-base-button *ngIf="!yourCampaign" iconName="keyboard_arrow_left" iconPosition="left" class="margin-r-10"
-      [routerLink]="['/dashboard/campaigns']">Paramètres</app-base-button>
+    (clickEvent)="onDecrementPage()" >Paramètres</app-base-button>
     <app-base-button iconName="save" [color]="yourCampaign === true ? 'primary' : 'accent'"
       (clickEvent)="postCampagne()">
       Enregistrer</app-base-button>
