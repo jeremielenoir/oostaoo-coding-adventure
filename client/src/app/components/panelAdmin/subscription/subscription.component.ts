@@ -24,7 +24,8 @@ export class SubscriptionComponent implements OnInit {
     private apiClientService: ApiClientService,
     private accountService: AccountService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router,
     ) {
       this.accountService.offer
         .subscribe(
@@ -36,7 +37,7 @@ export class SubscriptionComponent implements OnInit {
     }
 
     goToPayment(){
-      
+      this.router.navigate(['/dashboard/facturation']);
     }
   ngOnInit() {
     this.dataRoute = [
