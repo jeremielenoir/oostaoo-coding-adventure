@@ -95,6 +95,10 @@
     "archive": {
       "default": false,
       "type": "boolean"
+    },
+    "expiration_days": {
+      "default": 2,
+      "type": "integer"
     }
   }
 }
