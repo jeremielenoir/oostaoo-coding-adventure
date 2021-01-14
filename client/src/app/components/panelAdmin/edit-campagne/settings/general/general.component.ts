@@ -74,6 +74,7 @@ export class GeneralComponent implements OnInit {
       this.envoiRapportSimplifie = false;
     }
 
+    
     if (this.expdate.value === null || this.name.value === '') {
       this.openSnackBar("Une erreur est survenue, veuillez remplir correctement tous les champs requis", "Fermer");
     } else {
