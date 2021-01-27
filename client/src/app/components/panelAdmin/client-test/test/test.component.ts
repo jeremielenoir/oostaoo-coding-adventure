@@ -22,6 +22,7 @@ export interface IDialogData {
 export class DialogTimeoutComponent implements OnInit {
   dataPopup;
   prev = false;
+  @Output("questNext") public questNext = new EventEmitter<any>();
   constructor(
     public dialogRef: MatDialogRef<DialogTimeoutComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IDialogData
@@ -45,6 +46,12 @@ export class DialogTimeoutComponent implements OnInit {
   }
   refreshComponent($event): void {
     console.log('REFRESH COMPONENT');
+  }
+
+  click() {
+    console.log("CLICK WORKS")
+    this.questNext.emit("emit works");
+    this.onClick();
   }
 }
 
@@ -243,7 +250,7 @@ export class TestComponent implements OnInit, OnDestroy {
       width: '50%',
       autoFocus: false,
     });
-
+    dialogRef.componentInstance.questNext.subscribe(item => this.questNext(item));
     dialogRef.afterClosed().subscribe();
   }
 
@@ -280,7 +287,8 @@ export class TestComponent implements OnInit, OnDestroy {
     console.log('VIEW RESULT');
   }
 
-  public questNext() {
+  public questNext(event: any) {
+    console.log(event);
     this.counterTotal++; // counter total questions
     if (this.checkTimeDefault === false) {
       this.arrayGoodRep = this.question.answer_value.split(this.separator).sort();
@@ -478,7 +486,7 @@ export class TestComponent implements OnInit, OnDestroy {
       timePauseDiff = this.candidat.test_pause + diffSeconds;
       if (this.question.time < timePauseDiff) {
         this.checkTimeDefault = true;
-        this.questNext();
+        this.questNext("toto");
       } else {
         this.timedefault = timePauseDiff;
       }
