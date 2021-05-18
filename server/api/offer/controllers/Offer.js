@@ -15,9 +15,9 @@ module.exports = {
    */
 
   find: async (ctx) => {
-   // console.log("ctx.state.user",ctx.state.user)
-    await strapi.services.customeraccount.repairAccountOffer(ctx.state.user.customeraccount.id);
-    if (ctx.query._q) {
+   /*  const repair= await strapi.services.customeraccount.repairAccountOffer(ctx.state.user.customeraccount.id);
+   console.log("repair",repair)  */
+   if (ctx.query._q) {
       return strapi.services.offer.search(ctx.query);
     } else {
       return strapi.services.offer.fetchAll(ctx.query);

@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -22,13 +22,13 @@ export class GeneralComponent implements OnInit {
   public globalId: any;
   public campaigns: any;
 
-  dateExp: string | number | Date;
-  NewDateExp: Date;
+  // dateExp: string | number | Date;
+  // NewDateExp: Date;
 
   name = new FormControl('', Validators.required);
   lang = new FormControl('', Validators.required);
   copypasteControl = new FormControl('', Validators.required);
-  date = new FormControl(30, Validators.required);
+  expdate = new FormControl('', Validators.required);
   rapportControl = new FormControl('', Validators.required);
   chrono = new FormControl('', Validators.required);
 
@@ -38,33 +38,31 @@ export class GeneralComponent implements OnInit {
 
 
   ngOnInit() {
-    
-      this.getCampaign().then(camp => {
-        this.name = new FormControl(camp[0].Name);
-        this.lang = new FormControl(camp[0].langs);
-        this.copypasteControl = new FormControl(camp[0].copy_paste);
-        this.rapportControl = new FormControl(camp[0].sent_report);
-        this.dateExp = camp[0].expiration_date.slice(0, 10);
-        this.NewDateExp = new Date(this.dateExp);
-        
-      });
-  
-    
+
+    this.getCampaign().then(camp => {
+      this.name = new FormControl(camp[0].Name);
+      this.lang = new FormControl(camp[0].langs);
+      this.copypasteControl = new FormControl(camp[0].copy_paste);
+      this.rapportControl = new FormControl(camp[0].sent_report);
+      this.expdate = new FormControl(camp[0].expiration_days);
+
+    });
+
+
   }
 
-  formatDate(date: string | number | Date) {
-    const d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-    if (month.length < 2) { month = '0' + month; }
-    if (day.length < 2) { day = '0' + day; }
-    return [year, month, day].join('-');
-}
+  //   formatDate(date: string | number | Date) {
+  //     const d = new Date(date);
+  //     let month = '' + (d.getMonth() + 1);
+  //     let day = '' + d.getDate();
+  //     const year = d.getFullYear();
+  //     if (month.length < 2) { month = '0' + month; }
+  //     if (day.length < 2) { day = '0' + day; }
+  //     return [year, month, day].join('-');
+  // }
 
   updateCampaign() {
-    this.NewDateExp.setDate(this.NewDateExp.getDate() + this. date.value);
-    
+    // this.NewDateExp.setDate(this.NewDateExp.getDate() + this. date.value);
     if (this.copypasteControl.value) {
       this.copypaste = true;
     } else {
@@ -75,20 +73,24 @@ export class GeneralComponent implements OnInit {
     } else {
       this.envoiRapportSimplifie = false;
     }
+
     
-    this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.globalId, {
-      Name: this.name.value,
-      langs: this.lang.value,
-      copy_paste: this.copypaste,
-      sent_report: this.envoiRapportSimplifie,
-      expiration_date: this.formatDate(this.NewDateExp),
-    }).subscribe(
-      (res) => {
-        this.openSnackBar("La campagne a correctement été mise à jour", "Fermer")
-       
-      },
-      err => console.log(err)
-    );
+    if (this.expdate.value === null || this.name.value === '') {
+      this.openSnackBar("Une erreur est survenue, veuillez remplir correctement tous les champs requis", "Fermer");
+    } else {
+      this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.globalId, {
+        Name: this.name.value,
+        langs: this.lang.value,
+        copy_paste: this.copypaste,
+        sent_report: this.envoiRapportSimplifie,
+        expiration_days: this.expdate.value,
+      }).subscribe(
+        (res) => {
+          this.openSnackBar("La campagne a correctement été mise à jour", "Fermer")
+
+        }
+      );
+    }
   }
 
   openSnackBar(message: string, action) {
@@ -104,7 +106,7 @@ export class GeneralComponent implements OnInit {
       const datas = await this.apiClientService
         .get(API_URI_CAMPAIGNS + '/' + this.globalId)
         .toPromise();
-        this.isLoaded = true;
+      this.isLoaded = true;
       return this.campaigns = [datas];
     } catch (err) {
       return err;

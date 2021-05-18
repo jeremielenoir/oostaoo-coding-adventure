@@ -12,7 +12,7 @@ export class BaseButton implements OnInit {
     @Input() public title: string = "";
     @Input() public disabled: boolean = false;
     @Input() public fullWidth: boolean = false;
-    @Output() public clickEvent = new EventEmitter<null>();
+    @Output() public clickEvent = new EventEmitter<any>();
     @Input() public hoverClass = "hvr-grow";
 
     constructor() { }
@@ -20,6 +20,6 @@ export class BaseButton implements OnInit {
     ngOnInit() { }
 
     click() {
-        this.clickEvent.emit(null);
+        this.clickEvent.emit("click");
     }
 }

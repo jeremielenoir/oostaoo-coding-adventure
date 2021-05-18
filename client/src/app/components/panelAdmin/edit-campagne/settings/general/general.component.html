@@ -7,7 +7,7 @@
   <form action="" *ngFor="let campaign of campaigns">
     <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
       <mat-label [ngStyle]="errorName ? { color: 'red' } : null">Nom du test d'evaluation</mat-label>
-      <input placeholder="Nom du test d'evaluation" type="text" [formControl]="name" matInput name="nomDeCampagne" />
+      <input placeholder="Nom du test d'evaluation" type="text" [formControl]="name" matInput name="nomDeCampagne" required/>
     </mat-form-field>
     <div>
       <label for="nomDeCampagne" [ngStyle]="errorNomCampgane ? { color: 'red' } : null">
@@ -44,7 +44,7 @@
     <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
       <mat-label [ngStyle]="errorName ? { color: 'red' } : null">Nombre de jours au bout desquels une invitation expire
       </mat-label>
-      <input id="date" type="number" matInput name="DayBeforeExp" [formControl]='date' />
+      <input id="date" type="number" matInput name="DayBeforeExp" [formControl]='expdate' required/>
     </mat-form-field>
     <!-- Button -->
     <div id="button-container">

@@ -589,13 +589,15 @@ module.exports = {
    */
   repairAccountOffer: async (account) => {
     let subscriptionParams= {
-     // customer: account.stripe_customer_id,
+      //customer: account.stripe_customer_id,
       limit: 1
     }
 
     if ( account && account.stripe_customer_id){
       subscriptionParams.customer = account.stripe_customer_id
     }
+
+    
     const subscriptions = await stripe.subscriptions.list(subscriptionParams);
     if (subscriptions && subscriptions.data[0]) {
       const subscription = await stripe.subscriptions.retrieve(subscriptions.data[0].id);

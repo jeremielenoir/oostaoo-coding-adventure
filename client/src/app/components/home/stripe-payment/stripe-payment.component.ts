@@ -6,10 +6,10 @@ import {
 } from 'src/app/api-client/api-client.service';
 import {
   StripeService,
-  //ElementsOptions,
-  //ElementOptions,
+  // ElementsOptions,
+  // ElementOptions,
   StripeCardComponent,
-  //Address
+  // Address
 } from 'ngx-stripe';
 import { Router } from '@angular/router';
 import { DecryptTokenService } from '../register/register.service';
@@ -159,14 +159,14 @@ export class StripePaymentComponent implements OnInit {
          }
        } */
       // create card payment method
-const paymentData:CreatePaymentMethodCardData = {
-  type:"card",
-  card:this.card.element,
+const paymentData: CreatePaymentMethodCardData = {
+  type: 'card',
+  card: this.card.element,
   metadata: {
     'account': this.account.id,
     'user': this.userInfo.id
   },
-  billing_details:{
+  billing_details: {
     email: this.emailForReceipt,
     address: {
       line1: this.account.billing_address.line1,
@@ -177,7 +177,7 @@ const paymentData:CreatePaymentMethodCardData = {
       country: 'FR', // this.account.billing_address.country,
     }
   }
-}
+};
       let response1 = await this.stripeService.getInstance()
         .createPaymentMethod(paymentData);
       if (response1.error) {
@@ -204,7 +204,7 @@ const paymentData:CreatePaymentMethodCardData = {
           this.snackBar.open(String(response3.error), 'Ok', { duration: 3000 });
           this.inProgress = false;
           return;
-        } else if (response3.paymentIntent.status === "requires_confirmation") {
+        } else if (response3.paymentIntent.status === 'requires_confirmation') {
           let response4 = await this.apiClientService
             .post(`${API_URI_ACCOUNT}/${this.account.id}/offers`, {
               paymentIntentId: response3.paymentIntent.id

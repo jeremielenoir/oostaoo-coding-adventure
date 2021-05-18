@@ -191,6 +191,11 @@ button {
 }
 
 .modal {
+  border-radius: $border-radius;
+  .modal-header {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
   .modal-content {
     width: 1000px;
     max-width: 90vw;

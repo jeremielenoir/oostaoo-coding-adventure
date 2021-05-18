@@ -339,9 +339,14 @@ add offer
       */
 
       const offer = await strapi.services.offer.fetch({title:"Gratuit"})
-     
+     const newCustomer = await  stripe.customers
+      .create({
+        email: params.email,
+      })
+      console.log("newCustomer",newCustomer)
       const account = await strapi.services.customeraccount.add({
         type: params.accountType || 'personal',
+        stripe_customer_id:newCustomer.id,
         offer:{id:offer.attributes.id}
       });
       console.log("customer account",account.attributes)
