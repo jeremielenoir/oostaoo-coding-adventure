@@ -20,8 +20,13 @@ phases:
       - cd ./client 
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t roodeo:latest .
-      - docker tag roodeo:latest 164476836539.dkr.ecr.eu-west-3.amazonaws.com/roodeo:latest
+      - docker build -t roodeo:roodeo-front .
+      - docker tag roodeo:roodeo-front 164476836539.dkr.ecr.eu-west-3.amazonaws.com/roodeo:roodeo-front
+      - cd ../server 
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t roodeo:roodeo-api .
+      - docker tag roodeo:roodeo-api 164476836539.dkr.ecr.eu-west-3.amazonaws.com/roodeo:roodeo-api
     finally:
       - echo This always runs even if the install command fails
   post_build:
@@ -29,5 +34,6 @@ phases:
       - echo Entered the post_build phase...
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 164476836539.dkr.ecr.eu-west-3.amazonaws.com/roodeo:latest
+      - docker push 164476836539.dkr.ecr.eu-west-3.amazonaws.com/roodeo:roodeo-front
+      - docker push 164476836539.dkr.ecr.eu-west-3.amazonaws.com/roodeo:roodeo-api
 
