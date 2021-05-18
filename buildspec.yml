@@ -36,4 +36,10 @@ phases:
       - echo Pushing the Docker image...
       - docker push 164476836539.dkr.ecr.eu-west-3.amazonaws.com/roodeo:roodeo-front
       - docker push 164476836539.dkr.ecr.eu-west-3.amazonaws.com/roodeo:roodeo-api
+artifacts:
+  files:
+    - 'docker-compose.yml'
+    - 'default.conf'
+    - 'appspec.yml'
+  name: roodeo
 

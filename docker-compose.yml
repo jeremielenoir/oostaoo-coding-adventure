@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   api:
-    image: roodeo-api
+    image: 164476836539.dkr.ecr.eu-west-3.amazonaws.com/roodeo:roodeo-api
     #environment:
     #  - CHAIN_ID=ubloChain
     #  - ./ublo-entrypoint.sh:/ublo-entrypoint.sh
@@ -27,13 +27,13 @@ services:
     #  traefik.docker.network: proxy
 
   front:
-    image: roodeo-front
+    image: 164476836539.dkr.ecr.eu-west-3.amazonaws.com/roodeo:roodeo-front
     #environment:
     #  - CHAIN_ID=ubloChain
     #  - HOST_NODE=node
     #  - PORT_NODE=26657
     volumes:
-      - ./client/default.conf:/etc/nginx/conf.d/default.conf:rw
+      - ./default.conf:/etc/nginx/conf.d/default.conf:rw
     networks:
       - default
     restart: always
