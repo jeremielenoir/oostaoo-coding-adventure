@@ -1,10 +1,12 @@
-FROM node:latest as build
+FROM node:12-alpine as build
 
 RUN mkdir /client
 
 COPY --chown=node:node . /client
 
 WORKDIR /client
+
+#RUN cat yarn.lock
 
 RUN yarn install
 
