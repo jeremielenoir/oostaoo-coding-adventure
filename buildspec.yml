@@ -40,6 +40,8 @@ artifacts:
   files:
     - 'docker-compose.yml'
     - 'default.conf'
+    - 'scripts/**/*'
     - 'appspec.yml'
   name: roodeo
+
 
