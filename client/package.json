@@ -2,7 +2,7 @@
   "name": "client",
   "version": "1.0.0",
   "repository": "https://github.com/jeremielenoir/oostaoo-coding-adventure",
-  "author": "Mendoza Miguel, Famady Kebe, Maxime Chagnon",
+  "author": "Lenoir Jérémie",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

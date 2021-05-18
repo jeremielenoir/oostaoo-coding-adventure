@@ -1,0 +1,55 @@
+version: "3.4"
+
+services:
+  api:
+    image: roodeo-api
+    #environment:
+    #  - CHAIN_ID=ubloChain
+    #  - ./ublo-entrypoint.sh:/ublo-entrypoint.sh
+    #entrypoint: /ublo-entrypoint.sh
+    #command: ubd start --home /ublo/ubd_1 --rpc.laddr tcp://0.0.0.0:26657
+    ports:
+      - 8080:8080
+    networks:
+      - default
+    restart: always
+    #labels:
+    #  traefik.enable: "true"
+    #  traefik.http.routers.app-dev-node.rule: "Host(`node.${FP_URI}`)"
+    #  traefik.http.routers.app-dev-node.entrypoints: "web"
+    #  traefik.http.routers.app-dev-node.middlewares: "https-redirect@file"
+    #  traefik.http.routers.app-dev-node-https.rule: "Host(`node.${FP_URI}`)"
+    #  traefik.http.routers.app-dev-node-https.entrypoints: "websecure"
+    #  traefik.http.routers.app-dev-node-https.middlewares: "security@file, compression@file"
+    #  traefik.http.routers.app-dev-node-https.tls: "true"
+    #  traefik.http.routers.app-dev-node-https.tls.certresolver: "letsencrypt"
+    #  traefik.http.services.app-dev-node.loadbalancer.server.port: 26657
+    #  traefik.docker.network: proxy
+
+  front:
+    image: roodeo-front
+    #environment:
+    #  - CHAIN_ID=ubloChain
+    #  - HOST_NODE=node
+    #  - PORT_NODE=26657
+    volumes:
+      - ./client/default.conf:/etc/nginx/conf.d/default.conf:rw
+    networks:
+      - default
+    restart: always
+    depends_on:
+      - api
+    ports:
+      - 80:80
+    #labels:
+    #  traefik.enable: "true"
+    #  traefik.http.routers.app-dev-node-rest.rule: "Host(`cli.${FP_URI}`)"
+    #  traefik.http.routers.app-dev-node-rest.entrypoints: "web"
+    #  traefik.http.routers.app-dev-node-rest.middlewares: "https-redirect@file"
+    #  traefik.http.routers.app-dev-node-rest-https.rule: "Host(`cli.${FP_URI}`)"
+    #  traefik.http.routers.app-dev-node-rest-https.entrypoints: "websecure"
+    #  traefik.http.routers.app-dev-node-rest-https.middlewares: "security@file, compression@file"
+    #  traefik.http.routers.app-dev-node-rest-https.tls: "true"
+    #  traefik.http.routers.app-dev-node-rest-https.tls.certresolver: "letsencrypt"
+    #  traefik.http.services.app-dev-node-rest.loadbalancer.server.port: 1317
+    #  traefik.docker.network: proxy
