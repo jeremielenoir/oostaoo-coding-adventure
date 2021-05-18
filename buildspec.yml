@@ -4,20 +4,11 @@ env:
     JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
     NODE_OPTIONS: "--max_old_space_size=8192"
 phases:
-  install:
-    runtime-versions:
-      nodejs: 10
-    commands:
-      - echo Entered the install phase...
-      - npm install yarn -g
-      - cd client && yarn install
-      - cd ../interview/client && yarn install
-      - cd ../..
-    finally:
-      - echo This always runs even if the update or install command fails 
   pre_build:
     commands:
       - echo Entered the pre_build phase...
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region eu-west-3 | docker login --username AWS --password-stdin 164476836539.dkr.ecr.eu-west-3.amazonaws.com
     finally:
       - echo This always runs even if the login command fails 
   build:
@@ -27,27 +18,16 @@ phases:
       - export NODE_OPTIONS=--max_old_space_size=8192
       - echo $NODE_OPTIONS
       - cd ./client 
-      - yarn run build
-      - yarn run build-i18n:fr
-      - mkdir ../server/public
-      - mkdir ../interview-client
-      - mkdir ../interview-server
-      - cp -R ../interview/server/* ../interview-server
-      - cp -R ./dist/client/* ../server/public/
-      - cd ../interview/client && yarn run build
-      - cp -R ./build/* ../../interview-client
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t roodeo:latest .
+      - docker tag roodeo:latest 164476836539.dkr.ecr.eu-west-3.amazonaws.com/roodeo:latest
     finally:
       - echo This always runs even if the install command fails
   post_build:
     commands:
       - echo Entered the post_build phase...
       - echo Build completed on `date`
-artifacts:
-  files:
-    - 'interview-server/**/*'
-    - 'interview-client/**/*'
-    - 'server/**/*'
-    - 'scripts/**/*'
-    - 'appspec.yml'
-  name: roodeo
+      - echo Pushing the Docker image...
+      - docker push roodeo:latest 164476836539.dkr.ecr.eu-west-3.amazonaws.com/roodeo:latest
 
