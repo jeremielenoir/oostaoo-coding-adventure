@@ -17,12 +17,10 @@ RUN yarn run build-i18n:en
 #RUN yarn run build-i18n:jp
 #RUN yarn run build-i18n:es
 
-RUN ls -lia
+RUN cd dist && ls -lia
 
 FROM nginx:latest as http-server
 
 COPY --from=build /client/dist/client /usr/share/nginx/html
 
-RUN cd /usr/share/nginx/html
-
-RUN ls
+RUN cd /usr/share/nginx/html && ls
