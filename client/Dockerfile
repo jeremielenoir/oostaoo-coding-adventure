@@ -17,7 +17,7 @@ RUN yarn run build-i18n:en
 #RUN yarn run build-i18n:jp
 #RUN yarn run build-i18n:es
 
-RUN cd dist && ls -lia
+RUN cd dist/client && ls -lia
 
 FROM nginx:latest as http-server
 
