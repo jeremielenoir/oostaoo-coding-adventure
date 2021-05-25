@@ -1,24 +1,8 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  LOCALE_ID,
-  Inject
-} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, LOCALE_ID, Inject } from '@angular/core';
 import { MatBottomSheet } from '@angular/material';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import {
-  ApiClientService,
-  API_URI_NOTIFICATIONS,
-  API_URI_USER,
-  API_URI_ACCOUNT
-} from 'src/app/api-client/api-client.service';
+import { ApiClientService, API_URI_NOTIFICATIONS, API_URI_USER, API_URI_ACCOUNT } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from '../../home/register/register.service';
 import {SelectedLanguageService} from '../../../services/selected-language.service';
 
@@ -44,33 +28,24 @@ export class RouteComponentComponent implements OnInit {
   public notifUnread = 0;
   public activeMenuB = false;
   public currentLanguage;
-  public lang = 'en-US';
+  public lang = 'en';
   public otherLanguage = [
-    {codelang: 'fr-FR', shortlang:'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr/'},
-    {codelang: 'en-US', shortlang:'en', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en/'},
-    {codelang: 'es-ES', shortlang:'es', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es/'},
-    {codelang: 'jp-JP', shortlang:'jp', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp/'}
+    {codelang: 'fr', shortlang: 'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr'},
+    {codelang: 'en', shortlang: 'en', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en'},
+    {codelang: 'es', shortlang: 'es', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es'},
+    {codelang: 'jp', shortlang: 'jp', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp'}
    ];
 
   @Output() ContentViewDefault = new EventEmitter<any>();
 
-
-  constructor(
-    public dialog: MatDialog,
-    public apiClientService: ApiClientService,
-    public route: Router,
-    @Inject(LOCALE_ID) private locale: string,
-    public decryptTokenService: DecryptTokenService,
-    public SelectedLanguageService:SelectedLanguageService
-
-  ) {}
+  constructor( public dialog: MatDialog, public apiClientService: ApiClientService,
+    public route: Router, @Inject(LOCALE_ID) private locale: string, private router: Router,
+    public decryptTokenService: DecryptTokenService, public selectedLanguageService: SelectedLanguageService ) {}
 
   ngOnInit() {
-
     this.lang = this.locale;
-
-    if(this.SelectedLanguageService.checkLanguageCountry()){
-      this.lang = this.SelectedLanguageService.getLanguageCountry()
+    if (this.selectedLanguageService.checkLanguageCountry()) {
+      this.lang = this.selectedLanguageService.getLanguageCountry();
     }
 
     this.otherLanguage.forEach( element => {
@@ -84,7 +59,7 @@ export class RouteComponentComponent implements OnInit {
       .subscribe(user => {
         this.user = user;
         this.account = user.customeraccount;
-        if(user.customeraccount){
+        if (user.customeraccount) {
           this.isProfesionalAccount = user.customeraccount.type === 'profesional';
         }
         this.offer_id = user.offer_id.id;
@@ -116,7 +91,7 @@ export class RouteComponentComponent implements OnInit {
 
     this.menuBurgeurDropdown();
 
-    let textMenu = document.querySelectorAll('.text-menu');
+    const textMenu = document.querySelectorAll('.text-menu');
 
     textMenu.forEach(element => {
       element.addEventListener('click', function(e) {
@@ -152,24 +127,27 @@ export class RouteComponentComponent implements OnInit {
     //   this.initNotifNotRead(this.notifications);
     // }), 5000);
   }
+
+  getCurrentRoute() {
+    return this.router.url;
+  }
+
   /**
    *
    * @param langage
    */
   setCurrentLanguage(langage) {
-
-    console.log('langage select --->',langage);
-    // console.log('this.local',this.locale)
-
-    this.SelectedLanguageService.updtateLanguageCountry(langage)
-
+    this.selectedLanguageService.updtateLanguageCountry(langage);
     this.currentLanguage = langage.img;
-    //this.route.navigate([`/dashboard/campaigns`]);
+    // window.parent.location.href = window.parent.location.origin + langage.url + window.parent.location.pathname;
+    window.parent.location.href = langage.url + this.getCurrentRoute();
+    // window.location.reload();
+    console.log('window.parent.location : ', window.parent.location.origin + langage.url + window.parent.location.pathname);
+    console.log('window.parent.location.href : ', langage.url + this.getCurrentRoute());
   }
+
   public disConnection(event) {
     event.preventDefault();
-
-
     const dialogRef = this.dialog.open(DistConnecTed, {});
   }
 
@@ -192,7 +170,7 @@ export class RouteComponentComponent implements OnInit {
 
   deleteNotification(notificationID) {
     const deleteUrl = API_URI_NOTIFICATIONS + '/' + notificationID;
-    //alert(API_URI_NOTIFICATIONS+'/'+notificationID);
+    // alert(API_URI_NOTIFICATIONS+'/'+notificationID);
     this.apiClientService
       .delete(deleteUrl)
       .toPromise()
@@ -258,7 +236,7 @@ export class RouteComponentComponent implements OnInit {
   }
 
   menuBurgeurDropdown() {
-    let list = document.querySelectorAll('.list-menu li');
+    const list = document.querySelectorAll('.list-menu li');
     list.forEach(element => {});
   }
 }
