@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import { CookieService } from 'ngx-cookie-service';
 import { registerLocaleData } from '@angular/common';
@@ -52,8 +52,12 @@ import { ScrollPointDirective } from './directives/scrollpoint.directive';
 
 import { IntegrationBoutonComponent } from './components/panelAdmin/integration-bouton/integration-bouton.component';
 import { NouvelleCampagneComponent } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagne.component';
-import { NouvelleCampagnePage1Component } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component';
-import { NouvelleCampagnePage2Component } from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage2-component/nouvelle-campagne2.component';
+import {
+  NouvelleCampagnePage1Component
+} from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage1-component/nouvelle-campagne.component';
+import {
+  NouvelleCampagnePage2Component
+} from './components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage2-component/nouvelle-campagne2.component';
 import {
   NouvelleCampagnePage3Component,
   PopupCampaign
@@ -106,8 +110,11 @@ import { ProfilesComponent } from './components/home/profiles/profiles.component
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { OffersComponent } from './components/home/offers/offers.component';
 import { HomeOffersComponent } from './components/home/home-offers/home-offers.component';
-import { RapportDetailleHomeComponent, RapportDetailleExempleComponent } from './components/home/rapport-detaille/rapport-detaille.component';
-import { SelectedLanguageService } from './services/selected-language.service'
+import {
+  RapportDetailleHomeComponent,
+  RapportDetailleExempleComponent
+} from './components/home/rapport-detaille/rapport-detaille.component';
+import { SelectedLanguageService } from './services/selected-language.service';
 import { FonctionnaliteComponent } from './components/home/fonctionnalite/fonctionnalite.component';
 import { StripePaymentComponent } from './components/home/stripe-payment/stripe-payment.component';
 import { RapportDetailleComponent } from './components/panelAdmin/edit-campagne/candidats/rapport-detaille/rapport-detaille.component';
@@ -135,7 +142,6 @@ import { QuestionsTypeComponent } from './components/panelAdmin/questions-type/q
 import { OneTypeComponent } from './components/panelAdmin/questions-type/one-type/one-type.component';
 import { FreeTypeComponent } from './components/panelAdmin/questions-type/free-type/free-type.component';
 import { MultipleTypeComponent } from './components/panelAdmin/questions-type/multiple-type/multiple-type.component';
-import { from } from 'rxjs';
 import { ConfirmComponent } from './components/home/confirm/confirm.component';
 import { SearchPipe } from './pipe/search.pipe';
 import { AddressComponent } from './components/address/address.component';
@@ -147,7 +153,7 @@ import { TimeagoComponent } from './components/timeago/timeago.component';
 import { InterviewDialogComponent } from './components/panelAdmin/edit-campagne/candidats/interview-dialog/interview-dialog.component';
 
 // nav-wrapper
-import { NavWrapperComponent } from './components/panelAdmin/navbar/nav-wrapper/nav-wrapper.component'
+import { NavWrapperComponent } from './components/panelAdmin/navbar/nav-wrapper/nav-wrapper.component';
 
 export class MyIntl extends TimeagoIntl {
 
@@ -320,6 +326,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     {
       provide: SWIPER_CONFIG,
       useValue: DEFAULT_SWIPER_CONFIG
+    },
+    {
+      provide: LOCALE_ID, useValue: 'fr'
     }
   ],
   bootstrap: [AppComponent]
