@@ -24,25 +24,25 @@ export class NavbarComponent implements OnInit {
   @Input() currentSection: string;
 
   constructor(@Inject(DOCUMENT) document, @Inject(LOCALE_ID) private locale: string,
-   private cookieService: CookieService, private _el: ElementRef, private router: Router,public SelectedLanguageService:SelectedLanguageService) { 
-
+    private cookieService: CookieService, private _el: ElementRef, private router: Router,
+    public selectedLanguageService: SelectedLanguageService) {
    }
 
-  public currentMenuId = "menuRoodeo";
+  public currentMenuId = 'menuRoodeo';
 
   public shouldShow = true;
   public Removeshould = true;
   public IsheaderTrue = false;
   public AddIndex = false;
-  public lang = 'en-US';
-  public activeBurgeur = false
+  public lang = 'en';
+  public activeBurgeur = false;
 
   public currentLanguage;
   public otherLanguage = [
-   {codelang: 'fr-FR', shortlang:'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr/'},
-   {codelang: 'en-US', shortlang:'en', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en/'},
-   {codelang: 'es-ES', shortlang:'es', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es/'},
-   {codelang: 'jp-JP', shortlang:'jp', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp/'}
+   {codelang: 'fr', shortlang: 'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr'},
+   {codelang: 'en', shortlang: 'en', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en'},
+   {codelang: 'es', shortlang: 'es', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es'},
+   {codelang: 'jp', shortlang: 'jp', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp'}
   ];
 
   @ViewChild('header') header;
@@ -54,52 +54,41 @@ export class NavbarComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   public onWindowScroll(event: any) {
     if (window.pageYOffset > 100) {
-
       this.IsheaderTrue = true;
-
-
     } else {
       this.IsheaderTrue = false;
-
     }
-    
-
   }
 
 
   ngOnInit() {
-
     console.log('locale', this.locale, window.parent.location.href);
-    
     this.lang = this.locale;
-
-    if(this.SelectedLanguageService.checkLanguageCountry()){
-      this.lang = this.SelectedLanguageService.getLanguageCountry();
+    if (this.selectedLanguageService.checkLanguageCountry()) {
+      this.lang = this.selectedLanguageService.getLanguageCountry();
     }
 
     this.onWindowScroll(null);
-
-    let linkMenu = document.querySelectorAll('#all-list-menu .link-menu');
+    const linkMenu = document.querySelectorAll('#all-list-menu .link-menu');
 
     linkMenu.forEach(element => {
-
       element.addEventListener('click', function(evt) {
-
         evt.preventDefault();
-
       });
-
     });
 
     this.otherLanguage.forEach( element => {
-      if ( element.codelang === this.lang || element.shortlang === this.lang) {
+      if (element.codelang === this.lang || element.shortlang === this.lang) {
         this.currentLanguage = element.img;
       }
     });
   }
 
+  getCurrentRoute() {
+    return this.router.url;
+  }
 
-  gotToLoginPage(){
+  gotToLoginPage() {
     this.router.navigate(['/home/register']);
   }
 
@@ -111,14 +100,16 @@ export class NavbarComponent implements OnInit {
 
 
   setCurrentLanguage(langage) {
-
-    this.SelectedLanguageService.updtateLanguageCountry(langage)
-    
+    this.selectedLanguageService.updtateLanguageCountry(langage);
     this.currentLanguage = langage.img;
-    window.parent.location.href = langage.url;
+    // window.parent.location.href = window.parent.location.origin + langage.url + window.parent.location.pathname;
+    window.parent.location.href = langage.url + this.getCurrentRoute();
+    // window.location.reload();
+    console.log('window.parent.location : ', window.parent.location.origin + langage.url + window.parent.location.pathname);
+    console.log('window.parent.location.href : ', langage.url + this.getCurrentRoute());
   }
 
-  openBurgeur(){
+  openBurgeur() {
     this.activeBurgeur = !this.activeBurgeur;
   }
 }
