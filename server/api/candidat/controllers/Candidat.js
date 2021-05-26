@@ -95,8 +95,11 @@ module.exports = {
       let candidat = await strapi.services.candidat.add(depositObj);
       const options = {
         to: email,
-        from: "Roodeo assessment <assessment@roodeo.com>",
-        replyTo: "assessment@roodeo.com",
+        from: {
+          name: 'Roodeo assessment',
+          address: 'assessment@roodeo.com'
+        },
+        replyTo: 'assessment@roodeo.com',
         subject: emailTitle,
         html: emailContentFormatted,
       };
