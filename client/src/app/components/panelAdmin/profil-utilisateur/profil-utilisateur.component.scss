@@ -1,118 +1,108 @@
 @import "../../../../roodeo-variables.scss";
-
-#global{
+#global {
     background: $color-background-blue;
-
-    .padding-top{
-      padding-top: 75px;
+    .padding-top {
+        padding-top: 75px;
     }
-    .content{
+    .content {
         // width: 95%;
-        padding: 10px;
+        // padding: 10px;
+        padding: 0px 0px 20px 0px;
         display: flex;
-        width: 98%;
+        // width: 98%;
         margin: 0 auto;
         // background: $color-background-blue;
         // .border-none{
         //    border-right:none
         // }
-        .icon{
+        &.top {
+            width: 100%;
+            display: block;
+            margin-top: 45px;
+            padding: 10px 0;
+        }
+        .icon {
             color: $color-orange;
             margin-left: 20px;
             margin-right: 10px;
             font-size: 32px;
         }
-
-        .title{
+        .title {
             font-size: 24px;
         }
-
-        #signature{
+        #signature {
             width: 100%;
         }
-
-        .section-title{
+        .section-title {
             display: flex;
         }
-
-        .input-title{
+        .input-title {
             font-size: 16px;
             flex: 1;
             margin-bottom: 10px;
         }
-
-        .btn-submit{
-         width: 100%;
-         height: 50px;
-         background: $color-principal-blue;
-         color: white;
-         text-transform: uppercase;
-         font-size: $font-size-home;
-
-         border: 0px ;
-         cursor: pointer;
-         transition: .3s;
-
-            &:focus{
-              outline: none;
+        .btn-submit {
+            width: 100%;
+            height: 50px;
+            background: $color-principal-blue;
+            color: white;
+            text-transform: uppercase;
+            font-size: $font-size-home;
+            border: 0px;
+            cursor: pointer;
+            transition: .3s;
+            &:focus {
+                outline: none;
             }
-
-            &:hover{
-              background: #152536;
+            &:hover {
+                background: #152536;
             }
         }
-
-        .form-line{
+        .form-line {
             display: flex;
             justify-content: space-around;
-            &.fix-top{
+            &.fix-top {
                 margin-top: 10px;
             }
-            .fullwidth{
+            .fullwidth {
                 width: 45%;
             }
-            .fullwidth100{
+            .fullwidth100 {
                 width: 95%;
             }
-            .input-bloc{
+            .input-bloc {
                 width: 95%;
                 margin: 20px 20px 18px 20px;
                 display: flex;
                 justify-content: center;
-                .input-section1{
+                .input-section1 {
                     width: 100%;
                     height: 50px;
                     border: $border-table;
                     background: white;
                     font-size: 16px;
                     padding-left: 15px;
-
-                    &:focus{
+                    &:focus {
                         outline: none;
                     }
                 }
-
-                .input-section1-textarea{
-                    height:250px !important;
+                .input-section1-textarea {
+                    height: 250px !important;
                     padding-top: 9px;
                     resize: none;
                 }
             }
         }
-
         .account-transform {
-          width: 100%;
-          margin-top: 25px;
-          background: rgba($color: #750240, $alpha: 0.08);
-          padding: 20px 20px;
-          border: $border-table;
-          border-radius: $border-radius;
+            width: 100%;
+            margin-top: 25px;
+            background: rgba($color: #750240, $alpha: 0.08);
+            padding: 20px 20px;
+            border: $border-table;
+            border-radius: $border-radius;
         }
-
-
         /* Section 1 */
-
-        #section1{
+        #section1 {
             width: 98%;
             margin: 25px 1% 0 0;
             background: white;
@@ -120,17 +110,14 @@
             border: $border-table;
             border-radius: $border-radius;
         }
-
         /* Section 2 */
-
-        #section2{
+        #section2 {
             width: 98%;
             margin: 25px auto 0;
             background: white;
             padding: 40px 80px;
             border: $border-table;
             border-radius: $border-radius;
-
             .form-line {
                 display: flex;
                 flex-direction: column;
@@ -140,10 +127,8 @@
                 }
             }
         }
-
         /* Section 3 */
-
-        #section3{
+        #section3 {
             width: 98%;
             margin: 18px 1% 0 0;
             background: white;
@@ -151,10 +136,8 @@
             border: $border-table;
             border-radius: $border-radius;
         }
-
         /* Section 4 */
-
-        #section4{
+        #section4 {
             width: 98%;
             margin: 18px auto 0;
             background: white;
@@ -165,19 +148,62 @@
     }
 }
 
-@media screen and (max-width: 1024px){
-    #global{
+@media screen and (max-width: 1024px) {
+    #global {
         display: block;
     }
-    #section1, #section2, #section3, #section4{
+    #section1,
+    #section2,
+    #section3,
+    #section4 {
         padding: 10px 10px!important;
     }
-    .content{
+    .content {
         flex-direction: column;
-
     }
 }
 
-.error-red{
+.error-red {
     color: red;
+}
+
+// TOOLBAR
+::ng-deep .tool-bar .mat-form-field-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+// Config css for bar search and buttons
+.tool-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4), -3px -4px 8px -2px rgba(124, 151, 166, 0.69);
+    border: $border-table;
+    background-color: $color-pricipal-blue-light;
+    border-radius: 5px;
+    padding: 15px;
+    color: $color-principal-blue;
+    .candidat-custom-select {
+        border: $border-table;
+        background-color: $color-white;
+        display: flex;
+        justify-content: center;
+        height: 50px;
+    }
+    .candidat-finish-custom-select {
+        display: flex;
+        justify-content: center;
+        height: 50px;
+    }
+    .candidat-finish-custom-select mat-label {
+        color: $color-white;
+    }
+     :host .candidat-finish-custom-select ::ng-deep .mat-select-value {
+        color: $color-white;
+    }
+    .fix-button {
+        margin-top: inherit;
+        border-radius: $border-radius;
+    }
 }

@@ -110,8 +110,7 @@ export class UtilisateursComponent implements OnInit {
     console.log('this.formulaire', this.formulaire.nativeElement);
 
     this.apiClientService.get(API_URI_ROLE + '?startwith=account_')
-      .subscribe(
-        (items) => this.rolesRef = items.roles,
+      .subscribe((items) => this.rolesRef = items.roles,
         (err) => {
           this._snackBar.open('Ajout d\'utilisateurs non disponible pour le moment', 'Ok', { duration: 3000 });
         }
@@ -122,9 +121,18 @@ export class UtilisateursComponent implements OnInit {
       console.log('THIS CURRENT USER : ', this.currentUser);
       // declaration nav route
       this.dataRoute = [
-        { routerLink : "/dashboard/profil-utilisateur", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "person_outline", name: "Mon profil" },
-        { routerLink : "/dashboard/profil-entreprise", condition: this.currentUser.customeraccount.type === 'profesional', classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "domain", name: "Mon entreprise" },
-        { routerLink : "/dashboard/utilisateurs", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "groups", name: "Utilisateurs" }
+        {
+          routerLink: '/dashboard/profil-utilisateur', condition: true,
+          classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'person_outline', name: 'Mon profil'
+        },
+        {
+          routerLink: '/dashboard/profil-entreprise', condition: this.currentUser.customeraccount.type === 'profesional',
+          classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'domain', name: 'Mon entreprise'
+        },
+        {
+          routerLink: '/dashboard/utilisateurs', condition: true, classAnimParent: 'hvr-icon-bounce',
+          classAnimIcone: 'hvr-icon', icon: 'groups', name: 'Utilisateurs'
+        }
       ];
       this.tests_available = datas.tests_available;
       if (this.currentUser.role.type === 'account_admin') {
@@ -133,7 +141,7 @@ export class UtilisateursComponent implements OnInit {
       this.apiClientService.get(API_URI_ACCOUNT + '/' + datas.id + '/users')
         .subscribe(
           (data) => this.users = data,
-          (err) => console.error(err)
+          // (err) => console.error(err)
         );
     });
 
@@ -146,6 +154,7 @@ export class UtilisateursComponent implements OnInit {
   }
 
   public param_cog() {
+    console.log('this.shadowcog1 : ', this.shadowcog1);
     this.shadowcog1 = !this.shadowcog1;
   }
 
@@ -201,7 +210,7 @@ export class UtilisateursComponent implements OnInit {
     // this.formulaire.nativeElement.nom.value = user.nom;
     // this.formulaire.nativeElement.email.value = user.email;
 
-    //this.list_change(user.role.id);
+    // this.list_change(user.role.id);
   }
 
   public param_cog_non_active_deux() {
@@ -230,7 +239,7 @@ export class UtilisateursComponent implements OnInit {
     const message = `Souhaitez vous réactiver l'utilisateur <strong>${userToEnable.username}</strong> ?`;
     const dialogData = new ConfirmModel('Confirmation', message);
     const dialogRef = this.dialog.open(ConfirmComponent, {
-      maxWidth: "400px",
+      maxWidth: '400px',
       data: dialogData
     });
 
@@ -238,10 +247,7 @@ export class UtilisateursComponent implements OnInit {
 
     if (doAction) {
       this.apiClientService
-        .put(
-          API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/users/' + userToEnable.id,
-          { blocked: false }
-        )
+        .put( API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/users/' + userToEnable.id, { blocked: false })
         .toPromise()
         .then(res => {
           console.log(res);
@@ -249,10 +255,9 @@ export class UtilisateursComponent implements OnInit {
           this.openSnackBar('L\'utilisateur a correctement été réactivé', 'Fermer');
         })
         .catch(e => {
-          this.openSnackBar('Oops ! la réactivation d\'utilisateur est indisponible', 'Fermer')
+          this.openSnackBar('Oops ! la réactivation d\'utilisateur est indisponible', 'Fermer');
         });
     }
-
   }
   /**
    *
@@ -263,7 +268,7 @@ export class UtilisateursComponent implements OnInit {
     const message = `Souhaitez vous désactiver l'utilisateur <strong>${userToDelete.username}</strong> ?`;
     const dialogData = new ConfirmModel('Confirmation', message);
     const dialogRef = this.dialog.open(ConfirmComponent, {
-      maxWidth: "400px",
+      maxWidth: '400px',
       data: dialogData
     });
 
@@ -279,14 +284,14 @@ export class UtilisateursComponent implements OnInit {
           this.openSnackBar('L\'utilisateur a correctement été supprimé', 'Fermer');
         })
         .catch(e => {
-          this.openSnackBar('Oops ! la désactivation d\'utilisateur est indisponible', 'Fermer')
+          this.openSnackBar('Oops ! la désactivation d\'utilisateur est indisponible', 'Fermer');
         });
     }
 
   }
 
   public list_change(id) {
-    for (let value of Object.values(this.checkbox_list)) {
+    for (const value of Object.values(this.checkbox_list)) {
       if (value.id === id) {
         this.selectedRoleName = value.name;
         value.isChecked = !value.isChecked;
@@ -306,6 +311,13 @@ export class UtilisateursComponent implements OnInit {
   }
 
   public addUser() {
+    console.log('this.addPrenom.value : ', this.addPrenom.value);
+    console.log('this.addNom.value : ', this.addNom.value);
+    console.log('this.addEmail.value : ', this.addEmail.value);
+    console.log('this.addPassword.value : ', this.addPassword.value);
+    console.log('this.confirmPassword.value : ', this.confirmPassword.value);
+    console.log('this.selectedRole : ', this.userrole.value);
+    console.log('this.addUsername.value : ', this.addUsername.value);
     this.submittedUser = true;
     if (
       this.addPrenom.value === '' ||
@@ -316,7 +328,7 @@ export class UtilisateursComponent implements OnInit {
       this.confirmPassword.value === '' ||
       this.addPassword.value === null ||
       this.addPassword.value !== this.confirmPassword.value ||
-      isNaN(this.selectedRole) ||
+      isNaN(this.userrole.value) ||
       this.addUsername.value === ''
     ) {
       this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
@@ -335,7 +347,7 @@ export class UtilisateursComponent implements OnInit {
       email: this.addEmail.value,
       username: this.addUsername.value,
       password: this.addPassword.value,
-      role: this.selectedRole,
+      role: this.userrole.value,
       adminId: this.adminId
     };
 
@@ -350,7 +362,7 @@ export class UtilisateursComponent implements OnInit {
         this.openSnackBar('L\'utilisateur a correctement été ajouté', 'Fermer');
       })
       .catch((err) => {
-        this._snackBar.open(err, undefined, { duration: 3000 });
+        this._snackBar.open(err, undefined, { duration: 10000 });
       });
   }
 
