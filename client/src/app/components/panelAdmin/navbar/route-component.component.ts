@@ -98,6 +98,7 @@ export class RouteComponentComponent implements OnInit {
         e.preventDefault();
       });
     });
+    
     this.getNotifications().then(notifications => {
       this.notifications = [];
       notifications.forEach(element => {
@@ -114,18 +115,18 @@ export class RouteComponentComponent implements OnInit {
       this.initNotifNotRead(this.notifications);
     });
 
-    // setInterval(() => this.getNotifications().then(notifications => {
-    //   this.notifications = [];
-    //   notifications.forEach(element => {
-    //     if (element.user.adminId === this.decryptTokenService.userId) {
-    //       this.notifications.push(element);
-    //     }
-    //   });
-    //   this.notifications.reverse();
-    //   this.notifications.sort((a, b) => a.status - b.status);
-    //   // console.log(this.notifications);
-    //   this.initNotifNotRead(this.notifications);
-    // }), 5000);
+    setInterval(() => this.getNotifications().then(notifications => {
+       this.notifications = [];
+       notifications.forEach(element => {
+         if (element.user.adminId === this.decryptTokenService.userId) {
+           this.notifications.push(element);
+         }
+       });
+       this.notifications.reverse();
+       this.notifications.sort((a, b) => a.status - b.status);
+       // console.log(this.notifications);
+       this.initNotifNotRead(this.notifications);
+     }), 5000);
   }
 
   getCurrentRoute() {

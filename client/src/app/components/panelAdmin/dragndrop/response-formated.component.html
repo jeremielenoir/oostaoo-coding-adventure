@@ -9,6 +9,13 @@
     <div *ngIf="question.type=== 'one' || question.type=== 'multiple'">
         <p *ngFor="let response of showedResponses">- {{response}}</p>
     </div>
+    <div *ngIf="question.type=== 'algo'">
+        <markdown ngPreserveWhitespaces>
+          {{'```javascript'}}
+          {{question['content' + currentLanguage]}}
+          {{'```'}}
+        </markdown>
+    </div>
 
     
   </div>
