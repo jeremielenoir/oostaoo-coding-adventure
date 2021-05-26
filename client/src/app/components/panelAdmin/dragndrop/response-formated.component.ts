@@ -46,7 +46,7 @@ export class ResponseFormatedComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.currentLanguage);
+    console.log('CURRENT LANGUAGE', this.currentLanguage);
     if (this.question['content' + this.currentLanguage]) {
       
       this.showedResponses = [...this.question['content' + this.currentLanguage].split(QUESTION_SEPARATOR)];

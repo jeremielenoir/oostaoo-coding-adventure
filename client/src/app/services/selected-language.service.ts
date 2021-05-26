@@ -9,7 +9,7 @@ export class SelectedLanguageService {
   constructor() { }
 
   getLanguageCountry() {
-    const cookies: any = localStorage.getItem('currentlanguage');
+    const cookies: any = localStorage.getItem('currentlanguage') != null ? localStorage.getItem('currentlanguage') : '';
     return cookies;
   }
 
