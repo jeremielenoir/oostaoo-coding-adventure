@@ -149,7 +149,7 @@ export class CandidatsMailComponent implements OnInit {
     } else {
       this.tests_available = this.tests_available - nbCandidats;
       this.apiClientService
-        .put(`${API_URI_USER}/${this.user_id}`, {
+        .put(API_URI_USER + '/' + this.user_id, {
           tests_available: this.tests_available
         })
         .toPromise()
