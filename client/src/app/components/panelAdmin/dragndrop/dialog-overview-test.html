@@ -1,2 +1,5 @@
-<app-test [questionCampaign]="data.questions" 
-[durationMaxTest]="10" (refresh)="refreshComponent($event)" [technoCampaign]="data['technoCampaign']" [preview]="true"></app-test>
+  <div class="close-invite-dialog">
+    <span (click)="close()"> <i class="fa fa-times" aria-hidden="true"></i></span>
+  </div>
+  <app-test [questionCampaign]="data.questions" 
+  [durationMaxTest]="10" (refresh)="refreshComponent($event)" [technoCampaign]="data['technoCampaign']" [preview]="true"></app-test>

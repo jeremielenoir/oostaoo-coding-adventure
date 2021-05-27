@@ -45,6 +45,7 @@ export interface IDialogData {
 @Component({
   selector: 'app-dialog-overview-test',
   templateUrl: 'dialog-overview-test.html',
+  styleUrls: ['./dialog-overview-test.scss']
 })
 export class DialogOverviewTestComponent implements OnInit {
   dataPopup;
@@ -57,6 +58,7 @@ export class DialogOverviewTestComponent implements OnInit {
       this.dataPopup = data;
       this.prev = true;
     }
+    
   }
 
   ngOnInit() {
@@ -72,6 +74,9 @@ export class DialogOverviewTestComponent implements OnInit {
   }
   refreshComponent($event): void {
     console.log('REFRESH COMPONENT');
+  }
+  close() {
+    this.dialogRef.close();
   }
 }
 

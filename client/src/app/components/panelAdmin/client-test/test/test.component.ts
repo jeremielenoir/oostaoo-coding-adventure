@@ -175,8 +175,11 @@ export class TestComponent implements OnInit, OnDestroy {
     this.timeDanger = this.questionCampaign[0].time - 5;
     this.type = this.questionCampaign[0];
 
-    this.Countertime();
+    
+
     if (!this.preview) {
+      console.log('IS NOT PREVIEW');
+      this.Countertime();
       this.controleTimeTest();
     }
 

@@ -37,6 +37,17 @@
     outline: none;
 }
 
+.close-invite-dialog{
+    float: right;
+    color: mat-color($roodeo-app-warn);
+    margin-top: 0px;
+    cursor: pointer;
+
+    span{
+      color: mat-color($roodeo-app-warn);
+    }
+  }
+
 
 
 .color-primary-dark{
