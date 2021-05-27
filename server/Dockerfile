@@ -1,4 +1,4 @@
-FROM node:latest as build
+FROM node:12-alpine as build
 
 RUN mkdir /server
 
