@@ -377,6 +377,7 @@ module.exports = {
    * @return {Promise}
    */
   fetchSpreadsheet: async (spreadsheetId, ppage, first, last) => {
+    
     try {
       let page = "";
 
@@ -387,6 +388,7 @@ module.exports = {
       } else {
         page = ppage;
       }
+
       const ranges = [`${page}!${first}:${last}`];
       const client = new google.auth.JWT(
         keys.client_email,
@@ -394,6 +396,7 @@ module.exports = {
         keys.private_key,
         [SCOPES]
       );
+      
       console.log('RANGES', ranges);
       await client.authorize();
       const gsapi = google.sheets({ version: "v4", auth: client });
@@ -404,6 +407,7 @@ module.exports = {
         spreadsheetId,
         ranges,
       });
+      
       const data = valueRanges.map((val) => val.values)[0];
       console.log('GET SPREADSHEET DATAS');
       const arrValues = [];
