@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, LOCALE_ID, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, LOCALE_ID, Inject } from '@angular/core';
 import { MatBottomSheet } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import {SelectedLanguageService} from '../../../services/selected-language.servi
   templateUrl: './route-component.component.html',
   styleUrls: ['./route-component.component.scss']
 })
-export class RouteComponentComponent implements OnInit {
+export class RouteComponentComponent implements OnInit, OnDestroy {
 
   user: any;
   account: any;
@@ -28,6 +28,7 @@ export class RouteComponentComponent implements OnInit {
   public notifUnread = 0;
   public activeMenuB = false;
   public currentLanguage;
+  public stopTimeInterval: any;
   public lang = 'en';
   public otherLanguage = [
     {codelang: 'fr', shortlang: 'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr'},
@@ -42,6 +43,11 @@ export class RouteComponentComponent implements OnInit {
     public route: Router, @Inject(LOCALE_ID) private locale: string, private router: Router,
     public decryptTokenService: DecryptTokenService, public selectedLanguageService: SelectedLanguageService ) {}
 
+  ngOnDestroy(): void {
+    clearInterval(this.stopTimeInterval);
+    console.log('DESTROY');
+    //throw new Error("Method not implemented.");
+  }
   ngOnInit() {
     this.lang = this.locale;
     if (this.selectedLanguageService.checkLanguageCountry()) {
@@ -115,7 +121,7 @@ export class RouteComponentComponent implements OnInit {
       this.initNotifNotRead(this.notifications);
     });
 
-    setInterval(() => this.getNotifications().then(notifications => {
+    this.stopTimeInterval = setInterval(() => this.getNotifications().then(notifications => {
        this.notifications = [];
        notifications.forEach(element => {
          if (element.user.adminId === this.decryptTokenService.userId) {
@@ -126,7 +132,7 @@ export class RouteComponentComponent implements OnInit {
        this.notifications.sort((a, b) => a.status - b.status);
        // console.log(this.notifications);
        this.initNotifNotRead(this.notifications);
-     }), 5000);
+     }), 15000);
   }
 
   getCurrentRoute() {
