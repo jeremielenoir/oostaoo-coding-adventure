@@ -1,236 +1,221 @@
 <div id="global">
-  <!--app-breadcrumb [namePage]="'Mon entreprise'"></app-breadcrumb-->
-  <div *ngIf="isVerifUser === false" class="loading">
-    <span class="fa fa-spinner fa-pulse"></span>
-  </div>
+    <!--app-breadcrumb [namePage]="'Mon entreprise'"></app-breadcrumb-->
+    <div *ngIf="isVerifUser === false" class="loading">
+        <span class="fa fa-spinner fa-pulse"></span>
+    </div>
 
-  <!-- <div *ngIf="!isVerifUser"> -->
-  <div *ngIf='entreprise === null' id="content">
-    <div class="new-entreprise">
-      <div *ngIf="dataRoute">
-        <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
-      </div>
-      <div class="all-group-content ajout-entreprise">
-        <div class="content-ajout-entreprise">
-          <div class="form-entreprise">
-            <form>
-              <h2>Ajouter son entreprise</h2>
-              <label for="name">Nom de l'entreprise</label>
-              <input [formControl]="newEntreprise" name="name" type="text" class="champ-form-gestion" />
-              <div *ngIf=" submitted && newEntreprise.invalid" class="alert alert-danger">
-                <div *ngIf="newEntreprise.errors.required">
-                  Veuillez saisir le nom de l'entreprise.
+    <!-- <div *ngIf="!isVerifUser"> -->
+    <div *ngIf='entreprise === null' id="content">
+        <div class="new-entreprise">
+            <div *ngIf="dataRoute">
+                <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
+            </div>
+            <div class="all-group-content ajout-entreprise">
+                <div class="content-ajout-entreprise">
+                    <div class="form-entreprise">
+                        <form>
+                            <h2>Ajouter son entreprise</h2>
+                            <label for="name">Nom de l'entreprise</label>
+                            <input [formControl]="newEntreprise" name="name" type="text" class="champ-form-gestion" />
+                            <div *ngIf=" submitted && newEntreprise.invalid" class="alert alert-danger">
+                                <div *ngIf="newEntreprise.errors.required">
+                                    Veuillez saisir le nom de l'entreprise.
+                                </div>
+                            </div>
+
+
+                            <label for="email">Email de l'entreprise</label>
+                            <input [formControl]="newEmail" name="email" type="email" class="champ-form-gestion" />
+                            <div *ngIf=" submitted && newEmail.invalid" class="alert alert-danger">
+                                <div *ngIf="newEmail.errors.required">
+                                    Veuillez saisir l'email de l'entreprise.
+                                </div>
+                                <div *ngIf="newEmail.errors.email">
+                                    Veuillez saisir un email correct.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Numéro de téléphone</label>
+                                <input [formControl]="newPhone" name="phone" type="tel" class="champ-form-gestion" />
+                                <div *ngIf=" submitted && newPhone.invalid" class="alert alert-danger">
+                                    <div *ngIf="newPhone.errors.required">
+                                        Veuillez saisir le numéro de l'entreprise.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button (click)="addentreprise()" mat-button class="btn-validate">Ajouter son entreprise</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="text-entreprise">
+                        <h2>Personnalisation entreprise</h2>
+                        <p>Bienvenue sur la page de personnalisation de votre entreprise, avant de pouvoir modifier les informations sur votre entreprise, merci de bien vouloir remplir le formulaire ci-contre.
+                        </p>
+
+                        <p>Une fois le formulaire remplis vous pourrez gérer les informations de votre entreprise comme, les nombres d'employés, la langue de votre entreprise, le lien de votre site web, etc.
+                        </p>
+                    </div>
                 </div>
-              </div>
-
-
-              <label for="email">Email de l'entreprise</label>
-              <input [formControl]="newEmail" name="email" type="email" class="champ-form-gestion" />
-              <div *ngIf=" submitted && newEmail.invalid" class="alert alert-danger">
-                <div *ngIf="newEmail.errors.required">
-                  Veuillez saisir l'email de l'entreprise.
-                </div>
-                <div *ngIf="newEmail.errors.email">
-                  Veuillez saisir un email correct.
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="phone">Numéro de téléphone</label>
-                <input [formControl]="newPhone" name="phone" type="tel" class="champ-form-gestion" />
-                <div *ngIf=" submitted && newPhone.invalid" class="alert alert-danger">
-                  <div *ngIf="newPhone.errors.required">
-                    Veuillez saisir le numéro de l'entreprise.
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <button (click)="addentreprise()" mat-button class="btn-validate">Ajouter son entreprise</button>
-              </div>
-            </form>
-          </div>
-          <div class="text-entreprise">
-            <h2>Personnalisation entreprise</h2>
-            <p>Bienvenue sur la page de personnalisation de votre entreprise, avant
-              de pouvoir modifier les informations sur votre entreprise, merci de bien vouloir
-              remplir le formulaire ci-contre.
-            </p>
-
-            <p>Une fois le formulaire remplis vous pourrez gérer les informations de votre entreprise comme,
-              les nombres d'employés, la langue de votre entreprise, le lien de votre site web, etc.
-            </p>
-          </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <!-- </div> -->
+    <!-- </div> -->
 
-  <!-- <div *ngIf="!isVerifUser"> -->
+    <!-- <div *ngIf="!isVerifUser"> -->
 
-  <div *ngIf='entreprise !== null' class="edit-entreprise" id="content">
+    <div *ngIf='entreprise !== null' class="edit-entreprise" id="content">
+        <div *ngIf="dataRoute">
+            <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
+        </div>
+        <div id="shadow-cog" [ngClass]="{'shadow-cog-active': shadowcog == true}">
 
-    <div id="shadow-cog" [ngClass]="{'shadow-cog-active': shadowcog == true}">
+            <div id="remove" (click)="param_cog_non_active()"></div>
 
-      <div id="remove" (click)="param_cog_non_active()"></div>
+            <div class="modal">
+                <form id='formlogo' class="formlogo" enctype="multipart/form-data">
+                    <div class="modal-header"></div>
+                    <div class="modal-content">
+                        <div class="block-upload" [class.block-upload-hidden]="blockUpload">
+                            <i class="modal-content-icon fas fa-camera"></i>
+                            <span class="modal-content-text"> Déposez votre image ici </span>
+                            <div class="btn-modal-content" id="btn-modal-content">
+                                <span>ou télécharger une photo</span>
+                                <input type="file" class="file" name="files" accept="image/x-png,image/gif,image/jpeg" (change)="readURL($event)" #uploadFileFirst />
+                                <input class="hidden-file" type="text" name="ref" value="entreprise" />
+                                <input type="text" name="refId" value="{{entreprise.id}}" />
+                                <input type="text" name="field" value="logo" />
+                            </div>
+                        </div>
 
-      <div class="modal">
-        <form id='formlogo' class="formlogo" enctype="multipart/form-data">
-          <div class="modal-header"></div>
-          <div class="modal-content">
-            <div class="block-upload" [class.block-upload-hidden]="blockUpload">
-              <i class="modal-content-icon fas fa-camera"></i>
+                        <div class="cadrage-img" [class.cadrage-img-active]="cadrageImgBoolean">
 
-              <span class="modal-content-text">
+                            <figure class="img-figure" [class.img-figure-active]="!cadrageImgBooleanState">
+                                <img src="" #uploadimgfirst />
+                            </figure>
+
+                            <div class="text-error-upload" [class.text-error-upload-show]="cadrageImgBooleanState">
+
+                                <i class="fas fa-ban ban-error"></i>
+
+                                <span class="error">Fichier non supporté</span>
+
+                                <div class="btn-modal-content" id="btn-modal-content">
+
+                                    <span class="modal-text-btn-upload">ou télécharger une photo</span>
+
+                                    <input type="file" class="file" (change)="readURL($event)" />
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="modal-footer" #btnValideParent>
+                        <button mat-button class="modal-btn-footer" (click)="uploadLogo()" disabled="disabled" id="btn-valide">valider</button>
+                        <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()">annuler</button>
+
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <div id="shadow-cog-add-images" [ngClass]="{'shadow-cog-active': shadowcogImage === true}">
+
+            <div id="remove_add_image" (click)="param_cog_non_active_add_img()"></div>
+
+            <div class="modal">
+
+                <form class="formimage" enctype="multipart/form-data">
+
+                    <div class="modal-header"></div>
+
+                    <div class="modal-content">
+
+                        <div class="block-upload" id="block-upload-deux" [ngClass]="{'block-upload-hidden': blockUploadLast == true}">
+
+
+                            <i class="modal-content-icon fas fa-camera"></i>
+
+                            <span class="modal-content-text">
 
                 Déposez votre image ici
 
               </span>
 
-              <div class="btn-modal-content" id="btn-modal-content">
+                            <div class="btn-modal-content" id="btn-modal-content">
 
-                <span>ou télécharger une photo</span>
+                                <span class="modal-text-btn-upload">ou télécharger une photo</span>
 
-                <input type="file" class="file" name="files" accept="image/x-png,image/gif,image/jpeg"
-                  (change)="readURL($event)" #uploadFileFirst />
-                <input class="hidden-file" type="text" name="ref" value="entreprise" />
-                <input type="text" name="refId" value="{{entreprise.id}}" />
-                <input type="text" name="field" value="logo" />
-              </div>
-            </div>
+                                <input type="file" class="file" name="files" accept="image/x-png,image/gif,image/jpeg" (change)="readURL_deux($event)" #fileLoading />
 
-            <div class="cadrage-img" [class.cadrage-img-active]="cadrageImgBoolean">
+                            </div>
+                        </div>
 
-              <figure class="img-figure" [class.img-figure-active]="!cadrageImgBooleanState">
-                <img src="" #uploadimgfirst />
-              </figure>
+                        <div class="cadrage-img" [ngClass]="{'cadrage-img-active' : cadrageImgBooleanLast === true}">
 
-              <div class="text-error-upload" [class.text-error-upload-show]="cadrageImgBooleanState">
+                            <figure class="img-figure" [ngClass]="{'img-figure-active' : cadrageImgBooleanStateLast === false}">
+                                <img src="" class="upload_img" #uploadimgLast />
+                            </figure>
 
-                <i class="fas fa-ban ban-error"></i>
+                            <div class="text-error-upload" [ngClass]="{'text-error-upload-show' : cadrageImgBooleanStateLast === true}">
 
-                <span class="error">Fichier non supporté</span>
+                                <i class="fas fa-ban ban-error"></i>
 
-                <div class="btn-modal-content" id="btn-modal-content">
+                                <span class="error">Fichier non supporté</span>
 
-                  <span class="modal-text-btn-upload">ou télécharger une photo</span>
+                                <div class="btn-modal-content" id="btn-modal-content">
 
-                  <input type="file" class="file" (change)="readURL($event)" />
+                                    <span class="modal-text-btn-upload">ou télécharger une photo</span>
 
-                </div>
+                                    <input type="file" class="file" (change)="readURL_deux($event)" />
+                                    <input class="hidden-file" type="text" name="ref" value="entreprise" />
+                                    <input type="text" name="refId" value="9" />
+                                    <input type="text" name="field" value="image_entreprise" />
 
-              </div>
+                                </div>
 
-            </div>
+                            </div>
 
-
-          </div>
-
-          <div class="modal-footer" #btnValideParent>
-            <button mat-button class="modal-btn-footer" (click)="uploadLogo()" disabled="disabled"
-              id="btn-valide">valider</button>
-            <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()">annuler</button>
+                        </div>
 
 
-          </div>
-
-        </form>
-
-      </div>
+                    </div>
 
 
-    </div>
+                    <div class="modal-footer" #btnValideParentAddImage>
 
-    <div id="shadow-cog-add-images" [ngClass]="{'shadow-cog-active': shadowcogImage === true}">
-
-      <div id="remove_add_image" (click)="param_cog_non_active_add_img()"></div>
-
-      <div class="modal">
-
-        <form class="formimage" enctype="multipart/form-data">
-
-          <div class="modal-header"></div>
-
-          <div class="modal-content">
-
-            <div class="block-upload" id="block-upload-deux"
-              [ngClass]="{'block-upload-hidden': blockUploadLast == true}">
+                        <button mat-button class="modal-btn-footer" (click)='uploadImage()' disabled="disabled" id="btn-valide-deuxx">valider</button>
+                        <button mat-button class="modal-btn-footer" (click)="param_cog_non_active_add_img()">annuler</button>
 
 
-              <i class="modal-content-icon fas fa-camera"></i>
+                    </div>
 
-              <span class="modal-content-text">
-
-                Déposez votre image ici
-
-              </span>
-
-              <div class="btn-modal-content" id="btn-modal-content">
-
-                <span class="modal-text-btn-upload">ou télécharger une photo</span>
-
-                <input type="file" class="file" name="files" accept="image/x-png,image/gif,image/jpeg"
-                  (change)="readURL_deux($event)" #fileLoading />
-
-              </div>
-            </div>
-
-            <div class="cadrage-img" [ngClass]="{'cadrage-img-active' : cadrageImgBooleanLast === true}">
-
-              <figure class="img-figure" [ngClass]="{'img-figure-active' : cadrageImgBooleanStateLast === false}">
-                <img src="" class="upload_img" #uploadimgLast />
-              </figure>
-
-              <div class="text-error-upload"
-                [ngClass]="{'text-error-upload-show' : cadrageImgBooleanStateLast === true}">
-
-                <i class="fas fa-ban ban-error"></i>
-
-                <span class="error">Fichier non supporté</span>
-
-                <div class="btn-modal-content" id="btn-modal-content">
-
-                  <span class="modal-text-btn-upload">ou télécharger une photo</span>
-
-                  <input type="file" class="file" (change)="readURL_deux($event)" />
-                  <input class="hidden-file" type="text" name="ref" value="entreprise" />
-                  <input type="text" name="refId" value="9" />
-                  <input type="text" name="field" value="image_entreprise" />
-
-                </div>
-
-              </div>
+                </form>
 
             </div>
 
 
-          </div>
+        </div>
 
 
-          <div class="modal-footer" #btnValideParentAddImage>
+        <div class="big-content">
 
-            <button mat-button class="modal-btn-footer" (click)='uploadImage()' disabled="disabled"
-              id="btn-valide-deuxx">valider</button>
-            <button mat-button class="modal-btn-footer" (click)="param_cog_non_active_add_img()">annuler</button>
+            <div class="all-group-content">
 
-
-          </div>
-
-        </form>
-
-      </div>
-
-
-    </div>
-
-
-    <div class="big-content">
-
-      <div class="all-group-content">
-
-        <div class="view-content-center">
-          <!--
+                <div class="view-content-center">
+                    <!--
             <div class="edit-panel">
 
               <header class="edit-panel-header">
@@ -261,15 +246,15 @@
 
             </div> -->
 
-          <div class="edit-panel">
+                    <div class="edit-panel">
 
-            <div class="edit-panel-header">
+                        <div class="edit-panel-header">
 
-              <h2 class="title-edit-panel">
-                Éditez les détails de votre entreprise dans la langue de votre choix
-              </h2>
+                            <h2 class="title-edit-panel">
+                                Éditez les détails de votre entreprise dans la langue de votre choix
+                            </h2>
 
-              <!-- <div class="sous-edit-panel-left">
+                            <!-- <div class="sous-edit-panel-left">
 
                   <span class="chart-title">Complétion</span>
 
@@ -294,355 +279,350 @@
 
 
 
-            </div>
+                        </div>
 
-            <form>
-              <div class="regroupe-form" #regroupeform>
+                        <form>
+                            <div class="regroupe-form" #regroupeform>
 
-                <label class="first-label-param-header">Choisissez votre langue</label>
+                                <label class="first-label-param-header">Choisissez votre langue</label>
 
-                <div class="block-form-flex">
+                                <div class="block-form-flex">
 
-                  <select [formControl]="lang" name="lang" class="champ-form-gestion">
+                                    <select [formControl]="lang" name="lang" class="champ-form-gestion">
 
                     <option *ngFor="let lang of langlist" value="{{lang}}">{{ lang }}</option>
 
                   </select>
 
-                </div>
+                                </div>
 
-              </div>
-              <div class="regroupe-form">
+                            </div>
+                            <div class="regroupe-form">
 
-                <label>Logo de l'entreprise</label>
+                                <label>Logo de l'entreprise</label>
 
-                <div class="all-gestion-info">
-
-
-                  <figure class="img-upload"><img src=" {{logo}}" alt="" role=""></figure>
+                                <div class="all-gestion-info">
 
 
-                  <div>
-
-                    <div class="gestion-info-img-header">
-
-                      <button mat-button class="btn-gestion" (click)="modal_upload()">ENVOYER</button>
-                      <button mat-button class="btn-gestion">SUPPRIMER</button>
-
-                    </div>
-
-                    <p class="gestion-info-img-contenu">4 Mo max.</p>
-                    <p class="gestion-info-img-contenu">Taille recommandée : 500 x 500px</p>
-                    <p class="gestion-info-img-contenu">Types de fichier recommandés : JPEG, PNG, GIF</p>
+                                    <figure class="img-upload"><img src=" {{logo}}" alt="" role=""></figure>
 
 
-                  </div>
+                                    <div>
+
+                                        <div class="gestion-info-img-header">
+
+                                            <button mat-button class="btn-gestion" (click)="modal_upload()">ENVOYER</button>
+                                            <button mat-button class="btn-gestion">SUPPRIMER</button>
+
+                                        </div>
+
+                                        <p class="gestion-info-img-contenu">4 Mo max.</p>
+                                        <p class="gestion-info-img-contenu">Taille recommandée : 500 x 500px</p>
+                                        <p class="gestion-info-img-contenu">Types de fichier recommandés : JPEG, PNG, GIF</p>
 
 
-                </div>
+                                    </div>
 
 
-              </div>
+                                </div>
 
 
-              <div class="regroupe-form">
-
-                <label>Nom de l'entreprise</label>
-                <div class="block-form-flex">
-
-                  <input [formControl]="name" name="name" type="text" class="champ-form-gestion" value="" />
-
-                  <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
-
-                </div>
-                <div *ngIf=" submitted && name.invalid" class="alert alert-danger">
-                  <div *ngIf="name.errors.required">
-                    Veuillez saisir le nom de l'entreprise.
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="regroupe-form">
-
-                <label>Adresse email de l'entreprise</label>
-
-                <div class="block-form-flex">
-
-                  <input [formControl]="email" name="email" type="text" class="champ-form-gestion" value="" />
-
-                  <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
-
-                </div>
-                <div *ngIf=" submitted && email.invalid" class="alert alert-danger">
-                  <div *ngIf="email.errors.required">
-                    Veuillez saisir l'email de l'entreprise.
-                  </div>
-                  <div *ngIf="email.errors.email">
-                    Veuillez saisir un email correct.
-                  </div>
-                </div>
+                            </div>
 
 
-              </div>
+                            <div class="regroupe-form">
 
-              <div class="regroupe-form">
+                                <label>Nom de l'entreprise</label>
+                                <div class="block-form-flex">
 
-                <label>Numéro de téléphone</label>
+                                    <input [formControl]="name" name="name" type="text" class="champ-form-gestion" value="" />
 
-                <div class="block-form-flex">
+                                    <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
 
-                  <input [formControl]="phone" type="tel" class="champ-form-gestion" value="" />
+                                </div>
+                                <div *ngIf=" submitted && name.invalid" class="alert alert-danger">
+                                    <div *ngIf="name.errors.required">
+                                        Veuillez saisir le nom de l'entreprise.
+                                    </div>
+                                </div>
 
-                  <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
+                            </div>
 
-                </div>
-                <div *ngIf=" submitted && phone.invalid" class="alert alert-danger">
-                  <div *ngIf="phone.errors.required">
-                    Veuillez saisir le numéro de téléphone de l'entreprise.
-                  </div>
-                </div>
+                            <div class="regroupe-form">
 
-              </div>
+                                <label>Adresse email de l'entreprise</label>
 
-              <div class="regroupe-form">
+                                <div class="block-form-flex">
 
-                <label>Industrie</label>
+                                    <input [formControl]="email" name="email" type="text" class="champ-form-gestion" value="" />
 
-                <div class="block-form-flex">
+                                    <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
+
+                                </div>
+                                <div *ngIf=" submitted && email.invalid" class="alert alert-danger">
+                                    <div *ngIf="email.errors.required">
+                                        Veuillez saisir l'email de l'entreprise.
+                                    </div>
+                                    <div *ngIf="email.errors.email">
+                                        Veuillez saisir un email correct.
+                                    </div>
+                                </div>
 
 
-                  <select [formControl]="industrie" name="industrie" class="champ-form-gestion">
+                            </div>
+
+                            <div class="regroupe-form">
+
+                                <label>Numéro de téléphone</label>
+
+                                <div class="block-form-flex">
+
+                                    <input [formControl]="phone" type="tel" class="champ-form-gestion" value="" />
+
+                                    <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
+
+                                </div>
+                                <div *ngIf=" submitted && phone.invalid" class="alert alert-danger">
+                                    <div *ngIf="phone.errors.required">
+                                        Veuillez saisir le numéro de téléphone de l'entreprise.
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="regroupe-form">
+
+                                <label>Industrie</label>
+
+                                <div class="block-form-flex">
+
+
+                                    <select [formControl]="industrie" name="industrie" class="champ-form-gestion">
 
                     <option *ngFor="let industrie of industrieList" value="{{industrie}}">{{ industrie }}</option>
 
                   </select>
 
-                </div>
+                                </div>
 
-              </div>
+                            </div>
 
-              <div class="regroupe-form">
+                            <div class="regroupe-form">
 
-                <label>Nombre d'employés</label>
+                                <label>Nombre d'employés</label>
 
-                <div class="block-form-flex">
+                                <div class="block-form-flex">
 
-                  <select [formControl]="numberofemployee" name="numberofemployee" class="champ-form-gestion">
+                                    <select [formControl]="numberofemployee" name="numberofemployee" class="champ-form-gestion">
 
                     <option *ngFor="let numberofemployee of  numberofemployeeList" value="{{numberofemployee}}">
                       {{ numberofemployee }}</option>
 
                   </select>
 
-                </div>
+                                </div>
 
-              </div>
+                            </div>
 
-              <div class="regroupe-form">
+                            <div class="regroupe-form">
 
-                <label>Nombre de développeurs</label>
+                                <label>Nombre de développeurs</label>
 
-                <div class="block-form-flex">
+                                <div class="block-form-flex">
 
-                  <select [formControl]="numberofdev" name="numberofdev" class="champ-form-gestion">
+                                    <select [formControl]="numberofdev" name="numberofdev" class="champ-form-gestion">
 
                     <option *ngFor="let numberofdev of numberofemployeeList" value="{{numberofdev}}">{{ numberofdev }}
                     </option>
 
                   </select>
 
-                </div>
+                                </div>
 
-              </div>
+                            </div>
 
-              <div class="regroupe-form">
+                            <div class="regroupe-form">
 
-                <label>Lien vidéo</label>
+                                <label>Lien vidéo</label>
 
-                <div class="block-form-flex incrage">
+                                <div class="block-form-flex incrage">
 
-                  <input [formControl]="videolink" type="text" class="champ-form-gestion champ-incrage" value="" />
+                                    <input [formControl]="videolink" type="text" class="champ-form-gestion champ-incrage" value="" />
 
-                  <span class="span-incrage">url:</span>
+                                    <span class="span-incrage">url:</span>
 
-                </div>
+                                </div>
 
-              </div>
+                            </div>
 
-              <div class="regroupe-form">
+                            <div class="regroupe-form">
 
-                <label>Lien du site</label>
+                                <label>Lien du site</label>
 
-                <div class="block-form-flex">
+                                <div class="block-form-flex">
 
-                  <input [formControl]="websitelink" type="text" class="champ-form-gestion champ-incrage" value="" />
+                                    <input [formControl]="websitelink" type="text" class="champ-form-gestion champ-incrage" value="" />
 
-                  <span class="span-incrage">url:</span>
+                                    <span class="span-incrage">url:</span>
 
-                </div>
+                                </div>
 
-              </div>
+                            </div>
 
-              <div class="regroupe-form">
+                            <div class="regroupe-form">
 
-                <label>Teaser de l'entreprise</label>
+                                <label>Teaser de l'entreprise</label>
 
-                <div class="block-form-flex">
+                                <div class="block-form-flex">
 
-                  <textarea [formControl]="teaser" class="champ-form-gestion textarea-gestion"
-                    style="height:150px;resize:none;"></textarea>
+                                    <textarea [formControl]="teaser" class="champ-form-gestion textarea-gestion" style="height:150px;resize:none;"></textarea>
 
-                  <!-- <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span> -->
+                                    <!-- <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span> -->
 
-                </div>
+                                </div>
 
-              </div>
-
-
-              <div class="regroupe-form">
-
-                <label>Ajouter des images (10 max)</label>
-
-                <div class="all-gestion-info">
-
-                  <div class="upload" (click)="param_cog_non_active_add_image()">
-
-                    <i class="fas fa-camera icon-upload"></i>
-
-                    <span class="text-upload">ADD PIC</span>
-
-                  </div>
-
-                  <div *ngFor='let image of picture' class="picture">
-                    <div class="img-gestion">
-
-                      <div class="bg-transparent-img">
-                        <span class="fa fa-window-close"></span>
+                            </div>
 
 
-                      </div>
+                            <div class="regroupe-form">
 
-                      <img src="{{image.url}}" alt="">
+                                <label>Ajouter des images (10 max)</label>
 
-                    </div>
-                  </div>
-                </div>
+                                <div class="all-gestion-info">
+
+                                    <div class="upload" (click)="param_cog_non_active_add_image()">
+
+                                        <i class="fas fa-camera icon-upload"></i>
+
+                                        <span class="text-upload">ADD PIC</span>
+
+                                    </div>
+
+                                    <div *ngFor='let image of picture' class="picture">
+                                        <div class="img-gestion">
+
+                                            <div class="bg-transparent-img">
+                                                <span class="fa fa-window-close"></span>
 
 
-              </div>
+                                            </div>
 
-              <div class="regroupe-form">
+                                            <img src="{{image.url}}" alt="">
 
-                <label></label>
+                                        </div>
+                                    </div>
+                                </div>
 
-                <div class="block-form-flex">
 
-                  <input [formControl]="linkedin" name="linkedin" type="text"
-                    class="champ-form-gestion champ-incrage-network" value="" />
+                            </div>
 
-                  <span class="span-incrage span-incrage-network">
+                            <div class="regroupe-form">
+
+                                <label></label>
+
+                                <div class="block-form-flex">
+
+                                    <input [formControl]="linkedin" name="linkedin" type="text" class="champ-form-gestion champ-incrage-network" value="" />
+
+                                    <span class="span-incrage span-incrage-network">
                     <i class="fab fa-linkedin-in icon-network"></i>
                     Linkedin
                   </span>
 
-                </div>
+                                </div>
 
-              </div>
+                            </div>
 
-              <div class="regroupe-form">
+                            <div class="regroupe-form">
 
-                <label></label>
+                                <label></label>
 
-                <div class="block-form-flex">
+                                <div class="block-form-flex">
 
-                  <input [formControl]="facebook" name="facebook" type="text"
-                    class="champ-form-gestion champ-incrage-network" value="" />
+                                    <input [formControl]="facebook" name="facebook" type="text" class="champ-form-gestion champ-incrage-network" value="" />
 
-                  <span class="span-incrage span-incrage-network">
+                                    <span class="span-incrage span-incrage-network">
                     <i class="fab fa-facebook-f icon-network"></i>
                     Facebook
                   </span>
 
-                </div>
+                                </div>
 
-              </div>
+                            </div>
 
-              <div class="regroupe-form">
+                            <div class="regroupe-form">
 
-                <label></label>
+                                <label></label>
 
-                <div class="block-form-flex">
+                                <div class="block-form-flex">
 
-                  <input [formControl]="twitter" name="twitter" type="text"
-                    class="champ-form-gestion champ-incrage-network" value="" />
+                                    <input [formControl]="twitter" name="twitter" type="text" class="champ-form-gestion champ-incrage-network" value="" />
 
-                  <span class="span-incrage span-incrage-network">
+                                    <span class="span-incrage span-incrage-network">
                     <i class="fab fa-twitter icon-network"></i>
                     Twitter
                   </span>
 
+                                </div>
+
+                            </div>
+
+
+                            <div class="regroupe-form">
+
+                                <label></label>
+
+                                <div (click)="clickchange2()" class="block-form-flex btn-block-flex">
+
+                                    <button mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </form>
+
+                    </div>
+
                 </div>
 
-              </div>
+                <div>
+
+                    <div class="completion_fiche">
 
 
-              <div class="regroupe-form">
+                        <div class="completion_fiche_progress">
 
-                <label></label>
+                            <h2 class="text_number_progress_responsive">Complétion de votre fiche</h2>
 
-                <div (click)="clickchange2()" class="block-form-flex btn-block-flex">
+                            <div class="progres">
+                                <round-progress [current]="currentTotal" [max]="100" [color]="'white'" [background]="'#6a84a0'" [radius]="200" [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="true" [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'"
+                                    [animationDelay]="1000">
+                                </round-progress>
+                            </div>
+                            <div class="detail_progresse">
 
-                  <button mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
+                                <span class="number_progress">{{currentTotal}}</span>
+
+                                <span class="text_number_progress">Complétion de votre fiche</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-              </div>
-
-
-
-            </form>
-
-          </div>
-
-        </div>
-
-        <div>
-
-          <div class="completion_fiche">
-
-
-            <div class="completion_fiche_progress">
-
-              <h2 class="text_number_progress_responsive">Complétion de votre fiche</h2>
-
-              <div class="progres">
-                <round-progress [current]="currentTotal" [max]="100" [color]="'white'" [background]="'#6a84a0'"
-                  [radius]="200" [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="true"
-                  [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'" [animationDelay]="1000">
-                </round-progress>
-              </div>
-              <div class="detail_progresse">
-
-                <span class="number_progress">{{currentTotal}}</span>
-
-                <span class="text_number_progress">Complétion de votre fiche</span>
-
-              </div>
 
             </div>
 
-          </div>
 
         </div>
 
-
-      </div>
-
-
     </div>
-
-  </div>
-  <!-- </div> -->
+    <!-- </div> -->
 
 </div>

@@ -1,20 +1,8 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import {
-  ApiClientService,
-  API_URI_USER,
-  API_URI_ENTREPRISE
-} from 'src/app/api-client/api-client.service';
+import { ApiClientService, API_URI_USER, API_URI_ENTREPRISE } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
-import {
-  MAT_DIALOG_DATA,
-  MatSnackBar
-} from '@angular/material';
+import { MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
 @Component({
@@ -135,18 +123,21 @@ export class ProfilEntrepriseComponent implements OnInit {
 
   ngOnInit() {
     this.getUser().then(user => {
-
       this.account = user[0].customeraccount;
     // declaration nav route
+      console.log('this.dataRoute : ', this.dataRoute);
       this.dataRoute = [
-        { routerLink : "/dashboard/profil-utilisateur", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "person_outline", name: "Mon profil" },
-        { routerLink : "/dashboard/profil-entreprise", condition: this.account.type === 'profesional', classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "domain", name: "Mon entreprise" },
-        { routerLink : "/dashboard/utilisateurs", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "groups", name: "Utilisateurs" }
+        { routerLink : '/dashboard/profil-utilisateur', condition: true, classAnimParent: 'hvr-icon-bounce',
+        classAnimIcone: 'hvr-icon', icon: 'person_outline', name: 'Mon profil' },
+        { routerLink : '/dashboard/profil-entreprise', condition: this.account.type === 'profesional',
+        classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'domain', name: 'Mon entreprise' },
+        { routerLink : '/dashboard/utilisateurs', condition: true, classAnimParent: 'hvr-icon-bounce',
+        classAnimIcone: 'hvr-icon', icon: 'groups', name: 'Utilisateurs' }
       ];
-
-      if (user[0].role.type === 'root') {
-        this.router.navigate(['/dashboard/profil-utilisateur']);
-      }
+      // console.log('user[0].role.type : ', user[0].role.type);
+      // if (user[0].role.type === 'root') {
+      //   this.router.navigate(['/dashboard/profil-utilisateur']); // role administrator strapi -> redirect to this route ?
+      // }
 
       if (this.account.entreprise === null) {
         this.isVerifUser = true;

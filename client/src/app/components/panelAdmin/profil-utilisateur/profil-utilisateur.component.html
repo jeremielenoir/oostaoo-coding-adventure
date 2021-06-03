@@ -29,7 +29,8 @@
             <div class="content top">
                 <div class="tool-bar">
                     <div class="flex1">
-                        <p>Basculer vers un compte professionnel</p>
+                        <p *ngIf="this.user?.customeraccount.type === 'personal'">Basculer vers un compte professionnel</p>
+                        <p *ngIf="this.user?.customeraccount.type === 'profesional'">Bienvenu(e) sur votre espace personnel</p>
                     </div>
                     <!-- Btn -->
                     <app-base-button iconName="business" (click)="convertToPro()">
