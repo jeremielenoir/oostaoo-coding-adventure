@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { API_URI_CAMPAIGNS, ApiClientService, API_URI_USER, API_URI_USERS_BY_ADMIN } from './../../../../api-client/api-client.service';
+import { DecryptTokenService } from '../register.service';
 
 // authentication service is used to LOGIN and LOGOUT of the application
 // it posts the creds (username and password) to the backend and check for the response if it has JWT token
@@ -15,7 +16,7 @@ export class AuthenticationService {
 
   currentUserSubject: BehaviorSubject<any>;
 
-  constructor(private http: HttpClient, public apiClientService: ApiClientService) {
+  constructor(private http: HttpClient, public apiClientService: ApiClientService, private decryptTokenService: DecryptTokenService) {
     this.currentUserSubject = new BehaviorSubject(localStorage.getItem('currentUser'));
   }
 
@@ -35,6 +36,7 @@ export class AuthenticationService {
           // console.log('AUTH SERVICE user: ', user);
           // login successful if the response has jwt token
           if (user && user.jwt) {
+            this.decryptTokenService.updateToken(user.jwt);
             // store user details and jwt token in the local storage to keep the user logged in between page refreshes
             localStorage.setItem('currentUser', user.jwt);
             this.currentUserSubject.next(user);
@@ -58,6 +60,7 @@ export class AuthenticationService {
           if (user && user.jwt) {
             // store user details and jwt token in the local storage to keep the user logged in between page refreshes
             localStorage.setItem('currentUser', user.jwt);
+            this.decryptTokenService.updateToken(user.jwt);
             this.currentUserSubject.next(user);
           }
           return user;
