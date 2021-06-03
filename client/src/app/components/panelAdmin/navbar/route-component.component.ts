@@ -64,11 +64,12 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
       .get(API_URI_USER + '/' + this.decryptTokenService.userId)
       .subscribe(user => {
         this.user = user;
+        console.log('this.user : ', this.user);
         this.account = user.customeraccount;
         if (user.customeraccount) {
           this.isProfesionalAccount = user.customeraccount.type === 'profesional';
         }
-        this.offer_id = user.offer_id.id;
+        this.offer_id = user.customeraccount.offer.id;
         switch (this.offer_id) {
           case 14:
             this.offer_id = 'Gratuit';
@@ -104,7 +105,7 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
         e.preventDefault();
       });
     });
-    
+
     this.getNotifications().then(notifications => {
       this.notifications = [];
       notifications.forEach(element => {
