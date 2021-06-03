@@ -2,9 +2,7 @@ import { Component, OnInit, Injectable, ChangeDetectorRef, ViewChild } from '@an
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ApiClientService, API_URI_USER } from 'src/app/api-client/api-client.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { debug } from 'util';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
 import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatRadioGroup } from '@angular/material';
 import { AuthenticationService } from './service/auth.service';
@@ -51,8 +49,8 @@ export class RegisterComponent implements OnInit {
       this.errorProvider = params['error'];
       setTimeout(() => {
         this.errorProvider = null;
-      }, 2000)
-    })
+      }, 2000);
+    });
   }
 
   public readonly siteKey = '6LdAf-AUAAAAACX5tqKig64A4zgc-Q7EA44fxE-9';
@@ -60,7 +58,7 @@ export class RegisterComponent implements OnInit {
   public size: 'compact' | 'normal' = 'normal';
   public lang = 'fr';
   public type: 'image' | 'audio';
-  public useGlobalDomain: boolean = false;
+  public useGlobalDomain = false;
   public captchaSuccess = false;
 
   ngOnInit() {
@@ -121,7 +119,7 @@ export class RegisterComponent implements OnInit {
 
     // stop if form is invalid
     if (this.loginForm.invalid) {
-      this.openSnackBar("Une erreur est survenue, veuillez remplir correctement tous les champs requis", "Fermer");
+      this.openSnackBar('Une erreur est survenue, veuillez remplir correctement tous les champs requis', 'Fermer');
     }
 
     this.loading = true;
@@ -131,7 +129,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         data => {
           // console.log('data : ', data);
-          this.router.navigate(['/dashboard/campaigns'])
+          this.router.navigate(['/dashboard/campaigns']);
         },
         error => {
           this.error = error;
@@ -151,9 +149,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-
     this.submittedRegister = true;
-
     // stop if form is invalid
     if (
       this.fr.emailregister.value === '' ||
@@ -162,18 +158,15 @@ export class RegisterComponent implements OnInit {
       this.fr.confirmpassword.value === '' ||
       this.fr.passwordregister.value !== this.fr.confirmpassword.value ||
       this.fr.recaptcha.value === '') {
-      this.openSnackBar("Une erreur est survenue, veuillez remplir correctement tous les champs requis", "Fermer");
+      this.openSnackBar('Une erreur est survenue, veuillez remplir correctement tous les champs requis', 'Fermer');
     } else {
-
       this.loading = true;
-
       this.authenticationService.register(
         this.fr.usernameregister.value,
         this.fr.emailregister.value,
         this.fr.passwordregister.value,
         this.accountType.value
-      )
-        .pipe(first())
+      ).pipe(first())
         .subscribe(
           data => {
             this.router.navigate(['/dashboard/campaigns']);
@@ -183,7 +176,6 @@ export class RegisterComponent implements OnInit {
             this.errorRegister = error;
           }
         );
-
     }
 
   }
