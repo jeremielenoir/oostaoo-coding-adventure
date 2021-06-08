@@ -156,7 +156,7 @@
                         <div class="block-upload" id="block-upload-deux" [ngClass]="{'block-upload-hidden': blockUploadLast == true}">
                             <i class="modal-content-icon fas fa-camera"></i>
                             <span class="modal-content-text">Déposez votre image ici</span>
-                            <div class="btn-modal-content" id="btn-modal-content">
+                            <div class="btn-modal-content hvr-grow" id="btn-modal-content">
                                 <span class="modal-text-btn-upload">ou télécharger une photo</span>
                                 <input type="file" class="file" name="files" accept="image/x-png,image/gif,image/jpeg" (change)="readURL_deux($event)" #fileLoading />
                             </div>
@@ -168,7 +168,7 @@
                             <div class="text-error-upload" [ngClass]="{'text-error-upload-show' : cadrageImgBooleanStateLast === true}">
                                 <i class="fas fa-ban ban-error"></i>
                                 <span class="error">Fichier non supporté</span>
-                                <div class="btn-modal-content" id="btn-modal-content">
+                                <div class="btn-modal-content hvr-grow" id="btn-modal-content">
                                     <span class="modal-text-btn-upload">ou télécharger une photo</span>
                                     <input type="file" class="file" (change)="readURL_deux($event)" />
                                     <input class="hidden-file" type="text" name="ref" value="entreprise" />
