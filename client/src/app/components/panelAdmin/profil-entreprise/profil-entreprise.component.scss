@@ -280,6 +280,7 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    border-radius: 4px;
                     .completion_fiche_progress {
                         width: 100%;
                         height: 100%;
@@ -421,6 +422,7 @@
         overflow: hidden;
         width: 250px;
         text-align: center;
+        border-radius: 30px;
         &:hover {
             background-color: rgba(43, 174, 145, 0.7);
         }
@@ -474,21 +476,6 @@
         &:last-child {
             background: white;
         }
-    }
-}
-
-.champ-form-gestion {
-    border: $border-table;
-    width: 100%;
-    height: 52px;
-    font-size: $font-size-home;
-    text-indent: 1px;
-    padding: 10px 15px;
-    font-weight: 400;
-    outline: none;
-    &:active,
-    &:focus {
-        border: $border-table !important;
     }
 }
 
@@ -566,19 +553,18 @@
     display: none;
 }
 
-:host ::ng-deep .mat-form-field-label-wrapper {
-    top: -2px !important;
-    padding-top: 0px !important;
-    left: 17.5px !important;
-}
-
+// :host ::ng-deep .mat-form-field-label-wrapper {
+//     top: -2px !important;
+//     padding-top: 0px !important;
+//     left: 17.5px !important;
+// }
 .mat-form-field-label {
     display: flex;
     align-items: center;
 }
 
 :host ::ng-deep .ng-star-inserted {
-    color: #000;
+    // color: #000;
 }
 
 :host ::ng-deep .mat-option-pseudo-checkbox {
@@ -639,6 +625,7 @@
     color: #fff;
     flex-direction: column;
     position: relative;
+    border-radius: 4px;
 }
 
 .upload:hover {
@@ -658,6 +645,84 @@
 
 .button-container {
     margin-left: 20px;
+}
+
+// CSS fix style inputs form
+.form-line {
+    display: flex;
+    justify-content: space-around;
+    &.fix-top {
+        margin-top: 10px;
+    }
+    &.fix-buttons {
+        justify-content: inherit;
+    }
+    .fullwidth {
+        width: 45%;
+    }
+    .fullwidth100 {
+        width: 95%;
+    }
+    .input-bloc {
+        width: 95%;
+        margin: 5px;
+        display: flex;
+        justify-content: center;
+        &.fix-error {
+            display: flex;
+            flex-direction: column;
+        }
+        .input-section1 {
+            width: 100%;
+            height: 50px;
+            border: $border-table;
+            background: white;
+            font-size: 16px;
+            padding-left: 15px;
+            &:focus {
+                outline: none;
+            }
+        }
+        .input-section1-textarea {
+            height: 250px !important;
+            padding-top: 9px;
+            resize: none;
+        }
+        .span-incrage {
+            width: 68px;
+            color: #7e8082;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+    }
+}
+
+.error-red {
+    color: red;
+}
+
+// Fix .mat-form-field-wrapper
+:host ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: inherit !important;
+}
+
+// Fix button validate end form
+.fix-button-save {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// fix save or cancel upload img
+.fix-upload-img {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 
@@ -712,14 +777,6 @@
     .text_number_progress_responsive {
         display: block!important;
         margin-bottom: 0px !important;
-    }
-    /*-- partie content view--*/
-    .regroupe-form {
-        display: block!important;
-    }
-    .regroupe-form label {
-        padding: 0px!important;
-        margin-bottom: 6px!important;
     }
 }
 
