@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="form-group">
-                                <button (click)="addentreprise()" mat-button class="btn-validate">Ajouter son entreprise</button>
+                                <app-base-button (click)='addentreprise()' iconName="done" i18n>CONFIRMER</app-base-button>
                             </div>
                         </form>
                     </div>
@@ -95,9 +95,9 @@
                     <div class="modal-content">
                         <div class="block-upload" [class.block-upload-hidden]="blockUpload">
                             <i class="modal-content-icon fas fa-camera"></i>
-                            <span class="modal-content-text"> Déposez votre image ici </span>
+                            <span class="modal-content-text" i18n> Déposez votre image ici </span>
                             <div class="btn-modal-content" id="btn-modal-content">
-                                <span>ou télécharger une photo</span>
+                                <span i18n>ou télécharger une photo</span>
                                 <input type="file" class="file hvr-grow" name="files" accept="image/x-png,image/gif,image/jpeg" (change)="readURL($event)" #uploadFileFirst />
                                 <input class="hidden-file" type="text" name="ref" value="entreprise" />
                                 <input type="text" name="refId" value="{{entreprise.id}}" />
@@ -115,11 +115,11 @@
 
                                 <i class="fas fa-ban ban-error"></i>
 
-                                <span class="error">Fichier non supporté</span>
+                                <span class="error" i18n>Fichier non supporté</span>
 
                                 <div class="btn-modal-content" id="btn-modal-content">
 
-                                    <span class="modal-text-btn-upload">ou télécharger une photo</span>
+                                    <span class="modal-text-btn-upload" i18n>ou télécharger une photo</span>
 
                                     <input type="file" class="file" (change)="readURL($event)" />
 
@@ -133,8 +133,8 @@
                     </div>
 
                     <div class="modal-footer" #btnValideParent>
-                        <button mat-button class="modal-btn-footer" (click)="uploadLogo()" disabled="disabled" id="btn-valide">valider</button>
-                        <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()">annuler</button>
+                        <button mat-button class="modal-btn-footer" (click)="uploadLogo()" disabled="disabled" id="btn-valide" i18n>valider</button>
+                        <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()" i18n>annuler</button>
 
 
                     </div>
@@ -155,9 +155,9 @@
                     <div class="modal-content">
                         <div class="block-upload" id="block-upload-deux" [ngClass]="{'block-upload-hidden': blockUploadLast == true}">
                             <i class="modal-content-icon fas fa-camera"></i>
-                            <span class="modal-content-text">Déposez votre image ici</span>
+                            <span class="modal-content-text" i18n>Déposez votre image ici</span>
                             <div class="btn-modal-content hvr-grow" id="btn-modal-content">
-                                <span class="modal-text-btn-upload">ou télécharger une photo</span>
+                                <span class="modal-text-btn-upload" i18n>ou télécharger une photo</span>
                                 <input type="file" class="file" name="files" accept="image/x-png,image/gif,image/jpeg" (change)="readURL_deux($event)" #fileLoading />
                             </div>
                         </div>
@@ -167,9 +167,9 @@
                             </figure>
                             <div class="text-error-upload" [ngClass]="{'text-error-upload-show' : cadrageImgBooleanStateLast === true}">
                                 <i class="fas fa-ban ban-error"></i>
-                                <span class="error">Fichier non supporté</span>
+                                <span class="error" i18n>Fichier non supporté</span>
                                 <div class="btn-modal-content hvr-grow" id="btn-modal-content">
-                                    <span class="modal-text-btn-upload">ou télécharger une photo</span>
+                                    <span class="modal-text-btn-upload" i18n>ou télécharger une photo</span>
                                     <input type="file" class="file" (change)="readURL_deux($event)" />
                                     <input class="hidden-file" type="text" name="ref" value="entreprise" />
                                     <input type="text" name="refId" value="9" />
@@ -392,7 +392,7 @@
 
                             <div class="regroupe-form">
 
-                                <label>Ajouter des images (10 max)</label>
+                                <label i18n>Ajouter des images (10 max)</label>
 
                                 <div class="all-gestion-info">
 
@@ -400,7 +400,7 @@
 
                                         <i class="fas fa-camera icon-upload"></i>
 
-                                        <span class="text-upload">ADD PIC</span>
+                                        <span class="text-upload" i18n>ADD PIC</span>
 
                                     </div>
 
@@ -477,7 +477,7 @@
 
                         <div class="completion_fiche_progress">
 
-                            <h2 class="text_number_progress_responsive">Complétion de votre fiche</h2>
+                            <h2 class="text_number_progress_responsive" i18n>Complétion de votre fiche</h2>
 
                             <div class="progres">
                                 <round-progress [current]="currentTotal" [max]="100" [color]="'white'" [background]="'#6a84a0'" [radius]="200" [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="true" [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'"
@@ -488,7 +488,7 @@
 
                                 <span class="number_progress">{{currentTotal}}</span>
 
-                                <span class="text_number_progress">Complétion de votre fiche</span>
+                                <span class="text_number_progress" i18n>Complétion de votre fiche</span>
 
                             </div>
 
