@@ -16,15 +16,16 @@
           <h3><i class="fa fa-cube"></i> {{selectedOffer?.title}}</h3>
           <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
             <i>{{selectedOffer?.price + '€' + (selectedOffer && selectedOffer.periodicity === 'monthly' ? '/mois' : '')}}</i>
-            <button (click)="goToPayment()" *ngIf="!ownedOffer || (selectedOffer && ownedOffer.id !== selectedOffer.id)" type="button" mat-raised-button color="primary">
+            <app-base-button *ngIf="!ownedOffer || (selectedOffer && ownedOffer.id !== selectedOffer.id)" type="button" mat-raised-button color="primary" (click)="goToPayment()">
               {{selectedOffer && selectedOffer.periodicity === 'monthly' ? 'S\'abonner' : 'Acheter'}}
-            </button>
-            <button *ngIf="ownedOffer && selectedOffer && ownedOffer.id === selectedOffer.id" [routerLink]="['/dashboard/facturation']"
-              type="button" mat-stroked-button color="primary">Voir ma facturation</button>
-            <button *ngIf="ownedOffer && selectedOffer && ownedOffer.id === selectedOffer.id && subscription && !subscription.cancel_at_period_end"
-              type="button" (click)="cancelSubscription()" mat-raised-button color="primary">Se désabonner</button>
-            <button *ngIf="ownedOffer && selectedOffer && ownedOffer.id === selectedOffer.id && subscription && subscription.cancel_at_period_end"
-              type="button"  mat-raised-button color="primary">Se réabonner</button>
+            </app-base-button>
+              <app-base-button iconName="save" *ngIf="ownedOffer && selectedOffer && ownedOffer.id === selectedOffer.id" [routerLink]="['/dashboard/facturation']"
+              type="button">Voir ma facturation</app-base-button>
+
+            <app-base-button *ngIf="ownedOffer && selectedOffer && ownedOffer.id === selectedOffer.id && subscription && !subscription.cancel_at_period_end"
+              type="button" (click)="cancelSubscription()" mat-raised-button color="primary">Se désabonner</app-base-button>
+            <app-base-button *ngIf="ownedOffer && selectedOffer && ownedOffer.id === selectedOffer.id && subscription && subscription.cancel_at_period_end"
+              type="button"  mat-raised-button color="primary">Se réabonner</app-base-button>
           </div>
         </div>
         <div>

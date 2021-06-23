@@ -139,7 +139,7 @@
                     <li>
                         <a href="" [routerLink]="['/subscription']"><i class="fas fa-circle circle-icon"></i> Changer de formule</a>
                     </li>
-                    <li>
+                    <li *ngIf="isProfesionalAccount || offer_id">
                         <a href="" [routerLink]="['/dashboard/facturation']"><i class="fas fa-circle circle-icon"></i> Facturation</a>
                     </li>
                     <li>

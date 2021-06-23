@@ -12,14 +12,15 @@
       <div>
         <h3><i class="fa fa-shopping-cart icon"></i> Détails de votre abonnement</h3>
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-          <button [disabled]="inProgress" type="button" [routerLink]="['/subscription']"  mat-stroked-button color="primary">Change d'offre</button>
-          <button *ngIf="subscription && !subscription.cancel_at_period_end" [disabled]="inProgress" type="button" (click)="cancelSub()"  mat-stroked-button color="primary">Se désabonner</button>
-          <button *ngIf="subscription && subscription.cancel_at_period_end" [disabled]="inProgress" type="button" (click)="enableSub()" mat-stroked-button color="primary">Se réabonner</button>
+          <app-base-button [disabled]="inProgress" type="button" [routerLink]="['/subscription']"  mat-stroked-button color="primary">Change d'offre</app-base-button>
+          <app-base-button *ngIf="subscription && !subscription.cancel_at_period_end" [disabled]="inProgress" type="button" (click)="cancelSub()"  mat-stroked-button color="primary">Se désabonner</app-base-button>
+          <app-base-button *ngIf="subscription && subscription.cancel_at_period_end" [disabled]="inProgress" type="button" (click)="enableSub()" mat-stroked-button color="primary">Se réabonner</app-base-button>
         </div>
       </div>
       <div>
         <div *ngIf="!subscription" class="rdo-loader"></div>
         <table class="rdp-content-table" *ngIf="subscription">
+          {{ subscription.cancel_at_period_end }}
           <tr><td>Statut</td><td><i [ngClass]="{
               'rdo-badge-success': !subscription?.cancel_at_period_end,
               'rdo-badge-warn': subscription?.cancel_at_period_end
@@ -40,7 +41,7 @@
         <div class="rdo-content-group">
           <div>
             <h3><i class="fa fa-credit-card icon"></i> Votre moyen de paiement</h3>
-            <!-- <button type="button" mat-stroked-button (click)="addOrEditCard()" color="primary">Modifier</button> -->
+            <app-base-button type="button" mat-stroked-button (click)="addOrEditCard()" color="primary">Modifier</app-base-button>
           </div>
           <div fxLayoutAlign="center center">
             <div *ngIf="!paymentMethod" class="rdo-loader"></div>
@@ -51,8 +52,8 @@
         <div class="rdo-content-group">
           <div>
             <h3><i class="fa fa-map-marker icon"></i> Votre adresse de facturation</h3>
-            <button [disabled]="inProgress" type="button" mat-stroked-button (click)="addOrEditAddress()"
-                color="primary">{{ account && account.billing_address ? 'Editer' : 'Ajouter une adresse'}}</button>
+            <app-base-button [disabled]="inProgress" type="button" mat-stroked-button (click)="addOrEditAddress()"
+                color="primary">{{ account && account.billing_address ? 'Editer' : 'Ajouter une adresse'}}</app-base-button>
           </div>
           <div>
             <div *ngIf="!getAddress()" class="rdo-loader"></div>
