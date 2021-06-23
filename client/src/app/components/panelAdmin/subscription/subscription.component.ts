@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ApiClientService, API_URI_OFFER } from 'src/app/api-client/api-client.service';
 import { AccountService } from 'src/app/services/account/account.service';
 import { Router } from '@angular/router';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import { ConfirmModel, ConfirmComponent } from '../../home/confirm/confirm.component';
 
+
+export interface DialogData {
+  offer: any;
+  confirmed: boolean;
+}
 @Component({
   selector: 'app-subscription',
   templateUrl: './subscription.component.html',
@@ -17,6 +22,8 @@ export class SubscriptionComponent implements OnInit {
   selectedOffer: any;
   ownedOffer: any;
   inProgress = false;
+  confirmed: boolean;
+
 
   dataRoute: any;
 
@@ -118,5 +125,39 @@ console.log("error fetching offers",err)
       this.inProgress = false;
     }
   }
+  openPayments(selectedOffer): void {
+    const dialogRef = this.dialog.open(DialogOverviewPayments, {
+      width: '250px',
+      data: { offer: selectedOffer, confirmed: this.confirmed },
+      disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.confirmed = result;
+      if (result === false) {
+        return;
+      } else {
+        this.goToPayment();
+      }
+    });
+  }
+}
 
+
+@Component({
+  selector: 'dialog-overview-payments',
+  templateUrl: 'dialog-overview-payments.html',
+})
+export class DialogOverviewPayments {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewPayments>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+
+  onNoClick(): void {
+    this.dialogRef.close(this.data.confirmed = false);
+  }
+  onClick(): void {
+    console.log(this.data);
+    this.dialogRef.close(this.data.confirmed = true);
+  }
 }

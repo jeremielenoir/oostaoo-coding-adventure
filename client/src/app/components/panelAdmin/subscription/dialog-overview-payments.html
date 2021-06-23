@@ -1,0 +1,29 @@
+<!-- <div class="container"  mat-dialog-content>
+    <p>Voulez vous dupliquer cette campagne ?</p>
+</div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Annulez</button>
+    <button mat-button (click)='onClick()' cdkFocusInitial>Confirmer</button>
+</div> -->
+<mat-dialog-content align="center">
+  <form (ngSubmit)="createStripeToken()" class="checkout">
+    <label for="card-info"><p i18n>Effectuer Payment</p> <b>{{this.data.selectedOffer?.title}}</b></p></label>
+<div id="form-field">
+        <div id="card-info" #cardInfo></div>
+        <button id="submit-button" (click)="onClick()" type="submit">
+            Payer ${{_totalAmount}}
+        </button>
+        <mat-error id="card-errors" role="alert" *ngIf="cardError">
+            <mat-icon style="color: #f44336">cancel</mat-icon>
+            &nbsp;{{ cardError }}
+        </mat-error>
+    </div>
+</form>
+</mat-dialog-content>
+<br>
+<br>
+<mat-dialog-actions align="center">
+  <button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="onNoClick()">Annuler</button>
+  <button mat-raised-button cdkFocusInitial style="background-color: #1d3552; color: white;" (click)="onClick()">Confirmer</button>
+</mat-dialog-actions>
