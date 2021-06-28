@@ -126,8 +126,9 @@ console.log("error fetching offers",err)
     }
   }
   openPayments(selectedOffer): void {
+    console.log();
     const dialogRef = this.dialog.open(DialogOverviewPayments, {
-      width: '250px',
+      width: '30%',
       data: { offer: selectedOffer, confirmed: this.confirmed },
       disableClose: true,
     });
@@ -145,7 +146,7 @@ console.log("error fetching offers",err)
 
 @Component({
   selector: 'dialog-overview-payments',
-  templateUrl: 'dialog-overview-payments.html',
+  templateUrl: './dialog-overview-payments.html',
 })
 export class DialogOverviewPayments {
 

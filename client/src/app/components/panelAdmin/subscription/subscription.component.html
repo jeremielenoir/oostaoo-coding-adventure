@@ -16,7 +16,7 @@
           <h3><i class="fa fa-cube"></i> {{selectedOffer?.title}}</h3>
           <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
             <i>{{selectedOffer?.price + '€' + (selectedOffer && selectedOffer.periodicity === 'monthly' ? '/mois' : '')}}</i>
-            <app-base-button *ngIf="!ownedOffer || (selectedOffer && ownedOffer.id !== selectedOffer.id)" type="button" mat-raised-button color="primary" (click)="openPayments(selectedOffer.id)">
+            <app-base-button *ngIf="!ownedOffer || (selectedOffer && ownedOffer.id !== selectedOffer.id)" type="button" mat-raised-button color="primary" (click)="openPayments(selectedOffer)">
               {{selectedOffer && selectedOffer.periodicity === 'monthly' ? 'S\'abonner' : 'Acheter'}}
             </app-base-button>
               <app-base-button iconName="save" *ngIf="ownedOffer && selectedOffer && ownedOffer.id === selectedOffer.id" [routerLink]="['/dashboard/facturation']"

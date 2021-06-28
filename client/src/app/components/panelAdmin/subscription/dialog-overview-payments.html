@@ -7,23 +7,42 @@
     <button mat-button (click)='onClick()' cdkFocusInitial>Confirmer</button>
 </div> -->
 <mat-dialog-content align="center">
-  <form (ngSubmit)="createStripeToken()" class="checkout">
-    <label for="card-info"><p i18n>Effectuer Payment</p> <b>{{this.data.selectedOffer?.title}}</b></p></label>
-<div id="form-field">
-        <div id="card-info" #cardInfo></div>
-        <button id="submit-button" (click)="onClick()" type="submit">
-            Payer ${{_totalAmount}}
-        </button>
-        <mat-error id="card-errors" role="alert" *ngIf="cardError">
-            <mat-icon style="color: #f44336">cancel</mat-icon>
-            &nbsp;{{ cardError }}
-        </mat-error>
-    </div>
-</form>
+  <div>
+      <form (ngSubmit)="createStripeToken()" class="checkout">
+        <label for="card-info">
+          <p i18n>Effectuer Payment pour l'offre
+            <b>
+              <br>{{this.data.offer.title}}
+            </b>
+          </p>
+        </label>
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>N° Carte</mat-label>
+            <input matInput placeholder="XXXX-XXXX-XXXX-XXXX-XXXX" name="cart">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Date d'Expire</mat-label>
+            <input matInput placeholder="Mois/Année" maxlength="5" name="date_expire">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>CVC</mat-label>
+            <input matInput name="cvc" maxlength="3" placeholder="XXX">
+          </mat-form-field>
+        </div>
+        <div id="form-field">
+          <div id="card-info" #cardInfo></div>
+            <mat-error id="card-errors" role="alert" *ngIf="cardError">
+                <mat-icon style="color: #f44336">cancel</mat-icon>
+                &nbsp;{{ cardError }}
+            </mat-error>
+        </div>
+    </form>
+  </div>
 </mat-dialog-content>
 <br>
 <br>
 <mat-dialog-actions align="center">
-  <button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="onNoClick()">Annuler</button>
-  <button mat-raised-button cdkFocusInitial style="background-color: #1d3552; color: white;" (click)="onClick()">Confirmer</button>
+  <app-base-button mat-raised-button cdkFocusInitial id="submit-button" (click)="onClick()" type="submit">Payer {{this.data.offer.price}} €</app-base-button>
+  <app-base-button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="onNoClick()">Annuler</app-base-button>
 </mat-dialog-actions>

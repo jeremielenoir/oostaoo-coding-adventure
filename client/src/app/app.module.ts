@@ -125,7 +125,10 @@ import { DragNDropComponent, DialogOverviewTestComponent } from './components/pa
 import { ResponseFormatedComponent } from './components/panelAdmin/dragndrop/response-formated.component';
 import { TopInfoCampagneComponent } from './components/panelAdmin/top-info-campagne/top-info-campagne.component';
 import { MotDePasseOublieComponent } from './components/home/register/mot-de-passe-oublie/mot-de-passe-oublie.component';
-import { SubscriptionComponent } from './components/panelAdmin/subscription/subscription.component';
+import {
+  SubscriptionComponent,
+  DialogOverviewPayments
+} from './components/panelAdmin/subscription/subscription.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { FAQComponent } from './components/panelAdmin/FAQ/faq.component';
 import { ContactSupportComponent } from './components/panelAdmin/contact-support/contact-support.component';
@@ -176,6 +179,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NouvelleCampagnePage3Component,
     CandidatsMailComponent,
     DialogOverviewDelete,
+    DialogOverviewPayments,
     DialogOverviewDuplicate,
     DialogOverviewTestComponent,
     DialogTimeoutComponent,
@@ -281,7 +285,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     QuestionsComponent,
     TimeagoComponent,
     CampaignsArchivedPipe,
-    NavWrapperComponent
+    NavWrapperComponent,
+    DialogOverviewPayments
   ],
   imports: [
     BrowserModule,
