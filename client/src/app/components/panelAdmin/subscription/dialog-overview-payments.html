@@ -55,12 +55,10 @@
       </div>
       <br>
       <br>
-        <app-base-button mat-raised-button cdkFocusInitial id="submit-button" type="submit">Payer {{this.data.offer.price}} €</app-base-button>
+        <app-base-button mat-raised-button cdkFocusInitial id="submit-button" type="submit">Payer {{ this.data.offer.price }} €</app-base-button>
     </form>
     <mat-dialog-actions align="center">
     <app-base-button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="onNoClick()">Annuler</app-base-button>
   </mat-dialog-actions>
   </div>
 </mat-dialog-content>
-
-

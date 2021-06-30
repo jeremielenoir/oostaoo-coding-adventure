@@ -91,10 +91,9 @@ module.exports = {
      * customeraccount.offer api
      */
     offerCreate: async(ctx) => {
-
         try {
 
-            const { paymentMethod, paymentIntent } = ctx.request.body;
+            //const { paymentMethod, paymentIntent } = ctx.request.body;
 
             // 0 - check first that account is not yet subscribed
             // if it's so, raise error cause it should be updated throw PUT endpoint
@@ -102,26 +101,19 @@ module.exports = {
                 id: ctx.state.user.customeraccount.id
             })).toJSON();
 
-            if (account.offer) {
+            /*if (account.offer) {
 
                 throw new Error('already subscribed');
-            }
+            }*/
 
             let intent;
-            if (paymentMethod) { // payment process started
-
-                intent = await strapi.services.customeraccount.startPaymentIntent(
+            let confirmation;
+            intent = await strapi.services.customeraccount.startPaymentIntent(
                     ctx.request.body, account, ctx.state.user
                 );
-
-            } else if (paymentIntent) { // payment process to finalize
-
-                intent = await strapi.services.customeraccount.finalizePaymentIntent(ctx.request.body);
-
-            }
-
+              confirmation = await strapi.services.customeraccount.finalizePaymentIntent(intent);
             // parse stripe intent response
-            const parsedIntent = strapi.services.customeraccount.parsePaymentIntent(intent);
+            const parsedIntent = strapi.services.customeraccount.parsePaymentIntent(confirmation);
 
             strapi.log.info(`parsed intent for account ${account.id}`, parsedIntent);
 
@@ -352,8 +344,11 @@ module.exports = {
 
             const customer = await stripe.customers.retrieve(account.stripe_customer_id, { expand: ['invoice_settings.default_payment_method'] });
 
-            ctx.send(customer.invoice_settings.default_payment_method);
-
+            if(customer.invoice_settings.default_payment_method != null){
+              ctx.send(customer.invoice_settings.default_payment_method);
+            }else{
+              ctx.send(null);
+            }
         } catch (error) {
             console.error(error);
             ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: error.message, field: error.field }] }] :
@@ -498,5 +493,33 @@ module.exports = {
             ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: error.message, field: error.field }] }] :
                 error.message);
         }
-    }
+    },
+    instantiatePayment: async(ctx) => {
+      try {
+
+          const account = ctx.state.user.customeraccount;
+
+          if (ctx.state.user.role.type !== 'account_admin') {
+              return ctx.forbidden(null, 'Action interdite.');
+          }
+          const paymentIntent = await stripe.paymentIntents.create({
+            payment_method_types: ['card'],
+            amount: ctx.data.price,
+            currency: 'euros',
+          }, {
+            stripeAccount: account.stripe_customer_id,
+          });
+
+          if (paymentIntent && paymentIntent.data) {
+              ctx.send(paymentIntent.data);
+          } else {
+              ctx.send({});
+          }
+
+      } catch (error) {
+          console.error(error);
+          ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: error.message, field: error.field }] }] :
+              error.message);
+      }
+  }
 };
