@@ -6,43 +6,61 @@
     <button mat-button (click)="onNoClick()">Annulez</button>
     <button mat-button (click)='onClick()' cdkFocusInitial>Confirmer</button>
 </div> -->
-<mat-dialog-content align="center">
+<mat-dialog-content align="center" class="payment">
   <div>
-      <form (ngSubmit)="createStripeToken()" class="checkout">
-        <label for="card-info">
-          <p i18n>Effectuer Payment pour l'offre
-            <b>
-              <br>{{this.data.offer.title}}
-            </b>
-          </p>
-        </label>
-        <div class="row">
-          <mat-form-field appearance="outline">
-            <mat-label>N° Carte</mat-label>
-            <input matInput placeholder="XXXX-XXXX-XXXX-XXXX-XXXX" name="cart">
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Date d'Expire</mat-label>
-            <input matInput placeholder="Mois/Année" maxlength="5" name="date_expire">
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>CVC</mat-label>
-            <input matInput name="cvc" maxlength="3" placeholder="XXX">
-          </mat-form-field>
-        </div>
-        <div id="form-field">
-          <div id="card-info" #cardInfo></div>
-            <mat-error id="card-errors" role="alert" *ngIf="cardError">
-                <mat-icon style="color: #f44336">cancel</mat-icon>
-                &nbsp;{{ cardError }}
-            </mat-error>
-        </div>
+    <form class="checkout" (ngSubmit)="onClick(formPayment)" #formPayment="ngForm">
+      <label for="card-info">
+        <p i18n>Effectuer Payment pour l'offre
+          <b>
+            <br>{{this.data.offer.title}}
+          </b>
+        </p>
+      </label>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Nom</mat-label>
+          <input matInput placeholder="Nom" name="nom" [(ngModel)]="nom">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Adresse</mat-label>
+          <input matInput placeholder="Address" name="address" [(ngModel)]="address">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Code Postal</mat-label>
+          <input matInput placeholder="Code Postal" name="cp" [(ngModel)]="cp">
+        </mat-form-field>
+        <hr>
+        <mat-form-field appearance="outline">
+          <mat-label>N° Carte</mat-label>
+          <input matInput placeholder="XXXXXXXXXXXXXXXX" name="cart" [(ngModel)]="cart">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Date d'Expire</mat-label>
+          <input matInput placeholder="Mois/Année" maxlength="5" name="date_expire" [(ngModel)]="date_expire">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>CVC</mat-label>
+          <input matInput placeholder="XXX" maxlength="3" name="cvc" [(ngModel)]="cvc">
+        </mat-form-field>
+      </div>
+      <div class="row">
+          <mat-checkbox [formControl]="hideRequiredControl" [(ngModel)]="saveCard">Enregistrer ma carte</mat-checkbox>
+      </div>
+      <div id="form-field">
+        <div id="card-info" #cardInfo></div>
+          <mat-error id="card-errors" role="alert" *ngIf="cardError">
+              <mat-icon style="color: #f44336">cancel</mat-icon>
+              &nbsp;{{ cardError }}
+          </mat-error>
+      </div>
+      <br>
+      <br>
+        <app-base-button mat-raised-button cdkFocusInitial id="submit-button" type="submit">Payer {{this.data.offer.price}} €</app-base-button>
     </form>
+    <mat-dialog-actions align="center">
+    <app-base-button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="onNoClick()">Annuler</app-base-button>
+  </mat-dialog-actions>
   </div>
 </mat-dialog-content>
-<br>
-<br>
-<mat-dialog-actions align="center">
-  <app-base-button mat-raised-button cdkFocusInitial id="submit-button" (click)="onClick()" type="submit">Payer {{this.data.offer.price}} €</app-base-button>
-  <app-base-button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="onNoClick()">Annuler</app-base-button>
-</mat-dialog-actions>
+
+

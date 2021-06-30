@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ApiClientService, API_URI_OFFER } from 'src/app/api-client/api-client.service';
+import { ApiClientService, API_URI_OFFER, API_URI_PAYMENT, API_URI_ACCOUNT } from 'src/app/api-client/api-client.service';
 import { AccountService } from 'src/app/services/account/account.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import { ConfirmModel, ConfirmComponent } from '../../home/confirm/confirm.component';
+import { NgForm } from '@angular/forms';
 
 
 export interface DialogData {
@@ -23,6 +24,9 @@ export class SubscriptionComponent implements OnInit {
   ownedOffer: any;
   inProgress = false;
   confirmed: boolean;
+  payements: any;
+  paypost: any
+  card: any;
 
 
   dataRoute: any;
@@ -43,8 +47,29 @@ export class SubscriptionComponent implements OnInit {
         .subscribe((sub) => this.subscription = sub);
     }
 
-    goToPayment(){
-      this.router.navigate(['/dashboard/facturation']);
+    goToPayment(selectedOffer, card){
+      console.log(selectedOffer.id);
+      this.paypost={
+        offerId : selectedOffer.id,
+        card : {
+            cvc: card.cvc,
+            exp_year: card.exp_year,
+            exp_month: card.exp_month,
+            number: card.number
+        },
+        paymentMethod: null
+      }
+      /*{
+        'amount' : '200',
+        'currency': 'EUR',
+        'payment_method_types': 'card',
+        'paymentIntent': true
+      }*/
+      this.payements=this.apiClientService.post(API_URI_ACCOUNT+'/'+ this.accountService.accountId +'/offers', this.paypost).subscribe();
+      console.log(this.payements);
+      if (this.payements){
+        this.apiClientService.post(API_URI_PAYMENT, this.selectedOffer);
+      }
     }
   ngOnInit() {
     this.dataRoute = [
@@ -128,16 +153,21 @@ console.log("error fetching offers",err)
   openPayments(selectedOffer): void {
     console.log();
     const dialogRef = this.dialog.open(DialogOverviewPayments, {
-      width: '30%',
+      width: "30%",
+      height: "100%",
       data: { offer: selectedOffer, confirmed: this.confirmed },
       disableClose: true,
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.confirmed = result;
+      console.log(result);
+      this.confirmed = result[0];
+      this.card=result[1];
+      console.log(this.card);
       if (result === false) {
         return;
       } else {
-        this.goToPayment();
+        this.apiClientService.get(API_URI_PAYMENT);
+        this.goToPayment(selectedOffer, this.card);
       }
     });
   }
@@ -147,6 +177,7 @@ console.log("error fetching offers",err)
 @Component({
   selector: 'dialog-overview-payments',
   templateUrl: './dialog-overview-payments.html',
+  styleUrls: ['./subscription.component.scss'],
 })
 export class DialogOverviewPayments {
 
@@ -157,8 +188,8 @@ export class DialogOverviewPayments {
   onNoClick(): void {
     this.dialogRef.close(this.data.confirmed = false);
   }
-  onClick(): void {
-    console.log(this.data);
-    this.dialogRef.close(this.data.confirmed = true);
+  onClick(formPayment: NgForm): void {
+    console.log('values' , JSON.stringify(formPayment.value));
+    this.dialogRef.close([this.data.confirmed = true, JSON.stringify(formPayment.value)]);
   }
 }
