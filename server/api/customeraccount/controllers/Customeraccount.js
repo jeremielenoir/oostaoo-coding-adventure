@@ -521,5 +521,39 @@ module.exports = {
           ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: error.message, field: error.field }] }] :
               error.message);
       }
+  },
+  addCardPayment: async(ctx) => {
+    try {
+
+        const account = ctx.state.user.customeraccount;
+
+        if (ctx.state.user.role.type !== 'account_admin') {
+            return ctx.forbidden(null, 'Action interdite.');
+        }
+        const paymentMethods = await stripe.payment_methods.create({
+          type: 'card',
+          card: {
+            number:ctx.data.number,
+            exp_month: ctx.data.exp_month,
+            exp_year: ctx.data.exp_year,
+            cvc: ctx.data.cvc
+          },
+        }, {
+          stripeAccount: account.stripe_customer_id,
+        });
+
+        await stripe.paymentMethods.attach(paymentMethod, {customer : account.stripe_customer_id});
+
+        if (paymentMethods && paymentMethods.data) {
+            ctx.send(paymentMethods.data);
+        } else {
+            ctx.send({});
+        }
+
+    } catch (error) {
+        console.error(error);
+        ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: error.message, field: error.field }] }] :
+            error.message);
+    }
   }
 };

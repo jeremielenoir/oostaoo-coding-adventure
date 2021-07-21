@@ -10,8 +10,16 @@
     },
     {
       "method": "GET",
-      "path": "/api/customeraccounts/:id/payments-methods",
+      "path": "/api/customeraccounts/:id/paymentsmethods",
       "handler": "Customeraccount.pmsFind",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/customeraccounts/:id/paymentsmethods",
+      "handler": "Customeraccount.addCardPayment",
       "config": {
         "policies": []
       }
