@@ -66,7 +66,7 @@ export class AccountService {
    *
    */
   loadPaymentMethod() {
-    this.httpService.get(`${API_URI_ACCOUNT}/${this.accountId}/payments-methods`)
+    this.httpService.get(`${API_URI_ACCOUNT}/${this.accountId}/paymentsmethods`)
       .subscribe(
         (pm) => this._paymentMethod.next(pm),
         (err) => {

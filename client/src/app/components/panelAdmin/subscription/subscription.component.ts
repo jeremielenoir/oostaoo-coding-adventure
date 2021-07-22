@@ -48,17 +48,19 @@ export class SubscriptionComponent implements OnInit {
     }
 
     goToPayment(selectedOffer, card){
-      console.log(selectedOffer.id);
+      const infopayment=JSON.parse(card);
+      console.log(infopayment);
       this.paypost={
         offerId : selectedOffer.id,
         card : {
-            cvc: card.cvc,
-            exp_year: card.exp_year,
-            exp_month: card.exp_month,
-            number: card.number
+            cvc : infopayment.cvc,
+            exp_year : infopayment.exp_year,
+            exp_month : infopayment.exp_month,
+            number : infopayment.number
         },
-        paymentMethod: null
       }
+      let payementsMethode=this.apiClientService.post(API_URI_ACCOUNT+'/'+ this.accountService.accountId+'/card', this.paypost).subscribe();
+      console.log(payementsMethode);
       /*{
         'amount' : '200',
         'currency': 'EUR',

@@ -32,19 +32,22 @@
         <hr>
         <mat-form-field appearance="outline">
           <mat-label>N° Carte</mat-label>
-          <input matInput placeholder="XXXXXXXXXXXXXXXX" name="cart" [(ngModel)]="cart">
+          <input matInput placeholder="XXXXXXXXXXXXXXXX" name="number" [(ngModel)]="number">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Date d'Expire</mat-label>
-          <input matInput placeholder="Mois/Année" maxlength="5" name="date_expire" [(ngModel)]="date_expire">
+          <input matInput placeholder="Mois" maxlength="2" name="exp_month" [(ngModel)]="exp_month">
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>CVC</mat-label>
+        <input matInput placeholder="Année" maxlength="2" name="exp_year" [(ngModel)]="exp_year">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Cvc</mat-label>
           <input matInput placeholder="XXX" maxlength="3" name="cvc" [(ngModel)]="cvc">
         </mat-form-field>
       </div>
       <div class="row">
-          <mat-checkbox [formControl]="hideRequiredControl" [(ngModel)]="saveCard">Enregistrer ma carte</mat-checkbox>
+          <mat-checkbox name="savecard" [(ngModel)]="saveCard">Enregistrer ma carte</mat-checkbox>
       </div>
       <div id="form-field">
         <div id="card-info" #cardInfo></div>

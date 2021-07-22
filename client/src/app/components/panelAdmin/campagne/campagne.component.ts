@@ -35,10 +35,10 @@ export class CampaignsArchivedPipe implements PipeTransform {
 })
 
 export class CampagneComponent implements OnInit {
-  
+
   @Output() campaignsChild = new EventEmitter<any>();
   @Output() emitIsactiveNoCountryside = new EventEmitter();
-  
+
   public campaigns = [];
   public searchHeader: string;
   public confirmed: boolean;
@@ -64,7 +64,7 @@ export class CampagneComponent implements OnInit {
   ngOnInit() {
 
     const adminId = this.decryptTokenService.adminId || this.decryptTokenService.userId;
-    
+
     this.authenticationService
     .getCampaignsUser(adminId)
     .then(resultat => {
@@ -74,8 +74,8 @@ export class CampagneComponent implements OnInit {
       this.giveCampaigns();
       this.isLoaded = true;
     });
-    
-    
+
+
   }
 
   customComparator(itemA) {
@@ -158,7 +158,7 @@ export class CampagneComponent implements OnInit {
             user: this.result.user,
           }).subscribe((duplicateCampaign) => {
             this.campaigns.push(duplicateCampaign);
-            this.campaigns = [...this.campaigns];
+            this.campaigns = [this.campaigns];
             this.openSnackBar("La campagne a correctement été dupliquée", "Fermer");
           });
 
@@ -175,7 +175,7 @@ export class CampagneComponent implements OnInit {
         }).subscribe(
           (res) => {
             campaign.pin = true;
-            this.campaigns = [...this.campaigns];
+            this.campaigns = [this.campaigns];
             this.openSnackBar("La campagne a correctement été épinglée", "Fermer");
           },
           err => console.log(err)
@@ -187,7 +187,7 @@ export class CampagneComponent implements OnInit {
         }).subscribe(
           (res) => {
             campaign.pin = false;
-            this.campaigns = [...this.campaigns];
+            this.campaigns = [this.campaigns];
             this.openSnackBar("La campagne a correctement été désépinglée", "Fermer");
           },
           err => console.log(err)
@@ -211,7 +211,7 @@ export class CampagneComponent implements OnInit {
         }).subscribe(
           (res) => {
             campaign.archive = true;
-            this.campaigns = [...this.campaigns];
+            this.campaigns = [this.campaigns];
             this.openSnackBar("La campagne a correctement été archivée", "Fermer");
             // console.log('res', res);
           },
@@ -224,7 +224,7 @@ export class CampagneComponent implements OnInit {
         }).subscribe(
           (res) => {
             campaign.archive = false;
-            this.campaigns = [...this.campaigns];
+            this.campaigns = [this.campaigns];
             this.openSnackBar("La campagne a correctement été désarchivée", "Fermer");
           },
           err => console.log(err)
@@ -242,7 +242,7 @@ export class CampagneComponent implements OnInit {
         let found = this.campaigns.findIndex(element => element.id == campaign.id);
         console.log('FOUND', found);
         this.campaigns.splice(found,1);
-        this.campaigns = [...this.campaigns];
+        this.campaigns = [this.campaigns];
         this.openSnackBar("La campagne a correctement été supprimée", "Fermer");
       });
   }

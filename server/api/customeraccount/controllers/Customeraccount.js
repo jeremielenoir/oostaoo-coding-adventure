@@ -530,13 +530,13 @@ module.exports = {
         if (ctx.state.user.role.type !== 'account_admin') {
             return ctx.forbidden(null, 'Action interdite.');
         }
-        const paymentMethods = await stripe.payment_methods.create({
+        const paymentMethods = await stripe.paymentMethods.create({
           type: 'card',
           card: {
-            number:ctx.data.number,
-            exp_month: ctx.data.exp_month,
-            exp_year: ctx.data.exp_year,
-            cvc: ctx.data.cvc
+            number: ctx.request.body.card.number,
+            exp_month: ctx.request.body.card.exp_month,
+            exp_year: ctx.request.body.card.exp_year,
+            cvc: ctx.request.body.card.cvc
           },
         }, {
           stripeAccount: account.stripe_customer_id,
@@ -555,5 +555,5 @@ module.exports = {
         ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: error.message, field: error.field }] }] :
             error.message);
     }
-  }
+  },
 };

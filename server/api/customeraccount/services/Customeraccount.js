@@ -701,10 +701,10 @@ module.exports = {
         const paymentMethods = await stripe.payment_methods.create({
           type: 'card',
           card: {
-            number:ctx.data.number,
-            exp_month: ctx.data.exp_month,
-            exp_year: ctx.data.exp_year,
-            cvc: ctx.data.cvc
+            number: ctx.request.body.card.number,
+            exp_month: ctx.request.body.card.exp_month,
+            exp_year: ctx.request.body.card.exp_year,
+            cvc: ctx.request.body.card.cvc
           },
         }, {
           stripeAccount: account.stripe_customer_id,
