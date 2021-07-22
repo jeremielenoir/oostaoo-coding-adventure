@@ -59,6 +59,7 @@ export class SubscriptionComponent implements OnInit {
             number : infopayment.number
         },
       }
+
       let payementsMethode=this.apiClientService.post(API_URI_ACCOUNT+'/'+ this.accountService.accountId+'/card', this.paypost).subscribe();
       console.log(payementsMethode);
       /*{
@@ -67,7 +68,15 @@ export class SubscriptionComponent implements OnInit {
         'payment_method_types': 'card',
         'paymentIntent': true
       }*/
-      this.payements=this.apiClientService.post(API_URI_ACCOUNT+'/'+ this.accountService.accountId +'/offers', this.paypost).subscribe();
+      let offer={
+        payementsMethode: payementsMethode,
+        paymentIntent: {
+          amount : selectedOffer.price,
+          currency : "eur",
+          payment_method_types: ['card'],
+        },
+      }
+      this.payements=this.apiClientService.post(API_URI_ACCOUNT+'/'+ this.accountService.accountId +'/offers', offer).subscribe();
       console.log(this.payements);
       if (this.payements){
         this.apiClientService.post(API_URI_PAYMENT, this.selectedOffer);
@@ -155,8 +164,8 @@ console.log("error fetching offers",err)
   openPayments(selectedOffer): void {
     console.log();
     const dialogRef = this.dialog.open(DialogOverviewPayments, {
-      width: "30%",
-      height: "100%",
+      width: "40%",
+      height: "57%",
       data: { offer: selectedOffer, confirmed: this.confirmed },
       disableClose: true,
     });

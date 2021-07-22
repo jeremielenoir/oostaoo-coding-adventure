@@ -16,32 +16,21 @@
           </b>
         </p>
       </label>
-      <div class="row">
-        <mat-form-field appearance="outline">
-          <mat-label>Nom</mat-label>
-          <input matInput placeholder="Nom" name="nom" [(ngModel)]="nom">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Adresse</mat-label>
-          <input matInput placeholder="Address" name="address" [(ngModel)]="address">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Code Postal</mat-label>
-          <input matInput placeholder="Code Postal" name="cp" [(ngModel)]="cp">
-        </mat-form-field>
         <hr>
-        <mat-form-field appearance="outline">
+      <div class="row">
+        <mat-form-field appearance="outline" class="number">
           <mat-label>N° Carte</mat-label>
           <input matInput placeholder="XXXXXXXXXXXXXXXX" name="number" [(ngModel)]="number">
         </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Date d'Expire</mat-label>
-          <input matInput placeholder="Mois" maxlength="2" name="exp_month" [(ngModel)]="exp_month">
+        <mat-form-field appearance="outline" class="exp_month">
+          <mat-label>mois</mat-label>
+          <input matInput placeholder="MM" maxlength="2" name="exp_month" [(ngModel)]="exp_month">
         </mat-form-field>
-        <mat-form-field appearance="outline">
-        <input matInput placeholder="Année" maxlength="2" name="exp_year" [(ngModel)]="exp_year">
+        <mat-form-field appearance="outline" class="exp_year">
+          <mat-label>Année</mat-label>
+          <input matInput placeholder="YY" maxlength="2" name="exp_year" [(ngModel)]="exp_year">
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="cvc">
           <mat-label>Cvc</mat-label>
           <input matInput placeholder="XXX" maxlength="3" name="cvc" [(ngModel)]="cvc">
         </mat-form-field>
@@ -56,12 +45,10 @@
               &nbsp;{{ cardError }}
           </mat-error>
       </div>
-      <br>
-      <br>
-        <app-base-button mat-raised-button cdkFocusInitial id="submit-button" type="submit">Payer {{ this.data.offer.price }} €</app-base-button>
+        <app-base-button mat-raised-button cdkFocusInitial id="submit-button" type="submit" class="buttonfrom">Payer {{ this.data.offer.price }} €</app-base-button>
+        <app-base-button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="onNoClick()" class="buttonfrom">Annuler</app-base-button>
     </form>
     <mat-dialog-actions align="center">
-    <app-base-button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="onNoClick()">Annuler</app-base-button>
   </mat-dialog-actions>
   </div>
 </mat-dialog-content>

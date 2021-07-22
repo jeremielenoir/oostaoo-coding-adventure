@@ -58,7 +58,30 @@
 
 .payment {
   display: revert;
+  width: 80% !important;
+  height:auto;
   .row{
-    text-align: center;
+    margin: 10px;
+  }
+  .cvc{
+    width: 100px;
+    display: inline-block;
+  }
+  .exp_month{
+    width: 100px;
+    margin-left: 10px;
+    display: inline-block;
+  }
+  .exp_year{
+    width: 100px;
+    margin-right: 10px;
+    display: inline-block;
+  }
+  .number{
+    width: 300px;
+    display: inline-block;
+  }
+  .buttonfrom{
+    display: inline-block;
   }
 }
