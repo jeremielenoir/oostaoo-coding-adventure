@@ -17,26 +17,33 @@
         </p>
       </label>
         <hr>
-      <div class="row">
-        <mat-form-field appearance="outline" class="number">
-          <mat-label>N° Carte</mat-label>
-          <input matInput placeholder="XXXXXXXXXXXXXXXX" name="number" [(ngModel)]="number">
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="exp_month">
-          <mat-label>mois</mat-label>
-          <input matInput placeholder="MM" maxlength="2" name="exp_month" [(ngModel)]="exp_month">
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="exp_year">
-          <mat-label>Année</mat-label>
-          <input matInput placeholder="YY" maxlength="2" name="exp_year" [(ngModel)]="exp_year">
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="cvc">
-          <mat-label>Cvc</mat-label>
-          <input matInput placeholder="XXX" maxlength="3" name="cvc" [(ngModel)]="cvc">
-        </mat-form-field>
+      <div class="row creditcard">
+        <div class="front">
+          <label class="titleCredit">Credit Card</label>
+          <hr style="color: beige;">
+
+          <mat-form-field appearance="fill" [color]="primary" class="number">
+            <mat-label style="color:white">Card</mat-label>
+            <input matInput placeholder="Card" name="number" [(ngModel)]="number" style="color:white">
+          </mat-form-field>
+          <label class="titleValidation">Valid :</label>
+          <mat-form-field appearance="fill" [color]="primary" class="exp_month">
+            <mat-label style="color:white">M</mat-label>
+            <input matInput placeholder="MM" maxlength="2" name="exp_month" [(ngModel)]="exp_month">
+          </mat-form-field>
+          <label style="color:white">/</label>
+          <mat-form-field appearance="fill" [color]="primary" class="exp_year">
+            <mat-label style="color:white">Y</mat-label>
+            <input matInput placeholder="YY" maxlength="2" name="exp_year" [(ngModel)]="exp_year">
+          </mat-form-field>
+          <mat-form-field appearance="fill" [color]="primary" class="cvc">
+            <mat-label style="color:white">CVC</mat-label>
+            <input matInput placeholder="Cvc" maxlength="3" name="cvc" [(ngModel)]="cvc">
+          </mat-form-field>
+        </div>
       </div>
       <div class="row">
-          <mat-checkbox name="savecard" [(ngModel)]="saveCard">Enregistrer ma carte</mat-checkbox>
+          <!--<mat-checkbox name="savecard" class="saveCard" [(ngModel)]="saveCard">Enregistrer ma carte</mat-checkbox>-->
       </div>
       <div id="form-field">
         <div id="card-info" #cardInfo></div>
@@ -46,7 +53,7 @@
           </mat-error>
       </div>
         <app-base-button mat-raised-button cdkFocusInitial id="submit-button" type="submit" class="buttonfrom">Payer {{ this.data.offer.price }} €</app-base-button>
-        <app-base-button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="onNoClick()" class="buttonfrom">Annuler</app-base-button>
+        <app-base-button mat-raised-button mat-dialog-close style="color: #7e1515" (click)="onNoClick()" class="buttonfrom">Annuler</app-base-button>
     </form>
     <mat-dialog-actions align="center">
   </mat-dialog-actions>

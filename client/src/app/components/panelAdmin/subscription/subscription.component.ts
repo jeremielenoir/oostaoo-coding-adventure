@@ -164,8 +164,8 @@ console.log("error fetching offers",err)
   openPayments(selectedOffer): void {
     console.log();
     const dialogRef = this.dialog.open(DialogOverviewPayments, {
-      width: "40%",
-      height: "57%",
+      width: "30%",
+      height: "70%",
       data: { offer: selectedOffer, confirmed: this.confirmed },
       disableClose: true,
     });

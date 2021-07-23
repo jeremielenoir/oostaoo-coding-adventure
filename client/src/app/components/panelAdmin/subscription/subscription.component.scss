@@ -61,27 +61,68 @@
   width: 80% !important;
   height:auto;
   .row{
-    margin: 10px;
+    margin: 5px;
   }
   .cvc{
-    width: 100px;
+    width: 61px;
     display: inline-block;
+    color: white;
+    margin-left: 20px;
+    //font-size: 12px;
   }
   .exp_month{
-    width: 100px;
+    width: 40px;
     margin-left: 10px;
     display: inline-block;
+    color: white;
+    //font-size: 12px;
   }
   .exp_year{
-    width: 100px;
+    width: 40px;
     margin-right: 10px;
     display: inline-block;
+    color: white;
+    //font-size: 12px;
   }
   .number{
-    width: 300px;
-    display: inline-block;
+    width: 200px;
+    display: block;
+    color: white;
+    margin-left: 20px;
+    //font-size: 12px;
   }
   .buttonfrom{
     display: inline-block;
+  }
+  .creditcard {
+    width: 320px;
+    height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .titleCredit{
+    margin-left: 10px;
+    margin-top: 60px;
+    font-size: 16px;
+    color: white;
+  }
+  .titleValidation{
+    margin-left: 20px;
+    font-size: 12px;
+    color: white;
+  }
+  .front {
+    width: 100%;
+    height: 200px;
+    -webkit-box-shadow: 1px 5px 6px 0px black;
+    box-shadow: 1px 5px 6px 0px black;
+    border-radius: 22px;
+    //background-color: #272222c0;
+    background: #19719e;
+  }
+  .saveCard{
+    margin-left: auto;
+    margin-right: auto;
   }
 }
