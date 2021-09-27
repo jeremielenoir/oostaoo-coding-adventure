@@ -1,0 +1,45 @@
+@import "../../../roodeo-variables.scss";
+@import "../../../roodeo-form.scss";
+
+/deep/ #nav-menu {
+    top: 0;
+    position: inherit !important;
+}
+
+/deep/ .header-notification {
+    top: 0;
+}
+
+.rdo-panel {
+    max-width: 800px;
+    margin: 100px auto;
+}
+
+.loader {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.StripeElement {
+    height: 50px;
+    border: 1px solid #1d3552;
+    background: white;
+    font-size: 16px;
+    padding-left: 15px;
+}
+
+.StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+    border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+}
+
+.roodeo-form-error-message {
+    margin-top: 5px;
+}

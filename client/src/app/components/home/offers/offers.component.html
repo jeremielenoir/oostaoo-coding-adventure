@@ -7,26 +7,63 @@
       </h3>
     </div>
     <div class="content" fxLayout="row" fxLayoutGap="30px">
-      <mat-card class="lab-item" *ngFor="let offer of listOffers"
-        [class.selected-offer]="currentOffer && currentOffer.id === offer.id">
+      <mat-card
+        class="lab-item"
+        *ngFor="let offer of listOffers"
+        [class.selected-offer]="currentOffer && currentOffer.id === offer.id"
+      >
         <mat-card-content>
           <mat-card-title>{{ offer.title }}</mat-card-title>
           <div [ngSwitch]="offer.periodicity">
-            <mat-card-subtitle *ngSwitchCase="'unique'">{{ offer.price }}€/{{ offer.title }}</mat-card-subtitle>
-            <mat-card-subtitle *ngSwitchCase="'monthly'">{{ offer.price }}€/mois</mat-card-subtitle>
+            <mat-card-subtitle *ngSwitchCase="'unique'"
+              >{{ offer.price }}€/{{ offer.title }}</mat-card-subtitle
+            >
+            <mat-card-subtitle *ngSwitchCase="'monthly'"
+              >{{ offer.price }}€/mois</mat-card-subtitle
+            >
           </div>
           <div class="offer-desc" [innerHTML]="offer.description"></div>
           <mat-card-actions>
-            <button *ngIf="!currentUser || (currentUser && !currentOffer)" (click)="purchase(offer)" mat-raised-button
+            <button
+              *ngIf="!currentUser || (currentUser && !currentOffer)"
+              (click)="purchase(offer)"
+              mat-raised-button
               color="warn"
-              class="lab-item lab-item-button">{{ offer.periodicity === 'monthly' ? 'S\'abonner' : 'Acheter' }}</button>
-            <button *ngIf="currentOffer && currentOffer.periodicity === 'monthly' && currentOffer.id === offer.id"
-              (click)="unSubscribe()" mat-raised-button color="warn" class="lab-item lab-item-button" i18n>Se
-              désabonner</button>
-            <button *ngIf="offer.periodicity === 'monthly' && currentOffer && currentOffer.id !== offer.id"
-              (click)="changeOffer(offer)" mat-raised-button color="warn" class="lab-item lab-item-button" i18n>S'abonner</button>
+              class="lab-item lab-item-button"
+            >
+              {{ offer.periodicity === 'monthly' ? "S'abonner" : 'Acheter' }}
+            </button>
+            <button
+              *ngIf="
+                currentOffer &&
+                currentOffer.periodicity === 'monthly' &&
+                currentOffer.id === offer.id
+              "
+              (click)="unSubscribe()"
+              mat-raised-button
+              color="warn"
+              class="lab-item lab-item-button"
+              i18n
+            >
+              Se désabonner
+            </button>
+            <button
+              *ngIf="
+                offer.periodicity === 'monthly' &&
+                currentOffer &&
+                currentOffer.id !== offer.id
+              "
+              (click)="changeOffer(offer)"
+              mat-raised-button
+              color="warn"
+              class="lab-item lab-item-button"
+              i18n
+            >
+              S'abonner
+            </button>
           </mat-card-actions>
         </mat-card-content>
       </mat-card>
     </div>
   </div>
+</div>
