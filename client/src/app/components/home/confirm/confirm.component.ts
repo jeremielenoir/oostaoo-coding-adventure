@@ -3,25 +3,13 @@ import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-confirm',
-  template: `
-    <h1 mat-dialog-title>
-      {{title}}
-    </h1>
-    <div mat-dialog-content>
-      <p [innerHTML]="message"></p>
-    </div>
-
-    <div mat-dialog-actions style="text-align: right; margin-bottom: 3px; margin-top: 5px;">
-      <button mat-button (click)="onDismiss()">Non</button>
-      <button mat-raised-button color="primary" (click)="onConfirm()">Oui</button>
-    </div>
-  `,
-  styleUrls: []
+  templateUrl: './confirm.component.html',
+  styleUrls: ['./confirm.component.scss']
 })
 export class ConfirmComponent implements OnInit {
 
   title: string;
-  message: string;
+  message: string; 
 
   constructor(public dialogRef: MatDialogRef<ConfirmComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ConfirmModel) {

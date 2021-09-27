@@ -24,6 +24,7 @@
             [routerLink]="['/subscription']"
             mat-stroked-button
             color="primary"
+            iconName="autorenew"
             >Change d'offre</app-base-button
           >
           <app-base-button
@@ -33,6 +34,7 @@
             (click)="cancelSub()"
             mat-stroked-button
             color="primary"
+            iconName="clear"
             >Se désabonner</app-base-button
           >
           <app-base-button
@@ -42,6 +44,7 @@
             (click)="enableSub()"
             mat-stroked-button
             color="primary"
+            iconName="history"
             >Se réabonner</app-base-button
           >
         </div>
@@ -120,6 +123,7 @@
               mat-stroked-button
               (click)="addOrEditCard()"
               color="primary"
+              iconName="credit_card"
               >Modifier</app-base-button
             >
           </div>
@@ -139,6 +143,7 @@
               mat-stroked-button
               (click)="addOrEditAddress()"
               color="primary"
+              iconName="edit"
               >{{
                 account && account.billing_address
                   ? 'Editer'

@@ -9,58 +9,44 @@
     <h2 i18n>
       <i class="fa fa-user-circle icon"></i> Enregistrer votre moyen de paiement
     </h2>
-    <button
+
+    <app-base-button
+      iconName="done"
       id="payment"
-      type="button"
-      (click)="saveCard()"
       [disabled]="!submitIsValid()"
-      mat-raised-button
-      color="primary"
-      i18n
+      (clickEvent)="saveCard()"
+      >Sauvegarder</app-base-button
     >
-      Sauvegarder
-      <mat-progress-spinner
-        *ngIf="inProgress"
-        style="display: inline-block"
-        color="accent"
-        mode="indeterminate"
-        diameter="20"
-        value="50"
-      >
-      </mat-progress-spinner>
-    </button>
   </div>
   <div fxLayout="column">
     <form [formGroup]="cardHolderForm" style="width: 100%">
       <div class="roodeo-form-unit-row">
         <div class="roodeo-form-unit" fxFlex="100">
-          <label class="roodeo-form-unit-title" for="cardHolder" i18n
-            >Propriétaire de la carte</label
+          <mat-form-field
+            class="item"
+            [color]="'accent'"
+            appearance="outline"
+            [floatLabel]="true"
           >
-          <input
-            class="roodeo-form-unit-input"
-            [(ngModel)]="cardHolder"
-            name="cardHolder"
-            id="cardHolder"
-            type="text"
-            formControlName="cardHolder"
-            placeholder="Propriétaire de la carte"
-          />
-          <div
-            *ngIf="
-              cardHolderForm.controls.cardHolder.invalid &&
-              (cardHolderForm.controls.cardHolder.dirty ||
-                cardHolderForm.controls.cardHolder.touched)
-            "
-            class="roodeo-form-error-message"
-          >
-            <div
-              *ngIf="cardHolderForm.controls.cardHolder.errors.required"
+            <mat-label i18n>Propriétaire de la carte</mat-label>
+            <input
+              formControlName="cardHolder"
+              name="cardHolder"
+              id="cardHolder"
+              matInput
+              placeholder="Propriétaire de la carte"
+              type="text"
+            />
+            <mat-error
+              *ngIf="
+                cardHolderForm.controls.cardHolder.invalid &&
+                (cardHolderForm.controls.cardHolder.dirty ||
+                  cardHolderForm.controls.cardHolder.touched)
+              "
               i18n
+              >Nom du propriètaire de la carte est requis.</mat-error
             >
-              Nom du propriètaire de la carte est requis.
-            </div>
-          </div>
+          </mat-form-field>
         </div>
       </div>
     </form>
@@ -76,22 +62,26 @@
       <div>{{ messageErrorStripeElement }}</div>
     </div>
   </div>
-
+  <img
+    class="certified-stripe"
+    src="./../../../assets/stripe.png"
+    alt="certified-stripe-logo"
+  />
   <div class="rdo-content-group">
     <div>
       <h3 i18n><i class="fa fa-map-marker icon"></i> Adresse de facturation</h3>
-      <button
-        *ngIf="!paied"
+
+      <app-base-button
         type="button"
         mat-stroked-button
         (click)="addOrEditAddress()"
         color="primary"
-        i18n
-      >
-        {{
+        iconName="edit"
+        *ngIf="!paied"
+        >{{
           account && account.billing_address ? 'Editer' : 'Ajouter une adresse'
-        }}
-      </button>
+        }}</app-base-button
+      >
     </div>
     <div>
       <app-address
@@ -109,29 +99,27 @@
       <form [formGroup]="emailForm" style="width: 100%">
         <div class="roodeo-form-unit-row">
           <div class="roodeo-form-unit" fxFlex="100">
-            <input
-              class="roodeo-form-unit-input"
-              [(ngModel)]="emailForReceipt"
-              name="email"
-              id="email"
-              type="text"
-              formControlName="email"
-            />
-            <div
-              *ngIf="
-                emailForm.controls.email.invalid &&
-                (emailForm.controls.email.dirty ||
-                  emailForm.controls.email.touched)
-              "
-              class="roodeo-form-error-message"
+            <mat-form-field
+              class="item"
+              [color]="'accent'"
+              appearance="outline"
+              [floatLabel]="true"
             >
-              <div *ngIf="emailForm.controls.email.errors.required" i18n>
-                Email est requis.
-              </div>
-              <div *ngIf="emailForm.controls.email.errors.email" i18n>
-                Format invalide.
-              </div>
-            </div>
+              <input
+                formControlName="email"
+                [(ngModel)]="emailForReceipt"
+                name="email"
+                id="email"
+                matInput
+                type="text"
+              />
+              <mat-error *ngIf="emailForm.controls.email?.errors?.required" i18n
+                >Email est requis.</mat-error
+              >
+              <mat-error *ngIf="emailForm.controls.email?.errors?.email" i18n
+                >Format invalide.</mat-error
+              >
+            </mat-form-field>
           </div>
         </div>
       </form>
