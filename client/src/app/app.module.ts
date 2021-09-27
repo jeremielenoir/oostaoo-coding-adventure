@@ -154,6 +154,7 @@ import { InterviewDialogComponent } from './components/panelAdmin/edit-campagne/
 
 // nav-wrapper
 import { NavWrapperComponent } from './components/panelAdmin/navbar/nav-wrapper/nav-wrapper.component';
+import { SaveCardComponent } from './components/save-card/save-card.component';
 
 export class MyIntl extends TimeagoIntl {
 
@@ -281,7 +282,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     QuestionsComponent,
     TimeagoComponent,
     CampaignsArchivedPipe,
-    NavWrapperComponent
+    NavWrapperComponent,
+    SaveCardComponent
   ],
   imports: [
     BrowserModule,

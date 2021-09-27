@@ -105,6 +105,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/api/customeraccounts/:id/savecard",
+      "handler": "Customeraccount.saveCard",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "GET",
       "path": "/api/customeraccounts",
       "handler": "Customeraccount.find",

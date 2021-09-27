@@ -4,7 +4,7 @@ import {
   ApiClientService,
   API_URI_OFFER,
   API_URI_USER,
-  API_URI_ACCOUNT
+  API_URI_ACCOUNT,
 } from 'src/app/api-client/api-client.service';
 import { Offer } from 'src/app/models/offer.model';
 import { SessionService } from 'src/app/services/session/session.service';
@@ -15,10 +15,9 @@ import { ConfirmModel, ConfirmComponent } from '../confirm/confirm.component';
 @Component({
   selector: 'app-offers',
   templateUrl: './offers.component.html',
-  styleUrls: ['./offers.component.scss']
+  styleUrls: ['./offers.component.scss'],
 })
 export class OffersComponent implements OnInit {
-
   handler: any = null;
   offerChoiceAmount: string;
   isSubPage = false;
@@ -31,7 +30,7 @@ export class OffersComponent implements OnInit {
     private apiClientService: ApiClientService,
     private session: SessionService,
     private userToken: DecryptTokenService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {}
   /**
    *
@@ -40,38 +39,34 @@ export class OffersComponent implements OnInit {
     // this.offerChoiceAmount = this.session.offerChoiceAmount ? this.session.offerChoiceAmount : null;
     this.offerChoiceAmount = localStorage.getItem('offerChoiceAmount');
     this.isSubPage = this.router.url.startsWith('/subscription');
-
-    if (this.userToken && this.userToken.userId) {
-      this.apiClientService
-        .get(API_URI_USER + '/' + this.userToken.userId)
-        .subscribe(user => {
-          this.currentUser = user;
-          this.currentOffer = this.currentUser.customeraccount.offer;
-        });
-    }
-
-    this.apiClientService.get(API_URI_OFFER)
-      .subscribe(offers => this.listOffers = offers.filter((o: Offer) => o.enabled));
+    this.getCurrentUser();
+    this.getOffers();
   }
+
   /**
    *
    * @param offer
    */
   async changeOffer(offer: any) {
-
     const message = `Souhaitez vous changer votre offre ?`;
-    const dialogData = new ConfirmModel("Confirmation", message);
+    const dialogData = new ConfirmModel('Confirmation', message);
     const dialogRef = this.dialog.open(ConfirmComponent, {
-      maxWidth: "400px",
-      data: dialogData
+      maxWidth: '400px',
+      data: dialogData,
     });
 
     const doAction = await dialogRef.afterClosed().toPromise();
 
     if (doAction) {
       const changeOffer: any = await this.apiClientService
-      .post(API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/changeoffer', {offerId : offer.id})
-      .toPromise();
+        .post(
+          API_URI_ACCOUNT +
+            '/' +
+            this.currentUser.customeraccount.id +
+            '/changeoffer',
+          { offerId: offer.id },
+        )
+        .toPromise();
     }
   }
   /**
@@ -100,4 +95,22 @@ export class OffersComponent implements OnInit {
     }
   }
 
+  private getCurrentUser() {
+    if (this.userToken && this.userToken.userId) {
+      this.apiClientService
+        .get(API_URI_USER + '/' + this.userToken.userId)
+        .subscribe((user) => {
+          this.currentUser = user;
+          this.currentOffer = this.currentUser.customeraccount.offer;
+        });
+    }
+  }
+
+  private getOffers() {
+    this.apiClientService
+      .get(API_URI_OFFER)
+      .subscribe(
+        (offers) => (this.listOffers = offers.filter((o: Offer) => o.enabled)),
+      );
+  }
 }

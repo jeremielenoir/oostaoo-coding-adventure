@@ -5,13 +5,9 @@
  * @description: A set of functions called "actions" for managing `Payment`.
  */
 
-
-
 const _ = require('lodash');
 
-
 module.exports = {
-
   /**
    * Retrieve payment records.
    *
@@ -53,10 +49,14 @@ module.exports = {
    */
 
   create: async (ctx) => {
-    try{
+    try {
       console.log('CONTROLLER CREATE : ctx request body : ', ctx.request.body);
 
-      const values = _.omit(ctx.request.body, ['paymentId', 'tests_available', 'test_already_available']);
+      const values = _.omit(ctx.request.body, [
+        'paymentId',
+        'tests_available',
+        'test_already_available',
+      ]);
 
       // to test datawriting failure and refund service
       // values.echec='echec';
@@ -65,34 +65,45 @@ module.exports = {
 
       const { user_id, offer_id } = values;
 
-      const {test_already_available, tests_available} = ctx.request.body;
+      const { test_already_available, tests_available } = ctx.request.body;
       let new_test_available;
-      if(tests_available == -1){
+      if (tests_available == -1) {
         new_test_available = tests_available;
-      }else{
+      } else {
         new_test_available = test_already_available + tests_available;
       }
-      if(result){
-       await strapi.plugins['users-permissions']
-       .services.user.edit({id: user_id}, {offer_id: offer_id, tests_available: new_test_available});
+      if (result) {
+        await strapi.plugins['users-permissions'].services.user.edit(
+          { id: user_id },
+          { offer_id: offer_id, tests_available: new_test_available },
+        );
       }
 
-      let user = await strapi.plugins['users-permissions'].services.user.fetch({id: user_id});
-      user = {id: user_id, adminId: user.adminId, offer_id, tests_available};
+      let user = await strapi.plugins['users-permissions'].services.user.fetch({
+        id: user_id,
+      });
+      user = { id: user_id, adminId: user.adminId, offer_id, tests_available };
 
       const jwt = await strapi.plugins['users-permissions'].services.jwt.issue(
-          _.pick(user.toJSON ? user.toJSON() : user,
-         ['_id', 'id', 'adminId', 'offer_id', 'tests_available']));
+        _.pick(user.toJSON ? user.toJSON() : user, [
+          '_id',
+          'id',
+          'adminId',
+          'offer_id',
+          'tests_available',
+        ]),
+      );
 
-      return {result, jwt};
-
-    }catch(err){
-      console.log(`CREATE CONTROLLER : erreur d'écriture en base : `, err);
+      return { result, jwt };
+    } catch (err) {
+      console.log('CREATE CONTROLLER : erreur d\'écriture en base : ', err);
 
       // Payment Refund
-      const refund = await strapi.services.payment.refund(ctx.request.body.paymentId);
+      const refund = await strapi.services.payment.refund(
+        ctx.request.body.paymentId,
+      );
       console.log(' CONTROLLER CREATE : refund : ', refund);
-      return {refund: refund};
+      return { refund: refund };
     }
   },
 
@@ -102,8 +113,8 @@ module.exports = {
    * @return {Object}
    */
 
-  update: async (ctx, next) => {
-    return strapi.services.payment.edit(ctx.params, ctx.request.body) ;
+  update: async (ctx) => {
+    return strapi.services.payment.edit(ctx.params, ctx.request.body);
   },
 
   /**
@@ -112,22 +123,7 @@ module.exports = {
    * @return {Object}
    */
 
-  destroy: async (ctx, next) => {
+  destroy: async (ctx) => {
     return strapi.services.payment.remove(ctx.params);
   },
-
-  // charge: async (ctx, next) => {
-  //   return strapi.services.payment.charge(ctx.request.body)
-  //   .then(res =>  {
-  //     console.log(res);
-  //     return {
-  //       status: res.status,
-  //       amount: res.amount,
-  //       capture: res.captured
-  //     };
-  //   })
-  //   .catch(error => error)
-  // },
-
-
 };
