@@ -5,12 +5,6 @@
     {{ address?.postal_code }}, {{ address?.city }} {{ address?.state }}<br />
     {{ address?.country }}
   </address>
-  <address style="color: gray" *ngIf="!address">
-    ligne adresse 1<br />
-    ligne adresse 2<br />
-    Code postale, Ville Province<br />
-    Pays
-  </address>
 </div>
 <div *ngIf="mode === 'edit'">
   <h1 mat-dialog-title i18n><i class="fa fa-map-marker icon"></i> Address</h1>

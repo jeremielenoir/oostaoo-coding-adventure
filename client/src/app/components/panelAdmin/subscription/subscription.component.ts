@@ -32,15 +32,7 @@ export class SubscriptionComponent implements OnInit {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private router: Router,
-  ) {
-    this.accountService.offer.subscribe(
-      (off) => (this.ownedOffer = off),
-      (err) => {},
-    );
-    this.accountService.subscription.subscribe(
-      (sub) => (this.subscription = sub),
-    );
-  }
+  ) {}
 
   goToPayment(offer: Offer) {
     localStorage.setItem('offerChoice', JSON.stringify(offer));
@@ -85,6 +77,37 @@ export class SubscriptionComponent implements OnInit {
         console.log('error fetching offers', err);
       },
     );
+
+    this.loadSubscriptions();
+    this.loadOffers();
+  }
+
+  loadSubscriptions() {
+    this.accountService.loadSubscription().subscribe(
+      (sub) => (this.subscription = sub),
+      (err) => {
+        console.error(err);
+        this.snackBar.open(
+          'Oops ! nous rencontrons un problème technique. Veuillez réessayer plus tard.',
+          'Ok',
+          { duration: 3500 },
+        );
+      },
+    );
+  }
+
+  loadOffers() {
+    this.accountService.loadOffer().subscribe(
+      (off) => (this.ownedOffer = off),
+      (err) => {
+        console.error(err);
+        this.snackBar.open(
+          'Oops ! nous rencontrons un problème technique. Veuillez réessayer plus tard.',
+          'Ok',
+          { duration: 3500 },
+        );
+      },
+    );
   }
   /**
    *
@@ -96,7 +119,7 @@ export class SubscriptionComponent implements OnInit {
   /**
    *
    */
-  async enableSub() {
+  async enableSub(sub) {
     console.log('click');
     this.inProgress = true;
     const dialogData = new ConfirmModel(
@@ -109,9 +132,10 @@ export class SubscriptionComponent implements OnInit {
     });
     const doAction = await dialogRef.afterClosed().toPromise();
     if (doAction) {
-      this.accountService.enableSubscription().subscribe(
+      this.accountService.enableSubscription(sub).subscribe(
         (sub) => {
           this.inProgress = false;
+          this.loadSubscriptions();
         },
         (err) => {
           this.snackBar.open(
@@ -129,7 +153,7 @@ export class SubscriptionComponent implements OnInit {
   /**
    *
    */
-  async cancelSubscription() {
+  async cancelSubscription(sub) {
     this.inProgress = true;
     const dialogData = new ConfirmModel(
       'Confirmation',
@@ -141,9 +165,10 @@ export class SubscriptionComponent implements OnInit {
     });
     const doAction = await dialogRef.afterClosed().toPromise();
     if (doAction) {
-      this.accountService.cancelSubscription().subscribe(
+      this.accountService.cancelSubscription(sub).subscribe(
         (sub) => {
           this.inProgress = false;
+          this.loadSubscriptions();
         },
         (err) => {
           this.snackBar.open(

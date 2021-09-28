@@ -64,7 +64,7 @@
                 !subscription.cancel_at_period_end
               "
               type="button"
-              (click)="cancelSubscription()"
+              (click)="cancelSubscription(subscription)"
               mat-raised-button
               iconName="clear"
               color="primary"
@@ -81,7 +81,7 @@
               type="button"
               mat-raised-button
               color="primary"
-              (click)="enableSub()"
+              (click)="enableSub(subscription)"
               iconName="history"
               >Se réabonner</app-base-button
             >

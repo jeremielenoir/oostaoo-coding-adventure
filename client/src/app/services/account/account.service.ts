@@ -7,7 +7,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { CustomerAccount } from 'src/app/models/account.model';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { invoices, subscriptions, paymentIntents } from 'stripe';
-import { filter, map } from 'rxjs/operators';
+import { catchError, filter, map, tap } from 'rxjs/operators';
+import ErrorConfig from 'src/app/components/common/config/Error';
+import { Offer } from 'src/app/models/offer.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,41 +19,11 @@ export class AccountService {
    *
    */
   accountId: number;
-  /**
-   *
-   */
-  private _account: BehaviorSubject<CustomerAccount> = new BehaviorSubject(
-    null,
-  );
-  public readonly account: Observable<CustomerAccount> =
-    this._account.asObservable();
-  /**
-   *
-   */
-  private _paymentMethod: BehaviorSubject<paymentIntents.IPaymentIntent> =
-    new BehaviorSubject(null);
-  public readonly paymentMethod: Observable<paymentIntents.IPaymentIntent> =
-    this._paymentMethod.asObservable();
-  /**
-   *
-   */
+
   private _subscription: BehaviorSubject<subscriptions.ISubscription> =
     new BehaviorSubject(null);
   public readonly subscription: Observable<subscriptions.ISubscription> =
     this._subscription.asObservable();
-  /**
-   *
-   */
-  private _offer: BehaviorSubject<any> = new BehaviorSubject(null);
-  public readonly offer: Observable<any> = this._offer.asObservable();
-  /**
-   *
-   */
-  private _invoices: BehaviorSubject<invoices.IInvoice[]> = new BehaviorSubject(
-    null,
-  );
-  public readonly invoices: Observable<invoices.IInvoice[]> =
-    this._invoices.asObservable();
   /**
    *
    * @param httpService
@@ -61,83 +33,66 @@ export class AccountService {
     private decryptTokenService: DecryptTokenService,
   ) {
     this.accountId = this.decryptTokenService.decodedValue.customeraccount;
-    this.loadAccount();
   }
   /**
    *
    */
-  loadAccount() {
-    this.httpService.get(`${API_URI_ACCOUNT}/${this.accountId}`).subscribe(
-      (acc) => {this._account.next(acc)},
-      (err) => {
-        // TODO show message fail to load account
-      },
+  loadAccount(): Observable<CustomerAccount> {
+    return this.httpService.get(`${API_URI_ACCOUNT}/${this.accountId}`).pipe(
+      tap((acc) => console.log('loadAccount: ' + JSON.stringify(acc))),
+      catchError(ErrorConfig.handleError(this.accountId)),
     );
   }
   /**
    *
    */
-  loadPaymentMethod() {
-    this.httpService
-      .get(`${API_URI_ACCOUNT}/${this.accountId}/payments-methods`)
-      .subscribe(
-        (pm) => this._paymentMethod.next(pm),
-        (err) => {
-          // TODO show message fail to load account
-        },
-      );
-  }
-  /**
-   *
-   */
-  loadSubscription() {
-    this.httpService
-      .get(`${API_URI_ACCOUNT}/${this.accountId}/subscriptions`)
-      .subscribe(
-        (sub) => {
-          this._subscription.next(sub);
-          this.loadOffer();
-        },
-        (err) => {
-          // TODO show message fail to load account
-        },
-      );
-  }
-  /**
-   *
-   */
-  loadOffer() {
-    this.httpService
-      .get(`${API_URI_ACCOUNT}/${this.accountId}/offers`)
-      .subscribe(
-        (off) => this._offer.next(off),
-        (err) => {
-          // TODO show message fail to load account
-          console.log('err load offer', err);
-        },
-      );
-  }
-  /**
-   *
-   */
-  loadInvoices() {
-    this.httpService
-      .get(`${API_URI_ACCOUNT}/${this.accountId}/invoices`)
-      .subscribe(
-        (inv) => this._invoices.next(inv),
-        (err) => {
-          // TODO show message fail to load account
-        },
-      );
-  }
-  /**
-   *
-   */
-  cancelSubscription() {
+  loadPaymentMethod(): Observable<any> {
     return this.httpService
-      .delete(
-        `${API_URI_ACCOUNT}/${this.accountId}/subscriptions/${this._subscription.value.id}`,
-      )
+      .get(`${API_URI_ACCOUNT}/${this.accountId}/payments-methods`)
+      .pipe(
+        tap((pay) => console.log('loadPaymentMethod: ' + JSON.stringify(pay))),
+        catchError(ErrorConfig.handleError(this.accountId)),
+      );
+  }
+  /**
+   *
+   */
+  loadSubscription(): Observable<any> {
+    return this.httpService
+      .get(`${API_URI_ACCOUNT}/${this.accountId}/subscriptions`)
+      .pipe(
+        tap((sub) => console.log('loadSubscription: ' + JSON.stringify(sub))),
+        catchError(ErrorConfig.handleError(this.accountId)),
+      );
+  }
+  /**
+   *
+   */
+  loadOffer(): Observable<Offer> {
+    return this.httpService
+      .get(`${API_URI_ACCOUNT}/${this.accountId}/offers`)
+      .pipe(
+        tap((off) => console.log('loadOffer: ' + JSON.stringify(off))),
+        catchError(ErrorConfig.handleError(this.accountId)),
+      );
+  }
+  /**
+   *
+   */
+  loadInvoices(): Observable<any> {
+    return this.httpService
+      .get(`${API_URI_ACCOUNT}/${this.accountId}/invoices`)
+      .pipe(
+        tap((inv) => console.log('loadInvoices: ' + JSON.stringify(inv))),
+        catchError(ErrorConfig.handleError(this.accountId)),
+      );
+  }
+  /**
+   *
+   */
+  cancelSubscription(sub) {
+    return this.httpService
+      .delete(`${API_URI_ACCOUNT}/${this.accountId}/subscriptions/${sub.id}`)
       .pipe(
         map((res) => {
           this._subscription.next(res.subscription);
@@ -149,10 +104,10 @@ export class AccountService {
   /**
    *
    */
-  enableSubscription() {
+  enableSubscription(sub) {
     return this.httpService
       .get(
-        `${API_URI_ACCOUNT}/${this.accountId}/subscriptions/${this._subscription.value.id}/enable`,
+        `${API_URI_ACCOUNT}/${this.accountId}/subscriptions/${sub.id}/enable`,
       )
       .pipe(
         map((res) => {
