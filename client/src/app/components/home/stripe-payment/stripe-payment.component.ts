@@ -127,7 +127,6 @@ export class StripePaymentComponent implements OnInit {
   }
 
   async confirmPayment() {
-    this.inProgress = true;
     const dialogData = new ConfirmModel(
       'Confirmation',
       'Souhaitez vous proceder au paiement ?',
@@ -150,6 +149,7 @@ export class StripePaymentComponent implements OnInit {
   async payNow() {
     try {
       // process payment server side
+      this.inProgress = true;
       let saveOfferResponse: any;
       saveOfferResponse = await this.apiClientService
         .post(`${API_URI_ACCOUNT}/${this.account.id}/offers`, {

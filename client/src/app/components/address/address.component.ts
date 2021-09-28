@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Inject, Optional } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { Component, OnInit, Input, Inject, Optional, ViewChild } from "@angular/core";
+import { FormBuilder, NgForm, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import {
   ApiClientService,
@@ -7,14 +7,15 @@ import {
 } from "src/app/api-client/api-client.service";
 
 @Component({
-  selector: "app-address",
-  templateUrl: "./address.component.html",
-  styleUrls: ["./address.component.css"],
+  selector: 'app-address',
+  templateUrl: './address.component.html',
+  styleUrls: ['./address.component.scss'],
 })
 export class AddressComponent implements OnInit {
   account: any;
   @Input() address: any;
-  @Input() mode = "show";
+  @Input() mode = 'show';
+  @ViewChild('adForm') adForm: NgForm;
 
   inProgress = false;
   addressForm: any;
@@ -23,10 +24,10 @@ export class AddressComponent implements OnInit {
     private formBuilder: FormBuilder,
     private apiClientService: ApiClientService,
     private dialogRef: MatDialogRef<AddressComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public dialogData: any
+    @Optional() @Inject(MAT_DIALOG_DATA) public dialogData: any,
   ) {
     if (dialogData) {
-      this.mode = "edit";
+      this.mode = 'edit';
       this.account = dialogData;
       this.address = this.account.billing_address;
     }
@@ -65,7 +66,7 @@ export class AddressComponent implements OnInit {
     if (this.address) {
       addressData.id = this.address.id;
       this.apiClientService
-        .put(API_URI_ADDRESS + "/" + addressData.id, addressData)
+        .put(API_URI_ADDRESS + '/' + addressData.id, addressData)
         .subscribe(
           (data) => {
             this.dialogRef.close(data);
@@ -73,7 +74,7 @@ export class AddressComponent implements OnInit {
           (err) => {
             this.inProgress = true;
             // TODO Handle error
-          }
+          },
         );
     } else {
       this.apiClientService.post(API_URI_ADDRESS, addressData).subscribe(
@@ -83,8 +84,12 @@ export class AddressComponent implements OnInit {
         (err) => {
           this.inProgress = true;
           // TODO Handle error
-        }
+        },
       );
     }
+  }
+
+  send() {
+    this.adForm.ngSubmit.emit();
   }
 }

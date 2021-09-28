@@ -1,0 +1,17 @@
+<header class="header-modal">
+  <div>
+    <h2 i18n>{{ title }}</h2>
+    <p [innerHTML]="message"></p>
+  </div>
+</header>
+<div
+  mat-dialog-actions
+  style="text-align: right; margin-bottom: 3px; margin-top: 5px"
+>
+  <app-base-button iconName="clear" iconPosition="left"  color="#f44336" (clickEvent)="onDismiss()"
+    >NON</app-base-button
+  >
+  <app-base-button iconName="done" (clickEvent)="onConfirm()"
+    >OUI</app-base-button
+  >
+</div>

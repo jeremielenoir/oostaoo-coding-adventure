@@ -24,24 +24,27 @@
             [routerLink]="['/subscription']"
             mat-stroked-button
             color="primary"
+            iconName="autorenew"
             >Change d'offre</app-base-button
           >
           <app-base-button
             *ngIf="subscription && !subscription.cancel_at_period_end"
             [disabled]="inProgress"
             type="button"
-            (click)="cancelSub()"
+            (click)="cancelSub(subscription)"
             mat-stroked-button
             color="primary"
+            iconName="clear"
             >Se désabonner</app-base-button
           >
           <app-base-button
             *ngIf="subscription && subscription.cancel_at_period_end"
             [disabled]="inProgress"
             type="button"
-            (click)="enableSub()"
+            (click)="enableSub(subscription)"
             mat-stroked-button
             color="primary"
+            iconName="history"
             >Se réabonner</app-base-button
           >
         </div>
@@ -49,9 +52,6 @@
       <div>
         <div *ngIf="!subscription" class="rdo-loader"></div>
         <table class="rdp-content-table" *ngIf="subscription">
-          {{
-            subscription.cancel_at_period_end
-          }}
           <tr>
             <td>Statut</td>
             <td>
@@ -120,11 +120,11 @@
               mat-stroked-button
               (click)="addOrEditCard()"
               color="primary"
-              >Modifier</app-base-button
+              iconName="credit_card"
+              >Modifier votre moyen de paiement  </app-base-button
             >
           </div>
           <div fxLayoutAlign="center center">
-            <div *ngIf="!paymentMethod" class="rdo-loader"></div>
             <app-creditcard [pm]="paymentMethod"></app-creditcard>
           </div>
         </div>
@@ -139,6 +139,7 @@
               mat-stroked-button
               (click)="addOrEditAddress()"
               color="primary"
+              iconName="edit"
               >{{
                 account && account.billing_address
                   ? 'Editer'
@@ -147,7 +148,6 @@
             >
           </div>
           <div>
-            <div *ngIf="!getAddress()" class="rdo-loader"></div>
             <app-address [address]="getAddress()"></app-address>
           </div>
         </div>

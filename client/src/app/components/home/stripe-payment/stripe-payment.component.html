@@ -12,47 +12,31 @@
 <div class="rdo-panel" style="margin-top: 130px">
   <div class="rdo-panel-header">
     <h2 i18n><i class="fa fa-user-circle icon"></i> Finalisez votre achat</h2>
-    <button
+    <app-base-button
       id="payment"
-      type="button"
-      (click)="confirmPayment()"
       *ngIf="!paied"
-
-      mat-raised-button
-      color="primary"
-      i18n
+      iconName="payment"
+      (clickEvent)="confirmPayment()"
+      >Payer</app-base-button
     >
-      Payer
-      <mat-progress-spinner
-        *ngIf="inProgress"
-        style="display: inline-block"
-        color="accent"
-        mode="indeterminate"
-        diameter="20"
-        value="50"
-      >
-      </mat-progress-spinner>
-    </button>
   </div>
   <div fxLayout="row" fxLayoutGap="20px">
     <div fxFlex="100" class="rdo-content-group">
       <div>
         <h3 i18n><i class="fa fa-shopping-cart icon"></i> Votre offre</h3>
-        <button
+        <app-base-button
           *ngIf="!paied"
-          type="button"
           mat-stroked-button
           color="primary"
-          i18n
+          iconName="autorenew"
           [routerLink]="['/subscription']"
+          >Change d'offre</app-base-button
         >
-          Changer d'offre
-        </button>
       </div>
       <div fxLayout="column" fxLayoutGap="20px">
         <div>
           <h2 style="display: inline-block">
-            {{ offerChoice?.title + " " + offerChoice?.price + "€ " }}
+            {{ offerChoice?.title + ' ' + offerChoice?.price + '€ ' }}
           </h2>
           <h6 style="display: inline-block; color: gray" i18n>/mois</h6>
         </div>

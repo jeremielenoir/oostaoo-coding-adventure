@@ -38,6 +38,7 @@ export class AuthenticationService {
           if (user && user.jwt) {
             this.decryptTokenService.updateToken(user.jwt);
             // store user details and jwt token in the local storage to keep the user logged in between page refreshes
+            console.log(user.jwt);
             localStorage.setItem('currentUser', user.jwt);
             this.currentUserSubject.next(user);
           }

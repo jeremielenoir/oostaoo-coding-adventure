@@ -13,7 +13,6 @@ export class DecryptTokenService {
 
   constructor() {
     this.ca = localStorage.getItem('currentUser');
-
     if (this.ca) {
       this.base64Url = this.ca.split('.')[1];
       this.decodedValue = JSON.parse(window.atob(this.base64Url));

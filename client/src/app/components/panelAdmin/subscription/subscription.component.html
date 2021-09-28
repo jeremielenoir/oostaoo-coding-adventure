@@ -34,6 +34,7 @@
               type="button"
               mat-raised-button
               color="primary"
+              [iconName]=" selectedOffer && selectedOffer.periodicity === 'monthly' ? 'stars' : 'payment'"
               (click)="goToPayment(selectedOffer)"
             >
               {{
@@ -43,7 +44,7 @@
               }}
             </app-base-button>
             <app-base-button
-              iconName="save"
+              iconName="description"
               *ngIf="
                 ownedOffer &&
                 selectedOffer &&
@@ -63,8 +64,9 @@
                 !subscription.cancel_at_period_end
               "
               type="button"
-              (click)="cancelSubscription()"
+              (click)="cancelSubscription(subscription)"
               mat-raised-button
+              iconName="clear"
               color="primary"
               >Se désabonner</app-base-button
             >
@@ -79,7 +81,8 @@
               type="button"
               mat-raised-button
               color="primary"
-              (click)="enableSub()"
+              (click)="enableSub(subscription)"
+              iconName="history"
               >Se réabonner</app-base-button
             >
           </div>
