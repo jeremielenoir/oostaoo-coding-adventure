@@ -36,9 +36,9 @@
       <div fxLayout="column" fxLayoutGap="20px">
         <div>
           <h2 style="display: inline-block">
-            {{ offerChoice?.title + ' ' + offerChoice?.price + '€ ' }}
+            {{ offerChoice?.title + ' pour ' + offerChoice?.price + '€ ' }}
           </h2>
-          <h6 style="display: inline-block; color: gray" i18n>/mois</h6>
+          <h6 *ngIf="offerChoice.periodicity === 'monthly'" style="display: inline-block; color: gray" i18n>/mois</h6>
         </div>
         <div class="offer-desc" [innerHTML]="offerChoice?.description"></div>
       </div>

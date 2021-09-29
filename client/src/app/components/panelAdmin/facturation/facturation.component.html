@@ -28,17 +28,23 @@
             >Change d'offre</app-base-button
           >
           <app-base-button
-            *ngIf="subscription && !subscription.cancel_at_period_end"
+            *ngIf="
+              (subscription && !subscription.cancel_at_period_end) &&
+              offer.periodicity === 'monthly'
+            "
             [disabled]="inProgress"
             type="button"
             (click)="cancelSub(subscription)"
             mat-stroked-button
-            color="primary"
+            color="warn"
             iconName="clear"
             >Se désabonner</app-base-button
           >
           <app-base-button
-            *ngIf="subscription && subscription.cancel_at_period_end"
+            *ngIf="
+              (subscription && subscription.cancel_at_period_end) &&
+              offer.periodicity === 'monthly'
+            "
             [disabled]="inProgress"
             type="button"
             (click)="enableSub(subscription)"
@@ -121,8 +127,8 @@
               (click)="addOrEditCard()"
               color="primary"
               iconName="credit_card"
-              >Modifier votre moyen de paiement  </app-base-button
-            >
+              >Modifier votre moyen de paiement
+            </app-base-button>
           </div>
           <div fxLayoutAlign="center center">
             <app-creditcard [pm]="paymentMethod"></app-creditcard>

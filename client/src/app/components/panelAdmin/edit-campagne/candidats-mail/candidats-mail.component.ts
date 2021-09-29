@@ -133,8 +133,6 @@ export class CandidatsMailComponent implements OnInit {
       for (const iterator of this.candidats) {
         this.postCandidat(iterator.name, iterator.value);
       }
-    } else if (this.offer_id == 14) {
-      this.goToSubscribe();
     } else if (this.tests_available == 0) {
       setTimeout(() => {
         this.goToSubscribe();
