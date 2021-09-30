@@ -115,7 +115,8 @@
           </tr>
         </table>
         <table *ngIf="offer" class="rdp-content-table">
-          <tr *ngIf="offer && offer.periodicity !== 'monthly'">
+          <hr class="separator-details-offre-unique">  
+          <tr  *ngIf="offer && offer.periodicity !== 'monthly'">
             <td valign="top">
               Détails offre unique
             </td>
