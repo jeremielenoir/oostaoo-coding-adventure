@@ -10,8 +10,7 @@
 const crypto = require('crypto');
 const _ = require('lodash');
 const stripe = require('stripe')('sk_test_SHGN7PIdottD4WBLCcdSfbwA00kPGubvOC');
-const emailRegExp =
-  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 module.exports = {
   callback: async (ctx) => {
@@ -104,7 +103,7 @@ module.exports = {
           null,
           ctx.request.admin
             ? [{ messages: [{ id: 'Auth.form.error.noAdminAccess' }] }]
-            : 'You\'re not an administrator.',
+            : "You're not an administrator.",
         );
       }
 
@@ -148,20 +147,47 @@ module.exports = {
           ]),
         });
 
-        // console.log('login User', user);
-        // user.customeraccount;
+        // Re credited the test stocks if the current subscription is active
+        const account = (
+          await strapi.services.customeraccount.fetch({
+            id: user.customeraccount,
+          })
+        ).toJSON();
 
-        // let subscription = await stripe.subscriptions.list({
-        //   customer: user.id,
-        //   status: 'active', // TODO how to handle other status
-        //   collection_method: 'charge_automatically',
-        //   limit: 1,
-        // });
+        let subscription = await stripe.subscriptions.list({
+          customer: account.stripe_customer_id,
+          status: 'active',
+          collection_method: 'charge_automatically',
+          limit: 1,
+        });
 
-        // console.log('login subscription', subscription);
+        if (!subscription.data[0]) {
+          console.error('no subscription found');
+        } else {
+          let dateCancelSubscription = new Date(
+            subscription.data[0].current_period_end * 1000,
+          );
 
-
-
+          let newTestsStock =
+            parseInt(account.tests_stock) + parseInt(account.offer.tests_stock);
+  
+          if (
+            !subscription.data[0] &&
+            !subscription.data[0].cancel_at_period_end &&
+            account.offer.tests_stock !== -1 &&
+            new Date() > dateCancelSubscription
+          ) {
+            console.log('re-credit tests stock monthly subscription');
+            await strapi.services.customeraccount.edit(
+              {
+                id: user.customeraccount,
+              },
+              {
+                tests_stock: newTestsStock,
+              },
+            );
+          }
+        }
       }
     } else {
       if (!_.get(await store.get({ key: 'grant' }), [provider, 'enabled'])) {
@@ -516,7 +542,6 @@ module.exports = {
 
       let user = await strapi.query('user', 'users-permissions').create(params);
 
-      
       // add offer
       const offer = await strapi.services.offer.fetch({ title: 'Gratuit' });
       console.log('offer', offer);

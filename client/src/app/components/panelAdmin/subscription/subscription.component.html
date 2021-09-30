@@ -27,10 +27,6 @@
                   : "")
             }}</i>
             <app-base-button
-              *ngIf="
-                !ownedOffer ||
-                (selectedOffer && ownedOffer.id !== selectedOffer.id)
-              "
               type="button"
               mat-raised-button
               color="primary"
@@ -49,6 +45,7 @@
                 ownedOffer &&
                 selectedOffer &&
                 ownedOffer.id === selectedOffer.id
+                && selectedOffer.periodicity === 'monthly'
               "
               [routerLink]="['/dashboard/facturation']"
               type="button"
@@ -62,6 +59,7 @@
                 ownedOffer.id === selectedOffer.id &&
                 subscription &&
                 !subscription.cancel_at_period_end
+                && selectedOffer.periodicity === 'monthly'
               "
               type="button"
               (click)="cancelSubscription(subscription)"
@@ -76,7 +74,8 @@
                 selectedOffer &&
                 ownedOffer.id === selectedOffer.id &&
                 subscription &&
-                subscription.cancel_at_period_end
+                subscription.cancel_at_period_end &&
+                selectedOffer.periodicity === 'monthly'
               "
               type="button"
               mat-raised-button
@@ -105,8 +104,10 @@
         (click)="selectOffer(offer)"
       >
         <h3>
-          {{ offer.title }}<br /><i
-            *ngIf="ownedOffer && ownedOffer.id === offer.id && subscription"
+          {{ offer.title }}<br />
+          
+          <i
+            *ngIf="ownedOffer && ownedOffer.id === offer.id && subscription && ownedOffer.periodicity === 'monthly'"
             style="margin-right: 10px"
             [ngClass]="{
               'rdo-badge-success':
