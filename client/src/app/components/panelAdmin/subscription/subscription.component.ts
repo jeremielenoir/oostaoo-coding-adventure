@@ -67,7 +67,9 @@ export class SubscriptionComponent implements OnInit {
     ];
     this.apiClientService.get(API_URI_OFFER).subscribe(
       (off) => {
-        this.offers = off.sort((a, b) => b.id - a.id).filter((o) => o.enabled);
+        this.offers = off
+          .sort((a, b) => b.id - a.id)
+          .filter((o) => o.enabled && o.id !== 14);
         this.offers[0].selected = true;
         this.selectedOffer = this.offers[0];
         this.accountService.loadOffer();

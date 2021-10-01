@@ -28,6 +28,7 @@ export class AuthenticationService {
 
   // login
   login(identifier: string, password: string) {
+    localStorage.clear();
     return this.http.post<any>(`/auth/local`, { identifier, password })
       .pipe(
         // the backend service sends an instance of the user
@@ -85,6 +86,7 @@ export class AuthenticationService {
   // logout
   logout() {
     // remove user from local storage
+    localStorage.clear();
     localStorage.removeItem('currentUser');
   }
 

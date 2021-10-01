@@ -64,7 +64,6 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
       .get(API_URI_USER + '/' + this.decryptTokenService.userId)
       .subscribe(user => {
         this.user = user;
-        console.log('this.user : ', this.user);
         this.account = user.customeraccount;
         if (user.customeraccount) {
           this.isProfesionalAccount = user.customeraccount.type === 'profesional';
@@ -75,13 +74,10 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
             this.offer_id = 'Gratuit';
             break;
           case 15:
-            this.offer_id = '1 TEST';
+            this.offer_id = '50 TEST';
             break;
           case 16:
-            this.offer_id = '50 TESTS';
-            break;
-          case 17:
-            this.offer_id = '100 TESTS';
+            this.offer_id = '10 TESTS';
             break;
           case 18:
             this.offer_id = 'ENTREPRISE';

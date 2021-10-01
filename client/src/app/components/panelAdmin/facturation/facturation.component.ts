@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 //import pdfMake from "pdfmake/build/pdfmake";
-import { getFactureDefinition } from './getFactureDefinition';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AddressComponent } from '../../address/address.component';
 import { AccountService } from 'src/app/services/account/account.service';
 import { CustomerAccount } from 'src/app/models/account.model';
-import { invoices, subscriptions, paymentIntents } from 'stripe';
 import {
   ConfirmModel,
   ConfirmComponent,
 } from '../../home/confirm/confirm.component';
 import { Router } from '@angular/router';
+import _ from "lodash";
 
 export interface PeriodicElement {
   date: string;
@@ -120,7 +119,11 @@ export class FacturationComponent implements OnInit {
 
   loadSubscriptions() {
     this.accountService.loadSubscription().subscribe(
-      (sub) => (this.subscription = sub),
+      (sub) => {
+        if(!_.isEmpty(sub))
+        this.subscription = sub;
+
+      },
       (err) => {
         console.error(err);
         this.snackBar.open(

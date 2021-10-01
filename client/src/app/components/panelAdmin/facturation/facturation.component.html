@@ -28,17 +28,25 @@
             >Change d'offre</app-base-button
           >
           <app-base-button
-            *ngIf="subscription && !subscription.cancel_at_period_end"
+            *ngIf="
+              subscription &&
+              !subscription.cancel_at_period_end &&
+              offer.periodicity === 'monthly'
+            "
             [disabled]="inProgress"
             type="button"
             (click)="cancelSub(subscription)"
             mat-stroked-button
-            color="primary"
+            color="warn"
             iconName="clear"
             >Se désabonner</app-base-button
           >
           <app-base-button
-            *ngIf="subscription && subscription.cancel_at_period_end"
+            *ngIf="
+              subscription &&
+              subscription.cancel_at_period_end &&
+              offer.periodicity === 'monthly'
+            "
             [disabled]="inProgress"
             type="button"
             (click)="enableSub(subscription)"
@@ -50,7 +58,6 @@
         </div>
       </div>
       <div>
-        <div *ngIf="!subscription" class="rdo-loader"></div>
         <table class="rdp-content-table" *ngIf="subscription">
           <tr>
             <td>Statut</td>
@@ -96,15 +103,29 @@
               }}
             </td>
           </tr>
-          <tr>
-            <td valign="top">Détails offre</td>
-            <td *ngIf="offer">
+          <tr *ngIf="offer && offer.periodicity === 'monthly'">
+            <td valign="top">
+              Détails souscription
+            </td>
+            <td >
               <h4 style="text-transform: uppercase">{{ offer.title }}</h4>
               <div [innerHTML]="offer.description"></div>
             </td>
             <td *ngIf="!offer">Aucune offre active</td>
           </tr>
-          <!-- <tr><td>Dernière facture</td><td><i class="rpo-pdf-show fa fa-file-pdf-o" aria-hidden="true"></i></td></tr> -->
+        </table>
+        <table *ngIf="offer" class="rdp-content-table">
+          <hr class="separator-details-offre-unique">  
+          <tr  *ngIf="offer && offer.periodicity !== 'monthly'">
+            <td valign="top">
+              Détails offre unique
+            </td>
+            <td>
+              <h4 style="text-transform: uppercase">{{ offer.title }}</h4>
+              <div [innerHTML]="offer.description"></div>
+            </td>
+            <td *ngIf="!offer">Aucune offre active</td>
+          </tr>
         </table>
       </div>
     </div>
@@ -121,8 +142,8 @@
               (click)="addOrEditCard()"
               color="primary"
               iconName="credit_card"
-              >Modifier votre moyen de paiement  </app-base-button
-            >
+              >Modifier votre moyen de paiement
+            </app-base-button>
           </div>
           <div fxLayoutAlign="center center">
             <app-creditcard [pm]="paymentMethod"></app-creditcard>

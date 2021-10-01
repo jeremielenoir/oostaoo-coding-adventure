@@ -423,6 +423,8 @@ module.exports = {
 
     customer = await stripe.customers.list({ email: email, limit: 1 });
 
+    console.log('get customer', customer);
+
     if (customer.error) {
       strapi.log.error(customer.error);
       throw new Error(customer.error.message);
@@ -631,14 +633,14 @@ module.exports = {
         new_tests_stock = parseInt(offer.tests_stock) + account.tests_stock;
       }
 
-      await strapi.services.customeraccount.edit(
+      const updateCustomer = await strapi.services.customeraccount.edit(
         { id: account.id },
         { offer: offer.id, tests_stock: new_tests_stock },
       );
       console.log(
         `account ${account.id} updated with new offer: id:${offer.id}, tests_stock:${new_tests_stock}`,
       );
-
+      
       // temp code until dev fetch offer info from account rather than user
       await strapi.plugins['users-permissions'].services.user.edit(
         { id: user.id },
@@ -651,6 +653,7 @@ module.exports = {
       console.log(
         `user ${user.id} updated with new offer: id:${offer.id}, tests_stock:${new_tests_stock}`,
       );
+      return updateCustomer;
     } catch (e) {
       console.error(
         'paiement was success but couldn\'t update account with new offer\n' +
