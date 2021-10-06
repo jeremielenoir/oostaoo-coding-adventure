@@ -8,11 +8,15 @@
 
   .content {
     // padding: 10px;
-    width: 98%;
+    width: 100%;
     margin: 0 auto;
     background: $color-background-blue;
     display: flex;
-    margin-left: 35px;
+
+    // margin-left: 35px;
+    .fix-app-width {
+      width: 100%;
+    }
   }
 }
 
