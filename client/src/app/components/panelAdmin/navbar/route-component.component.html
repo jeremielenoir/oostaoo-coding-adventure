@@ -198,7 +198,9 @@
             <!-- </button> -->
             <mat-menu #menu="matMenu">
                 <div *ngFor="let language of otherLanguage">
-                    <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage' mat-menu-item><img class="flags_img_selected" src="{{language.img}}" alt=""></button>
+                    <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage' mat-menu-item>
+                      <img class="flags_img_selected" src="{{language.img}}" alt="">&nbsp;&nbsp;{{getProperty(language, 'label')}}
+                    </button>
                 </div>
             </mat-menu>
         </div>
