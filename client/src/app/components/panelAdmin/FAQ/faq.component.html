@@ -1,52 +1,46 @@
 <app-route-component></app-route-component>
 <div class="global">
-  <div style="padding-top: 90px;" *ngIf="dataRoute">
-      <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
-  </div>
-  <!--app-breadcrumb [namePage]="'FAQ'" [listNavigation]="listTest"></app-breadcrumb-->
-  <div class="rowter">
-    <section class="roodeo-page-faq">
-      <!-- <div class="sous-header">
-        <h3 class="roodeo-fix-header">Questions fréquentes</h3>
-        <mat-icon>help_outline</mat-icon>
-      </div> -->
-      <div class="roodeo-box">
-        <span>
-          <h1 class="roodeo-custom-title-box">
-            FAQ {{ this.filterParams ? '> ' + this.filterParams : ''}}
-            <hr *ngIf="this.filterParams" class="roodeo-fix-trait">
-          </h1>
-        </span>
-      <mat-accordion class="roodeo-fix-accordion" *ngFor="let faq of this.faqs | typeFaq : filterParams">
-        <mat-expansion-panel
-        (opened)="panelOpenState = false"
-        [(expanded)]="faq.open"
-        (closed)="panelOpenState = false"
-        >
-          <mat-expansion-panel-header class="roodeo-fix-header">
-            <mat-panel-title class="roodeo-fix-title">
-              <span class="roodeo-faq-question">Q.</span> {{ faq.title }}
-            </mat-panel-title>
-            <mat-panel-description class="roodeo-fix-type">
-              <span *ngIf="faq.type === 'utilisateurs'">
-                <mat-icon>perm_identity</mat-icon>
-              </span>
-              <span *ngIf="faq.type === 'formules'">
-                <mat-icon>credit_card</mat-icon>
-              </span>
-              <span *ngIf="faq.type === 'tests'">
-                <mat-icon>description</mat-icon>
-              </span>
-              {{ faq.type }}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-
-          <div class="roodeo-fix-text">
-            <span class="roodeo-faq-reponse">R.</span>{{ faq.description }}
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+    <div style="padding-top: 90px;" *ngIf="dataRoute">
+        <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
     </div>
-    </section>
-  </div>
+    <!--app-breadcrumb [namePage]="'FAQ'" [listNavigation]="listTest"></app-breadcrumb-->
+    <div class="rowter">
+        <section class="roodeo-page-faq">
+            <!-- <div class="sous-header">
+                <h3 class="roodeo-fix-header">Questions fréquentes</h3>
+                <mat-icon>help_outline</mat-icon>
+                </div> -->
+            <div class="roodeo-box">
+                <span>
+                    <h1 class="roodeo-custom-title-box">
+                        FAQ {{ this.filterParams ? '> ' + this.filterParams : ''}}
+                        <hr *ngIf="this.filterParams" class="roodeo-fix-trait">
+                    </h1>
+                </span>
+                <mat-accordion class="roodeo-fix-accordion" *ngFor="let faq of this.faqs | typeFaq : filterParams">
+                    <mat-expansion-panel (opened)="panelOpenState = false" [(expanded)]="faq.open" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header [ngClass]="{'fix-height-panel': faq.open}" class="roodeo-fix-header">
+                            <mat-panel-title class="roodeo-fix-title">
+                                <span class="roodeo-faq-question">Q.</span> {{ faq.title }}
+                            </mat-panel-title>
+                            <mat-panel-description class="roodeo-fix-type">
+                                <span *ngIf="faq.type === 'utilisateurs'">
+                                    <mat-icon>perm_identity</mat-icon>
+                                </span>
+                                <span *ngIf="faq.type === 'formules'">
+                                    <mat-icon>credit_card</mat-icon>
+                                </span>
+                                <span *ngIf="faq.type === 'tests'">
+                                    <mat-icon>description</mat-icon>
+                                </span> {{ faq.type }}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div class="roodeo-fix-text">
+                            <span class="roodeo-faq-reponse">R.</span>{{ faq.description }}
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </section>
+    </div>
 </div>
