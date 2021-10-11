@@ -23,7 +23,7 @@
                         <div class="content-form-first">
                             <div class="form-groupe">
                                 <div>
-                                    <mat-form-field [color]="'accent'" appearance="outline">
+                                    <mat-form-field class="remove-padding" [color]="'accent'" appearance="outline">
                                         <mat-label i18n>Prénom</mat-label>
                                         <input type="text" [formControl]="addPrenom" matInput value="" name="prenom" required />
                                     </mat-form-field>
@@ -109,17 +109,12 @@
                                 <div>
                                     <mat-form-field appearance="outline" [color]="'accent'">
                                         <mat-label i18n>Role</mat-label>
-                                        <mat-select (change)="roleSetted($event)" [formControl]="userrole" name="userrole">
+                                        <mat-select (selectionChange)="roleSetted($event)" [formControl]="userrole" name="userrole">
                                             <mat-option title="{{rol.description}}" *ngFor="let rol of rolesRef" [value]="rol.id">
                                                 {{ rol.name }}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                    <!-- <div *ngIf=" submittedUser && addPassword.invalid" class="alert alert-danger">
-                    <div *ngIf="addPassword.errors.required">
-                      Mot de passe requis
-                    </div>
-                  </div> -->
                                 </div>
                             </div>
                         </div>
@@ -141,129 +136,111 @@
             <div id="remove-2" (click)="param_cog_non_active_deux()"></div>
             <div class="modal">
                 <div class="modal-header">
-                    <h3 class="modal-title">Modifier l'utilisateur</h3>
+                    <h3 class="modal-title" i18n>Modifier l'utilisateur</h3>
                 </div>
                 <div class="modal-content">
                     <form (ngSubmit)="updateUser()" class="form" method="PUT" #form>
                         <div class="content-form-first">
                             <div class="form-groupe">
-                                <div class="top-form-groupe">
-                                    <div class="title-and-error-span">
-                                        <label class="libele">prenom</label>
-                                    </div>
-                                </div>
                                 <div>
-                                    <input [formControl]="editPrenom" type="" value="{{editingUser?.prenom}}" class="champ-form" />
-                                    <div *ngIf=" modifiedUser && editPrenom.invalid" class="alert alert-danger">
-                                        <div *ngIf="editPrenom.errors.required">
+                                    <mat-form-field [color]="'accent'" appearance="outline">
+                                        <mat-label i18n>Prénom</mat-label>
+                                        <input type="text" [formControl]="editPrenom" matInput value="{{editingUser?.prenom}}" name="prenom" required />
+                                    </mat-form-field>
+                                    <div *ngIf=" modifiedUser && editPrenom.invalid" class="alert">
+                                        <div *ngIf="editPrenom.errors.required" i18n>
                                             Prénom requis
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-groupe">
-                                <div class="top-form-groupe">
-                                    <div class="title-and-error-span">
-                                        <label class="libele">nom</label>
-                                    </div>
-                                </div>
                                 <div>
-                                    <input [formControl]="editNom" type="" class="champ-form" value="{{editingUser?.nom}}" />
+                                    <mat-form-field [color]="'accent'" appearance="outline">
+                                        <mat-label i18n>Nom</mat-label>
+                                        <input type="text" [formControl]="editNom" matInput value="{{editingUser?.nom}}" name="nom" required />
+                                    </mat-form-field>
                                     <div *ngIf=" modifiedUser && editNom.invalid" class="alert alert-danger">
-                                        <div *ngIf="editNom.errors.required">
+                                        <div *ngIf="editNom.errors.required" i18n>
                                             Nom requis
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-groupe">
-                                <div class="top-form-groupe">
-                                    <div class="title-and-error-span">
-                                        <label class="libele">email</label>
-                                    </div>
-                                </div>
                                 <div>
-                                    <input [formControl]="editEmail" type="" value="{{editingUser?.email}}" class="champ-form" />
-                                    <div *ngIf=" modifiedUser && editEmail.invalid" class="alert alert-danger">
-                                        <div *ngIf="editEmail.errors.required">
+                                    <mat-form-field [color]="'accent'" appearance="outline">
+                                        <mat-label i18n>E-mail</mat-label>
+                                        <input type="email" [formControl]="editEmail" matInput value="{{editingUser?.email}}" name="email" required />
+                                    </mat-form-field>
+                                    <div *ngIf=" modifiedUser && editEmail.invalid" class="alert">
+                                        <div *ngIf="editEmail.errors.required" i18n>
                                             Email requis
                                         </div>
-                                        <div *ngIf="editEmail.errors.email">
+                                        <div *ngIf="editEmail.errors.email" i18n>
                                             Email valide requis
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-groupe">
-                                <div class="top-form-groupe">
-                                    <div class="title-and-error-span">
-                                        <label class="libele">Pseudo</label>
-                                    </div>
-                                </div>
                                 <div>
-                                    <input [formControl]="editUsername" type="text" name="username" class="champ-form" id="editUsername" />
-                                    <div *ngIf=" modifiedUser && editUsername.invalid" class="alert alert-danger">
-                                        <div *ngIf="editUsername.errors.required">
+                                    <mat-form-field [color]="'accent'" appearance="outline">
+                                        <mat-label i18n>Pseudo</mat-label>
+                                        <input type="text" [formControl]="editUsername" matInput required />
+                                    </mat-form-field>
+                                    <div *ngIf=" modifiedUser && editUsername.invalid" class="alert">
+                                        <div *ngIf="editUsername.errors.required" i18n>
                                             Pseudo requis
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-groupe">
-                                <div class="top-form-groupe">
-                                    <div class="title-and-error-span">
-                                        <label class="libele">Mot de passe</label>
-                                    </div>
-                                </div>
                                 <div>
-                                    <input [formControl]="editPassword" type="password" name="password" class="champ-form" id="editPassword" />
-                                    <div *ngIf=" modifiedUser && editPassword.invalid" class="alert alert-danger">
-                                        <div *ngIf="editPassword.errors.required">
+                                    <mat-form-field [color]="'accent'" appearance="outline">
+                                        <mat-label i18n>Mot de passe</mat-label>
+                                        <input [formControl]="editPassword" type="password" matInput required />
+                                    </mat-form-field>
+                                    <div *ngIf=" modifiedUser && editPassword.invalid" class="alert">
+                                        <div *ngIf="editPassword.errors.required" i18n>
                                             Mot de passe requis
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-groupe">
-                                <div class="top-form-groupe">
-                                    <div class="title-and-error-span">
-                                        <label class="libele">Confirmer le mot de passe</label>
-                                    </div>
-                                </div>
                                 <div>
-                                    <input [formControl]="confirmPassword" type="password" name="confirmPassword" class="champ-form" id="confirmPassword" />
-                                    <div *ngIf=" modifiedUser && confirmPassword.invalid" class="alert alert-danger">
-                                        <div *ngIf="confirmPassword.errors.required">
+                                    <mat-form-field [color]="'accent'" appearance="outline">
+                                        <mat-label i18n>Confirmation du mot de passe</mat-label>
+                                        <input [formControl]="confirmPassword" type="password" matInput required />
+                                    </mat-form-field>
+                                    <div *ngIf=" modifiedUser && confirmPassword.invalid" class="alert">
+                                        <div *ngIf="confirmPassword.errors.required" i18n>
                                             Confirmation du mot de passe requis
                                         </div>
                                     </div>
-                                    <div *ngIf=" modifiedUser && editPassword.value !== confirmPassword.value" class="alert alert-danger">
+                                    <div *ngIf=" modifiedUser && editPassword.value !== confirmPassword.value" class="alert" i18n>
                                         Les mots de passe ne correspondent pas
                                     </div>
                                 </div>
                             </div>
                             <div class="form-groupe">
-                                <div class="top-form-groupe">
-                                    <div class="title-and-error-span">
-                                        <label class="libele">Rôles</label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <select (change)="roleSetted($event)" [formControl]="editUserrole" name="editUserrole" class="select-role">
-                    <option title="{{rol.description}}" *ngFor="let rol of rolesRef" [value]="rol.id">{{ rol.name }}
-                    </option>
-                  </select>
-                                    <!-- <div *ngIf=" submittedUser && addPassword.invalid" class="alert alert-danger">
-                    <div *ngIf="addPassword.errors.required">
-                      Mot de passe requis
-                    </div>
-                  </div> -->
-                                </div>
+                              <div>
+                                <mat-form-field appearance="outline" [color]="'accent'">
+                                  <mat-label i18n>Rôles</mat-label>
+                                  <mat-select (selectionChange)="roleSetted($event)" [formControl]="editUserrole">
+                                    <mat-option title="{{rol.description}}" *ngFor="let rol of rolesRef" [value]="rol.id">
+                                      {{ rol.name }}
+                                    </mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
                             </div>
                         </div>
                         <div class="content-form-last">
-                            <div class="footer-form-last">
-                                <button class="btn-gestion" type="submit">Sauvegarder</button>
+                            <div class="flex_center">
+                                <app-base-button type="submit" iconName="save" i18n>SAUVEGARDER</app-base-button>
                             </div>
                         </div>
                     </form>
@@ -271,35 +248,18 @@
             </div>
         </div>
         <div class="component-utilisateurs">
-            <!-- <header class="header-form">
-                <div class="champ-utilisateur">
-                    <form>
-                        <span class="icon-form-group-header-contenu"><i class="fas fa-search"></i></span>
-                        <input type="text" name="search" [(ngModel)]="searchText" class="input-champ-utilisateurs" placeholder="Filtrer par titre ou candidat" id="search-header">
-                    </form>
-                </div>
-                <div class="left-form-utilisateurs">
-                    <div class="nbr-utilisateurs">
-                        <i class="far fa-user btn-icon-utilisateur"></i>
-                        <span>Utilisateurs {{users && users.length ? users.length : '*'}}/{{users && users.length ? users.length : '*'}}</span>
-                    </div>
-                    <button class="btn-header-contenu" (click)="param_cog()">
-                      <i class="far fa-plus-square btn-icon" id="param-cog"></i> Ajouter utilisateur
-                    </button>
-                </div>
-            </header> -->
             <div class="tool-bar">
                 <div class="flex1">
                     <!-- Menu -->
-                    <button id="menu" mat-raised-button color="primary" aria-label="Example icon-button with a menu" class="nocursor">
+                    <button id="menu" mat-raised-button color="primary" aria-label="Example icon-button with a menu" class="nocursor" i18n>
                           <mat-icon>groups</mat-icon>
                           Utilisateurs {{users && users.length ? users.length : '*'}}/{{users && users.length ? users.length : '*'}}
                         </button>
                     <!-- Filter -->
                     <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="custom-input-filter">
-                        <mat-label>Rechercher</mat-label>
+                        <mat-label i18n>Rechercher</mat-label>
                         <input matInput placeholder="Filtrer par titre ou candidat" type="text" [(ngModel)]="searchText" />
-                        <mat-icon color="accent" matSuffix>search</mat-icon>
+                        <mat-icon color="accent" matSuffix i18n>search</mat-icon>
                     </mat-form-field>
                 </div>
                 <!-- Btn Invite -->
@@ -311,9 +271,9 @@
                 <table class="table_user">
                     <thead class="table_head">
                         <tr class="table_row">
-                            <th class="table_head_cell">Nom</th>
-                            <th class="table_head_cell">Email</th>
-                            <th class="table_head_cell">Privileges</th>
+                            <th class="table_head_cell" i18n>Nom</th>
+                            <th class="table_head_cell" i18n>Email</th>
+                            <th class="table_head_cell" i18n>Privileges</th>
                             <th class="table_head_cell"></th>
                         </tr>
                     </thead>
