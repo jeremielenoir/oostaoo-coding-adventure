@@ -188,18 +188,18 @@
 
         </ul>
         <div class="right-contry">
-            <p class="custom-text">Type de Compte : {{ user?.customeraccount.type }}</p>
+            <p class="custom-text" *ngIf="user?.customeraccount.type == 'profesional'"><span class="custom-type-acc">PRO</span></p>
         </div>
         <div class="right-contry">
             <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
-                <img class="flags_img" src="{{currentLanguage}}" alt="Français">
+                <img class="flags_img" src="{{currentLanguage}}" alt="">
                 <i class="icon-country fas fa-caret-down"></i>
             </div>
             <!-- </button> -->
             <mat-menu #menu="matMenu">
                 <div *ngFor="let language of otherLanguage">
                     <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage' mat-menu-item>
-                      <img class="flags_img_selected" src="{{language.img}}" alt="">&nbsp;&nbsp;{{getProperty(language, 'label')}}
+                      <img class="flags_img_selected" src="{{language.img}}" alt="">&nbsp;&nbsp;{{getProperty(language, 'label') | uppercase}}
                     </button>
                 </div>
             </mat-menu>
