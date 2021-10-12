@@ -31,10 +31,22 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
   public stopTimeInterval: any;
   public lang = 'en';
   public otherLanguage = [
-    {codelang: 'fr', shortlang: 'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr'},
-    {codelang: 'en', shortlang: 'en', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en'},
-    {codelang: 'es', shortlang: 'es', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es'},
-    {codelang: 'jp', shortlang: 'jp', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp'}
+    {
+      codelang: 'fr', shortlang: 'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr',
+      labelfr: 'français', labelen: 'french', labeles: 'francés', labeljp: 'フランス語'
+    },
+    {
+      codelang: 'en', shortlang: 'en', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en',
+      labelfr: 'anglais', labelen: 'english', labeles: 'inglés', labeljp: '英語'
+    },
+    {
+      codelang: 'es', shortlang: 'es', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es',
+      labelfr: 'espagnol', labelen: 'spanish', labeles: 'español', labeljp: 'スペイン語'
+    },
+    {
+      codelang: 'jp', shortlang: 'jp', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp',
+      labelfr: 'japonais', labelen: 'japanese', labeles: 'japonés', labeljp: '日本'
+    }
    ];
 
   @Output() ContentViewDefault = new EventEmitter<any>();
@@ -64,7 +76,6 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
       .get(API_URI_USER + '/' + this.decryptTokenService.userId)
       .subscribe(user => {
         this.user = user;
-        console.log('this.user : ', this.user);
         this.account = user.customeraccount;
         if (user.customeraccount) {
           this.isProfesionalAccount = user.customeraccount.type === 'profesional';
@@ -75,13 +86,10 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
             this.offer_id = 'Gratuit';
             break;
           case 15:
-            this.offer_id = '1 TEST';
+            this.offer_id = '50 TEST';
             break;
           case 16:
-            this.offer_id = '50 TESTS';
-            break;
-          case 17:
-            this.offer_id = '100 TESTS';
+            this.offer_id = '10 TESTS';
             break;
           case 18:
             this.offer_id = 'ENTREPRISE';
@@ -138,6 +146,10 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
 
   getCurrentRoute() {
     return this.router.url;
+  }
+
+  getProperty(obj: any, property: string): string {
+    return obj[property + this.lang];
   }
 
   /**

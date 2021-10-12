@@ -14,48 +14,63 @@
                 <div class="content-ajout-entreprise">
                     <div class="form-entreprise">
                         <form>
-                            <h2>Ajouter son entreprise</h2>
-                            <label for="name">Nom de l'entreprise</label>
-                            <input [formControl]="newEntreprise" name="name" type="text" class="champ-form-gestion" />
-                            <div *ngIf=" submitted && newEntreprise.invalid" class="alert alert-danger">
-                                <div *ngIf="newEntreprise.errors.required">
-                                    Veuillez saisir le nom de l'entreprise.
+                            <h2 i18n>Ajouter son entreprise</h2>
+                            <div class="form-line">
+                                <div class="input-bloc fix-error">
+                                    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
+                                        <mat-label i18n>Nom de l'entreprise *</mat-label>
+                                        <input type="text" [formControl]="newEntreprise" matInput value="" name="newEntreprise" />
+                                    </mat-form-field>
+                                    <div *ngIf=" submitted && newEntreprise.invalid" class="alert alert-danger">
+                                        <div *ngIf="newEntreprise.errors.required" class="error-red" i18n>
+                                            Veuillez saisir le nom de l'entreprise.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-
-                            <label for="email">Email de l'entreprise</label>
-                            <input [formControl]="newEmail" name="email" type="email" class="champ-form-gestion" />
-                            <div *ngIf=" submitted && newEmail.invalid" class="alert alert-danger">
-                                <div *ngIf="newEmail.errors.required">
-                                    Veuillez saisir l'email de l'entreprise.
-                                </div>
-                                <div *ngIf="newEmail.errors.email">
-                                    Veuillez saisir un email correct.
+                            <div class="form-line">
+                                <div class="input-bloc fix-error">
+                                    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
+                                        <mat-label i18n>Email de l'entreprise *</mat-label>
+                                        <input type="text" [formControl]="newEmail" matInput value="" name="newEmail" />
+                                    </mat-form-field>
+                                    <div *ngIf=" submitted && newEmail.invalid">
+                                        <div *ngIf="newEmail.errors.required" class="error-red" i18n>
+                                            Veuillez saisir l'email de l'entreprise.
+                                        </div>
+                                        <div *ngIf="newEmail.errors.email" class="error-red" i18n>
+                                            Veuillez saisir un email correct.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="phone">Numéro de téléphone</label>
-                                <input [formControl]="newPhone" name="phone" type="tel" class="champ-form-gestion" />
-                                <div *ngIf=" submitted && newPhone.invalid" class="alert alert-danger">
-                                    <div *ngIf="newPhone.errors.required">
-                                        Veuillez saisir le numéro de l'entreprise.
+                            <div class="form-line">
+                                <div class="input-bloc fix-error">
+                                    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
+                                        <mat-label i18n>Numéro de téléphone *</mat-label>
+                                        <input type="tel" [formControl]="newPhone" matInput value="" name="phone" />
+                                    </mat-form-field>
+                                    <div *ngIf="submitted && newPhone.invalid">
+                                        <div *ngIf="newPhone.errors.required" class="error-red" i18n>
+                                            Veuillez saisir le numéro de l'entreprise.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <button (click)="addentreprise()" mat-button class="btn-validate">Ajouter son entreprise</button>
+                                <app-base-button (click)='addentreprise()' iconName="done" i18n>CONFIRMER</app-base-button>
                             </div>
                         </form>
                     </div>
                     <div class="text-entreprise">
-                        <h2>Personnalisation entreprise</h2>
-                        <p>Bienvenue sur la page de personnalisation de votre entreprise, avant de pouvoir modifier les informations sur votre entreprise, merci de bien vouloir remplir le formulaire ci-contre.
+                        <h2 i18n>Personnalisation entreprise</h2>
+                        <p i18n>Bienvenue sur la page de personnalisation de votre entreprise, avant de pouvoir modifier les informations sur votre entreprise, merci de bien vouloir remplir le formulaire ci-contre.
                         </p>
 
-                        <p>Une fois le formulaire remplis vous pourrez gérer les informations de votre entreprise comme, les nombres d'employés, la langue de votre entreprise, le lien de votre site web, etc.
+                        <p i18n>Une fois le formulaire remplis vous pourrez gérer les informations de votre entreprise comme, les nombres d'employés, la langue de votre entreprise, le lien de votre site web, etc.
                         </p>
                     </div>
                 </div>
@@ -80,10 +95,10 @@
                     <div class="modal-content">
                         <div class="block-upload" [class.block-upload-hidden]="blockUpload">
                             <i class="modal-content-icon fas fa-camera"></i>
-                            <span class="modal-content-text"> Déposez votre image ici </span>
+                            <span class="modal-content-text" i18n> Déposez votre image ici </span>
                             <div class="btn-modal-content" id="btn-modal-content">
-                                <span>ou télécharger une photo</span>
-                                <input type="file" class="file" name="files" accept="image/x-png,image/gif,image/jpeg" (change)="readURL($event)" #uploadFileFirst />
+                                <span i18n>ou télécharger une photo</span>
+                                <input type="file" class="file hvr-grow" name="files" accept="image/x-png,image/gif,image/jpeg" (change)="readURL($event)" #uploadFileFirst />
                                 <input class="hidden-file" type="text" name="ref" value="entreprise" />
                                 <input type="text" name="refId" value="{{entreprise.id}}" />
                                 <input type="text" name="field" value="logo" />
@@ -100,11 +115,11 @@
 
                                 <i class="fas fa-ban ban-error"></i>
 
-                                <span class="error">Fichier non supporté</span>
+                                <span class="error" i18n>Fichier non supporté</span>
 
                                 <div class="btn-modal-content" id="btn-modal-content">
 
-                                    <span class="modal-text-btn-upload">ou télécharger une photo</span>
+                                    <span class="modal-text-btn-upload" i18n>ou télécharger une photo</span>
 
                                     <input type="file" class="file" (change)="readURL($event)" />
 
@@ -118,8 +133,8 @@
                     </div>
 
                     <div class="modal-footer" #btnValideParent>
-                        <button mat-button class="modal-btn-footer" (click)="uploadLogo()" disabled="disabled" id="btn-valide">valider</button>
-                        <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()">annuler</button>
+                        <button mat-button class="modal-btn-footer" (click)="uploadLogo()" disabled="disabled" id="btn-valide" i18n>valider</button>
+                        <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()" i18n>annuler</button>
 
 
                     </div>
@@ -132,81 +147,47 @@
         </div>
 
         <div id="shadow-cog-add-images" [ngClass]="{'shadow-cog-active': shadowcogImage === true}">
-
             <div id="remove_add_image" (click)="param_cog_non_active_add_img()"></div>
-
             <div class="modal">
 
                 <form class="formimage" enctype="multipart/form-data">
-
                     <div class="modal-header"></div>
-
                     <div class="modal-content">
-
                         <div class="block-upload" id="block-upload-deux" [ngClass]="{'block-upload-hidden': blockUploadLast == true}">
-
-
                             <i class="modal-content-icon fas fa-camera"></i>
-
-                            <span class="modal-content-text">
-
-                Déposez votre image ici
-
-              </span>
-
-                            <div class="btn-modal-content" id="btn-modal-content">
-
-                                <span class="modal-text-btn-upload">ou télécharger une photo</span>
-
+                            <span class="modal-content-text" i18n>Déposez votre image ici</span>
+                            <div class="btn-modal-content hvr-grow" id="btn-modal-content">
+                                <span class="modal-text-btn-upload" i18n>ou télécharger une photo</span>
                                 <input type="file" class="file" name="files" accept="image/x-png,image/gif,image/jpeg" (change)="readURL_deux($event)" #fileLoading />
-
                             </div>
                         </div>
-
                         <div class="cadrage-img" [ngClass]="{'cadrage-img-active' : cadrageImgBooleanLast === true}">
-
                             <figure class="img-figure" [ngClass]="{'img-figure-active' : cadrageImgBooleanStateLast === false}">
                                 <img src="" class="upload_img" #uploadimgLast />
                             </figure>
-
                             <div class="text-error-upload" [ngClass]="{'text-error-upload-show' : cadrageImgBooleanStateLast === true}">
-
                                 <i class="fas fa-ban ban-error"></i>
-
-                                <span class="error">Fichier non supporté</span>
-
-                                <div class="btn-modal-content" id="btn-modal-content">
-
-                                    <span class="modal-text-btn-upload">ou télécharger une photo</span>
-
+                                <span class="error" i18n>Fichier non supporté</span>
+                                <div class="btn-modal-content hvr-grow" id="btn-modal-content">
+                                    <span class="modal-text-btn-upload" i18n>ou télécharger une photo</span>
                                     <input type="file" class="file" (change)="readURL_deux($event)" />
                                     <input class="hidden-file" type="text" name="ref" value="entreprise" />
                                     <input type="text" name="refId" value="9" />
                                     <input type="text" name="field" value="image_entreprise" />
-
                                 </div>
-
                             </div>
-
                         </div>
-
-
                     </div>
-
 
                     <div class="modal-footer" #btnValideParentAddImage>
-
-                        <button mat-button class="modal-btn-footer" (click)='uploadImage()' disabled="disabled" id="btn-valide-deuxx">valider</button>
-                        <button mat-button class="modal-btn-footer" (click)="param_cog_non_active_add_img()">annuler</button>
-
-
+                        <div class="fix-upload-img">
+                            <app-base-button (click)='uploadImage()' iconName="done" [disabled]="disabled" i18n>VALIDER</app-base-button>
+                            <app-base-button (click)='param_cog_non_active_add_img()' iconName="close" i18n>ANNULER</app-base-button>
+                        </div>
                     </div>
-
                 </form>
 
             </div>
-
-
         </div>
 
 
@@ -249,244 +230,169 @@
                     <div class="edit-panel">
 
                         <div class="edit-panel-header">
-
-                            <h2 class="title-edit-panel">
-                                Éditez les détails de votre entreprise dans la langue de votre choix
-                            </h2>
+                            <h2 class="title-edit-panel" i18n> Éditez les détails de votre entreprise dans la langue de votre choix </h2>
 
                             <!-- <div class="sous-edit-panel-left">
-
-                  <span class="chart-title">Complétion</span>
-
-                  <div class="charte-progress">
-
-
-                    <round-progress [current]="current2" [max]="100" [color]="'1d3551'" [background]="'#eee'"
-                      [radius]="125" [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="true"
-                      [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'" [animationDelay]="1000">
-                    </round-progress>
-
-                    <div class="detail_progresse_mini">
-
-                      <span class="number_progress_mini">{{current2}} %</span>
-
-                    </div>
-
-
-                  </div>
-
-                </div> -->
-
-
-
+                                    <span class="chart-title">Complétion</span>
+                                    <div class="charte-progress">
+                                    <round-progress [current]="current2" [max]="100" [color]="'1d3551'" [background]="'#eee'"
+                                      [radius]="125" [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="true"
+                                      [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'" [animationDelay]="1000">
+                                    </round-progress>
+                                    <div class="detail_progresse_mini">
+                                      <span class="number_progress_mini">{{current2}} %</span>
+                                    </div>
+                                 </div>
+                            </div> -->
                         </div>
 
                         <form>
-                            <div class="regroupe-form" #regroupeform>
-
-                                <label class="first-label-param-header">Choisissez votre langue</label>
-
-                                <div class="block-form-flex">
-
-                                    <select [formControl]="lang" name="lang" class="champ-form-gestion">
-
-                    <option *ngFor="let lang of langlist" value="{{lang}}">{{ lang }}</option>
-
-                  </select>
-
+                            <div class="form-line">
+                                <div class="input-bloc">
+                                    <mat-form-field appearance="outline" [color]="'accent'" class="fullwidth">
+                                        <mat-label i18n>Choisissez votre langue</mat-label>
+                                        <mat-select [formControl]="lang" name="lang" class="mat-primary">
+                                            <mat-option *ngFor="let lang of langlist" value="{{lang}}">{{ lang }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
-
                             </div>
+                            <br>
+
                             <div class="regroupe-form">
-
-                                <label>Logo de l'entreprise</label>
-
+                                <label i18n>Logo de l'entreprise</label>
                                 <div class="all-gestion-info">
-
-
                                     <figure class="img-upload"><img src=" {{logo}}" alt="" role=""></figure>
-
-
                                     <div>
-
                                         <div class="gestion-info-img-header">
-
-                                            <button mat-button class="btn-gestion" (click)="modal_upload()">ENVOYER</button>
-                                            <button mat-button class="btn-gestion">SUPPRIMER</button>
-
+                                            <!-- <button mat-button class="btn-gestion" (click)="modal_upload()">ENVOYER</button> -->
+                                            <div class="form-line fix-buttons">
+                                                <app-base-button (click)='modal_upload()' iconName="upload" i18n>ENVOYER</app-base-button>
+                                            </div>
+                                            <div class="form-line fix-buttons">
+                                                <app-base-button iconName="delete" i18n>SUPPRIMER</app-base-button>
+                                            </div>
+                                            <!-- <button mat-button class="btn-gestion">SUPPRIMER</button> -->
                                         </div>
-
-                                        <p class="gestion-info-img-contenu">4 Mo max.</p>
-                                        <p class="gestion-info-img-contenu">Taille recommandée : 500 x 500px</p>
-                                        <p class="gestion-info-img-contenu">Types de fichier recommandés : JPEG, PNG, GIF</p>
-
-
-                                    </div>
-
-
-                                </div>
-
-
-                            </div>
-
-
-                            <div class="regroupe-form">
-
-                                <label>Nom de l'entreprise</label>
-                                <div class="block-form-flex">
-
-                                    <input [formControl]="name" name="name" type="text" class="champ-form-gestion" value="" />
-
-                                    <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
-
-                                </div>
-                                <div *ngIf=" submitted && name.invalid" class="alert alert-danger">
-                                    <div *ngIf="name.errors.required">
-                                        Veuillez saisir le nom de l'entreprise.
+                                        <p class="gestion-info-img-contenu" i18n>4 Mo max.</p>
+                                        <p class="gestion-info-img-contenu" i18n>Taille recommandée : 500 x 500px</p>
+                                        <p class="gestion-info-img-contenu" i18n>Types de fichier recommandés : JPEG, PNG, GIF</p>
                                     </div>
                                 </div>
-
                             </div>
 
-                            <div class="regroupe-form">
-
-                                <label>Adresse email de l'entreprise</label>
-
-                                <div class="block-form-flex">
-
-                                    <input [formControl]="email" name="email" type="text" class="champ-form-gestion" value="" />
-
-                                    <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
-
-                                </div>
-                                <div *ngIf=" submitted && email.invalid" class="alert alert-danger">
-                                    <div *ngIf="email.errors.required">
-                                        Veuillez saisir l'email de l'entreprise.
-                                    </div>
-                                    <div *ngIf="email.errors.email">
-                                        Veuillez saisir un email correct.
+                            <div class="form-line">
+                                <div class="input-bloc fix-error">
+                                    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
+                                        <mat-label i18n>Nom de l'entreprise *</mat-label>
+                                        <input type="text" [formControl]="name" matInput name="name" />
+                                    </mat-form-field>
+                                    <div *ngIf=" submitted && name.invalid" class="alert alert-danger">
+                                        <div *ngIf="name.errors.required" class="error-red" i18n>
+                                            Veuillez saisir le nom de l'entreprise.
+                                        </div>
                                     </div>
                                 </div>
-
-
                             </div>
 
-                            <div class="regroupe-form">
-
-                                <label>Numéro de téléphone</label>
-
-                                <div class="block-form-flex">
-
-                                    <input [formControl]="phone" type="tel" class="champ-form-gestion" value="" />
-
-                                    <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span>
-
-                                </div>
-                                <div *ngIf=" submitted && phone.invalid" class="alert alert-danger">
-                                    <div *ngIf="phone.errors.required">
-                                        Veuillez saisir le numéro de téléphone de l'entreprise.
+                            <div class="form-line">
+                                <div class="input-bloc fix-error">
+                                    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
+                                        <mat-label i18n>Email de l'entreprise *</mat-label>
+                                        <input type="text" [formControl]="email" matInput name="email" />
+                                    </mat-form-field>
+                                    <div *ngIf=" submitted && email.invalid">
+                                        <div *ngIf="email.errors.required" class="error-red" i18n>
+                                            Veuillez saisir l'email de l'entreprise.
+                                        </div>
+                                        <div *ngIf="email.errors.email" class="error-red" i18n>
+                                            Veuillez saisir un email correct.
+                                        </div>
                                     </div>
                                 </div>
-
                             </div>
 
-                            <div class="regroupe-form">
-
-                                <label>Industrie</label>
-
-                                <div class="block-form-flex">
-
-
-                                    <select [formControl]="industrie" name="industrie" class="champ-form-gestion">
-
-                    <option *ngFor="let industrie of industrieList" value="{{industrie}}">{{ industrie }}</option>
-
-                  </select>
-
+                            <div class="form-line">
+                                <div class="input-bloc fix-error">
+                                    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
+                                        <mat-label i18n>Numéro de téléphone *</mat-label>
+                                        <input type="tel" [formControl]="phone" matInput name="phone" />
+                                    </mat-form-field>
+                                    <div *ngIf="submitted && phone.invalid">
+                                        <div *ngIf="phone.errors.required" class="error-red" i18n>
+                                            Veuillez saisir le numéro de l'entreprise.
+                                        </div>
+                                    </div>
                                 </div>
-
                             </div>
 
-                            <div class="regroupe-form">
-
-                                <label>Nombre d'employés</label>
-
-                                <div class="block-form-flex">
-
-                                    <select [formControl]="numberofemployee" name="numberofemployee" class="champ-form-gestion">
-
-                    <option *ngFor="let numberofemployee of  numberofemployeeList" value="{{numberofemployee}}">
-                      {{ numberofemployee }}</option>
-
-                  </select>
-
+                            <div class="form-line">
+                                <div class="input-bloc">
+                                    <mat-form-field appearance="outline" [color]="'accent'" class="fullwidth">
+                                        <mat-label i18n>Industrie</mat-label>
+                                        <mat-select [formControl]="industrie" name="industrie" class="mat-primary">
+                                            <mat-option *ngFor="let industrie of industrieList" value="{{industrie}}">{{ industrie }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
-
                             </div>
 
-                            <div class="regroupe-form">
-
-                                <label>Nombre de développeurs</label>
-
-                                <div class="block-form-flex">
-
-                                    <select [formControl]="numberofdev" name="numberofdev" class="champ-form-gestion">
-
-                    <option *ngFor="let numberofdev of numberofemployeeList" value="{{numberofdev}}">{{ numberofdev }}
-                    </option>
-
-                  </select>
-
+                            <div class="form-line">
+                                <div class="input-bloc">
+                                    <mat-form-field appearance="outline" [color]="'accent'" class="fullwidth">
+                                        <mat-label i18n>Nombre d'employés</mat-label>
+                                        <mat-select [formControl]="numberofemployee" name="numberofemployee" class="mat-primary">
+                                            <mat-option *ngFor="let numberofemployee of numberofemployeeList" value="{{numberofemployee}}">{{ numberofemployee }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
-
                             </div>
 
-                            <div class="regroupe-form">
-
-                                <label>Lien vidéo</label>
-
-                                <div class="block-form-flex incrage">
-
-                                    <input [formControl]="videolink" type="text" class="champ-form-gestion champ-incrage" value="" />
-
-                                    <span class="span-incrage">url:</span>
-
+                            <div class="form-line">
+                                <div class="input-bloc">
+                                    <mat-form-field appearance="outline" [color]="'accent'" class="fullwidth">
+                                        <mat-label i18n>Nombre de développeurs</mat-label>
+                                        <mat-select [formControl]="numberofdev" name="numberofdev" class="mat-primary">
+                                            <mat-option *ngFor="let numberofdev of numberofemployeeList" value="{{numberofdev}}">{{ numberofdev }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
-
                             </div>
 
-                            <div class="regroupe-form">
-
-                                <label>Lien du site</label>
-
-                                <div class="block-form-flex">
-
-                                    <input [formControl]="websitelink" type="text" class="champ-form-gestion champ-incrage" value="" />
-
-                                    <span class="span-incrage">url:</span>
-
+                            <div class="form-line">
+                                <div class="input-bloc">
+                                    <!-- <span class="span-incrage">URL : </span> -->
+                                    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
+                                        <mat-label i18n>
+                                            <mat-icon class="mat-18">link</mat-icon> Lien vidéo</mat-label>
+                                        <input type="text" [formControl]="videolink" matInput name="videolink" />
+                                    </mat-form-field>
                                 </div>
-
                             </div>
 
-                            <div class="regroupe-form">
-
-                                <label>Teaser de l'entreprise</label>
-
-                                <div class="block-form-flex">
-
-                                    <textarea [formControl]="teaser" class="champ-form-gestion textarea-gestion" style="height:150px;resize:none;"></textarea>
-
-                                    <!-- <span class="champ-asterix-obg"><i class="fas fa-asterisk"></i></span> -->
-
+                            <div class="form-line">
+                                <div class="input-bloc">
+                                    <!-- <span class="span-incrage">URL : </span> -->
+                                    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
+                                        <mat-label i18n>
+                                            <mat-icon class="mat-18">link</mat-icon> Lien du site</mat-label>
+                                        <input type="text" [formControl]="websitelink" matInput name="websitelink" />
+                                    </mat-form-field>
                                 </div>
-
                             </div>
 
+                            <div class="form-line">
+                                <div class="input-bloc">
+                                    <mat-form-field appearance="outline" [color]="'accent'" class="fullwidth">
+                                        <mat-label i18n>Teaser de l'entreprise</mat-label>
+                                        <textarea matTextareaAutosize matAutosizeMinRows="10" matAutosizeMaxRows="20" [formControl]="teaser" matInput></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
 
                             <div class="regroupe-form">
 
-                                <label>Ajouter des images (10 max)</label>
+                                <label i18n>Ajouter des images (10 max)</label>
 
                                 <div class="all-gestion-info">
 
@@ -494,7 +400,7 @@
 
                                         <i class="fas fa-camera icon-upload"></i>
 
-                                        <span class="text-upload">ADD PIC</span>
+                                        <span class="text-upload" i18n>ADD PIC</span>
 
                                     </div>
 
@@ -516,72 +422,48 @@
 
                             </div>
 
-                            <div class="regroupe-form">
-
-                                <label></label>
-
-                                <div class="block-form-flex">
-
-                                    <input [formControl]="linkedin" name="linkedin" type="text" class="champ-form-gestion champ-incrage-network" value="" />
-
-                                    <span class="span-incrage span-incrage-network">
-                    <i class="fab fa-linkedin-in icon-network"></i>
-                    Linkedin
-                  </span>
-
+                            <div class="form-line">
+                                <div class="input-bloc">
+                                    <!-- <span class="span-incrage">URL : </span> -->
+                                    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
+                                        <mat-label i18n>
+                                            <mat-icon class="mat-18">link</mat-icon>&nbsp;Linked<i class="fab fa-linkedin-in icon-network"></i>
+                                        </mat-label>
+                                        <input type="text" [formControl]="linkedin" matInput name="linkedin" />
+                                    </mat-form-field>
                                 </div>
-
                             </div>
 
-                            <div class="regroupe-form">
-
-                                <label></label>
-
-                                <div class="block-form-flex">
-
-                                    <input [formControl]="facebook" name="facebook" type="text" class="champ-form-gestion champ-incrage-network" value="" />
-
-                                    <span class="span-incrage span-incrage-network">
-                    <i class="fab fa-facebook-f icon-network"></i>
-                    Facebook
-                  </span>
-
+                            <div class="form-line">
+                                <div class="input-bloc">
+                                    <!-- <span class="span-incrage">URL : </span> -->
+                                    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
+                                        <mat-label i18n>
+                                            <mat-icon class="mat-18">link</mat-icon>&nbsp;<i class="fab fa-facebook-f icon-network"></i>acebook
+                                        </mat-label>
+                                        <input type="text" [formControl]="facebook" matInput name="facebook" />
+                                    </mat-form-field>
                                 </div>
-
                             </div>
 
-                            <div class="regroupe-form">
-
-                                <label></label>
-
-                                <div class="block-form-flex">
-
-                                    <input [formControl]="twitter" name="twitter" type="text" class="champ-form-gestion champ-incrage-network" value="" />
-
-                                    <span class="span-incrage span-incrage-network">
-                    <i class="fab fa-twitter icon-network"></i>
-                    Twitter
-                  </span>
-
+                            <div class="form-line">
+                                <div class="input-bloc">
+                                    <!-- <span class="span-incrage">URL : </span> -->
+                                    <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
+                                        <mat-label i18n>
+                                            <mat-icon class="mat-18">link</mat-icon>&nbsp; <i class="fab fa-twitter icon-network"></i>Twitter
+                                        </mat-label>
+                                        <input type="text" [formControl]="twitter" matInput name="twitter" />
+                                    </mat-form-field>
                                 </div>
-
                             </div>
 
 
                             <div class="regroupe-form">
-
-                                <label></label>
-
-                                <div (click)="clickchange2()" class="block-form-flex btn-block-flex">
-
-                                    <button mat-button class="btn-validate">ENREGISTRER LES CHANGEMENTS</button>
-
+                                <div class="fix-button-save">
+                                    <app-base-button (click)='clickchange2()' iconName="save" i18n>ENREGISTRER LES CHANGEMENTS</app-base-button>
                                 </div>
-
                             </div>
-
-
-
                         </form>
 
                     </div>
@@ -595,7 +477,7 @@
 
                         <div class="completion_fiche_progress">
 
-                            <h2 class="text_number_progress_responsive">Complétion de votre fiche</h2>
+                            <h2 class="text_number_progress_responsive" i18n>Complétion de votre fiche</h2>
 
                             <div class="progres">
                                 <round-progress [current]="currentTotal" [max]="100" [color]="'white'" [background]="'#6a84a0'" [radius]="200" [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="true" [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'"
@@ -606,7 +488,7 @@
 
                                 <span class="number_progress">{{currentTotal}}</span>
 
-                                <span class="text_number_progress">Complétion de votre fiche</span>
+                                <span class="text_number_progress" i18n>Complétion de votre fiche</span>
 
                             </div>
 

@@ -247,7 +247,7 @@ export class UtilisateursComponent implements OnInit {
 
     if (doAction) {
       this.apiClientService
-        .put( API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/users/' + userToEnable.id, { blocked: false })
+        .put(API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/users/' + userToEnable.id, { blocked: false })
         .toPromise()
         .then(res => {
           console.log(res);
@@ -307,17 +307,18 @@ export class UtilisateursComponent implements OnInit {
    * @param event
    */
   roleSetted(event): void {
-    this.selectedRole = event.target.value;
+    console.log('event: ', event);
+    this.selectedRole = event.value;
   }
 
   public addUser() {
-    console.log('this.addPrenom.value : ', this.addPrenom.value);
-    console.log('this.addNom.value : ', this.addNom.value);
-    console.log('this.addEmail.value : ', this.addEmail.value);
-    console.log('this.addPassword.value : ', this.addPassword.value);
-    console.log('this.confirmPassword.value : ', this.confirmPassword.value);
-    console.log('this.selectedRole : ', this.userrole.value);
-    console.log('this.addUsername.value : ', this.addUsername.value);
+    // console.log('this.addPrenom.value : ', this.addPrenom.value);
+    // console.log('this.addNom.value : ', this.addNom.value);
+    // console.log('this.addEmail.value : ', this.addEmail.value);
+    // console.log('this.addPassword.value : ', this.addPassword.value);
+    // console.log('this.confirmPassword.value : ', this.confirmPassword.value);
+    // console.log('this.selectedRole : ', this.userrole.value);
+    // console.log('this.addUsername.value : ', this.addUsername.value);
     this.submittedUser = true;
     if (
       this.addPrenom.value === '' ||
@@ -378,6 +379,10 @@ export class UtilisateursComponent implements OnInit {
   }
 
   public updateUser() {
+    console.log('this.editPrenom.value : ', this.editPrenom.value);
+    console.log('this.editPassword.value  : ', this.editPassword.value);
+    console.log('this.confirmPassword.value : ', this.confirmPassword.value);
+    console.log('this.selectedRole : ', this.selectedRole);
     this.modifiedUser = true;
     if (
       this.editPrenom.value === '' ||
@@ -404,6 +409,7 @@ export class UtilisateursComponent implements OnInit {
         })
         .toPromise()
         .then(async res => {
+          console.log('Res post update user : ', res);
           this.ngOnInit();
           this.param_cog_non_active_deux();
           this.editPrenom = new FormControl('', Validators.required);

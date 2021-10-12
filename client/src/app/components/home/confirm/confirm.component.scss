@@ -1,0 +1,26 @@
+@import"../../../../roodeo-variables.scss";
+
+.header-modal {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid $color-principal-blue;
+    padding: 15px;
+
+    /* background-color: #f2bb13; */
+
+    h2 {
+        margin-bottom: 0px !important;
+        color: black;
+        font-size: 20px;
+    }
+
+    p {
+        color: $color-principal-blue;
+    }
+}
+
+app-base-button:first-child{
+    margin-right: 10px;
+}

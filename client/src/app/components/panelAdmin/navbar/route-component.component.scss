@@ -1,8 +1,8 @@
 @import "../../../../roodeo-variables.scss";
-::ng-deep .mat-menu-item {
-    display: flex!important;
+button.mat-menu-item {
+    display: flex !important;
     // justify-content: center!important;
-    align-items: center!important;
+    align-items: center !important;
 }
 
 .flags_img_selected {
@@ -14,10 +14,9 @@
     position: fixed;
     z-index: 2;
     width: 100%;
-    padding: 0px 15px;
     .wrapper {
         background: #fff;
-        box-shadow: 0px 9px 11px -1px rgba(124, 151, 166, 0.69), 0px 9px 11px -1px rgba(68, 68, 68, 0.69);
+        box-shadow: 0 1px 6px rgba(32, 33, 36, .28);
         display: flex;
         width: 100%;
         z-index: 9999;
@@ -42,7 +41,7 @@
             display: flex;
             align-items: center;
             .custom-text {
-                color: #1d3551;
+                color: $color-principal-blue;
                 margin-bottom: 0px !important;
                 font-size: 14px;
                 display: inline-block;
@@ -50,6 +49,11 @@
                 text-transform: uppercase;
                 font-weight: bold;
                 margin-right: 20px;
+                .custom-type-acc {
+                    border: 1px solid $color-principal-blue;
+                    padding: 5px;
+                    border-radius: 50%;
+                }
             }
             .icon-country {
                 position: relative;
@@ -280,7 +284,7 @@
 
 // STYLE NOTIF
 .dropdownn-notif {
-    width: 350px!important;
+    width: 350px !important;
     padding: 15px;
     min-height: 250px;
     max-height: 50%;
@@ -376,13 +380,13 @@
 
 @media screen and (max-width:767px) {
     .menu-burgeur {
-        display: block!important;
+        display: block !important;
     }
     .circle-icon {
-        display: inline-block!important;
+        display: inline-block !important;
     }
     .chevron-down-burgeur {
-        display: block!important;
+        display: block !important;
         color: white;
         margin-top: 3px;
         // margin-left: 9px;
@@ -395,40 +399,40 @@
         height: 100%;
         background-color: #20252a;
         ;
-        flex-direction: column!important;
+        flex-direction: column !important;
         // display: none;
         transition: .5s;
         transform: translateX(-280px)
     }
     #nav-menu .active-menu-bergeur {
         // display: block!important;
-        transform: translateX(0px)!important;
+        transform: translateX(0px) !important;
     }
     .list-menu>li {
-        margin-left: 0px!important;
+        margin-left: 0px !important;
         text-transform: uppercase;
     }
     .list-menu li {
         &:hover {
-            background-color: transparent!important;
+            background-color: transparent !important;
         }
         &:hover .content-img {
-            background-color: transparent!important;
+            background-color: transparent !important;
         }
     }
     .text-menu {
-        height: 52px!important;
-        width: 65px!important;
-        padding: 7px 15px!important;
-        color: white!important;
+        height: 52px !important;
+        width: 65px !important;
+        padding: 7px 15px !important;
+        color: white !important;
         // display: inline-block!important;
         &:hover {
-            background-color: transparent!important;
+            background-color: transparent !important;
         }
     }
     .content-img {
-        width: 56px!important;
-        height: 52px!important;
+        width: 56px !important;
+        height: 52px !important;
     }
     .list-menu-top-header {
         border-top: 1px solid black;
@@ -441,7 +445,7 @@
         min-width: 180px;
     }
     .arrow {
-        display: inline-block!important;
+        display: inline-block !important;
         color: white;
         align-items: flex-end;
         position: relative;
@@ -449,21 +453,21 @@
         cursor: pointer;
     }
     .dropdownn.dropdownn-notif {
-        display: none!important;
+        display: none !important;
     }
     .title-menu-responsive {
-        display: block!important;
+        display: block !important;
         min-width: 180px;
         color: #fff
     }
     .dropdownn {
-        width: auto!important;
-        display: block!important;
-        position: static!important;
-        padding: 6px 15px!important;
-        background: transparent!important;
+        width: auto !important;
+        display: block !important;
+        position: static !important;
+        padding: 6px 15px !important;
+        background: transparent !important;
     }
     .dropdownn li p {
-        display: none!important;
+        display: none !important;
     }
 }

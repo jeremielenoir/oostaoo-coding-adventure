@@ -1,9 +1,9 @@
 <div #header id="navbar" [className]="shouldShow ? 'remove-index' : 'add-index'">
-  <mat-toolbar color="primary">
-    <img [routerLink]="['/home']" id="logo" src="../../assets/logo_ROODEO.svg" alt="Logo" />
+    <mat-toolbar color="primary">
+        <img [routerLink]="['/home']" id="logo" src="../../assets/logo_ROODEO.svg" alt="Logo" />
 
-    <mat-toolbar-row class="super">
-      <!--button
+        <mat-toolbar-row class="super">
+            <!--button
         mat-icon-button
         (click)="sidenav.toggle()"
         (click)="showOrHideManually()"
@@ -13,88 +13,87 @@
         <mat-icon class="size-nav">menu</mat-icon>
       </button-->
 
-      <span class="menu-spacer"></span>
-      <div id="all-list-menu" fxShow="true" fxHide.lt-md>
-        
-        <a class="link-menu hvr-underline-reveal" [ngClass]="currentSection == 'home' ? 'link-active':''" [routerLink]="[ '/home']" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'test-dev'" i18n>
+            <span class="menu-spacer"></span>
+            <div id="all-list-menu" fxShow="true" fxHide.lt-md>
+
+                <a class="link-menu hvr-underline-reveal" [ngClass]="currentSection == 'home' ? 'link-active':''" [routerLink]="[ '/home']" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'test-dev'" i18n>
           Test the developers
         </a>
-        <a class="link-menu hvr-underline-reveal" [ngClass]="currentSection == 'interview' ? 'link-active':''" [routerLink]="[ '/home']" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'interview'" i18n>
+                <a class="link-menu hvr-underline-reveal" [ngClass]="currentSection == 'interview' ? 'link-active':''" [routerLink]="[ '/home']" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'interview'" i18n>
           Technical Interviews
         </a>
-        <a class="link-menu hvr-underline-reveal" [ngClass]="currentSection == 'techno' ? 'link-active':''" [routerLink]="[ '/home']" [ngx-scroll-to-offset]='-30' [ngx-scroll-to]="'techno'" i18n>
+                <a class="link-menu hvr-underline-reveal" [ngClass]="currentSection == 'techno' ? 'link-active':''" [routerLink]="[ '/home']" [ngx-scroll-to-offset]='-30' [ngx-scroll-to]="'techno'" i18n>
           Technologies
         </a>
-        <a class="link-menu hvr-underline-reveal" [ngClass]="currentSection == 'fonctionnalites' ? 'link-active':''" [routerLink]="[ '/home']" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'fonctionnalites'" i18n>
+                <a class="link-menu hvr-underline-reveal" [ngClass]="currentSection == 'fonctionnalites' ? 'link-active':''" [routerLink]="[ '/home']" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'fonctionnalites'" i18n>
           Features
         </a>
-        <a class="link-menu hvr-underline-reveal" [ngClass]="currentSection == 'offers' ? 'link-active':''" [routerLink]="[ '/home']" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'offers'" i18n>
+                <a class="link-menu hvr-underline-reveal" [ngClass]="currentSection == 'offers' ? 'link-active':''" [routerLink]="[ '/home']" [ngx-scroll-to-offset]='-100' [ngx-scroll-to]="'offers'" i18n>
           Prices
         </a>
-        <!--a (click)="logout()">Se déconnecter</a-->
-        <a (click)="gotToLoginPage()" class="link-menu mat-button hvr-fade" i18n>Connection</a>
+                <!--a (click)="logout()">Se déconnecter</a-->
+                <a (click)="gotToLoginPage()" class="link-menu mat-button hvr-fade" i18n>Connection</a>
 
 
-        <div class="align_flags">
-         
-              <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
-              <img  class="flags_img" src="{{currentLanguage}}" alt="Français">
-              <i class="fas fa-caret-down arrow"></i>
+                <div class="align_flags">
+
+                    <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
+                        <img class="flags_img" src="{{currentLanguage}}" alt="Français">
+                        <i class="fas fa-caret-down arrow"></i>
+                    </div>
+
+                    <mat-menu #menu="matMenu">
+                        <div *ngFor="let language of otherLanguage">
+                            <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage' mat-menu-item><img class="flags_img" src="{{language.img}}" alt="">&nbsp;&nbsp;{{getProperty(language, 'label') | uppercase}}</button>
+                        </div>
+                    </mat-menu>
+                </div>
+
+
             </div>
-           
-            <mat-menu #menu="matMenu">
-              <div *ngFor="let language of otherLanguage">
-                <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage' mat-menu-item><img class="flags_img" src="{{language.img}}" alt=""></button>
-              </div>
-            </mat-menu>
+        </mat-toolbar-row>
+
+        <div id="icon" #icon (click)="openBurgeur()" [class.open]="activeBurgeur">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
+    </mat-toolbar>
 
-       
-      </div>
-    </mat-toolbar-row>
 
-    <div id="icon" #icon (click)="openBurgeur()" [class.open]="activeBurgeur">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </mat-toolbar>
-  
-
-  <mat-sidenav-container (click)="showOrHideManually()" fxFlexFill class="fixe-nav">
-    <mat-sidenav #sidenav>
-      <mat-nav-list>
-        <a href="#" mat-list-item i18n>
+    <mat-sidenav-container (click)="showOrHideManually()" fxFlexFill class="fixe-nav">
+        <mat-sidenav #sidenav>
+            <mat-nav-list>
+                <a href="#" mat-list-item i18n>
           Evaluate and test developers</a>
-        <a href="#" mat-list-item i18n>Prices</a>
-        <a href="#" mat-list-item i18n>Connection</a>
-        <!--a (click)="logout()">Se déconnecter</a-->
-        <a href="#" mat-button i18n>
+                <a href="#" mat-list-item i18n>Prices</a>
+                <a href="#" mat-list-item i18n>Connection</a>
+                <!--a (click)="logout()">Se déconnecter</a-->
+                <a href="#" mat-button i18n>
           30 days free evaluation</a>
-      </mat-nav-list>
-    </mat-sidenav>
-  </mat-sidenav-container>
+            </mat-nav-list>
+        </mat-sidenav>
+    </mat-sidenav-container>
 </div>
 
 <nav id="menuBurgeur" [class.openBurgeur]="activeBurgeur">
-   <a href="" class="logo-burgeur">
-      <img src="../../assets/logo_ROODEO.svg" alt="" />
-   </a>
-  <ul class="nav-burgeur">
-      <li><a href="" i18n> Test the developers </a></li>
-      <li><a href="" i18n> Technical Interviews  </a></li>
-      <li><a href="" i18n> Technologies  </a></li>
-      <li><a href="" i18n> Features  </a></li>
-      <li><a href="" i18n> Connection </a> </li>
-      <li class="last-list-flags">
-          <span *ngFor="let otherLanguageSingle of otherLanguage">
+    <a href="" class="logo-burgeur">
+        <img src="../../assets/logo_ROODEO.svg" alt="" />
+    </a>
+    <ul class="nav-burgeur">
+        <li><a href="" i18n> Test the developers </a></li>
+        <li><a href="" i18n> Technical Interviews  </a></li>
+        <li><a href="" i18n> Technologies  </a></li>
+        <li><a href="" i18n> Features  </a></li>
+        <li><a href="" i18n> Connection </a> </li>
+        <li class="last-list-flags">
+            <span *ngFor="let otherLanguageSingle of otherLanguage">
             <img src="{{otherLanguageSingle.img}}" alt=""/>
           </span>
-          
-      </li>
 
-  </ul>
+        </li>
+
+    </ul>
 
 
 </nav>
-

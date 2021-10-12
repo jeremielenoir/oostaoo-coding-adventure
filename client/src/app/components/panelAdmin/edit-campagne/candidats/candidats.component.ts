@@ -1,25 +1,26 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {
   MatDialog,
   MatTableDataSource,
   MatSort,
   MatSidenav,
-} from "@angular/material";
-import { ActivatedRoute, Router } from "@angular/router";
-import { DatePipe } from "@angular/common";
-import { InviteCandidat } from "./invite-candidat.component";
-import { DecryptTokenService } from "../../../home/register/register.service";
+} from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { InviteCandidat } from './invite-candidat.component';
+import { DecryptTokenService } from '../../../home/register/register.service';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
   API_URI_CANDIDATS,
   API_URI_CANDIDATS_PDF_REPORT,
-} from "../../../../api-client/api-client.service";
-import { HttpClient } from "@angular/common/http";
-import { saveAs } from "file-saver";
-import { getResultsDefinition } from "./getResultsDefinition";
-import { InterviewDialogComponent } from "./interview-dialog/interview-dialog.component";
-import * as moment from "moment";
+  API_URI_USER,
+} from '../../../../api-client/api-client.service';
+import { HttpClient } from '@angular/common/http';
+import { saveAs } from 'file-saver';
+import { getResultsDefinition } from './getResultsDefinition';
+import { InterviewDialogComponent } from './interview-dialog/interview-dialog.component';
+import * as moment from 'moment';
 //import pdfMake from "pdfmake/build/pdfmake";
 // font build has to be committed otherwise each developers has to build font locally.
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -43,9 +44,9 @@ import * as moment from "moment";
 };*/
 
 @Component({
-  selector: "app-candidats",
-  templateUrl: "./candidats.component.html",
-  styleUrls: ["./candidats.component.scss"],
+  selector: 'app-candidats',
+  templateUrl: './candidats.component.html',
+  styleUrls: ['./candidats.component.scss'],
 })
 export class CandidatsComponent implements OnInit {
   public globalId: string;
@@ -53,7 +54,7 @@ export class CandidatsComponent implements OnInit {
   public campaigns;
   public campaign;
   public candidats;
-  public currentCandidat = { Candidats: "" };
+  public currentCandidat = { Candidats: '' };
   public technologies;
   public displayedColumns;
   public infosCandidats;
@@ -63,7 +64,7 @@ export class CandidatsComponent implements OnInit {
   public anonymizing: boolean;
   public deletingCandidats: boolean;
   public allCandidatsSelected = false;
-  datePipe = new DatePipe("fr");
+  datePipe = new DatePipe('fr');
   ViewCandidats;
   isLoading = true;
   choiceList: boolean;
@@ -72,14 +73,14 @@ export class CandidatsComponent implements OnInit {
   public decryptTokenService = new DecryptTokenService();
 
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild("check") check: ElementRef;
+  @ViewChild('check') check: ElementRef;
 
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
     public apiClientService: ApiClientService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
   ) {
     this.route.parent.params.subscribe((params) => {
       this.globalId = params.id;
@@ -91,36 +92,51 @@ export class CandidatsComponent implements OnInit {
   }
 
   choices = [
-    { value: "exporter", viewValue: "Exporter" },
-    { value: "anonymiser", viewValue: "Anonymiser" },
-    { value: "supprimer", viewValue: "Supprimer" },
+    { value: 'exporter', viewValue: 'Exporter' },
+    { value: 'anonymiser', viewValue: 'Anonymiser' },
+    { value: 'supprimer', viewValue: 'Supprimer' },
   ];
   choicesTimeTest = [
-    { value: "attente", viewValue: "En attente" },
-    { value: "terminer", viewValue: "Terminés" },
-    { value: "expirer", viewValue: "Expirés" },
+    { value: 'attente', viewValue: 'En attente' },
+    { value: 'terminer', viewValue: 'Terminés' },
+    { value: 'expirer', viewValue: 'Expirés' },
   ];
 
   ngOnInit() {
-    this.tests_available = this.decryptTokenService.tests_available;
+    this.loadTestsAvailable();
     if (this.tests_available == -1) {
-      this.tests_available = "";
+      this.tests_available = '';
     }
     this.getCampaign().then((datas) => {
       this.campaign = datas;
     });
   }
 
+  loadTestsAvailable() {
+    this.apiClientService
+      .get(API_URI_USER + '/' + this.decryptTokenService.userId)
+      .subscribe((user) => {
+        console.log(user);
+        this.tests_available = user.customeraccount.tests_stock;
+      });
+  }
+
   openDialog() {
+    if (this.tests_available === 0) {
+      console.log('ZERO');
+    }
     const dialogRef = this.dialog.open(InviteCandidat, {
-      data: { globalId: this.globalId, tests_available: this.tests_available },
-      height: "580px",
+      data: {
+        globalId: this.globalId,
+        tests_available: this.tests_available,
+      },
+      height: '580px',
     });
 
     dialogRef.afterClosed().subscribe((data) => {
       if (data) this.tests_available = data;
       this.getCampaign().then((datas) => {
-        console.log("AFTER CLOSE ALL DATAS", datas);
+        console.log('AFTER CLOSE ALL DATAS', datas);
       });
     });
   }
@@ -128,7 +144,7 @@ export class CandidatsComponent implements OnInit {
   openInterviewDialog(data) {
     this.dialog.open(InterviewDialogComponent, {
       data,
-      height: "auto",
+      height: 'auto',
       minWidth: 550,
     });
   }
@@ -149,27 +165,32 @@ export class CandidatsComponent implements OnInit {
     if (!this.infosCandidats) {
       return;
     }
-    this.infosCandidats.data.forEach(c => {
+    this.infosCandidats.data.forEach((c) => {
       c.selected = checked;
     });
   }
   someCandidatsSelected(): boolean {
-    return !this.infosCandidats ? false : this.getCandidatsSelected().length > 0 && !this.allCandidatsSelected;
+    return !this.infosCandidats
+      ? false
+      : this.getCandidatsSelected().length > 0 && !this.allCandidatsSelected;
   }
   updateAllCandidatsSelected() {
-    this.allCandidatsSelected = this.infosCandidats.data.every(c => c.selected);
+    this.allCandidatsSelected = this.infosCandidats.data.every(
+      (c) => c.selected,
+    );
   }
   getCandidatsSelected() {
-    return this.infosCandidats.data.filter(c => c.selected).map(c => c.candidat_id.toString());
+    return this.infosCandidats.data
+      .filter((c) => c.selected)
+      .map((c) => c.candidat_id.toString());
   }
   getCandidatStatusSelected(id: number) {
     if (!this.infosCandidats) {
       return false;
     }
-    const found = this.infosCandidats.data.find(c => c.candidat_id === id);
+    const found = this.infosCandidats.data.find((c) => c.candidat_id === id);
     return found ? found.selected : false;
   }
-
 
   exported() {
     this.viewResultsPdf(this.getCandidatsSelected());
@@ -180,11 +201,11 @@ export class CandidatsComponent implements OnInit {
   }
   anonymize() {
     this.getCandidatsSelected().forEach((elementid) => {
-      const urlApi = API_URI_CANDIDATS + "/" + elementid;
+      const urlApi = API_URI_CANDIDATS + '/' + elementid;
       this.apiClientService
         .put(urlApi, {
-          Nom: "-",
-          email: "-",
+          Nom: '-',
+          email: '-',
         })
         .subscribe((response) => {
           this.setAnonymizing(false);
@@ -198,7 +219,7 @@ export class CandidatsComponent implements OnInit {
   }
   deleteCandidats() {
     this.getCandidatsSelected().forEach((idDelete) => {
-      const urlApi = API_URI_CANDIDATS + "/" + idDelete;
+      const urlApi = API_URI_CANDIDATS + '/' + idDelete;
       this.apiClientService.delete(urlApi).subscribe((response) => {
         this.setDeletingCandidats(false);
         this.selectAllCandidats(false);
@@ -212,16 +233,16 @@ export class CandidatsComponent implements OnInit {
     //   this.selectAllCandidats(false);
     // }, 100);
 
-    const apiURL = API_URI_CAMPAIGNS + "/" + this.globalId;
+    const apiURL = API_URI_CAMPAIGNS + '/' + this.globalId;
     return this.apiClientService
       .get(apiURL)
       .toPromise()
       .then(
         (res) => {
           let userId = res.user.id;
-          let userIdConnect = this.decryptTokenService.userIdExporte["userId"];
+          let userIdConnect = this.decryptTokenService.userIdExporte['userId'];
           if (userId !== userIdConnect) {
-            this.router.navigate(["/dashboard/campaigns"]);
+            this.router.navigate(['/dashboard/campaigns']);
             return;
           }
 
@@ -233,22 +254,23 @@ export class CandidatsComponent implements OnInit {
               let points_candidat = candidat.points_candidat;
               let scoreByTechObject = {};
               points_candidat.forEach((point) => {
-                if (point["getpourcentByCandidat"]) {
-                  getpourcentByCandidat = point["getpourcentByCandidat"];
+                if (point['getpourcentByCandidat']) {
+                  getpourcentByCandidat = point['getpourcentByCandidat'];
                 }
               });
               getpourcentByCandidat.forEach((score) => {
-                scoreByTechObject[score.techno] = score.percentage.toFixed(2) + "%";
+                scoreByTechObject[score.techno] =
+                  score.percentage.toFixed(2) + '%';
               });
 
               const percentArray =
                 points_candidat &&
-                  points_candidat.length &&
-                  points_candidat[2] &&
-                  points_candidat[2]["getpourcentByCandidat"]
-                  ? points_candidat[2]["getpourcentByCandidat"].map(
-                    (a) => a.percentage
-                  )
+                points_candidat.length &&
+                points_candidat[2] &&
+                points_candidat[2]['getpourcentByCandidat']
+                  ? points_candidat[2]['getpourcentByCandidat'].map(
+                      (a) => a.percentage,
+                    )
                   : [];
 
               const sumPercent =
@@ -256,7 +278,7 @@ export class CandidatsComponent implements OnInit {
                   ? percentArray.reduce((a, b) => parseFloat(a + b))
                   : 0;
 
-              const Score = (sumPercent / percentArray.length).toFixed(2) + "%";
+              const Score = (sumPercent / percentArray.length).toFixed(2) + '%';
               return {
                 ...candidat,
                 Score,
@@ -270,26 +292,26 @@ export class CandidatsComponent implements OnInit {
           this.technologies = res.technologies;
 
           if (this.campaigns.candidats.length > 0) {
-            this.ViewCandidats = "CandidatTrue";
+            this.ViewCandidats = 'CandidatTrue';
           } else {
-            this.ViewCandidats = "CandidatFalse";
+            this.ViewCandidats = 'CandidatFalse';
           }
           return this.campaigns;
         },
         (err) => {
-          this.router.navigate(["/dashboard/campaigns"]);
-        }
+          this.router.navigate(['/dashboard/campaigns']);
+        },
       )
       .then((data) => {
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
         const defaultColumns = [
-          "Checked",
-          "Rapport",
-          "Interview",
+          'Checked',
+          'Rapport',
+          'Interview',
 
-          "Candidats",
-          "Dernière activité",
-          "Score",
+          'Candidats',
+          'Dernière activité',
+          'Score',
         ];
         const getInfoCandidat = [];
         let dateInvite;
@@ -302,7 +324,7 @@ export class CandidatsComponent implements OnInit {
           getTechnos.push(technos.name);
         }
 
-        this.displayedColumns = defaultColumns.concat(getTechnos, ["Durée"]);
+        this.displayedColumns = defaultColumns.concat(getTechnos, ['Durée']);
 
         for (const candidat of this.candidats) {
           if (candidat.duree !== null) {
@@ -312,9 +334,9 @@ export class CandidatsComponent implements OnInit {
             duree = 0;
           }
           // console.log('CANDIDAT TERMINER', candidat.test_terminer);
-          if (candidat.test_terminer === "0000-00-00 00:00:00") {
+          if (candidat.test_terminer === '0000-00-00 00:00:00') {
             dateInvite = new Date(candidat.invitation_date);
-            percentCandidat = 0 + "%";
+            percentCandidat = 0 + '%';
           } else {
             dateInvite = new Date(candidat.test_terminer);
             // console.log('candidat.points_candidat[5].PourcentTest: ', candidat.points_candidat[5].PourcentTest);
@@ -325,9 +347,9 @@ export class CandidatsComponent implements OnInit {
               !candidat.points_candidat[5].PourcentTest ||
               candidat.points_candidat[5].PourcentTest === null
             ) {
-              percentCandidat = 0 + "%";
+              percentCandidat = 0 + '%';
             } else {
-              percentCandidat = candidat.points_candidat[5].PourcentTest + "%";
+              percentCandidat = candidat.points_candidat[5].PourcentTest + '%';
             }
           }
           //console.log("candidat ===============",candidat)
@@ -337,7 +359,7 @@ export class CandidatsComponent implements OnInit {
             Email: candidat.email,
             status: candidat.status,
             selected: this.getCandidatStatusSelected(candidat.id),
-            "Dernière activité": dateInvite.toLocaleString(),
+            'Dernière activité': dateInvite.toLocaleString(),
             // Score: percentCandidat,
             Score: candidat.Score,
             Durée: duree,
@@ -349,11 +371,11 @@ export class CandidatsComponent implements OnInit {
               ...candidat.interview,
               interview_date:
                 candidat &&
-                  candidat.interview &&
-                  candidat.interview.interview_date
+                candidat.interview &&
+                candidat.interview.interview_date
                   ? moment(candidat.interview.interview_date)
-                    .lang("fr")
-                    .format("dddd, MMMM Do YYYY, HH:mm")
+                      .lang('fr')
+                      .format('dddd, MMMM Do YYYY, HH:mm')
                   : null,
             },
             date: candidat.test_ouvert,
@@ -371,7 +393,7 @@ export class CandidatsComponent implements OnInit {
         return this.campaigns;
       })
       .catch((error) => {
-        console.log("ERROR", error);
+        console.log('ERROR', error);
       });
   }
 
@@ -379,7 +401,7 @@ export class CandidatsComponent implements OnInit {
     // console.log('%c counterId', 'font-size:24px;color:blue', candidat_id)
 
     const selectedCandidate = this.candidats.find(
-      (unit) => unit.id == candidat_id
+      (unit) => unit.id == candidat_id,
     );
     const name = selectedCandidate.Nom;
     const email = selectedCandidate.email;
@@ -387,7 +409,7 @@ export class CandidatsComponent implements OnInit {
     const rapport = selectedCandidate.raport_candidat.rapport;
     const date = this.datePipe.transform(
       selectedCandidate.test_ouvert,
-      "dd-MM-yy"
+      'dd-MM-yy',
     );
     const points = selectedCandidate.points_candidat;
 
@@ -397,10 +419,10 @@ export class CandidatsComponent implements OnInit {
     points[1].allPointsCandidat.forEach((techno) => {
       totalPointsCandidat += techno.points;
       const pointsMaxTechno = points[0].allPointsTechnos.find(
-        (tech) => tech.technologies === techno.technologies
+        (tech) => tech.technologies === techno.technologies,
       ).points;
       totalPointsMax += pointsMaxTechno;
-      const percentage_techno = (techno.points / pointsMaxTechno) * 100 + " %";
+      const percentage_techno = (techno.points / pointsMaxTechno) * 100 + ' %';
       resultsByLanguage[techno.technologies] = {
         note: techno.points,
         max: pointsMaxTechno,
@@ -408,8 +430,8 @@ export class CandidatsComponent implements OnInit {
       };
     });
 
-    const score = (totalPointsCandidat / totalPointsMax) * 100 + "%";
-    let languages = "";
+    const score = (totalPointsCandidat / totalPointsMax) * 100 + '%';
+    let languages = '';
     Object.keys(resultsByLanguage).map((language) => {
       languages = `${languages} ${language}`;
     });
@@ -425,10 +447,10 @@ export class CandidatsComponent implements OnInit {
       const question_candidate_score =
         candidate_answer === correct_answer ? question_max_score : 0;
       const content = question.index_question.content
-        ? question.index_question.content.split(", ")
+        ? question.index_question.content.split(', ')
         : [];
-      if (content && content[3] === "Aucune") {
-        content.splice(3, 4, "Aucune des solutions précédentes");
+      if (content && content[3] === 'Aucune') {
+        content.splice(3, 4, 'Aucune des solutions précédentes');
       }
 
       function convertToMin(time) {
@@ -486,13 +508,13 @@ export class CandidatsComponent implements OnInit {
   viewResultsPdf(candidat) {
     this.http
       .get(API_URI_CANDIDATS_PDF_REPORT + candidat.candidat_id, {
-        responseType: "blob",
+        responseType: 'blob',
       })
       .toPromise()
       .then((blob) => {
         saveAs(blob, `${candidat.Candidats}-tests-result.pdf`);
       })
-      .catch((err) => console.error("download error = ", err));
+      .catch((err) => console.error('download error = ', err));
   }
 
   secondsToHms(duree) {
@@ -500,9 +522,9 @@ export class CandidatsComponent implements OnInit {
     const m = Math.floor((duree % 3600) / 60);
     const s = Math.floor((duree % 3600) % 60);
 
-    const hour = h > 0 ? h + (h === 1 ? " heure " : " heures, ") : "";
-    const minute = m > 0 ? m + (m === 1 ? " minute, " : " minutes, ") : "";
-    const secondes = s > 0 ? s + (s === 1 ? " seconde" : " secondes") : "";
+    const hour = h > 0 ? h + (h === 1 ? ' heure ' : ' heures, ') : '';
+    const minute = m > 0 ? m + (m === 1 ? ' minute, ' : ' minutes, ') : '';
+    const secondes = s > 0 ? s + (s === 1 ? ' seconde' : ' secondes') : '';
     return hour + minute + secondes;
   }
 

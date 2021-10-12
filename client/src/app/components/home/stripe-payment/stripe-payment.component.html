@@ -4,89 +4,43 @@
         <div class="loader"> -->
 <app-route-component></app-route-component>
 <!--app-breadcrumb [namePage]="'Payment'"></app-breadcrumb-->
-<mat-progress-bar *ngIf="inProgress" class="roodeo-progress-bar" mode="query"></mat-progress-bar>
-<div class="rdo-panel" style="margin-top: 130px;">
+<mat-progress-bar
+  *ngIf="inProgress"
+  class="roodeo-progress-bar"
+  mode="query"
+></mat-progress-bar>
+<div class="rdo-panel" style="margin-top: 130px">
   <div class="rdo-panel-header">
     <h2 i18n><i class="fa fa-user-circle icon"></i> Finalisez votre achat</h2>
-    <button id="payment" type="button" (click)="payNow()" *ngIf="!paied" [disabled]="!canPayNow()" mat-raised-button
-      color="primary" i18n>Payer
-      <mat-progress-spinner *ngIf="inProgress" style="display: inline-block;" color="accent" mode="indeterminate"
-        diameter="20" value="50">
-      </mat-progress-spinner>
-    </button>
+    <app-base-button
+      id="payment"
+      *ngIf="!paied"
+      iconName="payment"
+      (clickEvent)="confirmPayment()"
+      >Payer</app-base-button
+    >
   </div>
   <div fxLayout="row" fxLayoutGap="20px">
-    <div fxFlex="50" class="rdo-content-group">
+    <div fxFlex="100" class="rdo-content-group">
       <div>
         <h3 i18n><i class="fa fa-shopping-cart icon"></i> Votre offre</h3>
-        <button *ngIf="!paied" type="button" mat-stroked-button color="primary" i18n>Changer d'offre</button>
+        <app-base-button
+          *ngIf="!paied"
+          mat-stroked-button
+          color="primary"
+          iconName="autorenew"
+          [routerLink]="['/subscription']"
+          >Change d'offre</app-base-button
+        >
       </div>
       <div fxLayout="column" fxLayoutGap="20px">
         <div>
-          <h2 style="display: inline-block;">{{offerChoice?.title + ' ' + offerChoice?.price + '€ '}}</h2>
-          <h6 style="display: inline-block; color: gray;" i18n>/mois</h6>
+          <h2 style="display: inline-block">
+            {{ offerChoice?.title + ' pour ' + offerChoice?.price + '€ ' }}
+          </h2>
+          <h6 *ngIf="offerChoice.periodicity === 'monthly'" style="display: inline-block; color: gray" i18n>/mois</h6>
         </div>
-        <div class="offer-desc" [innerHTML]="offerChoice.description"></div>
-      </div>
-    </div>
-    <div fxFlex="50" fxLayout="column">
-      <div class="rdo-content-group">
-        <div>
-          <h3 i18n><i class="fa fa-credit-card icon"></i> Payer par carte bancaire</h3>
-        </div>
-        <div fxLayout="column">
-          <form [formGroup]="cardHolderForm" style="width: 100%;">
-            <div class="roodeo-form-unit-row">
-              <div class="roodeo-form-unit" fxFlex="100">
-                <label class="roodeo-form-unit-title" for="cardHolder" i18n>Propriétaire de la carte</label>
-                <input class="roodeo-form-unit-input" [(ngModel)]="cardHolder" name="cardHolder" id="cardHolder" type="text"
-                  formControlName="cardHolder" placeholder="Propriétaire de la carte">
-                <div
-                  *ngIf="cardHolderForm.controls.cardHolder.invalid && (cardHolderForm.controls.cardHolder.dirty || cardHolderForm.controls.cardHolder.touched)"
-                  class="roodeo-form-error-message">
-                  <div *ngIf="cardHolderForm.controls.cardHolder.errors.required" i18n>Nom du propriètaire de la carte est requis.</div>
-                </div>
-              </div>
-            </div>
-          </form>
-          <label class="roodeo-form-unit-title" i18n>Informations de la carte</label>
-          <ngx-stripe-card class="StripeElement" [options]="cardOptions" [elementsOptions]="elementsOptions">
-          </ngx-stripe-card>
-          <div *ngIf="messageErrorStripeElement" class="roodeo-form-error-message">
-            <div>{{messageErrorStripeElement}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="rdo-content-group">
-        <div>
-          <h3 i18n><i class="fa fa-map-marker icon"></i> Adresse de facturation</h3>
-          <button *ngIf="!paied" type="button" mat-stroked-button (click)="addOrEditAddress()"
-            color="primary" i18n>{{ account && account.billing_address ? 'Editer' : 'Ajouter une adresse'}}</button>
-        </div>
-        <div>
-          <app-address class="address" [address]="account ? account.billing_address : null"></app-address>
-        </div>
-      </div>
-      <div class="rdo-content-group">
-        <div>
-          <h3 i18n><i class="fa fa-envelope-o icon"></i> Reçu envoyé à</h3>
-        </div>
-        <div>
-          <form [formGroup]="emailForm" style="width: 100%;">
-            <div class="roodeo-form-unit-row">
-              <div class="roodeo-form-unit" fxFlex="100">
-                <input class="roodeo-form-unit-input" [(ngModel)]="emailForReceipt" name="email" id="email" type="text"
-                  formControlName="email">
-                <div
-                  *ngIf="emailForm.controls.email.invalid && (emailForm.controls.email.dirty || emailForm.controls.email.touched)"
-                  class="roodeo-form-error-message">
-                  <div *ngIf="emailForm.controls.email.errors.required" i18n>Email est requis.</div>
-                  <div *ngIf="emailForm.controls.email.errors.email" i18n>Format invalide.</div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
+        <div class="offer-desc" [innerHTML]="offerChoice?.description"></div>
       </div>
     </div>
   </div>

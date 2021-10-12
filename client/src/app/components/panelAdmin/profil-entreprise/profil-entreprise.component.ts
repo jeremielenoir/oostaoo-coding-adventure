@@ -113,6 +113,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   ];
 
   dataRoute: any;
+  disabled: boolean;
 
   constructor(
     private router: Router,
@@ -318,7 +319,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   public param_cog_non_active_add_img() {
     this.shadowcogImage = false;
 
-    this.btnValideParentAddImage.nativeElement.children[0].disabled = true;
+    this.disabled = true;
     this.cadrageImgBooleanLast = false;
     this.blockUploadLast = false;
     this.uploadimgLast.nativeElement.src = 'salut';
@@ -453,7 +454,7 @@ export class ProfilEntrepriseComponent implements OnInit {
         event.target.files[0]
       );
 
-      this.btnValideParentAddImage.nativeElement.children[0].disabled = false;
+      this.disabled = false;
     } else {
       this.cadrageImgBooleanStateLast = true;
 

@@ -1,0 +1,128 @@
+<app-route-component></app-route-component>
+<mat-progress-bar
+  *ngIf="inProgress"
+  class="roodeo-progress-bar"
+  mode="query"
+></mat-progress-bar>
+<div class="rdo-panel">
+  <div class="rdo-panel-header">
+    <h2 i18n>
+      <i class="fa fa-user-circle icon"></i> Enregistrer votre moyen de paiement
+    </h2>
+
+    <app-base-button
+      iconName="done"
+      id="payment"
+      [disabled]="!submitIsValid()"
+      (clickEvent)="saveCard()"
+      >Sauvegarder</app-base-button
+    >
+  </div>
+  <div fxLayout="column">
+    <form [formGroup]="cardHolderForm" style="width: 100%">
+      <div class="roodeo-form-unit-row">
+        <div class="roodeo-form-unit" fxFlex="100">
+          <mat-form-field
+            class="item"
+            [color]="'accent'"
+            appearance="outline"
+            [floatLabel]="true"
+          >
+            <mat-label i18n>Propriétaire de la carte</mat-label>
+            <input
+              formControlName="cardHolder"
+              name="cardHolder"
+              id="cardHolder"
+              matInput
+              placeholder="Propriétaire de la carte"
+              type="text"
+            />
+            <mat-error
+              *ngIf="
+                cardHolderForm.controls.cardHolder.invalid &&
+                (cardHolderForm.controls.cardHolder.dirty ||
+                  cardHolderForm.controls.cardHolder.touched)
+              "
+              i18n
+              >Nom du propriètaire de la carte est requis.</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <label class="roodeo-form-unit-title" i18n>Informations de la carte</label>
+    <ngx-stripe-card
+      class="StripeElement"
+      [options]="cardOptions"
+      [elementsOptions]="elementsOptions"
+      (change)="onChange($event)"
+    >
+    </ngx-stripe-card>
+    <div *ngIf="messageErrorStripeElement" class="roodeo-form-error-message">
+      <div>{{ messageErrorStripeElement }}</div>
+    </div>
+  </div>
+  <img
+    class="certified-stripe"
+    src="./../../../assets/stripe.png"
+    alt="certified-stripe-logo"
+  />
+  <div class="rdo-content-group">
+    <div>
+      <h3 i18n><i class="fa fa-map-marker icon"></i> Adresse de facturation</h3>
+
+      <app-base-button
+        type="button"
+        mat-stroked-button
+        (click)="addOrEditAddress()"
+        color="primary"
+        iconName="edit"
+        *ngIf="!paied"
+        >{{
+          account && account.billing_address ? 'Editer' : 'Ajouter une adresse'
+        }}</app-base-button
+      >
+    </div>
+    <div>
+      <app-address
+        class="address"
+        [address]="account ? account.billing_address : null"
+      ></app-address>
+    </div>
+  </div>
+
+  <div class="rdo-content-group">
+    <div>
+      <h3 i18n><i class="fa fa-envelope-o icon"></i> Reçu envoyé à</h3>
+    </div>
+    <div>
+      <form [formGroup]="emailForm" style="width: 100%">
+        <div class="roodeo-form-unit-row">
+          <div class="roodeo-form-unit" fxFlex="100">
+            <mat-form-field
+              class="item"
+              [color]="'accent'"
+              appearance="outline"
+              [floatLabel]="true"
+            >
+              <input
+                formControlName="email"
+                [(ngModel)]="emailForReceipt"
+                name="email"
+                id="email"
+                matInput
+                type="text"
+              />
+              <mat-error *ngIf="emailForm.controls.email?.errors?.required" i18n
+                >Email est requis.</mat-error
+              >
+              <mat-error *ngIf="emailForm.controls.email?.errors?.email" i18n
+                >Format invalide.</mat-error
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

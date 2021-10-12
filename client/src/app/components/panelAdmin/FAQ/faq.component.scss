@@ -1,9 +1,12 @@
 @import "../../../../roodeo-variables.scss";
+
 .global {
   background: $color-background-blue;
+
   .rowter {
     background-color: $color-background-blue;
     font-family: $font-poppins;
+
     .roodeo-page-faq {
       // height: 100%;
       padding-top: 55px;
@@ -14,18 +17,21 @@
       flex-direction: column;
       background: $color-background-blue;
       padding-bottom: 20px;
-      .roodeo-box{
+
+      .roodeo-box {
         display: flex;
         flex-direction: column;
         border: 1px solid $color-principal-blue;
         border-radius: 4px;
         background-color: $color-white;
         padding: 10px;
-        width: 70%;
-        span{
-          .roodeo-custom-title-box{
+        width: 98%;
+
+        span {
+          .roodeo-custom-title-box {
             margin-bottom: 10px;
-            .roodeo-fix-trait{
+
+            .roodeo-fix-trait {
               height: 4px;
               background-color: $color-principal-blue;
               width: 100px;
@@ -33,6 +39,7 @@
           }
         }
       }
+
       .sous-header {
         background: $color-pricipal-blue-light;
         height: 150px;
@@ -47,9 +54,11 @@
         justify-content: center;
         margin-bottom: 10px;
         box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4);
+
         .roodeo-fix-header {
           margin: 0px;
         }
+
         mat-icon {
           color: $color-orange;
           font-size: 55px;
@@ -57,6 +66,7 @@
           line-height: 150px;
         }
       }
+
       .roodeo-fix-accordion {
         // width: 70%;
         margin-bottom: 10px;
@@ -64,6 +74,7 @@
         box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4);
         border: 1px solid $color-principal-blue;
         border-radius: 4px;
+
         mat-expansion-panel {
           .roodeo-fix-header {
             background: $color-pricipal-blue-light;
@@ -71,11 +82,13 @@
             // border-left: 1px solid $color-principal-blue;
             // border-right: 1px solid $color-principal-blue;
             border-radius: 4px;
+
             .roodeo-fix-title {
               display: flex;
               margin-right: 16px;
               align-items: center;
               font-weight: bold;
+
               // color: $color-white;
               .roodeo-faq-question {
                 font-size: 30px;
@@ -83,6 +96,7 @@
                 margin-right: 10px;
               }
             }
+
             .roodeo-fix-type {
               display: flex;
               justify-content: flex-end;
@@ -90,9 +104,11 @@
               // color: $color-white;
             }
           }
+
           .roodeo-fix-text {
             text-align: start;
             margin-top: 16px;
+
             .roodeo-faq-reponse {
               font-size: 30px;
               color: $color-principal-blue;
@@ -104,4 +120,8 @@
       }
     }
   }
+}
+
+.fix-height-panel {
+  height: 100% !important;
 }

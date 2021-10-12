@@ -15,7 +15,6 @@ const stripe = require('stripe')('sk_test_SHGN7PIdottD4WBLCcdSfbwA00kPGubvOC');
 const utils = require('strapi-hook-bookshelf/lib/utils/');
 
 module.exports = {
-
   /**
    * Promise to fetch all customeraccounts.
    *
@@ -24,17 +23,28 @@ module.exports = {
 
   fetchAll: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('customeraccount', params);
+    const filters = strapi.utils.models.convertParams(
+      'customeraccount',
+      params,
+    );
     // Select field to populate.
     const populate = Customeraccount.associations
-      .filter(ast => ast.autoPopulate !== false)
-      .map(ast => ast.alias);
+      .filter((ast) => ast.autoPopulate !== false)
+      .map((ast) => ast.alias);
 
     return Customeraccount.query(function (qb) {
       _.forEach(filters.where, (where, key) => {
-        if (_.isArray(where.value) && where.symbol !== 'IN' && where.symbol !== 'NOT IN') {
+        if (
+          _.isArray(where.value) &&
+          where.symbol !== 'IN' &&
+          where.symbol !== 'NOT IN'
+        ) {
           for (const value in where.value) {
-            qb[value ? 'where' : 'orWhere'](key, where.symbol, where.value[value])
+            qb[value ? 'where' : 'orWhere'](
+              key,
+              where.symbol,
+              where.value[value],
+            );
           }
         } else {
           qb.where(key, where.symbol, where.value);
@@ -48,7 +58,7 @@ module.exports = {
       qb.offset(filters.start);
       qb.limit(filters.limit);
     }).fetchAll({
-      withRelated: filters.populate || populate
+      withRelated: filters.populate || populate,
     });
   },
 
@@ -61,11 +71,11 @@ module.exports = {
   fetch: (params) => {
     // Select field to populate.
     const populate = Customeraccount.associations
-      .filter(ast => ast.autoPopulate !== false)
-      .map(ast => ast.alias);
+      .filter((ast) => ast.autoPopulate !== false)
+      .map((ast) => ast.alias);
 
     return Customeraccount.forge(_.pick(params, 'id')).fetch({
-      withRelated: populate
+      withRelated: populate,
     });
   },
 
@@ -77,13 +87,20 @@ module.exports = {
 
   count: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('customeraccount', params);
+    const filters = strapi.utils.models.convertParams(
+      'customeraccount',
+      params,
+    );
 
     return Customeraccount.query(function (qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value)) {
           for (const value in where.value) {
-            qb[value ? 'where' : 'orWhere'](key, where.symbol, where.value[value]);
+            qb[value ? 'where' : 'orWhere'](
+              key,
+              where.symbol,
+              where.value[value],
+            );
           }
         } else {
           qb.where(key, where.symbol, where.value);
@@ -100,8 +117,14 @@ module.exports = {
 
   add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Customeraccount.associations.map(ast => ast.alias));
-    const data = _.omit(values, Customeraccount.associations.map(ast => ast.alias));
+    const relations = _.pick(
+      values,
+      Customeraccount.associations.map((ast) => ast.alias),
+    );
+    const data = _.omit(
+      values,
+      Customeraccount.associations.map((ast) => ast.alias),
+    );
 
     // Create entry with no-relational data.
     const entry = await Customeraccount.forge(data).save();
@@ -118,14 +141,22 @@ module.exports = {
 
   edit: async (params, values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Customeraccount.associations.map(ast => ast.alias));
-    const data = _.omit(values, Customeraccount.associations.map(ast => ast.alias));
+    const relations = _.pick(
+      values,
+      Customeraccount.associations.map((ast) => ast.alias),
+    );
+    const data = _.omit(
+      values,
+      Customeraccount.associations.map((ast) => ast.alias),
+    );
 
     // Create entry with no-relational data.
     const entry = await Customeraccount.forge(params).save(data);
 
     // Create relational data and return the entry.
-    return Customeraccount.updateRelations(Object.assign(params, { values: relations }));
+    return Customeraccount.updateRelations(
+      Object.assign(params, { values: relations }),
+    );
   },
 
   /**
@@ -136,7 +167,7 @@ module.exports = {
 
   remove: async (params) => {
     params.values = {};
-    Customeraccount.associations.map(association => {
+    Customeraccount.associations.map((association) => {
       switch (association.nature) {
         case 'oneWay':
         case 'oneToOne':
@@ -166,45 +197,84 @@ module.exports = {
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('customeraccount', params);
+    const filters = strapi.utils.models.convertParams(
+      'customeraccount',
+      params,
+    );
     // Select field to populate.
     const populate = Customeraccount.associations
-      .filter(ast => ast.autoPopulate !== false)
-      .map(ast => ast.alias);
+      .filter((ast) => ast.autoPopulate !== false)
+      .map((ast) => ast.alias);
 
-    const associations = Customeraccount.associations.map(x => x.alias);
+    const associations = Customeraccount.associations.map((x) => x.alias);
     const searchText = Object.keys(Customeraccount._attributes)
-      .filter(attribute => attribute !== Customeraccount.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['string', 'text'].includes(Customeraccount._attributes[attribute].type));
+      .filter(
+        (attribute) =>
+          attribute !== Customeraccount.primaryKey &&
+          !associations.includes(attribute),
+      )
+      .filter((attribute) =>
+        ['string', 'text'].includes(
+          Customeraccount._attributes[attribute].type,
+        ),
+      );
 
     const searchNoText = Object.keys(Customeraccount._attributes)
-      .filter(attribute => attribute !== Customeraccount.primaryKey && !associations.includes(attribute))
-      .filter(attribute => !['string', 'text', 'boolean', 'integer', 'decimal', 'float'].includes(Customeraccount._attributes[attribute].type));
+      .filter(
+        (attribute) =>
+          attribute !== Customeraccount.primaryKey &&
+          !associations.includes(attribute),
+      )
+      .filter(
+        (attribute) =>
+          ![
+            'string',
+            'text',
+            'boolean',
+            'integer',
+            'decimal',
+            'float',
+          ].includes(Customeraccount._attributes[attribute].type),
+      );
 
     const searchInt = Object.keys(Customeraccount._attributes)
-      .filter(attribute => attribute !== Customeraccount.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['integer', 'decimal', 'float'].includes(Customeraccount._attributes[attribute].type));
+      .filter(
+        (attribute) =>
+          attribute !== Customeraccount.primaryKey &&
+          !associations.includes(attribute),
+      )
+      .filter((attribute) =>
+        ['integer', 'decimal', 'float'].includes(
+          Customeraccount._attributes[attribute].type,
+        ),
+      );
 
     const searchBool = Object.keys(Customeraccount._attributes)
-      .filter(attribute => attribute !== Customeraccount.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['boolean'].includes(Customeraccount._attributes[attribute].type));
+      .filter(
+        (attribute) =>
+          attribute !== Customeraccount.primaryKey &&
+          !associations.includes(attribute),
+      )
+      .filter((attribute) =>
+        ['boolean'].includes(Customeraccount._attributes[attribute].type),
+      );
 
     const query = (params._q || '').replace(/[^a-zA-Z0-9.-\s]+/g, '');
 
-    return Customeraccount.query(qb => {
+    return Customeraccount.query((qb) => {
       // Search in columns which are not text value.
-      searchNoText.forEach(attribute => {
+      searchNoText.forEach((attribute) => {
         qb.orWhereRaw(`LOWER(${attribute}) LIKE '%${_.toLower(query)}%'`);
       });
 
       if (!_.isNaN(_.toNumber(query))) {
-        searchInt.forEach(attribute => {
+        searchInt.forEach((attribute) => {
           qb.orWhereRaw(`${attribute} = ${_.toNumber(query)}`);
         });
       }
 
       if (query === 'true' || query === 'false') {
-        searchBool.forEach(attribute => {
+        searchBool.forEach((attribute) => {
           qb.orWhereRaw(`${attribute} = ${_.toNumber(query === 'true')}`);
         });
       }
@@ -212,13 +282,16 @@ module.exports = {
       // Search in columns with text using index.
       switch (Customeraccount.client) {
         case 'mysql':
-          qb.orWhereRaw(`MATCH(${searchText.join(',')}) AGAINST(? IN BOOLEAN MODE)`, `*${query}*`);
+          qb.orWhereRaw(
+            `MATCH(${searchText.join(',')}) AGAINST(? IN BOOLEAN MODE)`,
+            `*${query}*`,
+          );
           break;
         case 'pg': {
-          const searchQuery = searchText.map(attribute =>
+          const searchQuery = searchText.map((attribute) =>
             _.toLower(attribute) === attribute
               ? `to_tsvector(${attribute})`
-              : `to_tsvector('${attribute}')`
+              : `to_tsvector('${attribute}')`,
           );
 
           qb.orWhereRaw(`${searchQuery.join(' || ')} @@ to_tsquery(?)`, query);
@@ -238,19 +311,18 @@ module.exports = {
         qb.limit(_.toNumber(filters.limit));
       }
     }).fetchAll({
-      withRelated: populate
+      withRelated: populate,
     });
   },
   /**
    *
    */
   refund: async (paymentId) => {
-
     let refund;
     const paymentType = paymentId.substring(0, 2);
     if (paymentType == 'ch') {
       refund = await stripe.refunds.create({
-        charge: paymentId
+        charge: paymentId,
       });
     } else if (paymentType == 'su') {
       refund = await stripe.subscriptions.del(paymentId);
@@ -261,9 +333,7 @@ module.exports = {
    *
    */
   charge: async (email, paymentToken, amount) => {
-
     try {
-
       // check if user already registred
       let customer = await stripe.customers.list({ email: email, limit: 1 });
 
@@ -271,7 +341,7 @@ module.exports = {
         // if not yet create it
         customer = await stripe.customers.create({
           email: email,
-          source: paymentToken
+          source: paymentToken,
         });
       }
 
@@ -279,22 +349,18 @@ module.exports = {
       return await stripe.charges.create({
         amount: amount * 100,
         currency: 'EUR',
-        customer: customer.id
+        customer: customer.id,
       });
-
     } catch (error) {
       console.log('error : ', error);
       return error;
     }
-
   },
   /**
    *
    */
   subscribe: async (email, paymentToken, plan) => {
-
     try {
-
       // check if user already registred
       let customer = await stripe.customers.list({ email: email, limit: 1 });
 
@@ -302,7 +368,7 @@ module.exports = {
         // if not yet create it
         customer = await stripe.customers.create({
           email: email,
-          source: paymentToken
+          source: paymentToken,
         });
       }
 
@@ -311,7 +377,7 @@ module.exports = {
         customer: customer.id,
         status: 'active', // TODO how to handle other status
         collection_method: 'charge_automatically',
-        limit: 1
+        limit: 1,
       });
 
       // prevent user for double subscription
@@ -323,15 +389,126 @@ module.exports = {
       // all fine, then create the subscription
       return await stripe.subscriptions.create({
         customer: customer.id,
-        items: [{
-          plan: plan
-        }]
+        items: [
+          {
+            plan: plan,
+          },
+        ],
       });
-
     } catch (error) {
       console.log('error : ', error);
       return error;
     }
+  },
+  createCustomer: async (paymentData, account, user) => {
+    let customer;
+    let paymentMethodResponse;
+
+    const { paymentMethod, cardOwner } = paymentData;
+    const { city, country, line1, postal_code, state } = account.billing_address;
+    const address = {
+      city: city,
+      country: country,
+      line1: line1,
+      postal_code: postal_code,
+      state: state,
+    };
+
+    const phone = account.entreprise
+      ? account.entreprise.tel
+      : user.tel
+        ? user.tel
+        : user.mobile;
+    const email = account.entreprise ? account.entreprise.email : user.email;
+
+    customer = await stripe.customers.list({ email: email, limit: 1 });
+
+    console.log('get customer', customer);
+
+    if (customer.error) {
+      strapi.log.error(customer.error);
+      throw new Error(customer.error.message);
+      
+    } else if (customer.data.length === 0) {
+      customer = await stripe.customers.create({
+        address: address,
+        payment_method: paymentMethod,
+        email: email,
+        name: cardOwner,
+        invoice_settings: {
+          default_payment_method: paymentMethod,
+        },
+        phone: phone,
+      });
+
+      paymentMethodResponse = await stripe.paymentMethods.attach(paymentMethod, {
+        customer: account.stripe_customer_id,
+      });
+
+      if (paymentMethodResponse.error) {
+        strapi.log.error(paymentMethodResponse.error);
+        throw new Error(paymentMethodResponse.error.message);
+      }
+
+      account.stripe_customer_id = customer.id;
+
+      await strapi.services.customeraccount.edit(
+        { id: account.id },
+        { stripe_customer_id: customer.id },
+      );
+
+      strapi.log.info(
+        `customer created to stripe ${customer.id} for account ${account.id}`,
+      );
+
+
+    } else if (customer.data.length === 1) {
+      
+      paymentMethodResponse = await stripe.paymentMethods.attach(
+        paymentMethod,
+        {
+          customer: account.stripe_customer_id,
+        },
+      );
+        
+      if (paymentMethodResponse.error) {
+        strapi.log.error(paymentMethodResponse.error);
+        throw new Error(paymentMethodResponse.error.message);
+      }
+        
+      customer = await stripe.customers.update(customer.data[0].id, {
+        address: address,
+        email: email,
+        name: cardOwner,
+        invoice_settings: {
+          default_payment_method: paymentMethodResponse.id,
+        },
+        phone: phone,
+      });
+
+      if (customer.error) {
+        strapi.log.error(customer.error);
+        throw new Error(customer.error.message);
+      }
+
+      account.stripe_customer_id = customer.id;
+
+      await strapi.services.customeraccount.edit(
+        { id: account.id },
+        { stripe_customer_id: customer.id },
+      );
+
+      strapi.log.info(
+        `customer retrieved from stripe ${customer.id} for account ${account.id}`,
+      );
+    } else {
+      strapi.log.error(
+        `Several customer found for account ${account.id}`,
+      );
+      throw new Error('Several custumer found');
+    }
+    
+    return customer;
   },
   /**
    *
@@ -339,79 +516,34 @@ module.exports = {
    * @param {*} account
    */
   startPaymentIntent: async (paymentData, account, user) => {
-
-    const { offerId, receiptEmail, paymentMethod } = paymentData;
+    const { offerId, receiptEmail } = paymentData;
     const offer = (await strapi.services.offer.fetch({ id: offerId })).toJSON();
 
-    if (!account.stripe_customer_id) {
+    let paymentMethods = await stripe.paymentMethods.list({
+      customer: account.stripe_customer_id,
+      type: 'card',
+    });
 
-      // create stripe customer if not exists
-      const customerName = account.entreprise ? account.entreprise.nom : (user.prenom + ' ' + user.nom);
-      const phone = account.entreprise ? account.entreprise.tel : (user.tel ? user.tel : user.mobile);
-      const email = account.entreprise ? account.entreprise.email : user.email;
-
-      let customer = await stripe.customers.list({email: email, limit: 1});
-
-      if (customer.error) {
-
-        strapi.log.error(customer.error);
-        throw new Error(customer.error.message);
-
-      } else if (customer.data.length === 0) {
-
-        customer = await stripe.customers.create({
-          // address: account.billing_address,
-          email: email,
-          name: customerName,
-          invoice_settings: {
-            default_payment_method: paymentMethod
-          },
-          phone: phone
-          /*,
-          shipping: {
-            address: account.billing_address,
-            name: customerName,
-            phone: phone
-          }*/
-        });
-
-        if (customer.error) {
-          strapi.log.error(customer.error);
-          throw new Error(customer.error.message);
-        }
-
-        account.stripe_customer_id = customer.id;
-        await strapi.services.customeraccount.edit({ id: account.id }, { stripe_customer_id: customer.id });
-
-        strapi.log.info(`customer created to stripe ${customer.id} for account ${account.id}`);
-
-      } else {
-
-        customer = customer.data[0];
-        strapi.log.info(`customer retrieved from stripe ${customer.id} for account ${account.id}`);
-
-      }
-
+    if (paymentMethods.error) {
+      strapi.log.error(paymentMethods.error);
+      throw new Error(paymentMethods.error.message);
     }
-
-    await stripe.paymentMethods.attach(paymentMethod, {customer: account.stripe_customer_id});
 
     strapi.log.info('payment method attached to customer');
 
     let subscription;
     let intent;
     if (offer.periodicity === 'monthly') {
-
       subscription = await stripe.subscriptions.create({
         customer: account.stripe_customer_id,
-        default_payment_method: paymentMethod,
+        default_payment_method: paymentMethods.data[0].id,
         items: [{ plan: offer.plan }],
         expand: ['latest_invoice.payment_intent'],
         metadata: {
           offer: offer.id,
           account: account.id,
-          user: user.id
-        }
+          user: user.id,
+        },
       });
 
       if (subscription.error) {
@@ -426,30 +558,33 @@ module.exports = {
         metadata: {
           offer: offer.id,
           account: account.id,
-          user: user.id
-        }
+          user: user.id,
+        },
       });
 
-      strapi.log.info(`subscription created to stripe ${subscription.id} for account ${account.id}`);
-      strapi.log.info(`intent created to stripe ${intent.id} for account ${account.id}`);
-
+      strapi.log.info(
+        `subscription created to stripe ${subscription.id} for account ${account.id}`,
+      );
+      strapi.log.info(
+        `intent created to stripe ${intent.id} for account ${account.id}`,
+      );
     } else {
-
       intent = await stripe.paymentIntents.create({
         customer: account.stripe_customer_id,
         description: 'buy offer ' + offer.description,
         amount: offer.price * 100,
         currency: 'EUR',
         receipt_email: receiptEmail,
-        payment_method: paymentMethod,
-        confirmation_method: 'manual',
+        payment_method: paymentMethods.data[0].id,
+        confirmation_method: 'automatic',
         confirm: true,
         use_stripe_sdk: true,
         metadata: {
           offer: offer.id,
           account: account.id,
-          user: user.id
-        }
+          user: user.id,
+        },
+        setup_future_usage: 'off_session',
       });
 
       if (intent.error) {
@@ -457,19 +592,18 @@ module.exports = {
         throw new Error(intent.error.message);
       }
 
-      strapi.log.info(`intent created to stripe ${intent.id} for account ${account.id}`);
-
+      strapi.log.info(
+        `intent created to stripe ${intent.id} for account ${account.id}`,
+      );
     }
-
     return intent;
-
   },
   /**
    *
    */
   finalizePaymentIntent: async (paymentData) => {
-    const { paymentIntent } = paymentData;
-    const intent = await stripe.paymentIntents.confirm(paymentIntent);
+    const { paymentIntentId } = paymentData;
+    const intent = await stripe.paymentIntents.retrieve(paymentIntentId);
     console.log(`intent confirmed to stripe ${intent.id}`);
     return intent;
   },
@@ -477,10 +611,10 @@ module.exports = {
    *
    */
   onPaymentSucceed: async (intent, account, user) => {
-
     try {
-
-      const offer = (await strapi.services.offer.fetch({ id: intent.metadata.offer })).toJSON();
+      const offer = (
+        await strapi.services.offer.fetch({ id: intent.metadata.offer })
+      ).toJSON();
 
       // 2 - add payment row
       const payment = await strapi.services.payment.add({
@@ -489,7 +623,7 @@ module.exports = {
         offer: offer.id,
         paied_at: new Date(),
         stripe_payment_intent: intent.id,
-        customeraccount: account.id
+        customeraccount: account.id,
       });
       console.log(`payment created ${payment.id}`);
 
@@ -499,42 +633,55 @@ module.exports = {
         new_tests_stock = parseInt(offer.tests_stock) + account.tests_stock;
       }
 
-      await strapi.services.customeraccount.edit(
+      const updateCustomer = await strapi.services.customeraccount.edit(
         { id: account.id },
-        { offer: offer.id, tests_stock: new_tests_stock }
+        { offer: offer.id, tests_stock: new_tests_stock },
       );
-      console.log(`account ${account.id} updated with new offer: id:${offer.id}, tests_stock:${new_tests_stock}`);
-
+      console.log(
+        `account ${account.id} updated with new offer: id:${offer.id}, tests_stock:${new_tests_stock}`,
+      );
+      
       // temp code until dev fetch offer info from account rather than user
       await strapi.plugins['users-permissions'].services.user.edit(
         { id: user.id },
-        { offer_id: offer.id, offer: offer.id, tests_available: new_tests_stock}
+        {
+          offer_id: offer.id,
+          offer: offer.id,
+          tests_available: new_tests_stock,
+        },
       );
-      console.log(`user ${user.id} updated with new offer: id:${offer.id}, tests_stock:${new_tests_stock}`);
-
+      console.log(
+        `user ${user.id} updated with new offer: id:${offer.id}, tests_stock:${new_tests_stock}`,
+      );
+      return updateCustomer;
     } catch (e) {
-      console.error('paiement was success but couldn\'t update account with new offer\n' +
-       `account:${account.id}, user:${user.id}`, e);
+      console.error(
+        'paiement was success but couldn\'t update account with new offer\n' +
+          `account:${account.id}, user:${user.id}`,
+        e,
+      );
     }
   },
   /**
    *
    */
   parsePaymentIntent: (intent) => {
+    console.log('intent: ', intent);
     // Generate a response based on the intent's status
     switch (intent.status) {
       case 'requires_action':
       case 'requires_source_action':
         // Card requires authentication
         return {
-          requiresAction: true,
-          clientSecret: intent.client_secret
+          requiredAction: true,
+          clientSecret: intent.client_secret,
         };
       case 'requires_payment_method':
       case 'requires_source':
         // Card was not properly authenticated, suggest a new payment method
         return {
-          error: 'Votre carte a été rejetée. Merci d\'utiliser un autre moyen de paiement'
+          error:
+            'Votre carte a été rejetée. Merci d\'utiliser un autre moyen de paiement',
         };
       case 'succeeded':
         // Payment is complete, authentication not required
@@ -547,17 +694,22 @@ module.exports = {
    *
    */
   retrieveSubscription: async (user, account, offer) => {
+    const payments = (
+      await strapi.services.payment.fetchAll({
+        customeraccount: account.id,
+        _sort: 'id:DESC',
+      })
+    ).toJSON();
 
-    const payments = (await strapi.services.payment.fetchAll({
-      customeraccount: account.id,
-      _sort: 'id:DESC'
-    })).toJSON();
-
-    const { charges } = await stripe.paymentIntents.retrieve(payments[0].stripe_payment_intent);
-    const { card } = await stripe.paymentMethods.retrieve(charges.data[0].payment_method);
+    const { charges } = await stripe.paymentIntents.retrieve(
+      payments[0].stripe_payment_intent,
+    );
+    const { card } = await stripe.paymentMethods.retrieve(
+      charges.data[0].payment_method,
+    );
     const sub = await stripe.subscriptions.list({
       limit: 1,
-      customer: account.stripe_customer_id
+      customer: account.stripe_customer_id,
     });
 
     return {
@@ -565,7 +717,7 @@ module.exports = {
       card: {
         last4: card.last4,
         exp_month: card.exp_month,
-        exp_year: card.exp_year
+        exp_year: card.exp_year,
       },
       sub: {
         cancel_at_period_end: sub.data[0].cancel_at_period_end,
@@ -574,40 +726,40 @@ module.exports = {
         current_period_end: sub.data[0].current_period_end,
         status: sub.data[0].status,
         created: sub.data[0].created,
-        ended_at: sub.data[0].ended_at
-      }
+        ended_at: sub.data[0].ended_at,
+      },
     };
-
-  },
-  /**
-   *
-   */
-  retrieveTestsStock: async (user, account) => {
   },
   /**
    *
    */
   repairAccountOffer: async (account) => {
-    let subscriptionParams= {
+    let subscriptionParams = {
       //customer: account.stripe_customer_id,
-      limit: 1
+      limit: 1,
+    };
+
+    if (account && account.stripe_customer_id) {
+      subscriptionParams.customer = account.stripe_customer_id;
     }
 
-    if ( account && account.stripe_customer_id){
-      subscriptionParams.customer = account.stripe_customer_id
-    }
-
-    
     const subscriptions = await stripe.subscriptions.list(subscriptionParams);
     if (subscriptions && subscriptions.data[0]) {
-      const subscription = await stripe.subscriptions.retrieve(subscriptions.data[0].id);
+      const subscription = await stripe.subscriptions.retrieve(
+        subscriptions.data[0].id,
+      );
       if (subscription) {
         // read repair
         if (subscription.status === 'active' && !account.offer) {
-          const offs = (await strapi.services.offer.fetchAll({ plan: subscription.plan.id })).toJSON();
-          await strapi.services.customeraccount.edit({ id: account.id }, { offer: offs[0].id });
+          const offs = (
+            await strapi.services.offer.fetchAll({ plan: subscription.plan.id })
+          ).toJSON();
+          await strapi.services.customeraccount.edit(
+            { id: account.id },
+            { offer: offs[0].id },
+          );
         }
       }
     }
-  }
+  },
 };

@@ -1,12 +1,18 @@
-@import "../../../../roodeo-variables.scss";
-@import "../../../../roodeo-form.scss";
+@import '../../../roodeo-variables.scss';
+@import '../../../roodeo-form.scss';
 
 /deep/ #nav-menu {
   top: 0;
+  position: inherit !important;
 }
 
 /deep/ .header-notification {
   top: 0;
+}
+
+.rdo-panel {
+  max-width: 800px;
+  margin: 30px auto;
 }
 
 .loader {
@@ -15,11 +21,12 @@
 }
 
 .StripeElement {
-  height: 50px;
-  border: 1px solid #1d3552;
+  height: 65px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   background: white;
   font-size: 16px;
-  padding-left: 15px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
 }
 
 .StripeElement--focus {
@@ -34,6 +41,11 @@
   background-color: #fefde5 !important;
 }
 
-.roodeo-form-error-message{
+.roodeo-form-error-message {
   margin-top: 5px;
+}
+
+.certified-stripe {
+  width: 55%;
+  margin: 20px auto;
 }

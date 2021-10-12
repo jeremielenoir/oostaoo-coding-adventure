@@ -39,10 +39,22 @@ export class NavbarComponent implements OnInit {
 
   public currentLanguage;
   public otherLanguage = [
-   {codelang: 'fr', shortlang: 'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr'},
-   {codelang: 'en', shortlang: 'en', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en'},
-   {codelang: 'es', shortlang: 'es', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es'},
-   {codelang: 'jp', shortlang: 'jp', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp'}
+    {
+      codelang: 'fr', shortlang: 'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr',
+      labelfr: 'français', labelen: 'french', labeles: 'francés', labeljp: 'フランス語'
+    },
+    {
+      codelang: 'en', shortlang: 'en', img: '../../../../assets/drapeau/united-kingdom-flag-round-icon-32.png', url: '/en',
+      labelfr: 'anglais', labelen: 'english', labeles: 'inglés', labeljp: '英語'
+    },
+    {
+      codelang: 'es', shortlang: 'es', img: '../../../../assets/drapeau/spain-flag-round-icon-32.png', url: '/es',
+      labelfr: 'espagnol', labelen: 'spanish', labeles: 'español', labeljp: 'スペイン語'
+    },
+    {
+      codelang: 'jp', shortlang: 'jp', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp',
+      labelfr: 'japonais', labelen: 'japanese', labeles: 'japonés', labeljp: '日本'
+    }
   ];
 
   @ViewChild('header') header;
@@ -107,6 +119,10 @@ export class NavbarComponent implements OnInit {
     // window.location.reload();
     console.log('window.parent.location : ', window.parent.location.origin + langage.url + window.parent.location.pathname);
     console.log('window.parent.location.href : ', langage.url + this.getCurrentRoute());
+  }
+
+  getProperty(obj: any, property: string): string {
+    return obj[property + this.lang];
   }
 
   openBurgeur() {

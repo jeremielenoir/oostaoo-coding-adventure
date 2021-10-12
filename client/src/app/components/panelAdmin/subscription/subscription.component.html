@@ -1,7 +1,11 @@
 <!-- <app-breadcrumb [namePage]="'Nos formules'"></app-breadcrumb> -->
 <app-route-component></app-route-component>
-<mat-progress-bar *ngIf="inProgress" class="roodeo-progress-bar" mode="query"></mat-progress-bar>
-<div style="margin-top: 90px; height: 6px;" *ngIf="dataRoute">
+<mat-progress-bar
+  *ngIf="inProgress"
+  class="roodeo-progress-bar"
+  mode="query"
+></mat-progress-bar>
+<div style="margin-top: 90px; height: 6px" *ngIf="dataRoute">
   <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
 </div>
 <div class="rdo-panel">
@@ -13,37 +17,113 @@
       <div *ngIf="!selectedOffer" class="rdo-loader"></div>
       <div *ngIf="selectedOffer" class="rdo-content-group">
         <div class="rdo-panel-header">
-          <h3><i class="fa fa-cube"></i> {{selectedOffer?.title}}</h3>
+          <h3><i class="fa fa-cube"></i> {{ selectedOffer?.title }}</h3>
           <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-            <i>{{selectedOffer?.price + '€' + (selectedOffer && selectedOffer.periodicity === 'monthly' ? '/mois' : '')}}</i>
-            <button (click)="goToPayment()" *ngIf="!ownedOffer || (selectedOffer && ownedOffer.id !== selectedOffer.id)" type="button" mat-raised-button color="primary">
-              {{selectedOffer && selectedOffer.periodicity === 'monthly' ? 'S\'abonner' : 'Acheter'}}
-            </button>
-            <button *ngIf="ownedOffer && selectedOffer && ownedOffer.id === selectedOffer.id" [routerLink]="['/dashboard/facturation']"
-              type="button" mat-stroked-button color="primary">Voir ma facturation</button>
-            <button *ngIf="ownedOffer && selectedOffer && ownedOffer.id === selectedOffer.id && subscription && !subscription.cancel_at_period_end"
-              type="button" (click)="cancelSubscription()" mat-raised-button color="primary">Se désabonner</button>
-            <button *ngIf="ownedOffer && selectedOffer && ownedOffer.id === selectedOffer.id && subscription && subscription.cancel_at_period_end"
-              type="button"  mat-raised-button color="primary">Se réabonner</button>
+            <i>{{
+              selectedOffer?.price +
+                "€" +
+                (selectedOffer && selectedOffer.periodicity === "monthly"
+                  ? "/mois"
+                  : "")
+            }}</i>
+            <app-base-button
+              type="button"
+              mat-raised-button
+              color="primary"
+              [iconName]=" selectedOffer && selectedOffer.periodicity === 'monthly' ? 'stars' : 'payment'"
+              (click)="goToPayment(selectedOffer)"
+            >
+              {{
+                selectedOffer && selectedOffer.periodicity === "monthly"
+                  ? "S'abonner"
+                  : "Acheter"
+              }}
+            </app-base-button>
+            <app-base-button
+              iconName="description"
+              *ngIf="
+                ownedOffer &&
+                selectedOffer &&
+                ownedOffer.id === selectedOffer.id
+                && selectedOffer.periodicity === 'monthly'
+              "
+              [routerLink]="['/dashboard/facturation']"
+              type="button"
+              >Voir ma facturation</app-base-button
+            >
+
+            <app-base-button
+              *ngIf="
+                ownedOffer &&
+                selectedOffer &&
+                ownedOffer.id === selectedOffer.id &&
+                subscription &&
+                !subscription.cancel_at_period_end
+                && selectedOffer.periodicity === 'monthly'
+              "
+              type="button"
+              (click)="cancelSubscription(subscription)"
+              mat-raised-button
+              iconName="clear"
+              color="warn"
+              >Se désabonner</app-base-button
+            >
+            <app-base-button
+              *ngIf="
+                ownedOffer &&
+                selectedOffer &&
+                ownedOffer.id === selectedOffer.id &&
+                subscription &&
+                subscription.cancel_at_period_end &&
+                selectedOffer.periodicity === 'monthly'
+              "
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="enableSub(subscription)"
+              iconName="history"
+              >Se réabonner</app-base-button
+            >
           </div>
         </div>
         <div>
           <div [innerHTML]="selectedOffer?.description"></div>
-          <h4 style="margin-top: 25px;"><strong>Service 1</strong></h4>
+          <h4 style="margin-top: 25px"><strong>Service 1</strong></h4>
           <div [innerHTML]="selectedOffer?.description"></div>
-          <h4 style="margin-top: 25px;"><strong>Service 2</strong></h4>
+          <h4 style="margin-top: 25px"><strong>Service 2</strong></h4>
           <div [innerHTML]="selectedOffer?.description"></div>
         </div>
       </div>
     </div>
     <div fxFlex="20">
       <div *ngIf="!offers" class="rdo-loader"></div>
-      <div class="rdo-sub-offer-head" *ngFor="let offer of offers"
-            [ngClass]="{'rdo-sub-offer-head-selected': offer.selected}"
-            (click)="selectOffer(offer)">
-        <h3>{{offer.title}}<br><i *ngIf="ownedOffer && ownedOffer.id === offer.id && subscription"
-          style="margin-right: 10px" [ngClass]="{'rdo-badge-success': !subscription || !subscription.cancel_at_period_end, 'rdo-badge-warn': subscription && subscription.cancel_at_period_end}">
-          active{{subscription?.cancel_at_period_end ?  ', expire le ' + ((subscription.current_period_end*1000) | date: 'dd/MM/yyyy') : '' }}</i></h3>
+      <div
+        class="rdo-sub-offer-head"
+        *ngFor="let offer of offers"
+        [ngClass]="{ 'rdo-sub-offer-head-selected': offer.selected }"
+        (click)="selectOffer(offer)"
+      >
+        <h3>
+          {{ offer.title }}<br />
+          
+          <i
+            *ngIf="ownedOffer && ownedOffer.id === offer.id && subscription && ownedOffer.periodicity === 'monthly'"
+            style="margin-right: 10px"
+            [ngClass]="{
+              'rdo-badge-success':
+                !subscription || !subscription.cancel_at_period_end,
+              'rdo-badge-warn':
+                subscription && subscription.cancel_at_period_end
+            }"
+          >
+            active{{
+              subscription?.cancel_at_period_end
+                ? ", expire le " +
+                  (subscription.current_period_end * 1000 | date: "dd/MM/yyyy")
+                : ""
+            }}</i
+          >
+        </h3>
       </div>
     </div>
   </div>
