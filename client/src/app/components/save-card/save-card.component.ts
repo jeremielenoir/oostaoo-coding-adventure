@@ -28,6 +28,7 @@ export class SaveCardComponent implements OnInit {
   messageErrorStripeElement: any;
   complete: boolean;
   cardInfos: any;
+  paied: boolean;
 
   @ViewChild(StripeCardComponent) card: any;
   cardOptions = {
