@@ -6,7 +6,7 @@ import {
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CustomerAccount } from 'src/app/models/account.model';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
-import { subscriptions, paymentIntents } from 'stripe';
+import { subscriptions } from 'stripe';
 import { catchError, filter, map, tap } from 'rxjs/operators';
 import ErrorConfig from 'src/app/components/common/config/Error';
 import { Offer } from 'src/app/models/offer.model';
