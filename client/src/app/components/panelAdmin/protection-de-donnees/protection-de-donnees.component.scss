@@ -31,7 +31,7 @@
         /* Section 1 */
 
         #section1 {
-            width: 98%;
+            //width: 98%;
             margin: 55px auto 0;
             background: white;
             padding: 40px;
@@ -60,7 +60,7 @@
         /* Section 2 */
 
         #section2 {
-            width: 98%;
+            //width: 100%;
             margin: 18px auto 0;
             background: white;
             padding: 40px;
@@ -111,7 +111,7 @@
         /* Section 3 */
 
         #section3 {
-            width: 98%;
+            //width: 98%;
             margin: 18px auto 0;
             background: white;
             padding: 40px;
@@ -155,16 +155,16 @@
 
         #section4 {
             display: flex;
-            width: 99%;
+            //width: 99%;
             justify-content: space-around;
             flex-wrap: wrap;
             flex: 1;
             margin: 18px auto;
 
             #section4-left {
-                width: 49%;
+                width: calc(50% - 10px);
                 min-width: 295px;
-                margin: 0px 0px 0px 0px;
+                margin: 0px 10px 0px 0px;
                 background: white;
                 padding: 40px;
                 text-align: center;
@@ -179,9 +179,9 @@
             }
 
             #section4-right {
-                width: 49%;
+                width: calc(50% - 10px);
                 min-width: 295px;
-                margin: 0px 0px 0px 0px;
+                margin: 0px 0px 0px 10px;
                 background: white;
                 padding: 40px;
                 text-align: center;
