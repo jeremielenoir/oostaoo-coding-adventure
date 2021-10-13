@@ -59,6 +59,10 @@ export class DialogOverviewTestComponent implements OnInit {
   ngOnInit() {
     console.log('this.dataPopup : ', this.dataPopup);
   }
+
+  close(){
+    this.dialogRef.close();
+  }
 }
 
 @Component({
