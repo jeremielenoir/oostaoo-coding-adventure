@@ -225,13 +225,13 @@
         <i class="far fa-user-circle"></i>
         {{currentCandidat.Candidats}}
       </h4>
-      <p class="info-candidat"><i class="far fa-envelope"></i> {{currentCandidat.Email}}</p>
-      <p class="info-candidat"><i class="fas fa-poll-h"></i> Pourcentage de bonne réponses : {{currentCandidat.Score}}
+      <p class="info-candidat"><i class="far fa-envelope"></i> {{currentCandidat['Email']}}</p>
+      <p class="info-candidat"><i class="fas fa-poll-h"></i> Pourcentage de bonne réponses : {{currentCandidat['Score']}}
       </p>
-      <p class="info-candidat"><i class="far fa-clock"></i> Durée du test : {{currentCandidat.Duree}}</p>
-      <div class="sidenav_candidat_content" *ngIf="currentCandidat.points">
+      <p class="info-candidat"><i class="far fa-clock"></i> Durée du test : {{currentCandidat['Duree']}}</p>
+      <div class="sidenav_candidat_content" *ngIf="currentCandidat['points']">
         <div class="sidenav_candidat_result"
-          *ngFor="let candidatPointTechno of currentCandidat.points[2].getpourcentByCandidat">
+          *ngFor="let candidatPointTechno of currentCandidat['points'][2]['getpourcentByCandidat']">
           <p class="sidenav_candidat_result">
             <span class="icon-techno" *ngIf="candidatPointTechno.techno === 'React'">
               <i class="fab fa-react"></i>
@@ -247,12 +247,12 @@
         </div>
         <div class="sidenav_candidat_result">
           <p class="sidenav_candidat_text" i18n>Total :</p>
-          <p class="sidenav_candidat_score">{{currentCandidat.Score}} </p>
+          <p class="sidenav_candidat_score">{{currentCandidat['Score']}} </p>
         </div>
       </div>
       <div class="margin-top-md">
         <app-base-button iconName="remove_red_eye" class="margin-right-md"
-          [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats', currentCandidat.candidat_id, 'rapport-detaille']">
+          [routerLink]="['/dashboard/campaigns', campaign.id, 'candidats', currentCandidat['candidat_id'], 'rapport-detaille']">
           Voir le rapport détaillé
         </app-base-button>
         <app-base-button iconName="picture_as_pdf" (clickEvent)="viewResultsPdf(currentCandidat)">
