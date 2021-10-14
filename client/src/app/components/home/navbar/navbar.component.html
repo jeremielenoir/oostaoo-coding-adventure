@@ -85,7 +85,7 @@
                 <img
                   class="flags_img"
                   src="{{ language.img }}"
-                  alt=""
+                  alt="{{ getProperty(language, 'label') | uppercase }}"
                 />&nbsp;&nbsp;{{ getProperty(language, 'label') | uppercase }}
               </button>
             </div>
@@ -166,7 +166,9 @@
     <li><a (click)="gotToLoginPage()" i18n> Connection </a></li>
     <li class="last-list-flags">
       <span *ngFor="let otherLanguageSingle of otherLanguage">
-        <img src="{{ otherLanguageSingle.img }}" alt="" />
+        <div (click)="setCurrentLanguage(otherLanguageSingle)">
+          <img src="{{ otherLanguageSingle.img }}" alt="{{ getProperty(otherLanguageSingle, 'label') | uppercase }}"/>
+        </div>
       </span>
     </li>
   </ul>
