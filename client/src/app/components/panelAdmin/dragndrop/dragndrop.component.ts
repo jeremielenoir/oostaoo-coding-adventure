@@ -60,7 +60,7 @@ export class DialogOverviewTestComponent implements OnInit {
     console.log('this.dataPopup : ', this.dataPopup);
   }
 
-  close(){
+  close() {
     this.dialogRef.close();
   }
 }
