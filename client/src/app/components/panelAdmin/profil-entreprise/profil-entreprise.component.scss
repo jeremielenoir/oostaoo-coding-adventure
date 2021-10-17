@@ -821,8 +821,6 @@
 
 /*--media screen responsive--*/
 
-@media (max-width: 1024px) {}
-
 @include respond-to(mobile-Handheld) {
 
   .title-edit-panel {
