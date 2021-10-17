@@ -6,13 +6,13 @@ $mobile: 320px;
 @mixin respond-to($media) {
 
   @if $media==mobile-Handheld {
-    @media only screen and (min-device-width : $mobile) and (max-device-width : $handheld) {
+    @media only screen and (min-width : $mobile) and (max-width : $handheld) {
       @content;
     }
   }
 
   @if $media==small-extra-Desktop {
-    @media only screen and (min-device-width : $small-desktop) and (max-device-width : $extra-large-desktop) {
+    @media only screen and (min-width : $small-desktop) and (max-width : $extra-large-desktop) {
       @content;
     }
   }
