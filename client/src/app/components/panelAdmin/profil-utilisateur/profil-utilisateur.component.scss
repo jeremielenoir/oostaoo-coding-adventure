@@ -166,22 +166,6 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
-  #global {
-    display: block;
-  }
-
-  #section1,
-  #section2,
-  #section3,
-  #section4 {
-    padding: 10px 10px !important;
-  }
-
-  // .content {
-  //   flex-direction: column;
-  // }
-}
 
 .error-red {
   color: red;
@@ -235,27 +219,20 @@
 
 
 @include respond-to(mobile-Handheld) {
-  .content {
-    flex-direction: column;
+  #global {
+    display: block;
 
-    #section1 {
-      margin: 25px auto 0;
-      width: 100%;
-    }
+    .content {
+      flex-direction: column;
 
-    #section2 {
-      width: 100%;
-      margin: 25px auto 0;
-    }
-
-    #section3 {
-      margin: 25px auto 0;
-      width: 100%;
-    }
-
-    #section4 {
-      width: 100%;
-      margin: 25px auto 0;
+      #section1,
+      #section2,
+      #section3,
+      #section4 {
+        padding: 10px 10px !important;
+        width: 100%;
+        margin: 25px auto 0;
+      }
     }
   }
 }
