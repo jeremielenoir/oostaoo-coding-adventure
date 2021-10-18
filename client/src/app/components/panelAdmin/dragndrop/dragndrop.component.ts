@@ -10,7 +10,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { FormControl, FormGroup  } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import {
   CdkDragDrop,
@@ -20,8 +20,6 @@ import {
 
 import {
   MAT_DIALOG_DATA,
-  MatBottomSheet,
-  MatBottomSheetRef,
   MatDialog,
   MatDialogRef,
 } from '@angular/material';
@@ -29,12 +27,10 @@ import { DecryptTokenService } from 'src/app/components/home/register/register.s
 
 import {
   API_URI_CAMPAIGNS,
-  API_URI_QUESTIONS,
   ApiClientService,
 } from '../../../api-client/api-client.service';
 
 import { Router } from '@angular/router';
-import { TestComponent } from '../client-test/test/test.component';
 
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
 
@@ -45,36 +41,25 @@ export interface IDialogData {
 @Component({
   selector: 'app-dialog-overview-test',
   templateUrl: 'dialog-overview-test.html',
-  styleUrls: ['./dialog-overview-test.scss']
+  styleUrls: ['./dialog-overview-test.scss'],
 })
 export class DialogOverviewTestComponent implements OnInit {
   dataPopup;
   prev = false;
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewTestComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IDialogData
+    @Inject(MAT_DIALOG_DATA) public data: IDialogData,
   ) {
     if (data) {
       this.dataPopup = data;
       this.prev = true;
     }
-    
   }
 
   ngOnInit() {
     console.log('this.dataPopup : ', this.dataPopup);
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-  onClick(): void {
-    console.log(this.data);
-    this.dialogRef.close();
-  }
-  refreshComponent($event): void {
-    console.log('REFRESH COMPONENT');
-  }
   close() {
     this.dialogRef.close();
   }
@@ -82,9 +67,7 @@ export class DialogOverviewTestComponent implements OnInit {
 
 @Component({
   selector: 'app-dragndrop-component',
-  styleUrls: [
-    './dragndrop.component.scss',
-  ],
+  styleUrls: ['./dragndrop.component.scss'],
   templateUrl: './dragndrop.component.html',
 })
 export class DragNDropComponent implements OnInit, OnChanges {
@@ -151,39 +134,35 @@ export class DragNDropComponent implements OnInit, OnChanges {
       const previous = event.previousContainer.data;
       const current = event.container.data;
       const diff = current.filter((p) => !previous.includes(p));
-
       this.chargeYourCampagn.emit(diff);
-      // console.log('all question: ', this.allQuestions);
-      // console.log('this Question: ', this.Questions)
     }
   }
 
   public ngOnInit() {
-
     switch (this.languageStorage.getLanguageCountry()) {
       case 'es-ES':
-        this.nameI18n =  'name_es';
+        this.nameI18n = 'name_es';
         this.contentI18n = 'content_es';
         this.answerValueI18n = 'answer_value_es';
         this.themeI18n = 'theme_es';
         this.titreI18n = 'titre_es';
         break;
       case 'fr-FR':
-        this.nameI18n =  'name';
+        this.nameI18n = 'name';
         this.contentI18n = 'content';
         this.answerValueI18n = 'answer_value';
         this.themeI18n = 'theme';
         this.titreI18n = 'titre_fr';
         break;
       case 'en-US':
-        this.nameI18n =  'name_en';
+        this.nameI18n = 'name_en';
         this.contentI18n = 'content_en';
         this.answerValueI18n = 'answer_value_en';
         this.themeI18n = 'theme_en';
         this.titreI18n = 'titre_en';
         break;
       case 'jp-JP':
-        this.nameI18n =  'name_jp';
+        this.nameI18n = 'name_jp';
         this.contentI18n = 'content_jp';
         this.answerValueI18n = 'answer_value_jp';
         this.themeI18n = 'theme_jp';
@@ -191,16 +170,13 @@ export class DragNDropComponent implements OnInit, OnChanges {
         break;
       default:
         this.contentI18n = 'content';
-        this.nameI18n =  'name';
+        this.nameI18n = 'name';
         this.answerValueI18n = 'answer_value';
         this.themeI18n = 'theme';
         this.titreI18n = 'titre';
     }
 
-    // this.methoddataLevels();
-
     window.scroll(10, 0);
-
     window.addEventListener('scroll', () => {
       this.headerChangePositioinDropList();
     });
@@ -254,7 +230,7 @@ export class DragNDropComponent implements OnInit, OnChanges {
         (res) => {
           console.log(res);
         },
-        (err) => console.log(err)
+        (err) => console.log(err),
       );
   }
 
@@ -298,7 +274,7 @@ export class DragNDropComponent implements OnInit, OnChanges {
           this.SendQuestionSelected(res.id);
           this.router.navigate([`/dashboard/campaigns/${res.id}/candidats`]);
         },
-        (err) => console.log(err)
+        (err) => console.log(err),
       );
   }
 
@@ -309,19 +285,17 @@ export class DragNDropComponent implements OnInit, OnChanges {
   // data: {questions: this.selectedQuestions}
   public openDialogTest(question?: any): void {
     const dialogRef = this.dialog.open(DialogOverviewTestComponent, {
-      data: { questions: question ? [question] : this.selectedQuestions, technoCampaign: this.techno },
+      data: {
+        questions: question ? [question] : this.selectedQuestions,
+        technoCampaign: this.techno,
+      },
       height: '90vh',
       maxHeight: '90vh',
       maxWidth: '90vw',
       panelClass: 'dialog-test',
       width: '90vw',
-      /*height: '100%',
-      width: '100%',*/
     });
 
     dialogRef.afterClosed().subscribe();
   }
-
 }
-
-

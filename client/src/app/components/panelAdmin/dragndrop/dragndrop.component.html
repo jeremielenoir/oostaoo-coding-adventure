@@ -3,231 +3,375 @@
     <div class="block-container left">
       <div class="bar">
         <mat-icon class="static">playlist_add</mat-icon>
-        <span class="bar-text">Questions disponibles ({{this.notSelectedQuestions ? this.notSelectedQuestions.length : 0}})</span>
+        <span class="bar-text"
+          >Questions disponibles ({{
+            this.notSelectedQuestions ? this.notSelectedQuestions.length : 0
+          }})</span
+        >
       </div>
 
       <div *ngIf="!isLoaded" class="loader-container">
         <mat-spinner [strokeWidth]="20"></mat-spinner>
       </div>
-     
 
       <div *ngIf="boelanIsSearchAdvenced" class="search-advanced-block">
         <mat-form-field>
           <mat-label>DIFFICULTÉ </mat-label>
           <mat-select [formControl]="toppingsDifficulty" multiple>
             <mat-select-trigger>
-              {{toppingsDifficulty.value ? toppingsDifficulty.value[0] : ''}}
-              <span *ngIf="toppingsDifficulty.value?.length > 1" class="example-additional-selection">
-                ,{{toppingsDifficulty.value[1]}}{{toppingsDifficulty.value.length === 2 ? '' : ','}}{{toppingsDifficulty.value[2]}}
+              {{ toppingsDifficulty.value ? toppingsDifficulty.value[0] : '' }}
+              <span
+                *ngIf="toppingsDifficulty.value?.length > 1"
+                class="example-additional-selection"
+              >
+                ,{{ toppingsDifficulty.value[1]
+                }}{{ toppingsDifficulty.value.length === 2 ? '' : ','
+                }}{{ toppingsDifficulty.value[2] }}
               </span>
             </mat-select-trigger>
             <mat-option *ngFor="let difficul of difficulty" [value]="difficul">
-              {{difficul}}
+              {{ difficul }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
 
-
-      <div id="cdkDropList" cdkDropList #todoList="cdkDropList"  [cdkDropListData]="notSelectedQuestions" [cdkDropListConnectedTo]="[doneList]"
-        class="liste-question" (cdkDropListDropped)="drop($event)">
-        
-          <div (cdkDragStarted)="dragStart($event)" (cdkDragEnded)="dragEnd($event)" class="ligne-question" *ngFor="let item of notSelectedQuestions | filter: searchText" cdkDrag>
-
-          
-              <div [ngClass]="{'info-hover-left': disablehover === false, 'disable': disablehover === true }" class="">
-                <div class="info-hover-header"><h2>{{item[nameI18n]}}</h2></div>
-                <div class="info-hover-content">
-                  <p i18n>Points : <span>{{item.points}}</span></p>
-                  <p i18n>Technologie : <span>{{item.technologies.name}}</span></p>
-                  <p i18n>Compétence évaluée : <span [innerHtml]>{{item[themeI18n]}}</span></p>
-                  <p i18n>Enoncé : </p>
-                </div>
-                
-                <app-response-formated [question]="item"></app-response-formated>
-              </div>
-
-            <div (click)="openDialogTest(item)" class="ligne-plus" >
-              <p class="ligne-plus-text">
-                <button (mouseover)="disablehover = true" (mouseout)="disablehover = false" mat-mini-fab [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Prévisualiser la question" [color]="'accent'" aria-label="Example icon button with a menu icon">
-                  <mat-icon>play_circle_outlined</mat-icon>
-                </button>
+      <div
+        id="cdkDropList"
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="notSelectedQuestions"
+        [cdkDropListConnectedTo]="[doneList]"
+        class="liste-question"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          (cdkDragStarted)="dragStart($event)"
+          (cdkDragEnded)="dragEnd($event)"
+          class="ligne-question"
+          *ngFor="let item of notSelectedQuestions | filter: searchText"
+          cdkDrag
+        >
+          <div
+            [ngClass]="{
+              'info-hover-left': disablehover === false,
+              disable: disablehover === true
+            }"
+            class=""
+          >
+            <div class="info-hover-header">
+              <h2>{{ item[nameI18n] }}</h2>
+            </div>
+            <div class="info-hover-content">
+              <p i18n>
+                Points : <span>{{ item.points }}</span>
               </p>
-            </div>
-            
-            <div class="ligne-techno" >
-            <p class="ligne-techno-text">{{item.technologies.name}}</p>
-            </div>
-
-            <div class="ligne-nom" matTooltip="{{item.name}}" >
-              <p class="ligne-nom-text">{{item[titreI18n]}}</p>
-            </div>
-
-            <div class="ligne-note" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
-            
-              <div class="archive archive-inclue">
-                <span></span>
-              </div>
-              <div class="archive archive-inclue">
-                <span></span>
-              </div>
-              <div class="archive archive-inclue">
-                <span></span>
-              </div>
-            </div>
-
-            <div class="ligne-note" *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
-            
-              <div class="archive archive-inclue">
-                <span></span>
-              </div>
-              <div class="archive archive-inclue">
-                <span></span>
-              </div>
-              <div class="archive archive-non-inclue">
-                <span></span>
-              </div>
-            </div>
-
-            <div class="ligne-note" *ngIf="item.level === 'facile'" matTooltip="Difficulté Facile">
-            
-              <div class="archive archive-inclue">
-                <span></span>
-              </div>
-              <div class="archive archive-non-inclue">
-                <span></span>
-              </div>
-              <div class="archive archive-non-inclue">
-                <span></span>
-              </div>
-            </div>
-
-            <div class="ligne-points"><p  class="ligne-points-text">{{item.points}} points</p></div>
-
-            <div class="ligne-type">
-              <i matTooltip="Question à choix multiple" *ngIf='item.type === "one" || item.type === "multiple"'
-                class="fas fa-list-ul ligne-icon"></i>
-              <i matTooltip="Question texte libre" *ngIf='item.type === "free"' class="fas fa-paragraph ligne-icon"></i>
-              <i matTooltip="Question algorithmique" *ngIf='item.type === "algo"' class="fas fa-code ligne-icon"></i>
-            </div>
-
-            <div class="ligne-temps" matTooltip="Durée(min:sec)"><p class="ligne-temps-text">{{ fmtMSS(item.time) }}</p></div>
-
-            <div (click)='addquestion(item)' class="ligne-plus">
-              <p class="ligne-plus-text">
-                <button (mouseover)="disablehover = true" (mouseout)="disablehover = false" mat-mini-fab [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Ajouter la question au test" [color]="'accent'" aria-label="Ajouter la question au test">
-                  <mat-icon>add</mat-icon>
-                </button>
+              <p i18n>
+                Technologie : <span>{{ item.technologies.name }}</span>
               </p>
+              <p i18n>
+                Compétence évaluée :
+                <span [innerHtml]>{{ item[themeI18n] }}</span>
+              </p>
+              <p i18n>Enoncé :</p>
             </div>
 
+            <app-response-formated [question]="item"></app-response-formated>
           </div>
 
+          <div (click)="openDialogTest(item)" class="ligne-plus">
+            <p class="ligne-plus-text">
+              <button
+                (mouseover)="disablehover = true"
+                (mouseout)="disablehover = false"
+                mat-mini-fab
+                [matTooltipPosition]="'below'"
+                [matTooltipClass]="'roodeo-tooltip'"
+                matTooltip="Prévisualiser la question"
+                [color]="'accent'"
+                aria-label="Example icon button with a menu icon"
+              >
+                <mat-icon>play_circle_outlined</mat-icon>
+              </button>
+            </p>
+          </div>
+
+          <div class="ligne-techno">
+            <p class="ligne-techno-text">{{ item.technologies.name }}</p>
+          </div>
+
+          <div class="ligne-nom" matTooltip="{{ item.name }}">
+            <p class="ligne-nom-text">{{ item[titreI18n] }}</p>
+          </div>
+
+          <div
+            class="ligne-note"
+            *ngIf="item.level === 'expert'"
+            matTooltip="Difficulté Expert"
+          >
+            <div class="archive archive-inclue">
+              <span></span>
+            </div>
+            <div class="archive archive-inclue">
+              <span></span>
+            </div>
+            <div class="archive archive-inclue">
+              <span></span>
+            </div>
+          </div>
+
+          <div
+            class="ligne-note"
+            *ngIf="item.level === 'moyen'"
+            matTooltip="Difficulté Moyen"
+          >
+            <div class="archive archive-inclue">
+              <span></span>
+            </div>
+            <div class="archive archive-inclue">
+              <span></span>
+            </div>
+            <div class="archive archive-non-inclue">
+              <span></span>
+            </div>
+          </div>
+
+          <div
+            class="ligne-note"
+            *ngIf="item.level === 'facile'"
+            matTooltip="Difficulté Facile"
+          >
+            <div class="archive archive-inclue">
+              <span></span>
+            </div>
+            <div class="archive archive-non-inclue">
+              <span></span>
+            </div>
+            <div class="archive archive-non-inclue">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="ligne-points">
+            <p class="ligne-points-text">{{ item.points }} points</p>
+          </div>
+
+          <div class="ligne-type">
+            <i
+              matTooltip="Question à choix multiple"
+              *ngIf="item.type === 'one' || item.type === 'multiple'"
+              class="fas fa-list-ul ligne-icon"
+            ></i>
+            <i
+              matTooltip="Question texte libre"
+              *ngIf="item.type === 'free'"
+              class="fas fa-paragraph ligne-icon"
+            ></i>
+            <i
+              matTooltip="Question algorithmique"
+              *ngIf="item.type === 'algo'"
+              class="fas fa-code ligne-icon"
+            ></i>
+          </div>
+
+          <div class="ligne-temps" matTooltip="Durée(min:sec)">
+            <p class="ligne-temps-text">{{ fmtMSS(item.time) }}</p>
+          </div>
+
+          <div (click)="addquestion(item)" class="ligne-plus">
+            <p class="ligne-plus-text">
+              <button
+                (mouseover)="disablehover = true"
+                (mouseout)="disablehover = false"
+                mat-mini-fab
+                [matTooltipPosition]="'below'"
+                [matTooltipClass]="'roodeo-tooltip'"
+                matTooltip="Ajouter la question au test"
+                [color]="'accent'"
+                aria-label="Ajouter la question au test"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="block-container right">
       <div class="bar">
-        
         <mat-icon class="static">grading</mat-icon>
-        <span class="bar-text">Votre test d'évaluation ({{this.selectedQuestions ? this.selectedQuestions.length : 0}})</span>
+        <span class="bar-text"
+          >Votre test d'évaluation ({{
+            this.selectedQuestions ? this.selectedQuestions.length : 0
+          }})</span
+        >
 
-        <button class="hvr-grow color-primary-dark" mat-mini-fab (click)="openDialogTest()" [matTooltipPosition]="'left'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Prévisualiser le test" color="primary" aria-label="Example icon button with a menu icon">
+        <button
+          class="hvr-grow color-primary-dark"
+          mat-mini-fab
+          (click)="openDialogTest()"
+          [matTooltipPosition]="'left'"
+          [matTooltipClass]="'roodeo-tooltip'"
+          matTooltip="Prévisualiser le test"
+          color="primary"
+          aria-label="Example icon button with a menu icon"
+        >
           <mat-icon>play_circle_outlined</mat-icon>
         </button>
-        
       </div>
 
       <div *ngIf="!isLoaded" class="loader-container">
         <mat-spinner [strokeWidth]="20"></mat-spinner>
       </div>
 
-      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="selectedQuestions"
-        [cdkDropListConnectedTo]="[todoList]" class="liste-question" (cdkDropListDropped)="drop($event)" #droplist>
+      <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="selectedQuestions"
+        [cdkDropListConnectedTo]="[todoList]"
+        class="liste-question"
+        (cdkDropListDropped)="drop($event)"
+        #droplist
+      >
         <p id="drop-text">Glissez/déposez une question ici</p>
 
-          <div class="ligne-question" (cdkDragEnded)="dragEnd($event)" (cdkDragStarted)="dragStart($event)" *ngFor="let item of selectedQuestions" cdkDrag>
-
-            <div #info [ngClass]="{'info-hover-right': disablehover === false, 'disable': disablehover === true }" class="">
-              <div class="info-hover-header"><h2>{{item[nameI18n]}}</h2></div>
-              <div class="info-hover-content">
-                <p>Points : <span>{{item.points}}</span></p>
-                <p>Technologie : <span>{{item.technologies.name}}</span></p>
-                <p>Compétence évaluée : <span>{{item[themeI18n]}}</span></p>
-                <p>Enoncé:</p>
-              </div>
-              <app-response-formated [question]="item"></app-response-formated>
+        <div
+          class="ligne-question"
+          (cdkDragEnded)="dragEnd($event)"
+          (cdkDragStarted)="dragStart($event)"
+          *ngFor="let item of selectedQuestions"
+          cdkDrag
+        >
+          <div
+            #info
+            [ngClass]="{
+              'info-hover-right': disablehover === false,
+              disable: disablehover === true
+            }"
+            class=""
+          >
+            <div class="info-hover-header">
+              <h2>{{ item[nameI18n] }}</h2>
             </div>
-
-
-            <div class="ligne-plus" (click)="openDialogTest(item)" (mouseover)="disablehover = true" (mouseout)="disablehover = false">
-              <p class="ligne-plus-text">
-                <button mat-mini-fab [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'" matTooltip="Prévisualiser la question" [color]="'accent'" aria-label="Example icon button with a menu icon">
-                  <mat-icon>play_circle_outlined</mat-icon>
-                </button>
+            <div class="info-hover-content">
+              <p>
+                Points : <span>{{ item.points }}</span>
               </p>
+              <p>
+                Technologie : <span>{{ item.technologies.name }}</span>
+              </p>
+              <p>
+                Compétence évaluée : <span>{{ item[themeI18n] }}</span>
+              </p>
+              <p>Enoncé:</p>
             </div>
-            
-            <div class="ligne-techno">
-            <p class="ligne-techno-text">{{item.technologies.name}}</p>
+            <app-response-formated [question]="item"></app-response-formated>
+          </div>
+
+          <div
+            class="ligne-plus"
+            (click)="openDialogTest(item)"
+            (mouseover)="disablehover = true"
+            (mouseout)="disablehover = false"
+          >
+            <p class="ligne-plus-text">
+              <button
+                mat-mini-fab
+                [matTooltipPosition]="'below'"
+                [matTooltipClass]="'roodeo-tooltip'"
+                matTooltip="Prévisualiser la question"
+                [color]="'accent'"
+                aria-label="Example icon button with a menu icon"
+              >
+                <mat-icon>play_circle_outlined</mat-icon>
+              </button>
+            </p>
+          </div>
+
+          <div class="ligne-techno">
+            <p class="ligne-techno-text">{{ item.technologies.name }}</p>
+          </div>
+
+          <div class="ligne-nom" matTooltip="{{ item[titreI18n] }}">
+            <p class="ligne-nom-text">{{ item[titreI18n] }}</p>
+          </div>
+
+          <div
+            class="ligne-note"
+            *ngIf="item.level === 'expert'"
+            matTooltip="Difficulté Expert"
+          >
+            <div class="archive archive-inclue">
+              <span></span>
             </div>
-
-            <div class="ligne-nom" matTooltip="{{item[titreI18n]}}" >
-              <p class="ligne-nom-text">{{item[titreI18n]}}</p>
+            <div class="archive archive-inclue">
+              <span></span>
             </div>
-
-            <div class="ligne-note" *ngIf="item.level === 'expert'" matTooltip="Difficulté Expert">
-            
-              <div class="archive archive-inclue">
-                <span></span>
-              </div>
-              <div class="archive archive-inclue">
-                <span></span>
-              </div>
-              <div class="archive archive-inclue">
-                <span></span>
-              </div>
+            <div class="archive archive-inclue">
+              <span></span>
             </div>
+          </div>
 
-            <div class="ligne-note" *ngIf="item.level === 'moyen'" matTooltip="Difficulté Moyen">
-            
-              <div class="archive archive-inclue">
-                <span></span>
-              </div>
-              <div class="archive archive-inclue">
-                <span></span>
-              </div>
-              <div class="archive archive-non-inclue">
-                <span></span>
-              </div>
+          <div
+            class="ligne-note"
+            *ngIf="item.level === 'moyen'"
+            matTooltip="Difficulté Moyen"
+          >
+            <div class="archive archive-inclue">
+              <span></span>
             </div>
-
-            <div class="ligne-note" *ngIf="item.level === 'facile'" matTooltip="Difficulté Facile">
-            
-              <div class="archive archive-inclue">
-                <span></span>
-              </div>
-              <div class="archive archive-non-inclue">
-                <span></span>
-              </div>
-              <div class="archive archive-non-inclue">
-                <span></span>
-              </div>
+            <div class="archive archive-inclue">
+              <span></span>
             </div>
-
-            <div class="ligne-points"><p  class="ligne-points-text">{{item.points}} points</p></div>
-
-            <div class="ligne-type">
-              <i matTooltip="Question à choix multiple" *ngIf='item.type === "one" || item.type === "multiple"'
-                class="fas fa-list-ul ligne-icon"></i>
-              <i matTooltip="Question texte libre" *ngIf='item.type === "free"' class="fas fa-paragraph ligne-icon"></i>
-              <i matTooltip="Question algorithmique" *ngIf='item.type === "algo"' class="fas fa-code ligne-icon"></i>
+            <div class="archive archive-non-inclue">
+              <span></span>
             </div>
+          </div>
 
-            <div class="ligne-temps" matTooltip="Durée(min:sec)"><p class="ligne-temps-text">{{ fmtMSS(item.time) }}</p></div>
+          <div
+            class="ligne-note"
+            *ngIf="item.level === 'facile'"
+            matTooltip="Difficulté Facile"
+          >
+            <div class="archive archive-inclue">
+              <span></span>
+            </div>
+            <div class="archive archive-non-inclue">
+              <span></span>
+            </div>
+            <div class="archive archive-non-inclue">
+              <span></span>
+            </div>
+          </div>
 
+          <div class="ligne-points">
+            <p class="ligne-points-text">{{ item.points }} points</p>
+          </div>
+
+          <div class="ligne-type">
+            <i
+              matTooltip="Question à choix multiple"
+              *ngIf="item.type === 'one' || item.type === 'multiple'"
+              class="fas fa-list-ul ligne-icon"
+            ></i>
+            <i
+              matTooltip="Question texte libre"
+              *ngIf="item.type === 'free'"
+              class="fas fa-paragraph ligne-icon"
+            ></i>
+            <i
+              matTooltip="Question algorithmique"
+              *ngIf="item.type === 'algo'"
+              class="fas fa-code ligne-icon"
+            ></i>
+          </div>
+
+          <div class="ligne-temps" matTooltip="Durée(min:sec)">
+            <p class="ligne-temps-text">{{ fmtMSS(item.time) }}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
