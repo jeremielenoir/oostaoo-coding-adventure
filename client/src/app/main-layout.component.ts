@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-main-layout',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent { 
-  
+  private currentPage: string;
+
+  constructor(private router: Router){
+    router.events.subscribe(val => {
+        if (val instanceof NavigationEnd) {
+          this.currentPage = val.url.replace(/\//,'').replace(/\//gi,'-');
+        }
+    });
+  }
 }

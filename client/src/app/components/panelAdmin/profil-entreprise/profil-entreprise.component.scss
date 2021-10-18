@@ -254,9 +254,37 @@
                 }
               }
             }
-
-            .param-header.active-param-header {
-              display: block;
+        }
+    }
+    .edit-entreprise {
+        padding-top: 55px;
+    }
+    #content {
+        .new-entreprise {
+            padding-top: 75px;
+        }
+        #shadow-cog,
+        #shadow-cog-add-images {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            display: none;
+            #remove,
+            #remove_add_image {
+                cursor: pointer;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                right: 0px;
+                bottom: 0px;
+                z-index: -1;
             }
 
             .edit-panel-header {
