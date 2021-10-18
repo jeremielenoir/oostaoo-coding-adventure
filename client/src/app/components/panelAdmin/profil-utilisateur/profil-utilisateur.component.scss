@@ -1,209 +1,265 @@
 @import "../../../../roodeo-variables.scss";
+@import "../../../../roodeo-responsive-mixin.scss";
+
 #global {
-    background: $color-background-blue;
-    .padding-top {
-        padding-top: 75px;
+  background: $color-background-blue;
+
+  .padding-top {
+    padding-top: 75px;
+  }
+
+  .content {
+    padding: 0px 0px 20px 0px;
+    display: flex;
+    margin: 0 auto;
+
+    &.top {
+      width: 100%;
+      display: block;
+      margin-top: 45px;
+      padding: 10px 0;
     }
-    .content {
-        // width: 95%;
-        // padding: 10px;
-        padding: 0px 0px 20px 0px;
+
+    .icon {
+      color: $color-orange;
+      margin-left: 20px;
+      margin-right: 10px;
+      font-size: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+    }
+
+    #signature {
+      width: 100%;
+    }
+
+    .section-title {
+      display: flex;
+    }
+
+    .input-title {
+      font-size: 16px;
+      flex: 1;
+      margin-bottom: 10px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      height: 50px;
+      background: $color-principal-blue;
+      color: white;
+      text-transform: uppercase;
+      font-size: $font-size-home;
+      border: 0px;
+      cursor: pointer;
+      transition: .3s;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover {
+        background: #152536;
+      }
+    }
+
+    .form-line {
+      display: flex;
+      justify-content: space-around;
+
+      &.fix-top {
+        margin-top: 10px;
+      }
+
+      .fullwidth {
+        width: 45%;
+      }
+
+      .fullwidth100 {
+        width: 95%;
+      }
+
+      .input-bloc {
+        width: 95%;
+        margin: 20px 20px 18px 20px;
         display: flex;
-        // width: 98%;
-        margin: 0 auto;
-        // background: $color-background-blue;
-        // .border-none{
-        //    border-right:none
-        // }
-        &.top {
-            width: 100%;
-            display: block;
-            margin-top: 45px;
-            padding: 10px 0;
+        justify-content: center;
+
+        .input-section1 {
+          width: 100%;
+          height: 50px;
+          border: $border-table;
+          background: white;
+          font-size: 16px;
+          padding-left: 15px;
+
+          &:focus {
+            outline: none;
+          }
         }
-        .icon {
-            color: $color-orange;
-            margin-left: 20px;
-            margin-right: 10px;
-            font-size: 32px;
+
+        .input-section1-textarea {
+          height: 250px !important;
+          padding-top: 9px;
+          resize: none;
         }
-        .title {
-            font-size: 24px;
-        }
-        #signature {
-            width: 100%;
-        }
-        .section-title {
-            display: flex;
-        }
-        .input-title {
-            font-size: 16px;
-            flex: 1;
-            margin-bottom: 10px;
-        }
-        .btn-submit {
-            width: 100%;
-            height: 50px;
-            background: $color-principal-blue;
-            color: white;
-            text-transform: uppercase;
-            font-size: $font-size-home;
-            border: 0px;
-            cursor: pointer;
-            transition: .3s;
-            &:focus {
-                outline: none;
-            }
-            &:hover {
-                background: #152536;
-            }
-        }
-        .form-line {
-            display: flex;
-            justify-content: space-around;
-            &.fix-top {
-                margin-top: 10px;
-            }
-            .fullwidth {
-                width: 45%;
-            }
-            .fullwidth100 {
-                width: 95%;
-            }
-            .input-bloc {
-                width: 95%;
-                margin: 20px 20px 18px 20px;
-                display: flex;
-                justify-content: center;
-                .input-section1 {
-                    width: 100%;
-                    height: 50px;
-                    border: $border-table;
-                    background: white;
-                    font-size: 16px;
-                    padding-left: 15px;
-                    &:focus {
-                        outline: none;
-                    }
-                }
-                .input-section1-textarea {
-                    height: 250px !important;
-                    padding-top: 9px;
-                    resize: none;
-                }
-            }
-        }
-        .account-transform {
-            width: 100%;
-            margin-top: 25px;
-            background: rgba($color: #750240, $alpha: 0.08);
-            padding: 20px 20px;
-            border: $border-table;
-            border-radius: $border-radius;
-        }
-        /* Section 1 */
-        #section1 {
-            width: 98%;
-            margin: 25px 1% 0 0;
-            background: white;
-            padding: 40px 80px;
-            border: $border-table;
-            border-radius: $border-radius;
-        }
-        /* Section 2 */
-        #section2 {
-            width: 98%;
-            margin: 25px auto 0;
-            background: white;
-            padding: 40px 80px;
-            border: $border-table;
-            border-radius: $border-radius;
-            .form-line {
-                display: flex;
-                flex-direction: column;
-                app-base-button {
-                    display: flex;
-                    justify-content: center;
-                }
-            }
-        }
-        /* Section 3 */
-        #section3 {
-            width: 98%;
-            margin: 18px 1% 0 0;
-            background: white;
-            padding: 40px 80px;
-            border: $border-table;
-            border-radius: $border-radius;
-        }
-        /* Section 4 */
-        #section4 {
-            width: 98%;
-            margin: 18px auto 0;
-            background: white;
-            padding: 40px 80px;
-            border: $border-table;
-            border-radius: $border-radius;
-        }
+      }
     }
+
+    .account-transform {
+      width: 100%;
+      margin-top: 25px;
+      background: rgba($color: #750240, $alpha: 0.08);
+      padding: 20px 20px;
+      border: $border-table;
+      border-radius: $border-radius;
+    }
+
+    #section1 {
+
+      background: white;
+      padding: 40px 80px;
+      border: $border-table;
+      border-radius: $border-radius;
+      // margin: 25px 0px 0px 0px;
+      // width: 100%;
+    }
+
+    #section2 {
+      background: white;
+      padding: 40px 80px;
+      border: $border-table;
+      border-radius: $border-radius;
+      // margin: 25px 0px 0px 0px;
+      // width: 100%;
+
+      .form-line {
+        display: flex;
+        flex-direction: column;
+
+        app-base-button {
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+
+    #section3 {
+      background: white;
+      padding: 40px 80px;
+      border: $border-table;
+      border-radius: $border-radius;
+      // margin: 18px 0px 0px 0px;
+      // width: 100%;
+    }
+
+    #section4 {
+      background: white;
+      padding: 40px 80px;
+      border: $border-table;
+      border-radius: $border-radius;
+      // margin: 18px 0px 0px 0px;
+      // width: 100%;
+    }
+  }
 }
 
-@media screen and (max-width: 1024px) {
-    #global {
-        display: block;
-    }
-    #section1,
-    #section2,
-    #section3,
-    #section4 {
-        padding: 10px 10px!important;
-    }
-    .content {
-        flex-direction: column;
-    }
-}
 
 .error-red {
-    color: red;
+  color: red;
 }
 
 // TOOLBAR
 ::ng-deep .tool-bar .mat-form-field-wrapper {
-    margin: 0 !important;
-    padding: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 // Config css for bar search and buttons
 .tool-bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4), -3px -4px 8px -2px rgba(124, 151, 166, 0.69);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4), -3px -4px 8px -2px rgba(124, 151, 166, 0.69);
+  border: $border-table;
+  background-color: $color-pricipal-blue-light;
+  border-radius: 5px;
+  padding: 15px;
+  color: $color-principal-blue;
+
+  .candidat-custom-select {
     border: $border-table;
-    background-color: $color-pricipal-blue-light;
-    border-radius: 5px;
-    padding: 15px;
-    color: $color-principal-blue;
-    .candidat-custom-select {
-        border: $border-table;
-        background-color: $color-white;
-        display: flex;
-        justify-content: center;
-        height: 50px;
+    background-color: $color-white;
+    display: flex;
+    justify-content: center;
+    height: 50px;
+  }
+
+  .candidat-finish-custom-select {
+    display: flex;
+    justify-content: center;
+    height: 50px;
+  }
+
+  .candidat-finish-custom-select mat-label {
+    color: $color-white;
+  }
+
+  :host .candidat-finish-custom-select ::ng-deep .mat-select-value {
+    color: $color-white;
+  }
+
+  .fix-button {
+    margin-top: inherit;
+    border-radius: $border-radius;
+  }
+}
+
+
+@include respond-to(mobile-Handheld) {
+  #global {
+    display: block;
+
+    .content {
+      flex-direction: column;
+
+      #section1,
+      #section2,
+      #section3,
+      #section4 {
+        padding: 10px 10px !important;
+        width: 100%;
+        margin: 25px auto 0;
+      }
     }
-    .candidat-finish-custom-select {
-        display: flex;
-        justify-content: center;
-        height: 50px;
+  }
+}
+
+@include respond-to(small-extra-Desktop) {
+  .content {
+    flex-direction: row;
+
+    #section1 {
+      width: calc(50% - 10px);
+      margin: 18px 10px 0px 0px;
     }
-    .candidat-finish-custom-select mat-label {
-        color: $color-white;
+
+    #section2 {
+      width: calc(50% - 10px);
+      margin: 18px 0px 0px 10px;
     }
-     :host .candidat-finish-custom-select ::ng-deep .mat-select-value {
-        color: $color-white;
+
+    #section3 {
+      width: calc(50% - 10px);
+      margin: 18px 10px 0px 0px;
     }
-    .fix-button {
-        margin-top: inherit;
-        border-radius: $border-radius;
+
+    #section4 {
+      width: calc(50% - 10px);
+      margin: 18px 0px 0px 10px;
     }
+  }
+
 }

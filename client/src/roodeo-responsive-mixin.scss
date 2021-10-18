@@ -1,0 +1,19 @@
+$small-desktop: 769px;
+$extra-large-desktop: 2560px;
+$handheld: 768px;
+$mobile: 320px;
+
+@mixin respond-to($media) {
+
+  @if $media==mobile-Handheld {
+    @media only screen and (min-width : $mobile) and (max-width : $handheld) {
+      @content;
+    }
+  }
+
+  @if $media==small-extra-Desktop {
+    @media only screen and (min-width : $small-desktop) and (max-width : $extra-large-desktop) {
+      @content;
+    }
+  }
+}
