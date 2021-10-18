@@ -1,5 +1,11 @@
 @import "../../../../roodeo-variables.scss";
 
+:host-context(.dashboard-campaigns){
+    .rowter {
+        height: calc(100vh - 40px);
+    }
+}
+
 .app-campagneMaxSize{
     flex: 11!important;
 }

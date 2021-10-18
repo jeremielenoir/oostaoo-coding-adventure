@@ -1,5 +1,5 @@
 <app-route-component></app-route-component>
-<div class="main-content-wrapper">
+<div [ngClass]="['main-content-wrapper', currentPage]">
     <router-outlet></router-outlet>
 </div>
 
