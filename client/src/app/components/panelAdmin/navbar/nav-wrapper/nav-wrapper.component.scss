@@ -9,6 +9,8 @@
   #nav {
     top: 90px;
     border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
     box-shadow: 0 1px 6px rgba(32, 33, 36, .28);
     background: #1d3552;
     display: flex;
