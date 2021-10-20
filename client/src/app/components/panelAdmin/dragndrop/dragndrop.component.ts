@@ -97,6 +97,7 @@ export class DragNDropComponent implements OnInit, OnChanges {
   public themeI18n = '';
   public titreI18n = '';
   public answerValueI18n = '';
+  
   @ViewChild('droplist') public droplist: ElementRef;
 
   constructor(

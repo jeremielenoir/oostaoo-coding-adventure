@@ -1,278 +1,277 @@
 <div id="global">
-    <!-- <app-breadcrumb [namePage]="'Mon profil'"></app-breadcrumb> -->
-
-    <div class="padding-top">
-        <!-- <div class="breadrumb">
-      <div [routerLink]="['/dashboard/profil-utilisateur']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
-        <p>
-        <mat-icon class="fix-right hvr-icon">person_outline</mat-icon>
-        Mon profil
-        </p>
-      </div>
-      <div *ngIf="this.user?.customeraccount.type === 'profesional'"  [routerLink]="['/dashboard/profil-entreprise']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
-        <p>
-        <mat-icon class="fix-right hvr-icon">domain</mat-icon>
-        Mon entreprise
-        </p>
-      </div>
-      <div [routerLink]="['/dashboard/utilisateurs']" class="navigation hvr-icon-bounce" routerLinkActive="router-link-active">
-        <p>
-        <mat-icon class="fix-right hvr-icon">groups</mat-icon>
-        utilisateurs
-        </p>
-      </div>
-    </div> -->
-        <div *ngIf="dataRoute">
-            <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
-        </div>
-        <div class="fix-contents">
-            <div class="content top">
-                <div class="tool-bar">
-                    <div class="flex1">
-                        <p *ngIf="this.user?.customeraccount.type === 'personal'" i18n>Basculer vers un compte professionnel</p>
-                        <p *ngIf="this.user?.customeraccount.type === 'profesional'" i18n>Bienvenu(e) sur votre espace personnel</p>
-                    </div>
-                    <!-- Btn -->
-                    <app-base-button iconName="business" (click)="convertToPro()">
-                        <span *ngIf="this.user?.customeraccount.type === 'profesional'" class="text" i18n> Editer le profil entreprise</span>
-                        <span *ngIf="this.user?.customeraccount.type === 'personal'" class="text" i18n> Créer votre profil entreprise</span>
-                    </app-base-button>
-                </div>
-            </div>
-
-            <div class="content">
-                <div id="section1" class="border-none">
-
-                    <div class="section-title">
-                        <i class="far fa-user-circle icon"></i>
-                        <h2 class="title" i18n>Profil</h2>
-                    </div>
-
-                    <form action="">
-                        <div class="form-line fix-top">
-                            <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurProfil" [floatLabel]="true" class="fullwidth">
-                                <mat-label i18n>Prénom *</mat-label>
-                                <input type="text" formControlName="firstName" matInput value="" name="firstName" />
-                            </mat-form-field>
-                            <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurProfil" class="fullwidth">
-                                <mat-label i18n>Nom *</mat-label>
-                                <input type="text" formControlName="lastName" matInput value="" name="lastName" />
-                            </mat-form-field>
-                        </div>
-
-                        <div class="form-line">
-                            <mat-form-field [formGroup]="formUtilisateurProfil" appearance="outline" [color]="'accent'" class="fullwidth">
-                                <mat-label i18n>Pays *</mat-label>
-                                <mat-select name="country" class="mat-primary" formControlName="country">
-                                    <mat-option value="Afrikanns">Afrikanns</mat-option>
-                                    <mat-option value="Albanian">Albanian</mat-option>
-                                    <mat-option value="Arabic">Arabic</mat-option>
-                                    <mat-option value="Armenian">Armenian</mat-option>
-                                    <mat-option value="Basque">Basque</mat-option>
-                                    <mat-option value="Bengali">Bengali</mat-option>
-                                    <mat-option value="Bulgarian">Bulgarian</mat-option>
-                                    <mat-option value="Catalan">Catalan</mat-option>
-                                    <mat-option value="Cambodian">Cambodian</mat-option>
-                                    <mat-option value="Chinese (Mandarin)">Chinese (Mandarin)</mat-option>
-                                    <mat-option value="Croation">Croation</mat-option>
-                                    <mat-option value="Czech">Czech</mat-option>
-                                    <mat-option value="Danish">Danish</mat-option>
-                                    <mat-option value="Dutch">Dutch</mat-option>
-                                    <mat-option value="English">English</mat-option>
-                                    <mat-option value="Estonian">Estonian</mat-option>
-                                    <mat-option value="Fiji">Fiji</mat-option>
-                                    <mat-option value="Finnish">Finnish</mat-option>
-                                    <mat-option value="France">France</mat-option>
-                                    <mat-option value="Georgian">Georgian</mat-option>
-                                    <mat-option value="German">German</mat-option>
-                                    <mat-option value="Greek">Greek</mat-option>
-                                    <mat-option value="Gujarati">Gujarati</mat-option>
-                                    <mat-option value="Hebrew">Hebrew</mat-option>
-                                    <mat-option value="Hindi">Hindi</mat-option>
-                                    <mat-option value="Hungarian">Hungarian</mat-option>
-                                    <mat-option value="Icelandic">Icelandic</mat-option>
-                                    <mat-option value="Indonesian">Indonesian</mat-option>
-                                    <mat-option value="Irish">Irish</mat-option>
-                                    <mat-option value="Italian">Italian</mat-option>
-                                    <mat-option value="Japanese">Japanese</mat-option>
-                                    <mat-option value="Javanese">Javanese</mat-option>
-                                    <mat-option value="Korean">Korean</mat-option>
-                                    <mat-option value="Latin">Latin</mat-option>
-                                    <mat-option value="Latvian">Latvian</mat-option>
-                                    <mat-option value="Lithuanian">Lithuanian</mat-option>
-                                    <mat-option value="Macedonian">Macedonian</mat-option>
-                                    <mat-option value="Malay">Malay</mat-option>
-                                    <mat-option value="Malayalam">Malayalam</mat-option>
-                                    <mat-option value="Maltese">Maltese</mat-option>
-                                    <mat-option value="Maori">Maori</mat-option>
-                                    <mat-option value="Marathi">Marathi</mat-option>
-                                    <mat-option value="Mongolian">Mongolian</mat-option>
-                                    <mat-option value="Nepali">Nepali</mat-option>
-                                    <mat-option value="Norwegian">Norwegian</mat-option>
-                                    <mat-option value="Persian">Persian</mat-option>
-                                    <mat-option value="Polish">Polish</mat-option>
-                                    <mat-option value="Portuguese">Portuguese</mat-option>
-                                    <mat-option value="Punjabi">Punjabi</mat-option>
-                                    <mat-option value="Quechua">Quechua</mat-option>
-                                    <mat-option value="Romanian">Romanian</mat-option>
-                                    <mat-option value="Russian">Russian</mat-option>
-                                    <mat-option value="Samoan">Samoan</mat-option>
-                                    <mat-option value="Serbian">Serbian</mat-option>
-                                    <mat-option value="Slovak">Slovak</mat-option>
-                                    <mat-option value="Slovenian">Slovenian</mat-option>
-                                    <mat-option value="Spanish">Spanish</mat-option>
-                                    <mat-option value="Swahili">Swahili</mat-option>
-                                    <mat-option value="Swedish ">Swedish </mat-option>
-                                    <mat-option value="Tamil">Tamil</mat-option>
-                                    <mat-option value="Tatar">Tatar</mat-option>
-                                    <mat-option value="Telugu">Telugu</mat-option>
-                                    <mat-option value="Thai">Thai</mat-option>
-                                    <mat-option value="Tibetan">Tibetan</mat-option>
-                                    <mat-option value="Tonga">Tonga</mat-option>
-                                    <mat-option value="Turkish">Turkish</mat-option>
-                                    <mat-option value="Ukranian">Ukranian</mat-option>
-                                    <mat-option value="Urdu">Urdu</mat-option>
-                                    <mat-option value="Uzbek">Uzbek</mat-option>
-                                    <mat-option value="Vietnamese">Vietnamese</mat-option>
-                                    <mat-option value="Welsh">Welsh</mat-option>
-                                    <mat-option value="Xhosa">Xhosa</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <mat-form-field [formGroup]="formUtilisateurProfil" appearance="outline" [color]="'accent'" class="fullwidth">
-                                <mat-label i18n>Langue *</mat-label>
-                                <mat-select name="language" class="mat-primary" formControlName="language">
-                                    <mat-option value="Anglais">Anglais</mat-option>
-                                    <mat-option value="Francais">Français</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="form-line">
-                            <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurProfil" class="fullwidth">
-                                <mat-label i18n> N° de téléphone </mat-label>
-                                <input type="text" formControlName="phone" matInput value="" name="phone" />
-                            </mat-form-field>
-
-                            <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurProfil" class="fullwidth">
-                                <mat-label i18n> N° mobile </mat-label>
-                                <input type="text" formControlName="telephone" matInput value="" name="telephone" />
-                            </mat-form-field>
-                        </div>
-
-
-
-                        <div class="form-line">
-                            <mat-form-field [formGroup]="formUtilisateurProfil" appearance="outline" [color]="'accent'" class="fullwidth100">
-                                <mat-label i18n>Fonction</mat-label>
-                                <mat-select name="office" class="mat-primary" formControlName="office">
-                                    <mat-option value="commercial">Commercial</mat-option>
-                                    <mat-option value="direction">Direction</mat-option>
-                                    <mat-option value="tech">Équipe technique</mat-option>
-                                    <mat-option value="marketing">Marketing/Communication</mat-option>
-                                    <mat-option value="rh">Ressources humaines</mat-option>
-                                    <mat-option value="other">Autre</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="form-line">
-                            <div class="input-bloc">
-                                <app-base-button (click)='updateprofil()' iconName="save">Enregister</app-base-button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-
-                <div id="section2">
-                    <div class="section-title">
-                        <i class="far fa-user-circle icon"></i>
-                        <h2 class="title" i18n>Signature</h2>
-                    </div>
-                    <form action="">
-                        <div class="form-line">
-                            <div class="input-bloc">
-                                <mat-form-field [formGroup]="formUtilisateurSignature" appearance="outline" [color]="'accent'" class="fullwidth100">
-                                    <mat-label i18n>Signature</mat-label>
-                                    <textarea matTextareaAutosize matAutosizeMinRows="14.5" matAutosizeMaxRows="20" formControlName="signature" matInput></textarea>
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <div class="form-line">
-                            <div class="input-bloc">
-                                <app-base-button (click)='updatesignature()' iconName="save">Enregister</app-base-button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="content">
-                <div id="section3" class="border-none">
-                    <div class="section-title">
-                        <i class="far fa-envelope-open icon"></i>
-                        <h2 class="title" i18n> Adresse Email</h2>
-                    </div>
-
-                    <form action="">
-                        <div class="form-line fix-top">
-                            <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurEmail" class="fullwidth100">
-                                <mat-label i18n> Email actuel * </mat-label>
-                                <input type="email" formControlName="email" matInput value="" name="email" />
-                            </mat-form-field>
-                        </div>
-
-                        <div class="form-line">
-                            <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurEmail" class="fullwidth100">
-                                <mat-label i18n> Nouvel email * </mat-label>
-                                <input type="email" formControlName="newEmail" matInput value="" name="newEmail" />
-                            </mat-form-field>
-                        </div>
-
-                        <div class="form-line">
-                            <div class="input-bloc">
-                                <app-base-button (click)='updateemail()' iconName="save" i18n>Enregister</app-base-button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-
-                <div id="section4">
-                    <div class="section-title">
-                        <i class="fas fa-lock icon"></i>
-                        <h2 class="title" i18n> Mot de passe</h2>
-                    </div>
-
-                    <form action="">
-                        <div class="form-line fix-top">
-                            <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurPassword" class="fullwidth100">
-                                <mat-label i18n>Nouveau mot de passe *</mat-label>
-                                <input [type]="hide ? 'password' : 'text'" formControlName="newPassword" matInput name="newPassword" />
-                                <mat-hint *ngIf="formUtilisateurPassword.get('newPassword').errors?.minlength" class="error-red" i18n>
-                                    Le mot de passe doit être au moins de 6 caractères</mat-hint>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="form-line">
-                            <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurPassword" class="fullwidth100">
-                                <mat-label i18n>Confirmer le mot de passe *</mat-label>
-                                <input [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" matInput name="confirmPassword" />
-                                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                <mat-hint *ngIf="formUtilisateurPassword.get('confirmPassword').errors?.mustMatch" class="error-red" i18n>Les mots de passe doivent correspondre</mat-hint>
-                            </mat-form-field>
-                        </div>
-
-
-                        <div class="form-line">
-                            <div class="input-bloc">
-                                <app-base-button (click)="updatepassword()" iconName="save" i18n>Enregister</app-base-button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+  <div class="padding-top">
+    <div *ngIf="dataRoute">
+      <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
     </div>
+    <div class="fix-contents">
+      <!--
+        remplacer ce block par le ng-content 
+        dans src/app/components/common/ui/header-panel
+       -->
+      <div class="content top">
+        <div class="tool-bar">
+          <div class="flex1">
+            <p *ngIf="this.user?.customeraccount.type === 'personal'" i18n>Basculer vers un compte professionnel</p>
+            <p *ngIf="this.user?.customeraccount.type === 'profesional'" i18n>Bienvenu(e) sur votre espace personnel</p>
+          </div>
+          <!-- Btn -->
+          <app-base-button iconName="business" (click)="convertToPro()">
+            <span *ngIf="this.user?.customeraccount.type === 'profesional'" class="text" i18n> Editer le profil
+              entreprise</span>
+            <span *ngIf="this.user?.customeraccount.type === 'personal'" class="text" i18n> Créer votre profil
+              entreprise</span>
+          </app-base-button>
+        </div>
+      </div>
+
+      <div class="content">
+        <div id="section1" class="border-none">
+
+          <div class="section-title">
+            <i class="far fa-user-circle icon"></i>
+            <h2 class="title" i18n>Profil</h2>
+          </div>
+
+          <form action="">
+            <div class="form-line fix-top">
+              <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurProfil"
+                [floatLabel]="true" class="fullwidth">
+                <mat-label i18n>Prénom *</mat-label>
+                <input type="text" formControlName="firstName" matInput value="" name="firstName" />
+              </mat-form-field>
+              <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurProfil"
+                class="fullwidth">
+                <mat-label i18n>Nom *</mat-label>
+                <input type="text" formControlName="lastName" matInput value="" name="lastName" />
+              </mat-form-field>
+            </div>
+
+            <div class="form-line">
+              <mat-form-field [formGroup]="formUtilisateurProfil" appearance="outline" [color]="'accent'"
+                class="fullwidth">
+                <mat-label i18n>Pays *</mat-label>
+                <mat-select name="country" class="mat-primary" formControlName="country">
+                  <mat-option value="Afrikanns" i18n>Afrikanns</mat-option>
+                  <mat-option value="Albanian" i18n>Albanian</mat-option>
+                  <mat-option value="Arabic" i18n>Arabic</mat-option>
+                  <mat-option value="Armenian" i18n>Armenian</mat-option>
+                  <mat-option value="Basque" i18n>Basque</mat-option>
+                  <mat-option value="Bengali" i18n>Bengali</mat-option>
+                  <mat-option value="Bulgarian" i18n>Bulgarian</mat-option>
+                  <mat-option value="Catalan" i18n>Catalan</mat-option>
+                  <mat-option value="Cambodian" i18n>Cambodian</mat-option>
+                  <mat-option value="Chinese (Mandarin)" i18n>Chinese (Mandarin)</mat-option>
+                  <mat-option value="Croation" i18n>Croation</mat-option>
+                  <mat-option value="Czech" i18n>Czech</mat-option>
+                  <mat-option value="Danish" i18n>Danish</mat-option>
+                  <mat-option value="Dutch" i18n>Dutch</mat-option>
+                  <mat-option value="English" i18n>English</mat-option>
+                  <mat-option value="Estonian" i18n>Estonian</mat-option>
+                  <mat-option value="Fiji" i18n>Fiji</mat-option>
+                  <mat-option value="Finnish" i18n>Finnish</mat-option>
+                  <mat-option value="France" i18n>France</mat-option>
+                  <mat-option value="Georgian" i18n>Georgian</mat-option>
+                  <mat-option value="German" i18n>German</mat-option>
+                  <mat-option value="Greek" i18n>Greek</mat-option>
+                  <mat-option value="Gujarati" i18n>Gujarati</mat-option>
+                  <mat-option value="Hebrew" i18n>Hebrew</mat-option>
+                  <mat-option value="Hindi" i18n>Hindi</mat-option>
+                  <mat-option value="Hungarian" i18n>Hungarian</mat-option>
+                  <mat-option value="Icelandic" i18n>Icelandic</mat-option>
+                  <mat-option value="Indonesian" i18n>Indonesian</mat-option>
+                  <mat-option value="Irish" i18n>Irish</mat-option>
+                  <mat-option value="Italian" i18n>Italian</mat-option>
+                  <mat-option value="Japanese" i18n>Japanese</mat-option>
+                  <mat-option value="Javanese" i18n>Javanese</mat-option>
+                  <mat-option value="Korean" i18n>Korean</mat-option>
+                  <mat-option value="Latin" i18n>Latin</mat-option>
+                  <mat-option value="Latvian" i18n>Latvian</mat-option>
+                  <mat-option value="Lithuanian" i18n>Lithuanian</mat-option>
+                  <mat-option value="Macedonian" i18n>Macedonian</mat-option>
+                  <mat-option value="Malay" i18n>Malay</mat-option>
+                  <mat-option value="Malayalam" i18n>Malayalam</mat-option>
+                  <mat-option value="Maltese" i18n>Maltese</mat-option>
+                  <mat-option value="Maori" i18n>Maori</mat-option>
+                  <mat-option value="Marathi" i18n>Marathi</mat-option>
+                  <mat-option value="Mongolian" i18n>Mongolian</mat-option>
+                  <mat-option value="Nepali" i18n>Nepali</mat-option>
+                  <mat-option value="Norwegian" i18n>Norwegian</mat-option>
+                  <mat-option value="Persian" i18n>Persian</mat-option>
+                  <mat-option value="Polish" i18n>Polish</mat-option>
+                  <mat-option value="Portuguese" i18n>Portuguese</mat-option>
+                  <mat-option value="Punjabi" i18n>Punjabi</mat-option>
+                  <mat-option value="Quechua" i18n>Quechua</mat-option>
+                  <mat-option value="Romanian" i18n>Romanian</mat-option>
+                  <mat-option value="Russian" i18n>Russian</mat-option>
+                  <mat-option value="Samoan" i18n>Samoan</mat-option>
+                  <mat-option value="Serbian" i18n>Serbian</mat-option>
+                  <mat-option value="Slovak" i18n>Slovak</mat-option>
+                  <mat-option value="Slovenian" i18n>Slovenian</mat-option>
+                  <mat-option value="Spanish" i18n>Spanish</mat-option>
+                  <mat-option value="Swahili" i18n>Swahili</mat-option>
+                  <mat-option value="Swedish" i18n>Swedish </mat-option>
+                  <mat-option value="Tamil" i18n>Tamil</mat-option>
+                  <mat-option value="Tatar" i18n>Tatar</mat-option>
+                  <mat-option value="Telugu" i18n>Telugu</mat-option>
+                  <mat-option value="Thai" i18n>Thai</mat-option>
+                  <mat-option value="Tibetan" i18n>Tibetan</mat-option>
+                  <mat-option value="Tonga" i18n>Tonga</mat-option>
+                  <mat-option value="Turkish" i18n>Turkish</mat-option>
+                  <mat-option value="Ukranian" i18n>Ukranian</mat-option>
+                  <mat-option value="Urdu" i18n>Urdu</mat-option>
+                  <mat-option value="Uzbek" i18n>Uzbek</mat-option>
+                  <mat-option value="Vietnamese" i18n>Vietnamese</mat-option>
+                  <mat-option value="Welsh" i18n>Welsh</mat-option>
+                  <mat-option value="Xhosa" i18n>Xhosa</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field [formGroup]="formUtilisateurProfil" appearance="outline" [color]="'accent'"
+                class="fullwidth">
+                <mat-label i18n>Langue *</mat-label>
+                <mat-select name="language" class="mat-primary" formControlName="language">
+                  <mat-option value="Anglais" i18n>Anglais</mat-option>
+                  <mat-option value="Francais" i18n>Français</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="form-line">
+              <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurProfil"
+                class="fullwidth">
+                <mat-label i18n> N° de téléphone </mat-label>
+                <input type="text" formControlName="phone" matInput value="" name="phone" />
+              </mat-form-field>
+
+              <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurProfil"
+                class="fullwidth">
+                <mat-label i18n> N° mobile </mat-label>
+                <input type="text" formControlName="telephone" matInput value="" name="telephone" />
+              </mat-form-field>
+            </div>
+
+
+
+            <div class="form-line">
+              <mat-form-field [formGroup]="formUtilisateurProfil" appearance="outline" [color]="'accent'"
+                class="fullwidth100">
+                <mat-label i18n>Fonction</mat-label>
+                <mat-select name="office" class="mat-primary" formControlName="office">
+                  <mat-option value="commercial" i18n>Commercial</mat-option>
+                  <mat-option value="direction" i18n>Direction</mat-option>
+                  <mat-option value="tech" i18n>Équipe technique</mat-option>
+                  <mat-option value="marketing" i18n>Marketing/Communication</mat-option>
+                  <mat-option value="rh" i18n>Ressources humaines</mat-option>
+                  <mat-option value="other" i18n>Autre</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="form-line">
+              <div class="input-bloc">
+                <app-base-button (click)='updateprofil()' iconName="save" i18n>Enregister</app-base-button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+        <div id="section2">
+          <div class="section-title">
+            <i class="far fa-user-circle icon"></i>
+            <h2 class="title" i18n>Signature</h2>
+          </div>
+          <form action="">
+            <div class="form-line">
+              <div class="input-bloc">
+                <mat-form-field [formGroup]="formUtilisateurSignature" appearance="outline" [color]="'accent'"
+                  class="fullwidth100">
+                  <mat-label i18n>Signature</mat-label>
+                  <textarea matTextareaAutosize matAutosizeMinRows="14.5" matAutosizeMaxRows="20"
+                    formControlName="signature" matInput></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="input-bloc">
+                <app-base-button (click)='updatesignature()' iconName="save" i18n>Enregister</app-base-button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="content">
+        <div id="section3" class="border-none">
+          <div class="section-title">
+            <i class="far fa-envelope-open icon"></i>
+            <h2 class="title" i18n> Adresse Email</h2>
+          </div>
+
+          <form action="">
+            <div class="form-line fix-top">
+              <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurEmail"
+                class="fullwidth100">
+                <mat-label i18n> Email actuel * </mat-label>
+                <input type="email" formControlName="email" matInput value="" name="email" />
+              </mat-form-field>
+            </div>
+
+            <div class="form-line">
+              <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurEmail"
+                class="fullwidth100">
+                <mat-label i18n> Nouvel email * </mat-label>
+                <input type="email" formControlName="newEmail" matInput value="" name="newEmail" />
+              </mat-form-field>
+            </div>
+
+            <div class="form-line">
+              <div class="input-bloc">
+                <app-base-button (click)='updateemail()' iconName="save" i18n>Enregister</app-base-button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+        <div id="section4">
+          <div class="section-title">
+            <i class="fas fa-lock icon"></i>
+            <h2 class="title" i18n> Mot de passe</h2>
+          </div>
+
+          <form action="">
+            <div class="form-line fix-top">
+              <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurPassword"
+                class="fullwidth100">
+                <mat-label i18n>Nouveau mot de passe *</mat-label>
+                <input [type]="hide ? 'password' : 'text'" formControlName="newPassword" matInput name="newPassword" />
+                <mat-hint *ngIf="formUtilisateurPassword.get('newPassword').errors?.minlength" class="error-red" i18n>
+                  Le mot de passe doit être au moins de 6 caractères</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <div class="form-line">
+              <mat-form-field [color]="'accent'" appearance="outline" [formGroup]="formUtilisateurPassword"
+                class="fullwidth100">
+                <mat-label i18n>Confirmer le mot de passe *</mat-label>
+                <input [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" matInput
+                  name="confirmPassword" />
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-hint *ngIf="formUtilisateurPassword.get('confirmPassword').errors?.mustMatch" class="error-red"
+                  i18n>Les mots de passe doivent correspondre</mat-hint>
+              </mat-form-field>
+            </div>
+
+
+            <div class="form-line">
+              <div class="input-bloc">
+                <app-base-button (click)="updatepassword()" iconName="save" i18n>Enregister</app-base-button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

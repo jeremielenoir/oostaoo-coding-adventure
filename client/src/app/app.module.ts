@@ -32,6 +32,7 @@ import { SecondSectionComponent } from './components/home/second-section/second-
 import { CounterAnimComponent } from './components/home/counter-anim/counter-anim.component';
 import { FooterComponent } from './components/home/footer/footer.component';
 import { BaseButton } from './components/common/ui/buttons/base-button.component';
+import { BaseHeaderPanel } from './components/common/ui/header-panel/base-header-panel.component';
 
 import { InterviewComponent } from './components/home/interview/interview.component';
 import { SliderComponent } from './components/home/slider/slider.component';
@@ -196,6 +197,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     InterviewComponent,
     FooterComponent,
     BaseButton,
+    BaseHeaderPanel,
     SliderComponent,
     SlideMarquesComponent,
     RouteComponentComponent,
@@ -283,7 +285,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     TimeagoComponent,
     CampaignsArchivedPipe,
     NavWrapperComponent,
-    SaveCardComponent
+    SaveCardComponent,
   ],
   imports: [
     BrowserModule,
