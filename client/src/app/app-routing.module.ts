@@ -166,19 +166,21 @@ const routes: Routes = [
         component: ContactSupportComponent,
         canActivate: [AuthGuard],
       },
+      {
+        path: 'faq',
+        component: FAQComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'faq/:dynamicParams',
+        component: FAQComponent,
+        canActivate: [AuthGuard],
+      },
     ],
   },
   {
     path: 'not-found',
     component: NotFoundComponent,
-  },
-  {
-    path: 'dashboard/faq',
-    component: FAQComponent,
-  },
-  {
-    path: 'dashboard/faq/:dynamicParams',
-    component: FAQComponent,
   },
   {
     path: '**',
