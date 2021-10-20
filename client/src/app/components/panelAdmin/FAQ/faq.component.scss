@@ -2,6 +2,10 @@
 
 .global {
   background: $color-background-blue;
+   
+  .hack{
+    padding-top: 55px;
+  }
 
   .rowter {
     background-color: $color-background-blue;
