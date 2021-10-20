@@ -1,6 +1,9 @@
 <div class="global">
+  <div *ngIf="dataRoute" class="hack">
+    <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
+  </div>
   <div class="rowter">
-    <base-header-panel>
+    <base-header-panel >
       <p title>Bienvenue dans la Foire aux questions, si vous ne trouvez pas les informations, veuillez nous contacter
       </p>
       <!-- Btn -->
