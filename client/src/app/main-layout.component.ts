@@ -7,7 +7,7 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent { 
-  private currentPage: string;
+  public currentPage: string;
 
   constructor(private router: Router){
     router.events.subscribe(val => {
