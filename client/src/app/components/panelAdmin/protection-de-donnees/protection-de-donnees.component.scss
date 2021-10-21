@@ -21,13 +21,6 @@
             margin-bottom: 25px;
         }
 
-        .save {
-            background: $color-principal-blue!important;
-            color: white;
-            min-width: 105px;
-            margin-left: 15px;
-        }
-
         /* Section 1 */
 
         #section1 {
@@ -199,7 +192,6 @@
 
 :host ::ng-deep .mat-flat-button {
     height: 45px;
-    border-radius: 0px !important;
 }
 
 :host ::ng-deep .mat-input-element {
