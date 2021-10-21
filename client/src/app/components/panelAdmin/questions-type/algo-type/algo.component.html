@@ -1,13 +1,22 @@
- 
-
 <div style="height: 75%">
- 
-    <ngx-monaco-editor [options]="editorOptions" style="height: 100%" [options]="options" [(ngModel)]="question.content"></ngx-monaco-editor>
- </div>
+  <ngx-monaco-editor
+    [options]="editorOptions"
+    style="height: 100%"
+    [options]="options"
+    [(ngModel)]="question.content"
+  ></ngx-monaco-editor>
+</div>
 
- 
- <button mat-flat-button (click)="testCode()" type="button">Test your code</button>
- 
- <div style="height: 75%;text-align:center;" *ngIf="result">
- <p>{{result.result}}</p>
- </div>
+<app-base-button
+  type="button"
+  mat-raised-button
+  color="primary"
+  (click)="testCode()"
+  class="button-test"
+>
+  Test your code
+</app-base-button>
+
+<div style="height: 75%; text-align: center" *ngIf="result">
+  <p>{{ result.result }}</p>
+</div>
