@@ -32,7 +32,7 @@
             border-radius: $border-radius;
 
             #section1-input {
-                margin: 15px 0px;
+                margin: 15px 10px 15px 0;
                 width: 85%;
             }
 
@@ -75,6 +75,7 @@
 
             #section2-right {
                 display: flex;
+                gap: 0 10px;
                 flex-wrap: wrap;
                 width: 46%;
 
@@ -131,7 +132,7 @@
             }
 
             .section3-right-input {
-                width: 80%;
+                width: 100%;
             }
 
             .section3-input {
@@ -139,8 +140,8 @@
                 margin-top: 10px;
             }
 
-            #section3-button {
-                margin-top: 50px;
+            .section3-button {
+                margin: 10px auto;
             }
         }
 
