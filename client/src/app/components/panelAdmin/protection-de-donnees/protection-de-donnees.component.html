@@ -23,8 +23,13 @@
       <button mat-flat-button class="section1-button" i18n>Politique de confidentialité</button>
 
       <p i18n>Email de votre Data Privacy Officer <i class="fas fa-info-circle icon-info"></i></p>
-      <input matInput placeholder="Email" id="section1-input" value="{{this.email}}" disabled>
-      <app-base-button iconName="save" i18n>Sauvegarder</app-base-button>
+      <!-- <input matInput placeholder="Email" id="section1-input" value="{{this.email}}" disabled> -->
+      <div class="section-input-btn">
+        <mat-form-field [color]="'accent'" appearance="outline" class="section-input">
+          <input type="text" matInput value="{{this.email}}" disabled />
+        </mat-form-field>
+        <app-base-button iconName="save" i18n>Sauvegarder</app-base-button>
+      </div>
     </div>
 
     <div id="section2">
@@ -41,18 +46,24 @@
       <div id="section2-right">
         <div id="section2-input-left">
           <p i18n>Jours avant anonymisation <i class="fas fa-info-circle icon-info"></i></p>
-          <input matInput placeholder="" value="0" class="section2-input">
+          <mat-form-field [color]="'accent'" appearance="outline">
+            <mat-label i18n>Jour *</mat-label>
+            <input type="text" matInput value="" />
+          </mat-form-field>
           <p class="never" i18n>0 signifie jamais</p>
         </div>
 
         <div>
-          <p i18n>Jours avant suppression<i class="fas fa-info-circle icon-info"></i></p>
-          <input matInput placeholder="" value="0" class="section2-input">
+          <p i18n>Jours avant suppression <i class="fas fa-info-circle icon-info"></i></p>
+          <mat-form-field [color]="'accent'" appearance="outline">
+            <mat-label i18n>Jour *</mat-label>
+            <input type="text" matInput value="" />
+          </mat-form-field>
           <p class="never" i18n>0 signifie jamais</p>
         </div>
 
         <!-- <button mat-flat-button  id="section2-button" class="save">Enregistrer</button> -->
-        <app-base-button iconName="save" i18n>Sauvegarder</app-base-button>
+        <app-base-button iconName="save" class="section2-button" i18n>Sauvegarder</app-base-button>
       </div>
 
     </div>
@@ -69,7 +80,10 @@
       <div id="section3-right">
         <div class="section3-right-input">
           <p i18n>URL de votre politique de confidentialité :</p>
-          <input matInput placeholder="" class="section3-input">
+          <mat-form-field [color]="'accent'" appearance="outline">
+            <mat-label i18n>URL *</mat-label>
+            <input type="text" matInput value="" />
+          </mat-form-field>
         </div>
         <app-base-button iconName="save" class="section3-button" i18n>Sauvegarder</app-base-button>
       </div>
