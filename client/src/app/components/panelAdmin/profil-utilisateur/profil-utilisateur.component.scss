@@ -9,9 +9,13 @@
   }
 
   .content {
-    padding: 0px 0px 20px 0px;
+    padding: 0px 0px 10px 0px;
     display: flex;
     margin: 0 auto;
+
+    &:last-child {
+      padding: 0px 0px 20px 0px;
+    }
 
     &.top {
       width: 100%;
@@ -243,22 +247,22 @@
 
     #section1 {
       width: calc(50% - 10px);
-      margin: 18px 10px 0px 0px;
+      margin: 10px 10px 0px 0px;
     }
 
     #section2 {
       width: calc(50% - 10px);
-      margin: 18px 0px 0px 10px;
+      margin: 10px 0px 0px 10px;
     }
 
     #section3 {
       width: calc(50% - 10px);
-      margin: 18px 10px 0px 0px;
+      margin: 10px 10px 0px 0px;
     }
 
     #section4 {
       width: calc(50% - 10px);
-      margin: 18px 0px 0px 10px;
+      margin: 10px 0px 0px 10px;
     }
   }
 
