@@ -76,15 +76,20 @@
 
     <div id="section4">
       <div id="section4-left">
-        <h2 class="title"> <i class="fas fa-cloud-download-alt icon"></i>Accès au données</h2>
-        <p>Les personnes bénéficient d’un droit d’accès à leurs données personnelles et un droit de portabilité de ces
+        <h2 class="title" i18n><i class="fas fa-cloud-download-alt icon"></i>Accès au données</h2>
+        <p i18n>Les personnes bénéficient d’un droit d’accès à leurs données personnelles et un droit de portabilité de
+          ces
           données. Contactez Roodeo pour obtenir les données personnelles d’un candidat en particulier.</p>
-        <button mat-flat-button class="section4-left-button">Contactez-nous</button>
+        <app-base-button iconName="mail" [routerLink]="['/dashboard/contact-support']">
+          <span class="text" i18n>Contactez-nous</span>
+        </app-base-button>
       </div>
       <div id="section4-right">
         <h2 class="title"> <i class="fas fa-user-times icon"></i> Suppression du compte</h2>
         <p>Toutes vos données, y compris celles des candidats, seront anonymisées et ne seront plus accessibles.</p>
-        <button mat-flat-button class="section4-right-button">Contactez-nous</button>
+        <app-base-button iconName="mail" color="red" [routerLink]="['/dashboard/contact-support']">
+          <span class="text" i18n>Contactez-nous</span>
+        </app-base-button>
       </div>
     </div>
 
