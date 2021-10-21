@@ -4,24 +4,20 @@
       <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
     </div>
     <div class="fix-contents">
-      <!--
-        remplacer ce block par le ng-content 
-        dans src/app/components/common/ui/header-panel
-       -->
       <div class="content top">
-        <div class="tool-bar">
-          <div class="flex1">
+        <base-header-panel>
+          <div title class="flex1">
             <p *ngIf="this.user?.customeraccount.type === 'personal'" i18n>Basculer vers un compte professionnel</p>
             <p *ngIf="this.user?.customeraccount.type === 'profesional'" i18n>Bienvenu(e) sur votre espace personnel</p>
           </div>
           <!-- Btn -->
-          <app-base-button iconName="business" (click)="convertToPro()">
+          <app-base-button btn iconName="business" (click)="convertToPro()">
             <span *ngIf="this.user?.customeraccount.type === 'profesional'" class="text" i18n> Editer le profil
               entreprise</span>
             <span *ngIf="this.user?.customeraccount.type === 'personal'" class="text" i18n> Créer votre profil
               entreprise</span>
           </app-base-button>
-        </div>
+        </base-header-panel>
       </div>
 
       <div class="content">
