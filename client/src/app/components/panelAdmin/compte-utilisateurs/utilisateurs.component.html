@@ -283,9 +283,42 @@
                             <td class="table_body_cell">{{user.email}}</td>
                             <td class="table_body_cell">{{user.role.name}}</td>
                             <td class="table_body_cell table_icon">
-                                <i *ngIf="isCurrentUserIsAccountAdmin && !user.blocked" (click)="openForm(user)" class="fas fa-pencil-alt icon"></i>
-                                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id && !user.blocked" (click)=deleteUser(user) class="fas fa-ban icon"></i>
-                                <i *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id && user.blocked" (click)=enableUser(user) class="fas fa-check-circle icon"></i>
+                                <button
+                                    class="hvr-grow color-primary-dark"
+                                    mat-mini-fab
+                                    [matTooltipPosition]="'left'"
+                                    [matTooltipClass]="'roodeo-tooltip'"
+                                    matTooltip="edit"
+                                    color="primary"
+                                    aria-label="edit user"
+                                    *ngIf="isCurrentUserIsAccountAdmin && !user.blocked" (click)="openForm(user)"
+                                >
+                                    <mat-icon>mode_edit</mat-icon>
+                                 </button>
+                                <button
+                                    class="hvr-grow color-primary-dark"
+                                    mat-mini-fab
+                                    [matTooltipPosition]="'left'"
+                                    [matTooltipClass]="'roodeo-tooltip'"
+                                    matTooltip="activate user"
+                                    color="primary"
+                                    aria-label="activate user"
+                                    *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id && user.blocked" (click)=enableUser(user)
+                                >
+                                    <mat-icon>check_circle</mat-icon>
+                                </button>
+                                <button
+                                    class="hvr-grow color-primary-dark"
+                                    mat-mini-fab
+                                    [matTooltipPosition]="'left'"
+                                    [matTooltipClass]="'roodeo-tooltip'"
+                                    matTooltip="deactivate user"
+                                    color="primary"
+                                    aria-label="deactivate user"
+                                    *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id && !user.blocked" (click)=deleteUser(user)
+                                >
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
