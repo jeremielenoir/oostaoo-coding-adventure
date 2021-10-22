@@ -18,6 +18,7 @@ export interface DialogData {
   confirmed: boolean;
 }
 
+
 @Pipe({ name: 'campaignsArchived' })
 export class CampaignsArchivedPipe implements PipeTransform {
   transform(campaigns: any[], archived?: boolean) {
@@ -35,15 +36,14 @@ export class CampaignsArchivedPipe implements PipeTransform {
 })
 
 export class CampagneComponent implements OnInit {
-  
   @Output() campaignsChild = new EventEmitter<any>();
   @Output() emitIsactiveNoCountryside = new EventEmitter();
-  
+
   public campaigns = [];
   public searchHeader: string;
   public confirmed: boolean;
   public IsactiveNoCountryside = false;
-  public searchText = '';
+  public searchText: string = '';
   public result: any;
   public showArchives = false;
   public test: any;
@@ -62,34 +62,30 @@ export class CampagneComponent implements OnInit {
   }
 
   ngOnInit() {
+    const adminId: number = this.decryptTokenService.adminId || this.decryptTokenService.userId;
 
-    const adminId = this.decryptTokenService.adminId || this.decryptTokenService.userId;
-    
     this.authenticationService
-    .getCampaignsUser(adminId)
-    .then(resultat => {
-      this.campaigns = resultat;
-      this.IsactiveNoCountryside = true;
-      this.emitIsactiveNoCountryside.emit(this.IsactiveNoCountryside);
-      this.giveCampaigns();
-      this.isLoaded = true;
-    });
-    
-    
+      .getCampaignsUser(adminId)
+      .then(resultat => {
+        this.campaigns = resultat;
+        this.IsactiveNoCountryside = true;
+        this.emitIsactiveNoCountryside.emit(this.IsactiveNoCountryside);
+        this.giveCampaigns();
+        this.isLoaded = true;
+      });
   }
 
   customComparator(itemA) {
     return itemA = true;
   }
 
-
   includeArchivedCampaigns() {
-      this.showArchives = !this.showArchives;
+    this.showArchives = !this.showArchives;
   }
 
-  openDialog(idCampaign) {
+  openDialog(campaignId: number) {
     this.dialog.open(InviteCandidat, {
-      data: idCampaign,
+      data: campaignId,
       height: '580px',
       panelClass: ['mat-snack-bar-container']
     });
@@ -102,9 +98,9 @@ export class CampagneComponent implements OnInit {
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.confirmed = result;
-      if (result === false) {
+    dialogRef.afterClosed().subscribe(res => {
+      this.confirmed = res;
+      if (res === false) {
         return;
       } else {
         this.duplicatecampaign(campaign);
@@ -119,9 +115,9 @@ export class CampagneComponent implements OnInit {
       disableClose: true
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.confirmed = result;
-      if (result === false) {
+    dialogRef.afterClosed().subscribe(res => {
+      this.confirmed = res;
+      if (res === false) {
         return;
       } else {
         this.deletecampaign(campaign);
@@ -241,7 +237,7 @@ export class CampagneComponent implements OnInit {
       .then(res => { // Success
         let found = this.campaigns.findIndex(element => element.id == campaign.id);
         console.log('FOUND', found);
-        this.campaigns.splice(found,1);
+        this.campaigns.splice(found, 1);
         this.campaigns = [...this.campaigns];
         this.openSnackBar("La campagne a correctement été supprimée", "Fermer");
       });

@@ -19,7 +19,7 @@ export class InviteCandidat {
   tests_available: number;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: number,
     public dialogRef: MatDialogRef<InviteCandidat>,
     public apiClientService: ApiClientService
   ) {
@@ -38,7 +38,7 @@ export class InviteCandidat {
     // will log the entire data object
     // console.log('params id', this.data); // show id pass in params router
     this.apiClientService
-      .get(API_URI_CAMPAIGNS + '/' + this.data.globalId)
+      .get(API_URI_CAMPAIGNS + '/' + this.data)
       .subscribe(datas => {
         this.campaigns = [datas];
         // console.log('id campaign', this.campaigns);
