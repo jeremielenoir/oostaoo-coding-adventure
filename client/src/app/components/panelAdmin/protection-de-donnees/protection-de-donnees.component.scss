@@ -32,7 +32,7 @@
             border-radius: $border-radius;
 
             #section1-input {
-                margin: 15px 0px;
+                margin: 15px 10px 15px 0;
                 width: 85%;
             }
 
@@ -47,6 +47,12 @@
 
             #section1 p {
                 margin-bottom: 10px;
+            }
+
+            .section-input-btn {
+              display: flex;
+              gap: 0 15px;
+              align-items: center;
             }
         }
 
@@ -75,6 +81,7 @@
 
             #section2-right {
                 display: flex;
+                gap: 0 20px;
                 flex-wrap: wrap;
                 width: 46%;
 
@@ -95,8 +102,8 @@
                     color: darkgray;
                 }
 
-                #section2-button {
-                    margin-top: 50px;
+                .section2-button {
+                    margin: auto;
                 }
             }
         }
@@ -131,7 +138,7 @@
             }
 
             .section3-right-input {
-                width: 80%;
+                width: 100%;
             }
 
             .section3-input {
@@ -139,8 +146,8 @@
                 margin-top: 10px;
             }
 
-            #section3-button {
-                margin-top: 50px;
+            .section3-button {
+                margin: 10px auto;
             }
         }
 
@@ -170,7 +177,6 @@
                     margin-top: 15px;
                 }
             }
-
             #section4-right {
                 width: calc(50% - 10px);
                 min-width: 295px;
@@ -179,12 +185,13 @@
                 padding: 40px;
                 text-align: center;
                 border: $border-table;
+            }
 
-                .section4-right-button {
-                    color: white;
-                    background: red !important;
-                    margin-top: 15px;
-                }
+            #section4-left,
+            #section4-right {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
             }
         }
     }
@@ -196,6 +203,16 @@
 
 :host ::ng-deep .mat-input-element {
     height: 45px;
+    margin-top: -15px
+}
+
+:host ::ng-deep .mat-form-field {
+    height: 65px;
+    width: 100%;
+}
+
+:host ::ng-deep .mat-form-field-outline {
+    height: 65px;
 }
 
 

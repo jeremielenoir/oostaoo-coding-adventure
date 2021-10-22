@@ -1,17 +1,17 @@
 <button mat-flat-button color="{{color}}" class="{{hoverClass}}" [ngStyle]="{'backgroundColor': color}"
-    [ngClass]="{ 'roodeo-button-icon-left': iconPosition == 'left', 'roodeo-button-icon-right': iconPosition == 'right', 'full-width': fullWidth == true }"
-    title={{title}} (click)='click()' disabled={{disabled}}>
-    <button mat-mini-fab *ngIf='iconPosition == "left"'
-        [ngClass]="{ 'icon': true, 'icon-primary': color == 'primary' && disabled == false, 'icon-accent': color == 'accent' && disabled == false }"
-        disabled={{disabled}}>
-        <mat-icon>{{iconName}}</mat-icon>
-    </button>
-    <span i18n [class]="iconPosition == 'left' ? 'text text-right' : 'text text-left'">
-        <ng-content></ng-content>
-    </span>
-    <button mat-mini-fab *ngIf='iconPosition == "right"'
-        [ngClass]="{ 'icon': true, 'icon-primary': color == 'primary' && disabled == false, 'icon-accent': color == 'accent' && disabled == false }"
-        disabled={{disabled}}>
-        <mat-icon>{{iconName}}</mat-icon>
-    </button>
+  [ngClass]="{ 'roodeo-button-icon-left': iconPosition == 'left', 'roodeo-button-icon-right': iconPosition == 'right', 'full-width': fullWidth == true }"
+  title={{title}} (click)='click()' disabled={{disabled}}>
+  <button mat-mini-fab *ngIf='iconPosition == "left"'
+    [ngClass]="{ 'icon': true, 'icon-primary': color == 'primary' && disabled == false, 'icon-accent': color == 'accent' && disabled == false }"
+    disabled={{disabled}}>
+    <mat-icon>{{iconName}}</mat-icon>
+  </button>
+  <span i18n [class]="iconPosition == 'left' ? 'text text-right' : 'text text-left'">
+    <ng-content></ng-content>
+  </span>
+  <button mat-mini-fab *ngIf='iconPosition == "right"'
+    [ngClass]="{ 'icon': true, 'icon-primary': color == 'primary' && disabled == false, 'icon-accent': color == 'accent' && disabled == false }"
+    disabled={{disabled}}>
+    <mat-icon>{{iconName}}</mat-icon>
+  </button>
 </button>
