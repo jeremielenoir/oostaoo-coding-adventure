@@ -17,14 +17,16 @@
         forment la base contractuelle de notre relation et détaillent nos rôles respectifs. Dans tous les cas les deux
         parties s’engagent à respecter la législation relative à la protection des données.</p>
 
-      <button mat-flat-button class="section1-button" i18n>Conditions d'utilisation</button>
-      <button mat-flat-button class="section1-button" i18n>Conditions de vente</button>
-      <button mat-flat-button class="section1-button" i18n>DPA</button>
-      <button mat-flat-button class="section1-button" i18n>Politique de confidentialité</button>
+      <div class="section1-buttons">
+        <button mat-flat-button class="section1-button" i18n>Conditions d'utilisation</button>
+        <button mat-flat-button class="section1-button" i18n>Conditions de vente</button>
+        <button mat-flat-button class="section1-button" i18n>DPA</button>
+        <button mat-flat-button class="section1-button" i18n>Politique de confidentialité</button>
+      </div>
 
       <p i18n>Email de votre Data Privacy Officer <i class="fas fa-info-circle icon-info"></i></p>
       <!-- <input matInput placeholder="Email" id="section1-input" value="{{this.email}}" disabled> -->
-      <div class="section-input-btn">
+      <div class="section1-input-btn">
         <mat-form-field [color]="'accent'" appearance="outline" class="section-input">
           <input type="text" matInput value="{{this.email}}" disabled />
         </mat-form-field>
@@ -44,6 +46,7 @@
       </div>
 
       <div id="section2-right">
+
         <div id="section2-input-left">
           <p i18n>Jours avant anonymisation <i class="fas fa-info-circle icon-info"></i></p>
           <mat-form-field [color]="'accent'" appearance="outline">
@@ -53,7 +56,7 @@
           <p class="never" i18n>0 signifie jamais</p>
         </div>
 
-        <div>
+        <div id="section2-input-right">
           <p i18n>Jours avant suppression <i class="fas fa-info-circle icon-info"></i></p>
           <mat-form-field [color]="'accent'" appearance="outline">
             <mat-label i18n>Jour *</mat-label>

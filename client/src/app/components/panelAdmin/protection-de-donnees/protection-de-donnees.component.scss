@@ -1,4 +1,5 @@
 @import "../../../../roodeo-variables.scss";
+@import "../../../../roodeo-responsive-mixin.scss";
 
 #global {
 
@@ -39,17 +40,16 @@
             .section1-button {
                 background: $color-gray !important;
                 color: white;
-
                 margin: 20px 15px 20px 0px;
                 width: 20%;
-                min-width: 200px;
+                min-width: 220px;
             }
 
             #section1 p {
                 margin-bottom: 10px;
             }
 
-            .section-input-btn {
+            .section1-input-btn {
               display: flex;
               gap: 0 15px;
               align-items: center;
@@ -87,6 +87,10 @@
 
                 #section2-input-left {
                     margin-right: 15px;
+                }
+
+                #section2-input-right {
+                  min-width: 239px;
                 }
 
                 .section2-input {
@@ -215,107 +219,98 @@
     height: 65px;
 }
 
+/*--media screen responsive--*/
+@media screen and (max-width: 1100px) {
+  #section1 {
+    flex-direction: column;
+    align-items: center;
 
-@media screen and (min-width: 300px) and (max-width: 1024px) {
-    #global {
-        display: block;
+    .title {
+      text-align: center;
     }
-    #content {
-        margin-left: 0%;
-    }
-}
 
-@media screen and (min-width:768px) and (max-width:1111px) {
-    /* Section 2 */
+    .section1-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .section1-input-btn {
+      gap: 15px 0 !important;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  #section2 {
     #section2-left {
-        width: 100%;
+      flex-direction: column;
+      width: 100% !important;
 
-        #section2-left p {
-            width: 100%;
-        }
+      .title {
+        text-align: center;
+      }
     }
 
     #section2-right {
-        width: 100%;
+      margin-top: 15px;
+      justify-content: center !important;
+      gap: 10px 20px;
+      width: 100% !important;
     }
-    /* Section 3 */
-    #section3-left {
-        width: 100%;
+  }
 
-        #section3-left p {
-            width: 100%;
-        }
+  #section3 {
+    flex-direction: column;
+    gap: 20px 0;
+    align-items: center;
+
+    #section3-left {
+      width: 100% !important;
+
+      .title {
+        text-align: center;
+      }
     }
 
     #section3-right {
-        width: 100%;
+      width: 100% !important;
+      margin-left: -28px;
+
+      .section3-button {
+        margin: 15px auto !important;
+      }
     }
+  }
 }
 
-@media screen and (min-width:460px) and (max-width:767px) {
-    /* Section 2 */
-    #section2-left {
-        width: 100%;
-
-        #section2-left p {
-            width: 100%;
-        }
-    }
+@include respond-to(mobile-Handheld) {
+  #section2 {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     #section2-right {
-        width: 100%;
-    }
-    /* Section 3 */
-    #section3-left {
-        width: 100%;
+      margin: 10px 0 0 -80px;
+      flex-direction: column;
 
-        #section3-left p {
-            width: 100%;
-        }
+      #section2-input-left {
+        margin: 0 !important;
+      }
     }
+  }
 
-    #section3-right {
-        width: 100%;
-    }
-    /* Section 4 */
-    #section4-left {
-        width: 100%;
-    }
+  #section4 {
+    gap: 18px 0;
+
+    #section4-left,
     #section4-right {
-        width: 100%;
+      width: 100% !important;
+      margin: 0 !important;
+      
+      & > p {
+        margin-bottom: 15px;
+      }
     }
-}
-
-@media screen and (max-width:459px) {
-    /* Section 2 */
-    #section2-left {
-        width: 100%;
-
-        #section2-left p {
-            width: 100%;
-        }
-    }
-
-    #section2-right {
-        width: 100%;
-    }
-    /* Section 3 */
-    #section3-left {
-        width: 100%;
-
-        #section3-left p {
-            width: 100%;
-        }
-    }
-
-    #section3-right {
-        width: 100%;
-    }
-    /* Section 4 */
-    #section4-left {
-        width: 100%;
-    }
-    #section4-right {
-        width: 100%;
-    }
+  }
 }
