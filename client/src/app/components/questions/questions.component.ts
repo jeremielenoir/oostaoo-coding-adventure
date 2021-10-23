@@ -42,7 +42,7 @@ export class QuestionsComponent implements OnInit {
         this.errors = null;
         this.results = results
         this.submittedPopulate = false;
-        this.populateForm.reset();
+        //this.populateForm.reset();
          
       })
       .catch((err) => {
