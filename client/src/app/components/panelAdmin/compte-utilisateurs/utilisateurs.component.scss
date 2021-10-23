@@ -121,7 +121,6 @@
     .table-info-user {
       flex: 1;
       margin-top: 20px;
-      overflow: scroll;
 
       .table_user {
         background: #fff;
@@ -212,8 +211,8 @@
 }
 
 .table_head {
-  background: $color-principal-blue !important;
-  color: white;
+  background: #eaeff3;
+  color: #000000;
 }
 
 .table_header,
@@ -221,10 +220,9 @@
 .table_body,
 .table_body_cell,
 .table_row {
-  border-right: $border-table;
-  border-bottom: $border-table;
+  border: $border-table;
   padding: 5px;
-  margin: 5px;
+  // margin: 5px;
 
   .user-disabled {
     background-color: rgba($color: #000000, $alpha: .18);
@@ -259,12 +257,16 @@
 
 .table_body_cell:nth-child(4),
 .table_head_cell:nth-child(4) {
-  width: 5%;
+  // width: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 #shadow-cog-2,
 #shadow-cog {
   z-index: 9999;
+  overflow-y: scroll;
 
   .modal {
     border-radius: $border-radius !important;
@@ -365,6 +367,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 
     .form-groupe {
       color: #20252a;
@@ -525,10 +529,6 @@
   /* .mat-cell */
 }
 
-@media screen and (max-width: 767px) {}
-
-@media screen and (max-width: 420px) {}
-
 // TOOLBAR
 ::ng-deep .tool-bar .mat-form-field-wrapper {
   margin: 0 !important;
@@ -649,6 +649,17 @@
       width: inherit;
       margin-top: 10px;
     }
+  }
+
+  .table-info-user {
+    overflow-x: scroll;
+  }
+
+  .table_body_cell:nth-child(4),
+  .table_head_cell:nth-child(4) {
+    // width: 5%;
+    display: revert;
+    text-align: center;
   }
 }
 

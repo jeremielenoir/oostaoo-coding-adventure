@@ -1,9 +1,9 @@
 <!--app-breadcrumb [namePage]="'Contact Support'"></app-breadcrumb-->
 <div id="container">
-    <div style="padding-top: 35px;" *ngIf="dataRoute">
-      <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
-  </div>
   <div class="content">
+    <div class="hack">
+      <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
+    </div>
     <app-contact-formular class="fix-app-width"></app-contact-formular>
     <app-contact-join-us class="fix-app-width"></app-contact-join-us>
   </div>

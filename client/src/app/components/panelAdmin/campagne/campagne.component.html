@@ -100,7 +100,7 @@
                 {{campaign.candidats.length > 1 ? 'invités' : 'invité'}}</p>
               <p class="termine-left" [ngClass]="{'termine-left-many':campaign.NbCandidatFinish > 1}" i18n>
                 {{ campaign.NbCandidatFinish !== null ?
-                  campaign.NbCandidatFinish : 0 }} {{ campaign.NbCandidatFinish > 1 ? 'terminés' : 'terminé'}}
+                campaign.NbCandidatFinish : 0 }} {{ campaign.NbCandidatFinish > 1 ? 'terminés' : 'terminé'}}
               </p>
 
             </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  ApiClientService, API_URI_USER} from 'src/app/api-client/api-client.service';
+import { ApiClientService, API_URI_USER } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 
 @Component({
@@ -17,16 +17,16 @@ export class ProtectionDeDonneesComponent implements OnInit {
 
   ngOnInit() {
     this.dataRoute = [
-      { routerLink : "/subscription", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "credit_card", name: "Abonnement" },
-      { routerLink : "/dashboard/facturation", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "list_alt", name: "Facturation" },
-      { routerLink : "/dashboard/protection-des-donnees", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "admin_panel_settings", name: "Confidentialité" }
+      { routerLink: "/subscription", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "credit_card", name: "Abonnement" },
+      { routerLink: "/dashboard/facturation", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "list_alt", name: "Facturation" },
+      { routerLink: "/dashboard/protection-des-donnees", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "admin_panel_settings", name: "Confidentialité" }
     ];
     this.getUser().then(user => {
       this.email = (user[0].email);
     });
   }
 
-async getUser(): Promise<any> {
+  async getUser(): Promise<any> {
     try {
       const datas = await this.apiClientService
         .get(API_URI_USER + '/' + this.decryptTokenService.userId)
