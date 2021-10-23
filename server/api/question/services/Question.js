@@ -409,7 +409,7 @@ module.exports = {
       });
       
       const data = valueRanges.map((val) => val.values)[0];
-      console.log('GET SPREADSHEET DATAS');
+      console.log('GET SPREADSHEET DATAS', data);
       const arrValues = [];
 
       for (var i = 0; i < data.length; i++) {
@@ -530,7 +530,7 @@ module.exports = {
             if (question.id) {
               const id = question.id;
               delete question.id;
-              return strapi.services.question
+              strapi.services.question
                 .edit(
                   { id },
                   {
@@ -543,11 +543,8 @@ module.exports = {
                   console.log('ERREUR', err);
                   reject(err);
                 });
-            }
-            
-            delete question.id;
-            
-            return strapi.services.question
+            }else{
+              strapi.services.question
               .add({
                 ...question,
                 technologies: question.technologies,
@@ -557,6 +554,11 @@ module.exports = {
                 console.log('ERROR ADD', err);
                 reject(err);
               });
+            }
+            
+            //delete question.id;
+            
+            
           })
         );
       });
