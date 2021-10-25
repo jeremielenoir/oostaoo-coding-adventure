@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   ApiClientService,
@@ -29,11 +30,14 @@ export class AlgoComponent implements OnInit {
         type: this.filetype,
       });
 
+      console.log('question ID',this.question.id.toString());
+
       const formData: FormData = new FormData();
       formData.append('files', file, file.name);
 
+
       this.apiClientService
-        .post(EXECUTE_SCRIPT, formData)
+        .post(EXECUTE_SCRIPT+'/'+this.question.id.toString(), formData)
         .toPromise()
         .then((data) => {
           console.log('data', data);

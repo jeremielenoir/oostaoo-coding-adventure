@@ -546,8 +546,7 @@ module.exports = {
                   console.log('ERREUR', err);
                   reject(err);
                 });
-            }
-else{
+            } else{
               strapi.services.question
               .add({
                 ...question,
@@ -559,10 +558,7 @@ else{
                 reject(err);
               });
             }
-
             //delete question.id;
-
-
           }),
         );
       });
@@ -590,11 +586,11 @@ else{
    *
    * @return {Promise}
    */
-  executeScript: async (file) => {
+  executeScript: async (file, questionId) => {
     try {
-
       let functionName;
-      let regexExtractFunctionName = new RegExp('(?<=function )(.*)(?=[(])');
+      let regexExtractFunctionNameJS = new RegExp('(?<=function )(.*)(?=[(])');
+      let consoleLogText;
 
       const generateStrings = (numberOfStrings, stringLength) => {
         const s = new Set();
@@ -633,13 +629,14 @@ else{
             .on('data', (chunk) => {
               functionName = chunk
                 .toString()
-                .match(regexExtractFunctionName)[0];
+                .match(regexExtractFunctionNameJS)[0];
             })
             .pipe(createWriteStream(path))
             .on('finish', () => resolve({ id, path, extension }))
             .on('error', (error) => reject(error)),
         );
       };
+
       // const deleteFile = async (id) => {
       //   try {
       //     const filepath = `${UPLOAD_DIR}/${id}`;
@@ -671,20 +668,27 @@ else{
       let compiledfile = `${filetoexecute.split('.')[0]}`;
 
 
+      /// PARAMS BASE
       let params = [...Array(10).keys()];
-      let consoleLogText = `console.log(${functionName}(${params}));`;
 
+      const question = (
+        await strapi.services.question.fetch({
+          id: questionId,
+        })
+      ).toJSON();
 
-      fs.appendFile(filetoexecute, consoleLogText, function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-      });
+      console.log(JSON.stringify(question.answer_value));
 
       const scriptjava = `sed -i ${''} s/Main/${
         compiledfile.split('/')[1]
       }/g ${filetoexecute}`;
       switch (extension) {
         case 'js':
+          consoleLogText = 'console.log('+functionName+'('+JSON.stringify(params)+'))';
+          fs.appendFile(filetoexecute, consoleLogText, function (err) {
+            if (err) throw err;
+            console.log('console.log added in File JS!');
+          });
           script = `node ${filetoexecute}`;
           break;
         case 'py':
@@ -711,7 +715,6 @@ else{
 
       /// Recuperer la sortie de la fonctions
       return new Promise((resolve, reject) => {
-        console.log(script);
         exec(script, async (error, stdout, stderr) => {
           console.log('Script sortie ADRIEN', error, stdout, stderr);
           // await deleteFile(id);

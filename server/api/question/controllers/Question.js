@@ -149,7 +149,8 @@ module.exports = {
   execute: async (ctx, _next) => {
     try {
       const file = ctx.request.body.files;
-      const result = await strapi.services.question.executeScript(file.files);
+      const questionId = ctx.params.id;
+      const result = await strapi.services.question.executeScript(file.files, questionId);
       return result;
     } catch (error) {
       return error;
