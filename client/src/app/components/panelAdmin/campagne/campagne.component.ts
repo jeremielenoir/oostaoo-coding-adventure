@@ -85,7 +85,9 @@ export class CampagneComponent implements OnInit {
 
   openDialog(campaignId: number) {
     this.dialog.open(InviteCandidat, {
-      data: campaignId,
+      data: {
+        globalId: campaignId,
+      },
       height: '580px',
       panelClass: ['mat-snack-bar-container']
     });

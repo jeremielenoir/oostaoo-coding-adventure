@@ -49,7 +49,7 @@ import * as moment from 'moment';
   styleUrls: ['./candidats.component.scss'],
 })
 export class CandidatsComponent implements OnInit {
-  public globalId: string;
+  public globalId: number;
   public tests_available;
   public campaigns;
   public campaign;
