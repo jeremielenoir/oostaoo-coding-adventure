@@ -32,10 +32,10 @@ export class FacturationComponent implements OnInit {
   offer: any;
   invoices: [];
 
-  inProgress = false;
+  inProgress: boolean = false;
   datePipe = new DatePipe('fr');
   nextInvoice: any;
-  searchQuery: '';
+  searchQuery: string = '';
 
   dataRoute: any;
 

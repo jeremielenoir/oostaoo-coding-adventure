@@ -11,10 +11,12 @@
   </div>
   <div class="rdo-section-billing">
     <div class="rdo-content-left-group rdo-content-group">
-      <div>
-        <h3>
-          <i class="fa fa-shopping-cart icon"></i> Détails de votre abonnement
-        </h3>
+      <div class="title-icon-detail-header">
+        <div class="scrolling-text">
+          <h3>
+            <i class="fa fa-shopping-cart icon"></i> Détails de votre abonnement
+          </h3>
+        </div>
         <div>
           <use-media query="(min-width: 651px)">
             <app-base-button [disabled]="inProgress" type="button" [routerLink]="['/subscription']" mat-stroked-button
@@ -133,10 +135,12 @@
     <div class="rdo-content-right-group">
       <div>
         <div class="rdo-content-group">
-          <div>
-            <h3>
-              <i class="fa fa-credit-card icon"></i> Votre moyen de paiement
-            </h3>
+          <div class="title-icon-detail-header">
+            <div class="scrolling-text">
+              <h3>
+                <i class="fa fa-credit-card icon"></i> Votre moyen de paiement
+              </h3>
+            </div>
             <use-media query="(min-width: 651px)">
               <app-base-button type="button" mat-stroked-button (click)="addOrEditCard()" color="primary"
                 iconName="credit_card">
@@ -153,10 +157,12 @@
           </div>
         </div>
         <div class="rdo-content-group">
-          <div>
-            <h3>
-              <i class="fa fa-map-marker icon"></i> Votre adresse de facturation
-            </h3>
+          <div class="title-icon-detail-header">
+            <div class="scrolling-text">
+              <h3>
+                <i class="fa fa-map-marker icon"></i> Votre adresse de facturation
+              </h3>
+            </div>
             <use-media query="(min-width: 651px)">
               <app-base-button [disabled]="inProgress" type="button" mat-stroked-button (click)="addOrEditAddress()"
                 color="primary" iconName="edit">{{
@@ -182,10 +188,12 @@
 <div class="billing-history rdo-panel">
   <div class="rdo-panel-header">
     <h2><i class="fa fa-history icon"></i> Historique des factures</h2>
-    <input [(ngModel)]="searchQuery" type="search" placeholder="Rechercher..." />
+    <mat-form-field appearance="outline">
+      <input type="text" matInput placeholder="Rechercher..." value="{{this.searchQuery}}" />
+    </mat-form-field>
   </div>
-  <div>
-    <table style="width: 100%" cellspacing="0" class="rdp-table">
+  <div class="horizontal-scrolling">
+    <table cellspacing="0" class="rdp-table">
       <thead>
         <tr>
           <th>Date</th>
@@ -199,8 +207,8 @@
       <div *ngIf="!invoices" class="rdo-loader"></div>
       <tbody>
         <tr *ngFor="
-            let invoice of invoices | search: 'number,amount_paid':searchQuery
-          ">
+              let invoice of invoices | search: 'number,amount_paid':searchQuery
+            ">
           <td class="rdp-column-align-center">
             {{ invoice.created * 1000 | date: 'dd/MM/yyyy' }}
           </td>
