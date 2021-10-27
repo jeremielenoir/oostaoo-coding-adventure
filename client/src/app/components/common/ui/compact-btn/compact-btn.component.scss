@@ -1,0 +1,11 @@
+@import '../../../../../roodeo-variables.scss';
+
+.icon {
+  color: $color-white;
+}
+.icon-primary {
+  background-color: #0c6192 !important;
+}
+.icon-accent {
+  background-color: mat-color($roodeo-app-accent, 800);
+}

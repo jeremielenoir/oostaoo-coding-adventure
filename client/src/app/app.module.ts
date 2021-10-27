@@ -34,6 +34,7 @@ import { CounterAnimComponent } from './components/home/counter-anim/counter-ani
 import { FooterComponent } from './components/home/footer/footer.component';
 import { BaseButton } from './components/common/ui/buttons/base-button.component';
 import { BaseHeaderPanel } from './components/common/ui/header-panel/base-header-panel.component';
+import { MediaQueryComponent } from './components/common/ui/media-query/media-query.component';
 
 import { InterviewComponent } from './components/home/interview/interview.component';
 import { SliderComponent } from './components/home/slider/slider.component';
@@ -49,7 +50,6 @@ import { CarouselItemDirective } from './components/home/carousel/carousel-item.
 import { AccueilComponent } from './components/home/accueil/accueil.component';
 
 import { NavMobileAbsoluteDirective } from './directives/nav-mobile-absolute.directive';
-
 import { ScrollPointDirective } from './directives/scrollpoint.directive';
 
 import { IntegrationBoutonComponent } from './components/panelAdmin/integration-bouton/integration-bouton.component';
@@ -157,6 +157,7 @@ import { InterviewDialogComponent } from './components/panelAdmin/edit-campagne/
 // nav-wrapper
 import { NavWrapperComponent } from './components/panelAdmin/navbar/nav-wrapper/nav-wrapper.component';
 import { SaveCardComponent } from './components/save-card/save-card.component';
+import { CompactBtnComponent } from './components/common/ui/compact-btn/compact-btn.component';
 
 export class MyIntl extends TimeagoIntl {
 
@@ -199,6 +200,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     FooterComponent,
     BaseButton,
     BaseHeaderPanel,
+    MediaQueryComponent,
     SliderComponent,
     SlideMarquesComponent,
     RouteComponentComponent,
@@ -287,6 +289,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     CampaignsArchivedPipe,
     NavWrapperComponent,
     SaveCardComponent,
+    MediaQueryComponent,
+    CompactBtnComponent,
   ],
   imports: [
     BrowserModule,
