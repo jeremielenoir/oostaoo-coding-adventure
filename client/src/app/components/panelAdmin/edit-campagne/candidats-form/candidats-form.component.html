@@ -1,4 +1,4 @@
-<div class="p-3" *ngIf="status === 'form'">
+<div *ngIf="status === 'form'">
   <header class="header-modal">
     <span class="rond-custom">1</span>
     <div class="info-campaign-candidats">
@@ -7,10 +7,10 @@
     </div>
   </header>
   <div class="content-modal-form">
-    <div lass="form-scroll">
-      <form class="cologne-form" [formGroup]="form" (submit)="submit()">
+    <div class="form-scroll">
+      <form class="cologne-form" [formGroup]="form">
         <div class="card-body" formArrayName="contacts">
-          <div [formGroupName]="i" class="row" *ngFor="let contact of contactFormGroup.controls; let i = index">
+          <div [formGroupName]="i" class="row" *ngFor="let contact of contacts.controls; let i = index">
             <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
               <mat-label>Nom*</mat-label>
               <input formControlName="name" matInput placeholder="John Smith" type="text" />
@@ -19,13 +19,15 @@
               <mat-label>Email*</mat-label>
               <input formControlName="value" matInput placeholder="john.smith@email.com" type="email" />
             </mat-form-field>
-            <button mat-mini-fab color="warn" (click)="removeContact(i)" [disabled]="contactList.length === 1">
+            <button mat-mini-fab color="warn" (click)="removeContact(i)" [disabled]="contacts.length === 1">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
         </div>
         <div class="block-button">
-          <app-base-button iconName="person_add" (clickEvent)="addContact()">Ajouter un autre candidat</app-base-button>
+          <app-base-button iconName="person_add" (clickEvent)="addContact()">Ajouter
+            un autre
+            candidat</app-base-button>
           <app-base-button iconName="mail_outline" [disabled]="!validate()" (clickEvent)="switchTo('email')">Prochaine
             étape : configurer l'email
           </app-base-button>
@@ -76,6 +78,42 @@
       </app-base-button>
       <app-base-button iconName="send" [disabled]="editing" (clickEvent)="updateCampaignPostCandidats()">
         Envoyer {{candidats.length > 1 ? "les emails" : "l'email"}}</app-base-button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="status === 'sent'" class="loader-container">
+  <div class="invitation-candidats">
+    <header class="header-modal">
+      <span class="rond-custom">3</span>
+      <div class="info-campaign-candidats">
+        <h2 i18n>{{candidats.length > 1 ? 'Invitations aux candidats' : 'Invitation candidat'}}</h2>
+      </div>
+    </header>
+    <div class="content-modal-form">
+      <p class="invit-desti">Vous avez envoyé l'invitation à {{ candidats.length }} destinataire(s)</p>
+      <div class="form-scroll">
+        <table mat-table [dataSource]="candidats" class="mat-elevation-z8">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef i18n> Name </th>
+            <td mat-cell *matCellDef="let candidat"> {{ candidat.name | titlecase }} </td>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef i18n> Email </th>
+            <td mat-cell *matCellDef="let candidat"> {{ candidat.email }} </td>
+          </ng-container>
+          <ng-container matColumnDef="icon">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let candidat">
+              <mat-icon style="color:#4caf50">check</mat-icon>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedMatTableColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedMatTableColumns;"></tr>
+        </table>
+      </div>
+
+      <app-base-button (click)='retourCandidat()' iconName="close" i18n>Fermer</app-base-button>
     </div>
   </div>
 </div>
