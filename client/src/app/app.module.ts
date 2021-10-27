@@ -14,6 +14,7 @@ import { ApiClientService } from './api-client/api-client.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LayoutModule } from '@angular/cdk/layout';
 import { CountUpModule } from 'countup.js-angular2';
 import { DragScrollModule } from 'ngx-drag-scroll';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -293,6 +294,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
+    LayoutModule,
     FormsModule,
     ReactiveFormsModule,
     CountUpModule,
