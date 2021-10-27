@@ -32,8 +32,9 @@ export class CandidatsMailComponent implements OnInit {
   public offer_id: any;
   public tests_available: any;
   public user_id: any;
+
   constructor(private router: Router,
-    @Inject(MAT_DIALOG_DATA) public data,
+    @Inject(MAT_DIALOG_DATA) public data: Record<string, any>,
     public apiClientService: ApiClientService,
     public decryptTokenService: DecryptTokenService,
     private dialog: MatDialog,
@@ -44,7 +45,6 @@ export class CandidatsMailComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.user_id = this.decryptTokenService.userId;
     this.offer_id = this.decryptTokenService.offer_id;
 
@@ -64,9 +64,6 @@ export class CandidatsMailComponent implements OnInit {
       });
 
     this.sujet = 'Évaluation technique';
-
-    // this.htmlContent = `
-    //    <div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.name},</span>
     this.htmlContent = `<div><span style="background-color: transparent; font-size: 1rem;">Bonjour ${this.namePlaceholder},</span>
        </div><br /><br />
        <div>Votre candidature a retenu notre attention.</div><div>Dans le cadre de notre processus

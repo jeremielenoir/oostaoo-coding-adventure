@@ -87,6 +87,7 @@ export class CampagneComponent implements OnInit {
     this.dialog.open(InviteCandidat, {
       data: {
         globalId: campaignId,
+        tests_available: this.campaigns.length,
       },
       height: '580px',
       panelClass: ['mat-snack-bar-container']
@@ -199,7 +200,6 @@ export class CampagneComponent implements OnInit {
   }
 
   archivecampaign(campaign) {
-
     const apiURL = API_URI_CAMPAIGNS + '/' + campaign.id;
 
     if (campaign.archive === false) {
