@@ -1,0 +1,5 @@
+<button mat-mini-fab class="{{hoverClass}}"
+  [ngClass]="{ 'icon': true, 'icon-primary': color == 'primary' && disabled == false, 'icon-accent': color == 'accent' && disabled == false }"
+  disabled={{disabled}}>
+  <mat-icon>{{iconName}}</mat-icon>
+</button>
