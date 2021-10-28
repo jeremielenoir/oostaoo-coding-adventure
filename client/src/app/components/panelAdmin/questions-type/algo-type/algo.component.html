@@ -17,6 +17,28 @@
   Test your code
 </app-base-button>
 
-<div style="height: 75%; text-align: center" *ngIf="result">
-  <p>Resultat du test : {{ result.result }}</p>
+<div class="algo_result">
+  <ng-container *ngFor="let result of responseTestCode; let index = index">
+    <p
+      [ngClass]="{
+        'text-error': !result.resultValidation,
+        'text-valid': result.resultValidation
+      }"
+    >
+      Resultat du test {{ index + 1 }} :
+      {{ result.resultValidation ? result.eval : 'Echec' }}
+    </p>
+  </ng-container>
+  <ng-container *ngIf="responseTestCode">
+    <p
+      class="algo_result_text"
+      [ngClass]="{
+        valid: responseTestAnswer,
+        error: !responseTestAnswer
+      }"
+    >
+      {{ responseTestAnswer ? 'Valide' : 'Erreur' }}
+    </p>
+    <p *ngIf="!responseTestAnswer">Merci de renseigner un algorithme correct !</p>
+  </ng-container>
 </div>

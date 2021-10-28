@@ -1,3 +1,31 @@
-.button-test{
-    margin-left: 15px;
+.button-test {
+  margin-left: 15px;
+}
+
+.algo_result {
+  text-align: center;
+}
+
+.algo_result_text {
+  width: 200px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 20px;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 5px;
+  &.error {
+    background-color: red;
+  }
+  &.valid {
+    background-color: green;
+  }
+}
+
+.text-error {
+  color: red;
+}
+
+.text-valid {
+  color: green;
 }

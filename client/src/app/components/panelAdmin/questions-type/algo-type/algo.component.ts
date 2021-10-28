@@ -15,14 +15,16 @@ export class AlgoComponent implements OnInit {
   @Input() options: any = {};
   @Input() filename: any = {};
   @Input() filetype: any = {};
-  public result: any = false;
+  responseTestCode: [any];
+  responseTestAnswer: boolean;
+  responseScriptResult: any;
+  responsesIsValid: any;
+
   public loading: boolean = false;
   editorOptions = { theme: 'vs-dark', language: 'javascript' };
 
   constructor(public apiClientService: ApiClientService) {}
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
   async testCode() {
     try {
       this.loading = true;
@@ -30,24 +32,25 @@ export class AlgoComponent implements OnInit {
         type: this.filetype,
       });
 
-      console.log('question ID',this.question.id.toString());
-
       const formData: FormData = new FormData();
       formData.append('files', file, file.name);
 
-
       this.apiClientService
-        .post(EXECUTE_SCRIPT+'/'+this.question.id.toString(), formData)
+        .post(EXECUTE_SCRIPT + '/' + this.question.id.toString(), formData)
         .toPromise()
         .then((data) => {
           console.log('data', data);
           this.loading = false;
-          this.result = data;
+          this.responseTestCode = data.testCode;
+          this.responseTestAnswer = data.testAnswer;
+          this.responsesIsValid = this.responseTestCode.every(
+            (v) => v.resultValidation === true,
+          );
         })
         .catch((error) => {
           console.log('error', error);
           this.loading = false;
-          this.result = error;
+          this.responseTestCode = error;
         });
     } catch (error) {
       throw error;

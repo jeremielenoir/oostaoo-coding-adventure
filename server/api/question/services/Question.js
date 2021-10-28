@@ -623,7 +623,6 @@ module.exports = {
             break;
         }
 
-
         return new Promise((resolve, reject) =>
           createReadStream(filename)
             .on('data', (chunk) => {
@@ -654,7 +653,8 @@ module.exports = {
       //   }
       // };
       const processUpload = async (upload) => {
-        const { name, path } = upload;
+        const { name, path, id } = upload;
+        console.log(id);
         const extension = name.split('.')[1];
         const res = await storeUpload({
           filename: path,
@@ -667,29 +667,25 @@ module.exports = {
       let script = '';
       let compiledfile = `${filetoexecute.split('.')[0]}`;
 
-
-      /// PARAMS BASE
-      let params = [...Array(10).keys()];
-
       const question = (
         await strapi.services.question.fetch({
           id: questionId,
         })
       ).toJSON();
-
-      console.log(JSON.stringify(question.answer_value));
+      const questionAnswerValues = JSON.parse(question.answer_value);
 
       const scriptjava = `sed -i ${''} s/Main/${
         compiledfile.split('/')[1]
       }/g ${filetoexecute}`;
       switch (extension) {
         case 'js':
-          consoleLogText = 'console.log('+functionName+'('+JSON.stringify(params)+'))';
-          fs.appendFile(filetoexecute, consoleLogText, function (err) {
-            if (err) throw err;
-            console.log('console.log added in File JS!');
-          });
-          script = `node ${filetoexecute}`;
+          ({ consoleLogText, script } = executeJsFile(
+            consoleLogText,
+            functionName,
+            questionAnswerValues,
+            filetoexecute,
+            script,
+          ));
           break;
         case 'py':
           script = `python3 ${filetoexecute}`;
@@ -715,8 +711,8 @@ module.exports = {
 
       /// Recuperer la sortie de la fonctions
       return new Promise((resolve, reject) => {
-        exec(script, async (error, stdout, stderr) => {
-          console.log('Script sortie ADRIEN', error, stdout, stderr);
+        exec(script, async (error, stdout) => {
+          const { testCode, testAnswer } = validationCode();
           // await deleteFile(id);
           // await deleteFile(
           //   extension.toString() === 'java'
@@ -727,14 +723,66 @@ module.exports = {
           if (error) {
             reject({ result: error.message || error, success: false });
           }
-          if (stderr) {
-            reject({ result: stderr, success: false });
+          resolve({ testCode: testCode, testAnswer: testAnswer });
+
+          function validationCode() {
+            let answerValues = [];
+            let resultScript = stdout
+              .toString()
+              .trim()
+              .replace(/\s/g, ',')
+              .split(',')
+              .map((number) => {
+                return parseInt(number, 10);
+              });
+
+            questionAnswerValues.map((a) => {
+              answerValues.push(a.result);
+            });
+
+            const testCode = questionAnswerValues.map((a) => ({
+              eval: resultScript.find((b) => b === a.result),
+              resultValidation: !!resultScript.find((b) => b === a.result),
+            }));
+
+            const testAnswer =
+              JSON.stringify(answerValues) == JSON.stringify(resultScript);
+            return { testCode, testAnswer };
           }
-          resolve({ result: stdout, success: true });
         });
       });
     } catch (error) {
       throw error;
+    }
+
+    function executeJsFile(
+      consoleLogText,
+      functionName,
+      params,
+      filetoexecute,
+      script,
+    ) {
+      var allParams = '';
+      params.forEach((element, i) => {
+        console.log(element);
+        if (element.type === 'array') {
+          let data = element.eval;
+          if (i === 0) return (allParams += functionName + '([' + data + '])');
+          else return (allParams += ', ' + functionName + '([' + data + '])');
+        } else {
+          allParams = functionName + '(' + element.eval + ')';
+          return allParams;
+        }
+      });
+
+      fs.appendFile(filetoexecute, consoleLogText, function (err) {
+        if (err) throw err;
+        console.log('console.log added in File JS!');
+      });
+
+      script = `node ${filetoexecute}`;
+      console.log('script', script);
+      return { consoleLogText, script };
     }
   },
 
