@@ -1,10 +1,4 @@
 <div id="global">
-    <!--app-breadcrumb [namePage]="'Mon entreprise'"></app-breadcrumb-->
-    <!--div *ngIf="isVerifUser === false" class="loading">
-        <span class="fa fa-spinner fa-pulse"></span>
-    </div-->
-
-    <!-- <div *ngIf="!isVerifUser"> -->
     <div *ngIf='entreprise === null' id="content">
         <div class="new-entreprise">
             <div *ngIf="dataRoute">
@@ -77,18 +71,13 @@
             </div>
         </div>
     </div>
-    <!-- </div> -->
-
-    <!-- <div *ngIf="!isVerifUser"> -->
 
     <div *ngIf='entreprise !== null' class="edit-entreprise" id="content">
         <div *ngIf="dataRoute">
             <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
         </div>
         <div id="shadow-cog" [ngClass]="{'shadow-cog-active': shadowcog == true}">
-
             <div id="remove" (click)="param_cog_non_active()"></div>
-
             <div class="modal">
                 <form id='formlogo' class="formlogo" enctype="multipart/form-data">
                     <div class="modal-header"></div>
@@ -106,44 +95,25 @@
                         </div>
 
                         <div class="cadrage-img" [class.cadrage-img-active]="cadrageImgBoolean">
-
                             <figure class="img-figure" [class.img-figure-active]="!cadrageImgBooleanState">
                                 <img src="" #uploadimgfirst />
                             </figure>
-
                             <div class="text-error-upload" [class.text-error-upload-show]="cadrageImgBooleanState">
-
                                 <i class="fas fa-ban ban-error"></i>
-
                                 <span class="error" i18n>Fichier non supporté</span>
-
                                 <div class="btn-modal-content" id="btn-modal-content">
-
                                     <span class="modal-text-btn-upload" i18n>ou télécharger une photo</span>
-
                                     <input type="file" class="file" (change)="readURL($event)" />
-
                                 </div>
-
                             </div>
-
                         </div>
-
-
                     </div>
-
                     <div class="modal-footer" #btnValideParent>
                         <button mat-button class="modal-btn-footer" (click)="uploadLogo()" disabled="disabled" id="btn-valide" i18n>valider</button>
                         <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()" i18n>annuler</button>
-
-
                     </div>
-
                 </form>
-
             </div>
-
-
         </div>
 
         <div id="shadow-cog-add-images" [ngClass]="{'shadow-cog-active': shadowcogImage === true}">
@@ -190,60 +160,12 @@
             </div>
         </div>
 
-
         <div class="big-content">
-
             <div class="all-group-content">
-
                 <div class="view-content-center">
-                    <!--
-            <div class="edit-panel">
-
-              <header class="edit-panel-header">
-
-                <h2 class="title-edit-panel" (click)="show_header_param()">Éditez les détails de votre entreprise dans
-                  la langue de votre choix</h2>
-
-                <div class="sous-edit-panel-left">
-
-                  <span class="chart-title">Complétion</span>
-
-                  <div class="charte-progress">
-                    <round-progress [current]="current1" [max]="100" [color]="'1d3551'" [background]="'#eee'"
-                      [radius]="125" [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="true"
-                      [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'" [animationDelay]="100">
-                    </round-progress>
-
-                    <div class="detail_progresse_mini">
-
-                      <span class="number_progress_mini"> {{current1}} %</span>
-
-                    </div>
-
-                  </div>
-
-                </div>
-              </header>
-
-            </div> -->
-
                     <div class="edit-panel">
-
                         <div class="edit-panel-header">
                             <h2 class="title-edit-panel" i18n> Éditez les détails de votre entreprise dans la langue de votre choix </h2>
-
-                            <!-- <div class="sous-edit-panel-left">
-                                    <span class="chart-title">Complétion</span>
-                                    <div class="charte-progress">
-                                    <round-progress [current]="current2" [max]="100" [color]="'1d3551'" [background]="'#eee'"
-                                      [radius]="125" [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="true"
-                                      [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'" [animationDelay]="1000">
-                                    </round-progress>
-                                    <div class="detail_progresse_mini">
-                                      <span class="number_progress_mini">{{current2}} %</span>
-                                    </div>
-                                 </div>
-                            </div> -->
                         </div>
 
                         <form>
@@ -265,14 +187,12 @@
                                     <figure class="img-upload"><img src=" {{logo}}" alt="" role=""></figure>
                                     <div>
                                         <div class="gestion-info-img-header">
-                                            <!-- <button mat-button class="btn-gestion" (click)="modal_upload()">ENVOYER</button> -->
                                             <div class="form-line fix-buttons">
                                                 <app-base-button (click)='modal_upload()' iconName="upload" i18n>ENVOYER</app-base-button>
                                             </div>
                                             <div class="form-line fix-buttons">
                                                 <app-base-button iconName="delete" i18n>SUPPRIMER</app-base-button>
                                             </div>
-                                            <!-- <button mat-button class="btn-gestion">SUPPRIMER</button> -->
                                         </div>
                                         <p class="gestion-info-img-contenu" i18n>4 Mo max.</p>
                                         <p class="gestion-info-img-contenu" i18n>Taille recommandée : 500 x 500px</p>
@@ -361,7 +281,6 @@
 
                             <div class="form-line">
                                 <div class="input-bloc">
-                                    <!-- <span class="span-incrage">URL : </span> -->
                                     <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
                                         <mat-label i18n>
                                             <mat-icon class="mat-18">link</mat-icon> Lien vidéo</mat-label>
@@ -372,7 +291,6 @@
 
                             <div class="form-line">
                                 <div class="input-bloc">
-                                    <!-- <span class="span-incrage">URL : </span> -->
                                     <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
                                         <mat-label i18n>
                                             <mat-icon class="mat-18">link</mat-icon> Lien du site</mat-label>
@@ -391,40 +309,25 @@
                             </div>
 
                             <div class="regroupe-form">
-
                                 <label i18n>Ajouter des images (10 max)</label>
-
                                 <div class="all-gestion-info">
-
                                     <div class="upload" (click)="param_cog_non_active_add_image()">
-
                                         <i class="fas fa-camera icon-upload"></i>
-
                                         <span class="text-upload" i18n>ADD PIC</span>
-
                                     </div>
-
                                     <div *ngFor='let image of picture' class="picture">
                                         <div class="img-gestion">
-
                                             <div class="bg-transparent-img">
                                                 <span class="fa fa-window-close"></span>
-
-
                                             </div>
-
                                             <img src="{{image.url}}" alt="">
-
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
 
                             <div class="form-line">
                                 <div class="input-bloc">
-                                    <!-- <span class="span-incrage">URL : </span> -->
                                     <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
                                         <mat-label i18n>
                                             <mat-icon class="mat-18">link</mat-icon>&nbsp;Linked<i class="fab fa-linkedin-in icon-network"></i>
@@ -433,10 +336,9 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-
+                            
                             <div class="form-line">
                                 <div class="input-bloc">
-                                    <!-- <span class="span-incrage">URL : </span> -->
                                     <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
                                         <mat-label i18n>
                                             <mat-icon class="mat-18">link</mat-icon>&nbsp;<i class="fab fa-facebook-f icon-network"></i>acebook
@@ -448,7 +350,6 @@
 
                             <div class="form-line">
                                 <div class="input-bloc">
-                                    <!-- <span class="span-incrage">URL : </span> -->
                                     <mat-form-field [color]="'accent'" appearance="outline" [floatLabel]="true" class="fullwidth">
                                         <mat-label i18n>
                                             <mat-icon class="mat-18">link</mat-icon>&nbsp; <i class="fab fa-twitter icon-network"></i>Twitter
@@ -458,53 +359,33 @@
                                 </div>
                             </div>
 
-
                             <div class="regroupe-form">
                                 <div class="fix-button-save">
                                     <app-base-button (click)='clickchange2()' iconName="save" i18n>ENREGISTRER LES CHANGEMENTS</app-base-button>
                                 </div>
                             </div>
                         </form>
-
                     </div>
-
                 </div>
 
                 <div class="fix-progress">
-
                     <div class="completion_fiche">
-
-
                         <div class="completion_fiche_progress">
-
                             <h2 class="text_number_progress_responsive" i18n>Complétion de votre fiche</h2>
-
                             <div class="progres">
                                 <round-progress [current]="currentTotal" [max]="100" [color]="'white'" [background]="'#6a84a0'" [radius]="200" [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="true" [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'"
                                     [animationDelay]="1000">
                                 </round-progress>
                             </div>
                             <div class="detail_progresse">
-
                                 <span class="number_progress">{{currentTotal}}</span>
-
                                 <span class="text_number_progress" i18n>Complétion de votre fiche</span>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
-
             </div>
-
-
         </div>
 
     </div>
-    <!-- </div> -->
-
 </div>
