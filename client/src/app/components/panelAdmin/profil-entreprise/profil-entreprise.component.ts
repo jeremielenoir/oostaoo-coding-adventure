@@ -123,19 +123,16 @@ export class ProfilEntrepriseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if(this.apiClientService.user){
+      this.createDataRoutes(this.apiClientService.user);
+    } else{
+      this.apiClientService.getUser().then(user =>{
+        this.createDataRoutes(user);
+      });
+    }
+
     this.getUser().then(user => {
       this.account = user[0].customeraccount;
-    // declaration nav route
-      console.log('this.dataRoute : ', this.dataRoute);
-      this.dataRoute = [
-        { routerLink : '/dashboard/profil-utilisateur', condition: true, classAnimParent: 'hvr-icon-bounce',
-        classAnimIcone: 'hvr-icon', icon: 'person_outline', name: 'Mon profil' },
-        { routerLink : '/dashboard/profil-entreprise', condition: this.account.type === 'profesional',
-        classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'domain', name: 'Mon entreprise' },
-        { routerLink : '/dashboard/utilisateurs', condition: true, classAnimParent: 'hvr-icon-bounce',
-        classAnimIcone: 'hvr-icon', icon: 'groups', name: 'Utilisateurs' }
-      ];
-      // console.log('user[0].role.type : ', user[0].role.type);
       // if (user[0].role.type === 'root') {
       //   this.router.navigate(['/dashboard/profil-utilisateur']); // role administrator strapi -> redirect to this route ?
       // }
@@ -174,6 +171,23 @@ export class ProfilEntrepriseComponent implements OnInit {
         this.progressbarTotal();
       }
     });
+  }
+
+  createDataRoutes(user){
+    this.dataRoute = [
+      {
+        routerLink: '/dashboard/profil-utilisateur', condition: true,
+        classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'person_outline', name: 'Mon profil'
+      },
+      {
+        routerLink: '/dashboard/profil-entreprise', condition: user['customeraccount'].type === 'profesional',
+        classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'domain', name: 'Mon entreprise'
+      },
+      {
+        routerLink: '/dashboard/utilisateurs', condition: true, classAnimParent: 'hvr-icon-bounce',
+        classAnimIcone: 'hvr-icon', icon: 'groups', name: 'Utilisateurs'
+      }
+    ];
   }
 
   addentreprise() {
