@@ -88,6 +88,7 @@
       <span class="rond-custom">3</span>
       <div class="info-campaign-candidats">
         <h2 i18n>{{candidats.length > 1 ? 'Invitations aux candidats' : 'Invitation candidat'}}</h2>
+        <p *ngFor="let campaign of campaigns">Campagne: {{ campaign.Name }}</p>
       </div>
     </header>
     <div class="content-modal-form">
@@ -113,7 +114,7 @@
         </table>
       </div>
 
-      <app-base-button (click)='retourCandidat()' iconName="close" i18n>Fermer</app-base-button>
+      <app-base-button class="submit-btn" (click)='retourCandidat()' iconName="close" i18n>Fermer</app-base-button>
     </div>
   </div>
 </div>
