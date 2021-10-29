@@ -114,7 +114,10 @@
         <app-base-button iconName="group_add" (clickEvent)="openDialog()" [disabled]="tests_available === 0"
           [title]="tests_available > 0 ? 'Invitez des candidats' : 'Vous n\'avez plus de tests disponibles' "><span
             class="text" i18n>Invitez des candidats
-          </span><span class="text" *ngIf='tests_available !==""' i18n>({{ tests_available }})</span></app-base-button>
+          </span>
+          <!-- <span class="text" *ngIf='tests_available !==""' i18n>({{ tests_available }})</span> -->
+          <span class="text" *ngIf='tests_available > 0' i18n>({{ testsAvailable.total$ | async }})</span>
+        </app-base-button>
       </div>
       <!-- Table -->
       <div class="table-container">

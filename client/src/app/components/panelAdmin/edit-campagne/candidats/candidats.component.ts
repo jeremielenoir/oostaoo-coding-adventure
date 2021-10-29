@@ -21,6 +21,8 @@ import { saveAs } from 'file-saver';
 import { getResultsDefinition } from './getResultsDefinition';
 import { InterviewDialogComponent } from './interview-dialog/interview-dialog.component';
 import * as moment from 'moment';
+import { BehaviorSubject } from 'rxjs';
+import { TotalTestsAvailableService } from '../services/total-tests-available.service';
 //import pdfMake from "pdfmake/build/pdfmake";
 // font build has to be committed otherwise each developers has to build font locally.
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -81,6 +83,7 @@ export class CandidatsComponent implements OnInit {
     public apiClientService: ApiClientService,
     private router: Router,
     private http: HttpClient,
+    private testsAvailable: TotalTestsAvailableService,
   ) {
     this.route.parent.params.subscribe((params) => {
       this.globalId = params.id;
@@ -116,8 +119,8 @@ export class CandidatsComponent implements OnInit {
     this.apiClientService
       .get(API_URI_USER + '/' + this.decryptTokenService.userId)
       .subscribe((user) => {
-        console.log(user);
-        this.tests_available = user.customeraccount.tests_stock;
+        this.tests_available = user.tests_available;
+        this.testsAvailable.updateValue(this.tests_available);
       });
   }
 
@@ -125,6 +128,7 @@ export class CandidatsComponent implements OnInit {
     if (this.tests_available === 0) {
       console.log('ZERO');
     }
+
     const dialogRef = this.dialog.open(InviteCandidat, {
       data: {
         globalId: this.globalId,
@@ -383,8 +387,6 @@ export class CandidatsComponent implements OnInit {
           });
         }
 
-        console.log(getInfoCandidat);
-        
         return getInfoCandidat;
       })
       .then((getInfoCandidat) => {
