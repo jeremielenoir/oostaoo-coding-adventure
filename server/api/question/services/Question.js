@@ -349,18 +349,12 @@ module.exports = {
       });
 
       const data = valueRanges.map((val) => val.values)[0];
-      /*   console.log("data", data); */
       const newData = data.map((e) => {
         if (e && e[6]) {
           const tab = e[6].split('☼');
-          // console.log("tab", tab);
-
           return tab.join('&#x263C;');
         }
       });
-      // console.log("newData", newData);
-
-      // return newData;
       const values = newData.map((e) => [e]);
       const updateOptions = {
         spreadsheetId,
@@ -483,18 +477,6 @@ module.exports = {
         const tech = arrTech.find(
           (t) => t && t.name && t.name.toString() === val[1],
         );
-
-        // const utf8Array = new Uint8Array(val[5]);
-        //EUC-JP
-        //utf-general-ci
-        /* const name_jp = encoding.convert(val[5], {
-          from: "UTF8",
-
-          to: "EUC-JP",
-          type: "string", // Specify 'string' type. (Return as string)
-        });
-
-        console.log("name_jp", name_jp); */
         questions.push({
           id: val[0] || null,
           technologies: tech,
@@ -653,8 +635,7 @@ module.exports = {
       //   }
       // };
       const processUpload = async (upload) => {
-        const { name, path, id } = upload;
-        console.log(id);
+        const { name, path } = upload;
         const extension = name.split('.')[1];
         const res = await storeUpload({
           filename: path,
@@ -712,7 +693,28 @@ module.exports = {
       /// Recuperer la sortie de la fonctions
       return new Promise((resolve, reject) => {
         exec(script, async (error, stdout) => {
-          const { testCode, testAnswer } = validationCode();
+
+          let answerValues = [];
+          let resultScript = stdout
+            .toString()
+            .trim()
+            .replace(/\s/g, ',')
+            .split(',')
+            .map((number) => {
+              return parseInt(number, 10);
+            });
+
+          questionAnswerValues.map((a) => {
+            answerValues.push(a.result);
+          });
+          
+          const testCode = questionAnswerValues.map((a) => ({
+            eval: resultScript.find((b) => b === a.result),
+            resultValidation: !!resultScript.find((b) => b === a.result),
+          }));
+          
+          const testAnswer =
+            JSON.stringify(answerValues) == JSON.stringify(resultScript);
           // await deleteFile(id);
           // await deleteFile(
           //   extension.toString() === 'java'
@@ -724,31 +726,6 @@ module.exports = {
             reject({ result: error.message || error, success: false });
           }
           resolve({ testCode: testCode, testAnswer: testAnswer });
-
-          function validationCode() {
-            let answerValues = [];
-            let resultScript = stdout
-              .toString()
-              .trim()
-              .replace(/\s/g, ',')
-              .split(',')
-              .map((number) => {
-                return parseInt(number, 10);
-              });
-
-            questionAnswerValues.map((a) => {
-              answerValues.push(a.result);
-            });
-
-            const testCode = questionAnswerValues.map((a) => ({
-              eval: resultScript.find((b) => b === a.result),
-              resultValidation: !!resultScript.find((b) => b === a.result),
-            }));
-
-            const testAnswer =
-              JSON.stringify(answerValues) == JSON.stringify(resultScript);
-            return { testCode, testAnswer };
-          }
         });
       });
     } catch (error) {
@@ -764,7 +741,6 @@ module.exports = {
     ) {
       var allParams = '';
       params.forEach((element, i) => {
-        console.log(element);
         if (element.type === 'array') {
           let data = element.eval;
           if (i === 0) return (allParams += functionName + '([' + data + '])');
@@ -774,6 +750,7 @@ module.exports = {
           return allParams;
         }
       });
+      consoleLogText = 'console.log(' + allParams + ')';
 
       fs.appendFile(filetoexecute, consoleLogText, function (err) {
         if (err) throw err;
@@ -781,7 +758,6 @@ module.exports = {
       });
 
       script = `node ${filetoexecute}`;
-      console.log('script', script);
       return { consoleLogText, script };
     }
   },
