@@ -382,6 +382,9 @@ export class CandidatsComponent implements OnInit {
             ...candidat.getpourcentByCandidat,
           });
         }
+
+        console.log(getInfoCandidat);
+        
         return getInfoCandidat;
       })
       .then((getInfoCandidat) => {

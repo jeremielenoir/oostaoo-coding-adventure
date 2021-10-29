@@ -301,7 +301,9 @@ tr.mat-row {
     width: 100%;
     overflow: hidden;
     
-
+    .last-activity {
+      font-style: oblique 8deg;
+    }
     &::-webkit-scrollbar {
       width: 8px;
       height: 8px;

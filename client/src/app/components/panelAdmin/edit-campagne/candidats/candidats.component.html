@@ -175,6 +175,19 @@
                   </span>
                 </td>
               </div>
+              <div *ngIf="column === 'Dernière activité'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ column }}
+                </th>
+                <td mat-cell *matCellDef="let dataInfos">
+                  <span class="name-candidat last-activity"
+                    [ngStyle]="{'color': dataInfos.rapport ? '#26bd68' : '#eea60b' }">{{
+                    dataInfos.rapport
+                    ?
+                    'Test effectué' : 'Invitation Envoyée'}}</span><br />
+                  {{ dataInfos[column] }}
+                </td>
+              </div>
               <div *ngIf=" column !='Candidats' && column!='Dernière activité' && column!='Interview' &&
                       column!='Dernière activité' && column !='Durée' && column !='Score'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
