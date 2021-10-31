@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class DecryptTokenService {
-
   ca;
-  base64Url;
+  base64Url: string;
   decodedValue;
   userId;
   adminId;
   offer_id;
-  tests_available;
+  tests_available: number;
 
   constructor() {
     this.ca = localStorage.getItem('currentUser');
+
     if (this.ca) {
       this.base64Url = this.ca.split('.')[1];
       this.decodedValue = JSON.parse(window.atob(this.base64Url));
@@ -25,12 +25,12 @@ export class DecryptTokenService {
   }
 
 
-  get userIdExporte(): any {
+  get userIdExporte(): Record<string, any> {
     return { userId: this.userId, userAdmin: this.adminId };
   }
 
   updateToken(updateTokenUser) {
-      if (updateTokenUser) {
+    if (updateTokenUser) {
       this.base64Url = updateTokenUser.split('.')[1];
       this.decodedValue = JSON.parse(window.atob(this.base64Url));
       console.log('cadecodedValue ', this.decodedValue);
@@ -40,6 +40,7 @@ export class DecryptTokenService {
       this.tests_available = this.decodedValue.tests_available;
     }
     this.ca = updateTokenUser;
+
     return this.ca;
   }
 }

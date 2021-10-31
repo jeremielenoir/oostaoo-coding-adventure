@@ -9,12 +9,6 @@
   flex: 1;
 }
 
-
-.loading {
-  //top: 0!important;
-  //left: 0!important;
-}
-
 .info-candidat {
   padding: 9px 5px;
 }
@@ -206,6 +200,10 @@ tr.mat-row {
   padding: 0 !important;
 }
 
+::ng-deep .mat-form-field-infix {
+  padding-top: 8px !important;
+}
+
 ::ng-deep #menu {
   width: 200px;
 }
@@ -258,6 +256,12 @@ tr.mat-row {
     width: 50%;
     margin-left: 18px;
 
+  }
+
+  .mat-form-field-wrapper {
+    .mat-form-field-appearance-outline {
+      padding: 1em 0 0.7em 0;
+    }
   }
 }
 
@@ -399,21 +403,25 @@ tr.mat-row {
   top: 8px;
   font-size: 19px;
   display: flex;
-  flex-direction: row;
-  // width: 60%;
+  gap: 0 10px;
+  align-items: center;
+
   .icon-techno {
     padding-right: 6px;
     color: $color-orange;
   }
+
+  .sidenav_candidat_text {
+    font-size: 18px;
+  }
+
+  .sidenav_candidat_score {
+    font-size: 1.8em;
+    color: $color-orange;
+  }
+
 }
-.sidenav_candidat_text {
-  margin-right: 40%;
-  font-size: 18px;
-}
-.sidenav_candidat_score {
-  font-size: 1.8em;
-  color: $color-orange;
-}
+
 
 // /SIDENAV
 
@@ -454,17 +462,49 @@ filter-table {
   .table-content {
     overflow-x: auto;
   }
+
   .tool-bar {
+    flex-direction: column;
+    gap: 15px 0;
+    
     .select-choice {
       width: 200px !important;
     }
+
     .custom-input-filter {
       width: 65% !important;
     }
-    flex-direction: column !important;
+
     .btn-question {
       margin-top: 8px;
       width: 250px;
+    }
+  }
+
+  .table-container {
+    display: flex;
+    overflow-x: scroll;
+  }
+}
+
+@media screen and (max-width: 515px) {
+  .flex1 {
+    flex-direction: column;
+    gap: 10px;
+    
+    #menu {
+      width: 100%;
+    }
+
+    .custom-input-filter {
+      width: 100% !important;
+      margin-left: 0;
+    }
+  }
+
+  .sidenav-container {
+    .mat-sidenav {
+      width: 85%;
     }
   }
 }
