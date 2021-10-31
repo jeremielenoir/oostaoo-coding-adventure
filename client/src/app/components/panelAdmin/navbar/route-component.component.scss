@@ -42,6 +42,15 @@ button.mat-menu-item {
             min-width: 60px;
             display: flex;
             align-items: center;
+            &.langage{
+                position: absolute;
+                right: 0px;
+            }
+            &.profile{
+                position: absolute;
+                right: 60px;
+                top: 15px;
+            }
             .custom-text {
                 color: $color-principal-blue;
                 margin-bottom: 0px !important;
@@ -96,6 +105,12 @@ button.mat-menu-item {
             flex-direction: row;
             justify-content: center;
             flex: 1;
+            margin-left: 80px;
+            &.tablet{
+                li{
+                    margin-left: 0px;
+                }
+            }
             li {
                 .title-menu-responsive {
                     display: none;
@@ -136,6 +151,7 @@ button.mat-menu-item {
                     }
                 }
                 margin-left: 18px;
+                
                 .dropdownn {
                     position: absolute;
                     list-style-type: none;
@@ -380,7 +396,7 @@ button.mat-menu-item {
     // }
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width:876px) {
     .menu-burgeur {
         display: block !important;
     }
