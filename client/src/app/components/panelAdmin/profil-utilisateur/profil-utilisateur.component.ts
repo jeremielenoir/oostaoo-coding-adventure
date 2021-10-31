@@ -33,6 +33,14 @@ export class ProfilUtilisateurComponent implements OnInit {
   dataRoute: any;
 
   ngOnInit() {
+    if(this.apiClientService.user){
+      this.createDataRoutes(this.apiClientService.user);
+    } else{
+      this.apiClientService.getUser().then(user =>{
+        this.createDataRoutes(user);
+      });
+    }
+
     this.formUtilisateurProfil = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -64,21 +72,6 @@ export class ProfilUtilisateurComponent implements OnInit {
       if (user.length > 0) {
         this.user = user[0];
         console.log('THIS USER : ', this.user);
-        // declaration nav route
-        this.dataRoute = [
-          {
-            routerLink: '/dashboard/profil-utilisateur', condition: true, classAnimParent: 'hvr-icon-bounce',
-            classAnimIcone: 'hvr-icon', icon: 'person_outline', name: 'Mon profil'
-          },
-          {
-            routerLink: '/dashboard/profil-entreprise', condition: this.user.customeraccount.type === 'profesional',
-            classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'domain', name: 'Mon entreprise'
-          },
-          {
-            routerLink: '/dashboard/utilisateurs', condition: true, classAnimParent: 'hvr-icon-bounce',
-            classAnimIcone: 'hvr-icon', icon: 'groups', name: 'Utilisateurs'
-          }
-        ];
         this.isOwnerOfPersonalAccount =
         this.user.customeraccount.type === 'personal';
         this.formUtilisateurProfil.controls['firstName'].setValue(this.user.prenom);
@@ -92,6 +85,24 @@ export class ProfilUtilisateurComponent implements OnInit {
         this.formUtilisateurEmail.controls['email'].setValue(this.user.email);
       }
     });
+  }
+
+
+  createDataRoutes(user){
+    this.dataRoute = [
+      {
+        routerLink: '/dashboard/profil-utilisateur', condition: true,
+        classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'person_outline', name: 'Mon profil'
+      },
+      {
+        routerLink: '/dashboard/profil-entreprise', condition: user['customeraccount'].type === 'profesional',
+        classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'domain', name: 'Mon entreprise'
+      },
+      {
+        routerLink: '/dashboard/utilisateurs', condition: true, classAnimParent: 'hvr-icon-bounce',
+        classAnimIcone: 'hvr-icon', icon: 'groups', name: 'Utilisateurs'
+      }
+    ];
   }
 
   /**

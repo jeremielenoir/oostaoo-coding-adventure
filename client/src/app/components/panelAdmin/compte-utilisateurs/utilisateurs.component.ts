@@ -32,15 +32,6 @@ export class UtilisateursComponent implements OnInit {
   rolesRef: any[];
   selectedRole: any;
 
-  constructor(
-    private router: Router,
-    public apiClientService: ApiClientService,
-    public authenticationService: AuthenticationService,
-    public decryptTokenService: DecryptTokenService,
-    private _snackBar: MatSnackBar,
-    private dialog: MatDialog
-  ) { }
-
   public submittedUser = false;
   public modifiedUser = false;
   public checkbox_list: any[];
@@ -106,7 +97,19 @@ export class UtilisateursComponent implements OnInit {
 
   dataRoute: any;
 
+  constructor( private router: Router, public apiClientService: ApiClientService,
+    public authenticationService: AuthenticationService, public decryptTokenService: DecryptTokenService,
+    private _snackBar: MatSnackBar, private dialog: MatDialog ) {}
+
   ngOnInit() {
+    if(this.apiClientService.user){
+      this.createDataRoutes(this.apiClientService.user);
+    } else{
+      this.apiClientService.getUser().then(user =>{
+        this.createDataRoutes(user);
+      });
+    }
+
     console.log('this.formulaire', this.formulaire.nativeElement);
 
     this.apiClientService.get(API_URI_ROLE + '?startwith=account_')
@@ -119,21 +122,7 @@ export class UtilisateursComponent implements OnInit {
     this.getUser().then(datas => {
       this.currentUser = datas;
       console.log('THIS CURRENT USER : ', this.currentUser);
-      // declaration nav route
-      this.dataRoute = [
-        {
-          routerLink: '/dashboard/profil-utilisateur', condition: true,
-          classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'person_outline', name: 'Mon profil'
-        },
-        {
-          routerLink: '/dashboard/profil-entreprise', condition: this.currentUser.customeraccount.type === 'profesional',
-          classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'domain', name: 'Mon entreprise'
-        },
-        {
-          routerLink: '/dashboard/utilisateurs', condition: true, classAnimParent: 'hvr-icon-bounce',
-          classAnimIcone: 'hvr-icon', icon: 'groups', name: 'Utilisateurs'
-        }
-      ];
+
       this.tests_available = datas.tests_available;
       if (this.currentUser.role.type === 'account_admin') {
         this.isCurrentUserIsAccountAdmin = true;
@@ -151,6 +140,23 @@ export class UtilisateursComponent implements OnInit {
     // this.authenticationService.getUsers(this.adminId).then(users => {
     //   this.users = users;
     // });
+  }
+
+  createDataRoutes(user){
+    this.dataRoute = [
+      {
+        routerLink: '/dashboard/profil-utilisateur', condition: true,
+        classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'person_outline', name: 'Mon profil'
+      },
+      {
+        routerLink: '/dashboard/profil-entreprise', condition: user['customeraccount'].type === 'profesional',
+        classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'domain', name: 'Mon entreprise'
+      },
+      {
+        routerLink: '/dashboard/utilisateurs', condition: true, classAnimParent: 'hvr-icon-bounce',
+        classAnimIcone: 'hvr-icon', icon: 'groups', name: 'Utilisateurs'
+      }
+    ];
   }
 
   public param_cog() {
