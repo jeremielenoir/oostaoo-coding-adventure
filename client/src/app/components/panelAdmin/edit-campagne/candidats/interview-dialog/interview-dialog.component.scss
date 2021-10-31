@@ -1,6 +1,10 @@
 @import"../../../../../../roodeo-variables.scss";
 @import '~@angular/material/theming';
 
+::ng-deep #cdk-overlay-0 {
+  min-width: 300px !important;
+}
+
 .close-invite-dialog{
   float:right;
   color: mat-color($roodeo-app-warn);
@@ -39,4 +43,10 @@
 
 .cancel-button.mat-raised-button.mat-accent.ng-star-inserted{
   margin-left: 10px;
+}
+
+@media only screen and (max-width : 450px) {
+  .mat-form-field {
+    display: inline;
+  }
 }

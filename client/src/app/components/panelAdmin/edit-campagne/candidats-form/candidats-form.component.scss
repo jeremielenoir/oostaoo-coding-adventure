@@ -153,3 +153,42 @@
 .email-subject-input {
     width: 75%;
 }
+
+.invitation-candidats {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .content-modal-form {
+    display: flex;
+    flex-direction: column;
+
+    .invit-desti {
+      margin-bottom: 15px;
+    }
+
+    .form-scroll {
+      height: 350px;
+    }
+
+    table {
+      width: 100%;
+
+      .mat-row {
+        height: auto;
+      }
+      
+      .mat-header-cell,
+      .mat-cell {
+        font-size: 17px;
+        padding: 10px;
+      }
+    }
+
+    .submit-btn {
+      margin: auto;
+    }
+  }
+}

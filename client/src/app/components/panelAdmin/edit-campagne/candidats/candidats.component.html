@@ -1,22 +1,21 @@
 <!-- MAIN COMPONENT -->
-<div [ngSwitch]="ViewCandidats" (click)="menuChoice($event)" class="big-content roodeo-dark-theme">
+<div [ngSwitch]="candidatsAvailable" (click)="menuChoice($event)" class="big-content roodeo-dark-theme">
   <div class="route-component">
-    <div *ngSwitchCase="'CandidatFalse'" id="editQuestion">
+    <div *ngSwitchCase="false" id="editQuestion">
       <div class="border1pxgray">
         <div class="border1pxdashedgray border1pxdashedgray-candidat">
           <div id="img-editquestion"></div>
-          <h1>
-            Votre campagne est prête. Il est temps d'inviter quelques candidats !
-          </h1>
+          <h1>Votre campagne est prête. Il est temps d'inviter quelques candidats !</h1>
           <!-- Btn Invite -->
-          <app-base-button iconName="group_add" (clickEvent)="openDialog()" [disabled]="tests_available === 0"><span class="text" i18n>
-            {{tests_available > 0 ? 'Invitez des candidats' : 'Vous n\'avez plus de tests disponibles'}} 
-            </span><span class="text" *ngIf='tests_available !==""' i18n>({{ tests_available }})</span>
+          <app-base-button iconName="group_add" (clickEvent)="openDialog()" [disabled]="tests_available === 0"><span
+              class="text" i18n>
+              {{tests_available > 0 ? 'Invitez des candidats' : 'Vous n\'avez plus de tests disponibles'}}
+            </span><span class="text" *ngIf='tests_available > 0' i18n>({{ tests_available }})</span>
           </app-base-button>
         </div>
       </div>
     </div>
-    <div *ngSwitchCase="'CandidatTrue'" id="editQuestion">
+    <div *ngSwitchCase="true" id="editQuestion">
       <div id="shadow-cog" [class.shadow-cog-active]="anonymizing">
         <div id="remove" (click)="setAnonymizing(false)"></div>
         <div class="modal">
@@ -66,7 +65,8 @@
             </p>
           </div>
           <div class="modal-footer">
-            <app-base-button iconName="close" iconPosition="left" color="warn" (clickEvent)="setDeletingCandidats(false)">
+            <app-base-button iconName="close" iconPosition="left" color="warn"
+              (clickEvent)="setDeletingCandidats(false)">
               <span class="text" i18n>Annuler</span>
             </app-base-button>
             <app-base-button iconName="check" (clickEvent)="deleteCandidats()">
@@ -112,7 +112,10 @@
         <app-base-button iconName="group_add" (clickEvent)="openDialog()" [disabled]="tests_available === 0"
           [title]="tests_available > 0 ? 'Invitez des candidats' : 'Vous n\'avez plus de tests disponibles' "><span
             class="text" i18n>Invitez des candidats
-          </span><span class="text" *ngIf='tests_available !==""' i18n>({{ tests_available }})</span></app-base-button>
+          </span>
+          <!-- <span class="text" *ngIf='tests_available !==""' i18n>({{ tests_available }})</span> -->
+          <span class="text" *ngIf='tests_available > 0' i18n>({{ testsAvailable.total$ | async }})</span>
+        </app-base-button>
       </div>
       <!-- Table -->
       <div class="table-container">
@@ -145,7 +148,7 @@
                   {{ dataInfos.Email }}
                 </td>
               </div>
-              <div *ngIf="column =='Rapport' ">
+              <div *ngIf="column === 'Rapport'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                   {{ column }}
                 </th>
@@ -159,7 +162,7 @@
                   </mat-icon>
                 </td>
               </div>
-              <div *ngIf="column =='Interview' ">
+              <div *ngIf="column === 'Interview'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                   {{ column }}
                 </th>
@@ -171,6 +174,19 @@
                     aria-hidden="true">
                     {{dataInfos.Interview.interview_date}}
                   </span>
+                </td>
+              </div>
+              <div *ngIf="column === 'Dernière activité'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ column }}
+                </th>
+                <td mat-cell *matCellDef="let dataInfos">
+                  <span class="name-candidat last-activity"
+                    [ngStyle]="{'color': dataInfos.rapport ? '#26bd68' : '#eea60b' }">{{
+                    dataInfos.rapport
+                    ?
+                    'Test effectué le' : 'Invitation Envoyée le'}}</span><br />
+                  {{ dataInfos[column] }}
                 </td>
               </div>
               <div *ngIf=" column !='Candidats' && column!='Dernière activité' && column!='Interview' &&
@@ -202,19 +218,20 @@
       </div>
       <!--End Table-->
     </div>
-    <!--div *ngSwitchDefault id="editQuestion">
+    <div *ngSwitchDefault id="editQuestion">
       <div class="loading">
         <span class="fa fa-spinner fa-pulse"></span>
       </div>
-    </div-->
+    </div>
   </div>
 </div>
+
 <!-- END MAIN COMPONENT -->
 
 <!-- SIDENAV -->
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="over" [(opened)]="opened" [autoFocus]="false">
-    <div class="sidenav-content" *ngIf='currentCandidat.Candidats !== "" '>
+    <div class="sidenav-content" *ngIf='currentCandidat.Candidats !== ""'>
       <div class="header-detail">
         <h2 class="sidenav_campaign_name">{{campaign.Name}}</h2>
         <span class="close-header-detail" (click)="sidnavClose(sidenav)">
@@ -228,22 +245,24 @@
       <p class="info-candidat"><i class="far fa-envelope"></i> {{currentCandidat.Email}}</p>
       <p class="info-candidat"><i class="fas fa-poll-h"></i> Pourcentage de bonne réponses : {{currentCandidat.Score}}
       </p>
-      <p class="info-candidat"><i class="far fa-clock"></i> Durée du test : {{currentCandidat.Duree}}</p>
+      <p class="info-candidat"><i class="fas fa-stopwatch"></i> Durée du test : {{ currentCandidat["Durée"] }}
+      </p>
+      <p class="info-candidat"><i class="fas fa-clock"></i> Dernière activitée : {{currentCandidat["Dernière
+        activité"]}}
+      </p>
       <div class="sidenav_candidat_content" *ngIf="currentCandidat.points">
         <div class="sidenav_candidat_result"
           *ngFor="let candidatPointTechno of currentCandidat.points[2].getpourcentByCandidat">
-          <p class="sidenav_candidat_result">
+          <p class="sidenav_candidat_text">
             <span class="icon-techno" *ngIf="candidatPointTechno.techno === 'React'">
               <i class="fab fa-react"></i>
             </span>
             <span class="icon-techno" *ngIf="candidatPointTechno.techno === 'Javascript'">
               <i class="fab fa-js"></i>
             </span>
-            {{candidatPointTechno.techno}}
+            {{candidatPointTechno.techno}} :
           </p>
-          <p class="sidenav_candidat_score">
-            {{candidatPointTechno.percentage}} %
-          </p>
+          <p class="sidenav_candidat_score">{{candidatPointTechno.percentage}} %</p>
         </div>
         <div class="sidenav_candidat_result">
           <p class="sidenav_candidat_text" i18n>Total :</p>

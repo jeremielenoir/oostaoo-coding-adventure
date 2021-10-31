@@ -354,8 +354,8 @@ module.exports = {
         element.index_question.content = questionAnswers;
         rightAnswers = element.index_question.answer_value.split("&#x263C;");
         element.index_question.answer_value = rightAnswers;
-        // TODO : see 'TODO #1' note on client side in 'rapport-detaille.component.ts'
-        element.index_question.is_right_answer = element.array_rep_candidat.every((val) => rightAnswers.map(v => v.toLowerCase()).includes(val.toLowerCase())) && (questionAnswers.length === 0 ? true : element.array_rep_candidat.length === rightAnswers.length);
+        // TODO : add a filter to remove null values from array even tough it should not have one. This issue needs to be fixed in client side
+        element.index_question.is_right_answer = element.array_rep_candidat.filter(el => el !== null).every((val) => rightAnswers.map(v => v.toLowerCase()).includes(val.toLowerCase())) && (questionAnswers.length === 0 ? true : element.array_rep_candidat.length === rightAnswers.length);
       });
 
       uniquetechno = removeDuplicates(rapportTechno);

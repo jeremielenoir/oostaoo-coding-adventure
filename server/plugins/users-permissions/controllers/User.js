@@ -28,12 +28,12 @@ module.exports = {
   },
 
 
- findByAdmin: async (ctx) => {
-   const data = await strapi.plugins['users-permissions'].services.user.fetchByAdmin({
+  findByAdmin: async (ctx) => {
+    const data = await strapi.plugins['users-permissions'].services.user.fetchByAdmin({
       adminId: ctx.params._adminId
     });
-   ctx.send(data);
- },
+    ctx.send(data);
+  },
 
 
   /**
@@ -107,7 +107,7 @@ module.exports = {
 
       // Send 201 `created`
       ctx.created(data);
-    } catch(error) {
+    } catch (error) {
       ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: error.message, field: error.field }] }] : error.message);
     }
   },
@@ -119,9 +119,7 @@ module.exports = {
    */
 
   update: async (ctx) => {
-
     try {
-
       const advancedConfigs = await strapi.store({
         environment: '',
         type: 'plugin',
@@ -163,22 +161,22 @@ module.exports = {
         }
       }
 
-      let data = await strapi.plugins['users-permissions'].services.user.edit(ctx.params, ctx.request.body) ;
+      let data = await strapi.plugins['users-permissions'].services.user.edit(ctx.params, ctx.request.body);
 
-      let updated_user = {...user, tests_available : ctx.request.body.tests_available};
+      let updated_user = { ...user, tests_available: ctx.request.body.tests_available };
       updated_user = _.pick(updated_user, ['_id', 'id', 'adminId', 'tests_available']);
       const offer_id = user.offer_id ? user.offer_id.id : null;
       updated_user.offer_id = offer_id;
 
       let updated_jwt;
 
-      if(Object.keys(ctx.request.body).length == 1
-      && !isNaN(ctx.request.body.tests_available) ){
+      if (Object.keys(ctx.request.body).length == 1
+        && !isNaN(ctx.request.body.tests_available)) {
         updated_jwt = await strapi.plugins['users-permissions'].services.jwt.issue(updated_user);
-        return ctx.send({newToken: updated_jwt});
+        return ctx.send({ newToken: updated_jwt });
       }
       ctx.send(data);
-    }catch(error) {
+    } catch (error) {
       console.log('User controller PUT / error : ', error);
       ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: error.message, field: error.field }] }] : error.message);
     }

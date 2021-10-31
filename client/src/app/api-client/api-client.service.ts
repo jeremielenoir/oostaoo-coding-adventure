@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+import { DecryptTokenService } from '../components/home/register/register.service';
 
 
 const prefix = '/api/';
@@ -37,8 +38,13 @@ export const API_POPULATE_QUESTIONS_SPREADSHEET: string = prefix + 'questions/po
 
 @Injectable()
 export class ApiClientService {
-
-  constructor(private http: HttpClient) { }
+  user: any;
+  constructor(private http: HttpClient, public decryptTokenService: DecryptTokenService) {
+    http.get(API_URI_USER + '/' + decryptTokenService.userId).toPromise().then(data=>{
+      console.log('IN CONSTRUCTOR API SERVICE', data);
+      this.user = data;
+    });
+  }
 
   private handleError(error: any, caught: Observable<any>): Observable<any> {
     let errorMessage = '';
@@ -57,7 +63,11 @@ export class ApiClientService {
     return body || {};
   }
 
-
+  getUser(){
+    return this.http.get(API_URI_USER + '/' + this.decryptTokenService.userId).toPromise().then(data=>{
+      return this.user = data;
+    });
+  }
 
   /**
    * Methode get()

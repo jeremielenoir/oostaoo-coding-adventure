@@ -5,6 +5,9 @@
 
 .rdo-panel{
   margin: 49px 15px;
+
+  display: flex;
+  flex-direction: column;
 }
 
 /deep/ #nav-menu {
@@ -13,10 +16,6 @@
 
 /deep/ .header-notification {
   top: 0;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 .rdo-loader {
@@ -33,10 +32,6 @@
   text-align: right;
   border-radius: $border-radius;
 
-  &:nth-child(1) {
-    margin-top: 10px;
-  }
-
   &:hover {
     background-color: rgba($color: #000000, $alpha: 0.4);
   }
@@ -49,5 +44,62 @@
 .rdo-sub-offer-desc{
   background-color: white;
   border-radius: $border-radius;
-  min-height: 600px;
+  min-height: 500px;
+}
+
+.rdo-list-offers {
+  display: flex;
+  gap: 0 20px;
+}
+
+.rdo-sub-offer-desc {
+  width: 100%;
+}
+
+.price-button-section {
+  display: flex;
+  align-items: center;
+  gap: 0 15px;
+}
+
+@media screen and (max-width: 850px) {
+  .rdo-list-offers {
+    display: flex;
+    gap: 15px 0;
+    flex-direction: column;
+    
+    .rdo-sub-offer-desc {
+      min-height: unset;
+    }
+  }
+
+  .rdo-menu-offers {
+    display: flex;
+
+    .rdo-sub-offer-head {
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .rdo-panel-header {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .rdo-list-offers {
+    gap: 45px 0;
+  }
+
+  .rdo-menu-offers {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .rdo-list-offers {
+    gap: 75px 0;
+  }
 }
