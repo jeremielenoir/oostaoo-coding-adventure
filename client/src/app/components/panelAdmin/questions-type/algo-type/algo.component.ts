@@ -1,4 +1,3 @@
-import { HttpParams } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   ApiClientService,
@@ -10,7 +9,7 @@ import {
   templateUrl: './algo.component.html',
   styleUrls: ['./algo.component.scss'],
 })
-export class AlgoComponent implements OnInit {
+export class AlgoComponent {
   @Input() question: any = { content: '', extension: '' };
   @Input() options: any = {};
   @Input() filename: any = {};
@@ -18,14 +17,14 @@ export class AlgoComponent implements OnInit {
   responseTestCode: [any];
   responseTestAnswer: boolean;
   responseScriptResult: any;
-  responsesIsValid: any;
+  responsesIsValid: boolean;
 
   public loading: boolean = false;
   editorOptions = { theme: 'vs-dark', language: 'javascript' };
 
   constructor(public apiClientService: ApiClientService) {}
-  ngOnInit(): void {}
-  async testCode() {
+
+  testCode() {
     try {
       this.loading = true;
       const file = new File([this.question.content.toString()], this.filename, {
@@ -36,16 +35,17 @@ export class AlgoComponent implements OnInit {
       formData.append('files', file, file.name);
 
       this.apiClientService
-        .post(EXECUTE_SCRIPT + '/' + this.question.id.toString(), formData)
+        .post(`${EXECUTE_SCRIPT}${this.question.id.toString()}`, formData)
         .toPromise()
         .then((data) => {
-          console.log('data', data);
-          this.loading = false;
-          this.responseTestCode = data.testCode;
-          this.responseTestAnswer = data.testAnswer;
-          this.responsesIsValid = this.responseTestCode.every(
-            (v) => v.resultValidation === true,
-          );
+          if (data) {
+            this.loading = false;
+            this.responseTestCode = data.testCode;
+            this.responseTestAnswer = data.testAnswer;
+            this.responsesIsValid =
+              this.responseTestCode &&
+              this.responseTestCode.every((v) => v.resultValidation === true);
+          }
         })
         .catch((error) => {
           console.log('error', error);

@@ -6,56 +6,83 @@
 
     <div>
       <h5 class="subtitle_h5">Résultats du test</h5>
-      <p> Nom : {{ candidat?.Nom }} </p>
-      <p> Email : {{ candidat?.email }} </p>
-      <p>Langue : {{candidat?.campaign.langs}}</p>
+      <p>Nom : {{ candidat?.Nom }}</p>
+      <p>Email : {{ candidat?.email }}</p>
+      <p>Langue : {{ candidat?.campaign.langs }}</p>
     </div>
 
-
-    <hr class="separator" size="1">
+    <hr class="separator" size="1" />
 
     <div class="header_result">
-
       <div class="progressbar_container">
-        <round-progress [current]="candidat?.points_candidat ? candidat?.points_candidat[5].PourcentTest : 0"
-          [max]="100" [color]="'#ce5637'" [background]="'#c1d5e0'" [radius]="10" [stroke]="3" [semicircle]="false"
-          [rounded]="true" [clockwise]="true" [responsive]="true" [duration]="1000" [animation]="'easeInOutQuart'"
-          [animationDelay]="100">
+        <round-progress
+          [current]="
+            candidat?.points_candidat
+              ? candidat?.points_candidat[5].PourcentTest
+              : 0
+          "
+          [max]="100"
+          [color]="'#ce5637'"
+          [background]="'#c1d5e0'"
+          [radius]="10"
+          [stroke]="3"
+          [semicircle]="false"
+          [rounded]="true"
+          [clockwise]="true"
+          [responsive]="true"
+          [duration]="1000"
+          [animation]="'easeInOutQuart'"
+          [animationDelay]="100"
+        >
         </round-progress>
       </div>
 
       <div>
         <p>Score</p>
-        <p class="header_stats">{{scorePercent}}%</p>
-        <p>{{totalPointsCandidat +" /"}} {{totalPointsCampaign}}
-          points </p>
+        <p class="header_stats">{{ scorePercent }}%</p>
+        <p>{{ totalPointsCandidat + ' /' }} {{ totalPointsCampaign }} points</p>
       </div>
       <div>
         <p>Durée</p>
-        <p class="header_stats">{{ fmtMSS(candidat?.duree) }} / {{ fmtMSS(totalTime) }}</p>
+        <p class="header_stats">
+          {{ fmtMSS(candidat?.duree) }} / {{ fmtMSS(totalTime) }}
+        </p>
       </div>
     </div>
 
-    <hr class="separator" size="1">
+    <hr class="separator" size="1" />
 
     <div>
-
-      <div *ngFor="let question of rapport; let i = index; let tech of techno">
-
-        <h3 class="question_number">Question {{ i+1 }} </h3>
+      <div
+        *ngFor="let question of rapport; let i = index; let tech; of: techno"
+      >
+        <h3 class="question_number">Question {{ i + 1 }}</h3>
         <div class="header_question">
           <p id="techno" *ngFor="let tech of techno">
-            <span *ngIf="question.index_question.technologies == tech.id"> {{tech.name}} </span>
+            <span *ngIf="question.index_question.technologies == tech.id">
+              {{ tech.name }}
+            </span>
           </p>
 
-          <p>{{ fmtMSS(question.timeRep) }} / {{ fmtMSS(question.index_question.time) }}</p>
+          <p>
+            {{ fmtMSS(question.timeRep) }} /
+            {{ fmtMSS(question.index_question.time) }}
+          </p>
           <ng-container *ngIf="question.is_right_answer; else zero">
             <p>
-              {{ question.index_question.points }} / {{ question.index_question.points }} pts</p>
+              {{ question.index_question.points }} /
+              {{ question.index_question.points }} pts
+            </p>
           </ng-container>
           <ng-template #zero>
-            <p *ngIf=" question.array_rep_candidat  !=  question.index_question.answer_value "> 0 /
-              {{ question.index_question.points }} pts</p>
+            <p
+              *ngIf="
+                question.array_rep_candidat !=
+                question.index_question.answer_value
+              "
+            >
+              0 / {{ question.index_question.points }} pts
+            </p>
           </ng-template>
         </div>
 
@@ -66,35 +93,76 @@
           <h5 class="subtitle_h5">Réponses :</h5>
           <ul *ngFor="let reponse of question.index_question.content">
             <li
-              [ngClass]="{'right_answer': question.array_rep_candidat.includes(reponse) && question.index_question.answer_value.includes(reponse),
-                          'wrong_answer': question.array_rep_candidat.includes(reponse) &&  !question.index_question.answer_value.includes(reponse)}">
-              <mat-checkbox [checked]="question.array_rep_candidat.includes(reponse)" disabled="true">
-              </mat-checkbox> {{ reponse }}
+              [ngClass]="{
+                right_answer:
+                  question.array_rep_candidat.includes(reponse) &&
+                  question.index_question.answer_value.includes(reponse),
+                wrong_answer:
+                  question.array_rep_candidat.includes(reponse) &&
+                  !question.index_question.answer_value.includes(reponse)
+              }"
+            >
+              <mat-checkbox
+                [checked]="question.array_rep_candidat.includes(reponse)"
+                disabled="true"
+              >
+              </mat-checkbox>
+              {{ reponse }}
             </li>
           </ul>
         </ng-container>
 
         <h5 class="subtitle_h5">Résultat :</h5>
-        <ng-container *ngIf="question.is_right_answer; else wrong">
-          <p><span class="right_answer">
-              Réponse correcte</span></p>
-          <p *ngIf="question.index_question.content.length === 0">Votre réponse :
-            {{ question.array_rep_candidat.join(", ") }}</p>
+        <ng-container *ngIf="question.index_question.type === 'algo'">
+          <div *ngIf="question.is_right_answer">
+            <p><span class="right_answer"> Réponse correcte</span></p>
+            <p *ngIf="question.index_question.content.length === 0">
+              Votre réponse : {{ question.array_rep_candidat.join(', ') }}
+            </p>
+          </div>
+          <div *ngIf="!question.is_right_answer">
+            <p class="wrong_answer">Mauvaise réponse</p>
+            <p *ngIf="question.index_question.content.length === 0">
+              Votre réponse :
+              {{ question.array_rep_candidat.join(', ') }}
+            </p>
+          </div>
         </ng-container>
-        <ng-template #wrong>
-          <p class="wrong_answer">Mauvaise réponse</p>
-          <p *ngIf="question.index_question.content.length === 0">Votre réponse :
-            {{ question.array_rep_candidat.join(", ") }}
-          </p>
-          <p>
-            {{ question.index_question.answer_value.length > 1 ? 'Les réponses correctes sont' : 'La réponse correcte est'  }}
-            :</p>
-          <ul #qcm *ngFor="let answer of question.index_question.answer_value">
-            <li>{{ question.index_question.answer_value.length > 1 ? '-' : '' }} {{ answer }}</li>
-          </ul>
-        </ng-template>
 
-        <hr *ngIf="rapport.length - 1 > i" class="separator_red" size="1">
+        <ng-container *ngIf="question.index_question.type !== 'algo'">
+          <ng-container *ngIf="question.is_right_answer; else wrong">
+            <p><span class="right_answer"> Réponse correcte</span></p>
+            <p *ngIf="question.index_question.content.length === 0">
+              Votre réponse : {{ question.array_rep_candidat.join(', ') }}
+            </p>
+          </ng-container>
+          <ng-template #wrong>
+            <p class="wrong_answer">Mauvaise réponse</p>
+            <p *ngIf="question.index_question.content.length === 0">
+              Votre réponse :
+              {{ question.array_rep_candidat.join(', ') }}
+            </p>
+            <p>
+              {{
+                question.index_question.answer_value.length > 1
+                  ? 'Les réponses correctes sont'
+                  : 'La réponse correcte est'
+              }}
+              :
+            </p>
+            <ul
+              #qcm
+              *ngFor="let answer of question.index_question.answer_value"
+            >
+              <li>
+                {{ question.index_question.answer_value.length > 1 ? '-' : '' }}
+                {{ answer }}
+              </li>
+            </ul>
+          </ng-template>
+        </ng-container>
+
+        <hr *ngIf="rapport.length - 1 > i" class="separator_red" size="1" />
       </div>
     </div>
   </div>

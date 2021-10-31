@@ -38,7 +38,6 @@ export class ClientTestComponent implements OnInit {
 
   public hundelechecked(event) {
     if (event.target.checked === true) {
-      // this.btnchecked.nativeElement.disabled == true
       this.btnchecked.nativeElement.disabled = false;
     } else {
       this.btnchecked.nativeElement.disabled = true;
@@ -47,7 +46,6 @@ export class ClientTestComponent implements OnInit {
 
   public hundleActiveTest() {
     this.ActiveTest = true;
-    //console.log("state", this.ActiveTest);
   }
 
   public noHandleActiveTest() {
@@ -62,7 +60,6 @@ export class ClientTestComponent implements OnInit {
     this.apiClientService.get(`${API_URI_CANDIDATS}?token=${this.idParam}`).toPromise().then((res) => {
       for (const candidat of res) {
         this.candidat = candidat;
-        console.log("candidat this.candidat", this.candidat);
         if (candidat.test_terminer !== "0000-00-00 00:00:00") {
           this.StatueTestingQuestion = "fin";
           return this.router.navigate(["/home"]);
@@ -79,16 +76,8 @@ export class ClientTestComponent implements OnInit {
           this.durationMaxTest = this.durationTotalTest + 10;
           this.questionCampaign = [...res1.questions];
           this.technoCampaign = [...res1.technologies];
-          // console.log("this.questionCampaign: ", this.questionCampaign);
-          // console.log("this.technoCampaign: ", this.technoCampaign);
         });
-        /*return this.router.navigate(["/evaluate"], {
-          queryParams: {
-            id: this.idParam
-          }
-        });*/
       }
-      //
     });
   }
 

@@ -618,22 +618,22 @@ module.exports = {
         );
       };
 
-      // const deleteFile = async (id) => {
-      //   try {
-      //     const filepath = `${UPLOAD_DIR}/${id}`;
-      //     access(filepath, async (err) => {
-      //       if (err) {
-      //         console.log(`The file ${filepath} does not exist.`);
-      //       } else {
-      //         await unlink(filepath, async (err) => {
-      //           if (err) throw err;
-      //         });
-      //       }
-      //     });
-      //   } catch (error) {
-      //     throw error;
-      //   }
-      // };
+      const deleteFile = async (id) => {
+        try {
+          const filepath = `${UPLOAD_DIR}/${id}`;
+          access(filepath, async (err) => {
+            if (err) {
+              console.log(`The file ${filepath} does not exist.`);
+            } else {
+              await fs.unlink(filepath, async (err) => {
+                if (err) throw err;
+              });
+            }
+          });
+        } catch (error) {
+          throw error;
+        }
+      };
       const processUpload = async (upload) => {
         const { name, path } = upload;
         const extension = name.split('.')[1];
@@ -644,7 +644,7 @@ module.exports = {
         return res;
       };
 
-      const { path: filetoexecute, extension } = await processUpload(file);
+      const { path: filetoexecute, extension, id } = await processUpload(file);
       let script = '';
       let compiledfile = `${filetoexecute.split('.')[0]}`;
 
@@ -715,17 +715,19 @@ module.exports = {
           
           const testAnswer =
             JSON.stringify(answerValues) == JSON.stringify(resultScript);
-          // await deleteFile(id);
-          // await deleteFile(
-          //   extension.toString() === 'java'
-          //     ? id.split('.')[0] + '.class'
-          //     : id.split('.')[0],
-          // );
 
           if (error) {
             reject({ result: error.message || error, success: false });
           }
+
           resolve({ testCode: testCode, testAnswer: testAnswer });
+
+          await deleteFile(id);
+          await deleteFile(
+            extension.toString() === 'java'
+              ? id.split('.')[0] + '.class'
+              : id.split('.')[0],
+          );
         });
       });
     } catch (error) {
