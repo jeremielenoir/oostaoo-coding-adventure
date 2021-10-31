@@ -89,7 +89,9 @@ export class CandidatsComponent implements OnInit {
   ngOnInit() {
     this.loadTestsAvailable();
     this.getCampaign().then((datas) => {
+
       this.campaign = datas
+      console.log('CAMPAIGN', this.campaign, datas);
     });
 
     this.mediaService = new MediaQueryService(this.compactTableWidth);
@@ -266,8 +268,8 @@ export class CandidatsComponent implements OnInit {
 
             campaign.candidats[i].status = false;
           }
-
-          return campaign;
+          this.campaign = campaign;
+          return this.campaign;
         },
         (err) => {
           this.router.navigate(['/dashboard/campaigns']);
@@ -275,6 +277,7 @@ export class CandidatsComponent implements OnInit {
       )
       .then((campaign: Record<string, any>) => {
         // keep minimal informations in displayedColumns to fit mobile width
+        console.log('PROMISE', campaign);
         this.displayedColumns = this.getDisplayedColumns();
         
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
@@ -326,22 +329,13 @@ export class CandidatsComponent implements OnInit {
 
           getInfoCandidats.push(getInfoCandidat);
         }
-
-
-        return getInfoCandidat;
-      })
-      .then((getInfoCandidat) => {
-        // console.log("getInfoCandidat", getInfoCandidat);
-        this.infosCandidats = new MatTableDataSource(getInfoCandidat);
-        this.infosCandidatsPdf = getInfoCandidat;
+        this.infosCandidats = new MatTableDataSource(getInfoCandidats);
+        this.infosCandidatsPdf = getInfoCandidats;
 
         this.infosCandidats.sort = this.sort;
         this.infosCandidatsPdf = getInfoCandidats;
         this.isLoading = false;
 
-        return campaign;
-      })
-      .then((campaign) => {
         return campaign;
       })
       .catch((error) => {
