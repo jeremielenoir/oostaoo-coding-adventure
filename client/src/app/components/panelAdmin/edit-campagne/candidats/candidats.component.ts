@@ -98,6 +98,7 @@ export class CandidatsComponent implements OnInit {
     this.mediaService.match$.subscribe(value => {
       this.displayedColumns = value ? this.compactMatTableColumns : this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
     });*/
+    this.displayedColumns = this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
   }
 
   private loadTestsAvailable(): void {
@@ -501,7 +502,7 @@ export class CandidatsComponent implements OnInit {
     this.mediaService.match$.subscribe(value => {
       result = value ? this.compactMatTableColumns : this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
     }).unsubscribe();*/
-    
+    result = this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
     return result;
   }
 }
