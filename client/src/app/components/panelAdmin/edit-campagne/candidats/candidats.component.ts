@@ -94,10 +94,11 @@ export class CandidatsComponent implements OnInit {
       console.log('CAMPAIGN', this.campaign, datas);
     });
 
-    this.mediaService = new MediaQueryService(this.compactTableWidth);
+    /*this.mediaService = new MediaQueryService(this.compactTableWidth);
     this.mediaService.match$.subscribe(value => {
       this.displayedColumns = value ? this.compactMatTableColumns : this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
-    });
+    });*/
+    this.displayedColumns = this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
   }
 
   private loadTestsAvailable(): void {
@@ -497,11 +498,11 @@ export class CandidatsComponent implements OnInit {
   private getDisplayedColumns(): string[] {
     let result: string[];
     
-    this.mediaService = new MediaQueryService(this.compactTableWidth);
+    /*this.mediaService = new MediaQueryService(this.compactTableWidth);
     this.mediaService.match$.subscribe(value => {
       result = value ? this.compactMatTableColumns : this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
-    }).unsubscribe();
-    
+    }).unsubscribe();*/
+    result = this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
     return result;
   }
 }
