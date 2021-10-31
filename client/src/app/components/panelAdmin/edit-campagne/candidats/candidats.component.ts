@@ -17,7 +17,8 @@ import { saveAs } from 'file-saver';
 import { getResultsDefinition } from './getResultsDefinition';
 import { InterviewDialogComponent } from './interview-dialog/interview-dialog.component';
 import * as moment from 'moment';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { TotalTestsAvailableService } from '../services/total-tests-available.service';
 //import pdfMake from "pdfmake/build/pdfmake";
 // font build has to be committed otherwise each developers has to build font locally.
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -74,8 +75,12 @@ export class CandidatsComponent implements OnInit {
   @ViewChild('check') check: ElementRef;
 
   constructor(
-    private http: HttpClient, private router: Router, private route: ActivatedRoute,
-    public dialog: MatDialog, public apiClientService: ApiClientService,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    public apiClientService: ApiClientService,
+    private router: Router,
+    private http: HttpClient,
+    private testsAvailable: TotalTestsAvailableService,
   ) {
     this.route.parent.params.subscribe((params) => this.globalId = params.id);
     this.dialog.afterAllClosed.subscribe(() => this.getCampaign());
@@ -97,11 +102,17 @@ export class CandidatsComponent implements OnInit {
     this.apiClientService
       .get(API_URI_USER + '/' + this.decryptTokenService.userId)
       .subscribe((user) => {
-        this.tests_available = user.customeraccount.tests_stock > -1 ? user.customeraccount.tests_stock : 0;
+        this.tests_available = user.tests_available;
+        this.testsAvailable.updateValue(this.tests_available);
       });
   }
 
-  openDialog(): void {
+  openDialog() {
+    if (this.tests_available === 0) {
+      console.log('ZERO');
+    }
+
+
     const dialogRef = this.dialog.open(InviteCandidat, {
       data: {
         globalId: this.globalId,
@@ -316,7 +327,14 @@ export class CandidatsComponent implements OnInit {
           getInfoCandidats.push(getInfoCandidat);
         }
 
-        this.infosCandidats = new MatTableDataSource(getInfoCandidats);
+
+        return getInfoCandidat;
+      })
+      .then((getInfoCandidat) => {
+        // console.log("getInfoCandidat", getInfoCandidat);
+        this.infosCandidats = new MatTableDataSource(getInfoCandidat);
+        this.infosCandidatsPdf = getInfoCandidat;
+
         this.infosCandidats.sort = this.sort;
         this.infosCandidatsPdf = getInfoCandidats;
         this.isLoading = false;

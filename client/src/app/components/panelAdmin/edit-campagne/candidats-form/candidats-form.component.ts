@@ -11,6 +11,7 @@ import {
   API_URI_CANDIDATS,
   API_URI_USER
 } from '../../../../api-client/api-client.service';
+import { TotalTestsAvailableService } from '../services/total-tests-available.service';
 
 
 @Component({
@@ -44,6 +45,7 @@ export class CandidatsFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder, public dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router,
     public apiClientService: ApiClientService, public dialogRef: MatDialogRef<CandidatsMailComponent>,
+    private testsAvailable: TotalTestsAvailableService,
   ) {
     this.onUpdateTestsAvailableWIP = new EventEmitter();
   }
@@ -129,29 +131,32 @@ export class CandidatsFormComponent implements OnInit {
   }
 
   updateCampaignPostCandidats(): void {
-    const nbCandidats: number = this.candidats.length;
-    
+    const totalCandidats: number = this.candidats.length;
+
     if (this.offer_id == 14) this.goToSubscribe();
 
     if (this.tests_available == -1) {
       for (const candidat of this.candidats) {
         this.postCandidat(candidat);
       }
+
+      // update tests_available counter
+      this.testsAvailable.updateValue(this.tests_available - totalCandidats);
     } else if (this.tests_available == 0) {
       setTimeout(() => this.goToSubscribe(), 1500);
       
       this.openSnackBar("Vous n'avez plus de test disponible", "Fermer");
-    } else if (this.tests_available < nbCandidats) {
+    } else if (this.tests_available < totalCandidats) {
       // Note : this case should never happens as we have limited the number of candidats added to the number of tests_available
       setTimeout(() => this.retourCandidat(), 1500);
 
-      this.openSnackBar(`Impossible d'inviter ${nbCandidats} candidat${nbCandidats > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`, "Fermer");
+      this.openSnackBar(`Impossible d'inviter ${totalCandidats} candidat${totalCandidats > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`, "Fermer");
     } else {
-      this.tests_available = this.tests_available - nbCandidats;
+      this.tests_available = this.tests_available - totalCandidats;
       
       this.apiClientService
         .put(API_URI_USER + '/' + this.user_id, {
-          tests_available: this.tests_available
+          tests_available: this.tests_available,
         })
         .toPromise()
         .then((res) => {
@@ -160,6 +165,9 @@ export class CandidatsFormComponent implements OnInit {
           for (const candidat of this.candidats) {
             this.postCandidat(candidat);
           }
+
+          // update tests_available counter
+          this.testsAvailable.updateValue(this.tests_available);
         }).catch(
           err => console.log(err)
         );
