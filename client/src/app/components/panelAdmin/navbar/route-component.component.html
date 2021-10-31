@@ -3,7 +3,7 @@
         <a href="" [routerLink]="['/dashboard/campaigns']" class="logo-link">
             <img class="logo" src="../../../../assets/logo_ROODEO.svg" alt="" />
         </a>
-        <ul class="list-menu" [class.active-menu-bergeur]="activeMenuB">
+        <ul class="list-menu" [class.active-menu-bergeur]="activeMenuB" [class.tablet]="isTablet">
             <li>
                 <div class="list-menu-top-header">
                     <a href="" class="text-menu">
@@ -187,10 +187,10 @@
             </li>
 
         </ul>
-        <div class="right-country">
+        <div class="right-country profile">
             <p class="custom-text" *ngIf="user?.customeraccount.type == 'profesional'"><span class="custom-type-acc">PRO</span></p>
         </div>
-        <div class="right-country">
+        <div class="right-country langage">
             <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
                 <img class="flags_img" src="{{currentLanguage}}" alt="">
                 <i class="icon-country fas fa-caret-down"></i>

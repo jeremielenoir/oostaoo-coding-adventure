@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ApiClientService, API_URI_NOTIFICATIONS, API_URI_USER, API_URI_ACCOUNT } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from '../../home/register/register.service';
 import {SelectedLanguageService} from '../../../services/selected-language.service';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-route-component',
@@ -30,6 +31,8 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
   public currentLanguage;
   public stopTimeInterval: any;
   public lang = 'en';
+  public isTablet: boolean = false;
+  
   public otherLanguage = [
     {
       codelang: 'fr', shortlang: 'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr',
@@ -53,7 +56,7 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
 
   constructor( public dialog: MatDialog, public apiClientService: ApiClientService,
     public route: Router, @Inject(LOCALE_ID) private locale: string, private router: Router,
-    public decryptTokenService: DecryptTokenService, public selectedLanguageService: SelectedLanguageService ) {}
+    public decryptTokenService: DecryptTokenService, public selectedLanguageService: SelectedLanguageService, public breakpointObserver: BreakpointObserver ) {}
 
   ngOnDestroy(): void {
     clearInterval(this.stopTimeInterval);
@@ -61,6 +64,14 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
     //throw new Error("Method not implemented.");
   }
   ngOnInit() {
+
+    this.breakpointObserver
+      .observe(['(max-width: 1100px)'])
+      .subscribe((state: BreakpointState) => {
+        console.log('Tablet');
+        this.isTablet = state.matches;
+      });
+
     this.lang = this.locale;
     if (this.selectedLanguageService.checkLanguageCountry()) {
       this.lang = this.selectedLanguageService.getLanguageCountry();
