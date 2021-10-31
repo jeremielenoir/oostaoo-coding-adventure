@@ -78,6 +78,7 @@ export class RapportDetailleComponent implements OnInit {
         );
 
         this.rapport = data.raport_candidat.rapport;
+        console.log('RAPPORT', this.rapport);
 
         this.rapport.forEach(question => {
           // Format datas
@@ -87,8 +88,8 @@ export class RapportDetailleComponent implements OnInit {
           this.rapportTechno.push(question.index_question.technologies);
           this.totalTime = this.totalTime + question.index_question.time;
           // Compute if candidat answered well
-          const candidatAnswers = question.array_rep_candidat.map(val => val.toLowerCase());
-          const rightAnswers = question.index_question.answer_value.map(val => val.toLowerCase());
+          const candidatAnswers = question.array_rep_candidat.map(val => val ? val.toLowerCase() : '');
+          const rightAnswers = question.index_question.answer_value.map(val => val ? val.toLowerCase() : '');
           const questionAnswers = question.index_question.content;
           // TODO #1 : this should be compute server side to avoid duplicate computing when PDF is generated ( source of potentials erros and duplicate maintenance )
           question.is_right_answer = candidatAnswers.every((val) => rightAnswers.includes(val.toLowerCase())) && (questionAnswers.length === 0 ? true : candidatAnswers.length === rightAnswers.length);
@@ -98,6 +99,7 @@ export class RapportDetailleComponent implements OnInit {
         this.uniquetechno.forEach((idTechno) => {
           this.getTechno(idTechno);
         });
+        
       });
   }
 
