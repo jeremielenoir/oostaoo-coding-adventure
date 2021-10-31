@@ -66,12 +66,14 @@
 
   .ajout-entreprise {
     display: flex;
-    height: 88vh;
+    // height: 88vh;
     justify-content: center;
     margin: 0 auto;
     align-items: center;
     flex-wrap: wrap;
     width: 60%;
+    padding-top: 55px;
+    padding-bottom: 20px;
 
     .content-ajout-entreprise {
       display: flex;
@@ -117,7 +119,7 @@
 
   #content {
     .new-entreprise {
-      padding-top: 75px;
+      padding-top: 55px;
     }
 
     #shadow-cog,

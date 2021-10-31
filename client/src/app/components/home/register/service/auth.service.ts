@@ -38,6 +38,7 @@ export class AuthenticationService {
           // login successful if the response has jwt token
           if (user && user.jwt) {
             this.decryptTokenService.updateToken(user.jwt);
+            this.apiClientService.getUser();
             // store user details and jwt token in the local storage to keep the user logged in between page refreshes
             console.log(user.jwt);
             localStorage.setItem('currentUser', user.jwt);
@@ -63,6 +64,7 @@ export class AuthenticationService {
             // store user details and jwt token in the local storage to keep the user logged in between page refreshes
             localStorage.setItem('currentUser', user.jwt);
             this.decryptTokenService.updateToken(user.jwt);
+            this.apiClientService.getUser();
             this.currentUserSubject.next(user);
           }
           return user;
@@ -91,6 +93,7 @@ export class AuthenticationService {
   }
 
   getCampaignsUser(adminId: number) {
+    console.log('HEEELOOOOLLL');
     return this.apiClientService.get(API_URI_CAMPAIGNS + '?user_in=' + adminId).toPromise();
   }
 
