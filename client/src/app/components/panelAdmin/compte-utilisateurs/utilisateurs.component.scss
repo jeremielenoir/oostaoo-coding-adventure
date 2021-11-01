@@ -128,6 +128,12 @@
         border-collapse: separate;
         border-spacing: 0;
         border-radius: $border-radius;
+        box-shadow: 3px 4px 8px -2px rgba(0, 0, 0, 0.4),
+          -3px -4px 8px -2px rgba(124, 151, 166, 0.69);
+        text-align: center;
+        color: rgba(29, 53, 82, 0.87);
+        border-bottom: $border-table;
+        font-size: 14px;
       }
     }
   }
@@ -211,16 +217,25 @@
 }
 
 .table_head {
-  background: #eaeff3;
-  color: #000000;
+  background-color: $color-principal-blue;
+  color: #fff;
+
+  .table_row {
+    &.fix-style {
+      .table_head_cell {
+        font-weight: 100;
+      }
+    }
+  }
 }
 
 .table_header,
-.table_head_cell,
+// .table_head_cell,
 .table_body,
 .table_body_cell,
 .table_row {
-  border: $border-table;
+  border-right: $border-table;
+  // border: $border-table;
   padding: 5px;
   // margin: 5px;
 
