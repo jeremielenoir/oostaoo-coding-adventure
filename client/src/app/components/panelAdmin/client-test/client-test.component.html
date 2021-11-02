@@ -1,6 +1,6 @@
-<div [ngSwitch]="statueTestingQuestion" class="testing-question-wrapper">
+<div [ngSwitch]="testStatus$ | async" class="testing-question-wrapper">
   <div *ngSwitchCase="'eval'" class="eval-testing">
-    <div id="shadow-cog" [class.shadow-cog-active]="ActiveTest">
+    <div id="shadow-cog" [class.shadow-cog-active]="popupTestStatus">
       <div class="modal">
         <div class="modal-header">
           <h3 class="modal-title" i18n>
@@ -29,9 +29,9 @@
           <p class=" claire-text" i18n>Bonne chance !</p>
 
           <label class="block-condition claire-text">
-            <span class="checkbox-condition" #btnchecked><input type="checkbox"
-                (click)="hundelechecked($event)" /></span>
-
+            <span class="checkbox-condition">
+              <input type="checkbox" [(ngModel)]="isAgreed" />
+            </span>
             <p class="text-condition" i18n>
               J'ai lu et j'accepte les
               <a href="" class="text-link" i18n>conditions d'utilisation </a> et la
@@ -43,10 +43,10 @@
         </div>
 
         <div class="modal-footer">
-          <app-base-button iconName="cancel" color="warn" iconPosition="left" (clickEvent)="noHandleActiveTest()" i18n>
+          <app-base-button iconName="cancel" color="warn" iconPosition="left" (click)="closePopup()" i18n>
             Annuler
           </app-base-button>
-          <app-base-button iconName="keyboard_arrow_right" (clickEvent)="handleStatusTestingQuestion()" i18n>
+          <app-base-button iconName="keyboard_arrow_right" (click)="runTest()" i18n [disabled]="!isAgreed">
             Commencer
           </app-base-button>
         </div>
@@ -88,7 +88,7 @@
             fait pas partie de l’évaluation. Vous avez la possibilité de
             recommencer ce tutoriel autant de fois que vous le souhaitez.
           </p>
-          <app-base-button iconName="keyboard_arrow_right" i18n>
+          <app-base-button iconName="keyboard_arrow_right" (click)="runTutorial()" i18n>
             Démarrer le tutoriel
           </app-base-button>
         </div>
@@ -104,7 +104,7 @@
             {{ durationMaxTest }} minutes. Merci de prévoir
             {{ durationMaxTest }} minutes consécutives pour faire ce test.
           </p>
-          <app-base-button iconName="keyboard_arrow_right" (clickEvent)="hundleActiveTest()" i18n>
+          <app-base-button iconName="keyboard_arrow_right" (click)="openPopup()" i18n>
             Démarrer le test
           </app-base-button>
         </div>
@@ -112,11 +112,16 @@
     </section>
   </div>
 
+  <div *ngSwitchCase="'tutorial'" class="tutorial">
+    <h2>Didacticiel</h2>
+  </div>
+
   <div *ngSwitchCase="'testing'">
     <app-test [candidat]="candidat" [questionCampaign]="questionCampaign" [technoCampaign]="technoCampaign"
       [durationMaxTest]="durationMaxTest" (refresh)="refreshComponent($event)"></app-test>
   </div>
-  <div *ngSwitchCase="'fin'" style="height: 100%;">
+
+  <div *ngSwitchDefault style="height: 100%;">
     <app-fin-test></app-fin-test>
   </div>
 </div>
