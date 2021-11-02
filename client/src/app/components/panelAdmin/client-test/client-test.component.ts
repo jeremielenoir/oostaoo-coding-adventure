@@ -12,7 +12,7 @@ export class ClientTestComponent implements OnInit {
   public idParam: string;
   public checkedBoolean: boolean;
   public ActiveTest: boolean;
-  public StatueTestingQuestion = "eval";
+  public statueTestingQuestion: string = "eval";
   public candidat: string;
   public dateOpenTest: any;
   public nbQuestion: number;
