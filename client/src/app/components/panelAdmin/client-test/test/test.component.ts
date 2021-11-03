@@ -198,7 +198,7 @@ export class TestComponent implements OnInit, OnDestroy {
       );
     }
     for (const techno of this.technoCampaign) {
-      if (this.question.technologies === techno.id) {
+      if (this.question.technologies.id === techno.id) {
         this.language = techno.name;
         this.langLower = this.language.toLowerCase();
         if (
@@ -624,10 +624,8 @@ export class TestComponent implements OnInit, OnDestroy {
   }
 
   public sumPointsByNumTechno(array) {
-    console.log('ARRAY sumPointsByNumTechno : ', array);
     const sumPoints = {};
     array.forEach((element) => {
-      console.log('sumPointsByNumTechno element', element);
       if (sumPoints.hasOwnProperty(element.technologies)) {
         sumPoints[element.technologies] =
           sumPoints[element.technologies] + element.points;
