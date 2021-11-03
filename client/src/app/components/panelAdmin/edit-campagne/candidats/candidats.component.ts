@@ -180,11 +180,17 @@ export class CandidatsComponent implements OnInit {
 
   public exported(): void {
     const selectedCandidats: Record<string, any>[] = this.getCandidatsSelected();
-    
+
     for (const candidat of selectedCandidats) {
-      this.viewResultsPdf(candidat);
+      // only selected candidat with score, points or rapport can get PDF file
+      if (
+        candidat.Score &&
+        candidat.points && candidat.points.length > 0 &&
+        candidat.rapport && candidat.rapport.length > 0
+      ) {
+        this.viewResultsPdf(candidat);
+      }
     }
-    console.log(this.getCandidatsSelected());
   }
 
   public setAnonymizing(status: boolean) {
