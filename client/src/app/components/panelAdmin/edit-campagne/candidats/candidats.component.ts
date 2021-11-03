@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
-import { MatDialog, MatTableDataSource, MatSort } from '@angular/material';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MediaQueryService } from 'src/app/services/media-query.service';
-import { InviteCandidat } from './invite-candidat.component';
+import { HttpClient } from '@angular/common/http';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { MatDialog, MatTableDataSource, MatSort } from '@angular/material';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { DatePipe } from '@angular/common';
 import { DecryptTokenService } from '../../../home/register/register.service';
 import {
   ApiClientService,
@@ -13,12 +13,12 @@ import {
   API_URI_CANDIDATS_PDF_REPORT,
   API_URI_USER,
 } from '../../../../api-client/api-client.service';
+import { TotalTestsAvailableService } from '../services/total-tests-available.service';
+import { InviteCandidat } from './invite-candidat.component';
+import { InterviewDialogComponent } from './interview-dialog/interview-dialog.component';
 import { saveAs } from 'file-saver';
 import { getResultsDefinition } from './getResultsDefinition';
-import { InterviewDialogComponent } from './interview-dialog/interview-dialog.component';
 import * as moment from 'moment';
-import { BehaviorSubject } from 'rxjs';
-import { TotalTestsAvailableService } from '../services/total-tests-available.service';
 //import pdfMake from "pdfmake/build/pdfmake";
 // font build has to be committed otherwise each developers has to build font locally.
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -46,9 +46,9 @@ import { TotalTestsAvailableService } from '../services/total-tests-available.se
   templateUrl: './candidats.component.html',
   styleUrls: ['./candidats.component.scss'],
 })
-export class CandidatsComponent implements OnInit {
+export class CandidatsComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
   public decryptTokenService = new DecryptTokenService();
-  private mediaService: MediaQueryService;
   private globalId: number;
   public tests_available: number = 0;
   private technologies: Record<string, any>[] = [];
@@ -77,6 +77,7 @@ export class CandidatsComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
+    private breakpointObserver: BreakpointObserver,
     public apiClientService: ApiClientService,
     private router: Router,
     private http: HttpClient,
@@ -89,16 +90,19 @@ export class CandidatsComponent implements OnInit {
   ngOnInit() {
     this.loadTestsAvailable();
     this.getCampaign().then((datas) => {
-
       this.campaign = datas
       console.log('CAMPAIGN', this.campaign, datas);
     });
 
-    /*this.mediaService = new MediaQueryService(this.compactTableWidth);
-    this.mediaService.match$.subscribe(value => {
-      this.displayedColumns = value ? this.compactMatTableColumns : this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
-    });*/
-    this.displayedColumns = this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
+    this.subscription = this.breakpointObserver
+      .observe([this.compactTableWidth])
+      .subscribe((state: BreakpointState) => {
+        this.displayedColumns = state.matches ? this.compactMatTableColumns : this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
+      });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   private loadTestsAvailable(): void {
@@ -283,9 +287,10 @@ export class CandidatsComponent implements OnInit {
         },
       )
       .then((campaign: Record<string, any>) => {
-        // keep minimal informations in displayedColumns to fit mobile width
         console.log('PROMISE', campaign);
+
         this.displayedColumns = this.getDisplayedColumns();
+
 
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
         let getInfoCandidats: Record<string, any>[] = [];
@@ -337,10 +342,11 @@ export class CandidatsComponent implements OnInit {
           getInfoCandidats.push(getInfoCandidat);
         }
         this.infosCandidats = new MatTableDataSource(getInfoCandidats);
-        this.infosCandidatsPdf = getInfoCandidats;
-
         this.infosCandidats.sort = this.sort;
+        
+        // this.infosCandidatsPdf = getInfoCandidats;
         this.infosCandidatsPdf = getInfoCandidats;
+        
         this.isLoading = false;
 
         return campaign;
@@ -500,6 +506,7 @@ export class CandidatsComponent implements OnInit {
   private getTechnoNames(): string[] {
     return this.technologies.map(techno => techno.name);
   }
+
 
   private getDisplayedColumns(): string[] {
     let result: string[];
