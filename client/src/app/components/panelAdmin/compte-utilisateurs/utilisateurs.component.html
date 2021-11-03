@@ -293,7 +293,7 @@
                                     mat-mini-fab
                                     [matTooltipPosition]="'left'"
                                     [matTooltipClass]="'roodeo-tooltip'"
-                                    matTooltip="edit"
+                                    [matTooltip]="actions[0].edit"
                                     color="primary"
                                     aria-label="edit user"
                                     *ngIf="isCurrentUserIsAccountAdmin && !user.blocked" (click)="openForm(user)"
@@ -305,7 +305,7 @@
                                     mat-mini-fab
                                     [matTooltipPosition]="'left'"
                                     [matTooltipClass]="'roodeo-tooltip'"
-                                    matTooltip="activate user"
+                                    [matTooltip]="actions[1].activate_user"
                                     color="primary"
                                     aria-label="activate user"
                                     *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id && user.blocked" (click)=enableUser(user)
@@ -317,7 +317,7 @@
                                     mat-mini-fab
                                     [matTooltipPosition]="'left'"
                                     [matTooltipClass]="'roodeo-tooltip'"
-                                    matTooltip="deactivate user"
+                                    [matTooltip]="actions[2].deactivate_user"
                                     color="primary"
                                     aria-label="deactivate user"
                                     *ngIf="isCurrentUserIsAccountAdmin && user.id !== currentUser.id && !user.blocked" (click)=deleteUser(user)
