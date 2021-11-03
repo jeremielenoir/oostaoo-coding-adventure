@@ -1,0 +1,1 @@
+Le dossier filescripts est necessaire pour sauvegarder les fichiers JS venant du live coding pour realiser le controle de la reponse du candidat. Fichier qui sera supprimé a la fin du traitement.
