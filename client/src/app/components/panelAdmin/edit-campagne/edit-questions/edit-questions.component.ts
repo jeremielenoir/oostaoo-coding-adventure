@@ -1,22 +1,22 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { TooltipPosition, MatSnackBar } from "@angular/material";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { TooltipPosition, MatSnackBar } from '@angular/material';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
   API_URI_QUESTIONS,
-} from "../../../../api-client/api-client.service";
+} from '../../../../api-client/api-client.service';
 import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
-} from "@angular/cdk/drag-drop";
-import { FormControl } from "@angular/forms";
-import { element } from "protractor";
+} from '@angular/cdk/drag-drop';
+import { FormControl } from '@angular/forms';
+
 @Component({
-  selector: "app-edit-questions",
-  templateUrl: "./edit-questions.component.html",
-  styleUrls: ["./edit-questions.component.scss"],
+  selector: 'app-edit-questions',
+  templateUrl: './edit-questions.component.html',
+  styleUrls: ['./edit-questions.component.scss'],
 })
 export class EditQuestionsComponent implements OnInit {
   public globalId;
@@ -25,26 +25,26 @@ export class EditQuestionsComponent implements OnInit {
   public allQuestions;
   public allQuestionsCampaign;
   public questionsEditQuestion;
-  public searchText = "";
+  public searchText = '';
   public positionOptions: TooltipPosition[] = [
-    "after",
-    "before",
-    "above",
-    "below",
-    "left",
-    "right",
+    'after',
+    'before',
+    'above',
+    'below',
+    'left',
+    'right',
   ];
   public toppings = new FormControl();
   public toppingsDifficulty = new FormControl();
   public toppingList: string[] = [
-    "Extra cheese",
-    "Mushroom",
-    "Onion",
-    "Pepperoni",
-    "Sausage",
-    "Tomato",
+    'Extra cheese',
+    'Mushroom',
+    'Onion',
+    'Pepperoni',
+    'Sausage',
+    'Tomato',
   ];
-  public difficulty = ["facile", "moyen", "expert"];
+  public difficulty = ['facile', 'moyen', 'expert'];
   public boelanIsSearchAdvenced: boolean = false;
   public saveallQuestionsCampaign = [];
   public techno = [];
@@ -54,14 +54,14 @@ export class EditQuestionsComponent implements OnInit {
       moveItemInArray(
         event.container.data,
         event.previousIndex,
-        event.currentIndex
+        event.currentIndex,
       );
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex
+        event.currentIndex,
       );
     }
   }
@@ -69,7 +69,7 @@ export class EditQuestionsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public apiClientService: ApiClientService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
   ) {
     this.route.parent.params.subscribe((params) => {
       this.globalId = params.id;
@@ -77,32 +77,29 @@ export class EditQuestionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-      this.apiClientService
-      .get(API_URI_CAMPAIGNS + "/" + this.globalId)
+    this.apiClientService
+      .get(API_URI_CAMPAIGNS + '/' + this.globalId)
       .subscribe((response) => {
         this.yourCampaign = response;
         this.yourCampaign.technologies.forEach((element) => {
           this.techno.push(element);
         });
-
-        const newQuestion = [];
         this.allTechno = this.techno;
         this.allQuestionsCampaign = this.yourCampaign.questions;
+
+        console.log('allQuestionsCampaign', this.allQuestionsCampaign);
+
         this.loadAllQuestion(this.allQuestionsCampaign);
       });
-    
-    
   }
 
   populateQuestions(yourCampaign) {
-    
     let technos = this.techno;
 
     yourCampaign.forEach((element) => {
       const technoIndex = technos.findIndex(
         (t) =>
-          t && t.id && t.id.toString() === element.technologies.id.toString()
+          t && t.id && t.id.toString() === element.technologies.id.toString(),
       );
       if (technoIndex < 0) {
         technos.push(element.technologies);
@@ -114,8 +111,6 @@ export class EditQuestionsComponent implements OnInit {
     for (let techno of technos) {
       for (let question of yourCampaign) {
         if (techno.id.toString() === question.technologies.id.toString()) {
-          
-
           newQuestion.push({ ...question, technologies: techno });
         }
       }
@@ -125,16 +120,16 @@ export class EditQuestionsComponent implements OnInit {
 
     this.yourCampaign = yourCampaign;
     this.allTechno = technos;
-    
   }
   chargeYourCampagn(event) {
-   /*  console.log("on vien de recupere event", event);
+    /*  console.log("on vien de recupere event", event);
     // this.yourCampaign = event; */
     this.populateQuestions(event);
   }
 
-  loadAllQuestion(yourCampaignQuestions): any {''
-    let url = "";
+  loadAllQuestion(yourCampaignQuestions): any {
+    ('');
+    let url = '';
     this.techno.forEach((tech, index) => {
       if (index === 0) {
         url += `?technologies_in=${tech.id}`;
@@ -149,22 +144,22 @@ export class EditQuestionsComponent implements OnInit {
         this.allQuestionsCampaign = response.filter(
           (q1) =>
             yourCampaignQuestions.findIndex(
-              (q2) => q2.id.toString() === q1.id.toString()
-            ) < 0
+              (q2) => q2.id.toString() === q1.id.toString(),
+            ) < 0,
         );
 
         this.allQuestions = response.filter(
           (q1) =>
             this.allQuestionsCampaign.findIndex(
-              (q2) => q2.id.toString() === q1.id.toString()
-            ) < 0
+              (q2) => q2.id.toString() === q1.id.toString(),
+            ) < 0,
         );
 
         this.questionsEditQuestion = response.filter(
           (q1) =>
             yourCampaignQuestions.findIndex(
-              (q2) => q2.id.toString() === q1.id.toString()
-            ) >= 0
+              (q2) => q2.id.toString() === q1.id.toString(),
+            ) >= 0,
         );
       });
   }
@@ -172,7 +167,7 @@ export class EditQuestionsComponent implements OnInit {
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
       duration: 6000,
-      panelClass: ['mat-snack-bar-container']
+      panelClass: ['mat-snack-bar-container'],
     });
   }
 
@@ -183,11 +178,11 @@ export class EditQuestionsComponent implements OnInit {
     var s = Math.floor((d % 3600) % 60);
 
     return (
-      ("0" + h).slice(-2) +
-      ":" +
-      ("0" + m).slice(-2) +
-      ":" +
-      ("0" + s).slice(-2)
+      ('0' + h).slice(-2) +
+      ':' +
+      ('0' + m).slice(-2) +
+      ':' +
+      ('0' + s).slice(-2)
     );
     // return (m - (m %= 60)) / 60 + (9 < m ? ':' : ':0') + m;
   }

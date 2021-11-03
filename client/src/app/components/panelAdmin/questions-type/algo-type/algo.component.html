@@ -1,13 +1,44 @@
- 
+<div style="height: 500px">
+  <ngx-monaco-editor
+    [options]="editorOptions"
+    style="height: 100%"
+    [options]="options"
+    [(ngModel)]="question.content"
+  ></ngx-monaco-editor>
+</div>
 
-<div style="height: 75%">
- 
-    <ngx-monaco-editor [options]="editorOptions" style="height: 100%" [options]="options" [(ngModel)]="question.content"></ngx-monaco-editor>
- </div>
+<app-base-button
+  type="button"
+  mat-raised-button
+  color="primary"
+  (click)="testCode()"
+  class="button-test"
+>
+  Test your code
+</app-base-button>
 
- 
- <button mat-flat-button (click)="testCode()" type="button">Test your code</button>
- 
- <div style="height: 75%;text-align:center;" *ngIf="result">
- <p>{{result.result}}</p>
- </div>
+<div class="algo_result">
+  <ng-container *ngFor="let result of responseTestCode; let index = index">
+    <p
+      [ngClass]="{
+        'text-error': !result.resultValidation,
+        'text-valid': result.resultValidation
+      }"
+    >
+      Resultat du test {{ index + 1 }} :
+      {{ result.resultValidation ? result.eval : 'Echec' }}
+    </p>
+  </ng-container>
+  <ng-container *ngIf="responseTestCode">
+    <p
+      class="algo_result_text"
+      [ngClass]="{
+        valid: responseTestAnswer,
+        error: !responseTestAnswer
+      }"
+    >
+      {{ responseTestAnswer ? 'Valide' : 'Erreur' }}
+    </p>
+    <p *ngIf="!responseTestAnswer">Merci de renseigner un algorithme correct !</p>
+  </ng-container>
+</div>

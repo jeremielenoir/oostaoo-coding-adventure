@@ -173,7 +173,7 @@ export class CandidatsComponent implements OnInit {
 
   getCandidatStatusSelected(id: number) {
     if (!this.infosCandidats) return false;
-    
+
     const found = this.infosCandidats.data.find((c) => c.candidat_id === id);
     return found ? found.selected : false;
   }
@@ -240,9 +240,9 @@ export class CandidatsComponent implements OnInit {
             this.router.navigate(['/dashboard/campaigns']);
             return;
           }
-          
+
           this.technologies = campaign.technologies;
-          
+
           this.candidatsAvailable = campaign.candidats.length > 0 ? true : false;
 
           for (let i = 0; i < campaign.candidats.length; i++) {
@@ -263,11 +263,11 @@ export class CandidatsComponent implements OnInit {
               ) {
                 percentArray = campaign.candidats[i].points_candidat[2]['getpourcentByCandidat'].map((a) => a.percentage);
               }
-              
+
               const sumPercent: number = percentArray.length > 0 ? percentArray.reduce((a, b) => parseFloat(a + b)) : 0;
-              
+
               const score: string = (sumPercent / percentArray.length).toFixed(2) + '%';
-            
+
               campaign.candidats[i].Score = score;
               campaign.candidats[i].getpourcentByCandidat = scoreByTechObject;
               campaign.candidats[i].status = false;
@@ -286,7 +286,7 @@ export class CandidatsComponent implements OnInit {
         // keep minimal informations in displayedColumns to fit mobile width
         console.log('PROMISE', campaign);
         this.displayedColumns = this.getDisplayedColumns();
-        
+
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
         let getInfoCandidats: Record<string, any>[] = [];
         for (let i = 0; i < campaign.candidats.length; i++) {
@@ -503,7 +503,7 @@ export class CandidatsComponent implements OnInit {
 
   private getDisplayedColumns(): string[] {
     let result: string[];
-    
+
     /*this.mediaService = new MediaQueryService(this.compactTableWidth);
     this.mediaService.match$.subscribe(value => {
       result = value ? this.compactMatTableColumns : this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
