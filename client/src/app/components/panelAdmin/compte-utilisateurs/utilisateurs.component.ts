@@ -97,15 +97,15 @@ export class UtilisateursComponent implements OnInit {
 
   dataRoute: any;
 
-  constructor( private router: Router, public apiClientService: ApiClientService,
+  constructor(private router: Router, public apiClientService: ApiClientService,
     public authenticationService: AuthenticationService, public decryptTokenService: DecryptTokenService,
-    private _snackBar: MatSnackBar, private dialog: MatDialog ) {}
+    private _snackBar: MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit() {
-    if(this.apiClientService.user){
+    if (this.apiClientService.user) {
       this.createDataRoutes(this.apiClientService.user);
-    } else{
-      this.apiClientService.getUser().then(user =>{
+    } else {
+      this.apiClientService.getUser().then(user => {
         this.createDataRoutes(user);
       });
     }
@@ -142,7 +142,7 @@ export class UtilisateursComponent implements OnInit {
     // });
   }
 
-  createDataRoutes(user){
+  createDataRoutes(user) {
     this.dataRoute = [
       {
         routerLink: '/dashboard/profil-utilisateur', condition: true,
@@ -165,15 +165,13 @@ export class UtilisateursComponent implements OnInit {
   }
 
   public param_cog_non_active() {
-    this.formulaire.nativeElement.prenom.value = '';
-    this.formulaire.nativeElement.nom.value = '';
-    this.formulaire.nativeElement.email.value = '';
-    this.formulaire.nativeElement.username.value = '';
-    this.formulaire.nativeElement.password.value = '';
-    this.formulaire.nativeElement.confirmPassword.value = '';
-    this.formulaire.nativeElement.confirmPassword.value = '';
-    this.formulaire.nativeElement.userrole.value = '';
-    this.selectedRole = undefined;
+    this.addPrenom.reset();
+    this.addNom.reset();
+    this.addEmail.reset();
+    this.addUsername.reset();
+    this.addPassword.reset();
+    this.confirmPassword.reset();
+    this.userrole.reset();
 
     this.shadowcog1 = false;
 
@@ -323,7 +321,7 @@ export class UtilisateursComponent implements OnInit {
     // console.log('this.addEmail.value : ', this.addEmail.value);
     // console.log('this.addPassword.value : ', this.addPassword.value);
     // console.log('this.confirmPassword.value : ', this.confirmPassword.value);
-    // console.log('this.selectedRole : ', this.userrole.value);
+    // console.log('this.selectedRole : ', this.userrole);
     // console.log('this.addUsername.value : ', this.addUsername.value);
     this.submittedUser = true;
     if (
@@ -335,42 +333,36 @@ export class UtilisateursComponent implements OnInit {
       this.confirmPassword.value === '' ||
       this.addPassword.value === null ||
       this.addPassword.value !== this.confirmPassword.value ||
-      isNaN(this.userrole.value) ||
-      this.addUsername.value === ''
+      this.addUsername.value === '' ||
+      this.userrole.value === '' ||
+      this.userrole.value === null
     ) {
       this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
       return;
+    } else {
+      const userPayload = {
+        prenom: this.addPrenom.value,
+        nom: this.addNom.value,
+        email: this.addEmail.value,
+        username: this.addUsername.value,
+        password: this.addPassword.value,
+        role: this.userrole.value,
+        adminId: this.adminId
+      };
+      this.apiClientService
+        .post(API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/users', userPayload)
+        .toPromise()
+        .then(async res => {
+          console.log(res);
+          this.ngOnInit();
+          this.param_cog_non_active();
+          this.submittedUser = false;
+          this.openSnackBar('L\'utilisateur a correctement été ajouté', 'Fermer');
+        })
+        .catch((err) => {
+          this._snackBar.open(err, undefined, { duration: 10000 });
+        });
     }
-
-    // if (this.tests_available !== -1) {
-    //   setTimeout(() => {
-    //     this.router.navigate(['/subscription']);
-    //   }, 1500);
-    // }
-
-    const userPayload = {
-      prenom: this.addPrenom.value,
-      nom: this.addNom.value,
-      email: this.addEmail.value,
-      username: this.addUsername.value,
-      password: this.addPassword.value,
-      role: this.userrole.value,
-      adminId: this.adminId
-    };
-
-
-    this.apiClientService
-      .post(API_URI_ACCOUNT + '/' + this.currentUser.customeraccount.id + '/users', userPayload)
-      .toPromise()
-      .then(async res => {
-        console.log(res);
-        this.ngOnInit();
-        this.param_cog_non_active();
-        this.openSnackBar('L\'utilisateur a correctement été ajouté', 'Fermer');
-      })
-      .catch((err) => {
-        this._snackBar.open(err, undefined, { duration: 10000 });
-      });
   }
 
   async getUser(): Promise<any> {
