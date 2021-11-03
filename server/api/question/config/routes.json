@@ -37,7 +37,7 @@
 
     {
       "method": "POST",
-      "path": "/api/questions/execute",
+      "path": "/api/questions/execute/:id",
       "handler": "Question.execute",
       "config": {
         "policies": []

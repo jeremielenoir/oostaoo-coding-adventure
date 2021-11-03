@@ -97,7 +97,7 @@ export class DragNDropComponent implements OnInit, OnChanges {
   public themeI18n = '';
   public titreI18n = '';
   public answerValueI18n = '';
-  
+
   @ViewChild('droplist') public droplist: ElementRef;
 
   constructor(
@@ -195,9 +195,6 @@ export class DragNDropComponent implements OnInit, OnChanges {
 
   public addquestion(question) {
     this.selectedQuestions.unshift(question);
-    // this.selectedQuestions = [question, ...this.selectedQuestions];
-    console.log([question, ...this.selectedQuestions]);
-
     const index = this.notSelectedQuestions.indexOf(question);
     if (index > -1) {
       this.notSelectedQuestions.splice(index, 1);
@@ -283,7 +280,6 @@ export class DragNDropComponent implements OnInit, OnChanges {
     this.boelanIsSearchAdvenced = !this.boelanIsSearchAdvenced;
   }
 
-  // data: {questions: this.selectedQuestions}
   public openDialogTest(question?: any): void {
     const dialogRef = this.dialog.open(DialogOverviewTestComponent, {
       data: {

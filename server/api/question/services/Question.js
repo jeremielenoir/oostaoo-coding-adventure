@@ -1,5 +1,5 @@
 /* global Question */
-"use strict";
+'use strict';
 
 /**
  * Question.js service
@@ -8,18 +8,19 @@
  */
 
 // Public dependencies.
-const _ = require("lodash");
+const _ = require('lodash');
 
 // Strapi utilities.
 //const utils = require('strapi-hook-bookshelf/lib/utils/');
-const { exec } = require("child_process");
-const shortid = require("shortid");
-const { createReadStream, createWriteStream, unlink, access } = require("fs");
-const randomstring = require("randomstring");
-const { google } = require("googleapis");
-const keys = require("../../../roodeo.json");
-const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
-const UPLOAD_DIR = "filescripts";
+const { exec } = require('child_process');
+const shortid = require('shortid');
+const { createReadStream, createWriteStream, unlink, access } = require('fs');
+const randomstring = require('randomstring');
+const { google } = require('googleapis');
+const keys = require('../../../roodeo.json');
+const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
+const UPLOAD_DIR = 'filescripts';
+const fs = require('fs');
 
 //const encoding = require("encoding-japanese");
 module.exports = {
@@ -31,7 +32,7 @@ module.exports = {
 
   fetchAll: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams("question", params);
+    const filters = strapi.utils.models.convertParams('question', params);
     // Select field to populate.
     const populate = Question.associations
       .filter((ast) => ast.autoPopulate !== false)
@@ -41,14 +42,14 @@ module.exports = {
       _.forEach(filters.where, (where, key) => {
         if (
           _.isArray(where.value) &&
-          where.symbol !== "IN" &&
-          where.symbol !== "NOT IN"
+          where.symbol !== 'IN' &&
+          where.symbol !== 'NOT IN'
         ) {
           for (const value in where.value) {
-            qb[value ? "where" : "orWhere"](
+            qb[value ? 'where' : 'orWhere'](
               key,
               where.symbol,
-              where.value[value]
+              where.value[value],
             );
           }
         } else {
@@ -79,7 +80,7 @@ module.exports = {
       .filter((ast) => ast.autoPopulate !== false)
       .map((ast) => ast.alias);
 
-    return Question.forge(_.pick(params, "id")).fetch({
+    return Question.forge(_.pick(params, 'id')).fetch({
       withRelated: populate,
     });
   },
@@ -92,16 +93,16 @@ module.exports = {
 
   count: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams("question", params);
+    const filters = strapi.utils.models.convertParams('question', params);
 
     return Question.query(function (qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value)) {
           for (const value in where.value) {
-            qb[value ? "where" : "orWhere"](
+            qb[value ? 'where' : 'orWhere'](
               key,
               where.symbol,
-              where.value[value]
+              where.value[value],
             );
           }
         } else {
@@ -121,11 +122,11 @@ module.exports = {
     // Extract values related to relational data.
     const relations = _.pick(
       values,
-      Question.associations.map((ast) => ast.alias)
+      Question.associations.map((ast) => ast.alias),
     );
     const data = _.omit(
       values,
-      Question.associations.map((ast) => ast.alias)
+      Question.associations.map((ast) => ast.alias),
     );
 
     // Create entry with no-relational data.
@@ -145,11 +146,11 @@ module.exports = {
     // Extract values related to relational data.
     const relations = _.pick(
       values,
-      Question.associations.map((ast) => ast.alias)
+      Question.associations.map((ast) => ast.alias),
     );
     const data = _.omit(
       values,
-      Question.associations.map((ast) => ast.alias)
+      Question.associations.map((ast) => ast.alias),
     );
 
     // Create entry with no-relational data.
@@ -157,7 +158,7 @@ module.exports = {
 
     // Create relational data and return the entry.
     return Question.updateRelations(
-      Object.assign(params, { values: relations })
+      Object.assign(params, { values: relations }),
     );
   },
 
@@ -171,15 +172,15 @@ module.exports = {
     params.values = {};
     Question.associations.map((association) => {
       switch (association.nature) {
-        case "oneWay":
-        case "oneToOne":
-        case "manyToOne":
-        case "oneToManyMorph":
+        case 'oneWay':
+        case 'oneToOne':
+        case 'manyToOne':
+        case 'oneToManyMorph':
           params.values[association.alias] = null;
           break;
-        case "oneToMany":
-        case "manyToMany":
-        case "manyToManyMorph":
+        case 'oneToMany':
+        case 'manyToMany':
+        case 'manyToManyMorph':
           params.values[association.alias] = [];
           break;
         default:
@@ -199,7 +200,7 @@ module.exports = {
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams("question", params);
+    const filters = strapi.utils.models.convertParams('question', params);
     // Select field to populate.
     const populate = Question.associations
       .filter((ast) => ast.autoPopulate !== false)
@@ -209,50 +210,54 @@ module.exports = {
     const searchText = Object.keys(Question._attributes)
       .filter(
         (attribute) =>
-          attribute !== Question.primaryKey && !associations.includes(attribute)
+          attribute !== Question.primaryKey &&
+          !associations.includes(attribute),
       )
       .filter((attribute) =>
-        ["string", "text"].includes(Question._attributes[attribute].type)
+        ['string', 'text'].includes(Question._attributes[attribute].type),
       );
 
     const searchNoText = Object.keys(Question._attributes)
       .filter(
         (attribute) =>
-          attribute !== Question.primaryKey && !associations.includes(attribute)
+          attribute !== Question.primaryKey &&
+          !associations.includes(attribute),
       )
       .filter(
         (attribute) =>
           ![
-            "string",
-            "text",
-            "boolean",
-            "integer",
-            "decimal",
-            "float",
-          ].includes(Question._attributes[attribute].type)
+            'string',
+            'text',
+            'boolean',
+            'integer',
+            'decimal',
+            'float',
+          ].includes(Question._attributes[attribute].type),
       );
 
     const searchInt = Object.keys(Question._attributes)
       .filter(
         (attribute) =>
-          attribute !== Question.primaryKey && !associations.includes(attribute)
+          attribute !== Question.primaryKey &&
+          !associations.includes(attribute),
       )
       .filter((attribute) =>
-        ["integer", "decimal", "float"].includes(
-          Question._attributes[attribute].type
-        )
+        ['integer', 'decimal', 'float'].includes(
+          Question._attributes[attribute].type,
+        ),
       );
 
     const searchBool = Object.keys(Question._attributes)
       .filter(
         (attribute) =>
-          attribute !== Question.primaryKey && !associations.includes(attribute)
+          attribute !== Question.primaryKey &&
+          !associations.includes(attribute),
       )
       .filter((attribute) =>
-        ["boolean"].includes(Question._attributes[attribute].type)
+        ['boolean'].includes(Question._attributes[attribute].type),
       );
 
-    const query = (params._q || "").replace(/[^a-zA-Z0-9.-\s]+/g, "");
+    const query = (params._q || '').replace(/[^a-zA-Z0-9.-\s]+/g, '');
 
     return Question.query((qb) => {
       // Search in columns which are not text value.
@@ -266,28 +271,28 @@ module.exports = {
         });
       }
 
-      if (query === "true" || query === "false") {
+      if (query === 'true' || query === 'false') {
         searchBool.forEach((attribute) => {
-          qb.orWhereRaw(`${attribute} = ${_.toNumber(query === "true")}`);
+          qb.orWhereRaw(`${attribute} = ${_.toNumber(query === 'true')}`);
         });
       }
 
       // Search in columns with text using index.
       switch (Question.client) {
-        case "mysql":
+        case 'mysql':
           qb.orWhereRaw(
-            `MATCH(${searchText.join(",")}) AGAINST(? IN BOOLEAN MODE)`,
-            `*${query}*`
+            `MATCH(${searchText.join(',')}) AGAINST(? IN BOOLEAN MODE)`,
+            `*${query}*`,
           );
           break;
-        case "pg": {
+        case 'pg': {
           const searchQuery = searchText.map((attribute) =>
             _.toLower(attribute) === attribute
               ? `to_tsvector(${attribute})`
-              : `to_tsvector('${attribute}')`
+              : `to_tsvector('${attribute}')`,
           );
 
-          qb.orWhereRaw(`${searchQuery.join(" || ")} @@ to_tsquery(?)`, query);
+          qb.orWhereRaw(`${searchQuery.join(' || ')} @@ to_tsquery(?)`, query);
           break;
         }
       }
@@ -316,12 +321,12 @@ module.exports = {
 
   addSeparatorSpreadSheet: async (spreadsheetId, ppage, first, last) => {
     try {
-      let page = "";
+      let page = '';
 
-      if (ppage.length === 3 && ppage.startsWith("C")) {
-        page = "C++";
-      } else if (ppage.length === 10 && ppage.startsWith("Angular")) {
-        page = "Angular 2+";
+      if (ppage.length === 3 && ppage.startsWith('C')) {
+        page = 'C++';
+      } else if (ppage.length === 10 && ppage.startsWith('Angular')) {
+        page = 'Angular 2+';
       } else {
         page = ppage;
       }
@@ -331,10 +336,10 @@ module.exports = {
         keys.client_email,
         null,
         keys.private_key,
-        [SCOPES]
+        [SCOPES],
       );
       await client.authorize();
-      const gsapi = google.sheets({ version: "v4", auth: client });
+      const gsapi = google.sheets({ version: 'v4', auth: client });
 
       const {
         data: { valueRanges },
@@ -344,29 +349,23 @@ module.exports = {
       });
 
       const data = valueRanges.map((val) => val.values)[0];
-      /*   console.log("data", data); */
       const newData = data.map((e) => {
         if (e && e[6]) {
-          const tab = e[6].split("☼");
-          // console.log("tab", tab);
-
-          return tab.join("&#x263C;");
+          const tab = e[6].split('☼');
+          return tab.join('&#x263C;');
         }
       });
-      // console.log("newData", newData);
-
-      // return newData;
       const values = newData.map((e) => [e]);
       const updateOptions = {
         spreadsheetId,
         range: `${page}!${first}`,
-        valueInputOption: "USER_ENTERED",
+        valueInputOption: 'USER_ENTERED',
         resource: { values },
       };
       await gsapi.spreadsheets.values.update(updateOptions);
-      return "ok";
+      return 'ok';
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
       throw error;
     }
   },
@@ -377,14 +376,13 @@ module.exports = {
    * @return {Promise}
    */
   fetchSpreadsheet: async (spreadsheetId, ppage, first, last) => {
-    
     try {
-      let page = "";
+      let page = '';
 
-      if (ppage.length === 3 && ppage.startsWith("C")) {
-        page = "C++";
-      } else if (ppage.length === 10 && ppage.startsWith("Angular")) {
-        page = "Angular 2+";
+      if (ppage.length === 3 && ppage.startsWith('C')) {
+        page = 'C++';
+      } else if (ppage.length === 10 && ppage.startsWith('Angular')) {
+        page = 'Angular 2+';
       } else {
         page = ppage;
       }
@@ -394,12 +392,12 @@ module.exports = {
         keys.client_email,
         null,
         keys.private_key,
-        [SCOPES]
+        [SCOPES],
       );
-      
+
       console.log('RANGES', ranges);
       await client.authorize();
-      const gsapi = google.sheets({ version: "v4", auth: client });
+      const gsapi = google.sheets({ version: 'v4', auth: client });
 
       const {
         data: { valueRanges },
@@ -407,7 +405,7 @@ module.exports = {
         spreadsheetId,
         ranges,
       });
-      
+
       const data = valueRanges.map((val) => val.values)[0];
       console.log('GET SPREADSHEET DATAS', data);
       const arrValues = [];
@@ -433,7 +431,7 @@ module.exports = {
             ) {
               if (
                 arrTech.findIndex(
-                  (t) => t && t.name.toString() === val.toString()
+                  (t) => t && t.name.toString() === val.toString(),
                 ) < 0
               ) {
                 arrTech.push({ name: val, id: tech.id });
@@ -455,7 +453,6 @@ module.exports = {
         diffTech.forEach((tech) => arrTech.push({ name: tech, id: null }));
       }
 
-
       const arrTechPromise = [];
 
       arrTech.forEach(async (tech) => {
@@ -469,7 +466,7 @@ module.exports = {
                 .then((techno) => resolve({ name: tech.name, id: techno.id }))
                 .catch((e) => reject(e));
             }
-          })
+          }),
         );
       });
 
@@ -478,20 +475,8 @@ module.exports = {
       const questions = [];
       arrValues.forEach((val) => {
         const tech = arrTech.find(
-          (t) => t && t.name && t.name.toString() === val[1]
+          (t) => t && t.name && t.name.toString() === val[1],
         );
-
-        // const utf8Array = new Uint8Array(val[5]);
-        //EUC-JP
-        //utf-general-ci
-        /* const name_jp = encoding.convert(val[5], {
-          from: "UTF8",
-
-          to: "EUC-JP",
-          type: "string", // Specify 'string' type. (Return as string)
-        });
-
-        console.log("name_jp", name_jp); */
         questions.push({
           id: val[0] || null,
           technologies: tech,
@@ -536,14 +521,14 @@ module.exports = {
                   {
                     ...question,
                     technologies: question.technologies,
-                  }
+                  },
                 )
                 .then((r) => resolve(r))
                 .catch((err) => {
                   console.log('ERREUR', err);
                   reject(err);
                 });
-            }else{
+            } else{
               strapi.services.question
               .add({
                 ...question,
@@ -555,11 +540,8 @@ module.exports = {
                 reject(err);
               });
             }
-            
             //delete question.id;
-            
-            
-          })
+          }),
         );
       });
 
@@ -569,10 +551,10 @@ module.exports = {
       const updateOptions = {
         spreadsheetId,
         range: `${page}!A${first}:A${last}`,
-        valueInputOption: "USER_ENTERED",
+        valueInputOption: 'USER_ENTERED',
         resource: { values: ids },
       };
-      
+
       await gsapi.spreadsheets.values.update(updateOptions);
       return results;
     } catch (error) {
@@ -586,8 +568,12 @@ module.exports = {
    *
    * @return {Promise}
    */
-  executeScript: async (file) => {
+  executeScript: async (file, questionId) => {
     try {
+      let functionName;
+      let regexExtractFunctionNameJS = new RegExp('(?<=function )(.*)(?=[(])');
+      let consoleLogText;
+
       const generateStrings = (numberOfStrings, stringLength) => {
         const s = new Set();
 
@@ -600,15 +586,15 @@ module.exports = {
       };
       const storeUpload = async ({ filename, extension }) => {
         const random = await shortid.generate();
-        let id = ``;
-        let path = ``;
+        let id = '';
+        let path = '';
         const randomname = generateStrings(1, 10).value;
         const javafilename = `Main${
           randomname.charAt(0).toUpperCase() + randomname.slice(1)
         }`;
 
         switch (extension) {
-          case "java":
+          case 'java':
             id = `${javafilename}.${extension}`;
             path = `${UPLOAD_DIR}/${javafilename}.${extension}`;
 
@@ -618,13 +604,20 @@ module.exports = {
             path = `${UPLOAD_DIR}/${id}`;
             break;
         }
+
         return new Promise((resolve, reject) =>
           createReadStream(filename)
+            .on('data', (chunk) => {
+              functionName = chunk
+                .toString()
+                .match(regexExtractFunctionNameJS)[0];
+            })
             .pipe(createWriteStream(path))
-            .on("finish", () => resolve({ id, path, extension }))
-            .on("error", (error) => reject(error))
+            .on('finish', () => resolve({ id, path, extension }))
+            .on('error', (error) => reject(error)),
         );
       };
+
       const deleteFile = async (id) => {
         try {
           const filepath = `${UPLOAD_DIR}/${id}`;
@@ -632,7 +625,7 @@ module.exports = {
             if (err) {
               console.log(`The file ${filepath} does not exist.`);
             } else {
-              await unlink(filepath, async (err) => {
+              await fs.unlink(filepath, async (err) => {
                 if (err) throw err;
               });
             }
@@ -643,7 +636,7 @@ module.exports = {
       };
       const processUpload = async (upload) => {
         const { name, path } = upload;
-        const extension = name.split(".")[1];
+        const extension = name.split('.')[1];
         const res = await storeUpload({
           filename: path,
           extension,
@@ -652,61 +645,122 @@ module.exports = {
       };
 
       const { path: filetoexecute, extension, id } = await processUpload(file);
-      let script = "";
-      let compiledfile = `${filetoexecute.split(".")[0]}`;
+      let script = '';
+      let compiledfile = `${filetoexecute.split('.')[0]}`;
 
-      const scriptjava = `sed -i ${""} s/Main/${
-        compiledfile.split("/")[1]
+      const question = (
+        await strapi.services.question.fetch({
+          id: questionId,
+        })
+      ).toJSON();
+      const questionAnswerValues = JSON.parse(question.answer_value);
+
+      const scriptjava = `sed -i ${''} s/Main/${
+        compiledfile.split('/')[1]
       }/g ${filetoexecute}`;
       switch (extension) {
-        case "js":
-          script = `node ${filetoexecute}`;
+        case 'js':
+          ({ consoleLogText, script } = executeJsFile(
+            consoleLogText,
+            functionName,
+            questionAnswerValues,
+            filetoexecute,
+            script,
+          ));
           break;
-        case "py":
+        case 'py':
           script = `python3 ${filetoexecute}`;
           break;
 
-        case "php":
+        case 'php':
           script = `php ${filetoexecute}`;
           break;
-        case "cpp":
-        case "c":
+        case 'cpp':
+        case 'c':
           script = `gcc ${filetoexecute} -o ${compiledfile} && ./${compiledfile}`;
           break;
 
-        case "java":
+        case 'java':
           script = `${scriptjava} && javac ${filetoexecute} && cd ${UPLOAD_DIR} && java ${
-            compiledfile.split("/")[1].split(".")[0]
+            compiledfile.split('/')[1].split('.')[0]
           } `;
           break;
 
         default:
           break;
       }
+
+      /// Recuperer la sortie de la fonctions
       return new Promise((resolve, reject) => {
-        exec(script, async (error, stdout, stderr) => {
-          await deleteFile(id);
-          await deleteFile(
-            extension.toString() === "java"
-              ? id.split(".")[0] + ".class"
-              : id.split(".")[0]
-          );
-          // console.log("error", error);
-          // console.log("stderr", stderr);
-          // console.log("stdout", stdout);
+        exec(script, async (error, stdout) => {
+
+          let answerValues = [];
+          let resultScript = stdout
+            .toString()
+            .trim()
+            .replace(/\s/g, ',')
+            .split(',')
+            .map((number) => {
+              return parseInt(number, 10);
+            });
+
+          questionAnswerValues.map((a) => {
+            answerValues.push(a.result);
+          });
+          
+          const testCode = questionAnswerValues.map((a) => ({
+            eval: resultScript.find((b) => b === a.result),
+            resultValidation: !!resultScript.find((b) => b === a.result),
+          }));
+          
+          const testAnswer =
+            JSON.stringify(answerValues) == JSON.stringify(resultScript);
 
           if (error) {
             reject({ result: error.message || error, success: false });
           }
-          if (stderr) {
-            reject({ result: stderr, success: false });
-          }
 
-          resolve({ result: stdout, success: true });
+          resolve({ testCode: testCode, testAnswer: testAnswer });
+
+          await deleteFile(id);
+          await deleteFile(
+            extension.toString() === 'java'
+              ? id.split('.')[0] + '.class'
+              : id.split('.')[0],
+          );
         });
       });
     } catch (error) {
       throw error;
+    }
+
+    function executeJsFile(
+      consoleLogText,
+      functionName,
+      params,
+      filetoexecute,
+      script,
+    ) {
+      var allParams = '';
+      params.forEach((element, i) => {
+        if (element.type === 'array') {
+          let data = element.eval;
+          if (i === 0) return (allParams += functionName + '([' + data + '])');
+          else return (allParams += ', ' + functionName + '([' + data + '])');
+        } else {
+          allParams = functionName + '(' + element.eval + ')';
+          return allParams;
+        }
+      });
+      consoleLogText = 'console.log(' + allParams + ')';
+
+      fs.appendFile(filetoexecute, consoleLogText, function (err) {
+        if (err) throw err;
+        console.log('console.log added in File JS!');
+      });
+
+      script = `node ${filetoexecute}`;
+      return { consoleLogText, script };
     }
   },
 
@@ -724,10 +778,10 @@ module.exports = {
         keys.client_email,
         null,
         keys.private_key,
-        [SCOPES]
+        [SCOPES],
       );
       await client.authorize();
-      const gsapi = google.sheets({ version: "v4", auth: client });
+      const gsapi = google.sheets({ version: 'v4', auth: client });
 
       const {
         data: { valueRanges },
@@ -757,14 +811,14 @@ module.exports = {
               values: [fields],
             },
           ],
-          valueInputOption: "USER_ENTERED",
+          valueInputOption: 'USER_ENTERED',
         },
       };
       await gsapi.spreadsheets.values.batchUpdate(resourceFields);
       const dataCopied = [
         {
           range: `${technology}!A2:V${arrValues.length + 1}`, // Update a 2d range
-          majorDimension: "ROWS",
+          majorDimension: 'ROWS',
           values: arrValues,
         },
       ];
@@ -772,7 +826,7 @@ module.exports = {
       const resource = {
         spreadsheetId: spreadsheetId,
 
-        resource: { data: dataCopied, valueInputOption: "USER_ENTERED" },
+        resource: { data: dataCopied, valueInputOption: 'USER_ENTERED' },
       };
 
       await gsapi.spreadsheets.values.batchUpdate(resource);

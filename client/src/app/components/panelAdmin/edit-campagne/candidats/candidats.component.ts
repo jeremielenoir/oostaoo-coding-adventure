@@ -177,18 +177,24 @@ export class CandidatsComponent implements OnInit, OnDestroy {
 
   getCandidatStatusSelected(id: number) {
     if (!this.infosCandidats) return false;
-    
+
     const found = this.infosCandidats.data.find((c) => c.candidat_id === id);
     return found ? found.selected : false;
   }
 
   public exported(): void {
     const selectedCandidats: Record<string, any>[] = this.getCandidatsSelected();
-    
+
     for (const candidat of selectedCandidats) {
-      this.viewResultsPdf(candidat);
+      // only selected candidat with score, points or rapport can get PDF file
+      if (
+        candidat.Score &&
+        candidat.points && candidat.points.length > 0 &&
+        candidat.rapport && candidat.rapport.length > 0
+      ) {
+        this.viewResultsPdf(candidat);
+      }
     }
-    console.log(this.getCandidatsSelected());
   }
 
   public setAnonymizing(status: boolean) {
@@ -238,9 +244,9 @@ export class CandidatsComponent implements OnInit, OnDestroy {
             this.router.navigate(['/dashboard/campaigns']);
             return;
           }
-          
+
           this.technologies = campaign.technologies;
-          
+
           this.candidatsAvailable = campaign.candidats.length > 0 ? true : false;
 
           for (let i = 0; i < campaign.candidats.length; i++) {
@@ -261,11 +267,11 @@ export class CandidatsComponent implements OnInit, OnDestroy {
               ) {
                 percentArray = campaign.candidats[i].points_candidat[2]['getpourcentByCandidat'].map((a) => a.percentage);
               }
-              
+
               const sumPercent: number = percentArray.length > 0 ? percentArray.reduce((a, b) => parseFloat(a + b)) : 0;
-              
+
               const score: string = (sumPercent / percentArray.length).toFixed(2) + '%';
-            
+
               campaign.candidats[i].Score = score;
               campaign.candidats[i].getpourcentByCandidat = scoreByTechObject;
               campaign.candidats[i].status = false;
@@ -282,6 +288,9 @@ export class CandidatsComponent implements OnInit, OnDestroy {
       )
       .then((campaign: Record<string, any>) => {
         console.log('PROMISE', campaign);
+
+        this.displayedColumns = this.getDisplayedColumns();
+
 
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
         let getInfoCandidats: Record<string, any>[] = [];
@@ -496,5 +505,17 @@ export class CandidatsComponent implements OnInit, OnDestroy {
 
   private getTechnoNames(): string[] {
     return this.technologies.map(techno => techno.name);
+  }
+
+
+  private getDisplayedColumns(): string[] {
+    let result: string[];
+
+    /*this.mediaService = new MediaQueryService(this.compactTableWidth);
+    this.mediaService.match$.subscribe(value => {
+      result = value ? this.compactMatTableColumns : this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
+    }).unsubscribe();*/
+    result = this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
+    return result;
   }
 }
