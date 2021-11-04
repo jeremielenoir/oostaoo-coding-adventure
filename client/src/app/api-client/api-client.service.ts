@@ -14,6 +14,7 @@ export const API_URI_TECHNO: string = prefix + 'technologies';
 export const API_URI_PROFILES: string = prefix + 'profiles';
 export const API_URI_QUESTIONS: string = prefix + 'questions';
 export const API_URI_CANDIDATS: string = prefix + 'candidats';
+export const API_URI_CANDIDATS_BY_TOKEN: string = API_URI_CANDIDATS + '/token';
 export const API_URI_INTERVIEWS: string = prefix + 'interviews';
 export const API_URI_CANDIDATS_PDF_REPORT: string = prefix + 'candidats-report-pdf/';
 export const API_URI_EMAIL: string = prefix + 'email';

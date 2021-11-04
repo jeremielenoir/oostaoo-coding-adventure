@@ -34,6 +34,16 @@ module.exports = {
   },
 
   /**
+   * Retrieve a candidat record by his token.
+   *
+   * @return {Object}
+   */
+
+  findToken: async (ctx) => {
+    return strapi.services.candidat.fetchByToken(ctx.params);
+  },
+
+  /**
    * Count candidat records.
    *
    * @return {Number}

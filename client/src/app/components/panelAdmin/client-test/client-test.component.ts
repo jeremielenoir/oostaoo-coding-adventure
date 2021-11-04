@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { API_URI_CAMPAIGNS, API_URI_CANDIDATS, ApiClientService } from "../../../api-client/api-client.service";
+import { API_URI_CAMPAIGNS, API_URI_CANDIDATS, API_URI_CANDIDATS_BY_TOKEN, ApiClientService } from "../../../api-client/api-client.service";
 
 @Component({
   selector: "app-client-test",
@@ -49,12 +49,10 @@ export class ClientTestComponent implements OnInit {
   }
 
   private getCandidats() {
-    this.apiClientService.get(`${API_URI_CANDIDATS}?token=${this.tokenId}`)
+    this.apiClientService.get(API_URI_CANDIDATS_BY_TOKEN + "/" + this.tokenId)
       .toPromise()
       .then((candidat: Record<string, any>) => {
-        // TODO: fixed but need to be tested
         const datetimeTestOpened: string = new Date().toISOString();
-        
 
         if (candidat.test_terminer !== "0000-00-00 00:00:00") {
           this.testStatus$.next("");

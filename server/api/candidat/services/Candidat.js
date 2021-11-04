@@ -89,6 +89,23 @@ module.exports = {
   },
 
   /**
+   * Promise to fetch a/an candidat by his token.
+   *
+   * @return {Promise}
+   */
+
+  fetchByToken: (params) => {
+    // Select field to populate.
+    const populate = Candidat.associations
+      .filter((ast) => ast.autoPopulate !== false)
+      .map((ast) => ast.alias);
+
+    return Candidat.forge(_.pick(params, 'token')).fetch({
+      withRelated: populate,
+    });
+  },
+
+  /**
    * Promise to count a/an candidat.
    *
    * @return {Promise}
