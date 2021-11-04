@@ -7,7 +7,7 @@
 
 <div class="rdo-panel">
   <div class="rdo-panel-header">
-    <h2><i class="fa fa-cubes icon"></i> Nos offres</h2>
+    <h2><mat-icon>local_offer</mat-icon> Nos offres</h2>
   </div>
   <div class="rdo-list-offers">
     <div class="rdo-menu-offers">
@@ -37,7 +37,7 @@
       <div *ngIf="!selectedOffer" class="rdo-loader"></div>
       <div *ngIf="selectedOffer" class="rdo-content-group">
         <div class="rdo-panel-header">
-          <h3><i class="fa fa-cube"></i> {{ selectedOffer?.title }}</h3>
+          <h3><mat-icon>local_offer</mat-icon> {{ selectedOffer?.title }}</h3>
           <div class="price-button-section">
             <i>{{
               selectedOffer?.price +

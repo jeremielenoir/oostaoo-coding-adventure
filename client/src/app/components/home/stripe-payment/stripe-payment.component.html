@@ -11,7 +11,7 @@
 ></mat-progress-bar>
 <div class="rdo-panel" style="margin-top: 130px">
   <div class="rdo-panel-header">
-    <h2 i18n><i class="fa fa-user-circle icon"></i> Finalisez votre achat</h2>
+    <h2 i18n><mat-icon>account_circle</mat-icon> Finalisez votre achat</h2>
     <app-base-button
       id="payment"
       *ngIf="!paied"
@@ -23,7 +23,7 @@
   <div fxLayout="row" fxLayoutGap="20px">
     <div fxFlex="100" class="rdo-content-group">
       <div>
-        <h3 i18n><i class="fa fa-shopping-cart icon"></i> Votre offre</h3>
+        <h3 i18n><mat-icon>shopping_cart</mat-icon> Votre offre</h3>
         <app-base-button
           *ngIf="!paied"
           mat-stroked-button
