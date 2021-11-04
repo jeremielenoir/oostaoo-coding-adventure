@@ -10,7 +10,8 @@
 
 .alert {
   padding-top: 6px;
-  color: #d03737
+  color: #d03737;
+  font-size: 11px;
 }
 
 #content {
@@ -155,6 +156,12 @@
   border-top-right-radius: $border-radius;
 }
 
+.table_icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
 .table-info-user .table-bordore {
   border: $border-table;
   background-color: white;
@@ -271,12 +278,7 @@
 }
 
 .table_body_cell:nth-child(4),
-.table_head_cell:nth-child(4) {
-  // width: 5%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
+.table_head_cell:nth-child(4) {}
 
 #shadow-cog-2,
 #shadow-cog {
