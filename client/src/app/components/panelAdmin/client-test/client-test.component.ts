@@ -30,12 +30,14 @@ export class ClientTestComponent implements OnInit {
     console.log(this.candidat);
   }
 
+
   public openPopup() {
     this.popupTestStatus = true;
   }
 
   public closePopup() {
     this.popupTestStatus = false;
+
   }
 
   public runTest() {
@@ -53,6 +55,7 @@ export class ClientTestComponent implements OnInit {
         // TODO: fixed but need to be tested
         const datetimeTestOpened: string = new Date().toISOString();
         
+
         if (candidat.test_terminer !== "0000-00-00 00:00:00") {
           this.testStatus$.next("");
 

@@ -4,12 +4,14 @@
       <header class="header-cube-testing">
         <div class="f030">
           <i class="far fa-question-circle icon-testing"></i>
+
           <span class="title-testing">Question {{ currentIdxQuestions + 1 }} / {{ questions.length }} - {{ language
             }}</span>
         </div>
 
         <div class="testing-timer">
           <span class="testing-timer-icon"><i class="far fa-clock"></i></span>
+
           <span class="testing-timer-text" i18n>Temps écoulé :</span>
           <span class="time-elapsed" [class.active-time-danger]="stopwatch >= fewSecondsLeft">
             {{ fmtMSS(stopwatch) }}/{{ fmtMSS(question.time) }}
@@ -17,9 +19,17 @@
         </div>
       </header>
 
-      <div class="scroll-auto-testing" appBlockCopyPaste [appActive]="candidat.campaign.copy_paste">
+      <div
+        class="scroll-auto-testing"
+        appBlockCopyPaste
+        [appActive]="candidat.campaign.copy_paste"
+      >
         <div class="content-testing">
-          <div markdown [data]="question[dataInfoLanguageName]" (ready)="onReady()"></div>
+          <div
+            markdown
+            [data]="question[dataInfoLanguageName]"
+            (ready)="onReady()"
+          ></div>
         </div>
       </div>
     </div>
@@ -29,10 +39,22 @@
     <div class="cube-testing cube-testing-right">
       <header class="header-cube-testing">
         <div class="f030">
-          <i *ngIf="question.type === 'algo'" class="fas fa-code icon-testing"></i>
-          <i *ngIf="question.type === 'free'" class="fas fa-edit icon-testing"></i>
-          <i *ngIf="question.type === 'one'" class="fas fa-check-circle icon-testing"></i>
-          <i *ngIf="question.type === 'multiple'" class="fas fa-check-square icon-testing"></i>
+          <i
+            *ngIf="question.type === 'algo'"
+            class="fas fa-code icon-testing"
+          ></i>
+          <i
+            *ngIf="question.type === 'free'"
+            class="fas fa-edit icon-testing"
+          ></i>
+          <i
+            *ngIf="question.type === 'one'"
+            class="fas fa-check-circle icon-testing"
+          ></i>
+          <i
+            *ngIf="question.type === 'multiple'"
+            class="fas fa-check-square icon-testing"
+          ></i>
 
           <span class="title-testing" i18n>Réponse</span>
         </div>
@@ -43,6 +65,7 @@
       <div *ngIf="question.type === 'free'" class="scroll-auto-testing">
         <div class="content-testing content-testing-seconde">
           <mat-form-field class="example-full-width" appearance="outline">
+
             <textarea cdkTextareaAutosize cdkAutosizeMinRows="10" cdkAutosizeMaxRows="10" [disabled]="isDisabled"
               appBlockCopyPaste [appActive]="candidat.campaign.copy_paste && !prev" matInput
               placeholder="Saisir votre réponse" [(ngModel)]="candidatAnswer"></textarea>
@@ -64,8 +87,12 @@
 
       <!--checkbox -->
 
-      <div *ngIf="question.type === 'multiple'" class="content-testing content-testing-seconde">
+      <div
+        *ngIf="question.type === 'multiple'"
+        class="content-testing content-testing-seconde"
+      >
         <div class="answer-checkbox-group">
+
           <div *ngFor="let answer of choiceOfAnswers" class="answer-checkbox">
             <mat-checkbox class="answer-wrap" [disabled]="isDisabled" (change)="checkboxAnswers($event)"
               [value]="answer" appBlockCopyPaste [appActive]="candidat.campaign.copy_paste && !prev">
@@ -78,9 +105,15 @@
       <!--algo-->
 
       <div *ngIf="question.type === 'algo'" class="scroll-auto-testing">
-        <app-algo [question]="question" [options]="options" [filename]="filename" [filetype]="filetype"></app-algo>
+        <app-algo
+          [question]="question"
+          [options]="options"
+          [filename]="filename"
+          [filetype]="filetype"
+        ></app-algo>
       </div>
     </div>
+
 
     <app-base-button *ngIf="preview && questions.length == 1" [fullWidth]="true" [hoverClass]="''"
       (click)="nextQuestion($event)" iconName="play_arrow">
@@ -101,5 +134,6 @@
       (click)="nextQuestion()">
       {{ currentIdxQuestions === questions.length - 1 ? "Soumettre le test" : "Question suivante" }}
     </app-base-button>
+
   </div>
 </div>

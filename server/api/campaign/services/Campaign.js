@@ -1,5 +1,5 @@
 /* global Campaign */
-"use strict";
+'use strict';
 
 /**
  * Campaign.js service
@@ -8,10 +8,10 @@
  */
 
 // Public dependencies.
-const _ = require("lodash");
+const _ = require('lodash');
 
 // Strapi utilities.
-const utils = require("strapi-hook-bookshelf/lib/utils/");
+const utils = require('strapi-hook-bookshelf/lib/utils/');
 
 module.exports = {
   /**
@@ -22,24 +22,24 @@ module.exports = {
 
   fetchAll: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams("campaign", params);
+    const filters = strapi.utils.models.convertParams('campaign', params);
     // Select field to populate.
     const populate = Campaign.associations
       .filter((ast) => ast.autoPopulate !== false)
       .map((ast) => ast.alias);
-  
+
     return Campaign.query(function (qb) {
       _.forEach(filters.where, (where, key) => {
         if (
           _.isArray(where.value) &&
-          where.symbol !== "IN" &&
-          where.symbol !== "NOT IN"
+          where.symbol !== 'IN' &&
+          where.symbol !== 'NOT IN'
         ) {
           for (const value in where.value) {
-            qb[value ? "where" : "orWhere"](
+            qb[value ? 'where' : 'orWhere'](
               key,
               where.symbol,
-              where.value[value]
+              where.value[value],
             );
           }
         } else {
@@ -53,11 +53,9 @@ module.exports = {
 
       qb.offset(filters.start);
       qb.limit(filters.limit);
-    })
-      .fetchAll({
-        withRelated: filters.populate || populate,
-      });
-       
+    }).fetchAll({
+      withRelated: filters.populate || populate,
+    });
   },
 
   /**
@@ -71,11 +69,10 @@ module.exports = {
     const populate = Campaign.associations
       .filter((ast) => ast.autoPopulate !== false)
       .map((ast) => ast.alias);
-     
-    
+
     populate.push('candidats.interview');
 
-    return Campaign.forge(_.pick(params, "id")).fetch({
+    return Campaign.forge(_.pick(params, 'id')).fetch({
       withRelated: populate,
     });
   },
@@ -88,16 +85,16 @@ module.exports = {
 
   count: (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams("campaign", params);
+    const filters = strapi.utils.models.convertParams('campaign', params);
 
     return Campaign.query(function (qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value)) {
           for (const value in where.value) {
-            qb[value ? "where" : "orWhere"](
+            qb[value ? 'where' : 'orWhere'](
               key,
               where.symbol,
-              where.value[value]
+              where.value[value],
             );
           }
         } else {
@@ -117,11 +114,11 @@ module.exports = {
     // Extract values related to relational data.
     const relations = _.pick(
       values,
-      Campaign.associations.map((ast) => ast.alias)
+      Campaign.associations.map((ast) => ast.alias),
     );
     const data = _.omit(
       values,
-      Campaign.associations.map((ast) => ast.alias)
+      Campaign.associations.map((ast) => ast.alias),
     );
 
     // Create entry with no-relational data.
@@ -141,11 +138,11 @@ module.exports = {
     // Extract values related to relational data.
     const relations = _.pick(
       values,
-      Campaign.associations.map((ast) => ast.alias)
+      Campaign.associations.map((ast) => ast.alias),
     );
     const data = _.omit(
       values,
-      Campaign.associations.map((ast) => ast.alias)
+      Campaign.associations.map((ast) => ast.alias),
     );
 
     // Create entry with no-relational data.
@@ -153,7 +150,7 @@ module.exports = {
 
     // Create relational data and return the entry.
     return Campaign.updateRelations(
-      Object.assign(params, { values: relations })
+      Object.assign(params, { values: relations }),
     );
   },
 
@@ -167,15 +164,15 @@ module.exports = {
     params.values = {};
     Campaign.associations.map((association) => {
       switch (association.nature) {
-        case "oneWay":
-        case "oneToOne":
-        case "manyToOne":
-        case "oneToManyMorph":
+        case 'oneWay':
+        case 'oneToOne':
+        case 'manyToOne':
+        case 'oneToManyMorph':
           params.values[association.alias] = null;
           break;
-        case "oneToMany":
-        case "manyToMany":
-        case "manyToManyMorph":
+        case 'oneToMany':
+        case 'manyToMany':
+        case 'manyToManyMorph':
           params.values[association.alias] = [];
           break;
         default:
@@ -195,7 +192,7 @@ module.exports = {
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams("campaign", params);
+    const filters = strapi.utils.models.convertParams('campaign', params);
     // Select field to populate.
     const populate = Campaign.associations
       .filter((ast) => ast.autoPopulate !== false)
@@ -205,50 +202,54 @@ module.exports = {
     const searchText = Object.keys(Campaign._attributes)
       .filter(
         (attribute) =>
-          attribute !== Campaign.primaryKey && !associations.includes(attribute)
+          attribute !== Campaign.primaryKey &&
+          !associations.includes(attribute),
       )
       .filter((attribute) =>
-        ["string", "text"].includes(Campaign._attributes[attribute].type)
+        ['string', 'text'].includes(Campaign._attributes[attribute].type),
       );
 
     const searchNoText = Object.keys(Campaign._attributes)
       .filter(
         (attribute) =>
-          attribute !== Campaign.primaryKey && !associations.includes(attribute)
+          attribute !== Campaign.primaryKey &&
+          !associations.includes(attribute),
       )
       .filter(
         (attribute) =>
           ![
-            "string",
-            "text",
-            "boolean",
-            "integer",
-            "decimal",
-            "float",
-          ].includes(Campaign._attributes[attribute].type)
+            'string',
+            'text',
+            'boolean',
+            'integer',
+            'decimal',
+            'float',
+          ].includes(Campaign._attributes[attribute].type),
       );
 
     const searchInt = Object.keys(Campaign._attributes)
       .filter(
         (attribute) =>
-          attribute !== Campaign.primaryKey && !associations.includes(attribute)
+          attribute !== Campaign.primaryKey &&
+          !associations.includes(attribute),
       )
       .filter((attribute) =>
-        ["integer", "decimal", "float"].includes(
-          Campaign._attributes[attribute].type
-        )
+        ['integer', 'decimal', 'float'].includes(
+          Campaign._attributes[attribute].type,
+        ),
       );
 
     const searchBool = Object.keys(Campaign._attributes)
       .filter(
         (attribute) =>
-          attribute !== Campaign.primaryKey && !associations.includes(attribute)
+          attribute !== Campaign.primaryKey &&
+          !associations.includes(attribute),
       )
       .filter((attribute) =>
-        ["boolean"].includes(Campaign._attributes[attribute].type)
+        ['boolean'].includes(Campaign._attributes[attribute].type),
       );
 
-    const query = (params._q || "").replace(/[^a-zA-Z0-9.-\s]+/g, "");
+    const query = (params._q || '').replace(/[^a-zA-Z0-9.-\s]+/g, '');
 
     return Campaign.query((qb) => {
       // Search in columns which are not text value.
@@ -262,28 +263,28 @@ module.exports = {
         });
       }
 
-      if (query === "true" || query === "false") {
+      if (query === 'true' || query === 'false') {
         searchBool.forEach((attribute) => {
-          qb.orWhereRaw(`${attribute} = ${_.toNumber(query === "true")}`);
+          qb.orWhereRaw(`${attribute} = ${_.toNumber(query === 'true')}`);
         });
       }
 
       // Search in columns with text using index.
       switch (Campaign.client) {
-        case "mysql":
+        case 'mysql':
           qb.orWhereRaw(
-            `MATCH(${searchText.join(",")}) AGAINST(? IN BOOLEAN MODE)`,
-            `*${query}*`
+            `MATCH(${searchText.join(',')}) AGAINST(? IN BOOLEAN MODE)`,
+            `*${query}*`,
           );
           break;
-        case "pg": {
+        case 'pg': {
           const searchQuery = searchText.map((attribute) =>
             _.toLower(attribute) === attribute
               ? `to_tsvector(${attribute})`
-              : `to_tsvector('${attribute}')`
+              : `to_tsvector('${attribute}')`,
           );
 
-          qb.orWhereRaw(`${searchQuery.join(" || ")} @@ to_tsquery(?)`, query);
+          qb.orWhereRaw(`${searchQuery.join(' || ')} @@ to_tsquery(?)`, query);
           break;
         }
       }

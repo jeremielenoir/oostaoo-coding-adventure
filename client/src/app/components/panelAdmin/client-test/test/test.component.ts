@@ -1,4 +1,15 @@
-import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+  OnDestroy,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import {
   API_URI_CAMPAIGNS,
   API_URI_CANDIDATS,
@@ -9,6 +20,7 @@ import {
 import { SelectedLanguageService } from '../../../../services/selected-language.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { DialogOverviewTestComponent } from '../../dragndrop/dragndrop.component';
+import { AlgoComponent } from '../../questions-type/algo-type/algo.component';
 
 export interface IDialogData {
   preview: boolean;
@@ -18,6 +30,7 @@ export interface IDialogData {
   selector: 'app-dialog-timeout',
   templateUrl: 'dialog-timeout.html',
 })
+
 export class DialogTimeoutComponent implements OnInit {
   @Output("nextQuestion") public nextQuestion = new EventEmitter<void>();
   dataPopup: any;
@@ -25,11 +38,13 @@ export class DialogTimeoutComponent implements OnInit {
   
   
   constructor(public dialogRef: MatDialogRef<DialogTimeoutComponent>, @Inject(MAT_DIALOG_DATA) public data: IDialogData) {
+
     if (data) {
       this.dataPopup = data;
       this.prev = true;
     }
   }
+
 
   ngOnInit() {
     console.log('this.dataPopup : ', this.dataPopup);
@@ -106,6 +121,7 @@ export class TestComponent implements OnInit, OnDestroy {
   constructor(private apiClientService: ApiClientService, public languageStorage: SelectedLanguageService, public dialog: MatDialog) { }
 
   ngOnInit() {
+
     switch (this.languageStorage.getLanguageCountry()) {
       case 'es-ES':
         this.dataInfoLanguageName = 'name_es';
@@ -146,12 +162,15 @@ export class TestComponent implements OnInit, OnDestroy {
 
     this.question = this.questions[this.currentIdxQuestions];
 
+
     this.fewSecondsLeft = this.questions[0].time - 5;
+
 
     if (!this.preview) {
       this.Countertime();
       this.controleTimeTest();
     }
+
 
     this.choiceOfAnswers = this.question[this.dataInfoLanguageContent].split(this.separator);
 
@@ -160,6 +179,7 @@ export class TestComponent implements OnInit, OnDestroy {
         this.language = techno.name.toLowerCase();
         
         if (this.language === 'java' || this.language === 'java/j2ee' || this.language === 'spring' || this.language === 'android') {
+
           this.filetype = `application/java`;
           this.filename = `Main.java`;
           this.options = { theme: 'vs-white', language: 'java' };
@@ -184,12 +204,14 @@ export class TestComponent implements OnInit, OnDestroy {
           this.filename = `Main.py`;
           this.options = { theme: 'vs-white', language: 'python' };
 
+
         } else if (this.language === 'go') {
           this.filetype = `application/go`;
           this.filename = `Main.go`;
           this.options = { theme: 'vs-white', language: 'go' };
 
         } else if (this.language === 'javascript' || this.language === 'angular 2+' || this.language === 'angularjs' || this.language === 'react' || this.language === 'vuejs') {
+
           this.filetype = `application/javascript`;
           this.filename = `Main.js`;
           this.options = { theme: 'vs-white', language: 'javascript' };
@@ -211,9 +233,11 @@ export class TestComponent implements OnInit, OnDestroy {
       width: '50%',
       autoFocus: false,
     });
+
     
     dialogRef.componentInstance.nextQuestion.subscribe(() => this.nextQuestion());
     
+
     dialogRef.afterClosed().subscribe();
   }
 
@@ -223,6 +247,7 @@ export class TestComponent implements OnInit, OnDestroy {
     if (checkbox.checked) {
       this.candidatAnswers.push(checkbox.value);
     } else {
+
       const element: string = this.candidatAnswers.find(item => item === checkbox.value);
       
       if (element) {
@@ -244,7 +269,6 @@ export class TestComponent implements OnInit, OnDestroy {
         this.activetime = !this.activetime;
 
         if (this.activetime) {
-          console.log('PREVIEW', this.preview);
           this.openDialogTimeout(this.preview);
         }
 
@@ -267,6 +291,7 @@ export class TestComponent implements OnInit, OnDestroy {
 
     this.totalElapsedTime += this.stopwatch;
     
+
     this.activetime = false;
 
     if (this.currentIdxQuestions < this.questions.length - 1) {
@@ -277,12 +302,14 @@ export class TestComponent implements OnInit, OnDestroy {
       
       this.Countertime();
 
+
     } else if (this.currentIdxQuestions === this.questions.length - 1) {
       this.testFinishedAt = new Date().toISOString();
       
       clearInterval(this.stopwatchId);
 
       this.postTimeTest(this.totalElapsedTime);
+
     }
 
     this.question = this.questions[this.currentIdxQuestions];
@@ -303,6 +330,7 @@ export class TestComponent implements OnInit, OnDestroy {
     this.isDisabled = false;
     this.checkTimeDefault = false;
   }
+
 
   private verifyAnswer() {
     if (this.questions[this.currentIdxQuestions].type === 'one') {
@@ -334,10 +362,13 @@ export class TestComponent implements OnInit, OnDestroy {
       } else {
         this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, 0);
       }
+
     }
 
     this.postRapportCandidat();
+
     // console.log(' this.candidatAnwsers : ', this.candidatAnwsers);
+
   }
 
   public disableRep(timeQuestion: number) {
@@ -347,15 +378,21 @@ export class TestComponent implements OnInit, OnDestroy {
   public fmtMSS(d) {
     d = Number(d);
     const h = Math.floor(d / 3600);
-    const m = Math.floor(d % 3600 / 60);
-    const s = Math.floor(d % 3600 % 60);
+    const m = Math.floor((d % 3600) / 60);
+    const s = Math.floor((d % 3600) % 60);
 
-    return ('0' + h).slice(-2) + ':' + ('0' + m).slice(-2) + ':' + ('0' + s).slice(-2);
+    return (
+      ('0' + h).slice(-2) +
+      ':' +
+      ('0' + m).slice(-2) +
+      ':' +
+      ('0' + s).slice(-2)
+    );
   }
 
   public onReady() {
-    console.log('onReady mark-down');
   }
+
 
   public postTimeTest(totalElapsedTime: number) {
     this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
@@ -434,8 +471,8 @@ export class TestComponent implements OnInit, OnDestroy {
           .then((resolve) => console.log('SUCCESS POST NOTIF ', resolve))
           .catch((reject) => console.log('ERROR POST NOTIF ', reject));
         });
+
       });
-    });
   }
 
   public controleTimeTest() {
@@ -455,7 +492,9 @@ export class TestComponent implements OnInit, OnDestroy {
       
       if (this.question.time < timePauseDiff) {
         this.checkTimeDefault = true;
+
         this.nextQuestion();
+
       } else {
         this.stopwatch = timePauseDiff;
       }
@@ -463,6 +502,7 @@ export class TestComponent implements OnInit, OnDestroy {
   }
 
   public postPauseTest() {
+
     this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
       date_pause: new Date().toISOString(),
       index_question: this.currentIdxQuestions,
@@ -508,6 +548,7 @@ export class TestComponent implements OnInit, OnDestroy {
       //   sumPoints[element.technologies] = element.points;
       //   // console.log('sumPoints[element.technologies] = element.points: ', sumPoints[element.technologies]);
       // }
+
     });
     console.log(sumPointsByTechno);
 
@@ -518,9 +559,11 @@ export class TestComponent implements OnInit, OnDestroy {
       arraySumPoints.push({ technologies: key, points: value });
     }
 
+
     // console.log('arraySumPoints : ', arraySumPoints);
     // console.log('this.technoCampaign : ', this.technologies);
     for (const techno of this.technologies) {
+
       for (const technoArray of arraySumPoints) {
         if (techno.id === Number(technoArray.technologies)) {
           technoArray.technologies = techno.name;
@@ -553,10 +596,11 @@ export class TestComponent implements OnInit, OnDestroy {
     //   this.totalPoints = statistics.reduce((a, b) => ({ total_points: a.points + b.points }));
     // }
     return statistics.reduce((a, b) => ({ total_points: a.points + b.points }));
+
   }
 
   public refreshComponent() {
-    this.refresh.emit(this.dataForParent = 'fin');
+    this.refresh.emit((this.dataForParent = 'fin'));
   }
 
   // work only if Press F5 or cancel close window

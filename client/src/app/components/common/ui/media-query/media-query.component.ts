@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs/internal/Subscription';
-
 
 @Component({
   selector: 'use-media',
@@ -12,9 +12,12 @@ export class MediaQueryComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   public show: boolean = false;
 
+  constructor(private breakpointObserver: BreakpointObserver) {}
+
   ngOnInit(): void {
-    /*this.mediaService = new MediaQueryService(this.query);
-    this.subscription = this.mediaService.match$.subscribe(value => this.show = value);*/
+    this.subscription = this.breakpointObserver
+      .observe([this.query])
+      .subscribe((state: BreakpointState) => this.show = state.matches);
   }
 
   ngOnDestroy(): void {
