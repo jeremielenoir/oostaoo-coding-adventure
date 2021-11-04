@@ -201,7 +201,29 @@ button {
       }
     }
   }
+
+  .testing {
+    width: 70%;
+    display: flex;
+    
+    .fullwidth {
+      width: 100%;
+    }
+  }
 }
+
+@media only screen and (max-width: 1500px) {
+  .testing {
+    width: 80% !important;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .testing {
+    width: 90% !important;
+  }
+}
+
 
 @media only screen and (max-width : 1000px) {
   .container-section {

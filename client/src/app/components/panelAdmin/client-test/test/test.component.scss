@@ -124,76 +124,76 @@
   }
 }
 
-.block-testing {
-  background-color: #f9f9f9;
-  display: flex;
-  // flex-direction: row;
-  height: 100%;
+// .block-testing {
+//   background-color: #f9f9f9;
+//   // display: flex;
+//   // flex-direction: row;
+//   // height: 100%;
 
-  @media #{$smallDevice} {
-    flex-direction: column;
-    height: auto;
-    overflow: hidden;
-    position: static !important;
-  }
-  .testing-left {
-    @include structureBlock();
-  }
-  .testing-right {
-    @include structureBlock();
-    .button {
-      margin-top: 7px;
-      margin-left: 5px;
-      margin-right: 0px;
-      color: white;
-      height: 50px;
-      padding: 10px;
-      position: relative;
-      transition: opacity 0.2s, background 0.2s;
-      font-size: 18px;
+//   @media #{$smallDevice} {
+//     flex-direction: column;
+//     height: auto;
+//     overflow: hidden;
+//     position: static !important;
+//   }
+//   .testing-left {
+//     // @include structureBlock();
+//   }
+//   .testing-right {
+//     @include structureBlock();
+//     .button {
+//       margin-top: 7px;
+//       margin-left: 5px;
+//       margin-right: 0px;
+//       color: white;
+//       height: 50px;
+//       padding: 10px;
+//       position: relative;
+//       transition: opacity 0.2s, background 0.2s;
+//       font-size: 18px;
 
-      background-color: $color-principal-blue;
-      border: none;
-      cursor: pointer;
-      outline: 0;
-      width: 98.8%;
-      &:hover {
-        background-color: $color-principal-blue;
-      }
-    }
-  }
-}
+//       background-color: $color-principal-blue;
+//       border: none;
+//       cursor: pointer;
+//       outline: 0;
+//       width: 98.8%;
+//       &:hover {
+//         background-color: $color-principal-blue;
+//       }
+//     }
+//   }
+// }
 
-@media (max-width: 1315px) {
-  .block-testing {
-    // flex-direction: row;
-    .testing-left {
-      width: 70%;
-      margin-right: -10%;
-      .f030 {
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
-      }
-      .testing-timer {
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
-      }
-    }
+// @media (max-width: 1315px) {
+//   .block-testing {
+//     // flex-direction: row;
+//     .testing-left {
+//       width: 70%;
+//       margin-right: -10%;
+//       .f030 {
+//         padding-left: 5px !important;
+//         padding-right: 5px !important;
+//         padding-top: 10px !important;
+//         padding-bottom: 10px !important;
+//       }
+//       .testing-timer {
+//         padding-left: 5px !important;
+//         padding-right: 5px !important;
+//         padding-top: 10px !important;
+//         padding-bottom: 10px !important;
+//       }
+//     }
 
-    .testing-right {
-      margin-left: 10%;
-      width: 40%;
+//     .testing-right {
+//       margin-left: 10%;
+//       width: 40%;
 
-      .content-testing {
-        margin: 20px !important;
-      }
-    }
-  }
-}
+//       .content-testing {
+//         margin: 20px !important;
+//       }
+//     }
+//   }
+// }
 
 /*--modal css--*/
 
@@ -255,4 +255,148 @@
 .testing-timer-text {
   width: 130px;
   display: inline-block;
+}
+
+
+///////// NEWWW
+
+.block-testing {
+  margin: 20px 0 20px 0;
+  background-color: #f9f9f9;
+  display: flex;
+  
+  .testing-left {
+    flex: 1;
+    min-width: 325px;
+    padding: 5px;
+    display: flex;
+
+    > .cube-testing {
+      width: 100%;
+    }
+  }
+
+  .testing-right {
+    flex: 1;
+    min-width: 325px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 0 15px;
+
+    .cube-testing-right {
+      .f030 {
+        border-right: 0px !important;
+      }
+    }
+  }
+
+  .cube-testing {
+    border: 1px solid $color-background-blue;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+
+    .header-cube-testing {
+      display: flex;
+      border-bottom: 1px solid $color-background-blue;
+      align-items: center;
+      flex-wrap: wrap;
+      background-color: $color-pricipal-blue-light;
+      color: $color-principal-blue;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+
+      .f030 {
+        min-width: 250px;
+        display: flex;
+        padding: 20px 15px;
+        flex: 1.5;
+        border-right: 1px solid $color-principal-blue;
+        
+        .icon-testing {
+          margin-right: 15px;
+          color: $color-orange;
+          display: block;
+          font-size: 24px;
+        }
+
+        .title-testing {
+          font-size: 14px;
+          margin-bottom: 0px;
+          display: inline-block;
+        }
+
+        .testing-timer {
+          display: flex;
+          align-items: center;
+          flex: 1;
+
+          .testing-timer-icon {
+            margin-right: 10px;
+            font-size: 20px;
+          }
+
+          .testing-timer-text {
+            display: inline-block;
+            
+            strong {
+              font-size: 14px;
+              font-size: 900;
+            }
+          }
+        }
+      }
+    }
+
+    .scroll-auto-testing {
+      overflow-y: auto;
+      height: 100%;
+
+      .content-testing {
+        margin: 60px;
+        &.content-testing-seconde {
+          min-height: 410px;
+        }
+
+        .example-full-width {
+          width: 100%;
+        }
+      }
+    }
+
+    .content-testing {
+      margin: 60px;
+      display: flex;
+
+      &.content-testing-seconde {
+        min-height: 410px;
+      }
+
+      .answer-radio-group {
+        display: flex;
+        flex-direction: column;
+        border-radius: $border-radius;
+        border: 1px solid $color-background-blue;
+        overflow: auto;
+        width: 100%;
+
+        .answer-radio-button {
+          padding: 20px 20px;
+          border-bottom: 1px solid $color-background-blue;
+          
+          &:last-child {
+            border-bottom: 0px solid $color-background-blue;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .block-testing {
+    flex-direction: column;
+  }
 }

@@ -1,17 +1,6 @@
 "use strict";
 
-const nodemailer = require("nodemailer");
-
-const crypto = require("crypto");
 const { access, unlink, createReadStream } = require("fs");
-// Create reusable transporter object using SMTP transport.
-const transporter = nodemailer.createTransport({
-  service: "Gmail",
-  auth: {
-    user: "assessment@roodeo.com",
-    pass: "Oostaoo@2020",
-  },
-});
 
 /**
  * Candidat.js controller
@@ -68,42 +57,13 @@ module.exports = {
    */
 
   create: async (ctx) => {
-    // faire un get campaigns avec ctx.request.body.token? qui est l'id de la campaign?
-    const { id, campaignId, email, emailContent, emailTitle, name, namePlaceholder } = ctx.request.body;
-
-    var cryptoData = crypto
-      .createHash("md5")
-      .update(id + name)
-      .digest("hex");
-
-    let emailContentFormatted = emailContent.replace(
-      "...",
-      "?id=" + cryptoData //or iplocal replace localhost
-    ).replace(
-      namePlaceholder,
-      name
-    );
-
-    const depositObj = {
-      Nom: name,
-      email,
-      campaign: campaignId,
-      token: cryptoData,
-    };
-
     try {
-      let candidat = await strapi.services.candidat.add(depositObj);
-      const options = {
-        to: email,
-        from: {
-          name: 'Roodeo assessment',
-          address: 'assessment@roodeo.com'
-        },
-        replyTo: 'assessment@roodeo.com',
-        subject: emailTitle,
-        html: emailContentFormatted,
-      };
-      await transporter.sendMail(options);
+      const candidat = await strapi.services.candidat.add(ctx.request.body);
+
+      const values = { token: candidat.attributes.token, ...ctx.request.body };
+
+      await strapi.services.candidat.sendNotification(values);
+
       return candidat;
     } catch (e) {
       throw e;

@@ -116,8 +116,8 @@
     <h2>Didacticiel</h2>
   </div>
 
-  <div *ngSwitchCase="'testing'">
-    <app-test [candidat]="candidat" [questionCampaign]="questionCampaign" [technoCampaign]="technoCampaign"
+  <div *ngSwitchCase="'testing'" class="testing">
+    <app-test class="fullwidth" [candidat]="candidat" [questions]="questions" [technologies]="technologies"
       [durationMaxTest]="durationMaxTest" (refresh)="refreshComponent($event)"></app-test>
   </div>
 
