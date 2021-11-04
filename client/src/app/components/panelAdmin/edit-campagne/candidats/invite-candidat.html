@@ -1,6 +1,6 @@
 <div class="modal-candidat">
   <div class="close-invite-dialog">
-    <span (click)="close()"> <i class="fa fa-times" aria-hidden="true"></i></span>
+    <span (click)="close()"> <mat-icon>close</mat-icon></span>
   </div>
   <app-candidats-form *ngFor="let campaign of campaigns" [globalId]="campaign.id"
     [tests_available]="data.tests_available">

@@ -7,14 +7,14 @@
 
 <div class="billing rdo-panel">
   <div class="rdo-panel-header">
-    <h2><i class="fa fa-tachometer icon"></i> Tableau de bord facturation</h2>
+    <h2><mat-icon>history_toggle_off</mat-icon> Tableau de bord facturation</h2>
   </div>
   <div class="rdo-section-billing">
     <div class="rdo-content-left-group rdo-content-group">
       <div class="title-icon-detail-header">
         <div class="scrolling-text">
           <h3>
-            <i class="fa fa-shopping-cart icon"></i> Détails de votre abonnement
+            <mat-icon>shopping_cart</mat-icon> Détails de votre abonnement
           </h3>
         </div>
         <div>
@@ -138,7 +138,7 @@
           <div class="title-icon-detail-header">
             <div class="scrolling-text">
               <h3>
-                <i class="fa fa-credit-card icon"></i> Votre moyen de paiement
+                <mat-icon>credit_card</mat-icon> Votre moyen de paiement
               </h3>
             </div>
             <use-media query="(min-width: 651px)">
@@ -160,7 +160,7 @@
           <div class="title-icon-detail-header">
             <div class="scrolling-text">
               <h3>
-                <i class="fa fa-map-marker icon"></i> Votre adresse de facturation
+                <mat-icon>room</mat-icon> Votre adresse de facturation
               </h3>
             </div>
             <use-media query="(min-width: 651px)">
@@ -187,7 +187,7 @@
 
 <div class="billing-history rdo-panel">
   <div class="rdo-panel-header">
-    <h2><i class="fa fa-history icon"></i> Historique des factures</h2>
+    <h2><mat-icon>history</mat-icon> Historique des factures</h2>
     <mat-form-field appearance="outline">
       <input type="text" matInput placeholder="Rechercher..." value="{{this.searchQuery}}" />
     </mat-form-field>
@@ -225,10 +225,7 @@
           <td class="rdp-column-align-left">{{ invoice.number }}</td>
           <td>
             <div>
-              <a href="{{ invoice.invoice_pdf }}" target="_blank"><i style="cursor: pointer"
-                  class="fa fa-external-link icon icon-button"></i></a>
-
-              <!-- <i (click)="downloadPdf()" class="fa fa-download icon icon-button"></i> -->
+              <a href="{{ invoice.invoice_pdf }}" target="_blank"><mat-icon>link</mat-icon></a>
             </div>
           </td>
         </tr>
