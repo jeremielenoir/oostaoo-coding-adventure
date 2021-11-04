@@ -221,8 +221,8 @@ export class CandidatsComponent implements OnInit, OnDestroy {
   }
 
   public deleteCandidats(): void {
-    this.getCandidatsSelected().forEach((idDelete) => {
-      const urlApi = API_URI_CANDIDATS + '/' + idDelete;
+    this.getCandidatsSelected().forEach((candidat) => {
+      const urlApi = API_URI_CANDIDATS + '/' + candidat.candidat_id;
       this.apiClientService.delete(urlApi).subscribe((response) => {
         this.setDeletingCandidats(false);
         this.selectAllCandidats(false);
