@@ -1,23 +1,20 @@
-<div class="block-testing" *ngIf="questions != undefined">
+<div class="block-testing" *ngIf="questions">
   <div class="testing-left">
     <div class="cube-testing">
       <header class="header-cube-testing">
         <div class="f030">
           <i class="far fa-question-circle icon-testing"></i>
 
-          <span class="title-testing"
-            >Question {{ index + 1 }} / {{ questions.length }} - {{ language }}
-          </span>
+          <span class="title-testing">Question {{ currentIdxQuestions + 1 }} / {{ questions.length }} - {{ language
+            }}</span>
         </div>
 
         <div class="testing-timer">
           <span class="testing-timer-icon"><i class="far fa-clock"></i></span>
-          <span class="testing-timer-text" i18n> Temps écoulé : </span>
-          <span
-            class="time-elapsed"
-            [class.active-time-danger]="timedefault >= timeDanger"
-          >
-            {{ fmtMSS(timedefault) }}/{{ fmtMSS(question.time) }}
+
+          <span class="testing-timer-text" i18n>Temps écoulé :</span>
+          <span class="time-elapsed" [class.active-time-danger]="stopwatch >= fewSecondsLeft">
+            {{ fmtMSS(stopwatch) }}/{{ fmtMSS(question.time) }}
           </span>
         </div>
       </header>
@@ -37,6 +34,7 @@
       </div>
     </div>
   </div>
+
   <div class="testing-right">
     <div class="cube-testing cube-testing-right">
       <header class="header-cube-testing">
@@ -67,42 +65,22 @@
       <div *ngIf="question.type === 'free'" class="scroll-auto-testing">
         <div class="content-testing content-testing-seconde">
           <mat-form-field class="example-full-width" appearance="outline">
-            <textarea
-              cdkTextareaAutosize
-              cdkAutosizeMinRows="10"
-              cdkAutosizeMaxRows="10"
-              [disabled]="isDisabled"
-              appBlockCopyPaste
-              [appActive]="candidat.campaign.copy_paste && !prev"
-              matInput
-              placeholder="Saisir votre réponse"
-              [(ngModel)]="responseUser"
-            ></textarea>
+
+            <textarea cdkTextareaAutosize cdkAutosizeMinRows="10" cdkAutosizeMaxRows="10" [disabled]="isDisabled"
+              appBlockCopyPaste [appActive]="candidat.campaign.copy_paste && !prev" matInput
+              placeholder="Saisir votre réponse" [(ngModel)]="candidatAnswer"></textarea>
           </mat-form-field>
         </div>
       </div>
 
       <!--radio-->
 
-      <div
-        *ngIf="question.type === 'one'"
-        class="content-testing content-testing-seconde"
-      >
-        <mat-radio-group
-          [disabled]="isDisabled"
-          aria-labelledby="answer-radio-group-label"
-          class="answer-radio-group"
-          [(ngModel)]="responseUser"
-        >
-          <mat-radio-button
-            class="answer-wrap"
-            class="answer-radio-button"
-            *ngFor="let response of responses"
-            [value]="response"
-            appBlockCopyPaste
-            [appActive]="candidat.campaign.copy_paste && !prev"
-          >
-            {{ response }}
+      <div *ngIf="question.type === 'one'" class="content-testing content-testing-seconde">
+        <mat-radio-group [disabled]="isDisabled" aria-labelledby="answer-radio-group-label" class="answer-radio-group"
+          [(ngModel)]="responseUser">
+          <mat-radio-button class="answer-wrap" class="answer-radio-button" *ngFor="let answer of choiceOfAnswers"
+            [value]="answer" appBlockCopyPaste [appActive]="candidat.campaign.copy_paste && !prev">
+            {{ answer }}
           </mat-radio-button>
         </mat-radio-group>
       </div>
@@ -114,16 +92,11 @@
         class="content-testing content-testing-seconde"
       >
         <div class="answer-checkbox-group">
-          <div *ngFor="let response of responses" class="answer-checkbox">
-            <mat-checkbox
-              class="answer-wrap"
-              [disabled]="isDisabled"
-              (change)="checkCheckBoxvalue($event)"
-              [value]="response"
-              appBlockCopyPaste
-              [appActive]="candidat.campaign.copy_paste && !prev"
-            >
-              {{ response }}
+
+          <div *ngFor="let answer of choiceOfAnswers" class="answer-checkbox">
+            <mat-checkbox class="answer-wrap" [disabled]="isDisabled" (change)="checkboxAnswers($event)"
+              [value]="answer" appBlockCopyPaste [appActive]="candidat.campaign.copy_paste && !prev">
+              {{ answer }}
             </mat-checkbox>
           </div>
         </div>
@@ -141,45 +114,26 @@
       </div>
     </div>
 
-    <app-base-button
-      *ngIf="preview && questions.length == 1"
-      [fullWidth]="true"
-      [hoverClass]="''"
-      (clickEvent)="questNext($event)"
-      iconName="play_arrow"
-      >Valider la réponse</app-base-button
-    >
 
-    <app-base-button
-      *ngIf="
-        preview && questions.length != 1 && index === questions.length - 1
-      "
-      [fullWidth]="true"
-      [hoverClass]="''"
-      (clickEvent)="questNext($event)"
-      iconName="play_arrow"
-      >Voir le résultat du test</app-base-button
-    >
+    <app-base-button *ngIf="preview && questions.length == 1" [fullWidth]="true" [hoverClass]="''"
+      (click)="nextQuestion($event)" iconName="play_arrow">
+      Valider la réponse
+    </app-base-button>
 
-    <app-base-button
-      *ngIf="preview && questions.length != 1 && index !== questions.length - 1"
-      [fullWidth]="true"
-      [hoverClass]="''"
-      (clickEvent)="questNext($event)"
-      iconName="play_arrow"
-      >Question suivante</app-base-button
-    >
+    <app-base-button *ngIf="preview && questions.length != 1 && currentIdxQuestions === questions.length - 1"
+      [fullWidth]="true" [hoverClass]="''" (click)="nextQuestion($event)" iconName="play_arrow">
+      Voir le résultat du test
+    </app-base-button>
 
-    <app-base-button
-      *ngIf="!preview"
-      [fullWidth]="true"
-      iconName="play_arrow"
-      (clickEvent)="questNext()"
-      >{{
-        index === questions.length - 1
-          ? 'Soumettre le test'
-          : 'Question suivante'
-      }}</app-base-button
-    >
+    <app-base-button *ngIf="preview && questions.length != 1 && currentIdxQuestions !== questions.length - 1"
+      [fullWidth]="true" [hoverClass]="''" (click)="nextQuestion($event)" iconName="play_arrow">
+      Question suivante
+    </app-base-button>
+
+    <app-base-button *ngIf="!preview" [fullWidth]="true" [hoverClass]="''" iconName="play_arrow"
+      (click)="nextQuestion()">
+      {{ currentIdxQuestions === questions.length - 1 ? "Soumettre le test" : "Question suivante" }}
+    </app-base-button>
+
   </div>
 </div>

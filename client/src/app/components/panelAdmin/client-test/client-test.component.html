@@ -1,6 +1,6 @@
-<div [ngSwitch]="StatueTestingQuestion" style="height: 100%;">
-  <div *ngSwitchCase="'eval'" style="height: 100%;">
-    <div id="shadow-cog" [class.shadow-cog-active]="ActiveTest">
+<div [ngSwitch]="testStatus$ | async" class="testing-question-wrapper">
+  <div *ngSwitchCase="'eval'" class="eval-testing">
+    <div id="shadow-cog" [class.shadow-cog-active]="popupTestStatus">
       <div class="modal">
         <div class="modal-header">
           <h3 class="modal-title" i18n>
@@ -29,8 +29,9 @@
           <p class=" claire-text" i18n>Bonne chance !</p>
 
           <label class="block-condition claire-text">
-            <span class="checkbox-condition" #btnchecked><input type="checkbox" (click)="hundelechecked($event)" /></span>
-
+            <span class="checkbox-condition">
+              <input type="checkbox" [(ngModel)]="isAgreed" />
+            </span>
             <p class="text-condition" i18n>
               J'ai lu et j'accepte les
               <a href="" class="text-link" i18n>conditions d'utilisation </a> et la
@@ -42,10 +43,10 @@
         </div>
 
         <div class="modal-footer">
-          <app-base-button iconName="cancel" color="warn" iconPosition="left" (clickEvent)="noHandleActiveTest()" i18n>
+          <app-base-button iconName="cancel" color="warn" iconPosition="left" (click)="closePopup()" i18n>
             Annuler
           </app-base-button>
-          <app-base-button iconName="keyboard_arrow_right" (clickEvent)="handleStatusTestingQuestion()" i18n>
+          <app-base-button iconName="keyboard_arrow_right" (click)="runTest()" i18n [disabled]="!isAgreed">
             Commencer
           </app-base-button>
         </div>
@@ -53,72 +54,74 @@
     </div>
 
     <section class="container-section">
-      <div class="test-container">
-        <div class="invitation">
-          <div class="test-invit">
-            <div class="image"></div>
-            <h3 i18n>Bonjour, vous avez été invité(e) à passer un test.</h3>
-          </div>
-
-          <div class="text">
-            <p i18n>
-              Vous devrez effectuer cette évaluation sans l’aide d’une tierce
-              personne. Cependant, vous pouvez (et nous le conseillons vivement)
-              vous servir de toutes les ressources à votre disposition
-              (Internet, livres, etc.). Vous pouvez également utiliser votre
-              environnement de développement préféré pour préparer vos réponses.
-            </p>
-            <p i18n>
-              Un tutoriel et une aide sont à votre disposition pour vous
-              permettre de vous familiariser avec l'application dans les
-              meilleures conditions.
-            </p>
-          </div>
+      <div class="invitation">
+        <div class="test-invit">
+          <div class="image"></div>
+          <h3 i18n>Bonjour, vous avez été invité(e) à passer un test.</h3>
         </div>
 
-        <div class="tutorial-test">
-          <div class="tutorial">
-            <div class="title">
-              <div class="img"></div>
-              <h3 i18n>Tutoriel</h3>
-            </div>
-            <p class="tuto-para" i18n>
-              Voici un tutoriel qui vous permet de découvrir votre environnement
-              d’évaluation en vous familiarisant avec les fonctionnalités de
-              l’application en toute tranquillité. Le résultat de ce tutoriel ne
-              fait pas partie de l’évaluation. Vous avez la possibilité de
-              recommencer ce tutoriel autant de fois que vous le souhaitez.
-            </p>
-            <app-base-button iconName="keyboard_arrow_right" i18n>
-              Démarrer le tutoriel
-            </app-base-button>
+        <div class="text">
+          <p i18n>
+            Vous devrez effectuer cette évaluation sans l’aide d’une tierce
+            personne. Cependant, vous pouvez (et nous le conseillons vivement)
+            vous servir de toutes les ressources à votre disposition
+            (Internet, livres, etc.). Vous pouvez également utiliser votre
+            environnement de développement préféré pour préparer vos réponses.
+          </p>
+          <p i18n>
+            Un tutoriel et une aide sont à votre disposition pour vous
+            permettre de vous familiariser avec l'application dans les
+            meilleures conditions.
+          </p>
+        </div>
+      </div>
+      <div class="tutorial-test">
+        <div class="tutorial">
+          <div class="title">
+            <div class="img"></div>
+            <h3 i18n>Tutoriel</h3>
           </div>
-          <div class="test">
-            <div class="title">
-              <div class="img"></div>
-              <h3 i18n>Test</h3>
-            </div>
-            <p class="tuto-para">
-              Ce test est composé de {{ nbQuestion }} questions. Chaque question
-              est chronométrée. La durée totale est estimée à
-              {{ durationTotalTest }} minutes mais le test peut durer jusqu’à
-              {{ durationMaxTest }} minutes. Merci de prévoir
-              {{ durationMaxTest }} minutes consécutives pour faire ce test.
-            </p>
-            <app-base-button iconName="keyboard_arrow_right" (clickEvent)="hundleActiveTest()" i18n>
-              Démarrer le test
-            </app-base-button>
+          <p class="tuto-para" i18n>
+            Voici un tutoriel qui vous permet de découvrir votre environnement
+            d’évaluation en vous familiarisant avec les fonctionnalités de
+            l’application en toute tranquillité. Le résultat de ce tutoriel ne
+            fait pas partie de l’évaluation. Vous avez la possibilité de
+            recommencer ce tutoriel autant de fois que vous le souhaitez.
+          </p>
+          <app-base-button iconName="keyboard_arrow_right" (click)="runTutorial()" i18n>
+            Démarrer le tutoriel
+          </app-base-button>
+        </div>
+        <div class="test">
+          <div class="title">
+            <div class="img"></div>
+            <h3 i18n>Test</h3>
           </div>
+          <p class="tuto-para">
+            Ce test est composé de {{ nbQuestion }} questions. Chaque question
+            est chronométrée. La durée totale est estimée à
+            {{ durationTotalTest }} minutes mais le test peut durer jusqu’à
+            {{ durationMaxTest }} minutes. Merci de prévoir
+            {{ durationMaxTest }} minutes consécutives pour faire ce test.
+          </p>
+          <app-base-button iconName="keyboard_arrow_right" (click)="openPopup()" i18n>
+            Démarrer le test
+          </app-base-button>
         </div>
       </div>
     </section>
   </div>
 
-  <div *ngSwitchCase="'testing'">
-    <app-test [candidat]="candidat" [questionCampaign]="questionCampaign" [technoCampaign]="technoCampaign"
+  <div *ngSwitchCase="'tutorial'" class="tutorial">
+    <h2>Didacticiel</h2>
+  </div>
+
+  <div *ngSwitchCase="'testing'" class="testing">
+    <app-test class="fullwidth" [candidat]="candidat" [questions]="questions" [technologies]="technologies"
       [durationMaxTest]="durationMaxTest" (refresh)="refreshComponent($event)"></app-test>
   </div>
-  <div *ngSwitchCase="'fin'" style="height: 100%;">
+
+  <div *ngSwitchDefault style="height: 100%;">
     <app-fin-test></app-fin-test>
   </div>
 </div>
