@@ -24,7 +24,14 @@
         "policies": []
       }
     },
-
+    {
+      "method": "GET",
+      "path": "/api/candidats/token/:token",
+      "handler": "Candidat.findToken",
+      "config": {
+        "policies": []
+      }
+    },
     {
       "method": "GET",
       "path": "/api/candidats-report-pdf/:id",
