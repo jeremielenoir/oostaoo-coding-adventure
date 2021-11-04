@@ -413,9 +413,7 @@ export class TestComponent implements OnInit, OnDestroy {
           
           this.allPointsCandidat = this.sumPointsByTechnologyId(this.SumPointsCandidat);
           
-          // this.allPointsCandidat = this.sumPointsbyTechno;
-          
-          this.calculTotalPoints(this.allPointsCandidat);
+          this.totalPoints = this.calculTotalPoints(this.allPointsCandidat);
           
           if (this.totalPoints) {
             this.totalPointsCandidat = this.totalPoints;
