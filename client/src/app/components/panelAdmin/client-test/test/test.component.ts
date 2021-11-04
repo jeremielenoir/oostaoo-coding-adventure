@@ -171,47 +171,51 @@ export class TestComponent implements OnInit, OnDestroy {
       this.controleTimeTest();
     }
 
-
     this.choiceOfAnswers = this.question[this.dataInfoLanguageContent].split(this.separator);
 
     for (const techno of this.technologies) {
-      if (this.question.technologies.id === techno.id) {
+      if (
+        this.question.technologies ||
+        this.question.technologies.id === techno.id
+      ) {
         this.language = techno.name.toLowerCase();
-        
-        if (this.language === 'java' || this.language === 'java/j2ee' || this.language === 'spring' || this.language === 'android') {
 
+        if (
+          this.language === 'java' ||
+          this.language === 'java/j2ee' ||
+          this.language === 'spring' ||
+          this.language === 'android'
+        ) {
           this.filetype = `application/java`;
           this.filename = `Main.java`;
           this.options = { theme: 'vs-white', language: 'java' };
-
         } else if (this.language === 'kotlin') {
           this.filetype = `application/kotlin`;
           this.filename = `Main.kt`;
           this.options = { theme: 'vs-white', language: 'kotlin' };
-
         } else if (this.language === 'c') {
           this.filetype = `application/c`;
           this.filename = `Main.c`;
           this.options = { theme: 'vs-white', language: 'c' };
-
         } else if (this.language === 'c++') {
           this.filetype = `application/cpp`;
           this.filename = `Main.cpp`;
           this.options = { theme: 'vs-white', language: 'cpp' };
-
         } else if (this.language === 'python') {
           this.filetype = `application/python`;
           this.filename = `Main.py`;
           this.options = { theme: 'vs-white', language: 'python' };
-
-
         } else if (this.language === 'go') {
           this.filetype = `application/go`;
           this.filename = `Main.go`;
           this.options = { theme: 'vs-white', language: 'go' };
-
-        } else if (this.language === 'javascript' || this.language === 'angular 2+' || this.language === 'angularjs' || this.language === 'react' || this.language === 'vuejs') {
-
+        } else if (
+          this.language === 'javascript' ||
+          this.language === 'angular 2+' ||
+          this.language === 'angularjs' ||
+          this.language === 'react' ||
+          this.language === 'vuejs'
+        ) {
           this.filetype = `application/javascript`;
           this.filename = `Main.js`;
           this.options = { theme: 'vs-white', language: 'javascript' };
