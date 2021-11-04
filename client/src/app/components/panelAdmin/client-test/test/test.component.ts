@@ -395,12 +395,14 @@ export class TestComponent implements OnInit, OnDestroy {
 
 
   public postTimeTest(totalElapsedTime: number) {
+    
     this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
       duree: totalElapsedTime,
       test_terminer: this.testFinishedAt,
     })
     .toPromise()
     .then((res) => {
+
       this.apiClientService.get(API_URI_CAMPAIGNS + '/' + res.campaign.id).subscribe((res1) => {
         const nbCandidats: number = res1.NbCandidatFinish ? res1.NbCandidatFinish + 1 : 1
 
@@ -473,7 +475,9 @@ export class TestComponent implements OnInit, OnDestroy {
         });
 
       });
-  }
+  });
+}
+
 
   public controleTimeTest() {
     let dateNow;
