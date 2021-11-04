@@ -219,9 +219,7 @@
       <!--End Table-->
     </div>
     <div *ngSwitchDefault id="editQuestion">
-      <div class="loading">
-        <span class="fa fa-spinner fa-pulse"></span>
-      </div>
+      <mat-spinner [strokeWidth]="20"></mat-spinner>
     </div>
   </div>
 </div>
@@ -235,7 +233,7 @@
       <div class="header-detail">
         <h2 class="sidenav_campaign_name">{{campaign.Name}}</h2>
         <span class="close-header-detail" (click)="sidnavClose(sidenav)">
-          <i class="fa fa-close"></i>
+          <mat-icon>close</mat-icon>
         </span>
       </div>
       <h4 class="info-candidat name-rapport-detailler">
