@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { API_URI_CAMPAIGNS, API_URI_CANDIDATS, ApiClientService } from "../../../api-client/api-client.service";
 
 @Component({
@@ -9,86 +10,83 @@ import { API_URI_CAMPAIGNS, API_URI_CANDIDATS, ApiClientService } from "../../..
 })
 
 export class ClientTestComponent implements OnInit {
-  public idParam: string;
-  public checkedBoolean: boolean;
-  public ActiveTest: boolean;
-  public StatueTestingQuestion = "eval";
-  public candidat: string;
-  public dateOpenTest: any;
+  private tokenId: string;
+  public popupTestStatus: boolean = false;
+  public testStatus$: BehaviorSubject<string> = new BehaviorSubject("eval"); // "eval", "tutorial", "testing"
   public nbQuestion: number;
   public durationTotalTest: number;
+  public candidat: Record<string, any>;
+  public questions: Record<string, any>[];
+  public technologies: Record<string, any>[];
   public durationMaxTest: number;
-
-  @ViewChild("btnchecked") public btnchecked: ElementRef;
-  public idCampaign: any;
-  public questionCampaign = [];
-  public technoCampaign = [];
+  public isAgreed: boolean = false;
 
   constructor(private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router) {
-    this.route.queryParams.subscribe((params) => {
-      this.idParam = params.id;
-    });
+    this.route.queryParams.subscribe((params) => this.tokenId = params.id);
   }
 
-  public ngOnInit() {
-    this.dateOpenTest = new Date().toISOString();
-    console.log("this.idParam : ", this.idParam);
+  ngOnInit() {
     this.getCandidats();
+    console.log(this.candidat);
   }
 
-  public hundelechecked(event) {
-    if (event.target.checked === true) {
-      this.btnchecked.nativeElement.disabled = false;
-    } else {
-      this.btnchecked.nativeElement.disabled = true;
-    }
+
+  public openPopup() {
+    this.popupTestStatus = true;
   }
 
-  public hundleActiveTest() {
-    this.ActiveTest = true;
+  public closePopup() {
+    this.popupTestStatus = false;
+
   }
 
-  public noHandleActiveTest() {
-    this.ActiveTest = false;
+  public runTest() {
+    this.testStatus$.next("testing");
   }
 
-  public handleStatusTestingQuestion() {
-    this.StatueTestingQuestion = "testing";
+  public runTutorial() {
+    this.testStatus$.next("tutorial");
   }
 
-  public getCandidats() {
-    this.apiClientService.get(`${API_URI_CANDIDATS}?token=${this.idParam}`).toPromise().then((res) => {
-      for (const candidat of res) {
-        this.candidat = candidat;
+  private getCandidats() {
+    this.apiClientService.get(`${API_URI_CANDIDATS}?token=${this.tokenId}`)
+      .toPromise()
+      .then((candidat: Record<string, any>) => {
+        // TODO: fixed but need to be tested
+        const datetimeTestOpened: string = new Date().toISOString();
+        
+
         if (candidat.test_terminer !== "0000-00-00 00:00:00") {
-          this.StatueTestingQuestion = "fin";
+          this.testStatus$.next("");
+
           return this.router.navigate(["/home"]);
         }
-        this.idCampaign = candidat.campaign.id;
-        this.postOpenTimeTest(this.dateOpenTest, candidat.id);
-        this.apiClientService.get(API_URI_CAMPAIGNS + "/" + this.idCampaign).toPromise().then((res1) => {
-          this.nbQuestion = res1.questions.length;
-          let secondTime = 0;
-          for (const question of res1.questions) {
-            secondTime = secondTime + question.time;
-          }
-          this.durationTotalTest = Math.floor(secondTime / 60);
-          this.durationMaxTest = this.durationTotalTest + 10;
-          this.questionCampaign = [...res1.questions];
-          this.technoCampaign = [...res1.technologies];
-        });
-      }
+
+        this.postOpenTimeTest(datetimeTestOpened, candidat.id);
+        
+        this.apiClientService.get(API_URI_CAMPAIGNS + "/" + candidat.campaign.id)
+          .toPromise()
+          .then((campaign: Record<string, any>) => {
+            this.nbQuestion = campaign.questions.length;
+            
+            const secondTime: number = campaign.questions.reduce((acc, curr) =>  acc + curr.time, 0);
+            
+            this.durationTotalTest = Math.floor(secondTime / 60);
+            this.durationMaxTest = this.durationTotalTest + 10;
+
+            this.questions = campaign.questions;
+            this.technologies = campaign.technologies;
+          });
+
+          this.candidat = candidat;
     });
   }
 
-  public postOpenTimeTest(dateOpen, candidat): Promise<any> {
-    return this.apiClientService.put(API_URI_CANDIDATS + "/" + candidat, {
-      test_ouvert: dateOpen,
-    }).toPromise().then((res) => {
-      console.log("candidat", res);
-    });
+  private postOpenTimeTest(dateOpen: string, candidatId: number): Promise<any> {
+    return this.apiClientService.put(API_URI_CANDIDATS + "/" + candidatId, { test_ouvert: dateOpen }).toPromise();
   }
+
   public refreshComponent(event) {
-    this.StatueTestingQuestion = event;
+    this.testStatus$.next(event);
   }
 }

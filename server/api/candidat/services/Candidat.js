@@ -12,9 +12,20 @@ const _ = require("lodash");
 
 // Strapi utilities.
 const utils = require("strapi-hook-bookshelf/lib/utils/");
+const crypto = require("crypto");
 const pdf = require("html-pdf");
 const ejs = require("ejs");
 const path = require("path");
+const nodemailer = require("nodemailer");
+// Create reusable transporter object using SMTP transport.
+const transporter = nodemailer.createTransport({
+  service: "Gmail",
+  auth: {
+    user: "assessment@roodeo.com",
+    pass: "Oostaoo@2020",
+  },
+});
+
 module.exports = {
   /**
    * Promise to fetch all candidats.
@@ -110,7 +121,13 @@ module.exports = {
    * @return {Promise}
    */
 
-  add: async (values) => {
+  add: async (params) => {
+    const { campaignId, email, name } = params;
+
+    const token = crypto.createHash('md5').update(campaignId + name + email).digest('hex');
+
+    const values = { Nom: name, email, campaign: campaignId, token: token };
+
     // Extract values related to relational data.
     const relations = _.pick(
       values,
@@ -126,6 +143,28 @@ module.exports = {
 
     // Create relational data and return the entry.
     return Candidat.updateRelations({ id: entry.id, values: relations });
+  },
+
+  /**
+  * Promise to send notification to a candidat.
+  *
+  * @return {Promise}
+  */
+
+  sendNotification: async (params) => {
+    const { token, email, emailTitle, emailContent } = params;
+
+    const emailContentFormatted = emailContent.replace('/...', `?id=${token}`).replace('/...', `?id=${token}`);
+
+    const options = {
+      to: email,
+      from: { name: 'Roodeo assessment', address: 'assessment@roodeo.com' },
+      replyTo: 'assessment@roodeo.com',
+      subject: emailTitle,
+      html: emailContentFormatted,
+    };
+
+    await transporter.sendMail(options);
   },
 
   /**

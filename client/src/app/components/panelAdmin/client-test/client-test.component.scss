@@ -3,40 +3,6 @@ $font-family-client-test: Open Sans, Lato, sans-serif;
 $Bg-client-test: #f9f9f9;
 $text-color-client-test: #333;
 
-// .tutorial {
-// flex: 1;
-// height: 500px;
-// display: flex;
-// flex-direction: column;
-// background-color: white;
-// border: $border-table;
-// border-radius: $border-radius;
-// justify-content: space-between;
-//   @media #{$deviceMaxDesktop} {
-//     margin: 20px 0 20px 0;
-//     width: 90% !important;
-//     height: auto !important;
-//   }
-// }
-
-// .test {
-//   background-color: white;
-//   padding: 40px;
-//   width: 100%;
-//   border: $border-table;
-//   border-radius: $border-radius;
-//   padding-top: 10px;
-//   @media #{$deviceMaxDesktop} {
-//     height: auto !important;
-//     margin-bottom: 20px;
-//   }
-// @include structureTitle();
-// }
-
-.test {
-  margin-top: 46px !important;
-}
-
 @mixin structureTitle {
   .title {
     display: flex;
@@ -85,110 +51,6 @@ button {
   margin-bottom: 18px;
 }
 
-.container-section {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-color: $color-background-blue;
-  font-family: $font-family-client-test;
-  font-weight: 300;
-  color: $text-color-client-test;
-  .test-container {
-    flex-direction: row;
-    width: 85%;
-    height: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-    display: flex;
-    margin-top: 20px;
-
-    @media #{$deviceMaxDesktop} {
-      flex-direction: column;
-      justify-content: space-around;
-      height: 100%;
-    }
-    .invitation {
-      justify-content: normal !important;
-      margin-right: 9px;
-      padding: 40px;
-      background: white;
-      border: $border-table;
-      border-radius: $border-radius;
-      padding-top: 10px;
-      // @include structureBlockPrincipal();
-      .test-invit {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        color: $color-principal-blue;
-        h3 {
-          margin-left: 20px;
-          margin-top: 20px;
-          padding-top: 6px;
-          padding-bottom: 6px;
-          padding-bottom: 10px;
-          margin-bottom: 0px;
-          font-size: 24px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-top: 1px dashed #e3e3e3;
-          border-bottom: 1px dashed #e3e3e3;
-        }
-        .image {
-          margin: 0px auto;
-          width: 205px;
-          height: 58px;
-          background-image: url($logoPath);
-          background-size: cover;
-          @media #{$deviceMaxDesktop} {
-            width: 130px !important;
-            height: 85px !important;
-            margin-right: 10px !important;
-          }
-        }
-      }
-      .text {
-        padding: 30px 0 80px 0;
-        p {
-          color: $color-principal-blue !important;
-        }
-      }
-    }
-
-    .tutorial-test {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      // @include structureBlockPrincipal();
-      .tutorial {
-        background-color: white;
-        padding: 40px;
-        width: 100%;
-        border: $border-table;
-        border-radius: $border-radius;
-        padding-top: 10px;
-        // @include structureSousBlockTutoTest();
-        @include btn-color($yellow: false);
-      }
-      .test {
-        background-color: white;
-        padding: 40px;
-        width: 100%;
-        border: $border-table;
-        border-radius: $border-radius;
-        padding-top: 10px;
-        @include btn-color($yellow: true);
-        @media #{$deviceMaxDesktop} {
-          height: auto !important;
-          margin-bottom: 20px;
-        }
-        // @include structureSousBlockTutoTest();
-      }
-    }
-  }
-}
 
 .modal {
   border-radius: $border-radius;
@@ -260,5 +122,130 @@ button {
         background-color: $color-principal-blue;
       }
     }
+  }
+}
+
+/////////////// NEW
+
+.testing-question-wrapper {
+  background-color: $color-background-blue;
+  font-family: $font-family-client-test;
+  font-weight: 300;
+  color: $text-color-client-test;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  .eval-testing {
+    margin: 20px 5% 20px 5%;
+    display: flex;
+    flex-direction: column;
+
+    .container-section {
+      flex: 1;
+      display: flex;
+      gap: 0 20px;
+
+      .invitation {
+        justify-content: normal !important;
+        padding: 40px;
+        background: white;
+        border: $border-table;
+        border-radius: $border-radius;
+
+        .test-invit {
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          color: $color-principal-blue;
+
+          h3 {
+            margin: 20px 20px 0 0;
+            padding: 6px 0 10px 0;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px dashed #e3e3e3;
+            border-bottom: 1px dashed #e3e3e3;
+          }
+
+          .image {
+            margin: 0 auto;
+            width: 205px;
+            height: 58px;
+            background-image: url($logoPath);
+            background-size: cover;
+          }
+        }
+
+        .text {
+          padding: 30px 0 80px 0;
+          p {
+            color: $color-principal-blue !important;
+          }
+        }
+      }
+
+      .tutorial-test {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        .tutorial, .test {
+          background-color: white;
+          padding: 40px;
+          border: $border-table;
+          border-radius: $border-radius;
+        }
+      }
+    }
+  }
+
+  .testing {
+    width: 70%;
+    display: flex;
+    
+    .fullwidth {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1500px) {
+  .testing {
+    width: 80% !important;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .testing {
+    width: 90% !important;
+  }
+}
+
+
+@media only screen and (max-width : 1000px) {
+  .container-section {
+    flex-direction: column;
+    gap: 20px 0 !important;
+
+    .tutorial-test {
+      gap: 10px 0;
+    }
+  }
+}
+
+@media only screen and (max-width : 800px) {
+  .testing-question-wrapper {
+    height: inherit;
+  }
+}
+
+@media only screen and (max-width : 500px) {
+  .invitation,
+  .tutorial,
+  .test {
+    padding: 40px 20px 40px 20px !important;
   }
 }
