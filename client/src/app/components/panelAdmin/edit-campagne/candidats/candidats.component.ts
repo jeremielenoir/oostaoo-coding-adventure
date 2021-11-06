@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { MatDialog, MatTableDataSource, MatSort } from '@angular/material';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { DatePipe } from '@angular/common';
 import { DecryptTokenService } from '../../../home/register/register.service';
 import {
   ApiClientService,
@@ -48,11 +47,10 @@ import * as moment from 'moment';
 })
 export class CandidatsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  public decryptTokenService = new DecryptTokenService();
+  public decryptTokenService = new DecryptTokenService(); //// A INJECTER DANS LE CONSTRUCTEUR ?
   private globalId: number;
   public tests_available: number = 0;
   private technologies: Record<string, any>[] = [];
-  // public campaigns: Record<string, any>;
   public campaign: Record<string, any>;
   public candidats: Record<string, any>[];
   public currentCandidat = { Candidats: '' };
@@ -61,7 +59,6 @@ export class CandidatsComponent implements OnInit, OnDestroy {
   public anonymizing: boolean;
   public deletingCandidats: boolean;
   public allCandidatsSelected: boolean = false;
-  // private datePipe = new DatePipe('fr');
   public candidatsAvailable: boolean = null;
   public isLoading: boolean = true;
   private choiceList: boolean;
@@ -287,11 +284,6 @@ export class CandidatsComponent implements OnInit, OnDestroy {
         },
       )
       .then((campaign: Record<string, any>) => {
-        console.log('PROMISE', campaign);
-
-        this.displayedColumns = this.getDisplayedColumns();
-
-
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
         let getInfoCandidats: Record<string, any>[] = [];
         for (let i = 0; i < campaign.candidats.length; i++) {
@@ -344,7 +336,6 @@ export class CandidatsComponent implements OnInit, OnDestroy {
         this.infosCandidats = new MatTableDataSource(getInfoCandidats);
         this.infosCandidats.sort = this.sort;
         
-        // this.infosCandidatsPdf = getInfoCandidats;
         this.infosCandidatsPdf = getInfoCandidats;
         
         this.isLoading = false;
@@ -505,17 +496,5 @@ export class CandidatsComponent implements OnInit, OnDestroy {
 
   private getTechnoNames(): string[] {
     return this.technologies.map(techno => techno.name);
-  }
-
-
-  private getDisplayedColumns(): string[] {
-    let result: string[];
-
-    /*this.mediaService = new MediaQueryService(this.compactTableWidth);
-    this.mediaService.match$.subscribe(value => {
-      result = value ? this.compactMatTableColumns : this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
-    }).unsubscribe();*/
-    result = this.defaultMatTableColumns.concat(this.getTechnoNames(), ['Durée']);
-    return result;
   }
 }
