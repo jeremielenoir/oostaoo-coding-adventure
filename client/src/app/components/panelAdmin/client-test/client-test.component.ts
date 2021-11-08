@@ -50,11 +50,12 @@ export class ClientTestComponent implements OnInit {
     this.testStatus$.next("tutorial");
   }
 
-  private getCandidats() {
-    this.apiClientService.get(API_URI_CANDIDATS_BY_TOKEN + "/" + this.tokenId)
+  private getCandidats() : Promise<Record<string, any>>{
+    return this.apiClientService.get(API_URI_CANDIDATS_BY_TOKEN + "/" + this.tokenId)
       .toPromise()
       .then((candidat: Record<string, any>) => {
         const datetimeTestOpened: string = new Date().toISOString();
+        this.candidat = candidat;
 
         if (candidat.test_terminer !== "0000-00-00 00:00:00") {
           this.testStatus$.next("");
@@ -62,12 +63,14 @@ export class ClientTestComponent implements OnInit {
           return this.router.navigate(["/home"]);
         }
 
-        this.postOpenTimeTest(datetimeTestOpened, candidat.id);
+        this.postOpenTimeTest(datetimeTestOpened, candidat.id).then();
         
-        this.apiClientService.get(API_URI_CAMPAIGNS + "/" + candidat.campaign.id)
+        return this.apiClientService.get(API_URI_CAMPAIGNS + "/" + candidat.campaign.id)
           .toPromise()
           .then((campaign: Record<string, any>) => {
             this.nbQuestion = campaign.questions.length;
+            this.campaignId = campaign.id;
+
             
             const secondTime: number = campaign.questions.reduce((acc, curr) =>  acc + curr.time, 0);
             
@@ -76,10 +79,10 @@ export class ClientTestComponent implements OnInit {
 
             this.questions = campaign.questions;
             this.technologies = campaign.technologies;
+            return campaign;
           });
 
-          this.candidat = candidat;
-          this.campaignId = candidat.campaign.id;
+          
     });
   }
 
