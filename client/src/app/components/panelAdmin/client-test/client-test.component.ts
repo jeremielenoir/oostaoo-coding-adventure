@@ -12,9 +12,10 @@ import { API_URI_CAMPAIGNS, API_URI_CANDIDATS, API_URI_CANDIDATS_BY_TOKEN, ApiCl
 export class ClientTestComponent implements OnInit {
   private tokenId: string;
   public popupTestStatus: boolean = false;
-  public testStatus$: BehaviorSubject<string> = new BehaviorSubject("eval"); // "eval", "tutorial", "testing"
+  public testStatus$: BehaviorSubject<string> = new BehaviorSubject(""); // "eval", "tutorial", "testing"
   public nbQuestion: number;
   public durationTotalTest: number;
+  public campaignId: number = 0;
   public candidat: Record<string, any>;
   public questions: Record<string, any>[];
   public technologies: Record<string, any>[];
@@ -27,7 +28,6 @@ export class ClientTestComponent implements OnInit {
 
   ngOnInit() {
     this.getCandidats();
-    console.log(this.candidat);
   }
 
 
@@ -77,6 +77,7 @@ export class ClientTestComponent implements OnInit {
           });
 
           this.candidat = candidat;
+          this.campaignId = candidat.campaign.id;
     });
   }
 

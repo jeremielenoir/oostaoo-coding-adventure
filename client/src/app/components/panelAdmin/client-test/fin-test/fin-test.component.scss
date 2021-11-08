@@ -107,7 +107,13 @@
     border-radius: $border-radius;
     padding-top: 10px;
     @include structureTitle();
+    display: flex;
+    flex-direction: column;
 
+    .feedback-btn {
+      text-align: center;
+    }
+    
     .oos-note {
       display: flex;
       justify-content: center;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ApiClientService, API_URI_FEEDBACK } from 'src/app/api-client/api-client.service';
@@ -8,15 +8,12 @@ import { ApiClientService, API_URI_FEEDBACK } from 'src/app/api-client/api-clien
   templateUrl: './fin-test.component.html',
   styleUrls: ['./fin-test.component.scss']
 })
-export class FinTestComponent implements OnInit {
-  public myStars = ['Très mauvaise', 'Mauvaise', 'Moyenne', 'Bonne', 'Très bonne'];
-  isSelected: boolean;
-  rating: number;
+export class FinTestComponent {
+  @Input() campaignId: number = 0;
+  public rating: number = 0;
   public commentaire = new FormControl("");
-  constructor(public apiClientService: ApiClientService, private _snackBar: MatSnackBar) { }
-
-  ngOnInit() {
-  }
+  
+  constructor(private apiClientService: ApiClientService, private _snackBar: MatSnackBar) { }
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
@@ -30,18 +27,15 @@ export class FinTestComponent implements OnInit {
   }
 
   sendFeedback() {
-    console.log(this.rating)
-    if(this.rating === undefined) {
+    if(this.rating >= 0 && this.rating <= 5) {
+      this.apiClientService.post(API_URI_FEEDBACK, {
+        commentaires: this.commentaire.value,
+        rating: this.rating,
+        campaignId: this.campaignId
+      }).subscribe(
+        _ => this.openSnackBar("Nous vous remercions pour votre retour", "Fermer"),
+        err => console.log(err)
+      );
     }
-    this.apiClientService.post(API_URI_FEEDBACK, {
-      rating: this.rating,
-      commentaires: this.commentaire.value,
-    }).subscribe(
-      (res) => {
-        this.openSnackBar("Nous vous remercions pour votre retour", "Fermer")
-      },
-      err => console.log(err)
-    );
   }
-
 }
