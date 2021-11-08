@@ -113,7 +113,8 @@
   </div>
 
   <div *ngSwitchCase="'tutorial'" class="tutorial">
-    <h2>Didacticiel</h2>
+    <app-test class="fullwidth" [mode]="'tutorial'" [candidat]="candidat" [questions]="trainingQuestions"
+      [technologies]="technologies" [durationMaxTest]="durationMaxTest" (refresh)="refreshComponent($event)"></app-test>
   </div>
 
   <div *ngSwitchCase="'testing'" class="testing">

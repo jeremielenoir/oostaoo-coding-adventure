@@ -4,6 +4,7 @@ import { SelectedLanguageService } from '../../../../services/selected-language.
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { DialogOverviewTestComponent } from '../../dragndrop/dragndrop.component';
 import { AlgoComponent } from '../../questions-type/algo-type/algo.component';
+import { Subscription } from 'rxjs';
 
 export interface IDialogData {
   preview: boolean;
@@ -51,7 +52,9 @@ export class TestComponent implements OnInit, OnDestroy {
   @Input() public technologies: Record<string, any>[];
   @Input() public durationMaxTest: number;
   @Input() public preview: boolean;
-  @Output() public refresh = new EventEmitter();
+  @Input() public mode: string = 'testing'; // prevent unnecessary api call when candidat is doing tutorial
+  @Output() public refresh = new EventEmitter<string>();
+  private subscription: Subscription;
   public question: Record<string, any>; // done
   public currentIdxQuestions: number = 0; // done
   public stopwatch: number = 0; // done
@@ -75,7 +78,6 @@ export class TestComponent implements OnInit, OnDestroy {
 
   public isDisabled: boolean = false; // done
 
-  public dataForParent: string;
   public checkTimeDefault: boolean = false;
   private jsonRapport = { rapport: [] };
   
@@ -98,7 +100,7 @@ export class TestComponent implements OnInit, OnDestroy {
   public filename: string;
   public options: Record<string, string>;
 
-  constructor(private apiClientService: ApiClientService, public languageStorage: SelectedLanguageService, public dialog: MatDialog) { }
+  constructor(private apiClientService: ApiClientService, public languageStorage: SelectedLanguageService, public dialog: MatDialog, ) { }
 
   ngOnInit() {
     switch (this.languageStorage.getLanguageCountry()) {
@@ -205,6 +207,7 @@ export class TestComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     clearInterval(this.stopwatchId);
+    this.subscription.unsubscribe();
   }
 
   public openDialogTimeout(preview: boolean = true): void {
@@ -217,7 +220,7 @@ export class TestComponent implements OnInit, OnDestroy {
       hasBackdrop: true,
     });
     
-    dialogRef.componentInstance.nextQuestion.subscribe(() => this.nextQuestion());
+    this.subscription = dialogRef.componentInstance.nextQuestion.subscribe(() => this.nextQuestion());
     dialogRef.afterClosed().subscribe();
   }
 
@@ -314,10 +317,15 @@ export class TestComponent implements OnInit, OnDestroy {
 
       if (this.correctAnswers.sort().toString() === this.candidatAnswers.sort().toString()) {
         this.correctAnswerCounter++;
-        this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, this.questions[this.currentIdxQuestions].points);
+        if (this.mode === 'testing') {
+          this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, this.questions[this.currentIdxQuestions].points);
+        }
       } else {
-        this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, 0);
+        if (this.mode === 'testing') {
+          this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, 0);
+        }
       }
+      // maybe use nullish coalescing operator ?
     }
 
     if (this.questions[this.currentIdxQuestions].type === 'free') {
@@ -325,26 +333,33 @@ export class TestComponent implements OnInit, OnDestroy {
 
       if (this.candidatAnswers.every((reps) => this.correctAnswers.includes(reps))) {
         this.correctAnswerCounter++;
-        this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, this.questions[this.currentIdxQuestions].points);
+        if (this.mode === 'testing') {
+          this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, this.questions[this.currentIdxQuestions].points);
+        }
       } else {
-        this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, 0);
+        if (this.mode === 'testing') {
+          this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, 0);
+        }
       }
+      // maybe use nullish coalescing operator ?
     }
 
     if (this.questions[this.currentIdxQuestions].type === 'multiple') {
       if (this.correctAnswers.sort().toString() === this.candidatAnswers.sort().toString()) {
         this.correctAnswerCounter++;
-        this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, this.questions[this.currentIdxQuestions].points);
+        if (this.mode === 'testing') {
+          this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, this.questions[this.currentIdxQuestions].points);
+        }
       } else {
-        this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, 0);
+        if (this.mode === 'testing') {
+          this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, 0);
+        }
       }
-
+      // maybe use nullish coalescing operator ?
     }
 
-    this.postRapportCandidat();
-
-    // console.log(' this.candidatAnwsers : ', this.candidatAnwsers);
-
+    // if on testing mode, make api call
+    if (this.mode === 'testing') this.postRapportCandidat();
   }
 
   public disableRep(timeQuestion: number) {
@@ -371,14 +386,16 @@ export class TestComponent implements OnInit, OnDestroy {
 
 
   public postTimeTest(totalElapsedTime: number) {
-    
+    if (this.mode !== 'testing') {
+      this.refreshComponent();
+    }
+
     this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
       duree: totalElapsedTime,
       test_terminer: this.testFinishedAt,
     })
     .toPromise()
     .then((res) => {
-
       this.apiClientService.get(API_URI_CAMPAIGNS + '/' + res.campaign.id).subscribe((res1) => {
         const nbCandidats: number = res1.NbCandidatFinish ? res1.NbCandidatFinish + 1 : 1
 
@@ -450,8 +467,7 @@ export class TestComponent implements OnInit, OnDestroy {
 
       });
   });
-}
-
+  }
 
   public controleTimeTest() {
     let dateNow;
@@ -511,7 +527,6 @@ export class TestComponent implements OnInit, OnDestroy {
     
     questions.forEach((element: Record<string, any>) => {
       sumPointsByTechno[element.technologies] = sumPointsByTechno[element.technologies] ? sumPointsByTechno[element.technologies] + element.points : element.points;
-
       // if (sumPoints.hasOwnProperty(element.technologies)) {
       //   sumPoints[element.technologies] = sumPoints[element.technologies] + element.points;
       //   // console.log('sumPoints[element.technologies]: ', sumPoints[element.technologies]);
@@ -519,9 +534,7 @@ export class TestComponent implements OnInit, OnDestroy {
       //   sumPoints[element.technologies] = element.points;
       //   // console.log('sumPoints[element.technologies] = element.points: ', sumPoints[element.technologies]);
       // }
-
     });
-    console.log(sumPointsByTechno);
 
     let arraySumPoints: Record<string, any>[] = [];
     // console.log('sumPoints : ', sumPoints);
@@ -571,19 +584,26 @@ export class TestComponent implements OnInit, OnDestroy {
   }
 
   public refreshComponent() {
-    this.refresh.emit((this.dataForParent = 'fin'));
+    this.refresh.emit('fin-testing');
   }
 
   // work only if Press F5 or cancel close window
   @HostListener('window:beforeunload', ['$event'])
   public beforeunloadHandler($event) {
     $event.returnValue = 'Are you sure?';
+    
+    // on tutorial mode, prevent backend api calls
+    if (this.mode !== 'testing') return;
+
     this.postPauseTest();
     this.controleTimeTest();
   }
 
   @HostListener('window:unload', ['$event'])
   public sendData() {
+    // on tutorial mode, prevent backend api calls
+    if (this.mode !== 'testing') return;
+
     this.postPauseTest();
   }
 }
