@@ -18,6 +18,10 @@
     "rating": {
       "default": "",
       "type": "integer"
+    },
+    "campaignId": {
+      "default": "",
+      "type": "integer"
     }
   }
 }

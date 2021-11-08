@@ -29,19 +29,6 @@
           Roodeo uniquement).
         </p>
         <div class="oos-note">
-          <!-- <div *ngFor="let item of myStars; let index = index" (mouseover)="numberStar = index"
-            (mouseout)="numberStar = null">
-            <button class="oos-custom-star" [value]="index" (click)="checkStarSelected(index)">
-              <i class="material-icons">
-                grade
-              </i>
-            </button>
-            <div>
-              <p class="oos-nameStar" *ngIf="numberStar === index">
-                {{ item }}
-              </p>
-            </div>
-          </div> -->
           <app-rating-feedback (ratingClick)="getRating($event)"></app-rating-feedback>
         </div>
         <br />
@@ -50,7 +37,7 @@
           <textarea matInput [formControl]="commentaire" name="commentaires" placeholder="Leave a comment"
             cdkTextareaAutosize cdkAutosizeMinRows="5" cdkAutosizeMaxRows="10"></textarea>
         </mat-form-field>
-        <app-base-button iconName="keyboard_arrow_right" (clickEvent)="sendFeedback()" i18n>
+        <app-base-button class="feedback-btn" iconName="keyboard_arrow_right" (clickEvent)="sendFeedback()" i18n>
           Envoyer votre avis
         </app-base-button>
       </div>

@@ -15,8 +15,10 @@ export class ClientTestComponent implements OnInit {
   public testStatus$: BehaviorSubject<string> = new BehaviorSubject("eval"); // "eval", "tutorial", "testing"
   public nbQuestion: number;
   public durationTotalTest: number;
+  public campaignId: number = 0;
   public candidat: Record<string, any>;
   public questions: Record<string, any>[];
+  public trainingQuestions: Record<string, any>[];
   public technologies: Record<string, any>[];
   public durationMaxTest: number;
   public isAgreed: boolean = false;
@@ -27,7 +29,6 @@ export class ClientTestComponent implements OnInit {
 
   ngOnInit() {
     this.getCandidats();
-    console.log(this.candidat);
   }
 
 
@@ -45,6 +46,7 @@ export class ClientTestComponent implements OnInit {
   }
 
   public runTutorial() {
+    this.trainingQuestions = this.questions.slice(0, 4);
     this.testStatus$.next("tutorial");
   }
 
@@ -77,6 +79,7 @@ export class ClientTestComponent implements OnInit {
           });
 
           this.candidat = candidat;
+          this.campaignId = candidat.campaign.id;
     });
   }
 
@@ -84,7 +87,7 @@ export class ClientTestComponent implements OnInit {
     return this.apiClientService.put(API_URI_CANDIDATS + "/" + candidatId, { test_ouvert: dateOpen }).toPromise();
   }
 
-  public refreshComponent(event) {
-    this.testStatus$.next(event);
+  public refreshComponent(status: string) {
+    this.testStatus$.next(status);
   }
 }

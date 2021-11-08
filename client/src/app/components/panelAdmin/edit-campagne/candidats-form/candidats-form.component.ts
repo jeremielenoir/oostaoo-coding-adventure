@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatSnackBar, MatTableDataSource, MatSort, MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
+import { EMPTY, Observable, of, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CandidatsMailComponent } from '../candidats-mail/candidats-mail.component';
 import { DecryptTokenService } from "../../../home/register/register.service";
@@ -19,17 +21,20 @@ import { TotalTestsAvailableService } from '../services/total-tests-available.se
   templateUrl: './candidats-form.component.html',
   styleUrls: ['./candidats-form.component.scss']
 })
-export class CandidatsFormComponent implements OnInit {
+export class CandidatsFormComponent implements OnInit, OnDestroy {
   private readonly emailRegex: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 
   @Input() globalId: number;
   @Input() status: string = "form";
   @Input() tests_available: number;
   @Output() onUpdateTestsAvailableWIP = new EventEmitter<any>();
+  private subscription: Subscription;
   public form: FormGroup;
   public campaigns: any;
   private decryptTokenService = new DecryptTokenService();
   public candidats: Record<string, string>[];
+  public candidatsApplied$: Observable<boolean> = of(false);
+  private emailsChecked: Map<string, boolean> = new Map(); // keep emails already checked to prevent recheck when form is updated
 
   public Editor = ClassicEditor;
   public displayedMatTableColumns: string[] = ['name', 'email', 'icon'];
@@ -55,6 +60,26 @@ export class CandidatsFormComponent implements OnInit {
       contacts: this.fb.array([this.createContact()])
     });
 
+    // listen on form changes in order to prevent candidat to be add more than once to a campaign
+    this.subscription = this.form.get("contacts").valueChanges.subscribe(contacts => {
+        const contactControls: FormArray = this.contacts;
+
+        for (let i in contacts) {
+          if (contactControls.at(+i).get('value').valid) {
+            const emailTrimed: string = contactControls.at(+i).value.value.trim();
+            
+            if (this.emailsChecked.has(emailTrimed)) {
+              this.candidatsApplied$ = of(this.emailsChecked.get(emailTrimed));
+            } else {
+              this.subscription = this.hasCandidatApplied(emailTrimed).subscribe(applied => {
+                this.emailsChecked.set(emailTrimed, applied);
+                this.candidatsApplied$ = of(applied);
+              });
+            }
+          }
+        }
+    })
+    
     this.user_id = this.decryptTokenService.userId;
     this.offer_id = this.decryptTokenService.offer_id;
 
@@ -67,16 +92,18 @@ export class CandidatsFormComponent implements OnInit {
     this.htmlContent = this.customHtmlContent();
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   get contacts(): FormArray {
     return <FormArray>this.form.get('contacts');
   }
 
   createContact(): FormGroup {
     return this.fb.group({
-      name: [null, Validators.compose([Validators.required])],
-      value: [null, Validators.compose([
-        Validators.required,
-        Validators.pattern(this.emailRegex)])]
+      name: ['', Validators.compose([Validators.required])],
+      value: ['', Validators.compose([Validators.required, Validators.pattern(this.emailRegex)])]
     });
   }
 
@@ -90,6 +117,17 @@ export class CandidatsFormComponent implements OnInit {
 
   removeContact(index: number): void {
     this.contacts.removeAt(index);
+
+    // check if left emails hasn't been already notified
+    for (let i = 0; i < this.contacts.length; i++) {
+      const email: string = this.contacts.at(i).value.value.trim();
+      if (this.emailsChecked.get(email)) this.candidatsApplied$ = of(true);
+    }
+  }
+
+  public hasApplied(idx: number): boolean {
+    const email: string = this.contacts.at(idx)['controls'].value.value;
+    return this.emailsChecked.get(email.trim());
   }
 
   postCandidat(contactInfo: Record<string, string>): Promise<any> {
@@ -188,15 +226,19 @@ export class CandidatsFormComponent implements OnInit {
       );
   }
 
+  // hasCandidatApplied gets candidat then returns true if candidat is already in the current campaign, otherwise false
+  private hasCandidatApplied(email: string): Observable<boolean> {
+    return this.apiClientService.get(API_URI_CANDIDATS + "?email=" + email).pipe(
+      map(candidats => candidats.length > 0 && candidats[0].campaign.id === this.globalId ? true : false)
+    );
+  }
+
   retourCandidat(): void {
     this.dialogRef.close(this.tests_available);
   }
 
   validate(): boolean {
-    // TODO : try to refacto with angular getError function ?
-    return !this.form.controls["contacts"]["controls"].map(control => {
-      return control.controls.name.errors === null && control.controls.value.errors === null;
-    }).includes(false);
+    return !this.form.controls["contacts"]["controls"].map(control => control.controls.name.errors === null && control.controls.value.errors === null).includes(false);
   }
 
   switchTo(status: string): void {

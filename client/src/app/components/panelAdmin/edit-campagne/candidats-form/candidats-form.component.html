@@ -11,24 +11,35 @@
       <form class="cologne-form" [formGroup]="form">
         <div class="card-body" formArrayName="contacts">
           <div [formGroupName]="i" class="row" *ngFor="let contact of contacts.controls; let i = index">
-            <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
-              <mat-label>Nom*</mat-label>
-              <input formControlName="name" matInput placeholder="John Smith" type="text" />
-            </mat-form-field>
-            <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
-              <mat-label>Email*</mat-label>
-              <input formControlName="value" matInput placeholder="john.smith@email.com" type="email" />
-            </mat-form-field>
-            <button mat-mini-fab color="warn" (click)="removeContact(i)" [disabled]="contacts.length === 1">
-              <mat-icon>delete</mat-icon>
-            </button>
+            <div class="candidats__contact-inputs">
+              <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
+                <mat-label>Nom*</mat-label>
+                <input formControlName="name" matInput placeholder="John Smith" type="text" />
+              </mat-form-field>
+
+              <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
+                <mat-label>Email*</mat-label>
+                <input formControlName="value" matInput placeholder="john.smith@email.com" type="email" />
+              </mat-form-field>
+
+              <button mat-mini-fab color="warn" (click)="removeContact(i)" [disabled]="contacts.length === 1">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <mat-hint *ngIf="hasApplied(i)" i18n>Ce
+              candidat a
+              déjà participé à cette
+              campagne !</mat-hint>
           </div>
         </div>
+
         <div class="block-button">
-          <app-base-button iconName="person_add" (clickEvent)="addContact()">Ajouter
+          <app-base-button iconName="person_add" (clickEvent)="addContact()" [disabled]="candidatsApplied$ | async">
+            Ajouter
             un autre
             candidat</app-base-button>
-          <app-base-button iconName="mail_outline" [disabled]="!validate()" (clickEvent)="switchTo('email')">Prochaine
+          <app-base-button iconName="mail_outline" [disabled]="!validate() || (candidatsApplied$ | async)"
+            (clickEvent)="switchTo('email')">Prochaine
             étape : configurer l'email
           </app-base-button>
         </div>
