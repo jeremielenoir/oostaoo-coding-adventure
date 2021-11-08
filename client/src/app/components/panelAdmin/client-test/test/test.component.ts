@@ -1,22 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  HostListener,
-  Inject,
-  Input,
-  OnInit,
-  Output,
-  OnDestroy,
-  ViewChild,
-  AfterViewInit,
-} from '@angular/core';
-import {
-  API_URI_CAMPAIGNS,
-  API_URI_CANDIDATS,
-  API_URI_NOTIFICATIONS,
-  ApiClientService,
-  QUESTION_SEPARATOR,
-} from '../../../../api-client/api-client.service';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, HostListener, Inject } from '@angular/core';
+import { ApiClientService, API_URI_CAMPAIGNS, API_URI_CANDIDATS, API_URI_NOTIFICATIONS, QUESTION_SEPARATOR } from '../../../../api-client/api-client.service';
 import { SelectedLanguageService } from '../../../../services/selected-language.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { DialogOverviewTestComponent } from '../../dragndrop/dragndrop.component';
@@ -33,18 +16,15 @@ export interface IDialogData {
 
 export class DialogTimeoutComponent implements OnInit {
   @Output("nextQuestion") public nextQuestion = new EventEmitter<void>();
-  dataPopup: any;
+  dataPopup: IDialogData;
   public prev: boolean = false;
   
-  
   constructor(public dialogRef: MatDialogRef<DialogTimeoutComponent>, @Inject(MAT_DIALOG_DATA) public data: IDialogData) {
-
     if (data) {
       this.dataPopup = data;
       this.prev = true;
     }
   }
-
 
   ngOnInit() {
     console.log('this.dataPopup : ', this.dataPopup);
@@ -93,7 +73,7 @@ export class TestComponent implements OnInit, OnDestroy {
   private candidatAnswers: string[] = []; // done
   private correctAnswers: string[] = []; // done
 
-  public isDisabled: boolean; // done
+  public isDisabled: boolean = false; // done
 
   public dataForParent: string;
   public checkTimeDefault: boolean = false;
@@ -121,7 +101,6 @@ export class TestComponent implements OnInit, OnDestroy {
   constructor(private apiClientService: ApiClientService, public languageStorage: SelectedLanguageService, public dialog: MatDialog) { }
 
   ngOnInit() {
-
     switch (this.languageStorage.getLanguageCountry()) {
       case 'es-ES':
         this.dataInfoLanguageName = 'name_es';
@@ -162,9 +141,7 @@ export class TestComponent implements OnInit, OnDestroy {
 
     this.question = this.questions[this.currentIdxQuestions];
 
-
     this.fewSecondsLeft = this.questions[0].time - 5;
-
 
     if (!this.preview) {
       this.Countertime();
@@ -236,12 +213,11 @@ export class TestComponent implements OnInit, OnDestroy {
       height: 'auto',
       width: '50%',
       autoFocus: false,
+      disableClose: true,
+      hasBackdrop: true,
     });
-
     
     dialogRef.componentInstance.nextQuestion.subscribe(() => this.nextQuestion());
-    
-
     dialogRef.afterClosed().subscribe();
   }
 
@@ -295,7 +271,6 @@ export class TestComponent implements OnInit, OnDestroy {
 
     this.totalElapsedTime += this.stopwatch;
     
-
     this.activetime = false;
 
     if (this.currentIdxQuestions < this.questions.length - 1) {
@@ -305,15 +280,12 @@ export class TestComponent implements OnInit, OnDestroy {
       clearInterval(this.stopwatchId);
       
       this.Countertime();
-
-
     } else if (this.currentIdxQuestions === this.questions.length - 1) {
       this.testFinishedAt = new Date().toISOString();
       
       clearInterval(this.stopwatchId);
 
       this.postTimeTest(this.totalElapsedTime);
-
     }
 
     this.question = this.questions[this.currentIdxQuestions];
@@ -498,9 +470,7 @@ export class TestComponent implements OnInit, OnDestroy {
       
       if (this.question.time < timePauseDiff) {
         this.checkTimeDefault = true;
-
         this.nextQuestion();
-
       } else {
         this.stopwatch = timePauseDiff;
       }
@@ -508,7 +478,6 @@ export class TestComponent implements OnInit, OnDestroy {
   }
 
   public postPauseTest() {
-
     this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
       date_pause: new Date().toISOString(),
       index_question: this.currentIdxQuestions,
@@ -517,10 +486,6 @@ export class TestComponent implements OnInit, OnDestroy {
   }
 
   public postRapportCandidat() {
-    // const myReps = this.candidatAnswers;
-    // const myQuestion = this.question;
-    // const myTime = this.stopwatch;
-    
     this.apiClientService.get(API_URI_CANDIDATS + '/' + this.candidat.id)
       .toPromise()
       .then(res => {

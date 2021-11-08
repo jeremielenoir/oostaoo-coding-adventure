@@ -12,7 +12,7 @@ import { API_URI_CAMPAIGNS, API_URI_CANDIDATS, API_URI_CANDIDATS_BY_TOKEN, ApiCl
 export class ClientTestComponent implements OnInit {
   private tokenId: string;
   public popupTestStatus: boolean = false;
-  public testStatus$: BehaviorSubject<string> = new BehaviorSubject(""); // "eval", "tutorial", "testing"
+  public testStatus$: BehaviorSubject<string> = new BehaviorSubject("eval"); // "eval", "tutorial", "testing"
   public nbQuestion: number;
   public durationTotalTest: number;
   public campaignId: number = 0;
