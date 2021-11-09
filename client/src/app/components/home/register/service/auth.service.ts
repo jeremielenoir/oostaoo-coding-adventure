@@ -95,7 +95,7 @@ export class AuthenticationService {
   getCampaignsUser(adminId: number): Observable<Record<string, any>[]> {
     // campaign n°737 is a campaign used to simulate tutorial for candidat and shouldn't be into no campaigns
     return this.apiClientService.get(API_URI_CAMPAIGNS + '?user_in=' + adminId).pipe(
-      filter(campaign => campaign.id !== TUTORIAL_ID)
+      map(campaigns => campaigns.filter(campaign => campaign.id === TUTORIAL_ID))
     );
   }
 
