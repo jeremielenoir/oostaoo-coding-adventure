@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, Inject, Pipe, PipeTransform, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, Inject, Pipe, PipeTransform, ViewEncapsulation, OnDestroy } from '@angular/core';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -8,7 +8,7 @@ import {
 import { InviteCandidat } from '../edit-campagne/candidats/invite-candidat.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from './../../home/register/service/auth.service';
 import { RouterLink } from '@angular/router';
@@ -35,10 +35,10 @@ export class CampaignsArchivedPipe implements PipeTransform {
   encapsulation: ViewEncapsulation.None
 })
 
-export class CampagneComponent implements OnInit {
+export class CampagneComponent implements OnInit, OnDestroy {
   @Output() campaignsChild = new EventEmitter<any>();
   @Output() emitIsactiveNoCountryside = new EventEmitter();
-
+  private subscription: Subscription;
   public campaigns = [];
   public searchHeader: string;
   public confirmed: boolean;
@@ -64,15 +64,17 @@ export class CampagneComponent implements OnInit {
   ngOnInit() {
     const adminId: number = this.decryptTokenService.adminId || this.decryptTokenService.userId;
 
-    this.authenticationService
-      .getCampaignsUser(adminId)
-      .then(resultat => {
-        this.campaigns = resultat;
-        this.IsactiveNoCountryside = true;
-        this.emitIsactiveNoCountryside.emit(this.IsactiveNoCountryside);
-        this.giveCampaigns();
-        this.isLoaded = true;
-      });
+    this.subscription = this.authenticationService.getCampaignsUser(adminId).subscribe((campaigns: Record<string, any>[]) => {
+      this.campaigns = campaigns;
+      this.IsactiveNoCountryside = true;
+      this.emitIsactiveNoCountryside.emit(this.IsactiveNoCountryside);
+      this.giveCampaigns();
+      this.isLoaded = true;
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   customComparator(itemA) {
