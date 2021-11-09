@@ -50,7 +50,7 @@ export class ClientTestComponent implements OnInit {
     this.testStatus$.next("tutorial");
   }
 
-  private getCandidats() : Promise<Record<string, any>>{
+  private getCandidats() : any{
     return this.apiClientService.get(API_URI_CANDIDATS_BY_TOKEN + "/" + this.tokenId)
       .toPromise()
       .then((candidat: Record<string, any>) => {
@@ -65,7 +65,7 @@ export class ClientTestComponent implements OnInit {
 
         this.postOpenTimeTest(datetimeTestOpened, candidat.id).then();
         
-        return this.apiClientService.get(API_URI_CAMPAIGNS + "/" + candidat.campaign.id)
+        this.apiClientService.get(API_URI_CAMPAIGNS + "/" + candidat.campaign.id)
           .toPromise()
           .then((campaign: Record<string, any>) => {
             this.nbQuestion = campaign.questions.length;

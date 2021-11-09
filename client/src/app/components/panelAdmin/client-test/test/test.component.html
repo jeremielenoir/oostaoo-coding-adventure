@@ -13,8 +13,8 @@
           <span class="testing-timer-icon"><i class="far fa-clock"></i></span>
 
           <span class="testing-timer-text" i18n>Temps écoulé :</span>
-          <span class="time-elapsed" [class.active-time-danger]="stopwatch >= fewSecondsLeft">
-            {{ fmtMSS(stopwatch) }}/{{ fmtMSS(question.time) }}
+          <span class="time-elapsed" [class.active-time-danger]="chronometerCurrentTime >= fewSecondsLeft">
+            {{ fmtMSS(chronometerCurrentTime) }}/{{ fmtMSS(question.time) }}
           </span>
         </div>
       </header>
@@ -103,7 +103,7 @@
     </app-base-button>
 
     <app-base-button *ngIf="!preview" [fullWidth]="true" [hoverClass]="''" iconName="play_arrow"
-      (click)="nextQuestion()">
+      (click)="answerQuestion.emit('answer_question from button')">
       {{ currentIdxQuestions === questions.length - 1 ? "Soumettre le test" : "Question suivante" }}
     </app-base-button>
 
