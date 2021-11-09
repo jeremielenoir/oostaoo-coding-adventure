@@ -43,7 +43,7 @@
       "default": "null",
       "type": "date"
     },
-    "test_ouvert": {
+    "opened_link": {
       "default": "null",
       "type": "date"
     },

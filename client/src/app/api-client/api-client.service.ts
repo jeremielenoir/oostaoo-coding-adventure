@@ -4,12 +4,14 @@ import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { DecryptTokenService } from '../components/home/register/register.service';
 
-
 const prefix = '/api/';
+
+export const TUTORIAL_ID: number = 737; // this campaign is for tutorial only
 export const QUESTION_SEPARATOR: string = '&#x263C;';
 
 export const API_URI_CAMPAIGNS: string = prefix + 'campaigns';
 export const API_URI_CAMPAIGN: string = prefix + 'campaign/:id';
+export const API_URI_TUTORIAL: string = API_URI_CAMPAIGNS + "/" + TUTORIAL_ID;
 export const API_URI_TECHNO: string = prefix + 'technologies';
 export const API_URI_PROFILES: string = prefix + 'profiles';
 export const API_URI_QUESTIONS: string = prefix + 'questions';

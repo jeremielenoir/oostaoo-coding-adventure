@@ -146,6 +146,7 @@ button {
       gap: 0 20px;
 
       .invitation {
+        width: calc(50%);
         justify-content: normal !important;
         padding: 40px;
         background: white;
@@ -187,6 +188,7 @@ button {
       }
 
       .tutorial-test {
+        width: calc(50%);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -196,6 +198,10 @@ button {
           padding: 40px;
           border: $border-table;
           border-radius: $border-radius;
+          .client-test__content {
+            display: flex;
+            flex-direction: column;
+          }
         }
       }
     }
