@@ -10,7 +10,7 @@
         </div>
 
         <div class="modal-content">
-          <p class=" claire-text" i18n>
+          <p class="claire-text" i18n>
             Une fois que vous aurez cliqué sur le bouton "Commencer", vous ne
             pourrez plus interrompre l'enchainement des questions. Une fois
             qu'une réponse est soumise, vous ne pourrez plus revenir à la
@@ -30,7 +30,7 @@
 
           <label class="block-condition claire-text">
             <span class="checkbox-condition">
-              <input type="checkbox" [(ngModel)]="isAgreed" />
+              <mat-checkbox [(ngModel)]="isAgreed" [checked]="isAgreed"></mat-checkbox>
             </span>
             <p class="text-condition" i18n>
               J'ai lu et j'accepte les
