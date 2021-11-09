@@ -15,8 +15,10 @@ export class ClientTestComponent implements OnInit {
   public testStatus$: BehaviorSubject<string> = new BehaviorSubject("eval"); // "eval", "tutorial", "testing"
   public nbQuestion: number;
   public durationTotalTest: number;
+  public campaignId: number = 0;
   public candidat: Record<string, any>;
   public questions: Record<string, any>[];
+  public trainingQuestions: Record<string, any>[];
   public technologies: Record<string, any>[];
   public durationMaxTest: number;
   public isAgreed: boolean = false;
@@ -27,7 +29,6 @@ export class ClientTestComponent implements OnInit {
 
   ngOnInit() {
     this.getCandidats();
-    console.log(this.candidat);
   }
 
 
@@ -45,14 +46,16 @@ export class ClientTestComponent implements OnInit {
   }
 
   public runTutorial() {
+    this.trainingQuestions = this.questions.slice(0, 4);
     this.testStatus$.next("tutorial");
   }
 
-  private getCandidats() {
-    this.apiClientService.get(API_URI_CANDIDATS_BY_TOKEN + "/" + this.tokenId)
+  private getCandidats() : any{
+    return this.apiClientService.get(API_URI_CANDIDATS_BY_TOKEN + "/" + this.tokenId)
       .toPromise()
       .then((candidat: Record<string, any>) => {
         const datetimeTestOpened: string = new Date().toISOString();
+        this.candidat = candidat;
 
         if (candidat.test_terminer !== "0000-00-00 00:00:00") {
           this.testStatus$.next("");
@@ -60,12 +63,14 @@ export class ClientTestComponent implements OnInit {
           return this.router.navigate(["/home"]);
         }
 
-        this.postOpenTimeTest(datetimeTestOpened, candidat.id);
+        this.postOpenTimeTest(datetimeTestOpened, candidat.id).then();
         
         this.apiClientService.get(API_URI_CAMPAIGNS + "/" + candidat.campaign.id)
           .toPromise()
           .then((campaign: Record<string, any>) => {
             this.nbQuestion = campaign.questions.length;
+            this.campaignId = campaign.id;
+
             
             const secondTime: number = campaign.questions.reduce((acc, curr) =>  acc + curr.time, 0);
             
@@ -74,9 +79,10 @@ export class ClientTestComponent implements OnInit {
 
             this.questions = campaign.questions;
             this.technologies = campaign.technologies;
+            return campaign;
           });
 
-          this.candidat = candidat;
+          
     });
   }
 
@@ -84,7 +90,7 @@ export class ClientTestComponent implements OnInit {
     return this.apiClientService.put(API_URI_CANDIDATS + "/" + candidatId, { test_ouvert: dateOpen }).toPromise();
   }
 
-  public refreshComponent(event) {
-    this.testStatus$.next(event);
+  public refreshComponent(status: string) {
+    this.testStatus$.next(status);
   }
 }
