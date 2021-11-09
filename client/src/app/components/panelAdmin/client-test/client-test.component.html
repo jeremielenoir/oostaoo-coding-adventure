@@ -81,32 +81,44 @@
             <div class="img"></div>
             <h3 i18n>Tutoriel</h3>
           </div>
-          <p class="tuto-para" i18n>
-            Voici un tutoriel qui vous permet de découvrir votre environnement
-            d’évaluation en vous familiarisant avec les fonctionnalités de
-            l’application en toute tranquillité. Le résultat de ce tutoriel ne
-            fait pas partie de l’évaluation. Vous avez la possibilité de
-            recommencer ce tutoriel autant de fois que vous le souhaitez.
-          </p>
-          <app-base-button iconName="keyboard_arrow_right" (click)="runTutorial()" i18n>
-            Démarrer le tutoriel
-          </app-base-button>
+
+          <div *ngIf="loading$ | async" class="loader-container">
+            <mat-spinner [strokeWidth]="15"></mat-spinner>
+          </div>
+          <div *ngIf="!(loading$ | async)" class="client-test__content">
+            <p class="tuto-para" i18n>
+              Voici un tutoriel qui vous permet de découvrir votre environnement
+              d’évaluation en vous familiarisant avec les fonctionnalités de
+              l’application en toute tranquillité. Le résultat de ce tutoriel ne
+              fait pas partie de l’évaluation. Vous avez la possibilité de
+              recommencer ce tutoriel autant de fois que vous le souhaitez.
+            </p>
+            <app-base-button iconName="keyboard_arrow_right" (click)="runTutorial()" color="#FB8C00" i18n>
+              Démarrer le tutoriel
+            </app-base-button>
+          </div>
         </div>
         <div class="test">
           <div class="title">
             <div class="img"></div>
-            <h3 i18n>Test</h3>
+            <h3 i18n>Évaluation - {{ campaignTitle }}</h3>
           </div>
-          <p class="tuto-para">
-            Ce test est composé de {{ nbQuestion }} questions. Chaque question
-            est chronométrée. La durée totale est estimée à
-            {{ durationTotalTest }} minutes mais le test peut durer jusqu’à
-            {{ durationMaxTest }} minutes. Merci de prévoir
-            {{ durationMaxTest }} minutes consécutives pour faire ce test.
-          </p>
-          <app-base-button iconName="keyboard_arrow_right" (click)="openPopup()" i18n>
-            Démarrer le test
-          </app-base-button>
+
+          <div *ngIf="loading$ | async" class="loader-container">
+            <mat-spinner [strokeWidth]="15"></mat-spinner>
+          </div>
+          <div *ngIf="!(loading$ | async)" class="client-test__content">
+            <p class="tuto-para">
+              Ce test est composé de {{ nbQuestion }} questions. Chaque question
+              est chronométrée. La durée totale est estimée à
+              {{ durationTotalTest }} minutes mais le test peut durer jusqu’à
+              {{ durationMaxTest }} minutes. Merci de prévoir
+              {{ durationMaxTest }} minutes consécutives pour faire ce test.
+            </p>
+            <app-base-button iconName="keyboard_arrow_right" (click)="openPopup()" i18n>
+              Démarrer le test
+            </app-base-button>
+          </div>
         </div>
       </div>
     </section>

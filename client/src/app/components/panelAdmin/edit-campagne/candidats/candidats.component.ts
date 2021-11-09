@@ -326,7 +326,7 @@ export class CandidatsComponent implements OnInit, OnDestroy {
               interview_date: campaign.candidats[i] && campaign.candidats[i].interview && campaign.candidats[i].interview.interview_date
                   ? moment(campaign.candidats[i].interview.interview_date).locale('fr').format('dddd, MMMM Do YYYY, HH:mm')
                   : null,
-              date: campaign.candidats[i].test_ouvert,
+              date: campaign.candidats[i].opened_link,
               ...campaign.candidats[i].getpourcentByCandidat
             }
           };
@@ -358,7 +358,7 @@ export class CandidatsComponent implements OnInit, OnDestroy {
   //   const duration = selectedCandidate.duree;
   //   const rapport = selectedCandidate.raport_candidat.rapport;
   //   const date = this.datePipe.transform(
-  //     selectedCandidate.test_ouvert,
+  //     selectedCandidate.opened_link,
   //     'dd-MM-yy',
   //   );
   //   const points = selectedCandidate.points_candidat;
