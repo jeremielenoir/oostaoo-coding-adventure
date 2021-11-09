@@ -84,39 +84,6 @@ export class ClientTestComponent implements OnInit, OnDestroy {
       switchMap(candidat => this.apiClientService.get(API_URI_CAMPAIGNS + "/" + candidat.campaign.id)),
       finalize(() => this.loading$.next(false))
     );
-    // return this.apiClientService.get(API_URI_CANDIDATS_BY_TOKEN + "/" + this.tokenId)
-    //   .toPromise()
-    //   .then((candidat: Record<string, any>) => {
-    //     const datetimeTestOpened: string = new Date().toISOString();
-    //     this.candidat = candidat;
-
-    //     if (candidat.test_terminer !== "0000-00-00 00:00:00") {
-    //       this.testStatus$.next("");
-
-    //       return this.router.navigate(["/home"]);
-    //     }
-
-    //     this.postOpenTimeTest(datetimeTestOpened, candidat.id).then();
-        
-    //     return this.apiClientService.get(API_URI_CAMPAIGNS + "/" + candidat.campaign.id)
-    //       .toPromise()
-    //       .then((campaign: Record<string, any>) => {
-    //         this.nbQuestion = campaign.questions.length;
-    //         this.campaignId = campaign.id;
-
-            
-    //         const secondTime: number = campaign.questions.reduce((acc, curr) =>  acc + curr.time, 0);
-            
-    //         this.durationTotalTest = Math.floor(secondTime / 60);
-    //         this.durationMaxTest = this.durationTotalTest + 10;
-
-    //         this.questions = campaign.questions;
-    //         this.technologies = campaign.technologies;
-    //         return campaign;
-    //       });
-
-          
-    // });
   }
 
   private candidatOpenedLinkAt(candidatId: number, currentDatetime: string): void {
