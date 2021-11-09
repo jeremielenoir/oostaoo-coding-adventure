@@ -75,9 +75,11 @@ export class ClientTestComponent implements OnInit, OnDestroy {
     this.testStatus$.next("tutorial");
   }
 
+
   private getTutorialCampaign(): Observable<Record<string, any>> {
     return this.apiClientService.get(API_URI_TUTORIAL);
   }
+
 
   private getCandidatCampaign(): Observable<Record<string, any>> {
     return this.apiClientService.get(API_URI_CANDIDATS_BY_TOKEN + "/" + this.tokenId).pipe(
@@ -92,6 +94,7 @@ export class ClientTestComponent implements OnInit, OnDestroy {
       }),
       switchMap(candidat => this.apiClientService.get(API_URI_CAMPAIGNS + "/" + candidat.campaign.id)),
     );
+
   }
 
   private candidatOpenedLinkAt(candidatId: number, currentDatetime: string): void {
