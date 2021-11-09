@@ -75,7 +75,7 @@
 
         </div>
 
-        <div *ngIf="candidat.duree === null && candidat.test_ouvert === '0000-00-00 00:00:00'" class="list-sidebar">
+        <div *ngIf="candidat.duree === null && candidat.opened_link === '0000-00-00 00:00:00'" class="list-sidebar">
           <div *ngIf="!IsBoaleanSmallSidebar" class="list-sidebar-left-content">
             <a [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{ candidat.Nom }}
             </a>
@@ -91,7 +91,7 @@
           </div>
         </div>
 
-        <div *ngIf="candidat.duree === null && candidat.test_ouvert !== '0000-00-00 00:00:00'" class="list-sidebar">
+        <div *ngIf="candidat.duree === null && candidat.opened_link !== '0000-00-00 00:00:00'" class="list-sidebar">
           <div *ngIf="!IsBoaleanSmallSidebar" class="list-sidebar-left-content">
             <a [routerLink]="['/dashboard/campaigns',candidat.campaign, 'candidats']">{{ candidat.Nom }}
             </a>

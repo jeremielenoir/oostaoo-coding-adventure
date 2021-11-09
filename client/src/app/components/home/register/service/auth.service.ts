@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { API_URI_CAMPAIGNS, ApiClientService, API_URI_USER, API_URI_USERS_BY_ADMIN } from './../../../../api-client/api-client.service';
+import { API_URI_CAMPAIGNS, ApiClientService, API_URI_USER, API_URI_USERS_BY_ADMIN, TUTORIAL_ID } from './../../../../api-client/api-client.service';
 import { DecryptTokenService } from '../register.service';
 
 // authentication service is used to LOGIN and LOGOUT of the application
@@ -92,9 +92,11 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
   }
 
-  getCampaignsUser(adminId: number) {
-    console.log('HEEELOOOOLLL');
-    return this.apiClientService.get(API_URI_CAMPAIGNS + '?user_in=' + adminId).toPromise();
+  getCampaignsUser(adminId: number): Observable<Record<string, any>[]> {
+    // campaign n°737 is a campaign used to simulate tutorial for candidat and shouldn't be into no campaigns
+    return this.apiClientService.get(API_URI_CAMPAIGNS + '?user_in=' + adminId).pipe(
+      filter(campaign => campaign.id !== TUTORIAL_ID)
+    );
   }
 
   getUsers(adminId: number) {
