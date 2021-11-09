@@ -98,12 +98,14 @@ export class TestComponent implements OnInit, OnDestroy {
 
     const answerQuestionObserver = {
       next: (n :string) => {
-        console.log(n);
+        
+        this.totalElapsedTime += this.chronometerCurrentTime;
         this.startChronometerSubscription.unsubscribe();
         this.currentIdxQuestions++;
         if(this.currentIdxQuestions === this.questions.length){
           //test is finish post test
         }else{
+
           this.startChronometerSubscription = this.startQuestion(this.currentIdxQuestions).subscribe(chronometerObserver);
         }
         
@@ -141,6 +143,9 @@ export class TestComponent implements OnInit, OnDestroy {
 
     this.choiceOfAnswers = this.question[this.dataInfoLanguageContent].split(this.separator);
     this.correctAnswers = this.question.answer_value.split(this.separator).sort();
+    this.candidatAnswer = '';
+    this.candidatAnswers = [];
+    this.isDisabled = false;
 
     const chronometer = interval(1000).pipe(
       takeUntil(timer(this.question.time * 1000))
@@ -148,6 +153,7 @@ export class TestComponent implements OnInit, OnDestroy {
 
     const showTimeoutDialog = new Observable<string>((observer) => {
       this.openDialogTimeout(true);
+      this.isDisabled = true;
       observer.next('dialog timeout opened');
 
       const delayDialog = timer(3000).subscribe(() => {
@@ -256,19 +262,7 @@ export class TestComponent implements OnInit, OnDestroy {
       this.validateAnswer();
     }
 
-    this.totalElapsedTime += this.chronometerCurrentTime;
-
-    this.activetime = false;
-
-    if (this.currentIdxQuestions < this.questions.length - 1) {
-      this.currentIdxQuestions++;
-      this.chronometerCurrentTime = 0;
-
-    } else if (this.currentIdxQuestions === this.questions.length - 1) {
-      this.testFinishedAt = new Date().toISOString();
-
-      this.postTimeTest(this.totalElapsedTime);
-    }
+    
 
     this.question = this.questions[this.currentIdxQuestions];
 
@@ -335,10 +329,6 @@ export class TestComponent implements OnInit, OnDestroy {
 
     // if on testing mode, make api call
     if (this.mode === 'testing') this.postRapportCandidat();
-  }
-
-  public disableRep(timeQuestion: number) {
-    this.isDisabled = timeQuestion === this.chronometerCurrentTime ? true : this.isDisabled;
   }
 
   public fmtMSS(d) {
