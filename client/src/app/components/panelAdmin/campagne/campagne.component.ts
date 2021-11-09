@@ -150,6 +150,7 @@ export class CampagneComponent implements OnInit, OnDestroy {
         pin: campaign.pin,
         profile: campaign.profile,
         email_title: campaign.email_title,
+        email_content: campaign.email_content,
         sent_report: campaign.sent_report,
         technologies: campaign.technologies,
         questions: campaign.questions,
@@ -235,7 +236,6 @@ export class CampagneComponent implements OnInit, OnDestroy {
       this.campaignsChild.emit(this.campaigns);
     }
   }
-
 }
 
 @Component({
