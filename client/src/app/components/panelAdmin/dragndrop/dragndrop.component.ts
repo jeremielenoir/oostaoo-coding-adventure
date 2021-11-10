@@ -1,37 +1,10 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
-
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef,
-} from '@angular/material';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
-
-import {
-  API_URI_CAMPAIGNS,
-  ApiClientService,
-} from '../../../api-client/api-client.service';
-
+import { API_URI_CAMPAIGNS, ApiClientService } from '../../../api-client/api-client.service';
 import { Router } from '@angular/router';
-
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
 
 export interface IDialogData {
@@ -108,38 +81,10 @@ export class DragNDropComponent implements OnInit, OnChanges {
     public dialog: MatDialog,
   ) {}
 
-  public dragStart(event: CdkDragDrop<string[]>) {
-    console.log('event start', event);
-    this.disablehover = true;
-  }
-
-  public dragEnd(event: CdkDragDrop<string[]>) {
-    console.log('event finish', event);
-    this.disablehover = false;
-  }
-
-  public drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-      const previous = event.previousContainer.data;
-      const current = event.container.data;
-      const diff = current.filter((p) => !previous.includes(p));
-      this.chargeYourCampagn.emit(diff);
-    }
-  }
-
   public ngOnInit() {
+    console.log(this.selectedQuestions);
+    console.log(this.notSelectedQuestions);
+    ////
     switch (this.languageStorage.getLanguageCountry()) {
       case 'es-ES':
         this.nameI18n = 'name_es';
@@ -189,6 +134,37 @@ export class DragNDropComponent implements OnInit, OnChanges {
     }
   }
 
+  public dragStart(event: CdkDragDrop<string[]>) {
+    console.log('event start', event);
+    this.disablehover = true;
+  }
+
+  public dragEnd(event: CdkDragDrop<string[]>) {
+    console.log('event finish', event);
+    this.disablehover = false;
+  }
+
+  public drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+      const previous = event.previousContainer.data;
+      const current = event.container.data;
+      const diff = current.filter((p) => !previous.includes(p));
+      this.chargeYourCampagn.emit(diff);
+    }
+  }
+
   public log(info: HTMLElement) {
     console.log('INFO', info.classList.add('machin'));
   }
@@ -198,6 +174,15 @@ export class DragNDropComponent implements OnInit, OnChanges {
     const index = this.notSelectedQuestions.indexOf(question);
     if (index > -1) {
       this.notSelectedQuestions.splice(index, 1);
+    }
+    this.chargeYourCampagn.emit([...this.selectedQuestions, question]);
+  }
+
+  public removeQuestion(question) {
+    this.notSelectedQuestions.unshift(question);
+    const index = this.selectedQuestions.indexOf(question);
+    if (index > -1) {
+      this.selectedQuestions.splice(index, 1);
     }
     this.chargeYourCampagn.emit([...this.selectedQuestions, question]);
   }

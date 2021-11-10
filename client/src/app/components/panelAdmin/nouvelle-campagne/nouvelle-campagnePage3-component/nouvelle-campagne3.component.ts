@@ -72,19 +72,12 @@ export class NouvelleCampagnePage3Component implements OnInit {
       
     }
   }
-  constructor(
-    public apiClientService: ApiClientService,
-    public decryptTokenService: DecryptTokenService,
-    private router: Router,
-  ) { }
+  constructor(public apiClientService: ApiClientService, public decryptTokenService: DecryptTokenService) { }
 
   ngOnInit() {
-  
     this.experience = this.formCampagne.value.experience;
     this.getAllQuestions();
-   
   } 
-
 
   fmtMSS(d) {
     d = Number(d);
@@ -105,26 +98,24 @@ export class NouvelleCampagnePage3Component implements OnInit {
 
 
    getAllQuestions() {
-
-      let url ='';
-
+      let url: string = '';
       this.techno.forEach((tech,index)=>{
-        if(index === 0){
-        url +=`?technologies_in=${tech.id}`
-        }else{
-        url +=`&technologies_in=${tech.id}`
+        if (index === 0) {
+          url +=`?technologies_in=${tech.id}`
+        } else {
+          url +=`&technologies_in=${tech.id}`
         }
       })
 
-      this.apiClientService.get(`${API_URI_QUESTIONS}${url}`).subscribe(datas => {
-        
+      const MOCK_URL: string = '/api/questions?technologies_in=13555&technologies_in=13554&technologies_in=13561'
+      // this.apiClientService.get(`${API_URI_QUESTIONS}${url}`).subscribe(datas => {
+      this.apiClientService.get(MOCK_URL).subscribe(datas => {
         this.questions = [...datas];
         
         for (const question of this.questions) {
           if (question.technologies) {
               this.allQuestions.push(question);
           }
-
         }
 
         this.selectedQuestions = this.allQuestions.filter(questionLevel => (questionLevel.level === this.experience));
@@ -133,13 +124,12 @@ export class NouvelleCampagnePage3Component implements OnInit {
         for(let questionOfLevel of this.selectedQuestions){
           this.notSelectedQuestions = this.notSelectedQuestions.filter(question => question !== questionOfLevel);
         }
-
       });
       
   }
 
   chargeYourCampagn(event) {
-    this.selectedQuestions= this.selectedQuestions.filter(q1=>this.notSelectedQuestions.findIndex(q2=>q1.id.toString()===q2.id.toString())<0)
+    this.selectedQuestions = this.selectedQuestions.filter(q1 => this.notSelectedQuestions.findIndex(q2 => q1.id.toString ()=== q2.id.toString()) < 0)
   }
 
   public onDecrementPage(): void {

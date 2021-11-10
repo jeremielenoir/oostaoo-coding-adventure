@@ -147,7 +147,11 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     height: 100%;
-    
+
+    .ligne-remove {
+      padding: 0 3px 0 3px;
+      border-left: 1px dashed $color-principal-blue;
+    }
 }
 .liste-question::-webkit-scrollbar{
     width: 8px;
@@ -482,4 +486,3 @@
     // padding-bottom: 25px;
     height: 100%;
 }
-
