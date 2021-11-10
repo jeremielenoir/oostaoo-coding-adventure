@@ -147,11 +147,6 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     height: 100%;
-
-    .ligne-remove {
-      padding: 0 3px 0 3px;
-      border-left: 1px dashed $color-principal-blue;
-    }
 }
 .liste-question::-webkit-scrollbar{
     width: 8px;
@@ -180,7 +175,7 @@
     display: none;
 }
 
-.ligne-question{
+.ligne-question {
     display: flex;
     flex-direction: row; 
     align-items: center; 
@@ -234,7 +229,7 @@
             }
         }
 
-        .info-hover-content{
+        .info-hover-content {
             background: #eaeff3;
             padding-top: 10px;
             padding-left: 10px;
@@ -289,7 +284,6 @@
         }
     }
     
-
     .ligne-note{
         width: 12%;
         min-width: 12%;
@@ -326,11 +320,7 @@
          }
     
     }
-    
-    
-    
-    
-    
+
     .ligne-points{
         width: 12%; 
         max-width: 12%; 
@@ -346,14 +336,13 @@
             justify-content: center;
         }
     }
-    
+
     .ligne-type{
         width: 7%;
         max-width: 7%; 
         min-width: 7%; 
         height: 100%; 
         border-right: 1px dashed $color-principal-blue;
-    
     }
     
     .ligne-icon{
@@ -378,7 +367,7 @@
             justify-content: center;
         }
     }
-    
+
     .ligne-plus{
         width: 7%; 
         max-width: 7%; 
@@ -388,10 +377,7 @@
         border-left: 1px dashed $color-principal-blue;
         display: none;
         
-        
-        .ligne-plus-text{
-            
-        }
+        .ligne-plus-text{}
     }
 
     &:hover{
@@ -406,7 +392,7 @@
             display:block;
         }
 
-        .ligne-techno p, .ligne-nom, .ligne-points, .ligne-type i, .ligne-temps{
+        .ligne-techno p, .ligne-nom, .ligne-points, .ligne-type i, .ligne-temps {
             color: white;
         }
     }

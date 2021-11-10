@@ -43,13 +43,14 @@ export const API_POPULATE_QUESTIONS_SPREADSHEET: string = prefix + 'questions/po
 export class ApiClientService {
   user: any;
   constructor(private http: HttpClient, public decryptTokenService: DecryptTokenService) {
-    if (decryptTokenService.userId) {
-      http.get(API_URI_USER + '/' + decryptTokenService.userId)
-        .toPromise()
-        .then(data => {
-          console.log('IN CONSTRUCTOR API SERVICE', data);
-          this.user = data;
-        });
+    if (this.decryptTokenService.userId) {
+      this.getUser();
+      // http.get(API_URI_USER + '/' + decryptTokenService.userId)
+      //   .toPromise()
+      //   .then(data => {
+      //     console.log('IN CONSTRUCTOR API SERVICE', data);
+      //     this.user = data;
+      //   });
     }
   }
 
@@ -70,7 +71,7 @@ export class ApiClientService {
     return body || {};
   }
 
-  getUser(){
+  getUser(): any {
     return this.http.get(API_URI_USER + '/' + this.decryptTokenService.userId).toPromise().then(data=>{
       return this.user = data;
     });

@@ -166,10 +166,7 @@
 
         <div class="ligne-question" (cdkDragEnded)="dragEnd($event)" (cdkDragStarted)="dragStart($event)"
           *ngFor="let item of selectedQuestions" cdkDrag>
-          <div #info [ngClass]="{
-              'info-hover-right': disablehover === false,
-              disable: disablehover === true
-            }" class="">
+          <div #info [ngClass]="{'info-hover-right': disablehover === false, disable: disablehover === true }" class="">
             <div class="info-hover-header">
               <h2>{{ item[nameI18n] }}</h2>
             </div>
@@ -258,11 +255,16 @@
             <p class="ligne-temps-text">{{ fmtMSS(item.time) }}</p>
           </div>
 
-          <div class="ligne-remove">
-            <button mat-mini-fab color="warn" (click)="removeQuestion(item)">
-              <mat-icon>delete</mat-icon>
-            </button>
+          <div (click)="removeQuestion(item)" class="ligne-plus">
+            <p class="ligne-plus-text">
+              <button (mouseover)="disablehover = true" (mouseout)="disablehover = false" mat-mini-fab
+                [matTooltipPosition]="'below'" [matTooltipClass]="'roodeo-tooltip'"
+                matTooltip="Retirer la question du test" [color]="'accent'" aria-label="Retirer la question du test">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </p>
           </div>
+
         </div>
       </div>
     </div>

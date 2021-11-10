@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
@@ -6,6 +6,7 @@ import { DecryptTokenService } from 'src/app/components/home/register/register.s
 import { API_URI_CAMPAIGNS, ApiClientService } from '../../../api-client/api-client.service';
 import { Router } from '@angular/router';
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
+import { Subscription } from 'rxjs';
 
 export interface IDialogData {
   questions: any;
@@ -43,7 +44,7 @@ export class DialogOverviewTestComponent implements OnInit {
   styleUrls: ['./dragndrop.component.scss'],
   templateUrl: './dragndrop.component.html',
 })
-export class DragNDropComponent implements OnInit, OnChanges {
+export class DragNDropComponent implements OnInit, OnChanges, OnDestroy {
   @Input() public formCampagne: FormGroup;
   @Input() public notSelectedQuestions = [];
   @Input() public selectedQuestions = [];
@@ -51,6 +52,7 @@ export class DragNDropComponent implements OnInit, OnChanges {
   @Output() public incrementPage = new EventEmitter<any>();
   @Output() public decrementPage = new EventEmitter<any>();
   @Output() public chargeYourCampagn = new EventEmitter<any>();
+  private subscription: Subscription;
   public searchText = '';
   public experience: string;
   public questions: any[];
@@ -60,6 +62,7 @@ export class DragNDropComponent implements OnInit, OnChanges {
   public yourCampaign;
   public difficulty = ['facile', 'moyen', 'expert'];
   public isLoaded: boolean;
+  public showDelBtn: boolean = false;
   public activeClassScrollTopDropList = false;
   public Questions = [];
   public disablehover = false;
@@ -134,6 +137,10 @@ export class DragNDropComponent implements OnInit, OnChanges {
     }
   }
 
+  public ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   public dragStart(event: CdkDragDrop<string[]>) {
     console.log('event start', event);
     this.disablehover = true;
@@ -189,9 +196,12 @@ export class DragNDropComponent implements OnInit, OnChanges {
 
   public fmtMSS(d: number) {
     d = Number(d);
+
     // var h = Math.floor(d / 3600);
     const m = Math.floor((d % 3600) / 60);
     const s = Math.floor((d % 3600) % 60);
+    
+    console.log(m, s);
 
     return ('0' + m).slice(-2) + ':' + ('0' + s).slice(-2);
   }
@@ -205,7 +215,7 @@ export class DragNDropComponent implements OnInit, OnChanges {
   }
 
   public SendQuestionSelected(id) {
-    this.apiClientService
+    this.subscription = this.apiClientService
       .put(API_URI_CAMPAIGNS + '/' + id, {
         questions: this.selectedQuestions,
       })
@@ -240,7 +250,7 @@ export class DragNDropComponent implements OnInit, OnChanges {
       envoiRapportSimplifie = false;
     }
 
-    this.apiClientService
+    this.subscription = this.apiClientService
       .post(API_URI_CAMPAIGNS, {
         Name: this.formCampagne.value.nomDeCampagne,
         copy_paste: truecp,
