@@ -62,7 +62,6 @@ export class DragNDropComponent implements OnInit, OnChanges, OnDestroy {
   public yourCampaign;
   public difficulty = ['facile', 'moyen', 'expert'];
   public isLoaded: boolean;
-  public showDelBtn: boolean = false;
   public activeClassScrollTopDropList = false;
   public Questions = [];
   public disablehover = false;

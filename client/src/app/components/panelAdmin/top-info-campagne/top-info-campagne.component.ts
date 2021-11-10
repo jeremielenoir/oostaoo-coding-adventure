@@ -72,9 +72,7 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
 
 
   ngOnInit() {
-    this.route.parent.params.subscribe((params) => {
-      this.globalId = params.id;
-    });
+    this.route.parent.params.subscribe((params) => this.globalId = params.id);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -84,13 +82,7 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
   }
 
   convertSecondsToMinutes(time) {
-    console.log(time, Math.floor(time / 60));
-
-    if (time < 59) {
-      return time;
-    }
-
-    return Math.floor(time / 60);
+    return time < 59 ? time : Math.floor(time / 60);
   }
 
   public onChangeIndex($event){
