@@ -84,9 +84,6 @@ export class DragNDropComponent implements OnInit, OnChanges, OnDestroy {
   ) {}
 
   public ngOnInit() {
-    console.log(this.selectedQuestions);
-    console.log(this.notSelectedQuestions);
-    ////
     switch (this.languageStorage.getLanguageCountry()) {
       case 'es-ES':
         this.nameI18n = 'name_es';
@@ -125,9 +122,7 @@ export class DragNDropComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     window.scroll(10, 0);
-    window.addEventListener('scroll', () => {
-      this.headerChangePositioinDropList();
-    });
+    window.addEventListener('scroll', () => this.headerChangePositioinDropList());
   }
 
   public ngOnChanges(changes: SimpleChanges) {
@@ -216,9 +211,7 @@ export class DragNDropComponent implements OnInit, OnChanges, OnDestroy {
         questions: this.selectedQuestions,
       })
       .subscribe(
-        (res) => {
-          console.log(res);
-        },
+        (res) => console.log(res),
         (err) => console.log(err),
       );
   }
