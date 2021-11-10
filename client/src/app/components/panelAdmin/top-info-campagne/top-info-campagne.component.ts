@@ -83,7 +83,13 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
     console.log('TECHNO DONUTS', this.technoDonuts);
   }
 
-  convertSecondsToMinutes( time) {
+  convertSecondsToMinutes(time) {
+    console.log(time, Math.floor(time / 60));
+
+    if (time < 59) {
+      return time;
+    }
+
     return Math.floor(time / 60);
   }
 

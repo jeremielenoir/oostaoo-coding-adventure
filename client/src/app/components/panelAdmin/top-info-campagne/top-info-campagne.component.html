@@ -29,7 +29,7 @@
                 <span class="icon-chevron fas fa-chevron-up"></span>
                 <span class="question-time">{{donut.question}} questions</span>
                 <span class="question-time">{{convertSecondsToMinutes(donut.timeQuestion / 2)}} à
-                  {{convertSecondsToMinutes(donut.timeQuestion)}} min</span>
+                  {{convertSecondsToMinutes(donut.timeQuestion)}} {{donut.timeQuestion < 59 ? 'sec' : 'min' }}</span>
               </p>
               <div class="infoBule-info">
                 <h3 class="title-infobule">connaissance du langange</h3>

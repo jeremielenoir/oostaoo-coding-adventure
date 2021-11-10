@@ -196,12 +196,9 @@ export class DragNDropComponent implements OnInit, OnChanges, OnDestroy {
 
   public fmtMSS(d: number) {
     d = Number(d);
-
     // var h = Math.floor(d / 3600);
     const m = Math.floor((d % 3600) / 60);
     const s = Math.floor((d % 3600) % 60);
-    
-    console.log(m, s);
 
     return ('0' + m).slice(-2) + ':' + ('0' + s).slice(-2);
   }
