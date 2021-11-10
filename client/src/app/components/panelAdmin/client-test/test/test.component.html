@@ -57,8 +57,8 @@
 
       <div *ngIf="question.type === 'one'" class="content-testing content-testing-seconde">
         <mat-radio-group [disabled]="isDisabled" aria-labelledby="answer-radio-group-label" class="answer-radio-group"
-          [(ngModel)]="responseUser">
-          <mat-radio-button class="answer-wrap" class="answer-radio-button" *ngFor="let answer of choiceOfAnswers"
+          [(ngModel)]="candidatAnswer">
+          <mat-radio-button [ngClass]="['answer-wrap', 'answer-radio-button']" *ngFor="let answer of choiceOfAnswers"
             [value]="answer" appBlockCopyPaste [appActive]="candidat.campaign.copy_paste && !prev">
             {{ answer }}
           </mat-radio-button>
