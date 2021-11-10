@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ApiClientService, API_URI_CAMPAIGNS, API_URI_CANDIDATS, API_URI_NOTIFICATIONS, QUESTION_SEPARATOR } from '../../../../api-client/api-client.service';
 import { SelectedLanguageService } from '../../../../services/selected-language.service';
 import { MatDialog } from '@angular/material';
 import { DialogTimeoutComponent } from './dialog-timeout.component';
-import { Subscription, timer, interval, Observable, concat} from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subscription, timer, interval, Observable, concat, EMPTY} from 'rxjs';
+import { takeUntil, map, tap, concatMap } from 'rxjs/operators';
 import { OVERLAY_KEYBOARD_DISPATCHER_PROVIDER } from '@angular/cdk/overlay/typings/keyboard/overlay-keyboard-dispatcher';
 
 @Component({
@@ -27,7 +28,7 @@ export class TestComponent implements OnInit, OnDestroy {
   public question: Record<string, any>; // done
   public currentIdxQuestions: number = 0; // done
   public chronometerCurrentTime: number = 0; // done
-  private chronometerCurrentTimeId: NodeJS.Timer; // done
+
   private startChronometerSubscription :Subscription;
   private answerQuestionSubscription :Subscription;
 
@@ -42,8 +43,7 @@ export class TestComponent implements OnInit, OnDestroy {
   public candidatAnswer: string = ''; // done
 
   public correctAnswerCounter: number = 0; // done
-  public totalAnswerCounter: number = 0; // done
-
+  
   private candidatAnswers: string[] = []; // done
   private correctAnswers: string[] = []; // done
 
@@ -73,6 +73,7 @@ export class TestComponent implements OnInit, OnDestroy {
 
   constructor(
     private apiClientService: ApiClientService, 
+    private httpClient: HttpClient,
     public languageStorage: SelectedLanguageService, 
     public dialog: MatDialog) { }
 
@@ -101,14 +102,16 @@ export class TestComponent implements OnInit, OnDestroy {
         
         this.totalElapsedTime += this.chronometerCurrentTime;
         this.startChronometerSubscription.unsubscribe();
-        this.currentIdxQuestions++;
-        if(this.currentIdxQuestions === this.questions.length){
-          //test is finish post test
-        }else{
-
-          this.startChronometerSubscription = this.startQuestion(this.currentIdxQuestions).subscribe(chronometerObserver);
-        }
         
+        this.validateAnswer().subscribe((observer) =>{
+          this.currentIdxQuestions++;
+            if(this.currentIdxQuestions === this.questions.length){
+              //test is finish post test
+              console.log('test is finish need to post it');
+            }else{
+              this.startChronometerSubscription = this.startQuestion(this.currentIdxQuestions).subscribe(chronometerObserver);
+            }
+        });
       },
       error: err => console.error('answer Question Observer got an error: ' + err),
     };
@@ -122,7 +125,6 @@ export class TestComponent implements OnInit, OnDestroy {
     };
 
     this.startChronometerSubscription = this.startQuestion(this.currentIdxQuestions).subscribe(chronometerObserver);
-    
   }
 
   ngOnDestroy(): void {
@@ -254,81 +256,40 @@ export class TestComponent implements OnInit, OnDestroy {
     }
   }
 
-  public nextQuestion() {
-    this.totalAnswerCounter++;
+  private validateAnswer() : Observable<any> {
 
-    if (this.checkTimeDefault === false) {
-      this.correctAnswers = this.question.answer_value.split(this.separator).sort();
-      this.validateAnswer();
-    }
-
-    
-
-    this.question = this.questions[this.currentIdxQuestions];
-
-    this.choiceOfAnswers = this.question[this.dataInfoLanguageContent].split(this.separator);
-
+    // get correct answers of current question    
     this.correctAnswers = this.question.answer_value.split(this.separator).sort();
+    let points :number;
 
-    this.fewSecondsLeft = this.questions[this.currentIdxQuestions].time - 5;
+    const { type: questionType } = this.questions[this.currentIdxQuestions].type;
+    console.log(questionType);
 
-    this.setCurrentQuestionTechnology();
-
-    this.candidatAnswer = '';
-    this.candidatAnswers = [];
-    this.isDisabled = false;
-    this.checkTimeDefault = false;
-  }
-
-  private validateAnswer() {
-    if (this.questions[this.currentIdxQuestions].type === 'one') {
+    if (this.questions[this.currentIdxQuestions].type === 'one' || 
+        this.questions[this.currentIdxQuestions].type === 'multiple' ) {
+      //determines if candidat answer is good and get associated points 
       this.candidatAnswers.push(this.candidatAnswer);
-
-      if (this.correctAnswers.sort().toString() === this.candidatAnswers.sort().toString()) {
-        this.correctAnswerCounter++;
-        if (this.mode === 'testing') {
-          this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, this.questions[this.currentIdxQuestions].points);
-        }
-      } else {
-        if (this.mode === 'testing') {
-          this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, 0);
-        }
-      }
+      points = this.correctAnswers.sort().toString() === this.candidatAnswers.sort().toString() ? this.questions[this.currentIdxQuestions].points : 0;  
       // maybe use nullish coalescing operator ?
     }
 
     if (this.questions[this.currentIdxQuestions].type === 'free') {
+
       this.candidatAnswers.push(this.candidatAnswer.toLowerCase().trim());
-
-      if (this.candidatAnswers.every((reps) => this.correctAnswers.includes(reps))) {
-        this.correctAnswerCounter++;
-        if (this.mode === 'testing') {
-          this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, this.questions[this.currentIdxQuestions].points);
-        }
-      } else {
-        if (this.mode === 'testing') {
-          this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, 0);
-        }
-      }
+      points = this.candidatAnswers.every((reps) => this.correctAnswers.includes(reps)) ? this.questions[this.currentIdxQuestions].points : 0;
       // maybe use nullish coalescing operator ?
     }
 
-    if (this.questions[this.currentIdxQuestions].type === 'multiple') {
-      if (this.correctAnswers.sort().toString() === this.candidatAnswers.sort().toString()) {
-        this.correctAnswerCounter++;
-        if (this.mode === 'testing') {
-          this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, this.questions[this.currentIdxQuestions].points);
-        }
-      } else {
-        if (this.mode === 'testing') {
-          this.sumPointsByRepCandidat(this.questions[this.currentIdxQuestions].technologies, 0);
-        }
-      }
-      // maybe use nullish coalescing operator ?
-    }
+    this.correctAnswerCounter+= points ? 1:0;
 
-    // if on testing mode, make api call
-    if (this.mode === 'testing') this.postRapportCandidat();
+    if (this.mode === 'testing') {
+      return this.putAnswerResult(
+        this.questions[this.currentIdxQuestions].technologies, 
+        points
+        );
+    } else{
+      return EMPTY;
+    }
   }
 
   public fmtMSS(d) {
@@ -430,30 +391,6 @@ export class TestComponent implements OnInit, OnDestroy {
       });
   }
 
-  public controleTimeTest() {
-    let dateNow;
-    let dateServeur;
-    let dateDiff;
-    let diffSeconds;
-    let timePauseDiff;
-
-    if (this.candidat.date_pause !== this.candidat.invitation_date) {
-      dateNow = new Date();
-      dateServeur = new Date(this.candidat.date_pause);
-
-      dateDiff = dateNow - dateServeur;
-      diffSeconds = Math.floor(dateDiff / 1e3); // diff date by seconds
-      timePauseDiff = this.candidat.test_pause + diffSeconds;
-
-      if (this.question.time < timePauseDiff) {
-        this.checkTimeDefault = true;
-        this.nextQuestion();
-      } else {
-        this.chronometerCurrentTime = timePauseDiff;
-      }
-    }
-  }
-
   public postPauseTest() {
     this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
       date_pause: new Date().toISOString(),
@@ -462,36 +399,11 @@ export class TestComponent implements OnInit, OnDestroy {
     }).toPromise().then();
   }
 
-  public postRapportCandidat() {
-    this.apiClientService.get(API_URI_CANDIDATS + '/' + this.candidat.id)
-      .toPromise()
-      .then(res => {
-        if (res.raport_candidat) this.jsonRapport = res.raport_candidat;
-
-        this.jsonRapport.rapport.push({
-          array_rep_candidat: this.candidatAnswers,
-          index_question: this.question, // JSON to PDF and rapport candidat
-          timeRep: this.chronometerCurrentTime,
-        });
-
-        this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
-          raport_candidat: this.jsonRapport,
-        }).toPromise().then();
-      });
-  }
-
   public sumPointsByTechnologyId(questions: Record<string, any>[]): Record<string, any>[] {
     let sumPointsByTechno = {};
 
     questions.forEach((element: Record<string, any>) => {
       sumPointsByTechno[element.technologies] = sumPointsByTechno[element.technologies] ? sumPointsByTechno[element.technologies] + element.points : element.points;
-      // if (sumPoints.hasOwnProperty(element.technologies)) {
-      //   sumPoints[element.technologies] = sumPoints[element.technologies] + element.points;
-      //   // console.log('sumPoints[element.technologies]: ', sumPoints[element.technologies]);
-      // } else {
-      //   sumPoints[element.technologies] = element.points;
-      //   // console.log('sumPoints[element.technologies] = element.points: ', sumPoints[element.technologies]);
-      // }
     });
 
     let arraySumPoints: Record<string, any>[] = [];
@@ -512,18 +424,32 @@ export class TestComponent implements OnInit, OnDestroy {
     return arraySumPoints;
   }
 
-  private sumPointsByRepCandidat(techno, point) {
-    this.apiClientService.get(API_URI_CANDIDATS + '/' + this.candidat.id)
-      .toPromise()
-      .then((res) => {
+  private putAnswerResult(techno, point) : Observable<Record<string, any>> {
+
+    return this.httpClient.get<Record<string, any>>(API_URI_CANDIDATS + '/' + this.candidat.id).pipe(
+      tap((res) => {
+        
+
         if (res.points_candidat) this.SumPointsCandidat = res.points_candidat;
-
         this.SumPointsCandidat.push({ technologies: techno, points: point });
+        
+        if (res.raport_candidat) this.jsonRapport = res.raport_candidat;
 
-        this.apiClientService.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
-          points_candidat: this.SumPointsCandidat,
-        }).toPromise().then();
-      });
+        this.jsonRapport.rapport.push({
+          array_rep_candidat: this.candidatAnswers,
+          index_question: this.question, // JSON to PDF and rapport candidat
+          timeRep: this.chronometerCurrentTime,
+        });
+
+        return this.SumPointsCandidat;
+      }),
+      concatMap((res) => this.httpClient.put<Record<string, any>>(API_URI_CANDIDATS + '/' + this.candidat.id, {
+        points_candidat: this.SumPointsCandidat,
+        raport_candidat: this.jsonRapport,
+      })),
+      tap((res) => console.log(res)
+      )
+    );
   }
 
   private calculTotalPoints(statistics: Record<string, any>[]): Record<string, any> {
@@ -548,7 +474,6 @@ export class TestComponent implements OnInit, OnDestroy {
       hasBackdrop: true,
     });
 
-    //this.subscription = dialogRef.componentInstance.nextQuestion.subscribe(() => this.nextQuestion());
     dialogRef.afterClosed().subscribe();
   }
 
