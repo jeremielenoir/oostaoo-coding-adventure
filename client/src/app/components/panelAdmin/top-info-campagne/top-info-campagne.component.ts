@@ -1,21 +1,5 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  ElementRef,
-  ViewChild,
-  EventEmitter, 
-  Output
-} from "@angular/core";
-
-import {
-  ApiClientService,
-  API_URI_QUESTIONS,
-  API_URI_CAMPAIGNS,
-} from "../../../api-client/api-client.service";
-
+import { Component, OnInit, Input, OnChanges, SimpleChanges, ElementRef, ViewChild, EventEmitter, Output } from "@angular/core";
+import { ApiClientService, API_URI_QUESTIONS, API_URI_CAMPAIGNS } from "../../../api-client/api-client.service";
 import Chart from "chart.js";
 import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -31,7 +15,6 @@ import { SwiperComponent, SwiperConfigInterface} from "ngx-swiper-wrapper";
   styleUrls: ["./top-info-campagne.component.scss"],
 })
 export class TopInfoCampagneComponent implements OnInit, OnChanges {
-
   @Input() formCampagne: FormGroup;
   @Input() questions;
   @Input() yourCampaign;
@@ -145,7 +128,7 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
       }
     }
 
-    this.technoDonuts = [...Object.values(summaries)];
+    this.technoDonuts = [...Object.values(summaries).filter(summary => summary.question !== 0)];
     this.poinTotal = totalPoint;
     this.timeAllquestionCampagn = totalTime;
     this.timeAllquestionCampgnDevice = totalTime / 2;
@@ -433,5 +416,3 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
 export interface IHash {
   [details: string] : any;
 }
-
-

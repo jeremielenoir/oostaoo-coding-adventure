@@ -129,7 +129,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
   }
 
   chargeYourCampagn(event) {
-    this.selectedQuestions = this.selectedQuestions.filter(q1 => this.notSelectedQuestions.findIndex(q2 => q1.id.toString ()=== q2.id.toString()) < 0)
+    this.selectedQuestions = this.selectedQuestions.filter(q1 => this.notSelectedQuestions.findIndex(q2 => q1.id.toString() === q2.id.toString()) < 0)
   }
 
   public onDecrementPage(): void {
