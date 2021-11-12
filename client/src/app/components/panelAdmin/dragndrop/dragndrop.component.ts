@@ -226,13 +226,13 @@ export class DragNDropComponent implements OnInit, OnChanges, OnDestroy {
 
   public postCampagne() {
     // Confirm true for post
-    let truecp;
+    let truecp: boolean;
     if (this.formCampagne.value.utilisationCopieColler === 'true') {
       truecp = true;
     } else {
       truecp = false;
     }
-    let envoiRapportSimplifie;
+    let envoiRapportSimplifie: boolean;
     if (this.formCampagne.value.envoiRapportSimplifie === 'true') {
       envoiRapportSimplifie = true;
     } else {
