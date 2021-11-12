@@ -118,7 +118,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
           }
         }
         
-        this.selectedQuestions = this.allQuestions.filter(questionLevel => (questionLevel.level === this.experience));
+        this.selectedQuestions = this.percentQuestionsByLevel(this.experience, this.allQuestions);
         this.notSelectedQuestions = [...this.allQuestions];
         
         for(let questionOfLevel of this.selectedQuestions){
