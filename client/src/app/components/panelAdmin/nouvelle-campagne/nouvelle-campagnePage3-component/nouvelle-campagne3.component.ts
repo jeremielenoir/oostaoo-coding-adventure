@@ -139,8 +139,8 @@ export class NouvelleCampagnePage3Component implements OnInit {
     // if selected level is “moyen“ then 60% of selected questions will be “moyen“ level
     // the left are split in 20% “facile“ level and 20% “expert“ level or inversely
     const sixtyPer: number = Math.round((60 * testTimeSeconds) / 100);
-    const twentyPer: number = Math.round(sixtyPer / 2);
-    const leftPer: number = testTimeSeconds - (sixtyPer + twentyPer);
+    const twentyPer: number = Math.round((testTimeSeconds - sixtyPer) / 2);
+    const leftPer: number = Math.round(testTimeSeconds - (sixtyPer + twentyPer));
 
     // In these 2 array, index position of each values are not correlated
     let levels: string[] = ["facile", "moyen", "expert"];
@@ -150,7 +150,8 @@ export class NouvelleCampagnePage3Component implements OnInit {
       {level: selectedLevel, time: sixtyPer}
     ];
 
-    for (let i = levels.length; i > 0; i--) {
+    const y: number = levels.length - 1;
+    for (let i = 0; i < y; i++) {
       let timeLevel = timeLevels[i]; // it'll get what it's in line 153
 
       // filter out level & time in order to keep only level & time not already used
