@@ -262,9 +262,6 @@ export class TestComponent implements OnInit, OnDestroy {
     this.correctAnswers = this.question.answer_value.split(this.separator).sort();
     let points :number;
 
-    const { type: questionType } = this.questions[this.currentIdxQuestions].type;
-    console.log(questionType);
-
     if (this.questions[this.currentIdxQuestions].type === 'one' || 
         this.questions[this.currentIdxQuestions].type === 'multiple' ) {
       //determines if candidat answer is good and get associated points 
@@ -274,10 +271,8 @@ export class TestComponent implements OnInit, OnDestroy {
     }
 
     if (this.questions[this.currentIdxQuestions].type === 'free') {
-
       this.candidatAnswers.push(this.candidatAnswer.toLowerCase().trim());
       points = this.candidatAnswers.every((reps) => this.correctAnswers.includes(reps)) ? this.questions[this.currentIdxQuestions].points : 0;
-      // maybe use nullish coalescing operator ?
     }
 
     this.correctAnswerCounter+= points ? 1:0;
