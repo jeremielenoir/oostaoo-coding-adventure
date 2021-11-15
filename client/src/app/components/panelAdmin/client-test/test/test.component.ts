@@ -427,15 +427,13 @@ export class TestComponent implements OnInit, OnDestroy {
             );
   }
 
-  public postPauseTest() {
-    this.apiClientService
+  public postPauseTest(): Observable<any>{
+    return this.httpClient
       .put(API_URI_CANDIDATS + '/' + this.candidat.id, {
         date_pause: new Date().toISOString(),
         index_question: this.currentIdxQuestions,
         test_pause: this.chronometerCurrentTime,
-      })
-      .toPromise()
-      .then();
+      });
   }
 
   public sumPointsByTechnologyId(
@@ -528,18 +526,18 @@ export class TestComponent implements OnInit, OnDestroy {
   // work only if Press F5 or cancel close window
   @HostListener('window:beforeunload', ['$event'])
   public beforeunloadHandler($event) {
-    //$event.returnValue = 'Are you sure?';
+    $event.returnValue = 'Are you sure?';
     console.log('before unload');
     // on tutorial mode, prevent backend api calls
     if (this.mode !== 'testing') return;
 
-    //this.postPauseTest();
-    //this.controleTimeTest();
+    this.postPauseTest().subscribe();
+    
   }
 
   @HostListener('window:unload', ['$event'])
   public sendData() {
-    alert('works');
+    //alert('works');
     // on tutorial mode, prevent backend api calls
     //console.log('unload');
     if (this.mode !== 'testing') return;
