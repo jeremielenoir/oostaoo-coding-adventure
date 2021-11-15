@@ -38,7 +38,6 @@ export class NouvelleCampagneComponent implements OnInit {
   }
 
   ngOnInit() {
-   
     /*
     this._http.get(`${environment.urlBackEnd}Test22s`)
       .subscribe(

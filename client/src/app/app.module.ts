@@ -159,6 +159,7 @@ import { InterviewDialogComponent } from './components/panelAdmin/edit-campagne/
 import { NavWrapperComponent } from './components/panelAdmin/navbar/nav-wrapper/nav-wrapper.component';
 import { SaveCardComponent } from './components/save-card/save-card.component';
 import { CompactBtnComponent } from './components/common/ui/compact-btn/compact-btn.component';
+import { JsonService } from './services/json/json.service';
 
 export class MyIntl extends TimeagoIntl {
 
@@ -188,7 +189,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DialogForgetPassword,
     OffersComponent,
     ConfirmComponent,
-    AddressComponent
+    AddressComponent,
   ],
   declarations: [
     AppComponent,
@@ -319,12 +320,15 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 
     TimeagoModule.forRoot({
       intl: { provide: TimeagoIntl, useClass: MyIntl },
-      formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
+      formatter: {
+        provide: TimeagoFormatter,
+        useClass: TimeagoCustomFormatter,
+      },
     }),
 
     CKEditorModule,
     MatProgressBarModule,
-    SwiperModule
+    SwiperModule,
   ],
   providers: [
     ApiClientService,
@@ -334,14 +338,16 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     SelectedLanguageService,
     CookieService,
     CampaignsArchivedPipe,
+    JsonService,
     {
       provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG
+      useValue: DEFAULT_SWIPER_CONFIG,
     },
     {
-      provide: LOCALE_ID, useValue: 'fr'
-    }
+      provide: LOCALE_ID,
+      useValue: 'fr',
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

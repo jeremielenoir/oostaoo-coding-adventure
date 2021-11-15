@@ -9,7 +9,7 @@ import { InviteCandidat } from '../edit-campagne/candidats/invite-candidat.compo
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { AuthenticationService } from './../../home/register/service/auth.service';
 import { RouterLink } from '@angular/router';
 
@@ -18,7 +18,6 @@ export interface DialogData {
   confirmed: boolean;
 }
 
-
 @Pipe({ name: 'campaignsArchived' })
 export class CampaignsArchivedPipe implements PipeTransform {
   transform(campaigns: any[], archived?: boolean) {
@@ -26,15 +25,12 @@ export class CampaignsArchivedPipe implements PipeTransform {
   }
 }
 
-
-
 @Component({
   selector: 'app-campagne',
   templateUrl: './campagne.component.html',
   styleUrls: ['./campagne.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-
 export class CampagneComponent implements OnInit, OnDestroy {
   @Output() campaignsChild = new EventEmitter<any>();
   @Output() emitIsactiveNoCountryside = new EventEmitter();
@@ -105,10 +101,12 @@ export class CampagneComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(res => {
       this.confirmed = res;
-      if (res === false) {
-        return;
-      } else {
-        this.duplicatecampaign(campaign);
+      if (res) {
+        this.subscription = this.duplicateCampaign(campaign.id).subscribe((duplicateCampaign) => {
+          this.campaigns.push(duplicateCampaign);
+          this.campaigns = [...this.campaigns];
+          this.openSnackBar("La campagne a correctement été dupliquée", "Fermer");
+        });
       }
     });
   }
@@ -122,10 +120,14 @@ export class CampagneComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(res => {
       this.confirmed = res;
-      if (res === false) {
-        return;
-      } else {
-        this.deletecampaign(campaign);
+      if (res) {
+        this.subscription = this.deleteCampaign(campaign.id).subscribe((campaignId) => {
+          let found = this.campaigns.findIndex(campaign => campaign.id === campaignId);
+          console.log('FOUND', found);
+          this.campaigns.splice(found, 1);
+          this.campaigns = [...this.campaigns];
+          this.openSnackBar("La campagne a correctement été supprimée", "Fermer");
+        });
       }
     });
   }
@@ -137,33 +139,24 @@ export class CampagneComponent implements OnInit, OnDestroy {
     });
   }
 
-  duplicatecampaign(campaign) {
-    const apiURL = API_URI_CAMPAIGNS + '/' + campaign.id;
-    return this.apiClientService
-      .get(apiURL)
-      .toPromise()
-      .then(res => { // Success
-        this.result = res;
-
-        this.apiClientService
-          .post(API_URI_CAMPAIGNS, {
-            Name: this.result.Name + ' copie',
-            archive: this.result.archive,
-            copy_paste: this.result.copy_paste,
-            langs: this.result.langs,
-            level: this.result.level,
-            pin: this.result.pin,
-            profile: this.result.profile,
-            sent_report: this.result.sent_report,
-            technologies: this.result.technologies,
-            user: this.result.user,
-          }).subscribe((duplicateCampaign) => {
-            this.campaigns.push(duplicateCampaign);
-            this.campaigns = [...this.campaigns];
-            this.openSnackBar("La campagne a correctement été dupliquée", "Fermer");
-          });
-
-      });
+  duplicateCampaign(campaignId: number): Observable<Record<string, any>> {
+    return this.apiClientService.get(API_URI_CAMPAIGNS + '/' + campaignId).pipe(
+      switchMap(campaign => this.apiClientService.post(API_URI_CAMPAIGNS, {
+        Name: campaign.Name + ' copie',
+        archive: campaign.archive,
+        copy_paste: campaign.copy_paste,
+        langs: campaign.langs,
+        level: campaign.level,
+        pin: campaign.pin,
+        profile: campaign.profile,
+        email_title: campaign.email_title,
+        email_content: campaign.email_content,
+        sent_report: campaign.sent_report,
+        technologies: campaign.technologies,
+        questions: campaign.questions,
+        user: campaign.user,
+      }))
+    );
   }
 
 
@@ -232,19 +225,10 @@ export class CampagneComponent implements OnInit, OnDestroy {
     }
   }
 
-  deletecampaign(campaign) {
-    const apiURL = API_URI_CAMPAIGNS + '/' + campaign.id;
-
-    return this.apiClientService
-      .delete(apiURL)
-      .toPromise()
-      .then(res => { // Success
-        let found = this.campaigns.findIndex(element => element.id == campaign.id);
-        console.log('FOUND', found);
-        this.campaigns.splice(found, 1);
-        this.campaigns = [...this.campaigns];
-        this.openSnackBar("La campagne a correctement été supprimée", "Fermer");
-      });
+  deleteCampaign(campaignId: number): Observable<number> {
+    return this.apiClientService.delete(API_URI_CAMPAIGNS + '/' + campaignId).pipe(
+      map(() => campaignId)
+    );
   }
 
   giveCampaigns() {
@@ -252,7 +236,6 @@ export class CampagneComponent implements OnInit, OnDestroy {
       this.campaignsChild.emit(this.campaigns);
     }
   }
-
 }
 
 @Component({

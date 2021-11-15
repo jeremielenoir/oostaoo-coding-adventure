@@ -1,16 +1,18 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ApiClientService, API_URI_USER, API_URI_ENTREPRISE } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profil-entreprise',
   templateUrl: './profil-entreprise.component.html',
   styleUrls: ['./profil-entreprise.component.scss']
 })
-export class ProfilEntrepriseComponent implements OnInit {
+export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
   @ViewChild('paramHeader') paramHeader: ElementRef;
   @ViewChild('uploadimgfirst') uploadimgfirst: ElementRef;
   @ViewChild('uploadimgLast') uploadimgLast: ElementRef;
@@ -19,6 +21,8 @@ export class ProfilEntrepriseComponent implements OnInit {
   @ViewChild('fileLoading') fileLoading: ElementRef;
   @ViewChild('uploadFileFirst') uploadFileFirst: ElementRef;
 
+  private subscription: Subscription;
+  readonly loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   account: any;
   public currentValue: number;
   public user: any;
@@ -44,7 +48,7 @@ export class ProfilEntrepriseComponent implements OnInit {
   logo: any;
   name = new FormControl('', Validators.required);
   newEntreprise = new FormControl('', Validators.required);
-  email = new FormControl('', Validators.required);
+  email = new FormControl('', [Validators.required, Validators.email]);
   newEmail = new FormControl('', [Validators.required, Validators.email]);
   lang = new FormControl('');
   phone = new FormControl('', Validators.required);
@@ -123,43 +127,51 @@ export class ProfilEntrepriseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loading$.next(true);
+
     if(this.apiClientService.user){
       this.createDataRoutes(this.apiClientService.user);
     } else{
-      this.apiClientService.getUser().then(user =>{
-        this.createDataRoutes(user);
-      });
+      this.apiClientService.getUser().then(user => this.createDataRoutes(user));
     }
 
-    this.getUser().then(user => {
-      this.account = user[0].customeraccount;
+    this.subscription = this.getUser().subscribe(user => {
+      // this.account is only used here, maybe to remove ?
+      this.account = user.customeraccount;
       // if (user[0].role.type === 'root') {
       //   this.router.navigate(['/dashboard/profil-utilisateur']); // role administrator strapi -> redirect to this route ?
       // }
 
-      if (this.account.entreprise === null) {
-        this.isVerifUser = true;
-        return console.log('no entreprise lel');
-      } else {
-        this.name = new FormControl(this.account.entreprise.nom, Validators.required);
-        this.email = new FormControl(this.account.entreprise.email, [
-          Validators.required,
-          Validators.email
-        ]);
-        this.lang = new FormControl(this.account.entreprise.lang);
-        this.phone = new FormControl(this.account.entreprise.tel, Validators.required);
-        this.industrie = new FormControl(this.account.entreprise.industrie);
-        this.numberofemployee = new FormControl(this.account.entreprise.nb_employe);
-        this.numberofdev = new FormControl(this.account.entreprise.nb_dev);
-        this.videolink = new FormControl(this.account.entreprise.lien_video);
-        this.websitelink = new FormControl(this.account.entreprise.url_site);
-        this.teaser = new FormControl(this.account.entreprise.teaser);
+      if (this.account.entreprise) {
+        this.name.setValue(this.account.entreprise.nom);
+        this.email.setValue(this.account.entreprise.email);
+        this.lang.setValue(this.account.entreprise.lang);
+        this.phone.setValue(this.account.entreprise.tel);
+        this.industrie.setValue(this.account.entreprise.nb_employe);
+        this.numberofemployee.setValue(this.account.entreprise.nb_employe);
+        this.numberofdev.setValue(this.account.entreprise.nb_dev);
+        this.videolink.setValue(this.account.entreprise.lien_video);
+        this.websitelink.setValue(this.account.entreprise.url_site);
+        this.teaser.setValue(this.account.entreprise.teaser);
+        this.linkedin.setValue(this.account.entreprise.linkedin);
+        this.facebook.setValue(this.account.entreprise.facebook);
+        this.twitter.setValue(this.account.entreprise.twitter);
+        // this.name = new FormControl(this.account.entreprise.nom, Validators.required);
+        // this.email = new FormControl(this.account.entreprise.email, [Validators.required, Validators.email]);
+        // this.lang = new FormControl(this.account.entreprise.lang);
+        // this.phone = new FormControl(this.account.entreprise.tel, Validators.required);
+        // this.industrie = new FormControl(this.account.entreprise.industrie);
+        // this.numberofemployee = new FormControl(this.account.entreprise.nb_employe);
+        // this.numberofdev = new FormControl(this.account.entreprise.nb_dev);
+        // this.videolink = new FormControl(this.account.entreprise.lien_video);
+        // this.websitelink = new FormControl(this.account.entreprise.url_site);
+        // this.teaser = new FormControl(this.account.entreprise.teaser);
         this.picture = this.account.entreprise.image_entreprise;
-        this.linkedin = new FormControl(this.account.entreprise.linkedin);
-        this.facebook = new FormControl(this.account.entreprise.facebook);
-        this.twitter = new FormControl(this.account.entreprise.twitter);
+        // this.linkedin = new FormControl(this.account.entreprise.linkedin);
+        // this.facebook = new FormControl(this.account.entreprise.facebook);
+        // this.twitter = new FormControl(this.account.entreprise.twitter);
         this.entreprise = this.account.entreprise;
-        if (this.account.entreprise.logo !== undefined) {
+        if (this.account.entreprise.logo) {
           this.logo = this.account.entreprise.logo.url;
         }
         console.log('entreprise user', this.account.entreprise);
@@ -169,8 +181,57 @@ export class ProfilEntrepriseComponent implements OnInit {
         // this.progressbar2();
         this.isVerifUser = true;
         this.progressbarTotal();
+      } else {
+        this.isVerifUser = true;
+        console.log('no entreprise lel');
       }
-    });
+
+      this.loading$.next(false);
+    })
+
+    // this.getUser()
+    //   .then(user => {
+    //     this.account = user[0].customeraccount;
+    //     // if (user[0].role.type === 'root') {
+    //     //   this.router.navigate(['/dashboard/profil-utilisateur']); // role administrator strapi -> redirect to this route ?
+    //     // }
+
+    //     if (this.account.entreprise === null) {
+    //       this.isVerifUser = true;
+    //       return console.log('no entreprise lel');
+    //     } else {
+    //       this.name = new FormControl(this.account.entreprise.nom, Validators.required);
+    //       this.email = new FormControl(this.account.entreprise.email, [Validators.required, Validators.email]);
+    //       this.lang = new FormControl(this.account.entreprise.lang);
+    //       this.phone = new FormControl(this.account.entreprise.tel, Validators.required);
+    //       this.industrie = new FormControl(this.account.entreprise.industrie);
+    //       this.numberofemployee = new FormControl(this.account.entreprise.nb_employe);
+    //       this.numberofdev = new FormControl(this.account.entreprise.nb_dev);
+    //       this.videolink = new FormControl(this.account.entreprise.lien_video);
+    //       this.websitelink = new FormControl(this.account.entreprise.url_site);
+    //       this.teaser = new FormControl(this.account.entreprise.teaser);
+    //       this.picture = this.account.entreprise.image_entreprise;
+    //       this.linkedin = new FormControl(this.account.entreprise.linkedin);
+    //       this.facebook = new FormControl(this.account.entreprise.facebook);
+    //       this.twitter = new FormControl(this.account.entreprise.twitter);
+    //       this.entreprise = this.account.entreprise;
+    //       if (this.account.entreprise.logo !== undefined) {
+    //         this.logo = this.account.entreprise.logo.url;
+    //       }
+    //       console.log('entreprise user', this.account.entreprise);
+    //       console.log('this.entreprise=', this.entreprise.logo);
+    //       console.log('entreprise picture', this.picture);
+    //       // this.progressbar1();
+    //       // this.progressbar2();
+    //       this.isVerifUser = true;
+    //       this.progressbarTotal();
+    //     }
+    //   })
+    //   .finally(() => this.loading$.next(false));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   createDataRoutes(user){
@@ -200,7 +261,8 @@ export class ProfilEntrepriseComponent implements OnInit {
       this.newEmail.invalid
     ) {
       this.openSnackBar('Une erreur est survenue, veuillez correctement remplir tous les champs requis', 'Fermer');
-      return console.log('password not updated');
+      console.log('password not updated');
+      return;
     } else {
       this.apiClientService
         .post(API_URI_ENTREPRISE, {
@@ -212,7 +274,7 @@ export class ProfilEntrepriseComponent implements OnInit {
         .subscribe(
           res => {
             this.ngOnInit();
-            this.openSnackBar('L\'entreprise a correctement été ajoutée', 'Fermer');
+            this.openSnackBar("L'entreprise a correctement été ajoutée", "Fermer");
           },
           err => console.log(err)
         );
@@ -476,17 +538,20 @@ export class ProfilEntrepriseComponent implements OnInit {
     }
   }
 
-  async getUser(): Promise<any> {
-    try {
-      const datas = await this.apiClientService
-        .get(API_URI_USER + '/' + this.decryptTokenService.userId)
-        .toPromise();
-      return (this.user = [datas]);
-    } catch (err) {
-      return err;
-    }
+  private getUser(): Observable<Record<string, any>> {
+    return this.apiClientService.get(API_URI_USER + '/' + this.decryptTokenService.userId);
+    // try {
+    //   const datas = await this.apiClientService
+    //     .get(API_URI_USER + '/' + this.decryptTokenService.userId)
+    //     .toPromise();
+    //   console.log(datas);
+    //   return (this.user = [datas]);
+    // } catch (err) {
+    //   return err;
+    // }
   }
 
+  // this function is not used
   async getentreprise(): Promise<any> {
     try {
       const user = await this.user;
