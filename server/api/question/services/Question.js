@@ -14,6 +14,7 @@ const _ = require('lodash');
 //const utils = require('strapi-hook-bookshelf/lib/utils/');
 const { exec } = require('child_process');
 const shortid = require('shortid');
+const Technologies = require('../../technologies/services/Technologies');
 const { createReadStream, createWriteStream, unlink, access } = require('fs');
 const randomstring = require('randomstring');
 const { google } = require('googleapis');
@@ -377,14 +378,12 @@ module.exports = {
    */
   fetchSpreadsheet: async (spreadsheetId, ppage, first, last) => {
     try {
-      let page = '';
+      let page = ppage;
 
       if (ppage.length === 3 && ppage.startsWith('C')) {
         page = 'C++';
       } else if (ppage.length === 10 && ppage.startsWith('Angular')) {
         page = 'Angular 2+';
-      } else {
-        page = ppage;
       }
 
       const ranges = [`${page}!${first}:${last}`];
@@ -401,18 +400,17 @@ module.exports = {
 
       const {
         data: { valueRanges },
-      } = await gsapi.spreadsheets.values.batchGet({
-        spreadsheetId,
-        ranges,
-      });
+      } = await gsapi.spreadsheets.values.batchGet({ spreadsheetId, ranges });
 
       const data = valueRanges.map((val) => val.values)[0];
-      console.log('GET SPREADSHEET DATAS', data);
-      const arrValues = [];
 
-      for (var i = 0; i < data.length; i++) {
+      console.log('GET SPREADSHEET DATAS', data);
+
+      const arrValues = [];
+      for (let i = 0; i < data.length; i++) {
         arrValues.push(data[i]);
       }
+
       let arrTech = [];
 
       const techFieldValues = [...new Set(arrValues.map((val) => val[1]))];
@@ -445,6 +443,7 @@ module.exports = {
         });
       }
 
+
       const techVals = arrTech.map((t) => t.name);
 
       const diffTech = _.difference(techFieldValues, techVals);
@@ -454,6 +453,8 @@ module.exports = {
       }
 
       const arrTechPromise = [];
+
+      console.log(arrTech);
 
       arrTech.forEach(async (tech) => {
         arrTechPromise.push(
@@ -528,17 +529,17 @@ module.exports = {
                   console.log('ERREUR', err);
                   reject(err);
                 });
-            } else{
+            } else {
               strapi.services.question
-              .add({
-                ...question,
-                technologies: question.technologies,
-              })
-              .then((r) => resolve(r))
-              .catch((err) => {
-                console.log('ERROR ADD', err);
-                reject(err);
-              });
+                .add({
+                  ...question,
+                  technologies: question.technologies,
+                })
+                .then((r) => resolve(r))
+                .catch((err) => {
+                  console.log('ERROR ADD', err);
+                  reject(err);
+                });
             }
             //delete question.id;
           }),
@@ -589,9 +590,8 @@ module.exports = {
         let id = '';
         let path = '';
         const randomname = generateStrings(1, 10).value;
-        const javafilename = `Main${
-          randomname.charAt(0).toUpperCase() + randomname.slice(1)
-        }`;
+        const javafilename = `Main${randomname.charAt(0).toUpperCase() + randomname.slice(1)
+          }`;
 
         switch (extension) {
           case 'java':
@@ -655,9 +655,8 @@ module.exports = {
       ).toJSON();
       const questionAnswerValues = JSON.parse(question.answer_value);
 
-      const scriptjava = `sed -i ${''} s/Main/${
-        compiledfile.split('/')[1]
-      }/g ${filetoexecute}`;
+      const scriptjava = `sed -i ${''} s/Main/${compiledfile.split('/')[1]
+        }/g ${filetoexecute}`;
       switch (extension) {
         case 'js':
           ({ consoleLogText, script } = executeJsFile(
@@ -681,9 +680,8 @@ module.exports = {
           break;
 
         case 'java':
-          script = `${scriptjava} && javac ${filetoexecute} && cd ${UPLOAD_DIR} && java ${
-            compiledfile.split('/')[1].split('.')[0]
-          } `;
+          script = `${scriptjava} && javac ${filetoexecute} && cd ${UPLOAD_DIR} && java ${compiledfile.split('/')[1].split('.')[0]
+            } `;
           break;
 
         default:
@@ -707,12 +705,12 @@ module.exports = {
           questionAnswerValues.map((a) => {
             answerValues.push(a.result);
           });
-          
+
           const testCode = questionAnswerValues.map((a) => ({
             eval: resultScript.find((b) => b === a.result),
             resultValidation: !!resultScript.find((b) => b === a.result),
           }));
-          
+
           const testAnswer =
             JSON.stringify(answerValues) == JSON.stringify(resultScript);
 
