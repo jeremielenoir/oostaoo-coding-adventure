@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { DecryptTokenService } from '../components/home/register/register.service';
 
 const prefix = '/api/';
@@ -33,7 +33,7 @@ export const API_URI_PAYMENT: string = prefix + 'payments';
 export const API_URI_FEEDBACK: string = prefix + 'feedbacks';
 export const API_URI_FAQ: string = prefix + 'faqs';
 export const API_URI_ISSUE: string = prefix + 'issues';
-export const API_URI_ROLE: string =  '/users-permissions/roles';
+export const API_URI_ROLE: string = '/users-permissions/roles';
 export const EXECUTE_SCRIPT: string = prefix + 'questions/execute/';
 export const API_POPULATE_QUESTIONS_SPREADSHEET: string = prefix + 'questions/populate/';
 
@@ -41,17 +41,10 @@ export const API_POPULATE_QUESTIONS_SPREADSHEET: string = prefix + 'questions/po
 
 @Injectable()
 export class ApiClientService {
-  user: any;
+  public _user = new BehaviorSubject(null);
   constructor(private http: HttpClient, public decryptTokenService: DecryptTokenService) {
-    if (this.decryptTokenService.userId) {
-      this.getUser();
-      // http.get(API_URI_USER + '/' + decryptTokenService.userId)
-      //   .toPromise()
-      //   .then(data => {
-      //     console.log('IN CONSTRUCTOR API SERVICE', data);
-      //     this.user = data;
-      //   });
-    }
+    this.getUser();
+    // console.log('this._user : ', this._user);
   }
 
   private handleError(error: any, caught: Observable<any>): Observable<any> {
@@ -71,10 +64,14 @@ export class ApiClientService {
     return body || {};
   }
 
-  getUser(): any {
-    return this.http.get(API_URI_USER + '/' + this.decryptTokenService.userId).toPromise().then(data=>{
-      return this.user = data;
-    });
+  getUser() {
+    if (this.decryptTokenService.userId) {
+      this.get(API_URI_USER + '/' + this.decryptTokenService.userId).subscribe(data => {
+        if (data) {
+          this._user.next(data);
+        }
+      });
+    }
   }
 
   /**
