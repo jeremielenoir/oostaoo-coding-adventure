@@ -29,7 +29,7 @@
                 <span class="icon-chevron fas fa-chevron-up"></span>
                 <span class="question-time">{{donut.question}} questions</span>
                 <span class="question-time">{{convertSecondsToMinutes(donut.timeQuestion / 2)}} à
-                  {{convertSecondsToMinutes(donut.timeQuestion)}} min</span>
+                  {{convertSecondsToMinutes(donut.timeQuestion)}} {{donut.timeQuestion < 59 ? 'sec' : 'min' }}</span>
               </p>
               <div class="infoBule-info">
                 <h3 class="title-infobule">connaissance du langange</h3>
@@ -65,7 +65,7 @@
   <!-- Buttons -->
   <div class="segment2">
     <app-base-button *ngIf="!yourCampaign" iconName="keyboard_arrow_left" iconPosition="left" class="margin-r-10"
-    (clickEvent)="onDecrementPage()" >Paramètres</app-base-button>
+      (clickEvent)="onDecrementPage()">Paramètres</app-base-button>
     <app-base-button iconName="save" [color]="yourCampaign === true ? 'primary' : 'accent'"
       (clickEvent)="postCampagne()">
       Enregistrer</app-base-button>
