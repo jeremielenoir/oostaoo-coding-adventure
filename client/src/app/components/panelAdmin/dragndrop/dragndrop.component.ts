@@ -1,38 +1,12 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
-
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef,
-} from '@angular/material';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
-
-import {
-  API_URI_CAMPAIGNS,
-  ApiClientService,
-} from '../../../api-client/api-client.service';
-
+import { API_URI_CAMPAIGNS, ApiClientService } from '../../../api-client/api-client.service';
 import { Router } from '@angular/router';
-
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
+import { Subscription } from 'rxjs';
 
 export interface IDialogData {
   questions: any;
@@ -70,7 +44,7 @@ export class DialogOverviewTestComponent implements OnInit {
   styleUrls: ['./dragndrop.component.scss'],
   templateUrl: './dragndrop.component.html',
 })
-export class DragNDropComponent implements OnInit, OnChanges {
+export class DragNDropComponent implements OnInit, OnChanges, OnDestroy {
   @Input() public formCampagne: FormGroup;
   @Input() public notSelectedQuestions = [];
   @Input() public selectedQuestions = [];
@@ -78,6 +52,7 @@ export class DragNDropComponent implements OnInit, OnChanges {
   @Output() public incrementPage = new EventEmitter<any>();
   @Output() public decrementPage = new EventEmitter<any>();
   @Output() public chargeYourCampagn = new EventEmitter<any>();
+  private subscription: Subscription;
   public searchText = '';
   public experience: string;
   public questions: any[];
@@ -107,37 +82,6 @@ export class DragNDropComponent implements OnInit, OnChanges {
     private router: Router,
     public dialog: MatDialog,
   ) {}
-
-  public dragStart(event: CdkDragDrop<string[]>) {
-    console.log('event start', event);
-    this.disablehover = true;
-  }
-
-  public dragEnd(event: CdkDragDrop<string[]>) {
-    console.log('event finish', event);
-    this.disablehover = false;
-  }
-
-  public drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-      const previous = event.previousContainer.data;
-      const current = event.container.data;
-      const diff = current.filter((p) => !previous.includes(p));
-      this.chargeYourCampagn.emit(diff);
-    }
-  }
 
   public ngOnInit() {
     switch (this.languageStorage.getLanguageCountry()) {
@@ -178,14 +122,47 @@ export class DragNDropComponent implements OnInit, OnChanges {
     }
 
     window.scroll(10, 0);
-    window.addEventListener('scroll', () => {
-      this.headerChangePositioinDropList();
-    });
+    window.addEventListener('scroll', () => this.headerChangePositioinDropList());
   }
 
   public ngOnChanges(changes: SimpleChanges) {
     if (this.selectedQuestions && this.selectedQuestions.length > 0) {
       this.isLoaded = true;
+    }
+  }
+
+  public ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  public dragStart(event: CdkDragDrop<string[]>) {
+    console.log('event start', event);
+    this.disablehover = true;
+  }
+
+  public dragEnd(event: CdkDragDrop<string[]>) {
+    console.log('event finish', event);
+    this.disablehover = false;
+  }
+
+  public drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+      const previous = event.previousContainer.data;
+      const current = event.container.data;
+      const diff = current.filter((p) => !previous.includes(p));
+      this.chargeYourCampagn.emit(diff);
     }
   }
 
@@ -198,6 +175,15 @@ export class DragNDropComponent implements OnInit, OnChanges {
     const index = this.notSelectedQuestions.indexOf(question);
     if (index > -1) {
       this.notSelectedQuestions.splice(index, 1);
+    }
+    this.chargeYourCampagn.emit([...this.selectedQuestions, question]);
+  }
+
+  public removeQuestion(question) {
+    this.notSelectedQuestions.unshift(question);
+    const index = this.selectedQuestions.indexOf(question);
+    if (index > -1) {
+      this.selectedQuestions.splice(index, 1);
     }
     this.chargeYourCampagn.emit([...this.selectedQuestions, question]);
   }
@@ -220,14 +206,12 @@ export class DragNDropComponent implements OnInit, OnChanges {
   }
 
   public SendQuestionSelected(id) {
-    this.apiClientService
+    this.subscription = this.apiClientService
       .put(API_URI_CAMPAIGNS + '/' + id, {
         questions: this.selectedQuestions,
       })
       .subscribe(
-        (res) => {
-          console.log(res);
-        },
+        (res) => console.log(res),
         (err) => console.log(err),
       );
   }
@@ -242,20 +226,20 @@ export class DragNDropComponent implements OnInit, OnChanges {
 
   public postCampagne() {
     // Confirm true for post
-    let truecp;
+    let truecp: boolean;
     if (this.formCampagne.value.utilisationCopieColler === 'true') {
       truecp = true;
     } else {
       truecp = false;
     }
-    let envoiRapportSimplifie;
+    let envoiRapportSimplifie: boolean;
     if (this.formCampagne.value.envoiRapportSimplifie === 'true') {
       envoiRapportSimplifie = true;
     } else {
       envoiRapportSimplifie = false;
     }
 
-    this.apiClientService
+    this.subscription = this.apiClientService
       .post(API_URI_CAMPAIGNS, {
         Name: this.formCampagne.value.nomDeCampagne,
         copy_paste: truecp,

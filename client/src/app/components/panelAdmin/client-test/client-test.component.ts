@@ -84,6 +84,7 @@ export class ClientTestComponent implements OnInit, OnDestroy {
   private getCandidatCampaign(): Observable<Record<string, any>> {
     return this.apiClientService.get(API_URI_CANDIDATS_BY_TOKEN + "/" + this.tokenId).pipe(
       tap((candidat: Record<string, any>) => {
+        this.candidat = candidat;
         if (candidat.test_terminer !== "0000-00-00 00:00:00") {
           this.router.navigate(["/home"]);
           return EMPTY;

@@ -1,0 +1,58 @@
+[
+  {
+    "languages": ["java", "java/j2ee", "spring", "android"],
+    "config": {
+      "filetype": "application/java",
+      "filename": "Main.java",
+      "options": { "theme": "vs-white", "language": "java" }
+    }
+  },
+  {
+    "languages": ["kotlin"],
+    "config": {
+      "filetype": "application/kotlin",
+      "filename": "Main.kt",
+      "options": { "theme": "vs-white", "language": "kotlin" }
+    }
+  },
+  {
+    "languages": ["c"],
+    "config": {
+      "filetype": "application/c",
+      "filename": "Main.c",
+      "options": { "theme": "vs-white", "language": "c" }
+    }
+  },
+  {
+    "languages": ["c"],
+    "config": {
+      "filetype": "application/cpp",
+      "filename": "Main.cpp",
+      "options": { "theme": "vs-white", "language": "cpp" }
+    }
+  },
+  {
+    "languages": ["python"],
+    "config": {
+      "filetype": "application/python",
+      "filename": "Main.py",
+      "options": { "theme": "vs-white", "language": "python" }
+    }
+  },
+  {
+    "languages": ["go"],
+    "config": {
+      "filetype": "application/go",
+      "filename": "Main.go",
+      "options": { "theme": "vs-white", "language": "go" }
+    }
+  },
+  {
+    "languages": ["javascript", "angular 2+", "angularjs", "react", "vuejs"],
+    "config": {
+      "filetype": "application/javascript",
+      "filename": "Main.js",
+      "options": { "theme": "vs-white", "language": "javascript" }
+    }
+  }   
+]

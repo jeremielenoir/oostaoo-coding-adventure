@@ -3,7 +3,7 @@ import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatSnackBar, MatTableDataSource, MatSort, MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 import { EMPTY, Observable, of, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { catchError, finalize, map, switchMap, tap } from 'rxjs/operators';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CandidatsMailComponent } from '../candidats-mail/candidats-mail.component';
 import { DecryptTokenService } from "../../../home/register/register.service";
@@ -83,11 +83,9 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
     this.user_id = this.decryptTokenService.userId;
     this.offer_id = this.decryptTokenService.offer_id;
 
-    this.apiClientService
+    this.subscription = this.apiClientService
       .get(API_URI_CAMPAIGNS + '/' + this.globalId)
-      .subscribe(datas => {
-        this.campaigns = [datas];
-      });
+      .subscribe(datas => this.campaigns = [datas]);
 
     this.htmlContent = this.customHtmlContent();
   }
@@ -130,32 +128,6 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
     return this.emailsChecked.get(email.trim());
   }
 
-  postCandidat(contactInfo: Record<string, string>): Promise<any> {
-    this.switchTo('loading');
-
-    return this.apiClientService.post(API_URI_CANDIDATS, {
-        name: contactInfo.name,
-        email: contactInfo.email,
-        campaignId: this.globalId,
-        emailTitle: this.sujet,
-        emailContent: this.customHtmlContent(contactInfo.name),
-        namePlaceholder: contactInfo.name
-      })
-      .toPromise()
-      .then(res => {
-        console.log('res', res.id);
-        let candidatIDs: number[] = [];
-        candidatIDs.push(res.id);
-        return candidatIDs;
-      }).then(candidatIDs => {
-        this.updateCampaign(candidatIDs);
-      }).catch(err => {
-        this.openSnackBar("Une erreur est survenue", "Fermer");
-      }).finally(() => {
-        this.switchTo('sent');
-      });
-  }
-
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
       duration: 6000,
@@ -171,64 +143,59 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
   updateCampaignPostCandidats(): void {
     const totalCandidats: number = this.candidats.length;
 
-    if (this.offer_id == 14) this.goToSubscribe();
+    if (this.offer_id === 14) this.goToSubscribe();
 
-    if (this.tests_available == -1) {
+    this.tests_available = this.tests_available - totalCandidats;
+    
+    this.switchTo('loading');
+
+    this.subscription = this.apiClientService.put(API_URI_USER + '/' + this.user_id, {
+      tests_available: this.tests_available
+    }).subscribe(user => {
+      localStorage.setItem('currentUser', user.newToken);
+
       for (const candidat of this.candidats) {
-        this.postCandidat(candidat);
+        this.subscription = this.postCandidat(candidat).subscribe();
       }
 
-      // update tests_available counter
-      this.testsAvailable.updateValue(this.tests_available - totalCandidats);
-    } else if (this.tests_available == 0) {
-      setTimeout(() => this.goToSubscribe(), 1500);
+      this.testsAvailable.updateValue(this.tests_available);
       
-      this.openSnackBar("Vous n'avez plus de test disponible", "Fermer");
-    } else if (this.tests_available < totalCandidats) {
-      // Note : this case should never happens as we have limited the number of candidats added to the number of tests_available
-      setTimeout(() => this.retourCandidat(), 1500);
-
-      this.openSnackBar(`Impossible d'inviter ${totalCandidats} candidat${totalCandidats > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`, "Fermer");
-    } else {
-      this.tests_available = this.tests_available - totalCandidats;
-      
-      this.apiClientService
-        .put(API_URI_USER + '/' + this.user_id, {
-          tests_available: this.tests_available,
-        })
-        .toPromise()
-        .then((res) => {
-          localStorage.setItem('currentUser', res.newToken);
-
-          for (const candidat of this.candidats) {
-            this.postCandidat(candidat);
-          }
-
-          // update tests_available counter
-          this.testsAvailable.updateValue(this.tests_available);
-        }).catch(
-          err => console.log(err)
-        );
-    }
+      this.switchTo('sent');
+    });
   }
 
-  updateCampaign(candidatIDs: number[]): Promise<any> {
+  postCandidat(contactInfo: Record<string, string>): Observable<any> {
+    return this.apiClientService.post(API_URI_CANDIDATS, {
+      name: contactInfo.name,
+      email: contactInfo.email,
+      campaignId: this.globalId,
+      emailTitle: this.sujet,
+      emailContent: this.customHtmlContent(contactInfo.name),
+      namePlaceholder: contactInfo.name
+    }).pipe(
+      switchMap(result => {
+        let candidatIDs: number[] = [];
+        candidatIDs.push(result.id);
+        return this.updateCampaign(candidatIDs);
+      }),
+      catchError(err => {
+        this.openSnackBar("Une erreur est survenue", "Fermer")
+        return of(err);
+      }),
+    )
+  }
+
+  updateCampaign(candidatIDs: number[]): Observable<any> {
     return this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.globalId, {
-        candidats: candidatIDs,
-        email_title: this.sujet,
-        email_content: this.htmlContent
-      })
-      .toPromise()
-      .then((res) => {
-        console.log('CANDIDATS', res);
-      }).catch(
-        err => console.log(err)
-      );
+      candidats: candidatIDs,
+      email_title: this.sujet,
+      email_content: this.htmlContent
+    });
   }
 
   // hasCandidatApplied gets candidat then returns true if candidat is already in the current campaign, otherwise false
   private hasCandidatApplied(email: string): Observable<boolean> {
-    return this.apiClientService.get(API_URI_CANDIDATS + "?email=" + email).pipe(
+    return this.apiClientService.get(API_URI_CANDIDATS + `?email=${email}&campaign=${this.globalId}`).pipe(
       map(candidats => candidats.length > 0 && candidats[0].campaign.id === this.globalId ? true : false)
     );
   }
