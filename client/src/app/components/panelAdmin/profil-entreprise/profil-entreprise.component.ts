@@ -124,16 +124,15 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     public apiClientService: ApiClientService,
     public decryptTokenService: DecryptTokenService,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loading$.next(true);
-
-    if(this.apiClientService.user){
-      this.createDataRoutes(this.apiClientService.user);
-    } else{
-      this.apiClientService.getUser().then(user => this.createDataRoutes(user));
-    }
+    this.apiClientService._user.subscribe(data => {
+      if (data) {
+        this.createDataRoutes(data);
+      }
+    });
 
     this.subscription = this.getUser().subscribe(user => {
       // this.account is only used here, maybe to remove ?
@@ -187,7 +186,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
       }
 
       this.loading$.next(false);
-    })
+    });
 
     // this.getUser()
     //   .then(user => {
@@ -234,7 +233,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  createDataRoutes(user){
+  createDataRoutes(user) {
     this.dataRoute = [
       {
         routerLink: '/dashboard/profil-utilisateur', condition: true,
@@ -339,7 +338,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
             this.openSnackBar('Profil entreprise mis à jour aves succès', 'Ok');
           },
           err => {
-            this.openSnackBar( err.message ? err.message :
+            this.openSnackBar(err.message ? err.message :
               'Oops ! la mise à jour du profil entreprise est indisponible', 'Ok');
           }
         );
