@@ -3,6 +3,57 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { FormCampagneValidator } from "src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator";
 import { RouterLink } from '@angular/router';
 
+// const MOCK_TECHNO: Record<string, any>[] = [
+//   {
+//     id: 13555,
+//     name: "React",
+//     description: null,
+//     created_at: "2020-03-16T10:39:57.000Z",
+//     updated_at: "2020-03-16T10:39:57.000Z",
+//     profile: null
+//   },
+//   {
+//     id: 13554,
+//     name: "JavaScript",
+//     description: null,
+//     created_at: "2020-03-16T10:39:41.000Z",
+//     updated_at: "2020-03-16T10:39:41.000Z",
+//     profile: null
+//   },
+//   {
+//     id: 13561,
+//     name: "HTML/CSS",
+//     description: null,
+//     created_at: "2020-03-26T16:04:07.000Z",
+//     updated_at: "2020-03-26T16:04:07.000Z",
+//     profile: null
+//   },
+//   {
+//     id: 13546,
+//     name: "python",
+//     description: null,
+//     created_at: "2020-03-12T12:50:58.000Z",
+//     updated_at: "2020-03-12T12:50:58.000Z",
+//     profile: null
+//   },
+//   {
+//     id: 13558,
+//     name: "Android",
+//     description: null,
+//     created_at: "2020-03-17T10:37:31.000Z",
+//     updated_at: "2020-03-17T10:37:31.000Z",
+//     profile: null
+//   },
+//   {
+//     id: 13568,
+//     name: "Symfony",
+//     description: null,
+//     created_at: "2020-06-09T14:41:17.000Z",
+//     updated_at: "2020-06-09T14:41:17.000Z",
+//     profile: null
+//   }
+// ];
+
 @Component({
   selector: "app-nouvelle-campagne",
   templateUrl: "./nouvelle-campagne.component.html",
@@ -38,6 +89,8 @@ export class NouvelleCampagneComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.nNumeorPage = 3
+    // this.Alltechno = MOCK_TECHNO;
     /*
     this._http.get(`${environment.urlBackEnd}Test22s`)
       .subscribe(
