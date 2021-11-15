@@ -59,7 +59,6 @@ export class TestComponent implements OnInit, OnDestroy {
 
   private totalElapsedTime: number = 0; // done
   public language: string; // done
-  private testFinishedAt: string; // done
 
   public choiceOfAnswers: string[]; // done
   public candidatAnswer: string = ''; // done
@@ -132,7 +131,14 @@ export class TestComponent implements OnInit, OnDestroy {
           this.currentIdxQuestions++;
           if (this.currentIdxQuestions === this.questions.length) {
             //test is finish post test
-            console.log('test is finish need to post it');
+            console.log('Test is finish need to post it');
+            this.postTimeTest(this.totalElapsedTime).subscribe({
+              next: ((res) => console.log(res)),
+              complete: () => { 
+                this.refreshComponent();
+                console.log('Test is finish and posted');
+              }
+            })
           } else {
             this.startChronometerSubscription = this.startQuestion(
               this.currentIdxQuestions,
@@ -179,9 +185,11 @@ export class TestComponent implements OnInit, OnDestroy {
     this.choiceOfAnswers = this.question[this.dataInfoLanguageContent].split(
       this.separator,
     );
+
     this.correctAnswers = this.question.answer_value
       .split(this.separator)
       .sort();
+
     this.candidatAnswer = '';
     this.candidatAnswers = [];
     this.isDisabled = false;
@@ -270,15 +278,13 @@ export class TestComponent implements OnInit, OnDestroy {
       .sort();
     let points: number;
 
-    const { type: questionType } =
-      this.questions[this.currentIdxQuestions].type;
-    console.log(questionType);
+    // get correct answers of current question    
+    this.correctAnswers = this.question.answer_value.split(this.separator).sort();
+    
 
-    if (
-      this.questions[this.currentIdxQuestions].type === 'one' ||
-      this.questions[this.currentIdxQuestions].type === 'multiple'
-    ) {
-      //determines if candidat answer is good and get associated points
+    if (this.questions[this.currentIdxQuestions].type === 'one' || 
+        this.questions[this.currentIdxQuestions].type === 'multiple' ) {
+      //determines if candidat answer is good and get associated points 
       this.candidatAnswers.push(this.candidatAnswer);
       points =
         this.correctAnswers.sort().toString() ===
@@ -325,120 +331,100 @@ export class TestComponent implements OnInit, OnDestroy {
     );
   }
 
-  public postTimeTest(totalElapsedTime: number) {
+  public postTimeTest(totalElapsedTime: number): Observable<any> {
+    
+    // if we are not in testing mode
     if (this.mode !== 'testing') {
       this.refreshComponent();
+      return EMPTY;
     }
 
-    this.apiClientService
-      .put(API_URI_CANDIDATS + '/' + this.candidat.id, {
-        duree: totalElapsedTime,
-        test_terminer: this.testFinishedAt,
-      })
-      .toPromise()
-      .then((res) => {
-        this.apiClientService
-          .get(API_URI_CAMPAIGNS + '/' + res.campaign.id)
-          .subscribe((res1) => {
-            const nbCandidats: number = res1.NbCandidatFinish
-              ? res1.NbCandidatFinish + 1
-              : 1;
 
-            this.apiClientService
-              .put(API_URI_CAMPAIGNS + '/' + res.campaign.id, {
-                NbCandidatFinish: nbCandidats,
-              })
-              .subscribe((res2) => {
-                this.refreshComponent();
+    this.allPointsCandidat = this.sumPointsByTechnologyId(
+      this.SumPointsCandidat,
+    );
 
-                this.allPointsCandidat = this.sumPointsByTechnologyId(
-                  this.SumPointsCandidat,
-                );
+    this.totalPoints = this.calculTotalPoints(
+      this.allPointsCandidat,
+    );
 
-                this.totalPoints = this.calculTotalPoints(
-                  this.allPointsCandidat,
-                );
+    if (this.totalPoints) {
+      this.totalPointsCandidat = this.totalPoints;
+    }
 
-                if (this.totalPoints) {
-                  this.totalPointsCandidat = this.totalPoints;
-                }
 
-                console.log(
-                  'this.totalPointsCandidat: ',
-                  this.totalPointsCandidat,
-                );
-                let getPourcent;
-                const objectGetpourcent = [];
+    let getPourcent;
+    const objectGetpourcent = [];
 
-                for (const pointsTechno of this.allPointsTechnos) {
-                  for (const pointsCandidat of this.allPointsCandidat) {
-                    if (
-                      pointsTechno.technologies === pointsCandidat.technologies
-                    ) {
-                      if (pointsCandidat.points === null) {
-                        getPourcent = 0;
-                      } else {
-                        getPourcent = Math.round(
-                          (pointsCandidat.points / pointsTechno.points) * 100,
-                        );
-                      }
+    for (const pointsTechno of this.allPointsTechnos) {
+      for (const pointsCandidat of this.allPointsCandidat) {
+        if (
+          pointsTechno.technologies === pointsCandidat.technologies
+        ) {
+          if (pointsCandidat.points === null) {
+            getPourcent = 0;
+          } else {
+            getPourcent = Math.round(
+              (pointsCandidat.points / pointsTechno.points) * 100,
+            );
+          }
 
-                      objectGetpourcent.push({
-                        percentage: getPourcent,
-                        techno: pointsTechno.technologies,
-                      });
-                    }
-                  }
-                }
-
-                const getPourcentTest = Math.round(
-                  ((this.totalPointsCandidat.total_points ||
-                    this.totalPointsCandidat.points) /
-                    (this.totalPointsCampaign.total_points ||
-                      this.totalPointsCampaign.points)) *
-                    100,
-                );
-                console.log('test SUM TOTAL OF THE TEST', getPourcentTest);
-
-                const newOBjectToPostCandidat = [
-                  { allPointsTechnos: this.allPointsTechnos },
-                  { allPointsCandidat: this.allPointsCandidat },
-                  { getpourcentByCandidat: objectGetpourcent },
-                  {
-                    totalPointsCandidat:
-                      this.totalPointsCandidat.total_points ||
-                      this.totalPointsCandidat.points,
-                  },
-                  {
-                    totalPointsCampaign:
-                      this.totalPointsCampaign.total_points ||
-                      this.totalPointsCampaign.points,
-                  },
-                  { PourcentTest: getPourcentTest },
-                ];
-
-                this.apiClientService
-                  .put(API_URI_CANDIDATS + '/' + this.candidat.id, {
-                    points_candidat: newOBjectToPostCandidat,
-                  })
-                  .toPromise();
-
-                this.apiClientService
-                  .post(API_URI_NOTIFICATIONS, {
-                    idCampaign: res.campaign.id,
-                    message: `Le rapport d'évalution de '${this.candidat.Nom}' est disponible.`,
-                    status: false,
-                    title: `Un candidat viens de finir le test '${res.campaign.Name}'.`,
-                    user: res.campaign.user,
-                  })
-                  .toPromise()
-                  .then((resolve) =>
-                    console.log('SUCCESS POST NOTIF ', resolve),
-                  )
-                  .catch((reject) => console.log('ERROR POST NOTIF ', reject));
-              });
+          objectGetpourcent.push({
+            percentage: getPourcent,
+            techno: pointsTechno.technologies,
           });
-      });
+        }
+      }
+    }
+
+    const getPourcentTest = Math.round(
+      ((this.totalPointsCandidat.total_points ||
+        this.totalPointsCandidat.points) /
+        (this.totalPointsCampaign.total_points ||
+          this.totalPointsCampaign.points)) *
+        100,
+    );
+    console.log('test SUM TOTAL OF THE TEST', getPourcentTest);
+
+    const newOBjectToPostCandidat = [
+      { allPointsTechnos: this.allPointsTechnos },
+      { allPointsCandidat: this.allPointsCandidat },
+      { getpourcentByCandidat: objectGetpourcent },
+      {
+        totalPointsCandidat:
+          this.totalPointsCandidat.total_points ||
+          this.totalPointsCandidat.points,
+      },
+      {
+        totalPointsCampaign:
+          this.totalPointsCampaign.total_points ||
+          this.totalPointsCampaign.points,
+      },
+      { PourcentTest: getPourcentTest },
+    ];
+
+    return this.httpClient.put(API_URI_CANDIDATS + '/' + this.candidat.id, {
+              duree: totalElapsedTime,
+              test_terminer: new Date(),
+              points_candidat: newOBjectToPostCandidat
+            }).pipe(
+              concatMap(
+                (res: any) => this.httpClient.get(API_URI_CAMPAIGNS + '/' + this.candidat.campaign.id)
+              ),
+              concatMap(
+                (res: any) => this.httpClient.put(API_URI_CAMPAIGNS + '/' + this.candidat.campaign.id, { 
+                  NbCandidatFinish: res.NbCandidatFinish ? res.NbCandidatFinish + 1 : 1
+                })
+              ),
+              concatMap((res: any) => this.httpClient.post(API_URI_NOTIFICATIONS, {
+                  idCampaign: this.candidat.campaign.id,
+                  message: `Le rapport d'évalution de '${this.candidat.Nom}' est disponible.`,
+                  status: false,
+                  title: `Un candidat viens de finir le test '${this.candidat.campaign.Name}'.`,
+                  user: this.candidat.campaign.user,
+                })
+              )
+            );
   }
 
   public postPauseTest() {

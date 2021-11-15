@@ -6,7 +6,7 @@ import { DecryptTokenService } from 'src/app/components/home/register/register.s
 import { API_URI_CAMPAIGNS, ApiClientService } from '../../../api-client/api-client.service';
 import { Router } from '@angular/router';
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
-import { Subscription } from 'rxjs';
+import { EMPTY, Subscription } from 'rxjs';
 
 export interface IDialogData {
   questions: any;
@@ -132,7 +132,8 @@ export class DragNDropComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if(this.subscription)
+      this.subscription.unsubscribe();
   }
 
   public dragStart(event: CdkDragDrop<string[]>) {
