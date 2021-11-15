@@ -47,7 +47,6 @@ import * as moment from 'moment';
 })
 export class CandidatsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  public decryptTokenService = new DecryptTokenService(); //// A INJECTER DANS LE CONSTRUCTEUR ?
   private globalId: number;
   public tests_available: number = 0;
   private technologies: Record<string, any>[] = [];
@@ -76,6 +75,7 @@ export class CandidatsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
     public apiClientService: ApiClientService,
+    private decryptTokenService: DecryptTokenService,
     private router: Router,
     private http: HttpClient,
     private testsAvailable: TotalTestsAvailableService,
@@ -88,7 +88,7 @@ export class CandidatsComponent implements OnInit, OnDestroy {
     this.loadTestsAvailable();
     this.getCampaign().then((datas) => {
       this.campaign = datas
-      console.log('CAMPAIGN', this.campaign, datas);
+      // console.log('CAMPAIGN', this.campaign, datas);
     });
 
     this.subscription = this.breakpointObserver
@@ -103,7 +103,7 @@ export class CandidatsComponent implements OnInit, OnDestroy {
   }
 
   private loadTestsAvailable(): void {
-    this.apiClientService
+    this.subscription = this.apiClientService
       .get(API_URI_USER + '/' + this.decryptTokenService.userId)
       .subscribe((user) => {
         this.tests_available = user.tests_available;
