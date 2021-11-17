@@ -59,11 +59,6 @@ export class UtilisateursComponent implements OnInit {
   public tests_available: any;
   public selectedRoleId;
   public selectedRoleName;
-  // public PrenomValue = '';
-  // public NomValue = '';
-  // public UserName = '';
-  // public EmailValue = '';
-  // public PasswordValue = '';
 
   public users: any[];
   prenom = new FormControl('', Validators.required);
@@ -99,7 +94,6 @@ export class UtilisateursComponent implements OnInit {
   public editingUser = null;
 
   public displayedColumns: string[] = ['name', 'mail', 'gestion', 'symbol'];
-  // public dataSource = ELEMENT_DATA;
 
   positionOptions: TooltipPosition[] = [
     'after',
@@ -121,7 +115,7 @@ export class UtilisateursComponent implements OnInit {
     public authenticationService: AuthenticationService, public decryptTokenService: DecryptTokenService,
     private _snackBar: MatSnackBar, private dialog: MatDialog) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.updateLabelToolTip(localStorage.getItem('currentlanguage'));
     this.apiClientService._user.subscribe(data => {
       if (data) {
@@ -149,16 +143,10 @@ export class UtilisateursComponent implements OnInit {
       this.apiClientService.get(API_URI_ACCOUNT + '/' + datas.id + '/users')
         .subscribe(
           (data) => this.users = data,
-          // (err) => console.error(err)
         );
     });
 
-    // this.adminId =
-    //  this.decryptTokenService.adminId || this.decryptTokenService.userId;
-
-    // this.authenticationService.getUsers(this.adminId).then(users => {
-    //   this.users = users;
-    // });
+    
   }
 
   updateLabelToolTip(lang) {
@@ -210,10 +198,7 @@ export class UtilisateursComponent implements OnInit {
     this.emailIsactive = false;
   }
 
-  // public param_cog_deux() {
-  //   this.shadowcog2 = true;
-  // }
-
+  
   public openForm(user) {
 
     this.editingUser = user;
@@ -240,20 +225,11 @@ export class UtilisateursComponent implements OnInit {
 
     this.selectedRole = user.role.id;
 
-    // this.formulaire.nativeElement.prenom.value = user.prenom;
-    // this.formulaire.nativeElement.nom.value = user.nom;
-    // this.formulaire.nativeElement.email.value = user.email;
-
-    // this.list_change(user.role.id);
+    
   }
 
   public param_cog_non_active_deux() {
     this.shadowcog2 = false;
-
-    // this.NomValue = 'Lenoir';
-    // this.PrenomValue = 'Jéremie';
-    // this.EmailValue = 'lenoir.jeremie@oostaoo.com';
-
     this.nomIsactiveUpdate = true;
     this.emailIsactiveUpdate = true;
     this.prenomIsactiveUpdate = true;
@@ -346,13 +322,7 @@ export class UtilisateursComponent implements OnInit {
   }
 
   public addUser() {
-    // console.log('this.addPrenom.value : ', this.addPrenom.value);
-    // console.log('this.addNom.value : ', this.addNom.value);
-    // console.log('this.addEmail.value : ', this.addEmail.value);
-    // console.log('this.addPassword.value : ', this.addPassword.value);
-    // console.log('this.confirmPassword.value : ', this.confirmPassword.value);
-    // console.log('this.selectedRole : ', this.userrole);
-    // console.log('this.addUsername.value : ', this.addUsername.value);
+    
     this.submittedUser = true;
     if (
       this.addPrenom.value === '' ||

@@ -11,7 +11,7 @@ import { AuthenticationService } from 'src/app/components/home/register/service/
   templateUrl: './contact-formular.component.html',
   styleUrls: ['./contact-formular.component.scss']
 })
-export class ContactFormularComponent implements OnInit {
+export class ContactFormularComponent {
 
   constructor(public apiClientService: ApiClientService,
     public decryptTokenService: DecryptTokenService,
@@ -36,8 +36,6 @@ export class ContactFormularComponent implements OnInit {
   public useGlobalDomain: boolean = false;
   public captchaSuccess = false;
 
-  ngOnInit() {
-  }
 
   openSnackBar(message: string, action) {
     this._snackBar.open(message, action, {
@@ -74,7 +72,6 @@ export class ContactFormularComponent implements OnInit {
             window.scrollTo(0, 0);
           }
           
-          // console.log('res', res);
         },
         err => console.log(err)
       );

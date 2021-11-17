@@ -6,7 +6,7 @@ import { DecryptTokenService } from 'src/app/components/home/register/register.s
 import { API_URI_CAMPAIGNS, ApiClientService } from '../../../api-client/api-client.service';
 import { Router } from '@angular/router';
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
-import { EMPTY, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 export interface IDialogData {
   questions: any;
@@ -17,7 +17,7 @@ export interface IDialogData {
   templateUrl: 'dialog-overview-test.html',
   styleUrls: ['./dialog-overview-test.scss'],
 })
-export class DialogOverviewTestComponent implements OnInit {
+export class DialogOverviewTestComponent {
   dataPopup;
   prev = false;
   constructor(
@@ -28,10 +28,6 @@ export class DialogOverviewTestComponent implements OnInit {
       this.dataPopup = data;
       this.prev = true;
     }
-  }
-
-  ngOnInit() {
-    console.log('this.dataPopup : ', this.dataPopup);
   }
 
   close() {
@@ -125,13 +121,13 @@ export class DragNDropComponent implements OnInit, OnChanges, OnDestroy {
     window.addEventListener('scroll', () => this.headerChangePositioinDropList());
   }
 
-  public ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (this.selectedQuestions && this.selectedQuestions.length > 0) {
       this.isLoaded = true;
     }
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     if(this.subscription)
       this.subscription.unsubscribe();
   }

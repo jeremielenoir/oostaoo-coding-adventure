@@ -496,9 +496,6 @@ export class TestComponent implements OnInit, OnDestroy {
   private calculTotalPoints(
     statistics: Record<string, any>[],
   ): Record<string, any> {
-    // if (typeof stats !== 'undefined' && stats.length > 0) {
-    //   this.totalPoints = statistics.reduce((a, b) => ({ total_points: a.points + b.points }));
-    // }
     return statistics.reduce((a, b) => ({ total_points: a.points + b.points }));
   }
 
@@ -533,11 +530,6 @@ export class TestComponent implements OnInit, OnDestroy {
 
   @HostListener('window:unload', ['$event'])
   public sendData() {
-    //alert('works');
-    // on tutorial mode, prevent backend api calls
-    //console.log('unload');
     if (this.mode !== 'testing') return;
-
-    //this.postPauseTest();
   }
 }

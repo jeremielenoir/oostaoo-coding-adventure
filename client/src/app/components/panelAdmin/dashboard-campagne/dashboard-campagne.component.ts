@@ -5,16 +5,13 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './dashboard-campagne.component.html',
   styleUrls: ['./dashboard-campagne.component.scss']
 })
-export class DashboadCampagneComponent implements OnInit {
+export class DashboadCampagneComponent{
   public campaigns: any;
   public booleanViewContentDefault = false;
   public IsactiveNoCountryside: boolean;
   public IsBooaleanDashboardMaxSize: any;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   display(value) {
     this.booleanViewContentDefault = value;

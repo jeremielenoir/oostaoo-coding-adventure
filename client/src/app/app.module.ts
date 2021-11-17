@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { ApiClientService } from './api-client/api-client.service';
+import { AuthenticationService } from './components/home/register/service/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -140,7 +141,6 @@ import { AlgotestComponent } from './components/panelAdmin/algotest/algotest.com
 import { ContactUsComponent } from './components/home/contact-us/contact-us.component';
 import { TypeFaqPipe } from './components/panelAdmin/FAQ/faq.pipes';
 import { AboutTeamComponent } from './components/home/about-us/about-team/about-team.component';
-import { Test2Component } from './components/panelAdmin/client-test/test2/test2.component';
 import { QuestionsTypeComponent } from './components/panelAdmin/questions-type/questions-type.component';
 import { OneTypeComponent } from './components/panelAdmin/questions-type/one-type/one-type.component';
 import { FreeTypeComponent } from './components/panelAdmin/questions-type/free-type/free-type.component';
@@ -277,7 +277,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ContactUsComponent,
     TypeFaqPipe,
     AboutTeamComponent,
-    Test2Component,
     QuestionsTypeComponent,
     OneTypeComponent,
     FreeTypeComponent,

@@ -12,16 +12,12 @@ export class BreadcrumbComponent implements OnInit {
   @Input('') namePage: string = "";
   @Input('') listNavigation: Array<String>;
 
-  public DefaultViewContent(event) {
-
-  }
 
   ngOnInit() {
     if(this.listNavigation){
       this.showNavigation = false;
     }
     this.namePage = this.namePage != "" ? " > "+ this.namePage : "";
-    // console.log('this.listNavigation : ', this.listNavigation);
   }
 
   showHiddenNavigation(){

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { EMPTY, forkJoin, Observable, Subscription } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { delay, finalize, switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { API_URI_CAMPAIGNS, API_URI_CANDIDATS, API_URI_CANDIDATS_BY_TOKEN, ApiClientService, API_URI_TUTORIAL } from "../../../api-client/api-client.service";
 
 @Component({
@@ -32,7 +32,7 @@ export class ClientTestComponent implements OnInit, OnDestroy {
     this.route.queryParams.subscribe((params) => this.tokenId = params.id);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loading$.next(true);
     this.subscription = forkJoin([
       this.getCandidatCampaign(),
@@ -55,7 +55,7 @@ export class ClientTestComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 

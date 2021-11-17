@@ -1,9 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, Input, Inject, Pipe, PipeTransform, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject, Pipe, PipeTransform, ViewEncapsulation, OnDestroy } from '@angular/core';
 import {
   ApiClientService,
-  API_URI_CAMPAIGNS,
-  API_URI_USER,
-  API_URI_CAMPAIGN
+  API_URI_CAMPAIGNS
 } from '../../../api-client/api-client.service';
 import { InviteCandidat } from '../edit-campagne/candidats/invite-candidat.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
@@ -11,7 +9,6 @@ import { DecryptTokenService } from 'src/app/components/home/register/register.s
 import { Observable, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AuthenticationService } from './../../home/register/service/auth.service';
-import { RouterLink } from '@angular/router';
 
 export interface DialogData {
   campaign: any;
@@ -190,7 +187,6 @@ export class CampagneComponent implements OnInit, OnDestroy {
   }
 
   trackByFn(index, campaign) {
-    //console.log(index, campaign);
     return campaign.id;
   }
 
@@ -206,7 +202,6 @@ export class CampagneComponent implements OnInit, OnDestroy {
             campaign.archive = true;
             this.campaigns = [...this.campaigns];
             this.openSnackBar("La campagne a correctement été archivée", "Fermer");
-            // console.log('res', res);
           },
           err => console.log(err)
         );
