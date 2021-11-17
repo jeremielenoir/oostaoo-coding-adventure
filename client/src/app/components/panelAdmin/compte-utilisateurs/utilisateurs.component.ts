@@ -123,13 +123,11 @@ export class UtilisateursComponent implements OnInit {
 
   ngOnInit() {
     this.updateLabelToolTip(localStorage.getItem('currentlanguage'));
-    if (this.apiClientService.user) {
-      this.createDataRoutes(this.apiClientService.user);
-    } else {
-      this.apiClientService.getUser().then(user => {
-        this.createDataRoutes(user);
-      });
-    }
+    this.apiClientService._user.subscribe(data => {
+      if (data) {
+        this.createDataRoutes(data);
+      }
+    });
 
     console.log('this.formulaire', this.formulaire.nativeElement);
 
