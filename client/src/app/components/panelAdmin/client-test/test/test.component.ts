@@ -16,7 +16,7 @@ import {
   QUESTION_SEPARATOR,
 } from '../../../../api-client/api-client.service';
 import { SelectedLanguageService } from '../../../../services/selected-language.service';
-import { MatDialog } from '@angular/material';
+import { MatCheckbox, MatDialog, MatCheckboxChange } from '@angular/material';
 import { DialogTimeoutComponent } from './dialog-timeout.component';
 import {
   Subscription,
@@ -255,8 +255,8 @@ export class TestComponent implements OnInit, OnDestroy {
     }
   }
 
-  public checkboxAnswers(event: Event) {
-    const checkbox = event.target as HTMLInputElement;
+  public checkboxAnswers(event: MatCheckboxChange) {
+    const checkbox: MatCheckbox = event.source;
 
     if (checkbox.checked) {
       this.candidatAnswers.push(checkbox.value);
@@ -272,12 +272,8 @@ export class TestComponent implements OnInit, OnDestroy {
   }
 
   private validateAnswer(): Observable<any> {
-    // get correct answers of current question
-    this.correctAnswers = this.question.answer_value
-      .split(this.separator)
-      .sort();
+    
     let points: number;
-
     // get correct answers of current question    
     this.correctAnswers = this.question.answer_value.split(this.separator).sort();
     
@@ -287,8 +283,8 @@ export class TestComponent implements OnInit, OnDestroy {
       //determines if candidat answer is good and get associated points 
       this.candidatAnswers.push(this.candidatAnswer);
       points =
-        this.correctAnswers.sort().toString() ===
-        this.candidatAnswers.sort().toString()
+        this.correctAnswers.sort().toString().toLowerCase() ===
+        this.candidatAnswers.sort().toString().toLowerCase()
           ? this.questions[this.currentIdxQuestions].points
           : 0;
       // maybe use nullish coalescing operator ?
@@ -427,15 +423,13 @@ export class TestComponent implements OnInit, OnDestroy {
             );
   }
 
-  public postPauseTest() {
-    this.apiClientService
+  public postPauseTest(): Observable<any>{
+    return this.httpClient
       .put(API_URI_CANDIDATS + '/' + this.candidat.id, {
         date_pause: new Date().toISOString(),
         index_question: this.currentIdxQuestions,
         test_pause: this.chronometerCurrentTime,
-      })
-      .toPromise()
-      .then();
+      });
   }
 
   public sumPointsByTechnologyId(
@@ -528,18 +522,18 @@ export class TestComponent implements OnInit, OnDestroy {
   // work only if Press F5 or cancel close window
   @HostListener('window:beforeunload', ['$event'])
   public beforeunloadHandler($event) {
-    //$event.returnValue = 'Are you sure?';
+    $event.returnValue = 'Are you sure?';
     console.log('before unload');
     // on tutorial mode, prevent backend api calls
     if (this.mode !== 'testing') return;
 
-    //this.postPauseTest();
-    //this.controleTimeTest();
+    this.postPauseTest().subscribe();
+    
   }
 
   @HostListener('window:unload', ['$event'])
   public sendData() {
-    alert('works');
+    //alert('works');
     // on tutorial mode, prevent backend api calls
     //console.log('unload');
     if (this.mode !== 'testing') return;
