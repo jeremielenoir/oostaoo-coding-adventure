@@ -165,11 +165,12 @@
         display: flex;
         width: 100%;
         flex-direction: row;
+        flex-wrap: wrap;
         color: #000;
 
         .view-content-center {
           display: flex;
-          flex-direction: column;
+          // flex-direction: column;
 
           .edit-panel {
             background-color: #fff;
@@ -177,6 +178,10 @@
             border: $border-table;
             border-radius: $border-radius;
             padding: 5% 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
 
             .all-gestion-info {
               -webkit-flex: 3;
@@ -256,17 +261,20 @@
                 }
               }
             }
+          }
         }
-    }
-    .edit-entreprise {
-        padding-top: 55px;
-    }
-    #content {
-        .new-entreprise {
+
+        .edit-entreprise {
+          padding-top: 55px;
+        }
+
+        #content {
+          .new-entreprise {
             padding-top: 75px;
-        }
-        #shadow-cog,
-        #shadow-cog-add-images {
+          }
+
+          #shadow-cog,
+          #shadow-cog-add-images {
             position: fixed;
             top: 0px;
             left: 0px;
@@ -278,15 +286,16 @@
             justify-content: center;
             z-index: 100;
             display: none;
+
             #remove,
             #remove_add_image {
-                cursor: pointer;
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                right: 0px;
-                bottom: 0px;
-                z-index: -1;
+              cursor: pointer;
+              position: absolute;
+              top: 0px;
+              left: 0px;
+              right: 0px;
+              bottom: 0px;
+              z-index: -1;
             }
 
             .edit-panel-header {
@@ -826,6 +835,7 @@
 
 .error-red {
   color: red;
+  font-size: 11px;
 }
 
 // Fix .mat-form-field-wrapper
@@ -901,10 +911,14 @@
   }
 
   .all-group-content {
-    flex-direction: column-reverse !important;
+    flex-direction: column !important;
 
     .view-content-center {
       width: inherit;
+
+      &.fix-view-cotent-center-right {
+        margin-top: 25px;
+      }
     }
 
     .fix-progress {
@@ -933,12 +947,16 @@
 @include respond-to(small-extra-Desktop) {
   .all-group-content {
     .view-content-center {
-      width: calc(70% - 10px);
+      width: calc(50% - 10px);
       margin: 0px 10px 0px 0px;
+
+      &.fix-view-cotent-center-right {
+        margin: 0px 0px 0px 10px;
+      }
     }
 
     .fix-progress {
-      width: calc(30% - 10px);
+      width: calc(50% - 10px);
       margin: 0px 0px 0px 10px;
       display: flex;
       justify-content: end;

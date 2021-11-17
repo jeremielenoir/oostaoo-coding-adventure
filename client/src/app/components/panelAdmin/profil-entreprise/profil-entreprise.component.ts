@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiClientService, API_URI_USER, API_URI_ENTREPRISE } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
@@ -21,6 +21,8 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
   @ViewChild('fileLoading') fileLoading: ElementRef;
   @ViewChild('uploadFileFirst') uploadFileFirst: ElementRef;
 
+  entrepriseProfilForm: FormGroup;
+  entrepriseLinksForm: FormGroup;
   private subscription: Subscription;
   readonly loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   account: any;
@@ -119,12 +121,32 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
   dataRoute: any;
   disabled: boolean;
 
-  constructor(
-    private router: Router,
-    public apiClientService: ApiClientService,
-    public decryptTokenService: DecryptTokenService,
-    private _snackBar: MatSnackBar
-  ) { }
+  constructor(private router: Router, public apiClientService: ApiClientService, public decryptTokenService: DecryptTokenService,
+    private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private el: ElementRef) {
+    this.entrepriseProfilForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      lang: [''],
+      phone: ['', Validators.required],
+      industrie: [''],
+      numberofemployee: [''],
+      numberofdev: [''],
+      videolink: [''],
+      websitelink: [''],
+      teaser: [''],
+      linkedin: [''],
+      facebook: [''],
+      twitter: [''],
+    });
+    this.entrepriseLinksForm = this.formBuilder.group({
+      videolink: [''],
+      websitelink: [''],
+      teaser: [''],
+      linkedin: [''],
+      facebook: [''],
+      twitter: [''],
+    });
+  }
 
   ngOnInit() {
     this.loading$.next(true);
@@ -142,33 +164,22 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
       // }
 
       if (this.account.entreprise) {
-        this.name.setValue(this.account.entreprise.nom);
-        this.email.setValue(this.account.entreprise.email);
-        this.lang.setValue(this.account.entreprise.lang);
-        this.phone.setValue(this.account.entreprise.tel);
-        this.industrie.setValue(this.account.entreprise.nb_employe);
-        this.numberofemployee.setValue(this.account.entreprise.nb_employe);
-        this.numberofdev.setValue(this.account.entreprise.nb_dev);
-        this.videolink.setValue(this.account.entreprise.lien_video);
-        this.websitelink.setValue(this.account.entreprise.url_site);
-        this.teaser.setValue(this.account.entreprise.teaser);
-        this.linkedin.setValue(this.account.entreprise.linkedin);
-        this.facebook.setValue(this.account.entreprise.facebook);
-        this.twitter.setValue(this.account.entreprise.twitter);
-        // this.name = new FormControl(this.account.entreprise.nom, Validators.required);
-        // this.email = new FormControl(this.account.entreprise.email, [Validators.required, Validators.email]);
-        // this.lang = new FormControl(this.account.entreprise.lang);
-        // this.phone = new FormControl(this.account.entreprise.tel, Validators.required);
-        // this.industrie = new FormControl(this.account.entreprise.industrie);
-        // this.numberofemployee = new FormControl(this.account.entreprise.nb_employe);
-        // this.numberofdev = new FormControl(this.account.entreprise.nb_dev);
-        // this.videolink = new FormControl(this.account.entreprise.lien_video);
-        // this.websitelink = new FormControl(this.account.entreprise.url_site);
-        // this.teaser = new FormControl(this.account.entreprise.teaser);
+        this.entrepriseProfilForm.controls['lang'].setValue(this.account.entreprise.lang);
+        this.entrepriseProfilForm.controls['name'].setValue(this.account.entreprise.nom);
+        this.entrepriseProfilForm.controls['email'].setValue(this.account.entreprise.email);
+        this.entrepriseProfilForm.controls['phone'].setValue(this.account.entreprise.tel);
+        this.entrepriseProfilForm.controls['industrie'].setValue(this.account.entreprise.nb_employe);
+        this.entrepriseProfilForm.controls['numberofemployee'].setValue(this.account.entreprise.nb_employe);
+        this.entrepriseProfilForm.controls['numberofdev'].setValue(this.account.entreprise.nb_dev);
+        this.entrepriseLinksForm.controls['videolink'].setValue(this.account.entreprise.lien_video);
+        this.entrepriseLinksForm.controls['websitelink'].setValue(this.account.entreprise.url_site);
+        this.entrepriseLinksForm.controls['teaser'].setValue(this.account.entreprise.teaser);
+        this.entrepriseLinksForm.controls['linkedin'].setValue(this.account.entreprise.linkedin);
+        this.entrepriseLinksForm.controls['facebook'].setValue(this.account.entreprise.facebook);
+        this.entrepriseLinksForm.controls['twitter'].setValue(this.account.entreprise.twitter);
+
         this.picture = this.account.entreprise.image_entreprise;
-        // this.linkedin = new FormControl(this.account.entreprise.linkedin);
-        // this.facebook = new FormControl(this.account.entreprise.facebook);
-        // this.twitter = new FormControl(this.account.entreprise.twitter);
+
         this.entreprise = this.account.entreprise;
         if (this.account.entreprise.logo) {
           this.logo = this.account.entreprise.logo.url;
@@ -176,8 +187,6 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
         console.log('entreprise user', this.account.entreprise);
         console.log('this.entreprise=', this.entreprise.logo);
         console.log('entreprise picture', this.picture);
-        // this.progressbar1();
-        // this.progressbar2();
         this.isVerifUser = true;
         this.progressbarTotal();
       } else {
@@ -187,46 +196,6 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
 
       this.loading$.next(false);
     });
-
-    // this.getUser()
-    //   .then(user => {
-    //     this.account = user[0].customeraccount;
-    //     // if (user[0].role.type === 'root') {
-    //     //   this.router.navigate(['/dashboard/profil-utilisateur']); // role administrator strapi -> redirect to this route ?
-    //     // }
-
-    //     if (this.account.entreprise === null) {
-    //       this.isVerifUser = true;
-    //       return console.log('no entreprise lel');
-    //     } else {
-    //       this.name = new FormControl(this.account.entreprise.nom, Validators.required);
-    //       this.email = new FormControl(this.account.entreprise.email, [Validators.required, Validators.email]);
-    //       this.lang = new FormControl(this.account.entreprise.lang);
-    //       this.phone = new FormControl(this.account.entreprise.tel, Validators.required);
-    //       this.industrie = new FormControl(this.account.entreprise.industrie);
-    //       this.numberofemployee = new FormControl(this.account.entreprise.nb_employe);
-    //       this.numberofdev = new FormControl(this.account.entreprise.nb_dev);
-    //       this.videolink = new FormControl(this.account.entreprise.lien_video);
-    //       this.websitelink = new FormControl(this.account.entreprise.url_site);
-    //       this.teaser = new FormControl(this.account.entreprise.teaser);
-    //       this.picture = this.account.entreprise.image_entreprise;
-    //       this.linkedin = new FormControl(this.account.entreprise.linkedin);
-    //       this.facebook = new FormControl(this.account.entreprise.facebook);
-    //       this.twitter = new FormControl(this.account.entreprise.twitter);
-    //       this.entreprise = this.account.entreprise;
-    //       if (this.account.entreprise.logo !== undefined) {
-    //         this.logo = this.account.entreprise.logo.url;
-    //       }
-    //       console.log('entreprise user', this.account.entreprise);
-    //       console.log('this.entreprise=', this.entreprise.logo);
-    //       console.log('entreprise picture', this.picture);
-    //       // this.progressbar1();
-    //       // this.progressbar2();
-    //       this.isVerifUser = true;
-    //       this.progressbarTotal();
-    //     }
-    //   })
-    //   .finally(() => this.loading$.next(false));
   }
 
   ngOnDestroy() {
@@ -250,33 +219,27 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     ];
   }
 
-  addentreprise() {
+  addEntreprise() {
     this.submitted = true;
 
-    if (
-      this.newEntreprise.value === '' ||
-      this.newEmail.value === '' ||
-      this.newPhone.value === '' ||
-      this.newEmail.invalid
-    ) {
-      this.openSnackBar('Une erreur est survenue, veuillez correctement remplir tous les champs requis', 'Fermer');
-      console.log('password not updated');
-      return;
-    } else {
+    if (this.entrepriseProfilForm.valid) {
       this.apiClientService
         .post(API_URI_ENTREPRISE, {
-          Nom: this.newEntreprise.value,
-          Email: this.newEmail.value,
-          Tel: this.newPhone.value,
-          useradmin: this.decryptTokenService.userId
-        })
-        .subscribe(
+          Nom: this.entrepriseProfilForm.controls['name'].value,
+          Email: this.entrepriseProfilForm.controls['email'].value,
+          Tel: this.entrepriseProfilForm.controls['phone'].value
+        }).subscribe(
           res => {
             this.ngOnInit();
-            this.openSnackBar("L'entreprise a correctement été ajoutée", "Fermer");
+            this.openSnackBar('L\'entreprise a correctement été ajoutée', 'Fermer');
           },
-          err => console.log(err)
-        );
+          err => {
+            this.openSnackBar(err.message ? err.message :
+              'Oops ! l\'ajout d\'entreprise est indisponible', 'Ok');
+          });
+    } else {
+      this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
+      return;
     }
   }
 
@@ -285,64 +248,6 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
       duration: 6000,
       panelClass: ['mat-snack-bar-container']
     });
-  }
-
-  clickchange() {
-    // console.log('this.user :', this.user);
-    this.apiClientService
-      .put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
-        lang: this.lang.value,
-        Lien_video: this.videolink.value,
-        Url_site: this.websitelink.value,
-        Teaser: this.teaser.value
-      })
-      .subscribe(
-        res => {
-          // console.log('res', res);
-        },
-        err => console.log(err)
-      );
-  }
-
-  clickchange2() {
-    console.log('bonjour' + this.name.value);
-    this.submitted = true;
-    if (
-      this.name.value === '' ||
-      this.email.value === '' ||
-      this.phone.value === '' ||
-      this.email.invalid
-    ) {
-      return console.log('password not updated');
-    } else {
-      this.apiClientService
-        .put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
-          lang: this.lang.value,
-          Nom: this.name.value,
-          Email: this.email.value,
-          Tel: this.phone.value,
-          industrie: this.industrie.value,
-          Nb_employe: this.numberofemployee.value,
-          Nb_dev: this.numberofdev.value,
-          Lien_video: this.videolink.value,
-          Url_site: this.websitelink.value,
-          Teaser: this.teaser.value,
-          Linkedin: this.linkedin.value,
-          Facebook: this.facebook.value,
-          Twitter: this.twitter.value
-        })
-        .subscribe(
-          res => {
-            this.currentTotal = 0;
-            this.ngOnInit();
-            this.openSnackBar('Profil entreprise mis à jour aves succès', 'Ok');
-          },
-          err => {
-            this.openSnackBar(err.message ? err.message :
-              'Oops ! la mise à jour du profil entreprise est indisponible', 'Ok');
-          }
-        );
-    }
   }
 
   uploadLogo() {
@@ -442,36 +347,6 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     }
   }
 
-  // progressbar1() {
-  //   const total = [this.lang.value, this.videolink.value, this.websitelink.value, this.teaser.value];
-  //   const percent = 25;
-
-  //   for (const element of total) {
-  //     if (element !== null && element !== '') {
-  //       this.current1 = this.current1 + percent;
-
-  //       this.current1 = Math.round(this.current1);
-  //     }
-
-  //   }
-  // }
-  // progressbar2() {
-
-  //   const total = [
-  //     this.name.value, this.email.value, this.phone.value,
-  //     this.industrie.value, this.numberofemployee.value,
-  //     this.numberofdev.value, this.videolink.value, this.websitelink.value,
-  //     this.teaser.value, this.linkedin.value, this.facebook.value, this.twitter.value
-  //   ];
-  //   const percent = 8.33333333;
-  //   for (const element of total) {
-  //     if (element !== null && element !== '') {
-  //       this.current2 = this.current2 + percent;
-  //       this.current2 = Math.trunc(this.current2);
-  //     }
-
-  //   }
-  // }
   progressbarTotal() {
     const total = [
       this.lang.value,
@@ -539,15 +414,6 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
 
   private getUser(): Observable<Record<string, any>> {
     return this.apiClientService.get(API_URI_USER + '/' + this.decryptTokenService.userId);
-    // try {
-    //   const datas = await this.apiClientService
-    //     .get(API_URI_USER + '/' + this.decryptTokenService.userId)
-    //     .toPromise();
-    //   console.log(datas);
-    //   return (this.user = [datas]);
-    // } catch (err) {
-    //   return err;
-    // }
   }
 
   // this function is not used
@@ -560,6 +426,70 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
       return (this.entre = [datas]);
     } catch (err) {
       return err;
+    }
+  }
+
+  // convenience getter for easy access to form fields
+  get entrepriseFormControl() {
+    return this.entrepriseProfilForm.controls;
+  }
+
+  updateProfilEntreprise() {
+    this.submitted = true;
+    if (this.entrepriseProfilForm.valid) {
+      this.apiClientService
+        .put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
+          lang: this.entrepriseProfilForm.controls['lang'].value,
+          Nom: this.entrepriseProfilForm.controls['name'].value,
+          Email: this.entrepriseProfilForm.controls['email'].value,
+          Tel: this.entrepriseProfilForm.controls['phone'].value,
+          industrie: this.entrepriseProfilForm.controls['industrie'].value,
+          Nb_employe: this.entrepriseProfilForm.controls['numberofemployee'].value,
+          Nb_dev: this.entrepriseProfilForm.controls['numberofdev'].value,
+        })
+        .subscribe(
+          res => {
+            this.currentTotal = 0;
+            this.ngOnInit();
+            this.openSnackBar('Profil entreprise mis à jour aves succès', 'Ok');
+          },
+          err => {
+            this.openSnackBar(err.message ? err.message :
+              'Oops ! la mise à jour du profil entreprise est indisponible', 'Ok');
+          }
+        );
+    } else {
+      this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
+      return;
+    }
+  }
+
+  updateLinksEntreprise() {
+    this.submitted = true;
+    if (this.entrepriseLinksForm.valid) {
+      this.apiClientService
+        .put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
+          Lien_video: this.entrepriseLinksForm.controls['videolink'].value,
+          Url_site: this.entrepriseLinksForm.controls['websitelink'].value,
+          Teaser: this.entrepriseLinksForm.controls['teaser'].value,
+          Linkedin: this.entrepriseLinksForm.controls['linkedin'].value,
+          Facebook: this.entrepriseLinksForm.controls['facebook'].value,
+          Twitter: this.entrepriseLinksForm.controls['twitter'].value
+        })
+        .subscribe(
+          res => {
+            this.currentTotal = 0;
+            this.ngOnInit();
+            this.openSnackBar('Profil entreprise mis à jour aves succès', 'Ok');
+          },
+          err => {
+            this.openSnackBar(err.message ? err.message :
+              'Oops ! la mise à jour du profil entreprise est indisponible', 'Ok');
+          }
+        );
+    } else {
+      // this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
+      return;
     }
   }
 }
