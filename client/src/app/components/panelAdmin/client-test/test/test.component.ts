@@ -16,7 +16,7 @@ import {
   QUESTION_SEPARATOR,
 } from '../../../../api-client/api-client.service';
 import { SelectedLanguageService } from '../../../../services/selected-language.service';
-import { MatDialog } from '@angular/material';
+import { MatCheckbox, MatDialog, MatCheckboxChange } from '@angular/material';
 import { DialogTimeoutComponent } from './dialog-timeout.component';
 import {
   Subscription,
@@ -255,8 +255,8 @@ export class TestComponent implements OnInit, OnDestroy {
     }
   }
 
-  public checkboxAnswers(event: Event) {
-    const checkbox = event.target as HTMLInputElement;
+  public checkboxAnswers(event: MatCheckboxChange) {
+    const checkbox: MatCheckbox = event.source;
 
     if (checkbox.checked) {
       this.candidatAnswers.push(checkbox.value);
@@ -272,12 +272,8 @@ export class TestComponent implements OnInit, OnDestroy {
   }
 
   private validateAnswer(): Observable<any> {
-    // get correct answers of current question
-    this.correctAnswers = this.question.answer_value
-      .split(this.separator)
-      .sort();
+    
     let points: number;
-
     // get correct answers of current question    
     this.correctAnswers = this.question.answer_value.split(this.separator).sort();
     
@@ -287,8 +283,8 @@ export class TestComponent implements OnInit, OnDestroy {
       //determines if candidat answer is good and get associated points 
       this.candidatAnswers.push(this.candidatAnswer);
       points =
-        this.correctAnswers.sort().toString() ===
-        this.candidatAnswers.sort().toString()
+        this.correctAnswers.sort().toString().toLowerCase() ===
+        this.candidatAnswers.sort().toString().toLowerCase()
           ? this.questions[this.currentIdxQuestions].points
           : 0;
       // maybe use nullish coalescing operator ?
