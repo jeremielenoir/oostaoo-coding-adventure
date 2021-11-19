@@ -38,19 +38,11 @@ button.mat-menu-item {
             height: 46px;
         }
         .right-country {
+            padding : 10px 0;
             width: 60px;
             min-width: 60px;
-            display: flex;
-            align-items: center;
-            &.langage{
-                position: absolute;
-                right: 0px;
-            }
-            &.profile{
-                position: absolute;
-                right: 60px;
-                top: 15px;
-            }
+            margin-left: auto; 
+            margin-right: 0;
             .custom-text {
                 color: $color-principal-blue;
                 margin-bottom: 0px !important;
@@ -87,13 +79,10 @@ button.mat-menu-item {
         }
         .menu-burgeur {
             display: flex;
-            margin-top: 5px;
+            padding: 18px 0;
             align-items: center;
             display: none;
             cursor: pointer;
-            position: absolute;
-            top: 15px;
-            right: 20px;
             i {
                 color: $color-principal-blue;
                 font-size: 35px;
@@ -106,10 +95,8 @@ button.mat-menu-item {
             justify-content: center;
             flex: 1;
             margin-left: 80px;
-            &.tablet{
-                li{
+            &.tablet {
                     margin-left: 0px;
-                }
             }
             li {
                 .title-menu-responsive {
@@ -387,7 +374,7 @@ button.mat-menu-item {
     background-color: rgb(121, 121, 121);
     display: block;
     padding: 5px 10px;
-    margin: 13px !important;
+    margin: 13px !important; 
 }
 
 @media screen and (max-width: 970px) {
