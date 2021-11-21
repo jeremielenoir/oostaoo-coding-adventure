@@ -217,7 +217,7 @@
                   <div>
                     <div class="gestion-info-img-header">
                       <div class="form-line fix-buttons">
-                        <app-base-button (click)='modal_upload()' iconName="upload" i18n>ENVOYER</app-base-button>
+                        <app-base-button (click)='modal_upload(); $event.preventDefault(); openDialog(3, 4, "mb")' iconName="upload" i18n>ENVOYER</app-base-button>
                       </div>
                       <div class="form-line fix-buttons">
                         <app-base-button iconName="delete" i18n>SUPPRIMER</app-base-button>

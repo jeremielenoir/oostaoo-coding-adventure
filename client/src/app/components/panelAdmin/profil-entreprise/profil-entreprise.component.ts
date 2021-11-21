@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiClientService, API_URI_USER, API_URI_ENTREPRISE } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
-import { MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MAT_DIALOG_DATA, MatSnackBar, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
+import { DialogImagesComponent } from './dialog-images/dialog-images.component';
 
 @Component({
   selector: 'app-profil-entreprise',
@@ -122,7 +123,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
   disabled: boolean;
 
   constructor(private router: Router, public apiClientService: ApiClientService, public decryptTokenService: DecryptTokenService,
-    private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private el: ElementRef) {
+    private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private el: ElementRef, public dialog: MatDialog) {
     this.entrepriseProfilForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -149,6 +150,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // this.openDialog();
     this.loading$.next(true);
     this.apiClientService._user.subscribe(data => {
       if (data) {
@@ -168,7 +170,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
         this.entrepriseProfilForm.controls['name'].setValue(this.account.entreprise.nom);
         this.entrepriseProfilForm.controls['email'].setValue(this.account.entreprise.email);
         this.entrepriseProfilForm.controls['phone'].setValue(this.account.entreprise.tel);
-        this.entrepriseProfilForm.controls['industrie'].setValue(this.account.entreprise.nb_employe);
+        this.entrepriseProfilForm.controls['industrie'].setValue(this.account.entreprise.industrie);
         this.entrepriseProfilForm.controls['numberofemployee'].setValue(this.account.entreprise.nb_employe);
         this.entrepriseProfilForm.controls['numberofdev'].setValue(this.account.entreprise.nb_dev);
         this.entrepriseLinksForm.controls['videolink'].setValue(this.account.entreprise.lien_video);
@@ -491,5 +493,17 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
       // this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
       return;
     }
+  }
+
+  openDialog(numbertObjects: number, limit_size: number, type_size: string) {
+    // type_size = ['bytes', 'kb', 'mb', 'gb', 'tb', 'pb', 'eb', 'zb', 'yb'];
+    const dialogRef = this.dialog.open(DialogImagesComponent, {
+      width: '600px',
+      data: { limit: numbertObjects, limit_size: limit_size, type_size: type_size }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
