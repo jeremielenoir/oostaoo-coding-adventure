@@ -91,7 +91,7 @@ import { GeneralComponent } from './components/panelAdmin/edit-campagne/settings
 import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne/settings/personnalisation/personnalisation.component';
 import { ClientTestComponent } from './components/panelAdmin/client-test/client-test.component';
 import { TestComponent } from './components/panelAdmin/client-test/test/test.component';
-import { DialogTimeoutComponent} from './components/panelAdmin/client-test/test/dialog-timeout.component'
+import { DialogTimeoutComponent } from './components/panelAdmin/client-test/test/dialog-timeout.component'
 
 
 
@@ -161,6 +161,9 @@ import { SaveCardComponent } from './components/save-card/save-card.component';
 import { CompactBtnComponent } from './components/common/ui/compact-btn/compact-btn.component';
 import { JsonService } from './services/json/json.service';
 
+import { DialogImagesComponent } from './components/panelAdmin/profil-entreprise/dialog-images/dialog-images.component';
+import { DragDropDirective } from './components/panelAdmin/profil-entreprise/drag-drop.directive';
+
 export class MyIntl extends TimeagoIntl {
 
 }
@@ -190,6 +193,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     OffersComponent,
     ConfirmComponent,
     AddressComponent,
+    DialogImagesComponent
   ],
   declarations: [
     AppComponent,
@@ -293,6 +297,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     SaveCardComponent,
     MediaQueryComponent,
     CompactBtnComponent,
+    DialogImagesComponent,
+    DragDropDirective
   ],
   imports: [
     BrowserModule,
@@ -350,4 +356,4 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
