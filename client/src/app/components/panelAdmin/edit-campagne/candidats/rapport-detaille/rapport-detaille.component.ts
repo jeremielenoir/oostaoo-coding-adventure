@@ -82,22 +82,6 @@ export class RapportDetailleComponent implements OnInit {
         console.log('RAPPORT', this.rapport);
 
         this.rapport.forEach((question) => {
-          // TODO get alog result
-
-          // let algoIsValid: boolean;
-          // if (question.index_question.type == 'algo') {
-          //   this.apiClientService
-          //     .get(API_URI_CAMPAIGNS + '/' + this.candidat.campaign.id)
-          //     .toPromise()
-          //     .then((response) => {
-          //       response.questions.map((q) => {
-          //         if (q.points === question.index_question.pointsWinned) {
-          //           question.is_right_answer = true;
-          //         }
-          //       });
-          //     });
-          // }
-
           // Format datas
           question.index_question.content =
             question.index_question.content.length === 0
@@ -109,10 +93,18 @@ export class RapportDetailleComponent implements OnInit {
           this.rapportTechno.push(question.index_question.technologies);
           this.totalTime = this.totalTime + question.index_question.time;
           // Compute if candidat answered well
-          const candidatAnswers = question.array_rep_candidat.map(val => val ? val.toLowerCase() : '');
-          const rightAnswers = question.index_question.answer_value.map(val => val ? val.toLowerCase() : '');
+          const candidatAnswers = question.array_rep_candidat.map((val) =>
+            val ? val.toLowerCase() : '',
+          );
+          const rightAnswers = question.index_question.answer_value.map((val) =>
+            val ? val.toLowerCase() : '',
+          );
           const questionAnswers = question.index_question.content;
           // TODO #1 : this should be compute server side to avoid duplicate computing when PDF is generated ( source of potentials erros and duplicate maintenance )
+
+          if (question.index_question.type == 'algo') {
+            console.log(question);
+          }
           question.is_right_answer =
             candidatAnswers.every((val) =>
               rightAnswers.includes(val.toLowerCase()),
@@ -126,7 +118,6 @@ export class RapportDetailleComponent implements OnInit {
         this.uniquetechno.forEach((idTechno) => {
           this.getTechno(idTechno);
         });
-
       });
   }
 

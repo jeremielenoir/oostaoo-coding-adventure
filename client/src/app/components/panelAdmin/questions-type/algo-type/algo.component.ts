@@ -30,28 +30,33 @@ export class AlgoComponent {
       const file = new File([this.question.content.toString()], this.filename, {
         type: this.filetype,
       });
-
       const formData: FormData = new FormData();
       formData.append('files', file, file.name);
-
-      this.apiClientService
-        .post(`${EXECUTE_SCRIPT}${this.question.id.toString()}`, formData)
-        .toPromise()
-        .then((data) => {
-          if (data) {
-            this.loading = false;
-            this.responseTestCode = data.testCode;
-            this.responseTestAnswer = data.testAnswer;
-            this.responsesIsValid =
-              this.responseTestCode &&
-              this.responseTestCode.every((v) => v.resultValidation === true);
-          }
-        })
-        .catch((error) => {
-          console.log('error', error);
-          this.loading = false;
-          this.responseTestCode = error;
-        });
+      return new Promise((resolve) => {
+        this.apiClientService
+          .post(`${EXECUTE_SCRIPT}${this.question.id.toString()}`, formData)
+          .subscribe(
+            (data) => {
+              if (data) {
+                this.loading = false;
+                this.responseTestCode = data.testCode;
+                this.responseTestAnswer = data.testAnswer;
+                this.responsesIsValid =
+                  this.responseTestCode &&
+                  this.responseTestCode.every(
+                    (v) => v.resultValidation === true,
+                  );
+                resolve(this.responseTestAnswer);
+              }
+            },
+            (error) => {
+              console.log('error', error);
+              resolve(false);
+              this.loading = false;
+              this.responseTestCode = error;
+            },
+          );
+      });
     } catch (error) {
       throw error;
     }
