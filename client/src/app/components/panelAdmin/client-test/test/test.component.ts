@@ -125,12 +125,12 @@ export class TestComponent implements OnInit, OnDestroy {
     }
 
     const answerQuestionObserver = {
-      next: (n: string) => {
+      next: () => {
         this.totalElapsedTime += this.chronometerCurrentTime;
         this.startChronometerSubscription.unsubscribe();
 
         this.validateAnswer().subscribe((observer) => {
-          console.log('observer validateAnswer');
+          console.log('observer validateAnswer', observer);
           this.currentIdxQuestions++;
           if (this.currentIdxQuestions === this.questions.length) {
             //test is finish post test
@@ -274,54 +274,50 @@ export class TestComponent implements OnInit, OnDestroy {
     }
   }
 
-  private validateAnswer(): Observable<any> {
-    debugger;
+  private validateAnswer() {
     let points: number;
     // get correct answers of current question
     this.correctAnswers = this.question.answer_value
       .split(this.separator)
       .sort();
 
-    if (
-      this.questions[this.currentIdxQuestions].type === 'one' ||
-      this.questions[this.currentIdxQuestions].type === 'multiple'
-    ) {
-      //determines if candidat answer is good and get associated points
-      this.candidatAnswers.push(this.candidatAnswer);
-      points =
-        this.correctAnswers.sort().toString().toLowerCase() ===
-        this.candidatAnswers.sort().toString().toLowerCase()
+    switch (this.questions[this.currentIdxQuestions].type) {
+      case 'one':
+      case 'multiple':
+        this.candidatAnswers.push(this.candidatAnswer);
+        points =
+          this.correctAnswers.sort().toString().toLowerCase() ===
+          this.candidatAnswers.sort().toString().toLowerCase()
+            ? this.questions[this.currentIdxQuestions].points
+            : 0;
+        return this.putAnswerResults(points);
+      case 'free':
+        this.candidatAnswers.push(this.candidatAnswer.toLowerCase().trim());
+        points = this.candidatAnswers.every((reps) =>
+          this.correctAnswers.includes(reps),
+        )
           ? this.questions[this.currentIdxQuestions].points
           : 0;
-      // maybe use nullish coalescing operator ?
-    }
+        return this.putAnswerResults(points);
+      case 'algo':
+        this.algoComponent.testCode().then((algoIsValid) => {
+          let responseAlgoString = algoIsValid ? 'valide' : 'ko';
 
-    if (this.questions[this.currentIdxQuestions].type === 'free') {
-      this.candidatAnswers.push(this.candidatAnswer.toLowerCase().trim());
-      points = this.candidatAnswers.every((reps) =>
-        this.correctAnswers.includes(reps),
-      )
-        ? this.questions[this.currentIdxQuestions].points
-        : 0;
-      // maybe use nullish coalescing operator ?
-    }
+          this.candidatAnswers.push({
+            isValid: responseAlgoString,
+          });
 
-    if (this.questions[this.currentIdxQuestions].type === 'algo') {
-      this.algoComponent.testCode().then((algoIsValid) => {
-        let responseAlgoString = algoIsValid ? 'valide' : 'ko';
+          points = algoIsValid
+            ? this.questions[this.currentIdxQuestions].points
+            : 0;
 
-        this.candidatAnswers.push({
-          isValid: responseAlgoString,
+          return this.putAnswerResults(points);
         });
-
-        points = algoIsValid
-          ? this.questions[this.currentIdxQuestions].points
-          : 0;
-      });
     }
-
     this.correctAnswerCounter += points ? 1 : 0;
+  }
 
+  private putAnswerResults(points: number): Observable<any> {
     if (this.mode === 'testing') {
       return this.putAnswerResult(
         this.questions[this.currentIdxQuestions].technologies,
@@ -491,13 +487,14 @@ export class TestComponent implements OnInit, OnDestroy {
       .get<Record<string, any>>(API_URI_CANDIDATS + '/' + this.candidat.id)
       .pipe(
         tap((res) => {
-          if (res.points_candidat) this.SumPointsCandidat = res.points_candidat;
-          this.SumPointsCandidat.push({ technologies: techno, points: point });
-
-          console.log('this.SumPointsCandidat', this.SumPointsCandidat);
-
-          if (res.raport_candidat) this.jsonRapport = res.raport_candidat;
-
+          if (res.points_candidat) {
+            this.SumPointsCandidat = res.points_candidat;
+            this.SumPointsCandidat.push({
+              technologies: techno,
+              points: point,
+            });
+            this.jsonRapport = res.raport_candidat;
+          }
           this.jsonRapport.rapport.push({
             array_rep_candidat: this.candidatAnswers,
             index_question: this.question, // JSON to PDF and rapport candidat
