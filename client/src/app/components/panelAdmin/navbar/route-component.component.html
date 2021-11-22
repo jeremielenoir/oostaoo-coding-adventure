@@ -187,28 +187,27 @@
             </li>
 
         </ul>
-        <div class="right-country profile">
-            <p class="custom-text" *ngIf="user?.customeraccount.type == 'profesional'"><span class="custom-type-acc">PRO</span></p>
-        </div>
-        <div class="right-country langage">
-            <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
-                <img class="flags_img" src="{{currentLanguage}}" alt="">
-                <i class="icon-country fas fa-caret-down"></i>
+        <div class="right-menu"> 
+            <div class="right-menu-div profile">
+                <p class="custom-text" *ngIf="user?.customeraccount.type == 'profesional'"><span class="custom-type-acc">PRO</span></p>
             </div>
-            <!-- </button> -->
-            <mat-menu #menu="matMenu">
-                <div *ngFor="let language of otherLanguage">
-                    <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage' mat-menu-item>
-                      <img class="flags_img_selected" src="{{language.img}}" alt="">&nbsp;&nbsp;{{getProperty(language, 'label') | uppercase}}
-                    </button>
+            <div class="right-menu-div language">
+                <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
+                    <img class="flags_img" src="{{currentLanguage}}" alt="">
+                    <i class="icon-country fas fa-caret-down"></i>
                 </div>
-            </mat-menu>
-        </div>
-
-        <div class="menu-burgeur" (click)="activeMenuBurgeur()">
-
-            <i class="fas fa-bars fa-pull-right"></i>
-
+                <!-- </button> -->
+                <mat-menu #menu="matMenu">
+                    <div *ngFor="let language of otherLanguage">
+                        <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage' mat-menu-item>
+                          <img class="flags_img_selected" src="{{language.img}}" alt="">&nbsp;&nbsp;{{getProperty(language, 'label') | uppercase}}
+                        </button>
+                    </div>
+                </mat-menu>
+            </div>
+            <div class="right-menu-div menu-burgeur" (click)="activeMenuBurgeur()">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
     </div>
 </nav>

@@ -37,12 +37,20 @@ button.mat-menu-item {
             width: 200px;
             height: 46px;
         }
-        .right-country {
-            padding : 10px 0;
-            width: 60px;
-            min-width: 60px;
-            margin-left: auto; 
-            margin-right: 0;
+        .language{
+            margin-left: 5px;
+            margin-right: 15px;
+            margin-bottom: 6px;
+        }
+        .profile{
+            margin-bottom: 4px;
+        }
+        .right-menu {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: 0px;
+            height: 100%;
             .custom-text {
                 color: $color-principal-blue;
                 margin-bottom: 0px !important;
@@ -78,9 +86,8 @@ button.mat-menu-item {
             padding-left: 6px;
         }
         .menu-burgeur {
-            display: flex;
-            padding: 18px 0;
-            align-items: center;
+            margin-right: 10px;
+            padding: 16px 0;
             display: none;
             cursor: pointer;
             i {
