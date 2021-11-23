@@ -159,6 +159,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     });
 
     this.subscription = this.getUser().subscribe(user => {
+      console.log('User : ', user);
       // this.account is only used here, maybe to remove ?
       this.account = user.customeraccount;
       // if (user[0].role.type === 'root') {
@@ -179,23 +180,22 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
         this.entrepriseLinksForm.controls['linkedin'].setValue(this.account.entreprise.linkedin);
         this.entrepriseLinksForm.controls['facebook'].setValue(this.account.entreprise.facebook);
         this.entrepriseLinksForm.controls['twitter'].setValue(this.account.entreprise.twitter);
-
-        this.picture = this.account.entreprise.image_entreprise;
-
         this.entreprise = this.account.entreprise;
-        if (this.account.entreprise.logo) {
-          this.logo = this.account.entreprise.logo.url;
-        }
-        console.log('entreprise user', this.account.entreprise);
-        console.log('this.entreprise=', this.entreprise.logo);
-        console.log('entreprise picture', this.picture);
+        this.getEntreprise(user.customeraccount.entreprise.id).then(data => {
+          console.log('data entreprise : ', data);
+          this.picture = this.account.entreprise.image_entreprise;
+
+          if (this.entreprise.logo) {
+            this.logo = this.entreprise.logo.url;
+          }
+        });
+
         this.isVerifUser = true;
         this.progressbarTotal();
       } else {
         this.isVerifUser = true;
         console.log('no entreprise lel');
       }
-
       this.loading$.next(false);
     });
   }
@@ -418,17 +418,14 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     return this.apiClientService.get(API_URI_USER + '/' + this.decryptTokenService.userId);
   }
 
-  // this function is not used
-  async getentreprise(): Promise<any> {
-    try {
-      const user = await this.user;
-      const datas = await this.apiClientService
-        .get(API_URI_ENTREPRISE + '/' + user[0].entreprise.id)
-        .toPromise();
-      return (this.entre = [datas]);
-    } catch (err) {
-      return err;
-    }
+  getEntreprise(idEntreprise): Promise<any> {
+    return this.apiClientService
+      .get(API_URI_ENTREPRISE + '/' + idEntreprise)
+      .toPromise()
+      .then(data => {
+        // console.log('data entreprise : ', data);
+        return this.entreprise = data;
+      });
   }
 
   // convenience getter for easy access to form fields
@@ -495,15 +492,31 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     }
   }
 
-  openDialog(numbertObjects: number, limit_size: number, type_size: string) {
+  openDialog(numbertObjects: number, limit_size: number, type_size: string, ref, field) {
+    // files: The file(s) to upload.The value(s) can be a Buffer or Stream.
+    // path: (optional): The folder where the file(s) will be uploaded to(only supported on strapi - upload - aws - s3 now).
+    // refId: (optional): The ID of the entry which the file(s) will be linked to.
+    // ref: (optional): The name of the model which the file(s) will be linked to.
+    // source: (optional): The name of the plugin where the model is located.
+    // field: (optional): The field of the entry which the file(s) will be precisely linked to.
     // type_size = ['bytes', 'kb', 'mb', 'gb', 'tb', 'pb', 'eb', 'zb', 'yb'];
     const dialogRef = this.dialog.open(DialogImagesComponent, {
       width: '600px',
-      data: { limit: numbertObjects, limit_size: limit_size, type_size: type_size }
+      data: {
+        limit: numbertObjects, limit_size: limit_size, type_size: type_size,
+        refId: this.entreprise.id,
+        ref: ref,
+        field: field
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      console.log('Dialog result: ', result);
+      if (result.field === 'logo') {
+        for (const ImgUrl of result) {
+          this.logo = ImgUrl.url;
+        }
+      }
     });
   }
 }

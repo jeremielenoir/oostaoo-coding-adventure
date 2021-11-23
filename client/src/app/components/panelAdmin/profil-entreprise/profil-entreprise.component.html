@@ -213,18 +213,18 @@
               <div class="regroupe-form">
                 <label i18n>Logo de l'entreprise</label>
                 <div class="all-gestion-info">
-                  <figure class="img-upload"><img src=" {{logo}}" alt="" role=""></figure>
+                  <figure class="img-upload"><img src="{{logo}}" alt="" role=""></figure>
                   <div>
                     <div class="gestion-info-img-header">
                       <div class="form-line fix-buttons">
-                        <app-base-button (click)='modal_upload(); $event.preventDefault(); openDialog(3, 4, "mb")' iconName="upload" i18n>ENVOYER</app-base-button>
+                        <app-base-button (click)='$event.preventDefault(); openDialog(1, 4, "mb", "entreprise", "logo")' iconName="upload" i18n>ENVOYER</app-base-button>
                       </div>
                       <div class="form-line fix-buttons">
                         <app-base-button iconName="delete" i18n>SUPPRIMER</app-base-button>
                       </div>
                     </div>
                     <p class="gestion-info-img-contenu" i18n>4 Mo max.</p>
-                    <p class="gestion-info-img-contenu" i18n>Taille recommandée : 500 x 500px</p>
+                    <p class="gestion-info-img-contenu" i18n>Taille recommandée : 500px 500px</p>
                     <p class="gestion-info-img-contenu" i18n>Types de fichier recommandés : JPEG, PNG, GIF</p>
                   </div>
                 </div>
