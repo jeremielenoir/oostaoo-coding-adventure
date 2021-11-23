@@ -5,15 +5,9 @@
   <h2 i18n>Déposez votre image ici</h2>
 </div>
 <mat-dialog-content>
-<!-- <form [formGroup]="imageForm" (ngSubmit)="onSubmit()">
-  <input type="file" formControlName="image" (onchange)="onFileChange($event, 'image')" accept="image/x-png,image/gif,image/jpeg"/>
-</form> -->
-
-
-
 <div draggable="true" [ngClass]="data && this.files.length === limit && !show ? 'hidden-upload' : 'uploadfilecontainer'"  class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
   <h2 i18n>Faites glisser le(s) images(s) ici ou cliquez pour ouvrir</h2>
-  <mat-icon class="fix-icon">photo_camera</mat-icon>
+  <mat-icon class="fix-icon">add_a_photo</mat-icon>
   <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)" accept="image/x-png,image/gif,image/jpeg">
 </div>
 <div  class="files-list" *ngFor="let file of files;let i= index">
@@ -26,5 +20,5 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <app-base-button (click)="uploadImage()" iconName="done" [disabled]="disabled" i18n>VALIDER</app-base-button>
+  <app-base-button (click)="onSubmit()" iconName="done" [disabled]="disabled" i18n>VALIDER</app-base-button>
 </mat-dialog-actions>

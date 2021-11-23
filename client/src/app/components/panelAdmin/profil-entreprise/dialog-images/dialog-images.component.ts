@@ -1,3 +1,4 @@
+import { ApiClientService, UPLOAD_TO_STRAPI } from 'src/app/api-client/api-client.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -17,12 +18,10 @@ export class DialogImagesComponent implements OnInit {
   limit = 0;
   limit_size = 0;
   type_size = '';
+  dataFormFile = {};
 
   constructor(public dialogRef: MatDialogRef<DialogImagesComponent>, private formBuilder: FormBuilder, private sanitizer: DomSanitizer,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-    // data limit : limit objet;
-    // data limit_size / objet
-    // data type_size
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, public apiClientService: ApiClientService) {
     this.imageForm = this.formBuilder.group({
       image: ['', Validators.required],
     });
@@ -30,10 +29,11 @@ export class DialogImagesComponent implements OnInit {
 
   ngOnInit() {
     this.disabled = true;
-    console.log('data : ', this.data);
+    // console.log('data : ', this.data);
     this.limit = this.data['limit'];
     this.limit_size = this.data['limit_size'];
     this.type_size = this.data['type_size'];
+    this.dataFormFile = { refId: this.data['refId'], ref: this.data['ref'], field: this.data['field'] };
   }
 
   uploadFile(event) {
@@ -43,12 +43,15 @@ export class DialogImagesComponent implements OnInit {
       if (this.formatBytes(element.size) && element.type === 'image/png' ||
         this.formatBytes(element.size) && element.type === 'image/gif' ||
         this.formatBytes(element.size) && element.type === 'image/jpeg' && this.files.length < this.limit) {
-        this.files.push({ name: element.name, url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(element)) });
+        this.files.push({
+          name: element.name, url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(element)),
+          properties: element
+        });
+        // this.onSubmit(element);
       } else {
         console.log('return "show popup" type unknown, limit size or limit files depassed');
       }
     }
-    console.log('this.files : ', this.files);
     if (this.files.length > 0) {
       if (this.files.length === this.limit) {
         this.show = false;
@@ -72,8 +75,8 @@ export class DialogImagesComponent implements OnInit {
     }
   }
 
-  closeDialog(): void {
-    this.dialogRef.close();
+  closeDialog(data) {
+    this.dialogRef.close(data);
   }
 
   formatBytes(bytes) {
@@ -96,14 +99,24 @@ export class DialogImagesComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
-    console.log('this.imageForm.value : ', this.imageForm.value);
-    Object.entries(this.imageForm.value).forEach(
-      ([key, value]: any[]) => {
-        formData.set(key, value);
-      });
+    for (const file of this.files) {
+      formData.append('files', file.properties);
+      formData.append('refId', this.dataFormFile['refId']); // id of content type
+      formData.append('ref', this.dataFormFile['ref']); // name of content type
+      formData.append('field', this.dataFormFile['field']); // name of key for the content type
+    }
+    // console.log('formData : ', formData);
+    this.uploadImage(formData);
   }
 
-  uploadImage() {
-
+  uploadImage(formFile) {
+    this.apiClientService.post(UPLOAD_TO_STRAPI, formFile).subscribe(data => {
+      console.log('Post upload file : ', data);
+      data['field'] = this.dataFormFile['field'];
+      this.closeDialog(data);
+    },
+      (err) => {
+        console.log(err);
+      });
   }
 }
