@@ -6,6 +6,9 @@ import { ApiClientService, API_URI_NOTIFICATIONS, API_URI_USER, API_URI_ACCOUNT 
 import { DecryptTokenService } from '../../home/register/register.service';
 import {SelectedLanguageService} from '../../../services/selected-language.service';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { NotificationService } from 'src/app/services/notification.service';
+import { Observable, Subscription, timer } from 'rxjs';
+import { map, share, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-route-component',
@@ -13,7 +16,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
   styleUrls: ['./route-component.component.scss']
 })
 export class RouteComponentComponent implements OnInit, OnDestroy {
-
+  private subscription: Subscription;
   user: any;
   account: any;
   paymentCard: any;
@@ -25,14 +28,12 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
   isShow2 = false;
   public offer_id: any;
   public viewcontentDefaults: boolean;
-  public notifications = [];
   public notifUnread = 0;
   public activeMenuB = false;
   public currentLanguage;
-  public stopTimeInterval: any;
   public lang = 'en';
   public isTablet: boolean = false;
-  
+  public notifications$: Observable<Record<string, any>[]>;
   public otherLanguage = [
     {
       codelang: 'fr', shortlang: 'fr', img: '../../../../assets/drapeau/france-flag-round-icon-32.png', url: '/fr',
@@ -50,34 +51,30 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
       codelang: 'jp', shortlang: 'jp', img: '../../../../assets/drapeau/japan-flag-round-icon-32.png', url: '/jp',
       labelfr: 'japonais', labelen: 'japanese', labeles: 'japonés', labeljp: '日本'
     }
-   ];
+  ];
 
   @Output() ContentViewDefault = new EventEmitter<any>();
 
-  constructor( public dialog: MatDialog, public apiClientService: ApiClientService,
-    public route: Router, @Inject(LOCALE_ID) private locale: string, private router: Router,
-    public decryptTokenService: DecryptTokenService, public selectedLanguageService: SelectedLanguageService, public breakpointObserver: BreakpointObserver ) {}
+  constructor(
+    public dialog: MatDialog, public apiClientService: ApiClientService, public route: Router,
+    @Inject(LOCALE_ID) private locale: string, private router: Router,
+    public decryptTokenService: DecryptTokenService, public selectedLanguageService: SelectedLanguageService, public breakpointObserver: BreakpointObserver,
+    private notificationService: NotificationService
+  ) {}
 
-  ngOnDestroy(): void {
-    clearInterval(this.stopTimeInterval);
-    console.log('DESTROY');
-    //throw new Error("Method not implemented.");
-  }
   ngOnInit() {
+    this.breakpointObserver.observe(['(max-width: 1100px)']).subscribe((state: BreakpointState) => this.isTablet = state.matches);
 
-    this.breakpointObserver
-      .observe(['(max-width: 1100px)'])
-      .subscribe((state: BreakpointState) => {
-        console.log('Tablet');
-        this.isTablet = state.matches;
-      });
+    this.notifications$ = timer(0, 60000).pipe(
+      switchMap(() => this.notificationService.getNotifications()),
+    );
 
     this.lang = this.locale;
     if (this.selectedLanguageService.checkLanguageCountry()) {
       this.lang = this.selectedLanguageService.getLanguageCountry();
     }
 
-    this.otherLanguage.forEach( element => {
+    this.otherLanguage.forEach(element => {
       if ( element.codelang === this.lang || element.shortlang === this.lang) {
         this.currentLanguage = element.img;
       }
@@ -118,41 +115,16 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
     this.menuBurgeurDropdown();
 
     const textMenu = document.querySelectorAll('.text-menu');
+    textMenu.forEach(element => element.addEventListener('click', (e) => e.preventDefault()));
+    // textMenu.forEach(element => {
+    //   element.addEventListener('click', function(e) {
+    //     e.preventDefault();
+    //   });
+    // });
+  }
 
-    textMenu.forEach(element => {
-      element.addEventListener('click', function(e) {
-        e.preventDefault();
-      });
-    });
-
-    this.getNotifications().then(notifications => {
-      this.notifications = [];
-      notifications.forEach(element => {
-        if (
-          element.user.adminId === this.decryptTokenService.userId &&
-          element.status === false
-        ) {
-          this.notifications.push(element);
-        }
-      });
-      this.notifications.reverse();
-      this.notifications.sort((a, b) => a.status - b.status);
-      // console.log(this.notifications);
-      this.initNotifNotRead(this.notifications);
-    });
-
-    this.stopTimeInterval = setInterval(() => this.getNotifications().then(notifications => {
-       this.notifications = [];
-       notifications.forEach(element => {
-         if (element.user.adminId === this.decryptTokenService.userId) {
-           this.notifications.push(element);
-         }
-       });
-       this.notifications.reverse();
-       this.notifications.sort((a, b) => a.status - b.status);
-       // console.log(this.notifications);
-       this.initNotifNotRead(this.notifications);
-     }), 15000);
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   getCurrentRoute() {
@@ -163,10 +135,6 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
     return obj[property + this.lang];
   }
 
-  /**
-   *
-   * @param langage
-   */
   setCurrentLanguage(langage) {
     this.selectedLanguageService.updtateLanguageCountry(langage);
     this.currentLanguage = langage.img;
@@ -191,56 +159,32 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
     });
   }
 
-  async getNotifications(): Promise<any> {
-    try {
-      return await this.apiClientService.get(API_URI_NOTIFICATIONS).toPromise();
-    } catch (err) {
-      return err;
-    }
-  }
-
-  deleteNotification(notificationID) {
-    const deleteUrl = API_URI_NOTIFICATIONS + '/' + notificationID;
-    // alert(API_URI_NOTIFICATIONS+'/'+notificationID);
-    this.apiClientService
-      .delete(deleteUrl)
-      .toPromise()
-      .then(_ => {
-        this.notifications = this.notifications.filter(
-          notification => notification.id !== notificationID
-        );
-        this.initNotifNotRead(this.notifications);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  delete(notificationID: number) {
+    this.subscription = this.apiClientService.put(API_URI_NOTIFICATIONS + '/' + notificationID, { status: true }).subscribe();
+    this.notifications$ = this.notifications$.pipe(map(notifications => notifications.filter(notif => notif.id !== notificationID)));
   }
 
   navigateTo(idCampaign, idNotif, value) {
     const updateUrl = API_URI_NOTIFICATIONS + '/' + idNotif;
     if (!value) {
-      this.apiClientService
-        .put(updateUrl, {
-          status: !value
-        })
-        .toPromise()
-        .then(_ => {
-          this.notifications = this.notifications.filter(notification => {
-            notification.id == idNotif ? (notification.status = !value) : value;
-            return notification;
-          });
-          this.initNotifNotRead(this.notifications);
-          this.route.navigate([
-            '/dashboard/campaigns/' + idCampaign + '/candidats'
-          ]);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      // this.apiClientService
+      //   .put(updateUrl, { status: !value })
+      //   .toPromise()
+      //   .then(_ => {
+      //     this.notifications = this.notifications.filter(notification => {
+      //       notification.id == idNotif ? (notification.status = !value) : value;
+      //       return notification;
+      //     });
+      //     this.initNotifNotRead(this.notifications);
+      //     this.route.navigate([
+      //       '/dashboard/campaigns/' + idCampaign + '/candidats'
+      //     ]);
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     } else {
-      this.route.navigate([
-        '/dashboard/campaigns/' + idCampaign + '/candidats'
-      ]);
+      this.route.navigate(['/dashboard/campaigns/' + idCampaign + '/candidats']);
     }
   }
 
