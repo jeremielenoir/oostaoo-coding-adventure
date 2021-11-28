@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, SecurityContext } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ApiClientService, API_URI_USER, API_URI_ENTREPRISE } from 'src/app/api-client/api-client.service';
+import { ApiClientService, API_URI_USER, API_URI_ENTREPRISE, UPLOAD_TO_STRAPI } from 'src/app/api-client/api-client.service';
 import { DecryptTokenService } from 'src/app/components/home/register/register.service';
 import { MAT_DIALOG_DATA, MatSnackBar, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 import { DialogImagesComponent } from './dialog-images/dialog-images.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profil-entreprise',
@@ -48,7 +49,6 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
   public entre: any;
 
   submitted = false;
-  logo: any;
   name = new FormControl('', Validators.required);
   newEntreprise = new FormControl('', Validators.required);
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -62,7 +62,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
   videolink = new FormControl('');
   websitelink = new FormControl('');
   teaser = new FormControl('');
-  picture = [];
+
   linkedin = new FormControl('');
   facebook = new FormControl('');
   twitter = new FormControl('');
@@ -121,9 +121,13 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
 
   dataRoute: any;
   disabled: boolean;
+  public logo: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  public formDataFile: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public picture: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(private router: Router, public apiClientService: ApiClientService, public decryptTokenService: DecryptTokenService,
-    private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private el: ElementRef, public dialog: MatDialog) {
+    private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private el: ElementRef, public dialog: MatDialog,
+    private sanitizer: DomSanitizer) {
     this.entrepriseProfilForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -150,8 +154,8 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.openDialog();
     this.loading$.next(true);
+    // this.onChanges();
     this.apiClientService._user.subscribe(data => {
       if (data) {
         this.createDataRoutes(data);
@@ -181,14 +185,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
         this.entrepriseLinksForm.controls['facebook'].setValue(this.account.entreprise.facebook);
         this.entrepriseLinksForm.controls['twitter'].setValue(this.account.entreprise.twitter);
         this.entreprise = this.account.entreprise;
-        this.getEntreprise(user.customeraccount.entreprise.id).then(data => {
-          console.log('data entreprise : ', data);
-          this.picture = this.account.entreprise.image_entreprise;
-
-          if (this.entreprise.logo) {
-            this.logo = this.entreprise.logo.url;
-          }
-        });
+        this.getEntreprise(user.customeraccount.entreprise.id);
 
         this.isVerifUser = true;
         this.progressbarTotal();
@@ -252,103 +249,6 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     });
   }
 
-  uploadLogo() {
-    const formElement = document.querySelector('.formlogo') as any;
-    const request = new XMLHttpRequest();
-    request.open('POST', '/upload');
-    request.send(new FormData(formElement));
-  }
-
-  uploadImage() {
-    const formElement = document.querySelector('.formimage') as any;
-    const request = new XMLHttpRequest();
-    request.open('POST', '/upload');
-    request.send(new FormData(formElement));
-  }
-
-  verifExtension(chemin) {
-    const longueur = chemin.length;
-    const indiceDebut = longueur - 4;
-    const indiceFin = longueur;
-    const extension = chemin.substr(indiceDebut, indiceFin);
-
-    return extension;
-  }
-  public modal_upload() {
-    this.shadowcog = true;
-  }
-
-  public param_cog_non_active() {
-    this.shadowcog = false;
-    this.btnValideParent.nativeElement.children[0].disabled = true;
-    this.cadrageImgBoolean = false;
-    this.blockUpload = false;
-    this.uploadimgfirst.nativeElement.src = '';
-    console.log('uploadFileFirst', this.uploadFileFirst.nativeElement);
-    this.uploadFileFirst.nativeElement.value = '';
-  }
-
-  public show_header_param() {
-    this.paramHeader.nativeElement.classList.toggle('active-param-header');
-  }
-
-  // function modal add images
-
-  param_cog_non_active_add_image() {
-    this.shadowcogImage = true;
-  }
-
-  public param_cog_non_active_add_img() {
-    this.shadowcogImage = false;
-
-    this.disabled = true;
-    this.cadrageImgBooleanLast = false;
-    this.blockUploadLast = false;
-    this.uploadimgLast.nativeElement.src = 'salut';
-    this.fileLoading.nativeElement.value = '';
-  }
-
-  readURL(event) {
-    if (event.target.files && event.target.files[0]) {
-      this.blockUpload = true;
-      this.cadrageImgBoolean = true;
-
-      const extensionsAutorise = [
-        '.png',
-        '.gif',
-        '.jpg',
-        '.jpeg',
-        '.PNG',
-        '.GIF',
-        '.JPG',
-        '.JPEG'
-      ];
-      const extension = this.verifExtension(event.target.value);
-
-      if (
-        extension === extensionsAutorise[0] ||
-        extension === extensionsAutorise[1] ||
-        extension === extensionsAutorise[2] ||
-        extension === extensionsAutorise[3] ||
-        extension === extensionsAutorise[4] ||
-        extension === extensionsAutorise[5] ||
-        extension === extensionsAutorise[6] ||
-        extension === extensionsAutorise[7]
-      ) {
-        this.cadrageImgBooleanState = false;
-
-        this.btnValideParent.nativeElement.children[0].disabled = false;
-
-        this.uploadimgfirst.nativeElement.src = URL.createObjectURL(
-          event.target.files[0]
-        );
-      } else {
-        this.cadrageImgBooleanState = true;
-        this.btnValideParent.nativeElement.children[0].disabled = true;
-      }
-    }
-  }
-
   progressbarTotal() {
     const total = [
       this.lang.value,
@@ -374,56 +274,18 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     this.currentTotal = Math.trunc(this.currentTotal);
   }
 
-  readURL_deux(event) {
-    this.blockUploadLast = true;
-    this.cadrageImgBooleanLast = true;
-
-    const extensionsAutorise = [
-      '.png',
-      '.gif',
-      '.jpg',
-      '.jpeg',
-      '.PNG',
-      '.GIF',
-      '.JPG',
-      '.JPEG'
-    ];
-    const extension = this.verifExtension(event.target.value);
-
-    if (
-      extension === extensionsAutorise[0] ||
-      extension === extensionsAutorise[1] ||
-      extension === extensionsAutorise[2] ||
-      extension === extensionsAutorise[3] ||
-      extension === extensionsAutorise[4] ||
-      extension === extensionsAutorise[5] ||
-      extension === extensionsAutorise[6] ||
-      extension === extensionsAutorise[7]
-    ) {
-      this.cadrageImgBooleanStateLast = false;
-
-      this.uploadimgLast.nativeElement.src = URL.createObjectURL(
-        event.target.files[0]
-      );
-
-      this.disabled = false;
-    } else {
-      this.cadrageImgBooleanStateLast = true;
-
-      this.btnValideParent.nativeElement.children[0].disabled = true;
-    }
-  }
-
   private getUser(): Observable<Record<string, any>> {
     return this.apiClientService.get(API_URI_USER + '/' + this.decryptTokenService.userId);
   }
 
-  getEntreprise(idEntreprise): Promise<any> {
+  getEntreprise(idEntreprise) {
     return this.apiClientService
-      .get(API_URI_ENTREPRISE + '/' + idEntreprise)
-      .toPromise()
-      .then(data => {
-        // console.log('data entreprise : ', data);
+      .get(API_URI_ENTREPRISE + '/' + idEntreprise).subscribe(data => {
+        console.log('data : ', data);
+        if (data.logo) {
+          this.logo.next(data.logo.url);
+        }
+        this.picture.next(this.account.entreprise.image_entreprise);
         return this.entreprise = data;
       });
   }
@@ -435,32 +297,36 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
 
   updateProfilEntreprise() {
     this.submitted = true;
-    if (this.entrepriseProfilForm.valid) {
-      this.apiClientService
-        .put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
-          lang: this.entrepriseProfilForm.controls['lang'].value,
-          Nom: this.entrepriseProfilForm.controls['name'].value,
-          Email: this.entrepriseProfilForm.controls['email'].value,
-          Tel: this.entrepriseProfilForm.controls['phone'].value,
-          industrie: this.entrepriseProfilForm.controls['industrie'].value,
-          Nb_employe: this.entrepriseProfilForm.controls['numberofemployee'].value,
-          Nb_dev: this.entrepriseProfilForm.controls['numberofdev'].value,
-        })
-        .subscribe(
-          res => {
-            this.currentTotal = 0;
-            this.ngOnInit();
-            this.openSnackBar('Profil entreprise mis à jour aves succès', 'Ok');
-          },
-          err => {
-            this.openSnackBar(err.message ? err.message :
-              'Oops ! la mise à jour du profil entreprise est indisponible', 'Ok');
-          }
-        );
-    } else {
-      this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
-      return;
+    if (this.formDataFile.value) {
+      this.uploadImage(this.formDataFile.value);
     }
+    if (this.entrepriseProfilForm.valid && !this.formDataFile.value) {
+      this.postUpdateEntreprise();
+    }
+  }
+
+  postUpdateEntreprise() {
+    this.apiClientService
+      .put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
+        lang: this.entrepriseProfilForm.controls['lang'].value,
+        Nom: this.entrepriseProfilForm.controls['name'].value,
+        Email: this.entrepriseProfilForm.controls['email'].value,
+        Tel: this.entrepriseProfilForm.controls['phone'].value,
+        industrie: this.entrepriseProfilForm.controls['industrie'].value,
+        Nb_employe: this.entrepriseProfilForm.controls['numberofemployee'].value,
+        Nb_dev: this.entrepriseProfilForm.controls['numberofdev'].value,
+      })
+      .subscribe(
+        res => {
+          this.currentTotal = 0;
+          this.ngOnInit();
+          this.openSnackBar('Profil entreprise mis à jour aves succès', 'Ok');
+        },
+        err => {
+          this.openSnackBar(err.message ? err.message :
+            'Oops ! la mise à jour du profil entreprise est indisponible', 'Ok');
+        }
+      );
   }
 
   updateLinksEntreprise() {
@@ -493,6 +359,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
   }
 
   openDialog(numbertObjects: number, limit_size: number, type_size: string, ref, field) {
+    // numbertObjects limit of files
     // files: The file(s) to upload.The value(s) can be a Buffer or Stream.
     // path: (optional): The folder where the file(s) will be uploaded to(only supported on strapi - upload - aws - s3 now).
     // refId: (optional): The ID of the entry which the file(s) will be linked to.
@@ -511,12 +378,44 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.formDataFile.next(result.formData);
       console.log('Dialog result: ', result);
       if (result.field === 'logo') {
-        for (const ImgUrl of result) {
-          this.logo = ImgUrl.url;
+        this.logo.next(this.sanitizer.sanitize(
+          SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(result.files[0].url)
+        ));
+      } else {
+        const multImages = [];
+        for (const file of result.files) {
+          multImages.push({
+            name: file.name,
+            url: this.sanitizer.sanitize(
+              SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(file.url)
+            )
+          });
         }
+        console.log('multImages : ', multImages);
+        this.picture.next(multImages);
+        console.log('this.picture : ', this.picture);
       }
     });
   }
+
+  uploadImage(formFile) {
+    return this.apiClientService.post(UPLOAD_TO_STRAPI, formFile).subscribe(data => {
+      console.log('Post upload file : ', data);
+      this.logo.next(data[0].url);
+      this.formDataFile.next(null);
+      return data;
+    },
+      (err) => {
+        console.log(err);
+      });
+  }
+
+  // onChanges(): void {
+  //   this.entrepriseProfilForm.valueChanges.subscribe(val => {
+  //     console.log('VALUES : ', val);
+  //   });
+  // }
 }

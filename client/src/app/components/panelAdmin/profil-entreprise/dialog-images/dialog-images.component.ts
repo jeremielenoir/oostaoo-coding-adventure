@@ -37,31 +37,35 @@ export class DialogImagesComponent implements OnInit {
   }
 
   uploadFile(event) {
-    for (let index = 0; index < event.length; index++) {
-      const element = event[index];
-      console.log('element : ', element);
-      if (this.formatBytes(element.size) && element.type === 'image/png' ||
-        this.formatBytes(element.size) && element.type === 'image/gif' ||
-        this.formatBytes(element.size) && element.type === 'image/jpeg' && this.files.length < this.limit) {
-        this.files.push({
-          name: element.name, url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(element)),
-          properties: element
-        });
-        // this.onSubmit(element);
+    if (event.length <= this.limit) {
+      for (let index = 0; index < event.length; index++) {
+        const element = event[index];
+        // console.log('element : ', element);
+        if (this.formatBytes(element.size) && element.type === 'image/png' ||
+          this.formatBytes(element.size) && element.type === 'image/gif' ||
+          this.formatBytes(element.size) && element.type === 'image/jpeg') {
+          this.files.push({
+            name: element.name, url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(element)),
+            properties: element
+          });
+        } else {
+          console.log('return "show popup" type unknown, limit size depassed'); // show limits? and type of files
+        }
+      }
+      if (this.files.length > 0) {
+        if (this.files.length === this.limit) {
+          this.show = false;
+        }
+        this.disabled = false;
       } else {
-        console.log('return "show popup" type unknown, limit size or limit files depassed');
+        this.show = true;
+        this.disabled = true;
       }
-    }
-    if (this.files.length > 0) {
-      if (this.files.length === this.limit) {
-        this.show = false;
-      }
-      this.disabled = false;
     } else {
-      this.show = true;
-      this.disabled = true;
+      console.log('return "show popup" limit files depassed'); // show limit files?
     }
   }
+
   deleteAttachment(index) {
     this.files.splice(index, 1);
     if (this.files.length > 0) {
@@ -105,18 +109,6 @@ export class DialogImagesComponent implements OnInit {
       formData.append('ref', this.dataFormFile['ref']); // name of content type
       formData.append('field', this.dataFormFile['field']); // name of key for the content type
     }
-    // console.log('formData : ', formData);
-    this.uploadImage(formData);
-  }
-
-  uploadImage(formFile) {
-    this.apiClientService.post(UPLOAD_TO_STRAPI, formFile).subscribe(data => {
-      console.log('Post upload file : ', data);
-      data['field'] = this.dataFormFile['field'];
-      this.closeDialog(data);
-    },
-      (err) => {
-        console.log(err);
-      });
+    this.closeDialog({ formData: formData, field: this.dataFormFile['field'], files: this.files });
   }
 }

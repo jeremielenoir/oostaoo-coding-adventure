@@ -5,10 +5,12 @@
   <h2 i18n>Déposez votre image ici</h2>
 </div>
 <mat-dialog-content>
-<div draggable="true" [ngClass]="data && this.files.length === limit && !show ? 'hidden-upload' : 'uploadfilecontainer'"  class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
-  <h2 i18n>Faites glisser le(s) images(s) ici ou cliquez pour ouvrir</h2>
+<div [ngClass]="data && this.files.length === limit && !show ? 'hidden-upload' : 'uploadfilecontainer'"  class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+  <h2 *ngIf="limit === 1"  i18n>Faites glisser l'image ici ou cliquez pour ouvrir</h2>
+  <h2 *ngIf="limit > 1"  i18n>Faites glisser les images ici ou cliquez pour ouvrir</h2>
   <mat-icon class="fix-icon">add_a_photo</mat-icon>
-  <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)" accept="image/x-png,image/gif,image/jpeg">
+  <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)" accept="image/x-png,image/gif,image/jpeg" [multiple]="limit > 1">
+  <!-- <input *ngIf="limit > 1"  hidden type="file" #fileInput (change)="uploadFile($event.target.files)" accept="image/x-png,image/gif,image/jpeg" multiple> -->
 </div>
 <div  class="files-list" *ngFor="let file of files;let i= index">
     <p class="text-trunc"> {{ file.name }} </p>

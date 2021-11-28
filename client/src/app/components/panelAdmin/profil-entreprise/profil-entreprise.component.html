@@ -81,96 +81,6 @@
     <div *ngIf="dataRoute">
       <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
     </div>
-    <div id="shadow-cog" [ngClass]="{'shadow-cog-active': shadowcog == true}">
-      <div id="remove" (click)="param_cog_non_active()"></div>
-      <div class="modal">
-        <form id='formlogo' class="formlogo" enctype="multipart/form-data">
-          <div class="modal-header"></div>
-          <div class="modal-content">
-            <div class="block-upload" [class.block-upload-hidden]="blockUpload">
-              <i class="modal-content-icon fas fa-camera"></i>
-              <span class="modal-content-text" i18n> Déposez votre image ici </span>
-              <div class="btn-modal-content" id="btn-modal-content">
-                <span i18n>ou télécharger une photo</span>
-                <input type="file" class="file hvr-grow" name="files" accept="image/x-png,image/gif,image/jpeg"
-                  (change)="readURL($event)" #uploadFileFirst />
-                <input class="hidden-file" type="text" name="ref" value="entreprise" />
-                <input type="text" name="refId" value="{{entreprise.id}}" />
-                <input type="text" name="field" value="logo" />
-              </div>
-            </div>
-
-            <div class="cadrage-img" [class.cadrage-img-active]="cadrageImgBoolean">
-              <figure class="img-figure" [class.img-figure-active]="!cadrageImgBooleanState">
-                <img src="" #uploadimgfirst />
-              </figure>
-              <div class="text-error-upload" [class.text-error-upload-show]="cadrageImgBooleanState">
-                <i class="fas fa-ban ban-error"></i>
-                <span class="error" i18n>Fichier non supporté</span>
-                <div class="btn-modal-content" id="btn-modal-content">
-                  <span class="modal-text-btn-upload" i18n>ou télécharger une photo</span>
-                  <input type="file" class="file" (change)="readURL($event)" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer" #btnValideParent>
-            <button mat-button class="modal-btn-footer" (click)="uploadLogo()" disabled="disabled" id="btn-valide"
-              i18n>valider</button>
-            <button mat-button class="modal-btn-footer" (click)="param_cog_non_active()" i18n>annuler</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <div id="shadow-cog-add-images" [ngClass]="{'shadow-cog-active': shadowcogImage === true}">
-      <div id="remove_add_image" (click)="param_cog_non_active_add_img()"></div>
-      <div class="modal">
-
-        <form class="formimage" enctype="multipart/form-data">
-          <div class="modal-header"></div>
-          <div class="modal-content">
-            <div class="block-upload" id="block-upload-deux"
-              [ngClass]="{'block-upload-hidden': blockUploadLast == true}">
-              <i class="modal-content-icon fas fa-camera"></i>
-              <span class="modal-content-text" i18n>Déposez votre image ici</span>
-              <div class="btn-modal-content hvr-grow" id="btn-modal-content">
-                <span class="modal-text-btn-upload" i18n>ou télécharger une photo</span>
-                <input type="file" class="file" name="files" accept="image/x-png,image/gif,image/jpeg"
-                  (change)="readURL_deux($event)" #fileLoading />
-              </div>
-            </div>
-            <div class="cadrage-img" [ngClass]="{'cadrage-img-active' : cadrageImgBooleanLast === true}">
-              <figure class="img-figure" [ngClass]="{'img-figure-active' : cadrageImgBooleanStateLast === false}">
-                <img src="" class="upload_img" #uploadimgLast />
-              </figure>
-              <div class="text-error-upload"
-                [ngClass]="{'text-error-upload-show' : cadrageImgBooleanStateLast === true}">
-                <i class="fas fa-ban ban-error"></i>
-                <span class="error" i18n>Fichier non supporté</span>
-                <div class="btn-modal-content hvr-grow" id="btn-modal-content">
-                  <span class="modal-text-btn-upload" i18n>ou télécharger une photo</span>
-                  <input type="file" class="file" (change)="readURL_deux($event)" />
-                  <input class="hidden-file" type="text" name="ref" value="entreprise" />
-                  <input type="text" name="refId" value="9" />
-                  <input type="text" name="field" value="image_entreprise" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-footer" #btnValideParentAddImage>
-            <div class="fix-upload-img">
-              <app-base-button (click)='uploadImage()' iconName="done" [disabled]="disabled" i18n>VALIDER
-              </app-base-button>
-              <app-base-button (click)='param_cog_non_active_add_img()' iconName="close" i18n>ANNULER</app-base-button>
-            </div>
-          </div>
-        </form>
-
-      </div>
-    </div>
-
     <div class="big-content">
       <div class="all-group-content">
         <!-- <div class="fix-progress">
@@ -213,14 +123,16 @@
               <div class="regroupe-form">
                 <label i18n>Logo de l'entreprise</label>
                 <div class="all-gestion-info">
-                  <figure class="img-upload"><img src="{{logo}}" alt="" role=""></figure>
+                  <figure class="img-upload" *ngIf="logo | async">
+                    <img [src]="logo.value" alt="" role="">
+                  </figure>
                   <div>
                     <div class="gestion-info-img-header">
                       <div class="form-line fix-buttons">
-                        <app-base-button (click)='$event.preventDefault(); openDialog(1, 4, "mb", "entreprise", "logo")' iconName="upload" i18n>ENVOYER</app-base-button>
+                        <app-base-button (click)='$event.preventDefault(); openDialog(1, 4, "mb", "entreprise", "logo")' iconName="upload" i18n>{{logo.value ? 'MODIFER':'AJOUTER'}}</app-base-button>
                       </div>
                       <div class="form-line fix-buttons">
-                        <app-base-button iconName="delete" i18n>SUPPRIMER</app-base-button>
+                        <app-base-button *ngIf="logo | async"  iconName="delete" i18n>SUPPRIMER</app-base-button>
                       </div>
                     </div>
                     <p class="gestion-info-img-contenu" i18n>4 Mo max.</p>
@@ -364,16 +276,18 @@
               <div class="regroupe-form">
                 <label i18n>Ajouter des images (10 max)</label>
                 <div class="all-gestion-info">
-                  <div class="upload" (click)="param_cog_non_active_add_image()">
-                    <i class="fas fa-camera icon-upload"></i>
+                  <div class="upload" (click)='$event.preventDefault(); openDialog(10, 4, "mb", "entreprise", "picture")'>
+                    <!-- (click)="param_cog_non_active_add_image()" -->
+                    <!-- <i class="fas fa-camera icon-upload"></i> -->
+                    <mat-icon class="mat-18">add_a_photo</mat-icon>
                     <span class="text-upload" i18n>ADD PIC</span>
                   </div>
-                  <div *ngFor='let image of picture' class="picture">
-                    <div class="img-gestion">
+                  <div *ngIf="picture | async" class="picture">
+                    <div *ngFor='let image of picture.value' class="img-gestion">
                       <div class="bg-transparent-img">
                         <mat-icon>dangerous</mat-icon>
                       </div>
-                      <img src="{{image.url}}" alt="">
+                      <img [src]="image.url" alt="" role="">
                     </div>
                   </div>
                 </div>

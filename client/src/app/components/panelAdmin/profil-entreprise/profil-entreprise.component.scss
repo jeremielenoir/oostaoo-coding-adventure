@@ -27,6 +27,8 @@
 
   .picture {
     padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
 
     img {
       width: 100%;
@@ -38,6 +40,7 @@
       position: relative;
       width: 100px;
       height: 100px;
+      margin-right: 10px;
 
       .bg-transparent-img {
         position: absolute;
@@ -49,6 +52,7 @@
         bottom: 0;
         right: 0;
         visibility: hidden;
+        cursor: pointer;
 
         span {
           font-size: 25px;
@@ -184,13 +188,13 @@
 
 
             .all-gestion-info {
-              -webkit-flex: 3;
-              flex: 3;
+              // -webkit-flex: 3;
+              // flex: 3;
               margin-bottom: 20px;
               padding: 15px;
               padding-right: 0px;
               background-color: #eaeff3;
-              display: flex;
+              // display: flex;
 
               .gestion-info-img-contenu {
                 font-size: 13px;
