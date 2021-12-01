@@ -194,7 +194,10 @@
               padding: 15px;
               padding-right: 0px;
               background-color: #eaeff3;
-              // display: flex;
+
+              &.fix-gestion-info {
+                display: flex;
+              }
 
               .gestion-info-img-contenu {
                 font-size: 13px;

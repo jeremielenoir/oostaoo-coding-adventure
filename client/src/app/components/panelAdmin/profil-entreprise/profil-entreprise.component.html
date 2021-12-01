@@ -122,7 +122,7 @@
 
               <div class="regroupe-form">
                 <label i18n>Logo de l'entreprise</label>
-                <div class="all-gestion-info">
+                <div class="all-gestion-info fix-gestion-info">
                   <figure class="img-upload" *ngIf="logo | async">
                     <img [src]="logo.value" alt="" role="">
                   </figure>
@@ -132,7 +132,7 @@
                         <app-base-button (click)='$event.preventDefault(); openDialog(1, 4, "mb", "entreprise", "logo")' iconName="upload" i18n>{{logo.value ? 'MODIFER':'AJOUTER'}}</app-base-button>
                       </div>
                       <div class="form-line fix-buttons">
-                        <app-base-button *ngIf="logo | async"  iconName="delete" i18n>SUPPRIMER</app-base-button>
+                        <app-base-button *ngIf="logo | async" (click)="$event.preventDefault(); deleteLogo(this.logo)"   iconName="delete" i18n>SUPPRIMER</app-base-button>
                       </div>
                     </div>
                     <p class="gestion-info-img-contenu" i18n>4 Mo max.</p>
@@ -276,7 +276,7 @@
               <div class="regroupe-form">
                 <label i18n>Ajouter des images (10 max)</label>
                 <div class="all-gestion-info">
-                  <div class="upload" (click)='$event.preventDefault(); openDialog(10, 4, "mb", "entreprise", "picture")'>
+                  <div class="upload" (click)='$event.preventDefault(); openDialog(10, 4, "mb", "entreprise", "image_entreprise")'>
                     <!-- (click)="param_cog_non_active_add_image()" -->
                     <!-- <i class="fas fa-camera icon-upload"></i> -->
                     <mat-icon class="mat-18">add_a_photo</mat-icon>

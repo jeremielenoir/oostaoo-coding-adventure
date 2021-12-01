@@ -13,7 +13,6 @@ export class DragDropDirective {
 
   // Dragover listener
   @HostListener('dragover', ['$event']) public onDragOver(evt) {
-    const files = evt.dataTransfer.files;
     evt.preventDefault();
     evt.stopPropagation();
     this.background = '#9ecbec';

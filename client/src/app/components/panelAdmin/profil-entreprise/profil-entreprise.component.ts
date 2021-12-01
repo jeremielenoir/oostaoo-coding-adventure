@@ -122,7 +122,8 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
   dataRoute: any;
   disabled: boolean;
   public logo: BehaviorSubject<string> = new BehaviorSubject<string>(null);
-  public formDataFile: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public formDataFileLogo: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public formDataFilePicture: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public picture: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(private router: Router, public apiClientService: ApiClientService, public decryptTokenService: DecryptTokenService,
@@ -285,7 +286,9 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
         if (data.logo) {
           this.logo.next(data.logo.url);
         }
-        this.picture.next(this.account.entreprise.image_entreprise);
+        if (data.image_entreprise) {
+          this.picture.next(data.image_entreprise);
+        }
         return this.entreprise = data;
       });
   }
@@ -297,10 +300,11 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
 
   updateProfilEntreprise() {
     this.submitted = true;
-    if (this.formDataFile.value) {
-      this.uploadImage(this.formDataFile.value);
+    if (this.formDataFileLogo.value) {
+      this.uploadImage(this.formDataFileLogo.value);
+      this.formDataFileLogo.next(null);
     }
-    if (this.entrepriseProfilForm.valid && !this.formDataFile.value) {
+    if (this.entrepriseProfilForm.valid && !this.formDataFileLogo.value) {
       this.postUpdateEntreprise();
     }
   }
@@ -331,7 +335,11 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
 
   updateLinksEntreprise() {
     this.submitted = true;
-    if (this.entrepriseLinksForm.valid) {
+    if (this.formDataFilePicture.value) {
+      this.uploadImage(this.formDataFilePicture.value);
+      this.formDataFilePicture.next(null);
+    }
+    if (this.entrepriseLinksForm.valid && !this.formDataFilePicture.value) {
       this.apiClientService
         .put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
           Lien_video: this.entrepriseLinksForm.controls['videolink'].value,
@@ -373,30 +381,42 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
         limit: numbertObjects, limit_size: limit_size, type_size: type_size,
         refId: this.entreprise.id,
         ref: ref,
-        field: field
+        field: field,
+        images: field === 'logo' ? [] : this.picture.value
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.formDataFile.next(result.formData);
       console.log('Dialog result: ', result);
-      if (result.field === 'logo') {
-        this.logo.next(this.sanitizer.sanitize(
-          SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(result.files[0].url)
-        ));
-      } else {
-        const multImages = [];
-        for (const file of result.files) {
-          multImages.push({
-            name: file.name,
-            url: this.sanitizer.sanitize(
-              SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(file.url)
-            )
-          });
+      const formData = new FormData();
+      formData.append('refId', result.properties['refId']); // id of content type
+      formData.append('ref', result.properties['ref']); // name of content type
+      formData.append('field', result.properties['field']); // name of key for the content type
+      for (const file of result.files) {
+        formData.append('files', file);
+        // formData.append('source', 'users-permissions');
+      }
+      if (result) {
+        if (result.field === 'logo') {
+          this.formDataFileLogo.next(formData);
+          this.logo.next(this.sanitizer.sanitize(
+            SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(result.files[0].url)
+          ));
+        } else {
+          this.formDataFilePicture.next(formData);
+          const multImages = [];
+          for (const file of result.files) {
+            multImages.push({
+              name: file.name,
+              url: this.sanitizer.sanitize(
+                SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(file.url)
+              )
+            });
+          }
+          // console.log('multImages : ', multImages);
+          this.picture.next(multImages);
+          console.log('this.picture : ', this.picture);
         }
-        console.log('multImages : ', multImages);
-        this.picture.next(multImages);
-        console.log('this.picture : ', this.picture);
       }
     });
   }
@@ -405,7 +425,6 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     return this.apiClientService.post(UPLOAD_TO_STRAPI, formFile).subscribe(data => {
       console.log('Post upload file : ', data);
       this.logo.next(data[0].url);
-      this.formDataFile.next(null);
       return data;
     },
       (err) => {
@@ -413,6 +432,9 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
       });
   }
 
+  deleteLogo(source) {
+    source.next(null);
+  }
   // onChanges(): void {
   //   this.entrepriseProfilForm.valueChanges.subscribe(val => {
   //     console.log('VALUES : ', val);
