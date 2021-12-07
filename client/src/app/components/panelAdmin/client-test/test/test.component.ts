@@ -276,15 +276,15 @@ export class TestComponent implements OnInit, OnDestroy {
     let points: number;
     // get correct answers of current question    
     this.correctAnswers = this.question.answer_value.split(this.separator).sort();
-    
 
     if (this.questions[this.currentIdxQuestions].type === 'one' || 
         this.questions[this.currentIdxQuestions].type === 'multiple' ) {
       //determines if candidat answer is good and get associated points 
-      this.candidatAnswers.push(this.candidatAnswer);
+      if(this.questions[this.currentIdxQuestions].type === 'multiple')this.candidatAnswers.push(this.candidatAnswer);
+      console.log('RESULT ANSWER',this.correctAnswers.sort().toString().toLowerCase().trim(),this.candidatAnswers.sort().toString().toLowerCase().trim(), this.correctAnswers.sort().toString().toLowerCase().trim() === this.candidatAnswers.sort().toString().toLowerCase().trim());
       points =
-        this.correctAnswers.sort().toString().toLowerCase() ===
-        this.candidatAnswers.sort().toString().toLowerCase()
+        this.correctAnswers.sort().toString().toLowerCase().trim() ===
+        this.candidatAnswers.sort().toString().toLowerCase().trim()
           ? this.questions[this.currentIdxQuestions].points
           : 0;
       // maybe use nullish coalescing operator ?
