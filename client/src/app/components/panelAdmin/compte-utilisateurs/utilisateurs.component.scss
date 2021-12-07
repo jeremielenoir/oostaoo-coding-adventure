@@ -237,14 +237,11 @@
 }
 
 .table_header,
-// .table_head_cell,
 .table_body,
 .table_body_cell,
 .table_row {
   border-right: $border-table;
-  // border: $border-table;
   padding: 5px;
-  // margin: 5px;
 
   .user-disabled {
     background-color: rgba($color: #000000, $alpha: .18);
@@ -277,8 +274,6 @@
   width: 55%;
 }
 
-.table_body_cell:nth-child(4),
-.table_head_cell:nth-child(4) {}
 
 #shadow-cog-2,
 #shadow-cog {
@@ -320,8 +315,6 @@
     .tbl-permition {
       display: flex;
       flex-wrap: wrap;
-      // border-right: 1px solid #ce5637;
-      // $border: 1px solid #ce5637;
       flex-direction: row;
 
       .element-gestion-permition {
@@ -446,7 +439,6 @@
           align-items: center;
 
           label {
-            /* max-width: 100%; */
             flex: 1 0 auto;
             width: auto;
             display: block;
@@ -543,7 +535,6 @@
 .title-champ-default.title-champ-default-visible,
 .title-champ-default-update.title-champ-default-visible {
   visibility: visible;
-  /* .mat-cell */
 }
 
 // TOOLBAR
@@ -674,7 +665,6 @@
 
   .table_body_cell:nth-child(4),
   .table_head_cell:nth-child(4) {
-    // width: 5%;
     display: revert;
     text-align: center;
   }

@@ -276,15 +276,15 @@ export class TestComponent implements OnInit, OnDestroy {
     let points: number;
     // get correct answers of current question    
     this.correctAnswers = this.question.answer_value.split(this.separator).sort();
-    
 
     if (this.questions[this.currentIdxQuestions].type === 'one' || 
         this.questions[this.currentIdxQuestions].type === 'multiple' ) {
       //determines if candidat answer is good and get associated points 
-      this.candidatAnswers.push(this.candidatAnswer);
+      if(this.questions[this.currentIdxQuestions].type === 'multiple')this.candidatAnswers.push(this.candidatAnswer);
+      console.log('RESULT ANSWER',this.correctAnswers.sort().toString().toLowerCase().trim(),this.candidatAnswers.sort().toString().toLowerCase().trim(), this.correctAnswers.sort().toString().toLowerCase().trim() === this.candidatAnswers.sort().toString().toLowerCase().trim());
       points =
-        this.correctAnswers.sort().toString().toLowerCase() ===
-        this.candidatAnswers.sort().toString().toLowerCase()
+        this.correctAnswers.sort().toString().toLowerCase().trim() ===
+        this.candidatAnswers.sort().toString().toLowerCase().trim()
           ? this.questions[this.currentIdxQuestions].points
           : 0;
       // maybe use nullish coalescing operator ?
@@ -496,9 +496,6 @@ export class TestComponent implements OnInit, OnDestroy {
   private calculTotalPoints(
     statistics: Record<string, any>[],
   ): Record<string, any> {
-    // if (typeof stats !== 'undefined' && stats.length > 0) {
-    //   this.totalPoints = statistics.reduce((a, b) => ({ total_points: a.points + b.points }));
-    // }
     return statistics.reduce((a, b) => ({ total_points: a.points + b.points }));
   }
 
@@ -533,11 +530,6 @@ export class TestComponent implements OnInit, OnDestroy {
 
   @HostListener('window:unload', ['$event'])
   public sendData() {
-    //alert('works');
-    // on tutorial mode, prevent backend api calls
-    //console.log('unload');
     if (this.mode !== 'testing') return;
-
-    //this.postPauseTest();
   }
 }
