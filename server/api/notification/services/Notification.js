@@ -29,7 +29,7 @@ module.exports = {
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    return Notification.query(function(qb) {
+    return Notification.query(function (qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value) && where.symbol !== 'IN' && where.symbol !== 'NOT IN') {
           for (const value in where.value) {
@@ -78,7 +78,7 @@ module.exports = {
     // Convert `params` object to filters compatible with Bookshelf.
     const filters = strapi.utils.models.convertParams('notification', params);
 
-    return Notification.query(function(qb) {
+    return Notification.query(function (qb) {
       _.forEach(filters.where, (where, key) => {
         if (_.isArray(where.value)) {
           for (const value in where.value) {
@@ -106,7 +106,7 @@ module.exports = {
     const entry = await Notification.forge(data).save();
 
     // Create relational data and return the entry.
-    return Notification.updateRelations({ id: entry.id , values: relations });
+    return Notification.updateRelations({ id: entry.id, values: relations });
   },
 
   /**

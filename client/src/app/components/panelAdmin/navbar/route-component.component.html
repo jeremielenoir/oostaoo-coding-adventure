@@ -1,107 +1,105 @@
 <nav id="nav-menu">
-    <div class="wrapper">
-        <a href="" [routerLink]="['/dashboard/campaigns']" class="logo-link">
-            <img class="logo" src="../../../../assets/logo_ROODEO.svg" alt="" />
-        </a>
-        <ul class="list-menu" [class.active-menu-bergeur]="activeMenuB" [class.tablet]="isTablet">
-            <li>
-                <div class="list-menu-top-header">
-                    <a href="" class="text-menu">
+  <div class="wrapper">
+    <a href="" [routerLink]="['/dashboard/campaigns']" class="logo-link">
+      <img class="logo" src="../../../../assets/logo_ROODEO.svg" alt="" />
+    </a>
+    <ul class="list-menu" [class.active-menu-bergeur]="activeMenuB" [class.tablet]="isTablet">
+      <li>
+        <div class="list-menu-top-header">
+          <a href="" class="text-menu">
 
-                        <span class="content-img" id="notif"></span>
-                        <span *ngIf="notifUnread !== 0" class="nbr-notif">{{
-            notifUnread
-          }}</span>
-                    </a>
-                    <span class="title-menu-responsive notif-title-arrow">notification</span>
-                    <i class="fas fa-chevron-right arrow"></i>
-                </div>
-                <ul class="dropdownn dropdownn-notif">
-                    <li>
-                        <p>Notifications</p>
-                    </li>
-
-                    <h3 *ngIf="notifications.length == 0" class="not-notification">Aucunes Notifications</h3>
-                    <div class="notif-content" *ngFor="let notification of notifications" [className]="
-            notification.status ? 'notif-content-read' : 'notif-content'
-          ">
-                        <!-- <div>
-            <span (click)="deleteNotification(notification.id)" class=""><i [className]="notification.status ? 'fas fa-trash icon-gestion-notif-read' : 'fas fa-trash icon-gestion-notif'"></i></span>
-          </div> -->
-                        <span (click)="
-              navigateTo(
-                notification.idCampaign,
-                notification.id,
-                notification.status
-              )
-            " style="display: block;">
-            <h4 class="notif-title">
-              {{ notification.title }}
-            </h4>
-            <span class="notif-message">{{ notification.Message }}</span>
-                        <p class="notif-footer">
-                            {{ notification.created_at | date: "dd/MM/yyyy" }}
-                        </p>
-                        </span>
-                    </div>
-                </ul>
-            </li>
-            <li>
-                <div class="list-menu-top-header">
-                    <a href="" [routerLink]="['/dashboard/campaigns']" class="text-menu">
-                        <span class="content-img" id="test"> </span>
-                    </a>
-                    <span class="title-menu-responsive">Tests d'évaluations</span>
-                    <i class="fas fa-chevron-down chevron-down-burgeur"></i>
-                </div>
-                <ul class="dropdownn">
-                    <li>
-                        <p>Tests d'évaluations</p>
-                    </li>
-                    <li>
-                        <a href="" [routerLink]="['/dashboard/campaigns']"><i class="fas fa-circle circle-icon"></i> Mes Tests</a>
-                    </li>
-                    <li>
-                        <a href="" [routerLink]="['/dashboard/campaigns/new']"><i class="fas fa-circle circle-icon"></i> Nouveau test</a>
-                    </li>
-                    <!-- <li>
+            <span class="content-img" id="notif"></span>
+            <span *ngIf="notifUnread !== 0" class="nbr-notif">{{
+              notifUnread
+              }}</span>
+          </a>
+          <span class="title-menu-responsive notif-title-arrow">notification</span>
+          <i class="fas fa-chevron-right arrow"></i>
+        </div>
+        <ul class="dropdownn dropdownn-notif">
+          <li>
+            <p>Notifications</p>
+          </li>
+          <h3 *ngIf="(notifications$ | async)?.length === 0" class="not-notification">Aucunes
+            Notifications</h3>
+          <div class="notif-content" *ngFor="let notification of notifications$ | async"
+            [className]="notification.status ? 'notif-content-read' : 'notif-content'">
+            <div>
+              <span (click)="delete(notification.id)" class="">
+                <i
+                  [className]="notification.status ? 'fas fa-trash icon-gestion-notif-read' : 'fas fa-trash icon-gestion-notif'"></i>
+              </span>
+            </div>
+            <!-- (click)="navigateTo(notification.idCampaign, notification.id, notification.status)" -->
+            <span style="display: block;">
+              <h4 class="notif-title">
+                {{ notification.title }}
+              </h4>
+              <span class="notif-message">{{ notification.Message }}</span>
+              <p class="notif-footer">
+                {{ notification.created_at | date: "dd/MM/yyyy" }}
+              </p>
+            </span>
+          </div>
+        </ul>
+      </li>
+      <li>
+        <div class="list-menu-top-header">
+          <a href="" [routerLink]="['/dashboard/campaigns']" class="text-menu">
+            <span class="content-img" id="test"> </span>
+          </a>
+          <span class="title-menu-responsive">Tests d'évaluations</span>
+          <i class="fas fa-chevron-down chevron-down-burgeur"></i>
+        </div>
+        <ul class="dropdownn">
+          <li>
+            <p>Tests d'évaluations</p>
+          </li>
+          <li>
+            <a href="" [routerLink]="['/dashboard/campaigns']"><i class="fas fa-circle circle-icon"></i> Mes Tests</a>
+          </li>
+          <li>
+            <a href="" [routerLink]="['/dashboard/campaigns/new']"><i class="fas fa-circle circle-icon"></i> Nouveau
+              test</a>
+          </li>
+          <!-- <li>
           <a href="" [routerLink]="['/dashboard/utilisateurs']">Éditeurs</a>
         </li> -->
-                </ul>
-            </li>
-            <li>
-                <div class="list-menu-top-header">
-                    <a href="" [routerLink]="['/dashboard/profil-utilisateur']" class="text-menu">
-                        <span class="content-img" id="compte"> </span>
-                    </a>
-                    <span class="title-menu-responsive">profil</span>
-                    <i class="fas fa-chevron-down chevron-down-burgeur"></i>
-                </div>
-                <ul class="dropdownn">
-                    <li>
-                        <p>Compte</p>
-                    </li>
-                    <li>
-                        <a href="" [routerLink]="['/dashboard/profil-utilisateur']">
-                            <i class="fas fa-circle circle-icon"></i>Mon profil
-                        </a>
-                    </li>
-                    <li *ngIf="isProfesionalAccount">
-                        <a href="" [routerLink]="['/dashboard/profil-entreprise']">
-                            <i class="fas fa-circle circle-icon"></i> Mon entreprise
-                        </a>
-                    </li>
-                    <li>
-                        <a href="" [routerLink]="['/dashboard/utilisateurs']">
-                            <i class="fas fa-circle circle-icon"></i> Utilisateurs
-                        </a>
-                    </li>
-                    <!-- <li>
+        </ul>
+      </li>
+      <li>
+        <div class="list-menu-top-header">
+          <a href="" [routerLink]="['/dashboard/profil-utilisateur']" class="text-menu">
+            <span class="content-img" id="compte"> </span>
+          </a>
+          <span class="title-menu-responsive">profil</span>
+          <i class="fas fa-chevron-down chevron-down-burgeur"></i>
+        </div>
+        <ul class="dropdownn">
+          <li>
+            <p>Compte</p>
+          </li>
+          <li>
+            <a href="" [routerLink]="['/dashboard/profil-utilisateur']">
+              <i class="fas fa-circle circle-icon"></i>Mon profil
+            </a>
+          </li>
+          <li *ngIf="isProfesionalAccount">
+            <a href="" [routerLink]="['/dashboard/profil-entreprise']">
+              <i class="fas fa-circle circle-icon"></i> Mon entreprise
+            </a>
+          </li>
+          <li>
+            <a href="" [routerLink]="['/dashboard/utilisateurs']">
+              <i class="fas fa-circle circle-icon"></i> Utilisateurs
+            </a>
+          </li>
+          <!-- <li>
           <a href="" (click)="disConnection($event)">Déconnexion</a>
         </li> -->
-                </ul>
-            </li>
-            <!-- <li>
+        </ul>
+      </li>
+      <!-- <li>
       <a href="" class="text-menu">
         <span class="content-img" id="contact">
         </span>
@@ -113,7 +111,7 @@
       </ul>
     </li> -->
 
-            <!--li>
+      <!--li>
       <a href="" class="text-menu">
         <span class="content-img" id="new">
         </span>
@@ -124,90 +122,95 @@
         </li>
       </ul>
     </li-->
-            <li>
-                <div class="list-menu-top-header">
-                    <a href="" class="text-menu">
-                        <span class="content-img" id="new"> </span>
-                    </a>
-                    <span class="title-menu-responsive">OFFRE {{ offer_id }}</span>
-                    <i class="fas fa-chevron-down chevron-down-burgeur"></i>
-                </div>
-                <ul class="dropdownn">
-                    <li>
-                        <p id="ma_formule">OFFRE {{ offer_id }}</p>
-                    </li>
-                    <li>
-                        <a href="" [routerLink]="['/subscription']"><i class="fas fa-circle circle-icon"></i> Changer de formule</a>
-                    </li>
-                    <li *ngIf="isProfesionalAccount || offer_id">
-                        <a href="" [routerLink]="['/dashboard/facturation']"><i class="fas fa-circle circle-icon"></i> Facturation</a>
-                    </li>
-                    <li>
-                        <a href="" [routerLink]="['/dashboard/protection-des-donnees']"><i class="fas fa-circle circle-icon"></i> Protection des données</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <div class="list-menu-top-header">
-                    <a href="" class="text-menu">
-                        <span class="content-img" id="help"> </span>
-                    </a>
-                    <span class="title-menu-responsive">Besoin d'aide ?</span>
-                    <i class="fas fa-chevron-down chevron-down-burgeur"></i>
-                </div>
-                <ul class="dropdownn">
-                    <li>
-                        <p>Besoin d'aide ?</p>
-                    </li>
-                    <li>
-                        <a href="" [routerLink]="['/dashboard/faq']">FAQ</a>
+      <li>
+        <div class="list-menu-top-header">
+          <a href="" class="text-menu">
+            <span class="content-img" id="new"> </span>
+          </a>
+          <span class="title-menu-responsive">OFFRE {{ offer_id }}</span>
+          <i class="fas fa-chevron-down chevron-down-burgeur"></i>
+        </div>
+        <ul class="dropdownn">
+          <li>
+            <p id="ma_formule">OFFRE {{ offer_id }}</p>
+          </li>
+          <li>
+            <a href="" [routerLink]="['/subscription']"><i class="fas fa-circle circle-icon"></i> Changer de formule</a>
+          </li>
+          <li *ngIf="isProfesionalAccount || offer_id">
+            <a href="" [routerLink]="['/dashboard/facturation']"><i class="fas fa-circle circle-icon"></i>
+              Facturation</a>
+          </li>
+          <li>
+            <a href="" [routerLink]="['/dashboard/protection-des-donnees']"><i class="fas fa-circle circle-icon"></i>
+              Protection des données</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <div class="list-menu-top-header">
+          <a href="" class="text-menu">
+            <span class="content-img" id="help"> </span>
+          </a>
+          <span class="title-menu-responsive">Besoin d'aide ?</span>
+          <i class="fas fa-chevron-down chevron-down-burgeur"></i>
+        </div>
+        <ul class="dropdownn">
+          <li>
+            <p>Besoin d'aide ?</p>
+          </li>
+          <li>
+            <a href="" [routerLink]="['/dashboard/faq']">FAQ</a>
 
-                    </li>
-                    <li>
-                        <a href="" [routerLink]="['/dashboard/contact-support']">Contact</a>
+          </li>
+          <li>
+            <a href="" [routerLink]="['/dashboard/contact-support']">Contact</a>
 
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <div class="list-menu-top-header">
-                    <a href="" class="text-menu">
-                        <span class="content-img" id="logout"> </span>
-                    </a>
-                    <span class="title-menu-responsive">Déconnexion</span>
-                </div>
-                <ul class="dropdownn">
-                    <li>
-                        <p><a href="" (click)="disConnection($event)">Déconnexion</a></p>
-                    </li>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <div class="list-menu-top-header">
+          <a href="" class="text-menu">
+            <span class="content-img" id="logout"> </span>
+          </a>
+          <span class="title-menu-responsive">Déconnexion</span>
+        </div>
+        <ul class="dropdownn">
+          <li>
+            <p><a href="" (click)="disConnection($event)">Déconnexion</a></p>
+          </li>
 
 
-
-                </ul>
-            </li>
 
         </ul>
-        <div class="right-menu"> 
-            <div class="right-menu-div profile">
-                <p class="custom-text" *ngIf="user?.customeraccount.type == 'profesional'"><span class="custom-type-acc">PRO</span></p>
-            </div>
-            <div class="right-menu-div language">
-                <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
-                    <img class="flags_img" src="{{currentLanguage}}" alt="">
-                    <i class="icon-country fas fa-caret-down"></i>
-                </div>
-                <!-- </button> -->
-                <mat-menu #menu="matMenu">
-                    <div *ngFor="let language of otherLanguage">
-                        <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage' mat-menu-item>
-                          <img class="flags_img_selected" src="{{language.img}}" alt="">&nbsp;&nbsp;{{getProperty(language, 'label') | uppercase}}
-                        </button>
-                    </div>
-                </mat-menu>
-            </div>
-            <div class="right-menu-div menu-burgeur" (click)="activeMenuBurgeur()">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
+      </li>
+
+    </ul>
+    <div class="right-country profile">
+      <p class="custom-text" *ngIf="user?.customeraccount.type == 'profesional'"><span
+          class="custom-type-acc">PRO</span></p>
     </div>
+    <div class="right-country langage">
+      <div class="flags_menu link-menu" [matMenuTriggerFor]="menu">
+        <img class="flags_img" src="{{currentLanguage}}" alt="">
+        <i class="icon-country fas fa-caret-down"></i>
+      </div>
+      <!-- </button> -->
+      <mat-menu #menu="matMenu">
+        <div *ngFor="let language of otherLanguage">
+          <button (click)="setCurrentLanguage(language)" *ngIf='language.img !== currentLanguage' mat-menu-item>
+            <img class="flags_img_selected" src="{{language.img}}" alt="">&nbsp;&nbsp;{{getProperty(language, 'label') |
+            uppercase}}
+          </button>
+        </div>
+      </mat-menu>
+    </div>
+
+    <div class="menu-burgeur" (click)="activeMenuBurgeur()">
+
+      <i class="fas fa-bars"></i>
+
+    </div>
+  </div>
 </nav>

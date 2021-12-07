@@ -59,7 +59,7 @@ module.exports = {
    */
 
   update: async (ctx, next) => {
-    return strapi.services.notification.edit(ctx.params, ctx.request.body) ;
+    return strapi.services.notification.edit(ctx.params, ctx.request.body);
   },
 
   /**
