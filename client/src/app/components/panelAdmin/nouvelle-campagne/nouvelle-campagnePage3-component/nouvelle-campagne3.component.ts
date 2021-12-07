@@ -107,10 +107,7 @@ export class NouvelleCampagnePage3Component implements OnInit {
         }
       })
 
-      // const MOCK_URL: string = '/api/questions?technologies_in=13555&technologies_in=13554&technologies_in=13561&technologies_in=13546&technologies_in=13558&technologies_in=13568'
-      // const MOCK_URL: string = '/api/questions?technologies_in=13561'
       this.apiClientService.get(`${API_URI_QUESTIONS}${url}`).subscribe(datas => {
-      // this.apiClientService.get(MOCK_URL).subscribe(datas => {
         this.questions = [...datas];
         
         for (const question of this.questions) {
@@ -119,7 +116,6 @@ export class NouvelleCampagnePage3Component implements OnInit {
           }
         }
         
-        // this.selectedQuestions = this.allQuestions.filter(questionLevel => (questionLevel.level === this.experience));
         this.selectedQuestions = this.percentQuestionsByLevel(this.experience, this.allQuestions);
         this.notSelectedQuestions = [...this.allQuestions];
         
