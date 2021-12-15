@@ -13,6 +13,7 @@ const InterviewHome = (props) => {
                 <video muted className="home-video" autoPlay ref={userVideo} />
                 </div>
                 <div className="options">
+                    <div className='wrapper-text'>
                     <p className='title'>Prêt à participer ?</p>
                     <p>Pas d'autre participant</p>
                     <Button 
@@ -30,6 +31,7 @@ const InterviewHome = (props) => {
                         <PhoneForwardedIcon />
                         participer par téléphone pour le son
                     </p>
+                    </div>
                 </div>
             </div>
         </div>
