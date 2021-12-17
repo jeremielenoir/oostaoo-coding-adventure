@@ -7,7 +7,7 @@ import PhoneForwardedIcon from '@material-ui/icons/PhoneForwarded';
 const InterviewHome = (props) => {
     const {userVideo, confirmMeeting} = props
     return (
-        <div className="main">
+        <div id="main">
             <div className='global-wrapper'>
                 <div className='wrapper-video'>
                 <video muted className="home-video" autoPlay ref={userVideo} />
@@ -16,17 +16,19 @@ const InterviewHome = (props) => {
                     <div className='wrapper-text'>
                     <p className='title'>Prêt à participer ?</p>
                     <p>Pas d'autre participant</p>
+                    <div d-flex>
                     <Button 
                         variant="contained" 
                         color='primary'
                         onClick={()=>confirmMeeting()}>
-                        <p>Participer à la réunion</p>
+                        <p>commencer la réunion</p>
                     </Button>
-                    <Button variant="contained">
-                        <PresentToAllIcon color='primary'/>
-                        <p className="text-color">Présenter</p>
+                    <Button variant="outlined" color="primary" >
+                        {/* <PresentToAllIcon /> */}
+                        <p>Présenter</p>
                     </Button>
-                    <p>Autres Options</p>
+                    </div>
+                    {/* <p>Autres Options</p> */}
                     <p className="telephone">
                         <PhoneForwardedIcon />
                         participer par téléphone pour le son
