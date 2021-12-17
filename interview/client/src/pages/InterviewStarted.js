@@ -42,12 +42,12 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn }) => {
       <div className="interview-started">
         <div className="chat-text">
           <div className="messagesList">
-            {
+            {/* {
                             messages.response.length > 0 ? 
                             messages.response.map(message=>
                             <Message text={message.text} date={message.date}/>)
                              : ""
-                          }
+                          } */}
             {messages.response.length > 0 &&
               messages.response.map((message) => (
                 <Message text={message.text} date={message.date} />
