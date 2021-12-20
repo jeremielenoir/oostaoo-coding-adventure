@@ -14,9 +14,11 @@ const InterviewHome = (props) => {
                 </div>
                 <div className="options">
                     <div className='wrapper-text'>
-                    <p className='title'>Prêt à participer ?</p>
-                    <p>Pas d'autre participant</p>
-                    <div d-flex>
+                    <div className='container-title'>
+                        <p className='title'>Prêt à participer ?</p>
+                        <p>Pas d'autre participant</p>
+                    </div>
+                    <div className="container-meeting-btn">
                     <Button 
                         variant="contained" 
                         color='primary'

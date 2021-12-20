@@ -20,49 +20,40 @@
 /* InterviewHome */
 
 #main {
-  /* border: solid rgb(255, 217, 0) 2px; */
-  display: flex;
-  /* justify-content: space-around; */
-  height: 90vh;
 }
 
 .global-wrapper {
-  /* border: solid rgb(141, 116, 143) 2px; */
-  width: 100vw;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  margin: 10px;
+  height: 80vh;
+  align-content: center;
   align-items: center;
 }
 
 .wrapper-video {
-  /* border: solid rgb(255, 0, 0) 2px; */
-  width: 49%;
-  height: 100%;
-  max-height: 450px;
-  display: flex;
-  justify-content: center;
-  text-align: center;
 }
 
 .home-video {
-  max-width: 545px;
-  width: 95%;
-  /* height: 100%; */
-  max-height: 410px;
-  align-self: center;
-  /* border: solid rgb(21, 255, 0) 2px; */
   background-color: #000;
-  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px
 }
 
-.options {
-  width: 49%;
+#main .container-title {
   display: flex;
-  justify-content: center;
-  /* border: solid rgb(0, 60, 255) 2px; */
+  flex-direction: column;
   text-align: center;
 }
+
+#main .container-meeting-btn {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.options {}
 
 #main .wrapper-text{
   /* border: solid 2px; */
@@ -84,6 +75,7 @@
 .telephone {
   display: flex;
   justify-content: center;
+  visibility:hidden;
   color: #e34f26;
 }
 
@@ -93,26 +85,17 @@ svg {
 
 @media screen and (max-width: 947px) {
   #main {
-    border: none;
-    display: block;
-    /* text-align: center; */
-    text-align: -webkit-center;
   }
 
   #main .wrapper-video {
-    width: 100vw;
-    /* height: 270px; */
-    /* border: solid red 2px; */
-    text-align: center;
   }
 
   #main .home-video {
-    max-width: 460px;
-    /* border: solid rgb(21, 255, 0) 2px; */
-    background-color: #000;
-    border-radius: 15px;
   }
 
+  .global-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  }
   #main .options {
     border: none;
     width: auto;
@@ -126,6 +109,6 @@ svg {
   }
 
   .telephone {
-  display: none;
-}
+    visibility: visible;
+  }
 }
