@@ -26,7 +26,6 @@
   display: grid;
   grid-template-columns: 1fr 400px;
   margin: 10px;
-  height: 80vh;
   align-content: center;
   align-items: center;
 }
