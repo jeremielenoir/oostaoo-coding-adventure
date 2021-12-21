@@ -1,8 +1,4 @@
 .interview-started{
-   /*  display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: 90vh; */
     display: grid;
     grid-template-columns: 1fr 400px;
     flex-wrap: wrap;
@@ -10,14 +6,6 @@
 
   /* TEXT */
   .chat-text{
- /*    width: 35vw;
-    height: 75vh;
-    border: 2px solid #000;
-    margin: 80px 50px 0 30px;
-    
-    display: flex;
-    flex-direction: column;
-     */
      box-sizing: border-box;
      margin: 0 5px;
      display: grid;
@@ -28,10 +16,6 @@
   }
 
   .messagesList{
-   /*  box-sizing: content-box;  
-    padding-top: 20px;
-    flex: 6;
-    align-content: flex-end; */
     box-sizing: border-box;
     padding: 10px;
   }
@@ -65,11 +49,6 @@
 
   /* VIDEO */
   .chat-video{
-    /* position: absolute;
-    top: 18%;
-    right: 1%;
-    width: 60vw;
-    height: 75vh; */
     background: #000;
     height: 80vh;
     display: grid;
@@ -86,27 +65,12 @@
   }
 
   .partner-video {
-   overflow: hidden;
-  /*   width: 60vw;
-    height: 70vh;
-    background-color: #000;
-    border-radius: 10px;
-    position: relative; */
+    overflow: hidden;
     width: 100%;
     height: 100%;
   }
   .user-video {
     overflow: hidden;
-   /*  position: absolute;
-    top: 63%;
-    right: 1%;
-    width: 15vw;
-    height: 20vh;
-    background-color: #000;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center; */
     width: 100%;
     height: 100%;
   }
@@ -121,19 +85,6 @@
     margin: auto;
   }
 
-  .mic{
-    /* position: absolute;
-    bottom: 12px;
-    left: 49%; */
-  }
-
-
-  @media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 812px) 
-  and (-webkit-min-device-pixel-ratio: 3) { 
-
-}
   @media screen and (max-width: 1240px) {
     .interview-started{
       display: block;
@@ -146,34 +97,4 @@
       margin-top: 10px;
       height: 40vh;
     }
-/*     .interview-started{
-      height: 1500px;
-      width: 100vw;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-    .chat-text{
-      position: absolute;
-      top: 85%;
-      width: 100vw;
-      margin: 0;
-      height: 40vh;
-    }
-    .chat-video{
-      position: absolute;
-      top: 15%;
-      left: 0%;
-      width: 100vw;
-    }
-    .partner-video {
-      width: 100vw;
-    }
-    .user-video {
-      position: absolute;
-      top: 63%;
-      right: 2%;
-      width: 24vw;
-      height: 20vh;
-    } */
   }
