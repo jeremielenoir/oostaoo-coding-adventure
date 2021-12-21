@@ -127,8 +127,26 @@
     left: 49%; */
   }
 
+
+  @media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+
+}
   @media screen and (max-width: 1240px) {
     .interview-started{
+      display: block;
+    }
+    .chat-video{
+      height: 40vh;
+    }
+
+    .chat-text {
+      margin-top: 10px;
+      height: 40vh;
+    }
+/*     .interview-started{
       height: 1500px;
       width: 100vw;
       display: flex;
@@ -157,5 +175,5 @@
       right: 2%;
       width: 24vw;
       height: 20vh;
-    }
+    } */
   }
