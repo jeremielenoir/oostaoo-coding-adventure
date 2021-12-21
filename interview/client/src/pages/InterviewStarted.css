@@ -1,42 +1,57 @@
 .interview-started{
-    display: flex;
+   /*  display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    height: 90vh;
+    height: 90vh; */
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    flex-wrap: wrap;
   }
 
   /* TEXT */
   .chat-text{
-    width: 35vw;
+ /*    width: 35vw;
     height: 75vh;
     border: 2px solid #000;
     margin: 80px 50px 0 30px;
     
     display: flex;
     flex-direction: column;
-    
+     */
+     box-sizing: border-box;
+     margin: 0 5px;
+     display: grid;
+     grid-template-rows: 1fr 80px;
+     border: 1px solid #dfdfdf;
+     border-radius: 5px;
+     padding: 0 5px;
   }
 
   .messagesList{
-
-    box-sizing: content-box;  
+   /*  box-sizing: content-box;  
     padding-top: 20px;
     flex: 6;
-    align-content: flex-end;
+    align-content: flex-end; */
+    box-sizing: border-box;
+    padding: 10px;
   }
 
   .messageWriting{
-    flex: 1;
+    /* flex: 1; */
     display: flex;
     justify-content: center;
-    align-content: flex-end;
+    align-content: center;
+    align-items: center;
   }
 
-  .message{
-    width: 80%;
+  .messageForm {
+    display: flex;
+    align-items: center;
+  }
+
+  .message{  
     display: flex;
     justify-content: space-between;
-    margin-left: 10%;
   }
   
   .messageDate{
@@ -50,22 +65,39 @@
 
   /* VIDEO */
   .chat-video{
-    position: absolute;
+    /* position: absolute;
     top: 18%;
     right: 1%;
     width: 60vw;
-    height: 75vh;
+    height: 75vh; */
+    background: #000;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: 1fr 30px;
   }
+
+  video {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 80vh;
+    min-width: 100%; 
+    min-height: 100%; 
+  }
+
   .partner-video {
-   
-    width: 60vw;
+   overflow: hidden;
+  /*   width: 60vw;
     height: 70vh;
     background-color: #000;
     border-radius: 10px;
-    position: relative;
+    position: relative; */
+    width: 100%;
+    height: 100%;
   }
   .user-video {
-    position: absolute;
+    overflow: hidden;
+   /*  position: absolute;
     top: 63%;
     right: 1%;
     width: 15vw;
@@ -74,13 +106,25 @@
     border-radius: 5px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+    width: 100%;
+    height: 100%;
   }
   
+  .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl {
+    width: 310px;
+  }
+
+  #icon-mic {
+    grid-column: span 2;
+    grid-row: 2;
+    margin: auto;
+  }
+
   .mic{
-    position: absolute;
+    /* position: absolute;
     bottom: 12px;
-    left: 49%;
+    left: 49%; */
   }
 
   @media screen and (max-width: 1240px) {

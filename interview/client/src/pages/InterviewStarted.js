@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MicOffIcon from '@material-ui/icons/MicOff';
 import MicIcon from '@material-ui/icons/Mic';
+import SendIcon from '@material-ui/icons/Send';
 import './InterviewStarted.css';
 import Message from './Message';
 
@@ -40,6 +41,32 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn }) => {
 
     return (
       <div className="interview-started">
+        <div className="chat-video">
+          <div className="partner-video">
+            <video controls autoPlay ref={partnerVideo} />
+          </div>
+
+          <div className="user-video">
+            <video muted autoPlay ref={userVideo} />
+          </div>
+
+<div id="icon-mic">
+          {micOn ? (
+              <MicOffIcon
+                className="mic"
+                color="primary"
+                onClick={() => micToggle()}
+              />
+            ) : (
+              <MicIcon
+                className="mic"
+                color="primary"
+                onClick={() => micToggle()}
+              />
+            )}
+ </div>
+        </div>
+
         <div className="chat-text">
           <div className="messagesList">
             {/* {
@@ -65,33 +92,10 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn }) => {
                 onChange={(e) => onChangeMessage(e)}
                 variant="outlined"
               />
-              <Button sx={{   color: "primary" }} onClick={(e) => sendMessage(e)}>
-                Envoyer
+              <Button id="send" size="small" color="primary" onClick={(e) => sendMessage(e)} style={{maxWidth: '40px', maxHeight: '56px', minWidth: '40px', minHeight: '56px', marginLeft: '5px', }}>
+                <SendIcon/>
               </Button>
             </form>
-          </div>
-        </div>
-
-        <div className="chat-video">
-          <div className="partner-video">
-            <video controls autoPlay ref={partnerVideo} />
-            {micOn ? (
-              <MicOffIcon
-                className="mic"
-                color="primary"
-                onClick={() => micToggle()}
-              />
-            ) : (
-              <MicIcon
-                className="mic"
-                color="primary"
-                onClick={() => micToggle()}
-              />
-            )}
-          </div>
-
-          <div className="user-video">
-            <video muted autoPlay ref={userVideo} />
           </div>
         </div>
       </div>
