@@ -11,10 +11,15 @@ import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import './InterviewStarted.css';
 import Message from './Message';
 
-
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
 
 const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggle, chatToggle }) => {
 
+  const [secondary] = React.useState(false);
     const inputRef = useRef();
     const [message, setMessage] = useState("");
 
@@ -52,22 +57,6 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggl
           <div className="user-video">
             <video muted autoPlay ref={userVideo} />
           </div>
-
-<div id="icon-mic">
-          {micOn ? (
-              <MicOffIcon
-                className="mic"
-                color="primary"
-                onClick={() => micToggle()}
-              />
-            ) : (
-              <MicIcon
-                className="mic"
-                color="primary"
-                onClick={() => micToggle()}
-              />
-            )}
- </div>
         </div>
 
         <div className="chat-text">
@@ -101,11 +90,45 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggl
             </form>
           </div>
         </div>
+
+        <div className="users-room">
+            <span> Participants </span>
+            <div className="search-users"></div>
+            <div className="users-list">
+            <List>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            U {/* Username */}
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="UserName" secondary={secondary ? 'Secondary text' : null}/>
+      </ListItem>
+    </List>
+            </div>
+        </div>
         </div>
         <footer className="container-interview-footer">
+        <div id="icon-mic">
+          {micOn ? (
+              <MicOffIcon
+                className="mic"
+                color="primary"
+                onClick={() => micToggle()}
+              />
+            ) : (
+              <MicIcon
+                className="mic"
+                color="primary"
+                onClick={() => micToggle()}
+              />
+            )}
+ </div>
+      <div className="footer-left-button">
         <GroupIcon onClick={() => groupToggle()}/>
         <QuestionAnswerIcon onClick={() => chatToggle()}/>
-        </footer>
+        </div>
+        </footer>  
       </div>
     );
 }

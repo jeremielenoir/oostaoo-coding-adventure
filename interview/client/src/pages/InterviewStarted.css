@@ -3,7 +3,8 @@
     grid-template-columns: 1fr 400px;
     flex-wrap: wrap; */
     display: flex;
-    min-height: 100vh;
+    min-height: 80vh;
+    height:auto;
     flex-direction: column;
   }
 
@@ -16,6 +17,8 @@
      border: 1px solid #dfdfdf;
      border-radius: 5px;
      padding: 0 5px;
+     display: none;
+     width: 367px;
   }
 
   .messagesList{
@@ -84,17 +87,38 @@
   }
 
   #icon-mic {
-    grid-column: span 2;
-    grid-row: 2;
+    grid-column: span 3;
     margin: auto;
   }
 
   .container-video-chat {
     flex-direction: row;
     display: flex;
-    height: 90vh;
+    height: auto;
   }
 
+  .container-interview-footer {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    padding-top: 10px;
+  }
+
+  .footer-left-button {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Participants */
+
+  .users-room {
+    box-sizing: border-box;
+    margin: 0 5px;
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    padding: 0 5px;
+    width: 367px;
+  }
+  
   @media screen and (max-width: 1240px) {
     .interview-started{
       /* display: block; */
