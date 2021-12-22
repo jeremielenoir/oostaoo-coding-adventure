@@ -1,7 +1,10 @@
 .interview-started{
-    display: grid;
+    /* display: grid;
     grid-template-columns: 1fr 400px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
   }
 
   /* TEXT */
@@ -54,6 +57,7 @@
     display: grid;
     grid-template-columns: repeat(2,1fr);
     grid-template-rows: 1fr 30px;
+    width: 100%
   }
 
   video {
@@ -85,9 +89,18 @@
     margin: auto;
   }
 
+  .container-video-chat {
+    flex-direction: row;
+    display: flex;
+    height: 90vh;
+  }
+
   @media screen and (max-width: 1240px) {
     .interview-started{
-      display: block;
+      /* display: block; */
+    }
+    .container-video-chat {
+      flex-direction: column;
     }
     .chat-video{
       height: 40vh;

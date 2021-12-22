@@ -6,12 +6,14 @@ import Button from '@material-ui/core/Button';
 import MicOffIcon from '@material-ui/icons/MicOff';
 import MicIcon from '@material-ui/icons/Mic';
 import SendIcon from '@material-ui/icons/Send';
+import GroupIcon from '@material-ui/icons/Group';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import './InterviewStarted.css';
 import Message from './Message';
 
 
 
-const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn }) => {
+const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggle, chatToggle }) => {
 
     const inputRef = useRef();
     const [message, setMessage] = useState("");
@@ -41,6 +43,7 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn }) => {
 
     return (
       <div className="interview-started">
+        <div className="container-video-chat">
         <div className="chat-video">
           <div className="partner-video">
             <video controls autoPlay ref={partnerVideo} />
@@ -98,6 +101,11 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn }) => {
             </form>
           </div>
         </div>
+        </div>
+        <footer className="container-interview-footer">
+        <GroupIcon onClick={() => groupToggle()}/>
+        <QuestionAnswerIcon onClick={() => chatToggle()}/>
+        </footer>
       </div>
     );
 }
