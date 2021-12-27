@@ -8,6 +8,8 @@ import MicIcon from '@material-ui/icons/Mic';
 import SendIcon from '@material-ui/icons/Send';
 import GroupIcon from '@material-ui/icons/Group';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import CloseIcon from '@material-ui/icons/Close';
+import CallEndIcon from '@material-ui/icons/CallEnd';
 import './InterviewStarted.css';
 import Message from './Message';
 
@@ -92,7 +94,10 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggl
         </div>
 
         <div className="users-room">
-            <span> Participants </span>
+          <div className="title-users-room">
+          <span> Participants </span>
+            <CloseIcon id="close-icon"/>
+          </div>
             <div className="search-users"></div>
             <div className="users-list">
             <List>
@@ -102,14 +107,16 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggl
             U {/* Username */}
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="UserName" secondary={secondary ? 'Secondary text' : null}/>
+        <ListItemText className="list-item-text" primary="UserName" secondary={secondary ? 'Secondary text' : null}/>
       </ListItem>
     </List>
             </div>
         </div>
         </div>
         <footer className="container-interview-footer">
-        <div id="icon-mic">
+          <div className="icons">
+
+          <div id="icon-mic">
           {micOn ? (
               <MicOffIcon
                 className="mic"
@@ -123,10 +130,14 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggl
                 onClick={() => micToggle()}
               />
             )}
- </div>
+        </div>
+              <div> <CallEndIcon color="secondary"/> </div>
+          </div>
+      
+
       <div className="footer-left-button">
-        <GroupIcon onClick={() => groupToggle()}/>
-        <QuestionAnswerIcon onClick={() => chatToggle()}/>
+        <GroupIcon className="footer-icons" onClick={() => groupToggle()}/>
+        <QuestionAnswerIcon className="footer-icons" onClick={() => chatToggle()}/>
         </div>
         </footer>  
       </div>

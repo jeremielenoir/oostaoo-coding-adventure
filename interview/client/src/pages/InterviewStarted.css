@@ -1,137 +1,175 @@
-.interview-started{
-    /* display: grid;
+.interview-started {
+  /* display: grid;
     grid-template-columns: 1fr 400px;
     flex-wrap: wrap; */
-    display: flex;
-    min-height: 80vh;
-    height:auto;
+  display: flex;
+  min-height: 80vh;
+  height: auto;
+  flex-direction: column;
+}
+
+/* TEXT */
+.chat-text {
+  box-sizing: border-box;
+  margin: 0 5px;
+  display: grid;
+  grid-template-rows: 1fr 80px;
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+  padding: 0 5px;
+  visibility: visible;
+  width: 367px;
+}
+
+.messagesList {
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.messageWriting {
+  /* flex: 1; */
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.messageForm {
+  display: flex;
+  align-items: center;
+}
+
+.message {
+  display: flex;
+  justify-content: space-between;
+}
+
+.messageDate {
+  font-style: italic;
+  justify-content: flex-end;
+}
+/* input chatText */
+.MuiInputBase-root {
+  width: 400px;
+}
+
+/* VIDEO */
+.chat-video {
+  background: #000;
+  height: 80vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 30px;
+  width: 100%;
+}
+
+video {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 80vh;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.partner-video {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.user-video {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl {
+  width: 310px;
+}
+
+.icons {
+  grid-column: span 3;
+  margin: auto;
+  display: flex;
+}
+
+.icons > div {
+  padding: 10px;
+}
+
+#icon-mic {
+}
+
+.container-video-chat {
+  flex-direction: row;
+  display: flex;
+  height: auto;
+}
+
+/* Users Room */
+
+.users-room {
+  box-sizing: border-box;
+  margin: 0 5px;
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+  padding: 0 5px;
+  width: 367px;
+  display: none;
+}
+
+.users-list {
+  color: #757575;
+}
+
+.title-users-room {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.title-users-room > span {
+  padding-left: 10px;
+  color: #757575;
+}
+
+.title-users-room > #close-icon {
+  color: #757575;
+}
+
+.users-list .MuiAvatar-colorDefault {
+  background-color: #18709f;
+}
+
+/* Footer */
+.container-interview-footer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding-top: 10px;
+}
+
+.footer-left-button {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-left-button > .footer-icons {
+  color: #757575;
+  padding: 10px;
+}
+
+@media screen and (max-width: 1240px) {
+  .interview-started {
+    /* display: block; */
+  }
+  .container-video-chat {
     flex-direction: column;
   }
-
-  /* TEXT */
-  .chat-text{
-     box-sizing: border-box;
-     margin: 0 5px;
-     display: grid;
-     grid-template-rows: 1fr 80px;
-     border: 1px solid #dfdfdf;
-     border-radius: 5px;
-     padding: 0 5px;
-     display: none;
-     width: 367px;
+  .chat-video {
+    height: 40vh;
   }
 
-  .messagesList{
-    box-sizing: border-box;
-    padding: 10px;
+  .chat-text {
+    margin-top: 10px;
+    height: 40vh;
   }
-
-  .messageWriting{
-    /* flex: 1; */
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-  }
-
-  .messageForm {
-    display: flex;
-    align-items: center;
-  }
-
-  .message{  
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .messageDate{
-    font-style: italic;
-    justify-content: flex-end;
-  }
-  /* input chatText */
-  .MuiInputBase-root{ 
-    width: 400px;
-  }
-
-  /* VIDEO */
-  .chat-video{
-    background: #000;
-    height: 80vh;
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-template-rows: 1fr 30px;
-    width: 100%
-  }
-
-  video {
-    width: 100% !important;
-    height: auto !important;
-    max-height: 80vh;
-    min-width: 100%; 
-    min-height: 100%; 
-  }
-
-  .partner-video {
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-  }
-  .user-video {
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl {
-    width: 310px;
-  }
-
-  #icon-mic {
-    grid-column: span 3;
-    margin: auto;
-  }
-
-  .container-video-chat {
-    flex-direction: row;
-    display: flex;
-    height: auto;
-  }
-
-  .container-interview-footer {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    padding-top: 10px;
-  }
-
-  .footer-left-button {
-    display: flex;
-    justify-content: center;
-  }
-
-  /* Participants */
-
-  .users-room {
-    box-sizing: border-box;
-    margin: 0 5px;
-    border: 1px solid #dfdfdf;
-    border-radius: 5px;
-    padding: 0 5px;
-    width: 367px;
-  }
-  
-  @media screen and (max-width: 1240px) {
-    .interview-started{
-      /* display: block; */
-    }
-    .container-video-chat {
-      flex-direction: column;
-    }
-    .chat-video{
-      height: 40vh;
-    }
-
-    .chat-text {
-      margin-top: 10px;
-      height: 40vh;
-    }
-  }
+}
