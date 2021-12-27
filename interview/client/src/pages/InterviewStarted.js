@@ -59,6 +59,25 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggl
           <div className="user-video">
             <video muted autoPlay ref={userVideo} />
           </div>
+
+          <div className="icons">
+            <div id="icon-mic">
+            {micOn ? (
+                <MicOffIcon
+                  className="mic"
+                  color="primary"
+                  onClick={() => micToggle()}
+                />
+              ) : (
+                <MicIcon
+                  className="mic"
+                  color="primary"
+                  onClick={() => micToggle()}
+                />
+              )}
+              </div>
+          <div> <CallEndIcon color="secondary"/> </div>
+      </div>
         </div>
 
         <div className="chat-text">

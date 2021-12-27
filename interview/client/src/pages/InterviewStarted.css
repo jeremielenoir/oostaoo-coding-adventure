@@ -21,6 +21,10 @@
   width: 367px;
 }
 
+.chat-text > .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl {
+  margin-bottom: 5px;
+}
+
 .title-chat-text {
   display: flex;
   justify-content: space-between;
@@ -78,6 +82,10 @@
   width: 100%;
 }
 
+.chat-video > .icons {
+  display: none;
+}
+
 video {
   width: 100% !important;
   height: auto !important;
@@ -99,19 +107,6 @@ video {
 
 .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl {
   width: 310px;
-}
-
-.icons {
-  grid-column: span 3;
-  margin: auto;
-  display: flex;
-}
-
-.icons > div {
-  padding: 10px;
-}
-
-#icon-mic {
 }
 
 .container-video-chat {
@@ -162,6 +157,19 @@ video {
   padding-top: 10px;
 }
 
+.container-interview-footer > .icons {
+  grid-column: span 3;
+  margin: auto;
+  display: flex;
+}
+
+.container-interview-footer > .icons > div {
+  padding: 10px;
+}
+
+#icon-mic {
+}
+
 .footer-left-button {
   display: flex;
   justify-content: center;
@@ -183,8 +191,18 @@ video {
     height: 40vh;
   }
 
+  .chat-video > .icons {
+     display: flex;
+     justify-content: center;
+     grid-column: span 3;
+  }
+  
   .chat-text {
     margin-top: 10px;
     height: 40vh;
+  }
+
+  .container-interview-footer > .icons {
+    visibility: hidden;
   }
 }
