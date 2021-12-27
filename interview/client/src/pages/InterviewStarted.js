@@ -62,6 +62,10 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggl
         </div>
 
         <div className="chat-text">
+        <div className="title-chat-text">
+          <span> Messages dans l'appel </span>
+            <CloseIcon id="close-icon"/>
+          </div>
           <div className="messagesList">
             {/* {
                             messages.response.length > 0 ? 

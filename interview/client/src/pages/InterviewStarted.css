@@ -21,6 +21,21 @@
   width: 367px;
 }
 
+.title-chat-text {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.title-chat-text > span {
+  padding-left: 10px;
+  color: #757575;
+}
+
+.title-chat-text > #close-icon {
+  color: #757575;
+}
+
 .messagesList {
   box-sizing: border-box;
   padding: 10px;
