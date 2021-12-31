@@ -168,6 +168,15 @@ video {
 }
 
 #icon-mic {
+  cursor: pointer;
+}
+
+#close-icon {
+  cursor: pointer;
+}
+  
+#footer-icons {
+  cursor: pointer;
 }
 
 .footer-left-button {

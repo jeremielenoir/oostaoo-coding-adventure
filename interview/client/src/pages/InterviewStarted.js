@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useRef} from 'react';
-import socketIOClient from "socket.io-client";
+import React, { useState, useEffect, useRef } from 'react';
+import socketIOClient from 'socket.io-client';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -19,38 +19,45 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 
-const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggle, chatToggle }) => {
+const InterviewStarted = ({ userVideo, partnerVideo, micToggle, micOn, groupToggle, chatToggle}) => {
+  const [secondary] = useState(false);
+  const inputRef = useRef();
+  const [message, setMessage] = useState('');
+  const [chat, setChat] = useState(false)
+  console.log("dsdsdsds",chat);
 
-  const [secondary] = React.useState(false);
-    const inputRef = useRef();
-    const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState({
+    response: false,
+    endpoint: 'http://localhost:8000',
+  }); //Ngrok adress
 
-    const [ messages, setMessages ] = useState({response: false,
-        endpoint: "http://localhost:8000"}); //Ngrok adress
+  const { endpoint } = messages;
+  const socket = socketIOClient(endpoint);
 
-    const {endpoint} = messages;
-    const socket = socketIOClient(endpoint);
-   
-    useEffect(()=>{
-        inputRef.current.focus();
-        socket.on("FromAPI", data => setMessages({response: data}));
-        }, [socket]);
+  useEffect(() => {
+    // inputRef.current.focus();
+    socket.on('FromAPI', (data) => setMessages({ response: data }));
+  }, [socket]);
 
-    const onChangeMessage = (e)=>{
-        setMessage(e.target.value);
+  const onChangeMessage = (e) => {
+    setMessage(e.target.value);
+  };
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    if (message) {
+      socket.emit('newMessage', message);
+      setMessage('');
     }
+  };
 
-    const sendMessage = (e) => {
-        e.preventDefault();
-        if(message){
-          socket.emit('newMessage', message);
-          setMessage("");
-        }
-      }
+  const toggleMessage = () => {
+    chat ? setChat(false) : setChat(true)
+  }
 
-    return (
-      <div className="interview-started">
-        <div className="container-video-chat">
+  return (
+    <div className="interview-started">
+      <div className="container-video-chat">
         <div className="chat-video">
           <div className="partner-video">
             <video controls autoPlay ref={partnerVideo} />
@@ -59,10 +66,9 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggl
           <div className="user-video">
             <video muted autoPlay ref={userVideo} />
           </div>
-
           <div className="icons">
             <div id="icon-mic">
-            {micOn ? (
+              {micOn ? (
                 <MicOffIcon
                   className="mic"
                   color="primary"
@@ -75,15 +81,18 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggl
                   onClick={() => micToggle()}
                 />
               )}
-              </div>
-          <div> <CallEndIcon color="secondary"/> </div>
-      </div>
+            </div>
+            <div>
+              {' '}
+              <CallEndIcon color="secondary" />{' '}
+            </div>
+          </div>
         </div>
-
+{ chat ?
         <div className="chat-text">
-        <div className="title-chat-text">
-          <span> Messages dans l'appel </span>
-            <CloseIcon id="close-icon"/>
+          <div className="title-chat-text">
+            <span> Messages dans l'appel </span>
+            <CloseIcon id="close-icon" onClick={toggleMessage} />
           </div>
           <div className="messagesList">
             {/* {
@@ -109,38 +118,52 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggl
                 onChange={(e) => onChangeMessage(e)}
                 variant="outlined"
               />
-              <Button id="send" size="small" color="primary" onClick={(e) => sendMessage(e)} style={{maxWidth: '40px', maxHeight: '56px', minWidth: '40px', minHeight: '56px', marginLeft: '5px', }}>
-                <SendIcon/>
+              <Button
+                id="send"
+                size="small"
+                color="primary"
+                onClick={(e) => sendMessage(e)}
+                style={{
+                  maxWidth: '40px',
+                  maxHeight: '56px',
+                  minWidth: '40px',
+                  minHeight: '56px',
+                  marginLeft: '5px',
+                }}
+              >
+                <SendIcon />
               </Button>
             </form>
           </div>
-        </div>
+        </div> : ""
 
+}
         <div className="users-room">
           <div className="title-users-room">
-          <span> Participants </span>
-            <CloseIcon id="close-icon"/>
+            <span> Participants </span>
+            <CloseIcon id="close-icon" />
           </div>
-            <div className="search-users"></div>
-            <div className="users-list">
+          <div className="search-users"></div>
+          <div className="users-list">
             <List>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            U {/* Username */}
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText className="list-item-text" primary="UserName" secondary={secondary ? 'Secondary text' : null}/>
-      </ListItem>
-    </List>
-            </div>
+              <ListItem>
+                <ListItemAvatar>
+                  <Avatar>U {/* Username */}</Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  className="list-item-text"
+                  primary="UserName"
+                  secondary={secondary ? 'Secondary text' : null}
+                />
+              </ListItem>
+            </List>
+          </div>
         </div>
-        </div>
-        <footer className="container-interview-footer">
-          <div className="icons">
-
+      </div>
+      <footer className="container-interview-footer">
+        <div className="icons">
           <div id="icon-mic">
-          {micOn ? (
+            {micOn ? (
               <MicOffIcon
                 className="mic"
                 color="primary"
@@ -153,17 +176,22 @@ const InterviewStarted = ({userVideo, partnerVideo, micToggle, micOn, groupToggl
                 onClick={() => micToggle()}
               />
             )}
-        </div>
-              <div> <CallEndIcon color="secondary"/> </div>
           </div>
-      
-
-      <div className="footer-left-button">
-        <GroupIcon className="footer-icons" onClick={() => groupToggle()}/>
-        <QuestionAnswerIcon className="footer-icons" onClick={() => chatToggle()}/>
+          <div>
+            {' '}
+            <CallEndIcon color="secondary" />{' '}
+          </div>
         </div>
-        </footer>  
-      </div>
-    );
-}
+
+        <div className="footer-left-button">
+          <GroupIcon id="footer-icons" />
+          <QuestionAnswerIcon
+            id="footer-icons"
+            onClick={toggleMessage}
+          />
+        </div>
+      </footer>
+    </div>
+  );
+};
 export default InterviewStarted;
