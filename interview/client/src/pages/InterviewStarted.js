@@ -18,13 +18,23 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+// import ToggleChatParticipant from '../component/toggleChatParticipant';
 
-const InterviewStarted = ({ userVideo, partnerVideo, micToggle, micOn, groupToggle, chatToggle}) => {
+const InterviewStarted = ({
+  userVideo,
+  partnerVideo,
+  micToggle,
+  micOn,
+  groupToggle,
+  chatToggle,
+}) => {
   const [secondary] = useState(false);
   const inputRef = useRef();
   const [message, setMessage] = useState('');
-  const [chat, setChat] = useState(false)
-  console.log("dsdsdsds",chat);
+  const [chat, setChat] = useState(false);
+  console.log('chat', chat);
+  const [participant, setParticipant] = useState(false);
+  console.log('participant', participant);
 
   const [messages, setMessages] = useState({
     response: false,
@@ -52,8 +62,14 @@ const InterviewStarted = ({ userVideo, partnerVideo, micToggle, micOn, groupTogg
   };
 
   const toggleMessage = () => {
-    chat ? setChat(false) : setChat(true)
-  }
+    chat ? setChat(false) : setChat(true);
+    participant && setParticipant(false);
+  };
+
+  const toggleParticipant = () => {
+    participant ? setParticipant(false) : setParticipant(true);
+    chat && setChat(false);
+  };
 
   return (
     <div className="interview-started">
@@ -83,83 +99,82 @@ const InterviewStarted = ({ userVideo, partnerVideo, micToggle, micOn, groupTogg
               )}
             </div>
             <div>
-              {' '}
-              <CallEndIcon color="secondary" />{' '}
+              <CallEndIcon color="secondary" />
             </div>
           </div>
         </div>
-{ chat ?
-        <div className="chat-text">
-          <div className="title-chat-text">
-            <span> Messages dans l'appel </span>
-            <CloseIcon id="close-icon" onClick={toggleMessage} />
-          </div>
-          <div className="messagesList">
-            {/* {
-                            messages.response.length > 0 ? 
-                            messages.response.map(message=>
-                            <Message text={message.text} date={message.date}/>)
-                             : ""
-                          } */}
-            {messages.response.length > 0 &&
-              messages.response.map((message) => (
-                <Message text={message.text} date={message.date} />
-              ))}
-          </div>
+        {chat ? (
+          <div className="chat-text">
+            <div className="title-chat-text">
+              <span> Messages dans l'appel </span>
+              <CloseIcon id="close-icon" onClick={toggleMessage} />
+            </div>
+            <div className="messagesList">
+              {messages.response.length > 0 &&
+                messages.response.map((message) => (
+                  <Message text={message.text} date={message.date} />
+                ))}
+            </div>
 
-          <div className="messageWriting">
-            <form className="messageForm" onSubmit={(e) => sendMessage(e)}>
-              <TextField
-                required
-                id="message"
-                label="Message"
-                value={message}
-                ref={inputRef}
-                onChange={(e) => onChangeMessage(e)}
-                variant="outlined"
-              />
-              <Button
-                id="send"
-                size="small"
-                color="primary"
-                onClick={(e) => sendMessage(e)}
-                style={{
-                  maxWidth: '40px',
-                  maxHeight: '56px',
-                  minWidth: '40px',
-                  minHeight: '56px',
-                  marginLeft: '5px',
-                }}
-              >
-                <SendIcon />
-              </Button>
-            </form>
-          </div>
-        </div> : ""
-
-}
-        <div className="users-room">
-          <div className="title-users-room">
-            <span> Participants </span>
-            <CloseIcon id="close-icon" />
-          </div>
-          <div className="search-users"></div>
-          <div className="users-list">
-            <List>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar>U {/* Username */}</Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  className="list-item-text"
-                  primary="UserName"
-                  secondary={secondary ? 'Secondary text' : null}
+            <div className="messageWriting">
+              <form className="messageForm" onSubmit={(e) => sendMessage(e)}>
+                <TextField
+                  required
+                  id="message"
+                  label="Message"
+                  value={message}
+                  ref={inputRef}
+                  onChange={(e) => onChangeMessage(e)}
+                  variant="outlined"
                 />
-              </ListItem>
-            </List>
+                <Button
+                  id="send"
+                  size="small"
+                  color="primary"
+                  onClick={(e) => sendMessage(e)}
+                  style={{
+                    maxWidth: '40px',
+                    maxHeight: '56px',
+                    minWidth: '40px',
+                    minHeight: '56px',
+                    marginLeft: '5px',
+                  }}
+                >
+                  <SendIcon />
+                </Button>
+              </form>
+            </div>
           </div>
-        </div>
+        ) : (
+          ''
+        )}
+        {participant ? (
+          <div className="users-room">
+            <div className="title-users-room">
+              <span> Participants </span>
+              <CloseIcon id="close-icon" onClick={toggleParticipant} />
+            </div>
+            <div className="search-users"></div>
+            <div className="users-list">
+              <List>
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar>U </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    className="list-item-text"
+                    primary="UserName"
+                    secondary={secondary ? 'Secondary text' : null}
+                  />
+                </ListItem>
+              </List>
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
+
       <footer className="container-interview-footer">
         <div className="icons">
           <div id="icon-mic">
@@ -178,15 +193,14 @@ const InterviewStarted = ({ userVideo, partnerVideo, micToggle, micOn, groupTogg
             )}
           </div>
           <div>
-            {' '}
-            <CallEndIcon color="secondary" />{' '}
+            <CallEndIcon color="secondary" />
           </div>
         </div>
 
         <div className="footer-left-button">
-          <GroupIcon id="footer-icons-group" />
+          <GroupIcon className="footer-icons" onClick={toggleParticipant} />
           <QuestionAnswerIcon
-            id="footer-icons-chat"
+            className="footer-icons"
             onClick={toggleMessage}
           />
         </div>

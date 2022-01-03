@@ -135,7 +135,7 @@ video {
   border-radius: 5px;
   padding: 0 5px;
   width: 367px;
-  display: none;
+  /* display: none; */
   background-color:white;
 }
 
