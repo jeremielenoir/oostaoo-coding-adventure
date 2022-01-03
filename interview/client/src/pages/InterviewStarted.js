@@ -184,9 +184,9 @@ const InterviewStarted = ({ userVideo, partnerVideo, micToggle, micOn, groupTogg
         </div>
 
         <div className="footer-left-button">
-          <GroupIcon id="footer-icons" />
+          <GroupIcon id="footer-icons-group" />
           <QuestionAnswerIcon
-            id="footer-icons"
+            id="footer-icons-chat"
             onClick={toggleMessage}
           />
         </div>
