@@ -25,7 +25,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
 
   entrepriseProfilForm: FormGroup;
   entrepriseLinksForm: FormGroup;
-  private subscription: Subscription;
+  private subscriptions: Subscription[] = [];
   readonly loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   account: any;
   public currentValue: number;
@@ -121,10 +121,12 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
 
   dataRoute: any;
   disabled: boolean;
-  public logo: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  public logo: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public logoDelete = [];
   public formDataFileLogo: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public formDataFilePicture: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public picture: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public pictureDelete = [];
 
   constructor(private router: Router, public apiClientService: ApiClientService, public decryptTokenService: DecryptTokenService,
     private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private el: ElementRef, public dialog: MatDialog,
@@ -156,14 +158,13 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loading$.next(true);
-    // this.onChanges();
     this.apiClientService._user.subscribe(data => {
       if (data) {
         this.createDataRoutes(data);
       }
     });
 
-    this.subscription = this.getUser().subscribe(user => {
+    this.subscriptions.push(this.getUser().subscribe(user => {
       console.log('User : ', user);
       // this.account is only used here, maybe to remove ?
       this.account = user.customeraccount;
@@ -195,11 +196,8 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
         console.log('no entreprise lel');
       }
       this.loading$.next(false);
-    });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+    })
+    );
   }
 
   createDataRoutes(user) {
@@ -243,7 +241,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     }
   }
 
-  openSnackBar(message: string, action) {
+  openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 6000,
       panelClass: ['mat-snack-bar-container']
@@ -279,12 +277,14 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     return this.apiClientService.get(API_URI_USER + '/' + this.decryptTokenService.userId);
   }
 
-  getEntreprise(idEntreprise) {
+  getEntreprise(idEntreprise: string) {
     return this.apiClientService
       .get(API_URI_ENTREPRISE + '/' + idEntreprise).subscribe(data => {
-        console.log('data : ', data);
-        if (data.logo) {
-          this.logo.next(data.logo.url);
+        console.log('data entreprise : ', data);
+        if (data.logo
+          && Object.keys(data.logo).length !== 0
+          && Object.getPrototypeOf(data.logo) === Object.prototype) {
+          this.logo.next([data.logo]);
         }
         if (data.image_entreprise) {
           this.picture.next(data.image_entreprise);
@@ -335,38 +335,44 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
 
   updateLinksEntreprise() {
     this.submitted = true;
-    if (this.formDataFilePicture.value) {
-      this.uploadImage(this.formDataFilePicture.value);
-      this.formDataFilePicture.next(null);
+    // if (this.formDataFilePicture.value) {
+    this.uploadImage(this.formDataFilePicture.value);
+    this.formDataFilePicture.next(null);
+    // }
+    // if (this.entrepriseLinksForm.valid && !this.formDataFilePicture.value) {
+    console.log('this.pictureDelete : ', this.pictureDelete);
+    for (const item of this.pictureDelete) {
+      this.subscriptions.push(this.apiClientService.delete(UPLOAD_TO_STRAPI + '/files/' + item.id).subscribe(data => {
+        console.log('data DELETED : ', data);
+      }));
     }
-    if (this.entrepriseLinksForm.valid && !this.formDataFilePicture.value) {
-      this.apiClientService
-        .put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
-          Lien_video: this.entrepriseLinksForm.controls['videolink'].value,
-          Url_site: this.entrepriseLinksForm.controls['websitelink'].value,
-          Teaser: this.entrepriseLinksForm.controls['teaser'].value,
-          Linkedin: this.entrepriseLinksForm.controls['linkedin'].value,
-          Facebook: this.entrepriseLinksForm.controls['facebook'].value,
-          Twitter: this.entrepriseLinksForm.controls['twitter'].value
-        })
-        .subscribe(
-          res => {
-            this.currentTotal = 0;
-            this.ngOnInit();
-            this.openSnackBar('Profil entreprise mis à jour aves succès', 'Ok');
-          },
-          err => {
-            this.openSnackBar(err.message ? err.message :
-              'Oops ! la mise à jour du profil entreprise est indisponible', 'Ok');
-          }
-        );
-    } else {
-      // this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
-      return;
-    }
+    this.apiClientService
+      .put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
+        Lien_video: this.entrepriseLinksForm.controls['videolink'].value,
+        Url_site: this.entrepriseLinksForm.controls['websitelink'].value,
+        Teaser: this.entrepriseLinksForm.controls['teaser'].value,
+        Linkedin: this.entrepriseLinksForm.controls['linkedin'].value,
+        Facebook: this.entrepriseLinksForm.controls['facebook'].value,
+        Twitter: this.entrepriseLinksForm.controls['twitter'].value
+      })
+      .subscribe(
+        res => {
+          this.currentTotal = 0;
+          this.ngOnInit();
+          this.openSnackBar('Profil entreprise mis à jour aves succès', 'Ok');
+        },
+        err => {
+          this.openSnackBar(err.message ? err.message :
+            'Oops ! la mise à jour du profil entreprise est indisponible', 'Ok');
+        }
+      );
+    // } else {
+    // // this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
+    // return;
+    // }
   }
 
-  openDialog(numbertObjects: number, limit_size: number, type_size: string, ref, field) {
+  openDialog(numbertObjects: number, limit_size: number, type_size: string, ref: string, field: string) {
     // numbertObjects limit of files
     // files: The file(s) to upload.The value(s) can be a Buffer or Stream.
     // path: (optional): The folder where the file(s) will be uploaded to(only supported on strapi - upload - aws - s3 now).
@@ -374,7 +380,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     // ref: (optional): The name of the model which the file(s) will be linked to.
     // source: (optional): The name of the plugin where the model is located.
     // field: (optional): The field of the entry which the file(s) will be precisely linked to.
-    // type_size = ['bytes', 'kb', 'mb', 'gb', 'tb', 'pb', 'eb', 'zb', 'yb'];
+    // type_size = 'bytes' or 'kb' or 'mb' or 'gb' or 'tb' or 'pb' or 'eb' or 'zb' or 'yb';
     const dialogRef = this.dialog.open(DialogImagesComponent, {
       width: '600px',
       data: {
@@ -389,19 +395,18 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog result: ', result);
       const formData = new FormData();
-      formData.append('refId', result.properties['refId']); // id of content type
-      formData.append('ref', result.properties['ref']); // name of content type
-      formData.append('field', result.properties['field']); // name of key for the content type
+      formData.append('refId', result.properties ? result.properties['refId'] : ''); // id of content type
+      formData.append('ref', result.properties ? result.properties['ref'] : ''); // name of content type
+      formData.append('field', result.properties ? result.properties['field'] : ''); // name of key for the content type
       for (const file of result.files) {
-        formData.append('files', file);
-        // formData.append('source', 'users-permissions');
+        formData.append('files', file.properties ? file.properties : file);
       }
       if (result) {
-        if (result.field === 'logo') {
+        if (result.properties.field === 'logo') {
           this.formDataFileLogo.next(formData);
-          this.logo.next(this.sanitizer.sanitize(
-            SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(result.files[0].url)
-          ));
+          this.logo.next([this.sanitizer.sanitize(
+            SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(result.files[0])
+          )]);
         } else {
           this.formDataFilePicture.next(formData);
           const multImages = [];
@@ -421,23 +426,42 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     });
   }
 
-  uploadImage(formFile) {
-    return this.apiClientService.post(UPLOAD_TO_STRAPI, formFile).subscribe(data => {
-      console.log('Post upload file : ', data);
-      this.logo.next(data[0].url);
-      return data;
-    },
-      (err) => {
+  uploadImage(formFile: FormData) {
+    if (formFile) {
+      return this.apiClientService.post(UPLOAD_TO_STRAPI, formFile).subscribe(data => {
+        console.log('Post upload file : ', data);
+        // this.logo.next(data[0]);
+        return data;
+      }, (err) => {
         console.log(err);
       });
+    } else {
+      return;
+    }
   }
 
-  deleteLogo(source) {
-    source.next(null);
+  deleteLogo(source: BehaviorSubject<any>, myItem: object) {
+    source.next(source.value.filter((item) => {
+      this.pictureDelete.push(myItem);
+      return item.id !== myItem['id'];
+    }));
+    console.log('source : ', source);
+    // this.apiClientService.delete(UPLOAD_TO_STRAPI + '/files/' + idItem).subscribe(data => {
+    //   console.log('data DELETED : ', data);
+    // });
+
+    // const formData = new FormData();
+    // formData.append('refId', '56'); // id of content type
+    // formData.append('ref', 'entreprise'); // name of content type
+    // formData.append('field', 'image_entreprise'); // name of key for the content type
+    // for (const file of source.value) {
+    //   console.log('file on delete : ', file);
+    //   formData.append('files', new File([new Blob()], file.name, { type: file.mime, lastModified: new Date().getTime() }));
+    // }
+    // this.formDataFilePicture.next(formData);
   }
-  // onChanges(): void {
-  //   this.entrepriseProfilForm.valueChanges.subscribe(val => {
-  //     console.log('VALUES : ', val);
-  //   });
-  // }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
 }

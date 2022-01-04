@@ -106,7 +106,6 @@
               <h2 class="title-edit-panel" i18n> Éditez les détails de votre entreprise dans la langue de votre choix
               </h2>
             </div>
-
             <form [formGroup]="entrepriseProfilForm" (ngSubmit)="updateProfilEntreprise()">
               <div class="form-line">
                 <div class="input-bloc">
@@ -124,7 +123,9 @@
                 <label i18n>Logo de l'entreprise</label>
                 <div class="all-gestion-info fix-gestion-info">
                   <figure class="img-upload" *ngIf="logo | async">
-                    <img [src]="logo.value" alt="" role="">
+                    <span *ngFor='let image of logo.value'>
+                      <img [src]="image.url" alt="" role="">
+                    </span>
                   </figure>
                   <div>
                     <div class="gestion-info-img-header">
@@ -132,7 +133,7 @@
                         <app-base-button (click)='$event.preventDefault(); openDialog(1, 4, "mb", "entreprise", "logo")' iconName="upload" i18n>{{logo.value ? 'MODIFER':'AJOUTER'}}</app-base-button>
                       </div>
                       <div class="form-line fix-buttons">
-                        <app-base-button *ngIf="logo | async" (click)="$event.preventDefault(); deleteLogo(this.logo)"   iconName="delete" i18n>SUPPRIMER</app-base-button>
+                        <app-base-button *ngIf="(logo | async)?.length > 0" (click)="$event.preventDefault(); deleteLogo(this.logo, this.logo.value[0])"   iconName="delete" i18n>SUPPRIMER</app-base-button>
                       </div>
                     </div>
                     <p class="gestion-info-img-contenu" i18n>4 Mo max.</p>
@@ -283,12 +284,14 @@
                     <span class="text-upload" i18n>ADD PIC</span>
                   </div>
                   <div *ngIf="picture | async" class="picture">
-                    <div *ngFor='let image of picture.value' class="img-gestion">
-                      <div class="bg-transparent-img">
-                        <mat-icon>dangerous</mat-icon>
-                      </div>
-                      <img [src]="image.url" alt="" role="">
+                    <span *ngFor='let image of picture.value'>
+                      <div *ngIf="image.url" class="img-gestion">
+                        <div class="bg-transparent-img" (click)="$event.preventDefault(); deleteLogo(this.picture, image)">
+                          <mat-icon>dangerous</mat-icon>
+                        </div>
+                        <img *ngIf="image.url"  [src]="image.url" alt="" role="">
                     </div>
+                    </span>
                   </div>
                 </div>
               </div>
