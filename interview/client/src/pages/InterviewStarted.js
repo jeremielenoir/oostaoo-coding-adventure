@@ -193,7 +193,7 @@ const InterviewStarted = ({
             )}
           </div>
           <div>
-            <CallEndIcon color="secondary" />
+            <CallEndIcon id="call-end" color="secondary" />
           </div>
         </div>
 

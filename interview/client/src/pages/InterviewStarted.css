@@ -82,7 +82,7 @@
   /* grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr 30px; */
   grid-template-columns: 1fr;
-  grid-auto-rows: 1fr 10px;
+  grid-template-rows: 1fr 10px;
   width: 100%;
 }
 
@@ -207,6 +207,7 @@ svg {
 #chat-icon:hover,
 #group-icon:hover {
   color: rgb(204, 202, 202);
+  cursor: pointer;
 }
 
 #chat-icon,
@@ -219,12 +220,17 @@ svg {
 @media screen and (max-width: 1240px) {
   .interview-started {
     /* display: block; */
+    min-height: 90vh;
   }
   .container-video-chat {
     flex-direction: column;
   }
   .chat-video {
-    height: 40vh;
+    height: 80vh;
+  }
+
+  .partner-video {
+    width:100%
   }
 
   .chat-video > .icons {
@@ -234,11 +240,24 @@ svg {
   }
   
   .chat-text {
-    margin-top: 10px;
-    height: 40vh;
+    /* margin-top: 30px;
+    height: 40vh; */
   }
 
   .container-interview-footer > .icons {
     visibility: hidden;
   }
+
+  .container-interview-footer {
+    display: none;
+  }
+
+  .users-room {
+    /* height: 40vh;
+    margin-top: 30px; */
+  }
+
+  .user-video {
+    top: -150px;
+}
 }
