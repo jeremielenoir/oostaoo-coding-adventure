@@ -10,15 +10,19 @@ import GroupIcon from '@material-ui/icons/Group';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import CloseIcon from '@material-ui/icons/Close';
 import CallEndIcon from '@material-ui/icons/CallEnd';
-import './InterviewStarted.css';
-import Message from './Message';
+import Box from '@material-ui/core/Box';
+import Modal from '@material-ui/core//Modal';
+import Typography from '@material-ui/core/Typography';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-// import ToggleChatParticipant from '../component/toggleChatParticipant';
+
+import './InterviewStarted.css';
+import Message from './Message';
+import { Link } from 'react-router-dom';
 
 const InterviewStarted = ({
   userVideo,
@@ -70,6 +74,10 @@ const InterviewStarted = ({
     participant ? setParticipant(false) : setParticipant(true);
     chat && setChat(false);
   };
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <div className="interview-started">
@@ -193,17 +201,32 @@ const InterviewStarted = ({
             )}
           </div>
           <div>
-            <CallEndIcon id="call-end" color="secondary" />
+            <CallEndIcon color="secondary" onClick={handleOpen} />
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box className="box-modal">
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Mettre fin à l'appel vidéo pour tous?
+                </Typography>
+                <Link to="/InterviewDeconnect">
+                <Button >Quitter simplement l'appel</Button>
+                </Link>
+              </Box>
+            </Modal>
           </div>
         </div>
 
         <div className="footer-left-button">
-          <button id="group-icon" className="footer-icons" >
-            <GroupIcon onClick={toggleParticipant} /> </button>
-          <button id="chat-icon" className="footer-icons" >
-            <QuestionAnswerIcon
-            onClick={toggleMessage}
-          /></button>
+          <button id="group-icon" className="footer-icons">
+            <GroupIcon onClick={toggleParticipant} />{' '}
+          </button>
+          <button id="chat-icon" className="footer-icons">
+            <QuestionAnswerIcon onClick={toggleMessage} />
+          </button>
         </div>
       </footer>
     </div>

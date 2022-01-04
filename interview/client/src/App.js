@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 //import HomeInterview from "./routes/HomeInterview";
 import Room from "./routes/Room";
+import InterviewDeconnect from './pages/InterviewDeconnect';
 
 import './App.css';
 
@@ -30,9 +31,10 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-          <BrowserRouter>
-              <Route path="/rooms/:hash" component={Room} />
-          </BrowserRouter> 
+        <BrowserRouter>
+          <Route path="/rooms/:hash" component={Room} />
+          <Route exact path="/InterviewDeconnect" component={InterviewDeconnect} />
+        </BrowserRouter>
       </ThemeProvider>
     </div>
   );

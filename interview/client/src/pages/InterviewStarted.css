@@ -20,7 +20,7 @@
   padding: 0 5px;
   visibility: visible;
   width: 367px;
-  background-color:white;
+  background-color: white;
 }
 
 .chat-text > .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl {
@@ -139,7 +139,7 @@ video {
   padding: 0 5px;
   width: 367px;
   /* display: none; */
-  background-color:white;
+  background-color: white;
 }
 
 .users-list {
@@ -169,8 +169,8 @@ video {
 .container-interview-footer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
- /*  padding-top: 10px; */
-  background-color: rgb(26, 25, 25);  
+  /*  padding-top: 10px; */
+  background: black;
   align-items: center;
 }
 
@@ -217,6 +217,19 @@ svg {
   color: rgb(160, 158, 158);
 }
 
+/* Modal */
+.box-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 20%;
+  border: 2px solid #000;
+  box-shadow: 2px 3px 13px 5px rgb(255 0 0 / 47%);
+  background: white;
+}
+
 @media screen and (max-width: 1240px) {
   .interview-started {
     /* display: block; */
@@ -234,11 +247,11 @@ svg {
   }
 
   .chat-video > .icons {
-     display: flex;
-     justify-content: center;
-     grid-column: span 3;
+    display: flex;
+    justify-content: center;
+    grid-column: span 3;
   }
-  
+
   .chat-text {
     /* margin-top: 30px;
     height: 40vh; */
