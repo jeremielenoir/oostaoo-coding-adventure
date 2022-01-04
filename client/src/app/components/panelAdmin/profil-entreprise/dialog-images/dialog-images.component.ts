@@ -40,7 +40,7 @@ export class DialogImagesComponent implements OnInit {
     } else {
       this.disabled = false;
     }
-    console.log('this.files : ', this.files);
+    // console.log('this.files : ', this.files);
   }
 
   uploadFile(event) {
@@ -54,7 +54,7 @@ export class DialogImagesComponent implements OnInit {
             name: element.name, url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(element)),
             properties: element
           });
-          console.log('this.files : ', this.files);
+          // console.log('this.files : ', this.files);
         } else {
           this.openSnackBar('Fichier trop volumineux ou type du fichier non accepté', 'Fermer');
           console.log('return "show popup" type unknown, limit size depassed'); // show limits? and type of files
