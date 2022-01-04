@@ -198,11 +198,12 @@ const InterviewStarted = ({
         </div>
 
         <div className="footer-left-button">
-          <GroupIcon className="footer-icons" onClick={toggleParticipant} />
-          <QuestionAnswerIcon
-            className="footer-icons"
+          <button id="group-icon" className="footer-icons" >
+            <GroupIcon onClick={toggleParticipant} /> </button>
+          <button id="chat-icon" className="footer-icons" >
+            <QuestionAnswerIcon
             onClick={toggleMessage}
-          />
+          /></button>
         </div>
       </footer>
     </div>

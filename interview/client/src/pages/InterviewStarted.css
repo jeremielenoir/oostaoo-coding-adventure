@@ -192,6 +192,27 @@ video {
   padding: 10px;
 }
 
+svg {
+  margin: 0;
+}
+
+#chat-icon:focus,
+#group-icon:focus {
+  color: rgb(40 151 205);
+}
+
+#chat-icon:hover,
+#group-icon:hover {
+  color: rgb(204, 202, 202);
+}
+
+#chat-icon,
+#group-icon {
+  background: none;
+  border: none;
+  color: rgb(160, 158, 158);
+}
+
 @media screen and (max-width: 1240px) {
   .interview-started {
     /* display: block; */
