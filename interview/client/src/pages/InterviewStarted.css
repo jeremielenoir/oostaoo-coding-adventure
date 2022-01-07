@@ -224,12 +224,78 @@ svg {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 40%;
-  height: 20%;
-  border: 2px solid #000;
-  box-shadow: 2px 3px 13px 5px rgb(255 0 0 / 47%);
+  height: auto;
+  box-shadow: 2px 3px 13px 5px rgba(90, 90, 90, 0.47);
   background: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
+.header-modal {
+  display: flex;
+  justify-content: flex-end;
+  color: #a7a7a7;
+}
+
+.header-modal #close-icon {
+  color: #a7a7a7;
+}
+
+.content-modal {
+  text-align: center;
+}
+
+.text-modal {
+  color: #a7a7a7;
+}
+
+.footer-modal {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footer-modal #cancel {
+  color: #a7a7a7;
+}
+
+.box-modal button {
+  margin: 0 10px;
+  font-weight: 500;
+}
+
+#modal-modal-title {
+  text-align: center;
+  color: #2c2c2c;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* DISCONNECT PAGE */ 
+
+.container-disconnect {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container-disconnect button {
+  margin: 0 5px;
+}
+
+.container-disconnect .buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.container-disconnect h3 {
+  text-align: center;
+  color: #2c2c2c;
+}
 @media screen and (max-width: 1240px) {
   .interview-started {
     /* display: block; */

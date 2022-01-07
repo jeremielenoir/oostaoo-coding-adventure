@@ -209,12 +209,25 @@ const InterviewStarted = ({
               aria-describedby="modal-modal-description"
             >
               <Box className="box-modal">
+                <div className="header-modal">
+                <Button onClick={handleClose}>
+                  <CloseIcon id="close-icon"/>
+                </Button>
+                </div>
+                
+                <div className="content-modal">
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Mettre fin à l'appel vidéo pour tous?
+                  Mettre fin à l'appel vidéo ?
                 </Typography>
-                <Link to="/InterviewDeconnect">
-                <Button >Quitter simplement l'appel</Button>
+                <span className="text-modal"> Vous quitterez la réunion après validation.</span>
+                </div>
+                
+                <div className="footer-modal">
+                <Button onClick={handleClose} id="cancel" variant="outlined">Annuler</Button>
+                <Link id="button-leave" to="/InterviewDeconnect">
+                <Button variant="contained" color="secondary" >Quitter</Button>
                 </Link>
+                </div>
               </Box>
             </Modal>
           </div>
