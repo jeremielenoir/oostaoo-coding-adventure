@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { EMPTY, Observable, of, Subject } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import {
   ApiClientService,
   EXECUTE_SCRIPT,
@@ -22,43 +25,37 @@ export class AlgoComponent {
   public loading: boolean = false;
   editorOptions = { theme: 'vs-dark', language: 'javascript' };
 
-  constructor(public apiClientService: ApiClientService) {}
+  constructor(private http: HttpClient) {}
 
-  testCode() {
-    try {
-      this.loading = true;
-      const file = new File([this.question.content.toString()], this.filename, {
-        type: this.filetype,
-      });
-      const formData: FormData = new FormData();
-      formData.append('files', file, file.name);
-      return new Promise((resolve) => {
-        this.apiClientService
-          .post(`${EXECUTE_SCRIPT}${this.question.id.toString()}`, formData)
-          .subscribe(
-            (data) => {
-              if (data) {
-                this.loading = false;
-                this.responseTestCode = data.testCode;
-                this.responseTestAnswer = data.testAnswer;
-                this.responsesIsValid =
-                  this.responseTestCode &&
-                  this.responseTestCode.every(
-                    (v) => v.resultValidation === true,
-                  );
-                resolve(this.responseTestAnswer);
-              }
-            },
-            (error) => {
-              console.log('error', error);
-              resolve(false);
-              this.loading = false;
-              this.responseTestCode = error;
-            },
-          );
-      });
-    } catch (error) {
-      throw error;
-    }
+  testCode(): Observable<Record<string, any>> {
+    this.loading = true;
+    const file = new File([this.question.content.toString()], this.filename, {
+      type: this.filetype,
+    });
+    const formData: FormData = new FormData();
+    formData.append('files', file, file.name);
+
+    return this.http
+      .post<Record<string, any>>(
+        `${EXECUTE_SCRIPT}${this.question.id.toString()}`,
+        formData,
+      )
+      .pipe(
+        tap((data) => {
+          this.loading = false;
+          this.responseTestCode = data.testCode;
+          this.responseTestAnswer = data.testAnswer;
+          this.responsesIsValid =
+            this.responseTestCode &&
+            this.responseTestCode.every((v) => v.resultValidation === true);
+          return data.testAnswer;
+        }),
+        catchError((err) => {
+          console.log('error', err);
+          this.loading = false;
+          this.responseTestCode = err;
+          return EMPTY;
+        }),
+      );
   }
 }

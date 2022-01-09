@@ -130,7 +130,6 @@ export class TestComponent implements OnInit, OnDestroy {
         this.startChronometerSubscription.unsubscribe();
 
         this.validateAnswer().subscribe((observer) => {
-          console.log('observer validateAnswer', observer);
           this.currentIdxQuestions++;
           if (this.currentIdxQuestions === this.questions.length) {
             //test is finish post test
@@ -300,7 +299,7 @@ export class TestComponent implements OnInit, OnDestroy {
           : 0;
         return this.putAnswerResults(points);
       case 'algo':
-        this.algoComponent.testCode().then((algoIsValid) => {
+        this.algoComponent.testCode().subscribe((algoIsValid) => {
           let responseAlgoString = algoIsValid ? 'valide' : 'ko';
 
           this.candidatAnswers.push({
