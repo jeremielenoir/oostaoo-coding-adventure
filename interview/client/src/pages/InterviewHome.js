@@ -4,8 +4,8 @@ import Button from '@material-ui/core/Button';
 import PresentToAllIcon from '@material-ui/icons/PresentToAll';
 import PhoneForwardedIcon from '@material-ui/icons/PhoneForwarded';
 
-const InterviewHome = (props) => {
-    const {userVideo, confirmMeeting} = props
+const InterviewHome = ({userVideo, confirmMeeting}) => {
+    // const {userVideo, confirmMeeting} = props
     return (
         <div id="main">
             <div className='global-wrapper'>
