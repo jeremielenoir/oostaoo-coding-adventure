@@ -287,6 +287,8 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
           this.logo.next([data.logo]);
         }
         if (data.image_entreprise) {
+          console.log('data.image_entreprise : ', data.image_entreprise.filter(img => img
+            && Object.keys(img).length !== 0));
           this.picture.next(data.image_entreprise);
         }
         return this.entreprise = data;
@@ -303,6 +305,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     if (this.formDataFileLogo.value) {
       this.uploadImage(this.formDataFileLogo.value);
       this.formDataFileLogo.next(null);
+      console.log('logo : ', this.logo.value);
     }
     if (this.entrepriseProfilForm.valid && !this.formDataFileLogo.value) {
       this.postUpdateEntreprise();
@@ -319,6 +322,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
         industrie: this.entrepriseProfilForm.controls['industrie'].value,
         Nb_employe: this.entrepriseProfilForm.controls['numberofemployee'].value,
         Nb_dev: this.entrepriseProfilForm.controls['numberofdev'].value,
+        // logo: 339
       })
       .subscribe(
         res => {
@@ -353,7 +357,8 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
         Teaser: this.entrepriseLinksForm.controls['teaser'].value,
         Linkedin: this.entrepriseLinksForm.controls['linkedin'].value,
         Facebook: this.entrepriseLinksForm.controls['facebook'].value,
-        Twitter: this.entrepriseLinksForm.controls['twitter'].value
+        Twitter: this.entrepriseLinksForm.controls['twitter'].value,
+        // image_entreprise: [342, 291, 339]
       })
       .subscribe(
         res => {
