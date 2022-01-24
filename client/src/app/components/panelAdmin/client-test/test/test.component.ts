@@ -101,7 +101,7 @@ export class TestComponent implements OnInit, OnDestroy {
     private jsonService: JsonService,
     public languageStorage: SelectedLanguageService,
     public dialog: MatDialog,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.setCurrentLanguage();
@@ -111,15 +111,13 @@ export class TestComponent implements OnInit, OnDestroy {
 
     this.totalPoints = this.calculTotalPoints(this.allPointsTechnos);
 
-    if (this.totalPoints) this.totalPointsCampaign = this.totalPoints;
+    if (this.totalPoints) { this.totalPointsCampaign = this.totalPoints; }
 
-    //get candidat info and go to good question
+    // get candidat info and go to good question
     if (this.candidat) {
-      if (this.candidat.index_question)
-        this.currentIdxQuestions = this.candidat.index_question;
+      if (this.candidat.index_question) { this.currentIdxQuestions = this.candidat.index_question; }
 
-      if (this.candidat.test_pause)
-        this.chronometerCurrentTime = this.candidat.test_pause;
+      if (this.candidat.test_pause) { this.chronometerCurrentTime = this.candidat.test_pause; }
     } else {
       this.candidat = { campaign: { copy_paste: false } };
     }
@@ -132,7 +130,7 @@ export class TestComponent implements OnInit, OnDestroy {
         this.validateAnswer().subscribe((observer) => {
           this.currentIdxQuestions++;
           if (this.currentIdxQuestions === this.questions.length) {
-            //test is finish post test
+            // test is finish post test
             console.log('Test is finish need to post it');
             this.postTimeTest(this.totalElapsedTime).subscribe({
               next: (res) => console.log(res),
@@ -286,7 +284,7 @@ export class TestComponent implements OnInit, OnDestroy {
         this.candidatAnswers.push(this.candidatAnswer);
         points =
           this.correctAnswers.sort().toString().toLowerCase() ===
-          this.candidatAnswers.sort().toString().toLowerCase()
+            this.candidatAnswers.sort().toString().toLowerCase()
             ? this.questions[this.currentIdxQuestions].points
             : 0;
         return this.putAnswerResults(points);
@@ -299,19 +297,18 @@ export class TestComponent implements OnInit, OnDestroy {
           : 0;
         return this.putAnswerResults(points);
       case 'algo':
+        let subject = new Subject<any>();
         this.algoComponent.testCode().subscribe((algoIsValid) => {
           let responseAlgoString = algoIsValid ? 'valide' : 'ko';
-
           this.candidatAnswers.push({
             isValid: responseAlgoString,
           });
-
           points = algoIsValid
             ? this.questions[this.currentIdxQuestions].points
             : 0;
-
-          return this.putAnswerResults(points);
+          subject.next(this.putAnswerResults(points));
         });
+        return subject.asObservable();
     }
     this.correctAnswerCounter += points ? 1 : 0;
   }
@@ -386,7 +383,7 @@ export class TestComponent implements OnInit, OnDestroy {
         this.totalPointsCandidat.points) /
         (this.totalPointsCampaign.total_points ||
           this.totalPointsCampaign.points)) *
-        100,
+      100,
     );
     console.log('test SUM TOTAL OF THE TEST', getPourcentTest);
 
@@ -547,18 +544,18 @@ export class TestComponent implements OnInit, OnDestroy {
     $event.returnValue = 'Are you sure?';
     console.log('before unload');
     // on tutorial mode, prevent backend api calls
-    if (this.mode !== 'testing') return;
+    if (this.mode !== 'testing') { return; }
 
     this.postPauseTest().subscribe();
   }
 
   @HostListener('window:unload', ['$event'])
   public sendData() {
-    //alert('works');
+    // alert('works');
     // on tutorial mode, prevent backend api calls
-    //console.log('unload');
-    if (this.mode !== 'testing') return;
+    // console.log('unload');
+    if (this.mode !== 'testing') { return; }
 
-    //this.postPauseTest();
+    // this.postPauseTest();
   }
 }
