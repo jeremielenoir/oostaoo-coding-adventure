@@ -302,17 +302,11 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
 
   updateProfilEntreprise() {
     this.submitted = true;
-    if (this.formDataFileLogo.value) {
-      this.uploadImage(this.formDataFileLogo.value);
-      this.formDataFileLogo.next(null);
-      console.log('logo : ', this.logo.value);
-    }
-    if (this.entrepriseProfilForm.valid && !this.formDataFileLogo.value) {
-      this.postUpdateEntreprise();
-    }
+    this.uploadImage(this.formDataFileLogo.value, 'logo');
+    this.formDataFileLogo.next(null);
   }
 
-  postUpdateEntreprise() {
+  postUpdateEntreprise(idLogo) {
     this.apiClientService
       .put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
         lang: this.entrepriseProfilForm.controls['lang'].value,
@@ -322,7 +316,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
         industrie: this.entrepriseProfilForm.controls['industrie'].value,
         Nb_employe: this.entrepriseProfilForm.controls['numberofemployee'].value,
         Nb_dev: this.entrepriseProfilForm.controls['numberofdev'].value,
-        // logo: 339
+        logo: idLogo ? idLogo : {}
       })
       .subscribe(
         res => {
@@ -339,17 +333,17 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
 
   updateLinksEntreprise() {
     this.submitted = true;
-    // if (this.formDataFilePicture.value) {
-    this.uploadImage(this.formDataFilePicture.value);
+    this.uploadImage(this.formDataFilePicture.value, 'image_entreprise');
     this.formDataFilePicture.next(null);
-    // }
     // if (this.entrepriseLinksForm.valid && !this.formDataFilePicture.value) {
-    console.log('this.pictureDelete : ', this.pictureDelete);
-    for (const item of this.pictureDelete) {
-      this.subscriptions.push(this.apiClientService.delete(UPLOAD_TO_STRAPI + '/files/' + item.id).subscribe(data => {
-        console.log('data DELETED : ', data);
-      }));
-    }
+    // console.log('this.pictureDelete : ', this.pictureDelete);
+    // for (const item of this.pictureDelete) {
+    //   this.subscriptions.push(this.apiClientService.delete(UPLOAD_TO_STRAPI + '/files/' + item.id).subscribe(data => {
+    //     console.log('data DELETED : ', data);
+    //   }));
+    // }
+  }
+  postUploadLinksEntreprise(idImagesEntreprise) {
     this.apiClientService
       .put(API_URI_ENTREPRISE + '/' + this.entreprise.id, {
         Lien_video: this.entrepriseLinksForm.controls['videolink'].value,
@@ -358,7 +352,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
         Linkedin: this.entrepriseLinksForm.controls['linkedin'].value,
         Facebook: this.entrepriseLinksForm.controls['facebook'].value,
         Twitter: this.entrepriseLinksForm.controls['twitter'].value,
-        // image_entreprise: [342, 291, 339]
+        image_entreprise: idImagesEntreprise
       })
       .subscribe(
         res => {
@@ -371,10 +365,6 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
             'Oops ! la mise à jour du profil entreprise est indisponible', 'Ok');
         }
       );
-    // } else {
-    // // this.openSnackBar('Une erreur est survenue, veuillez correctement remplir les champs requis', 'Fermer');
-    // return;
-    // }
   }
 
   openDialog(numbertObjects: number, limit_size: number, type_size: string, ref: string, field: string) {
@@ -417,6 +407,7 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
           const multImages = [];
           for (const file of result.files) {
             multImages.push({
+              id: file ? file.id : '',
               name: file.name,
               url: this.sanitizer.sanitize(
                 SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(file.url)
@@ -431,23 +422,38 @@ export class ProfilEntrepriseComponent implements OnInit, OnDestroy {
     });
   }
 
-  uploadImage(formFile: FormData) {
+  uploadImage(formFile: FormData, field: string) {
     if (formFile) {
       return this.apiClientService.post(UPLOAD_TO_STRAPI, formFile).subscribe(data => {
         console.log('Post upload file : ', data);
-        // this.logo.next(data[0]);
-        return data;
+        if (field === 'logo') {
+          this.logo.next(data);
+          this.postUpdateEntreprise(this.logo.value[0].id);
+        } else {
+          const arrayImages = [];
+          data.map(value => {
+            arrayImages.push(value.id);
+          });
+          this.picture.value.map(value => { if (value.id) { arrayImages.push(value.id); } });
+          this.postUploadLinksEntreprise(arrayImages);
+        }
       }, (err) => {
         console.log(err);
       });
     } else {
-      return;
+      if (field === 'logo') {
+        this.postUpdateEntreprise(this.logo.value[0] ? this.logo.value[0].id : '');
+      } else {
+        const arrayImages = [];
+        this.picture.value.map(value => { if (value.id) { arrayImages.push(value.id); } });
+        this.postUploadLinksEntreprise(arrayImages);
+      }
     }
   }
 
   deleteLogo(source: BehaviorSubject<any>, myItem: object) {
     source.next(source.value.filter((item) => {
-      this.pictureDelete.push(myItem);
+      // this.pictureDelete.push(myItem);
       return item.id !== myItem['id'];
     }));
     console.log('source : ', source);
