@@ -1,0 +1,26 @@
+<button class="fix-button" mat-icon-button aria-label="close dialog" mat-dialog-close>
+  <mat-icon>close</mat-icon>
+</button>
+<div mat-dialog-title>
+  <h2 i18n>Déposez votre image ici {{this.files.length}}/{{limit}}</h2>
+</div>
+<mat-dialog-content>
+<div [ngClass]="data && this.files.length === limit && !show ? 'hidden-upload' : 'uploadfilecontainer'"  class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+  <h2 *ngIf="limit === 1"  i18n>Faites glisser l'image ici ou cliquez pour ouvrir</h2>
+  <h2 *ngIf="limit > 1"  i18n>Faites glisser les images ici ou cliquez pour ouvrir</h2>
+  <mat-icon class="fix-icon">add_a_photo</mat-icon>
+  <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)" accept="image/x-png,image/gif,image/jpeg" [multiple]="limit > 1">
+  <!-- <input *ngIf="limit > 1"  hidden type="file" #fileInput (change)="uploadFile($event.target.files)" accept="image/x-png,image/gif,image/jpeg" multiple> -->
+</div>
+<div  class="files-list" *ngFor="let file of files;let i= index">
+    <p class="text-trunc"> {{ file.name }} </p>
+    <img *ngIf="file" [src]="file.url" width="100px" height="100px" [alt]="file.url">
+    <button class="delete-file" (click)="deleteAttachment(i)">
+      <mat-icon>close</mat-icon>
+    </button>
+ </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <app-base-button (click)="onSubmit()" iconName="done" [disabled]="disabled" i18n>VALIDER</app-base-button>
+</mat-dialog-actions>

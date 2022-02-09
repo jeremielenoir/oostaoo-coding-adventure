@@ -1,0 +1,68 @@
+.fix-button {
+  float: right;
+}
+
+.hidden-upload {
+  display: none !important;
+}
+
+.uploadfilecontainer {
+  .fix-icon {
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  // background-image: url("../../assets/cloud-2044823_960_720.png");
+  background-repeat: no-repeat;
+  background-size: 100px;
+  background-position: center;
+  height: 200px;
+  width: 80%;
+  margin: 20px auto;
+  border: 2px dashed #1C8ADB;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #9ecbec !important;
+    opacity: 0.8;
+  }
+}
+
+.files-list {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 10px auto;
+  background: #ffffff;
+  border: 1px dashed;
+  border-radius: 12px;
+  padding: 5px;
+  color: #1c8adb;
+  align-items: center;
+
+  .text-trunc {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .delete-file {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+
+    img {
+      width: 30px;
+    }
+  }
+}

@@ -37,6 +37,8 @@ export const API_URI_ROLE: string = '/users-permissions/roles';
 export const EXECUTE_SCRIPT: string = prefix + 'questions/execute/';
 export const API_POPULATE_QUESTIONS_SPREADSHEET: string = prefix + 'questions/populate/';
 
+export const UPLOAD_TO_STRAPI = '/upload';
+
 //Bp6PnJmoydK5rz6o
 
 @Injectable()
