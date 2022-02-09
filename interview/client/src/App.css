@@ -1,58 +1,116 @@
 /*nav*/
 .home-interview {
-  min-width: 100vh;
 }
+
 .nav {
   display: flex;
   justify-content: space-between;
-  height: 10vh;
+  align-items: center;
+  padding: 16px;
 }
+
 .email {
-  padding: 40px;
+  /* padding: 40px; */
 }
+
 .nav img {
-  padding-top: 40px;
-  min-width: 300px;
+  height: 40px;
 }
 
 /* InterviewHome */
-.main{
-  height: 90vh;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+
+#main {
+}
+
+.global-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  margin: 10px;
+  align-content: center;
   align-items: center;
 }
+
+.wrapper-video {
+  overflow: hidden;
+}
+
 .home-video {
-  width: 60vw;
-  min-width: 800px;
-  height: 70vh;
   background-color: #000;
-  border-radius: 15px;
+  border-radius: 10px;
+  width: 100% !important;
+  height: auto !important;
+  min-width: 100%; 
+  min-height: 100%; 
 }
-.options {
+
+#main .container-title {
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  max-width: 30vw;
 }
-.main button{
-  border-radius: 30px;
-  margin: 15px;
+
+#main .container-meeting-btn {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.options {}
+
+#main .wrapper-text{
+  /* border: solid 2px; */
+}
+
+#main .title {
+  font-size: x-large;
   font-weight: bold;
 }
-.text-color{
-  color: #2ba2d1;
+
+#main button {
+  margin: 2%;
+  padding: 0.5% 4%;
+  font-size: 0.75rem;
+  border-radius: 30px;
+  font-weight: bold;
 }
+
 .telephone {
   display: flex;
   justify-content: center;
-  color: #e34f26; 
+  visibility:hidden;
+  color: #e34f26;
 }
-svg{
+
+svg {
   margin-right: 10px;
 }
 
+@media screen and (max-width: 947px) {
+  #main {
+  }
 
+  #main .wrapper-video {
+  }
 
-@media screen and (max-width: 992px) {
+  #main .home-video {
+  }
 
+  .global-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  }
+  #main .options {
+    border: none;
+    width: auto;
+  }
+  #main button {
+    margin: 16px;
+    padding: 0 4%;
+    font-size: x-small;
+    border-radius: 30px;
+    font-weight: bold;
+  }
+
+  .telephone {
+    visibility: visible;
+  }
 }

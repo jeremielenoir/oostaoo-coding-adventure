@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 //import HomeInterview from "./routes/HomeInterview";
 import Room from "./routes/Room";
+import InterviewDeconnect from './pages/InterviewDeconnect';
 
 import './App.css';
 
@@ -12,16 +13,16 @@ import { ThemeProvider } from '@material-ui/styles';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#55b4da',
-      main: '#2ba2d1',
-      dark: '#1e7192',
+      light: '#84cfe0',
+      main: '#1a73e8',
+      dark: '#2094bd',
       contrastText: '#fff',
     },
     secondary: {
       light: '#e87251',
-      main: '#e34f26',
-      dark: '#9e371a',
-      contrastText: '#000',
+      main: '#9e371a',
+      /* dark: '#9e371a', */
+     /*  contrastText: '#303030', */
     },
   },
 });
@@ -30,9 +31,10 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-          <BrowserRouter>
-              <Route path="/rooms/:hash" component={Room} />
-          </BrowserRouter> 
+        <BrowserRouter>
+          <Route path="/rooms/:hash" component={Room} />
+          <Route exact path="/InterviewDeconnect" component={InterviewDeconnect} />
+        </BrowserRouter>
       </ThemeProvider>
     </div>
   );

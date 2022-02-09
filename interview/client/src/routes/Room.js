@@ -26,12 +26,12 @@ const Room = (props) => {
     
         decryptHash(props.match.params.hash)
         .then((res)=>{
-            setInterviewId(res.interview_id);
-            setEmail(res.email);
-            setDate(res.interview_date);
-            console.log('res : ', res);
-            console.log('date : ', date);
-            if(res.nom){setNom(res.nom)};
+            // setInterviewId(res.interview_id);
+            // setEmail(res.email);
+            // setDate(res.interview_date);
+            // console.log('res : ', res);
+            // console.log('date : ', date);
+            // if(res.nom){setNom(res.nom)};
             });
 
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
