@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
 
 //import HomeInterview from "./routes/HomeInterview";
-import Room from "./routes/Room";
+import Room from "./guard/Room";
 import InterviewDeconnect from './pages/InterviewDeconnect';
 
-import './App.css';
+import './assets/css/App.css';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
