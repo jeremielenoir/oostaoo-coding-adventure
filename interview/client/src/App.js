@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
 
 //import HomeInterview from "./routes/HomeInterview";
-import Room from "./guard/Room";
+import Room from "./components/Room";
 import InterviewDeconnect from './pages/InterviewDeconnect';
 
 import './assets/css/App.css';
