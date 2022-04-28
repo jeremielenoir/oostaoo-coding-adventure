@@ -1,7 +1,7 @@
 import React from 'react';
-import './InterviewStarted.css';
+import '../assets/css/InterviewStarted.css';
 
-import './Message.css'
+import '../assets/css/Message.css'
 
 export default ({text, date}) => {
   return <div className="message">

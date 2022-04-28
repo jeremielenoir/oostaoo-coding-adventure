@@ -20,8 +20,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 
-import './InterviewStarted.css';
-import Message from './Message';
+import '../assets/css/InterviewStarted.css';
+import Message from '../components/Message';
 import { Link } from 'react-router-dom';
 
 const InterviewStarted = ({

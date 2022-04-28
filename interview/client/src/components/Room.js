@@ -35,6 +35,7 @@ const Room = (props) => {
             });
 
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
+            console.log('stream', stream, 'userVideo', userVideo);
 
             userVideo.current.srcObject = stream;
             userStream.current = stream;
@@ -164,9 +165,18 @@ const Room = (props) => {
                 <div className="email">{email}</div>
             </div>
             { meetingConfirmation ? 
-                <InterviewHome userVideo={userVideo} confirmMeeting={confirmMeeting}/>
+                <InterviewHome 
+                userVideo={userVideo} 
+                confirmMeeting={confirmMeeting}
+                />
             :
-                <InterviewStarted userVideo={userVideo} partnerVideo={partnerVideo} micToggle={micToggle} micOn={micOn} setMicOn={setMicOn} />
+                <InterviewStarted 
+                userVideo={userVideo} 
+                partnerVideo={partnerVideo} 
+                micToggle={micToggle} 
+                micOn={micOn} 
+                setMicOn={setMicOn} 
+                />
             }
         </div>
     )
