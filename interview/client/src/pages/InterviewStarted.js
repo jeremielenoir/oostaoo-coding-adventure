@@ -44,6 +44,10 @@ const InterviewStarted = ({
     response: false,
     endpoint: 'http://localhost:8000',
   }); //Ngrok adress
+  
+  const endpointPort = process.env.ENDPOINT;
+
+  console.log("endpointPort", endpointPort);
 
   const { endpoint } = messages;
   const socket = socketIOClient(endpoint);
