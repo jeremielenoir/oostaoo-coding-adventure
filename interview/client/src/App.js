@@ -28,8 +28,10 @@ const theme = createMuiTheme({
 });
 
 function App() {
+  const secret_key = process.env.REACT_APP_REST_API_LOCATION;
   return (
     <div className="App">
+      <h1>{secret_key}</h1>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Route path="/rooms/:hash" component={Room} />
