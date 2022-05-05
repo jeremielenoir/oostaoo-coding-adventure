@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import socketIOClient from 'socket.io-client';
+import { EndPointContext } from '../useContext';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -42,15 +43,16 @@ const InterviewStarted = ({
 
   const [messages, setMessages] = useState({
     response: false,
-    endpoint: 'http://localhost:8000',
-  }); //Ngrok adress
+    // endpoint: 'http://localhost:8000',
+  }); //Ngrok adress  
+  // const { endpoint } = messages;
+  // const endpointPort = process.env.ENDPOINT;
+  // console.log('endpointPort', endpointPort);
+
   
-  const endpointPort = process.env.ENDPOINT;
-
-  console.log("endpointPort", endpointPort);
-
-  const { endpoint } = messages;
+  const endpoint = useContext(EndPointContext);
   const socket = socketIOClient(endpoint);
+  console.log('endpoint', endpoint);
 
   useEffect(() => {
     // inputRef.current.focus();
@@ -214,23 +216,34 @@ const InterviewStarted = ({
             >
               <Box className="box-modal">
                 <div className="header-modal">
-                <Button onClick={handleClose}>
-                  <CloseIcon id="close-icon"/>
-                </Button>
+                  <Button onClick={handleClose}>
+                    <CloseIcon id="close-icon" />
+                  </Button>
                 </div>
-                
+
                 <div className="content-modal">
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Mettre fin à l'appel vidéo ?
-                </Typography>
-                <span className="text-modal"> Vous quitterez la réunion après validation.</span>
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Mettre fin à l'appel vidéo ?
+                  </Typography>
+                  <span className="text-modal">
+                    {' '}
+                    Vous quitterez la réunion après validation.
+                  </span>
                 </div>
-                
+
                 <div className="footer-modal">
-                <Button onClick={handleClose} id="cancel" variant="outlined">Annuler</Button>
-                <Link id="button-leave" to="/InterviewDeconnect">
-                <Button variant="contained" color="secondary" >Quitter</Button>
-                </Link>
+                  <Button onClick={handleClose} id="cancel" variant="outlined">
+                    Annuler
+                  </Button>
+                  <Link id="button-leave" to="/InterviewDeconnect">
+                    <Button variant="contained" color="secondary">
+                      Quitter
+                    </Button>
+                  </Link>
                 </div>
               </Box>
             </Modal>
@@ -248,5 +261,5 @@ const InterviewStarted = ({
       </footer>
     </div>
   );
-};
+};;
 export default InterviewStarted;
