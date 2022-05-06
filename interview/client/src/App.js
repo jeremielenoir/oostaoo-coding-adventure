@@ -40,8 +40,6 @@ const [locationPath, setLocationPath] = useState(secret_key);
 
   return (
     <div className="App">
-      <h1>{secret_key}</h1>
-      <h1>{node}</h1>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <EndPointContext.Provider value={secret_key}>
