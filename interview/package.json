@@ -1,11 +1,11 @@
 {
   "dependencies": {
+    "@types/jest": "^27.5.0",
     "concurrently": "^7.1.0"
   },
   "name": "interview",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "client": "cd client && npm i && npm start",
     "server": "cd server && npm i && npm start",
