@@ -126,8 +126,8 @@ function InterviewStarted({
             </div>
             <div className="messagesList">
               {messages.response.length > 0 &&
-                messages.response.map((message) => (
-                  <Message text={message.text} date={message.date} />
+                messages.response.map((conversation) => (
+                  <Message text={conversation.text} date={conversation.date} />
                 ))}
             </div>
 
@@ -252,10 +252,10 @@ function InterviewStarted({
         </div>
 
         <div className="footer-left-button">
-          <button id="group-icon" className="footer-icons">
+          <button type="button" id="group-icon" className="footer-icons">
             <GroupIcon onClick={toggleParticipant} />{' '}
           </button>
-          <button id="chat-icon" className="footer-icons">
+          <button type="button" id="chat-icon" className="footer-icons">
             <QuestionAnswerIcon onClick={toggleMessage} />
           </button>
         </div>

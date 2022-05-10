@@ -29,5 +29,21 @@ module.exports = {
     'react/prop-types': 'off',
     'no-console': 'off',
     'react/no-unescaped-entities': 0,
+    'jsx-a11y/media-has-caption': [
+      2,
+      {
+        audio: ['Audio'],
+        video: ['Video'],
+        track: ['Track'],
+      },
+    ],
   },
+  overrides: [
+    {
+      files: ['**/*.test.js', '**/*.test.jsx'],
+      env: {
+        jest: true,
+      },
+    },
+  ],
 };
