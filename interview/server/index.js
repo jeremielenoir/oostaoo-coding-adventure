@@ -1,9 +1,11 @@
-const express = require("express");
-const http = require("http");
-const app = express();
-const server = http.createServer(app);
-const socket = require("socket.io");
-const io = socket(server);
+const app = require('express')();
+const http = require('http').createServer(app);
+
+require('dotenv').config();
+const PORT = process.env.PORT;
+
+const io = require('socket.io')(http);
+
 const moment = require('moment');
 const rooms = {};
 
@@ -45,7 +47,7 @@ io.on("connection", socket => {
     })
 
     socket.on("join room", roomID => {
-        console.log(socket);
+        // console.log(socket);
         if (rooms[roomID]) {
             rooms[roomID].push(socket.id);
         } else {
@@ -72,4 +74,4 @@ io.on("connection", socket => {
 });
 
 
-server.listen(8000, () => console.log('server is running on port 8000'));
+http.listen(PORT, () => console.log(`server is running on port ${PORT}`));

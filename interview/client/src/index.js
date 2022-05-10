@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/css/index.css';
 import App from './App';
+// import { EndPointContext } from './useContext';
 import * as serviceWorker from './services/serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <EndPointContext.Provider value="hello from context"> */}
+      <App />
+    {/* </EndPointContext.Provider> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

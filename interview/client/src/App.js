@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
+
+import { EndPointContext } from './useContext';
+// import UrlPathLocation from './useContext';
 
 //import HomeInterview from "./routes/HomeInterview";
 import Room from "./components/Room";
@@ -28,12 +31,21 @@ const theme = createMuiTheme({
 });
 
 function App() {
+  const secret_key = process.env.REACT_APP_REST_API_LOCATION;
+  const node = process.env.REACT_APP_ORIGIN_FILE;
+  console.log(process.env);
+
+
+const [locationPath, setLocationPath] = useState(secret_key);
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <Route path="/rooms/:hash" component={Room} />
-          <Route exact path="/InterviewDeconnect" component={InterviewDeconnect} />
+          <EndPointContext.Provider value={secret_key}>
+            <Route path="/rooms/:hash" component={Room} />
+            <Route exact path="/InterviewDeconnect" component={InterviewDeconnect} />
+          </EndPointContext.Provider>
         </BrowserRouter>
       </ThemeProvider>
     </div>
