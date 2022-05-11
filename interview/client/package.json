@@ -27,11 +27,7 @@
     }
   },
   "scripts": {
-    "print-log": "env-cmd --environments production npm start",
     "start": "react-scripts start",
-    "development": "env-cmd -f .env.development react-scripts start",
-    "local": "env-cmd -f .env.local react-scripts start",
-    "production": "env-cmd -f .env.production react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
