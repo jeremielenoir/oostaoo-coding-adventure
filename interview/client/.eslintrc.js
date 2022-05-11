@@ -28,6 +28,7 @@ module.exports = {
     'prettier/prettier': ['error'],
     'react/prop-types': 'off',
     'no-console': 'off',
+    "allowTernary": "true",
     'react/no-unescaped-entities': 0,
   },
 };

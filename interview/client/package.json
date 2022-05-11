@@ -28,14 +28,11 @@
     }
   },
   "scripts": {
-    "print-log": "env-cmd --environments production npm start",
-    "lint": "eslint --ext .js,.jsx --fix src/",
     "start": "react-scripts start",
-    "development": "env-cmd -f .env.development react-scripts start",
-    "local": "env-cmd -f .env.local react-scripts start",
-    "production": "env-cmd -f .env.production react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "lint": "eslint --ext .js",
+    "lint:fix": ".jsx --fix src/",
     "eject": "react-scripts eject",
     "watch": "npm-watch start"
   },
