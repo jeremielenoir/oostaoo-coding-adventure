@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import socketIOClient from 'socket.io-client';
-import { EndPointContext } from '../useContext';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -22,17 +21,20 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 
 import '../assets/css/InterviewStarted.css';
-import Message from '../components/Message';
 import { Link } from 'react-router-dom';
 
-const InterviewStarted = ({
+import { EndPointContext } from '../useContext';
+
+import Message from '../components/Message';
+
+function InterviewStarted({
   userVideo,
   partnerVideo,
   micToggle,
   micOn,
-  groupToggle,
-  chatToggle,
-}) => {
+  // groupToggle,
+  // chatToggle,
+}) {
   const [secondary] = useState(false);
   const inputRef = useRef();
   const [message, setMessage] = useState('');
@@ -48,7 +50,6 @@ const InterviewStarted = ({
   // const { endpoint } = messages;
   // const endpointPort = process.env.ENDPOINT;
   // console.log('endpointPort', endpointPort);
-
   
   const endpoint = useContext(EndPointContext);
   const socket = socketIOClient(endpoint);
@@ -168,7 +169,7 @@ const InterviewStarted = ({
               <span> Participants </span>
               <CloseIcon id="close-icon" onClick={toggleParticipant} />
             </div>
-            <div className="search-users"></div>
+            <div className="search-users" />
             <div className="users-list">
               <List>
                 <ListItem>
@@ -261,5 +262,5 @@ const InterviewStarted = ({
       </footer>
     </div>
   );
-};;
+}
 export default InterviewStarted;

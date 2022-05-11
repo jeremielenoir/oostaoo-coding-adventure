@@ -8,7 +8,7 @@ import * as serviceWorker from './services/serviceWorker';
 ReactDOM.render(
   <React.StrictMode>
     {/* <EndPointContext.Provider value="hello from context"> */}
-      <App />
+    <App />
     {/* </EndPointContext.Provider> */}
   </React.StrictMode>,
   document.getElementById('root')
