@@ -1,17 +1,9 @@
-// import React from 'react';
-// import { render } from '@testing-library/react';
-// import App from './App';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import InterviewDeconnect from './InterviewDeconnect';
 
-// test('ad', () => {
-//   expect(sum(1, 2)).toBe(3);
-// });
-
-test('zero', () => {
-  const addition = 0 + 0;
-
-  expect(addition).not.toBeNull();
-  expect(addition).toBeDefined();
-  expect(addition).not.toBeUndefined();
-  expect(addition).not.toBeTruthy();
-  expect(addition).toBeFalsy();
+test('tcheck value in InterviewDeconnect', () => {
+  render(<InterviewDeconnect />);
+  const targetButton = screen.ByTestId('#button-reunion');
+  expect(targetButton).toBeInTheDocument();
 });

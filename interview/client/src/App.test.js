@@ -2,21 +2,34 @@
 
 import React from 'react';
 import { render } from '@testing-library/react';
-import App from './App';
+// import { Modal } from '@material-ui/core';
+// import App from './App';
 
-test('renders react app', () => {
-  console.log('getbytext');
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('scenario dexemple', () => {
+  describe('test modal', () => {
+    render(
+      <div title="Bonjour les gens" onClose={() => null}>
+        <div id="demo">hugo</div>
+      </div>
+    );
+    const demo = "document.querySelector('#demo');";
+    expect(demo).not.toBeNull();
+  });
+
+  // describe(() => {
+  //   const { getByText } = render(<App />);
+  //   const linkElement = getByText(/learn react/i);
+  //   expect(linkElement).to;
+  // });
+
   describe('react router, /rooms/:hash || /InterviewDeconnect', () => {});
-});
 
-// test('zero', () => {
-//   const z = 0;
-//   expect(z).not.toBeNull();
-//   expect(z).toBeDefined();
-//   expect(z).not.toBeUndefined();
-//   expect(z).not.toBeTruthy();
-//   expect(z).toBeFalsy();
-// });
+  describe('all test', () => {
+    const a = 0;
+    expect(a).not.toBeNull();
+    expect(a).toBeDefined();
+    expect(a).not.toBeUndefined();
+    expect(a).not.toBeTruthy();
+    expect(a).toBeFalsy();
+  });
+});

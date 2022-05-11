@@ -17,7 +17,9 @@ function InterviewDeconnect() {
       <div className="buttons">
         {/* <Link to="/rooms/:hash"> */}
         <Link to="/rooms/2">
-          <Button variant="outlined">Réintégrer la réunion</Button>
+          <Button id="button-reunion" variant="outlined">
+            Réintégrer la réunion
+          </Button>
         </Link>
       </div>
     </div>
