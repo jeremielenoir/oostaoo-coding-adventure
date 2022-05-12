@@ -27,51 +27,46 @@ setTimeout(function() {
 }, 10 * 1000);
 */
 
-
 var messages = [];
 
+io.on('connection', (socket) => {
+  io.emit('FromApi', messages);
 
-io.on("connection", socket => {
-
-
-    io.emit('FromApi', messages);
-
-    socket.on('newMessage', (message) => {
-    if(messages.length == 16){
+  socket.on('newMessage', (message) => {
+    if (messages.length == 16) {
       messages.shift();
     }
-    message = {text: message, date: moment().format('HH:mm')};
+    message = { text: message, date: moment().format('HH:mm') };
     messages.push(message);
     console.log('messages : ', messages);
-    io.emit("FromAPI", messages);
-    })
+    io.emit('FromAPI', messages);
+  });
 
-    socket.on("join room", roomID => {
-        // console.log(socket);
-        if (rooms[roomID]) {
-            rooms[roomID].push(socket.id);
-        } else {
-            rooms[roomID] = [socket.id];
-        }
-        const otherUser = rooms[roomID].find(id => id !== socket.id);
-        if (otherUser) {
-            socket.emit("other user", otherUser);
-            socket.to(otherUser).emit("user joined", socket.id);
-        }
-    });
+  socket.on('join room', (roomID) => {
+    // console.log(socket);
+    if (rooms[roomID]) {
+      rooms[roomID].push(socket.id);
+    } else {
+      rooms[roomID] = [socket.id];
+    }
+    const otherUser = rooms[roomID].find((id) => id !== socket.id);
+    if (otherUser) {
+      socket.emit('other user', otherUser);
+      socket.to(otherUser).emit('user joined', socket.id);
+    }
+  });
 
-    socket.on("offer", payload => {
-        io.to(payload.target).emit("offer", payload);
-    });
+  socket.on('offer', (payload) => {
+    io.to(payload.target).emit('offer', payload);
+  });
 
-    socket.on("answer", payload => {
-        io.to(payload.target).emit("answer", payload);
-    });
+  socket.on('answer', (payload) => {
+    io.to(payload.target).emit('answer', payload);
+  });
 
-    socket.on("ice-candidate", incoming => {
-        io.to(incoming.target).emit("ice-candidate", incoming.candidate);
-    });
+  socket.on('ice-candidate', (incoming) => {
+    io.to(incoming.target).emit('ice-candidate', incoming.candidate);
+  });
 });
-
 
 http.listen(PORT, () => console.log(`server is running on port ${PORT}`));
