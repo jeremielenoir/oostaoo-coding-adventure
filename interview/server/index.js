@@ -1,8 +1,11 @@
 const app = require('express')();
 const http = require('http').createServer(app);
 
-require('dotenv').config();
-const PORT = process.env.PORT;
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+const PORT = process.env.PORT || 3000;
 
 const io = require('socket.io')(http);
 
