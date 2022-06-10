@@ -18,7 +18,7 @@
     "client": "cd client && npm i && npm start",
     "server": "cd server && npm i && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "prepare": "cd .. && husky install interview/.husky"
+    "prepare": "cd .. && husky install interview/.husky && chmod +x .husky/*"
   },
   "author": "",
   "license": "ISC",
