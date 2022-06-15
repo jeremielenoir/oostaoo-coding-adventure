@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 
 import LogoRoodeo from '../assets/logo_ROODEO.svg';
@@ -36,8 +37,7 @@ function Room(props) {
       .then(() => {
         userStream.current
           .getTracks()
-          .forEach((track) =>
-            peerRef.current.addTrack(track, userStream.current)
+          .forEach((track) => peerRef.current.addTrack(track, userStream.current),
           );
       })
       .then(() => peerRef.current.createAnswer())
@@ -66,9 +66,7 @@ function Room(props) {
   function createPeer(userID) {
     const peer = new RTCPeerConnection({
       iceServers: [
-        {
-          urls: 'stun:stun.stunprotocol.org',
-        },
+        { urls: 'stun:stun.stunprotocol.org' },
         {
           urls: 'turn:numb.viagenie.ca',
           credential: 'muazkh',
@@ -157,8 +155,7 @@ function Room(props) {
 
   function micToggle() {
     console.log('userstream.current : ', userStream.current);
-    userStream.current.getAudioTracks()[0].enabled =
-      !userStream.current.getAudioTracks()[0].enabled;
+    userStream.current.getAudioTracks()[0].enabled =      !userStream.current.getAudioTracks()[0].enabled;
     setMicOn(!micOn);
   }
 
@@ -186,4 +183,7 @@ function Room(props) {
     </div>
   );
 }
+
+Room.propTypes = { match: PropTypes.object };
+
 export default Room;

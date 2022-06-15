@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 // import PresentToAllIcon from '@material-ui/icons/PresentToAll';
@@ -43,3 +44,8 @@ function InterviewHome({ userVideo, confirmMeeting }) {
   );
 }
 export default InterviewHome;
+
+InterviewHome.propTypes = {
+  userVideo: PropTypes.object,
+  confirmMeeting: PropTypes.func,
+};

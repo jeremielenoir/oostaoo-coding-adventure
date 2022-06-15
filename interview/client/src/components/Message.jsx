@@ -1,6 +1,7 @@
 import React from 'react';
-import '../assets/css/InterviewStarted.css';
+import PropTypes from 'prop-types';
 
+import '../assets/css/InterviewStarted.css';
 import '../assets/css/Message.css';
 
 export default function Messages({ text, date }) {
@@ -11,3 +12,8 @@ export default function Messages({ text, date }) {
     </div>
   );
 }
+
+Messages.propTypes = {
+  text: PropTypes.string,
+  date: PropTypes.string,
+};
