@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/css/index.css';
-import App from './App';
+import App from './App.jsx';
 // import { EndPointContext } from './useContext';
 import * as serviceWorker from './services/serviceWorker';
 
@@ -11,7 +11,7 @@ ReactDOM.render(
     <App />
     {/* </EndPointContext.Provider> */}
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

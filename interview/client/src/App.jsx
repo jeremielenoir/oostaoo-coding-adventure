@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
 import { EndPointContext } from './useContext';
@@ -13,7 +13,7 @@ import InterviewDeconnect from './pages/InterviewDeconnect';
 
 import './assets/css/App.css';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       light: '#84cfe0',
