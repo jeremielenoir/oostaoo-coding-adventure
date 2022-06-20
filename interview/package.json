@@ -6,7 +6,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
-    "husky": "^8.0.0",
+    "husky": "^8.0.1",
     "lint-staged": "^13.0.1"
   },
   "lint-staged": {
@@ -18,7 +18,7 @@
     "client": "cd client && npm i && npm start",
     "server": "cd server && npm i && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "prepare": "cd .. && husky install interview/.husky && chmod ug+x .husky/*"
+    "prepare": "cd .. && husky install interview/.husky"
   },
   "author": "",
   "license": "ISC",
