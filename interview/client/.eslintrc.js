@@ -26,12 +26,22 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'no-undef': 1,
+    'comma-dangle': 0,
     'prefer-const': 1,
     'no-console': 1,
-    'no-unused-expressions': ['error', { allowTernary: true }],
-    'max-len': ['error', { code: 80, ignoreUrls: true }],
+    'no-use-before-define': 1,
+    'prefer-destructuring': 0,
+    'no-shadow': 0,
+    'no-use-before-define': 0,
+    'no-unused-expressions': ['error', { "allowTernary": true, "allowShortCircuit": true }],
+    'max-len': ['error', { code: 120, ignoreUrls: true }],
     eqeqeq: [1, 'smart'],
     'object-curly-newline': ['error', { multiline: true }],
+    'jsx-a11y/media-has-caption': [ 2, {
+      'audio': [ 'Audio' ],
+      'video': [ 'Video' ],
+      'track': [ 'Track' ]
+    }],
     'react/jsx-filename-extension': [
       1,
       {
@@ -41,5 +51,11 @@ module.exports = {
     'react/prop-types': 'off',
     'react/no-unescaped-entities': 0,
     'react/jsx-wrap-multilines': 1,
+    'react/button-has-type': 1,
+    'react/jsx-no-bind': [2, {
+      "allowArrowFunctions": true,
+      "allowFunctions": true
+    }],
+    'react/destructuring-assignment': [1, "always", { "ignoreClassFields": true, "destructureInSignature": "always" }]
   },
 };

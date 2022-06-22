@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-cd interview
-npx lint-staged
+cd interview/client
+npm run lint

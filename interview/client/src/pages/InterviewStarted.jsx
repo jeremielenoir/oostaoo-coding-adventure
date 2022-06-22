@@ -46,11 +46,11 @@ function InterviewStarted({
   const [messages, setMessages] = useState({
     response: false,
     // endpoint: 'http://localhost:8000',
-  }); //Ngrok adress  
+  }); // Ngrok adress
   // const { endpoint } = messages;
   // const endpointPort = process.env.ENDPOINT;
   // console.log('endpointPort', endpointPort);
-  
+
   const endpoint = useContext(EndPointContext);
   const socket = socketIOClient(endpoint);
   console.log('endpoint', endpoint);
@@ -91,7 +91,7 @@ function InterviewStarted({
       <div className="container-video-chat">
         <div className="chat-video">
           <div className="partner-video">
-            <video controls autoPlay ref={partnerVideo} />
+            <video controls autoPlay ref={partnerVideo}><track kind="captions" /></video>
           </div>
 
           <div className="user-video">
@@ -125,8 +125,8 @@ function InterviewStarted({
               <CloseIcon id="close-icon" onClick={toggleMessage} />
             </div>
             <div className="messagesList">
-              {messages.response.length > 0 &&
-                messages.response.map((message) => (
+              {messages.response.length > 0
+                && messages.response.map((message) => (
                   <Message text={message.text} date={message.date} />
                 ))}
             </div>
@@ -253,7 +253,8 @@ function InterviewStarted({
 
         <div className="footer-left-button">
           <button id="group-icon" className="footer-icons">
-            <GroupIcon onClick={toggleParticipant} />{' '}
+            <GroupIcon onClick={toggleParticipant} />
+            {' '}
           </button>
           <button id="chat-icon" className="footer-icons">
             <QuestionAnswerIcon onClick={toggleMessage} />
