@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 
 import LogoRoodeo from '../assets/logo_ROODEO.svg';
@@ -181,4 +182,7 @@ function Room(props) {
     </div>
   );
 }
+
+Room.propTypes = { match: PropTypes.object };
+
 export default Room;

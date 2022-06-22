@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
+import PropTypes from 'prop-types';
 import socketIOClient from 'socket.io-client';
 
 import TextField from '@material-ui/core/TextField';
@@ -264,4 +265,12 @@ function InterviewStarted({
     </div>
   );
 }
+
+InterviewStarted.propTypes = {
+  userVideo: PropTypes.object,
+  partnerVideo: PropTypes.object,
+  micToggle: PropTypes.func,
+  micOn: PropTypes.bool,
+};
+
 export default InterviewStarted;

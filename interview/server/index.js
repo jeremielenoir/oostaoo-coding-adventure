@@ -1,15 +1,11 @@
 const app = require('express')();
 const http = require('http').createServer(app);
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
-
-const PORT = process.env.PORT || 3000;
-
 const io = require('socket.io')(http);
 
 const moment = require('moment');
+const config = require('./config');
+
 const rooms = {};
 
 /* pour plus tard
@@ -36,7 +32,7 @@ io.on('connection', (socket) => {
   io.emit('FromApi', messages);
 
   socket.on('newMessage', (message) => {
-    if (messages.length == 16) {
+    if (messages.length === 16) {
       messages.shift();
     }
     message = { text: message, date: moment().format('HH:mm') };
@@ -72,4 +68,6 @@ io.on('connection', (socket) => {
   });
 });
 
-http.listen(PORT, () => console.log(`server is running on port ${PORT}`));
+http.listen(config.PORT, config.HOST, () => {
+  console.log(`APP LISTENING ON http://${config.HOST}:${config.PORT}`);
+});
