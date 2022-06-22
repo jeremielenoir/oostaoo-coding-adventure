@@ -5,11 +5,14 @@
   "name": "interview",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "husky": "^8.0.0"
+  },
   "scripts": {
     "client": "cd client && npm i && npm start",
     "server": "cd server && npm i && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "prepare": "cd .. && husky install interview/.husky"
   },
   "author": "",
   "license": "ISC",

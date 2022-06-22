@@ -37,8 +37,7 @@ function Room(props) {
       .then(() => {
         userStream.current
           .getTracks()
-          .forEach((track) => peerRef.current.addTrack(track, userStream.current),
-          );
+          .forEach((track) => peerRef.current.addTrack(track, userStream.current));
       })
       .then(() => peerRef.current.createAnswer())
       .then((answer) => peerRef.current.setLocalDescription(answer))
@@ -155,7 +154,7 @@ function Room(props) {
 
   function micToggle() {
     console.log('userstream.current : ', userStream.current);
-    userStream.current.getAudioTracks()[0].enabled =      !userStream.current.getAudioTracks()[0].enabled;
+    userStream.current.getAudioTracks()[0].enabled = !userStream.current.getAudioTracks()[0].enabled;
     setMicOn(!micOn);
   }
 

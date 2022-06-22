@@ -92,7 +92,7 @@ function InterviewStarted({
       <div className="container-video-chat">
         <div className="chat-video">
           <div className="partner-video">
-            <video controls autoPlay ref={partnerVideo} />
+            <video controls autoPlay ref={partnerVideo}><track kind="captions" /></video>
           </div>
 
           <div className="user-video">
