@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { EndPointContext } from '../useContext';
-import '../assets/css/InterviewStarted.css';
+import '../assets/css/Interview.css';
 
 function InterviewDeconnect() {
   const msg = useContext(EndPointContext);
