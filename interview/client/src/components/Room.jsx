@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 
@@ -22,14 +22,33 @@ function Room(props) {
   const otherUser = useRef();
   const userStream = useRef();
 
-  function callUser(userID) {
+  const createPeer = useCallback((userID) => {
+    const peer = new RTCPeerConnection({
+      iceServers: [
+        { urls: 'stun:stun.stunprotocol.org' },
+        {
+          urls: 'turn:numb.viagenie.ca',
+          credential: 'muazkh',
+          username: 'webrtc@live.com',
+        },
+      ],
+    });
+
+    peer.onicecandidate = handleICECandidateEvent;
+    peer.ontrack = handleTrackEvent;
+    peer.onnegotiationneeded = () => handleNegotiationNeededEvent(userID);
+
+    return peer;
+  }, []);
+
+  const callUser = useCallback((userID) => {
     peerRef.current = createPeer(userID);
     userStream.current
       .getTracks()
       .forEach((track) => peerRef.current.addTrack(track, userStream.current));
-  }
+  }, [createPeer]);
 
-  function handleRecieveCall(incoming) {
+  const handleReceiveCall = useCallback((incoming) => {
     peerRef.current = createPeer();
     const desc = new RTCSessionDescription(incoming.sdp);
     peerRef.current
@@ -49,7 +68,7 @@ function Room(props) {
         };
         socketRef.current.emit('answer', payload);
       });
-  }
+  }, [createPeer]);
 
   function handleAnswer(message) {
     const desc = new RTCSessionDescription(message.sdp);
@@ -60,25 +79,6 @@ function Room(props) {
     const candidate = new RTCIceCandidate(incoming);
 
     peerRef.current.addIceCandidate(candidate).catch((e) => console.log(e));
-  }
-
-  function createPeer(userID) {
-    const peer = new RTCPeerConnection({
-      iceServers: [
-        { urls: 'stun:stun.stunprotocol.org' },
-        {
-          urls: 'turn:numb.viagenie.ca',
-          credential: 'muazkh',
-          username: 'webrtc@live.com',
-        },
-      ],
-    });
-
-    peer.onicecandidate = handleICECandidateEvent;
-    peer.ontrack = handleTrackEvent;
-    peer.onnegotiationneeded = () => handleNegotiationNeededEvent(userID);
-
-    return peer;
   }
 
   function handleICECandidateEvent(e) {
@@ -144,13 +144,13 @@ function Room(props) {
           otherUser.current = userID;
         });
 
-        socketRef.current.on('offer', handleRecieveCall);
+        socketRef.current.on('offer', handleReceiveCall);
 
         socketRef.current.on('answer', handleAnswer);
 
         socketRef.current.on('ice-candidate', handleNewICECandidateMsg);
       });
-  }, [meetingConfirmation]);
+  }, [callUser, handleReceiveCall, meetingConfirmation, props.match.params.roomID]);
 
   function micToggle() {
     console.log('userstream.current : ', userStream.current);
