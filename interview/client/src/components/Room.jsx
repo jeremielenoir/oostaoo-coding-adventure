@@ -6,7 +6,7 @@ import LogoRoodeo from '../assets/logo_ROODEO.svg';
 // import { decryptHash } from '../services/decryptService';
 
 import InterviewHome from '../pages/InterviewHome';
-import InterviewStarted from '../pages/InterviewStarted';
+import Interview from '../pages/Interview';
 
 function Room(props) {
   const [meetingConfirmation, setMeetingConfirmation] = useState(true);
@@ -171,7 +171,7 @@ function Room(props) {
       {meetingConfirmation ? (
         <InterviewHome userVideo={userVideo} confirmMeeting={confirmMeeting} />
       ) : (
-        <InterviewStarted
+        <Interview
           userVideo={userVideo}
           partnerVideo={partnerVideo}
           micToggle={micToggle}
