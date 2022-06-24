@@ -2,16 +2,12 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import socketIOClient from 'socket.io-client';
 
-import MicOffIcon from '@material-ui/icons/MicOff';
-import MicIcon from '@material-ui/icons/Mic';
-import CallEndIcon from '@material-ui/icons/CallEnd';
-
 import '../assets/css/Interview.css';
 
 import { EndPointContext } from '../useContext';
 
 import ChatSection from '../components/ChatSection';
-import Footer from '../components/Footer';
+import CommandsBar from '../components/CommandsBar';
 import ParticipantsSection from '../components/ParticipantsSection';
 
 function Interview({
@@ -37,6 +33,7 @@ function Interview({
   // const { endpoint } = messages;
   // const endpointPort = process.env.ENDPOINT;
   // console.log('endpointPort', endpointPort);
+  const [open, setOpen] = useState(false);
 
   const endpoint = useContext(EndPointContext);
   const socket = socketIOClient(endpoint);
@@ -50,7 +47,6 @@ function Interview({
   const onChangeMessage = (e) => {
     setMessage(e.target.value);
   };
-
   const sendMessage = (e) => {
     e.preventDefault();
     if (message) {
@@ -58,18 +54,14 @@ function Interview({
       setMessage('');
     }
   };
-
   const toggleMessage = () => {
     chat ? setChat(false) : setChat(true);
     participant && setParticipant(false);
   };
-
   const toggleParticipant = () => {
     participant ? setParticipant(false) : setParticipant(true);
     chat && setChat(false);
   };
-
-  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -82,33 +74,6 @@ function Interview({
           </div>
           <div className="user-video">
             <video muted autoPlay ref={userVideo} />
-          </div>
-          <div className="icons">
-            <div id="icon-mic">
-              {micOn ? (
-                <>
-                  <MicOffIcon
-                    className="mic"
-                    color="primary"
-                    onClick={() => micToggle()}
-                  />
-                  <MicOffIcon
-                  className="mic"
-                  color="primary"
-                  onClick={() => micToggle()}
-                  />
-                </>
-              ) : (
-                <MicIcon
-                  className="mic"
-                  color="primary"
-                  onClick={() => micToggle()}
-                />
-              )}
-            </div>
-            <div>
-              <CallEndIcon color="secondary" />
-            </div>
           </div>
         </div>
         {chat ? (
@@ -123,7 +88,7 @@ function Interview({
         )}
       </div>
 
-      <Footer 
+      <CommandsBar 
         userVideo={userVideo} 
         partnerVideo={partnerVideo} 
         micToggle={micToggle} 

@@ -18,7 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import '../assets/css/Interview.css';
 
 /* Component definition */
-const Footer = ({userVideo, partnerVideo, micToggle, micOn, handleOpen, handleClose, toggleParticipant, toggleMessage, open}) => {
+const CommandsBar = ({userVideo, partnerVideo, micToggle, micOn, handleOpen, handleClose, toggleParticipant, toggleMessage, open}) => {
   return (
     <footer className="container-interview-footer">
         <div className="icons">
@@ -95,7 +95,7 @@ const Footer = ({userVideo, partnerVideo, micToggle, micOn, handleOpen, handleCl
 }
 
 /* Proptypes */
-Footer.propTypes = {
+CommandsBar.propTypes = {
   userVideo: PropTypes.object,
   partnerVideo: PropTypes.object,
   micToggle: PropTypes.func,
@@ -107,4 +107,4 @@ Footer.propTypes = {
   open: PropTypes.bool,
 };
 
-export default Footer;
+export default CommandsBar;

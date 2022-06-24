@@ -62,6 +62,13 @@ const ChatSection = ({toggleMessage, messages, message, sendMessage, inputRef, o
 
 /* Proptypes */
 ChatSection.propTypes = {
+  toggleMessage: PropTypes.func,
+  messages: PropTypes.object, // probably to change into array once we get the right response
+  message: PropTypes.string,
+  sendMessage: PropTypes.func,
+  inputRef: PropTypes.func,
+  onChangeMessage: PropTypes.func,
+  /* toggleMessage, messages, message, sendMessage, inputRef, onChangeMessage */
 };
 
 export default ChatSection;
