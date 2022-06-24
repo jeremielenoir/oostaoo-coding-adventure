@@ -77,7 +77,14 @@ function Interview({
           </div>
         </div>
         {chat ? (
-          <ChatSection toggleMessage={toggleMessage} messages={messages} message={message} sendMessage={sendMessage} inputRef={inputRef} onChangeMessage={onChangeMessage}/>
+          <ChatSection 
+            toggleMessage={toggleMessage} 
+            messages={messages} 
+            message={message} 
+            sendMessage={sendMessage} 
+            inputRef={inputRef} 
+            onChangeMessage={onChangeMessage}
+          />
         ) : (
           ''
         )}
