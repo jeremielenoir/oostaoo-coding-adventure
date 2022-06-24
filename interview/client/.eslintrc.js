@@ -25,6 +25,8 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    'linebreak-style': 0,
+    'eol-last': 0,
     'no-undef': 1,
     'comma-dangle': 0,
     'prefer-const': 1,

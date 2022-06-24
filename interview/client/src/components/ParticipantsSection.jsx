@@ -13,31 +13,29 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import '../assets/css/Interview.css';
 
 /* Component definition */
-const ParticipantsSection = ({toggleParticipant, secondary}) => {
-  return (
-    <div className="users-room">
-      <div className="title-users-room">
-        <span> Participants </span>
-        <CloseIcon id="close-icon" onClick={toggleParticipant} />
-      </div>
-      <div className="search-users" />
-      <div className="users-list">
-        <List>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>U </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              className="list-item-text"
-              primary="UserName"
-              secondary={secondary ? 'Secondary text' : null}
-            />
-          </ListItem>
-        </List>
-      </div>
+const ParticipantsSection = ({ toggleParticipant, secondary }) => (
+  <div className="users-room">
+    <div className="title-users-room">
+      <span> Participants </span>
+      <CloseIcon id="close-icon" onClick={toggleParticipant} />
     </div>
-  );
-}
+    <div className="search-users" />
+    <div className="users-list">
+      <List>
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar>U </Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            className="list-item-text"
+            primary="UserName"
+            secondary={secondary ? 'Secondary text' : null}
+          />
+        </ListItem>
+      </List>
+    </div>
+  </div>
+);
 
 /* Proptypes */
 ParticipantsSection.propTypes = {
