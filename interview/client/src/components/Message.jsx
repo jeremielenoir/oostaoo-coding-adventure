@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '../assets/css/InterviewStarted.css';
+import '../assets/css/Interview.css';
 import '../assets/css/Message.css';
 
 export default function Messages({ text, date }) {
