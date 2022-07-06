@@ -5,6 +5,8 @@ import '../assets/css/Interview.css';
 import '../assets/css/Message.css';
 
 export default function Messages({ text, date }) {
+  console.log('Message component: ', text);
+  console.log('Message component: ', date);
   return (
     <div className="message">
       <div className="messageText">{text}</div>

@@ -165,7 +165,7 @@ function Room(props) {
   return (
     <div className="home-interview">
       <div className="nav">
-        <img src={LogoRoodeo} alt="React Logo" />
+        <img src={LogoRoodeo} alt="Roodeo Logo" />
         <div className="email">{email}</div>
       </div>
       {meetingConfirmation ? (

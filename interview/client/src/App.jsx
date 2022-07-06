@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -44,12 +44,14 @@ function App() {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <EndPointContext.Provider value={secretKey}>
-            <Route path="/rooms/:hash" component={Room} />
-            <Route
-              exact
-              path="/InterviewDeconnect"
-              component={InterviewDeconnect}
-            />
+            <Switch>
+              <Route path="/rooms/:hash" component={Room} />
+              <Route
+                exact
+                path="/InterviewDeconnect"
+                component={InterviewDeconnect}
+              />
+            </Switch>
           </EndPointContext.Provider>
         </BrowserRouter>
       </ThemeProvider>
