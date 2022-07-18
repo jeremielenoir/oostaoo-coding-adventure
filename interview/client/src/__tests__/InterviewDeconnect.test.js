@@ -1,17 +1,57 @@
-import React from "react";
-import InterviewDeconnect from "../pages/InterviewDeconnect";
-import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { BrowserRouter } from 'react-router-dom';
+import InterviewDeconnect from '../pages/InterviewDeconnect';
+import { EndPointContext } from '../useContext';
 
-describe("InterviewDeconnect component", () => {
-    test("Should render without crash", async () => {
-        render(
-            <BrowserRouter>
-                <InterviewDeconnect/>
-            </BrowserRouter>
-        )
+describe('InterviewDeconnect component', () => {
+  test('Should render without crash', () => {
+    render(
+      <BrowserRouter>
+        <InterviewDeconnect />
+      </BrowserRouter>
+    );
 
-        const youLeftMeeting = screen.getByText(/vous avez quitté la réunion/i)
-        expect(youLeftMeeting).toBeInTheDocument()
-    })
-})
+    const youLeftMeeting = screen.getByText(/vous avez quitté la réunion/i);
+    expect(youLeftMeeting).toBeInTheDocument();
+  });
+
+  test('The button should render correctly', () => {
+    render(
+      <BrowserRouter>
+        <InterviewDeconnect />
+      </BrowserRouter>
+    );
+
+    const button = screen.getByText(/réintégrer la réunion/i);
+    expect(button).toBeInTheDocument();
+  });
+
+  test('The button should work', () => {
+    render(
+      <BrowserRouter>
+        <InterviewDeconnect />
+      </BrowserRouter>
+    );
+
+    const button = screen.getByText(/réintégrer la réunion/i);
+    const mockFunction = jest.fn();
+    fireEvent.click(button);
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+  });
+
+  test('The text passed with EndPointContext should appear on screen', () => {
+    const mockContext = 'Toto';
+    render(
+      <BrowserRouter>
+        <EndPointContext.Provider value={[mockContext]}>
+          <InterviewDeconnect />
+        </EndPointContext.Provider>
+      </BrowserRouter>
+    );
+
+    const title = screen.getByText('Toto');
+    expect(title).toBeInTheDocument();
+  });
+});
