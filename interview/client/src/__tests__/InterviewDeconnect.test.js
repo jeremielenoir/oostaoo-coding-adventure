@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
 import InterviewDeconnect from '../pages/InterviewDeconnect';
@@ -26,19 +26,6 @@ describe('InterviewDeconnect component', () => {
 
     const button = screen.getByText(/réintégrer la réunion/i);
     expect(button).toBeInTheDocument();
-  });
-
-  test('The button should work', () => {
-    render(
-      <BrowserRouter>
-        <InterviewDeconnect />
-      </BrowserRouter>
-    );
-
-    const button = screen.getByText(/réintégrer la réunion/i);
-    const mockFunction = jest.fn();
-    fireEvent.click(button);
-    expect(mockFunction).toHaveBeenCalledTimes(1);
   });
 
   test('The text passed with EndPointContext should appear on screen', () => {
