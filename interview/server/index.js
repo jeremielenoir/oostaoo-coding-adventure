@@ -1,7 +1,14 @@
-const app = require('express')();
-const http = require('http').createServer(app);
+const app = require('express');
+const https = require('https');
+const path = require('path');
+const fs = require('fs');
 
-const io = require('socket.io')(http);
+const httpsServer = https.createServer({
+  key: fs.readFileSync(path.join(__dirname, 'SSL_cert', 'key.pem')),
+  cert: fs.readFileSync(path.join(__dirname, 'SSL_cert', 'cert.pem')),
+}, app);
+
+const io = require('socket.io')(httpsServer);
 
 const moment = require('moment');
 const config = require('./config');
@@ -68,6 +75,6 @@ io.on('connection', (socket) => {
   });
 });
 
-http.listen(config.PORT, config.HOST, () => {
+httpsServer.listen(config.PORT, config.HOST, () => {
   console.log(`APP LISTENING ON http://${config.HOST}:${config.PORT}`);
 });
