@@ -8,17 +8,17 @@ import { EndPointContext } from '../useContext';
 
 import ChatSection from '../components/ChatSection';
 import CommandsBar from '../components/CommandsBar';
-import ParticipantsSection from '../components/ParticipantsSection';
+import UsersSection from '../components/UsersSection';
 
 function Interview({
   userVideo,
   partnerVideo,
   micToggle,
-  micOn
+  micOn,
   // groupToggle,
   // chatToggle,
 }) {
-  const [secondary] = useState(false);
+  const [secondary] = useState(false); // a state with no setter function associated ? why ?
   const inputRef = useRef();
   const [message, setMessage] = useState('');
   const [chat, setChat] = useState(false);
@@ -70,7 +70,9 @@ function Interview({
       <div className="container-video-chat">
         <div className="chat-video">
           <div className="partner-video">
-            <video controls autoPlay ref={partnerVideo}><track kind="captions" /></video>
+            <video controls autoPlay ref={partnerVideo}>
+              <track kind="captions" />
+            </video>
           </div>
           <div className="user-video">
             <video muted autoPlay ref={userVideo} />
@@ -89,7 +91,10 @@ function Interview({
           ''
         )}
         {participant ? (
-          <ParticipantsSection toggleParticipant={toggleParticipant} secondary={secondary} />
+          <UsersSection
+            toggleParticipant={toggleParticipant}
+            secondary={secondary}
+          />
         ) : (
           ''
         )}
@@ -106,7 +111,6 @@ function Interview({
         toggleMessage={toggleMessage}
         open={open}
       />
-
     </div>
   );
 }
