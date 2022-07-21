@@ -8,10 +8,10 @@ import SendIcon from '@material-ui/icons/Send';
 import TextField from '@material-ui/core/TextField';
 
 /* Custom components */
-import Message from './Message';
+import Message from '../Message/Message';
 
 /* Style */
-import '../assets/css/Interview.css';
+import './chatSection.css';
 
 /* Component definition */
 const ChatSection = ({

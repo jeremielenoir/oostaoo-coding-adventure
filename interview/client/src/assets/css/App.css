@@ -17,7 +17,7 @@
   height: 40px;
 }
 
-/* InterviewHome */
+/* HomePage */
 
 #main {
 }
@@ -39,8 +39,8 @@
   border-radius: 10px;
   width: 100% !important;
   height: auto !important;
-  min-width: 100%; 
-  min-height: 100%; 
+  min-width: 100%;
+  min-height: 100%;
 }
 
 #main .container-title {
@@ -55,9 +55,10 @@
   flex-wrap: wrap;
 }
 
-.options {}
+.options {
+}
 
-#main .wrapper-text{
+#main .wrapper-text {
   /* border: solid 2px; */
 }
 
@@ -77,7 +78,7 @@
 .telephone {
   display: flex;
   justify-content: center;
-  visibility:hidden;
+  visibility: hidden;
   color: #e34f26;
 }
 

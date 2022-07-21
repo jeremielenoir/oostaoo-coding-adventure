@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import { EndPointContext } from '../useContext';
-import '../assets/css/Interview.css';
+import { EndPointContext } from '../../useContext';
 
-function InterviewDeconnect() {
+/* MUI components */
+import Button from '@material-ui/core/Button';
+
+/* Style */
+import './loggedOffPage.css';
+
+function LoggedOffPage() {
   const msg = useContext(EndPointContext);
   return (
     <div className="container-disconnect">
@@ -20,4 +24,4 @@ function InterviewDeconnect() {
   );
 }
 
-export default InterviewDeconnect;
+export default LoggedOffPage;

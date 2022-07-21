@@ -1,0 +1,13 @@
+.messageText {
+  width: 50%;
+}
+
+.message {
+  display: flex;
+  justify-content: space-between;
+}
+
+.messageDate {
+  font-style: italic;
+  justify-content: flex-end;
+}
