@@ -2,14 +2,14 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
-import InterviewDeconnect from '../pages/InterviewDeconnect';
-import { EndPointContext } from '../useContext';
+import LoggedOffPage from './LoggedOffPage';
+import { EndPointContext } from '../../useContext';
 
-describe('InterviewDeconnect component', () => {
+describe('LoggedOffPage component', () => {
   test('Should render without crash', () => {
     render(
       <BrowserRouter>
-        <InterviewDeconnect />
+        <LoggedOffPage />
       </BrowserRouter>
     );
 
@@ -20,7 +20,7 @@ describe('InterviewDeconnect component', () => {
   test('The button should render correctly', () => {
     render(
       <BrowserRouter>
-        <InterviewDeconnect />
+        <LoggedOffPage />
       </BrowserRouter>
     );
 
@@ -33,7 +33,7 @@ describe('InterviewDeconnect component', () => {
     render(
       <BrowserRouter>
         <EndPointContext.Provider value={[mockContext]}>
-          <InterviewDeconnect />
+          <LoggedOffPage />
         </EndPointContext.Provider>
       </BrowserRouter>
     );
