@@ -25,7 +25,7 @@ const CommandsBar = ({
   handleClose,
   toggleParticipant,
   toggleMessage,
-  open
+  open,
 }) => (
   <footer className="container-interview-footer">
     <div className="icons">
@@ -35,17 +35,26 @@ const CommandsBar = ({
             className="mic"
             color="primary"
             onClick={() => micToggle()}
+            // next line for testing purpose
+            data-testid="micOffBtn"
           />
         ) : (
           <MicIcon
             className="mic"
             color="primary"
             onClick={() => micToggle()}
+            // next line for testing purpose
+            data-testid="micOnBtn"
           />
         )}
       </div>
       <div>
-        <CallEndIcon color="secondary" onClick={handleOpen} />
+        <CallEndIcon
+          color="secondary"
+          onClick={handleOpen}
+          // next line for testing purpose
+          data-testid="callEndButton"
+        />
         <Modal
           open={open}
           onClose={handleClose}
@@ -54,17 +63,17 @@ const CommandsBar = ({
         >
           <Box className="box-modal">
             <div className="header-modal">
-              <Button onClick={handleClose}>
+              <Button
+                onClick={handleClose}
+                // next line for test purpose
+                data-testid="closeModalBtn"
+              >
                 <CloseIcon id="close-icon" />
               </Button>
             </div>
 
             <div className="content-modal">
-              <Typography
-                id="modal-modal-title"
-                variant="h6"
-                component="h2"
-              >
+              <Typography id="modal-modal-title" variant="h6" component="h2">
                 Mettre fin à l'appel vidéo ?
               </Typography>
               <span className="text-modal">
@@ -89,12 +98,25 @@ const CommandsBar = ({
     </div>
 
     <div className="footer-left-button">
-      <button type="button" id="group-icon" className="footer-icons">
-        <GroupIcon onClick={toggleParticipant} />
-        {' '}
+      <button
+        type="button"
+        id="group-icon"
+        className="footer-icons"
+        // next line for test purpose
+        data-testid="group-icon"
+        onClick={toggleParticipant}
+      >
+        <GroupIcon />
       </button>
-      <button type="button" id="chat-icon" className="footer-icons">
-        <QuestionAnswerIcon onClick={toggleMessage} />
+      <button
+        type="button"
+        id="chat-icon"
+        className="footer-icons"
+        // next line for test purpose
+        data-testid="chat-icon"
+        onClick={toggleMessage}
+      >
+        <QuestionAnswerIcon />
       </button>
     </div>
   </footer>

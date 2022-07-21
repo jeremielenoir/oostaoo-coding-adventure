@@ -44,12 +44,12 @@ function App() {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <EndPointContext.Provider value={secretKey}>
-            <Route path="/rooms/:hash" component={Room} />
-            <Route
-              exact
-              path="/InterviewDeconnect"
-              component={InterviewDeconnect}
-            />
+              <Route path="/rooms/:hash" component={Room} />
+              <Route
+                exact
+                path="/InterviewDeconnect"
+                component={InterviewDeconnect}
+              />
           </EndPointContext.Provider>
         </BrowserRouter>
       </ThemeProvider>
