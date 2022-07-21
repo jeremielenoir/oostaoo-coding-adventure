@@ -8,8 +8,8 @@ import { EndPointContext } from './useContext';
 // import UrlPathLocation from './useContext';
 
 // import HomeInterview from "./routes/HomeInterview";
-import Room from './components/Room';
-import InterviewDeconnect from './pages/InterviewDeconnect';
+import Room from './components/Room/Room';
+import LoggedOffPage from './components/LoggedOffPage/LoggedOffPage';
 
 import './assets/css/App.css';
 
@@ -45,11 +45,7 @@ function App() {
         <BrowserRouter>
           <EndPointContext.Provider value={secretKey}>
             <Route path="/rooms/:hash" component={Room} />
-            <Route
-              exact
-              path="/InterviewDeconnect"
-              component={InterviewDeconnect}
-            />
+            <Route exact path="/InterviewDeconnect" component={LoggedOffPage} />
           </EndPointContext.Provider>
         </BrowserRouter>
       </ThemeProvider>

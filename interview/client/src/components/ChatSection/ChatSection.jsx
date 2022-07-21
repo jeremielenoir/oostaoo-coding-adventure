@@ -8,21 +8,28 @@ import SendIcon from '@material-ui/icons/Send';
 import TextField from '@material-ui/core/TextField';
 
 /* Custom components */
-import Message from './Message';
+import Message from '../Message/Message';
 
 /* Style */
-import '../assets/css/Interview.css';
+import './chatSection.css';
 
 /* Component definition */
-const ChatSection = ({ toggleMessage, messages, message, sendMessage, inputRef, onChangeMessage }) => (
+const ChatSection = ({
+  toggleMessage,
+  messages,
+  message,
+  sendMessage,
+  inputRef,
+  onChangeMessage,
+}) => (
   <div className="chat-text">
     <div className="title-chat-text">
       <span> Messages dans l'appel </span>
       <CloseIcon id="close-icon" onClick={toggleMessage} />
     </div>
     <div className="messagesList">
-      {messages.response.length > 0
-        && messages.response.map((message) => (
+      {messages.response.length > 0 &&
+        messages.response.map((message) => (
           <Message text={message.text} date={message.date} />
         ))}
     </div>

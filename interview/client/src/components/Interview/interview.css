@@ -1,0 +1,92 @@
+.interview-started {
+  display: flex;
+  min-height: 88.5vh;
+  height: auto;
+  flex-direction: column;
+  background-color: rgb(26, 25, 25);
+}
+
+/* VIDEO */
+
+.chat-video {
+  height: 80vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 10px;
+  width: 100%;
+}
+
+.chat-video > .icons {
+  display: none;
+}
+
+video {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 80vh;
+  min-width: 100%;
+  min-height: 100%;
+  border-radius: 5px;
+}
+
+.partner-video {
+  overflow: hidden;
+  width: 80%;
+  height: 90%;
+  grid-column: span 2;
+  margin: auto;
+  border-radius: 5px;
+}
+
+.user-video {
+  overflow: hidden;
+  width: 200px;
+  z-index: 2;
+  grid-column: 2;
+  grid-row: 2;
+  height: 150px;
+  position: relative;
+  top: -140px;
+  padding: 0 10px 10px 0;
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl {
+  width: 310px;
+}
+
+.container-video-chat {
+  flex-direction: row;
+  display: flex;
+  height: auto;
+}
+
+svg {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1240px) {
+  .interview-started {
+    min-height: 90vh;
+  }
+  .container-video-chat {
+    flex-direction: column;
+  }
+  .chat-video {
+    height: 80vh;
+  }
+  .partner-video {
+    width: 100%;
+  }
+  .chat-video > .icons {
+    display: flex;
+    justify-content: center;
+    grid-column: span 3;
+  }
+  .user-video {
+    top: -150px;
+  }
+}

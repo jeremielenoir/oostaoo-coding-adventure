@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import socketIOClient from 'socket.io-client';
+import { EndPointContext } from '../../useContext';
 
-import '../assets/css/Interview.css';
+/* Custom Components */
+import ChatSection from '../ChatSection/ChatSection';
+import CommandsBar from '../CommandsBar/CommandsBar';
+import UsersSection from '../UsersSection/UsersSection';
 
-import { EndPointContext } from '../useContext';
-
-import ChatSection from '../components/ChatSection';
-import CommandsBar from '../components/CommandsBar';
-import UsersSection from '../components/UsersSection';
+/* Style */
+import './interview.css';
 
 function Interview({
   userVideo,
@@ -33,7 +34,6 @@ function Interview({
   // const { endpoint } = messages;
   // const endpointPort = process.env.ENDPOINT;
   // console.log('endpointPort', endpointPort);
-  const [open, setOpen] = useState(false);
 
   const endpoint = useContext(EndPointContext);
   const socket = socketIOClient(endpoint);
@@ -62,8 +62,6 @@ function Interview({
     participant ? setParticipant(false) : setParticipant(true);
     chat && setChat(false);
   };
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
     <div className="interview-started">
@@ -105,11 +103,8 @@ function Interview({
         partnerVideo={partnerVideo}
         micToggle={micToggle}
         micOn={micOn}
-        handleOpen={handleOpen}
-        handleClose={handleClose}
         toggleParticipant={toggleParticipant}
         toggleMessage={toggleMessage}
-        open={open}
       />
     </div>
   );

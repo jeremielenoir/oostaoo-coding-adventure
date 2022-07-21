@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 // import PresentToAllIcon from '@material-ui/icons/PresentToAll';
 import PhoneForwardedIcon from '@material-ui/icons/PhoneForwarded';
 
-function InterviewHome({ userVideo, confirmMeeting }) {
+function HomePage({ userVideo, confirmMeeting }) {
   // const {userVideo, confirmMeeting} = props
   return (
     <div id="main">
@@ -43,9 +43,9 @@ function InterviewHome({ userVideo, confirmMeeting }) {
     </div>
   );
 }
-export default InterviewHome;
+export default HomePage;
 
-InterviewHome.propTypes = {
+HomePage.propTypes = {
   userVideo: PropTypes.object,
   confirmMeeting: PropTypes.func,
 };
