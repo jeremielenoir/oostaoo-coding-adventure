@@ -142,10 +142,6 @@ video {
   background-color: white;
 }
 
-.users-list {
-  color: #757575;
-}
-
 .title-users-room {
   display: flex;
   justify-content: space-between;
@@ -159,10 +155,6 @@ video {
 
 .title-users-room > #close-icon {
   color: #757575;
-}
-
-.users-list .MuiAvatar-colorDefault {
-  background-color: #18709f;
 }
 
 /* Footer */
@@ -274,7 +266,7 @@ a {
   text-decoration: none;
 }
 
-/* DISCONNECT PAGE */ 
+/* DISCONNECT PAGE */
 
 .container-disconnect {
   height: 100vh;
@@ -309,7 +301,7 @@ a {
   }
 
   .partner-video {
-    width:100%
+    width: 100%;
   }
 
   .chat-video > .icons {
@@ -338,5 +330,5 @@ a {
 
   .user-video {
     top: -150px;
-}
+  }
 }
