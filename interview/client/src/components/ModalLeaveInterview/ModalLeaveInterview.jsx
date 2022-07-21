@@ -41,7 +41,7 @@ function ModalLeaveInterview({ open, handleClose }) {
           <Button onClick={handleClose} id="cancel" variant="outlined">
             Annuler
           </Button>
-          <Link id="button-leave" to="/InterviewDeconnect">
+          <Link id="button-leave" to="/LoggedOffPage">
             <Button variant="contained" color="secondary">
               Quitter
             </Button>
