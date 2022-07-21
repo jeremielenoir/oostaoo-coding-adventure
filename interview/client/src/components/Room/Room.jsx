@@ -2,11 +2,11 @@ import React, { useCallback, useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 
-import LogoRoodeo from '../assets/logo_ROODEO.svg';
+import LogoRoodeo from '../../assets/images/logo_ROODEO.svg';
 // import { decryptHash } from '../services/decryptService';
 
-import InterviewHome from '../pages/InterviewHome';
-import Interview from '../pages/Interview';
+import HomePage from '../HomePage/HomePage';
+import Interview from '../Interview/Interview';
 
 function Room(props) {
   const [meetingConfirmation, setMeetingConfirmation] = useState(true);
@@ -41,34 +41,44 @@ function Room(props) {
     return peer;
   }, []);
 
-  const callUser = useCallback((userID) => {
-    peerRef.current = createPeer(userID);
-    userStream.current
-      .getTracks()
-      .forEach((track) => peerRef.current.addTrack(track, userStream.current));
-  }, [createPeer]);
+  const callUser = useCallback(
+    (userID) => {
+      peerRef.current = createPeer(userID);
+      userStream.current
+        .getTracks()
+        .forEach((track) =>
+          peerRef.current.addTrack(track, userStream.current)
+        );
+    },
+    [createPeer]
+  );
 
-  const handleReceiveCall = useCallback((incoming) => {
-    peerRef.current = createPeer();
-    const desc = new RTCSessionDescription(incoming.sdp);
-    peerRef.current
-      .setRemoteDescription(desc)
-      .then(() => {
-        userStream.current
-          .getTracks()
-          .forEach((track) => peerRef.current.addTrack(track, userStream.current));
-      })
-      .then(() => peerRef.current.createAnswer())
-      .then((answer) => peerRef.current.setLocalDescription(answer))
-      .then(() => {
-        const payload = {
-          target: incoming.caller,
-          caller: socketRef.current.id,
-          sdp: peerRef.current.localDescription,
-        };
-        socketRef.current.emit('answer', payload);
-      });
-  }, [createPeer]);
+  const handleReceiveCall = useCallback(
+    (incoming) => {
+      peerRef.current = createPeer();
+      const desc = new RTCSessionDescription(incoming.sdp);
+      peerRef.current
+        .setRemoteDescription(desc)
+        .then(() => {
+          userStream.current
+            .getTracks()
+            .forEach((track) =>
+              peerRef.current.addTrack(track, userStream.current)
+            );
+        })
+        .then(() => peerRef.current.createAnswer())
+        .then((answer) => peerRef.current.setLocalDescription(answer))
+        .then(() => {
+          const payload = {
+            target: incoming.caller,
+            caller: socketRef.current.id,
+            sdp: peerRef.current.localDescription,
+          };
+          socketRef.current.emit('answer', payload);
+        });
+    },
+    [createPeer]
+  );
 
   function handleAnswer(message) {
     const desc = new RTCSessionDescription(message.sdp);
@@ -150,11 +160,17 @@ function Room(props) {
 
         socketRef.current.on('ice-candidate', handleNewICECandidateMsg);
       });
-  }, [callUser, handleReceiveCall, meetingConfirmation, props.match.params.roomID]);
+  }, [
+    callUser,
+    handleReceiveCall,
+    meetingConfirmation,
+    props.match.params.roomID,
+  ]);
 
   function micToggle() {
     console.log('userstream.current : ', userStream.current);
-    userStream.current.getAudioTracks()[0].enabled = !userStream.current.getAudioTracks()[0].enabled;
+    userStream.current.getAudioTracks()[0].enabled =
+      !userStream.current.getAudioTracks()[0].enabled;
     setMicOn(!micOn);
   }
 
@@ -169,7 +185,7 @@ function Room(props) {
         <div className="email">{email}</div>
       </div>
       {meetingConfirmation ? (
-        <InterviewHome userVideo={userVideo} confirmMeeting={confirmMeeting} />
+        <HomePage userVideo={userVideo} confirmMeeting={confirmMeeting} />
       ) : (
         <Interview
           userVideo={userVideo}

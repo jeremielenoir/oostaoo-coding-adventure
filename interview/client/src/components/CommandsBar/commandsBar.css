@@ -1,0 +1,55 @@
+.container-interview-footer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: black;
+  align-items: center;
+}
+
+.container-interview-footer > .icons {
+  grid-column: 2/4;
+  margin: auto;
+  display: flex;
+}
+
+.container-interview-footer > .icons > div {
+  padding: 10px;
+}
+
+#chat-icon:focus,
+#group-icon:focus {
+  color: rgb(40 151 205);
+}
+
+#chat-icon:hover,
+#group-icon:hover {
+  color: rgb(204, 202, 202);
+  cursor: pointer;
+}
+
+#chat-icon,
+#group-icon {
+  background: none;
+  border: none;
+  color: rgb(160, 158, 158);
+}
+
+.footer-left-button {
+  display: flex;
+  justify-content: center;
+  color: #757575;
+  cursor: pointer;
+}
+
+.footer-left-button > .footer-icons {
+  padding: 10px;
+}
+
+@media screen and (max-width: 1240px) {
+  .container-interview-footer > .icons {
+    visibility: hidden;
+  }
+
+  .container-interview-footer {
+    display: none;
+  }
+}

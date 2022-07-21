@@ -1,19 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 /* Custom components */
-import UserLine from '../components/UserLine';
+import UserLine from '../UserLine/UserLine';
 
 /* MUI components */
 import List from '@material-ui/core/List';
 
 /* Style */
-import '../assets/css/users-list.css';
+import './users-list.css';
 
 function UsersList({ secondary }) {
   // Fake data to test required behaviour on initial letter for avatar.
   // Should be replaced with true data from the call with probably more informations.
-  let listOfUsers = ['Jérémie', 'Cécilia', 'Yannick'];
+  let listOfUsers = [
+    'Jérémie',
+    'Cécilia',
+    'Yannick',
+    'Camille',
+    'Julien',
+    'Benjamin',
+    'William',
+  ];
   //
 
   listOfUsers = listOfUsers.map((name) => (
@@ -26,5 +33,3 @@ function UsersList({ secondary }) {
   );
 }
 export default UsersList;
-
-UsersList.propTypes = {};

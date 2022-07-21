@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /* Custom components */
-import UsersList from '../components/UsersList';
+import UsersList from '../UsersList/UsersList';
 
 /* MUI components */
 import CloseIcon from '@material-ui/icons/Close';
 
 /* Style */
-import '../assets/css/Interview.css';
+import './usersSection.css';
 
 /* Component definition */
 const UsersSection = ({ toggleParticipant, secondary }) => (
@@ -18,7 +18,7 @@ const UsersSection = ({ toggleParticipant, secondary }) => (
       <CloseIcon id="close-icon" onClick={toggleParticipant} />
     </div>
     <div className="search-users" />
-    <UsersList secondary={secondary}></UsersList>
+    <UsersList secondary={secondary} />
   </div>
 );
 
