@@ -24,7 +24,7 @@ function UsersList({ secondary }) {
   //
 
   listOfUsers = listOfUsers.map((name, index) => (
-    <UserLine key={`${name_index}`} name={name} secondary={secondary} />
+    <UserLine key={`${name}_${index}`} name={name} secondary={secondary} />
   ));
   return (
     <div className="users-list">
