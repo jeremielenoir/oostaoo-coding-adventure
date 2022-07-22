@@ -23,8 +23,8 @@ function UsersList({ secondary }) {
   ];
   //
 
-  listOfUsers = listOfUsers.map((name) => (
-    <UserLine name={name} secondary={secondary} />
+  listOfUsers = listOfUsers.map((name, index) => (
+    <UserLine key={`${name_index}`} name={name} secondary={secondary} />
   ));
   return (
     <div className="users-list">
