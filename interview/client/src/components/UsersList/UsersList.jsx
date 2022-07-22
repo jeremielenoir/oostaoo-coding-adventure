@@ -23,7 +23,7 @@ function UsersList({ secondary }) {
   ];
   //
 
-  listOfUsers = listOfUsers.map((index, name) => (
+  listOfUsers = listOfUsers.map((name, index) => (
     <UserLine key={index} name={name} secondary={secondary} />
   ));
   return (
