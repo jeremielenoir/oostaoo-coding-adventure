@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 /* MUI components */
@@ -15,72 +15,82 @@ import './chatSection.css';
 
 /* Component definition */
 const ChatSection = ({
+  socket,
   toggleMessage,
   messages,
-  message,
-  sendMessage,
   inputRef,
   onChangeMessage,
-}) => (
-  <div className="chat-text">
-    <div className="title-chat-text">
-      <span> Messages dans l'appel </span>
-      <CloseIcon
-        id="close-icon"
-        onClick={toggleMessage}
-        role="button"
-        // next line for test purpose
-        data-testid="closeButton"
-      />
-    </div>
-    <div className="messagesList">
-      {messages.response.length > 0 &&
-        messages.response.map((message) => (
-          <Message
-            // added the missing key prop, mandatory in React with map() for better render management
-            key={Math.random()}
-            text={message.text}
-            date={message.date}
-          />
-        ))}
-    </div>
+}) => {
+  const [message, setMessage] = useState('');
 
-    <div className="messageWriting">
-      <form className="messageForm" onSubmit={(e) => sendMessage(e)}>
-        <TextField
-          required
-          id="message"
-          label="Message"
-          value={message}
-          ref={inputRef}
-          onChange={(e) => onChangeMessage(e)}
-          variant="outlined"
-          // next line is for testing purpose
-          inputProps={{ 'data-testid': 'textfield' }}
-        />
-        <Button
-          id="send"
-          size="small"
-          color="primary"
-          // we shouldn't have the sendMessage function here since it's already bound to the form via onSubmit
-          // should be a type='submit' button instead
-          onClick={(e) => sendMessage(e)}
-          style={{
-            maxWidth: '40px',
-            maxHeight: '56px',
-            minWidth: '40px',
-            minHeight: '56px',
-            marginLeft: '5px',
-          }}
-          // added a role button for screen readers and test purpose
+  const sendMessage = (e) => {
+    e.preventDefault();
+    if (message) {
+      socket.emit('newMessage', message);
+      setMessage('');
+    }
+  };
+  return (
+    <div className="chat-text">
+      <div className="title-chat-text">
+        <span> Messages dans l'appel </span>
+        <CloseIcon
+          id="close-icon"
+          onClick={toggleMessage}
           role="button"
-        >
-          <SendIcon />
-        </Button>
-      </form>
+          // next line for test purpose
+          data-testid="closeButton"
+        />
+      </div>
+      <div className="messagesList">
+        {messages.response.length > 0 &&
+          messages.response.map((message) => (
+            <Message
+              // added the missing key prop, mandatory in React with map() for better render management
+              key={Math.random()}
+              text={message.text}
+              date={message.date}
+            />
+          ))}
+      </div>
+
+      <div className="messageWriting">
+        <form className="messageForm" onSubmit={(e) => sendMessage(e)}>
+          <TextField
+            required
+            id="message"
+            label="Message"
+            value={message}
+            ref={inputRef}
+            onChange={(e) => onChangeMessage(e)}
+            variant="outlined"
+            // next line is for testing purpose
+            inputProps={{ 'data-testid': 'textfield' }}
+          />
+          <Button
+            id="send"
+            size="small"
+            color="primary"
+            // we shouldn't have the sendMessage function here since it's already bound to the form via onSubmit
+            // should be a type='submit' button instead
+            onClick={(e) => sendMessage(e)}
+            style={{
+              maxWidth: '40px',
+              maxHeight: '56px',
+              minWidth: '40px',
+              minHeight: '56px',
+              marginLeft: '5px',
+            }}
+            // added a role button for screen readers and test purpose
+            role="button"
+          >
+            <SendIcon />
+          </Button>
+        </form>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 /* Proptypes */
 ChatSection.propTypes = {

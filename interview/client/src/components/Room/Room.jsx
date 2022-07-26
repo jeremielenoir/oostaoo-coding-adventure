@@ -2,7 +2,6 @@ import React, { useCallback, useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 
-import LogoRoodeo from '../../assets/images/logo_ROODEO.svg';
 // import { decryptHash } from '../services/decryptService';
 
 import HomePage from '../HomePage/HomePage';
@@ -11,7 +10,7 @@ import Interview from '../Interview/Interview';
 function Room(props) {
   const [meetingConfirmation, setMeetingConfirmation] = useState(true);
   // const [nom, setNom] = useState('');
-  const [email] = useState('');
+  // const [email] = useState('');
   // const [interviewId, setInterviewId] = useState('');
   // const [date, setDate] = useState(null);
   const [micOn, setMicOn] = useState(true);
@@ -180,10 +179,6 @@ function Room(props) {
 
   return (
     <div className="home-interview">
-      <div className="nav">
-        <img src={LogoRoodeo} alt="Roodeo Logo" />
-        <div className="email">{email}</div>
-      </div>
       {meetingConfirmation ? (
         <HomePage userVideo={userVideo} confirmMeeting={confirmMeeting} />
       ) : (
