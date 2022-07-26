@@ -24,4 +24,20 @@ describe('UserLine component tests', () => {
 
     expect(userName).toBeInTheDocument();
   });
+
+  test('if no secondary props there should not be secondary text', () => {
+    render(<UserLine name="Toto" />);
+
+    const text = screen.queryByText(/secondary text/i);
+
+    expect(text).not.toBeInTheDocument();
+  });
+
+  test('if secondary props there should be secondary text', () => {
+    render(<UserLine name="Toto" secondary="Tutu" />);
+
+    const text = screen.queryByText(/secondary text/i);
+
+    expect(text).toBeInTheDocument();
+  });
 });

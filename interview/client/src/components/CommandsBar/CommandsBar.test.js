@@ -61,21 +61,6 @@ describe('CommandsBar component tests', () => {
     expect(button).toBeInTheDocument();
   });
 
-  // fonction handleOpen et state [opent, setOpen] disparus de Interview.jsx ?
-  test('clicking on the end call button should trigger the handleOpen function passed in props', () => {
-    const mockFunction = jest.fn();
-    render(
-      <BrowserRouter>
-        <CommandsBar handleOpen={mockFunction} />
-      </BrowserRouter>
-    );
-
-    const button = screen.getByTestId('callEndButton');
-    fireEvent.click(button);
-
-    expect(mockFunction).toHaveBeenCalledTimes(1);
-  });
-
   test('should have a toggle users button in the footer', () => {
     const { container } = render(<CommandsBar />);
 
