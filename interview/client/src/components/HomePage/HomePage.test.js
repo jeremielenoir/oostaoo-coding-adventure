@@ -1,15 +1,15 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import InterviewHome from '../pages/InterviewHome';
+import HomePage from './HomePage';
 
-describe('InterviewHome component', () => {
+describe('HomePage component', () => {
   test('should render without crash', () => {
-    render(<InterviewHome />);
+    render(<HomePage />);
   });
 
   test('should have a title', () => {
-    render(<InterviewHome />);
+    render(<HomePage />);
 
     const title = screen.getByText(/Prêt à participer ?/i);
 
@@ -17,7 +17,7 @@ describe('InterviewHome component', () => {
   });
 
   test('The 2 buttons should render correctly', () => {
-    render(<InterviewHome />);
+    render(<HomePage />);
 
     const buttonOne = screen.getByText(/commencer la réunion/i);
     const buttonTwo = screen.getByText(/Présenter/i);
@@ -28,7 +28,7 @@ describe('InterviewHome component', () => {
 
   test('The confirmMeeting function should be passed in props and work on button click', () => {
     const confirmMeeting = jest.fn();
-    render(<InterviewHome confirmMeeting={confirmMeeting} />);
+    render(<HomePage confirmMeeting={confirmMeeting} />);
 
     const button = screen.getByText(/commencer la réunion/i);
     fireEvent.click(button);

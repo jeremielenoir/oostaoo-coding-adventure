@@ -37,27 +37,45 @@ const CommandsBar = ({
               className="mic"
               color="primary"
               onClick={() => micToggle()}
+              data-testid="micOffBtn"
             />
           ) : (
             <MicIcon
               className="mic"
               color="primary"
               onClick={() => micToggle()}
+              data-testid="micOnBtn"
             />
           )}
         </div>
         <div>
-          <CallEndIcon color="secondary" onClick={handleOpen} />
+          <CallEndIcon
+            color="secondary"
+            onClick={handleOpen}
+            data-testid="callEndButton"
+          />
           <ModalLeaveInterview open={open} handleClose={handleClose} />
         </div>
       </div>
 
       <div className="footer-left-button">
-        <button type="button" id="group-icon" className="footer-icons">
-          <GroupIcon onClick={toggleParticipant} />{' '}
+        <button
+          type="button"
+          id="group-icon"
+          className="footer-icons"
+          onClick={toggleParticipant}
+          data-testid="group-icon"
+        >
+          <GroupIcon />
         </button>
-        <button type="button" id="chat-icon" className="footer-icons">
-          <QuestionAnswerIcon onClick={toggleMessage} />
+        <button
+          type="button"
+          id="chat-icon"
+          className="footer-icons"
+          onClick={toggleMessage}
+          data-testid="chat-icon"
+        >
+          <QuestionAnswerIcon />
         </button>
       </div>
     </footer>

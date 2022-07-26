@@ -22,7 +22,7 @@ function ModalLeaveInterview({ open, handleClose }) {
     >
       <Box className="box-modal">
         <div className="header-modal">
-          <Button onClick={handleClose}>
+          <Button onClick={handleClose} data-testid="closeModalBtn">
             <CloseIcon id="close-icon" />
           </Button>
         </div>

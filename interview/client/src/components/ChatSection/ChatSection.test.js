@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 
-import ChatSection from '../components/ChatSection';
+import ChatSection from './ChatSection';
 
 // some mock data for the component so it prevents the "Cannot read properties of undefined (reading 'response')" error
 const mockMessage = {
