@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Room from '../components/Room';
+import Room from './Room';
 
 describe('Room', () => {
   beforeEach(() => {

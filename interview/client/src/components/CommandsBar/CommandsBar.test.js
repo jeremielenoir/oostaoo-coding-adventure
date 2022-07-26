@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import CommandsBar from '../components/CommandsBar';
+import CommandsBar from './CommandsBar';
 
 describe('CommandsBar component tests', () => {
   test('should render correctly', () => {
@@ -50,106 +50,30 @@ describe('CommandsBar component tests', () => {
   });
 
   test('should have a button to end call', () => {
-    render(<CommandsBar />);
+    render(
+      <BrowserRouter>
+        <CommandsBar />
+      </BrowserRouter>
+    );
 
     const button = screen.getByTestId('callEndButton');
 
     expect(button).toBeInTheDocument();
   });
 
+  // fonction handleOpen et state [opent, setOpen] disparus de Interview.jsx ?
   test('clicking on the end call button should trigger the handleOpen function passed in props', () => {
     const mockFunction = jest.fn();
-    render(<CommandsBar handleOpen={mockFunction} />);
+    render(
+      <BrowserRouter>
+        <CommandsBar handleOpen={mockFunction} />
+      </BrowserRouter>
+    );
 
     const button = screen.getByTestId('callEndButton');
     fireEvent.click(button);
 
     expect(mockFunction).toHaveBeenCalledTimes(1);
-  });
-
-  test('the modal should not be open', () => {
-    render(<CommandsBar />);
-
-    const modalText = screen.queryByText(/Mettre fin à l'appel vidéo ?/i);
-
-    expect(modalText).not.toBeInTheDocument();
-  });
-
-  test('modal should be open if the open prop is true', () => {
-    // had to use BrowserRouter because the modal contains a <Link>
-    render(
-      <BrowserRouter>
-        <CommandsBar open />
-      </BrowserRouter>
-    );
-
-    const modalText = screen.getByText(/Mettre fin à l'appel vidéo ?/i);
-
-    expect(modalText).toBeInTheDocument();
-  });
-
-  test('modal should have a button to close itself', () => {
-    render(
-      <BrowserRouter>
-        <CommandsBar open />
-      </BrowserRouter>
-    );
-
-    const closeModalButton = screen.getByTestId('closeModalBtn');
-
-    expect(closeModalButton).toBeInTheDocument();
-  });
-
-  test('click on the close modal button should trigger the handleClose function passed in props', () => {
-    const mockFunction = jest.fn();
-    render(
-      <BrowserRouter>
-        <CommandsBar open handleClose={mockFunction} />
-      </BrowserRouter>
-    );
-
-    const closeModalButton = screen.getByTestId('closeModalBtn');
-    fireEvent.click(closeModalButton);
-
-    expect(mockFunction).toHaveBeenCalledTimes(1);
-  });
-
-  test('the modal should have a "annuler" button', () => {
-    render(
-      <BrowserRouter>
-        <CommandsBar open />
-      </BrowserRouter>
-    );
-
-    const cancelButton = screen.getByText(/annuler/i);
-
-    expect(cancelButton).toBeInTheDocument();
-  });
-
-  test('click on the "annuler" button should trigger the handleClose function passed in props', () => {
-    const mockFunction = jest.fn();
-    render(
-      <BrowserRouter>
-        <CommandsBar open handleClose={mockFunction} />
-      </BrowserRouter>
-    );
-
-    const cancelButton = screen.getByText(/annuler/i);
-    fireEvent.click(cancelButton);
-
-    expect(mockFunction).toHaveBeenCalledTimes(1);
-  });
-
-  test('should have a "quitter" button', () => {
-    render(
-      <BrowserRouter>
-        <CommandsBar open />
-      </BrowserRouter>
-    );
-
-    const quitButton = screen.getByText('Quitter');
-
-    expect(quitButton).toBeInTheDocument();
   });
 
   test('should have a toggle users button in the footer', () => {

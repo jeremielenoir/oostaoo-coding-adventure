@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Message from '../components/Message';
+import Message from './Message';
 
 describe('Message', () => {
   test('Should render without crash', () => {
