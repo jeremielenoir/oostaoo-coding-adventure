@@ -14,22 +14,22 @@ import Message from '../Message/Message';
 import './chatSection.css';
 
 /* Component definition */
-const ChatSection = ({
-  socket,
-  toggleMessage,
-  messages,
-  inputRef,
-  onChangeMessage,
-}) => {
-  const [message, setMessage] = useState('');
+const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
+  const [currentMessage, setCurrentMessage] = useState('');
+
+  const onChangeMessage = (e) => {
+    setCurrentMessage(e.target.value);
+  };
 
   const sendMessage = (e) => {
     e.preventDefault();
-    if (message) {
-      socket.emit('newMessage', message);
-      setMessage('');
+    if (currentMessage) {
+      socket.emit('newMessage', currentMessage);
+      setCurrentMessage('');
     }
   };
+
+  console.log('current message => ', currentMessage);
   return (
     <div className="chat-text">
       <div className="title-chat-text">
@@ -60,7 +60,7 @@ const ChatSection = ({
             required
             id="message"
             label="Message"
-            value={message}
+            value={currentMessage}
             ref={inputRef}
             onChange={(e) => onChangeMessage(e)}
             variant="outlined"
@@ -97,10 +97,7 @@ ChatSection.propTypes = {
   toggleMessage: PropTypes.func,
   // if there are multiple elements in the object, should use the PropTypes.shape property instead
   messages: PropTypes.object, // probably to change into array once we get the right response
-  message: PropTypes.string,
-  sendMessage: PropTypes.func,
   inputRef: PropTypes.func,
-  onChangeMessage: PropTypes.func,
 };
 
 export default ChatSection;
