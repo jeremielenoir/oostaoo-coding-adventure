@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import ChatSection from './ChatSection';
 
@@ -47,6 +47,14 @@ describe('ChatSection component tests', () => {
     fireEvent.change(textfield, { target: { value: 'there !' } });
 
     expect(mockFunction).toHaveBeenCalledTimes(2);
+  });
+
+  test('the text passed in message prop should appear in Textfield', () => {
+    render(<ChatSection messages={mockMessage} message="I am the senate !" />);
+
+    const textfield = screen.getByTestId('textfield');
+
+    expect(textfield.value).toBe('I am the senate !');
   });
 
   test('should have send message button', () => {

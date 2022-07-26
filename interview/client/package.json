@@ -68,7 +68,8 @@
   },
   "jest": {
     "coveragePathIgnorePatterns": [
-      "src/services/"
+      "src/services/",
+      "index.jsx"
     ]
   }
 }
