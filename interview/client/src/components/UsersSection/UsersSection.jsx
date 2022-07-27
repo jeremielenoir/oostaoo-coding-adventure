@@ -15,7 +15,11 @@ const UsersSection = ({ toggleParticipant, secondary }) => (
   <div className="users-room">
     <div className="title-users-room">
       <span> Participants </span>
-      <CloseIcon id="close-icon" onClick={toggleParticipant} />
+      <CloseIcon
+        id="close-icon"
+        onClick={toggleParticipant}
+        data-testid="toggleParticipantBtn"
+      />
     </div>
     <div className="search-users" />
     <UsersList secondary={secondary} />
