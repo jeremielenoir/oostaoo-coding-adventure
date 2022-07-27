@@ -21,7 +21,6 @@ function Interview({
 }) {
   const [secondary] = useState(false); // a state with no setter function associated ? why ?
   const inputRef = useRef();
-  const [message, setMessage] = useState('');
   const [chat, setChat] = useState(false);
   console.log('chat', chat);
   const [participant, setParticipant] = useState(false);
@@ -44,16 +43,6 @@ function Interview({
     socket.on('FromAPI', (data) => setMessages({ response: data }));
   }, [socket]);
 
-  const onChangeMessage = (e) => {
-    setMessage(e.target.value);
-  };
-  const sendMessage = (e) => {
-    e.preventDefault();
-    if (message) {
-      socket.emit('newMessage', message);
-      setMessage('');
-    }
-  };
   const toggleMessage = () => {
     chat ? setChat(false) : setChat(true);
     participant && setParticipant(false);
@@ -78,12 +67,10 @@ function Interview({
         </div>
         {chat ? (
           <ChatSection
+            socket={socket}
             toggleMessage={toggleMessage}
             messages={messages}
-            message={message}
-            sendMessage={sendMessage}
             inputRef={inputRef}
-            onChangeMessage={onChangeMessage}
           />
         ) : (
           ''

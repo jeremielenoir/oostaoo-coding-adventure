@@ -30,7 +30,7 @@ const CommandsBar = ({
 
   return (
     <footer className="container-interview-footer">
-      <div className="icons">
+      <div className="call-icons">
         <div id="icon-mic">
           {micOn ? (
             <MicOffIcon
@@ -58,15 +58,9 @@ const CommandsBar = ({
         </div>
       </div>
 
-      <div className="footer-left-button">
-        <button
-          type="button"
-          id="group-icon"
-          className="footer-icons"
-          onClick={toggleParticipant}
-          data-testid="group-icon"
-        >
-          <GroupIcon />
+      <div className="other-icons">
+        <button type="button" id="group-icon" className="footer-icons">
+          <GroupIcon onClick={toggleParticipant} />{' '}
         </button>
         <button
           type="button"

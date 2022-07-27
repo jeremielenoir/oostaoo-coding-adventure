@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 /* MUI components */
@@ -14,46 +14,54 @@ import Message from '../Message/Message';
 import './chatSection.css';
 
 /* Component definition */
-const ChatSection = ({
-  toggleMessage,
-  messages,
-  message,
-  sendMessage,
-  inputRef,
-  onChangeMessage,
-}) => (
-  <div className="chat-text">
-    <div className="title-chat-text">
-      <span> Messages dans l'appel </span>
-      <CloseIcon
-        id="close-icon"
-        onClick={toggleMessage}
-        role="button"
-        // next line for test purpose
-        data-testid="closeButton"
-      />
-    </div>
-    <div className="messagesList">
-      {messages.response.length > 0 &&
-        messages.response.map((message) => (
-          <Message
-            // added the missing key prop, mandatory in React with map() for better render management
-            key={Math.random()}
-            text={message.text}
-            date={message.date}
-          />
-        ))}
-    </div>
+const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
+  const [currentMessage, setCurrentMessage] = useState('');
 
-    <div className="messageWriting">
-      <form className="messageForm" onSubmit={(e) => sendMessage(e)}>
+  const onChangeMessage = (e) => {
+    setCurrentMessage(e.target.value);
+  };
+
+  const sendMessage = (e) => {
+    if (currentMessage) {
+      socket.emit('newMessage', currentMessage);
+      setCurrentMessage('');
+    }
+  };
+
+  console.log('current message => ', currentMessage);
+
+  return (
+    <div className="chat-text">
+      <div className="title-chat-text">
+        <span> Messages dans l'appel </span>
+        <CloseIcon
+          id="close-icon"
+          onClick={toggleMessage}
+          role="button"
+          // next line for test purpose
+          data-testid="closeButton"
+        />
+      </div>
+      <div className="messagesList">
+        {messages.response.length > 0 &&
+          messages.response.map((message) => (
+            <Message
+              // added the missing key prop, mandatory in React with map() for better render management
+              key={Math.random()}
+              text={message.text}
+              date={message.date}
+            />
+          ))}
+      </div>
+
+      <div className="messageWriting">
         <TextField
           required
           id="message"
           label="Message"
-          value={message}
+          value={currentMessage}
           ref={inputRef}
-          onChange={(e) => onChangeMessage(e)}
+          onChange={onChangeMessage}
           variant="outlined"
           // next line is for testing purpose
           inputProps={{ 'data-testid': 'textfield' }}
@@ -64,7 +72,7 @@ const ChatSection = ({
           color="primary"
           // we shouldn't have the sendMessage function here since it's already bound to the form via onSubmit
           // should be a type='submit' button instead
-          onClick={(e) => sendMessage(e)}
+          onClick={sendMessage}
           style={{
             maxWidth: '40px',
             maxHeight: '56px',
@@ -77,20 +85,17 @@ const ChatSection = ({
         >
           <SendIcon />
         </Button>
-      </form>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 /* Proptypes */
 ChatSection.propTypes = {
   toggleMessage: PropTypes.func,
   // if there are multiple elements in the object, should use the PropTypes.shape property instead
   messages: PropTypes.object, // probably to change into array once we get the right response
-  message: PropTypes.string,
-  sendMessage: PropTypes.func,
   inputRef: PropTypes.func,
-  onChangeMessage: PropTypes.func,
 };
 
 export default ChatSection;

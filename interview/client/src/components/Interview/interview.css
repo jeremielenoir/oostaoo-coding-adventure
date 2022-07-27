@@ -46,7 +46,7 @@ video {
   grid-row: 2;
   height: 150px;
   position: relative;
-  top: -140px;
+  top: -150px;
   padding: 0 10px 10px 0;
 }
 
@@ -72,9 +72,6 @@ a {
   .interview-started {
     min-height: 90vh;
   }
-  .container-video-chat {
-    flex-direction: column;
-  }
   .chat-video {
     height: 80vh;
   }
@@ -85,8 +82,5 @@ a {
     display: flex;
     justify-content: center;
     grid-column: span 3;
-  }
-  .user-video {
-    top: -150px;
   }
 }

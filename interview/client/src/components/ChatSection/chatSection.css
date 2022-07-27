@@ -43,11 +43,6 @@
   padding-bottom: 10px;
 }
 
-.messageForm {
-  display: flex;
-  align-items: center;
-}
-
 /* input text chat */
 .MuiInputBase-root {
   width: 400px;
