@@ -30,6 +30,7 @@ const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
   };
 
   console.log('current message => ', currentMessage);
+
   return (
     <div className="chat-text">
       <div className="title-chat-text">
