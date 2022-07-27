@@ -3,13 +3,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40%;
+  width: 400px;
+  min-width: 300px;
   height: auto;
   box-shadow: 2px 3px 13px 5px rgba(90, 90, 90, 0.47);
   background: white;
   border-radius: 5px;
   padding: 10px;
   box-sizing: border-box;
+  font-size: 0.9em;
 }
 
 .header-modal {
@@ -20,10 +22,12 @@
 
 .header-modal #close-icon {
   color: #a7a7a7;
+  margin: 0;
 }
 
 .content-modal {
   text-align: center;
+  font-size: 1em;
 }
 
 .text-modal {
@@ -41,11 +45,30 @@
 }
 
 .box-modal button {
-  margin: 0 10px;
   font-weight: 500;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.box-modal svg {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.footer-modal button {
+  margin: 0 10px;
 }
 
 #modal-modal-title {
   text-align: center;
   color: #2c2c2c;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 400px) {
+  .box-modal {
+    width: 80%;
+    min-width: 300px;
+  }
 }

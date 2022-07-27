@@ -17,7 +17,7 @@ function LoggedOffPage() {
       <div className="buttons">
         {/* <Link to="/rooms/:hash"> */}
         <Link to="/rooms/2">
-          <Button variant="outlined">Réintégrer la réunion</Button>
+          <Button variant="outlined">Retour vers l'accueil</Button>
         </Link>
       </div>
     </div>

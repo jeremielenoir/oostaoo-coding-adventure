@@ -1,18 +1,19 @@
 .container-interview-footer {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  min-width: 400px;
   background: black;
   align-items: center;
 }
 
-.container-interview-footer > .icons {
-  grid-column: 2/4;
-  margin: auto;
+.container-interview-footer > .other-icons {
+  grid-column: 3/4;
   display: flex;
+  justify-content: center;
 }
 
 .container-interview-footer > .icons > div {
-  padding: 10px;
+  /*padding: 10px;*/
 }
 
 #chat-icon:focus,
@@ -33,23 +34,44 @@
   color: rgb(160, 158, 158);
 }
 
-.footer-left-button {
+.other-icons {
   display: flex;
   justify-content: center;
   color: #757575;
   cursor: pointer;
 }
 
-.footer-left-button > .footer-icons {
+.other-icons > .footer-icons {
   padding: 10px;
 }
 
+.call-icons {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  column-gap: 1rem;
+}
+
+.icon-mic {
+  color: red;
+}
+
 @media screen and (max-width: 1240px) {
-  .container-interview-footer > .icons {
-    visibility: hidden;
+  .container-interview-footer {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .container-interview-footer {
-    display: none;
+  .icon-mic {
+    grid-column: 1/2;
+  }
+
+  .container-interview-footer > .other-icons {
+    grid-row: 1/1;
+    grid-column: 2/2;
+  }
+
+  .container-interview-footer > .icons {
+    grid-row: 1/1;
+    grid-column: 2/2;
   }
 }
