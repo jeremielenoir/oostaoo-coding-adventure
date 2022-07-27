@@ -22,7 +22,6 @@ const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
   };
 
   const sendMessage = (e) => {
-    e.preventDefault();
     if (currentMessage) {
       socket.emit('newMessage', currentMessage);
       setCurrentMessage('');
@@ -56,38 +55,36 @@ const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
       </div>
 
       <div className="messageWriting">
-        <form className="messageForm" onSubmit={(e) => sendMessage(e)}>
-          <TextField
-            required
-            id="message"
-            label="Message"
-            value={currentMessage}
-            ref={inputRef}
-            onChange={(e) => onChangeMessage(e)}
-            variant="outlined"
-            // next line is for testing purpose
-            inputProps={{ 'data-testid': 'textfield' }}
-          />
-          <Button
-            id="send"
-            size="small"
-            color="primary"
-            // we shouldn't have the sendMessage function here since it's already bound to the form via onSubmit
-            // should be a type='submit' button instead
-            onClick={(e) => sendMessage(e)}
-            style={{
-              maxWidth: '40px',
-              maxHeight: '56px',
-              minWidth: '40px',
-              minHeight: '56px',
-              marginLeft: '5px',
-            }}
-            // added a role button for screen readers and test purpose
-            role="button"
-          >
-            <SendIcon />
-          </Button>
-        </form>
+        <TextField
+          required
+          id="message"
+          label="Message"
+          value={currentMessage}
+          ref={inputRef}
+          onChange={onChangeMessage}
+          variant="outlined"
+          // next line is for testing purpose
+          inputProps={{ 'data-testid': 'textfield' }}
+        />
+        <Button
+          id="send"
+          size="small"
+          color="primary"
+          // we shouldn't have the sendMessage function here since it's already bound to the form via onSubmit
+          // should be a type='submit' button instead
+          onClick={sendMessage}
+          style={{
+            maxWidth: '40px',
+            maxHeight: '56px',
+            minWidth: '40px',
+            minHeight: '56px',
+            marginLeft: '5px',
+          }}
+          // added a role button for screen readers and test purpose
+          role="button"
+        >
+          <SendIcon />
+        </Button>
       </div>
     </div>
   );
