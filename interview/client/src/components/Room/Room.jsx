@@ -140,9 +140,14 @@ function Room(props) {
 
         userVideo.current.srcObject = stream;
         userStream.current = stream;
+        console.log('SOCKET SERVER', process.env.REACT_APP_SOCKET_SERVER);
+        socketRef.current = io(process.env.REACT_APP_SOCKET_SERVER);
+        
+        socketRef.current.on('connect', () => {
+          console.log(socketRef.current.connected); // true
+        });
 
-        socketRef.current = io.connect('/');
-        socketRef.current.emit('join room', props.match.params.roomID);
+        socketRef.current.emit('join room', 123/*props.match.params.roomID*/);
 
         socketRef.current.on('other user', (userID) => {
           callUser(userID);
