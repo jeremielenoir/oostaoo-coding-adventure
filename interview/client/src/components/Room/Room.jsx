@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 // import { decryptHash } from '../services/decryptService';
 import HomePage from '../HomePage/HomePage';
 import Interview from '../Interview/Interview';
+import socket from 'socket.io-client/lib/socket';
 
 // socket variables
 import dico from '../../common/dico';

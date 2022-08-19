@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
 
 import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -7,9 +6,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import { EndPointContext } from './useContext';
 // import UrlPathLocation from './useContext';
 
-// import HomeInterview from "./routes/HomeInterview";
-import Room from './components/Room/Room';
-import LoggedOffPage from './components/LoggedOffPage/LoggedOffPage';
+import Routes from './common/routes';
 
 import './assets/css/App.css';
 
@@ -42,12 +39,9 @@ function App() {
       <h1>{secretKey}</h1>
       <h1>{node}</h1>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <EndPointContext.Provider value={secretKey}>
-            <Route path="/rooms/:hash" component={Room} />
-            <Route exact path="/LoggedOffPage" component={LoggedOffPage} />
-          </EndPointContext.Provider>
-        </BrowserRouter>
+      <EndPointContext.Provider value={secretKey}>
+        <Routes />
+      </EndPointContext.Provider>
       </ThemeProvider>
     </div>
   );
