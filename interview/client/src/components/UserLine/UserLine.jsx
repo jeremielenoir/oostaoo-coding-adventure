@@ -11,8 +11,8 @@ function UserLine({ name, secondary }) {
   // this function gives a random color for every user, but it changes everytime the component is mounted.
   // it should be called higher in the tree.
   const randomColor = () => {
-    let hex = Math.floor(Math.random() * 0xffffff);
-    let color = `#${hex.toString(16)}`;
+    const hex = Math.floor(Math.random() * 0xffffff);
+    const color = `#${hex.toString(16)}`;
     return color;
   };
   return (
@@ -31,4 +31,7 @@ function UserLine({ name, secondary }) {
 }
 export default React.memo(UserLine);
 
-UserLine.propTypes = {};
+UserLine.propTypes = {
+  name: PropTypes.string,
+  secondary: PropTypes.string,
+};

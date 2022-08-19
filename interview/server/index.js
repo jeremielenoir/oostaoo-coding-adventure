@@ -52,7 +52,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('join room', (roomID) => {
-    // console.log(socket);
+    console.log('user join ROOM', roomID);
     if (rooms[roomID]) {
       rooms[roomID].push(socket.id);
     } else {

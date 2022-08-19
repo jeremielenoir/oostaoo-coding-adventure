@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { EndPointContext } from '../../useContext';
-
 /* MUI components */
 import Button from '@material-ui/core/Button';
+
+import { EndPointContext } from '../../useContext';
 
 /* Style */
 import './loggedOffPage.css';

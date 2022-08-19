@@ -13,6 +13,11 @@ import Message from '../Message/Message';
 /* Style */
 import './chatSection.css';
 
+// Socket variables
+import dico from '../../common/dico';
+
+const { SOCKET_NEW_MESSAGE } = dico;
+
 /* Component definition */
 const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
   const [currentMessage, setCurrentMessage] = useState('');
@@ -21,14 +26,14 @@ const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
     setCurrentMessage(e.target.value);
   };
 
-  const sendMessage = (e) => {
+  const sendMessage = () => {
     if (currentMessage) {
-      socket.emit('newMessage', currentMessage);
+      socket.emit(SOCKET_NEW_MESSAGE, currentMessage);
       setCurrentMessage('');
     }
   };
 
-  console.log('current message => ', currentMessage);
+  // console.log('current message => ', currentMessage);
 
   return (
     <div className="chat-text">
@@ -43,6 +48,7 @@ const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
         />
       </div>
       <div className="messagesList">
+        {/* eslint-disable-next-line */}
         {messages.response.length > 0 &&
           messages.response.map((message) => (
             <Message
@@ -96,6 +102,7 @@ ChatSection.propTypes = {
   // if there are multiple elements in the object, should use the PropTypes.shape property instead
   messages: PropTypes.object, // probably to change into array once we get the right response
   inputRef: PropTypes.func,
+  socket: PropTypes.object,
 };
 
 export default ChatSection;

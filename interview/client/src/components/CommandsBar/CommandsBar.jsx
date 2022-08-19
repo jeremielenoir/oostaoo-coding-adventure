@@ -60,7 +60,7 @@ const CommandsBar = ({
 
       <div className="other-icons">
         <button type="button" id="group-icon" className="footer-icons">
-          <GroupIcon onClick={toggleParticipant} />{' '}
+          <GroupIcon onClick={toggleParticipant} />
         </button>
         <button
           type="button"

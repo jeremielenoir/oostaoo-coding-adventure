@@ -1,14 +1,28 @@
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import io from 'socket.io-client';
-
 // import { decryptHash } from '../services/decryptService';
-
 import HomePage from '../HomePage/HomePage';
 import Interview from '../Interview/Interview';
 import socket from 'socket.io-client/lib/socket';
 
+// socket variables
+import dico from '../../common/dico';
+
+const {
+  SOCKET_ANSWER,
+  SOCKET_CONNECT,
+  SOCKET_ICE_CANDIDATE,
+  SOCKET_JOIN_ROOM,
+  SOCKET_OFFER,
+  SOCKET_USER_JOINED,
+  SOCKET_OTHER_USER,
+} = dico;
+
 function Room(props) {
+  console.log(props);
+  const hash = props.match.params.hash;
+
   const [meetingConfirmation, setMeetingConfirmation] = useState(true);
   // const [nom, setNom] = useState('');
   // const [email] = useState('');
@@ -46,8 +60,10 @@ function Room(props) {
       peerRef.current = createPeer(userID);
       userStream.current
         .getTracks()
-        .forEach((track) =>
-          peerRef.current.addTrack(track, userStream.current)
+        // eslint-disable-next-line
+        .forEach(
+          (track) => peerRef.current.addTrack(track, userStream.current)
+          // eslint-disable-next-line
         );
     },
     [createPeer]
@@ -60,11 +76,10 @@ function Room(props) {
       peerRef.current
         .setRemoteDescription(desc)
         .then(() => {
-          userStream.current
-            .getTracks()
-            .forEach((track) =>
-              peerRef.current.addTrack(track, userStream.current)
-            );
+          userStream.current.getTracks().forEach(
+            (track) => peerRef.current.addTrack(track, userStream.current)
+            // eslint-disable-next-line
+          );
         })
         .then(() => peerRef.current.createAnswer())
         .then((answer) => peerRef.current.setLocalDescription(answer))
@@ -74,7 +89,7 @@ function Room(props) {
             caller: socketRef.current.id,
             sdp: peerRef.current.localDescription,
           };
-          socketRef.current.emit('answer', payload);
+          socketRef.current.emit(SOCKET_ANSWER, payload);
         });
     },
     [createPeer]
@@ -97,7 +112,7 @@ function Room(props) {
         target: otherUser.current,
         candidate: e.candidate,
       };
-      socketRef.current.emit('ice-candidate', payload);
+      socketRef.current.emit(SOCKET_ICE_CANDIDATE, payload);
     }
   }
 
@@ -119,7 +134,7 @@ function Room(props) {
           caller: socketRef.current.id,
           sdp: peerRef.current.localDescription,
         };
-        socketRef.current.emit('offer', payload);
+        socketRef.current.emit(SOCKET_OFFER, payload);
       })
       .catch((e) => console.log(e));
   }
@@ -144,32 +159,28 @@ function Room(props) {
         console.log('SOCKET SERVER', process.env.REACT_APP_SOCKET_SERVER);
         socketRef.current = io(process.env.REACT_APP_SOCKET_SERVER);
 
-        socketRef.current.on('connect', () => {
+        socketRef.current.on(SOCKET_CONNECT, () => {
           console.log(socketRef.current.connected); // true
         });
-        socketRef.current.emit('join room', 123/*props.match.params.roomID*/);
-        
-        socketRef.current.on('other user', (userID) => {
+
+        socketRef.current.emit(SOCKET_JOIN_ROOM, Number(hash));
+
+        socketRef.current.on(SOCKET_OTHER_USER, (userID) => {
           callUser(userID);
           otherUser.current = userID;
         });
 
-        socketRef.current.on('user joined', (userID) => {
+        socketRef.current.on(SOCKET_USER_JOINED, (userID) => {
           otherUser.current = userID;
         });
 
-        socketRef.current.on('offer', handleReceiveCall);
+        socketRef.current.on(SOCKET_OFFER, handleReceiveCall);
 
-        socketRef.current.on('answer', handleAnswer);
+        socketRef.current.on(SOCKET_ANSWER, handleAnswer);
 
-        socketRef.current.on('ice-candidate', handleNewICECandidateMsg);
+        socketRef.current.on(SOCKET_ICE_CANDIDATE, handleNewICECandidateMsg);
       });
-  }, [
-    callUser,
-    handleReceiveCall,
-    meetingConfirmation,
-    props.match.params.roomID,
-  ]);
+  }, [callUser, handleReceiveCall, meetingConfirmation, hash]);
 
   function micToggle() {
     console.log('userstream.current : ', userStream.current);

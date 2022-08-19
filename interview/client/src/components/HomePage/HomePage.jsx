@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import LogoRoodeo from '../../assets/images/logo_ROODEO.svg';
-import PhoneForwardedIcon from '@material-ui/icons/PhoneForwarded';
+// import PhoneForwardedIcon from '@material-ui/icons/PhoneForwarded';
 
 /* Style */
 import './homepage.css';

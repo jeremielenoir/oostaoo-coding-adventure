@@ -1,10 +1,11 @@
 import React from 'react';
-
-/* Custom components */
-import UserLine from '../UserLine/UserLine';
+import PropTypes from 'prop-types';
 
 /* MUI components */
 import List from '@material-ui/core/List';
+
+/* Custom components */
+import UserLine from '../UserLine/UserLine';
 
 /* Style */
 import './users-list.css';
@@ -33,3 +34,7 @@ function UsersList({ secondary }) {
   );
 }
 export default UsersList;
+
+UsersList.propTypes = {
+  secondary: PropTypes.string,
+};
