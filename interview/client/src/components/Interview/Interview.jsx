@@ -11,6 +11,11 @@ import UsersSection from '../UsersSection/UsersSection';
 /* Style */
 import './interview.css';
 
+// Socket variables
+import dico from '../../common/dico';
+
+const { SOCKET_FROMAPI } = dico;
+
 function Interview({
   userVideo,
   partnerVideo,
@@ -22,8 +27,10 @@ function Interview({
   const [secondary] = useState(false); // a state with no setter function associated ? why ?
   const inputRef = useRef();
   const [chat, setChat] = useState(false);
+  // eslint-disable-next-line
   console.log('chat', chat);
   const [participant, setParticipant] = useState(false);
+  // eslint-disable-next-line
   console.log('participant', participant);
 
   const [messages, setMessages] = useState({
@@ -36,11 +43,12 @@ function Interview({
 
   const endpoint = useContext(EndPointContext);
   const socket = socketIOClient(endpoint);
+  // eslint-disable-next-line
   console.log('endpoint', endpoint);
 
   useEffect(() => {
     // inputRef.current.focus();
-    socket.on('FromAPI', (data) => setMessages({ response: data }));
+    socket.on(SOCKET_FROMAPI, (data) => setMessages({ response: data }));
   }, [socket]);
 
   const toggleMessage = () => {

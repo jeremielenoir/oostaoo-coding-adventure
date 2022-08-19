@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/* Custom components */
-import UsersList from '../UsersList/UsersList';
-
 /* MUI components */
 import CloseIcon from '@material-ui/icons/Close';
+
+/* Custom components */
+import UsersList from '../UsersList/UsersList';
 
 /* Style */
 import './usersSection.css';

@@ -33,7 +33,7 @@ const theme = createTheme({
 function App() {
   const secretKey = process.env.REACT_APP_REST_API_LOCATION;
   const node = process.env.REACT_APP_ORIGIN_FILE;
-  console.log(process.env);
+  // console.log(process.env);
 
   // const [locationPath, setLocationPath] = useState(secretKey);
 
