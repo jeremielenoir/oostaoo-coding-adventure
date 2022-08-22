@@ -6,9 +6,9 @@ import LogoRoodeo from '../../assets/images/logo_ROODEO.svg';
 // import PhoneForwardedIcon from '@material-ui/icons/PhoneForwarded';
 
 /* Style */
-import './homepage.css';
+import './Preview.css';
 
-function HomePage({ userVideo, confirmMeeting }) {
+function Preview({ userVideo, confirmMeeting }) {
   return (
     <>
       <div className="nav">
@@ -54,9 +54,9 @@ function HomePage({ userVideo, confirmMeeting }) {
     </>
   );
 }
-export default HomePage;
+export default Preview;
 
-HomePage.propTypes = {
+Preview.propTypes = {
   userVideo: PropTypes.object,
   confirmMeeting: PropTypes.func,
 };

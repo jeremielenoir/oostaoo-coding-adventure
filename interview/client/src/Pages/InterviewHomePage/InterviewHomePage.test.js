@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Room from './Room';
+import InterviewHomePage from './InterviewHomePage';
 
-describe('Room', () => {
+describe('InterviewHomePage', () => {
   beforeEach(() => {
     const props = {
       match: {
@@ -21,7 +21,7 @@ describe('Room', () => {
 
     // eslint-disable-line
     // disabling the "spreading props is forbidden" eslint error
-    render(<Room {...props} hash="2" />);
+    render(<InterviewHomePage {...props} hash="2" />);
   });
 
   // ESLint problem next line with "Parsing error: Unexpected token =>" for arrow function
