@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 // import { decryptHash } from '../services/decryptService';
 import Preview from '../../components/Preview/Preview';
 import Interview from '../../components/Interview/Interview';
-import socket from 'socket.io-client/lib/socket';
+// import socket from 'socket.io-client/lib/socket';
 
 // socket variables
 import dico from '../../common/dico';
@@ -19,9 +19,8 @@ const {
   SOCKET_OTHER_USER,
 } = dico;
 
-function InterviewHomePage(props) {
-  console.log(props);
-  const hash = props.match.params.hash;
+function InterviewHomePage({ match }) {
+  const hash = match.params.hash;
 
   const [meetingConfirmation, setMeetingConfirmation] = useState(true);
   // const [nom, setNom] = useState('');
@@ -184,6 +183,7 @@ function InterviewHomePage(props) {
 
   function micToggle() {
     console.log('userstream.current : ', userStream.current);
+    // eslint-disable-next-line
     userStream.current.getAudioTracks()[0].enabled =
       !userStream.current.getAudioTracks()[0].enabled;
     setMicOn(!micOn);
