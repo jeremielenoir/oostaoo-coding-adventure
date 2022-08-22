@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 // import { decryptHash } from '../services/decryptService';
 import Preview from '../../components/Preview/Preview';
 import Interview from '../../components/Interview/Interview';
-import socket from 'socket.io-client/lib/socket';
+// import socket from 'socket.io-client/lib/socket';
 
 // socket variables
 import dico from '../../common/dico';
@@ -19,9 +19,8 @@ const {
   SOCKET_OTHER_USER,
 } = dico;
 
-function InterviewHomePage(props) {
-  console.log(props);
-  const hash = props.match.params.hash;
+function InterviewHomePage({ match }) {
+  const hash = match.params.hash;
 
   const [meetingConfirmation, setMeetingConfirmation] = useState(true);
   // const [nom, setNom] = useState('');
@@ -97,13 +96,13 @@ function InterviewHomePage(props) {
 
   function handleAnswer(message) {
     const desc = new RTCSessionDescription(message.sdp);
-    peerRef.current.setRemoteDescription(desc).catch((e) => console.log(e));
+    peerRef.current.setRemoteDescription(desc).catch((e) => console.error(e));
   }
 
   function handleNewICECandidateMsg(incoming) {
     const candidate = new RTCIceCandidate(incoming);
 
-    peerRef.current.addIceCandidate(candidate).catch((e) => console.log(e));
+    peerRef.current.addIceCandidate(candidate).catch((e) => console.error(e));
   }
 
   function handleICECandidateEvent(e) {
@@ -136,7 +135,7 @@ function InterviewHomePage(props) {
         };
         socketRef.current.emit(SOCKET_OFFER, payload);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.error(e));
   }
 
   useEffect(() => {
@@ -152,15 +151,15 @@ function InterviewHomePage(props) {
     navigator.mediaDevices
       .getUserMedia({ audio: true, video: true })
       .then((stream) => {
-        console.log('stream', stream, 'userVideo', userVideo);
+        // console.log('stream', stream, 'userVideo', userVideo);
 
         userVideo.current.srcObject = stream;
         userStream.current = stream;
-        console.log('SOCKET SERVER', process.env.REACT_APP_SOCKET_SERVER);
+        // console.log('SOCKET SERVER', process.env.REACT_APP_SOCKET_SERVER);
         socketRef.current = io(process.env.REACT_APP_SOCKET_SERVER);
 
         socketRef.current.on(SOCKET_CONNECT, () => {
-          console.log(socketRef.current.connected); // true
+          console.warn(socketRef.current.connected); // true
         });
 
         socketRef.current.emit(SOCKET_JOIN_ROOM, Number(hash));
@@ -183,7 +182,8 @@ function InterviewHomePage(props) {
   }, [callUser, handleReceiveCall, meetingConfirmation, hash]);
 
   function micToggle() {
-    console.log('userstream.current : ', userStream.current);
+    // console.log('userstream.current : ', userStream.current);
+    // eslint-disable-next-line
     userStream.current.getAudioTracks()[0].enabled =
       !userStream.current.getAudioTracks()[0].enabled;
     setMicOn(!micOn);

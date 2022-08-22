@@ -39,9 +39,9 @@ function App() {
       <h1>{secretKey}</h1>
       <h1>{node}</h1>
       <ThemeProvider theme={theme}>
-      <EndPointContext.Provider value={secretKey}>
-        <Routes />
-      </EndPointContext.Provider>
+        <EndPointContext.Provider value={secretKey}>
+          <Routes />
+        </EndPointContext.Provider>
       </ThemeProvider>
     </div>
   );
