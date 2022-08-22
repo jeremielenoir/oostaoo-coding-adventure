@@ -2,8 +2,8 @@ import React, { useCallback, useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 // import { decryptHash } from '../services/decryptService';
-import HomePage from '../HomePage/HomePage';
-import Interview from '../Interview/Interview';
+import Preview from '../../components/Preview/Preview';
+import Interview from '../../components/Interview/Interview';
 import socket from 'socket.io-client/lib/socket';
 
 // socket variables
@@ -19,7 +19,7 @@ const {
   SOCKET_OTHER_USER,
 } = dico;
 
-function Room(props) {
+function InterviewHomePage(props) {
   console.log(props);
   const hash = props.match.params.hash;
 
@@ -196,7 +196,7 @@ function Room(props) {
   return (
     <div className="home-interview">
       {meetingConfirmation ? (
-        <HomePage userVideo={userVideo} confirmMeeting={confirmMeeting} />
+        <Preview userVideo={userVideo} confirmMeeting={confirmMeeting} />
       ) : (
         <Interview
           userVideo={userVideo}
@@ -210,6 +210,6 @@ function Room(props) {
   );
 }
 
-Room.propTypes = { match: PropTypes.object };
+InterviewHomePage.propTypes = { match: PropTypes.object };
 
-export default Room;
+export default InterviewHomePage;
