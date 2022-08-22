@@ -39,11 +39,11 @@ function InterviewHomePage(props) {
   const createPeer = useCallback((userID) => {
     const peer = new RTCPeerConnection({
       iceServers: [
-        { urls: 'stun:stun.stunprotocol.org' },
+        { urls: process.env.REACT_APP_ICE_URL_ONE },
         {
-          urls: 'turn:numb.viagenie.ca',
-          credential: 'muazkh',
-          username: 'webrtc@live.com',
+          urls: process.env.REACT_APP_ICE_URL_TWO,
+          credential: process.env.REACT_APP_ICE_CREDENTIAL,
+          username: process.env.REACT_APP_ICE_USERNAME,
         },
       ],
     });
