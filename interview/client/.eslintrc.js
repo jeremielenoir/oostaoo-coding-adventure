@@ -31,7 +31,7 @@ module.exports = {
     'no-undef': 1,
     'comma-dangle': 0,
     'prefer-const': 1,
-    'no-console': 1,
+    'no-console': ['error', { allow: ['error', 'warn'] }],
     'no-use-before-define': 1,
     'prefer-destructuring': 0,
     'no-shadow': 0,
