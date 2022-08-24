@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
   io.emit('FromApi', messages);
 
   socket.on('newMessage', (message) => {
-    if (messages.length === 16) {
+    if (messages.length === 30) {
       messages.shift();
     }
     const newMessage = {
