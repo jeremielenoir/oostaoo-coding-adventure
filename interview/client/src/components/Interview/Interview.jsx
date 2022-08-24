@@ -13,6 +13,7 @@ import './interview.css';
 
 // Socket variables
 import dico from '../../common/dico';
+import { SocketContext } from '../../common/SocketContext';
 
 const { SOCKET_FROMAPI } = dico;
 
@@ -41,8 +42,10 @@ function Interview({
   // const endpointPort = process.env.ENDPOINT;
   // console.log('endpointPort', endpointPort);
 
+  /* ----- SOCKET CONTEXT ----- */
   const endpoint = useContext(EndPointContext);
-  const socket = socketIOClient('http://localhost:8000');
+  const { APILocation } = useContext(SocketContext);
+  const socket = socketIOClient(APILocation);
   // eslint-disable-next-line
   console.log('endpoint', endpoint);
 
