@@ -13,7 +13,7 @@ import Message from '../Message/Message';
 /* Style */
 import './chatSection.css';
 
-// Socket variables
+/* Socket variables */
 import dico from '../../common/dico';
 
 const { SOCKET_NEW_MESSAGE } = dico;
