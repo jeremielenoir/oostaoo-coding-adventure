@@ -51,12 +51,10 @@ const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
         {/* eslint-disable-next-line */}
         {messages.response.length > 0 &&
           messages.response.map((message) => (
-            <Message
-              // added the missing key prop, mandatory in React with map() for better render management
-              key={Math.random()}
-              text={message.text}
-              date={message.date}
-            />
+            <div className="message-and-date" key={Math.random()}>
+              <Message date={message.date} />
+              <Message text={message.text} />
+            </div>
           ))}
       </div>
 
