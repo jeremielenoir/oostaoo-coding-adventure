@@ -19,7 +19,7 @@ import dico from '../../common/dico';
 const { SOCKET_NEW_MESSAGE } = dico;
 
 /* Component definition */
-const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
+const ChatSection = ({ socket, toggleMessage, messages }) => {
   const [currentMessage, setCurrentMessage] = useState('');
 
   const onChangeMessage = (e) => {
@@ -64,7 +64,6 @@ const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
           id="message"
           label="Message"
           value={currentMessage}
-          ref={inputRef}
           focused
           onChange={onChangeMessage}
           variant="outlined"
@@ -100,7 +99,6 @@ ChatSection.propTypes = {
   toggleMessage: PropTypes.func,
   // if there are multiple elements in the object, should use the PropTypes.shape property instead
   messages: PropTypes.object, // probably to change into array once we get the right response
-  inputRef: PropTypes.object,
   socket: PropTypes.object,
 };
 
