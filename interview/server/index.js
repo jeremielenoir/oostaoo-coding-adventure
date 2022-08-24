@@ -45,8 +45,8 @@ io.on('connection', (socket) => {
     if (messages.length === 16) {
       messages.shift();
     }
-    message = { text: message, date: moment().format('HH:mm') };
-    messages.push(message);
+    const newMessage = { text: message, date: moment().format('HH:mm') };
+    messages.push(newMessage);
     console.log('messages : ', messages);
     io.emit('FromAPI', messages);
   });

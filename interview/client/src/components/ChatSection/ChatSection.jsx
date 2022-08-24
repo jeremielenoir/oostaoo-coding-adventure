@@ -67,6 +67,7 @@ const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
           label="Message"
           value={currentMessage}
           ref={inputRef}
+          focused
           onChange={onChangeMessage}
           variant="outlined"
           // next line is for testing purpose
@@ -101,7 +102,7 @@ ChatSection.propTypes = {
   toggleMessage: PropTypes.func,
   // if there are multiple elements in the object, should use the PropTypes.shape property instead
   messages: PropTypes.object, // probably to change into array once we get the right response
-  inputRef: PropTypes.func,
+  inputRef: PropTypes.object,
   socket: PropTypes.object,
 };
 

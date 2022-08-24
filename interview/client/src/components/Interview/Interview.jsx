@@ -42,7 +42,7 @@ function Interview({
   // console.log('endpointPort', endpointPort);
 
   const endpoint = useContext(EndPointContext);
-  const socket = socketIOClient(endpoint);
+  const socket = socketIOClient('http://localhost:8000');
   // eslint-disable-next-line
   console.log('endpoint', endpoint);
 
