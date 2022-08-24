@@ -50,7 +50,6 @@ function Interview({
   console.log('endpoint', endpoint);
 
   useEffect(() => {
-    // Is the useEffect really useful here ?
     // inputRef.current.focus();
     socket.on(SOCKET_FROMAPI, (data) => setMessages({ response: data }));
   }, [socket]);

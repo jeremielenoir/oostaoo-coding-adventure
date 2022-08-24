@@ -33,6 +33,13 @@ const ChatSection = ({ socket, toggleMessage, messages }) => {
     }
   };
 
+  const sendMessageWithEnterKey = (event) => {
+    if (event.key === 'Enter') {
+      socket.emit(SOCKET_NEW_MESSAGE, currentMessage);
+      setCurrentMessage('');
+    }
+  };
+
   // console.log('current message => ', currentMessage);
 
   return (
@@ -66,6 +73,7 @@ const ChatSection = ({ socket, toggleMessage, messages }) => {
           value={currentMessage}
           focused
           onChange={onChangeMessage}
+          onKeyDown={sendMessageWithEnterKey}
           variant="outlined"
           // next line is for testing purpose
           inputProps={{ 'data-testid': 'textfield' }}
