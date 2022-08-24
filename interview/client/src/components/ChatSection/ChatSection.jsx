@@ -51,7 +51,7 @@ const ChatSection = ({ socket, toggleMessage, messages }) => {
         {/* eslint-disable-next-line */}
         {messages.response.length > 0 &&
           messages.response.map((message) => (
-            <div className="message-and-date" key={Math.random()}>
+            <div className="message-and-date" key={message.id}>
               <Message date={message.date} />
               <Message text={message.text} />
             </div>
@@ -74,8 +74,6 @@ const ChatSection = ({ socket, toggleMessage, messages }) => {
           id="send"
           size="small"
           color="primary"
-          // we shouldn't have the sendMessage function here since it's already bound to the form via onSubmit
-          // should be a type='submit' button instead
           onClick={sendMessage}
           style={{
             maxWidth: '40px',
@@ -84,7 +82,6 @@ const ChatSection = ({ socket, toggleMessage, messages }) => {
             minHeight: '56px',
             marginLeft: '5px',
           }}
-          // added a role button for screen readers and test purpose
           role="button"
         >
           <SendIcon />
