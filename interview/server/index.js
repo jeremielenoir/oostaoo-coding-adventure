@@ -1,5 +1,6 @@
 const app = require('express')();
 const http = require('http');
+const { uuid } = require('uuidv4');
 // const path = require('path');
 // const fs = require('fs');
 
@@ -42,10 +43,14 @@ io.on('connection', (socket) => {
   io.emit('FromApi', messages);
 
   socket.on('newMessage', (message) => {
-    if (messages.length === 16) {
+    if (messages.length === 30) {
       messages.shift();
     }
-    const newMessage = { text: message, date: moment().format('HH:mm') };
+    const newMessage = {
+      text: message,
+      date: moment().format('HH:mm'),
+      id: uuid(),
+    };
     messages.push(newMessage);
     console.log('messages : ', messages);
     io.emit('FromAPI', messages);

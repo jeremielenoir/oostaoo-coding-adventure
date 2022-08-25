@@ -29,7 +29,7 @@ const UsersSection = ({ toggleParticipant, secondary }) => (
 /* Proptypes */
 UsersSection.propTypes = {
   toggleParticipant: PropTypes.func,
-  secondary: PropTypes.bool,
+  secondary: PropTypes.string,
 };
 
 export default UsersSection;

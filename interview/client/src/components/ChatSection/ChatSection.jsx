@@ -13,13 +13,13 @@ import Message from '../Message/Message';
 /* Style */
 import './chatSection.css';
 
-// Socket variables
+/* Socket variables */
 import dico from '../../common/dico';
 
 const { SOCKET_NEW_MESSAGE } = dico;
 
 /* Component definition */
-const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
+const ChatSection = ({ socket, toggleMessage, messages }) => {
   const [currentMessage, setCurrentMessage] = useState('');
 
   const onChangeMessage = (e) => {
@@ -28,6 +28,13 @@ const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
 
   const sendMessage = () => {
     if (currentMessage) {
+      socket.emit(SOCKET_NEW_MESSAGE, currentMessage);
+      setCurrentMessage('');
+    }
+  };
+
+  const sendMessageWithEnterKey = (event) => {
+    if (event.key === 'Enter') {
       socket.emit(SOCKET_NEW_MESSAGE, currentMessage);
       setCurrentMessage('');
     }
@@ -51,12 +58,10 @@ const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
         {/* eslint-disable-next-line */}
         {messages.response.length > 0 &&
           messages.response.map((message) => (
-            <Message
-              // added the missing key prop, mandatory in React with map() for better render management
-              key={Math.random()}
-              text={message.text}
-              date={message.date}
-            />
+            <div className="message-and-date" key={message.id}>
+              <Message date={message.date} />
+              <Message text={message.text} />
+            </div>
           ))}
       </div>
 
@@ -66,9 +71,9 @@ const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
           id="message"
           label="Message"
           value={currentMessage}
-          ref={inputRef}
           focused
           onChange={onChangeMessage}
+          onKeyDown={sendMessageWithEnterKey}
           variant="outlined"
           // next line is for testing purpose
           inputProps={{ 'data-testid': 'textfield' }}
@@ -77,8 +82,6 @@ const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
           id="send"
           size="small"
           color="primary"
-          // we shouldn't have the sendMessage function here since it's already bound to the form via onSubmit
-          // should be a type='submit' button instead
           onClick={sendMessage}
           style={{
             maxWidth: '40px',
@@ -87,7 +90,6 @@ const ChatSection = ({ socket, toggleMessage, messages, inputRef }) => {
             minHeight: '56px',
             marginLeft: '5px',
           }}
-          // added a role button for screen readers and test purpose
           role="button"
         >
           <SendIcon />
@@ -102,7 +104,6 @@ ChatSection.propTypes = {
   toggleMessage: PropTypes.func,
   // if there are multiple elements in the object, should use the PropTypes.shape property instead
   messages: PropTypes.object, // probably to change into array once we get the right response
-  inputRef: PropTypes.object,
   socket: PropTypes.object,
 };
 

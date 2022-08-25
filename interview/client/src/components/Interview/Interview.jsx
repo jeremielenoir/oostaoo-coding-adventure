@@ -55,11 +55,11 @@ function Interview({
   }, [socket]);
 
   const toggleMessage = () => {
-    chat ? setChat(false) : setChat(true);
+    setChat(!chat);
     participant && setParticipant(false);
   };
   const toggleParticipant = () => {
-    participant ? setParticipant(false) : setParticipant(true);
+    setParticipant(!participant);
     chat && setChat(false);
   };
 
