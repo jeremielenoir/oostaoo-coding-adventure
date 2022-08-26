@@ -63,6 +63,9 @@ io.on('connection', (socket) => {
     } else {
       rooms[roomID] = [socket.id];
     }
+
+    io.emit('FromAPI', messages);
+
     const otherUser = rooms[roomID].find((id) => id !== socket.id);
     if (otherUser) {
       socket.emit('other user', otherUser);
