@@ -1,4 +1,10 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react';
+import React, {
+  useCallback,
+  useRef,
+  useState,
+  useEffect,
+  // useContext,
+} from 'react';
 import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 // import { decryptHash } from '../services/decryptService';
@@ -17,6 +23,7 @@ const {
   SOCKET_OFFER,
   SOCKET_USER_JOINED,
   SOCKET_OTHER_USER,
+  // SOCKET_FROMAPI,
 } = dico;
 
 function InterviewHomePage({ match }) {
