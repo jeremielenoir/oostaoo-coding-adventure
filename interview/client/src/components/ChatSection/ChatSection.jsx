@@ -23,9 +23,7 @@ const { SOCKET_NEW_MESSAGE } = dico;
 /* Component definition */
 const ChatSection = ({ toggleMessage }) => {
   const { socket, chatMessages } = useContext(SocketContext);
-
   const [currentMessage, setCurrentMessage] = useState('');
-
   const onChangeMessage = (e) => {
     setCurrentMessage(e.target.value);
   };
@@ -60,12 +58,14 @@ const ChatSection = ({ toggleMessage }) => {
       </div>
       <div className="messagesList">
         {/* eslint-disable-next-line */}
+
         {chatMessages.map((message) => (
           <div className="message-and-date" key={message.id}>
             <Message date={message.date} />
             <Message text={message.text} />
           </div>
         ))}
+
       </div>
 
       <div className="messageWriting">
