@@ -17,6 +17,7 @@ const {
   SOCKET_OFFER,
   SOCKET_USER_JOINED,
   SOCKET_OTHER_USER,
+  // SOCKET_FROMAPI,
 } = dico;
 
 function InterviewHomePage({ match }) {

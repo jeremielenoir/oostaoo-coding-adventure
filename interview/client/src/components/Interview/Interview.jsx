@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import socketIOClient from 'socket.io-client';
-import { EndPointContext } from '../../useContext';
+// import socketIOClient from 'socket.io-client';
 
 /* Custom Components */
 import ChatSection from '../ChatSection/ChatSection';
@@ -10,12 +9,6 @@ import UsersSection from '../UsersSection/UsersSection';
 
 /* Style */
 import './interview.css';
-
-// Socket variables
-import dico from '../../common/dico';
-import { SocketContext } from '../../common/SocketContext';
-
-const { SOCKET_FROMAPI } = dico;
 
 function Interview({
   userVideo,
@@ -34,25 +27,8 @@ function Interview({
   // eslint-disable-next-line
   console.log('participant', participant);
 
-  const [messages, setMessages] = useState({
-    response: false,
-    // endpoint: 'http://localhost:8000',
-  }); // Ngrok adress
-  // const { endpoint } = messages;
-  // const endpointPort = process.env.ENDPOINT;
-  // console.log('endpointPort', endpointPort);
-
-  /* ----- SOCKET CONTEXT ----- */
-  const endpoint = useContext(EndPointContext);
-  const { APILocation } = useContext(SocketContext);
-  const socket = socketIOClient(APILocation);
-  // eslint-disable-next-line
-  console.log('endpoint', endpoint);
-
-  useEffect(() => {
-    // inputRef.current.focus();
-    socket.on(SOCKET_FROMAPI, (data) => setMessages({ response: data }));
-  }, [socket]);
+  // const endpoint = useContext(EndPointContext);
+  // console.log('endpoint', endpoint);
 
   const toggleMessage = () => {
     setChat(!chat);
@@ -77,12 +53,7 @@ function Interview({
           </div>
         </div>
         {chat ? (
-          <ChatSection
-            socket={socket}
-            toggleMessage={toggleMessage}
-            messages={messages}
-            inputRef={inputRef}
-          />
+          <ChatSection toggleMessage={toggleMessage} inputRef={inputRef} />
         ) : (
           ''
         )}

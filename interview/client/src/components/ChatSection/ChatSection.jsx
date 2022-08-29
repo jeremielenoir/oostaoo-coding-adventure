@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 /* MUI components */
@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import SendIcon from '@material-ui/icons/Send';
 import TextField from '@material-ui/core/TextField';
+
+import { SocketContext } from '../../common/SocketContext';
 
 /* Custom components */
 import Message from '../Message/Message';
@@ -19,9 +21,9 @@ import dico from '../../common/dico';
 const { SOCKET_NEW_MESSAGE } = dico;
 
 /* Component definition */
-const ChatSection = ({ socket, toggleMessage, messages }) => {
+const ChatSection = ({ toggleMessage }) => {
+  const { socket, chatMessages } = useContext(SocketContext);
   const [currentMessage, setCurrentMessage] = useState('');
-
   const onChangeMessage = (e) => {
     setCurrentMessage(e.target.value);
   };
@@ -56,13 +58,14 @@ const ChatSection = ({ socket, toggleMessage, messages }) => {
       </div>
       <div className="messagesList">
         {/* eslint-disable-next-line */}
-        {messages.response.length > 0 &&
-          messages.response.map((message) => (
-            <div className="message-and-date" key={message.id}>
-              <Message date={message.date} />
-              <Message text={message.text} />
-            </div>
-          ))}
+
+        {chatMessages.map((message) => (
+          <div className="message-and-date" key={message.id}>
+            <Message date={message.date} />
+            <Message text={message.text} />
+          </div>
+        ))}
+
       </div>
 
       <div className="messageWriting">
@@ -100,11 +103,6 @@ const ChatSection = ({ socket, toggleMessage, messages }) => {
 };
 
 /* Proptypes */
-ChatSection.propTypes = {
-  toggleMessage: PropTypes.func,
-  // if there are multiple elements in the object, should use the PropTypes.shape property instead
-  messages: PropTypes.object, // probably to change into array once we get the right response
-  socket: PropTypes.object,
-};
+ChatSection.propTypes = { toggleMessage: PropTypes.func };
 
 export default ChatSection;
