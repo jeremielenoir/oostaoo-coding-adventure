@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 /* MUI components */
 import Button from '@material-ui/core/Button';
