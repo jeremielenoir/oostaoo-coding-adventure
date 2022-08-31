@@ -65,7 +65,6 @@ const ChatSection = ({ toggleMessage }) => {
             <Message text={message.text} />
           </div>
         ))}
-
       </div>
 
       <div className="messageWriting">

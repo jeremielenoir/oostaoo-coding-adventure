@@ -41,6 +41,7 @@ var messages = [];
 
 io.on('connection', (socket) => {
   io.emit('FromApi', messages);
+  socket.emit('my-id', socket.id);
 
   socket.on('newMessage', (message) => {
     if (messages.length === 30) {
@@ -57,7 +58,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('join room', (roomID) => {
-    console.log('user join ROOM', roomID);
+    console.log(`User ${socket.id} joined room ${roomID}`);
     if (rooms[roomID]) {
       rooms[roomID].push(socket.id);
     } else {
