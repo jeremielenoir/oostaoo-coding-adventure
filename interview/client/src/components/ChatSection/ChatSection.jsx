@@ -24,6 +24,7 @@ const { SOCKET_NEW_MESSAGE } = dico;
 const ChatSection = ({ toggleMessage }) => {
   const { socket, chatMessages } = useContext(SocketContext);
   const [currentMessage, setCurrentMessage] = useState('');
+
   const onChangeMessage = (e) => {
     setCurrentMessage(e.target.value);
   };

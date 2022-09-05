@@ -16,6 +16,7 @@ const {
   SOCKET_JOIN_ROOM,
   SOCKET_OFFER,
   SOCKET_USER_JOINED,
+  SOCKET_MY_ID,
   SOCKET_OTHER_USER,
 } = dico;
 
@@ -59,6 +60,7 @@ function InterviewHomePage({ match }) {
         socketRef.emit(SOCKET_ICE_CANDIDATE, payload);
       }
     }
+
     function handleNegotiationNeededEvent(userID) {
       peerRef.current
         .createOffer()
@@ -158,6 +160,10 @@ function InterviewHomePage({ match }) {
     //     if(res.nom){setNom(res.nom)};
     //   });
 
+    socketRef.on(SOCKET_MY_ID, (id) => {
+      setMySocketID(id);
+    });
+
     socketRef.on(SOCKET_OTHER_USER, (userID) => {
       callUser(userID);
       otherUser.current = userID;
@@ -169,10 +175,6 @@ function InterviewHomePage({ match }) {
 
     socketRef.on(SOCKET_CONNECT, () => {
       console.warn(socketRef.connected); // true
-    });
-
-    socketRef.on('my-id', (id) => {
-      setMySocketID(id);
     });
 
     socketRef.emit(SOCKET_JOIN_ROOM, Number(hash));
