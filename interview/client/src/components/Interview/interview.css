@@ -38,6 +38,12 @@ video {
   border-radius: 5px;
 }
 
+.partner-id {
+  color: white;
+  font-weight: bold;
+  font-size: 800;
+}
+
 .user-video {
   overflow: hidden;
   width: 200px;
