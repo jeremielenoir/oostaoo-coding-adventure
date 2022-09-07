@@ -15,6 +15,7 @@ function Interview({
   partnerVideo,
   micToggle,
   micOn,
+  partnerID,
   // groupToggle,
   // chatToggle,
 }) {
@@ -44,6 +45,8 @@ function Interview({
       <div className="container-video-chat">
         <div className="chat-video">
           <div className="partner-video">
+            <p className="partner-id">PartnerID :</p>
+            <p className="partner-id">{partnerID}</p>
             <video controls autoPlay ref={partnerVideo}>
               <track kind="captions" />
             </video>
@@ -84,6 +87,7 @@ Interview.propTypes = {
   partnerVideo: PropTypes.object,
   micToggle: PropTypes.func,
   micOn: PropTypes.bool,
+  partnerID: PropTypes.string,
 };
 
 export default Interview;
