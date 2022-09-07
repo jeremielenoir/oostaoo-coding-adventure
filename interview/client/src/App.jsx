@@ -9,6 +9,7 @@ import { EndPointContext } from './useContext';
 import Routes from './common/routes';
 
 import './assets/css/App.css';
+import { StreamContextProvider } from './common/StreamContext';
 import { SocketProvider } from './common/SocketContext';
 
 const theme = createTheme({
@@ -41,9 +42,11 @@ function App() {
       <h1>{node}</h1>
       <ThemeProvider theme={theme}>
         <EndPointContext.Provider value={secretKey}>
-          <SocketProvider>
-            <Routes />
-          </SocketProvider>
+          <StreamContextProvider>
+            <SocketProvider>
+              <Routes />
+            </SocketProvider>
+          </StreamContextProvider>
         </EndPointContext.Provider>
       </ThemeProvider>
     </div>

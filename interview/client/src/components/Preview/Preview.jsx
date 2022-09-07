@@ -1,14 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 
 import Button from '@material-ui/core/Button';
 import LogoRoodeo from '../../assets/images/logo_ROODEO.svg';
 // import PhoneForwardedIcon from '@material-ui/icons/PhoneForwarded';
 
+import { StreamContext } from '../../common/StreamContext';
+
 /* Style */
 import './Preview.css';
 
-function Preview({ userVideo, confirmMeeting }) {
+function Preview() {
+  const { myVideo, confirmMeeting } = useContext(StreamContext);
+
   return (
     <>
       <div className="nav">
@@ -17,7 +20,7 @@ function Preview({ userVideo, confirmMeeting }) {
       <div id="main">
         <div className="global-wrapper">
           <div className="wrapper-video">
-            <video muted className="home-video" autoPlay ref={userVideo} />
+            <video muted className="home-video" autoPlay ref={myVideo} />
           </div>
           <div className="options">
             <div className="wrapper-text">
@@ -55,8 +58,3 @@ function Preview({ userVideo, confirmMeeting }) {
   );
 }
 export default Preview;
-
-Preview.propTypes = {
-  userVideo: PropTypes.object,
-  confirmMeeting: PropTypes.func,
-};

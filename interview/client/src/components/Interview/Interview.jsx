@@ -1,6 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
-// import socketIOClient from 'socket.io-client';
 
 /* Custom Components */
 import ChatSection from '../ChatSection/ChatSection';
@@ -9,16 +8,16 @@ import UsersSection from '../UsersSection/UsersSection';
 
 /* Style */
 import './interview.css';
+import { StreamContext } from '../../common/StreamContext';
 
 function Interview({
-  userVideo,
-  partnerVideo,
   micToggle,
   micOn,
-  partnerID,
   // groupToggle,
   // chatToggle,
 }) {
+  const { myVideo, partnerSocketID, partnerVideo } = useContext(StreamContext);
+
   const [secondary] = useState(false); // a state with no setter function associated ? why ?
   const inputRef = useRef();
   const [chat, setChat] = useState(false);
@@ -46,13 +45,13 @@ function Interview({
         <div className="chat-video">
           <div className="partner-video">
             <p className="partner-id">PartnerID :</p>
-            <p className="partner-id">{partnerID}</p>
+            <p className="partner-id">{partnerSocketID}</p>
             <video controls autoPlay ref={partnerVideo}>
               <track kind="captions" />
             </video>
           </div>
           <div className="user-video">
-            <video muted autoPlay ref={userVideo} />
+            <video muted autoPlay ref={myVideo} />
           </div>
         </div>
         {chat ? (
@@ -71,7 +70,7 @@ function Interview({
       </div>
 
       <CommandsBar
-        userVideo={userVideo}
+        userVideo={myVideo}
         partnerVideo={partnerVideo}
         micToggle={micToggle}
         micOn={micOn}
@@ -83,11 +82,8 @@ function Interview({
 }
 
 Interview.propTypes = {
-  userVideo: PropTypes.object,
-  partnerVideo: PropTypes.object,
   micToggle: PropTypes.func,
   micOn: PropTypes.bool,
-  partnerID: PropTypes.string,
 };
 
 export default Interview;
