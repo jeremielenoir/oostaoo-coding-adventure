@@ -109,7 +109,9 @@ export const StreamContextProvider = ({ children }) => {
       setMySocketID(id);
     });
 
-    socket.emit(SOCKET_JOIN_ROOM, Number(pageHash));
+    if (pageHash) {
+      socket.emit(SOCKET_JOIN_ROOM, Number(pageHash));
+    }
   }, [meetingConfirmation, pageHash]);
 
   useEffect(() => {
@@ -124,7 +126,8 @@ export const StreamContextProvider = ({ children }) => {
       receiveCall(partnerID);
     });
     // eslint-disable-next-line
-  }, [meetingConfirmation]); // need investigation, React asks for callUser + receiveCall dependencies but it breaks the app
+  }, [meetingConfirmation]);
+  // need investigation, React asks for callUser + receiveCall dependencies but it breaks the app
 
   function confirmMeeting() {
     setMeetingConfirmation(!meetingConfirmation);

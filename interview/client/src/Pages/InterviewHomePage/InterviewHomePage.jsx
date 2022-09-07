@@ -10,7 +10,7 @@ function InterviewHomePage({ match }) {
 
   const [micOn, setMicOn] = useState(true);
 
-  const hash = match.params.hash;
+  const hash = match.params.hash; // room ID
   useEffect(() => {
     setPageHash(hash);
   }, [hash, setPageHash]);
