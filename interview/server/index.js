@@ -94,6 +94,7 @@ io.on('connection', (socket) => {
         socket.emit('other user', otherUser);
         console.log('Room partner : ', otherUser);
       }
+
     } else {
       rooms.push(newRoom);
     }

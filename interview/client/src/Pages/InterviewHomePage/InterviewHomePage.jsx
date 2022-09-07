@@ -35,6 +35,7 @@ function InterviewHomePage({ match }) {
   // const [email] = useState('');
   // const [interviewId, setInterviewId] = useState('');
   // const [date, setDate] = useState(null);
+
   // const peerRef = useRef(); // Obligatoire
   // const otherUser = useRef();
   // // const userStream = useRef();
@@ -74,6 +75,7 @@ function InterviewHomePage({ match }) {
       });
 
       connectionRef.current = peer;
+
     },
     [mySocketID, myStream]
   );
