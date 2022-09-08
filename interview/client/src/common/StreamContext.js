@@ -26,6 +26,7 @@ const {
 export const StreamContext = createContext();
 
 export const StreamContextProvider = ({ children }) => {
+  const [micOn, setMicOn] = useState(false);
   const [mySocketID, setMySocketID] = useState('');
   const [partnerSocketID, setPartnerSocketID] = useState('');
   const [myStream, setMyStream] = useState(null);
@@ -116,7 +117,6 @@ export const StreamContextProvider = ({ children }) => {
 
   useEffect(() => {
     socket.on(SOCKET_SEND_CALL, (data) => {
-      // setPartnerSocketID(data.from);
       setCallerSignal(data.signal);
     });
 
@@ -133,6 +133,12 @@ export const StreamContextProvider = ({ children }) => {
     setMeetingConfirmation(!meetingConfirmation);
   }
 
+  function micToggle() {
+    connectionRef.current.streams[0].getAudioTracks()[0].enabled =
+      !connectionRef.current.streams[0].getAudioTracks()[0].enabled;
+    setMicOn(!micOn);
+  }
+
   return (
     <StreamContext.Provider
       value={{
@@ -142,6 +148,9 @@ export const StreamContextProvider = ({ children }) => {
         setPageHash,
         meetingConfirmation,
         confirmMeeting,
+        micToggle,
+        micOn,
+        setMicOn,
       }}
     >
       {children}

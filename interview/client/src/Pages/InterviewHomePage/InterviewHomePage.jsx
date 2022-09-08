@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { StreamContext } from '../../common/StreamContext';
-// import { decryptHash } from '../services/decryptService';
 import Preview from '../../components/Preview/Preview';
 import Interview from '../../components/Interview/Interview';
 
 function InterviewHomePage({ match }) {
   const { setPageHash, meetingConfirmation } = useContext(StreamContext);
-
-  const [micOn, setMicOn] = useState(true);
 
   const hash = match.params.hash; // room ID
   useEffect(() => {
@@ -20,11 +17,7 @@ function InterviewHomePage({ match }) {
       {meetingConfirmation ? (
         <Preview />
       ) : (
-        <Interview
-          // micToggle={micToggle}
-          micOn={micOn}
-          setMicOn={setMicOn}
-        />
+        <Interview />
       )}
     </div>
   );
