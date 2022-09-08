@@ -58,8 +58,6 @@ function Interview() {
       </div>
 
       <CommandsBar
-        userVideo={myVideo}
-        partnerVideo={partnerVideo}
         toggleParticipant={toggleParticipant}
         toggleMessage={toggleMessage}
       />
