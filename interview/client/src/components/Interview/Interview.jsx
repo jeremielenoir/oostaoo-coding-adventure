@@ -10,25 +10,13 @@ import UsersSection from '../UsersSection/UsersSection';
 import './interview.css';
 import { StreamContext } from '../../common/StreamContext';
 
-function Interview({
-  micToggle,
-  micOn,
-  // groupToggle,
-  // chatToggle,
-}) {
+function Interview() {
   const { myVideo, partnerSocketID, partnerVideo } = useContext(StreamContext);
 
   const [secondary] = useState(false); // a state with no setter function associated ? why ?
   const inputRef = useRef();
   const [chat, setChat] = useState(false);
-  // eslint-disable-next-line
-  console.log('chat', chat);
   const [participant, setParticipant] = useState(false);
-  // eslint-disable-next-line
-  console.log('participant', participant);
-
-  // const endpoint = useContext(EndPointContext);
-  // console.log('endpoint', endpoint);
 
   const toggleMessage = () => {
     setChat(!chat);
@@ -72,8 +60,6 @@ function Interview({
       <CommandsBar
         userVideo={myVideo}
         partnerVideo={partnerVideo}
-        micToggle={micToggle}
-        micOn={micOn}
         toggleParticipant={toggleParticipant}
         toggleMessage={toggleMessage}
       />

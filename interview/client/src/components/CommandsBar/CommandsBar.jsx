@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 /* MUI components */
@@ -13,14 +13,14 @@ import ModalLeaveInterview from '../ModalLeaveInterview/ModalLeaveInterview';
 
 /* Style */
 import './commandsBar.css';
+import { StreamContext } from '../../common/StreamContext';
 
 /* Component definition */
 const CommandsBar = ({
-  micToggle,
-  micOn,
   toggleParticipant,
   toggleMessage,
 }) => {
+  const {micOn, micToggle} = useContext(StreamContext)
   /* State */
   const [open, setOpen] = useState(false);
 
