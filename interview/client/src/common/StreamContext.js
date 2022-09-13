@@ -93,20 +93,11 @@ export const StreamContextProvider = ({ children }) => {
     [callerSignal, myStream]
   );
 
-  // keep for later so we can cut the video stream when leaving the room (issue #480)
   const leaveCall = useCallback(() => {
-    if (mySocketID && pageHash) {
-      socket.emit('leave-call', { userID: mySocketID, room: pageHash });
-      connectionRef.current.destroy();
-      // window.location.reload();
-      // myVideo.current = null;
-      // partnerVideo.current = null;
-      // setMySocketID('');
-      // setPageHash('');
-      // setMyStream('');
-      // setMeetingConfirmation(false);
-      console.log('Call ended');
-    }
+    socket.emit('leave-call', { userID: mySocketID, room: pageHash });
+    connectionRef.current.streams[0].getAudioTracks()[0].enabled = false;
+    connectionRef.current.streams[0].getVideoTracks()[0].enabled = false;
+    connectionRef.current.destroy();
   }, [mySocketID, pageHash]);
 
   useEffect(() => {
@@ -125,6 +116,21 @@ export const StreamContextProvider = ({ children }) => {
       socket.emit(SOCKET_JOIN_ROOM, pageHash);
     }
   }, [meetingConfirmation, pageHash]);
+
+  // Leaving room logic if user simply directly close the tab
+  useEffect(() => {
+    const handleTabClose = (event) => {
+      event.preventDefault();
+      event.returnValue = '';
+    };
+    window.addEventListener('beforeunload', handleTabClose);
+    window.addEventListener('unload', leaveCall);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleTabClose);
+      window.removeEventListener('unload', leaveCall);
+    };
+  }, [leaveCall]);
 
   useEffect(() => {
     socket.on(SOCKET_SEND_CALL, (data) => {
