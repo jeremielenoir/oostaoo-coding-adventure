@@ -52,7 +52,8 @@
   column-gap: 1rem;
 }
 
-.icon-mic {
+.icon-mic,
+.icon-VideoCam {
   color: red;
 }
 
