@@ -31,6 +31,7 @@ export const StreamContextProvider = ({ children }) => {
   const [partnerSocketID, setPartnerSocketID] = useState('');
   const [myStream, setMyStream] = useState(null);
   const [callerSignal, setCallerSignal] = useState();
+  const [videoCamOn, setVideoCamOn] = useState(false);
 
   const [pageHash, setPageHash] = useState('');
   const [meetingConfirmation, setMeetingConfirmation] = useState(true);
@@ -139,6 +140,12 @@ export const StreamContextProvider = ({ children }) => {
     setMicOn(!micOn);
   }
 
+  function videoCamToggle() {
+    connectionRef.current.streams[0].getVideoTracks()[0].enabled =
+      !connectionRef.current.streams[0].getVideoTracks()[0].enabled;
+    setVideoCamOn(!videoCamOn);
+  }
+
   return (
     <StreamContext.Provider
       value={{
@@ -150,7 +157,8 @@ export const StreamContextProvider = ({ children }) => {
         confirmMeeting,
         micToggle,
         micOn,
-        setMicOn,
+        videoCamOn,
+        videoCamToggle,
       }}
     >
       {children}

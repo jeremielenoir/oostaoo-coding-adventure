@@ -3,6 +3,7 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import CommandsBar from './CommandsBar';
+import { StreamContextProvider } from '../../common/StreamContext';
 
 describe('CommandsBar component tests', () => {
   test('should render correctly', () => {
@@ -10,7 +11,11 @@ describe('CommandsBar component tests', () => {
   });
 
   test('should have a button to activate mic', () => {
-    render(<CommandsBar />);
+    render(
+      <StreamContextProvider>
+        <CommandsBar />
+      </StreamContextProvider>
+    );
 
     const micOnButton = screen.getByTestId('micOnBtn');
     const micOffButton = screen.queryByTestId('micOffBtn');
@@ -45,6 +50,46 @@ describe('CommandsBar component tests', () => {
 
     const micOffButton = screen.getByTestId('micOffBtn');
     fireEvent.click(micOffButton);
+
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+  });
+
+  test('should have a button to desactive videoCam', () => {
+    render(<CommandsBar />);
+
+    const videoCamOnButton = screen.getByTestId('videoCamOnBtn');
+    const videoCamOffButton = screen.queryByTestId('videoCamOffBtn');
+
+    expect(videoCamOnButton).toBeInTheDocument();
+    expect(videoCamOffButton).not.toBeInTheDocument();
+  });
+
+  test('should have a button to deactivate videoCam instead of the videoCam on one if the videoCamOn prop is true', () => {
+    render(<CommandsBar videoCamOn />);
+
+    const videoCamOffButton = screen.getByTestId('videoCamOffBtn');
+    const videoCamOnButton = screen.queryByTestId('videoCamOnBtn');
+
+    expect(videoCamOffButton).toBeInTheDocument();
+    expect(videoCamOnButton).not.toBeInTheDocument();
+  });
+
+  test('The videoCam on button should trigger the videoCamToggle function passed in props', () => {
+    const mockFunction = jest.fn();
+    render(<CommandsBar videoCamToggle={mockFunction} />);
+
+    const videoCamOnButton = screen.getByTestId('videoCamOnBtn');
+    fireEvent.click(videoCamOnButton);
+
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+  });
+
+  test('The videoCam on button should trigger the videoCamToggle function passed in props', () => {
+    const mockFunction = jest.fn();
+    render(<CommandsBar videoCamOn videoCamToggle={mockFunction} />);
+
+    const videoCamOffButton = screen.getByTestId('videoCamOffBtn');
+    fireEvent.click(videoCamOffButton);
 
     expect(mockFunction).toHaveBeenCalledTimes(1);
   });
