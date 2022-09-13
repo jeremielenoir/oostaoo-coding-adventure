@@ -93,10 +93,21 @@ export const StreamContextProvider = ({ children }) => {
     [callerSignal, myStream]
   );
 
-  // // keep for later so we can cut the video stream when leaving the room (issue #480)
-  // const leaveCall = () => {
-  //   connectionRef.current.destroy();
-  // };
+  // keep for later so we can cut the video stream when leaving the room (issue #480)
+  const leaveCall = useCallback(() => {
+    if (mySocketID && pageHash) {
+      socket.emit('leave-call', { userID: mySocketID, room: pageHash });
+      connectionRef.current.destroy();
+      // window.location.reload();
+      // myVideo.current = null;
+      // partnerVideo.current = null;
+      // setMySocketID('');
+      // setPageHash('');
+      // setMyStream('');
+      // setMeetingConfirmation(false);
+      console.log('Call ended');
+    }
+  }, [mySocketID, pageHash]);
 
   useEffect(() => {
     navigator.mediaDevices
@@ -111,7 +122,7 @@ export const StreamContextProvider = ({ children }) => {
     });
 
     if (pageHash) {
-      socket.emit(SOCKET_JOIN_ROOM, Number(pageHash));
+      socket.emit(SOCKET_JOIN_ROOM, pageHash);
     }
   }, [meetingConfirmation, pageHash]);
 
@@ -151,6 +162,7 @@ export const StreamContextProvider = ({ children }) => {
         micToggle,
         micOn,
         setMicOn,
+        leaveCall,
       }}
     >
       {children}

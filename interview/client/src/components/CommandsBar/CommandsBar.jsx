@@ -16,11 +16,8 @@ import './commandsBar.css';
 import { StreamContext } from '../../common/StreamContext';
 
 /* Component definition */
-const CommandsBar = ({
-  toggleParticipant,
-  toggleMessage,
-}) => {
-  const {micOn, micToggle} = useContext(StreamContext)
+const CommandsBar = ({ toggleParticipant, toggleMessage }) => {
+  const { micOn, micToggle } = useContext(StreamContext);
   /* State */
   const [open, setOpen] = useState(false);
 
@@ -78,8 +75,6 @@ const CommandsBar = ({
 
 /* Proptypes */
 CommandsBar.propTypes = {
-  micToggle: PropTypes.func,
-  micOn: PropTypes.bool,
   toggleParticipant: PropTypes.func,
   toggleMessage: PropTypes.func,
 };

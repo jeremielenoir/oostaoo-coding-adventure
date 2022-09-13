@@ -43,10 +43,6 @@ io.on('connection', (socket) => {
   io.emit('FromApi', messages);
   socket.emit('my-id', socket.id);
 
-  socket.on('disconnect', () => {
-    socket.broadcast.emit('CallEnded');
-  });
-
   socket.on('send-call', (data) => {
     io.to(data.userToCall).emit('send-call', {
       signal: data.signalData,
@@ -73,8 +69,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('join room', (roomID) => {
-    console.log(`User ${socket.id} joined room ${roomID}`);
-
     const newRoom = {
       id: roomID,
       users: [socket.id],
@@ -82,21 +76,29 @@ io.on('connection', (socket) => {
 
     const doesRoomExists = rooms.find((room) => room.id === roomID);
     if (doesRoomExists) {
-      const amIConnected = doesRoomExists.users.find(
+      const isUserConnected = doesRoomExists.users.find(
         (user) => user === socket.id,
       );
-      if (!amIConnected) {
+
+      if (!isUserConnected && doesRoomExists.users.length < 2) {
         doesRoomExists.users.push(socket.id);
+        console.log(`User ${socket.id} joined room ${roomID}`);
+      }
+
+      if (!isUserConnected && doesRoomExists.users.length >= 2) {
+        doesRoomExists.users.shift();
+        doesRoomExists.users.push(socket.id);
+        console.log(`User ${socket.id} joined room ${roomID}`);
       }
 
       const otherUser = doesRoomExists.users.find((user) => user !== socket.id);
       if (otherUser) {
         socket.emit('other user', otherUser);
-        console.log('Room partner : ', otherUser);
+        console.log('Room partner: ', otherUser);
       }
-
     } else {
       rooms.push(newRoom);
+      console.log(`User ${socket.id} joined room ${roomID}`);
     }
 
     // if (rooms[roomID]) {
@@ -125,6 +127,31 @@ io.on('connection', (socket) => {
   // socket.on('ice-candidate', (incoming) => {
   //   io.to(incoming.target).emit('ice-candidate', incoming.candidate);
   // });
+
+  socket.on('leave-call', (data) => {
+    console.log(rooms);
+    // socket.broadcast.emit('CallEnded');
+    const roomToLeave = rooms.find((room) => room.id === data.room);
+    if (roomToLeave) {
+      const leavingUser = roomToLeave.users.find(
+        (user) => user === data.userID,
+      );
+      roomToLeave.users.splice(roomToLeave.users.indexOf(leavingUser), 1);
+      console.log(`User ${data.userID} left room ${data.room}`);
+
+      let otherUser = roomToLeave.users.find((user) => user !== socket.id);
+      if (otherUser) {
+        otherUser = '';
+        socket.emit('other user', otherUser);
+        console.log('Room partner: ', otherUser);
+      }
+
+      if (roomToLeave.users.length < 1) {
+        rooms.splice(rooms.indexOf(roomToLeave), 1);
+      }
+    }
+    console.log(rooms);
+  });
 });
 
 httpServer.listen(config.PORT, config.HOST, () => {

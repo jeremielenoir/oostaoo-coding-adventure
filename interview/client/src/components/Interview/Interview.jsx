@@ -1,5 +1,4 @@
 import React, { useState, useRef, useContext } from 'react';
-import PropTypes from 'prop-types';
 
 /* Custom Components */
 import ChatSection from '../ChatSection/ChatSection';
@@ -64,10 +63,5 @@ function Interview() {
     </div>
   );
 }
-
-Interview.propTypes = {
-  micToggle: PropTypes.func,
-  micOn: PropTypes.bool,
-};
 
 export default Interview;
