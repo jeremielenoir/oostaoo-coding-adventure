@@ -101,19 +101,7 @@ io.on('connection', (socket) => {
       console.log(`User ${socket.id} joined room ${roomID}`);
     }
 
-    // if (rooms[roomID]) {
-    //   rooms[roomID].push(socket.id);
-    // } else {
-    //   rooms[roomID] = [socket.id];
-    // }
-
     io.emit('FromAPI', messages);
-
-    // const otherUser = rooms[roomID].find((id) => id !== socket.id);
-    // if (otherUser) {
-    //   socket.emit('other user', otherUser);
-    //   socket.to(otherUser).emit('user joined', socket.id);
-    // }
   });
 
   // socket.on('offer', (payload) => {
