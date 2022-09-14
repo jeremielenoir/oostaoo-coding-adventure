@@ -140,8 +140,11 @@ export const StreamContextProvider = ({ children }) => {
 
     socket.on(SOCKET_OTHER_USER, (partnerID) => {
       setPartnerSocketID(partnerID);
-      callUser(partnerID);
-      receiveCall(partnerID);
+
+      if (!meetingConfirmation) {
+        callUser(partnerID);
+        receiveCall(partnerID);
+      }
     });
     // eslint-disable-next-line
   }, [meetingConfirmation]);
@@ -152,6 +155,7 @@ export const StreamContextProvider = ({ children }) => {
   }
 
   function micToggle() {
+    console.log(myStream);
     connectionRef.current.streams[0].getAudioTracks()[0].enabled =
       !connectionRef.current.streams[0].getAudioTracks()[0].enabled;
     setMicOn(!micOn);

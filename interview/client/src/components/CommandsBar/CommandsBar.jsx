@@ -18,11 +18,8 @@ import './commandsBar.css';
 import { StreamContext } from '../../common/StreamContext';
 
 /* Component definition */
-const CommandsBar = ({
-  toggleParticipant,
-  toggleMessage,
-}) => {
-  const {micOn, micToggle, videoCamOn, videoCamToggle} = useContext(StreamContext)
+const CommandsBar = ({ toggleParticipant, toggleMessage }) => {
+  const { micOn, micToggle, videoCamOn, videoCamToggle } = useContext(StreamContext);
   /* State */
   const [open, setOpen] = useState(false);
 
