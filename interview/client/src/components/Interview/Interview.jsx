@@ -33,7 +33,7 @@ function Interview() {
           <div className="partner-video">
             <p className="partner-id">PartnerID :</p>
             <p className="partner-id">{partnerSocketID}</p>
-            <video controls autoPlay ref={partnerVideo}>
+            <video autoPlay ref={partnerVideo}>
               <track kind="captions" />
             </video>
           </div>

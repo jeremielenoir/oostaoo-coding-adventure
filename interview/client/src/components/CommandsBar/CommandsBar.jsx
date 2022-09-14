@@ -7,6 +7,8 @@ import MicIcon from '@material-ui/icons/Mic';
 import GroupIcon from '@material-ui/icons/Group';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import CallEndIcon from '@material-ui/icons/CallEnd';
+import VideocamIcon from '@material-ui/icons/Videocam';
+import VideocamOffIcon from '@material-ui/icons/VideocamOff';
 
 /* Custom components */
 import ModalLeaveInterview from '../ModalLeaveInterview/ModalLeaveInterview';
@@ -16,8 +18,11 @@ import './commandsBar.css';
 import { StreamContext } from '../../common/StreamContext';
 
 /* Component definition */
-const CommandsBar = ({ toggleParticipant, toggleMessage }) => {
-  const { micOn, micToggle } = useContext(StreamContext);
+const CommandsBar = ({
+  toggleParticipant,
+  toggleMessage,
+}) => {
+  const {micOn, micToggle, videoCamOn, videoCamToggle} = useContext(StreamContext)
   /* State */
   const [open, setOpen] = useState(false);
 
@@ -42,6 +47,23 @@ const CommandsBar = ({ toggleParticipant, toggleMessage }) => {
               color="primary"
               onClick={() => micToggle()}
               data-testid="micOnBtn"
+            />
+          )}
+        </div>
+        <div id="icon-VideoCam">
+          {videoCamOn ? (
+            <VideocamOffIcon
+              className="videoCam"
+              color="primary"
+              onClick={() => videoCamToggle()}
+              data-testid="videoCamOffBtn"
+            />
+          ) : (
+            <VideocamIcon
+              className="videoCam"
+              color="primary"
+              onClick={() => videoCamToggle()}
+              data-testid="videoCamOnBtn"
             />
           )}
         </div>
