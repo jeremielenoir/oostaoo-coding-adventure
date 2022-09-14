@@ -97,8 +97,6 @@ const CommandsBar = ({
 
 /* Proptypes */
 CommandsBar.propTypes = {
-  micToggle: PropTypes.func,
-  micOn: PropTypes.bool,
   toggleParticipant: PropTypes.func,
   toggleMessage: PropTypes.func,
 };

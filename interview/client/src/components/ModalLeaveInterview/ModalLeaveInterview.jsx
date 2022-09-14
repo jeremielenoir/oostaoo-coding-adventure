@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -11,8 +11,10 @@ import Typography from '@material-ui/core/Typography';
 
 /* Style */
 import './modalLeaveInterview.css';
+import { StreamContext } from '../../common/StreamContext';
 
 function ModalLeaveInterview({ open, handleClose }) {
+  const { leaveCall } = useContext(StreamContext);
   return (
     <Modal
       open={open}
@@ -32,7 +34,6 @@ function ModalLeaveInterview({ open, handleClose }) {
             Mettre fin à l'appel vidéo ?
           </Typography>
           <span className="text-modal">
-            {' '}
             Vous quitterez la réunion après validation.
           </span>
         </div>
@@ -42,7 +43,7 @@ function ModalLeaveInterview({ open, handleClose }) {
             Annuler
           </Button>
           <Link id="button-leave" to="/LoggedOffPage">
-            <Button variant="contained" color="secondary">
+            <Button onClick={leaveCall} variant="contained" color="secondary">
               Quitter
             </Button>
           </Link>

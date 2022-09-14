@@ -94,10 +94,12 @@ export const StreamContextProvider = ({ children }) => {
     [callerSignal, myStream]
   );
 
-  // // keep for later so we can cut the video stream when leaving the room (issue #480)
-  // const leaveCall = () => {
-  //   connectionRef.current.destroy();
-  // };
+  const leaveCall = useCallback(() => {
+    socket.emit('leave-call', { userID: mySocketID, room: pageHash });
+    connectionRef.current.streams[0].getAudioTracks()[0].enabled = false;
+    connectionRef.current.streams[0].getVideoTracks()[0].enabled = false;
+    connectionRef.current.destroy();
+  }, [mySocketID, pageHash]);
 
   useEffect(() => {
     navigator.mediaDevices
@@ -112,9 +114,24 @@ export const StreamContextProvider = ({ children }) => {
     });
 
     if (pageHash) {
-      socket.emit(SOCKET_JOIN_ROOM, Number(pageHash));
+      socket.emit(SOCKET_JOIN_ROOM, pageHash);
     }
   }, [meetingConfirmation, pageHash]);
+
+  // Leaving room logic if user simply directly close the tab
+  useEffect(() => {
+    const handleTabClose = (event) => {
+      event.preventDefault();
+      event.returnValue = '';
+    };
+    window.addEventListener('beforeunload', handleTabClose);
+    window.addEventListener('unload', leaveCall);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleTabClose);
+      window.removeEventListener('unload', leaveCall);
+    };
+  }, [leaveCall]);
 
   useEffect(() => {
     socket.on(SOCKET_SEND_CALL, (data) => {
@@ -157,6 +174,7 @@ export const StreamContextProvider = ({ children }) => {
         confirmMeeting,
         micToggle,
         micOn,
+        leaveCall,
         videoCamOn,
         videoCamToggle,
       }}
