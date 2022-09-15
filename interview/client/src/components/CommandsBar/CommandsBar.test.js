@@ -12,9 +12,6 @@ import {
   videoCamToggle,
 } from '../../common/StreamContext';
 
-import { handleOpen } from '../CommandsBar/CommandsBar';
-import { BrowserRouter } from 'react-router-dom';
-
 describe('CommandsBar component tests', () => {
   test('should render correctly', () => {
     render(
