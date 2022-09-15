@@ -75,8 +75,13 @@ const CommandsBar = ({ toggleParticipant, toggleMessage }) => {
       </div>
 
       <div className="other-icons">
-        <button type="button" id="group-icon" className="footer-icons">
-          <GroupIcon onClick={toggleParticipant} />
+        <button
+          type="button"
+          onClick={toggleParticipant}
+          id="group-icon"
+          className="footer-icons"
+        >
+          <GroupIcon />
         </button>
         <button
           type="button"
