@@ -37,8 +37,6 @@ setTimeout(function() {
 }, 10 * 1000);
 */
 
-var messages = [];
-
 io.on('connection', (socket) => {
   io.emit('FromApi', messages);
   socket.emit('my-id', socket.id);

@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
 import LoggedOffPage from './LoggedOffPage';
-import { EndPointContext } from '../../useContext';
 
 describe('LoggedOffPage component', () => {
   test('Should render without crash', () => {
@@ -24,21 +23,7 @@ describe('LoggedOffPage component', () => {
       </BrowserRouter>
     );
 
-    const button = screen.getByText(/réintégrer la réunion/i);
+    const button = screen.getByText(/Retour vers l'accueil/i);
     expect(button).toBeInTheDocument();
-  });
-
-  test('The text passed with EndPointContext should appear on screen', () => {
-    const mockContext = 'Toto';
-    render(
-      <BrowserRouter>
-        <EndPointContext.Provider value={[mockContext]}>
-          <LoggedOffPage />
-        </EndPointContext.Provider>
-      </BrowserRouter>
-    );
-
-    const title = screen.getByText('Toto');
-    expect(title).toBeInTheDocument();
   });
 });

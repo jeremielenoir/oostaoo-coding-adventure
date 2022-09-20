@@ -69,7 +69,11 @@
   "jest": {
     "coveragePathIgnorePatterns": [
       "src/services/",
-      "index.jsx"
+      "index.jsx",
+      "src/common",
+      "src/App.jsx",
+      "src/useContext.js",
+      "src/Pages/InterviewHomePage"
     ]
   }
 }
