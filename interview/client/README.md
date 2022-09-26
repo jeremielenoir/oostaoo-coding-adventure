@@ -1,6 +1,6 @@
 <div style="text-align: center">
 
-  <img width="300px" src="/client/src//assets/images/logo_ROODEO.svg" />
+  <img width="300px" src="./src/assets/images/logo_ROODEO.svg" />
 
 Assessment and test platform by @Oostaoo Consulting.
 This is the interview module of the project.
