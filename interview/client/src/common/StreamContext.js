@@ -140,10 +140,8 @@ export const StreamContextProvider = ({ children }) => {
     socket.on(SOCKET_OTHER_USER, (partnerID) => {
       setPartnerSocketID(partnerID);
 
-      if (!meetingConfirmation) {
-        callUser(partnerID);
-        receiveCall(partnerID);
-      }
+      callUser(partnerID);
+      receiveCall(partnerID);
     });
     // eslint-disable-next-line
   }, [meetingConfirmation]);
