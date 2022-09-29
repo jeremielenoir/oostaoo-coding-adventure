@@ -18,6 +18,7 @@ const moment = require('moment');
 const config = require('./config');
 
 const rooms = [];
+const messages = [];
 
 /* pour plus tard
 var room = io.sockets.in('some super awesome room');
