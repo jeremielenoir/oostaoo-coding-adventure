@@ -160,6 +160,8 @@ export const StreamContextProvider = ({ children }) => {
   function videoCamToggle() {
     connectionRef.current.streams[0].getVideoTracks()[0].enabled =
       !connectionRef.current.streams[0].getVideoTracks()[0].enabled;
+    myVideo.current.streams[0].getVideoTracks()[0].enabled =
+      !myVideo.current.streams[0].getVideoTracks()[0].enabled;
     setVideoCamOn(!videoCamOn);
   }
 
