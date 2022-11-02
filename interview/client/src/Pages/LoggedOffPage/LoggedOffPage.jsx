@@ -9,7 +9,7 @@ import './loggedOffPage.css';
 function LoggedOffPage() {
   return (
     <div className="container-disconnect">
-      <h3>Vous avez quitté la réunion.</h3>
+      <h3>Vous avez quitté la réunion, aurevoir.</h3>
       <div className="buttons">
         <Link to="/rooms/2">
           <Button variant="outlined">Retour vers l'accueil</Button>
