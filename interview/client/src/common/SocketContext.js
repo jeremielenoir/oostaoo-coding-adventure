@@ -28,6 +28,7 @@ export const SocketProvider = ({ children }) => {
       }}
     >
       {children}
+      console.log("test")
     </SocketContext.Provider>
   );
 };
