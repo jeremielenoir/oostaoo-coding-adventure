@@ -14,7 +14,6 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     socket.on(SOCKET_FROMAPI, (data) => {
-      // console.log(data);
       setChatMessages(data);
     });
   }, [socket]);

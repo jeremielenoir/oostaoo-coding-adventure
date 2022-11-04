@@ -41,6 +41,7 @@ const CommandsBar = ({ toggleParticipant, toggleMessage }) => {
           ) : (
             <MicIcon
               className="mic"
+              s
               color="primary"
               onClick={() => micToggle()}
               data-testid="micOnBtn"
