@@ -8,6 +8,7 @@ import SendIcon from '@material-ui/icons/Send';
 import TextField from '@material-ui/core/TextField';
 
 import { SocketContext } from '../../common/SocketContext';
+import { useSelector, useDispatch } from 'react-redux'
 
 /* Custom components */
 import Message from '../Message/Message';
@@ -17,6 +18,7 @@ import './chatSection.css';
 
 /* Socket variables */
 import dico from '../../common/dico';
+import { sendMessageRedux } from '../../redux/features/message/messageSlice';
 
 const { SOCKET_NEW_MESSAGE } = dico;
 
@@ -24,6 +26,12 @@ const { SOCKET_NEW_MESSAGE } = dico;
 const ChatSection = ({ toggleMessage }) => {
   const { socket, chatMessages } = useContext(SocketContext);
   const [currentMessage, setCurrentMessage] = useState('');
+
+  
+
+  const dispatch = useDispatch()
+  const testLog = useSelector((state) => state.message.messageTest)
+  console.log(testLog)
 
   const onChangeMessage = (e) => {
     setCurrentMessage(e.target.value);
@@ -85,7 +93,9 @@ const ChatSection = ({ toggleMessage }) => {
           id="send"
           size="small"
           color="primary"
-          onClick={sendMessage}
+          onClick={() => dispatch(currentMessage && sendMessageRedux())}
+          // onClick={() => dispatch(currentMessage && sendMessageRedux(socket.emit(SOCKET_NEW_MESSAGE, currentMessage)))}
+          // onClick={sendMessage}
           style={{
             maxWidth: '40px',
             maxHeight: '56px',
