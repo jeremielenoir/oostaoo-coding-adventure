@@ -31,7 +31,6 @@ const ChatSection = ({ toggleMessage }) => {
 
   const dispatch = useDispatch()
   const testLog = useSelector((state) => state.message.messageTest)
-  console.log(testLog)
 
   const onChangeMessage = (e) => {
     setCurrentMessage(e.target.value);
