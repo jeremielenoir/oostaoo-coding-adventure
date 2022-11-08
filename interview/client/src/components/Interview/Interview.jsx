@@ -12,19 +12,11 @@ import { StreamContext } from '../../common/StreamContext';
 function Interview() {
   const { myVideo, partnerSocketID, partnerVideo } = useContext(StreamContext);
 
-  const [secondary] = useState(false); // a state with no setter function associated ? why ?
   const inputRef = useRef();
+
+  const [secondary] = useState(false); // a state with no setter function associated ? why ?
   const [chat, setChat] = useState(false);
   const [participant, setParticipant] = useState(false);
-
-  const toggleMessage = () => {
-    setChat(!chat);
-    participant && setParticipant(false);
-  };
-  const toggleParticipant = () => {
-    setParticipant(!participant);
-    chat && setChat(false);
-  };
 
   return (
     <div className="interview-started">
@@ -41,25 +33,11 @@ function Interview() {
             <video muted autoPlay ref={myVideo} />
           </div>
         </div>
-        {chat ? (
-          <ChatSection toggleMessage={toggleMessage} inputRef={inputRef} />
-        ) : (
-          ''
-        )}
-        {participant ? (
-          <UsersSection
-            toggleParticipant={toggleParticipant}
-            secondary={secondary}
-          />
-        ) : (
-          ''
-        )}
+        {chat && <ChatSection inputRef={inputRef} />}
+        {participant && <UsersSection secondary={secondary} />}
       </div>
 
-      <CommandsBar
-        toggleParticipant={toggleParticipant}
-        toggleMessage={toggleMessage}
-      />
+      <CommandsBar setChat={setChat} setParticipant={setParticipant} />
     </div>
   );
 }
