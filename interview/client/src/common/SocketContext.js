@@ -22,7 +22,6 @@ export const SocketProvider = ({ children }) => {
   return (
     <SocketContext.Provider
       value={{
-        APILocation,
         chatMessages,
         socket,
       }}

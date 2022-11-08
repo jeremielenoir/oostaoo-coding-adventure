@@ -4,11 +4,15 @@ import './index.css';
 import App from './App';
 // import { EndPointContext } from './useContext';
 import * as serviceWorker from './services/serviceWorker';
+import { store } from './redux/store'
+import { Provider } from 'react-redux'
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <EndPointContext.Provider value="hello from context"> */}
-    <App />
+    <Provider store={store}>
+      <App />      
+    </Provider>
     {/* </EndPointContext.Provider> */}
   </React.StrictMode>,
   document.getElementById('root')
