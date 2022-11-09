@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import PropTypes from 'prop-types';
 
 /* MUI components */
 import Button from '@material-ui/core/Button';
@@ -7,8 +6,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import SendIcon from '@material-ui/icons/Send';
 import TextField from '@material-ui/core/TextField';
 
+import { useDispatch } from 'react-redux';
 import { SocketContext } from '../../common/SocketContext';
-import { useSelector, useDispatch } from 'react-redux'
 
 /* Custom components */
 import Message from '../Message/Message';
@@ -18,30 +17,30 @@ import './chatSection.css';
 
 /* Socket variables */
 import dico from '../../common/dico';
-import { sendMessageRedux } from '../../redux/features/message/messageSlice';
+import {
+  sendMessageRedux,
+  toggleActionMessage,
+} from '../../redux/features/message/messageSlice';
 
 const { SOCKET_NEW_MESSAGE } = dico;
 
 /* Component definition */
-const ChatSection = ({ toggleMessage }) => {
+const ChatSection = () => {
   const { socket, chatMessages } = useContext(SocketContext);
   const [currentMessage, setCurrentMessage] = useState('');
 
-  
-
-  const dispatch = useDispatch()
-  const testLog = useSelector((state) => state.message.messageTest)
+  const dispatch = useDispatch();
 
   const onChangeMessage = (e) => {
     setCurrentMessage(e.target.value);
   };
 
-  const sendMessage = () => {
-    if (currentMessage) {
-      socket.emit(SOCKET_NEW_MESSAGE, currentMessage);
-      setCurrentMessage('');
-    }
-  };
+  // const sendMessage = () => {
+  //   if (currentMessage) {
+  //     socket.emit(SOCKET_NEW_MESSAGE, currentMessage);
+  //     setCurrentMessage('');
+  //   }
+  // };
 
   const sendMessageWithEnterKey = (event) => {
     if (event.key === 'Enter') {
@@ -50,15 +49,14 @@ const ChatSection = ({ toggleMessage }) => {
     }
   };
 
-  // console.log('current message => ', currentMessage);
-
   return (
     <div className="chat-text">
       <div className="title-chat-text">
         <span> Messages dans l'appel </span>
         <CloseIcon
           id="close-icon"
-          onClick={toggleMessage}
+          className="close-icon"
+          onClick={() => dispatch(toggleActionMessage())}
           role="button"
           // next line for test purpose
           data-testid="closeButton"
@@ -93,7 +91,6 @@ const ChatSection = ({ toggleMessage }) => {
           size="small"
           color="primary"
           onClick={() => dispatch(currentMessage && sendMessageRedux())}
-          // onClick={() => dispatch(currentMessage && sendMessageRedux(socket.emit(SOCKET_NEW_MESSAGE, currentMessage)))}
           // onClick={sendMessage}
           style={{
             maxWidth: '40px',
@@ -110,8 +107,5 @@ const ChatSection = ({ toggleMessage }) => {
     </div>
   );
 };
-
-/* Proptypes */
-ChatSection.propTypes = { toggleMessage: PropTypes.func };
 
 export default ChatSection;

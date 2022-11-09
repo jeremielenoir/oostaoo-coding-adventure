@@ -1,20 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    messageTest: 0,
-}
+  messageTest: 0,
+  toggleMessage: false,
+  toggleUserList: false,
+};
 
 export const messageSlice = createSlice({
-    name: 'message',
-    initialState,
-    reducers: {
-        sendMessageRedux: (state, {payload}) => {
-        state.messageTest += 1 
-      },
+  name: 'message',
+  initialState,
+  reducers: {
+    sendMessageRedux: (state) => {
+      state.messageTest += 1;
     },
-  })
-  
-  // Action creators are generated for each case reducer function
-  export const { sendMessageRedux } = messageSlice.actions
-  
-  export default messageSlice.reducer
+    toggleActionMessage: (state) => {
+      state.toggleMessage = !state.toggleMessage;
+    },
+    toggleActionUserList: (state) => {
+      state.toggleUserList = !state.toggleUserList;
+    },
+  },
+});
+
+// Action creators are generated for each case reducer function
+export const { sendMessageRedux, toggleActionMessage, toggleActionUserList } =
+  messageSlice.actions;
+
+export default messageSlice.reducer;

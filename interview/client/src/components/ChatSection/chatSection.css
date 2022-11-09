@@ -62,3 +62,7 @@
 .MuiInputBase-root {
   width: 400px;
 }
+
+.close-icon{
+  cursor: pointer;
+}
