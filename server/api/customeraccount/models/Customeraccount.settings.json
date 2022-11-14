@@ -32,7 +32,8 @@
       "plugin": "users-permissions"
     },
     "offer": {
-      "model": "offer"
+      "model": "offer",
+      "via": "undefined"
     },
     "payments": {
       "collection": "payment",
