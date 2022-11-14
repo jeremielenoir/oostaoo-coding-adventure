@@ -549,18 +549,6 @@ module.exports = {
         email: params.email,
       });
 
-      interface saveble
-
-      interface serializbe
-
-
-      class moto extends vehicule implements SVGFEGaussianBlurElement, serializabe, sellable{
-
-        constructor(){
-          vehicule: super()
-        }
-
-      }
       
       const account = await strapi.services.customeraccount.add({
         type: params.accountType || 'personal',
