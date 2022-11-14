@@ -548,7 +548,20 @@ module.exports = {
       const newCustomer = await stripe.customers.create({
         email: params.email,
       });
-      console.log('newCustomer', newCustomer);
+
+      interface saveble
+
+      interface serializbe
+
+
+      class moto extends vehicule implements SVGFEGaussianBlurElement, serializabe, sellable{
+
+        constructor(){
+          vehicule: super()
+        }
+
+      }
+      
       const account = await strapi.services.customeraccount.add({
         type: params.accountType || 'personal',
         stripe_customer_id: newCustomer.id,
