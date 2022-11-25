@@ -4,6 +4,7 @@ import React, { useState, useRef, useContext } from 'react';
 import ChatSection from '../ChatSection/ChatSection';
 import CommandsBar from '../CommandsBar/CommandsBar';
 import UsersSection from '../UsersSection/UsersSection';
+import { useSelector } from 'react-redux';
 
 /* Style */
 import './interview.css';
@@ -15,8 +16,9 @@ function Interview() {
   const inputRef = useRef();
 
   const [secondary] = useState(false); // a state with no setter function associated ? why ?
-  const [chat, setChat] = useState(false);
-  const [participant, setParticipant] = useState(false);
+
+  const toggleMessage = useSelector((state) => state.message.toggleMessage);
+  const toggleUser = useSelector((state) => state.message.toggleUserList);
 
   return (
     <div className="interview-started">
@@ -33,11 +35,11 @@ function Interview() {
             <video muted autoPlay ref={myVideo} />
           </div>
         </div>
-        {chat && <ChatSection inputRef={inputRef} />}
-        {participant && <UsersSection secondary={secondary} />}
+        {toggleMessage && <ChatSection inputRef={inputRef} />}
+        {toggleUser && <UsersSection secondary={secondary} />}
       </div>
 
-      <CommandsBar setChat={setChat} setParticipant={setParticipant} />
+      <CommandsBar />
     </div>
   );
 }

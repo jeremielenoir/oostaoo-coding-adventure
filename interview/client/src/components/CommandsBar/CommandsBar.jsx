@@ -1,5 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useContext } from 'react';
 
 /* MUI components */
 import MicOffIcon from '@material-ui/icons/MicOff';
@@ -11,7 +10,7 @@ import VideocamIcon from '@material-ui/icons/Videocam';
 import VideocamOffIcon from '@material-ui/icons/VideocamOff';
 
 /* Custom components */
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import ModalLeaveInterview from '../ModalLeaveInterview/ModalLeaveInterview';
 
 /* Style */
@@ -23,30 +22,17 @@ import {
 } from '../../redux/features/message/messageSlice';
 
 /* Component definition */
-const CommandsBar = ({ setChat, setParticipant }) => {
+const CommandsBar = () => {
   const { micOn, micToggle, videoCamOn, videoCamToggle } = useContext(StreamContext);
 
   const dispatch = useDispatch();
 
   /* State */
   const [open, setOpen] = useState(false);
-  const [openMessageModal, setOpenMessageModal] = useState('');
-  const [openUserModal, setOpenUserModal] = useState('');
 
   /* Events */
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const toggleValue = useSelector((state) => state.message.toggleMessage);
-  const toggleValueUser = useSelector((state) => state.message.toggleUserList);
-
-  setChat(openMessageModal);
-  setParticipant(openUserModal);
-
-  useEffect(() => {
-    setOpenMessageModal(toggleValue);
-    setOpenUserModal(toggleValueUser);
-  }, [toggleValue, openMessageModal, setChat, toggleValueUser, openUserModal]);
 
   return (
     <footer className="container-interview-footer">
@@ -98,7 +84,6 @@ const CommandsBar = ({ setChat, setParticipant }) => {
       <div className="other-icons">
         <button
           type="button"
-          // onClick={toggleParticipant}
           onClick={() => dispatch(toggleActionUserList())}
           id="group-icon"
           className="footer-icons"
@@ -109,7 +94,6 @@ const CommandsBar = ({ setChat, setParticipant }) => {
           type="button"
           id="chat-icon"
           className="footer-icons"
-          // onClick={toggleMessage}
           onClick={() => dispatch(toggleActionMessage())}
           data-testid="chat-icon"
         >
@@ -118,12 +102,6 @@ const CommandsBar = ({ setChat, setParticipant }) => {
       </div>
     </footer>
   );
-};
-
-/* Proptypes */
-CommandsBar.propTypes = {
-  setParticipant: PropTypes.func,
-  setChat: PropTypes.func,
 };
 
 export default CommandsBar;

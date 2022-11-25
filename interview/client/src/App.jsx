@@ -10,7 +10,6 @@ import Routes from './common/routes';
 
 import './assets/css/App.css';
 import { StreamContextProvider } from './common/StreamContext';
-import { SocketProvider } from './common/SocketContext';
 
 const theme = createTheme({
   palette: {
@@ -43,9 +42,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <EndPointContext.Provider value={secretKey}>
           <StreamContextProvider>
-            <SocketProvider>
               <Routes />
-            </SocketProvider>
           </StreamContextProvider>
         </EndPointContext.Provider>
       </ThemeProvider>
