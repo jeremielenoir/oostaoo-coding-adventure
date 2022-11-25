@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 
 /* MUI components */
 import Button from '@material-ui/core/Button';
@@ -6,8 +6,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import SendIcon from '@material-ui/icons/Send';
 import TextField from '@material-ui/core/TextField';
 
-import { useDispatch } from 'react-redux';
-import { SocketContext } from '../../common/SocketContext';
+import { useDispatch, useSelector } from 'react-redux';
 
 /* Custom components */
 import Message from '../Message/Message';
@@ -16,36 +15,48 @@ import Message from '../Message/Message';
 import './chatSection.css';
 
 /* Socket variables */
-import dico from '../../common/dico';
 import {
-  sendMessageRedux,
+  currentMessage,
+  dataMessage,
   toggleActionMessage,
 } from '../../redux/features/message/messageSlice';
+import { request, fail, success } from '../../redux/features/socket/socketSlice';
+import dico from '../../common/dico';
+import socketIOClient from 'socket.io-client';
 
-const { SOCKET_NEW_MESSAGE } = dico;
+const APILocation = process.env.REACT_APP_REST_API_LOCATION;
+const { SOCKET_FROMAPI } = dico;
+const socket = socketIOClient(APILocation);
 
 /* Component definition */
 const ChatSection = () => {
-  const { socket, chatMessages } = useContext(SocketContext);
-  const [currentMessage, setCurrentMessage] = useState('');
-
+  const messageValue = useSelector((state)=> state.message.messageChat)
+  const currentMessageValue = useSelector((state)=> state.message.currentMsg)
   const dispatch = useDispatch();
 
   const onChangeMessage = (e) => {
-    setCurrentMessage(e.target.value);
+    dispatch(currentMessage(e.target.value))
   };
 
-  // const sendMessage = () => {
-  //   if (currentMessage) {
-  //     socket.emit(SOCKET_NEW_MESSAGE, currentMessage);
-  //     setCurrentMessage('');
-  //   }
-  // };
+// Get the values from the back
+const getDataMsg = () => {
+  socket.on(SOCKET_FROMAPI, (data) => {
+    dispatch(dataMessage(data));
+  });
+}
+
+  const sendMessage = () => {
+    if (currentMessageValue) {
+      dispatch(request(currentMessageValue))
+      dispatch(currentMessage(""))
+      getDataMsg()
+    }
+  };
 
   const sendMessageWithEnterKey = (event) => {
     if (event.key === 'Enter') {
-      socket.emit(SOCKET_NEW_MESSAGE, currentMessage);
-      setCurrentMessage('');
+      sendMessage()
+      getDataMsg()
     }
   };
 
@@ -64,8 +75,7 @@ const ChatSection = () => {
       </div>
       <div className="messagesList">
         {/* eslint-disable-next-line */}
-
-        {chatMessages.map((message) => (
+        {messageValue.map((message) => (
           <div className="message-and-date" key={message.id}>
             <Message date={message.date} />
             <Message text={message.text} />
@@ -78,7 +88,7 @@ const ChatSection = () => {
           required
           id="message"
           label="Message"
-          value={currentMessage}
+          value={currentMessageValue}
           focused
           onChange={onChangeMessage}
           onKeyDown={sendMessageWithEnterKey}
@@ -90,15 +100,7 @@ const ChatSection = () => {
           id="send"
           size="small"
           color="primary"
-          onClick={() => dispatch(currentMessage && sendMessageRedux())}
-          // onClick={sendMessage}
-          style={{
-            maxWidth: '40px',
-            maxHeight: '56px',
-            minWidth: '40px',
-            minHeight: '56px',
-            marginLeft: '5px',
-          }}
+          onClick={sendMessage}
           role="button"
         >
           <SendIcon />

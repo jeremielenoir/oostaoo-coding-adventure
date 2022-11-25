@@ -4,10 +4,11 @@ import { StreamContext } from '../../common/StreamContext';
 import Preview from '../../components/Preview/Preview';
 import Interview from '../../components/Interview/Interview';
 
+
 function InterviewHomePage({ match }) {
   const { setPageHash, meetingConfirmation } = useContext(StreamContext);
-
   const hash = match.params.hash; // room ID
+  
   useEffect(() => {
     setPageHash(hash);
   }, [hash, setPageHash]);
