@@ -1,62 +1,62 @@
 {
     "/api": {
-        "target": "https://roodeo.com",
+        "target": "http://roodeo.com:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/upload": {
-        "target": "https://roodeo.com",
+        "target": "http://roodeo.com:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/connect": {
-        "target": "https://roodeo.com",
+        "target": "http://roodeo.com:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/auth/": {
-        "target": "https://roodeo.com",
+        "target": "http://roodeo.com:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/auth/forgot-password": {
-        "target": "https://roodeo.com",
+        "target": "http://roodeo.com:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/auth/reset-password": {
-        "target": "https://roodeo.com",
+        "target": "http://roodeo.com:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/user": {
-        "target": "https://roodeo.com",
+        "target": "http://roodeo.com:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/notifications": {
-        "target": "https://roodeo.com",
+        "target": "http://roodeo.com:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
         }
     },
     "/feedback": {
-        "target": "https://roodeo.com",
+        "target": "http://roodeo.com:8080",
         "secure": false,
         "pathRewrite":{
             "^/":""
