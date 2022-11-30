@@ -6,7 +6,7 @@ import { DecryptTokenService } from '../components/home/register/register.servic
 
 const prefix = '/api/';
 
-export const TUTORIAL_ID: number = 737; // this campaign is for tutorial only
+export const TUTORIAL_ID: number = 6; // this campaign is for tutorial only
 export const QUESTION_SEPARATOR: string = '&#x263C;';
 
 export const API_URI_CAMPAIGNS: string = prefix + 'campaigns';
