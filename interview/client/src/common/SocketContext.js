@@ -9,13 +9,11 @@ export const SocketContext = createContext();
 
 export const SocketProvider = ({ children }) => {
   const APILocation = process.env.REACT_APP_REST_API_LOCATION;
-  console.log(APILocation);
   const socket = socketIOClient(APILocation);
   const [chatMessages, setChatMessages] = useState([]);
 
   useEffect(() => {
     socket.on(SOCKET_FROMAPI, (data) => {
-      // console.log(data);
       setChatMessages(data);
     });
   }, [socket]);
