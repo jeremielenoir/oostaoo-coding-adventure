@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import PropTypes from 'prop-types';
 
 /* MUI components */
 import MicOffIcon from '@material-ui/icons/MicOff';
@@ -11,15 +10,23 @@ import VideocamIcon from '@material-ui/icons/Videocam';
 import VideocamOffIcon from '@material-ui/icons/VideocamOff';
 
 /* Custom components */
+import { useDispatch } from 'react-redux';
 import ModalLeaveInterview from '../ModalLeaveInterview/ModalLeaveInterview';
 
 /* Style */
 import './commandsBar.css';
 import { StreamContext } from '../../common/StreamContext';
+import {
+  toggleActionMessage,
+  toggleActionUserList,
+} from '../../redux/features/message/messageSlice';
 
 /* Component definition */
-const CommandsBar = ({ toggleParticipant, toggleMessage }) => {
+const CommandsBar = () => {
   const { micOn, micToggle, videoCamOn, videoCamToggle } = useContext(StreamContext);
+
+  const dispatch = useDispatch();
+
   /* State */
   const [open, setOpen] = useState(false);
 
@@ -77,7 +84,7 @@ const CommandsBar = ({ toggleParticipant, toggleMessage }) => {
       <div className="other-icons">
         <button
           type="button"
-          onClick={toggleParticipant}
+          onClick={() => dispatch(toggleActionUserList())}
           id="group-icon"
           className="footer-icons"
         >
@@ -87,7 +94,7 @@ const CommandsBar = ({ toggleParticipant, toggleMessage }) => {
           type="button"
           id="chat-icon"
           className="footer-icons"
-          onClick={toggleMessage}
+          onClick={() => dispatch(toggleActionMessage())}
           data-testid="chat-icon"
         >
           <QuestionAnswerIcon />
@@ -95,12 +102,6 @@ const CommandsBar = ({ toggleParticipant, toggleMessage }) => {
       </div>
     </footer>
   );
-};
-
-/* Proptypes */
-CommandsBar.propTypes = {
-  toggleParticipant: PropTypes.func,
-  toggleMessage: PropTypes.func,
 };
 
 export default CommandsBar;

@@ -62,3 +62,15 @@
 .MuiInputBase-root {
   width: 400px;
 }
+
+.close-icon{
+  cursor: pointer;
+}
+
+#send {
+  max-width: 40px;
+  max-height: 56px;
+  min-width: 40px;
+  min-height: 56px;
+  margin-left: 5px;
+}

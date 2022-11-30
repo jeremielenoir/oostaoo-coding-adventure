@@ -22,3 +22,7 @@
 .title-users-room > #close-icon {
   color: #757575;
 }
+
+.close-icon{
+  cursor: pointer;
+}
