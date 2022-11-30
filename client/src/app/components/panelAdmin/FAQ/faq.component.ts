@@ -18,15 +18,15 @@ export class FAQComponent implements OnInit {
       // if (params['edit']) {
       // }
       console.log('params in FAQ : ', params);
-      this.filterParams = params.dynamicParams
+      this.filterParams = params.dynamicParams;
     });
   }
 
   ngOnInit() {
     // declaration nav route
     this.dataRoute = [
-      { routerLink: "/dashboard/faq", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "contact_support", name: "FAQ" },
-      { routerLink: "/dashboard/contact-support", condition: true, classAnimParent: "hvr-icon-bounce", classAnimIcone: "hvr-icon", icon: "place", name: "Contact" }
+      { routerLink: '/dashboard/faq', condition: true, classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'contact_support', name: 'FAQ' },
+      { routerLink: '/dashboard/contact-support', condition: true, classAnimParent: 'hvr-icon-bounce', classAnimIcone: 'hvr-icon', icon: 'place', name: 'Contact' }
     ];
     this.apiClientService.get(API_URI_FAQ).toPromise().then(faqs => {
       // console.log('faqs : ', faqs);
@@ -35,7 +35,7 @@ export class FAQComponent implements OnInit {
       return this.listTest = Array.from(new Set(faqs.map(faq => faq.type)));
     }).then(listType => {
       if (!listType.includes(this.filterParams)) {
-        this.filterParams = ''
+        this.filterParams = '';
       }
     });
 

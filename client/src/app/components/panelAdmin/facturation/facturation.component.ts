@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-//import pdfMake from "pdfmake/build/pdfmake";
+// import pdfMake from "pdfmake/build/pdfmake";
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AddressComponent } from '../../address/address.component';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -10,7 +10,7 @@ import {
   ConfirmComponent,
 } from '../../home/confirm/confirm.component';
 import { Router } from '@angular/router';
-import _ from "lodash";
+import _ from 'lodash';
 
 export interface PeriodicElement {
   date: string;
@@ -32,10 +32,10 @@ export class FacturationComponent implements OnInit {
   offer: any;
   invoices: [];
 
-  inProgress: boolean = false;
+  inProgress = false;
   datePipe = new DatePipe('fr');
   nextInvoice: any;
-  searchQuery: string = '';
+  searchQuery = '';
 
   dataRoute: any;
 
@@ -120,8 +120,9 @@ export class FacturationComponent implements OnInit {
   loadSubscriptions() {
     this.accountService.loadSubscription().subscribe(
       (sub) => {
-        if(!_.isEmpty(sub))
+        if (!_.isEmpty(sub)) {
         this.subscription = sub;
+        }
 
       },
       (err) => {
@@ -243,7 +244,7 @@ export class FacturationComponent implements OnInit {
         },
         (err) => {
           this.snackBar.open(
-            "Oops ! nous sommes pas en mesure d'annuler votre abonnement pour le moment. Veuillez réessayer plus tard.",
+            'Oops ! nous sommes pas en mesure d\'annuler votre abonnement pour le moment. Veuillez réessayer plus tard.',
             'Ok',
             { duration: 3500 },
           );

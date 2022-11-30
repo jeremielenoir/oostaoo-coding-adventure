@@ -5,4 +5,4 @@ export interface CodeLanguages {
     filename: string;
     options: { theme: string; language: string };
   };
-} 
+}

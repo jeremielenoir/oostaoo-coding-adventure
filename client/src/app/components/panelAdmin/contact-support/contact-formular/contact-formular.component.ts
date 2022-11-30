@@ -33,7 +33,7 @@ export class ContactFormularComponent implements OnInit {
   public size: 'compact' | 'normal' = 'normal';
   public lang = 'fr';
   public type: 'image' | 'audio';
-  public useGlobalDomain: boolean = false;
+  public useGlobalDomain = false;
   public captchaSuccess = false;
 
   ngOnInit() {
@@ -43,7 +43,7 @@ export class ContactFormularComponent implements OnInit {
     this._snackBar.open(message, action, {
       duration: 6000,
       panelClass: ['mat-snack-bar-container']
-    })
+    });
   }
 
   handleSuccess(captchaResponse: string): void {
@@ -54,7 +54,7 @@ export class ContactFormularComponent implements OnInit {
   sendFormular() {
     this.submittedForm = true;
     if (this.nom.value === '' || this.email.value === '' || this.email.invalid || this.subject.value === '' || this.message.value === '' || this.captchaSuccess !== true) {
-      this.openSnackBar("Une erreur a été recontrée, veuillez remplir tous les champs requis", "Fermer");
+      this.openSnackBar('Une erreur a été recontrée, veuillez remplir tous les champs requis', 'Fermer');
       return console.log('Erreur veuillez remplir tout les champs requis');
     } else {
       this.apiClientService.post(API_URI_ISSUE, {
@@ -64,16 +64,15 @@ export class ContactFormularComponent implements OnInit {
         Message: this.message.value
       }).subscribe(
         (res) => {
-          this.openSnackBar("Le formulaire a bien été envoyé à l'équipe support", "Fermer")
+          this.openSnackBar('Le formulaire a bien été envoyé à l\'équipe support', 'Fermer');
           const currentUser = this.authenticationService.currentUserValue;
           if (currentUser) {
             this.router.navigate(['/dashboard']);
-          }
-          else {
+          } else {
             this.router.navigate(['/home']);
             window.scrollTo(0, 0);
           }
-          
+
           // console.log('res', res);
         },
         err => console.log(err)

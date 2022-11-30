@@ -1,12 +1,12 @@
 
-export function getFactureDefinition(facture){
+export function getFactureDefinition(facture) {
 
   const { id, numero_facture, statut, updated_at , montant, date } = facture;
 
   return {
     content : [
       {
-        margin: [5,5,40, 5],
+        margin: [5, 5, 40, 5],
         columns: [
           [{
             // text: this.resume.name,
@@ -46,13 +46,13 @@ export function getFactureDefinition(facture){
           }, {
             text: 'N° de facture ' + numero_facture,
             alignment: 'right',
-            margin: [1,1,5,1]
+            margin: [1, 1, 5, 1]
           },
           {
             text: '   ',
-            margin: [20,0,0,0]
+            margin: [20, 0, 0, 0]
           }
-          ,{
+          , {
             text: 'solde exigible',
             alignment: 'right'
           }, {
@@ -140,9 +140,9 @@ export function getFactureDefinition(facture){
           // backgroundColor: 'orange',
           layout: 'factureTableLayout',
            headersRow: 1,
-           widths: [ 25,'*', 'auto', 100, '*' ],
+           widths: [ 25, '*', 'auto', 100, '*' ],
            body: [
-             [{text: '#', background: "orange"},'First', 'Second', 'Third', 'Four'],
+             [{text: '#', background: 'orange'}, 'First', 'Second', 'Third', 'Four'],
              ['1',
              {
                text: 'Online - monthly growth subscription',

@@ -1,26 +1,26 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { HttpClient } from "@angular/common/http";
-import { API_POPULATE_QUESTIONS_SPREADSHEET } from "../../api-client/api-client.service";
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { API_POPULATE_QUESTIONS_SPREADSHEET } from '../../api-client/api-client.service';
 
 @Component({
-  selector: "app-questions",
-  templateUrl: "./questions.component.html",
-  styleUrls: ["./questions.component.scss"],
+  selector: 'app-questions',
+  templateUrl: './questions.component.html',
+  styleUrls: ['./questions.component.scss'],
 })
 export class QuestionsComponent implements OnInit {
   populateForm: FormGroup;
   submittedPopulate = false;
   errors = null;
-  results = null
+  results = null;
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
 
   ngOnInit() {
     this.populateForm = this.formBuilder.group({
-      spreadsheetId: ["1X3x5HJVyAyg9MZTfhw044wEafHpoInT_L1rU-CnZdjE", Validators.required],
-      page: ["", Validators.required],
-      first: ["", Validators.required],
-      last: ["", Validators.required],
+      spreadsheetId: ['1X3x5HJVyAyg9MZTfhw044wEafHpoInT_L1rU-CnZdjE', Validators.required],
+      page: ['', Validators.required],
+      first: ['', Validators.required],
+      last: ['', Validators.required],
     });
   }
 
@@ -40,13 +40,13 @@ export class QuestionsComponent implements OnInit {
       .toPromise()
       .then((results ) => {
         this.errors = null;
-        this.results = results
+        this.results = results;
         this.submittedPopulate = false;
-        //this.populateForm.reset();
-         
+        // this.populateForm.reset();
+
       })
       .catch((err) => {
-        this.results = null
+        this.results = null;
         this.errors = err.message || err;
         this.submittedPopulate = false;
       });

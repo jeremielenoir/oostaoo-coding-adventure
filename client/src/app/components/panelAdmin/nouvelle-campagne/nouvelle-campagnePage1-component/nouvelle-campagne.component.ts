@@ -1,23 +1,23 @@
-import { Component, OnInit, EventEmitter, Output, Input, ViewEncapsulation } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import { FormCampagneValidator } from "src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator";
+import { Component, OnInit, EventEmitter, Output, Input, ViewEncapsulation } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FormCampagneValidator } from 'src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator';
 import {
   ApiClientService,
   API_URI_TECHNO,
   API_URI_PROFILES
-} from "../../../../api-client/api-client.service";
-import { MatSelectChange, TooltipPosition } from "@angular/material";
+} from '../../../../api-client/api-client.service';
+import { MatSelectChange, TooltipPosition } from '@angular/material';
 import {SelectedLanguageService} from '../../../../services/selected-language.service';
 import { LanguagePipe } from 'ngx-markdown';
 
 @Component({
-  selector: "app-profile-rechercher",
-  templateUrl: "./nouvelle-campagne.component.html",
+  selector: 'app-profile-rechercher',
+  templateUrl: './nouvelle-campagne.component.html',
   styleUrls: [
-    "./nouvelle-campagne.component.scss",
-    "../nouvelle-campagne.component.scss"
+    './nouvelle-campagne.component.scss',
+    '../nouvelle-campagne.component.scss'
   ],
-  //encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class NouvelleCampagnePage1Component implements OnInit {
   @Output() incrementPage = new EventEmitter<any>();
@@ -35,15 +35,15 @@ export class NouvelleCampagnePage1Component implements OnInit {
   public technosSelect: Array<string>;
   public roleSelect: string;
   public facile = 'facile';
-  public nameLanguage:string = '';
-  
+  public nameLanguage = '';
+
 
   @Output() valueChange = new EventEmitter();
   @Output() valueChangeProfil = new EventEmitter();
 
 
 
-  constructor(public apiClientService: ApiClientService,public languageStorage:SelectedLanguageService) {
+  constructor(public apiClientService: ApiClientService, public languageStorage: SelectedLanguageService) {
     this.oFormCampagneValidator = new FormCampagneValidator();
   }
 
@@ -52,10 +52,10 @@ export class NouvelleCampagnePage1Component implements OnInit {
     this.roleSelect = this.profilByParent;
     this.getProfiles();
     this.getTechnos();
-    
-    console.log('this.languageStorage.recupLanguageCountry()',this.languageStorage.getLanguageCountry())
 
-    switch(this.languageStorage.getLanguageCountry()){
+    console.log('this.languageStorage.recupLanguageCountry()', this.languageStorage.getLanguageCountry());
+
+    switch (this.languageStorage.getLanguageCountry()) {
       case 'es-ES':
       this.nameLanguage = 'name_es';
       break;
@@ -73,8 +73,8 @@ export class NouvelleCampagnePage1Component implements OnInit {
 
     }
 
-    console.log('content this.nameLanguage',this.nameLanguage);
-    
+    console.log('content this.nameLanguage', this.nameLanguage);
+
   }
 
   // somme(a, b) {
@@ -97,7 +97,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
   selected(event: MatSelectChange) {
 
     for (const iterator of this.profiles) {
-  
+
       const roleData = iterator[this.nameLanguage];
       if (event.value === roleData) {
         this.formCampagne.patchValue({roleSelectedId: { id: iterator.id } });
@@ -116,13 +116,13 @@ export class NouvelleCampagnePage1Component implements OnInit {
         });
       }
     }
-   
+
   }
 
   getTechnoChecked() {
 
     for (const profile of this.profiles) {
-      console.log('this.profileHasTechnologies -->',this.formCampagne.value.techno)
+      console.log('this.profileHasTechnologies -->', this.formCampagne.value.techno);
       if (this.profileHasTechnologies(profile, this.formCampagne.value.techno)) {
         this.roleSelect = profile[this.nameLanguage];
         break;
@@ -160,7 +160,7 @@ export class NouvelleCampagnePage1Component implements OnInit {
     for (const techno of profile.technologies) {
       // console.log('technoFromList: ', technoFromList);
       for (const technoFromList of listTechno) {
-        if (techno[this.nameLanguage] === technoFromList["name"]) {
+        if (techno[this.nameLanguage] === technoFromList['name']) {
           nbCounterTechno++;
         }
       }
@@ -177,9 +177,9 @@ export class NouvelleCampagnePage1Component implements OnInit {
   public onIncrementPage(pDatafromValue: any): void {
     this.valueChanged();
     this.formValid(pDatafromValue);
-    if (FormCampagneValidator._sMessageError === "") {
+    if (FormCampagneValidator._sMessageError === '') {
       this.incrementPage.emit(); // Déclenche l'output pour passer à la paga suivante.
-      this.methodAllTechno()
+      this.methodAllTechno();
     }
   }
 
@@ -192,19 +192,19 @@ export class NouvelleCampagnePage1Component implements OnInit {
     ) {
       this.errorExperience = FormCampagneValidator._sMessageError;
     } else {
-      this.errorExperience = "";
+      this.errorExperience = '';
     }
 
     if (FormCampagneValidator.validateRole(pDatafromValue.role) === false) {
       this.errorRole = FormCampagneValidator._sMessageError;
     } else {
-      this.errorRole = "";
+      this.errorRole = '';
     }
 
     if (FormCampagneValidator.validateTechno(pDatafromValue.techno) === false) {
       this.errorTechno = FormCampagneValidator._sMessageError;
     } else {
-      this.errorTechno = "";
+      this.errorTechno = '';
     }
   }
 

@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { FormCampagneValidator } from "src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator";
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormCampagneValidator } from 'src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator';
 
 @Component({
-  selector: "app-nouvelle-campagne",
-  templateUrl: "./nouvelle-campagne.component.html",
-  styleUrls: ["./nouvelle-campagne.component.scss"],
+  selector: 'app-nouvelle-campagne',
+  templateUrl: './nouvelle-campagne.component.html',
+  styleUrls: ['./nouvelle-campagne.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class NouvelleCampagneComponent implements OnInit {
@@ -14,25 +14,25 @@ export class NouvelleCampagneComponent implements OnInit {
   public oFormCampagneValidator: FormCampagneValidator;
   technoFromChild: Array<string>;
   selectProfilFromChild: string;
-  public Alltechno: any[] = []
+  public Alltechno: any[] = [];
 
   constructor(private _formBuilder: FormBuilder) {
     this.nNumeorPage = 1;
     this.oFormCampagneValidator = new FormCampagneValidator();
     this.ParentFormCampagne = this._formBuilder.group({
       role: this.oFormCampagneValidator.getRoleValidator(),
-      roleSelectedId: { id: "" },
+      roleSelectedId: { id: '' },
       techno: this.oFormCampagneValidator.getTechnoValidator(),
       technoSelectedId: [],
       experience: [
-        "facile",
+        'facile',
         this.oFormCampagneValidator.getExperienceValidator()
       ],
-      utilisationCopieColler: "false",
-      envoiRapportSimplifie: "false",
-      nomDeCampagne: "",
+      utilisationCopieColler: 'false',
+      envoiRapportSimplifie: 'false',
+      nomDeCampagne: '',
       langue: [],
-      CampaignID: { id: "" }
+      CampaignID: { id: '' }
     });
   }
 
@@ -47,7 +47,7 @@ export class NouvelleCampagneComponent implements OnInit {
   }
 
   showtechno() {
-    console.log("this.technoFromChild: ", this.technoFromChild);
+    console.log('this.technoFromChild: ', this.technoFromChild);
   }
 
   public nextPage(): void {

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlgotestComponent implements OnInit {
   public result: any;
-  public  filetype: any ='application/java';
+  public  filetype: any = 'application/java';
   public filename: any = 'Main.java';
   public question: any = {
     content: `

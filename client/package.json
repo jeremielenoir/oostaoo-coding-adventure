@@ -10,6 +10,7 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
+    "lint:fix": "ng lint --fix",
     "e2e": "ng e2e",
     "build-i18n:fr": "ng build --sourceMap=false --output-path=dist/client/fr --index=src/locale/fr/index.html --aot --prod --base-href /fr/ --i18n-file=src/locale/fr/messages.fr.xlf --i18n-format=xlf --i18n-missing-translation=ignore --i18n-locale=fr",
     "build-i18n:es": "ng build --sourceMap=false --output-path=dist/client/es --index=src/locale/es/index.html --aot --prod --base-href /es/ --i18n-file=src/locale/es/messages.es.xlf --i18n-format=xlf --i18n-missing-translation=ignore --i18n-locale=es",
@@ -92,6 +93,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.2.2"
+    "typescript": "3.2.2"
   }
 }

@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Inject, Optional, ViewChild } from "@angular/core";
-import { FormBuilder, NgForm, Validators } from "@angular/forms";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { Component, OnInit, Input, Inject, Optional, ViewChild } from '@angular/core';
+import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import {
   ApiClientService,
   API_URI_ADDRESS,
-} from "src/app/api-client/api-client.service";
+} from 'src/app/api-client/api-client.service';
 
 @Component({
   selector: 'app-address',

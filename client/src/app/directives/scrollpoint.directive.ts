@@ -15,24 +15,24 @@ import { throttle } from 'rxjs/operators';
         @Inject(DOCUMENT) private document: Document,
         private renderer: Renderer2,
         private el: ElementRef
-      ) { 
-        this.isInViewport= fromEvent(window, 'scroll')
+      ) {
+        this.isInViewport = fromEvent(window, 'scroll')
           .pipe(throttle(val => interval(250)));
 
         this.isInViewport.subscribe((ev) => {
           const {x, y, height} = el.nativeElement.getBoundingClientRect();
-          
-          if(window.scrollY > el.nativeElement.offsetTop - this.offset && window.scrollY < el.nativeElement.offsetTop + (height- this.offset)){
-            //console.log('WORKS', el.nativeElement);
+
+          if (window.scrollY > el.nativeElement.offsetTop - this.offset && window.scrollY < el.nativeElement.offsetTop + (height - this.offset)) {
+            // console.log('WORKS', el.nativeElement);
             this.renderer.addClass(this.el.nativeElement, 'active-section');
             this.currentSection.emit(this.scrollPoint);
-          }else{
+          } else {
             this.renderer.removeClass(this.el.nativeElement, 'active-section');
           }
-          
+
 
         });
-          
+
     }
 
     ngOnDestroy() {
@@ -40,5 +40,5 @@ import { throttle } from 'rxjs/operators';
     }
 
 
-    
+
     }

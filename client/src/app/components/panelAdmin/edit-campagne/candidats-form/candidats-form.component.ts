@@ -6,7 +6,7 @@ import { EMPTY, Observable, of, Subscription } from 'rxjs';
 import { catchError, finalize, map, switchMap, tap } from 'rxjs/operators';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CandidatsMailComponent } from '../candidats-mail/candidats-mail.component';
-import { DecryptTokenService } from "../../../home/register/register.service";
+import { DecryptTokenService } from '../../../home/register/register.service';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS,
@@ -25,7 +25,7 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
   private readonly emailRegex: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 
   @Input() globalId: number;
-  @Input() status: string = "form";
+  @Input() status = 'form';
   @Input() tests_available: number;
   @Output() onUpdateTestsAvailableWIP = new EventEmitter<any>();
   private subscription: Subscription;
@@ -41,7 +41,7 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
 
   public readonly sujet: string = 'Évaluation technique';
   public contenu: string;
-  public editing: boolean = false;
+  public editing = false;
   public htmlContent: string;
 
   public offer_id: any;
@@ -61,13 +61,13 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
     });
 
     // listen on form changes in order to prevent candidat to be add more than once to a campaign
-    this.subscription = this.form.get("contacts").valueChanges.subscribe(contacts => {
+    this.subscription = this.form.get('contacts').valueChanges.subscribe(contacts => {
         const contactControls: FormArray = this.contacts;
 
-        for (let i in contacts) {
+        for (const i in contacts) {
           if (contactControls.at(+i).get('value').valid) {
             const emailTrimed: string = contactControls.at(+i).value.value.trim();
-            
+
             if (this.emailsChecked.has(emailTrimed)) {
               this.candidatsApplied$ = of(this.emailsChecked.get(emailTrimed));
             } else {
@@ -78,8 +78,8 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
             }
           }
         }
-    })
-    
+    });
+
     this.user_id = this.decryptTokenService.userId;
     this.offer_id = this.decryptTokenService.offer_id;
 
@@ -109,7 +109,7 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
     if (this.contacts.length < this.tests_available) {
       this.contacts.push(this.createContact());
     } else {
-      this.openSnackBar("Limite de test disponibles atteinte", "Fermer");
+      this.openSnackBar('Limite de test disponibles atteinte', 'Fermer');
     }
   }
 
@@ -119,7 +119,7 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
     // check if left emails hasn't been already notified
     for (let i = 0; i < this.contacts.length; i++) {
       const email: string = this.contacts.at(i).value.value.trim();
-      if (this.emailsChecked.get(email)) this.candidatsApplied$ = of(true);
+      if (this.emailsChecked.get(email)) { this.candidatsApplied$ = of(true); }
     }
   }
 
@@ -143,10 +143,10 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
   updateCampaignPostCandidats(): void {
     const totalCandidats: number = this.candidats.length;
 
-    if (this.offer_id === 14) this.goToSubscribe();
+    if (this.offer_id === 14) { this.goToSubscribe(); }
 
     this.tests_available = this.tests_available - totalCandidats;
-    
+
     this.switchTo('loading');
 
     this.subscription = this.apiClientService.put(API_URI_USER + '/' + this.user_id, {
@@ -159,7 +159,7 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
       }
 
       this.testsAvailable.updateValue(this.tests_available);
-      
+
       this.switchTo('sent');
     });
   }
@@ -174,15 +174,15 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
       namePlaceholder: contactInfo.name
     }).pipe(
       switchMap(result => {
-        let candidatIDs: number[] = [];
+        const candidatIDs: number[] = [];
         candidatIDs.push(result.id);
         return this.updateCampaign(candidatIDs);
       }),
       catchError(err => {
-        this.openSnackBar("Une erreur est survenue", "Fermer")
+        this.openSnackBar('Une erreur est survenue', 'Fermer');
         return of(err);
       }),
-    )
+    );
   }
 
   updateCampaign(candidatIDs: number[]): Observable<any> {
@@ -205,22 +205,22 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
   }
 
   validate(): boolean {
-    return !this.form.controls["contacts"]["controls"].map(control => control.controls.name.errors === null && control.controls.value.errors === null).includes(false);
+    return !this.form.controls['contacts']['controls'].map(control => control.controls.name.errors === null && control.controls.value.errors === null).includes(false);
   }
 
   switchTo(status: string): void {
-    let cdts: Record<string, string>[] = [];
+    const cdts: Record<string, string>[] = [];
 
     for (const contact of this.contacts.controls) {
       const ct = (contact as FormGroup).controls;
-      
+
       const contactSanitized: Record<string, string> = {
         name: ct.name.value.trim(),
         email: ct.value.value.trim(),
       };
       cdts.push(contactSanitized);
     }
-    
+
     this.candidats = cdts;
 
     this.status = status;

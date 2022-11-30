@@ -24,7 +24,7 @@ export class CandidatsMailComponent implements OnInit {
   public candidats: any;
 
   public sujet: string;
-  public namePlaceholder: string = "[nom du candidat]";
+  public namePlaceholder = '[nom du candidat]';
   public contenu: string;
   public editing = false;
   public htmlContent: any;
@@ -100,14 +100,14 @@ export class CandidatsMailComponent implements OnInit {
           console.log('res', res.id);
           const idCandidat = [];
           idCandidat.push(res.id);
-          this.openSnackBar("Un mail d'invitation a correctement été envoyé", "Fermer");
+          this.openSnackBar('Un mail d\'invitation a correctement été envoyé', 'Fermer');
           return idCandidat;
         }
       )
       .then(idCandidat => {
         this.updateCampaign(idCandidat);
       }).catch(err => {
-        this.openSnackBar("Une erreur est survenue", "Fermer");
+        this.openSnackBar('Une erreur est survenue', 'Fermer');
         console.log('log error', err);
       });
   }
@@ -125,7 +125,7 @@ export class CandidatsMailComponent implements OnInit {
   }
 
   updateCampaignPostCandidats() {
-    let nbCandidats = this.candidats.length;
+    const nbCandidats = this.candidats.length;
     if (this.tests_available == -1) {
       for (const iterator of this.candidats) {
         this.postCandidat(iterator.name, iterator.value);
@@ -133,14 +133,14 @@ export class CandidatsMailComponent implements OnInit {
     } else if (this.tests_available == 0) {
       setTimeout(() => {
         this.goToSubscribe();
-      }, 1500)
-      this.openSnackBar(`Vous n'avez plus de test disponible`, "Fermer");
+      }, 1500);
+      this.openSnackBar(`Vous n'avez plus de test disponible`, 'Fermer');
     } else if (nbCandidats > this.tests_available) {
       // Note : this case should never happens has we have limited the number of candidats added to the number of tests_available
       setTimeout(() => {
         this.retourCandidat();
       }, 1500);
-      this.openSnackBar(`Impossible d'inviter ${nbCandidats} candidat${nbCandidats > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`, "Fermer");
+      this.openSnackBar(`Impossible d'inviter ${nbCandidats} candidat${nbCandidats > 1 ? 's' : ''}. Il vous reste seulement ${this.tests_available} test${this.tests_available > 1 ? 's' : ''} disponible${this.tests_available > 1 ? 's' : ''}`, 'Fermer');
     } else {
       this.tests_available = this.tests_available - nbCandidats;
       this.apiClientService

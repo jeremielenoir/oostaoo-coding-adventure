@@ -99,7 +99,7 @@ export class SaveCardComponent implements OnInit {
     };
 
     try {
-      let createPaymentMethodResponse = await this.stripeService
+      const createPaymentMethodResponse = await this.stripeService
         .getInstance()
         .createPaymentMethod(paymentData);
       if (createPaymentMethodResponse.error) {
@@ -131,7 +131,7 @@ export class SaveCardComponent implements OnInit {
         return;
       }
 
-      this.snackBar.open("La sauvegarde s'est terminée avec succès", 'Ok', {
+      this.snackBar.open('La sauvegarde s\'est terminée avec succès', 'Ok', {
         duration: 3000,
       });
       this.inProgress = false;

@@ -13,7 +13,7 @@ export class FooterComponent implements OnInit {
   }
 
 
-  scrollToTop(){
+  scrollToTop() {
     window.scrollTo(0, 0);
   }
 

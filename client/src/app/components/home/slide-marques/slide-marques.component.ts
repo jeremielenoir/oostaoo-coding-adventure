@@ -82,12 +82,12 @@ export class SlideMarquesComponent implements OnInit, OnDestroy {
   loopScroll() {
     this.intervalId = setInterval(() => {
       this.ds.moveRight();
-      
-      if(this.ds.currIndex > 5){
+
+      if (this.ds.currIndex > 5) {
         this.ds.moveTo(0);
       }
 
-    },3000);
+    }, 3000);
     /*if (this.ds.currIndex === this.srcImages.length - 5) {
       console.log(this.ds.currIndex);
       setTimeout(() => {
@@ -100,7 +100,7 @@ export class SlideMarquesComponent implements OnInit, OnDestroy {
     }
     setTimeout(() => this.loopScroll(), 3000);*/
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     clearInterval(this.intervalId);
   }
 }

@@ -6,16 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accueil.component.scss']
 })
 export class AccueilComponent implements OnInit {
-  currentMenuId = "menuRoodeo";
-  currentSection = "home";
+  currentMenuId = 'menuRoodeo';
+  currentSection = 'home';
   constructor() {
-    
+
    }
 
   ngOnInit() {
   }
 
-  setCurrentSection(id: string){
+  setCurrentSection(id: string) {
     console.log('ID', id);
     this.currentSection = id;
   }

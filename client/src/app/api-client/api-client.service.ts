@@ -6,12 +6,12 @@ import { DecryptTokenService } from '../components/home/register/register.servic
 
 const prefix = '/api/';
 
-export const TUTORIAL_ID: number = 5; // this campaign is for tutorial only
-export const QUESTION_SEPARATOR: string = '&#x263C;';
+export const TUTORIAL_ID = 5; // this campaign is for tutorial only
+export const QUESTION_SEPARATOR = '&#x263C;';
 
 export const API_URI_CAMPAIGNS: string = prefix + 'campaigns';
 export const API_URI_CAMPAIGN: string = prefix + 'campaign/:id';
-export const API_URI_TUTORIAL: string = API_URI_CAMPAIGNS + "/" + TUTORIAL_ID;
+export const API_URI_TUTORIAL: string = API_URI_CAMPAIGNS + '/' + TUTORIAL_ID;
 export const API_URI_TECHNO: string = prefix + 'technologies';
 export const API_URI_PROFILES: string = prefix + 'profiles';
 export const API_URI_QUESTIONS: string = prefix + 'questions';
@@ -33,13 +33,13 @@ export const API_URI_PAYMENT: string = prefix + 'payments';
 export const API_URI_FEEDBACK: string = prefix + 'feedbacks';
 export const API_URI_FAQ: string = prefix + 'faqs';
 export const API_URI_ISSUE: string = prefix + 'issues';
-export const API_URI_ROLE: string = '/users-permissions/roles';
+export const API_URI_ROLE = '/users-permissions/roles';
 export const EXECUTE_SCRIPT: string = prefix + 'questions/execute/';
 export const API_POPULATE_QUESTIONS_SPREADSHEET: string = prefix + 'questions/populate/';
 
 export const UPLOAD_TO_STRAPI = '/upload';
 
-//Bp6PnJmoydK5rz6o
+// Bp6PnJmoydK5rz6o
 
 @Injectable()
 export class ApiClientService {

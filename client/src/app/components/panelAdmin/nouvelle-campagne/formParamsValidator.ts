@@ -4,7 +4,7 @@ export class FormParamsValidator {
 
     private static sMessageError = '';
     private nameValidator: FormControl;
-    
+
 
     public static get _sMessageError(): string {
         return this.sMessageError;

@@ -1,21 +1,21 @@
-import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import { FormParamsValidator } from "src/app/components/panelAdmin/nouvelle-campagne/formParamsValidator";
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FormParamsValidator } from 'src/app/components/panelAdmin/nouvelle-campagne/formParamsValidator';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS
-} from "../../../../api-client/api-client.service";
+} from '../../../../api-client/api-client.service';
 
 @Component({
-  selector: "app-NouvelleCampagnePage2Component",
-  templateUrl: "./nouvelle-campagne2.component.html",
+  selector: 'app-NouvelleCampagnePage2Component',
+  templateUrl: './nouvelle-campagne2.component.html',
   styleUrls: [
-    "./nouvelle-campagne2.component.scss",
-    "../nouvelle-campagne.component.scss"
+    './nouvelle-campagne2.component.scss',
+    '../nouvelle-campagne.component.scss'
   ]
 })
 export class NouvelleCampagnePage2Component implements OnInit {
-  selectedLangue = "FR";
+  selectedLangue = 'FR';
 
   @Output() incrementPage = new EventEmitter<any>();
   @Output() decrementPage = new EventEmitter<any>();
@@ -32,7 +32,7 @@ export class NouvelleCampagnePage2Component implements OnInit {
     this.formCampagne.patchValue({
       nomDeCampagne:
         this.formCampagne.value.role +
-        " - " +
+        ' - ' +
         this.formCampagne.value.experience
     });
   }
@@ -51,7 +51,7 @@ export class NouvelleCampagnePage2Component implements OnInit {
     if (FormParamsValidator.validateName(pDatafromValue.nomDeCampagne) === false) {
       this.errorName = FormParamsValidator._sMessageError;
     } else {
-      this.errorName = "";
+      this.errorName = '';
     }
   }
 
@@ -62,7 +62,7 @@ export class NouvelleCampagnePage2Component implements OnInit {
   public onIncrementPage(pDatafromValue): void {
 
     this.formValid(pDatafromValue);
-    if (FormParamsValidator._sMessageError === "") {
+    if (FormParamsValidator._sMessageError === '') {
       this.incrementPage.emit(); // Déclenche l'output pour passer à la paga suivante.
     }
   }

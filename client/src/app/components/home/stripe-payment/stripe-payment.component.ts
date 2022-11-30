@@ -177,7 +177,7 @@ export class StripePaymentComponent implements OnInit {
                   })
                   .toPromise();
                 this.snackBar.open(
-                  "Votre achat s'est terminé avec succès",
+                  'Votre achat s\'est terminé avec succès',
                   'Ok',
                   {
                     duration: 3000,
@@ -190,7 +190,7 @@ export class StripePaymentComponent implements OnInit {
             }
           });
       } else {
-        this.snackBar.open("Votre achat s'est terminé avec succès", 'Ok', {
+        this.snackBar.open('Votre achat s\'est terminé avec succès', 'Ok', {
           duration: 3000,
         });
         this.inProgress = false;

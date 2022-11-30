@@ -5,7 +5,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as _moment from 'moment';
-//@ts-ignore 
+// @ts-ignore
 import { default as _rollupMoment } from 'moment';
 import { ApiClientService, API_URI_INTERVIEWS, API_URI_USER } from 'src/app/api-client/api-client.service';
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
@@ -38,17 +38,17 @@ const moment = _rollupMoment || _moment;
 })
 
 export class InterviewDialogComponent implements OnInit {
-  public currentDate: any = new Date()
+  public currentDate: any = new Date();
   public Editor = ClassicEditor;
   public htmlContent: any;
   public interview: any;
-  public interview_link: string = "https://interview.oostaoo.com/rooms/"
+  public interview_link = 'https://interview.oostaoo.com/rooms/';
   public loading: Boolean = false;
   public show: any = true;
   public status: string;
-  public STATUS_CREATE = "CREATE";
-  public STATUS_VIEW = "VIEW";
-  public STATUS_UPDATE = "UPDATE";
+  public STATUS_CREATE = 'CREATE';
+  public STATUS_VIEW = 'VIEW';
+  public STATUS_UPDATE = 'UPDATE';
   public subject: string;
   public times: any = [];
   currentUser: any;
@@ -127,12 +127,12 @@ export class InterviewDialogComponent implements OnInit {
       case 'en-US': this._adapter.setLocale('en'); break;
       case 'jp-JP': this._adapter.setLocale('ja-JP'); break;
       default: this._adapter.setLocale('fr'); break;
-    };
+    }
   }
 
   get pctrl() {
     if (!this.populateForm || !this.populateForm.controls) {
-      return null
+      return null;
     }
     return this.populateForm.controls;
   }
@@ -142,11 +142,11 @@ export class InterviewDialogComponent implements OnInit {
   get time() { return this.populateForm.get('time'); }
 
   get formInterviewDate() {
-    return this.pctrl && this.pctrl.interview_date && this.pctrl.interview_date.value && this.pctrl.time && this.pctrl.time.value ? ` à la date du ${moment(this.pctrl.interview_date.value).format('DD/MM/YYYY')} à ${this.pctrl.time.value}` : ''
+    return this.pctrl && this.pctrl.interview_date && this.pctrl.interview_date.value && this.pctrl.time && this.pctrl.time.value ? ` à la date du ${moment(this.pctrl.interview_date.value).format('DD/MM/YYYY')} à ${this.pctrl.time.value}` : '';
   }
 
   formatCandidatName(name) {
-    return name === "-" ? "" : " " + name;
+    return name === '-' ? '' : ' ' + name;
   }
 
   setStatus(status) {
@@ -156,20 +156,20 @@ export class InterviewDialogComponent implements OnInit {
       this.pctrl['time'].reset();
     } else {
       this.pctrl['interview_date'].reset(this.interview.interview_date);
-      this.pctrl['time'].reset(moment(this.interview.interview_date).format("HH:mm"));
+      this.pctrl['time'].reset(moment(this.interview.interview_date).format('HH:mm'));
     }
   }
 
   close() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 
   validateTime(group: FormGroup): any {
-    if (group && group.get("interview_date").dirty && group.get("time").dirty) {
-      let toBeValidated = group.get("interview_date").value.clone();
-      let selectedTime = group.get("time").value;
+    if (group && group.get('interview_date').dirty && group.get('time').dirty) {
+      const toBeValidated = group.get('interview_date').value.clone();
+      const selectedTime = group.get('time').value;
       toBeValidated.add(selectedTime);
-      let now = moment();
+      const now = moment();
       if (toBeValidated.isBefore(now)) {
         return { badTime: true };
       }
@@ -186,7 +186,7 @@ export class InterviewDialogComponent implements OnInit {
         .subscribe(user => {
           this.currentUser = user;
         });
-    };
+    }
 
     // Compute times for Select hour
     for (let hour = 0; hour < 24; hour++) {
@@ -200,20 +200,20 @@ export class InterviewDialogComponent implements OnInit {
     }
     this.times = this.times.sort((a, b) => {
       moment(new Date(a)).isBefore(moment(new Date(b)));
-      const currentDate = new Date()
-      const [hourA, mmA] = a.split(":")
-      let firstDate = moment(currentDate).set({
+      const currentDate = new Date();
+      const [hourA, mmA] = a.split(':');
+      const firstDate = moment(currentDate).set({
         hour: hourA,
         minute: mmA
-      })
-      const [hourB, mmB] = b.split(":")
-      let secondDate = moment(currentDate).set({
+      });
+      const [hourB, mmB] = b.split(':');
+      const secondDate = moment(currentDate).set({
         hour: hourB,
         minute: mmB
       });
       const result = firstDate.diff(secondDate);
       return result;
-    })
+    });
 
     // Set form datas
     this.subject = `Entretien video conférence`;
@@ -232,7 +232,7 @@ export class InterviewDialogComponent implements OnInit {
 
     } else if (this.status === this.STATUS_VIEW) {
       this.htmlContent = this.HTML_CONTENT_UPDATE;
-      const apiURL = API_URI_INTERVIEWS + "/" + this.data.Interview.id;
+      const apiURL = API_URI_INTERVIEWS + '/' + this.data.Interview.id;
       this.apiClientService
         .get(apiURL)
         .toPromise()
@@ -248,15 +248,15 @@ export class InterviewDialogComponent implements OnInit {
               email: [this.interview.candidats[0].email, Validators.required],
               name: [this.interview.candidats[0].Nom, Validators.required],
               interview_link: [this.interview.interview_link, Validators.required],
-              htmlContent: [this.htmlContent.replace("[date]", moment(this.interview.interview_date).format('DD/MM/YYYY')), Validators.required],
-              time: [moment(this.interview.interview_date).format("HH:mm"), Validators.required],
+              htmlContent: [this.htmlContent.replace('[date]', moment(this.interview.interview_date).format('DD/MM/YYYY')), Validators.required],
+              time: [moment(this.interview.interview_date).format('HH:mm'), Validators.required],
             }, { validator: this.validateTime });
           }
         })
         .catch(e => {
-          console.log("Error fetching interview", e)
+          console.log('Error fetching interview', e);
           throw new Error(`Error fetching interview :\n${e}`);
-        })
+        });
     }
   }
 
@@ -268,16 +268,16 @@ export class InterviewDialogComponent implements OnInit {
     if (this.status === this.STATUS_UPDATE) {
       this.loading = true;
       const id = this.data.Interview.id;
-      const apiURL = API_URI_INTERVIEWS + "/" + id;
+      const apiURL = API_URI_INTERVIEWS + '/' + id;
 
-      let interview_date = moment(this.pctrl.interview_date.value);
-      const [hour, minute] = this.pctrl.time.value.split(":");
+      const interview_date = moment(this.pctrl.interview_date.value);
+      const [hour, minute] = this.pctrl.time.value.split(':');
       interview_date.set({
         hour,
         minute
       });
 
-      const email_content = this.pctrl.htmlContent.value.toString().replace("[nouvelle date]", date);
+      const email_content = this.pctrl.htmlContent.value.toString().replace('[nouvelle date]', date);
       const data: any = {
         id,
         interview_date,
@@ -286,7 +286,7 @@ export class InterviewDialogComponent implements OnInit {
         interview_link: this.interview_link,
         email_title: this.subject,
         email_content,
-      }
+      };
 
       return this.apiClientService
         .put(apiURL, data)
@@ -297,18 +297,18 @@ export class InterviewDialogComponent implements OnInit {
         ).catch(e => {
           this.loading = false;
           throw new Error(`Error updating interview :\n${e}`);
-        })
+        });
     } else if (this.status === this.STATUS_CREATE) {
       const apiURL = API_URI_INTERVIEWS;
 
-      let interview_date = moment(this.pctrl.interview_date.value);
-      const [hour, minute] = this.pctrl.time.value.split(":");
+      const interview_date = moment(this.pctrl.interview_date.value);
+      const [hour, minute] = this.pctrl.time.value.split(':');
       interview_date.set({
         hour,
         minute
-      })
+      });
 
-      const email_content = this.pctrl.htmlContent.value.toString().replace("[date de l'entretien]", date)
+      const email_content = this.pctrl.htmlContent.value.toString().replace('[date de l\'entretien]', date);
       this.loading = true;
       const data: any = {
         interview_date,
@@ -317,7 +317,7 @@ export class InterviewDialogComponent implements OnInit {
         email_title: this.subject,
         email_content,
         interview_link: this.interview_link
-      }
+      };
 
       return this.apiClientService
         .post(apiURL, data)
@@ -328,29 +328,29 @@ export class InterviewDialogComponent implements OnInit {
         ).catch(e => {
           this.loading = false;
           throw new Error(`Error creating interview :\n${e}`);
-        })
+        });
     }
   }
 
   remove() {
     if (!(this.data && this.data.Interview && this.data.Interview.id)) {
-      return
+      return;
     }
 
     const id = this.data.Interview.id;
-    const apiURL = API_URI_INTERVIEWS + "-cancel";
+    const apiURL = API_URI_INTERVIEWS + '-cancel';
 
-    if (window.confirm("Voulez-vous annuler cet entretien ? ( le candidat sera prévenu automatiquement par email )")) {
+    if (window.confirm('Voulez-vous annuler cet entretien ? ( le candidat sera prévenu automatiquement par email )')) {
       this.loading = true;
-      let interview_date = moment(this.pctrl.interview_date.value);
-      const [hour, minute] = this.pctrl.time.value.split(":");
+      const interview_date = moment(this.pctrl.interview_date.value);
+      const [hour, minute] = this.pctrl.time.value.split(':');
       interview_date.set({
         hour,
         minute
       });
 
       const date = this.formInterviewDate;
-      const email_content = this.HTML_CONTENT_CANCEL.replace("[date]", date);
+      const email_content = this.HTML_CONTENT_CANCEL.replace('[date]', date);
       const data: any = {
         id,
         interview_date,
@@ -359,7 +359,7 @@ export class InterviewDialogComponent implements OnInit {
         interview_link: this.interview_link,
         email_title: `Annulation Entretien vidéo du ${date}`,
         email_content,
-      }
+      };
 
       return this.apiClientService
         .post(apiURL, data)
@@ -371,7 +371,7 @@ export class InterviewDialogComponent implements OnInit {
         ).catch(e => {
           this.loading = false;
           throw new Error(`Error deleting interview :\n${e}`);
-        })
+        });
     }
   }
 }

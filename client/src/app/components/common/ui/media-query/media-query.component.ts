@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 export class MediaQueryComponent implements OnInit, OnDestroy {
   @Input() query: string;
   private subscription: Subscription = new Subscription();
-  public show: boolean = false;
+  public show = false;
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 

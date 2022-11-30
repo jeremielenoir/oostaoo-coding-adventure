@@ -9,7 +9,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 export class ConfirmComponent implements OnInit {
 
   title: string;
-  message: string; 
+  message: string;
 
   constructor(public dialogRef: MatDialogRef<ConfirmComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ConfirmModel) {

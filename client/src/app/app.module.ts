@@ -91,7 +91,7 @@ import { GeneralComponent } from './components/panelAdmin/edit-campagne/settings
 import { PersonnalisationComponent } from './components/panelAdmin/edit-campagne/settings/personnalisation/personnalisation.component';
 import { ClientTestComponent } from './components/panelAdmin/client-test/client-test.component';
 import { TestComponent } from './components/panelAdmin/client-test/test/test.component';
-import { DialogTimeoutComponent } from './components/panelAdmin/client-test/test/dialog-timeout.component'
+import { DialogTimeoutComponent } from './components/panelAdmin/client-test/test/dialog-timeout.component';
 
 
 

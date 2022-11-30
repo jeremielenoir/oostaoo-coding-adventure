@@ -174,7 +174,7 @@ export class SubscriptionComponent implements OnInit {
         },
         (err) => {
           this.snackBar.open(
-            "Oops ! nous sommes pas en mesure d'annuler votre abonnement pour le moment. Veuillez réessayer plus tard.",
+            'Oops ! nous sommes pas en mesure d\'annuler votre abonnement pour le moment. Veuillez réessayer plus tard.',
             'Ok',
             { duration: 3500 },
           );

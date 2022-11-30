@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PaymentMethod } from '@stripe/stripe-js';
-//import { PaymentMethod } from 'ngx-stripe/lib/interfaces/payment-intent';
+// import { PaymentMethod } from 'ngx-stripe/lib/interfaces/payment-intent';
 @Component({
   selector: 'app-creditcard',
   templateUrl: './creditcard.component.html',

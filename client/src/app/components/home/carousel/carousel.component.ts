@@ -44,21 +44,21 @@ export class CarouselItemElement {
   `]
 })
 export class CarouselComponent implements AfterViewInit {
-  @ContentChildren(CarouselItemDirective) items : QueryList<CarouselItemDirective>;
-  @ViewChildren(CarouselItemElement, { read: ElementRef }) private itemsElements : QueryList<ElementRef>;
-  @ViewChild('carousel') private carousel : ElementRef;
+  @ContentChildren(CarouselItemDirective) items: QueryList<CarouselItemDirective>;
+  @ViewChildren(CarouselItemElement, { read: ElementRef }) private itemsElements: QueryList<ElementRef>;
+  @ViewChild('carousel') private carousel: ElementRef;
   @Input() timing = '250ms ease-in';
   @Input() showControls = true;
-  private player : AnimationPlayer;
-  private itemWidth : number;
+  private player: AnimationPlayer;
+  private itemWidth: number;
   private currentSlide = 0;
-  carouselWrapperStyle = {}
+  carouselWrapperStyle = {};
 
   next() {
-    if( this.currentSlide + 1 === this.items.length ) this.currentSlide = -1;
+    if ( this.currentSlide + 1 === this.items.length ) { this.currentSlide = -1; }
     this.currentSlide = (this.currentSlide + 1) % this.items.length;
     const offset = this.currentSlide * this.itemWidth;
-    const myAnimation : AnimationFactory = this.buildAnimation(offset);
+    const myAnimation: AnimationFactory = this.buildAnimation(offset);
     this.player = myAnimation.create(this.carousel.nativeElement);
     this.player.play();
   }
@@ -70,17 +70,17 @@ export class CarouselComponent implements AfterViewInit {
   }
 
   prev() {
-    if( this.currentSlide === 0 ) return;
+    if ( this.currentSlide === 0 ) { return; }
 
     this.currentSlide = ((this.currentSlide - 1) + this.items.length) % this.items.length;
     const offset = this.currentSlide * this.itemWidth;
 
-    const myAnimation : AnimationFactory = this.buildAnimation(offset);
+    const myAnimation: AnimationFactory = this.buildAnimation(offset);
     this.player = myAnimation.create(this.carousel.nativeElement);
     this.player.play();
   }
 
-  constructor( private builder : AnimationBuilder ) {
+  constructor( private builder: AnimationBuilder ) {
   }
 
   ngAfterViewInit() {
@@ -89,9 +89,9 @@ export class CarouselComponent implements AfterViewInit {
       this.itemWidth = this.itemsElements.first.nativeElement.getBoundingClientRect().width;
       this.carouselWrapperStyle = {
         width: `${this.itemWidth}px`
-      }
+      };
     });
-    
+
   }
 
 }

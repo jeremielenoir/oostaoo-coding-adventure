@@ -34,7 +34,7 @@ export class GeneralComponent implements OnInit {
 
   copypaste: boolean;
   envoiRapportSimplifie: boolean;
-  isLoaded: boolean = false;
+  isLoaded = false;
 
 
   ngOnInit() {
@@ -74,9 +74,9 @@ export class GeneralComponent implements OnInit {
       this.envoiRapportSimplifie = false;
     }
 
-    
+
     if (this.expdate.value === null || this.name.value === '') {
-      this.openSnackBar("Une erreur est survenue, veuillez remplir correctement tous les champs requis", "Fermer");
+      this.openSnackBar('Une erreur est survenue, veuillez remplir correctement tous les champs requis', 'Fermer');
     } else {
       this.apiClientService.put(API_URI_CAMPAIGNS + '/' + this.globalId, {
         Name: this.name.value,
@@ -86,7 +86,7 @@ export class GeneralComponent implements OnInit {
         expiration_days: this.expdate.value,
       }).subscribe(
         (res) => {
-          this.openSnackBar("La campagne a correctement été mise à jour", "Fermer")
+          this.openSnackBar('La campagne a correctement été mise à jour', 'Fermer');
 
         }
       );

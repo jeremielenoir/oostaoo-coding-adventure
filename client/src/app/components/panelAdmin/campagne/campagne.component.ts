@@ -39,7 +39,7 @@ export class CampagneComponent implements OnInit, OnDestroy {
   public searchHeader: string;
   public confirmed: boolean;
   public IsactiveNoCountryside = false;
-  public searchText: string = '';
+  public searchText = '';
   public result: any;
   public showArchives = false;
   public test: any;
@@ -105,7 +105,7 @@ export class CampagneComponent implements OnInit, OnDestroy {
         this.subscription = this.duplicateCampaign(campaign.id).subscribe((duplicateCampaign) => {
           this.campaigns.push(duplicateCampaign);
           this.campaigns = [...this.campaigns];
-          this.openSnackBar("La campagne a correctement été dupliquée", "Fermer");
+          this.openSnackBar('La campagne a correctement été dupliquée', 'Fermer');
         });
       }
     });
@@ -122,11 +122,11 @@ export class CampagneComponent implements OnInit, OnDestroy {
       this.confirmed = res;
       if (res) {
         this.subscription = this.deleteCampaign(campaign.id).subscribe((campaignId) => {
-          let found = this.campaigns.findIndex(campaign => campaign.id === campaignId);
+          const found = this.campaigns.findIndex(campaign => campaign.id === campaignId);
           console.log('FOUND', found);
           this.campaigns.splice(found, 1);
           this.campaigns = [...this.campaigns];
-          this.openSnackBar("La campagne a correctement été supprimée", "Fermer");
+          this.openSnackBar('La campagne a correctement été supprimée', 'Fermer');
         });
       }
     });
@@ -170,7 +170,7 @@ export class CampagneComponent implements OnInit, OnDestroy {
           (res) => {
             campaign.pin = true;
             this.campaigns = [...this.campaigns];
-            this.openSnackBar("La campagne a correctement été épinglée", "Fermer");
+            this.openSnackBar('La campagne a correctement été épinglée', 'Fermer');
           },
           err => console.log(err)
         );
@@ -182,7 +182,7 @@ export class CampagneComponent implements OnInit, OnDestroy {
           (res) => {
             campaign.pin = false;
             this.campaigns = [...this.campaigns];
-            this.openSnackBar("La campagne a correctement été désépinglée", "Fermer");
+            this.openSnackBar('La campagne a correctement été désépinglée', 'Fermer');
           },
           err => console.log(err)
         );
@@ -190,7 +190,7 @@ export class CampagneComponent implements OnInit, OnDestroy {
   }
 
   trackByFn(index, campaign) {
-    //console.log(index, campaign);
+    // console.log(index, campaign);
     return campaign.id;
   }
 
@@ -205,7 +205,7 @@ export class CampagneComponent implements OnInit, OnDestroy {
           (res) => {
             campaign.archive = true;
             this.campaigns = [...this.campaigns];
-            this.openSnackBar("La campagne a correctement été archivée", "Fermer");
+            this.openSnackBar('La campagne a correctement été archivée', 'Fermer');
             // console.log('res', res);
           },
           err => console.log(err)
@@ -218,7 +218,7 @@ export class CampagneComponent implements OnInit, OnDestroy {
           (res) => {
             campaign.archive = false;
             this.campaigns = [...this.campaigns];
-            this.openSnackBar("La campagne a correctement été désarchivée", "Fermer");
+            this.openSnackBar('La campagne a correctement été désarchivée', 'Fermer');
           },
           err => console.log(err)
         );

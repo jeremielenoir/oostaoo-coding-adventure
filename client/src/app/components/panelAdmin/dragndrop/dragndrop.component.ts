@@ -132,8 +132,9 @@ export class DragNDropComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public ngOnDestroy() {
-    if(this.subscription)
+    if (this.subscription) {
       this.subscription.unsubscribe();
+    }
   }
 
   public dragStart(event: CdkDragDrop<string[]>) {

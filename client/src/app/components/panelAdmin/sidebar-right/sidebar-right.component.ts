@@ -8,7 +8,7 @@ import { element } from '@angular/core/src/render3';
 })
 export class SidebarRightComponent implements OnInit, OnChanges {
   @Input() campaignsFromParent;
-  @Output() IsBoaleanSmallSidebarOutput = new EventEmitter<boolean>()
+  @Output() IsBoaleanSmallSidebarOutput = new EventEmitter<boolean>();
 
   @ViewChild('option') option: ElementRef;
   @ViewChild('check1') check1: ElementRef;
@@ -55,7 +55,7 @@ export class SidebarRightComponent implements OnInit, OnChanges {
       }
     }
 
-    //session storage
+    // session storage
 
     if (localStorage.getItem('notification') === undefined || localStorage.getItem('notification') === null) {
       this.check1.nativeElement.checked = true;
@@ -81,7 +81,7 @@ export class SidebarRightComponent implements OnInit, OnChanges {
     return {
       valueCheckeventFirst: this.check1.nativeElement.checked,
       valueCheckeventLast: this.check2.nativeElement.checked,
-    }
+    };
 
   }
 
@@ -110,10 +110,10 @@ export class SidebarRightComponent implements OnInit, OnChanges {
 
     if (this.check1.nativeElement.checked && this.check2.nativeElement.checked) {
       if (this.candidatbydate.length === 0) {
-        this.candidatbydate = this.myArrayCandidat
+        this.candidatbydate = this.myArrayCandidat;
       }
       this.isActiveNotiFinish = false;
-      this.isActiveNotifInvite = false
+      this.isActiveNotifInvite = false;
 
     } else {
 
@@ -121,7 +121,7 @@ export class SidebarRightComponent implements OnInit, OnChanges {
       if (this.check1.nativeElement.checked) {
 
         if (this.candidatbydate.length === 0) {
-          this.candidatbydate = this.myArrayCandidat
+          this.candidatbydate = this.myArrayCandidat;
         }
 
         this.isActiveNotifInvite = true;
@@ -131,7 +131,7 @@ export class SidebarRightComponent implements OnInit, OnChanges {
 
       if (this.check2.nativeElement.checked) {
         if (this.candidatbydate.length === 0) {
-          this.candidatbydate = this.myArrayCandidat
+          this.candidatbydate = this.myArrayCandidat;
         }
 
         this.isActiveNotiFinish = true;
@@ -149,7 +149,7 @@ export class SidebarRightComponent implements OnInit, OnChanges {
 
     localStorage.setItem('notification', JSON.stringify(this.allCheckevent()));
 
-    this.saveCheckValue()
+    this.saveCheckValue();
 
     this.Isactive = false;
 

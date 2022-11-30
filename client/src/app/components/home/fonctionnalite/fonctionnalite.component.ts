@@ -6,18 +6,18 @@ import {CarouselComponent } from '../carousel/carousel.component';
   styleUrls: ['./fonctionnalite.component.scss']
 })
 export class FonctionnaliteComponent implements OnInit {
-  @ViewChild('carousel') private carousel : CarouselComponent;
+  @ViewChild('carousel') private carousel: CarouselComponent;
   intervalId: any;
   items = [
-    { title: 'Slide 1', img_url:'slide_1.png' },
-    { title: 'Slide 2', img_url:'slide_2.png' },
-    { title: 'Slide 3', img_url:'slide_3.png' }
+    { title: 'Slide 1', img_url: 'slide_1.png' },
+    { title: 'Slide 2', img_url: 'slide_2.png' },
+    { title: 'Slide 3', img_url: 'slide_3.png' }
   ];
 
   constructor() { }
 
   ngOnInit() {
-    //console.log('CAROUSEL', this.carousel);
+    // console.log('CAROUSEL', this.carousel);
     this.intervalId = setInterval( () => {
       this.carousel.next();
     }, 5000);

@@ -1,18 +1,18 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, ElementRef, ViewChild, EventEmitter, Output } from "@angular/core";
-import { ApiClientService, API_URI_QUESTIONS, API_URI_CAMPAIGNS } from "../../../api-client/api-client.service";
-import Chart from "chart.js";
-import { FormGroup } from "@angular/forms";
-import { Router } from "@angular/router";
-import { DecryptTokenService } from "src/app/components/home/register/register.service";
-import { TooltipPosition, MatSnackBar } from "@angular/material";
-import { ActivatedRoute } from "@angular/router";
-import { SwiperComponent, SwiperConfigInterface} from "ngx-swiper-wrapper";
+import { Component, OnInit, Input, OnChanges, SimpleChanges, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
+import { ApiClientService, API_URI_QUESTIONS, API_URI_CAMPAIGNS } from '../../../api-client/api-client.service';
+import Chart from 'chart.js';
+import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DecryptTokenService } from 'src/app/components/home/register/register.service';
+import { TooltipPosition, MatSnackBar } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { SwiperComponent, SwiperConfigInterface} from 'ngx-swiper-wrapper';
 
 
 @Component({
-  selector: "app-top-info-campagne",
-  templateUrl: "./top-info-campagne.component.html",
-  styleUrls: ["./top-info-campagne.component.scss"],
+  selector: 'app-top-info-campagne',
+  templateUrl: './top-info-campagne.component.html',
+  styleUrls: ['./top-info-campagne.component.scss'],
 })
 export class TopInfoCampagneComponent implements OnInit, OnChanges {
   @Input() formCampagne: FormGroup;
@@ -20,13 +20,13 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
   @Input() yourCampaign;
   @Input() technologies;
   @Output() decrementPage = new EventEmitter<any>();
-  @ViewChild("Chart") Chart: ElementRef;
+  @ViewChild('Chart') Chart: ElementRef;
 
   public globalId: number;
   public updateQuestionsCampaign: number[] = [];
   public technoDonuts: any[] = [];
   public elementDonnut: any;
-  public poinTotal: number = 0;
+  public poinTotal = 0;
   public timeAllquestionCampagn = 0;
   public timeAllquestionCampgnDevice = 0;
   public campagneFull = [];
@@ -60,7 +60,7 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
   };
 
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
-  
+
 
   constructor(
     public apiClientService: ApiClientService,
@@ -76,7 +76,7 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes", changes);
+    console.log('changes', changes);
     this.technoMethod();
     console.log('TECHNO DONUTS', this.technoDonuts);
   }
@@ -85,44 +85,44 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
     return time < 59 ? time : Math.floor(time / 60);
   }
 
-  public onChangeIndex($event){
+  public onChangeIndex($event) {
     console.log('test');
   }
 
-  public nextSlide(){
+  public nextSlide() {
     this.componentRef.directiveRef.nextSlide();
-    
+
     console.log(this.componentRef.isAtLast);
   }
 
-  public prevSlide(){
+  public prevSlide() {
     this.componentRef.directiveRef.prevSlide();
     console.log(this.componentRef.isAtFirst);
   }
 
-  public technoMethod(): void{
+  public technoMethod(): void {
 
-    let summaries: IHash = {};
+    const summaries: IHash = {};
     let totalPoint = 0;
     let totalTime = 0;
 
-    for (let technologie of this.technologies) {
+    for (const technologie of this.technologies) {
       summaries[technologie.id] = {
         label: technologie.name,
         value: 0,
         question: 0,
         timeQuestion: 0,
         timeQuestionDIvice: 0
-      }
+      };
     }
 
     if (this.questions && this.questions.length > 0) {
-      for (let question of this.questions) {
-            totalPoint += question["points"];
+      for (const question of this.questions) {
+            totalPoint += question['points'];
             totalTime += Number(question.time);
-            summaries[question["technologies"].id].value += question["points"];
-            summaries[question["technologies"].id].question ++;
-            summaries[question["technologies"].id].timeQuestion += Number(question.time);
+            summaries[question['technologies'].id].value += question['points'];
+            summaries[question['technologies'].id].question ++;
+            summaries[question['technologies'].id].timeQuestion += Number(question.time);
       }
     }
 
@@ -130,27 +130,27 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
     this.poinTotal = totalPoint;
     this.timeAllquestionCampagn = totalTime;
     this.timeAllquestionCampgnDevice = totalTime / 2;
-    
-    //donut chart
+
+    // donut chart
     this.technoLabel = [];
     this.technoPoint = [];
     Object.values(summaries).forEach((value) => {
       this.technoLabel.push(value.label);
       this.technoPoint.push(value.value);
     });
-    
-    this.elementDonnut = this.Chart.nativeElement.getContext("2d");
 
-    let chart = new Chart(this.elementDonnut, {
-      type: "doughnut",
+    this.elementDonnut = this.Chart.nativeElement.getContext('2d');
+
+    const chart = new Chart(this.elementDonnut, {
+      type: 'doughnut',
 
       data: {
         labels: this.technoLabel,
         datasets: [
           {
-            label: "diagram",
-            backgroundColor: ["#1d3552", "#e34e26", "#1f7eab", "#c1d5df"],
-            borderColor: ["#1d3552", "#e34e26", "#1f7eab", "#c1d5df"],
+            label: 'diagram',
+            backgroundColor: ['#1d3552', '#e34e26', '#1f7eab', '#c1d5df'],
+            borderColor: ['#1d3552', '#e34e26', '#1f7eab', '#c1d5df'],
             data: this.technoPoint,
           },
         ],
@@ -165,7 +165,7 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
         tooltips: {
           callbacks: {
             title: function (tooltipItem, data) {
-              return data["labels"][tooltipItem[0]["index"]];
+              return data['labels'][tooltipItem[0]['index']];
             },
             label: function (tooltipItem, data) {
               // return data['datasets'][0]['data'][tooltipItem['index']]+' pts';
@@ -175,14 +175,14 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
             // }
           },
 
-          backgroundColor: "#fff",
+          backgroundColor: '#fff',
           titleFontSize: 13,
-          titleFontColor: "#1d3552",
-          bodyFontColor: "#1d3552",
+          titleFontColor: '#1d3552',
+          bodyFontColor: '#1d3552',
           bodyFontSize: 13,
           displayColors: false,
-          footerMarginTop: "10",
-          titleAlign: "center",
+          footerMarginTop: '10',
+          titleAlign: 'center',
         },
       },
     });
@@ -319,7 +319,7 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
 
   SendQuestionSeleditd(id) {
     this.apiClientService
-      .put(API_URI_CAMPAIGNS + "/" + id, {
+      .put(API_URI_CAMPAIGNS + '/' + id, {
         questions: this.questions,
       })
       .subscribe(
@@ -333,21 +333,21 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
 
   editQuestionSelected() {
     for (const element of this.questions) {
-      console.log("element: ", element);
+      console.log('element: ', element);
       this.updateQuestionsCampaign.push(element.id);
     }
-    console.log("this.updateQuestionsCampaign", this.updateQuestionsCampaign);
+    console.log('this.updateQuestionsCampaign', this.updateQuestionsCampaign);
     this.apiClientService
-      .put(API_URI_CAMPAIGNS + "/" + this.globalId, {
+      .put(API_URI_CAMPAIGNS + '/' + this.globalId, {
         questions: this.updateQuestionsCampaign,
       })
       .subscribe(
         (res) => {
           this.openSnackBar(
-            "La campagne a correctement été mise à jour",
-            "Fermer"
+            'La campagne a correctement été mise à jour',
+            'Fermer'
           );
-          console.log("this.yourCampaign", this.yourCampaign[0]);
+          console.log('this.yourCampaign', this.yourCampaign[0]);
         },
         (err) => console.log(err)
       );
@@ -366,17 +366,17 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
   }
 
   postCampagne() {
-    
+
     let truecp;
 
     if (this.formCampagne && this.formCampagne.value.utilisationCopieColler) {
-      if (this.formCampagne.value.utilisationCopieColler === "true") {
+      if (this.formCampagne.value.utilisationCopieColler === 'true') {
         truecp = true;
       } else {
         truecp = false;
       }
       let envoiRapportSimplifie;
-      if (this.formCampagne.value.envoiRapportSimplifie === "true") {
+      if (this.formCampagne.value.envoiRapportSimplifie === 'true') {
         envoiRapportSimplifie = true;
       } else {
         envoiRapportSimplifie = false;
@@ -399,8 +399,8 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
             this.SendQuestionSeleditd(res.id);
             this.router.navigate([`/dashboard/campaigns/${res.id}/candidats`]);
             this.openSnackBar(
-              "La campagne a correctement été enregistrée",
-              "Fermer"
+              'La campagne a correctement été enregistrée',
+              'Fermer'
             );
           },
           (err) => console.log(err)
@@ -412,5 +412,5 @@ export class TopInfoCampagneComponent implements OnInit, OnChanges {
 }
 
 export interface IHash {
-  [details: string] : any;
+  [details: string]: any;
 }

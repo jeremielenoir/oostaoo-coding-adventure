@@ -32,7 +32,7 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
   public activeMenuB = false;
   public currentLanguage;
   public lang = 'en';
-  public isTablet: boolean = false;
+  public isTablet = false;
   public notifications$: Observable<Record<string, any>[]>;
   public otherLanguage = [
     {
@@ -88,8 +88,7 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
         if (user.customeraccount) {
           this.isProfesionalAccount = user.customeraccount.type === 'profesional';
         }
-        this.offer_id = user.customeraccount.offer.id;
-        switch (this.offer_id) {
+        switch (user.customeraccount.offer && user.customeraccount.offer.id) {
           case 14:
             this.offer_id = 'Gratuit';
             break;
@@ -124,7 +123,9 @@ export class RouteComponentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
   }
 
   getCurrentRoute() {

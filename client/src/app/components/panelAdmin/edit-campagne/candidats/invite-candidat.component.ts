@@ -9,7 +9,7 @@ import {
 } from '../../../../api-client/api-client.service';
 
 @Component({
-  selector: "invite-candidat",
+  selector: 'invite-candidat',
   templateUrl: './invite-candidat.html',
   styleUrls: ['./invite-candidat.scss']
 })

@@ -11,10 +11,10 @@ export interface IDialogData {
 })
 
 export class DialogTimeoutComponent implements OnInit {
-  @Output("nextQuestion") public nextQuestion = new EventEmitter<void>();
+  @Output('nextQuestion') public nextQuestion = new EventEmitter<void>();
   dataPopup: IDialogData;
-  public prev: boolean = false;
-  
+  public prev = false;
+
   constructor(public dialogRef: MatDialogRef<DialogTimeoutComponent>, @Inject(MAT_DIALOG_DATA) public data: IDialogData) {
     if (data) {
       this.dataPopup = data;

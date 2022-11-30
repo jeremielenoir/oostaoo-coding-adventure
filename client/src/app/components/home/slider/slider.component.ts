@@ -36,7 +36,7 @@ export class SliderComponent implements OnInit {
 
   ngOnDestroy() {
     console.log('DESTROY');
-    //clearInterval(this.intervalId);
+    // clearInterval(this.intervalId);
   }
 
   onClickNav() {

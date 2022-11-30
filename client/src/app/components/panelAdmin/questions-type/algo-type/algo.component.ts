@@ -19,7 +19,7 @@ export class AlgoComponent {
   responseScriptResult: any;
   responsesIsValid: boolean;
 
-  public loading: boolean = false;
+  public loading = false;
   editorOptions = { theme: 'vs-dark', language: 'javascript' };
 
   constructor(public apiClientService: ApiClientService) {}

@@ -43,34 +43,34 @@ export class TestComponent implements OnInit, OnDestroy {
   @Input() public technologies: Record<string, any>[];
   @Input() public durationMaxTest: number;
   @Input() public preview: boolean;
-  @Input() public mode: string = 'testing'; // prevent unnecessary api call when candidat is doing tutorial
+  @Input() public mode = 'testing'; // prevent unnecessary api call when candidat is doing tutorial
   @Output() public refresh = new EventEmitter<string>();
   @Output() public answerQuestion = new EventEmitter<string>();
 
   public question: Record<string, any>; // done
-  public currentIdxQuestions: number = 0; // done
-  public chronometerCurrentTime: number = 0; // done
+  public currentIdxQuestions = 0; // done
+  public chronometerCurrentTime = 0; // done
 
   private startChronometerSubscription: Subscription;
   private answerQuestionSubscription: Subscription;
 
   public activetime: boolean;
-  public fewSecondsLeft: number = 0; // done
+  public fewSecondsLeft = 0; // done
 
-  private totalElapsedTime: number = 0; // done
+  private totalElapsedTime = 0; // done
   public language: string; // done
 
   public choiceOfAnswers: string[]; // done
-  public candidatAnswer: string = ''; // done
+  public candidatAnswer = ''; // done
 
-  public correctAnswerCounter: number = 0; // done
+  public correctAnswerCounter = 0; // done
 
   private candidatAnswers: string[] = []; // done
   private correctAnswers: string[] = []; // done
 
-  public isDisabled: boolean = false; // done
+  public isDisabled = false; // done
 
-  public checkTimeDefault: boolean = false;
+  public checkTimeDefault = false;
   private jsonRapport = { rapport: [] };
 
   public sumPointsbyTechno = [];
@@ -83,8 +83,8 @@ export class TestComponent implements OnInit, OnDestroy {
   public totalPointsCampaign;
   public totalPointsCandidat;
 
-  public dataInfoLanguageName: string = 'name'; // done
-  public dataInfoLanguageContent: string = 'content'; // done
+  public dataInfoLanguageName = 'name'; // done
+  public dataInfoLanguageContent = 'content'; // done
   private readonly separator: string = QUESTION_SEPARATOR; // done
 
   // Input algo
@@ -104,20 +104,22 @@ export class TestComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.setCurrentLanguage();
 
-    //set points
+    // set points
     this.allPointsTechnos = this.sumPointsByTechnologyId(this.questions);
 
     this.totalPoints = this.calculTotalPoints(this.allPointsTechnos);
 
-    if (this.totalPoints) this.totalPointsCampaign = this.totalPoints;
+    if (this.totalPoints) { this.totalPointsCampaign = this.totalPoints; }
 
-    //get candidat info and go to good question
+    // get candidat info and go to good question
     if (this.candidat) {
-      if (this.candidat.index_question)
+      if (this.candidat.index_question) {
         this.currentIdxQuestions = this.candidat.index_question;
+      }
 
-      if (this.candidat.test_pause)
+      if (this.candidat.test_pause) {
         this.chronometerCurrentTime = this.candidat.test_pause;
+      }
     } else {
       this.candidat = { campaign: { copy_paste: false } };
     }
@@ -130,15 +132,15 @@ export class TestComponent implements OnInit, OnDestroy {
         this.validateAnswer().subscribe((observer) => {
           this.currentIdxQuestions++;
           if (this.currentIdxQuestions === this.questions.length) {
-            //test is finish post test
+            // test is finish post test
             console.log('Test is finish need to post it');
             this.postTimeTest(this.totalElapsedTime).subscribe({
               next: ((res) => console.log(res)),
-              complete: () => { 
+              complete: () => {
                 this.refreshComponent();
                 console.log('Test is finish and posted');
               }
-            })
+            });
           } else {
             this.startChronometerSubscription = this.startQuestion(
               this.currentIdxQuestions,
@@ -218,7 +220,7 @@ export class TestComponent implements OnInit, OnDestroy {
       .getJSON('./assets/json/languages.json')
       .subscribe((json) => {
         for (const techno of this.technologies) {
-          let arrayName = [];
+          const arrayName = [];
           arrayName.push(techno.name.toLowerCase());
           json.map((lg) => {
             if (
@@ -272,15 +274,15 @@ export class TestComponent implements OnInit, OnDestroy {
   }
 
   private validateAnswer(): Observable<any> {
-    
-    let points: number;
-    // get correct answers of current question    
-    this.correctAnswers = this.question.answer_value.split(this.separator).sort();
-    
 
-    if (this.questions[this.currentIdxQuestions].type === 'one' || 
+    let points: number;
+    // get correct answers of current question
+    this.correctAnswers = this.question.answer_value.split(this.separator).sort();
+
+
+    if (this.questions[this.currentIdxQuestions].type === 'one' ||
         this.questions[this.currentIdxQuestions].type === 'multiple' ) {
-      //determines if candidat answer is good and get associated points 
+      // determines if candidat answer is good and get associated points
       this.candidatAnswers.push(this.candidatAnswer);
       points =
         this.correctAnswers.sort().toString().toLowerCase() ===
@@ -328,7 +330,7 @@ export class TestComponent implements OnInit, OnDestroy {
   }
 
   public postTimeTest(totalElapsedTime: number): Observable<any> {
-    
+
     // if we are not in testing mode
     if (this.mode !== 'testing') {
       this.refreshComponent();
@@ -408,7 +410,7 @@ export class TestComponent implements OnInit, OnDestroy {
                 (res: any) => this.httpClient.get(API_URI_CAMPAIGNS + '/' + this.candidat.campaign.id)
               ),
               concatMap(
-                (res: any) => this.httpClient.put(API_URI_CAMPAIGNS + '/' + this.candidat.campaign.id, { 
+                (res: any) => this.httpClient.put(API_URI_CAMPAIGNS + '/' + this.candidat.campaign.id, {
                   NbCandidatFinish: res.NbCandidatFinish ? res.NbCandidatFinish + 1 : 1
                 })
               ),
@@ -423,7 +425,7 @@ export class TestComponent implements OnInit, OnDestroy {
             );
   }
 
-  public postPauseTest(): Observable<any>{
+  public postPauseTest(): Observable<any> {
     return this.httpClient
       .put(API_URI_CANDIDATS + '/' + this.candidat.id, {
         date_pause: new Date().toISOString(),
@@ -435,7 +437,7 @@ export class TestComponent implements OnInit, OnDestroy {
   public sumPointsByTechnologyId(
     questions: Record<string, any>[],
   ): Record<string, any>[] {
-    let sumPointsByTechno = {};
+    const sumPointsByTechno = {};
 
     questions.forEach((element: Record<string, any>) => {
       sumPointsByTechno[element.technologies] = sumPointsByTechno[
@@ -445,7 +447,7 @@ export class TestComponent implements OnInit, OnDestroy {
         : element.points;
     });
 
-    let arraySumPoints: Record<string, any>[] = [];
+    const arraySumPoints: Record<string, any>[] = [];
 
     for (const [key, value] of Object.entries(sumPointsByTechno)) {
       arraySumPoints.push({ technologies: key, points: value });
@@ -467,10 +469,10 @@ export class TestComponent implements OnInit, OnDestroy {
       .get<Record<string, any>>(API_URI_CANDIDATS + '/' + this.candidat.id)
       .pipe(
         tap((res) => {
-          if (res.points_candidat) this.SumPointsCandidat = res.points_candidat;
+          if (res.points_candidat) { this.SumPointsCandidat = res.points_candidat; }
           this.SumPointsCandidat.push({ technologies: techno, points: point });
 
-          if (res.raport_candidat) this.jsonRapport = res.raport_candidat;
+          if (res.raport_candidat) { this.jsonRapport = res.raport_candidat; }
 
           this.jsonRapport.rapport.push({
             array_rep_candidat: this.candidatAnswers,
@@ -525,19 +527,19 @@ export class TestComponent implements OnInit, OnDestroy {
     $event.returnValue = 'Are you sure?';
     console.log('before unload');
     // on tutorial mode, prevent backend api calls
-    if (this.mode !== 'testing') return;
+    if (this.mode !== 'testing') { return; }
 
     this.postPauseTest().subscribe();
-    
+
   }
 
   @HostListener('window:unload', ['$event'])
   public sendData() {
-    //alert('works');
+    // alert('works');
     // on tutorial mode, prevent backend api calls
-    //console.log('unload');
-    if (this.mode !== 'testing') return;
+    // console.log('unload');
+    if (this.mode !== 'testing') { return; }
 
-    //this.postPauseTest();
+    // this.postPauseTest();
   }
 }

@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class RatingFeedbackComponent {
   @Output() ratingClick: EventEmitter<number> = new EventEmitter<number>();
-  public rating: number = 0;
+  public rating = 0;
 
   public setRating(rating: number): void {
     this.rating = rating;

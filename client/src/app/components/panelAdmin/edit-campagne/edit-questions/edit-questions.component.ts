@@ -45,7 +45,7 @@ export class EditQuestionsComponent implements OnInit {
     'Tomato',
   ];
   public difficulty = ['facile', 'moyen', 'expert'];
-  public boelanIsSearchAdvenced: boolean = false;
+  public boelanIsSearchAdvenced = false;
   public saveallQuestionsCampaign = [];
   public techno = [];
   public allTechno = [];
@@ -94,7 +94,7 @@ export class EditQuestionsComponent implements OnInit {
   }
 
   populateQuestions(yourCampaign) {
-    let technos = this.techno;
+    const technos = this.techno;
 
     yourCampaign.forEach((element) => {
       const technoIndex = technos.findIndex(
@@ -108,8 +108,8 @@ export class EditQuestionsComponent implements OnInit {
 
     const newQuestion = [];
 
-    for (let techno of technos) {
-      for (let question of yourCampaign) {
+    for (const techno of technos) {
+      for (const question of yourCampaign) {
         if (techno.id.toString() === question.technologies.id.toString()) {
           newQuestion.push({ ...question, technologies: techno });
         }
@@ -173,9 +173,9 @@ export class EditQuestionsComponent implements OnInit {
 
   fmtMSS(d) {
     d = Number(d);
-    var h = Math.floor(d / 3600);
-    var m = Math.floor((d % 3600) / 60);
-    var s = Math.floor((d % 3600) % 60);
+    const h = Math.floor(d / 3600);
+    const m = Math.floor((d % 3600) / 60);
+    const s = Math.floor((d % 3600) % 60);
 
     return (
       ('0' + h).slice(-2) +

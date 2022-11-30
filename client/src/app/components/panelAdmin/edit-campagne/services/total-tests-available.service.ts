@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 export class TotalTestsAvailableService {
   private totalTestsAvailableSubject = new BehaviorSubject<number>(0);
   total$ = this.totalTestsAvailableSubject.asObservable();
-  
+
   constructor() { }
 
   public updateValue(value: number): void {

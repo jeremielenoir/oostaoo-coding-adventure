@@ -18,12 +18,12 @@ import { InterviewDialogComponent } from './interview-dialog/interview-dialog.co
 import { saveAs } from 'file-saver';
 import { getResultsDefinition } from './getResultsDefinition';
 import * as moment from 'moment';
-//import pdfMake from "pdfmake/build/pdfmake";
+// import pdfMake from "pdfmake/build/pdfmake";
 // font build has to be committed otherwise each developers has to build font locally.
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
-//import pdfFonts from '../../../../../assets/pdfmake-font-builds/vfs_fonts';
+// import pdfFonts from '../../../../../assets/pdfmake-font-builds/vfs_fonts';
 
-//pdfMake.vfs = pdfFonts.pdfMake.vfs;
+// pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 /*pdfMake.fonts = {
   FontAwesome: {
@@ -48,7 +48,7 @@ import * as moment from 'moment';
 export class CandidatsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private globalId: number;
-  public tests_available: number = 0;
+  public tests_available = 0;
   private technologies: Record<string, any>[] = [];
   public campaign: Record<string, any>;
   public candidats: Record<string, any>[];
@@ -57,15 +57,15 @@ export class CandidatsComponent implements OnInit, OnDestroy {
   public infosCandidatsPdf: Record<string, any>[];
   public anonymizing: boolean;
   public deletingCandidats: boolean;
-  public allCandidatsSelected: boolean = false;
+  public allCandidatsSelected = false;
   public candidatsAvailable: boolean = null;
-  public isLoading: boolean = true;
+  public isLoading = true;
   private choiceList: boolean;
   public opened: boolean;
   public displayedColumns: string[];
   public readonly defaultMatTableColumns: string[] = ['Checked', 'Rapport', 'Interview', 'Candidats', 'Dernière activité', 'Score'];
   public readonly compactMatTableColumns: string[] = ['Checked', 'Rapport', 'Interview', 'Candidats'];
-  private readonly compactTableWidth: string = "(max-width: 650px)";
+  private readonly compactTableWidth: string = '(max-width: 650px)';
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('check') check: ElementRef;
@@ -87,7 +87,7 @@ export class CandidatsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadTestsAvailable();
     this.getCampaign().then((datas) => {
-      this.campaign = datas
+      this.campaign = datas;
       // console.log('CAMPAIGN', this.campaign, datas);
     });
 
@@ -126,7 +126,7 @@ export class CandidatsComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((data) => {
-      if (data) this.tests_available = data;
+      if (data) { this.tests_available = data; }
 
       this.getCampaign();
     });
@@ -141,7 +141,7 @@ export class CandidatsComponent implements OnInit, OnDestroy {
   }
 
   menuChoice(event: MouseEvent) {
-    if (event) event.stopPropagation();
+    if (event) { event.stopPropagation(); }
 
     this.choiceList = false;
   }
@@ -173,7 +173,7 @@ export class CandidatsComponent implements OnInit, OnDestroy {
   }
 
   getCandidatStatusSelected(id: number) {
-    if (!this.infosCandidats) return false;
+    if (!this.infosCandidats) { return false; }
 
     const found = this.infosCandidats.data.find((c) => c.candidat_id === id);
     return found ? found.selected : false;
@@ -249,10 +249,10 @@ export class CandidatsComponent implements OnInit, OnDestroy {
           for (let i = 0; i < campaign.candidats.length; i++) {
             if (campaign.candidats[i].points_candidat) {
               let getpourcentByCandidat = [];
-              let scoreByTechObject = {};
+              const scoreByTechObject = {};
 
               campaign.candidats[i].points_candidat.forEach(point => {
-                if (point['getpourcentByCandidat']) getpourcentByCandidat = point['getpourcentByCandidat'];
+                if (point['getpourcentByCandidat']) { getpourcentByCandidat = point['getpourcentByCandidat']; }
               });
 
               getpourcentByCandidat.forEach((score) => scoreByTechObject[score.techno] = score.percentage.toFixed(2) + '%');
@@ -285,7 +285,7 @@ export class CandidatsComponent implements OnInit, OnDestroy {
       )
       .then((campaign: Record<string, any>) => {
         // INFOS FOR CANDIDATS TO PUSH IN DATA TABLE
-        let getInfoCandidats: Record<string, any>[] = [];
+        const getInfoCandidats: Record<string, any>[] = [];
         for (let i = 0; i < campaign.candidats.length; i++) {
           let duree: any;
           let dateInvite: any;
@@ -316,7 +316,7 @@ export class CandidatsComponent implements OnInit, OnDestroy {
             Email: campaign.candidats[i].email,
             status: campaign.candidats[i].status,
             selected: this.getCandidatStatusSelected(campaign.candidats[i].id),
-            'Dernière activité': datetime.substring(0, datetime.length-6) + ' ' + datetime.substring(datetime.length-2, datetime.length),
+            'Dernière activité': datetime.substring(0, datetime.length - 6) + ' ' + datetime.substring(datetime.length - 2, datetime.length),
             Score: campaign.candidats[i].Score,
             Durée: duree,
             rapport: campaign.candidats[i].raport_candidat ? campaign.candidats[i].raport_candidat.rapport : null,
@@ -335,9 +335,9 @@ export class CandidatsComponent implements OnInit, OnDestroy {
         }
         this.infosCandidats = new MatTableDataSource(getInfoCandidats);
         this.infosCandidats.sort = this.sort;
-        
+
         this.infosCandidatsPdf = getInfoCandidats;
-        
+
         this.isLoading = false;
 
         return campaign;

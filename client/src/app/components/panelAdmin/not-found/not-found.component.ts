@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-not-found',
@@ -9,11 +9,11 @@ import { Router } from '@angular/router'
 export class NotFoundComponent implements OnInit {
   nameUrl: string;
   constructor(private router: Router) {
-    this.nameUrl = this.router.url
+    this.nameUrl = this.router.url;
   }
 
   ngOnInit() {
-    console.log('name url', this.nameUrl)
+    console.log('name url', this.nameUrl);
   }
 
 }
