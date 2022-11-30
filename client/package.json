@@ -63,6 +63,7 @@
     "ngx-swiper-wrapper": "8.0.2",
     "ngx-timeago": "^1.0.4",
     "ngx-toastr": "^10.1.0",
+    "node-sass": "4.13.1",
     "popmotion": "^8.7.1",
     "prismjs": "^1.21.0",
     "rxjs": "~6.3.3",

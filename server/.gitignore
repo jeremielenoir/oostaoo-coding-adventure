@@ -105,3 +105,6 @@ testApp
 coverage
 package-lock.json
 yarn.lock
+
+*.database.json
+*.custom.json

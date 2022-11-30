@@ -59,3 +59,6 @@ typings/
 .env
 
 .yarnrc.yml
+
+**/database.json
+**/custom.json
