@@ -46,7 +46,7 @@ export class ApiClientService {
   public _user = new BehaviorSubject(null);
   constructor(private http: HttpClient, public decryptTokenService: DecryptTokenService) {
     this.getUser();
-    // console.log('this._user : ', this._user);
+    
   }
 
   private handleError(error: any, caught: Observable<any>): Observable<any> {
@@ -116,7 +116,7 @@ export class ApiClientService {
     );
   }
   /**
-   * Methode put()
+   * Methode patch()
    * @param path
    * @param payload
    */

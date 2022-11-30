@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, forkJoin, Observable, Subscription } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { delay, finalize, switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { API_URI_CAMPAIGNS, API_URI_CANDIDATS, API_URI_CANDIDATS_BY_TOKEN, ApiClientService, API_URI_TUTORIAL } from '../../../api-client/api-client.service';
 
 @Component({
@@ -99,7 +99,7 @@ export class ClientTestComponent implements OnInit, OnDestroy {
   }
 
   private candidatOpenedLinkAt(candidatId: number, currentDatetime: string): void {
-    this.apiClientService.put(API_URI_CANDIDATS + '/' + candidatId, { opened_link: currentDatetime }).subscribe().unsubscribe();
+    this.apiClientService.put(API_URI_CANDIDATS + '/' + candidatId, { opened_link: currentDatetime }).subscribe();
   }
 
   public refreshComponent(status: string) {

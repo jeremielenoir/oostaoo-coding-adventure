@@ -25,7 +25,7 @@ export interface Address {
  *
  */
 export interface Entreprise {
-
+  name?: string;
 }
 /**
  *

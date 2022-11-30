@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
-  ApiClientService,
   API_URI_CAMPAIGNS,
   API_URI_CANDIDATS,
   API_URI_NOTIFICATIONS,
@@ -25,9 +24,8 @@ import {
   Observable,
   concat,
   EMPTY,
-  Subject,
 } from 'rxjs';
-import { takeUntil, map, tap, concatMap } from 'rxjs/operators';
+import { takeUntil, tap, concatMap } from 'rxjs/operators';
 import { OVERLAY_KEYBOARD_DISPATCHER_PROVIDER } from '@angular/cdk/overlay/typings/keyboard/overlay-keyboard-dispatcher';
 import { JsonService } from 'src/app/services/json/json.service';
 import { CodeLanguages } from 'src/app/models/code-languages.model';
@@ -94,7 +92,6 @@ export class TestComponent implements OnInit, OnDestroy {
   codeLanguages: CodeLanguages[];
 
   constructor(
-    private apiClientService: ApiClientService,
     private httpClient: HttpClient,
     private jsonService: JsonService,
     public languageStorage: SelectedLanguageService,
@@ -160,7 +157,7 @@ export class TestComponent implements OnInit, OnDestroy {
       next: (n: number) => {
         this.chronometerCurrentTime++;
       },
-      error: (err) =>
+      error: (err: any) =>
         console.error('Chronometer Observer got an error: ' + err),
       complete: () =>
         this.answerQuestion.emit('answer_question from chronometer'),
