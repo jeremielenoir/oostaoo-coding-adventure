@@ -57,7 +57,7 @@
       <div class="invitation">
         <div class="test-invit">
           <div class="image"></div>
-          <h3 i18n>Bonjour, vous avez été invité(e) à passer un test.</h3>
+          <h3 i18n class="text">Bonjour, vous avez été invité(e) à passer un test.</h3>
         </div>
 
         <div class="text">
@@ -79,7 +79,7 @@
         <div class="tutorial">
           <div class="title">
             <div class="img"></div>
-            <h3 i18n>Tutoriel</h3>
+            <h3 i18n class="text-tutorial">Tutoriel</h3>
           </div>
 
           <div *ngIf="loading$ | async" class="loader-container">
@@ -101,7 +101,7 @@
         <div class="test">
           <div class="title">
             <div class="img"></div>
-            <h3 i18n>Évaluation - {{ campaignTitle }}</h3>
+            <h3 i18n class="text-evaluation">Évaluation - {{ campaignTitle }}</h3>
           </div>
 
           <div *ngIf="loading$ | async" class="loader-container">

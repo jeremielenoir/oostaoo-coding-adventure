@@ -51,6 +51,14 @@ button {
   margin-bottom: 18px;
 }
 
+.text-tutorial{
+  margin-bottom: 10px;
+
+}
+.text-evaluation{
+  margin-bottom: 10px;
+}
+
 
 .modal {
   border-radius: $border-radius;
@@ -143,12 +151,14 @@ button {
     .container-section {
       flex: 1;
       display: flex;
+      align-items: center;
       gap: 0 20px;
 
       .invitation {
         width: calc(50%);
         justify-content: normal !important;
-        padding: 40px;
+        padding: 42px;
+        height: 600px;
         background: white;
         border: $border-table;
         border-radius: $border-radius;
@@ -168,6 +178,10 @@ button {
             align-items: center;
             border-top: 1px dashed #e3e3e3;
             border-bottom: 1px dashed #e3e3e3;
+          }
+
+          .text{
+            text-align: center;
           }
 
           .image {
@@ -190,6 +204,7 @@ button {
       .tutorial-test {
         width: calc(50%);
         display: flex;
+        height: 600px;
         flex-direction: column;
         justify-content: space-between;
         
@@ -237,7 +252,15 @@ button {
 
     .tutorial-test {
       gap: 10px 0;
+    width: calc(80%) !important;
+      height: 630px !important;
+    justify-content: inherit !important;
+
     }
+    
+  }
+  .invitation{
+    width: calc(80%) !important;
   }
 }
 
