@@ -272,7 +272,7 @@
                     <span class="text" i18n> Ajouter utilisateur</span>
                 </app-base-button>
             </div>
-            <div class="table-info-user">
+            <div class="table-info-user">   
                 <table class="table_user">
                     <thead class="table_head">
                         <tr class="table_row">
@@ -283,7 +283,7 @@
                         </tr>
                     </thead>
                     <tbody class="table_body">
-                        <tr class="table_row" *ngFor="let user of  users | search:'username,email':searchText" [ngClass]="{'user-disabled': user.blocked}">
+                        <tr class="table_rows" *ngFor="let user of  users | search:'username,email':searchText" [ngClass]="{'user-disabled': user.blocked}">
                             <td class="table_body_cell">{{user.username}}</td>
                             <td class="table_body_cell">{{user.email}}</td>
                             <td class="table_body_cell">{{user.role.name}}</td>
