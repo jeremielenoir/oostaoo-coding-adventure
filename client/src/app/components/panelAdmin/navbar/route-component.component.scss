@@ -18,6 +18,7 @@ button.mat-menu-item {
         background: #fff;
         box-shadow: 0 1px 6px rgba(32, 33, 36, .28);
         display: flex;
+        align-items: center;
         width: 100%;
         z-index: 9999;
         height: 70px;
@@ -31,7 +32,6 @@ button.mat-menu-item {
         .logo-link {
             position: absolute;
             justify-self: left;
-            margin-top: 10px;
         }
         .logo {
             width: 200px;
