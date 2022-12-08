@@ -260,13 +260,19 @@ button {
     .tutorial-test {
       gap: 10px 0;
       width: calc(80%) !important;
-      height: 630px !important;
+      height: auto !important;
       justify-content: inherit !important ;
     }
     
   }
   .invitation{
     width: calc(80%) !important;
+    height: auto !important;
+    max-height: 600px;
+  }
+
+  .testing-question-wrapper{
+    height: auto !important;
   }
 }
 
