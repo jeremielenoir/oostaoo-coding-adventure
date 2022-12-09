@@ -174,7 +174,6 @@ export class TestComponent implements OnInit, OnDestroy {
   }
 
   public startQuestion(questionIndex: number): Observable<number | string> {
-    console.log('QUESTION INDEX', questionIndex);
     this.question = this.questions[questionIndex];
     this.chronometerCurrentTime = 0;
     this.setCurrentQuestionTechnology();
@@ -275,15 +274,15 @@ export class TestComponent implements OnInit, OnDestroy {
     let points: number;
     // get correct answers of current question
     this.correctAnswers = this.question.answer_value.split(this.separator).sort();
-
-
+    
     if (this.questions[this.currentIdxQuestions].type === 'one' ||
         this.questions[this.currentIdxQuestions].type === 'multiple' ) {
       // determines if candidat answer is good and get associated points
-      this.candidatAnswers.push(this.candidatAnswer);
+      
+      this.questions[this.currentIdxQuestions].type === 'one' && this.candidatAnswers.push(this.candidatAnswer);
       points =
-        this.correctAnswers.sort().toString().toLowerCase() ===
-        this.candidatAnswers.sort().toString().toLowerCase()
+        this.correctAnswers.sort().toString().toLowerCase().replace(/\s/g, "") ===
+        this.candidatAnswers.sort().toString().toLowerCase().replace(/\s/g, "")
           ? this.questions[this.currentIdxQuestions].points
           : 0;
       // maybe use nullish coalescing operator ?
