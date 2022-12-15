@@ -1,114 +1,216 @@
 <div class="block-testing" *ngIf="questions">
-  <div class="block-testing__container-up">
-    <div class="testing-left">
-      <div class="cube-testing">
-        <header class="header-cube-testing">
-          <div class="f030">
-            <i class="far fa-question-circle icon-testing"></i>
-  
-            <span class="title-testing">Question {{ currentIdxQuestions + 1 }} / {{ questions.length }} - {{ language
-              }}</span>
-          </div>
-  
-          <div class="testing-timer">
-            <span class="testing-timer-icon"><i class="far fa-clock"></i></span>
-  
-            <span class="testing-timer-text" i18n>Temps écoulé :</span>
-            <span class="time-elapsed" [class.active-time-danger]="chronometerCurrentTime >= fewSecondsLeft">
-              {{ fmtMSS(chronometerCurrentTime) }}/{{ fmtMSS(question.time) }}
-            </span>
-          </div>
-        </header>
-  
-        <div class="scroll-auto-testing" appBlockCopyPaste [appActive]="candidat.campaign.copy_paste">
-          <div class="content-testing">
-            <div markdown [data]="question[dataInfoLanguageName]" (ready)="onReady()"></div>
-          </div>
+  <!-- ///////////////////: -->
+  <div class="testing-left">
+    <div class="cube-testing">
+      <header class="header-cube-testing header-cube-testing-left">
+        <div class="f030">
+          <i class="far fa-question-circle icon-testing"></i>
+          <span class="title-testing"
+            >Question {{ currentIdxQuestions + 1 }} / {{ questions.length }} -
+            {{ language }}</span
+          >
+        </div>
+
+        <div class="testing-timer">
+          <span class="testing-timer-icon"><i class="far fa-clock"></i></span>
+
+          <span class="testing-timer-text" i18n>Temps écoulé :</span>
+          <span
+            class="time-elapsed"
+            [class.active-time-danger]="
+              chronometerCurrentTime >= fewSecondsLeft
+            "
+          >
+            {{ fmtMSS(chronometerCurrentTime) }}&nbsp;/&nbsp;{{
+              fmtMSS(question.time)
+            }}
+          </span>
+        </div>
+      </header>
+
+      <div
+        class="scroll-auto-testing"
+        appBlockCopyPaste
+        [appActive]="candidat.campaign.copy_paste"
+      >
+        <div class="content-testing content-testing-left">
+          <div
+            markdown
+            [data]="question[dataInfoLanguageName]"
+            (ready)="onReady()"
+          ></div>
         </div>
       </div>
     </div>
-  
-    <div class="testing-right">
+  </div>
+  <!-- ////////////// -->
+
+  <div class="testing-right">
+    <!-- Premier Block -->
+    <div class="testing-right__up">
       <div class="cube-testing cube-testing-right">
         <header class="header-cube-testing">
           <div class="f030">
-            <i *ngIf="question.type === 'algo'" class="fas fa-code icon-testing"></i>
-            <i *ngIf="question.type === 'free'" class="fas fa-edit icon-testing"></i>
-            <i *ngIf="question.type === 'one'" class="fas fa-check-circle icon-testing"></i>
-            <i *ngIf="question.type === 'multiple'" class="fas fa-check-square icon-testing"></i>
-  
+            <i
+              *ngIf="question.type === 'algo'"
+              class="fas fa-code icon-testing"
+            ></i>
+            <i
+              *ngIf="question.type === 'free'"
+              class="fas fa-edit icon-testing"
+            ></i>
+            <i
+              *ngIf="question.type === 'one'"
+              class="fas fa-check-circle icon-testing"
+            ></i>
+            <i
+              *ngIf="question.type === 'multiple'"
+              class="fas fa-check-square icon-testing"
+            ></i>
+
             <span class="title-testing" i18n>Réponse</span>
           </div>
         </header>
-  
+
         <!--textarea-->
-  
-        <div *ngIf="question.type === 'free'" class="scroll-auto-testing">
-          <div class="content-testing content-testing-seconde">
-            <mat-form-field class="example-full-width" appearance="outline">
-  
-              <textarea cdkTextareaAutosize cdkAutosizeMinRows="10" cdkAutosizeMaxRows="10" [disabled]="isDisabled"
-                appBlockCopyPaste [appActive]="candidat.campaign.copy_paste && !prev" matInput
-                placeholder="Saisir votre réponse" [(ngModel)]="candidatAnswer"></textarea>
-            </mat-form-field>
-          </div>
+
+        <!-- <div *ngIf="question.type === 'free'" class="scroll-auto-testing"> -->
+        <div
+          *ngIf="question.type === 'free'"
+          class="content-testing content-testing-seconde content-testing-right scroll-auto-testing"
+        >
+          <mat-form-field class="example-full-width" appearance="outline">
+            <textarea
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="10"
+              cdkAutosizeMaxRows="10"
+              [disabled]="isDisabled"
+              appBlockCopyPaste
+              [appActive]="candidat.campaign.copy_paste && !prev"
+              matInput
+              placeholder="Saisir votre réponse"
+              [(ngModel)]="candidatAnswer"
+            ></textarea>
+          </mat-form-field>
         </div>
-  
+        <!-- </div> -->
+
         <!--radio-->
-  
-        <div *ngIf="question.type === 'one'" class="content-testing content-testing-seconde">
-          <mat-radio-group [disabled]="isDisabled" aria-labelledby="answer-radio-group-label" class="answer-radio-group"
-            [(ngModel)]="candidatAnswer">
-            <mat-radio-button [ngClass]="['answer-wrap', 'answer-radio-button']" *ngFor="let answer of choiceOfAnswers"
-              [value]="answer" appBlockCopyPaste [appActive]="candidat.campaign.copy_paste && !prev">
+
+        <div
+          *ngIf="question.type === 'one'"
+          class="content-testing content-testing-seconde"
+        >
+          <mat-radio-group
+            [disabled]="isDisabled"
+            aria-labelledby="answer-radio-group-label"
+            class="answer-radio-group"
+            [(ngModel)]="candidatAnswer"
+          >
+            <mat-radio-button
+              [ngClass]="['answer-wrap', 'answer-radio-button']"
+              *ngFor="let answer of choiceOfAnswers"
+              [value]="answer"
+              appBlockCopyPaste
+              [appActive]="candidat.campaign.copy_paste && !prev"
+            >
               {{ answer }}
             </mat-radio-button>
           </mat-radio-group>
         </div>
-  
+
         <!--checkbox -->
-  
-        <div *ngIf="question.type === 'multiple'" class="content-testing content-testing-seconde">
+
+        <div
+          *ngIf="question.type === 'multiple'"
+          class="content-testing content-testing-seconde"
+        >
           <div class="answer-checkbox-group">
-  
             <div *ngFor="let answer of choiceOfAnswers" class="answer-checkbox">
-              <mat-checkbox class="answer-wrap" [disabled]="isDisabled" (change)="checkboxAnswers($event)"
-                [value]="answer" appBlockCopyPaste [appActive]="candidat.campaign.copy_paste && !prev">
+              <mat-checkbox
+                class="answer-wrap"
+                [disabled]="isDisabled"
+                (change)="checkboxAnswers($event)"
+                [value]="answer"
+                appBlockCopyPaste
+                [appActive]="candidat.campaign.copy_paste && !prev"
+              >
                 {{ answer }}
               </mat-checkbox>
             </div>
           </div>
         </div>
-  
+
         <!--algo-->
-  
+
         <div *ngIf="question.type === 'algo'" class="scroll-auto-testing">
-          <app-algo [question]="question" [options]="options" [filename]="filename" [filetype]="filetype"></app-algo>
+          <app-algo
+            [question]="question"
+            [options]="options"
+            [filename]="filename"
+            [filetype]="filetype"
+          ></app-algo>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="block-testing__container-down">
-    <app-base-button *ngIf="preview && questions.length == 1" [fullWidth]="true" [hoverClass]="''"
-      (click)="nextQuestion($event)" iconName="play_arrow" class="block-testing__container-down__button">
-      Valider la réponse
-    </app-base-button>
-  
-    <app-base-button *ngIf="preview && questions.length != 1 && currentIdxQuestions === questions.length - 1"
-      [fullWidth]="true" [hoverClass]="''" (click)="nextQuestion($event)" iconName="play_arrow" class="block-testing__container-down__button">
-      Voir le résultat du test
-    </app-base-button>
-  
-    <app-base-button *ngIf="preview && questions.length != 1 && currentIdxQuestions !== questions.length - 1"
-      [fullWidth]="true" [hoverClass]="''" (click)="nextQuestion($event)" iconName="play_arrow" class="block-testing__container-down__button">
-      Question suivante
-    </app-base-button>
-  
-    <app-base-button *ngIf="!preview" [fullWidth]="true" [hoverClass]="''" iconName="play_arrow"
-      (click)="answerQuestion.emit('answer_question from button')" class="block-testing__container-down__button">
-      {{ currentIdxQuestions === questions.length - 1 ? "Soumettre le test" : "Question suivante" }}
-    </app-base-button>
+    <!-- Second block -->
+    <div class="testing-right__down">
+      <app-base-button
+        *ngIf="preview && questions.length == 1"
+        [fullWidth]="true"
+        [hoverClass]="''"
+        (click)="nextQuestion($event)"
+        iconName="play_arrow"
+        class="block-testing__container-down__button"
+      >
+        Valider la réponse
+      </app-base-button>
+
+      <app-base-button
+        *ngIf="
+          preview &&
+          questions.length != 1 &&
+          currentIdxQuestions === questions.length - 1
+        "
+        [fullWidth]="true"
+        [hoverClass]="''"
+        (click)="nextQuestion($event)"
+        iconName="play_arrow"
+        class="block-testing__container-down__button"
+      >
+        Voir le résultat du test
+      </app-base-button>
+
+      <app-base-button
+        *ngIf="
+          preview &&
+          questions.length != 1 &&
+          currentIdxQuestions !== questions.length - 1
+        "
+        [fullWidth]="true"
+        [hoverClass]="''"
+        (click)="nextQuestion($event)"
+        iconName="play_arrow"
+        class="block-testing__container-down__button"
+      >
+        Question suivante
+      </app-base-button>
+
+      <app-base-button
+        *ngIf="!preview"
+        [fullWidth]="true"
+        [hoverClass]="''"
+        iconName="play_arrow"
+        (click)="answerQuestion.emit('answer_question from button')"
+        class="block-testing__container-down__button"
+      >
+        {{
+          currentIdxQuestions === questions.length - 1
+            ? 'Soumettre le test'
+            : 'Question suivante'
+        }}
+      </app-base-button>
+    </div>
   </div>
- 
 </div>

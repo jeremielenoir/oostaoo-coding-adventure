@@ -2,7 +2,6 @@
 .testing-timer {
   display: flex;
   gap: 0.2rem;
-  // padding: 0px 15px !important;
 }
 
 @mixin structureBlock {
@@ -11,107 +10,12 @@
     width: 100%;
     margin-bottom: 12px;
   }
-  /*-- partie header--*/
-  .cube-testing-right {
-    height: 91.5% !important;
-  }
-  .cube-testing {
-    border: 1px solid $color-background-blue;
-    display: flex;
-    background: #fff;
-    flex-direction: column;
-    margin-left: 5px;
-    margin-right: 5px;
-    height: 100%;
-    border-radius: 5px;
-
-    .header-cube-testing {
-      display: flex;
-      border-bottom: 1px solid $color-background-blue;
-      align-items: center;
-      flex-direction: row;
-      // flex-direction: column;
-      background-color: $color-pricipal-blue-light;
-      color: $color-principal-blue;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      .f030 {
-        display: flex;
-        flex-direction: row;
-        padding: 0px 15px;
-        flex: 1.5;
-        .icon-testing {
-          margin-right: 15px;
-          color: $color-orange;
-          display: block;
-          font-size: 24px;
-        }
-        .title-testing {
-          font-size: 14px;
-
-          margin-bottom: 0px;
-          display: inline-block;
-        }
-        // .testing-timer {
-        //   display: flex;
-        //   flex: 1;
-        //   flex-direction: row;
-        //   align-items: center;
-        //   .testing-timer-icon {
-        //     margin-right: 10px;
-        //     font-size: 20px;
-        //   }
-        //   .testing-timer-text {
-        //     display: inline-block;
-        //     strong {
-        //       font-size: 14px;
-        //       font-size: 900;
-        //     }
-        //   }
-        // }
-      }
-    }
-    .scroll-auto-testing {
-      overflow-y: auto;
-      height: 100%;
-      .content-testing {
-        margin: 60px;
-        &.content-testing-seconde {
-          min-height: 410px;
-        }
-        .example-full-width {
-          width: 100%;
-        }
-      }
-    }
-    .content-testing {
-      margin: 60px;
-      display: flex;
-      &.content-testing-seconde {
-        min-height: 410px;
-      }
-      .answer-radio-group {
-        display: flex;
-        flex-direction: column;
-        border-radius: $border-radius;
-        border: 1px solid $color-background-blue;
-        overflow: auto;
-        width: 100%;
-        .answer-radio-button {
-          padding: 20px 20px;
-          border-bottom: 1px solid $color-background-blue;
-          &:last-child {
-            border-bottom: 0px solid $color-background-blue;
-          }
-        }
-      }
-    }
-  }
 }
 
 ::ng-deep .answer-checkbox-group {
   border-radius: $border-radius;
   border: 1px solid $color-background-blue;
+  width: 100%;
 }
 
 ::ng-deep .answer-checkbox {
@@ -121,77 +25,6 @@
     border-bottom: 0px solid $color-background-blue;
   }
 }
-
-// .block-testing {
-//   background-color: #f9f9f9;
-//   // display: flex;
-//   // flex-direction: row;
-//   // height: 100%;
-
-//   @media #{$smallDevice} {
-//     flex-direction: column;
-//     height: auto;
-//     overflow: hidden;
-//     position: static !important;
-//   }
-//   .testing-left {
-//     // @include structureBlock();
-//   }
-//   .testing-right {
-//     @include structureBlock();
-//     .button {
-//       margin-top: 7px;
-//       margin-left: 5px;
-//       margin-right: 0px;
-//       color: white;
-//       height: 50px;
-//       padding: 10px;
-//       position: relative;
-//       transition: opacity 0.2s, background 0.2s;
-//       font-size: 18px;
-
-//       background-color: $color-principal-blue;
-//       border: none;
-//       cursor: pointer;
-//       outline: 0;
-//       width: 98.8%;
-//       &:hover {
-//         background-color: $color-principal-blue;
-//       }
-//     }
-//   }
-// }
-
-// @media (max-width: 1315px) {
-//   .block-testing {
-//     // flex-direction: row;
-//     .testing-left {
-//       width: 70%;
-//       margin-right: -10%;
-//       .f030 {
-//         padding-left: 5px !important;
-//         padding-right: 5px !important;
-//         padding-top: 10px !important;
-//         padding-bottom: 10px !important;
-//       }
-//       .testing-timer {
-//         padding-left: 5px !important;
-//         padding-right: 5px !important;
-//         padding-top: 10px !important;
-//         padding-bottom: 10px !important;
-//       }
-//     }
-
-//     .testing-right {
-//       margin-left: 10%;
-//       width: 40%;
-
-//       .content-testing {
-//         margin: 20px !important;
-//       }
-//     }
-//   }
-// }
 
 /*--modal css--*/
 
@@ -250,33 +83,12 @@
   display: inline-block;
 }
 
-// .testing-timer-text {
-//   width: 130px;
-//   display: inline-block;
-// }
-
-
-///////// NEWWW
-
 .block-testing {
-  margin: 20px 0 20px 0;
-  background-color: #f9f9f9;
-  // display: flex;
-  &__container-up {
-    display: flex;
-  }
-  &__container-down {
-    width: 50%;
-    margin: auto;
-    // &__button {
-    //   width: 50%;
-    // }
-  }
-  
+  display: flex;
+  gap: 0.5rem;
+
   .testing-left {
     flex: 1;
-    min-width: 325px;
-    padding: 5px;
     display: flex;
 
     > .cube-testing {
@@ -286,19 +98,23 @@
 
   .testing-right {
     flex: 1;
-    min-width: 325px;
-    padding: 5px;
     display: flex;
     flex-direction: column;
-    gap: 0 15px;
+    gap: 0.5rem;
+    &__up {
+      height: 100%;
+    }
   }
 
   .cube-testing {
+    height: 100%;
     border: 1px solid $color-background-blue;
     background: #fff;
-    display: flex;
     flex-direction: column;
     border-radius: 5px;
+    &-right {
+      border: none;
+    }
 
     .header-cube-testing {
       height: 6rem;
@@ -307,20 +123,21 @@
       align-items: flex-start;
       justify-content: space-between;
       padding: 0.5rem;
-      // align-items: center;
-      border-bottom: 1px solid $color-background-blue;
+      border: 1px solid $color-background-blue;
       flex-wrap: wrap;
       background-color: $color-pricipal-blue-light;
       color: $color-principal-blue;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
+      &-left {
+        border: none;
+        border-bottom: 1px solid $color-background-blue;
+      }
 
       .f030 {
         min-width: 250px;
         display: flex;
-        // padding: 0px 15px;
-        // flex: 1.5;
-        
+
         .icon-testing {
           margin-right: 15px;
           color: $color-orange;
@@ -330,68 +147,49 @@
 
         .title-testing {
           font-size: 14px;
-          // margin-bottom: 0px;
           display: inline-block;
         }
-
-        // .testing-timer {
-        //   display: flex;
-        //   align-items: center;
-        //   // flex: 1;
-        //   gap: 0.1rem;
-
-        //   .testing-timer-icon {
-        //     margin-right: 10px;
-        //     font-size: 20px;
-        //   }
-
-        //   .testing-timer-text {
-        //     display: inline-block;
-            
-        //     strong {
-        //       font-size: 14px;
-        //       font-size: 900;
-        //     }
-        //   }
-        // }
       }
     }
-
+    // il faut atteindre ces classes pour changer la box de textearea mat-form-field-appearance-outline .mat-form-field-outline
     .scroll-auto-testing {
-      overflow-y: auto;
-
-      .content-testing {
-        margin: 60px;
-        &.content-testing-seconde {
-          min-height: 410px;
+      min-height: 30rem !important;
+      .example-full-width {
+        width: 100%;
+        margin-top: -0.25em;
+        .mat-form-field-wrapper {
+          margin: 0 !important;
+          padding: 0 !important;
+          .mat-form-field-flex {
+            margin: 0 !important;
+            min-height: 30rem !important;
+          }
         }
-
-        .example-full-width {
+        textarea {
+          height: 100%;
           width: 100%;
         }
       }
     }
-
     .content-testing {
-      margin: 60px;
       display: flex;
-
-      &.content-testing-seconde {
-        min-height: 410px;
+      &-left {
+        margin: 1.5rem;
       }
 
       .answer-radio-group {
         display: flex;
         flex-direction: column;
-        border-radius: $border-radius;
+        border-radius: 0 0 $border-radius $border-radius;
         border: 1px solid $color-background-blue;
+        border-top: none;
         overflow: auto;
         width: 100%;
 
         .answer-radio-button {
           padding: 20px 20px;
           border-bottom: 1px solid $color-background-blue;
-          
+
           &:last-child {
             border-bottom: 0px solid $color-background-blue;
           }
@@ -403,12 +201,6 @@
 
 @media only screen and (max-width: 800px) {
   .block-testing {
-    &__container-up {
-      flex-direction: column;
-    }
-    &__container-down {
-      width: 100%;
-      margin: auto;
-    }
+    flex-direction: column;
   }
 }
