@@ -13,8 +13,9 @@
 }
 
 ::ng-deep .answer-checkbox-group {
-  border-radius: $border-radius;
+  border-radius: 0 0 $border-radius $border-radius;
   border: 1px solid $color-background-blue;
+  border-top: none;
   width: 100%;
 }
 
