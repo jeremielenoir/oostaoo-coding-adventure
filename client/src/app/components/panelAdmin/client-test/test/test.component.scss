@@ -27,6 +27,16 @@
   }
 }
 
+// Permet de masquer le border qui n'est pas un border autour du textearea
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: transparent;
+}
+
+::ng-deep .mat-form-field-flex {
+  border: 1px solid $color-background-blue;
+  border-radius: 0 0 4px 4px;
+}
+
 /*--modal css--*/
 
 .modal {
@@ -157,7 +167,7 @@
       min-height: 30rem !important;
       .example-full-width {
         width: 100%;
-        margin-top: -0.25em;
+        // margin-top: -0.25em;
         .mat-form-field-wrapper {
           margin: 0 !important;
           padding: 0 !important;
