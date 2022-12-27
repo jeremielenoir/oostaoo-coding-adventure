@@ -2,22 +2,26 @@
 
 
   .close-invite-dialog{
-    float: right;
     color: mat-color($roodeo-app-warn);
-    margin-top: -25px;
     cursor: pointer;
-    margin-right: -15px;
-  
-    span{
-      color: mat-color($roodeo-app-warn);
-      font-size: 20px;
+    position: fixed;
+    top: 3rem;
+    right: 2.5rem;
+    @media only screen and (min-width: 700px) {
+        right: 3.5rem;
+    }
+    @media only screen and (min-width: 1000px) {
+        right: 4.5rem;
+    }
+    @media only screen and (min-width: 1300px) {
+        top: 3.5rem;
+        right: 5.5rem;
     }
   }
-  
 
+  
   .content-modal-form {
     padding: 24px;
-    
   }
 
 
