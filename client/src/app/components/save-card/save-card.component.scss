@@ -3,7 +3,7 @@
 
 /deep/ #nav-menu {
   top: 0;
-  position: inherit !important;
+  // position: inherit !important;
 }
 
 /deep/ .header-notification {
@@ -13,6 +13,7 @@
 .rdo-panel {
   max-width: 800px;
   margin: 30px auto;
+  padding-top: 5rem;
 }
 
 .loader {
