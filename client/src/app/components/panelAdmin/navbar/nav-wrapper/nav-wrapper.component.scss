@@ -1,10 +1,13 @@
-@import"../../../../../roodeo-variables.scss";
+@import '../../../../../roodeo-variables.scss';
 
 .fix-nav {
   width: 100%;
   position: fixed;
   left: 0px;
   z-index: 1;
+
+  // position: absolute;
+  top: 70px;
 
   #nav {
     top: 90px;
