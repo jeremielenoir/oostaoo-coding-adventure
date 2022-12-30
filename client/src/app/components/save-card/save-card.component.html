@@ -1,9 +1,15 @@
 <app-route-component></app-route-component>
+
 <mat-progress-bar
   *ngIf="inProgress"
   class="roodeo-progress-bar"
   mode="query"
 ></mat-progress-bar>
+
+<div style="margin-top: 55px; height: 6px" *ngIf="dataRoute">
+  <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
+</div>
+
 <div class="rdo-panel">
   <div class="rdo-panel-header">
     <h2 i18n>

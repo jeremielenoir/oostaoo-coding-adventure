@@ -11,6 +11,7 @@ import {
 } from '../../home/confirm/confirm.component';
 import { Router } from '@angular/router';
 import _ from 'lodash';
+import { RouteData } from '../navbar/nav-wrapper/nav-wrapper.component.js';
 
 export interface PeriodicElement {
   date: string;
@@ -37,7 +38,7 @@ export class FacturationComponent implements OnInit {
   nextInvoice: any;
   searchQuery = '';
 
-  dataRoute: any;
+  dataRoute: RouteData[];
 
   /**
    *

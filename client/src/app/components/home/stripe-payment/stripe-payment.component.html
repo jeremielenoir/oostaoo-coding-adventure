@@ -9,6 +9,11 @@
   class="roodeo-progress-bar"
   mode="query"
 ></mat-progress-bar>
+
+<div style="margin-top: 55px; height: 6px" *ngIf="dataRoute">
+  <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
+</div>
+
 <div class="rdo-panel" style="margin-top: 130px">
   <div class="rdo-panel-header">
     <h2 i18n><mat-icon>account_circle</mat-icon> Finalisez votre achat</h2>
@@ -38,7 +43,13 @@
           <h2 style="display: inline-block">
             {{ offerChoice?.title + ' pour ' + offerChoice?.price + '€ ' }}
           </h2>
-          <h6 *ngIf="offerChoice.periodicity === 'monthly'" style="display: inline-block; color: gray" i18n>/mois</h6>
+          <h6
+            *ngIf="offerChoice.periodicity === 'monthly'"
+            style="display: inline-block; color: gray"
+            i18n
+          >
+            /mois
+          </h6>
         </div>
         <div class="offer-desc" [innerHTML]="offerChoice?.description"></div>
       </div>

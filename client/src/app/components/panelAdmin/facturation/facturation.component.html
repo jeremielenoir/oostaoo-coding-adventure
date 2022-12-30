@@ -1,5 +1,9 @@
 <!--app-breadcrumb [namePage]="'Facturation'"></app-breadcrumb-->
-<mat-progress-bar *ngIf="inProgress" class="roodeo-progress-bar" mode="query"></mat-progress-bar>
+<mat-progress-bar
+  *ngIf="inProgress"
+  class="roodeo-progress-bar"
+  mode="query"
+></mat-progress-bar>
 
 <div style="margin-top: 55px; height: 6px" *ngIf="dataRoute">
   <nav-wrapper-component [dataRoute]="this.dataRoute"></nav-wrapper-component>
@@ -19,47 +23,88 @@
         </div>
         <div>
           <use-media query="(min-width: 651px)">
-            <app-base-button [disabled]="inProgress" type="button" [routerLink]="['/subscription']" mat-stroked-button
-              color="primary" iconName="autorenew">Change d'offre
+            <app-base-button
+              [disabled]="inProgress"
+              type="button"
+              [routerLink]="['/subscription']"
+              mat-stroked-button
+              color="primary"
+              iconName="autorenew"
+              >Change d'offre
             </app-base-button>
           </use-media>
           <use-media query="(max-width: 650px)">
-            <compact-btn [disabled]="inProgress" type="button" [routerLink]="['/subscription']" mat-stroked-button
-              iconName="autorenew"></compact-btn>
+            <compact-btn
+              [disabled]="inProgress"
+              type="button"
+              [routerLink]="['/subscription']"
+              mat-stroked-button
+              iconName="autorenew"
+            ></compact-btn>
           </use-media>
 
           <use-media query="(min-width: 651px)">
-            <app-base-button *ngIf="
-              subscription &&
-              !subscription.cancel_at_period_end &&
-              offer.periodicity === 'monthly'
-            " [disabled]="inProgress" type="button" (click)="cancelSub(subscription)" mat-stroked-button color="warn"
-              iconName="clear">Se désabonner</app-base-button>
+            <app-base-button
+              *ngIf="
+                subscription &&
+                !subscription.cancel_at_period_end &&
+                offer.periodicity === 'monthly'
+              "
+              [disabled]="inProgress"
+              type="button"
+              (click)="cancelSub(subscription)"
+              mat-stroked-button
+              color="warn"
+              iconName="clear"
+              >Se désabonner</app-base-button
+            >
           </use-media>
           <use-media query="(max-width: 650px)">
-            <compact-btn *ngIf="
-                          subscription &&
-                          !subscription.cancel_at_period_end &&
-                          offer.periodicity === 'monthly'
-                        " [disabled]="inProgress" type="button" (click)="cancelSub(subscription)" mat-stroked-button
-              color="warn" iconName="clear"></compact-btn>
+            <compact-btn
+              *ngIf="
+                subscription &&
+                !subscription.cancel_at_period_end &&
+                offer.periodicity === 'monthly'
+              "
+              [disabled]="inProgress"
+              type="button"
+              (click)="cancelSub(subscription)"
+              mat-stroked-button
+              color="warn"
+              iconName="clear"
+            ></compact-btn>
           </use-media>
 
           <use-media query="(min-width: 651px)">
-            <app-base-button *ngIf="
+            <app-base-button
+              *ngIf="
                 subscription &&
                 subscription.cancel_at_period_end &&
                 offer.periodicity === 'monthly'
-              " [disabled]="inProgress" type="button" (click)="enableSub(subscription)" mat-stroked-button
-              color="primary" iconName="history">Se réabonner</app-base-button>
+              "
+              [disabled]="inProgress"
+              type="button"
+              (click)="enableSub(subscription)"
+              mat-stroked-button
+              color="primary"
+              iconName="history"
+              >Se réabonner</app-base-button
+            >
           </use-media>
           <use-media query="(max-width: 650px)">
-            <compact-btn *ngIf="
+            <compact-btn
+              *ngIf="
                 subscription &&
                 subscription.cancel_at_period_end &&
                 offer.periodicity === 'monthly'
-              " [disabled]="inProgress" type="button" (click)="enableSub(subscription)" mat-stroked-button
-              color="primary" iconName="history"></compact-btn>
+              "
+              [disabled]="inProgress"
+              type="button"
+              (click)="enableSub(subscription)"
+              mat-stroked-button
+              color="primary"
+              iconName="history"
+            ></compact-btn>
           </use-media>
         </div>
       </div>
@@ -68,48 +113,49 @@
           <tr>
             <td>Statut</td>
             <td>
-              <i [ngClass]="{
+              <i
+                [ngClass]="{
                   'rdo-badge-success': !subscription?.cancel_at_period_end,
                   'rdo-badge-warn': subscription?.cancel_at_period_end
-                }">{{ subscription.status
+                }"
+                >{{ subscription.status
                 }}{{
-                subscription?.cancel_at_period_end
-                ? ', expire le ' +
-                (subscription.current_period_end * 1000
-                | date: 'dd/MM/yyyy')
-                : ''
-                }}</i>
+                  subscription?.cancel_at_period_end
+                    ? ', expire le ' +
+                      (subscription.current_period_end * 1000
+                        | date : 'dd/MM/yyyy')
+                    : ''
+                }}</i
+              >
             </td>
           </tr>
           <tr>
             <td>Créé le</td>
-            <td>{{ subscription.created * 1000 | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ subscription.created * 1000 | date : 'dd/MM/yyyy' }}</td>
           </tr>
           <tr>
             <td>Période courante</td>
             <td>
               du
               {{
-              subscription.current_period_start * 1000 | date: 'dd/MM/yyyy'
+                subscription.current_period_start * 1000 | date : 'dd/MM/yyyy'
               }}
               à
-              {{ subscription.current_period_end * 1000 | date: 'dd/MM/yyyy' }}
+              {{ subscription.current_period_end * 1000 | date : 'dd/MM/yyyy' }}
             </td>
           </tr>
           <tr>
             <td>Montant</td>
             <td>
               {{
-              subscription.plan != null
-              ? subscription.plan.amount / 100 + '€/Mois'
-              : ''
+                subscription.plan != null
+                  ? subscription.plan.amount / 100 + '€/Mois'
+                  : ''
               }}
             </td>
           </tr>
           <tr *ngIf="offer && offer.periodicity === 'monthly'">
-            <td valign="top">
-              Détails souscription
-            </td>
+            <td valign="top">Détails souscription</td>
             <td>
               <h4 style="text-transform: uppercase">{{ offer.title }}</h4>
               <div [innerHTML]="offer.description"></div>
@@ -118,11 +164,9 @@
           </tr>
         </table>
         <table *ngIf="offer" class="rdp-content-table">
-          <hr class="separator-details-offre-unique">
+          <hr class="separator-details-offre-unique" />
           <tr *ngIf="offer && offer.periodicity !== 'monthly'">
-            <td valign="top">
-              Détails offre unique
-            </td>
+            <td valign="top">Détails offre unique</td>
             <td>
               <h4 style="text-transform: uppercase">{{ offer.title }}</h4>
               <div [innerHTML]="offer.description"></div>
@@ -137,19 +181,27 @@
         <div class="rdo-content-group">
           <div class="title-icon-detail-header">
             <div class="scrolling-text">
-              <h3>
-                <mat-icon>credit_card</mat-icon> Votre moyen de paiement
-              </h3>
+              <h3><mat-icon>credit_card</mat-icon> Votre moyen de paiement</h3>
             </div>
             <use-media query="(min-width: 651px)">
-              <app-base-button type="button" mat-stroked-button (click)="addOrEditCard()" color="primary"
-                iconName="credit_card">
+              <app-base-button
+                type="button"
+                mat-stroked-button
+                (click)="addOrEditCard()"
+                color="primary"
+                iconName="credit_card"
+              >
                 Modifier votre moyen de paiement
               </app-base-button>
             </use-media>
             <use-media query="(max-width: 650px)">
-              <compact-btn type="button" mat-stroked-button (click)="addOrEditCard()" color="primary"
-                iconName="credit_card"></compact-btn>
+              <compact-btn
+                type="button"
+                mat-stroked-button
+                (click)="addOrEditCard()"
+                color="primary"
+                iconName="credit_card"
+              ></compact-btn>
             </use-media>
           </div>
           <div>
@@ -159,21 +211,32 @@
         <div class="rdo-content-group">
           <div class="title-icon-detail-header">
             <div class="scrolling-text">
-              <h3>
-                <mat-icon>room</mat-icon> Votre adresse de facturation
-              </h3>
+              <h3><mat-icon>room</mat-icon> Votre adresse de facturation</h3>
             </div>
             <use-media query="(min-width: 651px)">
-              <app-base-button [disabled]="inProgress" type="button" mat-stroked-button (click)="addOrEditAddress()"
-                color="primary" iconName="edit">{{
-                account && account.billing_address
-                ? 'Editer'
-                : 'Ajouter une adresse'
-                }}</app-base-button>
+              <app-base-button
+                [disabled]="inProgress"
+                type="button"
+                mat-stroked-button
+                (click)="addOrEditAddress()"
+                color="primary"
+                iconName="edit"
+                >{{
+                  account && account.billing_address
+                    ? 'Editer'
+                    : 'Ajouter une adresse'
+                }}</app-base-button
+              >
             </use-media>
             <use-media query="(max-width: 650px)">
-              <compact-btn [disabled]="inProgress" type="button" mat-stroked-button (click)="addOrEditAddress()"
-                color="primary" iconName="edit"></compact-btn>
+              <compact-btn
+                [disabled]="inProgress"
+                type="button"
+                mat-stroked-button
+                (click)="addOrEditAddress()"
+                color="primary"
+                iconName="edit"
+              ></compact-btn>
             </use-media>
           </div>
           <div>
@@ -189,7 +252,12 @@
   <div class="rdo-panel-header">
     <h2><mat-icon>history</mat-icon> Historique des factures</h2>
     <mat-form-field appearance="outline">
-      <input type="text" matInput placeholder="Rechercher..." value="{{this.searchQuery}}" />
+      <input
+        type="text"
+        matInput
+        placeholder="Rechercher..."
+        value="{{ this.searchQuery }}"
+      />
     </mat-form-field>
   </div>
   <div>
@@ -206,26 +274,35 @@
       </thead>
       <div *ngIf="!invoices" class="rdo-loader"></div>
       <tbody>
-        <tr *ngFor="
-              let invoice of invoices | search: 'number,amount_paid':searchQuery
-            ">
+        <tr
+          *ngFor="
+            let invoice of invoices
+              | search : 'number,amount_paid' : searchQuery
+          "
+        >
           <td class="rdp-column-align-center">
-            {{ invoice.created * 1000 | date: 'dd/MM/yyyy' }}
+            {{ invoice.created * 1000 | date : 'dd/MM/yyyy' }}
           </td>
           <td class="rdp-column-align-left">
-            du {{ invoice.period_start * 1000 | date: 'dd/MM/yyyy' }} à
-            {{ invoice.period_end * 1000 | date: 'dd/MM/yyyy' }}
+            du {{ invoice.period_start * 1000 | date : 'dd/MM/yyyy' }} à
+            {{ invoice.period_end * 1000 | date : 'dd/MM/yyyy' }}
           </td>
           <td class="rdp-column-align-center">
             {{ invoice.amount_paid / 100 }} €
           </td>
           <td class="rdp-column-align-center">
-            <i style="line-height: 16px; height: 23px" class="rdo-badge-success">{{ invoice.status }}</i>
+            <i
+              style="line-height: 16px; height: 23px"
+              class="rdo-badge-success"
+              >{{ invoice.status }}</i
+            >
           </td>
           <td class="rdp-column-align-left">{{ invoice.number }}</td>
           <td>
             <div>
-              <a href="{{ invoice.invoice_pdf }}" target="_blank"><mat-icon>link</mat-icon></a>
+              <a href="{{ invoice.invoice_pdf }}" target="_blank"
+                ><mat-icon>link</mat-icon></a
+              >
             </div>
           </td>
         </tr>

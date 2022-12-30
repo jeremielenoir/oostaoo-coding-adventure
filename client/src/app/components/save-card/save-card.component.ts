@@ -11,12 +11,14 @@ import {
 } from 'src/app/api-client/api-client.service';
 import { AddressComponent } from '../address/address.component';
 import { DecryptTokenService } from '../home/register/register.service';
+import { RouteData } from '../panelAdmin/navbar/nav-wrapper/nav-wrapper.component.js';
 
 @Component({
   selector: 'app-save-card',
   templateUrl: './save-card.component.html',
   styleUrls: ['./save-card.component.scss'],
 })
+
 export class SaveCardComponent implements OnInit {
   cardHolderForm: FormGroup;
   emailForm: FormGroup;
@@ -29,6 +31,7 @@ export class SaveCardComponent implements OnInit {
   complete: boolean;
   cardInfos: any;
   paied: boolean;
+  dataRoute: RouteData[];
 
   @ViewChild(StripeCardComponent) card: any;
   cardOptions = {
@@ -73,6 +76,33 @@ export class SaveCardComponent implements OnInit {
   }
 
   ngOnInit() {
+        // declaration nav route
+        this.dataRoute = [
+          {
+            routerLink: '/subscription',
+            condition: true,
+            classAnimParent: 'hvr-icon-bounce',
+            classAnimIcone: 'hvr-icon',
+            icon: 'credit_card',
+            name: 'Abonnement',
+          },
+          {
+            routerLink: '/dashboard/facturation',
+            condition: true,
+            classAnimParent: 'hvr-icon-bounce',
+            classAnimIcone: 'hvr-icon',
+            icon: 'list_alt',
+            name: 'Facturation',
+          },
+          {
+            routerLink: '/dashboard/protection-des-donnees',
+            condition: true,
+            classAnimParent: 'hvr-icon-bounce',
+            classAnimIcone: 'hvr-icon',
+            icon: 'admin_panel_settings',
+            name: 'Confidentialité',
+          },
+        ];
     this.getUser();
   }
 
