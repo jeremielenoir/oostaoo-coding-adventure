@@ -18,6 +18,7 @@ import { AddressComponent } from '../../address/address.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CreatePaymentMethodCardData } from '@stripe/stripe-js';
 import { ConfirmComponent, ConfirmModel } from '../confirm/confirm.component';
+import { RouteData } from '../../panelAdmin/navbar/nav-wrapper/nav-wrapper.component.js';
 @Component({
   selector: 'app-stripe-payment',
   templateUrl: './stripe-payment.component.html',
@@ -38,6 +39,7 @@ export class StripePaymentComponent implements OnInit {
   paied = false;
   complete = false;
   cardConfirmation: FormBuilder;
+  dataRoute: RouteData[];
   @ViewChild(StripeCardComponent) card: any;
   cardOptions = {
     style: {
@@ -82,6 +84,33 @@ export class StripePaymentComponent implements OnInit {
    *
    */
   ngOnInit() {
+            // declaration nav route
+            this.dataRoute = [
+              {
+                routerLink: '/subscription',
+                condition: true,
+                classAnimParent: 'hvr-icon-bounce',
+                classAnimIcone: 'hvr-icon',
+                icon: 'credit_card',
+                name: 'Abonnement',
+              },
+              {
+                routerLink: '/dashboard/facturation',
+                condition: true,
+                classAnimParent: 'hvr-icon-bounce',
+                classAnimIcone: 'hvr-icon',
+                icon: 'list_alt',
+                name: 'Facturation',
+              },
+              {
+                routerLink: '/dashboard/protection-des-donnees',
+                condition: true,
+                classAnimParent: 'hvr-icon-bounce',
+                classAnimIcone: 'hvr-icon',
+                icon: 'admin_panel_settings',
+                name: 'Confidentialité',
+              },
+            ];
     this.getUser();
   }
 

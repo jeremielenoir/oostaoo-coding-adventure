@@ -1,5 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+export interface RouteData {
+  routerLink: string;
+  condition: boolean;
+  classAnimParent: string;
+  classAnimIcone: string;
+  icon: string;
+  name: string;
+}
+
 @Component({
   selector: 'nav-wrapper-component',
   templateUrl: './nav-wrapper.component.html',
@@ -25,7 +34,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class NavWrapperComponent implements OnInit {
 
-  @Input() dataRoute: any;
+  @Input() dataRoute: RouteData[];
 
   constructor() { }
 
