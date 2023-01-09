@@ -1,30 +1,31 @@
 @import '../../../../../roodeo-variables.scss';
 
-
 button {
   text-transform: uppercase;
 }
 
-.icon-left {
-  padding: 0 16px 0 0;
-}
-.icon-right {
-  padding: 0 0 0 16px;
-}
+// .icon-left {
+//   padding: 0 16px 0 0;
+// }
+// .icon-right {
+//   padding: 0 0 0 16px;
+// }
 
 .full-width {
   width: 100%;
-  &.roodeo-button-icon-left, &.roodeo-button-icon-right {
-    .icon{
-      position: absolute;
-      right: 0px;
-      top:-1px;
-    }
-    
-  }
+  // &.roodeo-button-icon-left,
+  // &.roodeo-button-icon-right {
+  //   .icon {
+  //     position: absolute;
+  //     right: 0px;
+  //     top: -1px;
+  //   }
+  // }
 }
 
-.roodeo-button-icon-left, .roodeo-button-icon-right {
+.roodeo-button-icon-left,
+.roodeo-button-icon-right,
+.roodeo-button-content {
   color: $color-white;
   border-radius: 19px;
   height: fit-content;
@@ -46,18 +47,18 @@ button {
   }
 }
 
-.roodeo-button-icon-left {
-  padding: 0 16px 0 0;
+// .roodeo-button-icon-left {
+//   padding: 0 16px 0 0;
 
-  .icon {
-    margin-right:10px;
-  }
-}
+//   .icon {
+//     margin-right: 10px;
+//   }
+// }
 
-.roodeo-button-icon-right {
-  padding: 0 0 0 16px;
+// .roodeo-button-icon-right {
+//   padding: 0 0 0 16px;
 
-  .icon {
-    margin-left:10px;
-  }
-}
+//   .icon {
+//     margin-left: 10px;
+//   }
+// }
