@@ -1,14 +1,23 @@
 <div *ngIf="status === 'form'">
   <header class="header-modal">
-    <span class="rond-custom">1</span>
-    <div class="info-campaign-candidats">
-      <h2 i18n>Entrez le nom et l'email des candidats</h2>
-      <p *ngFor="let campaign of campaigns">Campagne: {{ campaign.Name }}</p>
+
+    <div class="main-content-header">
+
+      <div class="rond-custom">1</div>
+
+      <div class="info-campaign-candidats">
+        <h2 i18n>Inviter des candidats</h2>
+        <p>Entrer le nom et l'email des candidats</p>
+      </div>
+
     </div>
+
     <div class="close-invite-dialog">
-      <span class="absolute-pos" (click)="close()"> <mat-icon>close</mat-icon></span>
+      <span (click)="close()"> <mat-icon class="cross">close</mat-icon></span>
     </div>
+
   </header>
+
   <div class="content-modal-form">
     <div class="form-scroll">
       <form class="cologne-form" [formGroup]="form">

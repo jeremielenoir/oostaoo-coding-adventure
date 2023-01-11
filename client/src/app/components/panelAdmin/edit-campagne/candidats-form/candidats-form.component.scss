@@ -79,45 +79,52 @@
 .header-modal {
     color: white;
     background-color: #CBDDE7;
+    color:#19719e;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    justify-content: flex-start;
-    border-bottom: 1px solid $color-principal-blue;
-    /* background-color: #f2bb13; */
+    padding: 0.5rem 1rem 0.5rem 4rem;
 
-      h2 {
-        margin-bottom: 0px !important;
-        color: black;
-        font-size: 20px;
-      }
+    .main-content-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.5rem;
+        font-size: 1rem;
 
-      p {
-        color: $color-principal-blue;
+        h2 {
+        margin-bottom: 0px;
+        font-weight: normal;
+        font-size: 1rem;
       }
 
       .rond-custom {
-        color:$color-principal-blue;
-        padding: 10px;
-        border-radius: 50px;
-        border: 1px solid $color-principal-blue;
+        font-weight: bold;
+        border: 2px solid white;
         text-align: center;
         height: 30px;
         width: 30px;
-        line-height: 10px;
-        position: relative;
-        top: -10px;
-        right: -10px;
-        margin-right: 30px;
+        border-radius: 50%;
       }
+    }
 
       .close-invite-dialog{
-        float: right;
-        color: mat-color($roodeo-app-warn);
-        margin-top: 0px;
         cursor: pointer;
+        background-color: #19719e;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        box-shadow: 1px 1px 5px rgba(128, 128, 128, 0.671);
 
         span{
-          color: mat-color($roodeo-app-warn);
+          width: 10px;
+          color: white;
+
+          .cross {
+            margin-top: 3px;
+          }
         }
       }
 
