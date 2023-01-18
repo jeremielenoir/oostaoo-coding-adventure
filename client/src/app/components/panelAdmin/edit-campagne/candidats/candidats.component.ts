@@ -122,7 +122,7 @@ export class CandidatsComponent implements OnInit, OnDestroy {
         globalId: this.globalId,
         tests_available: this.tests_available,
       },
-      height: '580px',
+      // height: '580px',
     });
 
     dialogRef.afterClosed().subscribe((data) => {

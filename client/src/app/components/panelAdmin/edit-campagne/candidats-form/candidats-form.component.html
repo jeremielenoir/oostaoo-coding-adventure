@@ -1,11 +1,23 @@
 <div *ngIf="status === 'form'">
   <header class="header-modal">
-    <span class="rond-custom">1</span>
-    <div class="info-campaign-candidats">
-      <h2 i18n>Entrez le nom et l'email des candidats</h2>
-      <p *ngFor="let campaign of campaigns">Campagne: {{ campaign.Name }}</p>
+
+    <div class="main-content-header">
+
+      <div class="rond-custom">1</div>
+
+      <div class="info-campaign-candidats">
+        <h2 i18n>Inviter des candidats</h2>
+        <p>Entrer le nom et l'email des candidats</p>
+      </div>
+
     </div>
+
+    <div class="close-invite-dialog">
+      <span (click)="close()"> <mat-icon class="cross">close</mat-icon></span>
+    </div>
+
   </header>
+
   <div class="content-modal-form">
     <div class="form-scroll">
       <form class="cologne-form" [formGroup]="form">
@@ -21,10 +33,10 @@
                 <mat-label>Email*</mat-label>
                 <input formControlName="value" matInput placeholder="john.smith@email.com" type="email" />
               </mat-form-field>
-
+<!--
               <button mat-mini-fab color="warn" (click)="removeContact(i)" [disabled]="contacts.length === 1">
                 <mat-icon>delete</mat-icon>
-              </button>
+              </button> -->
             </div>
             <mat-hint *ngIf="hasApplied(i)" i18n>Ce
               candidat a
@@ -51,7 +63,7 @@
   </div>
 </div>
 
-<div *ngIf="status === 'email'">
+<div *ngIf="status === 'email'" class="modal-padding">
   <header class="header-modal">
     <span class="rond-custom">
       <p>2</p>
@@ -93,7 +105,7 @@
   </div>
 </div>
 
-<div *ngIf="status === 'sent'" class="loader-container">
+<div *ngIf="status === 'sent'" class="loader-container modal-padding">
   <div class="invitation-candidats">
     <header class="header-modal">
       <span class="rond-custom">3</span>
@@ -130,7 +142,7 @@
   </div>
 </div>
 
-<div *ngIf="status === 'loading'" class="loader-container">
+<div *ngIf="status === 'loading'" class="loader-container modal-padding">
   <mat-spinner [strokeWidth]="20"></mat-spinner>
   <p class="margin-top-md" i18n>Envoi en cours...</p>
 </div>

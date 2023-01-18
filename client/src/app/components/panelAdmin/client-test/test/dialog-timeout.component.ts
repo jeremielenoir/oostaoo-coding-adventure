@@ -8,6 +8,7 @@ export interface IDialogData {
 @Component({
   selector: 'app-dialog-timeout',
   templateUrl: 'dialog-timeout.html',
+  styleUrls: ['dialog-timeout.scss']
 })
 
 export class DialogTimeoutComponent implements OnInit {

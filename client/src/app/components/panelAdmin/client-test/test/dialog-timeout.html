@@ -1,20 +1,22 @@
-<h1 mat-dialog-title i18n>Temps imparti écoulé</h1>
-<mat-dialog-content>
-  <p *ngIf="!data.preview" i18n>
-    Le temps imparti pour la question est écoulé. En test réel le candidat sera dirigé vers la question suivante.
-  </p>
-  <p *ngIf="data.preview" i18n>
-    Le temps imparti pour la question est écoulé. Votre réponse actuelle a
-    été soumise. Cliquez sur OK quand vous êtes prêt(e) à passer à la
-    question suivante.
-  </p>
-</mat-dialog-content>
-<mat-dialog-actions class="block-button">
-  <app-base-button iconName="done" iconPosition="right" *ngIf="data.preview" (click)="next()">
-    <span class="text" i18n>OK</span>
-  </app-base-button>
+<div class="modal-padding">
+  <h1 mat-dialog-title i18n>Temps imparti écoulé</h1>
+  <mat-dialog-content>
+    <p *ngIf="!data.preview" i18n>
+      Le temps imparti pour la question est écoulé. En test réel le candidat sera dirigé vers la question suivante.
+    </p>
+    <p *ngIf="data.preview" i18n>
+      Le temps imparti pour la question est écoulé. Votre réponse actuelle a
+      été soumise. Cliquez sur OK quand vous êtes prêt(e) à passer à la
+      question suivante.
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions class="block-button">
+    <app-base-button iconName="done" iconPosition="right" *ngIf="data.preview" (click)="next()">
+      <span class="text" i18n>OK</span>
+    </app-base-button>
 
-  <app-base-button iconName="flaky" iconPosition="right" *ngIf="!data.preview" (click)="showTextResult()">
-    <span class="text" i18n>Voir la réponse</span>
-  </app-base-button>
-</mat-dialog-actions>
+    <app-base-button iconName="flaky" iconPosition="right" *ngIf="!data.preview" (click)="showTextResult()">
+      <span class="text" i18n>Voir la réponse</span>
+    </app-base-button>
+  </mat-dialog-actions>
+</div>

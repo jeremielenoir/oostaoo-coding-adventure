@@ -87,7 +87,7 @@ export class CampagneComponent implements OnInit, OnDestroy {
         globalId: campaignId,
         tests_available: this.campaigns.length,
       },
-      height: '580px',
+      // height: '580px',
       panelClass: ['mat-snack-bar-container']
     });
   }

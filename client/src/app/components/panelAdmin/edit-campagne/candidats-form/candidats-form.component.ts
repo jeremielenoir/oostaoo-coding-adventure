@@ -243,4 +243,8 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
        <div>Bonne chance !</div><div>Cordialement </div>
     `;
   }
+
+  close() {
+    this.dialogRef.close(this.tests_available);
+  }
 }
