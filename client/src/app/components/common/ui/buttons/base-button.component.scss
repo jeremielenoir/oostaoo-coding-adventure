@@ -1,31 +1,30 @@
 @import '../../../../../roodeo-variables.scss';
 
+
 button {
   text-transform: uppercase;
 }
 
-// .icon-left {
-//   padding: 0 16px 0 0;
-// }
-// .icon-right {
-//   padding: 0 0 0 16px;
-// }
-
-.full-width {
-  width: 100%;
-  // &.roodeo-button-icon-left,
-  // &.roodeo-button-icon-right {
-  //   .icon {
-  //     position: absolute;
-  //     right: 0px;
-  //     top: -1px;
-  //   }
-  // }
+.icon-left {
+  padding: 0 16px 0 0;
+}
+.icon-right {
+  padding: 0 0 0 16px;
 }
 
-.roodeo-button-icon-left,
-.roodeo-button-icon-right,
-.roodeo-button-content {
+.full-width {
+  //width: 100%;
+  &.roodeo-button-icon-left, &.roodeo-button-icon-right {
+    .icon{
+      position: absolute;
+      right: 0px;
+      top:-1px;
+    }
+    
+  }
+}
+
+.roodeo-button-icon-left, .roodeo-button-icon-right {
   color: $color-white;
   border-radius: 19px;
   height: fit-content;
@@ -43,22 +42,48 @@ button {
     background-color: #0c6192 !important;
   }
   .icon-accent {
-    background-color: mat-color($roodeo-app-accent, 800);
+    //background-color: mat-color($roodeo-app-accent, 800);
   }
 }
 
-// .roodeo-button-icon-left {
-//   padding: 0 16px 0 0;
+.roodeo-button-icon-left {
+  padding: 0 16px 0 0;
 
-//   .icon {
-//     margin-right: 10px;
-//   }
-// }
+  .icon {
+    margin-right:10px;
+  }
+}
 
-// .roodeo-button-icon-right {
-//   padding: 0 0 0 16px;
+.roodeo-button-icon-right {
+  padding: 0 0 0 16px;
 
-//   .icon {
-//     margin-left: 10px;
-//   }
-// }
+  .icon {
+    margin-left:10px;
+  }
+}
+
+.customButtonSize {
+  $large-size-button: 80px;
+  $large-size-icon: 48px;
+  width: $large-size-button;
+  height: $large-size-button;
+  line-height: $large-size-button;
+  .mat-icon{
+    font-size: $large-size-icon;
+    width: $large-size-icon;
+    height: $large-size-icon;
+    line-height: $large-size-icon;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    filter: opacity(1);
+  }
+  50% {
+  filter: opacity(0);
+  }
+  to {
+    filter: opacity(1);
+  }
+}

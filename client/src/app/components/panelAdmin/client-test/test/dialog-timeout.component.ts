@@ -32,6 +32,7 @@ export class DialogTimeoutComponent implements OnInit {
   }
 
   public next() {
+    console.log('toto');
     this.nextQuestion.emit();
     this.dialogRef.close();
   }

@@ -1,12 +1,12 @@
 <div *ngIf="status === 'form'">
-  <header class="header-modal">
+  <header mat-dialog-title class="header-modal">
 
     <div class="main-content-header">
 
       <div class="rond-custom">1</div>
 
       <div class="info-campaign-candidats">
-        <h2 i18n>Inviter des candidats</h2>
+        <h3 i18n>Inviter des candidats</h3>
         <p>Entrer le nom et l'email des candidats</p>
       </div>
 
@@ -17,15 +17,16 @@
     </div>
 
   </header>
-
+  
   <div class="content-modal-form">
-    <div class="form-scroll">
-      <form class="cologne-form" [formGroup]="form">
+    <div>
+      <form [formGroup]="form">
+        <mat-dialog-content>
         <div class="card-body" formArrayName="contacts">
           <div [formGroupName]="i" class="row" *ngFor="let contact of contacts.controls; let i = index">
             <div class="candidats__contact-inputs">
               <mat-form-field class="item" [color]="'accent'" appearance="outline" [floatLabel]="true">
-                <mat-label>Nom*</mat-label>
+                <mat-label>NOM et Prénom*</mat-label>
                 <input formControlName="name" matInput placeholder="John Smith" type="text" />
               </mat-form-field>
 
@@ -33,91 +34,94 @@
                 <mat-label>Email*</mat-label>
                 <input formControlName="value" matInput placeholder="john.smith@email.com" type="email" />
               </mat-form-field>
-<!--
-              <button mat-mini-fab color="warn" (click)="removeContact(i)" [disabled]="contacts.length === 1">
+             
+              <button  mat-mini-fab color="warn" (click)="removeContact(i)" [disabled]="contacts.length === 1">
                 <mat-icon>delete</mat-icon>
-              </button> -->
+              </button> 
             </div>
             <mat-hint *ngIf="hasApplied(i)" i18n>Ce
               candidat a
               déjà participé à cette
               campagne !</mat-hint>
           </div>
+         
         </div>
-
+      </mat-dialog-content>
+      
+      <div class="information" style=" display: flex; justify-content: space-between">
+          Les champs indiqués par une * sont obligatoires
+          <button mat-mini-fab (click)="addContact()" [disabled]="candidatsApplied$ | async" color="primary" aria-label="Example icon button with a delete icon">
+            <mat-icon>person_add</mat-icon>
+          </button>
+        </div>
         <div class="block-button">
-          <app-base-button iconName="person_add" (clickEvent)="addContact()" [disabled]="candidatsApplied$ | async">
-            Ajouter
-            un autre
-            candidat</app-base-button>
           <app-base-button iconName="mail_outline" [disabled]="!validate() || (candidatsApplied$ | async)"
             (clickEvent)="switchTo('email')">Prochaine
             étape : configurer l'email
           </app-base-button>
         </div>
-        <div class="information">
-          Les champs indiqués par une * sont obligatoires
-        </div>
+      
       </form>
     </div>
   </div>
+
 </div>
 
 <div *ngIf="status === 'email'" class="modal-padding">
-  <header class="header-modal">
-    <span class="rond-custom">
-      <p>2</p>
-    </span>
+  <header mat-dialog-title class="header-modal">
+    <div class="main-content-header">
+    <div class="rond-custom">2</div>
     <div class="info-campaign-candidats">
-      <h2>Configuration de l'email</h2>
-      <p *ngFor="let campaign of campaigns">{{ campaign.Name }}</p>
+      <h3>Configuration de l'email</h3>
       <p>Vous avez sélectionné <strong>{{candidats.length}}</strong> destinataire(s)</p>
     </div>
+    </div>
   </header>
+  
   <div class="content-modal-email">
     <div class="scroll-body">
+      
       <div class="email-subject">
-        <label *ngIf="!editing">Sujet :</label>
+        
         <mat-form-field *ngIf="editing" class="email-subject-input" [color]="'accent'" appearance="outline"
           [floatLabel]="true">
           <mat-label>Sujet</mat-label>
           <input matInput placeholder="sujet" type="text" name="" [(ngModel)]="sujet" />
         </mat-form-field>
-        <p *ngIf="!editing" class="content">{{sujet}}</p>
-      </div>
+        
+      </div> 
       <div [class.message-personaliser-form]="editing">
-        <label *ngIf="!editing">Message :</label>
+        
         <ckeditor *ngIf="editing" [editor]="Editor" [(ngModel)]="htmlContent"></ckeditor>
-        <div *ngIf="!editing" [innerHTML]="htmlContent" class="htmlContent"></div>
-      </div>
+        
+      </div> 
     </div>
     <div class="block-button">
-      <app-base-button iconName="keyboard_arrow_left" iconPosition="left" [disabled]="editing"
+      <app-base-button iconName="keyboard_arrow_left" iconPosition="left" 
         (clickEvent)="switchTo('form')">
         Retour
       </app-base-button>
-      <app-base-button [iconName]="editing ? 'done' : 'edit'" (clickEvent)="editing=!editing">
-        {{editing ? 'OK' : 'Personnaliser cet email'}}
-      </app-base-button>
-      <app-base-button iconName="send" [disabled]="editing" (clickEvent)="updateCampaignPostCandidats()">
+     
+      <app-base-button iconName="send"  (clickEvent)="updateCampaignPostCandidats()">
         Envoyer {{candidats.length > 1 ? "les emails" : "l'email"}}</app-base-button>
     </div>
   </div>
 </div>
 
-<div *ngIf="status === 'sent'" class="loader-container modal-padding">
+
+<div *ngIf="status === 'sent'" class="modal-padding">
   <div class="invitation-candidats">
-    <header class="header-modal">
-      <span class="rond-custom">3</span>
-      <div class="info-campaign-candidats">
-        <h2 i18n>{{candidats.length > 1 ? 'Invitations aux candidats' : 'Invitation candidat'}}</h2>
-        <p *ngFor="let campaign of campaigns">Campagne: {{ campaign.Name }}</p>
-      </div>
-    </header>
+    <div class="icon">
+      <mat-icon class="md-48">
+        task_alt
+      </mat-icon>
+    </div>
     <div class="content-modal-form">
-      <p class="invit-desti">Vous avez envoyé l'invitation à {{ candidats.length }} destinataire(s)</p>
+      <p class="invit-desti">L'invitation a été envoyé avec succés à {{ candidats.length }} destinataire(s)</p>
+      
       <div class="form-scroll">
-        <table mat-table [dataSource]="candidats" class="mat-elevation-z8">
+        <mat-dialog-content>
+        <table mat-table [dataSource]="candidats">
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef i18n> Name </th>
             <td mat-cell *matCellDef="let candidat"> {{ candidat.name | titlecase }} </td>
@@ -132,9 +136,9 @@
               <mat-icon style="color:#4caf50">check</mat-icon>
             </td>
           </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedMatTableColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedMatTableColumns;"></tr>
+         <tr mat-row *matRowDef="let row; columns: displayedMatTableColumns;"></tr>
         </table>
+      </mat-dialog-content>
       </div>
 
       <app-base-button class="submit-btn" (click)='retourCandidat()' iconName="close" i18n>Fermer</app-base-button>

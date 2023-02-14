@@ -1,13 +1,28 @@
 @import"../../../../../roodeo-variables.scss";
 
-
+@mixin md-icon-size($size: 24px, $color : #fff) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: $size;
+  color: $color;
+}
+.material-icons.md-48 {
+  @include md-icon-size(80px, #4caf50);
+  margin-top: 20px;
+ }
+ 
+.icon{
+  display :flex; 
+  justify-content: center; 
+}
 .cologne-form{
     border:none!important;
     border-radius: 0px!important;
 }
 
 .form-scroll{
-    margin: 0.5rem 1rem 6.5rem 1rem;
+    //margin: 0.5rem 1rem 6.5rem 1rem;
 }
 
 .card-body{
@@ -18,11 +33,13 @@
         align-items: center;
         gap: 5px 0;
         margin-bottom: 10px;
+        padding: 2px;
 
         .candidats__contact-inputs {
           display: flex;
+          align-items: center;
           width: 100%;
-          background-color: white;
+          
 
           mat-hint {
             color: red !important;
@@ -56,7 +73,7 @@
 .block-button{
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
+    padding: 1rem;
 }
 
 .m-1{
@@ -86,6 +103,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 1rem 0.5rem 4rem;
+    margin: initial;
+    border-bottom: 1px solid #1d3552;
 
     .main-content-header {
         display: flex;
@@ -104,7 +123,7 @@
         font-weight: bold;
         border: 2px solid white;
         text-align: center;
-        height: 30px;
+        height: 33px;
         width: 30px;
         border-radius: 50%;
       }
@@ -134,19 +153,19 @@
       }
 }
 
-.modal-padding {
-  padding: 2.5rem !important;
-}
+
 
 .content-modal-form {
     padding: 24px;
     width: 100%;
-    background-color: #F4F4F4;
 }
 
+
 .content-modal-email {
-    padding: 0 14px 0 14px;
-    width: 100%;
+  padding-top: 1rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  width: 100%;
 }
 
 .scroll-body{
@@ -203,20 +222,25 @@
   flex-direction: column;
   justify-content: space-between;
 
-  .content-modal-form {
+  .content-modal-form{
     display: flex;
     flex-direction: column;
-
+    
     .invit-desti {
       margin-bottom: 15px;
+      display: flex;
+      justify-content: center;
     }
 
     .form-scroll {
-      height: 350px;
-    }
+      height: auto;
+      margin-bottom: 1.5rem;
+      margin-top: 1rem;
+      }
 
     table {
       width: 100%;
+      
 
       .mat-row {
         height: auto;

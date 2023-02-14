@@ -40,7 +40,7 @@ span.interview-icon.ng-star-inserted {
   border-radius: 4px;
 
   .modal-content {
-    padding: 40px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -63,7 +63,7 @@ span.interview-icon.ng-star-inserted {
   .modal-footer {
     display: flex;
     justify-content: space-between;
-    padding: 20px 40px;
+    padding: 20px 100px;
     .btn-modal {
       color: $color-white;
       height: 50px;
@@ -92,6 +92,7 @@ span.interview-icon.ng-star-inserted {
     }
   }
 }
+
 
 .mat-cell,
 .mat-header-cell {
@@ -143,6 +144,23 @@ th.mat-header-cell:first-of-type {
 .mat-cell:last-child {
   border-right: none !important;
 }
+
+@mixin md-icon-size($size: 24px, $color : #fff) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: $size;
+  color: $color;
+}
+
+.material-icons.md-48 {
+ @include md-icon-size(80px, $color-icon-light);
+ margin-top: 20px;
+}
+
+
+
+
 
 .tr.mat-footer-row,
 tr.mat-row {

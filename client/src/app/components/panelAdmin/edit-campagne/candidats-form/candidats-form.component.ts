@@ -41,7 +41,7 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
 
   public readonly sujet: string = 'Évaluation technique';
   public contenu: string;
-  public editing = false;
+  public editing = true;
   public htmlContent: string;
 
   public offer_id: any;
@@ -107,7 +107,7 @@ export class CandidatsFormComponent implements OnInit, OnDestroy {
 
   addContact(): void {
     if (this.contacts.length < this.tests_available) {
-      this.contacts.push(this.createContact());
+      this.contacts.insert(0,this.createContact());
     } else {
       this.openSnackBar('Limite de test disponibles atteinte', 'Fermer');
     }

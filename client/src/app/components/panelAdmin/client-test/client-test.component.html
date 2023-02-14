@@ -4,7 +4,7 @@
       <div class="modal">
         <div class="modal-header">
           <h3 class="modal-title" i18n>
-            <mat-icon>perm_identity</mat-icon>
+            <mat-icon color="warn">perm_identity</mat-icon>
             Vous êtes sur le point de démarrer votre test
           </h3>
         </div>
@@ -19,14 +19,9 @@
           <p class="claire-text text-gras" i18n>
             Les solutions qui prennent en considération un maximum de cas
             d'utilisation sont privilégiées par le système de notation.
-          </p>
-          <p class="claire-text" i18n>
             Nous vous rappelons qu'il est interdit de tricher. Notre système
             détecte les tentatives de triche, et préviendra le recruteur le cas
-            échéant.
-          </p>
-
-          <p class=" claire-text" i18n>Bonne chance !</p>
+            échéant.Bonne chance !</p>
 
           <label class="block-condition claire-text">
             <span class="checkbox-condition">
@@ -54,13 +49,18 @@
     </div>
 
     <section class="container-section">
-      <div class="invitation">
-        <div class="test-invit">
-          <div class="image"></div>
-          <h3 i18n class="text">Bonjour, vous avez été invité(e) à passer un test.</h3>
-        </div>
+      
+      <div class="image"></div>
 
+      <div class="invitation">
+        
+        <div class="test-invit">
+          
+          <h3 i18n class="text">Bonjour, vous avez été invité(e) à passer un test.</h3>
+          
+        </div>
         <div class="text">
+
           <p i18n>
             Vous devrez effectuer cette évaluation sans l’aide d’une tierce
             personne. Cependant, vous pouvez (et nous le conseillons vivement)
@@ -93,11 +93,14 @@
               fait pas partie de l’évaluation. Vous avez la possibilité de
               recommencer ce tutoriel autant de fois que vous le souhaitez.
             </p>
+            <div class="button-center">
             <app-base-button iconName="keyboard_arrow_right" (click)="runTutorial()" color="#FB8C00" i18n>
               Démarrer le tutoriel
             </app-base-button>
           </div>
+          </div>
         </div>
+        <div class="tutorial-space"></div>
         <div class="test">
           <div class="title">
             <div class="img"></div>
@@ -115,9 +118,11 @@
               {{ durationMaxTest }} minutes. Merci de prévoir
               {{ durationMaxTest }} minutes consécutives pour faire ce test.
             </p>
-            <app-base-button iconName="keyboard_arrow_right" (click)="openPopup()" i18n>
-              Démarrer le test
-            </app-base-button>
+            <div class="button-center">
+              <app-base-button iconName="keyboard_arrow_right" (click)="openPopup()" i18n>
+                Démarrer le test
+              </app-base-button>
+            </div>
           </div>
         </div>
       </div>

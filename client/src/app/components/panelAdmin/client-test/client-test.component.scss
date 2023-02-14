@@ -65,6 +65,8 @@ button {
   .modal-header {
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
+    background-color: $color-background-blue;
+    padding: 40px;
   }
   .modal-content {
     width: 1000px;
@@ -102,8 +104,9 @@ button {
   }
   .modal-footer {
     display: flex;
-    justify-content: space-around;
-    padding: 0 20px 20px 20px;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px 20px 20px 20px;
     .btn {
       flex: 1;
       color: white;
@@ -135,14 +138,14 @@ button {
 /////////////// NEW
 
 .testing-question-wrapper {
-  background-color: $color-background-blue;
+  background-color: white;
   font-family: $font-family-client-test;
   font-weight: 300;
   color: $text-color-client-test;
-  height: 100vh;
+  //height: 100vh;
   display: flex;
   justify-content: center;
-
+  
   .eval-testing {
     margin: 20px 5% 20px 5%;
     display: flex;
@@ -152,16 +155,31 @@ button {
       flex: 1;
       display: flex;
       align-items: center;
-      gap: 0 20px;
+      gap: 20px;
+      flex-direction: column;
+      
+      .image {
+        margin: 3% auto;
+        width: 205px;
+        height: 58px;
+        background-image: url($logoPath);
+        background-size: cover;
+      }
+
+      
 
       .invitation {
-        width: calc(50%);
-        justify-content: normal !important;
-        padding: 42px;
-        height: 600px;
-        background: white;
-        border: $border-table;
-        border-radius: $border-radius;
+        //width: calc(50%);
+        //justify-content: normal !important;
+        padding: 30px;
+        //height: 600px;
+        //background: #f9fbfc;
+        //border: $border-table;
+        //border-radius: $border-radius;
+        border-radius: 5px;
+        border: 1px solid #c1d5df;
+        background-color: #e9f1f4;
+        box-shadow: 0px 0px 5px 0px grey;
 
         .test-invit {
           display: flex;
@@ -170,31 +188,25 @@ button {
           color: $color-principal-blue;
 
           h3 {
-            margin: 20px 20px 0 0;
-            padding: 6px 0 10px 0;
+            //margin: 20px 20px 0 0;
+            padding: 0 0 10px 0;
             font-size: 24px;
             display: flex;
             justify-content: center;
             align-items: center;
-            border-top: 1px dashed #e3e3e3;
-            border-bottom: 1px dashed #e3e3e3;
+            //border-top: 1px dashed #e3e3e3;
+            //border-bottom: 1px dashed #e3e3e3;
           }
 
           .text{
             text-align: center;
           }
 
-          .image {
-            margin: 0 auto;
-            width: 205px;
-            height: 58px;
-            background-image: url($logoPath);
-            background-size: cover;
-          }
+          
         }
 
         .text {
-          padding: 30px 0 80px 0;
+          //padding: 30px 0 80px 0;
           
           p {
             color: $color-principal-blue !important;
@@ -208,17 +220,37 @@ button {
       }
 
       .tutorial-test {
-        width: calc(50%);
-        display: flex;
-        height: 600px;
-        flex-direction: column;
-        justify-content: space-between;
         
-        .tutorial, .test {
+        display: flex;
+        flex-direction: row;
+        //gap: 20px;
+        //border: $border-table;
+        //border-radius: $border-radius;
+        //background-color: #f9fbfc;
+        align-items: center;
+        border-radius: 5px;
+        border: 1px solid #c1d5df;
+        background-color: #e9f1f4;
+        box-shadow: 0px 0px 5px 0px grey;
+        .button-center{
+          display:flex;
+          justify-content: center;
+        }
+        .tutorial-space{
+          
+          height: 80%;
           background-color: white;
-          padding: 40px;
-          border: $border-table;
-          border-radius: $border-radius;
+          padding-left: 9px;
+          box-shadow: inset 0px 0px 4px 0px #33709a;
+          border-radius: 10px;
+        }
+        .tutorial, .test {
+          
+          width: 50%;
+          padding: 30px;
+          
+          ;
+          
           .client-test__content {
             display: flex;
             flex-direction: column;
@@ -258,17 +290,17 @@ button {
     gap: 20px 0 !important;
 
     .tutorial-test {
-      gap: 10px 0;
-      width: calc(80%) !important;
-      height: auto !important;
-      justify-content: inherit !important ;
+      //gap: 10px 0;
+      //width: calc(80%) !important;
+      //height: auto !important;
+      //justify-content: inherit !important ;
     }
     
   }
   .invitation{
-    width: calc(80%) !important;
-    height: auto !important;
-    max-height: 600px;
+    //width: calc(80%) !important;
+    //height: auto !important;
+    //max-height: 600px;
   }
 
   .testing-question-wrapper{

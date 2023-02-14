@@ -29,12 +29,42 @@ import { takeUntil, tap, concatMap } from 'rxjs/operators';
 import { OVERLAY_KEYBOARD_DISPATCHER_PROVIDER } from '@angular/cdk/overlay/typings/keyboard/overlay-keyboard-dispatcher';
 import { JsonService } from 'src/app/services/json/json.service';
 import { CodeLanguages } from 'src/app/models/code-languages.model';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  keyframes,
+  // ...
+} from '@angular/animations';
 
 @Component({
   selector: 'app-test',
   styleUrls: ['./test.component.scss'],
   templateUrl: './test.component.html',
+  animations: [
+  trigger('openClose', [
+      state('open', style({ opacity: 1})),
+      state('closed', style({ opacity: 0})),
+      transition('open <=> closed', [animate('0.5s')]),
+    ]),
+
+  /*trigger('openClose', [
+    transition(':enter', [
+      style({ opacity: 0 }),
+      animate('2s', style({ opacity: 1 })),
+    ]),
+    transition(':leave', [
+      animate('2s', style({ opacity: 0 }))
+    ])
+  ]),*/
+  ],
 })
+
+
+
+
 export class TestComponent implements OnInit, OnDestroy {
   @Input() public candidat: Record<string, any>;
   @Input() public questions: Record<string, any>[];
@@ -44,6 +74,7 @@ export class TestComponent implements OnInit, OnDestroy {
   @Input() public mode = 'testing'; // prevent unnecessary api call when candidat is doing tutorial
   @Output() public refresh = new EventEmitter<string>();
   @Output() public answerQuestion = new EventEmitter<string>();
+  isOpen = "open";
 
   public question: Record<string, any>; // done
   public currentIdxQuestions = 0; // done
@@ -98,6 +129,19 @@ export class TestComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
   ) {}
 
+  onAnimationEvent ( event: AnimationEvent ) {
+    if(event.toState == "closed")
+    {
+      this.answerQuestion.emit('answer_question from button');
+      //this.nextQuestion();
+    }
+    console.log(event);
+  }
+
+  nextQuestion (){
+    this.isOpen = this.isOpen=="closed" ? "open" : "closed";
+  }
+
   ngOnInit(): void {
     this.setCurrentLanguage();
 
@@ -125,7 +169,6 @@ export class TestComponent implements OnInit, OnDestroy {
       next: (n: string) => {
         this.totalElapsedTime += this.chronometerCurrentTime;
         this.startChronometerSubscription.unsubscribe();
-
         this.validateAnswer().subscribe((observer) => {
           this.currentIdxQuestions++;
           if (this.currentIdxQuestions === this.questions.length) {
@@ -139,6 +182,7 @@ export class TestComponent implements OnInit, OnDestroy {
               }
             });
           } else {
+            this.nextQuestion();
             this.startChronometerSubscription = this.startQuestion(
               this.currentIdxQuestions,
             ).subscribe(chronometerObserver);
@@ -192,8 +236,8 @@ export class TestComponent implements OnInit, OnDestroy {
     this.candidatAnswers = [];
     this.isDisabled = false;
 
-    const chronometer = interval(1000).pipe(
-      takeUntil(timer(this.question.time * 1000)),
+    const chronometer = interval(10000000).pipe(
+      takeUntil(timer(this.question.time * 10000000)),
     );
 
     const showTimeoutDialog = new Observable<string>((observer) => {

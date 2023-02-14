@@ -49,17 +49,15 @@
       <div id="shadow-cog" [class.shadow-cog-active]="deletingCandidats">
         <div id="remove" (click)="setDeletingCandidats(false)"></div>
         <div class="modal">
-          <div class="modal-header">
-            <h3 class="modal-title">
-              Supprimer {{getCandidatsSelected().length > 1 ? 'les candidats' : 'le candidat'}}
-            </h3>
+          <div style="display :flex; justify-content: center">
+            <mat-icon class="md-48" color="primary">
+              info
+            </mat-icon>
           </div>
           <div class="modal-content">
-            <i class="fas fa-close content-icon"></i>
-            <h4 class="modal-content-title">Supprimer
-              {{getCandidatsSelected().length > 1 ? 'les candidats' : 'le candidat'}}</h4>
+            
             <p class="content">
-              Attention, vous êtes sur le point de supprimer ce/cette candidat(e) de votre liste.
+              Attention,<br>vous êtes sur le point de supprimer ce/cette candidat(e) de votre liste.
               Dans le cadre de la protection des données personnelles, ses données seront anonymisées et vous ne pourrez
               plus accéder à ses résultats.
             </p>

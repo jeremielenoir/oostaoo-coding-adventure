@@ -22,6 +22,7 @@ $color-blue-light:#1f7eab;
 $color-blue-roodeo:#c1d5e0;
 $color-background-interview: #f2f7f9;
 $color-background-offers: #DAE6EA;
+$color-icon-light: #c2d3df;
 /*Override properties for hover.css*/
 $activeColor: $color-principal-blue !default;
 
@@ -40,6 +41,9 @@ $border-radius: 4px;
 
 /*Path logo*/
 $logoPath: "src/assets/logo.png";
+
+/*Path timer*/
+$TimerPath: "src/assets/hourglass2.png";
 
 
 .title-dashed {

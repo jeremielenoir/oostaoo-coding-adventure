@@ -2,6 +2,12 @@
 .testing-timer {
   display: flex;
   gap: 0.2rem;
+  text-align: center;
+  flex-direction: column;
+  color: #346f9a;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin: auto;
 }
 
 @mixin structureBlock {
@@ -14,14 +20,14 @@
 
 ::ng-deep .answer-checkbox-group {
   border-radius: 0 0 $border-radius $border-radius;
-  border: 1px solid $color-background-blue;
+  //border: 1px solid $color-background-blue;
   border-top: none;
   width: 100%;
 }
 
 ::ng-deep .answer-checkbox {
   padding: 20px 20px;
-  border-bottom: 1px solid $color-background-blue;
+  //border-bottom: 1px solid $color-background-blue;
   &:last-child {
     border-bottom: 0px solid $color-background-blue;
   }
@@ -88,23 +94,29 @@
   color: red;
 }
 
-.time-elapsed {
-  font-weight: bold;
-  width: 145px;
-  display: inline-block;
-}
+
 
 .block-testing {
   display: flex;
-  padding: 2.5rem;
+  margin : 2.5rem;
   gap: 0.5rem;
+  
+ //border-radius: 5px;
+  //border: 1px solid $color-background-blue;
+  //background-color: #e9f1f4;
+  //box-shadow: 0px 0px 5px 0px grey;
 
   .testing-left {
+    transition-duration: 5s;
     flex: 1;
     display: flex;
 
     > .cube-testing {
       width: 100%;
+      background-color: $color-pricipal-blue-light;
+      border: 1px solid $color-background-blue;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px 0px grey;
     }
   }
 
@@ -112,53 +124,68 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    //gap: 0.7rem;
+    background-color: $color-pricipal-blue-light;
+    border: 1px solid $color-background-blue;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px grey;
+
     &__up {
-      height: 100%;
+      height: fit-content;
+      width: fit-content;
+      margin: auto;
+      background-color: $color-pricipal-blue-light;
+    }
+    &__down {
+      display: flex;
+      margin: 10%;
+      justify-content: center;
     }
   }
 
   .cube-testing {
     height: 100%;
-    border: 1px solid $color-background-blue;
+    //border: 1px solid $color-background-blue;
     background: #fff;
     flex-direction: column;
     border-radius: 5px;
     &-right {
       border: none;
+      display: flex;
+      justify-content: center;
     }
 
     .header-cube-testing {
-      height: 6rem;
+      height: 25%;
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: space-between;
+      flex-direction: column-reverse;
+      //align-items: center;
+      //justify-content: space-evenly;
       padding: 0.5rem;
-      border: 1px solid $color-background-blue;
-      flex-wrap: wrap;
-      background-color: $color-pricipal-blue-light;
+      //border: 1px solid $color-background-blue;
+      //flex-wrap: wrap;
       color: $color-principal-blue;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       &-left {
         border: none;
-        border-bottom: 1px solid $color-background-blue;
+        //border-bottom: 1px solid $color-background-blue;
       }
 
       .f030 {
-        min-width: 250px;
+       
         display: flex;
+        margin-top: 14%;
 
         .icon-testing {
           margin-right: 15px;
           color: $color-orange;
           display: block;
-          font-size: 24px;
+          font-size: 30px;
         }
 
         .title-testing {
-          font-size: 14px;
+          font-size: 1.2rem;
           display: inline-block;
         }
       }
@@ -166,6 +193,7 @@
     // il faut atteindre ces classes pour changer la box de textearea mat-form-field-appearance-outline .mat-form-field-outline
     .scroll-auto-testing {
       min-height: 30rem !important;
+      
       .example-full-width {
         width: 100%;
         // margin-top: -0.25em;
@@ -193,14 +221,15 @@
         display: flex;
         flex-direction: column;
         border-radius: 0 0 $border-radius $border-radius;
-        border: 1px solid $color-background-blue;
+        //border: 1px solid $color-background-blue;
         border-top: none;
         overflow: auto;
         width: 100%;
+        background-color: $color-pricipal-blue-light;
 
         .answer-radio-button {
           padding: 20px 20px;
-          border-bottom: 1px solid $color-background-blue;
+          //border-bottom: 1px solid $color-background-blue;
 
           &:last-child {
             border-bottom: 0px solid $color-background-blue;
@@ -216,3 +245,41 @@
     flex-direction: column;
   }
 }
+
+.timer {
+  width: 40px;
+  height: 40px;
+  background-image: url($TimerPath);
+  background-size: cover;
+  
+}
+
+.timer-background{
+  border-top-right-radius: 45px;
+  border-bottom-right-radius: 45px;
+  border-bottom-left-radius: 45px;
+  background-color: white;
+  border-top-left-radius: 45px;
+    /* border-radius: 39%; */
+  padding: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
+  box-shadow: inset 0px 0px 7px 0px #9e9e9e;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 8px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.separate-testing{
+  
+  background-color: white;
+  padding-left: 9px;
+  box-shadow: inset 0px 0px 4px 0px #33709a;
+  /* padding-top: 0px; */
+  margin-top: 10%;
+  margin-bottom: 10%;
+ 
+  border-radius: 10px;
+  }
