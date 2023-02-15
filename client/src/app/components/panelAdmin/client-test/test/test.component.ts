@@ -36,6 +36,7 @@ import {
   animate,
   transition,
   keyframes,
+  AnimationEvent,
   // ...
 } from '@angular/animations';
 
@@ -47,7 +48,7 @@ import {
   trigger('openClose', [
       state('open', style({ opacity: 1})),
       state('closed', style({ opacity: 0})),
-      transition('open <=> closed', [animate('0.5s')]),
+      transition('open <=> closed', [animate('0.2s')]),
     ]),
 
   /*trigger('openClose', [
@@ -135,11 +136,19 @@ export class TestComponent implements OnInit, OnDestroy {
       this.answerQuestion.emit('answer_question from button');
       //this.nextQuestion();
     }
-    console.log(event);
+    console.log(this.technologies);
   }
 
   nextQuestion (){
     this.isOpen = this.isOpen=="closed" ? "open" : "closed";
+  }
+
+  getTechnologie(): string{
+    for (const techno of this.technologies) {
+      if(this.question.technologies == techno.id){
+        return(techno.name);
+      }
+    }
   }
 
   ngOnInit(): void {

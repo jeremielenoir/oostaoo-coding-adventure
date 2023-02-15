@@ -2,17 +2,18 @@
   <!-- ///////////////////: -->
   <div class="testing-left">
     <div class="cube-testing">
-      <header class="header-cube-testing header-cube-testing-left"  
-      [@openClose]="isOpen">
+      <header class="header-cube-testing header-cube-testing-left">
+      
        <div class="f030">
           <i class="far fa-question-circle icon-testing"></i>
-          <span class="title-testing"
-            >Question {{ currentIdxQuestions + 1 }} / {{ questions.length }} -
-            {{ language }}</span
-          >
+          <span class="title-testing">
+            Question {{ currentIdxQuestions + 1 }} / {{ questions.length }} -
+            {{ getTechnologie() }}</span>
         </div>
         <div class="timer-background">
-          <div class="testing-timer">
+          <div class="testing-timer"
+          [@openClose]="isOpen"
+          (@openClose.done)="onAnimationEvent($event)">
             <!--span i18n>Temps écoulé :</span-->
             <span
               
@@ -53,8 +54,6 @@
     <div 
     class="testing-right__up" 
     [@openClose]="isOpen"
-    
-    (@openClose.done)="onAnimationEvent($event)"
     >
       <div class="cube-testing cube-testing-right" >
         <!--header class="header-cube-testing">
