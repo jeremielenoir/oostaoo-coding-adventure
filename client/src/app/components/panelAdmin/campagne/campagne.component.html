@@ -129,12 +129,12 @@
             <span class="iconStyle" i18n>Epingler</span>
           </button>
 
-          <button *ngIf="campaign.archive === true" (click)="archivecampaign(campaign)" mat-menu-item>
+          <button *ngIf="campaign.archive === true" (click)="openDialogArchive(campaign)" mat-menu-item>
             <mat-icon class="icon">unarchive</mat-icon>
             <span class="iconStyle" i18n>Désarchiver</span>
           </button>
 
-          <button *ngIf="campaign.archive === false" (click)="archivecampaign(campaign)" mat-menu-item>
+          <button *ngIf="campaign.archive === false" (click)="openDialogArchive(campaign)" mat-menu-item>
             <mat-icon class="icon">archive</mat-icon>
             <span class="iconStyle" i18n>Archiver</span>
           </button>

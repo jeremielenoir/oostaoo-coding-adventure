@@ -69,6 +69,7 @@ import {
   CampagneComponent,
   DialogOverviewDelete,
   DialogOverviewDuplicate,
+  DialogOverviewArchive,
   CampaignsArchivedPipe
 } from './components/panelAdmin/campagne/campagne.component';
 import { SidebarRightComponent } from './components/panelAdmin/sidebar-right/sidebar-right.component';
@@ -185,6 +186,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NouvelleCampagnePage3Component,
     CandidatsMailComponent,
     DialogOverviewDelete,
+    DialogOverviewArchive,
     DialogOverviewDuplicate,
     DialogOverviewTestComponent,
     DialogTimeoutComponent,
@@ -225,6 +227,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DashboadCampagneComponent,
     CampagneComponent,
     DialogOverviewDelete,
+    DialogOverviewArchive,
     DialogOverviewDuplicate,
     SidebarRightComponent,
     ProfilUtilisateurComponent,

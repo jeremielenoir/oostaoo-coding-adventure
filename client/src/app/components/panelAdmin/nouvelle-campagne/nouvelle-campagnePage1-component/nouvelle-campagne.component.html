@@ -16,13 +16,14 @@
 
             <!-- <label for="role" [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</label>-->
             <mat-form-field [formGroup]="formCampagne" appearance="outline" [color]="'accent'">
-              <mat-label [ngStyle]="errorRole ? { color: 'red' } : null">Sélectionnez un rôle</mat-label>
+              <mat-label>Sélectionnez un rôle</mat-label>
               <mat-select name="role" class="mat-primary" formControlName="role" [(ngModel)]="roleSelect"
                 (selectionChange)="selected($event)">
                 <mat-option *ngFor="let role of profiles" [value]="role[nameLanguage]">{{
                   role[nameLanguage]
                 }}</mat-option>
               </mat-select>
+              <mat-error *ngIf="formCampagne.controls.role.hasError('required')" >Veuillez selectionner un rôle</mat-error>
             </mat-form-field>
 
           </div>
@@ -40,13 +41,14 @@
 
 
               <mat-form-field [formGroup]="formCampagne" appearance="outline" [color]="'accent'">
-                <mat-label for="techno" [ngStyle]="errorTechno ? { color: 'red' } : null" i18n>Sélectionnez les
+                <mat-label for="techno" i18n>Sélectionnez les
                   technologies à
                   tester</mat-label>
                 <mat-select multiple name="techno" formControlName="techno" [compareWith]="compareObjects"
                   [(ngModel)]="technosSelect" (selectionChange)="getTechnoChecked()">
                   <mat-option *ngFor="let techno of technos" [value]="techno">{{techno.name}}</mat-option>
                 </mat-select>
+                <mat-error *ngIf="formCampagne.controls.techno.hasError('required')" >Veuillez selectionner une technologie</mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -77,6 +79,7 @@
                   title="Questions et challenges de code pour des développeurs qui ont une expertise sur une ou plusieurs technologies.">
                 </i-->
               </mat-radio-button>
+              <mat-error *ngIf="formCampagne.controls.experience.hasError('required')" >Veuillez selectionner une expérience</mat-error>
             </mat-radio-group>
           </div>
         </div>

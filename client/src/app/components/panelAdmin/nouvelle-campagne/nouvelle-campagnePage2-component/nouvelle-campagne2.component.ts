@@ -1,10 +1,13 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { FormParamsValidator } from 'src/app/components/panelAdmin/nouvelle-campagne/formParamsValidator';
+import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
+import { DecryptTokenService } from 'src/app/components/home/register/register.service';
+import { AuthenticationService } from 'src/app/components/home/register/service/auth.service';
+import { Observable, Subscription } from 'rxjs';
 import {
   ApiClientService,
   API_URI_CAMPAIGNS
-} from '../../../../api-client/api-client.service';
+} from 'src/app/api-client/api-client.service';
+ 
 
 @Component({
   selector: 'app-NouvelleCampagnePage2Component',
@@ -21,12 +24,21 @@ export class NouvelleCampagnePage2Component implements OnInit {
   @Output() decrementPage = new EventEmitter<any>();
   @Input() formCampagne: FormGroup;
   public errorNomCampgane = false;
-  public oFormParamsValidator: FormParamsValidator;
+  
   public errorName: string;
+  private subscription: Subscription;
+  public campaigns = [];
+  public nameFormControl = new FormControl('', [
+    Validators.required,
+  ]);
 
-  constructor(public apiClientService: ApiClientService) {
-    this.oFormParamsValidator = new FormParamsValidator();
-  }
+  constructor(public apiClientService: ApiClientService,
+              public decryptTokenService: DecryptTokenService,
+              public authenticationService: AuthenticationService,) 
+    {
+              
+
+    }
 
   ngOnInit() {
     this.formCampagne.patchValue({
@@ -34,6 +46,11 @@ export class NouvelleCampagnePage2Component implements OnInit {
         this.formCampagne.value.role +
         ' - ' +
         this.formCampagne.value.experience
+    });
+
+    const adminId: number = this.decryptTokenService.adminId || this.decryptTokenService.userId;
+    this.subscription = this.authenticationService.getCampaignsUser(adminId).subscribe((campaigns: Record<string, any>[]) => {
+    this.campaigns = campaigns;
     });
   }
 
@@ -45,25 +62,21 @@ export class NouvelleCampagnePage2Component implements OnInit {
     });
   }
 
-  public formValid(pDatafromValue: any): void {
-    FormParamsValidator.startVerificationFrom();
-
-    if (FormParamsValidator.validateName(pDatafromValue.nomDeCampagne) === false) {
-      this.errorName = FormParamsValidator._sMessageError;
-    } else {
-      this.errorName = '';
-    }
-  }
-
+  
   public onDecrementPage(): void {
     this.decrementPage.emit(); // Déclenche l'output
   }
 
   public onIncrementPage(pDatafromValue): void {
-
-    this.formValid(pDatafromValue);
-    if (FormParamsValidator._sMessageError === '') {
-      this.incrementPage.emit(); // Déclenche l'output pour passer à la paga suivante.
+  
+  if(this.formCampagne.controls.nomDeCampagne.hasError('required') == false &&
+      this.formCampagne.controls.nomDeCampagne.hasError('forbiddenName') == false){
+        this.incrementPage.emit(); 
+        console.log("toto");
+        console.log((this.formCampagne.controls.nomDeCampagne.hasError('forbiddenName')));
+        console.log("tata");
+      
+      // Déclenche l'output pour passer à la paga suivante.
     }
   }
 }

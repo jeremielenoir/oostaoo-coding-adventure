@@ -1,7 +1,6 @@
 :host ::ng-deep .cdk-overlay-pane {
     position: absolute !important;
-    left: 2.5% !important;
-    top: 20% !important;
+    
     pointer-events: auto;
     box-sizing: border-box;
     z-index: 1000;

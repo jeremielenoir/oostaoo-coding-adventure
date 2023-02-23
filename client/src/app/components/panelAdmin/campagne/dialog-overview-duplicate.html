@@ -6,7 +6,7 @@
     <button mat-button (click)="onNoClick()">Annulez</button>
     <button mat-button (click)='onClick()' cdkFocusInitial>Confirmer</button>
 </div> -->
-<mat-dialog-content align="center">
+<!--mat-dialog-content align="center">
   <p i18n>Voulez vous dupliquer le test <b>{{this.data.campaign.Name}}</b> ?</p>
 </mat-dialog-content>
 <br>
@@ -14,4 +14,32 @@
 <mat-dialog-actions align="center">
   <button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="onNoClick()">Annuler</button>
   <button mat-raised-button cdkFocusInitial style="background-color: #1d3552; color: white;" (click)="onClick()">Confirmer</button>
-</mat-dialog-actions>
+</mat-dialog-actions-->
+
+<div class="modalDelete">
+  <div style="display :flex; justify-content: center">
+    <mat-icon class="md-48" color="primary">
+      info
+    </mat-icon>
+  </div>
+    <div class="modalDelete-content">
+      <p i18n class="contentDelete">Etes vous sûr de vouloir dupliquer le test <b>{{this.data.campaign.Name}}</b> ?</p>
+    </div>
+  
+<div class="modalDelete-footer">
+    <app-base-button iconName="close" iconPosition="left" color="warn" (clickEvent)="onNoClick()">
+      <span class="text" i18n>
+        Annuler
+      </span>
+    </app-base-button>
+    <app-base-button iconName="check" iconPosition="right" (clickEvent)="onClick()">
+      <span class="text" i18n>
+        Confirmer
+      </span>
+    </app-base-button>
+   
+    
+      <!--button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="onNoClick()">Annuler</button>
+      <button mat-raised-button cdkFocusInitial style="background-color: #1d3552; color: white;" (click)="onClick()">Confirmer</button-->
+</div>
+</div>

@@ -1,0 +1,39 @@
+@import '../../../../roodeo-variables.scss';
+
+
+.modalDelete{
+  width: 600px;
+  //border: solid 1px black;
+  overflow: hidden;
+  border-radius: 4px;
+  .contentDelete {
+    margin-bottom: 12px;
+  }
+  .modalDelete-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .modalDelete-footer{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 100px;
+    margin: auto;
+  }
+}
+
+@mixin md-icon-size($size: 24px, $color : #fff) {
+    font-size: $size;
+    height: $size;
+    width: $size;
+    line-height: $size;
+    color: $color;
+  }
+  
+  .material-icons.md-48 {
+   @include md-icon-size(80px, $color-icon-light);
+   margin-top: 20px;
+  }

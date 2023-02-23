@@ -1,6 +1,14 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { FormCampagneValidator } from 'src/app/components/panelAdmin/nouvelle-campagne/formCampagneValidator';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+
+//import { campaigns } from 'src/app/components/panelAdmin/nouvelle-campagne/nouvelle-campagnePage2-component/nouvelle-campagne2.component';
+import { DecryptTokenService } from 'src/app/components/home/register/register.service';
+import { AuthenticationService } from 'src/app/components/home/register/service/auth.service';
+import { Observable, Subscription } from 'rxjs';
+import {
+  ApiClientService,
+  API_URI_CAMPAIGNS
+} from 'src/app/api-client/api-client.service';
 
 @Component({
   selector: 'app-nouvelle-campagne',
@@ -11,32 +19,58 @@ import { FormCampagneValidator } from 'src/app/components/panelAdmin/nouvelle-ca
 export class NouvelleCampagneComponent implements OnInit {
   nNumeorPage: number;
   ParentFormCampagne: FormGroup;
-  public oFormCampagneValidator: FormCampagneValidator;
   technoFromChild: Array<string>;
   selectProfilFromChild: string;
   public Alltechno: any[] = [];
+  public campaigns = [];
+  private subscription: Subscription;
+  public forbiddenNameValidator(): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      let forbidden = false;
+      this.campaigns.forEach((element)=> {
+        if (control.value === element.Name) {
+            forbidden = true;
+        } 
+      });
+      return forbidden ? {'forbiddenName': {value: control.value}} : null;
+    };
+  }
 
-  constructor(private _formBuilder: FormBuilder) {
+
+
+
+
+
+  constructor(private formBuilder: FormBuilder,
+              public apiClientService: ApiClientService,
+              public decryptTokenService: DecryptTokenService,
+              public authenticationService: AuthenticationService,) {
     this.nNumeorPage = 1;
-    this.oFormCampagneValidator = new FormCampagneValidator();
-    this.ParentFormCampagne = this._formBuilder.group({
-      role: this.oFormCampagneValidator.getRoleValidator(),
+  
+    this.ParentFormCampagne = this.formBuilder.group({
+      role: ['',Validators.required],
       roleSelectedId: { id: '' },
-      techno: this.oFormCampagneValidator.getTechnoValidator(),
+      techno: [[],Validators.required],
       technoSelectedId: [],
-      experience: [
-        'facile',
-        this.oFormCampagneValidator.getExperienceValidator()
-      ],
+      experience: ['facile',Validators.required],
       utilisationCopieColler: 'false',
       envoiRapportSimplifie: 'false',
-      nomDeCampagne: '',
+      nomDeCampagne: ['',[Validators.required, this.forbiddenNameValidator()]],
       langue: [],
       CampaignID: { id: '' }
     });
   }
 
-  ngOnInit() {}
+  
+
+  ngOnInit() {
+    const adminId: number = this.decryptTokenService.adminId || this.decryptTokenService.userId;
+    this.subscription = this.authenticationService.getCampaignsUser(adminId).subscribe((campaigns: Record<string, any>[]) => {
+    this.campaigns = campaigns;
+    });
+  }
+
+ 
 
   getTechno(techno: Array<string>) {
     return (this.technoFromChild = techno);

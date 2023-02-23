@@ -93,8 +93,9 @@ export class CampagneComponent implements OnInit, OnDestroy {
   }
 
   openDialogDuplicate(campaign): void {
-    const dialogRef = this.dialog.open(DialogOverviewDuplicate, {
-      width: '250px',
+   
+   const dialogRef = this.dialog.open(DialogOverviewDuplicate, {
+      autoFocus: false,
       data: { campaign: campaign, confirmed: this.confirmed },
       disableClose: true,
     });
@@ -102,7 +103,7 @@ export class CampagneComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(res => {
       this.confirmed = res;
       if (res) {
-        this.subscription = this.duplicateCampaign(campaign.id).subscribe((duplicateCampaign) => {
+          this.subscription = this.duplicateCampaign(campaign.id).subscribe((duplicateCampaign) => {
           this.campaigns.push(duplicateCampaign);
           this.campaigns = [...this.campaigns];
           this.openSnackBar('La campagne a correctement été dupliquée', 'Fermer');
@@ -113,7 +114,7 @@ export class CampagneComponent implements OnInit, OnDestroy {
 
   openDialogDelete(campaign): void {
     const dialogRef = this.dialog.open(DialogOverviewDelete, {
-      width: '250px',
+      autoFocus: false,
       data: { campaign: campaign, confirmed: this.confirmed },
       disableClose: true
     });
@@ -121,13 +122,50 @@ export class CampagneComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(res => {
       this.confirmed = res;
       if (res) {
-        this.subscription = this.deleteCampaign(campaign.id).subscribe((campaignId) => {
+          this.subscription = this.deleteCampaign(campaign.id).subscribe((campaignId) => {
           const found = this.campaigns.findIndex(campaign => campaign.id === campaignId);
           console.log('FOUND', found);
           this.campaigns.splice(found, 1);
           this.campaigns = [...this.campaigns];
           this.openSnackBar('La campagne a correctement été supprimée', 'Fermer');
         });
+      }
+    });
+  }
+
+  openDialogArchive(campaign): void {
+    
+    const dialogRef = this.dialog.open(DialogOverviewArchive, {
+      autoFocus: false,
+      data: { campaign: campaign, confirmed: this.confirmed },
+      disableClose: true,
+     });
+
+    dialogRef.afterClosed().subscribe(res => {
+      this.confirmed = res;
+      
+      
+      if (res) {
+        if(campaign.archive === false){
+          console.log("tata");
+          console.log(this.campaigns[0].Name);
+          console.log("toto");
+          
+          
+          this.subscription = this.archcampaign(campaign.id).subscribe((campaignId) => {
+            campaign.archive = true;
+            this.campaigns = [...this.campaigns];
+            this.openSnackBar('La campagne a correctement été archivée', 'Fermer');
+          });
+        }
+        else {
+          console.log(campaign);
+          this.subscription = this.unarchcampaign(campaign.id).subscribe((campaignId) => {
+            campaign.archive = false;
+            this.campaigns = [...this.campaigns];
+            this.openSnackBar('La campagne a correctement été désarchivée', 'Fermer');
+          });
+        }
       }
     });
   }
@@ -194,7 +232,7 @@ export class CampagneComponent implements OnInit, OnDestroy {
     return campaign.id;
   }
 
-  archivecampaign(campaign) {
+  /*archivecampaign(campaign) {
     const apiURL = API_URI_CAMPAIGNS + '/' + campaign.id;
 
     if (campaign.archive === false) {
@@ -223,9 +261,20 @@ export class CampagneComponent implements OnInit, OnDestroy {
           err => console.log(err)
         );
     }
+  }*/
+
+  archcampaign(campaignId: number) {
+    console.log(campaignId);
+    return this.apiClientService.put(API_URI_CAMPAIGNS + '/' + campaignId,{archive : true});
+  }
+
+  unarchcampaign(campaignId: number) {
+    console.log(campaignId);
+    return this.apiClientService.put(API_URI_CAMPAIGNS + '/' + campaignId,{archive : false});
   }
 
   deleteCampaign(campaignId: number): Observable<number> {
+    
     return this.apiClientService.delete(API_URI_CAMPAIGNS + '/' + campaignId).pipe(
       map(() => campaignId)
     );
@@ -241,6 +290,7 @@ export class CampagneComponent implements OnInit, OnDestroy {
 @Component({
   selector: 'dialog-overview-duplicate',
   templateUrl: 'dialog-overview-duplicate.html',
+  styleUrls: ['./dialog-overview-delete.scss'],
 })
 export class DialogOverviewDuplicate {
 
@@ -256,11 +306,35 @@ export class DialogOverviewDuplicate {
     this.dialogRef.close(this.data.confirmed = true);
   }
 
+
+}
+
+@Component({
+  selector: 'dialog-overview-archive',
+  templateUrl: 'dialog-overview-archive.html',
+  styleUrls: ['./dialog-overview-delete.scss'],
+})
+export class DialogOverviewArchive {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewArchive>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+
+  onNoClick(): void {
+    this.dialogRef.close(this.data.confirmed = false);
+  }
+  onClick(): void {
+    console.log(this.data);
+    this.dialogRef.close(this.data.confirmed = true);
+  }
+
+
 }
 
 @Component({
   selector: 'dialog-overview-delete',
   templateUrl: 'dialog-overview-delete.html',
+  styleUrls: ['./dialog-overview-delete.scss'],
 })
 export class DialogOverviewDelete {
 

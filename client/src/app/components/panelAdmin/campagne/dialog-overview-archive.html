@@ -1,0 +1,27 @@
+<div class="modalDelete">
+    <div style="display :flex; justify-content: center">
+      <mat-icon class="md-48" color="primary">
+        info
+      </mat-icon>
+    </div>
+      <div class="modalDelete-content">
+        <p i18n *ngIf="data.campaign.archive === false" class="contentDelete">Etes vous sûr de vouloir archiver le test <b>{{this.data.campaign.Name}}</b> ?</p>
+        <p i18n *ngIf="data.campaign.archive === true" class="contentDelete">Etes vous sûr de vouloir désarchiver le test <b>{{this.data.campaign.Name}}</b> ?</p>
+    </div>
+    
+  <div class="modalDelete-footer">
+      <app-base-button iconName="close" iconPosition="left" color="warn" (clickEvent)="onNoClick()">
+        <span class="text" i18n>
+          Annuler
+        </span>
+      </app-base-button>
+      <app-base-button iconName="check" iconPosition="right" (clickEvent)="onClick()">
+        <span class="text" i18n>
+          Confirmer
+        </span>
+      </app-base-button>
+      
+        <!--button mat-raised-button mat-dialog-close style="background-color: white; color: #1d3552" (click)="onNoClick()">Annuler</button>
+        <button mat-raised-button cdkFocusInitial style="background-color: #1d3552; color: white;" (click)="onClick()">Confirmer</button-->
+        </div>
+  </div>
