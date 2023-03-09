@@ -42,7 +42,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <EndPointContext.Provider value={secretKey}>
           <StreamContextProvider>
-              <Routes />
+            <Routes />
           </StreamContextProvider>
         </EndPointContext.Provider>
       </ThemeProvider>

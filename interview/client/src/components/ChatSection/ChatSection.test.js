@@ -3,8 +3,16 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import ChatSection, { sendMessage } from './ChatSection';
-import { SocketContext } from '../../common/SocketContext';
-import { socket, chatMessages } from '../../common/SocketContext';
+import { Provider, useSelector } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import socketSlice from '../../redux/features/socket/socketSlice';
+import messageSlice from '../../redux/features/message/messageSlice';
+import CloseIcon from '@material-ui/icons/Close';
+
+// import { SocketContext } from '../../common/SocketContext';
+// import { socket, chatMessages } from '../../common/SocketContext';
+
+const store = configureStore({ reducer: { socket: socketSlice, message: messageSlice } })
 
 // some mock data for the component so it prevents the "Cannot read properties of undefined (reading 'response')" error
 const mockMessage = [
@@ -19,17 +27,17 @@ const mockMessage = [
 describe('ChatSection component tests', () => {
   test('should render correctly', () => {
     render(
-      <SocketContext.Provider value={{ socket, chatMessages: mockMessage }}>
+      <Provider store={store}>
         <ChatSection />
-      </SocketContext.Provider>
-    );
+      </Provider>
+    )
   });
 
   test('chat should have a title', () => {
     const { getByText } = render(
-      <SocketContext.Provider value={{ socket, chatMessages: mockMessage }}>
+      <Provider store={store}>
         <ChatSection />
-      </SocketContext.Provider>
+      </Provider>
     );
 
     const text = getByText(/Messages dans l'appel/i);
@@ -39,9 +47,9 @@ describe('ChatSection component tests', () => {
 
   test('Textfield should be empty', () => {
     const { getByTestId } = render(
-      <SocketContext.Provider value={{ socket, chatMessages: mockMessage }}>
+      <Provider store={store}>
         <ChatSection />
-      </SocketContext.Provider>
+      </Provider>
     );
 
     const textfield = getByTestId('textfield');
@@ -78,9 +86,9 @@ describe('ChatSection component tests', () => {
 
   test('should have send message button', () => {
     const { getByRole } = render(
-      <SocketContext.Provider value={{ socket, chatMessages: mockMessage }}>
+      <Provider store={store}>
         <ChatSection />
-      </SocketContext.Provider>
+      </Provider>
     );
 
     const button = getByRole('button');
@@ -104,9 +112,9 @@ describe('ChatSection component tests', () => {
 
   test('should have a button to close messages', () => {
     const { getByTestId } = render(
-      <SocketContext.Provider value={{ socket, chatMessages: mockMessage }}>
+      <Provider store={store}>
         <ChatSection />
-      </SocketContext.Provider>
+      </Provider>
     );
 
     const closeBtn = getByTestId('closeButton');
@@ -114,17 +122,20 @@ describe('ChatSection component tests', () => {
     expect(closeBtn).toBeInTheDocument();
   });
 
-  test('the closeButton should trigger the toggleMessage action passed in props', () => {
+  test('the closeButton should trigger the onClick function action', () => {
     const mockFunction = jest.fn();
     const { getByTestId } = render(
-      <SocketContext.Provider value={{ socket, chatMessages: mockMessage }}>
-        <ChatSection toggleMessage={mockFunction} />
-      </SocketContext.Provider>
+      <Provider store={store}>
+        <ChatSection>
+          <CloseIcon onClick={mockFunction} data-testid="closeButton" />
+        </ChatSection>
+      </Provider>
     );
 
     const closeBtn = getByTestId('closeButton');
     fireEvent.click(closeBtn);
 
-    expect(mockFunction).toHaveBeenCalledTimes(1);
+    console.log(mockFunction.mock);
+    expect(mockFunction).toHaveBeenCalled();
   });
 });

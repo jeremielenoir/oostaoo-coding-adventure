@@ -1,4 +1,5 @@
 import React from 'react';
+import socketIOClient from 'socket.io-client';
 
 /* MUI components */
 import Button from '@material-ui/core/Button';
@@ -20,9 +21,8 @@ import {
   dataMessage,
   toggleActionMessage,
 } from '../../redux/features/message/messageSlice';
-import { request, fail, success } from '../../redux/features/socket/socketSlice';
+import { request } from '../../redux/features/socket/socketSlice';
 import dico from '../../common/dico';
-import socketIOClient from 'socket.io-client';
 
 const APILocation = process.env.REACT_APP_REST_API_LOCATION;
 const { SOCKET_FROMAPI } = dico;
@@ -30,34 +30,38 @@ const socket = socketIOClient(APILocation);
 
 /* Component definition */
 const ChatSection = () => {
-  const messageValue = useSelector((state)=> state.message.messageChat)
-  const currentMessageValue = useSelector((state)=> state.message.currentMsg)
+  const messageValue = useSelector((state) => state.message.messageChat);
+  const currentMessageValue = useSelector((state) => state.message.currentMsg);
   const dispatch = useDispatch();
 
   const onChangeMessage = (e) => {
-    dispatch(currentMessage(e.target.value))
+    dispatch(currentMessage(e.target.value));
   };
 
-// Get the values from the back
-const getDataMsg = () => {
-  socket.on(SOCKET_FROMAPI, (data) => {
-    dispatch(dataMessage(data));
-  });
-}
+  // Get the values from the back
+  const getDataMsg = () => {
+    socket.on(SOCKET_FROMAPI, (data) => {
+      dispatch(dataMessage(data));
+    });
+  };
 
   const sendMessage = () => {
     if (currentMessageValue) {
-      dispatch(request(currentMessageValue))
-      dispatch(currentMessage(""))
-      getDataMsg()
+      dispatch(request(currentMessageValue));
+      dispatch(currentMessage(''));
+      getDataMsg();
     }
   };
 
   const sendMessageWithEnterKey = (event) => {
     if (event.key === 'Enter') {
-      sendMessage()
-      getDataMsg()
+      sendMessage();
+      getDataMsg();
     }
+  };
+
+  const handleClick = () => {
+    dispatch(toggleActionMessage());
   };
 
   return (
@@ -67,7 +71,7 @@ const getDataMsg = () => {
         <CloseIcon
           id="close-icon"
           className="close-icon"
-          onClick={() => dispatch(toggleActionMessage())}
+          onClick={handleClick}
           role="button"
           // next line for test purpose
           data-testid="closeButton"
