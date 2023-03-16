@@ -1,7 +1,12 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
 import CommandsBar from './CommandsBar';
+
+import { messageSlice } from '../../redux/features/message/messageSlice';
+import { socketSlice } from '../../redux/features/socket/socketSlice';
 
 // Important to test everything coming from StreamContext
 import { StreamContext } from '../../common/StreamContext';
@@ -12,24 +17,35 @@ import {
   videoCamToggle,
 } from '../../common/StreamContext';
 
+const rootReducer = combineReducers({
+  socket: socketSlice.reducer,
+  message: messageSlice.reducer
+});
+
+const store = configureStore({ reducer: rootReducer })
+
 describe('CommandsBar component tests', () => {
   test('should render correctly', () => {
     render(
-      <StreamContext.Provider
-        value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
-      >
-        <CommandsBar />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
+        >
+          <CommandsBar />
+        </StreamContext.Provider>
+      </Provider>
     );
   });
 
   test('should have a button to activate mic', () => {
     render(
-      <StreamContext.Provider
-        value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
-      >
-        <CommandsBar />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
+        >
+          <CommandsBar />
+        </StreamContext.Provider>
+      </Provider>
     );
 
     const micOnButton = screen.getByTestId('micOnBtn');
@@ -41,11 +57,13 @@ describe('CommandsBar component tests', () => {
 
   test('should have a button to deactivate mic instead of the mic on one if the micOn prop is true', () => {
     render(
-      <StreamContext.Provider
-        value={{ micOn: true, micToggle, videoCamOn, videoCamToggle }}
-      >
-        <CommandsBar />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{ micOn: true, micToggle, videoCamOn, videoCamToggle }}
+        >
+          <CommandsBar />
+        </StreamContext.Provider>
+      </Provider>
     );
     const micOffButton = screen.getByTestId('micOffBtn');
     const micOnButton = screen.queryByTestId('micOnBtn');
@@ -57,11 +75,13 @@ describe('CommandsBar component tests', () => {
   test('The mic on button should trigger the micToggle function passed via context', () => {
     const mockFunction = jest.fn();
     render(
-      <StreamContext.Provider
-        value={{ micOn, micToggle: mockFunction, videoCamOn, videoCamToggle }}
-      >
-        <CommandsBar />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{ micOn, micToggle: mockFunction, videoCamOn, videoCamToggle }}
+        >
+          <CommandsBar />
+        </StreamContext.Provider>
+      </Provider>
     );
 
     const micOnButton = screen.getByTestId('micOnBtn');
@@ -73,16 +93,18 @@ describe('CommandsBar component tests', () => {
   test('The mic off button should also trigger the micToggle function passed via context', () => {
     const mockFunction = jest.fn();
     render(
-      <StreamContext.Provider
-        value={{
-          micOn: true,
-          micToggle: mockFunction,
-          videoCamOn,
-          videoCamToggle,
-        }}
-      >
-        <CommandsBar />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{
+            micOn: true,
+            micToggle: mockFunction,
+            videoCamOn,
+            videoCamToggle,
+          }}
+        >
+          <CommandsBar />
+        </StreamContext.Provider>
+      </Provider>
     );
 
     const micOffButton = screen.getByTestId('micOffBtn');
@@ -93,11 +115,13 @@ describe('CommandsBar component tests', () => {
 
   test('should have a videoCamOn button', () => {
     render(
-      <StreamContext.Provider
-        value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
-      >
-        <CommandsBar />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
+        >
+          <CommandsBar />
+        </StreamContext.Provider>
+      </Provider>
     );
 
     const videoCamOnButton = screen.getByTestId('videoCamOnBtn');
@@ -109,11 +133,13 @@ describe('CommandsBar component tests', () => {
 
   test('should have a videoCamOff button instead of the videoCamOn one if the videoCamOn prop is true', () => {
     render(
-      <StreamContext.Provider
-        value={{ micOn, micToggle, videoCamOn: true, videoCamToggle }}
-      >
-        <CommandsBar />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{ micOn, micToggle, videoCamOn: true, videoCamToggle }}
+        >
+          <CommandsBar />
+        </StreamContext.Provider>
+      </Provider>
     );
 
     const videoCamOffButton = screen.getByTestId('videoCamOffBtn');
@@ -126,11 +152,13 @@ describe('CommandsBar component tests', () => {
   test('The videoCam on button should trigger the videoCamToggle function passed via context', () => {
     const mockFunction = jest.fn();
     render(
-      <StreamContext.Provider
-        value={{ micOn, micToggle, videoCamOn, videoCamToggle: mockFunction }}
-      >
-        <CommandsBar />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{ micOn, micToggle, videoCamOn, videoCamToggle: mockFunction }}
+        >
+          <CommandsBar />
+        </StreamContext.Provider>
+      </Provider>
     );
 
     const videoCamOnButton = screen.getByTestId('videoCamOnBtn');
@@ -142,16 +170,18 @@ describe('CommandsBar component tests', () => {
   test('The videoCam on button should also trigger the videoCamToggle function passed via context', () => {
     const mockFunction = jest.fn();
     render(
-      <StreamContext.Provider
-        value={{
-          micOn,
-          micToggle,
-          videoCamOn: true,
-          videoCamToggle: mockFunction,
-        }}
-      >
-        <CommandsBar />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{
+            micOn,
+            micToggle,
+            videoCamOn: true,
+            videoCamToggle: mockFunction,
+          }}
+        >
+          <CommandsBar />
+        </StreamContext.Provider>
+      </Provider>
     );
 
     const videoCamOffButton = screen.getByTestId('videoCamOffBtn');
@@ -162,11 +192,13 @@ describe('CommandsBar component tests', () => {
 
   test('should have a button to end call', () => {
     render(
-      <StreamContext.Provider
-        value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
-      >
-        <CommandsBar />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
+        >
+          <CommandsBar />
+        </StreamContext.Provider>
+      </Provider>
     );
 
     const button = screen.getByTestId('callEndButton');
@@ -176,11 +208,13 @@ describe('CommandsBar component tests', () => {
 
   test('should have a toggle users button in the footer', () => {
     const { container } = render(
-      <StreamContext.Provider
-        value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
-      >
-        <CommandsBar />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
+        >
+          <CommandsBar />
+        </StreamContext.Provider>
+      </Provider>
     );
 
     const toggleUsersBtn = container.getElementsByClassName('footer-icons');
@@ -190,11 +224,13 @@ describe('CommandsBar component tests', () => {
 
   test('should have a toggle chat button in the footer', () => {
     render(
-      <StreamContext.Provider
-        value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
-      >
-        <CommandsBar />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
+        >
+          <CommandsBar />
+        </StreamContext.Provider>
+      </Provider>
     );
 
     const toggleChatBtn = screen.getByTestId('chat-icon');
@@ -205,11 +241,13 @@ describe('CommandsBar component tests', () => {
   test('click on toggle users button should trigger the toggleParticipant function passed in props', () => {
     const mockFunction = jest.fn();
     const { container } = render(
-      <StreamContext.Provider
-        value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
-      >
-        <CommandsBar toggleParticipant={mockFunction} />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
+        >
+          <CommandsBar toggleParticipant={mockFunction} />
+        </StreamContext.Provider>
+      </Provider>
     );
 
     const toggleUsersBtn = container.getElementsByClassName('footer-icons')[0];
@@ -221,11 +259,13 @@ describe('CommandsBar component tests', () => {
   test('click on toggle chat button should trigger the toggleMessage function passed in props', () => {
     const mockFunction = jest.fn();
     render(
-      <StreamContext.Provider
-        value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
-      >
-        <CommandsBar toggleMessage={mockFunction} />
-      </StreamContext.Provider>
+      <Provider store={store}>
+        <StreamContext.Provider
+          value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
+        >
+          <CommandsBar toggleMessage={mockFunction} />
+        </StreamContext.Provider>
+      </Provider>
     );
 
     const toggleChatBtn = screen.getByTestId('chat-icon');

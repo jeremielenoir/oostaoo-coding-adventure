@@ -1,16 +1,35 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import '@testing-library/jest-dom';
 
 import UsersSection from './UsersSection';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { socketSlice } from '../../redux/features/socket/socketSlice';
+import { messageSlice } from '../../redux/features/message/messageSlice';
+
+const rootReducer = combineReducers({
+  socket: socketSlice.reducer,
+  message: messageSlice.reducer
+});
+
+const store = configureStore({ reducer: rootReducer })
 
 describe('UsersSection component tests', () => {
   test('should render correctly', () => {
-    render(<UsersSection />);
+    render(
+      <Provider store={store}>
+        <UsersSection />
+      </Provider>
+    );
   });
 
   test('should have a title', () => {
-    render(<UsersSection />);
+    render(
+      <Provider store={store}>
+        <UsersSection />
+      </Provider>
+    );
 
     const title = screen.getByText(/Participants/i);
 
@@ -18,7 +37,11 @@ describe('UsersSection component tests', () => {
   });
 
   test('should have a button to close', () => {
-    render(<UsersSection />);
+    render(
+      <Provider store={store}>
+        <UsersSection />
+      </Provider>
+    );
 
     const closeButton = screen.getByTestId('toggleParticipantBtn');
 
@@ -27,7 +50,11 @@ describe('UsersSection component tests', () => {
 
   test('click on the button should trigger the toggleParticipant fonction passed in props', () => {
     const mockToggleParticipant = jest.fn();
-    render(<UsersSection toggleParticipant={mockToggleParticipant} />);
+    render(
+      <Provider store={store}>
+        <UsersSection toggleParticipant={mockToggleParticipant} />
+      </Provider>
+    );
 
     const closeButton = screen.getByTestId('toggleParticipantBtn');
     fireEvent.click(closeButton);
