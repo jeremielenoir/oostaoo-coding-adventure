@@ -124,18 +124,17 @@ describe('ChatSection component tests', () => {
 
   test('the closeButton should trigger the onClick function action', () => {
     const mockFunction = jest.fn();
+    jest.spyOn(store, 'dispatch').mockImplementation(mockFunction);
+
     const { getByTestId } = render(
       <Provider store={store}>
-        <ChatSection>
-          <CloseIcon onClick={mockFunction} data-testid="closeButton" />
-        </ChatSection>
+        <ChatSection />
       </Provider>
     );
 
     const closeBtn = getByTestId('closeButton');
     fireEvent.click(closeBtn);
 
-    console.log(mockFunction.mock);
-    expect(mockFunction).toHaveBeenCalled();
+    expect(mockFunction).toHaveBeenCalledTimes(1);
   });
 });

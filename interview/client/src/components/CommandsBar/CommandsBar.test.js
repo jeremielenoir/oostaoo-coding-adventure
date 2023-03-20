@@ -240,12 +240,14 @@ describe('CommandsBar component tests', () => {
 
   test('click on toggle users button should trigger the toggleParticipant function passed in props', () => {
     const mockFunction = jest.fn();
+    jest.spyOn(store, 'dispatch').mockImplementation(mockFunction);
+
     const { container } = render(
       <Provider store={store}>
         <StreamContext.Provider
           value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
         >
-          <CommandsBar toggleParticipant={mockFunction} />
+          <CommandsBar />
         </StreamContext.Provider>
       </Provider>
     );
@@ -258,12 +260,14 @@ describe('CommandsBar component tests', () => {
 
   test('click on toggle chat button should trigger the toggleMessage function passed in props', () => {
     const mockFunction = jest.fn();
+    jest.spyOn(store, 'dispatch').mockImplementation(mockFunction);
+
     render(
       <Provider store={store}>
         <StreamContext.Provider
           value={{ micOn, micToggle, videoCamOn, videoCamToggle }}
         >
-          <CommandsBar toggleMessage={mockFunction} />
+          <CommandsBar />
         </StreamContext.Provider>
       </Provider>
     );

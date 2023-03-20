@@ -49,16 +49,18 @@ describe('UsersSection component tests', () => {
   });
 
   test('click on the button should trigger the toggleParticipant fonction passed in props', () => {
-    const mockToggleParticipant = jest.fn();
+    const dispatch = jest.fn();
+    jest.spyOn(store, 'dispatch').mockImplementation(dispatch);
+
     render(
       <Provider store={store}>
-        <UsersSection toggleParticipant={mockToggleParticipant} />
+        <UsersSection />
       </Provider>
     );
 
     const closeButton = screen.getByTestId('toggleParticipantBtn');
     fireEvent.click(closeButton);
 
-    expect(mockToggleParticipant).toHaveBeenCalledTimes(1);
+    expect(dispatch).toHaveBeenCalledTimes(1);
   });
 });
