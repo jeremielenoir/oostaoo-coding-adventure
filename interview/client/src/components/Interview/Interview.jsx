@@ -1,10 +1,10 @@
 import React, { useState, useRef, useContext } from 'react';
+import { useSelector } from 'react-redux';
 
 /* Custom Components */
 import ChatSection from '../ChatSection/ChatSection';
 import CommandsBar from '../CommandsBar/CommandsBar';
 import UsersSection from '../UsersSection/UsersSection';
-import { useSelector } from 'react-redux';
 
 /* Style */
 import './interview.css';

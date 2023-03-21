@@ -56,7 +56,7 @@ function ModalLeaveInterview({ open, handleClose }) {
 /* Proptypes */
 ModalLeaveInterview.propTypes = {
   handleClose: PropTypes.func,
-  open: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
 };
 
 export default ModalLeaveInterview;

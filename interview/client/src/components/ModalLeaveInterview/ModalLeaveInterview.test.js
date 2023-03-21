@@ -41,7 +41,7 @@ describe('ModalLeaveInterview component tests', () => {
     render(
       <StreamContext.Provider value={{ leaveCall }}>
         <BrowserRouter>
-          <ModalLeaveInterview />
+          <ModalLeaveInterview open={false} />
         </BrowserRouter>
       </StreamContext.Provider>
     );
